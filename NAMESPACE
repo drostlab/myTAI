@@ -1,0 +1,7 @@
+useDynLib(myTAI)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+importFrom(MASS, fitdistr)
+importFrom(nortest, lillie.test)
+importFrom(doParallel)
+importFrom(fitdistrplus)

@@ -1,0 +1,93 @@
+\name{PlotBarRE}
+\alias{PlotBarRE}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Function to plot the mean relative expression levels of phylostratum or divergence-stratum classes as barplot.
+}
+\description{
+This function needs a PhyloExpressionSet object as input and computes
+for two or more defined phylostratum classes the statistical significance of
+the differences of mean relative expression of these two corresponding phylostratum classes.
+As test-statistic, the function performs a nonparametric \code{\link{kruskal.test}} based on the relative expression values stored within each defined phylostratum class.
+}
+\usage{
+PlotBarRE(ExpressionSet, Groups = list(NULL), 
+          wLength = 0.1, ratio = FALSE, ...)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{ExpressionSet}{
+a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+  \item{Groups}{
+a list containing the phylostrata or divergence-strata that correspond to the same phylostratum class or divergence class.
+For ex. evolutionary old phylostrata could be PS1-3 (Class 1) and evolutionary young phylostrata could be PS4-12 (Class 2). In this case, the list could be assigned as, Groups = list(c(1:3), c(4:12)). It is also possible to define more than 2 groups of evolutionary ages.
+For ex. Groups = list(c(1:3),c(4:8),c(9:12)) would perform a One-Way-ANOVA as test-statistic to determine the statistical significance of the evolutionary classes PS1-3, PS4-6, and PS9-12 based on their corresponding mean relative expression levels. 
+}
+  
+  \item{wLength}{
+a numeric value defining the whiskers length obove the bars. In case there are numerous different phylostratum classes
+a smaller wLength parameter should be used for better visualizations. }
+  \item{ratio}{
+a boolean value specifying whether the bars in the barplot represent the mean relative expression level of phylostrata belonging to the same phylostratum class.
+In case ratio = TRUE, the ratio of the mean relative expression level of the two phylostrata classes is plotted as lines within the barplot. This parameter can only be used for 2 class comparisons.
+}
+
+  \item{\dots}{
+default graphics parameters. 
+}
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+A barplot comparing Phylostratum-Classes by its mean relative expression levels.
+Significant stages are marked by '*' refering to statistically significant differences:
+
+(1) '*'   = P-Value <= 0.05 
+
+(2) '**'  = P-Value <= 0.005  
+
+(3) '***' = P-Value <= 0.0005  
+ 
+}
+\references{
+Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+}
+\author{
+Hajk-Georg Drost
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+\code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{kruskal.test}}
+}
+\examples{
+# read standard phylotranscriptomics data
+
+data(PhyloExpressionSetExample)
+data(DivergenceExpressionSetExample)
+
+# example PhyloExpressionSet
+
+PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)))
+
+# example DivergenceExpressionSet
+
+PlotBarRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)))
+
+# Example: plot ratio
+# the ratio curve visualizes the ratio between bar 1 / bar 2
+# the z - axis shows the corresponding ratio value of bar 1 / bar 2
+
+PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), ratio = TRUE)
+
+
+
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ PlotBarRE }
