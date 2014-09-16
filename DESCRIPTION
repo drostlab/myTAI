@@ -17,10 +17,10 @@ Imports:
     Rcpp (>= 0.11.1),
     nortest (>= 1.0-2),
     MASS (>= 7.3-33),
-    fitdistrplus (>= 1.0-2)
+    fitdistrplus (>= 1.0-2),
+    parallel (>= 3.0.2),
+    foreach (>= 1.4.2)
 Suggests:
     knitr (>= 1.6),
     doParallel (>= 1.0.8),
-    parallel (>= 3.0.2),
-    foreach (>= 1.4.2)
 LinkingTo: Rcpp
