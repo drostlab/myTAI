@@ -58,6 +58,19 @@ re.colors <- function(n)
 }
 
 
+#' @title A function to get a vector of length n storing a palette of colors for multiple bars in barplots.
+#' @description A nice color palette for barplots with several bars.
+#' @param n the number of colors to be in the palette. 
+#' @return a character vector containing different color names that can be used for barplots.
+#' @author Hajk-Georg Drost
+#' @seealso \code{\link{palette}}, \code{\link{re.colors}}
+#' @examples \dontrun{
+#' 
+#' # get 5 different colors for 5 different bars
+#' barplot_colors <- bar.colors(5)
+#' 
+#' 
+#' }
 bar.colors <- function(n)
 {
   
