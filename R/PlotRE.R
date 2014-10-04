@@ -1,9 +1,65 @@
-PlotRE <- function(ExpressionSet,Groups=list(NULL),legendName=NULL,...)
+#' @title Function to plot the relative expression profiles of a PhyloExpressionSet or DivergenceExpressionSet.
+#' @description 
+#' This function computes for each phylostratum the corresponding relative expression profile
+#' and plots the profiles in N different windows corresponding to the given phylostratum classes 
+#' or divergence-stratum classes that shall be compared.
+#' 
+#' For each phylostratum or divergence-stratum the corresponding relative expression profile is being computed as follows:
+#' 
+#' \deqn{f_js = ( e_js - e_j min ) / ( e_j max - e_j min )}
+#'
+#' where \eqn{e_j min} and \eqn{e_j max} is the minimum/maximum \code{\link{mean}} expression level 
+#' of phylostratum j over the  developmental stages s. This linear transformation corresponds to 
+#' a shift by \eqn{e_j min} and a subsequent shrinkage by \eqn{e_j max - e_j min}. 
+#' As a result, the relative expression level \eqn{f_js} of developmental stage s 
+#' with minimum \eqn{e_js} is 0, the relative expression level \eqn{f_js} of the developmental 
+#' stage s with maximum \eqn{e_js} is 1, and the relative expression levels \eqn{f_js} of 
+#' all other stages s range between 0 and 1, accordingly.
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' @param Groups a list containing the phylostrata or divergence-strata that correspond 
+#' to the same phylostratum class or divergence class.
+#' For ex. evolutionary old phylostrata could be PS1-3 (Class 1) 
+#' and evolutionary young phylostrata could be PS4-12 (Class 2). In this case, 
+#' the list could be assigned as, Groups = list(c(1:3), c(4:12)). 
+#' It is also possible to define more than 2 groups of evolutionary ages.
+#' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
+#' @param \dots default graphics parameters.
+#' @details Studying the relative expression profiles of each phylostratum or divergence-stratum enables the detection
+#' of common gene expression patterns shared by several phylostrata or divergence-strata.
+#'
+#' Finding similar relative expression profiles among phylostrata or divergence-strata suggests that 
+#' phylostrata or divergence-strata sharing a similar relative expression profile are regulated by similar
+#' gene regulatory elements. Hence, these common phylostrata or divergence-strata might govern similar processes in the given developmental time course. 
+#' @return a plot showing the relative expression profiles of phylostrata or divergence-strata belonging to the same group.
+#' @references 
+#' Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
+#'
+#' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' @author Hajk-Georg Drost
+#' @seealso \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}
+#' @examples \dontrun{
+#' 
+#' # read standard phylotranscriptomics data
+#' data(PhyloExpressionSetExample)
+#' data(DivergenceExpressionSetExample)
+#'
+#' # example PhyloExpressionSet
+#' PlotRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), legendName = "PS")
+#'
+#'
+#' # example DivergenceExpressionSet
+#' PlotRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), legendName = "DS")
+#'
+#' 
+#' }
+#' @export
+
+PlotRE <- function(ExpressionSet,Groups = NULL,legendName=NULL,...)
 {
         
         is.ExpressionSet(ExpressionSet)
         
-        if(any(sapply(Groups,is.null)))
+        if(is.null(Groups))
                 stop("Your Groups list does not store any items.")
         
         if(is.null(legendName))
