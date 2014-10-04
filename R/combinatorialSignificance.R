@@ -1,0 +1,178 @@
+
+
+
+#' @title Function to compute the statistical significance of each replicate combination.
+#' @description In case a PhyloExpressionSet or DivergenceExpressionSet stores replicates for each
+#' developmental stage or experiment, this function allows to compute the p-values quantifying
+#' the statistical significance of the underlying pattern for all combinations of replicates.
+#' 
+#' The intention of this analysis is to validate that there exists no sequence of replicates 
+#' (for all possible combination of replicates) that results in a non-significant pattern,
+#' when the initial pattern with combined replicates was shown to be significant.
+#' 
+#' A small Example: 
+#' 
+#'      
+#' Assume PhyloExpressionSet stores 2 developmental stages with 3 replicates measured for each stage.
+#' The 6 replicates in total are denoted as: 1.1, 1.2, 1.3, 2.1, 2.2, 2.3. Now the function computes the
+#' statistical significance of each pattern derived by the corresponding combination of replicates, e.g.
+#'
+#' 1.1 + 2.1 -> p-value for combination 1
+#'
+#' 1.1 + 2.2 -> p-value for combination 2
+#'
+#' 1.1 + 2.3 -> p-value for combination 3
+#'
+#' 1.2 + 2.1 -> p-value for combination 4
+#'
+#' 1.2 + 2.2 -> p-value for combination 5
+#'
+#' 1.2 + 2.3 -> p-value for combination 6
+#'
+#' 1.3 + 2.1 -> p-value for combination 7
+#'
+#' 1.3 + 2.2 -> p-value for combination 8
+#'
+#' 1.3 + 2.3 -> p-value for combination 9
+#' 
+#' This procedure yields 9 p-values for the \eqn{2^3} (\eqn{#stages^#replicates}) replicate combinations.
+#' 
+#' Note, that in case you have a large amount of stages/experiments and a large amount of replicates
+#' the computation time will increase by \eqn{#stages^#replicates}. For 11 stages and 4 replicates, 4^11 = 4194304 p-values have to be computed. Each p-value computation itself is based on a permutation test running with 1000 or more permutations. Be aware that this might take some time.
+#'
+#' The p-value vector returned by this function can then be used to plot the p-values to see
+#' whether an critical value \eqn{\alpha} is exeeded or not (e.g. \eqn{\alpha = 0.05}).
+#' 
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' @param replicates a numeric vector storing the number of replicates within each developmental stage or experiment.
+#' In case replicate stores only one value, then the function assumes that each developmental stage or experiment
+#' stores the same number of replicates.
+#' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
+#' Possible values can be: \code{TestStatistic} = "FlatLineTest" : Statistical test for the deviation from a flat line.
+#' \code{TestStatistic} = "ReductiveHourglassTest" : Statistical test for the existence of a hourglass shape (high-low-high pattern).
+#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}.
+#' @param parallel a boolean value specifying whether parallel processing (multicore processing) shall be performed.
+#' @details The function receives a standard PhyloExpressionSet or DivergenceExpressionSet object and a vector storing the number of replicates present in each stage or experiment. Based on these arguments the function computes all possible replicate combinations using the \code{\link{expand.grid}} function and performs a permutation test (either a \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}) for each replicate combination. The \emph{permutation} parameter of this function specifies the number of permutations that shall be performed for each permutation test. When all p-values are computed, a numeric vector storing the corresponding p-values for each replicate combination is returned.  
+#' 
+#' In other words, for each replicate combination present in the PhyloExpressionSet or DivergenceExpressionSet object, the TAI or TDI pattern of the corresponding replicate combination is tested for its statistical significance based on the underlying test statistic.
+#' 
+#' This function is also able to perform all computations in parallel using multicore processing. The underlying statistical tests are written in C++ and optimized for fast computations.
+#' 
+#' @return a numeric vector storing the p-values returned by the underlying test statistic for all possible replicate combinations.
+#' @references Drost et al. 2014, Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis. MBE. 2014
+#' @author Hajk-Georg Drost
+#' @seealso \code{\link{expand.grid}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
+#' @examples \dontrun{
+#' 
+#' # load a standard PhyloExpressionSet
+#' data(PhyloExpressionSetExample)
+#'
+#' # we assume that the PhyloExpressionSetExample consists of 3 developmental stages 
+#' # and 2 replicates for stage 1, 3 replicates for stage 2, and 2 replicates for stage 3
+#' p.vector <- combinatorialSignificance(PhyloExpressionSetExample, replicates = c(2,3,2), TestStatistic = "FlatLineTest", permutations = 1000, parallel = FALSE)
+#'
+#'
+#' # now we assume that the PhyloExpressionSetExample consists of 3 developmental stages 
+#' # and 2 replicates for each stage
+#' # in this case typing replicates = 2 is enough to allow the function to assume that
+#' # each stage has 2 replicates
+# here we also compute the p-values using multicore processing
+#' p.vector <- combinatorialSignificance(PhyloExpressionSetExample[ , 1:8], replicates = 2, TestStatistic = "FlatLineTest", permutations = 1000, parallel = TRUE)
+#'
+#'
+#' }
+#' @export
+combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "FlatLineTest", permutations = 1000, parallel = FALSE)
+{
+  
+  is.ExpressionSet(ExpressionSet)
+  
+  if(!is.element(TestStatistic, c("FlatLineTest","ReductiveHourglassTest"))){
+    stop("Please enter a correct string for the test statistic: 'FlatLineTest' or 'ReductiveHourglassTest'.")
+  }
+  
+  ncols <- dim(ExpressionSet)[2]
+  
+  if(length(replicates) == 1){
+  
+     if((ncols - 2) %% replicates != 0)
+        stop("The number of stages and the number of replicates do not match.")
+  
+     nStages <- (ncols - 2) / replicates
+     replicateName.List <- lapply(lapply(1:nStages,rep,times = replicates),paste0,paste0(".",1:replicates))
+     stageNames <- as.vector(unlist(replicateName.List))
+  
+     colnames(ExpressionSet)[3:ncols] <- stageNames
+  
+     # compute all possible combinations
+     combinatorialMatrix <- expand.grid(replicateName.List, stringsAsFactors = FALSE)
+  }
+  
+  if(length(replicates) > 1){
+    
+    nStages <- length(replicates)
+    
+    if(sum(replicates) != (ncols - 2))
+      stop("The number of stages and the number of replicates do not match.")
+    
+    f <- function(x){ 
+      unlist(lapply(lapply(x,rep,times = replicates[x]),paste0,paste0(".",1:replicates[x])))
+    }
+    
+    
+    replicateName.List <- lapply(1:nStages,f)
+    stageNames <- as.vector(unlist(replicateName.List))
+    colnames(ExpressionSet)[3:ncols] <- stageNames
+    
+    combinatorialMatrix <- expand.grid(replicateName.List, stringsAsFactors = FALSE)
+    
+  }
+  
+  nCombinations <- dim(combinatorialMatrix)[1]
+  p.vals <- vector(mode = "numeric",length = nCombinations)
+  first_cols_names <- as.character(colnames(ExpressionSet)[1:2])
+  
+  if(parallel == TRUE){
+    # parallellizing the sampling process using the 'doMC' and 'parallel' package
+    # register all given cores for parallelization
+    # detectCores(all.tests = TRUE, logical = FALSE) returns the number of cores available on a multi-core machine
+    cores <- makeForkCluster(detectCores(all.tests = FALSE, logical = FALSE))
+    registerDoParallel(cores)
+    
+    # perform the sampling process in parallel
+    p.vals <- as.vector(foreach(i = 1:nCombinations,.combine = "c") %dopar% {
+      
+      FlatLineTest(as.data.frame(ExpressionSet[c(first_cols_names,as.character(combinatorialMatrix[i , ]))]), permutations = permutations)$p.value
+      
+    })
+    
+    # close the cluster connection
+    # The is important to be able to re-run the function N times
+    # without getting cluster connection problems
+    stopCluster(cores)
+  }
+  
+  
+  if(parallel == FALSE){
+    # sequential computations of p-values 
+    if(nCombinations > 10){
+      # initializing the progress bar
+      progressBar <- txtProgressBar(min = 1,max = nCombinations,style = 3)
+      
+    }
+    
+    for(i in 1:nCombinations){
+      
+      p.vals[i] <- FlatLineTest(as.data.frame(ExpressionSet[c(first_cols_names,as.character(combinatorialMatrix[i , ]))]), permutations = permutations)$p.value
+      
+      if(nCombinations > 10){
+        # printing out the progress
+        setTxtProgressBar(progressBar,i)
+      }
+      
+    }
+  }
+  
+  return(p.vals)
+}
+

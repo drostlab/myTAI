@@ -1,0 +1,67 @@
+#' @title Function to apply analyses on each phylotranscriptomic age class.
+#' @description 
+#' This function takes a standard PhyloExpressionSet or DivergenceExpressionSet object
+#' as argument and performs any given function to the sub expression matrix of each phylotranscriptomic age class.
+#' 
+#' This function is verx useful to perform any phylostratum or divergence-stratum specific analysis.
+#' 
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' @param FUN a function to be performed on the corresponding expression matrix of each phylostratum or divergence-stratum.
+#' @param ... additional arguments of FUN.
+#' @param as.list a boolean value specifying whether the output format shall be a matrix or a list object.
+#' @details This function uses the \code{\link{split}} function to subset the expression matrix into
+#' phylostratum specific sub-matrices. Internally using \code{\link{lapply}}, any function can
+#' be performed to the sub-matrices. The return value of this function is a numeric matrix storing
+#' the return values by \code{FUN} for each phylostratum and each developmental stage s. 
+#' Note that the input \code{FUN} must be an function that can be applied to a matrix (e.g., \code{\link{colMeans}} or \code{\link{RE}}). 
+#' In case you use an ananymous function you coud use function(x) apply(x , 2 , var).
+#' @return Either a numric matrix storing the return values of the applied function for each age class
+#' or a numeric list storing the return values of the applied function for each age class in a list.
+#' @author Hajk-Georg Drost
+#' @seealso \code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}, \code{\link{RE}}, \code{\link{REMatrix}}
+#' @examples \dontrun{
+#' 
+#'  data(PhyloExpressionSetExample)
+#' # Example 1
+#' # get the relative expression profiles for each phylostratum
+#' age.apply(PhyloExpressionSetExample, RE)
+#'
+#' # this is analogous to 
+#' REMatrix(PhyloExpressionSetExample)
+
+#' # Example 2
+#' # compute the mean expression profiles for each phylostratum
+#' age.apply(PhyloExpressionSetExample, colMeans)
+#'
+#' # Example 3
+#' # compute the variance profiles for each phylostratum
+#' age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , var))
+#'
+#' # Example 4
+#' # compute the range for each phylostratum
+#' # Note: in this case, the range() function returns 2 values for each phylostratum
+#' # and each developmental stage, hence one should use the argument 'as.list = TRUE'
+#' # to make sure that the results are returned properly 
+#' age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list = TRUE)
+#' 
+#' }
+#' @export
+age.apply <- function(ExpressionSet,FUN, ... ,as.list = FALSE)
+{
+        f <- match.fun(FUN)
+        ncols <- dim(ExpressionSet)[2]
+        s <- split(ExpressionSet, ExpressionSet[ , 1])
+        
+        if(as.list == FALSE){
+                res <- t(as.data.frame(lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))))
+                rownames(res) <- levels(as.factor(ExpressionSet[ , 1]))
+        }
+        
+        if(as.list == TRUE){
+                res <- lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))
+                names(res) <- levels(as.factor(ExpressionSet[ , 1]))
+        }
+        
+        return(res)
+}
+
