@@ -1,5 +1,50 @@
-
-
+#' @title Function to plot the mean expression profiles of phylostrata or divergence-strata.
+#' @description This function computes for each phylostratum or divergence-stratum the corresponding mean expression profile
+#' and plots the profiles in N different windows corresponding to the given Phylostratum-Classes
+#' that shall be compared.
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' @param Groups a list containing the phylostrata or divergence-strata that correspond to the same phylostratum class or divergence class.
+#' For ex. evolutionary old phylostrata could be PS1-3 (Class 1) and evolutionary young phylostrata could be PS4-12 (Class 2). 
+#' In this case, the list could be assigned as, Groups = list(c(1:3), c(4:12)). 
+#' It is also possible to define more than 2 groups of evolutionary ages.
+#' For ex. Groups = list(c(1:3),c(4:8),c(9:12)) would perform an \code{\link{kruskal.test}} 
+#' as test-statistic to determine the statistical significance of the evolutionary 
+#' classes PS1-3, PS4-6, and PS9-12 based on their corresponding mean relative expression levels. 
+#' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
+#' @param \dots default graphics parameters.
+#' @details 
+#' 
+#' This plot may be useful to compare the absolute mean expression        
+#' levels of each phylostratum or divergence-stratum class.
+#'
+#'In different developmental processes different phylostratum or divergence-stratum
+#' classes might be more expressed than others, hence contributing more to the overall
+#' phylotranscriptomics pattern (\code{\link{TAI}} or \code{\link{TDI}}).
+#' This plot can help to identify the phylostratum or divergence-stratum classes 
+#' that mostly influence the given developmental process.
+#' @return a plot showing mean expression profiles of 
+#' phylostrata or divergence-strata corresponding to the same phylostratum
+#' class or divergence class.
+#' @author Hajk-Georg Drost
+#' @seealso \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{PlotRE}}
+#' @examples \dontrun{
+#' 
+#' # load PhyloExpressionSet
+#' data(PhyloExpressionSetExample)
+#'
+#' # load PhyloExpressionSet
+#' data(DivergenceExpressionSetExample)
+#'
+#' # plot evolutionary old PS (PS1-3) vs evolutionary young PS (PS4-12)
+#' PlotMeans(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), legendName = "PS")
+#'
+#' # plot conserved DS (DS1-5) vs divergent DS (PS6-10)
+#' # NOTE: DS are always defined in the range 1, 2, ... , 10.
+#' # Hence, make sure that your groups are within this range!
+#' PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), legendName = "DS")
+#'
+#' }
+#' @export 
 
 PlotMeans <- function(ExpressionSet,Groups=list(NULL),legendName = NULL,...)
 {
