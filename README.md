@@ -40,3 +40,42 @@ Using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package
 all computationally expansive functions have been written in C++ 
 to enable real-time analytics on phylotranscriptomics datasets.
 
+
+## Tutorials
+
+Three tutorials will get you started with this package:
+
+- [An Introduction to the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
+- [Intermediate concepts of the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
+- Advanced topics using the myTAI package
+
+## Discussions and Bug Reports
+
+I would be very happy to learn more about potential improvements of the concepts and functions
+provided in this package.
+
+Furthermore, in case you find some bugs or need additional (more flexible) functionality of parts
+of this package, please let me know:
+
+
+
+## Acknowledgement
+
+I would like to thank several individuals for making this project possible.
+
+First I would like to thank Ivo Grosse and Marcel Quint for providing me a place
+and the environment to be able to work on fascinating topics of Evo-Devo research and for the
+fruitful discussions that lead to projects like this one.
+
+Furthermore, I would like to thank Alexander Gabel and Jan Grau for valuable discussions
+on how to improve some methodological concepts of some analyses present in this package.
+
+I would also like to thank the Master of Science Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
+who worked intensively with this package and helped me to improve the usibility and logic of this package.
+
+As google scholar properly cites: _On the shoulders of giants_, I couldn't agree more than to add that this work
+wouln't be possible without the _giants_ that came before me and who provided such amazing work I can now benefit from and
+I hope others can benefit from too.
+
+
+

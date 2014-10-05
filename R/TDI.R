@@ -1,4 +1,9 @@
-# Transcriptome divergence index
+#' @title Function to compute the Transcriptome Divergence Index (TDI)
+#' 
+#' 
+
+
+
 TDI <- function(DivergenceExpressionSet)
 {
         

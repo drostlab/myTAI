@@ -89,8 +89,9 @@
 #' boxplot(bootMatrix(DivergenceExpressionSetExample) , ylab = "TDI")
 #' 
 #' } 
+#' @import foreach
 #' @export
-FlatLineTest <- function(ExpressionSet,permutations=1000,plotHistogram=FALSE,parallel=FALSE,runs=10)
+FlatLineTest <- function(ExpressionSet, permutations = 1000, plotHistogram = FALSE, parallel = FALSE, runs = 10)
 {
         
         is.ExpressionSet(ExpressionSet)
@@ -112,15 +113,13 @@ FlatLineTest <- function(ExpressionSet,permutations=1000,plotHistogram=FALSE,par
         resMatrix <- bootMatrix(ExpressionSet, permutations)
         var_values <- apply(resMatrix,1,var)
         #random_mean_age <- apply(resMatrix,2,mean)
-        ### estimate the maximum likelihood parameter (shape,rate) 
+        ### estimate the parameters (shape,rate) 
         ### of the gamma distributed variance values
-        #gamma_MLE <- MASS::fitdistr(var_values,"gamma")
+        ### using: method of moments estimation
         gamma_MME <- fitdistrplus::fitdist(var_values,"gamma",method = "mme")
         ### estimate shape:
-        #shape <- est.shape(var_values)
         shape <- gamma_MME$estimate[1]
         ### estimate the rate:
-        #rate <- est.rate(var_values)
         rate <- gamma_MME$estimate[2]
         
         if(plotHistogram == TRUE){
@@ -138,9 +137,13 @@ FlatLineTest <- function(ExpressionSet,permutations=1000,plotHistogram=FALSE,par
                 # plot a Cullen and Frey graph
                 fitdistrplus::descdist(var_values, boot = permutations)
                 # plot the histogram and the fitted curve
-                curve(gammaDensity,xlim = c(min(var_values),max(c(var_values,real.var))),col = "steelblue",lwd=5,xlab = "Variances",ylab="Frequency", main = paste0("permutations = ",permutations))
+                curve(gammaDensity,xlim = c(min(var_values),max(c(var_values,real.var))),
+                      col = "steelblue",lwd=5,xlab = "Variances",ylab="Frequency", 
+                      main = paste0("permutations = ",permutations))
+                
                 histogram <- hist(var_values,prob = TRUE,add = TRUE, breaks = permutations / (0.01 * permutations))
                 rug(var_values)
+                
                 abline(v = real.var, lty = 1, lwd = 4, col = "darkred")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
