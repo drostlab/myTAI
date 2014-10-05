@@ -11,20 +11,22 @@ bootMatrix(ExpressionSet, permutations = 1000)
 \item{permutations}{a numeric value specifying the number of permutations to be performed.}
 }
 \value{
-a numeric matrix representing N randomly permuted TAI or TDI profiles.
+a numeric matrix representing N randomly permuted \code{TAI} or \code{TDI} profiles.
 }
 \description{
 This function computes the TAI for a row permutated PhyloExpressionSet or DivergenceExpressionSet.
 
-One can determine the number of permutations. The function then returns a \code{\link{TAI}} or \code{\link{TDI}} matrix holding
-the \code{\link{TAI}} or \code{\link{TDI}} profiles of the permutated PhyloExpressionSets or DivergenceExpressionSets. This procedure
-can be used for Test-Statistics based on the TAI or TDI profiles.
+One can specify the number of permutations which corresponds to the number of \code{\link{TAI}} or \code{\link{TDI}} profiles
+that are being returned as data matrix. The function then returns a \code{TAI} or \code{TDI} matrix holding
+the \code{TAI} or \code{TDI} profiles of the permutated PhyloExpressionSets or DivergenceExpressionSets. This procedure
+can be used for building test statistics based on the \code{TAI} or \code{TDI} profiles.
 }
 \details{
 The sampled \code{\link{TAI}} or \code{\link{TDI}} matrix samples the phylostratum or divergence-stratum vector of
-a given PhyloExpressionSet or DivergenceExpressionSet and computes the corresponding TAI or TDI profiles
-of the randomly assigned phylostrata or divergence-strata. This sampling is then performed N times, yielding N randomly sampled TAI or TDI profiles.
-This random TAI or TDI profile matrix can furthermore be used to perform statistical tests (such as the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}) based on the significance of TAI or TDI patterns.
+a given PhyloExpressionSet or DivergenceExpressionSet and computes the corresponding \code{TAI} or \code{TDI} profiles
+of the randomly assigned phylostrata or divergence-strata. This sampling is then performed N times, yielding N randomly sampled \code{TAI} or \code{TDI} profiles.
+This random \code{TAI} or \code{TDI} profile matrix can then be used to perform statistical tests
+(such as the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}) based on the significance of \code{TAI} or \code{TDI} patterns.
 }
 \examples{
 \dontrun{
@@ -37,7 +39,7 @@ data(DivergenceExpressionSetExample)
 randomTAI.Matrix <- bootMatrix(PhyloExpressionSetExample, permutations = 1000)
 
 # example DivergenceExpressionSet using 1000 permutations
-randomTDI.Matrix <- bootMatrix(DivergenceExpressionSetExample, permutations = 1000
+randomTDI.Matrix <- bootMatrix(DivergenceExpressionSetExample, permutations = 1000)
 
 
 }

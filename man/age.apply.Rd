@@ -15,14 +15,14 @@ age.apply(ExpressionSet, FUN, ..., as.list = FALSE)
 \item{as.list}{a boolean value specifying whether the output format shall be a matrix or a list object.}
 }
 \value{
-Either a numric matrix storing the return values of the applied function for each age class
+Either a numeric matrix storing the return values of the applied function for each age class
 or a numeric list storing the return values of the applied function for each age class in a list.
 }
 \description{
 This function takes a standard PhyloExpressionSet or DivergenceExpressionSet object
 as argument and performs any given function to the sub expression matrix of each phylotranscriptomic age class.
 
-This function is verx useful to perform any phylostratum or divergence-stratum specific analysis.
+This function is very useful to perform any phylostratum or divergence-stratum specific analysis.
 }
 \details{
 This function uses the \code{\link{split}} function to subset the expression matrix into
@@ -30,12 +30,15 @@ phylostratum specific sub-matrices. Internally using \code{\link{lapply}}, any f
 be performed to the sub-matrices. The return value of this function is a numeric matrix storing
 the return values by \code{FUN} for each phylostratum and each developmental stage s.
 Note that the input \code{FUN} must be an function that can be applied to a matrix (e.g., \code{\link{colMeans}} or \code{\link{RE}}).
-In case you use an ananymous function you coud use function(x) apply(x , 2 , var).
+In case you use an an anymous function you coud use \code{function(x) apply(x , 2 , var)} as an example to compute the variance of each phylostratum and each
+developmental stage s.
 }
 \examples{
 \dontrun{
 
+ # source the example dataset
  data(PhyloExpressionSetExample)
+
 # Example 1
 # get the relative expression profiles for each phylostratum
 age.apply(PhyloExpressionSetExample, RE)

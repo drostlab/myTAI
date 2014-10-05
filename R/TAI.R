@@ -30,6 +30,8 @@
 #' TAIs <- TAI(PhyloExpressionSetExample)
 #' 
 #' }
+#' @useDynLib myTAI
+#' @importFrom Rcpp sourceCpp
 #' @export
 
 TAI <- function(PhyloExpressionSet)

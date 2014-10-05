@@ -36,6 +36,7 @@ NumericVector permut(NumericVector a)
 }
 
 
+//' @export
 // [[Rcpp::export]]
  NumericVector cpp_TAI(NumericMatrix ExpressionSet, NumericVector Phylostratum)
  {
@@ -57,7 +58,7 @@ NumericVector permut(NumericVector a)
 
   }
 
-
+//' @export
 // [[Rcpp::export]]
 NumericMatrix cpp_bootMatrix(NumericMatrix ExpressionMatrix, NumericVector AgeVector, int permutations)
 {
@@ -106,6 +107,7 @@ NumericMatrix cpp_bootMatrix(NumericMatrix ExpressionMatrix, NumericVector AgeVe
   return bootM;
 }
 
+//' @export
 // [[Rcpp::export]]
   NumericMatrix cpp_pMatrix(NumericMatrix ExpressionSet, NumericVector AgeVector)
   {
@@ -134,6 +136,7 @@ NumericMatrix cpp_bootMatrix(NumericMatrix ExpressionMatrix, NumericVector AgeVe
   }
 
 
+//' @export
 // [[Rcpp::export]]
 double cpp_std_error(NumericVector x)
 {
@@ -142,7 +145,7 @@ double cpp_std_error(NumericVector x)
   
 }
   
-  
+//' @export  
 // [[Rcpp::export]] 
 double cpp_geom_mean(NumericVector x)
 {
@@ -151,7 +154,7 @@ double cpp_geom_mean(NumericVector x)
   
 } 
 
-
+//' @export
 // [[Rcpp::export]]
   NumericMatrix cpp_omitMatrix(NumericMatrix ExpressionSet, NumericVector AgeVector){
    

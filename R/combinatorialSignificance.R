@@ -13,32 +13,35 @@
 #' A small Example: 
 #' 
 #'      
-#' Assume PhyloExpressionSet stores 2 developmental stages with 3 replicates measured for each stage.
-#' The 6 replicates in total are denoted as: 1.1, 1.2, 1.3, 2.1, 2.2, 2.3. Now the function computes the
+#' Assume PhyloExpressionSet stores 3 developmental stages with 3 replicates measured for each stage.
+#' The 9 replicates in total are denoted as: 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 3.1, 3.2, 3.3. Now the function computes the
 #' statistical significance of each pattern derived by the corresponding combination of replicates, e.g.
 #'
-#' 1.1 + 2.1 -> p-value for combination 1
+#' 1.1, 2.1, 3.1 -> p-value for combination 1
 #'
-#' 1.1 + 2.2 -> p-value for combination 2
+#' 1.1, 2.2, 3.1  -> p-value for combination 2
 #'
-#' 1.1 + 2.3 -> p-value for combination 3
+#' 1.1, 2.3, 3.1 -> p-value for combination 3
 #'
-#' 1.2 + 2.1 -> p-value for combination 4
+#' 1.2, 2.1, 3.1 -> p-value for combination 4
 #'
-#' 1.2 + 2.2 -> p-value for combination 5
+#' 1.2, 2.1, 3.1 -> p-value for combination 5
 #'
-#' 1.2 + 2.3 -> p-value for combination 6
+#' 1.2, 2.1, 3.1 -> p-value for combination 6
 #'
-#' 1.3 + 2.1 -> p-value for combination 7
+#' 1.3, 2.1, 3.1 -> p-value for combination 7
 #'
-#' 1.3 + 2.2 -> p-value for combination 8
+#' 1.3, 2.2, 3.1 -> p-value for combination 8
 #'
-#' 1.3 + 2.3 -> p-value for combination 9
+#' 1.3, 2.3, 3.1 -> p-value for combination 9
 #' 
-#' This procedure yields 9 p-values for the \eqn{2^3} (\eqn{#stages^#replicates}) replicate combinations.
+#' \dots
+#' 
+#' This procedure yields 27 p-values for the \eqn{3^3} (\eqn{#stages^#replicates}) replicate combinations.
 #' 
 #' Note, that in case you have a large amount of stages/experiments and a large amount of replicates
-#' the computation time will increase by \eqn{#stages^#replicates}. For 11 stages and 4 replicates, 4^11 = 4194304 p-values have to be computed. Each p-value computation itself is based on a permutation test running with 1000 or more permutations. Be aware that this might take some time.
+#' the computation time will increase by \eqn{#stages^#replicates}. For 11 stages and 4 replicates, 4^11 = 4194304 p-values have to be computed. 
+#' Each p-value computation itself is based on a permutation test running with 1000 or more permutations. Be aware that this might take some time.
 #'
 #' The p-value vector returned by this function can then be used to plot the p-values to see
 #' whether an critical value \eqn{\alpha} is exeeded or not (e.g. \eqn{\alpha = 0.05}).
@@ -59,7 +62,7 @@
 #' This function is also able to perform all computations in parallel using multicore processing. The underlying statistical tests are written in C++ and optimized for fast computations.
 #' 
 #' @return a numeric vector storing the p-values returned by the underlying test statistic for all possible replicate combinations.
-#' @references Drost et al. 2014, Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis. MBE. 2014
+#' @references Drost et al. 2014, Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{expand.grid}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 #' @examples \dontrun{
@@ -81,6 +84,7 @@
 #'
 #'
 #' }
+#' @import foreach
 #' @export
 combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "FlatLineTest", permutations = 1000, parallel = FALSE)
 {
@@ -136,20 +140,15 @@ combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "
     # parallellizing the sampling process using the 'doMC' and 'parallel' package
     # register all given cores for parallelization
     # detectCores(all.tests = TRUE, logical = FALSE) returns the number of cores available on a multi-core machine
-    cores <- makeForkCluster(detectCores(all.tests = FALSE, logical = FALSE))
-    registerDoParallel(cores)
+    cores <- parallel::detectCores()
+    doMC::registerDoMC(cores)
     
     # perform the sampling process in parallel
-    p.vals <- as.vector(foreach(i = 1:nCombinations,.combine = "c") %dopar% {
+    p.vals <- as.vector(foreach::foreach(i = 1:nCombinations,.combine = "c") %dopar% {
       
       FlatLineTest(as.data.frame(ExpressionSet[c(first_cols_names,as.character(combinatorialMatrix[i , ]))]), permutations = permutations)$p.value
       
     })
-    
-    # close the cluster connection
-    # The is important to be able to re-run the function N times
-    # without getting cluster connection problems
-    stopCluster(cores)
   }
   
   
@@ -173,6 +172,7 @@ combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "
     }
   }
   
+  cat("\n")
   return(p.vals)
 }
 
