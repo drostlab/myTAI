@@ -125,7 +125,14 @@ omitMatrix <- function(ExpressionSet)
   is.ExpressionSet(ExpressionSet)
   
   ncols <- dim(ExpressionSet)[2]
-  return(cpp_omitMatrix(as.matrix(ExpressionSet[ , 3:ncols]),as.vector(ExpressionSet[ , 1])))
+  
+  oMatrix <- matrix(NA_real_, ncol = (ncols - 2), nrow = nrow(ExpressionSet))
+  oMatrix <- cpp_omitMatrix(as.matrix(ExpressionSet[ , 3:ncols]),as.vector(ExpressionSet[ , 1]))
+  
+  colnames(oMatrix) <- names(ExpressionSet)[3:ncols]
+  rownames(oMatrix) <- paste0("(-) ",ExpressionSet[ , 2])
+          
+  return(oMatrix)
   
 }
 
