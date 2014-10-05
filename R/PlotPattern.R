@@ -1,5 +1,5 @@
 #' @title Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object
-#' @description Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object.}
+#' @description Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object.
 #' This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object. Furthermore, this function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. The user can choose between the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}. The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line. Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
 #' The \code{\link{ReductiveHourglassTest}} specificly tests for the statistical significance of a molecular hourglass pattern (high-low-high pattern) with prior biological knowlegde.
 #' The corresponding p-value that is printed within the plot (by default) specifies the statistical significance of the chosen test statistic.
