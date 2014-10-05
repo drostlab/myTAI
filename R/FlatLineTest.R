@@ -186,7 +186,10 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000, plotHistogram = FAL
                         }
                 }
                 
-                plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), col = "darkblue", xlab = "Runs", ylab = "p-value", main = paste0("runs = ",runs))
+                plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), 
+                     col = "darkblue", xlab = "Runs", ylab = "p-value", 
+                     main = paste0("runs = ",runs))
+                
                 abline(h = 0.05, lty = 2, lwd = 3, col = "darkred")
                 
         }
