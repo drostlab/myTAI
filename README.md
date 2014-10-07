@@ -1,10 +1,10 @@
 myTAI
 =====
 
-### A package to perform phylotranscriptomics analyses for Evolutionary Developmental Biology research.
+### A package to perform phylotranscriptomics analyses and visualization for Evolutionary Developmental Biology research.
 
 The present collection of functions can be used to perform phylotranscriptomics 
-analyses to investigate phenomena within the field of Evolutionary Developmental Biology.
+analyses and visualization to investigate phenomena within the field of Evolutionary Developmental Biology.
     
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
 gene expression levels to capture evolutionary signals during developmental processes.
