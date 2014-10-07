@@ -218,8 +218,19 @@ bar.colors <- function(n)
 }
 
 
-# tests whether a given input data.frame 
-# fulfills the ExpressionSet standard
+#' @title Function testing for the validaty of a PhyloExpressionSet or DivergenceExpressionSet standard
+#' @description This function tests whether a given ExpressionSet follows the pre-defined PhyloExpressionSet or DivergenceExpressionSet standard.
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet that shall be tested for format validity.
+#' @author Hajk-Georg Drost
+#' @examples \dontrun{
+#' 
+#' # read example PhyloExpressionSet
+#' data(PhyloExpressionSetExample)
+#' 
+#' is.ExpressionSet(PhyloExpressionSetExample)
+#' 
+#' } 
+#' @export
 is.ExpressionSet <- function(ExpressionSet){
         
         ncols <- dim(ExpressionSet)[2]

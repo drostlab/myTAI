@@ -1,8 +1,8 @@
 ---
 output:
+  html_document: default
   pdf_document:
     highlight: haddock
-  html_document: default
 ---
 <!--
 %\VignetteEngine{knitr}
@@ -23,17 +23,18 @@ knitr::opts_chunk$set(
 
 # Introduction to the _myTAI_ package
 
-The __myTAI__ packages provides a collection of functions that can be used to perform phylotranscriptomics analyses to investigate phenomena within the field of __Evolutionary Developmental Biology__. It is ought to provide some kind of [Domain Specific Language](http://martinfowler.com/books/dsl.html) for phylotranscriptomics analyses.
+The __myTAI__ packages provides a collection of functions that can be used to perform phylotranscriptomics analyses and
+visualization to investigate phenomena within the field of __Evolutionary Developmental Biology__. 
 
-The goal of this package is to provide a broad range of users (as well as the phylotranscriptomics community) with an easy to use and computationally optimized framework for reproducible research in the fields referred to as __Evolutionary Developmental Biology__ and __Phylotranscriptomics__ and to allow a better comparability between molecular phenomena resulting from _in silico_ data analysis. 
+The goal of this package is to provide a broad range of users (as well as the phylotranscriptomics community) with an easy to use and computationally optimized framework for reproducible research in the fields referred to as __Evolutionary Developmental Biology__ and __Phylotranscriptomics__ and to allow a better comparability between molecular phenomena resulting from _in silico_ data analyses. 
 
-A series of tutorials aim to introduce you to the __myTAI__ package and should allow you to perform research related analyses in the field referred to as __Phylotranscriptomics__:
+A series of tutorials aim to introduce you to the __myTAI__ package: 
 
 * __1) Introduction:__ Vignette - Introduction to the myTAI package
-* __2) Intermediate:__ Vignette - Intermediate Analyses
-* __3) Advanced:__ Vignette - Advanced use of the myTAI package
+* __2) Intermediate:__ Vignette - Intermediate Analyses and Test Statistics
+* __3) Advanced:__ Vignette - Advanced use of the myTAI package and data retrieval performing divergence stratigraphy using the [orthologr](https://github.com/HajkD/orthologr) package
 
-Internally, computationally intensive functions have been written in C++ using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package and paralleled using the [doParallel](http://cran.r-project.org/web/packages/doParallel/index.html) package to allow real-time analytics in phylotranscriptomics research.
+Internally, computationally intensive functions have been written in C++ using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package and paralleled using the [doMC](http://cran.r-project.org/web/packages/doMC/index.html) package to allow real-time analytics in phylotranscriptomics research.
 
 ## Getting Started
 
