@@ -1,6 +1,6 @@
 #' @title Function to plot the relative expression profiles of a PhyloExpressionSet or DivergenceExpressionSet.
 #' @description 
-#' This function computes for each phylostratum the corresponding relative expression profile
+#' This function computes for each phylostratum or divergence stratum the corresponding relative expression profile
 #' and plots the profiles in N different windows corresponding to the given phylostratum classes 
 #' or divergence-stratum classes that shall be compared.
 #' 
@@ -8,19 +8,19 @@
 #' 
 #' \deqn{f_js = ( e_js - e_j min ) / ( e_j max - e_j min )}
 #'
-#' where \eqn{e_j min} and \eqn{e_j max} is the minimum/maximum \code{\link{mean}} expression level 
-#' of phylostratum j over the  developmental stages s. This linear transformation corresponds to 
+#' where \eqn{e_j min} and \eqn{e_j max} denote the minimum/maximum \code{\link{mean}} expression level 
+#' of phylostratum j over  developmental stages s. This linear transformation corresponds to 
 #' a shift by \eqn{e_j min} and a subsequent shrinkage by \eqn{e_j max - e_j min}. 
 #' As a result, the relative expression level \eqn{f_js} of developmental stage s 
 #' with minimum \eqn{e_js} is 0, the relative expression level \eqn{f_js} of the developmental 
 #' stage s with maximum \eqn{e_js} is 1, and the relative expression levels \eqn{f_js} of 
 #' all other stages s range between 0 and 1, accordingly.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
-#' @param Groups a list containing the phylostrata or divergence-strata that correspond 
+#' @param Groups a list containing the phylostrata or divergence strata that correspond 
 #' to the same phylostratum class or divergence class.
-#' For ex. evolutionary old phylostrata could be PS1-3 (Class 1) 
-#' and evolutionary young phylostrata could be PS4-12 (Class 2). In this case, 
-#' the list could be assigned as, Groups = list(c(1:3), c(4:12)). 
+#' For ex. evolutionary old phylostrata: PS1-3 (Class 1) 
+#' and evolutionary young phylostrata: PS4-12 (Class 2). In this case, 
+#' the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)). 
 #' It is also possible to define more than 2 groups of evolutionary ages.
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
 #' @param \dots default graphics parameters.

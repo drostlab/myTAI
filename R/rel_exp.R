@@ -3,7 +3,7 @@
 #' 
 #' \deqn{f_s = ( e_s - e_min ) / ( e_max - e_min )}
 #'
-#' where \eqn{e_min} and \eqn{e_max} is the minimum/maximum mean expression level
+#' where \eqn{e_min} and \eqn{e_max} denote the minimum/maximum mean expression level
 #' over the  developmental stages s. This linear transformation corresponds to a
 #' shift by \eqn{e_min} and a subsequent shrinkage by \eqn{e_max - e_min}. 
 #' As a result, the relative expression level \eqn{f_s} of developmental stage s
@@ -51,14 +51,14 @@ RE <- function(ExpressionMatrix)
 #'
 #' \deqn{f_js = ( e_js - e_j min ) / ( e_j max - e_j min )}
 #'
-#' where \eqn{e_j min} and \eqn{e_j max} is the minimum/maximum mean expression level of 
+#' where \eqn{e_j min} and \eqn{e_j max} denote the minimum/maximum mean expression level of 
 #' phylostratum j over the  developmental stages s. This linear transformation corresponds
 #' to a shift by \eqn{e_j min} and a subsequent shrinkage by \eqn{e_j max - e_j min}. 
 #' As a result, the relative expression level \eqn{f_js} of developmental stage s with minimum \eqn{e_js} is 0,
 #' the relative expression level \eqn{f_js} of the developmental stage s with maximum \eqn{e_js} is 1, 
 #' and the relative expression levels \eqn{f_js} of all other stages s range between 0 and 1, accordingly.
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{RE}}
+#' @seealso \code{\link{RE}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}
 #' @examples \dontrun{
 #' 
 #' # read standard phylotranscriptomics data

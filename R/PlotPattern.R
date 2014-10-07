@@ -1,11 +1,25 @@
 #' @title Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object
 #' @description Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object.
-#' This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object. Furthermore, this function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. The user can choose between the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}. The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line. Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
+#' This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object. 
+#' 
+#' Furthermore, this function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. 
+#' The user can choose between the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}. 
+#' The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line. 
+#' Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
 #' The \code{\link{ReductiveHourglassTest}} specificly tests for the statistical significance of a molecular hourglass pattern (high-low-high pattern) with prior biological knowlegde.
 #' The corresponding p-value that is printed within the plot (by default) specifies the statistical significance of the chosen test statistic.
-#' The x-axis denotes the developmental series (time course / experiments / ontogeny) of the input ExpressionSet and the y-axis denotes the corresponding mean transcriptome age value (\code{\link{TAI}} or \code{\link{TDI}}) of the given ExpressionSet. Furthermore, the grey lines above and below the actual phylotranscriptomics pattern denotes the standard deviations of \code{\link{TAI}} or \code{\link{TDI}} values that have been estimated from the \code{\link{bootMatrix}}.
-#' A low mean transcriptome age value denotes an evolutionary older transcriptome being active during the corresponding periods, whereas a high mean transcriptome age value denotes an evolutionary younger transcriptome being active during the corresponding periods.
-#' For the mean transcriptome divergence, a low mean transcriptome divergence value denotes a more conserved transcriptome being active (between two species), whereas a high mean transcriptome divergence value denotes a more divergent transcriptome being active (between two species) - in terms of protein-sequence substitution rates.
+#' 
+#' 
+#' The x-axis denotes the developmental series (time course / experiments / ontogeny) of the input ExpressionSet and the y-axis 
+#' denotes the corresponding mean transcriptome age value (\code{\link{TAI}} or \code{\link{TDI}}) of the given ExpressionSet. 
+#' 
+#' Furthermore, the grey lines above and below the actual phylotranscriptomics pattern denotes the standard deviations of \code{\link{TAI}} or \code{\link{TDI}} 
+#' values that have been estimated from the \code{\link{bootMatrix}}.
+#' A low mean transcriptome age value denotes an evolutionary older transcriptome being active during the corresponding periods, 
+#' whereas a high mean transcriptome age value denotes an evolutionary younger transcriptome being active during the corresponding periods.
+#' For mean transcriptome divergence, a low mean transcriptome divergence value denotes a more conserved transcriptome 
+#' being active (between two species), whereas a high mean transcriptome divergence value denotes a more divergent transcriptome 
+#' being active (between two species) - in terms of protein-sequence substitution rates.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
 #' Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
@@ -33,7 +47,7 @@
 #' 
 #' Hence, when calling the function \code{PlotPattern}, one can specify arguments 
 #' for \code{\link{plot}} and \code{\link{axis}} and \code{\link{legend}} 
-#' instead of \code{\link{...}}. 
+#' as \code{\link{...}}. 
 #' 
 #' In case prior biological knowledge is present for a specific period of development,
 #' the \code{shaded.area} argument can be set to \code{TRUE} and the function will use
@@ -68,7 +82,7 @@
 #'
 #'
 #' # you can also run the Lilliefors Kolmogorov-Smirnov Test (see ReductiveHourglassTest) 
-#' # to ensure the the goodness of fit of the ReductiveHourglassTest statistic is valid
+#' # to quantify the goodness of fit of the ReductiveHourglassTest assumptions
 #'
 #' PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
 #'             modules = list(early = 1:2,mid = 3:5,late = 6:7), 

@@ -15,7 +15,7 @@
 #' \eqn{f_is = e_is / \sum e_is} and \eqn{ps_i} is the phylostratum or divergence-stratum of gene i.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @details The partial TAI or TDI matrix can be used to perform different cluster analyses
-#' and also gives an overall impression of the contribution of each gene to the global \code{\link{TAI}} or \code{link{TDI}} pattern.
+#' and also gives an overall impression of the contribution of each gene to the global \code{\link{TAI}} or \code{\link{TDI}} pattern.
 #' @return a numeric matrix storing the partial TAI or TDI values for each gene in the 
 #' corresponding PhyloExpressionSet or DivergenceExpressionSet. 
 #' @references 
@@ -34,7 +34,21 @@
 #' # example DivergenceExpressionSet
 #' PTM_ds <- pMatrix(DivergenceExpressionSetExample)
 #'
-#'
+#' # boxplot of the pMatrix
+#' boxplot(pMatrix(PhyloExpressionSetExample),outline = FALSE)
+#' 
+#' # boxplot of the pMatrix using log2 transformed expression levels
+#' boxplot(pMatrix(tf(PhyloExpressionSetExample,log2)))
+#' 
+#' # or using the dplyr notation
+#' library(dplyr)
+#' 
+#' tf(PhyloExpressionSetExample,log2) %>% pMatrix() %>% boxplot()
+#' 
+#' # using sqrt transformed expression levels
+#' tf(PhyloExpressionSetExample,log2) %>% pMatrix() %>% boxplot(outline = FALSE)
+#' 
+#' 
 #' }
 #' @export
 

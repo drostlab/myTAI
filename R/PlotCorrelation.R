@@ -15,7 +15,7 @@
 #' @param main.text a character string specifying the text that shall be written as main. 
 #' Default is \code{main.text} = \code{NULL}.
 #' @param \dots default plot parameters.
-#' @return a jitter-plot of PS and DS correlation.
+#' @return a jitter-correlation-plot of PS and DS correlation.
 #' @references  Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{cor}}
