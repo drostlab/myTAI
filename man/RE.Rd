@@ -16,7 +16,7 @@ This function computes the relative expression profiles of any given gene expres
 
 \deqn{f_s = ( e_s - e_min ) / ( e_max - e_min )}
 
-where \eqn{e_min} and \eqn{e_max} is the minimum/maximum mean expression level
+where \eqn{e_min} and \eqn{e_max} denote the minimum/maximum mean expression level
 over the  developmental stages s. This linear transformation corresponds to a
 shift by \eqn{e_min} and a subsequent shrinkage by \eqn{e_max - e_min}.
 As a result, the relative expression level \eqn{f_s} of developmental stage s

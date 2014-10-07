@@ -3,20 +3,18 @@
 \alias{PlotMeans}
 \title{Function to plot the mean expression profiles of phylostrata or divergence-strata.}
 \usage{
-PlotMeans(ExpressionSet, Groups = list(NULL), legendName = NULL, ...)
+PlotMeans(ExpressionSet, Groups = NULL, legendName = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
 \item{Groups}{a list containing the phylostrata or divergence-strata that correspond to the same phylostratum class or divergence class.
-For ex. evolutionary old phylostrata could be PS1-3 (Class 1) and evolutionary young phylostrata could be PS4-12 (Class 2).
-In this case, the list could be assigned as, Groups = list(c(1:3), c(4:12)).
+For ex. evolutionary old phylostrata: PS1-3 (Class 1) and evolutionary young phylostrata: PS4-12 (Class 2).
+In this case, the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).
 It is also possible to define more than 2 groups of evolutionary ages.
-For ex. Groups = list(c(1:3),c(4:8),c(9:12)) would perform an \code{\link{kruskal.test}}
-as test-statistic to determine the statistical significance of the evolutionary
-classes PS1-3, PS4-6, and PS9-12 based on their corresponding mean relative expression levels.}
+For ex. \code{Groups} = list(c(1:3),c(4:8),c(9:12)).}
 
-\item{legendName}{a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.}
+\item{legendName}{a character string specifying whether "PS" or "DS" are used.}
 
 \item{\dots}{default graphics parameters.}
 }
@@ -38,7 +36,7 @@ In different developmental processes different phylostratum or divergence-stratu
 classes might be more expressed than others, hence contributing more to the overall
 phylotranscriptomics pattern (\code{\link{TAI}} or \code{\link{TDI}}).
 This plot can help to identify the phylostratum or divergence-stratum classes
-that mostly influence the given developmental process.
+that contributes most to the overall transcriptome of the given developmental process.
 }
 \examples{
 \dontrun{

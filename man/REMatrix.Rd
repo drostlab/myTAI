@@ -18,7 +18,7 @@ For each phylostratum or divergence-stratum the corresponding relative expressio
 
 \deqn{f_js = ( e_js - e_j min ) / ( e_j max - e_j min )}
 
-where \eqn{e_j min} and \eqn{e_j max} is the minimum/maximum mean expression level of
+where \eqn{e_j min} and \eqn{e_j max} denote the minimum/maximum mean expression level of
 phylostratum j over the  developmental stages s. This linear transformation corresponds
 to a shift by \eqn{e_j min} and a subsequent shrinkage by \eqn{e_j max - e_j min}.
 As a result, the relative expression level \eqn{f_js} of developmental stage s with minimum \eqn{e_js} is 0,
@@ -45,6 +45,6 @@ REMatrix(DivergenceExpressionSetExample)
 Hajk-Georg Drost
 }
 \seealso{
-\code{\link{RE}}
+\code{\link{RE}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}
 }
 

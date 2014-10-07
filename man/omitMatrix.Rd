@@ -13,11 +13,11 @@ a numeric matrix storing TAI or TDI profile for each omitted gene i.
 }
 \description{
 For each gene i, exclude the corresponding gene i from the global
- PhyloExpressionSet or DivergenceExpressionSet and compute the TAI or TDI
+ PhyloExpressionSet or DivergenceExpressionSet and compute the \code{\link{TAI}} or \code{\link{TDI}}
  profile for the corresponding global PhyloExpressionSet or DivergenceExpressionSet
  with excluded gene i.
 
- This results in a TAI or TDI profile Matrix storing the TAI or TDI profile for each omitted gene i.
+ This results in a TAI or TDI profile Matrix storing the \code{\link{TAI}} or \code{\link{TDI}} profile for each omitted gene i.
 }
 \examples{
 \dontrun{

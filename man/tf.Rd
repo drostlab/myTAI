@@ -36,7 +36,7 @@ the global \code{\link{TAI}} and \code{\link{TDI}} pattern, or on any subsequent
 
 The examples using the \emph{PhyloExpressionSetExample} data set show that using common gene expression
 transformation functions: \code{\link{log2}} (Quackenbush, 2001 and 2002), \code{\link{sqrt}} (Yeung et al., 2001),
-\emph{MASS::boxcox}, or \emph{inverse hyperbolic sine transformation}, each transformation results
+\code{\link[MASS]{boxcox}}, or \emph{inverse hyperbolic sine transformation}, each transformation results
 in qualitatively different patterns.
 Nevertheless, for each resulting pattern the statistical significance can be tested
 using either the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}} (Drost et al., 2014)
@@ -68,19 +68,25 @@ head(PES.absolute)
 
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
-PlotPattern(tf(PhyloExpressionSetExample, log2), type = "l", lwd = 5, TestStatistic = "FlatLineTest")
+PlotPattern(tf(PhyloExpressionSetExample, log2),
+            type = "l", lwd = 5, TestStatistic = "FlatLineTest")
 
 # plotting the TAI using sqrt transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
-PlotPattern(tf(PhyloExpressionSetExample, sqrt), type = "l", lwd = 5, TestStatistic = "FlatLineTest")
+PlotPattern(tf(PhyloExpressionSetExample, sqrt),
+            type = "l", lwd = 5, TestStatistic = "FlatLineTest")
 
 
 # plotting the TAI using log2 transformed expression levels
 # and performing the Reductive Hourglass Test to obtain the p-value
-PlotPattern(tf(PhyloExpressionSetExample, log2), type = "l", lwd = 5, TestStatistic = "ReductiveHourglassTest", modules = list(early = 1:2, mid = 3:5, late = 6:7))
+PlotPattern(tf(PhyloExpressionSetExample, log2),
+            type = "l", lwd = 5, TestStatistic = "ReductiveHourglassTest",
+            modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
 # plotting the TAI using sqrt transformed expression levels
-PlotPattern(tf(PhyloExpressionSetExample, sqrt), type = "l", lwd = 5, TestStatistic = "ReductiveHourglassTest", modules = list(early = 1:2, mid = 3:5, late = 6:7))
+PlotPattern(tf(PhyloExpressionSetExample, sqrt), type = "l",
+            lwd = 5, TestStatistic = "ReductiveHourglassTest",
+            modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
 
 }

@@ -23,7 +23,7 @@ Default is \code{main.text} = \code{NULL}.}
 \item{\dots}{default plot parameters.}
 }
 \value{
-a jitter-plot of PS and DS correlation.
+a jitter-correlation-plot of PS and DS correlation.
 }
 \description{
 This function plots the correlation coefficient between phylostratum values

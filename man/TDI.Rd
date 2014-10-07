@@ -35,6 +35,9 @@ data(DivergenceExpressionSetExample)
 # computing the TDI profile of a given DivergenceExpressionSet object
 TDIs <- TDI(DivergenceExpressionSetExample)
 
+# you can then visualize the TDI results using PlotPattern()
+PlotPattern(DivergenceExpressionSetExample, type = "l",
+            xlab = "Ontogeny", ylab = "TDI", lwd = 9)
 
 }
 }
