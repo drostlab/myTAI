@@ -79,7 +79,7 @@
 #' # expression levels, to perform subsequent phylotranscriptomics analyses 
 #' # (that are defined for absolute expression levels), one can re-transform a PhyloExpressionSet like this:
 #' 
-#' PES.absolute <- tf(PES.log2 , function(x) return(2^x))
+#' PES.absolute <- tf(PES.log2 , function(x) 2^x)
 #' 
 #' # which should be the same as  PhyloExpressionSetExample :
 #' head(PhyloExpressionSetExample)
