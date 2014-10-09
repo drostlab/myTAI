@@ -33,14 +33,56 @@
 #'
 #' Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' 
-#' Piasecka B, Lichocki P, Moretti S, et al. (2013) The hourglass and the early conservation models--co-existing patterns of developmental constraints in vertebrates. PLoS Genet. 9(4): e1003476.
+#' Piasecka B, Lichocki P, Moretti S, et al. (2013) The hourglass and the early conservation models--co-existing
+#' patterns of developmental constraints in vertebrates. PLoS Genet. 9(4): e1003476.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{gpScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
 #' @examples \dontrun{
 #' 
+#' data(PhyloExpressionSetExample)
+#' data(DivergenceExpressionSetExample)
+#'
+#' # perform the early conservation test for a PhyloExpressionSet
+#' # here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,
+#' # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
+#' # module 3 = late
+#' EarlyConservationTest(PhyloExpressionSetExample,
+#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
+#'                        permutations = 1000)
+#'
+#'
+#' # perform the early conservation test for a DivergenceExpressionSet
+#' # here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,
+#' # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
+#' # module 3 = late
+#' EarlyConservationTest(DivergenceExpressionSetExample,
+#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
+#'                        permutations = 1000)
+#' 
+#' # to test the goodness of fit and to plot the histogram and Cullen and Frey skewness-kurtosis plot
+#' # the parameter plotHistogram needs to be set to TRUE
+#' # in case plotHistogram = TRUE, the runs parameter must be specified (e.g. 10 or 100)
+#' # to test for the influence of permutation bias on the p-value
+#' # runs = 10 determines the number of independent permutation runs that are
+#' # performed to compute 10 independent p-values based on 10 independent underlying permutations
+#' # and to search for permutation runs that cross the p < 0.05 border
+#' EarlyConservationTest(PhyloExpressionSetExample,
+#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
+#'                        permutations = 1000, lillie.test = TRUE, 
+#'                        plotHistogram = TRUE, runs = 10)
+#' 
+#' 
+#' # since 10 runs using 1000 permutations for each run is computationally expensive
+#' # the parameter parallel = TRUE can be used to perform parallel (multicore) processing
+#' EarlyConservationTest(PhyloExpressionSetExample,
+#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
+#'                        permutations = 1000, lillie.test = TRUE,
+#'                        plotHistogram = TRUE, parallel = TRUE, runs = 10)
+#' 
 #' 
 #' 
 #' }
+#' @import foreach
 #' @export
 
 EarlyConservationTest <- function(ExpressionSet,modules = NULL,
@@ -68,8 +110,165 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
         real_age <- vector(mode = "numeric",length = nCols-2)
         real_age <- TAI(ExpressionSet)
         
+        # compute the real early conservation of the observed phylotranscriptomics pattern
+        # ecScore = early conservation score
+        real_ecv <- ecScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],
+                            method = "min",scoringMethod = "mean-mean")
+                
+        ### compute the bootstrap matrix 
+        resMatrix <- bootMatrix(ExpressionSet, permutations)
+        
+        ### compute the global phylotranscriptomics destruction scores foe each sampled age vector
+        score_vector <- apply(resMatrix, 1 ,ecScore,early = modules[[1]],
+                              mid = modules[[2]],late = modules[[3]],
+                              method = "min",scoringMethod = "mean-mean")
+        
+        
+        # parameter estimators using MASS::fitdistr
+        param <- fitdistrplus::fitdist(score_vector,"norm", method = "mme")
+        mu <- param$estimate[1]
+        sigma <- param$estimate[2]
+        
+        if(plotHistogram == TRUE){
+                # plot histogram of scores
+                normDensity <- function(x){
+                        
+                        return(dnorm(x,mu,sigma))
+                        
+                }
+                
+                if(lillie.test == TRUE)
+                        par(mfrow = c(2,2))
+                if(lillie.test == FALSE)
+                        par(mfrow = c(1,2))
+                
+                fitdistrplus::descdist(score_vector, boot = permutations)
+                curve(normDensity,xlim = c(min(score_vector),max(score_vector)),col = "steelblue",lwd = 5,xlab = "Scores",ylab = "Frequency")
+                hist(score_vector,prob = TRUE,add = TRUE, breaks = permutations / (0.01 * permutations))
+                rug(score_vector)
+                legend("topleft", legend = "A", bty = "n")
+                
+                p.vals_vec <- vector(mode = "numeric", length = runs)
+                lillie_vec <- vector(mode = "logical", length = runs)
+                ect <- vector(mode = "list", length = 3)
+                
+                
+                if(parallel == TRUE){
+                        
+                        # parallellizing the sampling process using the 'doMC' and 'parallel' package
+                        # register all given cores for parallelization
+                        # detectCores() returns the number of cores available on a multi-core machine
+                        cores <- parallel::detectCores()
+                        doMC::registerDoMC(cores)
+                        
+                        # perform the sampling process in parallel
+                        parallel_results <- as.data.frame(foreach::foreach(i = 1:runs,.combine = "rbind") %dopar% {
+                                
+                                if(lillie.test == TRUE)
+                                        EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = TRUE,
+                                                              plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]))[c(1,3)]
+                                if(lillie.test == FALSE)
+                                        EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = FALSE,
+                                                              plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]))[c(1,3)]
+                                
+                        })
+                        
+                        p.vals_vec <- parallel_results$p.value[1]
+                        
+                        if(lillie.test == TRUE)
+                                lillie_vec <- parallel_results$lillie.test[[1]]
+                        
+                }
+                
+                if(parallel == FALSE){
+                        
+                        # sequential computations of p-values 
+                        if(runs >= 10){
+                                # initializing the progress bar
+                                progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
+                                
+                        }
+                        
+                        for(i in 1:runs){
+                                if(lillie.test == TRUE)
+                                        ect <- EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = TRUE, 
+                                                                     plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),runs=NULL)
+                                if(lillie.test == FALSE)
+                                        ect <- EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = FALSE, 
+                                                                     plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),runs=NULL)
+                                
+                                p.vals_vec[i] <- ect$p.value
+                                if(lillie.test == TRUE)
+                                        lillie_vec[i] <- ect$lillie.test
+                                
+                                if(runs >= 10){
+                                        # printing out the progress
+                                        setTxtProgressBar(progressBar,i)
+                                }
+                        }
+                }
+                
+                plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), col = "darkblue", xlab = "Runs", ylab = "p-value")
+                abline(h = 0.05, lty = 2, lwd = 3)
+                legend("topleft", legend = "B", bty = "n")
+                
+                if(lillie.test == TRUE){
+                        tbl <- table(factor(lillie_vec, levels = c("FALSE","TRUE")))
+                        barplot(tbl/sum(tbl) , beside = TRUE, names.arg = c("FALSE", "TRUE"), ylab = "relative frequency", main = paste0("runs = ",runs))
+                        legend("topleft", legend = "C", bty = "n")
+                }
+        }
+        
+        
+        #if(real_score >= 0)
+        pval <- pnorm(real_score,mean = mu,sd = sigma,lower.tail = FALSE)
+        
+        #if(real_score < 0)
+        #pval <- pnorm(real_score,mean=mu,sd=sigma,lower.tail=TRUE)
+        ### computing the standard deviation of the sampled TAI values for each stage separately
+        sd_vals <- vector(mode = "numeric",length = nCols-2)
+        sd_vals <- apply(resMatrix,2,sd)
+        
+        if(lillie.test == TRUE){
+                # perform Lilliefors K-S-Test
+                lillie_p.val <- nortest::lillie.test(score_vector)$p.value
+                # does the Lilliefors test pass the criterion
+                lillie_bool <- (lillie_p.val > 0.05)
+                
+                if((lillie_p.val < 0.05) & (plotHistogram == FALSE)){
+                        warning("Lilliefors (Kolmogorov-Smirnov) test for normality did not pass the p > 0.05 criterion!")
+                }
+        }
+        
+        if(lillie.test == TRUE)
+                return(list(p.value = pval,std.dev = sd_vals,lillie.test = lillie_bool))
+        if(lillie.test == FALSE)
+                return(list(p.value = pval,std.dev = sd_vals,lillie.test = NA))
+        
+        
+}
+
+
+
+ecScore <- function(){
+        
+        Score.Early <- vector(mode = "numeric", length = 1)
+        Score.Late <- vector(mode = "numeric", length = 1)
+        age_valsEarly <- vector(mode = "numeric",length = length(early))
+        age_valsMid <- vector(mode = "numeric",length = length(mid))
+        age_valsLate <- vector(mode = "numeric",length = length(late))
+        
+        
+        age_valsEarly <- age_vals[early]
+        age_valsMid <- age_vals[mid]
+        age_valsLate <- age_vals[late]
         
         
         
         
 }
+
+
+
+
+
