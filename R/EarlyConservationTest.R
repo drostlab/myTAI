@@ -1,4 +1,4 @@
-#' @title Function to perform the Early Conservation Test.
+#' @title Function to perform the Reductive Early Conservation Test.
 #' @description The \emph{Early Conservation Test} has been developed to statistically evaluate the
 #' existence of a monotonically increasing phylotranscriptomic pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
@@ -112,16 +112,14 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
         
         # compute the real early conservation of the observed phylotranscriptomics pattern
         # ecScore = early conservation score
-        real_ecv <- ecScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],
-                            method = "min",scoringMethod = "mean-mean")
+        real_ecv <- ecScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]])
                 
         ### compute the bootstrap matrix 
         resMatrix <- bootMatrix(ExpressionSet, permutations)
         
         ### compute the global phylotranscriptomics destruction scores foe each sampled age vector
         score_vector <- apply(resMatrix, 1 ,ecScore,early = modules[[1]],
-                              mid = modules[[2]],late = modules[[3]],
-                              method = "min",scoringMethod = "mean-mean")
+                              mid = modules[[2]],late = modules[[3]])
         
         
         # parameter estimators using MASS::fitdistr
@@ -146,12 +144,13 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                 curve(normDensity,xlim = c(min(score_vector),max(score_vector)),col = "steelblue",lwd = 5,xlab = "Scores",ylab = "Frequency")
                 hist(score_vector,prob = TRUE,add = TRUE, breaks = permutations / (0.01 * permutations))
                 rug(score_vector)
-                legend("topleft", legend = "A", bty = "n")
+                #legend("topleft", legend = "A", bty = "n")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
                 lillie_vec <- vector(mode = "logical", length = runs)
                 ect <- vector(mode = "list", length = 3)
                 
+                cat("\n")
                 
                 if(parallel == TRUE){
                         
@@ -162,21 +161,18 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                         doMC::registerDoMC(cores)
                         
                         # perform the sampling process in parallel
-                        parallel_results <- as.data.frame(foreach::foreach(i = 1:runs,.combine = "rbind") %dopar% {
+                        parallel_results <- foreach::foreach(i = 1:runs,.combine = "rbind") %dopar% {
                                 
-                                if(lillie.test == TRUE)
-                                        EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = TRUE,
-                                                              plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]))[c(1,3)]
-                                if(lillie.test == FALSE)
-                                        EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = FALSE,
-                                                              plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]))[c(1,3)]
-                                
-                        })
+                               
+                                        data.frame(EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = TRUE,
+                                                              plotHistogram = FALSE, modules = modules)[c(1,3)])
+                                        
+                        }
                         
-                        p.vals_vec <- parallel_results$p.value[1]
+                        colnames(parallel_results) <- c("p.value","lillie.test")
                         
-                        if(lillie.test == TRUE)
-                                lillie_vec <- parallel_results$lillie.test[[1]]
+                        p.vals_vec <- parallel_results[ ,"p.value"]
+                        lillie_vec <- parallel_results[ ,"lillie.test"]
                         
                 }
                 
@@ -210,21 +206,21 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                 
                 plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), col = "darkblue", xlab = "Runs", ylab = "p-value")
                 abline(h = 0.05, lty = 2, lwd = 3)
-                legend("topleft", legend = "B", bty = "n")
+                #legend("topleft", legend = "B", bty = "n")
                 
                 if(lillie.test == TRUE){
                         tbl <- table(factor(lillie_vec, levels = c("FALSE","TRUE")))
                         barplot(tbl/sum(tbl) , beside = TRUE, names.arg = c("FALSE", "TRUE"), ylab = "relative frequency", main = paste0("runs = ",runs))
-                        legend("topleft", legend = "C", bty = "n")
+                        #legend("topleft", legend = "C", bty = "n")
                 }
         }
         
         
-        #if(real_score >= 0)
-        pval <- pnorm(real_score,mean = mu,sd = sigma,lower.tail = FALSE)
+        #if(real_ecv >= 0)
+        pval <- pnorm(real_ecv,mean = mu,sd = sigma,lower.tail = FALSE)
         
-        #if(real_score < 0)
-        #pval <- pnorm(real_score,mean=mu,sd=sigma,lower.tail=TRUE)
+        #if(real_ecv < 0)
+        #pval <- pnorm(real_ecv,mean=mu,sd=sigma,lower.tail=TRUE)
         ### computing the standard deviation of the sampled TAI values for each stage separately
         sd_vals <- vector(mode = "numeric",length = nCols-2)
         sd_vals <- apply(resMatrix,2,sd)
@@ -250,22 +246,18 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
 
 
 
-ecScore <- function(){
+ecScore <- function(age_vals,early,mid,late){
         
-        Score.Early <- vector(mode = "numeric", length = 1)
-        Score.Late <- vector(mode = "numeric", length = 1)
-        age_valsEarly <- vector(mode = "numeric",length = length(early))
-        age_valsMid <- vector(mode = "numeric",length = length(mid))
-        age_valsLate <- vector(mode = "numeric",length = length(late))
+        D1 <- vector(mode = "numeric", length = 1)
+        D2 <- vector(mode = "numeric", length = 1)
+        D_min <- vector(mode = "numeric", length = 1)
         
+        D1 <- mean(age_vals[mid]) - mean(age_vals[early])
+        D2 <- mean(age_vals[late]) - mean(age_vals[early])
         
-        age_valsEarly <- age_vals[early]
-        age_valsMid <- age_vals[mid]
-        age_valsLate <- age_vals[late]
+        D_min <- min(D1,D2)
         
-        
-        
-        
+        return(D_min)
 }
 
 

@@ -199,12 +199,13 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                 curve(normDensity,xlim = c(min(score_vector),max(score_vector)),col = "steelblue",lwd = 5,xlab = "Scores",ylab = "Frequency")
                 hist(score_vector,prob = TRUE,add = TRUE, breaks = permutations / (0.01 * permutations))
                 rug(score_vector)
-                legend("topleft", legend = "A", bty = "n")
+                #legend("topleft", legend = "A", bty = "n")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
                 lillie_vec <- vector(mode = "logical", length = runs)
                 rht <- vector(mode = "list", length = 3)
                 
+                cat("\n")
                 
                 if(parallel == TRUE){
                         
@@ -215,23 +216,24 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                         doMC::registerDoMC(cores)
                         
                         # perform the sampling process in parallel
-                        parallel_results <- as.data.frame(foreach::foreach(i = 1:runs,.combine = "rbind") %dopar% {
+                        parallel_results <- foreach::foreach(iter(1:runs),.combine = "rbind") %dopar% {
                                 
-                                if(lillie.test == TRUE)
-                                        ReductiveHourglassTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = TRUE, plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]))[c(1,3)]
-                                if(lillie.test == FALSE)
-                                        ReductiveHourglassTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = FALSE, plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]))[c(1,3)]
-                                
-                        })
+                                      data.frame(ReductiveHourglassTest(ExpressionSet = ExpressionSet,permutations = permutations,
+                                                                  lillie.test = TRUE, plotHistogram = FALSE, modules = modules)[c(1,3)])
+                                                              
+                        }
                         
-                        p.vals_vec <- parallel_results$p.value[1]
                         
-                        if(lillie.test == TRUE)
-                                lillie_vec <- parallel_results$lillie.test[[1]]
+                        colnames(parallel_results) <- c("p.value","lillie.test")
+                        
+                        p.vals_vec <- parallel_results[ ,"p.value"]
+                        lillie_vec <- parallel_results[ ,"lillie.test"]
                         
                 }
                 
+                
                 if(parallel == FALSE){
+                        
                         
                         # sequential computations of p-values 
                         if(runs >= 10){
@@ -257,14 +259,16 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                         }
                 }
                 
+                cat("\n")
+                
                 plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), col = "darkblue", xlab = "Runs", ylab = "p-value")
                 abline(h = 0.05, lty = 2, lwd = 3)
-                legend("topleft", legend = "B", bty = "n")
+                #legend("topleft", legend = "B", bty = "n")
                 
                 if(lillie.test == TRUE){
                         tbl <- table(factor(lillie_vec, levels = c("FALSE","TRUE")))
                         barplot(tbl/sum(tbl) , beside = TRUE, names.arg = c("FALSE", "TRUE"), ylab = "relative frequency", main = paste0("runs = ",runs))
-                        legend("topleft", legend = "C", bty = "n")
+                        #legend("topleft", legend = "C", bty = "n")
                 }
         }
         
