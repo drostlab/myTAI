@@ -91,7 +91,7 @@
 #'
 #' http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf  
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{gpScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
+#' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
 #' @examples \dontrun{
 #' 
 #' data(PhyloExpressionSetExample)
@@ -166,14 +166,14 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
         real_age <- vector(mode = "numeric",length = nCols-2)
         real_age <- TAI(ExpressionSet)
         ### compute the real reductive hourglass scores of the observed phylotranscriptomics pattern
-        real_score <- gpScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],
+        real_score <- rhScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],
                               method = "min",scoringMethod = "mean-mean")
         
         ### compute the bootstrap matrix 
         resMatrix <- bootMatrix(ExpressionSet, permutations)
         
         ### compute the global phylotranscriptomics destruction scores foe each sampled age vector
-        score_vector <- apply(resMatrix, 1 ,gpScore,early = modules[[1]],mid = modules[[2]],late = modules[[3]],method = "min",scoringMethod = "mean-mean")
+        score_vector <- apply(resMatrix, 1 ,rhScore,early = modules[[1]],mid = modules[[2]],late = modules[[3]],method = "min",scoringMethod = "mean-mean")
         
         
         

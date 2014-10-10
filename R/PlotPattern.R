@@ -3,12 +3,15 @@
 #' This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object. 
 #' 
 #' Furthermore, this function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. 
-#' The user can choose between the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}. 
+#' The user can choose between the \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, or \code{\link{EarlyConservationTest}}. 
 #' The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line. 
 #' Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
 #' The \code{\link{ReductiveHourglassTest}} specificly tests for the statistical significance of a molecular hourglass pattern (high-low-high pattern) with prior biological knowlegde.
 #' The corresponding p-value that is printed within the plot (by default) specifies the statistical significance of the chosen test statistic.
 #' 
+#' The \code{\link{EarlyConservationTest}} specificly tests for the statistical significance of a low-high-high pattern (monotonically increasing function)
+#' with prior biological knowlegde.
+#' The corresponding p-value that is printed within the plot (by default) specifies the statistical significance of the chosen test statistic.
 #' 
 #' The x-axis denotes the developmental series (time course / experiments / ontogeny) of the input ExpressionSet and the y-axis 
 #' denotes the corresponding mean transcriptome age value (\code{\link{TAI}} or \code{\link{TDI}}) of the given ExpressionSet. 
@@ -24,11 +27,12 @@
 #' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
 #' Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
 #' \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern).
-#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}}: early, mid, and late. 
+#' \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern).
+#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}} or \code{\link{EarlyConservationTest}}: early, mid, and late. 
 #' Each element expects a numeric vector specifying the developmental stages 
 #' or experiments that correspond to each module. For example, 
 #' \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.
-#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}.
+#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}} or \code{\link{ReductiveHourglassTest}}.
 #' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.
 #' @param digits.ylab a numeric value specifying the number of digits shown for the TAI or TDI values on the y-axis.
 #' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.
@@ -53,12 +57,22 @@
 #' the \code{shaded.area} argument can be set to \code{TRUE} and the function will use
 #' the values stored in the \code{mid} argument to draw a shaded area within the corresponding period of development.
 #' @return a plot visualizing the phylotranscriptomic pattern of a given PhyloExpressionSet or DivergenceExpressionSet object.
+#' 
+#' The corresponding \emph{p-value} of the test statistic is named as follows:
+#' 
+#' \code{p_flt} = p-value of the corresponding \code{\link{FlatLineTest}}
+#' 
+#' \code{p_rht} = p-value of the corresponding \code{\link{ReductiveHourglassTest}}
+#' 
+#' \code{p_ect} = p-value of the corresponding \code{\link{EarlyConservationTest}}
+#' 
 #' @references 
 #' Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
 #'
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, \code{\link{gpScore}}
+#' @seealso \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}},
+#'  \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{gpScore}}
 #' @examples \dontrun{
 #' 
 #' # load PhyloExpressionSet
@@ -89,22 +103,40 @@
 #'             permutations = 1000, lillie.test = TRUE)
 #' 
 #' 
+#' # example: EarlyConservationTest
+#' PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
+#'             modules = list(early = 1:2,mid = 3:5,late = 6:7), 
+#'             permutations = 1000,p.value = TRUE,shaded.area = FALSE, 
+#'             xlab = "Ontogeny", ylab = "TAI", type = "b", lwd = 9)
+#'
+#'
+#' # you can also run the Lilliefors Kolmogorov-Smirnov Test (see EarlyConservationTest) 
+#' # to quantify the goodness of fit of the EarlyConservationTest assumptions
+#'
+#' PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
+#'             modules = list(early = 1:2,mid = 3:5,late = 6:7), 
+#'             permutations = 1000, lillie.test = TRUE)
+#' 
+#' 
 #' }
 #' @export
 
-PlotPattern <- function(ExpressionSet,TestStatistic="FlatLineTest",
-                        modules = NULL,permutations=1000,lillie.test = FALSE,
-                        digits.ylab=3,p.value=TRUE,shaded.area=FALSE,y.ticks=4,...)
+PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",
+                        modules = NULL,permutations = 1000,lillie.test = FALSE,
+                        digits.ylab = 3,p.value = TRUE,shaded.area = FALSE,y.ticks = 4,...)
 {
         
         is.ExpressionSet(ExpressionSet)
         
-        if(!(is.element(TestStatistic, c("FlatLineTest","ReductiveHourglassTest")))){
-                stop("Please enter a correct string for the test statistic: 'FlatLineTest' or 'ReductiveHourglassTest'.")
+        if(!(is.element(TestStatistic, c("FlatLineTest","ReductiveHourglassTest","EarlyConservationTest")))){
+                stop("Please enter a correct string for the test statistic: 'FlatLineTest', 'EarlyConservationTest' or 'ReductiveHourglassTest'.")
         }
         
-        if((TestStatistic == "ReductiveHourglassTest") & is.null(modules))
-                stop("Please specify the modules for the ReductiveHourglassTest: modules = list(early = ..., mid = ..., late = ...).")
+        if((is.element(TestStatistic,c("ReductiveHourglassTest","EarlyConservationTest"))) & is.null(modules))
+                stop("Please specify the modules for the ReductiveHourglassTest or EarlyConservationTest: modules = list(early = ..., mid = ..., late = ...).")
+        
+        if((!is.null(modules)) & (TestStatistic == "FlatLineTest"))
+                warning("You don't need to specify the modules argument for the FlatLineTest.")
         
         nCols <- dim(ExpressionSet)[2]
         resList <- vector("list", length = 2)
@@ -130,6 +162,20 @@ PlotPattern <- function(ExpressionSet,TestStatistic="FlatLineTest",
                 
                 if(lillie.test == FALSE){
                         resList <- ReductiveHourglassTest(ExpressionSet,modules = modules, 
+                                                          permutations = permutations, lillie.test = FALSE)
+                }
+                
+        }
+        
+        if(TestStatistic == "EarlyConservationTest"){
+                
+                if(lillie.test == TRUE){
+                        resList <- EarlyConservationTest(ExpressionSet,modules = modules, 
+                                                          permutations = permutations, lillie.test = TRUE)
+                }
+                
+                if(lillie.test == FALSE){
+                        resList <- EarlyConservationTest(ExpressionSet,modules = modules, 
                                                           permutations = permutations, lillie.test = FALSE)
                 }
                 
@@ -182,8 +228,21 @@ PlotPattern <- function(ExpressionSet,TestStatistic="FlatLineTest",
         lines(age - sd_vals,lwd = 2,col = "darkgrey")
         
         if(p.value == TRUE){
-                do.call(graphics::legend,c(x = "topleft",bty = "n",legend = paste("p = ",format(pval,digits = 3),sep = ""),
+                
+                if(TestStatistic == "FlatLineTest"){
+                        do.call(graphics::legend,c(x = "topleft",bty = "n",legend = paste("p_flt = ",format(pval,digits = 3),sep = ""),
                                            dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                }
+                
+                if(TestStatistic == "ReductiveHourglassTest"){
+                        do.call(graphics::legend,c(x = "topleft",bty = "n",legend = paste("p_rht = ",format(pval,digits = 3),sep = ""),
+                                                   dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                }
+                
+                if(TestStatistic == "EarlyConservationTest"){
+                        do.call(graphics::legend,c(x = "topleft",bty = "n",legend = paste("p_ect = ",format(pval,digits = 3),sep = ""),
+                                                   dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                }
                 
         }
         
@@ -200,3 +259,17 @@ PlotPattern <- function(ExpressionSet,TestStatistic="FlatLineTest",
                 rect(modules[[2]][1], usr[3], modules[[2]][length(modules[[2]])], usr[4], col = col2alpha("midnightblue",alpha = 0.2)) 
         }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

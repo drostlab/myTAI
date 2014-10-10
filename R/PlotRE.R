@@ -1,4 +1,4 @@
-#' @title Function to plot the relative expression profiles of a PhyloExpressionSet or DivergenceExpressionSet.
+#' @title Function to plot the relative expression profiles of a PhyloExpressionSet or DivergenceExpressionSet
 #' @description 
 #' This function computes for each phylostratum or divergence stratum the corresponding relative expression profile
 #' and plots the profiles in N different windows corresponding to the given phylostratum classes 

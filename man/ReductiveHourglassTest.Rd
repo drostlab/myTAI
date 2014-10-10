@@ -161,6 +161,6 @@ http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf
 http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf
 }
 \seealso{
-\code{\link{gpScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
+\code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
 }
 

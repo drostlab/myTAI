@@ -1,4 +1,4 @@
-#' @title Function to compute TAI or TDI profiles based on N permuted PhyloExpressionSets or DivergenceExpressionSets.
+#' @title Function to compute TAI or TDI profiles based on N permuted PhyloExpressionSets or DivergenceExpressionSets
 #' @description This function computes the TAI for a row permutated PhyloExpressionSet or DivergenceExpressionSet.
 #'
 #' One can specify the number of permutations which corresponds to the number of \code{\link{TAI}} or \code{\link{TDI}} profiles

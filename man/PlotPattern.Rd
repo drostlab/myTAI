@@ -12,14 +12,15 @@ PlotPattern(ExpressionSet, TestStatistic = "FlatLineTest", modules = NULL,
 
 \item{TestStatistic}{a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
 Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
-\code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern).}
+\code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern).
+\code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern).}
 
-\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}}: early, mid, and late.
+\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}} or \code{\link{EarlyConservationTest}}: early, mid, and late.
 Each element expects a numeric vector specifying the developmental stages
 or experiments that correspond to each module. For example,
 \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.}
 
-\item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}.}
+\item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}} or \code{\link{ReductiveHourglassTest}}.}
 
 \item{lillie.test}{a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.}
 
@@ -36,18 +37,29 @@ be drawn for the developmental stages defined to be the presumptive phylotypic p
 }
 \value{
 a plot visualizing the phylotranscriptomic pattern of a given PhyloExpressionSet or DivergenceExpressionSet object.
+
+The corresponding \emph{p-value} of the test statistic is named as follows:
+
+\code{p_flt} = p-value of the corresponding \code{\link{FlatLineTest}}
+
+\code{p_rht} = p-value of the corresponding \code{\link{ReductiveHourglassTest}}
+
+\code{p_ect} = p-value of the corresponding \code{\link{EarlyConservationTest}}
 }
 \description{
 Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object.
 This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object.
 
 Furthermore, this function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern.
-The user can choose between the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}.
+The user can choose between the \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, or \code{\link{EarlyConservationTest}}.
 The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line.
 Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
 The \code{\link{ReductiveHourglassTest}} specificly tests for the statistical significance of a molecular hourglass pattern (high-low-high pattern) with prior biological knowlegde.
 The corresponding p-value that is printed within the plot (by default) specifies the statistical significance of the chosen test statistic.
 
+The \code{\link{EarlyConservationTest}} specificly tests for the statistical significance of a low-high-high pattern (monotonically increasing function)
+with prior biological knowlegde.
+The corresponding p-value that is printed within the plot (by default) specifies the statistical significance of the chosen test statistic.
 
 The x-axis denotes the developmental series (time course / experiments / ontogeny) of the input ExpressionSet and the y-axis
 denotes the corresponding mean transcriptome age value (\code{\link{TAI}} or \code{\link{TDI}}) of the given ExpressionSet.
@@ -109,6 +121,21 @@ PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
             permutations = 1000, lillie.test = TRUE)
 
 
+# example: EarlyConservationTest
+PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
+            modules = list(early = 1:2,mid = 3:5,late = 6:7),
+            permutations = 1000,p.value = TRUE,shaded.area = FALSE,
+            xlab = "Ontogeny", ylab = "TAI", type = "b", lwd = 9)
+
+
+# you can also run the Lilliefors Kolmogorov-Smirnov Test (see EarlyConservationTest)
+# to quantify the goodness of fit of the EarlyConservationTest assumptions
+
+PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
+            modules = list(early = 1:2,mid = 3:5,late = 6:7),
+            permutations = 1000, lillie.test = TRUE)
+
+
 }
 }
 \author{
@@ -120,6 +147,7 @@ Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age in
 Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 }
 \seealso{
-\code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, \code{\link{gpScore}}
+\code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}},
+ \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{gpScore}}
 }
 

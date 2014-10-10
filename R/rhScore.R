@@ -1,4 +1,4 @@
-#' @title Function to compute the TAI or TDI destruction score of the global hourglass pattern based on a pre-computed TAI or TDI vector.
+#' @title Function to compute the hourglass score for the ReductiveHourglassTest
 #' @description
 #' 
 #'         This function reduces the destruction of an hourglass shaped pattern to a single score value.
@@ -67,7 +67,7 @@
 #'  TAIs <- TAI(PhyloExpressionSetExample)
 #'
 #'  # compute the global hourglass destruction score for the TAIs profile using reduction method: mean(mean-mean)
-#'  gScore <- gpScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,method = "mean",scoringMethod = "mean-mean")
+#'  rh_score <- rhScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,method = "mean",scoringMethod = "mean-mean")
 #'
 #'
 #'  # example DivergenceExpressionSet:
@@ -76,10 +76,12 @@
 #'  TDIs <- TDI(DivergenceExpressionSetExample)
 #'
 #'  # compute the global hourglass destruction score for the TDIs profile using reduction method: mean(mean-mean)
-#'  gScore <- gpScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,method = "mean",scoringMethod = "mean-mean")
+#'  rh_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,method = "mean",scoringMethod = "mean-mean")
+#'  
+#'  
 #' }
 #' @export
-gpScore <- function(age_vals,early,mid,late,method,scoringMethod)
+rhScore <- function(age_vals,early,mid,late,method,scoringMethod)
 {
         
         Score.Early <- vector(mode = "numeric", length = 1)
