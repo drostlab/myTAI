@@ -1,13 +1,16 @@
 ---
-title: "Intermediate Phylotranscriptomics Analyses"
-author: "Hajk-Georg Drost"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Intermediate Phylotranscriptomics Analyses}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\usepackage[utf8]{inputenc}
+output:
+  html_document: default
+  pdf_document:
+    highlight: haddock
 ---
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Intermediate Analyses}
+%\VignetteBuilder(knitr::knitr)
+%\VignetteIndexEntry{Vignette Intermediate Analyses}
+-->
+
 
 ```{r, echo = FALSE, message = FALSE}
 library(myTAI)
@@ -18,8 +21,11 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-In the Introduction vignette you learned how to perform the most fundamental computations
-and visualizations for phylotranscriptomics analyses using the `myTAI` package.
+# Intermediate Analyses Phylotranscriptomics Analyses
+
+
+In the introduction vignette you learned how to perform the most fundamental computations
+and visualizations for phylotranscriptomics analyses using the __myTAI__ package.
 
 This intermediate vignette will provide you more detailed analyses and more specialized techniques 
 to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, etc.).
@@ -35,7 +41,7 @@ Three methods have been proposed to quantify the statistical significance of the
 * __EarlyConservationTest__
 
 Here, we will build the test statistic of each test step by step so that future modifications
-or new test statistics can be built upon the existing methods implemented in the `myTAI` package.
+or new test statistics can be built upon the existing methods implemented in the __myTAI__ package.
 
 
 
@@ -45,7 +51,7 @@ The FlatLineTest is a permutation test quantifying the statistical significance 
 to deviate from a flat line. The goal is to detect any evolutionary signal within a developmental time course that significantly deviates from a flat line.
 
 To build the test statistic we start with a standard PhyloExpressionSet.
-The `myTAI` package provides an example PhyloExpressionSet named `PhyloExpressionSetExample`:
+The __myTAI__ package provides an example PhyloExpressionSet named `PhyloExpressionSetExample`:
 
 ```{r}
 library(myTAI)
@@ -68,7 +74,7 @@ TAI(PhyloExpressionSetExample)
 
 Visualization: 
 
-```{r, fig.width= 7, fig.height= 5}
+```{r}
 # visualize the TAI profile of correctly assigned Phylostrata
 PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, p.value = FALSE) 
 ```
@@ -77,8 +83,7 @@ PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, p.value = FALSE)
 ```{r}
 
 # randomly permute the Phylostratum assignment of all genes 
-randomPhyloExpressionSetExample <- data.frame( sample(PhyloExpressionSetExample[ , 1]), 
-                                              PhyloExpressionSetExample[, 2:9] )
+randomPhyloExpressionSetExample <- data.frame(sample(PhyloExpressionSetExample[ , 1]), PhyloExpressionSetExample[, 2:9])
 
 # TAI profile based on randomly assigned Phylostrata
 TAI(randomPhyloExpressionSetExample) 
@@ -86,7 +91,7 @@ TAI(randomPhyloExpressionSetExample)
 
 Visualization: 
 
-```{r, fig.width= 7, fig.height= 5}
+```{r}
 # visualize the TAI profile based on randomly assigned Phylostrata
 PlotPattern(randomPhyloExpressionSetExample, type = "l", lwd = 6, p.value = FALSE) 
 ```
@@ -122,7 +127,7 @@ Based on this `booMatrix` we can compute the variance of each random TAI profile
 
 
 
-```{r, fig.width= 7, fig.height= 5}
+```{r}
 # compute the variance of the random TAI profile for each row
 variance_vector <- apply(randomTAIs, 1 , var)
 
@@ -133,13 +138,12 @@ hist(variance_vector, breaks = 100)
 Now it is interesting to see where we can find the variance of the correctly assigned TAI.
 
 
-```{r, fig.width= 7, fig.height= 5}
+```{r}
 # variance of the TAI profile based on correctly assigned Phylostrata
 var_real <- var(TAI(PhyloExpressionSetExample)) 
 
 # visualize the distribution of variances
-hist(c(variance_vector,var_real), breaks = 100, 
-     xlab = "variance", main = "Histogram of variance_vector")
+hist(c(variance_vector,var_real), breaks = 100, xlab = "variance", main = "Histogram of variance_vector")
 
 # and plot a red line at the position where we can find the 
 # real variance
@@ -152,7 +156,7 @@ This plot illustrates that variances based on random `TAI` profiles seem have a 
 Visually it would be possible to choose a gamma distribution to fit the histogram of `variance_vector`. To validate this choice a [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment) provided by the [fitdistrplus](http://cran.r-project.org/web/packages/fitdistrplus/index.html) package can be used.
 
 
-```{r, fig.width= 7, fig.height= 5}
+```{r}
 # install.packages("fitdistrplus")
 
 # plot a Cullen and Frey graph
@@ -162,7 +166,7 @@ fitdistrplus::descdist(variance_vector)
 Based on the observation that a gamma distribution is a suitable fit for `variance_vector`, we can now
 estimate the parameters of the gamma distribution that fits the data.
 
-```{r, fig.width= 7, fig.height= 5}
+```{r}
 # estimate the parameters: shape and rate using 'moment matching estimation'
 gamma_MME <- fitdistrplus::fitdist(variance_vector,distr = "gamma",method = "mme")
 # estimate shape:
@@ -205,4 +209,5 @@ FlatLineTest(PhyloExpressionSetExample, permutations = 1000)
 ```
 
 This function returns the p-value of the test statistic.
+
 
