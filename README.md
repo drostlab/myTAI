@@ -47,7 +47,7 @@ Three tutorials will get you started with this package:
 
 - [An Introduction to the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
 - [Intermediate concepts of the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
-- Advanced topics using the myTAI package
+- [Advanced topics using the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
 
 ## Discussions and Bug Reports
 
