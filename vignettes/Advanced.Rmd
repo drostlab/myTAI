@@ -1,0 +1,31 @@
+---
+title: "Advanced Phylotranscriptomics Analyses"
+author: "Hajk-Georg Drost"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced Phylotranscriptomics Analyses}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(myTAI)
+options(width = 750)
+knitr::opts_chunk$set(
+  comment = "#>",
+  error = FALSE,
+  tidy = FALSE)
+```
+
+
+The `myTAI` package is based on the __PhyloExpressionSet__ and __DivergenceExpressionSet__ standard.
+To obtain this data format a __PhyloExpressionSet__ and __DivergenceExpressionSet__ are based
+on the combination of a Phylostratigraphic Map and an Expressionset (__PhyloExpressionSet__) or
+on the combination of a Divergence Map and an Expressionset (__DivergenceExpressionSet__).
+
+The computation of a Phylostratigraphic Map relies on a method named [Phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995).
+The computation of a Divergence Map relies on a method named [Divergence Stratigraphy](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html).
+Both methods are computationally expensive and include many methodologies and evolutionary concepts.
+Nevertheless, the [orthologr](https://github.com/HajkD/orthologr) package aims to automate [Divergence Stratigraphy](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)
+and can be used to obtain a Divergence Map for a _query organism of interest_.
