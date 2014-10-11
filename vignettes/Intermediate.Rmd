@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 In the Introduction vignette you learned how to perform the most fundamental computations
 and visualizations for phylotranscriptomics analyses using the `myTAI` package.
 
-This intermediate vignette will provide you more detailed analyses and more specialized techniques 
+This __Intermediate__ vignette will provide you more detailed analyses and more specialized techniques 
 to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, etc.).
 
 
