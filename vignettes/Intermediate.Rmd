@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-In the Introduction vignette you learned how to perform the most fundamental computations
+In the __Introduction__ vignette you learned how to perform the most fundamental computations
 and visualizations for phylotranscriptomics analyses using the `myTAI` package.
 
 This __Intermediate__ vignette will provide you more detailed analyses and more specialized techniques 
@@ -290,13 +290,13 @@ The reductive hourglass test is a permutation test based on the following test s
 
 (1) A set of developmental stages is partitioned into three modules – early, mid, and late – based on prior biological knowledge.
 
-(2) The mean TAI or TDI value for each of the three modules Tearly, Tmid, and Tlate are computed.
+(2) The mean TAI or TDI value for each of the three modules T~early, T~mid, and T~late are computed.
 
-(3) The two differences D1 = Tearly - Tmid and D2 = Tlate - Tmid are calculated.
+(3) The two differences D1 = T~early - T~mid and D2 = T~late - T~mid are calculated.
 
-(4) The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+(4) The minimum D~min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
 
-In order to determine the statistical significance of an observed minimum difference Dmin the following permutation test was performed. Based on the bootMatrix Dmin is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by fitdist, and the corresponding p-value is computed by pnorm given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector Dmin is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference D~min the following permutation test was performed. Based on the bootMatrix D~min is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by fitdist, and the corresponding p-value is computed by pnorm given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector D~min is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
 
 
 
