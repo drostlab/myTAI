@@ -475,6 +475,93 @@ properties of the underlying permutation test. Although single aspects might fit
 the overall impression (sum of all individual analyses) must be considered to obtain a valid p-value.
 
 
+## Data Transformation
+
+Motivated by the dicussion raised by [Piasecka et al., 2013](http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1003476#pgen-1003476-g004), the influence of gene expression transformation on the global phylotranscriptomics pattern does not seem negligible. Hence, different transformations can result in qualitatively different TAI or TDI patterns.
+
+Initially, the TAI and TDI formulas were defined for absolute expression levels. So using the initial TAI and TDI formulas with transformed expression levels might turn out in qualitatively different patterns when compared with non-transformed expression levels, but might also belong to a different class of models, since different valid expression level transformation functions result in different patterns.
+
+The purpose of the `tf()` function is to allow the user to study the qualitative impact of different transformation functions on the global TAI and TDI pattern,
+or on any subsequent phylotranscriptomics analysis.
+
+The examples using the `PhyloExpressionSetExample` data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the `FlatLineTest()` or `ReductiveHourglassTest()` (Drost et al., 2014) to quantify the significance of interest.
+
+The `tf()` function takes a standard PhyloExpressionSet or DivergenceExpressionSet and transformation function and returns the corresonding ExpressionSet with
+transformed gene expression levels.
+
+```{r, fig.width= 7, fig.height= 5}
+
+data(PhyloExpressionSetExample)
+
+# a simple example is to transform the gene expression levels of a given PhyloExpressionSet
+# using a sqrt or log2 transformation
+
+PES.sqrt <- tf(PhyloExpressionSetExample, sqrt)
+
+head(PES.sqrt)
+
+```
+
+```{r, fig.width= 7, fig.height= 5}
+
+PES.log2 <- tf(PhyloExpressionSetExample, log2)
+
+head(PES.log2)
+
+```
+
+
+```{r, fig.width= 7, fig.height= 5}
+
+
+# in case a given PhyloExpressionSet already stores gene expression levels
+# that are log2 transformed and need to be re-transformed to absolute
+# expression levels, to perform subsequent phylotranscriptomics analyses
+# (that are defined for absolute expression levels), 
+# one can re-transform a PhyloExpressionSet like this:
+
+PES.absolute <- tf(PES.log2 , function(x) 2^x)
+
+# which should be the same as  PhyloExpressionSetExample :
+head(PhyloExpressionSetExample)
+head(PES.absolute)
+
+```
+
+
+When transforming the `ExpressionMatrix` of the `PhyloExpressionSetExample` using different transformation functions,
+the resulting phylotranscriptomics patterns qualitatively differ:
+
+### log2 transformation
+
+```{r, fig.width= 7, fig.height= 5}
+
+# plotting the TAI using log2 transformed expression levels
+# and performing the Flat Line Test to obtain the p-value
+PlotPattern(tf(PhyloExpressionSetExample, log2),
+            type = "l", lwd = 5, TestStatistic = "FlatLineTest")
+
+
+```
+
+### sqrt transformation
+
+```{r, fig.width= 7, fig.height= 5}
+
+# plotting the TAI using sqrt transformed expression levels
+# and performing the Flat Line Test to obtain the p-value
+PlotPattern(tf(PhyloExpressionSetExample, sqrt),
+            type = "l", lwd = 5, TestStatistic = "FlatLineTest")
+
+
+```
+
+
+For the `PhyloExpressionSetExample` all transformations result in a significant
+phylotranscriptomics pattern deviating from a flat line.
+
+Nevertheless, it is not clear which transformation is the most appropriate one
+since the original TAI and TDI measure were defined for absolute expression levels.
 
 
 
