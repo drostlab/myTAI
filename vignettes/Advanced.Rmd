@@ -29,3 +29,11 @@ The computation of a Divergence Map relies on a method named [Divergence Stratig
 Both methods are computationally expensive and include many methodologies and evolutionary concepts.
 Nevertheless, the [orthologr](https://github.com/HajkD/orthologr) package aims to automate [Divergence Stratigraphy](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)
 and can be used to obtain a Divergence Map for a _query organism of interest_.
+
+## Retrieving a divergence map
+
+A divergence map quantifies for each protein coding gene of a given organism the
+degree of selection pressure. The selection pressure is quantified by dNdS estimation.
+
+
+
