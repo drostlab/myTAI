@@ -254,8 +254,7 @@ The Reductive Hourglass Test has been developed to statistically evaluate the ex
 The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) does not follow an hourglass like shape. 
 A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does indeed follow an hourglass (high-low-high) shape.
 
-To build the test statistic we start with a standard PhyloExpressionSet.
-The `myTAI` package provides an example PhyloExpressionSet named `PhyloExpressionSetExample`:
+To build the test statistic again we start with a standard PhyloExpressionSet.
 
 ```{r}
 library(myTAI)
@@ -267,9 +266,7 @@ data(PhyloExpressionSetExample)
 head(PhyloExpressionSetExample, 3) 
 ```
 
-As you can see the first column of the `PhyloExpressionSetExample` stores the Phylostratum assignments of the corresponding genes.
-The permutation test is based on random sampling of the Phylostratum assignment of genes. The underlying assumption is that
-the `TAI` profile of correctly assigned Phylostrata is significantly deviating from `TAI` profiles based on randomly assigned Phylostrata.
+And again compute the `TAI()` profile of the `PhyloExpressionSetExample`.
 
 ```{r}
 # TAI profile of correctly assigned Phylostrata
@@ -321,9 +318,166 @@ into the three modules:
 
 # perform the Reductive Hourglass Test
 ReductiveHourglassTest(PhyloExpressionSetExample,
-                       modules = list(early = 1:2, mid = 3:5, late = 6:7)) 
+                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
+                       lillie.test = TRUE) 
 
 ```
+
+
+The corresponding output shows the p-value returned by the __Reductive Hourglass Test__,
+the standard deviation of randomly permuted TAI profiles returned by `bootMatrix()`
+ (`apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)`) and in case the argument `lillie.test = TRUE`,
+a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality is being returned. In case `lillie.test` is `TRUE`, the 
+[Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) 
+ passed the goodness of fit criterion, in case `lillie.test` is `FALSE` the corresponding goodness of fit by a normal distribution is not statistically significant.
+
+Analogous to the `plotHistogram` argument that is present in the `FlatLineTest()` function,
+the `ReductiveHourglassTest()` function also takes an argument `plotHistogram`. When `plotHistogram = TRUE`,
+the `ReductiveHourglassTest()` function returns a multi-plot showing:
+
+* A Cullen and Frey skewness-kurtosis plot. 
+This plot illustrates which distributions seem plausible to fit the resulting permutation vector D~min. 
+In the case of the Reductive Hourglass Test a normal distribution seemed plausible.
+
+* A histogram of D~min combined with the density plot is plotted. 
+D~min is then fitted by a normal distribution. 
+The corresponding parameters are estimated by moment matching estimation.
+
+* A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
+
+* A barplot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (TRUE) or not significant (FALSE). 
+This allows to quantify the permutation bias and their implications on the goodness of fit.
+
+
+```{r, fig.width= 7, fig.height= 6}
+
+# perform the Reductive Hourglass Test and plot the test statistic
+ReductiveHourglassTest(PhyloExpressionSetExample,
+                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
+                       plotHistogram = TRUE, parallel = TRUE, lillie.test = TRUE) 
+
+```
+
+
+The corresponding output shows the `summary statistics` of the fitted normal distribution
+as well as the p-value, standard deviation, and [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) result.
+
+
+### Reductive Early Conservation Test
+
+The Early Conservation Test has been developed to statistically evaluate the existence of a monotonically increasing phylotranscriptomic pattern based on TAI or TDI computations. 
+The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) does not follow an early conservation like pattern. 
+A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does indeed follow an early conservation (low-high-high) shape.
+
+To build the test statistic again we start with a standard PhyloExpressionSet.
+
+```{r}
+library(myTAI)
+
+# load an example PhyloExpressionSet stored in the myTAI package
+data(PhyloExpressionSetExample) 
+
+# look at the standardized data set format
+head(PhyloExpressionSetExample, 3) 
+```
+
+And again compute the `TAI()` profile of the `PhyloExpressionSetExample`.
+
+```{r}
+# TAI profile of correctly assigned Phylostrata
+TAI(PhyloExpressionSetExample) 
+```
+
+Visualization: 
+
+```{r, fig.width= 7, fig.height= 5}
+# visualize the TAI profile of correctly assigned Phylostrata
+PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, 
+            p.value = FALSE) 
+
+```
+
+The reductive early conservation test is a permutation test based on the following test statistic.
+
+(1) A set of developmental stages is partitioned into three modules – early, mid, and late – based on prior biological knowledge.
+
+(2) The mean TAI or TDI value for each of the three modules T~early, T~mid, and T~late are computed.
+
+(3) The two differences D1 = T~mid - T~early and D2 = T~late - T~early are calculated.
+
+(4) The minimum D~min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+
+In order to determine the statistical significance of an observed minimum difference D~min the following permutation test was performed. Based on the bootMatrix D~min is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by fitdist, and the corresponding p-value is computed by pnorm given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector D~min is statistically quantified by an [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+
+
+To perform the __Reductive Early Conservation Test__ you can use the `EarlyConservationTest()` function.
+Using this function you need to devide the given phylotranscriptomics pattern into
+three developmental modules:
+
+* early module
+* mid module
+* late module
+
+This can be done using the `modules` argument: `module = list(early = 1:2, mid = 3:5, late = 6:7)`.
+In this example (`PhyloExpressionSetExample`) we devide the corresponding developmental process
+into the three modules:
+
+* early module: Stages 1 - 2 = Zygote and Quadrant
+* mid module: Stages 3 - 5 = Globular, Heart, and Torpedo
+* late module: Stages 6 - 7 = Bent and Mature
+
+
+```{r, fig.width= 7, fig.height= 5}
+
+# perform the Reductive Early Conservation Test
+EarlyConservationTest(PhyloExpressionSetExample,
+                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
+                       lillie.test = TRUE) 
+
+```
+
+
+Analogous to the `plotHistogram` argument that is present in the `FlatLineTest()` and `ReductiveHourglassTest()` function,
+the `EarlyConservationTest()` function also takes an argument `plotHistogram`. When `plotHistogram = TRUE`,
+the `EarlyConservationTest()` function returns a multi-plot showing:
+
+* A Cullen and Frey skewness-kurtosis plot. 
+This plot illustrates which distributions seem plausible to fit the resulting permutation vector D~min. 
+In the case of the Reductive Hourglass Test a normal distribution seemed plausible.
+
+* A histogram of D~min combined with the density plot is plotted. 
+D~min is then fitted by a normal distribution. 
+The corresponding parameters are estimated by moment matching estimation.
+
+* A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
+
+* A barplot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (TRUE) or not significant (FALSE). 
+This allows to quantify the permutation bias and their implications on the goodness of fit.
+
+
+```{r, fig.width= 7, fig.height= 6}
+
+# perform the Reductive Early Conservation Test and plot the test statistic
+EarlyConservationTest(PhyloExpressionSetExample,
+                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
+                       plotHistogram = TRUE, parallel = TRUE, lillie.test = TRUE) 
+
+```
+
+
+This example output nicely illustrates that although the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality is violated, the [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment) shows that there is no better approximation
+than a normal distribution (which is also suppoted visually by investigating the fitted frequency distribution). The corresponding p-value
+returned by the `EarlyConservationTest()` is highly non-significant and illustrates that the observed phylotranscriptomics pattern of `PhyloExpressionSetExample`
+does not follow the Early Conservation Model assumption. 
+
+This example shall illustrate that finding the right test statistic is a multi-step process of investigating different
+properties of the underlying permutation test. Although single aspects might fit or fit not corresponding criteria,
+the overall impression (sum of all individual analyses) must be considered to obtain a valid p-value.
+
+
+
+
+
 
 
 
