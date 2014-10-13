@@ -305,7 +305,7 @@ The __TAI__ or __TDI__ pattern are very useful to gain a first insight into the 
 
 To further investigate the origins of the global __TAI__ or __TDI__ pattern it is very useful to visualize the mean gene expression of each Phylostratum or Divergence-Stratum class.
 
-#### * Visualizing the Mean Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
+#### Visualizing the Mean Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
 
 
 
@@ -325,7 +325,7 @@ So the `PlotPattern()` function takes an PhyloExpressionSet or DivergenceExpress
 
 For this example we separate groups of Phylostrata into __evolutionary old Phylostrata__ (PS1-3) in one plot versus __evolutionary younger Phylostrata__ (PS4-12) into another plot:
 
-```{r, fig.width=13}
+```{r, fig.height= 5, fig.width=9}
 # visualizing the mean gene expression of each Phylostratum class
 PlotMeans(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
@@ -379,7 +379,7 @@ PlotRE(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS",
 
 or again by assigning Phylostratum or Divergence-Stratums groups that shall be visualized in different plots:
 
-```{r, fig.width=13}
+```{r,fig.height=5, fig.width=9}
 # visualizing the mean gene expression of each Phylostratum class
 PlotRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
@@ -409,7 +409,7 @@ age.apply(PhyloExpressionSetExample, RE)
 
 This barplot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the `PlotMeans()` and `PlotRE()` functions:
 
-```{r, fig.width=9}
+```{r,fig.height=5, fig.width=7}
 # visualizing the mean relative expression of two Phylostratum groups
 PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), 
           xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
@@ -422,14 +422,14 @@ A [Kruskal-Wallis Rank Sum Test](http://stat.ethz.ch/R-manual/R-patched/library/
 
 Additionally the ratio between both values represented by the bars to be compared can be visualized as function within the barplot using the `ratio = TRUE` argument:
 
-```{r, fig.width=9}
+```{r, fig.height=5,fig.width=7}
 # visualizing the mean relative expression of two Phylostratum groups
 PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), ratio = TRUE,
           xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
 ```
 
 It is also possible to compare more than two groups:
-```{r, fig.width=9}
+```{r, fig.width=7}
 # visualizing the mean relative expression of three Phylostratum groups
 PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:6, 7:12), wLength = 0.05,
           xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
