@@ -77,9 +77,14 @@ When the download is finished you need to unzip the files and
 then start R to perform the following analyses:
 
 ```r
-
 library(orthologr)
 
+# compute the divergence map of A. thaliana
+Athaliana_DM <- divergence_stratigraphy(
+                         query_file = "path/to/Arabidopsis_thaliana.TAIR10.23.cds.all.fa",
+                         subject_file = "path/to/Arabidopsis_lyrata.v.1.0.23.cds.all.fa",
+                         eval = "1E-5", ortho_detection = "RBH",
+                         comp_cores = 1, quiet = TRUE, clean_folders = TRUE )
 
 ```
 
