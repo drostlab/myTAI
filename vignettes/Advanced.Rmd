@@ -19,10 +19,11 @@ knitr::opts_chunk$set(
 ```
 
 
-The `myTAI` package is based on the __PhyloExpressionSet__ and __DivergenceExpressionSet__ standard.
-To obtain this data format a __PhyloExpressionSet__ and __DivergenceExpressionSet__ are based
-on the combination of a Phylostratigraphic Map and an Expressionset (__PhyloExpressionSet__) or
-on the combination of a Divergence Map and an Expressionset (__DivergenceExpressionSet__).
+The `myTAI` package provides analytics tools for datasets
+fulfilling the __PhyloExpressionSet__ and __DivergenceExpressionSet__ standard.
+To obtain this data format a __PhyloExpressionSet__ or __DivergenceExpressionSet__ resembles
+the combination of a Phylostratigraphic Map and an Expressionset (__PhyloExpressionSet__) or
+ the combination of a Divergence Map and an Expressionset (__DivergenceExpressionSet__).
 
 The computation of a Phylostratigraphic Map relies on a method named [Phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995).
 The computation of a Divergence Map relies on a method named [Divergence Stratigraphy](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html).
@@ -37,7 +38,6 @@ and can be used to obtain a Divergence Map for a _query organism of interest_.
 # install orthologr from CRAN
 install.packages("orthologr")
 
-
 ```
 
 ## Retrieving a divergence map
@@ -47,14 +47,19 @@ degree of selection pressure. The selection pressure is quantified by dNdS estim
 
 To perform `divergence stratigraphy` using `orthologr` you need the following prerequisites
 
-* a CDS file covering all protein coding genes of the query organism of interes
-* a CDS file covering all protein coding genes of the subject organism of interes
+* a CDS file covering all protein coding genes of the query organism of interest
+* a CDS file covering all protein coding genes of the subject organism of interest
 
 In the following example, we will use Arabidopsis thaliana as query organism
 and Arabidopsis lyrata as subject organism.
 
 First, we need to download the CDS sequences for all protein coding genes of A. thaliana
 and A. lyrata
+
+The CDS retrieval can be done using a `Terminal` or by manual downloading the files
+
+* `Arabidopsis_thaliana.TAIR10.23.cds.all.fa.gz`
+* `Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz`
 
 ```shell
 
@@ -76,7 +81,7 @@ Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz
 When the download is finished you need to unzip the files and
 then start R to perform the following analyses:
 
-```r
+```{r,eval=FALSE}
 library(orthologr)
 
 # compute the divergence map of A. thaliana
@@ -88,7 +93,43 @@ Athaliana_DM <- divergence_stratigraphy(
 
 ```
 
-The next step is to combine the `divergence map` of A. thaliana with an
+The next step is to combine the `divergence map` of A. thaliana (`Athaliana_DM`) with an
 gene expression set covering a developmental process of interest (in our case A. thaliana embryogenesis).
+We obtain an example gene expression set covering A. thaliana embryogenesis from the ExpressionMatrix stored
+in `PhyloExpressionSetExample`.
+This results in an standard DivergenceExpressionSet object. 
+
+```{r,eval=FALSE}
+# load the PhyloExpressionSetExample data set
+data(PhyloExpressionSetExample)
+
+# get the ExpressionMatrix covering A. thaliana embryogenesis.
+ExprMatrix <- PhyloExpressionSetExample[ , 2:9]
+
+# match the divergence map with the gene expression set of A. thaliana
+# to obtain an PhyloExpressionSet object
+Ath_PhyloExpressionSet <- MatchMap(Map = Athaliana_DM,ExpressionMatrix = ExprMatrix)
+
+```
+
+This way you can create any PhyloExpressionSet of interest.
+In this example, the output of `Ath_PhyloExpressionSet` should be
+analogous to `PhyloExpressionSetExample`.
+
+
+```{r}
+# load the PhyloExpressionSetExample data set
+data(PhyloExpressionSetExample)
+
+# look at PhyloExpressionSetExample
+head(PhyloExpressionSetExample)
+
+```
+
+
+
+
+
+
 
 
