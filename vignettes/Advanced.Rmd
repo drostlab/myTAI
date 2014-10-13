@@ -30,10 +30,60 @@ Both methods are computationally expensive and include many methodologies and ev
 Nevertheless, the [orthologr](https://github.com/HajkD/orthologr) package aims to automate [Divergence Stratigraphy](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)
 and can be used to obtain a Divergence Map for a _query organism of interest_.
 
+
+## Fast Installation guide for orthologr
+
+```r
+# install orthologr from CRAN
+install.packages("orthologr")
+
+
+```
+
 ## Retrieving a divergence map
 
 A divergence map quantifies for each protein coding gene of a given organism the
 degree of selection pressure. The selection pressure is quantified by dNdS estimation.
 
+To perform `divergence stratigraphy` using `orthologr` you need the following prerequisites
+
+* a CDS file covering all protein coding genes of the query organism of interes
+* a CDS file covering all protein coding genes of the subject organism of interes
+
+In the following example, we will use Arabidopsis thaliana as query organism
+and Arabidopsis lyrata as subject organism.
+
+First, we need to download the CDS sequences for all protein coding genes of A. thaliana
+and A. lyrata
+
+```shell
+
+# download CDS file of A. thaliana
+curl ftp://ftp.ensemblgenomes.org/pub/
+plants/release-23/fasta/arabidopsis_thaliana/
+cds/Arabidopsis_thaliana.TAIR10.23.cds.all.fa.gz 
+-o Arabidopsis_thaliana.TAIR10.23.cds.all.fa.gz
+
+# download CDS file of A. lyrata
+
+curl ftp://ftp.ensemblgenomes.org/pub/plants/
+release-23/fasta/arabidopsis_lyrata/cds/
+Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz 
+-o Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz
+
+
+```
+When the download is finished you need to unzip the files and
+then start R to perform the following analyses:
+
+```r
+
+library(orthologr)
+
+
+```
+
+The next step is to combine the `divergence map` of A. thaliana with an
+gene expression set covering a developmental process of interest (in our case A. thaliana embryogenesis).
 
 
