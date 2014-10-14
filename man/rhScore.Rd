@@ -58,7 +58,7 @@ This function reduces the destruction of an hourglass shaped pattern to a single
         \eqn{S = mean{a_early,a_late}}
 
         All together this results in a global score \emph{S}.
-        This global score \emph{S} is being returned by this function \code{\link{gpScore}}.
+        This global score \emph{S} is being returned by this function \code{\link{rhScore}}.
 }
 \details{
 The gpScore is a heuristic score enabling to  construct a test statistic to determine

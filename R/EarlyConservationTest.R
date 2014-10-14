@@ -71,7 +71,7 @@
 #' patterns of developmental constraints in vertebrates. PLoS Genet. 9(4): e1003476.
 #' 
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{gpScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}} , \code{\link{PlotPattern}}
+#' @seealso \code{\link{ecScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}} , \code{\link{PlotPattern}}
 #' @examples \dontrun{
 #' 
 #' data(PhyloExpressionSetExample)

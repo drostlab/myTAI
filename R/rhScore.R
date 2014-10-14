@@ -39,7 +39,7 @@
 #'         \eqn{S = mean{a_early,a_late}}
 #'         
 #'         All together this results in a global score \emph{S}.
-#'         This global score \emph{S} is being returned by this function \code{\link{gpScore}}.
+#'         This global score \emph{S} is being returned by this function \code{\link{rhScore}}.
 #'         
 #' @param age_vals a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.
 #' @param early a numeric vector including the numeric stage values that correspond to the early phase of development.

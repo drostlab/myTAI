@@ -71,7 +71,7 @@ In case the PhyloExpressionSet standard is violated, the `is.ExpressionSet()` fu
 head(PhyloExpressionSetExample[ , 2:5], 2)
 ```
 
-```{r, error = TRUE}
+```{r, error = TRUE,eval=FALSE}
 is.ExpressionSet(PhyloExpressionSetExample[ , 2:5]) 
 ```
 

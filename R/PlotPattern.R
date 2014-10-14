@@ -72,7 +72,7 @@
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}},
-#'  \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{gpScore}}
+#'  \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}
 #' @examples \dontrun{
 #' 
 #' # load PhyloExpressionSet

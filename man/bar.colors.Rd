@@ -27,6 +27,6 @@ barplot_colors <- bar.colors(5)
 Hajk-Georg Drost
 }
 \seealso{
-\code{\link{palette}}, \code{\link{re.colors}}
+\code{\link{palette}}
 }
 

@@ -141,6 +141,6 @@ Piasecka B, Lichocki P, Moretti S, et al. (2013) The hourglass and the early con
 patterns of developmental constraints in vertebrates. PLoS Genet. 9(4): e1003476.
 }
 \seealso{
-\code{\link{gpScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}} , \code{\link{PlotPattern}}
+\code{\link{ecScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}} , \code{\link{PlotPattern}}
 }
 
