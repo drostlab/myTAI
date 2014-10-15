@@ -69,25 +69,34 @@ data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
 
 # example PhyloExpressionSet using 1000 permutations
-FlatLineTest(PhyloExpressionSetExample, permutations = 1000, plotHistogram = FALSE)
+FlatLineTest(PhyloExpressionSetExample,
+             permutations = 1000, plotHistogram = FALSE)
 
 # example DivergenceExpressionSet using 1000 permutations
-FlatLineTest(DivergenceExpressionSetExample, permutations = 1000, plotHistogram = FALSE)
+FlatLineTest(DivergenceExpressionSetExample, permutations = 1000,
+             plotHistogram = FALSE)
 
-# perform the Lilliefors Kolmogorov-Smirnov-Test and plot the resulting histogram for a PhyloExpressionSet
-FlatLineTest(PhyloExpressionSetExample, permutations = 1000, plotHistogram = TRUE, runs = 10)
+# perform the Lilliefors Kolmogorov-Smirnov-Test and plot the resulting
+# histogram for a PhyloExpressionSet
+FlatLineTest(PhyloExpressionSetExample, permutations = 1000,
+             plotHistogram = TRUE, runs = 10)
 
-# in case you have a multi-core processor and the doParallel package installed on you system,
+# in case you have a multi-core processor and the
+# doParallel package installed on you system,
 # you can run the tests shown above in parallel
-# perform the Kolmogorov-Smirnov-Test and plot the resulting histogram for a PhyloExpressionSet
-FlatLineTest(PhyloExpressionSetExample, permutations = 1000, plotHistogram = TRUE, parallel = TRUE, runs = 10)
+# perform the Kolmogorov-Smirnov-Test and plot
+# the resulting histogram for a PhyloExpressionSet
+FlatLineTest(PhyloExpressionSetExample, permutations = 1000,
+             plotHistogram = TRUE, parallel = TRUE, runs = 10)
 
 
-# Example: finding outlier expression levels that badly influence the permutation test statistic
-# this plot visualizes the distribution and variance of permuted TAI values for each developmental stage
-# In case there are outlier expression levels in a specific developmental stage,
-# the corresponding boxplot of this stage also shows an unusual fluctuation of TAI values
-# compared to other stages
+# Example: finding outlier expression levels that badly
+# influence the permutation test statistic
+# this plot visualizes the distribution and variance
+# of permuted TAI values for each developmental stage
+# In case there are outlier expression levels in a specific
+# developmental stage, the corresponding boxplot of this stage
+# also shows an unusual fluctuation of TAI values compared to other stages
 boxplot(bootMatrix(PhyloExpressionSetExample) , ylab = "TAI")
 
 # analogous for TDI permutation results

@@ -28,7 +28,7 @@ pow <- function(x,power)
 #' @return a standard PhyloExpressionSet or DivergenceExpressionSet object. 
 #' @references 
 #' 
-#'   Domazet-Loso T, Brajković J, Tautz D (2007) A phylostratigraphy approach to uncover the genomic history of major adaptations in metazoan lineages. Trends Genet. 23: 533-9.
+#'   Domazet-Loso T, Brajkovic J, Tautz D (2007) A phylostratigraphy approach to uncover the genomic history of major adaptations in metazoan lineages. Trends Genet. 23: 533-9.
 #' 
 #'   Domazet-Loso T, Tautz D (2010) A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns. Nature 468: 815-8.
 #' 
@@ -42,27 +42,36 @@ pow <- function(x,power)
 #'         # load a standard PhyloExpressionSet
 #'         data(PhyloExpressionSetExample)
 #'         
-#'         # in a standard PhyloExpressionSet, column one and column two denote a standard phylostratigraphic map
+#'         # in a standard PhyloExpressionSet, 
+#'         # column one and column two denote a standard 
+#'         # phylostratigraphic map
 #'         PhyloMap <- PhyloExpressionSetExample[ , 1:2]
 #'         
 #'         # look at the phylostratigraphic map standard
 #'         head(PhyloMap)
 #'         
-#'         # in a standard PhyloExpressionSet, column two combined with column 3 - N denote a standard ExpressionMatrix
+#'         # in a standard PhyloExpressionSet, column two combined 
+#'         # with column 3 - N denote a standard ExpressionMatrix
 #'         ExpressionMatrixExample <- PhyloExpressionSetExample[ , c(2,3:9)]
 #'         
-#'         # these two data sets shall illustrate an example phylostratigraphic map that is returned
-#'         # by a standard phylostratigraphy run, and a expression set that is the result of expression data analysis (background correction, normalization, ...)
+#'         # these two data sets shall illustrate an example 
+#'         # phylostratigraphic map that is returned
+#'         # by a standard phylostratigraphy run, and a expression set 
+#'         # that is the result of expression data analysis 
+#'         # (background correction, normalization, ...)
 #'         
 #'         # now we can use the MatchMap function to merge both data sets
 #'         # to obtain a standard PhyloExpressionSet
 #'         
 #'         PES <- MatchMap(PhyloMap, ExpressionMatrixExample)
 #'         
-#'         # note that the function returns a head() of the matched gene ids to enable
+#'         # note that the function returns a head() 
+#'         # of the matched gene ids to enable
 #'         # the user to find potential mis-matches
 #'         
-#'         # the entire procedure is analogous to merge() with two data sets sharing the same gene ids as column (primary key)
+#'         # the entire procedure is analogous to merge() 
+#'         # with two data sets sharing the same gene ids 
+#'         # as column (primary key)
 #'         PES_merge <- merge(PhyloMap, ExpressionMatrixExample)
 #'         
 #'         

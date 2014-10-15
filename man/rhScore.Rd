@@ -76,8 +76,10 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
  # compute the TAI profile
  TAIs <- TAI(PhyloExpressionSetExample)
 
- # compute the global hourglass destruction score for the TAIs profile using reduction method: mean(mean-mean)
- rh_score <- rhScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,method = "mean",scoringMethod = "mean-mean")
+ # compute the global hourglass destruction score
+ # for the TAIs profile using reduction method: mean(mean-mean)
+ rh_score <- rhScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
+                     method = "mean",scoringMethod = "mean-mean")
 
 
  # example DivergenceExpressionSet:
@@ -85,8 +87,10 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
  # compute the TDI profile
  TDIs <- TDI(DivergenceExpressionSetExample)
 
- # compute the global hourglass destruction score for the TDIs profile using reduction method: mean(mean-mean)
- rh_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,method = "mean",scoringMethod = "mean-mean")
+ # compute the global hourglass destruction score for the TDIs profile
+ # using reduction method: mean(mean-mean)
+ rh_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
+                     method = "mean",scoringMethod = "mean-mean")
 
 
 }

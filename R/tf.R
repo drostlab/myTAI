@@ -54,21 +54,22 @@
 #'
 #' J. M. Bland et al.: Transforming data. BMJ 1996, 312:770
 #'
-#' http://stats.stackexchange.com/questions/1444/how-should-i-transform-non-negative-data-including-zeros
+#' \url{http://stats.stackexchange.com/questions/1444/how-should-i-transform-non-negative-data-including-zeros}
 #'
-#' http://stats.stackexchange.com/questions/78929/how-can-i-estimate-theta-for-the-inverse-hyperbolic-sine-transformation
+#' \url{http://stats.stackexchange.com/questions/78929/how-can-i-estimate-theta-for-the-inverse-hyperbolic-sine-transformation}
 #'
 #' John B. Burbidge, Lonnie Magee and A. Leslie Robb (1988) Alternative Transformations to Handle Extreme Values of the Dependent Variable. Journal of the American Statistical Association, 83(401): 123-127.
 #'
 #' G. E. P. Box and D. R. Cox (1964) An Analysis of Transformations. Journal of the Royal Statistical Society. Series B (Methodological), 26(2): 211-252.
+#' 
 #' @author Hajk-Georg Drost
 #' @seealso  \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 #' @examples \dontrun{
 #' 
 #' data(PhyloExpressionSetExample)
 #' 
-#' # a simple example is to transform the gene expression levels of a given PhyloExpressionSet
-#' # using a sqrt or log2 transformation
+#' # a simple example is to transform the gene expression levels
+#' # of a given PhyloExpressionSet using a sqrt or log2 transformation
 #' 
 #' PES.sqrt <- tf(PhyloExpressionSetExample, sqrt)
 #' 
@@ -77,7 +78,8 @@
 #' # in case a given PhyloExpressionSet already stores gene expression levels
 #' # that are log2 transformed and need to be re-transformed to absolute
 #' # expression levels, to perform subsequent phylotranscriptomics analyses 
-#' # (that are defined for absolute expression levels), one can re-transform a PhyloExpressionSet like this:
+#' # (that are defined for absolute expression levels), one can re-transform
+#' # a PhyloExpressionSet like this:
 #' 
 #' PES.absolute <- tf(PES.log2 , function(x) 2^x)
 #' 

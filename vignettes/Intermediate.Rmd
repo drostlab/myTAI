@@ -536,10 +536,13 @@ the resulting phylotranscriptomics patterns qualitatively differ:
 
 ```{r, fig.width= 7, fig.height= 5}
 
+data(DivergenceExpressionSetExample)
+
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
 PlotPattern(tf(PhyloExpressionSetExample, log2),
-            type = "l", lwd = 5, TestStatistic = "FlatLineTest")
+            type = "l", lwd = 5, 
+            TestStatistic = "FlatLineTest", ylab = "TAI")
 
 
 ```
@@ -548,10 +551,13 @@ PlotPattern(tf(PhyloExpressionSetExample, log2),
 
 ```{r, fig.width= 7, fig.height= 5}
 
+data(DivergenceExpressionSetExample)
+
 # plotting the TAI using sqrt transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
 PlotPattern(tf(PhyloExpressionSetExample, sqrt),
-            type = "l", lwd = 5, TestStatistic = "FlatLineTest")
+            type = "l", lwd = 5, TestStatistic = "FlatLineTest",
+            ylab = "TAI")
 
 
 ```
@@ -564,6 +570,34 @@ Nevertheless, it is not clear which transformation is the most appropriate one
 since the original TAI and TDI measure were defined for absolute expression levels.
 
 
+The same accounts for `TDI` profiles:
+
+### log2 transformation
+
+```{r, fig.width= 7, fig.height= 5}
+
+# plotting the TAI using log2 transformed expression levels
+# and performing the Flat Line Test to obtain the p-value
+PlotPattern(tf(DivergenceExpressionSetExample, log2),
+            type = "l", lwd = 5, 
+            TestStatistic = "FlatLineTest", 
+            ylab = "TDI")
+
+
+```
+
+### sqrt transformation
+
+```{r, fig.width= 7, fig.height= 5}
+
+# plotting the TAI using sqrt transformed expression levels
+# and performing the Flat Line Test to obtain the p-value
+PlotPattern(tf(DivergenceExpressionSetExample, sqrt),
+            type = "l", lwd = 5, TestStatistic = "FlatLineTest",
+            ylab = "TDI")
+
+
+```
 
 
 

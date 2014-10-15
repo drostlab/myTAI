@@ -36,7 +36,8 @@
 #'
 #' # a example for visualizing the PS distribution for a subset of genes
 #' # plot the relative frequency distribution of a PhyloExpressionSet
-#' PlotDistribution(subset(PhyloExpressionSetExample,Phylostratum == 5), plotText = TRUE, as.ratio = TRUE)
+#' PlotDistribution(subset(PhyloExpressionSetExample,Phylostratum == 5), 
+#'                  plotText = TRUE, as.ratio = TRUE)
 #'
 #' }
 #' @export

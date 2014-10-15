@@ -49,7 +49,9 @@
 #'
 #' Sokal RR and Rohlf FJ (1995) Biometry. W.H. Freeman and Company, USA, pp. 111-115.
 #'
-#' Juergen Gross and bug fixes by Uwe Ligges (2012). nortest: Tests for Normality. R package version 1.0-2. http://CRAN.R-project.org/package=nortest
+#' Juergen Gross and bug fixes by Uwe Ligges (2012). nortest: Tests for Normality. R package version 1.0-2. 
+#' 
+#' \url{http://CRAN.R-project.org/package=nortest}
 #'
 #' Dallal, G.E. and Wilkinson, L. (1986): An analytic approximation to the distribution of Lilliefors test for normality. The American Statistician, 40, 294–296.
 #'
@@ -76,25 +78,34 @@
 #' data(DivergenceExpressionSetExample)
 #'
 #' # example PhyloExpressionSet using 1000 permutations
-#' FlatLineTest(PhyloExpressionSetExample, permutations = 1000, plotHistogram = FALSE)
+#' FlatLineTest(PhyloExpressionSetExample, 
+#'              permutations = 1000, plotHistogram = FALSE)
 #'
 #' # example DivergenceExpressionSet using 1000 permutations
-#' FlatLineTest(DivergenceExpressionSetExample, permutations = 1000, plotHistogram = FALSE)
+#' FlatLineTest(DivergenceExpressionSetExample, permutations = 1000, 
+#'              plotHistogram = FALSE)
 #'
-#' # perform the Lilliefors Kolmogorov-Smirnov-Test and plot the resulting histogram for a PhyloExpressionSet
-#' FlatLineTest(PhyloExpressionSetExample, permutations = 1000, plotHistogram = TRUE, runs = 10)
+#' # perform the Lilliefors Kolmogorov-Smirnov-Test and plot the resulting 
+#' # histogram for a PhyloExpressionSet
+#' FlatLineTest(PhyloExpressionSetExample, permutations = 1000,
+#'              plotHistogram = TRUE, runs = 10)
 #'
-#' # in case you have a multi-core processor and the doParallel package installed on you system,
+#' # in case you have a multi-core processor and the 
+#' # doParallel package installed on you system,
 #' # you can run the tests shown above in parallel 
-#' # perform the Kolmogorov-Smirnov-Test and plot the resulting histogram for a PhyloExpressionSet
-#' FlatLineTest(PhyloExpressionSetExample, permutations = 1000, plotHistogram = TRUE, parallel = TRUE, runs = 10)
+#' # perform the Kolmogorov-Smirnov-Test and plot 
+#' # the resulting histogram for a PhyloExpressionSet
+#' FlatLineTest(PhyloExpressionSetExample, permutations = 1000, 
+#'              plotHistogram = TRUE, parallel = TRUE, runs = 10)
 #' 
 #'
-#' # Example: finding outlier expression levels that badly influence the permutation test statistic
-#' # this plot visualizes the distribution and variance of permuted TAI values for each developmental stage
-#' # In case there are outlier expression levels in a specific developmental stage,
-#' # the corresponding boxplot of this stage also shows an unusual fluctuation of TAI values
-#' # compared to other stages
+#' # Example: finding outlier expression levels that badly 
+#' # influence the permutation test statistic
+#' # this plot visualizes the distribution and variance 
+#' # of permuted TAI values for each developmental stage
+#' # In case there are outlier expression levels in a specific 
+#' # developmental stage, the corresponding boxplot of this stage 
+#' # also shows an unusual fluctuation of TAI values compared to other stages
 #' boxplot(bootMatrix(PhyloExpressionSetExample) , ylab = "TAI")
 #' 
 #' # analogous for TDI permutation results
@@ -103,7 +114,8 @@
 #' } 
 #' @import foreach
 #' @export
-FlatLineTest <- function(ExpressionSet, permutations = 1000, plotHistogram = FALSE, parallel = FALSE, runs = 10)
+FlatLineTest <- function(ExpressionSet, permutations = 1000, 
+                         plotHistogram = FALSE, parallel = FALSE, runs = 10)
 {
         
         is.ExpressionSet(ExpressionSet)

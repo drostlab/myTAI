@@ -47,8 +47,8 @@ to quantify the significance of interest.
 
 data(PhyloExpressionSetExample)
 
-# a simple example is to transform the gene expression levels of a given PhyloExpressionSet
-# using a sqrt or log2 transformation
+# a simple example is to transform the gene expression levels
+# of a given PhyloExpressionSet using a sqrt or log2 transformation
 
 PES.sqrt <- tf(PhyloExpressionSetExample, sqrt)
 
@@ -57,7 +57,8 @@ PES.log2 <- tf(PhyloExpressionSetExample, log2)
 # in case a given PhyloExpressionSet already stores gene expression levels
 # that are log2 transformed and need to be re-transformed to absolute
 # expression levels, to perform subsequent phylotranscriptomics analyses
-# (that are defined for absolute expression levels), one can re-transform a PhyloExpressionSet like this:
+# (that are defined for absolute expression levels), one can re-transform
+# a PhyloExpressionSet like this:
 
 PES.absolute <- tf(PES.log2 , function(x) 2^x)
 

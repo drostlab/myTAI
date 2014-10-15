@@ -204,7 +204,7 @@ PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",
         #   plot phylotranscriptomic age
         # 
         
-        if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) & (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
+        if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) | (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
                 do.call(graphics::plot,c(list(x = age,ylim = c(ylim.range[1],ylim.range[2]),axes = FALSE), 
                                          dots[!is.element(names(dots),c(axis.args,legend.args))]))
         }

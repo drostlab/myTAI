@@ -83,13 +83,14 @@
 #'
 #' Stephens, M.A. (1974): EDF statistics for goodness of fit and some comparisons. Journal of the American Statistical Association, 69, 730–737.
 #'
-#' http://stackoverflow.com/questions/4290081/fitting-data-to-distributions?rq=1
+#' \url{http://stackoverflow.com/questions/4290081/fitting-data-to-distributions?rq=1}
 #'
-#' http://stats.stackexchange.com/questions/45033/can-i-use-kolmogorov-smirnov-test-and-estimate-distribution-parameters
+#' \url{http://stats.stackexchange.com/questions/45033/can-i-use-kolmogorov-smirnov-test-and-estimate-distribution-parameters}
 #'
-#' http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf
+#' \url{http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf}
 #'
-#' http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf  
+#' \url{http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf}
+#'   
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
 #' @examples \dontrun{
