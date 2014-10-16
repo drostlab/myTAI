@@ -43,11 +43,16 @@ PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
         is.ExpressionSet(PhyloExpressionSet)
         is.ExpressionSet(DivergenceExpressionSet)
         
+        
         if(!is.element(method, c("pearson", "kendall", "spearman")))
                 stop("Please choose a correlation method that is supported by this function.")
         
         colnames(PhyloExpressionSet)[2] <- "GeneID"
         colnames(DivergenceExpressionSet)[2] <- "GeneID"
+        
+        # convert ids to lower case
+        PhyloExpressionSet[ , "GeneID"] <- tolower(PhyloExpressionSet[ , "GeneID"])
+        DivergenceExpressionSet[ , "GeneID"] <- tolower(DivergenceExpressionSet[ , "GeneID"])
         
         PS_DS.Subset <- merge(PhyloExpressionSet[ , 1:2], DivergenceExpressionSet[ , 1:2],by = "GeneID")
         
