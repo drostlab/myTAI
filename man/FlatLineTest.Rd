@@ -118,7 +118,9 @@ Evans M, Hastings N and Peacock B (2000) Statistical distributions. John Wiley a
 
 Sokal RR and Rohlf FJ (1995) Biometry. W.H. Freeman and Company, USA, pp. 111-115.
 
-Juergen Gross and bug fixes by Uwe Ligges (2012). nortest: Tests for Normality. R package version 1.0-2. http://CRAN.R-project.org/package=nortest
+Juergen Gross and bug fixes by Uwe Ligges (2012). nortest: Tests for Normality. R package version 1.0-2.
+
+\url{http://CRAN.R-project.org/package=nortest}
 
 Dallal, G.E. and Wilkinson, L. (1986): An analytic approximation to the distribution of Lilliefors test for normality. The American Statistician, 40, 294–296.
 

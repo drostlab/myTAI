@@ -1,6 +1,5 @@
 ---
 title: "Introduction to the myTAI package"
-author: "Hajk-Georg Drost"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

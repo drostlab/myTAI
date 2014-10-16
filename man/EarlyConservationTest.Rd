@@ -137,7 +137,7 @@ Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass pattern
 
 Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 
-Piasecka B, Lichocki P, Moretti S, et al. (2013) The hourglass and the early conservation models--co-existing
+Piasecka B, Lichocki P, Moretti S, et al. (2013) The hourglass and the early conservation models co-existing
 patterns of developmental constraints in vertebrates. PLoS Genet. 9(4): e1003476.
 }
 \seealso{

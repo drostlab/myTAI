@@ -21,15 +21,15 @@ a numeric value representing the early conservation score.
 This function computes the EarlyConservationTest score for a given \code{\link{TAI}}
 or \code{\link{TDI}} pattern.
 
-The \emph{reductive early conservation test} is a permutation test based on the following test statistic.
+The reductive early conservation test is a permutation test based on the following test statistic.
 
-(1) A set of developmental stages is partitioned into three modules – early, mid, and late – based on prior biological knowledge.
+- A set of developmental stages is partitioned into three modules – early, mid, and late – based on prior biological knowledge.
 
-(2) The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the three modules T_early, T_mid, and T_late are computed.
+- The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the three modules T_early, T_mid, and T_late are computed.
 
-(3) The two differences D1 = T_mid - T_early and D2 = T_late - T_early are calculated.
+- The two differences D1 = T_mid - T_early and D2 = T_late - T_early are calculated.
 
-(4) The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+- The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
 
 This function \code{ecScore} computes the \code{D_min} value for a given \code{\link{TAI}} or \code{\link{TDI}}
 stored in the \code{age_vals} argument.
@@ -41,7 +41,7 @@ stored in the \code{age_vals} argument.
  data(PhyloExpressionSetExample)
  data(DivergenceExpressionSetExample)
 
- # example PhyloExpressionSet:
+ # Example PhyloExpressionSet:
 
  # compute the TAI profile
  TAIs <- TAI(PhyloExpressionSetExample)
@@ -50,7 +50,7 @@ stored in the \code{age_vals} argument.
  ec_score <- ecScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7)
 
 
- # example DivergenceExpressionSet:
+ # Example DivergenceExpressionSet:
 
  # compute the TDI profile
  TDIs <- TDI(DivergenceExpressionSetExample)
