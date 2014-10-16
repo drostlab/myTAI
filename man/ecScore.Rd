@@ -25,13 +25,13 @@ The reductive early conservation test is a permutation test based on the followi
 
 - A set of developmental stages is partitioned into three modules – early, mid, and late – based on prior biological knowledge.
 
-- The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the three modules T_early, T_mid, and T_late are computed.
+- The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the three modules Tearly, Tmid, and Tlate are computed.
 
-- The two differences D1 = T_mid - T_early and D2 = T_late - T_early are calculated.
+- The two differences D1 = Tmid - Tearly and D2 = Tlate - Tearly are calculated.
 
-- The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+- The minimum Dmin of D1 and D2 is computed as final test statistic of the reductive hourglass test.
 
-This function \code{ecScore} computes the \code{D_min} value for a given \code{\link{TAI}} or \code{\link{TDI}}
+This function \code{ecScore} computes the \code{Dmin} value for a given \code{\link{TAI}} or \code{\link{TDI}}
 stored in the \code{age_vals} argument.
 }
 \examples{
