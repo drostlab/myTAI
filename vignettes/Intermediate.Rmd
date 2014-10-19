@@ -286,13 +286,13 @@ The reductive hourglass test is a permutation test based on the following test s
 
 (1) A set of developmental stages is partitioned into three modules – early, mid, and late – based on prior biological knowledge.
 
-(2) The mean TAI or TDI value for each of the three modules T~early, T~mid, and T~late are computed.
+(2) The mean TAI or TDI value for each of the three modules Tearly, Tmid, and Tlate are computed.
 
-(3) The two differences D1 = T~early - T~mid and D2 = T~late - T~mid are calculated.
+(3) The two differences D1 = Tearly - Tmid and D2 = Tlate - Tmid are calculated.
 
-(4) The minimum D~min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+(4) The minimum Dmin of D1 and D2 is computed as final test statistic of the reductive hourglass test.
 
-In order to determine the statistical significance of an observed minimum difference D~min the following permutation test was performed. Based on the bootMatrix D~min is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by fitdist, and the corresponding p-value is computed by pnorm given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector D~min is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference Dmin the following permutation test was performed. Based on the bootMatrix Dmin is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by fitdist, and the corresponding p-value is computed by pnorm given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector Dmin is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
 
 
 
@@ -335,11 +335,11 @@ the `ReductiveHourglassTest()` function also takes an argument `plotHistogram`. 
 the `ReductiveHourglassTest()` function returns a multi-plot showing:
 
 * A Cullen and Frey skewness-kurtosis plot. 
-This plot illustrates which distributions seem plausible to fit the resulting permutation vector D~min. 
+This plot illustrates which distributions seem plausible to fit the resulting permutation vector Dmin. 
 In the case of the Reductive Hourglass Test a normal distribution seemed plausible.
 
-* A histogram of D~min combined with the density plot is plotted. 
-D~min is then fitted by a normal distribution. 
+* A histogram of Dmin combined with the density plot is plotted. 
+Dmin is then fitted by a normal distribution. 
 The corresponding parameters are estimated by moment matching estimation.
 
 * A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
@@ -441,11 +441,11 @@ the `EarlyConservationTest()` function also takes an argument `plotHistogram`. W
 the `EarlyConservationTest()` function returns a multi-plot showing:
 
 * A Cullen and Frey skewness-kurtosis plot. 
-This plot illustrates which distributions seem plausible to fit the resulting permutation vector D~min. 
+This plot illustrates which distributions seem plausible to fit the resulting permutation vector Dmin. 
 In the case of the Reductive Hourglass Test a normal distribution seemed plausible.
 
-* A histogram of D~min combined with the density plot is plotted. 
-D~min is then fitted by a normal distribution. 
+* A histogram of Dmin combined with the density plot is plotted. 
+Dmin is then fitted by a normal distribution. 
 The corresponding parameters are estimated by moment matching estimation.
 
 * A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
