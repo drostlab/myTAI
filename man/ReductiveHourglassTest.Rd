@@ -134,7 +134,7 @@ Hajk-Georg Drost
 \references{
 Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 
-Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 
 M. L. Delignette-Muller, R. Pouillot, J.-B. Denis and C. Dutang (2014), fitdistrplus: help to fit
 of a parametric distribution to non-censored or censored data.
@@ -146,7 +146,9 @@ Evans M, Hastings N and Peacock B (2000) Statistical distributions. John Wiley a
 Sokal RR and Rohlf FJ (1995) Biometry. W.H. Freeman and Company, USA, pp. 111-115.
 
 Juergen Gross and bug fixes by Uwe Ligges (2012). nortest: Tests for Normality. R package version
-1.0-2. http://CRAN.R-project.org/package=nortest
+1.0-2.
+
+\url{http://CRAN.R-project.org/package=nortest}
 
 Dallal, G.E. and Wilkinson, L. (1986): An analytic approximation to the distribution of Lilliefors' test for normality. The American Statistician, 40, 294–296.
 

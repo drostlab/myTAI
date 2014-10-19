@@ -65,7 +65,7 @@
 #' 
 #' Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 #'
-#' Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 #' 
 #' Piasecka B, Lichocki P, Moretti S, et al. (2013) The hourglass and the early conservation models co-existing
 #' patterns of developmental constraints in vertebrates. PLoS Genet. 9(4): e1003476.
@@ -214,11 +214,11 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                 if(parallel == FALSE){
                         
                         # sequential computations of p-values 
-                        if(runs >= 10){
-                                # initializing the progress bar
-                                progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
-                                
-                        }
+#                         if(runs >= 10){
+#                                 # initializing the progress bar
+#                                 #progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
+#                                 
+#                         }
                         
                         for(i in 1:runs){
                                 if(lillie.test == TRUE)
@@ -232,10 +232,10 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                                 if(lillie.test == TRUE)
                                         lillie_vec[i] <- ect$lillie.test
                                 
-                                if(runs >= 10){
-                                        # printing out the progress
-                                        setTxtProgressBar(progressBar,i)
-                                }
+#                                 if(runs >= 10){
+#                                         # printing out the progress
+#                                         setTxtProgressBar(progressBar,i)
+#                                 }
                         }
                 }
                 

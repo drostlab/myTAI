@@ -1,4 +1,3 @@
-
 #' @title Function to perform the Flat Line Test.
 #' @description This function computes N phylotranscriptomics profiles of a randomly sampled (row-permutations: random permutations of phylostratum or divergence-stratum assignments) 
 #' PhyloExpressionSets or DivergenceExpressionSets.
@@ -39,7 +38,7 @@
 #' }
 #' @references 
 #' 
-#' Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 #'
 #' M. L. Delignette-Muller, R. Pouillot, J.-B. Denis and C. Dutang (2014), fitdistrplus: help to fit of a parametric distribution to non-censored or censored data.
 #'
@@ -187,14 +186,14 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000,
                 if(parallel == FALSE){
                         # sequential computations of p-values 
                         # initializing the progress bar
-                        progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
+                        #progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
                                 
                         
                         for(i in 1:runs){
                                 p.vals_vec[i] <- FlatLineTest(ExpressionSet)$p.value
                                 
                                 # printing out the progress
-                                setTxtProgressBar(progressBar,i)
+                                #setTxtProgressBar(progressBar,i)
                         }
                 }
                 

@@ -108,7 +108,7 @@ boxplot(bootMatrix(DivergenceExpressionSetExample) , ylab = "TDI")
 Hajk-Georg Drost
 }
 \references{
-Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 
 M. L. Delignette-Muller, R. Pouillot, J.-B. Denis and C. Dutang (2014), fitdistrplus: help to fit of a parametric distribution to non-censored or censored data.
 

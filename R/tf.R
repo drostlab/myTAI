@@ -32,13 +32,13 @@
 #'
 #' Quint M., Drost H.G., Gabel A., Ullrich K.K., Boenn M., Grosse I. (2012) A transcriptomic hourglass in plant embryogenesis. Nature 490: 98-101.
 #'
-#' Domazet-Loso T, Tautz D (2010) A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns. Nature 468: 815-8.
+#' Domazet-Loso T., Tautz D. (2010) A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns. Nature 468: 815-8.
 #'
 #' Drost et al. (2014) Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 #'
 #' K.Y. Yeung et al.: Model-based clustering and data transformations for gene expression data. Bioinformatics 2001, 17:977-987
 #'
-#' K.Y. Yeung et al.:  Supplement to „Model-based clustering and data transformations for gene expression data“ – Data Transformations and the Gaussian mixture assumption. Bioinformatics 2001, 17:977-987
+#' K.Y. Yeung et al.:  Supplement to Model-based clustering and data transformations for gene expression data – Data Transformations and the Gaussian mixture assumption. Bioinformatics 2001, 17:977-987
 #'
 #' P.A.C. Hoen et al.: Deep sequencing-based expression analysis shows major advances in robustness, resolution and inter-lab portability over five microarray platforms. Nucleic Acids Research 2008, Vol. 36, No. 21
 #'

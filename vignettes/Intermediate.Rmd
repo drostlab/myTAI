@@ -106,7 +106,7 @@ var(TAI(randomPhyloExpressionSetExample))
 
 We observe that the variance of the randomly assigned TAI profile is much smaller than the variance of the correctly assigned TAI profile. Here we use the variance to quantify the _flatness_ of a given TAI profile. In theory the variance of a perfect flat line would be zero. So any TAI profile that is close to zero would resemble a flat line. But how exactly are the variances of randomly assigned TAI profiles distributed. For this purpose the `bootMatrix()` function was implemented.
 
-The `bootMatrix()` takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes $N$ `TAI` or `TDI` profiles of based on randomly assigned Phylostrata or Divergence-Strata.
+The `bootMatrix()` takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N `TAI` or `TDI` profiles of based on randomly assigned Phylostrata or Divergence-Strata.
 
 ```{r}
 # compute 1000 TAI profiles based on randomly assigned Phylostrata
@@ -217,14 +217,14 @@ of the test statistic.
 
 # perform the FlatLineTest and investigate the goodness of the test statistic
 FlatLineTest(PhyloExpressionSetExample, permutations = 1000, 
-             plotHistogram = TRUE, parallel = TRUE)
+             plotHistogram = TRUE, parallel = FALSE)
 
 ```
 
 The `plotHistogram` argument specifies whether analytics plots shall be drawn
 to quantify the goodness of the test statistic returned by the `FlatLineTest`.
 The `parallel` argument specifies that the corresponding computations are performed
-by multicore processing. So in case you aren't working on a multicore machine,
+by multicore processing. So in case you are not working on a multicore machine,
 please make sure you set `parallel = FALSE` (default).
 
 
@@ -353,7 +353,7 @@ This allows to quantify the permutation bias and their implications on the goodn
 # perform the Reductive Hourglass Test and plot the test statistic
 ReductiveHourglassTest(PhyloExpressionSetExample,
                        modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       plotHistogram = TRUE, parallel = TRUE, lillie.test = TRUE) 
+                       plotHistogram = TRUE, parallel = FALSE, lillie.test = TRUE) 
 
 ```
 
@@ -459,7 +459,7 @@ This allows to quantify the permutation bias and their implications on the goodn
 # perform the Reductive Early Conservation Test and plot the test statistic
 EarlyConservationTest(PhyloExpressionSetExample,
                        modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       plotHistogram = TRUE, parallel = TRUE, lillie.test = TRUE) 
+                       plotHistogram = TRUE, parallel = FALSE, lillie.test = TRUE) 
 
 ```
 
@@ -540,8 +540,8 @@ data(DivergenceExpressionSetExample)
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
 PlotPattern(tf(PhyloExpressionSetExample, log2),
-            type = "l", lwd = 5, 
-            TestStatistic = "FlatLineTest", ylab = "TAI")
+            type = "l", lwd = 5,  TestStatistic = "FlatLineTest",
+            xlab = "Ontogeny", ylab = "TAI")
 
 
 ```
@@ -556,7 +556,7 @@ data(DivergenceExpressionSetExample)
 # and performing the Flat Line Test to obtain the p-value
 PlotPattern(tf(PhyloExpressionSetExample, sqrt),
             type = "l", lwd = 5, TestStatistic = "FlatLineTest",
-            ylab = "TAI")
+            xlab = "Ontogeny", ylab = "TAI")
 
 
 ```
@@ -580,7 +580,7 @@ The same accounts for `TDI` profiles:
 PlotPattern(tf(DivergenceExpressionSetExample, log2),
             type = "l", lwd = 5, 
             TestStatistic = "FlatLineTest", 
-            ylab = "TDI")
+            xlab = "Ontogeny", ylab = "TDI")
 
 
 ```
@@ -593,7 +593,7 @@ PlotPattern(tf(DivergenceExpressionSetExample, log2),
 # and performing the Flat Line Test to obtain the p-value
 PlotPattern(tf(DivergenceExpressionSetExample, sqrt),
             type = "l", lwd = 5, TestStatistic = "FlatLineTest",
-            ylab = "TDI")
+            xlab = "Ontogeny", ylab = "TDI")
 
 
 ```
