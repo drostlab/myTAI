@@ -38,7 +38,7 @@
 #'
 #' K.Y. Yeung et al.: Model-based clustering and data transformations for gene expression data. Bioinformatics 2001, 17:977-987
 #'
-#' K.Y. Yeung et al.:  Supplement to Model-based clustering and data transformations for gene expression data – Data Transformations and the Gaussian mixture assumption. Bioinformatics 2001, 17:977-987
+#' K.Y. Yeung et al.:  Supplement to Model-based clustering and data transformations for gene expression data - Data Transformations and the Gaussian mixture assumption. Bioinformatics 2001, 17:977-987
 #'
 #' P.A.C. Hoen et al.: Deep sequencing-based expression analysis shows major advances in robustness, resolution and inter-lab portability over five microarray platforms. Nucleic Acids Research 2008, Vol. 36, No. 21
 #'

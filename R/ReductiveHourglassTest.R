@@ -21,7 +21,7 @@
 #' @details 
 #' The reductive hourglass test is a permutation test based on the following test statistic. 
 #'
-#' (1) A set of developmental stages is partitioned into three modules – early, mid, and late – based on prior biological knowledge.
+#' (1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
 #'
 #' (2) The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the three modules T_early, T_mid, and T_late are computed. 
 #'
