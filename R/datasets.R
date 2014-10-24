@@ -6,16 +6,25 @@
 #' The standard is defined as follows:
 #'        
 #' Divergencestratum | GeneID | Expression-level 1 | ... | Expression-level N
-#' @details This dataset covers 7 developmental stages of Arabidopsis thaliana embryo development.
-#' The initial gene expression dataset was published by Xiang et al., 2011 and was then
-#' used by Quint et al., 2012 to assign sequence divergence values (divergence strata) to each gene expression profile.
+#' @details 
+#' 
+#' This example DivergenceExpressionSet dataset covers 7 developmental stages of Arabidopsis thaliana embryo development.
+#' The initial gene expression dataset was published by Xiang et al., 2011 (see references section) 
+#' and was then used by Quint et al., 2012 (see references section) to assign sequence divergence values (divergence strata) to each gene expression profile.
 #' @return a standard DivergenceExpressionSet object.
-#' @references Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' @references 
+#' 
+#' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' Supplementary Table 2 : \url{http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html}
 #' 
 #' Xiang D et al. 2011. "Genome-Wide Analysis Reveals Gene Expression and Metabolic Network Dynamics during Embryo Development in Arabidopsis". Plant Physiology (156): 346-356.
+#' Supplemental Table 1 : \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
+#' 
+#' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{PhyloExpressionSetExample}}
 #' @name DivergenceExpressionSetExample
+#' @source \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
 NULL
 
 
@@ -29,15 +38,20 @@ NULL
 #'        
 #' Phylostratum | GeneID | Expression-level 1 | ... | Expression-level N
 #' @details This dataset covers 7 developmental stages of Arabidopsis thaliana embryo development.
-#' The initial gene expression dataset was published by Xiang et al., 2011 and was then
-#' used by Quint et al., 2012 to assign evolutionary ages to each gene expression profile.
+#' The initial gene expression dataset was published by Xiang et al., 2011 (see references section) and was then
+#' used by Quint et al., 2012 (see references section) to assign evolutionary ages to each gene expression profile.
 #' @return a standard PhyloExpressionSet object.
-#' @references Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' @references 
+#' 
+#' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' Supplementary Table 2 : \url{http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html}
 #' 
 #' Xiang D et al. 2011. "Genome-Wide Analysis Reveals Gene Expression and Metabolic Network Dynamics during Embryo Development in Arabidopsis". Plant Physiology (156): 346-356.
+#' Supplemental Table 1 : \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{DivergenceExpressionSetExample}}
 #' @name PhyloExpressionSetExample
+#' @source \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
 NULL
 
 

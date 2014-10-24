@@ -15,11 +15,13 @@ gene expression levels to capture evolutionary signals during developmental proc
 # install.packages("devtools")
 
 # install the current version of myTAI on your system
+# this can take some time since the vignettes are
+# very comprehensive and take some time to build
 library(devtools)
-install_github("HajkD/myTAI")
+install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # On Windows, this won't work - see ?build_github_devtools
-install_github("HajkD/myTAI")
+install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # When working with Windows, first you need to install the
 # R package: rtools -> install.packages("rtools")
@@ -27,7 +29,7 @@ install_github("HajkD/myTAI")
 # Afterwards you can install devtools -> install.packages("devtools")
 # and then you can run:
 
-devtools::install_github("HajkD/myTAI")
+devtools::install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # and then call it from the library
 library("myTAI", lib.loc = "C:/Program Files/R/R-3.1.1/library")
@@ -50,7 +52,7 @@ Three tutorials will get you started with this package:
 - [Advanced topics using the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
 
 
-You can also read the tutorials within R ([RStudio](http://www.rstudio.com/)) :
+You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
 ```r
 
@@ -87,6 +89,7 @@ provided in this package.
 Furthermore, in case you find some bugs or need additional (more flexible) functionality of parts
 of this package, please let me know:
 
+hajk-georg.drost@informatik.uni-halle.de
 
 
 ## Acknowledgement
@@ -102,10 +105,5 @@ on how to improve some methodological concepts of some analyses present in this 
 
 I would also like to thank the Master of Science Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
 who worked intensively with this package and helped me to improve the usability and logic of this package.
-
-As google scholar properly cites: [_On the shoulders of giants_](http://scholar.google.com/), I couldn't agree more than to add that this work
-wouldn't be possible without the _giants_ that came before me and who provided such amazing work I can now benefit from and
-I hope others can benefit from too.
-
 
 

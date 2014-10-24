@@ -9,7 +9,7 @@ Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
 Description: The present collection of functions can be used to perform
     phylotranscriptomics analyses to investigate phenomena
     within the field of Evolutionary Developmental Biology
-License: GPL-2
+License: GPL-3
 VignetteBuilder: knitr
 Depends:
     R (>= 3.0.2)
