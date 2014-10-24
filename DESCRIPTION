@@ -12,12 +12,12 @@ Description: The present collection of functions can be used to perform
 License: GPL-3
 VignetteBuilder: knitr
 Depends:
-    R (>= 3.0.2)
+    R (>= 3.1.1)
 Imports:
     Rcpp (>= 0.11.1),
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.0-2),
-    parallel (>= 3.0.2),
+    parallel (>= 3.1.1),
     foreach (>= 1.4.2),
     iterators (>= 1.0.7)
 Suggests:

@@ -56,8 +56,9 @@ You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
 ```r
 
-# first install the myTAI package -> see "Fast Installation Guide" for the current development version
-install.packages("myTAI", dependencies = TRUE)
+# first install the myTAI package 
+# -> see "Fast Installation Guide" for the current development version
+install.packages("myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # source the myTAI package
 library(myTAI)
@@ -104,6 +105,6 @@ Furthermore, I would like to thank Alexander Gabel and Jan Grau for valuable dis
 on how to improve some methodological concepts of some analyses present in this package.
 
 I would also like to thank the Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
-who worked intensively with this package and helped me to improve the usability and logic of this package.
+who worked intensively with this package and helped me to improve the usability and logic of the package environment.
 
 
