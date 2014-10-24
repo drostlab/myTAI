@@ -22,5 +22,5 @@ Imports:
     iterators (>= 1.0.7)
 Suggests:
     knitr (>= 1.6),
-    doMC (>= 1.3.3),
+    doMC (>= 1.3.3)
 LinkingTo: Rcpp
