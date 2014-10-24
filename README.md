@@ -98,12 +98,12 @@ I would like to thank several individuals for making this project possible.
 
 First I would like to thank Ivo Grosse and Marcel Quint for providing me a place
 and the environment to be able to work on fascinating topics of Evo-Devo research and for the
-fruitful discussions that lead to projects like this one.
+fruitful discussions that led to projects like this one.
 
 Furthermore, I would like to thank Alexander Gabel and Jan Grau for valuable discussions
 on how to improve some methodological concepts of some analyses present in this package.
 
-I would also like to thank the Master of Science Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
+I would also like to thank the Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
 who worked intensively with this package and helped me to improve the usability and logic of this package.
 
 
