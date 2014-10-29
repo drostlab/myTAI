@@ -28,8 +28,9 @@ a numeric vector storing the p-values returned by the underlying test statistic 
 In case a PhyloExpressionSet or DivergenceExpressionSet stores replicates for each
 developmental stage or experiment, this function allows to compute the p-values quantifying
 the statistical significance of the underlying pattern for all combinations of replicates.
-
-The intention of this analysis is to validate that there exists no sequence of replicates
+}
+\details{
+#' The intention of this analysis is to validate that there exists no sequence of replicates
 (for all possible combination of replicates) that results in a non-significant pattern,
 when the initial pattern with combined replicates was shown to be significant.
 
@@ -40,36 +41,37 @@ Assume PhyloExpressionSet stores 3 developmental stages with 3 replicates measur
 The 9 replicates in total are denoted as: 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 3.1, 3.2, 3.3. Now the function computes the
 statistical significance of each pattern derived by the corresponding combination of replicates, e.g.
 
-1.1, 2.1, 3.1 -> p-value for combination 1
+\itemize{
+\item 1.1, 2.1, 3.1 -> p-value for combination 1
 
-1.1, 2.2, 3.1  -> p-value for combination 2
+\item 1.1, 2.2, 3.1  -> p-value for combination 2
 
-1.1, 2.3, 3.1 -> p-value for combination 3
+\item 1.1, 2.3, 3.1 -> p-value for combination 3
 
-1.2, 2.1, 3.1 -> p-value for combination 4
+\item 1.2, 2.1, 3.1 -> p-value for combination 4
 
-1.2, 2.1, 3.1 -> p-value for combination 5
+\item 1.2, 2.1, 3.1 -> p-value for combination 5
 
-1.2, 2.1, 3.1 -> p-value for combination 6
+\item 1.2, 2.1, 3.1 -> p-value for combination 6
 
-1.3, 2.1, 3.1 -> p-value for combination 7
+\item 1.3, 2.1, 3.1 -> p-value for combination 7
 
-1.3, 2.2, 3.1 -> p-value for combination 8
+\item 1.3, 2.2, 3.1 -> p-value for combination 8
 
-1.3, 2.3, 3.1 -> p-value for combination 9
+\item 1.3, 2.3, 3.1 -> p-value for combination 9
 
-\dots
-
-This procedure yields 27 p-values for the \eqn{3^3} (\eqn{#stages^#replicates}) replicate combinations.
+\item \dots
+}
+This procedure yields 27 p-values for the \eqn{3^3} (\eqn{n_stages^n_replicates}) replicate combinations.
 
 Note, that in case you have a large amount of stages/experiments and a large amount of replicates
-the computation time will increase by \eqn{#stages^#replicates}. For 11 stages and 4 replicates, 4^11 = 4194304 p-values have to be computed.
+the computation time will increase by \eqn{n_stages^n_replicates}. For 11 stages and 4 replicates, 4^11 = 4194304 p-values have to be computed.
 Each p-value computation itself is based on a permutation test running with 1000 or more permutations. Be aware that this might take some time.
 
 The p-value vector returned by this function can then be used to plot the p-values to see
 whether an critical value \eqn{\alpha} is exeeded or not (e.g. \eqn{\alpha = 0.05}).
-}
-\details{
+
+
 The function receives a standard PhyloExpressionSet or DivergenceExpressionSet object and a vector storing the number of replicates present in each stage or experiment. Based on these arguments the function computes all possible replicate combinations using the \code{\link{expand.grid}} function and performs a permutation test (either a \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}) for each replicate combination. The \emph{permutation} parameter of this function specifies the number of permutations that shall be performed for each permutation test. When all p-values are computed, a numeric vector storing the corresponding p-values for each replicate combination is returned.
 
 In other words, for each replicate combination present in the PhyloExpressionSet or DivergenceExpressionSet object, the TAI or TDI pattern of the corresponding replicate combination is tested for its statistical significance based on the underlying test statistic.
