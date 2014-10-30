@@ -147,11 +147,14 @@ combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "
   first_cols_names <- as.character(colnames(ExpressionSet)[1:2])
   
   if(parallel == TRUE){
+          
+          stop("The parallel version does not work yet!")
+          
     # parallellizing the sampling process using the 'doMC' and 'parallel' package
     # register all given cores for parallelization
     # detectCores(all.tests = TRUE, logical = FALSE) returns the number of cores available on a multi-core machine
     cores <- parallel::detectCores()
-    doMC::registerDoMC(cores)
+    #doMC::registerDoMC(cores)
     
     # perform the sampling process in parallel
     p.vals <- as.vector(foreach::foreach(i = 1:nCombinations,.combine = "c") %dopar% {

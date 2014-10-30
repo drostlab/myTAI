@@ -173,7 +173,7 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000,
                         ### register all given cores for parallelization
                         ### detectCores(all.tests = TRUE, logical = FALSE) returns the number of cores available on a multi-core machine
                         cores <- parallel::detectCores()
-                        doMC::registerDoMC(cores)
+                        #doMC::registerDoMC(cores)
                         
                         ### Perform the sampling process in parallel
                         p.vals_vec <- as.vector(foreach::foreach(i = 1:runs,.combine="c") %dopar% {FlatLineTest(ExpressionSet)$p.value})

@@ -211,7 +211,7 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                         # register all given cores for parallelization
                         # detectCores(all.tests = TRUE, logical = FALSE) returns the number of cores available on a multi-core machine
                         cores <- parallel::detectCores()
-                        doMC::registerDoMC(cores)
+                        #doMC::registerDoMC(cores)
                         
                         # perform the sampling process in parallel
                         parallel_results <- foreach::foreach(iterators::iter(1:runs),.combine = "rbind") %dopar% {

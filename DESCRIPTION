@@ -15,7 +15,7 @@ NeedsCompilation: yes
 Depends:
     R (>= 3.1.1)
 Imports:
-    Rcpp (>= 0.11.1),
+    Rcpp (>= 0.11.3),
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.0-2),
     parallel (>= 3.1.1),
