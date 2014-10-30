@@ -28,7 +28,7 @@ A series of tutorials aim to introduce you to the `myTAI` package:
 * __2) Intermediate:__ Vignette - Intermediate Analyses and Test Statistics
 * __3) Advanced:__ Vignette - Advanced use of the myTAI package and data retrieval performing divergence stratigraphy using the [orthologr](https://github.com/HajkD/orthologr) package
 
-Internally, computationally intensive functions have been written in C++ using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package and paralleled using the [doMC](http://cran.r-project.org/web/packages/doMC/index.html) package to allow real-time analytics in phylotranscriptomics research.
+Internally, computationally intensive functions have been written in C++ using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package to allow fast analytics in phylotranscriptomics research.
 
 ## Getting Started
 
@@ -36,7 +36,7 @@ All functions implemented in the `myTAI` package expect a specific data format a
 
 The simplest way to get introduced into the standard formats referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__ is to look at the example data sets that come with the `myTAI` package.
 
-```{r}
+```{r,eval=FALSE}
 library(myTAI)
 
 # load an example PhyloExpressionSet stored in the myTAI package
@@ -133,7 +133,7 @@ Before starting any computation, sometimes it is good to visualize the Phylostra
 
 For this purpose, the `PlotDistribution()` function was implemented:
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # displaying the phylostratum distribution (gene frequency distribution) 
 # of a PhyloExpressionSet as absolute frequency distribution
 PlotDistribution(PhyloExpressionSetExample, xlab = "Phylostratum")
@@ -141,7 +141,7 @@ PlotDistribution(PhyloExpressionSetExample, xlab = "Phylostratum")
 
 or display it as relative frequencies: 
 
-```{r, fig.width= 7, fig.height= 4}
+```{r, fig.width= 7, fig.height= 4,eval=FALSE}
 # as relative frequency distribution
 PlotDistribution(PhyloExpressionSetExample, as.ratio = TRUE, xlab = "Phylostratum", cex = 0.7)
 ```
@@ -152,7 +152,7 @@ Another important feature to check is, whether the Phylostratum assignment and D
 
 For this purpose the `PlotCorrelation()` function was implemented:
 
-```{r, fig.width= 5, fig.height= 4}
+```{r, fig.width= 5, fig.height= 4,eval=FALSE}
 # visualizing the correlation between Phylostratum and Divergence-Stratum assignments
 # of the intersecting set of genes that are stored within the PhyloExpressionSet
 # and DivergenceExpressionSet
@@ -181,7 +181,7 @@ Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was int
 
 The `PlotPattern()` function first computes the `TAI` (given a PhyloExpressionSet) or the `TDI` (given a DivergenceExpressionSet) to then visualize the TAI or TDI profile, their standard deviation and statistical significance.
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # simple use of the PlotPattern function
 # to plot the TAI of a given PhyloExpressionSet 
 PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI")
@@ -206,7 +206,7 @@ For this example we divide _A. thaliana_ embryo development stored within the _P
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # using the PlotPattern function
 # to plot the TAI of a given PhyloExpressionSet
 # and to perform the ReductiveHourglassTest to quantify
@@ -222,7 +222,7 @@ which is different from the p-value returned by the `FlatLineTest` (`p_flt`).
 
 To make sure that you selected the correct modules you can use the `shaded.area` argument to visualize the chosen modules:
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # using the shaded.area argument to visualize the chosen modules
 PlotPattern(PhyloExpressionSetExample, TestStatistic = "ReductiveHourglassTest",
             modules = list(early = 1:2, mid = 3:5, late = 6:7),
@@ -253,7 +253,7 @@ For this example we divide _A. thaliana_ embryo development stored within the _P
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # using the PlotPattern function
 # to plot the TAI of a given PhyloExpressionSet
 # and to perform the EarlyConservationTest to test the
@@ -275,18 +275,22 @@ which in contrast would start at position 3, ... N.
 
 To obtain the numerical _TAI_ values, the `TAI()` function can be used:
 
-```{r}
+```{r,eval=FALSE}
 # simply getting the TAI values of a given PhyloExpressionSet
 TAI(PhyloExpressionSetExample) 
 ```
 
+```
+  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
 
+```
 ## TDI analyses
 
 
 Analogous to the _TAI_ computations and visualization, the _TDI_ computations can be performed in a similar fashion:
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # simple use of the PlotPattern function
 # to plot the TDI of a given DivergenceExpressionSet 
 PlotPattern(DivergenceExpressionSetExample, type = "l", lwd = 6,
@@ -299,7 +303,7 @@ Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo develop
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # using the PlotPattern function
 # to plot the TDI of a given DivergenceExpressionSet
 # and to perform the ReductiveHourglassTest to quantify
@@ -316,7 +320,7 @@ And for the __EarlyConservationTest__ we again divide _A. thaliana_ embryo devel
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # using the PlotPattern function
 # to plot the TDI of a given DivergenceExpressionSet
 # and to perform the EarlyConservationTest 
@@ -329,11 +333,16 @@ PlotPattern(DivergenceExpressionSetExample, TestStatistic = "EarlyConservationTe
 
 To obtain the numerical TDI values for a given DivergenceExpressionSet simply run:
 
-```{r}
+```{r,eval=FALSE}
 # getting the TDI values of a given DivergenceExpressionSet
 TDI(DivergenceExpressionSetExample) 
 ```
 
+```
+  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+4.532029 4.563200 4.485705 4.500868 4.466477 4.530704 4.690292
+
+```
 ### 2) Mean Expression and Relative Expression of single phylostrata or divergence-strata
 
 
@@ -348,7 +357,7 @@ To further investigate the origins of the global __TAI__ or __TDI__ pattern it i
 
 Visualizing the mean gene expression of genes corresponding to the same Phylostratum or Divergence-Stratum class allows to detect development specific groups of Phylostrata or Divergence-Strata that are most expressed during the underlying developmental process. This might lead to correlating specific groups of Phylostrata or Divergence-Strata sharing similar evolutionary origins with common functions or functional contributions to a specific developmental process. 
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # visualizing the mean gene expression of each Phylostratum class
 PlotMeans(PhyloExpressionSetExample, Groups = list(1:12), legendName = "PS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
@@ -362,7 +371,7 @@ So the `PlotPattern()` function takes an PhyloExpressionSet or DivergenceExpress
 
 For this example we separate groups of Phylostrata into __evolutionary old Phylostrata__ (PS1-3) in one plot versus __evolutionary younger Phylostrata__ (PS4-12) into another plot:
 
-```{r, fig.height= 5, fig.width=9}
+```{r, fig.height= 5, fig.width=9,eval=FALSE}
 # visualizing the mean gene expression of each Phylostratum class
 PlotMeans(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
@@ -370,17 +379,34 @@ PlotMeans(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS"
 
 To obtain the numerical values (mean expression levels for all Phylostrata) run:
 
-```{r}
+```{r,eval=FALSE}
 # using the age.apply() function implemented in the myTAI package
 # to compute the mean expression levels of all Phylostrata
 age.apply(PhyloExpressionSetExample, colMeans) 
 ```
 
+```
+
+     Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
+1  2607.882 2579.372 2604.856 2525.704 2554.825 2622.757 2696.331
+2  2597.258 2574.745 2467.679 2388.045 2296.410 2243.716 2321.709
+3  2528.272 2363.159 2019.436 2099.079 2155.642 2196.875 2855.866
+4  1925.320 1887.078 1771.399 1787.175 1740.823 1867.981 2358.893
+5  2378.883 2368.593 2061.729 2077.087 2076.693 2564.904 3157.761
+6  1658.253 1697.242 1485.401 1462.613 1492.861 1631.741 2304.683
+7  1993.321 1717.659 1480.525 1590.009 1545.078 1600.264 2385.409
+8  1781.653 1670.106 1452.180 1414.052 1359.376 1816.718 2364.070
+9  1758.119 1764.748 1708.815 1575.727 1388.920 1687.314 2193.930
+10 2414.456 2501.390 2163.810 1938.060 1770.039 1993.032 2127.015
+11 1999.163 2071.456 1702.779 1710.290 1662.099 1726.865 2501.443
+12 2126.189 2036.804 1896.964 1909.578 1859.485 1995.732 2387.343
+
+```
 Here the `age.apply()` function (`?age.apply`) takes a function as argument that itself receives a `data.frame` as argument (e.g. `colMeans()`).
 
 For a DivergenceExpressionSet run:
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # visualizing the mean gene expression of each Divergence-Stratum class
 PlotMeans(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
@@ -388,12 +414,27 @@ PlotMeans(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS"
 
 To obtain the numerical values (mean expression levels for all Divergence-Strata) run:
 
-```{r}
+```{r,eval=FALSE}
 # using the age.apply() function to compute the mean expression levels
 # of all Divergence-Strata
 age.apply(DivergenceExpressionSetExample, colMeans) 
 ```
 
+```
+
+     Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
+1  5222.189 5230.547 5254.464 4911.494 4807.936 4654.683 4277.490
+2  3146.510 3020.156 2852.072 2807.367 2845.025 3002.967 3237.315
+3  2356.008 2239.344 2257.539 2272.270 2360.816 2529.276 2912.164
+4  2230.350 2180.706 2050.895 2049.035 2001.043 2127.165 2608.903
+5  2014.600 1994.640 1884.899 1851.554 1858.913 1920.185 2210.391
+6  2096.593 2018.440 1938.765 1961.828 1905.246 2005.523 2339.767
+7  1836.290 1832.815 1734.319 1719.186 1659.044 1736.141 2201.981
+8  1784.470 1762.151 1635.529 1624.682 1590.489 1711.439 1983.607
+9  1649.254 1659.455 1522.214 1485.560 1453.689 1584.176 1767.276
+10 1660.750 1735.086 1605.275 1473.854 1398.067 1438.258 1541.633
+
+```
 #### * Visualizing the Relative Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
 
 
@@ -402,13 +443,13 @@ Introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journ
 
 The `PlotRE()` function can be used (analogous to the `PlotMeans()` function) to visualize the relative expression levels of a given PhyloExpressionSet and DivergenceExpressionSet:
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # visualizing the mean gene expression of each Phylostratum class
 PlotRE(PhyloExpressionSetExample, Groups = list(1:10), legendName = "PS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
 ```
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # visualizing the mean gene expression of each Divergence-Stratum class
 PlotRE(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
@@ -416,7 +457,7 @@ PlotRE(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS",
 
 or again by assigning Phylostratum or Divergence-Stratums groups that shall be visualized in different plots:
 
-```{r,fig.height=5, fig.width=9}
+```{r,fig.height=5, fig.width=9,eval=FALSE}
 # visualizing the mean gene expression of each Phylostratum class
 PlotRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
@@ -424,29 +465,76 @@ PlotRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS",
 
 The relative expression levels can be obtained using the `REMatrix()` function:
 
-```{r}
+```{r,eval=FALSE}
 # getting the relative expression levels for all Phylostrata
 REMatrix(PhyloExpressionSetExample) 
 ```
 
-```{r}
+```
+
+      Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature
+1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000
+2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063
+3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000
+4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000
+5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000
+6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000
+7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000
+8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000
+9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000
+10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046
+11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000
+12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000
+
+```
+```{r,eval=FALSE}
 # getting the relative expression levels for all Divergence-Strata
 REMatrix(DivergenceExpressionSetExample) 
 ```
 
+```
+      Zygote  Quadrant   Globular      Heart    Torpedo      Bent    Mature
+1  0.9669643 0.9755188 1.00000000 0.64894653 0.54294759 0.3860827 0.0000000
+2  0.7888009 0.4949178 0.10397567 0.00000000 0.08758660 0.4549387 1.0000000
+3  0.1733953 0.0000000 0.02704324 0.04893726 0.18054185 0.4309208 1.0000000
+4  0.3772372 0.2955661 0.08201140 0.07895260 0.00000000 0.2074848 1.0000000
+5  0.4543752 0.3987496 0.09292474 0.00000000 0.02050713 0.1912595 1.0000000
+6  0.4403615 0.2605017 0.07713944 0.13021586 0.00000000 0.2307754 1.0000000
+7  0.3264585 0.3200581 0.13864386 0.11077270 0.00000000 0.1420009 1.0000000
+8  0.4934416 0.4366671 0.11457069 0.08697865 0.00000000 0.3076689 1.0000000
+9  0.6236387 0.6561674 0.21851855 0.10163374 0.00000000 0.4161087 1.0000000
+10 0.7794318 1.0000000 0.61482564 0.22487531 0.00000000 0.1192539 0.4259882
+
+```
+
 The same could also be done using the `age.apply()` function in combination with the `RE()` function:
 
-```{r}
+```{r,eval=FALSE}
 # getting the relative expression levels for all Phylostrata
 age.apply(PhyloExpressionSetExample, RE) 
 ```
 
+```
+      Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature
+1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000
+2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063
+3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000
+4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000
+5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000
+6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000
+7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000
+8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000
+9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000
+10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046
+11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000
+12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000
 
+```
 [Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) introduced an additional way of visualizing the difference of relative expression levels between groups of Phylostrata/Divergence-Strata.
 
 This barplot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the `PlotMeans()` and `PlotRE()` functions:
 
-```{r,fig.height=5, fig.width=7}
+```{r,fig.height=5, fig.width=7,eval=FALSE}
 # visualizing the mean relative expression of two Phylostratum groups
 PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), 
           xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
@@ -459,14 +547,14 @@ A [Kruskal-Wallis Rank Sum Test](http://stat.ethz.ch/R-manual/R-patched/library/
 
 Additionally the ratio between both values represented by the bars to be compared can be visualized as function within the barplot using the `ratio = TRUE` argument:
 
-```{r, fig.height=5,fig.width=7}
+```{r, fig.height=5,fig.width=7,eval=FALSE}
 # visualizing the mean relative expression of two Phylostratum groups
 PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), ratio = TRUE,
           xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
 ```
 
 It is also possible to compare more than two groups:
-```{r, fig.width=7}
+```{r, fig.width=7,eval=FALSE}
 # visualizing the mean relative expression of three Phylostratum groups
 PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:6, 7:12), wLength = 0.05,
           xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
@@ -480,7 +568,7 @@ For the corresponding statistically significant stages, a _Posthoc_ test can be 
 Most visualization functions in the _`myTAI`_ package have an __ellipsis__ argument (`?dotsMethods`)
 which allows you to modify the `cex.lab`, `cex.axis`, and `cex` arguments within the plot.
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # cex = 0.5, cex.lab = 0.5, cex.axis = 0.5
 PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI",
             cex = 0.5, cex.lab = 0.5, cex.axis = 0.5)
@@ -490,13 +578,13 @@ The `cex` argument modifies the the p-value font size, the `cex.lab` argument mo
 
 More examples:
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # cex = 2, cex.lab = 1, cex.axis = 0.5 
 PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI",
             cex = 2, cex.lab = 1, cex.axis = 0.5)
 ```
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # cex = 0.5, cex.lab = 0.7, cex.axis = 1.5
 PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI",
             cex = 0.5, cex.lab = 0.7, cex.axis = 1.5)

@@ -247,11 +247,11 @@ is.ExpressionSet <- function(ExpressionSet){
         d.f_bool <- is.data.frame(ExpressionSet)
         age.vector_bool <- is.numeric(ExpressionSet[ , 1])
         gene.vector_bool <- ifelse(is.factor(ExpressionSet[ , 2]),is.character(levels(ExpressionSet[ , 2])),is.character(ExpressionSet[ , 2]))
-        expression.matrix_bool <- all(apply(ExpressionSet[ , 3:ncols] , 2 , is.numeric))
-        any.NA.values_bool <- !any(apply(ExpressionSet , 2 , is.na))
+        expression.matrix_bool <- all(sapply(ExpressionSet[ , 3:ncols], is.numeric))
+        any.NA.values_bool <- !any(is.na(ExpressionSet))
         
         
-        if(d.f_bool & age.vector_bool & gene.vector_bool & expression.matrix_bool & any.NA.values_bool){
+        if(all(c(d.f_bool,age.vector_bool,gene.vector_bool,expression.matrix_bool,any.NA.values_bool))){
                 return(TRUE)
         }
         
