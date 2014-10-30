@@ -55,10 +55,10 @@ library(devtools)
 install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # On Windows, this won't work - see ?build_github_devtools
-install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
+# install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # When working with Windows, first you need to install the
-# R package: rtools -> install.packages("rtools")
+# R package: rtools -> http://cran.r-project.org/bin/windows/Rtools/
 
 # Afterwards you can install devtools -> install.packages("devtools")
 # and then you can run:
