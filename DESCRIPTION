@@ -1,6 +1,6 @@
 Package: myTAI
 Type: Package
-Title: A package to perform phylotranscriptomics analyses for Evolutionary
+Title: A framework to perform phylotranscriptomics analyses for Evolutionary
     Developmental Biology research.
 Version: 0.0.1
 Date: 2014-10-25
