@@ -1,13 +1,47 @@
 myTAI
 =====
 
-### A package to perform phylotranscriptomics analyses and visualization for Evolutionary Developmental Biology research.
+### A framework to perform phylotranscriptomics analyses and visualization for Evolutionary Developmental Biology research.
 
 The present collection of [R](http://cran.r-project.org/) functions can be used to perform phylotranscriptomics 
 analyses and visualization to investigate phenomena within the field of Evolutionary Developmental Biology.
     
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
-gene expression levels to capture evolutionary signals during developmental processes.
+gene expression levels to capture evolutionary signals during developmental processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)).
+
+
+In the `myTAI` framework you can find:
+
+#### The following phylotranscriptiomics measures:
+
+* `TAI()` : Function to compute the Transcriptome Age Index (TAI)
+* `TDI()` : Function to compute the Transcriptome Divergence Index (TDI)
+* `REMatrix()` : Function to compute the relative expression profiles of all phylostrata or divergence-strata
+
+#### The following visualization and analytics tools:
+
+* `PlotPattern()` : Function to plot the TAI or TDI profiles and perform statistical tests
+* `PlotCorrelation()` : Function to plot the correlation between phylostratum values and divergence-stratum values
+* `PlotRE()` : Function to plot the relative expression profiles
+* `PlotBarRE()` : Function to plot the mean relative expression levels of phylostratum or divergence-stratum classes as barplot
+* `PlotMeans()` : Function to plot the mean expression profiles of phylostrata or divergence-strata
+* `PlotDistribution()` : Function to plot the frequency distribution of genes within the corresponding phylostratigraphic map or divergence map
+
+
+#### The following statistical framework and test statistics:
+
+* `FlatLineTest()` : Function to perform the __Flat Line Test__ that quantifies the statistical significance of an observed
+phylotranscriptomics pattern (significant deviation from a frat line = no evolutionary signal)
+* `ReductiveHourglassTest()` : Function to perform the __Reductive Hourglass Test__ that statistically evaluates the existence of a phylotranscriptomic hourglass pattern (hourglass model)
+* `EarlyConservationTest()` : Function to perform the __Reductive Early Conservation Test__ that statistically evaluates the existence of a monotonically increasing phylotranscriptomic pattern (early conservation model)
+
+All three functions also include visual analytics tools to quantify the goodness of test statistics.
+
+#### Minor functions for better usibility and additional analytics
+
+`age.apply()`, `bootMatrix()`, `combinatorialSignificance()`, `ecScore()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`,
+`RE()`, `rhScore()`, and `tf()`
+
 
 ## Fast installation guide
 
