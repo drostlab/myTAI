@@ -4,7 +4,6 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \emph{FlatLineTest}.
 #' @param plotHistogram a boolean value specifying whether a detailed statistical analysis concerning the goodness of fit shall be performed.
-#' @param parallel a boolean value specifying whether goodness of fit computations shall be performed in parallel using the \pkg{doMC} package.
 #' @param runs specify the number of runs to be performed for goodness of fit computations. In most cases runs = 100 is a reasonable choice.
 #' @details Internally the function performs N phylotranscriptomics pattern computations (\code{\link{TAI}} or \code{\link{TDI}}) based on sampled PhyloExpressionSets or DivergenceExpressionSets (see \code{\link{bootMatrix}}). 
 #' The test statistics is being developed as follows:
@@ -114,13 +113,18 @@
 #' @import foreach
 #' @export
 FlatLineTest <- function(ExpressionSet, permutations = 1000, 
-                         plotHistogram = FALSE, parallel = FALSE, runs = 10)
+                         plotHistogram = FALSE, runs = 10)
 {
         
         is.ExpressionSet(ExpressionSet)
         
         if((plotHistogram == TRUE) & is.null(runs))
                 stop("Please specify the number of runs to be performed for the goodness of fit computations.")
+        
+        
+        # since the doMC package is not available for Windows machines yet,
+        # the parallel version of this function cannot be used:
+        parallel <- FALSE
         
         nCols <- dim(ExpressionSet)[2]
         resMatrix <- matrix(NA_real_, permutations,(nCols-2))

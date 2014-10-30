@@ -217,15 +217,12 @@ of the test statistic.
 
 # perform the FlatLineTest and investigate the goodness of the test statistic
 FlatLineTest(PhyloExpressionSetExample, permutations = 1000, 
-             plotHistogram = TRUE, parallel = FALSE)
+             plotHistogram = TRUE)
 
 ```
 
 The `plotHistogram` argument specifies whether analytics plots shall be drawn
 to quantify the goodness of the test statistic returned by the `FlatLineTest`.
-The `parallel` argument specifies that the corresponding computations are performed
-by multicore processing. So in case you are not working on a multicore machine,
-please make sure you set `parallel = FALSE` (default).
 
 
 The three resulting plots show:
@@ -353,7 +350,7 @@ This allows to quantify the permutation bias and their implications on the goodn
 # perform the Reductive Hourglass Test and plot the test statistic
 ReductiveHourglassTest(PhyloExpressionSetExample,
                        modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       plotHistogram = TRUE, parallel = FALSE, lillie.test = TRUE) 
+                       plotHistogram = TRUE, lillie.test = TRUE) 
 
 ```
 
@@ -459,7 +456,7 @@ This allows to quantify the permutation bias and their implications on the goodn
 # perform the Reductive Early Conservation Test and plot the test statistic
 EarlyConservationTest(PhyloExpressionSetExample,
                        modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       plotHistogram = TRUE, parallel = FALSE, lillie.test = TRUE) 
+                       plotHistogram = TRUE, lillie.test = TRUE) 
 
 ```
 

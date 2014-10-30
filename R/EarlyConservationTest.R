@@ -14,8 +14,6 @@
 #' @param plotHistogram a boolean value specifying whether a \emph{Lillifor's Kolmogorov-Smirnov-Test} 
 #' shall be performed to test the goodness of fit of the approximated distribution, as well as additional plots quantifying the significance
 #' of the observed phylotranscriptomic pattern.
-#' @param parallel a boolean value specifying whether goodness of fit computations 
-#' shall be performed in parallel using the \pkg{doMC} package.
 #' @param runs specify the number of runs to be performed for goodness of fit computations, in case \code{plotHistogram} = \code{TRUE}.
 #' In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).
 #' @details The \emph{reductive early conservation test} is a permutation test based on the following test statistic. 
@@ -122,8 +120,7 @@
 
 EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                                   permutations = 1000, lillie.test = FALSE, 
-                                  plotHistogram = FALSE,parallel = FALSE,
-                                  runs = 10){
+                                  plotHistogram = FALSE, runs = 10){
         
         is.ExpressionSet(ExpressionSet)
         
@@ -138,6 +135,10 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
         
         if(any(table(unlist(modules)) > 1))
                 stop("Intersecting modules are not defined for the ReductiveHourglassTest.")
+        
+        # since the doMC package is not available for Windows machines yet,
+        # the parallel version of this function cannot be used:
+        parallel <- FALSE
         
         nCols <- dim(ExpressionSet)[2]
         score_vector <- vector(mode = "numeric",length = permutations)

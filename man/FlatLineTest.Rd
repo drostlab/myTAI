@@ -4,7 +4,7 @@
 \title{Function to perform the Flat Line Test.}
 \usage{
 FlatLineTest(ExpressionSet, permutations = 1000, plotHistogram = FALSE,
-  parallel = FALSE, runs = 10)
+  runs = 10)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -12,8 +12,6 @@ FlatLineTest(ExpressionSet, permutations = 1000, plotHistogram = FALSE,
 \item{permutations}{a numeric value specifying the number of permutations to be performed for the \emph{FlatLineTest}.}
 
 \item{plotHistogram}{a boolean value specifying whether a detailed statistical analysis concerning the goodness of fit shall be performed.}
-
-\item{parallel}{a boolean value specifying whether goodness of fit computations shall be performed in parallel using the \pkg{doMC} package.}
 
 \item{runs}{specify the number of runs to be performed for goodness of fit computations. In most cases runs = 100 is a reasonable choice.}
 }

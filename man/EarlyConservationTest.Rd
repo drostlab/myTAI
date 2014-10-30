@@ -4,8 +4,7 @@
 \title{Function to perform the Reductive Early Conservation Test.}
 \usage{
 EarlyConservationTest(ExpressionSet, modules = NULL, permutations = 1000,
-  lillie.test = FALSE, plotHistogram = FALSE, parallel = FALSE,
-  runs = 10)
+  lillie.test = FALSE, plotHistogram = FALSE, runs = 10)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -22,9 +21,6 @@ storing seven developmental stages into 3 modules.}
 \item{plotHistogram}{a boolean value specifying whether a \emph{Lillifor's Kolmogorov-Smirnov-Test}
 shall be performed to test the goodness of fit of the approximated distribution, as well as additional plots quantifying the significance
 of the observed phylotranscriptomic pattern.}
-
-\item{parallel}{a boolean value specifying whether goodness of fit computations
-shall be performed in parallel using the \pkg{doMC} package.}
 
 \item{runs}{specify the number of runs to be performed for goodness of fit computations, in case \code{plotHistogram} = \code{TRUE}.
 In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).}
