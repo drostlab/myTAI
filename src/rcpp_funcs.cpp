@@ -44,9 +44,9 @@ NumericVector permut(NumericVector a)
     int nCols = ExpressionSet.ncol();
     int nRows = ExpressionSet.nrow();
     NumericVector results(nCols);
-    for(unsigned stage = 0; stage < nCols; stage++) {
+    for(int stage = 0; stage < nCols; stage++) {
 	    double numerator = 0, divisor = 0;
-	      for(unsigned gene = 0; gene < nRows; gene++) {
+	      for(int gene = 0; gene < nRows; gene++) {
 		      numerator+= (double) Phylostratum[gene] * ExpressionSet(gene, stage);
 		      divisor  += ExpressionSet(gene, stage);
 	       }
@@ -117,17 +117,17 @@ NumericMatrix cpp_bootMatrix(NumericMatrix ExpressionMatrix, NumericVector AgeVe
     NumericMatrix results(nRows,nCols);
     NumericVector DivisorVector(nCols);
 
-    for(unsigned stage = 0; stage < nCols; stage++) {
+    for(int stage = 0; stage < nCols; stage++) {
 	     double divisor = 0;
-	     for(unsigned gene = 0; gene < nRows; gene++) {
+	     for(int gene = 0; gene < nRows; gene++) {
 		     divisor  += ExpressionSet(gene, stage);
 	     }
 
        DivisorVector[stage] = divisor;
     }
 
-    for(unsigned stage = 0; stage < nCols; stage++){
-      for(unsigned gene = 0; gene < nRows; gene++){
+    for(int stage = 0; stage < nCols; stage++){
+      for(int gene = 0; gene < nRows; gene++){
 	      results(gene,stage) = (double) AgeVector[gene] * (ExpressionSet(gene, stage)/DivisorVector[stage]);
       }
     }
@@ -165,9 +165,9 @@ double cpp_geom_mean(NumericVector x)
     NumericVector DivisorVector(nCols);
 
 
-    for(unsigned stage = 0; stage < nCols; stage++) {
+    for(int stage = 0; stage < nCols; stage++) {
        double numerator = 0, divisor = 0;
-       for(unsigned gene = 0; gene < nRows; gene++) {
+       for(int gene = 0; gene < nRows; gene++) {
 		      numerator+= (double) AgeVector[gene] * ExpressionSet(gene, stage);
 		      divisor  += ExpressionSet(gene, stage);
 	     }
@@ -176,9 +176,9 @@ double cpp_geom_mean(NumericVector x)
         DivisorVector[stage] = divisor;
     }
 
-   for(unsigned stage = 0; stage < nCols; stage++){
+   for(int stage = 0; stage < nCols; stage++){
       double newNumerator = 0, newDivisor = 0;
-      for(unsigned gene = 0; gene < nRows; gene++){
+      for(int gene = 0; gene < nRows; gene++){
 	       newNumerator = (double) NumeratorVector[stage] - (AgeVector[gene] * ExpressionSet(gene, stage));
          newDivisor = (double) DivisorVector[stage] - ExpressionSet(gene, stage);
          ResultMatrix(gene,stage) = newNumerator / newDivisor;
