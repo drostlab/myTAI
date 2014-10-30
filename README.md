@@ -59,6 +59,7 @@ install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # When working with Windows, first you need to install the
 # R package: rtools -> http://cran.r-project.org/bin/windows/Rtools/
+# or consult: http://www.rstudio.com/products/rpackages/devtools/
 
 # Afterwards you can install devtools -> install.packages("devtools")
 # and then you can run:

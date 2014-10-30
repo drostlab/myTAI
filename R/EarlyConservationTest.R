@@ -105,14 +105,6 @@
 #'                        plotHistogram = TRUE, runs = 10)
 #' 
 #' 
-#' # since 10 runs using 1000 permutations for each run is computationally expensive
-#' # the parameter parallel = TRUE can be used to perform parallel (multicore) processing
-#' EarlyConservationTest(PhyloExpressionSetExample,
-#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
-#'                        permutations = 1000, lillie.test = TRUE,
-#'                        plotHistogram = TRUE, parallel = TRUE, runs = 10)
-#' 
-#' 
 #' 
 #' }
 #' @import foreach

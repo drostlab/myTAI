@@ -79,14 +79,6 @@ FlatLineTest(DivergenceExpressionSetExample, permutations = 1000,
 FlatLineTest(PhyloExpressionSetExample, permutations = 1000,
              plotHistogram = TRUE, runs = 10)
 
-# in case you have a multi-core processor and the
-# doParallel package installed on you system,
-# you can run the tests shown above in parallel
-# perform the Kolmogorov-Smirnov-Test and plot
-# the resulting histogram for a PhyloExpressionSet
-FlatLineTest(PhyloExpressionSetExample, permutations = 1000,
-             plotHistogram = TRUE, parallel = TRUE, runs = 10)
-
 
 # Example: finding outlier expression levels that badly
 # influence the permutation test statistic
@@ -96,6 +88,7 @@ FlatLineTest(PhyloExpressionSetExample, permutations = 1000,
 # developmental stage, the corresponding boxplot of this stage
 # also shows an unusual fluctuation of TAI values compared to other stages
 boxplot(bootMatrix(PhyloExpressionSetExample) , ylab = "TAI")
+
 
 # analogous for TDI permutation results
 boxplot(bootMatrix(DivergenceExpressionSetExample) , ylab = "TDI")
