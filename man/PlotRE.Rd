@@ -55,11 +55,13 @@ data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
 
 # example PhyloExpressionSet
-PlotRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), legendName = "PS")
+PlotRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)),
+       legendName = "PS", lty = 1, lwd = 5)
 
 
 # example DivergenceExpressionSet
-PlotRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), legendName = "DS")
+PlotRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)),
+       legendName = "DS", lty = 1, lwd = 5)
 
 
 }

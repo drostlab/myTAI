@@ -87,7 +87,7 @@ PlotBarRE <- function(ExpressionSet,Groups = NULL,wLength = 0.1,ratio = FALSE,..
         ### compute the relative expression profiles for all
         ### given phylostrata
         REmatrix <- matrix(NA_real_,ncol = nPS,nrow = nCols-2)
-        REmatrix <- REMatrix(ExpressionSet)
+        REmatrix <- age.apply(ExpressionSet = ExpressionSet, RE)
         
         ### compute the mean relative expression levels for each PS-Group
         ### as well as the Std.Error of the relative expression levels

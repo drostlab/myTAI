@@ -44,11 +44,13 @@
 #' data(DivergenceExpressionSetExample)
 #'
 #' # example PhyloExpressionSet
-#' PlotRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), legendName = "PS")
+#' PlotRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), 
+#'        legendName = "PS", lty = 1, lwd = 5)
 #'
 #'
 #' # example DivergenceExpressionSet
-#' PlotRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), legendName = "DS")
+#' PlotRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), 
+#'        legendName = "DS", lty = 1, lwd = 5)
 #'
 #' 
 #' }
@@ -88,7 +90,7 @@ PlotRE <- function(ExpressionSet,Groups = NULL,legendName=NULL,...)
         nElements <- sapply(Groups,length)
         
         # compute the relative expression matrix
-        REmatrix <- REMatrix(ExpressionSet)
+        REmatrix <- age.apply(ExpressionSet = ExpressionSet, RE)
         
         # define arguments for different graphics functions
         plot.args <- c("lwd","col","lty","xlab","cex.lab","main")
