@@ -141,7 +141,7 @@ PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",
         nCols <- dim(ExpressionSet)[2]
         resList <- vector("list", length = 2)
         age <- vector(mode = "numeric",length = (nCols-2))
-        age <- TAI(ExpressionSet)
+        age <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
         
         # computing the standard error of the TAI/TDI pattern using bootstrap analyses
         x <- min(age);

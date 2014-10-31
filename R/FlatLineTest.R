@@ -125,12 +125,12 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000,
         sd_values <- vector(mode = "numeric",length = nCols-2)
         #random_mean_age <- vector(mode = "numeric", length = permutations)
         age.real <- vector(mode = "numeric",length = nCols-2)
-        age.real <- TAI(ExpressionSet)
+        age.real <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
         ### compute the real variance of TAIs of the observed TAI/TDI-Hourglass pattern
         real.var <- var(age.real)
         ### sample only the phylostrata (row-permutations) 
         
-        resMatrix <- bootMatrix(ExpressionSet, permutations)
+        resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
         var_values <- apply(resMatrix,1,var)
         #random_mean_age <- apply(resMatrix,2,mean)
         ### estimate the parameters (shape,rate) 

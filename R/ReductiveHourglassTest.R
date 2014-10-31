@@ -162,13 +162,13 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
         score_vector <- vector(mode = "numeric",length = permutations)
         resMatrix <- matrix(NA_real_, permutations,(nCols-2))
         real_age <- vector(mode = "numeric",length = nCols-2)
-        real_age <- TAI(ExpressionSet)
+        real_age <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
         ### compute the real reductive hourglass scores of the observed phylotranscriptomics pattern
         real_score <- rhScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],
                               method = "min",scoringMethod = "mean-mean")
         
         ### compute the bootstrap matrix 
-        resMatrix <- bootMatrix(ExpressionSet, permutations)
+        resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
         
         ### compute the global phylotranscriptomics destruction scores foe each sampled age vector
         score_vector <- apply(resMatrix, 1 ,rhScore,early = modules[[1]],mid = modules[[2]],late = modules[[3]],method = "min",scoringMethod = "mean-mean")

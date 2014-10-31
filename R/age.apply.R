@@ -51,6 +51,9 @@
 #' @export
 age.apply <- function(ExpressionSet,FUN, ... ,as.list = FALSE)
 {
+        
+        is.ExpressionSet(ExpressionSet)
+        
         f <- match.fun(FUN)
         ncols <- dim(ExpressionSet)[2]
         s <- split(ExpressionSet, ExpressionSet[ , 1])
