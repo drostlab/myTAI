@@ -16,6 +16,9 @@
 #' @return a numeric vector containing the TDI values for all given developmental stages.
 #' @references 
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' 
+#' Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+#' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{TAI}},  \code{\link{PlotPattern}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 #' @examples \dontrun{

@@ -205,7 +205,7 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000,
         pval <- pgamma(real.var,shape = shape,rate = rate,lower.tail = FALSE)
         sd_values <- apply(resMatrix,2,sd)
         
-        cat("\n")
+        #cat("\n")
         return(list(p.value = pval,std.dev = sd_values))
 }
 

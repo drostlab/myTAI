@@ -44,6 +44,11 @@ REMatrix(DivergenceExpressionSetExample)
 \author{
 Hajk-Georg Drost
 }
+\references{
+Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
+
+Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+}
 \seealso{
 \code{\link{RE}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}
 }

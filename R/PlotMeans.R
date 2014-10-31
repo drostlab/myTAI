@@ -34,12 +34,14 @@
 #' data(DivergenceExpressionSetExample)
 #'
 #' # plot evolutionary old PS (PS1-3) vs evolutionary young PS (PS4-12)
-#' PlotMeans(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), legendName = "PS")
+#' PlotMeans(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), 
+#'           legendName = "PS", lty = 1, lwd = 5)
 #'
 #' # plot conserved DS (DS1-5) vs divergent DS (PS6-10)
 #' # NOTE: DS are always defined in the range 1, 2, ... , 10.
 #' # Hence, make sure that your groups are within this range!
-#' PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), legendName = "DS")
+#' PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), 
+#'           legendName = "DS", lty = 1, lwd = 5)
 #'
 #' }
 #' @export 

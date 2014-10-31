@@ -98,6 +98,9 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
 \author{
 Hajk-Georg Drost
 }
+\references{
+Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+}
 \seealso{
 \code{\link{ReductiveHourglassTest}}, \code{\link{TAI}}, \code{\link{TDI}}
 }

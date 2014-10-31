@@ -72,6 +72,10 @@ Hajk-Georg Drost
 }
 \references{
 Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+
+Domazet-Loso T. and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
+
+Myles Hollander and Douglas A. Wolfe (1973), Nonparametric Statistical Methods. New York: John Wiley & Sons. Pages 115–120.
 }
 \seealso{
 \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{kruskal.test}}

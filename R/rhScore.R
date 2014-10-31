@@ -54,6 +54,9 @@
 #' 
 #' @return a numeric value representing the hourglass destruction score.
 #' @author Hajk-Georg Drost
+#' @references
+#' Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+#' 
 #' @seealso \code{\link{ReductiveHourglassTest}}, \code{\link{TAI}}, \code{\link{TDI}}
 #' @examples \dontrun{
 #' 

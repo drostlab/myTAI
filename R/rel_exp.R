@@ -58,6 +58,11 @@ RE <- function(ExpressionMatrix)
 #' the relative expression level \eqn{f_js} of the developmental stage s with maximum \eqn{e_js} is 1, 
 #' and the relative expression levels \eqn{f_js} of all other stages s range between 0 and 1, accordingly.
 #' @author Hajk-Georg Drost
+#' @references
+#' Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
+#'
+#' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' 
 #' @seealso \code{\link{RE}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}
 #' @examples \dontrun{
 #' 

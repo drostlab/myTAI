@@ -81,15 +81,6 @@
 #'                                       permutations = 1000, parallel = FALSE)
 #'
 #'
-#' # now we assume that the PhyloExpressionSetExample consists 
-#' # of 3 developmental stages and 2 replicates for each stage
-#' # in this case typing replicates = 2 is enough to allow the function
-#' # to assume that each stage has 2 replicates
-#' # here we also compute the p-values using multicore processing
-#' p.vector <- combinatorialSignificance(PhyloExpressionSetExample[ , 1:8], 
-#'                                       replicates = 2, 
-#'                                       TestStatistic = "FlatLineTest", 
-#'                                       permutations = 1000, parallel = TRUE)
 #'
 #'
 #' }
@@ -167,20 +158,20 @@ combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "
   
   if(parallel == FALSE){
     # sequential computations of p-values 
-    if(nCombinations > 10){
-      # initializing the progress bar
-      progressBar <- txtProgressBar(min = 1,max = nCombinations,style = 3)
-      
-    }
+#     if(nCombinations > 10){
+#       # initializing the progress bar
+#       progressBar <- txtProgressBar(min = 1,max = nCombinations,style = 3)
+#       
+#     }
     
     for(i in 1:nCombinations){
       
       p.vals[i] <- FlatLineTest(as.data.frame(ExpressionSet[c(first_cols_names,as.character(combinatorialMatrix[i , ]))]), permutations = permutations)$p.value
       
-      if(nCombinations > 10){
-        # printing out the progress
-        setTxtProgressBar(progressBar,i)
-      }
+#       if(nCombinations > 10){
+#         # printing out the progress
+#         setTxtProgressBar(progressBar,i)
+#       }
       
     }
   }

@@ -49,8 +49,9 @@ The corresponding \emph{p-value} of the test statistic is named as follows:
 \description{
 Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object.
 This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object.
-
-Furthermore, this function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern.
+}
+\details{
+#' This function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern.
 The user can choose between the \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, or \code{\link{EarlyConservationTest}}.
 The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line.
 Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
@@ -71,8 +72,7 @@ whereas a high mean transcriptome age value denotes an evolutionary younger tran
 For mean transcriptome divergence, a low mean transcriptome divergence value denotes a more conserved transcriptome
 being active (between two species), whereas a high mean transcriptome divergence value denotes a more divergent transcriptome
 being active (between two species) - in terms of protein-sequence substitution rates.
-}
-\details{
+
 This function is useful to fastly plot the \code{\link{TAI}} or \code{\link{TDI}}
 profile of a given PhyloExpressionSet or DivergenceExpressionSet object and
 the statistical significance of the corresponding pattern.
@@ -110,7 +110,7 @@ PlotPattern(PhyloExpressionSetExample, type = "l",xlab = "Ontogeny", ylab = "TAI
 PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
             modules = list(early = 1:2,mid = 3:5,late = 6:7),
             permutations = 1000,p.value = TRUE,shaded.area = TRUE,
-            xlab = "Ontogeny", ylab = "TAI", type = "b", lwd = 9)
+            xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
 
 
 # you can also run the Lilliefors Kolmogorov-Smirnov Test (see ReductiveHourglassTest)
@@ -118,14 +118,14 @@ PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
 
 PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
             modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 1000, lillie.test = TRUE)
+            permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
 
 
 # example: EarlyConservationTest
 PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
             modules = list(early = 1:2,mid = 3:5,late = 6:7),
             permutations = 1000,p.value = TRUE,shaded.area = FALSE,
-            xlab = "Ontogeny", ylab = "TAI", type = "b", lwd = 9)
+            xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
 
 
 # you can also run the Lilliefors Kolmogorov-Smirnov Test (see EarlyConservationTest)
@@ -133,7 +133,7 @@ PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
 
 PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
             modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 1000, lillie.test = TRUE)
+            permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
 
 
 }

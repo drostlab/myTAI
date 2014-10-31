@@ -59,9 +59,21 @@ PlotRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)),
        legendName = "PS", lty = 1, lwd = 5)
 
 
+# or you can choose any combination of groups
+PlotRE(PhyloExpressionSetExample,Groups = list(c(1,7,9), c(2:6,8,10:12)),
+       legendName = "PS", lty = 1, lwd = 5)
+
+# or multiple groups
+PlotRE(PhyloExpressionSetExample,Groups = list(c(1,7,9), c(3:6,8),c(2,10:12)),
+       legendName = "PS", lty = 1, lwd = 5)
+
+
+
 # example DivergenceExpressionSet
 PlotRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)),
        legendName = "DS", lty = 1, lwd = 5)
+
+
 
 
 }

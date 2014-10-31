@@ -257,7 +257,7 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                         }
                 }
                 
-                cat("\n")
+                #cat("\n")
                 
                 plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), col = "darkblue", xlab = "Runs", ylab = "p-value")
                 abline(h = 0.05, lty = 2, lwd = 3)

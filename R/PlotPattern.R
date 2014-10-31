@@ -2,7 +2,26 @@
 #' @description Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object.
 #' This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object. 
 #' 
-#' Furthermore, this function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. 
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
+#' Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
+#' \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern).
+#' \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern).
+#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}} or \code{\link{EarlyConservationTest}}: early, mid, and late. 
+#' Each element expects a numeric vector specifying the developmental stages 
+#' or experiments that correspond to each module. For example, 
+#' \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.
+#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}} or \code{\link{ReductiveHourglassTest}}.
+#' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.
+#' @param digits.ylab a numeric value specifying the number of digits shown for the TAI or TDI values on the y-axis.
+#' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.
+#' @param shaded.area a boolean value specifying whether a shaded area shall 
+#' be drawn for the developmental stages defined to be the presumptive phylotypic period.
+#' @param y.ticks a numeric value specifying the number of ticks to be drawn on the y-axis.
+#' @param \dots default plot parameters.
+#' @details 
+#' 
+#' #' This function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. 
 #' The user can choose between the \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, or \code{\link{EarlyConservationTest}}. 
 #' The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line. 
 #' Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
@@ -23,24 +42,8 @@
 #' For mean transcriptome divergence, a low mean transcriptome divergence value denotes a more conserved transcriptome 
 #' being active (between two species), whereas a high mean transcriptome divergence value denotes a more divergent transcriptome 
 #' being active (between two species) - in terms of protein-sequence substitution rates.
-#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
-#' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
-#' Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
-#' \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern).
-#' \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern).
-#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}} or \code{\link{EarlyConservationTest}}: early, mid, and late. 
-#' Each element expects a numeric vector specifying the developmental stages 
-#' or experiments that correspond to each module. For example, 
-#' \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.
-#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}} or \code{\link{ReductiveHourglassTest}}.
-#' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.
-#' @param digits.ylab a numeric value specifying the number of digits shown for the TAI or TDI values on the y-axis.
-#' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.
-#' @param shaded.area a boolean value specifying whether a shaded area shall 
-#' be drawn for the developmental stages defined to be the presumptive phylotypic period.
-#' @param y.ticks a numeric value specifying the number of ticks to be drawn on the y-axis.
-#' @param \dots default plot parameters.
-#' @details This function is useful to fastly plot the \code{\link{TAI}} or \code{\link{TDI}} 
+#' 
+#' This function is useful to fastly plot the \code{\link{TAI}} or \code{\link{TDI}} 
 #' profile of a given PhyloExpressionSet or DivergenceExpressionSet object and 
 #' the statistical significance of the corresponding pattern.
 #' Internally the function calls several graphics functions, 
@@ -92,7 +95,7 @@
 #' PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
 #'             modules = list(early = 1:2,mid = 3:5,late = 6:7), 
 #'             permutations = 1000,p.value = TRUE,shaded.area = TRUE, 
-#'             xlab = "Ontogeny", ylab = "TAI", type = "b", lwd = 9)
+#'             xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
 #'
 #'
 #' # you can also run the Lilliefors Kolmogorov-Smirnov Test (see ReductiveHourglassTest) 
@@ -100,14 +103,14 @@
 #'
 #' PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
 #'             modules = list(early = 1:2,mid = 3:5,late = 6:7), 
-#'             permutations = 1000, lillie.test = TRUE)
+#'             permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
 #' 
 #' 
 #' # example: EarlyConservationTest
 #' PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
 #'             modules = list(early = 1:2,mid = 3:5,late = 6:7), 
 #'             permutations = 1000,p.value = TRUE,shaded.area = FALSE, 
-#'             xlab = "Ontogeny", ylab = "TAI", type = "b", lwd = 9)
+#'             xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
 #'
 #'
 #' # you can also run the Lilliefors Kolmogorov-Smirnov Test (see EarlyConservationTest) 
@@ -115,7 +118,7 @@
 #'
 #' PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
 #'             modules = list(early = 1:2,mid = 3:5,late = 6:7), 
-#'             permutations = 1000, lillie.test = TRUE)
+#'             permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
 #' 
 #' 
 #' }

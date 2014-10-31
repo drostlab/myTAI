@@ -178,7 +178,7 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                 lillie_vec <- vector(mode = "logical", length = runs)
                 ect <- vector(mode = "list", length = 3)
                 
-                cat("\n")
+                #cat("\n")
                 
                 if(parallel == TRUE){
                         

@@ -94,15 +94,6 @@ p.vector <- combinatorialSignificance(PhyloExpressionSetExample,
                                       permutations = 1000, parallel = FALSE)
 
 
-# now we assume that the PhyloExpressionSetExample consists
-# of 3 developmental stages and 2 replicates for each stage
-# in this case typing replicates = 2 is enough to allow the function
-# to assume that each stage has 2 replicates
-# here we also compute the p-values using multicore processing
-p.vector <- combinatorialSignificance(PhyloExpressionSetExample[ , 1:8],
-                                      replicates = 2,
-                                      TestStatistic = "FlatLineTest",
-                                      permutations = 1000, parallel = TRUE)
 
 
 }
