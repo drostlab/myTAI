@@ -78,16 +78,6 @@
 #' FlatLineTest(PhyloExpressionSetExample, 
 #'              permutations = 1000, plotHistogram = FALSE)
 #'
-#'
-#' # Example: finding outlier expression levels that badly 
-#' # influence the permutation test statistic
-#' # this plot visualizes the distribution and variance 
-#' # of permuted TAI values for each developmental stage
-#' # In case there are outlier expression levels in a specific 
-#' # developmental stage, the corresponding boxplot of this stage 
-#' # also shows an unusual fluctuation of TAI values compared to other stages
-#' boxplot(bootMatrix(PhyloExpressionSetExample) , ylab = "TAI")
-#' 
 #' 
 #' 
 #' @import foreach

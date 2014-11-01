@@ -49,11 +49,11 @@ To perform `divergence stratigraphy` using `orthologr` you need the following pr
 * a CDS file covering all protein coding genes of the query organism of interest
 * a CDS file covering all protein coding genes of the subject organism of interest
 
-In the following example, we will use Arabidopsis thaliana as query organism
-and Arabidopsis lyrata as subject organism.
+In the following example, we will use _Arabidopsis thaliana_ as query organism
+and _Arabidopsis lyrata_ as subject organism.
 
-First, we need to download the CDS sequences for all protein coding genes of A. thaliana
-and A. lyrata
+First, we need to download the CDS sequences for all protein coding genes of _A. thaliana_
+and _A. lyrata_.
 
 The CDS retrieval can be done using a `Terminal` or by manual downloading the files
 
@@ -92,9 +92,11 @@ Athaliana_DM <- divergence_stratigraphy(
 
 ```
 
-The next step is to combine the `divergence map` of A. thaliana (`Athaliana_DM`) with an
-gene expression set covering a developmental process of interest (in our case A. thaliana embryogenesis).
-We obtain an example gene expression set covering A. thaliana embryogenesis from the ExpressionMatrix stored
+__Note__, that you can specify the `comp_cores` argument in case you work with an multicore machine.
+
+The next step is to combine the `divergence map` of _A. thaliana_ (`Athaliana_DM`) with an
+gene expression set covering a developmental process of interest (in our case _A. thaliana_ embryogenesis).
+We obtain an example gene expression set covering _A. thaliana_ embryogenesis from the ExpressionMatrix stored
 in `PhyloExpressionSetExample`.
 This results in an standard DivergenceExpressionSet object. 
 

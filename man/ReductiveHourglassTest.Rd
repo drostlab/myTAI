@@ -80,22 +80,12 @@ This allows to quantify the permutation bias and their implications on the goodn
 }
 \examples{
 data(PhyloExpressionSetExample)
-data(DivergenceExpressionSetExample)
 
 # perform the reductive hourglass test for a PhyloExpressionSet
 # here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,
 # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
 # module 3 = late
 ReductiveHourglassTest(PhyloExpressionSetExample,
-                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       permutations = 1000)
-
-
-# perform the reductive hourglass test for a DivergenceExpressionSet
-# here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,
-# stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
-# module 3 = late
-ReductiveHourglassTest(DivergenceExpressionSetExample,
                        modules = list(early = 1:2, mid = 3:5, late = 6:7),
                        permutations = 1000)
 }

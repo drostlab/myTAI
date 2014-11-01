@@ -100,7 +100,7 @@ data(PhyloExpressionSetExample)
 # in the plot
 
 PlotPattern(PhyloExpressionSetExample, TestStatistic = "FlatLineTest",
-            permutations = 1000, type = "l", xlab = "Ontogeny",
+            permutations = 100, type = "l", xlab = "Ontogeny",
             ylab = "TAI", lwd = 9)
 
 # an example performing the ReductiveHourglassTest and printing the p-value
@@ -109,7 +109,13 @@ PlotPattern(PhyloExpressionSetExample, TestStatistic = "FlatLineTest",
 
 PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
             modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 1000, p.value = TRUE, shaded.area = TRUE,
+            permutations = 100, p.value = TRUE, shaded.area = TRUE,
+            xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
+
+# testing for early conservation model
+PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
+            modules = list(early = 1:2,mid = 3:5,late = 6:7),
+            permutations = 100, p.value = TRUE, shaded.area = TRUE,
             xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
 }
 \author{

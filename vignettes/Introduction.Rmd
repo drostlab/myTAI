@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-The `myTAI` packages provides a collection of functions that can be used to perform phylotranscriptomics analyses and
+The `myTAI` packages provides a statistical framework and a collection of functions that can be used to perform phylotranscriptomics analyses and
 visualization to investigate phenomena within the field of __Evolutionary Developmental Biology__. 
 
 The goal of this package is to provide a broad range of users (as well as the phylotranscriptomics community) with an easy to use and computationally optimized framework for reproducible research in the fields referred to as __Evolutionary Developmental Biology__ and __Phylotranscriptomics__ and to allow a better comparability between molecular phenomena resulting from _in silico_ data analyses. 
@@ -169,9 +169,9 @@ __Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as 
 ### 1) Plotting the _Transcriptome Age Index_ and the _Transcriptome Divergence Index_
 
 
-Mathematically the _Transcriptome Age Index_ (TAI) introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage $s$. 
+Mathematically the _Transcriptome Age Index_ (TAI) introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
 
-Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage $s$.
+Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage _s_.
 
 ## TAI analyses
 
@@ -179,7 +179,7 @@ Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was int
 ### Flat Line Test
 
 
-The `PlotPattern()` function first computes the `TAI` (given a PhyloExpressionSet) or the `TDI` (given a DivergenceExpressionSet) to then visualize the TAI or TDI profile, their standard deviation and statistical significance.
+The `PlotPattern()` function first computes the `TAI` (given a PhyloExpressionSet) or the `TDI` (given a DivergenceExpressionSet) to visualize the TAI or TDI profile, their standard deviation and statistical significance.
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # simple use of the PlotPattern function
@@ -238,8 +238,8 @@ which in contrast would start at position 3, ... N.
 
 The third test statistic that is implemented in the `myTAI` package is the `EarlyConservationTest`.
 
-The `EarlyConservationTest` tests whether an observed phylotranscriptomics pattern follows
-a low-high-high pattern (monotonically increasing function) supporting the Early Conservation Model of Embryogenesis.
+The `EarlyConservationTest` tests whether an observed phylotranscriptomic pattern follows
+a low-high-high pattern (monotonically increasing function) supporting the Early Conservation Model of embryogenesis.
 
 
 Analogous to the `ReductiveHourglassTest`, the `EarlyConservationTest` needs a priori biological knowledge (Drost et al., 2014).
@@ -349,7 +349,7 @@ TDI(DivergenceExpressionSetExample)
 
 The __TAI__ or __TDI__ pattern are very useful to gain a first insight into the mean transcriptome age or mean sequence divergence of genes being most active during the corresponding developmental stage or experiment.
 
-To further investigate the origins of the global __TAI__ or __TDI__ pattern it is very useful to visualize the mean gene expression of each Phylostratum or Divergence-Stratum class.
+To further investigate the origins of the global __TAI__ or __TDI__ pattern it is useful to visualize the mean gene expression of each Phylostratum or Divergence-Stratum class.
 
 #### Visualizing the Mean Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
 
@@ -367,7 +367,7 @@ Here we see that the mean gene expression of Phylostratum group: PS1-3 (genes ev
 
 In different developmental processes different Phylostratum groups or combination of groups might resemble the majority of expressed genes. 
 
-So the `PlotPattern()` function takes an PhyloExpressionSet or DivergenceExpressionSet and plots for each Phylostratum the mean expression levels of all genes corresponding to this Phylostratum. The `Groups` argument takes a list storing the Phylostrata (classified into the same group) that shall be visualized on the same plot.
+So the `PlotMeans()` function takes an PhyloExpressionSet or DivergenceExpressionSet and plots for each Phylostratum the mean expression levels of all genes corresponding to this Phylostratum. The `Groups` argument takes a list storing the Phylostrata (classified into the same group) that shall be visualized on the same plot.
 
 For this example we separate groups of Phylostrata into __evolutionary old Phylostrata__ (PS1-3) in one plot versus __evolutionary younger Phylostrata__ (PS4-12) into another plot:
 
@@ -435,7 +435,7 @@ age.apply(DivergenceExpressionSetExample, colMeans)
 10 1660.750 1735.086 1605.275 1473.854 1398.067 1438.258 1541.633
 
 ```
-#### * Visualizing the Relative Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
+#### Visualizing the Relative Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
 
 
 
@@ -455,7 +455,7 @@ PlotRE(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS",
           xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
 ```
 
-or again by assigning Phylostratum or Divergence-Stratums groups that shall be visualized in different plots:
+or again by assigning Phylostratum or Divergence-Stratum groups that shall be visualized in different plots:
 
 ```{r,fig.height=5, fig.width=9,eval=FALSE}
 # visualizing the mean gene expression of each Phylostratum class
@@ -532,7 +532,7 @@ age.apply(PhyloExpressionSetExample, RE)
 ```
 [Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) introduced an additional way of visualizing the difference of relative expression levels between groups of Phylostrata/Divergence-Strata.
 
-This barplot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the `PlotMeans()` and `PlotRE()` functions:
+This bar plot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the `PlotMeans()` and `PlotRE()` functions:
 
 ```{r,fig.height=5, fig.width=7,eval=FALSE}
 # visualizing the mean relative expression of two Phylostratum groups
@@ -542,10 +542,10 @@ PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12),
 
 Here the argument `Groups = list(1:3, 4:12)` corresponds to dividing Phylostrata 1-12
 into Phylostratum groups defined as _origin before embryogenesis_ (group one: PS1-3) and
-_origin during or after embryogenesis_ (group one: PS4-12).
+_origin during or after embryogenesis_ (group two: PS4-12).
 A [Kruskal-Wallis Rank Sum Test](http://stat.ethz.ch/R-manual/R-patched/library/stats/html/kruskal.test.html) is then performed to test the statistical significance of the different bars that are compared. The '*' corresponds to a statistically significant difference.
 
-Additionally the ratio between both values represented by the bars to be compared can be visualized as function within the barplot using the `ratio = TRUE` argument:
+Additionally the ratio between both values represented by the bars to be compared can be visualized as function within the bar plot using the `ratio = TRUE` argument:
 
 ```{r, fig.height=5,fig.width=7,eval=FALSE}
 # visualizing the mean relative expression of two Phylostratum groups
