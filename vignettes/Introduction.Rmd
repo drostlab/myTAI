@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-The `myTAI` packages provides a statistical framework and a collection of functions that can be used to perform phylotranscriptomics analyses and
+The `myTAI` package provides a statistical framework and a collection of functions that can be used to perform phylotranscriptomics analyses and
 visualization to investigate phenomena within the field of __Evolutionary Developmental Biology__. 
 
 The goal of this package is to provide a broad range of users (as well as the phylotranscriptomics community) with an easy to use and computationally optimized framework for reproducible research in the fields referred to as __Evolutionary Developmental Biology__ and __Phylotranscriptomics__ and to allow a better comparability between molecular phenomena resulting from _in silico_ data analyses. 
