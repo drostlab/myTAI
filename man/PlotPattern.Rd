@@ -99,7 +99,9 @@ data(PhyloExpressionSetExample)
 # the statistical significance of the present TAI pattern and will be drawn as 'p = ... '
 # in the plot
 
-PlotPattern(PhyloExpressionSetExample, type = "l",xlab = "Ontogeny", ylab = "TAI", lwd = 9)
+PlotPattern(PhyloExpressionSetExample, TestStatistic = "FlatLineTest",
+            permutations = 1000, type = "l", xlab = "Ontogeny",
+            ylab = "TAI", lwd = 9)
 
 # an example performing the ReductiveHourglassTest and printing the p-value
 # and shaded area of the presumptive phylotypic period into the plot
@@ -107,31 +109,8 @@ PlotPattern(PhyloExpressionSetExample, type = "l",xlab = "Ontogeny", ylab = "TAI
 
 PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
             modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 1000,p.value = TRUE,shaded.area = TRUE,
+            permutations = 1000, p.value = TRUE, shaded.area = TRUE,
             xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
-
-
-# you can also run the Lilliefors Kolmogorov-Smirnov Test (see ReductiveHourglassTest)
-# to quantify the goodness of fit of the ReductiveHourglassTest assumptions
-
-PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
-            modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
-
-
-# example: EarlyConservationTest
-PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
-            modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 1000,p.value = TRUE,shaded.area = FALSE,
-            xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
-
-
-# you can also run the Lilliefors Kolmogorov-Smirnov Test (see EarlyConservationTest)
-# to quantify the goodness of fit of the EarlyConservationTest assumptions
-
-PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
-            modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
 }
 \author{
 Hajk-Georg Drost

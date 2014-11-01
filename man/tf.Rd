@@ -69,23 +69,6 @@ head(PES.absolute)
 # and performing the Flat Line Test to obtain the p-value
 PlotPattern(tf(PhyloExpressionSetExample, log2),
             type = "l", lwd = 5, TestStatistic = "FlatLineTest")
-
-# plotting the TAI using sqrt transformed expression levels
-# and performing the Flat Line Test to obtain the p-value
-PlotPattern(tf(PhyloExpressionSetExample, sqrt),
-            type = "l", lwd = 5, TestStatistic = "FlatLineTest")
-
-
-# plotting the TAI using log2 transformed expression levels
-# and performing the Reductive Hourglass Test to obtain the p-value
-PlotPattern(tf(PhyloExpressionSetExample, log2),
-            type = "l", lwd = 5, TestStatistic = "ReductiveHourglassTest",
-            modules = list(early = 1:2, mid = 3:5, late = 6:7))
-
-# plotting the TAI using sqrt transformed expression levels
-PlotPattern(tf(PhyloExpressionSetExample, sqrt), type = "l",
-            lwd = 5, TestStatistic = "ReductiveHourglassTest",
-            modules = list(early = 1:2, mid = 3:5, late = 6:7))
 }
 \author{
 Hajk-Georg Drost

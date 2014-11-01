@@ -40,14 +40,6 @@
 #' # boxplot of the pMatrix using log2 transformed expression levels
 #' boxplot(pMatrix(tf(PhyloExpressionSetExample,log2)))
 #' 
-#' # or using the dplyr notation
-#' library(dplyr)
-#' 
-#' tf(PhyloExpressionSetExample,log2) %>% pMatrix() %>% boxplot()
-#' 
-#' # using sqrt transformed expression levels
-#' tf(PhyloExpressionSetExample,log2) %>% pMatrix() %>% boxplot(outline = FALSE)
-#' 
 #' 
 #' @export
 

@@ -12,14 +12,10 @@ is.ExpressionSet(ExpressionSet)
 This function tests whether a given ExpressionSet follows the pre-defined PhyloExpressionSet or DivergenceExpressionSet standard.
 }
 \examples{
-\dontrun{
-
 # read example PhyloExpressionSet
 data(PhyloExpressionSetExample)
 
 is.ExpressionSet(PhyloExpressionSetExample)
-
-}
 }
 \author{
 Hajk-Georg Drost

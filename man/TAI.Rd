@@ -33,10 +33,6 @@ data(PhyloExpressionSetExample)
 
 # computing the TAI profile of a given PhyloExpressionSet object
 TAIs <- TAI(PhyloExpressionSetExample)
-
-# you can then visualize the TAI results using PlotPattern()
-PlotPattern(PhyloExpressionSetExample, type = "l",
-            xlab = "Ontogeny", ylab = "TAI", lwd = 9)
 }
 \author{
 Hajk-Georg Drost

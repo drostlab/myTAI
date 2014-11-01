@@ -73,15 +73,10 @@
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
-#' data(DivergenceExpressionSetExample)
 #'
 #' # example PhyloExpressionSet using 1000 permutations
 #' FlatLineTest(PhyloExpressionSetExample, 
 #'              permutations = 1000, plotHistogram = FALSE)
-#'
-#' # example DivergenceExpressionSet using 1000 permutations
-#' FlatLineTest(DivergenceExpressionSetExample, permutations = 1000, 
-#'              plotHistogram = FALSE)
 #'
 #'
 #' # Example: finding outlier expression levels that badly 
@@ -93,9 +88,6 @@
 #' # also shows an unusual fluctuation of TAI values compared to other stages
 #' boxplot(bootMatrix(PhyloExpressionSetExample) , ylab = "TAI")
 #' 
-#' 
-#' # analogous for TDI permutation results
-#' boxplot(bootMatrix(DivergenceExpressionSetExample) , ylab = "TDI")
 #' 
 #' 
 #' @import foreach

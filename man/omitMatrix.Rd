@@ -21,14 +21,14 @@ For each gene i, exclude the corresponding gene i from the global
 }
 \examples{
 # read standard phylotranscriptomics data
-#data(PhyloExpressionSetExample)
-#data(DivergenceExpressionSetExample)
+data(PhyloExpressionSetExample)
+data(DivergenceExpressionSetExample)
 
 # example PhyloExpressionSet
-#omMatrix <- omitMatrix(PhyloExpressionSetExample)
+omMatrix_ps <- omitMatrix(PhyloExpressionSetExample)
 
 # example DivergenceExpressionSet
-omMatrix <- omitMatrix(DivergenceExpressionSetExample)
+omMatrix_ds <- omitMatrix(DivergenceExpressionSetExample)
 }
 \author{
 Hajk-Georg Drost
