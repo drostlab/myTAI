@@ -22,7 +22,7 @@
 #' @return a barplot showing the phylostratum distribution or 
 #' divergence-stratum distribution of a given numeric vector containing PS or DS values.
 #' @author Hajk-Georg Drost
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # load PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
@@ -38,7 +38,6 @@
 #' PlotDistribution(PhyloExpressionSetExample[sample(20000,5000) , ],
 #'                  plotText = TRUE, as.ratio = TRUE)
 #'
-#' }
 #' @export
 
 PlotDistribution <- function(PhyloExpressionSet,plotText = TRUE,as.ratio = FALSE,...)

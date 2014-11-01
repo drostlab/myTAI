@@ -2,7 +2,7 @@
 \name{PlotCorrelation}
 \alias{PlotCorrelation}
 \title{Function to plot the correlation between phylostratum values and divergence-stratum values
- of a given PhyloExpressionSet and DivergenceExpressionSet.}
+ of a given PhyloExpressionSet and DivergenceExpressionSet}
 \usage{
 PlotCorrelation(PhyloExpressionSet, DivergenceExpressionSet,
   method = "pearson", linearModel = FALSE, main.text = NULL, ...)
@@ -34,20 +34,14 @@ linear correlated so that the independence of PS and DS can be assumed for
 subsequent analyses (Quint et al., 2012).
 }
 \examples{
-\dontrun{
-
- # read standard phylotranscriptomics data
+# read standard phylotranscriptomics data
  data(PhyloExpressionSetExample)
  data(DivergenceExpressionSetExample)
 
 # plot the PS and DS correlation
 PlotCorrelation(PhyloExpressionSetExample, DivergenceExpressionSetExample,
-                method = "kendall", linearModel = TRUE,
-                main.text = "Kendall's ")
-
-
-
-}
+                method = "pearson", linearModel = TRUE,
+                main.text = "Pearson's ")
 }
 \author{
 Hajk-Georg Drost

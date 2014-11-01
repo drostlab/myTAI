@@ -65,9 +65,7 @@ The gpScore is a heuristic score enabling to  construct a test statistic to dete
 the significance of a present (phylotranscriptomic) hourglass pattern.
 }
 \examples{
-\dontrun{
-
- # read standard phylotranscriptomics data
+# read standard phylotranscriptomics data
  data(PhyloExpressionSetExample)
  data(DivergenceExpressionSetExample)
 
@@ -91,9 +89,6 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
  # using reduction method: mean(mean-mean)
  rh_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
                      method = "mean",scoringMethod = "mean-mean")
-
-
-}
 }
 \author{
 Hajk-Georg Drost

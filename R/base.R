@@ -6,7 +6,7 @@ pow <- function(x,power)
 }
 
 
-#' @title Function to match a phylostratigraphic map  or divergence map with an ExpressionSet to obtain a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' @title Match function for a map with an ExpressionSet
 #' @details This function matches a \emph{phylostratigraphic map} or \emph{divergence map} only storing unique gene ids with an ExpressionSet also storing only unique gene ids.
 #' @param Map a standard \emph{phylostratigraphic map} or \emph{divergence map} object.
 #' @param ExpressionMatrix  a standard ExpressionMatrix object.
@@ -37,7 +37,7 @@ pow <- function(x,power)
 #'   Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 #' 
 #' @author Hajk-Georg Drost
-#' @examples \dontrun{
+#' @examples
 #'         
 #'         # load a standard PhyloExpressionSet
 #'         data(PhyloExpressionSetExample)
@@ -76,7 +76,6 @@ pow <- function(x,power)
 #'         
 #'         
 #'         
-#'}
 #'@export
 MatchMap <- function(Map,ExpressionMatrix)
 {
@@ -113,7 +112,7 @@ MatchMap <- function(Map,ExpressionMatrix)
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.        
 #' @return a numeric matrix storing TAI or TDI profile for each omitted gene i.
 #' @author Hajk-Georg Drost
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # read standard phylotranscriptomics data
 #' #data(PhyloExpressionSetExample)
@@ -126,7 +125,6 @@ MatchMap <- function(Map,ExpressionMatrix)
 #' omMatrix <- omitMatrix(DivergenceExpressionSetExample)
 #' 
 #' 
-#' }
 #' @export
 omitMatrix <- function(ExpressionSet)
 {
@@ -211,13 +209,12 @@ re.colors <- function(n)
 #' @return a character vector containing different color names that can be used for barplots.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{palette}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # get 5 different colors for 5 different bars
 #' barplot_colors <- bar.colors(5)
 #' 
-#' 
-#' }
+#' @export
 bar.colors <- function(n)
 {
         

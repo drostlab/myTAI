@@ -1,5 +1,6 @@
-#' @title Function to compute the relative expression profiles of any given gene expression set.
-#' @description This function computes the relative expression profiles of any given gene expression set. The relative expression profile is being computed as follows:
+#' @title Function to compute the relative expression profiles of any given gene expression set
+#' @description This function computes the relative expression profiles of any given gene expression set. 
+#' The relative expression profile is being computed as follows:
 #' 
 #' \deqn{f_s = ( e_s - e_min ) / ( e_max - e_min )}
 #'
@@ -18,7 +19,7 @@
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{REMatrix}}, \code{\link{PlotRE}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
@@ -27,7 +28,6 @@
 #' RE(PhyloExpressionSetExample[ which(PhyloExpressionSetExample[ , 1] == 1), 3:9 ])
 #'
 #' 
-#' }
 #' @export
 
 RE <- function(ExpressionMatrix)
@@ -43,7 +43,7 @@ RE <- function(ExpressionMatrix)
 }
 
 #' @title Function to compute the relative expression profiles of all phylostrata or divergence-strata
-#' available in a PhyloExpressionSet or DivergenceExpressionSet.
+#' available in a PhyloExpressionSet or DivergenceExpressionSet
 #' @description This function computes the relative expression profiles of 
 #' all given phylostrata or divergence-strata within a given PhyloExpressionSet or DivergenceExpressionSet.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
@@ -64,7 +64,7 @@ RE <- function(ExpressionMatrix)
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' 
 #' @seealso \code{\link{RE}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
@@ -77,7 +77,6 @@ RE <- function(ExpressionMatrix)
 #' REMatrix(DivergenceExpressionSetExample)
 #' 
 #' 
-#' }
 #' @export
 
 REMatrix <- function(ExpressionSet)

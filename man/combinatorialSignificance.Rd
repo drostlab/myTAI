@@ -79,8 +79,6 @@ In other words, for each replicate combination present in the PhyloExpressionSet
 This function is also able to perform all computations in parallel using multicore processing. The underlying statistical tests are written in C++ and optimized for fast computations.
 }
 \examples{
-\dontrun{
-
 # load a standard PhyloExpressionSet
 data(PhyloExpressionSetExample)
 
@@ -88,15 +86,12 @@ data(PhyloExpressionSetExample)
 # consists of 3 developmental stages
 # and 2 replicates for stage 1, 3 replicates for stage 2,
 # and 2 replicates for stage 3
+# FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000
+# BUT NOTE THAT THIS TAKES MUCH MORE COMPUTATION TIME
 p.vector <- combinatorialSignificance(PhyloExpressionSetExample,
                                       replicates = c(2,3,2),
                                       TestStatistic = "FlatLineTest",
-                                      permutations = 1000, parallel = FALSE)
-
-
-
-
-}
+                                      permutations = 10, parallel = FALSE)
 }
 \author{
 Hajk-Georg Drost

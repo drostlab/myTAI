@@ -2,7 +2,7 @@
 \name{pMatrix}
 \alias{pMatrix}
 \title{Function to compute the partial TAI or TDI values for each single gene
-in a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+in a standard PhyloExpressionSet or DivergenceExpressionSet object}
 \usage{
 pMatrix(ExpressionSet)
 }
@@ -33,9 +33,6 @@ The partial TAI or TDI matrix can be used to perform different cluster analyses
 and also gives an overall impression of the contribution of each gene to the global \code{\link{TAI}} or \code{\link{TDI}} pattern.
 }
 \examples{
-\dontrun{
-
-
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
@@ -59,9 +56,6 @@ tf(PhyloExpressionSetExample,log2) \%>\% pMatrix() \%>\% boxplot()
 
 # using sqrt transformed expression levels
 tf(PhyloExpressionSetExample,log2) \%>\% pMatrix() \%>\% boxplot(outline = FALSE)
-
-
-}
 }
 \author{
 Hajk-Georg Drost

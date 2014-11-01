@@ -1,4 +1,4 @@
-#' @title Function to plot the mean expression profiles of phylostrata or divergence-strata.
+#' @title Function to plot the mean expression profiles of phylostrata or divergence-strata
 #' @description This function computes for each phylostratum or divergence-stratum the corresponding mean expression profile
 #' and plots the profiles in N different windows corresponding to the given Phylostratum-Classes
 #' that shall be compared.
@@ -25,7 +25,7 @@
 #' class or divergence class.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{PlotRE}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # load PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
@@ -43,7 +43,6 @@
 #' PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), 
 #'           legendName = "DS", lty = 1, lwd = 5)
 #'
-#' }
 #' @export 
 
 PlotMeans <- function(ExpressionSet,Groups = NULL,legendName = NULL,...)

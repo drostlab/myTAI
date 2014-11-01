@@ -1,5 +1,5 @@
 #' @title Function to compute the partial TAI or TDI values for each single gene 
-#' in a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' in a standard PhyloExpressionSet or DivergenceExpressionSet object
 #' @description This function computes the partial \code{\link{TAI}} or \code{\link{TDI}} 
 #' values for each single gene in a PhyloExpressionSet or DivergenceExpressionSet object.
 #'
@@ -21,7 +21,7 @@
 #' @references 
 #' Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
 #' @author Hajk-Georg Drost
-#' @examples \dontrun{
+#' @examples
 #' 
 #' 
 #' # read standard phylotranscriptomics data
@@ -49,7 +49,6 @@
 #' tf(PhyloExpressionSetExample,log2) %>% pMatrix() %>% boxplot(outline = FALSE)
 #' 
 #' 
-#' }
 #' @export
 
 pMatrix <- function(ExpressionSet)

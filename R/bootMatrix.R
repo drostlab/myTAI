@@ -16,20 +16,19 @@
 #' @references Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
-#' @examples \dontrun{
+#' @examples 
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
 #' data(DivergenceExpressionSetExample)
 #' 
-#' # example PhyloExpressionSet using 1000 permutations
-#' randomTAI.Matrix <- bootMatrix(PhyloExpressionSetExample, permutations = 1000)
+#' # example PhyloExpressionSet using 100 permutations
+#' randomTAI.Matrix <- bootMatrix(PhyloExpressionSetExample, permutations = 100)
 #' 
-#' # example DivergenceExpressionSet using 1000 permutations
-#' randomTDI.Matrix <- bootMatrix(DivergenceExpressionSetExample, permutations = 1000)
+#' # example DivergenceExpressionSet using 100 permutations
+#' randomTDI.Matrix <- bootMatrix(DivergenceExpressionSetExample, permutations = 100)
 #' 
 #' 
-#' }
 #' @export
 bootMatrix <- function(ExpressionSet,permutations = 1000)
 {

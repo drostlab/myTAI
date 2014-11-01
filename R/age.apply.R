@@ -20,7 +20,7 @@
 #' or a numeric list storing the return values of the applied function for each age class in a list.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}, \code{\link{RE}}, \code{\link{REMatrix}}
-#' @examples \dontrun{
+#' @examples
 #'  
 #'  # source the example dataset
 #'  data(PhyloExpressionSetExample)
@@ -47,7 +47,6 @@
 #' # to make sure that the results are returned properly 
 #' age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list = TRUE)
 #' 
-#' }
 #' @export
 age.apply <- function(ExpressionSet,FUN, ... ,as.list = FALSE)
 {

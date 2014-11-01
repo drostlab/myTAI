@@ -76,7 +76,7 @@
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}},
 #'  \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # load PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
@@ -121,7 +121,6 @@
 #'             permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
 #' 
 #' 
-#' }
 #' @export
 
 PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",

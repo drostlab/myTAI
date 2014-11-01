@@ -48,8 +48,6 @@ phylostrata or divergence-strata sharing a similar relative expression profile a
 gene regulatory elements. Hence, these common phylostrata or divergence-strata might govern similar processes in the given developmental time course.
 }
 \examples{
-\dontrun{
-
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
@@ -72,11 +70,6 @@ PlotRE(PhyloExpressionSetExample,Groups = list(c(1,7,9), c(3:6,8),c(2,10:12)),
 # example DivergenceExpressionSet
 PlotRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)),
        legendName = "DS", lty = 1, lwd = 5)
-
-
-
-
-}
 }
 \author{
 Hajk-Georg Drost

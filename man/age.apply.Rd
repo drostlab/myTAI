@@ -34,9 +34,7 @@ In case you use an an anymous function you coud use \code{function(x) apply(x , 
 developmental stage s.
 }
 \examples{
-\dontrun{
-
- # source the example dataset
+# source the example dataset
  data(PhyloExpressionSetExample)
 
 # Example 1
@@ -59,8 +57,6 @@ age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , var))
 # and each developmental stage, hence one should use the argument 'as.list = TRUE'
 # to make sure that the results are returned properly
 age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list = TRUE)
-
-}
 }
 \author{
 Hajk-Georg Drost

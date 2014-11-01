@@ -64,7 +64,7 @@
 #' 
 #' @author Hajk-Georg Drost
 #' @seealso  \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' data(PhyloExpressionSetExample)
 #' 
@@ -111,7 +111,6 @@
 #'             modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #' 
 #' 
-#' }
 #' @export
 
 tf <- function(ExpressionSet, FUN){

@@ -66,7 +66,7 @@
 #' @references Drost et al. 2014, Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{expand.grid}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # load a standard PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
@@ -75,15 +75,16 @@
 #' # consists of 3 developmental stages 
 #' # and 2 replicates for stage 1, 3 replicates for stage 2, 
 #' # and 2 replicates for stage 3
+#' # FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000
+#' # BUT NOTE THAT THIS TAKES MUCH MORE COMPUTATION TIME
 #' p.vector <- combinatorialSignificance(PhyloExpressionSetExample, 
 #'                                       replicates = c(2,3,2), 
 #'                                       TestStatistic = "FlatLineTest", 
-#'                                       permutations = 1000, parallel = FALSE)
+#'                                       permutations = 10, parallel = FALSE)
 #'
 #'
 #'
 #'
-#' }
 #' @import foreach
 #' @export
 combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "FlatLineTest", 

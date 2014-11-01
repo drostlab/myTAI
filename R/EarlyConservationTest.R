@@ -1,4 +1,4 @@
-#' @title Function to perform the Reductive Early Conservation Test.
+#' @title Function to perform the Reductive Early Conservation Test
 #' @description The \emph{Early Conservation Test} has been developed to statistically evaluate the
 #' existence of a monotonically increasing phylotranscriptomic pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
@@ -70,7 +70,7 @@
 #' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{ecScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}} , \code{\link{PlotPattern}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' data(PhyloExpressionSetExample)
 #' data(DivergenceExpressionSetExample)
@@ -92,21 +92,8 @@
 #'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
 #'                        permutations = 1000)
 #' 
-#' # to test the goodness of fit and to plot the histogram and Cullen and Frey skewness-kurtosis plot
-#' # the parameter plotHistogram needs to be set to TRUE
-#' # in case plotHistogram = TRUE, the runs parameter must be specified (e.g. 10 or 100)
-#' # to test for the influence of permutation bias on the p-value
-#' # runs = 10 determines the number of independent permutation runs that are
-#' # performed to compute 10 independent p-values based on 10 independent underlying permutations
-#' # and to search for permutation runs that cross the p < 0.05 border
-#' EarlyConservationTest(PhyloExpressionSetExample,
-#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
-#'                        permutations = 1000, lillie.test = TRUE, 
-#'                        plotHistogram = TRUE, runs = 10)
 #' 
 #' 
-#' 
-#' }
 #' @import foreach
 #' @export
 

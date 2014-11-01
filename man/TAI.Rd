@@ -28,8 +28,6 @@ and ps_i denotes the corresponding phylostratum of gene i, \eqn{i = 1,...,N} and
 Internally the function calls the C++ function \code{cpp_TAI} to speed up TAI computations.
 }
 \examples{
-\dontrun{
-
 # reading a standard PhyloExpressionSet
 data(PhyloExpressionSetExample)
 
@@ -39,9 +37,6 @@ TAIs <- TAI(PhyloExpressionSetExample)
 # you can then visualize the TAI results using PlotPattern()
 PlotPattern(PhyloExpressionSetExample, type = "l",
             xlab = "Ontogeny", ylab = "TAI", lwd = 9)
-
-
-}
 }
 \author{
 Hajk-Georg Drost

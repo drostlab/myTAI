@@ -43,8 +43,6 @@ As test-statistic, the function performs a nonparametric \code{\link{kruskal.tes
  based on relative expression values stored within each defined phylostratum class.
 }
 \examples{
-\dontrun{
-
 # read standard phylotranscriptomics data
 
 data(PhyloExpressionSetExample)
@@ -63,9 +61,6 @@ PlotBarRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)))
 # the z - axis shows the corresponding ratio value of bar 1 / bar 2
 
 PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), ratio = TRUE)
-
-
-}
 }
 \author{
 Hajk-Georg Drost

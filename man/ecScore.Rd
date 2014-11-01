@@ -35,9 +35,7 @@ This function \emph{ecScore} computes the \emph{D_min} value for a given \code{\
 stored in the \code{age_vals} argument.
 }
 \examples{
-\dontrun{
-
- # read standard phylotranscriptomics data
+# read standard phylotranscriptomics data
  data(PhyloExpressionSetExample)
  data(DivergenceExpressionSetExample)
 
@@ -57,9 +55,6 @@ stored in the \code{age_vals} argument.
 
  # compute the early conservation score for the TDI profile
  ec_score <- ecScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7)
-
-
-}
 }
 \author{
 Hajk-Georg Drost

@@ -37,7 +37,7 @@
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
@@ -65,10 +65,9 @@
 #'
 #' 
 #'   
-#' }
 #' @export
 
-PlotRE <- function(ExpressionSet,Groups = NULL,legendName=NULL,...)
+PlotRE <- function(ExpressionSet,Groups = NULL,legendName = NULL,...)
 {
         
         is.ExpressionSet(ExpressionSet)

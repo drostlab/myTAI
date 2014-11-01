@@ -21,7 +21,7 @@
 #' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{TAI}},  \code{\link{PlotPattern}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # reading a standard DivergenceExpressionSet
 #' data(DivergenceExpressionSetExample)
@@ -33,7 +33,6 @@
 #' PlotPattern(DivergenceExpressionSetExample, type = "l",
 #'             xlab = "Ontogeny", ylab = "TDI", lwd = 9)
 #'
-#' }
 #' @export
 
 TDI <- function(DivergenceExpressionSet)

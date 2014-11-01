@@ -91,8 +91,6 @@ the \code{shaded.area} argument can be set to \code{TRUE} and the function will 
 the values stored in the \code{mid} argument to draw a shaded area within the corresponding period of development.
 }
 \examples{
-\dontrun{
-
 # load PhyloExpressionSet
 data(PhyloExpressionSetExample)
 
@@ -134,9 +132,6 @@ PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
 PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
             modules = list(early = 1:2,mid = 3:5,late = 6:7),
             permutations = 1000, lillie.test = TRUE, type = "l", lwd = 9)
-
-
-}
 }
 \author{
 Hajk-Georg Drost

@@ -58,7 +58,7 @@
 #' Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 #' 
 #' @seealso \code{\link{ReductiveHourglassTest}}, \code{\link{TAI}}, \code{\link{TDI}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #'  # read standard phylotranscriptomics data
 #'  data(PhyloExpressionSetExample)
@@ -86,7 +86,6 @@
 #'                      method = "mean",scoringMethod = "mean-mean")
 #'  
 #'  
-#' }
 #' @export
 rhScore <- function(age_vals,early,mid,late,method,scoringMethod)
 {

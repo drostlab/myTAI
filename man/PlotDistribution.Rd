@@ -38,8 +38,6 @@ This analysis allows to compare different gene expression profiles (or gene grou
 on their evolutionary origins or evolutionary relationships.
 }
 \examples{
-\dontrun{
-
 # load PhyloExpressionSet
 data(PhyloExpressionSetExample)
 
@@ -53,8 +51,6 @@ PlotDistribution(PhyloExpressionSetExample, plotText = TRUE, as.ratio = TRUE)
 # a example for visualizing the PS distribution for a subset of genes
 PlotDistribution(PhyloExpressionSetExample[sample(20000,5000) , ],
                  plotText = TRUE, as.ratio = TRUE)
-
-}
 }
 \author{
 Hajk-Georg Drost

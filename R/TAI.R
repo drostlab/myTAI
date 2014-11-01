@@ -21,7 +21,7 @@
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{TDI}}, \code{\link{PlotPattern}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # reading a standard PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
@@ -34,7 +34,6 @@
 #'             xlab = "Ontogeny", ylab = "TAI", lwd = 9)
 #' 
 #' 
-#' }
 #' @useDynLib myTAI
 #' @importFrom Rcpp sourceCpp
 #' @export

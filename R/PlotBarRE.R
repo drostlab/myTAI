@@ -37,7 +37,7 @@
 #' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{kruskal.test}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # read standard phylotranscriptomics data
 #'
@@ -59,7 +59,6 @@
 #' PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), ratio = TRUE)
 #'
 #' 
-#' }
 #' @export
 
 PlotBarRE <- function(ExpressionSet,Groups = NULL,wLength = 0.1,ratio = FALSE,...)

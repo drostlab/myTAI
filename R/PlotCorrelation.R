@@ -1,5 +1,5 @@
 #' @title Function to plot the correlation between phylostratum values and divergence-stratum values
-#'  of a given PhyloExpressionSet and DivergenceExpressionSet.
+#'  of a given PhyloExpressionSet and DivergenceExpressionSet
 #'  @description
 #' This function plots the correlation coefficient between phylostratum values 
 #' and divergence-stratum values of a given PhyloExpressionSet and DivergenceExpressionSet.
@@ -19,7 +19,7 @@
 #' @references  Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{cor}}
-#' @examples \dontrun{
+#' @examples 
 #' 
 #'  # read standard phylotranscriptomics data
 #'  data(PhyloExpressionSetExample)
@@ -27,12 +27,11 @@
 #'  
 #' # plot the PS and DS correlation
 #' PlotCorrelation(PhyloExpressionSetExample, DivergenceExpressionSetExample, 
-#'                 method = "kendall", linearModel = TRUE, 
-#'                 main.text = "Kendall's ")
+#'                 method = "pearson", linearModel = TRUE, 
+#'                 main.text = "Pearson's ")
 #' 
 #' 
 #' 
-#' }
 #' @export
 
 PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,

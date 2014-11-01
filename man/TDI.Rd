@@ -27,8 +27,6 @@ where TDI_s denotes the TDI value in developmental stage s, e_is denotes the gen
 Internally the function is written in C++ to speed up TDI computations.
 }
 \examples{
-\dontrun{
-
 # reading a standard DivergenceExpressionSet
 data(DivergenceExpressionSetExample)
 
@@ -38,8 +36,6 @@ TDIs <- TDI(DivergenceExpressionSetExample)
 # you can then visualize the TDI results using PlotPattern()
 PlotPattern(DivergenceExpressionSetExample, type = "l",
             xlab = "Ontogeny", ylab = "TDI", lwd = 9)
-
-}
 }
 \author{
 Hajk-Georg Drost

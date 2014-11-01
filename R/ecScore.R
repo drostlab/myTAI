@@ -22,7 +22,7 @@
 #' @return a numeric value representing the early conservation score.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{EarlyConservationTest}}, \code{\link{TAI}}, \code{\link{TDI}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #'  # read standard phylotranscriptomics data
 #'  data(PhyloExpressionSetExample)
@@ -46,7 +46,6 @@
 #'  ec_score <- ecScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7)
 #'  
 #'  
-#' }
 #' @export
 
 ecScore <- function(age_vals,early,mid,late){

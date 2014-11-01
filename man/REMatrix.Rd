@@ -2,7 +2,7 @@
 \name{REMatrix}
 \alias{REMatrix}
 \title{Function to compute the relative expression profiles of all phylostrata or divergence-strata
-available in a PhyloExpressionSet or DivergenceExpressionSet.}
+available in a PhyloExpressionSet or DivergenceExpressionSet}
 \usage{
 REMatrix(ExpressionSet)
 }
@@ -26,8 +26,6 @@ the relative expression level \eqn{f_js} of the developmental stage s with maxim
 and the relative expression levels \eqn{f_js} of all other stages s range between 0 and 1, accordingly.
 }
 \examples{
-\dontrun{
-
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
@@ -37,9 +35,6 @@ REMatrix(PhyloExpressionSetExample)
 
 # example DivergenceExpressionSet
 REMatrix(DivergenceExpressionSetExample)
-
-
-}
 }
 \author{
 Hajk-Georg Drost

@@ -43,8 +43,6 @@ using either the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTes
 to quantify the significance of interest.
 }
 \examples{
-\dontrun{
-
 data(PhyloExpressionSetExample)
 
 # a simple example is to transform the gene expression levels
@@ -88,9 +86,6 @@ PlotPattern(tf(PhyloExpressionSetExample, log2),
 PlotPattern(tf(PhyloExpressionSetExample, sqrt), type = "l",
             lwd = 5, TestStatistic = "ReductiveHourglassTest",
             modules = list(early = 1:2, mid = 3:5, late = 6:7))
-
-
-}
 }
 \author{
 Hajk-Georg Drost

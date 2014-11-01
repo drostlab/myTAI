@@ -1,4 +1,4 @@
-#' @title Function to perform the Flat Line Test.
+#' @title Function to perform the Flat Line Test
 #' @description This function computes N phylotranscriptomics profiles of a randomly sampled (row-permutations: random permutations of phylostratum or divergence-stratum assignments) 
 #' PhyloExpressionSets or DivergenceExpressionSets.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
@@ -69,7 +69,7 @@
 #'   "In densfun(x, parm[1], parm[2], ...) : NaNs were produced" which indicates that permutation results caused by extreme outlier expression values 
 #'   that could not be fitted accordingly. This warning will not be printed out when the corresponding outlier values are extracted from the dataset.
 #' @seealso \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{PlotPattern}}, \code{\link{bootMatrix}}
-#' @examples \dontrun{
+#' @examples
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
@@ -83,11 +83,6 @@
 #' FlatLineTest(DivergenceExpressionSetExample, permutations = 1000, 
 #'              plotHistogram = FALSE)
 #'
-#' # perform the Lilliefors Kolmogorov-Smirnov-Test and plot the resulting 
-#' # histogram for a PhyloExpressionSet
-#' FlatLineTest(PhyloExpressionSetExample, permutations = 1000,
-#'              plotHistogram = TRUE, runs = 10)
-#' 
 #'
 #' # Example: finding outlier expression levels that badly 
 #' # influence the permutation test statistic
@@ -102,7 +97,7 @@
 #' # analogous for TDI permutation results
 #' boxplot(bootMatrix(DivergenceExpressionSetExample) , ylab = "TDI")
 #' 
-#' } 
+#' 
 #' @import foreach
 #' @export
 FlatLineTest <- function(ExpressionSet, permutations = 1000, 

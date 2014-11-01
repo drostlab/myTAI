@@ -20,8 +20,6 @@ For each gene i, exclude the corresponding gene i from the global
  This results in a TAI or TDI profile Matrix storing the \code{\link{TAI}} or \code{\link{TDI}} profile for each omitted gene i.
 }
 \examples{
-\dontrun{
-
 # read standard phylotranscriptomics data
 #data(PhyloExpressionSetExample)
 #data(DivergenceExpressionSetExample)
@@ -31,9 +29,6 @@ For each gene i, exclude the corresponding gene i from the global
 
 # example DivergenceExpressionSet
 omMatrix <- omitMatrix(DivergenceExpressionSetExample)
-
-
-}
 }
 \author{
 Hajk-Georg Drost
