@@ -46,6 +46,13 @@ All three functions also include visual analytics tools to quantify the goodness
 ## Fast installation guide
 
 ```r
+
+# install myTAI version 0.0.1 from CRAN
+install.packages("myTAI")
+
+
+# The developer version can be installed directly from github:
+
 # install.packages("devtools")
 
 # install the current version of myTAI on your system
