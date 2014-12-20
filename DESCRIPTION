@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
-Title: A framework to perform phylotranscriptomics analyses for Evolutionary
-    Developmental Biology research
+Title: A Framework to Perform Phylotranscriptomics Analyses for Evolutionary
+    Developmental Biology Research
 Version: 0.0.1
 Date: 2014-10-25
 Author: Hajk-Georg Drost
