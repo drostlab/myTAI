@@ -6,7 +6,7 @@ pow <- function(x,power)
 }
 
 
-#' @title Match function for a map with an ExpressionSet
+#' @title Match a age class map with an ExpressionSet
 #' @details This function matches a \emph{phylostratigraphic map} or \emph{divergence map} only storing unique gene ids with an ExpressionSet also storing only unique gene ids.
 #' @param Map a standard \emph{phylostratigraphic map} or \emph{divergence map} object.
 #' @param ExpressionMatrix  a standard ExpressionMatrix object.
@@ -102,7 +102,7 @@ MatchMap <- function(Map,ExpressionMatrix)
 }
 
 
-#' @title Function to compute the TAI or TDI profiles omitting a given gene
+#' @title Compute TAI or TDI profiles omitting a given gene
 #' @description For each gene i, exclude the corresponding gene i from the global
 #'  PhyloExpressionSet or DivergenceExpressionSet and compute the \code{\link{TAI}} or \code{\link{TDI}} 
 #'  profile for the corresponding global PhyloExpressionSet or DivergenceExpressionSet
@@ -203,7 +203,7 @@ re.colors <- function(n)
 }
 
 
-#' @title A function to get a vector of length n storing a palette of colors for multiple bars in barplots
+#' @title Color palette for barplots
 #' @description A nice color palette for barplots with several bars.
 #' @param n the number of colors to be in the palette. 
 #' @return a character vector containing different color names that can be used for barplots.
@@ -214,7 +214,6 @@ re.colors <- function(n)
 #' # get 5 different colors for 5 different bars
 #' barplot_colors <- bar.colors(5)
 #' 
-#' @export
 bar.colors <- function(n)
 {
         
@@ -224,7 +223,7 @@ bar.colors <- function(n)
 }
 
 
-#' @title Function testing for the validaty of a PhyloExpressionSet or DivergenceExpressionSet standard
+#' @title Testing the validaty of a PhyloExpressionSet or DivergenceExpressionSet standard
 #' @description This function tests whether a given ExpressionSet follows the pre-defined PhyloExpressionSet or DivergenceExpressionSet standard.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet that shall be tested for format validity.
 #' @author Hajk-Georg Drost

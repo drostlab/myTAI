@@ -1,4 +1,4 @@
-#' @title Function to compute the Transcriptome Age Index (TAI)
+#' @title Compute the Transcriptome Age Index (TAI)
 #' @description
 #' This function computes the phylogenetically based transcriptome age index (TAI) introduced by Domazet-Loso & Tautz, 2010.
 #' @param PhyloExpressionSet a standard PhyloExpressionSet object.

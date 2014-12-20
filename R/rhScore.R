@@ -1,4 +1,4 @@
-#' @title Function to compute the hourglass score for the ReductiveHourglassTest
+#' @title Compute the Hourglass Score for the Reductive Hourglass Test
 #' @description
 #' 
 #'         This function reduces the destruction of an hourglass shaped pattern to a single score value.

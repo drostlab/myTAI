@@ -1,4 +1,4 @@
-#' @title Function to perform the Reductive Hourglass Test
+#' @title Perform the Reductive Hourglass Test
 #' @description The \emph{Reductive Hourglass Test} has been developed to statistically evaluate the
 #' existence of a phylotranscriptomic hourglass pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 

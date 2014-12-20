@@ -1,4 +1,4 @@
-#' @title Function to compute the partial TAI or TDI values for each single gene 
+#' @title Compute the partial TAI or TDI values for each single gene 
 #' in a standard PhyloExpressionSet or DivergenceExpressionSet object
 #' @description This function computes the partial \code{\link{TAI}} or \code{\link{TDI}} 
 #' values for each single gene in a PhyloExpressionSet or DivergenceExpressionSet object.

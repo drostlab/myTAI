@@ -1,4 +1,4 @@
-#' @title Function to perform the Flat Line Test
+#' @title Perform the Flat Line Test
 #' @description This function computes N phylotranscriptomics profiles of a randomly sampled (row-permutations: random permutations of phylostratum or divergence-stratum assignments) 
 #' PhyloExpressionSets or DivergenceExpressionSets.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.

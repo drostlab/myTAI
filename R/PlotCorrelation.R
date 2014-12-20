@@ -1,4 +1,4 @@
-#' @title Function to plot the correlation between phylostratum values and divergence-stratum values
+#' @title Plot the correlation between Phylostrata and Divergence-Strata
 #'  of a given PhyloExpressionSet and DivergenceExpressionSet
 #'  @description
 #' This function plots the correlation coefficient between phylostratum values 

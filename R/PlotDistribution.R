@@ -1,4 +1,4 @@
-#' @title Function to plot the frequency distribution of genes within the corresponding phylostratigraphic map or divergence map
+#' @title Plot the frequency distribution of Phylostrata or Divergence-Strata
 #' @description This function plots the frequency distribution of genes within the 
 #' corresponding \emph{phylostratigraphic map} or \emph{divergence map} and can be used to fastly visualize the PS or DS distribution of a given phylostratum vector or divergence-stratum vector.
 #' @param PhyloExpressionSet a standard PhyloExpressionSet object.

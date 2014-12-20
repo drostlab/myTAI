@@ -1,4 +1,4 @@
-#' @title Function to apply analyses on each phylotranscriptomic age class
+#' @title Age class specific apply function
 #' @description 
 #' This function takes a standard PhyloExpressionSet or DivergenceExpressionSet object
 #' as argument and performs any given function to the sub expression matrix of each phylotranscriptomic age class.

@@ -1,4 +1,4 @@
-#' @title Function to compute the hourglass score for the EarlyConservationTest
+#' @title Compute the Hourglass Score for the EarlyConservationTest
 #' @description This function computes the EarlyConservationTest score for a given \code{\link{TAI}}
 #' or \code{\link{TDI}} pattern.
 #' 

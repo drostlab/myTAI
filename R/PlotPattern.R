@@ -1,4 +1,4 @@
-#' @title Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object
+#' @title Plot the Transcriptome Age Index or Transcriptome Divergence Index
 #' @description Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpressionSet object.
 #' This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object. 
 #' 

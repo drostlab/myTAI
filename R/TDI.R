@@ -1,4 +1,4 @@
-#' @title Function to compute the Transcriptome Divergence Index (TDI)
+#' @title Compute the Transcriptome Divergence Index (TDI)
 #' @description This function computes the sequence distance based transcriptome divergence index (TDI) introduced by
 #' Quint et al., 2012.
 #' @param DivergenceExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.

@@ -1,4 +1,4 @@
-#' @title A example data set for a standard DivergenceExpressionSet
+#' @title A standard DivergenceExpressionSet example
 #' @docType data
 #' @description A standard DivergenceExpressionSet is a \code{\link{data.frame}} consisting of a standardized sequence of columns
 #' to store the age information for each gene and its corresponding gene expression profile.
@@ -29,7 +29,7 @@ NULL
 
 
 
-#' @title A example data set for a standard PhyloExpressionSet
+#' @title A standard PhyloExpressionSet example
 #' @docType data
 #' @description A standard PhyloExpressionSet is a \code{\link{data.frame}} consisting of a standardized sequence of columns
 #' to store the age information for each gene and its corresponding gene expression profile.

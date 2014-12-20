@@ -1,4 +1,4 @@
-#' @title Function to compute the statistical significance of each replicate combination
+#' @title Compute the statistical significance of each replicate combination
 #' @description In case a PhyloExpressionSet or DivergenceExpressionSet stores replicates for each
 #' developmental stage or experiment, this function allows to compute the p-values quantifying
 #' the statistical significance of the underlying pattern for all combinations of replicates.
