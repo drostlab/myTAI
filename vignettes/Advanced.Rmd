@@ -31,15 +31,33 @@ Nevertheless, the [orthologr](https://github.com/HajkD/orthologr) package aims t
 and can be used to obtain a Divergence Map for a _query organism of interest_.
 
 
-## Fast Installation guide for orthologr
+## Fast Installation Guide for orthologr
 
 ```r
-# install orthologr from CRAN
-install.packages("orthologr")
+# install orthologr from GitHub
+# install.packages("devtools")
+
+# install the current version of orthologr on your system
+library(devtools)
+install_github("HajkD/orthologr", build_vignettes = TRUE, dependencies = TRUE)
+
+# On Windows, this won't work - see ?build_github_devtools
+install_github("HajkD/orthologr", build_vignettes = TRUE, dependencies = TRUE)
+
+# When working with Windows, first you need to install the
+# R package: rtools -> install.packages("rtools")
+
+# Afterwards you can install devtools -> install.packages("devtools")
+# and then you can run:
+
+devtools::install_github("HajkD/orthologr", build_vignettes = TRUE, dependencies = TRUE)
+
+# and then call it from the library
+library("orthologr", lib.loc = "C:/Program Files/R/R-3.1.1/library")
 
 ```
 
-## Retrieving a divergence map
+## Retrieving a Divergence Map
 
 A divergence map quantifies for each protein coding gene of a given organism the
 degree of selection pressure. The selection pressure is quantified by dNdS estimation.
@@ -77,6 +95,44 @@ Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz
 
 
 ```
+
+Alternatively, you can use the Biological Data Retrieval package [biomartr](https://github.com/HajkD/biomartr)
+to download proteomes from the refseq database (see [Sequence Retrieval Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Sequence_Retrieval.Rmd) for details).
+
+```{r,eval=FALSE}
+# install.packages("devtools")
+
+# install the current version of biomartr on your system
+library(devtools)
+install_github("HajkD/biomartr", build_vignettes = TRUE, dependencies = TRUE)
+
+# On Windows, this won't work - see ?build_github_devtools
+install_github("HajkD/biomartr", build_vignettes = TRUE, dependencies = TRUE)
+
+# When working with Windows, first you need to install the
+# R package: rtools -> install.packages("rtools")
+
+# Afterwards you can install devtools -> install.packages("devtools")
+# and then you can run:
+
+devtools::install_github("HajkD/biomartr", build_vignettes = TRUE, dependencies = TRUE)
+
+# and then call it from the library
+library("biomartr", lib.loc = "C:/Program Files/R/R-3.1.1/library")
+```
+
+```{r,eval=FALSE}
+# download the proteome of Arabidopsis thaliana from refseq
+# and store the corresponding proteome file in '_ncbi_downloads/proteomes'
+getProteome( db           = "refseq", 
+             kingdom      = "plant",
+             organism     = "Arabidopsis thaliana",
+             clean_folder = FALSE )
+
+```
+
+Internally, the `getProteome()` function creates a directory named `_ncbi_downloads/proteome` in which corresponding proteomes are loaded and then sourced as data.table object into the current R session. When specifying `clean_folder = FALSE`, the `_ncbi_downloads/proteomes` folder will not be removed and the corresponding proteome does not need to be downloaded again when sourcing it into the current R session via `getProteome()`.
+
 When the download is finished you need to unzip the files and
 then start R to perform the following analyses:
 
@@ -85,10 +141,13 @@ library(orthologr)
 
 # compute the divergence map of A. thaliana
 Athaliana_DM <- divergence_stratigraphy(
-                         query_file = "path/to/Arabidopsis_thaliana.TAIR10.23.cds.all.fa",
-                         subject_file = "path/to/Arabidopsis_lyrata.v.1.0.23.cds.all.fa",
-                         eval = "1E-5", ortho_detection = "RBH",
-                         comp_cores = 1, quiet = TRUE, clean_folders = TRUE )
+                         query_file      = "path/to/Arabidopsis_thaliana.TAIR10.23.cds.all.fa",
+                         subject_file    = "path/to/Arabidopsis_lyrata.v.1.0.23.cds.all.fa",
+                         eval            = "1E-5", 
+                         ortho_detection = "RBH",
+                         comp_cores      = 1, 
+                         quiet           = TRUE, 
+                         clean_folders   = TRUE )
 
 ```
 
@@ -109,7 +168,8 @@ ExprMatrix <- PhyloExpressionSetExample[ , 2:9]
 
 # match the divergence map with the gene expression set of A. thaliana
 # to obtain an PhyloExpressionSet object
-Ath_PhyloExpressionSet <- MatchMap(Map = Athaliana_DM,ExpressionMatrix = ExprMatrix)
+Ath_PhyloExpressionSet <- MatchMap( Map              = Athaliana_DM,
+                                    ExpressionMatrix = ExprMatrix )
 
 ```
 
