@@ -33,7 +33,7 @@ and can be used to obtain a Divergence Map for a _query organism of interest_.
 
 ## Fast Installation Guide for orthologr
 
-```r
+```{r,eval=FALSE}
 # install orthologr from GitHub
 # install.packages("devtools")
 
