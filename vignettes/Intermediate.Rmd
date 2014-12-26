@@ -27,7 +27,7 @@ to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, e
 ## Investigating the statistical significance of phylotranscriptomic patterns
 
 Three methods have been proposed to quantify the statistical significance of the observed phylotranscriptomics patterns
-(Quint et al. 2012, Drost et al., 2014).
+(Quint et al. 2012, Drost et al., 2015).
 
 * __FlatLineTest__
 * __ReductiveHourglassTest__
@@ -80,16 +80,19 @@ TAI(PhyloExpressionSetExample)
 Visualization: 
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# visualize the TAI profile of correctly assigned Phylostrata
-PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, p.value = FALSE) 
+# Visualize the TAI profile of correctly assigned Phylostrata
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             p.value       = FALSE ) 
 ```
 
 
 ```{r,eval=FALSE}
 
 # randomly permute the Phylostratum assignment of all genes 
-randomPhyloExpressionSetExample <- data.frame( sample(PhyloExpressionSetExample[ , 1]), 
-                                              PhyloExpressionSetExample[, 2:9] )
+randomPhyloExpressionSetExample <- data.frame( sample(PhyloExpressionSetExample[ , "Phylostratum"]), 
+                                               PhyloExpressionSetExample[, 2:9] )
 
 # TAI profile based on randomly assigned Phylostrata
 TAI(randomPhyloExpressionSetExample) 
@@ -103,8 +106,11 @@ TAI(randomPhyloExpressionSetExample)
 Visualization: 
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# visualize the TAI profile based on randomly assigned Phylostrata
-PlotPattern(randomPhyloExpressionSetExample, type = "l", lwd = 6, p.value = FALSE) 
+# Visualize the TAI profile based on randomly assigned Phylostrata
+PlotPattern( ExpressionSet =  randomPhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             p.value       = FALSE ) 
 ```
 
 As you can see, the visual pattern of the correctly assigned `TAI` profile and the randomly assigned `TAI` profile differ qualitatively.
@@ -112,7 +118,7 @@ As you can see, the visual pattern of the correctly assigned `TAI` profile and t
 Now we investigate the variance of the two observed patterns.
 
 ```{r,eval=FALSE}
-# variance of the TAI profile based on correctly assigned Phylostrata
+# Variance of the TAI profile based on correctly assigned Phylostrata
 var(TAI(PhyloExpressionSetExample)) 
 ```
 
@@ -121,7 +127,7 @@ var(TAI(PhyloExpressionSetExample))
 ```
 
 ```{r,eval=FALSE}
-# variance of the TAI profile based on randomly assigned Phylostrata
+# Variance of the TAI profile based on randomly assigned Phylostrata
 var(TAI(randomPhyloExpressionSetExample)) 
 ```
 
@@ -134,8 +140,9 @@ We observe that the variance of the randomly assigned TAI profile is much smalle
 The `bootMatrix()` takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N `TAI` or `TDI` profiles of based on randomly assigned Phylostrata or Divergence-Strata.
 
 ```{r,eval=FALSE}
-# compute 1000 TAI profiles based on randomly assigned Phylostrata
-randomTAIs <- bootMatrix(PhyloExpressionSetExample, permutations = 1000)
+# Compute 1000 TAI profiles based on randomly assigned Phylostrata
+randomTAIs <- bootMatrix( ExpressionSet = PhyloExpressionSetExample, 
+                          permutations  = 1000 )
 
 head(randomTAIs)
 
@@ -169,8 +176,10 @@ Now it is interesting to see where we can find the variance of the correctly ass
 var_real <- var(TAI(PhyloExpressionSetExample)) 
 
 # visualize the distribution of variances
-hist(c(variance_vector,var_real), breaks = 100, 
-     xlab = "variance", main = "Histogram of variance_vector")
+hist( x      = c(variance_vector,var_real), 
+      breaks = 100, 
+      xlab   = "variance", 
+      main   = "Histogram of variance_vector" )
 
 # and plot a red line at the position where we can find the 
 # real variance
@@ -195,19 +204,22 @@ estimate the parameters of the gamma distribution that fits the data.
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # estimate the parameters: shape and rate using 'moment matching estimation'
-gamma_MME <- fitdistrplus::fitdist(variance_vector,distr = "gamma",method = "mme")
+gamma_MME <- fitdistrplus::fitdist(variance_vector,distr = "gamma", method = "mme")
 # estimate shape:
 shape <- gamma_MME$estimate[1]
 # estimate the rate:
 rate <- gamma_MME$estimate[2]
 
 # define an expression written as function as input for the curve() function
-gamma_distr <- function(x){ return(dgamma(x = x,shape = shape,rate = rate)) }
+gamma_distr <- function(x){ return(dgamma(x = x, shape = shape, rate = rate)) }
 
 # plot the density function and the histogram of variance_vector
-curve(gamma_distr,
-      xlim = c(min(variance_vector),max(c(variance_vector,var_real))),
-      col = "steelblue",lwd = 5,xlab = "Variances", ylab="Frequency")
+curve( expr = gamma_distr,
+       xlim = c(min(variance_vector),max(c(variance_vector,var_real))),
+       col  = "steelblue",
+       lwd  = 5,
+       xlab = "Variances", 
+       ylab = "Frequency" )
 
 # plot the histogram of variance_vector
 histogram <- hist(variance_vector,prob = TRUE,add = TRUE, breaks = 100)
@@ -234,8 +246,9 @@ and this allows us to assume that the underlying TAI profile captures a real evo
 This entire procedure of computing the p-value having the variance of TAI profiles as test statistic is done by the `FlatLineTest()` function.
 
 ```{r,eval=FALSE}
-# perform the FlatLineTest
-FlatLineTest(PhyloExpressionSetExample, permutations = 1000)
+# Perform the FlatLineTest
+FlatLineTest( ExpressionSet = PhyloExpressionSetExample, 
+              permutations  = 1000 )
 ```
 
 This function returns the p-value of the test statistic.
@@ -248,8 +261,9 @@ of the test statistic.
 ```{r, fig.width= 7, fig.height= 3,eval=FALSE}
 
 # perform the FlatLineTest and investigate the goodness of the test statistic
-FlatLineTest(PhyloExpressionSetExample, permutations = 1000, 
-             plotHistogram = TRUE)
+FlatLineTest( ExpressionSet = PhyloExpressionSetExample, 
+              permutations  = 1000, 
+              plotHistogram = TRUE )
 
 ```
 
@@ -318,13 +332,15 @@ Visualization:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # visualize the TAI profile of correctly assigned Phylostrata
-PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, 
-            p.value = FALSE) 
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             p.value       = FALSE ) 
 
 ```
 
 
-The reductive hourglass test is a permutation test based on the following test statistic.
+The Reductive Hourglass Test is a permutation test based on the following test statistic.
 
 (1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
 
@@ -357,10 +373,10 @@ into the three modules:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 
-# perform the Reductive Hourglass Test
-ReductiveHourglassTest(PhyloExpressionSetExample,
-                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       lillie.test = TRUE) 
+# Perform the Reductive Hourglass Test
+ReductiveHourglassTest( ExpressionSet = PhyloExpressionSetExample,
+                        modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+                        lillie.test   = TRUE ) 
 
 ```
 
@@ -393,9 +409,10 @@ This allows to quantify the permutation bias and their implications on the goodn
 ```{r, fig.width= 7, fig.height= 6,eval=FALSE}
 
 # perform the Reductive Hourglass Test and plot the test statistic
-ReductiveHourglassTest(PhyloExpressionSetExample,
-                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       plotHistogram = TRUE, lillie.test = TRUE) 
+ReductiveHourglassTest( ExpressionSet = PhyloExpressionSetExample,
+                        modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+                        plotHistogram = TRUE, 
+                        lillie.test   = TRUE ) 
 
 ```
 
@@ -438,9 +455,11 @@ TAI(PhyloExpressionSetExample)
 Visualization: 
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# visualize the TAI profile of correctly assigned Phylostrata
-PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, 
-            p.value = FALSE) 
+# Visualize the TAI profile of correctly assigned Phylostrata
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             p.value       = FALSE ) 
 
 ```
 
@@ -476,10 +495,10 @@ into the three modules:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 
-# perform the Reductive Early Conservation Test
-EarlyConservationTest(PhyloExpressionSetExample,
-                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       lillie.test = TRUE) 
+# Perform the Reductive Early Conservation Test
+EarlyConservationTest( ExpressionSet = PhyloExpressionSetExample,
+                       modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+                       lillie.test   = TRUE ) 
 
 ```
 
@@ -505,9 +524,10 @@ This allows to quantify the permutation bias and their implications on the goodn
 ```{r, fig.width= 7, fig.height= 6,eval=FALSE}
 
 # perform the Reductive Early Conservation Test and plot the test statistic
-EarlyConservationTest(PhyloExpressionSetExample,
-                       modules = list(early = 1:2, mid = 3:5, late = 6:7),
-                       plotHistogram = TRUE, lillie.test = TRUE) 
+EarlyConservationTest( ExpressionSet = PhyloExpressionSetExample,
+                       modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+                       plotHistogram = TRUE, 
+                       lillie.test   = TRUE ) 
 
 ```
 
@@ -531,7 +551,7 @@ Initially, the TAI and TDI formulas were defined for absolute expression levels.
 The purpose of the `tf()` function is to allow the user to study the qualitative impact of different transformation functions on the global TAI and TDI pattern,
 or on any subsequent phylotranscriptomics analysis.
 
-The examples using the `PhyloExpressionSetExample` data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the `FlatLineTest()`, `ReductiveHourglassTest()`, or `EarlyConservationTest()` (Drost et al., 2014) to quantify the significance of observed patterns.
+The examples using the `PhyloExpressionSetExample` data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the `FlatLineTest()`, `ReductiveHourglassTest()`, or `EarlyConservationTest()` (Drost et al., 2015) to quantify the significance of observed patterns.
 
 The `tf()` function takes a standard PhyloExpressionSet or DivergenceExpressionSet and transformation function and returns the corresponding ExpressionSet with
 transformed gene expression levels.
@@ -551,7 +571,7 @@ head(PES.sqrt)
 
 ```
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 
 PES.log2 <- tf(PhyloExpressionSetExample, log2)
 
@@ -559,6 +579,15 @@ head(PES.log2)
 
 ```
 
+```
+  Phylostratum      GeneID    Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
+1            1 at1g01040.2 11.085894 10.900263 10.170620 10.334745  9.966149  9.911358 10.728284
+2            1 at1g01050.1 10.551722 10.827588 10.701574 10.611727 10.547204 10.122367 10.065625
+3            1 at1g01070.1 10.244117 10.267960  9.875289  9.860497  9.755251  9.776772  9.805452
+4            1 at1g01080.2  9.989991  9.870956 10.206206 10.376639 10.443610 10.330888  9.750306
+5            1 at1g01090.1 13.479852 14.034298 15.068722 15.279598 15.779093 16.031451 12.924174
+6            1 at1g01120.1  9.721170  9.621306  9.747567  9.863595  9.880877  9.765307  9.630730
+```
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 
@@ -577,6 +606,24 @@ head(PES.absolute)
 
 ```
 
+```
+> head(PhyloExpressionSetExample)
+  Phylostratum      GeneID     Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
+1            1 at1g01040.2  2173.6352  1911.2001  1152.5553  1291.4224  1000.2529   962.9772 1696.4274
+2            1 at1g01050.1  1501.0141  1817.3086  1665.3089  1564.7612  1496.3207  1114.6435 1071.6555
+3            1 at1g01070.1  1212.7927  1233.0023   939.2000   929.6195   864.2180   877.2060  894.8189
+4            1 at1g01080.2  1016.9203   936.3837  1181.3381  1329.4734  1392.6429  1287.9746  861.2605
+5            1 at1g01090.1 11424.5667 16778.1685 34366.6493 39775.6405 56231.5689 66980.3673 7772.5617
+6            1 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
+> head(PES.absolute)
+  Phylostratum      GeneID     Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
+1            1 at1g01040.2  2173.6352  1911.2001  1152.5553  1291.4224  1000.2529   962.9772 1696.4274
+2            1 at1g01050.1  1501.0141  1817.3086  1665.3089  1564.7612  1496.3207  1114.6435 1071.6555
+3            1 at1g01070.1  1212.7927  1233.0023   939.2000   929.6195   864.2180   877.2060  894.8189
+4            1 at1g01080.2  1016.9203   936.3837  1181.3381  1329.4734  1392.6429  1287.9746  861.2605
+5            1 at1g01090.1 11424.5667 16778.1685 34366.6493 39775.6405 56231.5689 66980.3673 7772.5617
+6            1 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
+```
 
 When transforming the `ExpressionMatrix` of the `PhyloExpressionSetExample` using different transformation functions,
 the resulting phylotranscriptomic patterns qualitatively differ:
@@ -585,13 +632,16 @@ the resulting phylotranscriptomic patterns qualitatively differ:
 
 ```{r, fig.width= 7, fig.height= 5}
 
-data(DivergenceExpressionSetExample)
+data(PhyloExpressionSetExample)
 
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
-PlotPattern(tf(PhyloExpressionSetExample, log2),
-            type = "l", lwd = 5,  TestStatistic = "FlatLineTest",
-            xlab = "Ontogeny", ylab = "TAI")
+PlotPattern( ExpressionSet = tf(PhyloExpressionSetExample, log2),
+             type          = "l", 
+             lwd           = 5,  
+             TestStatistic = "FlatLineTest",
+             xlab          = "Ontogeny", 
+             ylab          = "TAI" )
 
 
 ```
@@ -600,13 +650,16 @@ PlotPattern(tf(PhyloExpressionSetExample, log2),
 
 ```{r, fig.width= 7, fig.height= 5}
 
-data(DivergenceExpressionSetExample)
+data(PhyloExpressionSetExample)
 
 # plotting the TAI using sqrt transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
-PlotPattern(tf(PhyloExpressionSetExample, sqrt),
-            type = "l", lwd = 5, TestStatistic = "FlatLineTest",
-            xlab = "Ontogeny", ylab = "TAI")
+PlotPattern( ExpressionSet = tf(PhyloExpressionSetExample, sqrt),
+             TestStatistic = "FlatLineTest",
+             type          = "l", 
+             lwd           = 5,
+             xlab          = "Ontogeny", 
+             ylab          = "TAI" )
 
 
 ```
@@ -624,13 +677,16 @@ The same accounts for `TDI` profiles:
 ### log2 transformation
 
 ```{r, fig.width= 7, fig.height= 5}
+data(DivergenceExpressionSetExample)
 
-# plotting the TAI using log2 transformed expression levels
+# plotting the TDI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
-PlotPattern(tf(DivergenceExpressionSetExample, log2),
-            type = "l", lwd = 5, 
-            TestStatistic = "FlatLineTest", 
-            xlab = "Ontogeny", ylab = "TDI")
+PlotPattern( ExpressionSet = tf(DivergenceExpressionSetExample, log2),
+             TestStatistic = "FlatLineTest",
+             type          = "l", 
+             lwd           = 5,
+             xlab          = "Ontogeny", 
+             ylab          = "TDI" )
 
 
 ```
@@ -638,12 +694,16 @@ PlotPattern(tf(DivergenceExpressionSetExample, log2),
 ### sqrt transformation
 
 ```{r, fig.width= 7, fig.height= 5}
+data(DivergenceExpressionSetExample)
 
-# plotting the TAI using sqrt transformed expression levels
+# plotting the TDI using sqrt transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
-PlotPattern(tf(DivergenceExpressionSetExample, sqrt),
-            type = "l", lwd = 5, TestStatistic = "FlatLineTest",
-            xlab = "Ontogeny", ylab = "TDI")
+PlotPattern( ExpressionSet = tf(DivergenceExpressionSetExample, sqrt),
+             TestStatistic = "FlatLineTest",
+             type          = "l", 
+             lwd           = 5,
+             xlab          = "Ontogeny", 
+             ylab          = "TDI" )
 
 
 ```
