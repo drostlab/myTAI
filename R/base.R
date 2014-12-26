@@ -6,9 +6,10 @@ pow <- function(x,power)
 }
 
 
-#' @title Match a age class map with an ExpressionSet
-#' @details This function matches a \emph{phylostratigraphic map} or \emph{divergence map} only storing unique gene ids with an ExpressionSet also storing only unique gene ids.
-#' @param Map a standard \emph{phylostratigraphic map} or \emph{divergence map} object.
+#' @title Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix
+#' @details This function matches a \emph{Phylostratigraphic Map} or \emph{Divergence Map} only storing unique gene ids with a ExpressionMatrix
+#' also storing only unique gene ids.
+#' @param Map a standard \emph{Phylostratigraphic Map} or \emph{Divergence Map} object.
 #' @param ExpressionMatrix  a standard ExpressionMatrix object.
 #' @details
 #' 
