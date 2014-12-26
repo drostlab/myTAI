@@ -1,4 +1,4 @@
-#' @title Plot the mean expression profiles of Phylostrata or Divergence-Strata
+#' @title Plot the Mean Expression Profiles of Phylostrata or Divergence-Strata
 #' @description This function computes for each phylostratum or divergence-stratum the corresponding mean expression profile
 #' and plots the profiles in N different windows corresponding to the given Phylostratum-Classes
 #' that shall be compared.
@@ -108,10 +108,10 @@ PlotMeans <- function(ExpressionSet,Groups = NULL,legendName = NULL,...)
                         do.call(graphics::axis,c(list(1,seq(1,nCols-2,1),names(ExpressionSet)[3:nCols]),
                                                  dots[!is.element(names(dots),c(plot.args,legend.args))]))
                         
-                        do.call(graphics::axis,c(list(2,seq(ylim_min,ylim_max,length.out = 5),format(seq(ylim_min,ylim_min,length.out = 5),digits = 2)),
+                        do.call(graphics::axis,c(list(2,seq(ylim_min,ylim_max,length.out = 5),format(seq(ylim_min,ylim_max,length.out = 5),digits = 6)),
                                                  dots[!is.element(names(dots),c(plot.args,legend.args))]))
                         
-                        do.call(graphics::legend,c(list("top",legend = paste(legendName,age_names[match(as.character(Groups[[j]]), age_names)],sep = ""),
+                        do.call(graphics::legend,c(list("top", legend = paste(legendName,age_names[match(as.character(Groups[[j]]), age_names)],sep = ""),
                                                         fill = colos[match(as.character(Groups[[j]]), age_names)],bty = "n",ncol = ceiling(nElements[j]/2)),
                                                    dots[!is.element(names(dots),c(axis.args,plot.args))]))
                         
@@ -128,7 +128,7 @@ PlotMeans <- function(ExpressionSet,Groups = NULL,legendName = NULL,...)
                         do.call(graphics::axis,c(list(1,seq(1,nCols-2,1),names(ExpressionSet)[3:nCols]),
                                                  dots[!is.element(names(dots),c(plot.args,legend.args))]))
                         
-                        do.call(graphics::axis,c(list(2,seq(ylim_min,ylim_max,length.out = 5),format(seq(ylim_min,ylim_max,length.out = 5),digits = 2)),
+                        do.call(graphics::axis,c(list(2,seq(ylim_min,ylim_max,length.out = 5),format(seq(ylim_min,ylim_max,length.out = 5),digits = 6)),
                                                  dots[!is.element(names(dots),c(plot.args,legend.args))]))
                         
                         do.call(graphics::legend,c(list("top",legend = paste(legendName,age_names[match(as.character(Groups[[j]]), age_names)],sep = ""),
