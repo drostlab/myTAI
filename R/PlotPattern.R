@@ -108,9 +108,9 @@
 #' 
 #' @export
 
-PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",
-                        modules = NULL,permutations = 1000,lillie.test = FALSE,
-                        digits.ylab = 3,p.value = TRUE,shaded.area = FALSE,y.ticks = 4,...)
+PlotPattern <- function(ExpressionSet, TestStatistic = "FlatLineTest",
+                        modules = NULL, permutations = 1000,lillie.test = FALSE,
+                        digits.ylab = 4, p.value = TRUE, shaded.area = FALSE, y.ticks = 4,...)
 {
         
         is.ExpressionSet(ExpressionSet)
@@ -130,40 +130,50 @@ PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",
         age <- vector(mode = "numeric",length = (nCols-2))
         age <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
         
-        # computing the standard error of the TAI/TDI pattern using bootstrap analyses
-        x <- min(age);
-        y <- max(age);
-        
+
         if(TestStatistic == "FlatLineTest"){
                 
-                resList <- FlatLineTest(ExpressionSet,permutations = permutations)
+                resList <- FlatLineTest( ExpressionSet = ExpressionSet,
+                                         permutations  = permutations )
                 
         }
         
         if(TestStatistic == "ReductiveHourglassTest"){
                 
-                if(lillie.test == TRUE){
-                        resList <- ReductiveHourglassTest(ExpressionSet,modules = modules, 
-                                                          permutations = permutations, lillie.test = TRUE)
+                if(lillie.test){
+                        
+                        resList <- ReductiveHourglassTest( ExpressionSet = ExpressionSet,
+                                                           modules       = modules, 
+                                                           permutations  = permutations, 
+                                                           lillie.test   = TRUE )
                 }
                 
-                if(lillie.test == FALSE){
-                        resList <- ReductiveHourglassTest(ExpressionSet,modules = modules, 
-                                                          permutations = permutations, lillie.test = FALSE)
+                if(!lillie.test){
+                        
+                        resList <- ReductiveHourglassTest( ExpressionSet = ExpressionSet,
+                                                           modules       = modules, 
+                                                           permutations  = permutations, 
+                                                           lillie.test   = FALSE )
                 }
                 
         }
         
         if(TestStatistic == "EarlyConservationTest"){
                 
-                if(lillie.test == TRUE){
-                        resList <- EarlyConservationTest(ExpressionSet,modules = modules, 
-                                                          permutations = permutations, lillie.test = TRUE)
+                if(lillie.test){
+                        
+                        resList <- EarlyConservationTest( ExpressionSet = ExpressionSet,
+                                                          modules       = modules, 
+                                                          permutations  = permutations, 
+                                                          lillie.test   = TRUE )
                 }
                 
-                if(lillie.test == FALSE){
-                        resList <- EarlyConservationTest(ExpressionSet,modules = modules, 
-                                                          permutations = permutations, lillie.test = FALSE)
+                if(!lillie.test){
+                        
+                        resList <- EarlyConservationTest( ExpressionSet = ExpressionSet,
+                                                          modules       = modules, 
+                                                          permutations  = permutations, 
+                                                          lillie.test   = FALSE )
                 }
                 
         }
@@ -175,6 +185,10 @@ PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",
         max_sd <- max(sd_vals)
         
         # plot the age pattern surrounded by the standard deviation
+        
+        # computing the standard error of the TAI/TDI pattern using bootstrap analyses
+        x <- min(age)
+        y <- max(age)
         
         # adjust the plotting margins 
         aspect_ratio <- ((max_sd + y) - (x - max_sd)) / 20
@@ -192,6 +206,7 @@ PlotPattern <- function(ExpressionSet,TestStatistic = "FlatLineTest",
         # 
         
         if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) | (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
+                
                 do.call(graphics::plot,c(list(x = age,ylim = c(ylim.range[1],ylim.range[2]),axes = FALSE), 
                                          dots[!is.element(names(dots),c(axis.args,legend.args))]))
         }

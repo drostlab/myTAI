@@ -4,7 +4,7 @@
 \title{Plot the Transcriptome Age Index or Transcriptome Divergence Index}
 \usage{
 PlotPattern(ExpressionSet, TestStatistic = "FlatLineTest", modules = NULL,
-  permutations = 1000, lillie.test = FALSE, digits.ylab = 3,
+  permutations = 1000, lillie.test = FALSE, digits.ylab = 4,
   p.value = TRUE, shaded.area = FALSE, y.ticks = 4, ...)
 }
 \arguments{
