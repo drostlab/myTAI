@@ -1,5 +1,5 @@
 ---
-title: "Introduction to the myTAI package"
+title: "Introduction to the myTAI Package"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -120,48 +120,186 @@ head(DivergenceExpressionSetExample, 3) # head of an example standard Divergence
 ```
 
 
-Analogous to a standard PhyloExpressionSet, a standard DivergenceExpressionSet is a `data.frame` storing the Divergence-Stratum assignment of a given gene in the first column, the gene id of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. This format is crucial for all functions that are implemented in the `myTAI` package.
+Analogous to a standard PhyloExpressionSet, a standard DivergenceExpressionSet is a `data.frame` storing the Divergence-Stratum assignment of a given gene in the first column, the gene id of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. __This format is crucial for all functions that are implemented in the `myTAI` package__.
 
 Keeping these standard data formats in mind will provide you with the most important requirements to get started with the `myTAI` package.
 
 __Note__, that within the code of each function, the argument `ExpressionSet` always refers to either a PhyloExpressionSet or a DivergenceExpressionSet, whereas in specialized functions some arguments are specified as _PhyloExpressionSet_ when they take an PhyloExpressionSet as input data set, or specified as _DivergenceExpressionSet_ when they take an _DivergenceExpressionSet_ as input data set.
 
 
-## Performing a standard workflow for phylotranscriptomics analyses 
+## Downloading Published PhyloExpressionSets or DivergenceExpressionSets
+
+The `myTAI` package provides the statistical framework for existing PhyloExpressionSets or DivergenceExpressionSets. To re-analyze, reproduce, or further investigate phenomena of existing PhyloExpressionSets or DivergenceExpressionSets, you can use the following
+procedure to download published datasets. In this example we will download `Supplementary Table S3` from [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses).
+
+
+
+```{r,eval=FALSE}
+# install.packages("gdata")
+library(gdata)
+url_phyloSet <- "http://files.figshare.com/1798296/Supplementary_table_S3.xls"
+
+download.file( url      =  url_phyloSet,
+               destfile = "PhyloExpressionSetTables.xls" )
+
+Athaliana_PhyloExpressionSet <- read.xls("PhyloExpressionSetTables.xls", sheet = 3)
+
+head(Athaliana_PhyloExpressionSet)
+
+```
+
+```
+  Phylostratum      GeneID     Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
+1            1 at1g01040.2  2173.6352  1911.2001  1152.5553  1291.4224  1000.2529   962.9772 1696.4274
+2            1 at1g01050.1  1501.0141  1817.3086  1665.3089  1564.7612  1496.3207  1114.6435 1071.6555
+3            1 at1g01070.1  1212.7927  1233.0023   939.2000   929.6195   864.2180   877.2060  894.8189
+4            1 at1g01080.2  1016.9203   936.3837  1181.3381  1329.4734  1392.6429  1287.9746  861.2605
+5            1 at1g01090.1 11424.5667 16778.1685 34366.6493 39775.6405 56231.5689 66980.3673 7772.5617
+6            1 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
+```
+
+This way you can download all published PhyloExpressionSets or DivergenceExpressionSets
+to perform phylotranscriptomics analyses.
+
+```{r,eval=FALSE}
+# Compute the Transcriptome Age Index of the downloaded PhyloExpressionSet
+TAI(Athaliana_PhyloExpressionSet)
+```
+
+```
+  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
+```
+
+
+## Creating Your Own PhyloExpressionSet or DivergenceExpressionSet
+
+Phylotranscriptomics combines evolutionary information obtained from
+Phylostratigraphy and Divergence-Stratigraphy with corresponding transcriptome data.
+
+For this purpose the following datasets need to be generated or obtained:
+
+- Phylostratigraphic Map of an Organism (of Interest)
+
+- Divergence Map of an Organism (of Interest)
+
+- Transcriptome Data Covering a Specific Experiment for the Organism (of Interest)
+
+Each step can be performed independent of all other steps and the resulting datasets
+can also be used for different (independent) studies and analyses.
+
+### Generating a Phylostratigraphic Map of an Organism
+
+A Phylostratigraphic Map can be generated via [Phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995).
+You can find a `Perl Script` for performing Phylostratigraphy in [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/README.md). After performing Phylostratigraphy the resulting Phylostratigraphic Map stores
+the Phylostratum assignment of genes in the first column and the corresponding gene id in the second column.
+
+```{r,eval=FALSE}
+head(Athaliana_PhyloExpressionSet[ , c("Phylostratum","GeneID")])
+```
+
+```
+  Phylostratum      GeneID
+1            1 at1g01040.2
+2            1 at1g01050.1
+3            1 at1g01070.1
+4            1 at1g01080.2
+5            1 at1g01090.1
+6            1 at1g01120.1
+```
+
+### Generating a Divergence Map of an Organism
+
+A Divergence Map can be generated via [Divergence-Stratigraphy](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/README.md). A detailed description on how to perform Divergence-Stratigraphy using the
+[orthologr](https://github.com/HajkD/orthologr) package can be found in the `Advanced Vignette`.
+After performing Divergence-Stratigraphy the resulting Divergence Map stores
+the Divergence-Stratum assignment of genes in the first column and the corresponding gene id in the second column.
+
+```{r,eval=FALSE}
+head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
+```
+
+```
+  Divergence.stratum      GeneID
+1                  1 at1g01050.1
+2                  1 at1g01120.1
+3                  1 at1g01140.3
+4                  1 at1g01170.1
+5                  1 at1g01230.1
+6                  1 at1g01540.2
+```
+
+### Transcriptome Data
+
+Any transcriptome data of interest can be used to perform phylotranscriptomics analyses.
+In the following sections as well as in the documentation of `myTAI` functions
+transcriptome data is referred to as `ExpressionMatrix`.
+
+It is assumed that a `ExpressionMatrix` used to perform phylotranscriptomics analyses
+does not include duplicate expression values for a gene and has the following format:
+
+```{r, eval=FALSE}
+head(DivergenceExpressionSetExample[ , 2:9])
+```
+
+```
+       GeneID    Zygote  Quadrant  Globular     Heart   Torpedo      Bent     Mature
+1 at1g01050.1 1501.0141 1817.3086 1665.3089 1564.7612 1496.3207 1114.6435  1071.6555
+2 at1g01120.1  844.0414  787.5929  859.6267  931.6180  942.8453  870.2625   792.7542
+3 at1g01140.3 1041.4291  908.3929 1068.8832  967.7490 1055.1901 1109.4662   825.4633
+4 at1g01170.1 1361.6646 1042.1991 1225.5625 1211.7386 1674.5224 2136.4284 10662.4763
+5 at1g01230.1  894.1276  946.6993  933.0931  965.1859  870.9218  843.1814   794.6536
+6 at1g01540.2 1464.3065 1451.4255 2378.7054 1993.9326 1800.2420 2119.9220  1020.2640
+```
+
+So the Gene IDs are stored in the first column and the corresponding gene expression matrix
+is stored in the following columns.
+
+Now you can use the `?MatchMap` function to combine a Phylostratigraphic Map or Divergence Map
+with a transcriptome dataset of interest.
+
+
+## Performing a Standard Workflow for Phylotranscriptomics Analyses 
 
 Before starting any computation, sometimes it is good to visualize the Phylostratum distribution of genes stored within a given PhyloExpressionSet.
 
 For this purpose, the `PlotDistribution()` function was implemented:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# displaying the phylostratum distribution (gene frequency distribution) 
+# Display the phylostratum distribution (gene frequency distribution) 
 # of a PhyloExpressionSet as absolute frequency distribution
-PlotDistribution(PhyloExpressionSetExample, xlab = "Phylostratum")
+PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample, 
+                  xlab               = "Phylostratum" )
 ```
 
 or display it as relative frequencies: 
 
 ```{r, fig.width= 7, fig.height= 4,eval=FALSE}
-# as relative frequency distribution
-PlotDistribution(PhyloExpressionSetExample, as.ratio = TRUE, xlab = "Phylostratum", cex = 0.7)
+# Plot phylostrata as relative frequency distribution
+PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample, 
+                  as.ratio           = TRUE, 
+                  xlab               = "Phylostratum", 
+                  cex                = 0.7 )
 ```
 
 
-Another important feature to check is, whether the Phylostratum assignment and Divergence-Stratum assignment of the genes stored within the PhyloExpressionSet and DivergenceExpressionSet are correlated (linear dependent). This is important to be able to assume the independence of __TAI__ and __TDI__ measures.
+Another important feature to check is whether the Phylostratum assignment and Divergence-Stratum assignment of the genes stored within the PhyloExpressionSet and DivergenceExpressionSet are correlated (linear dependent). This is important to be able to assume the linear independence of __TAI__ and __TDI__ measures.
 
 
 For this purpose the `PlotCorrelation()` function was implemented:
 
 ```{r, fig.width= 5, fig.height= 4,eval=FALSE}
-# visualizing the correlation between Phylostratum and Divergence-Stratum assignments
+# Visualizing the correlation between Phylostratum and Divergence-Stratum assignments
 # of the intersecting set of genes that are stored within the PhyloExpressionSet
 # and DivergenceExpressionSet
 
-PlotCorrelation(PhyloExpressionSetExample, DivergenceExpressionSetExample,
-                method = "kendall", linearModel = TRUE)
+PlotCorrelation( PhyloExpressionSet      = PhyloExpressionSetExample,
+                 DivergenceExpressionSet = DivergenceExpressionSetExample,
+                 method                  = "kendall", 
+                 linearModel             = TRUE )
 ```
 
-In this case Phylostratum and Divergence-Stratum assignments of the intersecting set of genes that are stored within the PhyloExpressionSet and DivergenceExpressionSet are weakly correlated, but can be assumed to be independent.
+In this case Phylostratum and Divergence-Stratum assignments of the intersecting set of genes that are stored within the PhyloExpressionSet and DivergenceExpressionSet are weakly correlated, but can be assumed to be linear independent.
 
 __Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as __first argument__ and a DivergenceExpressionSet as __second argument__.
 
@@ -173,7 +311,7 @@ Mathematically the _Transcriptome Age Index_ (TAI) introduced by [Domazet-Loso a
 
 Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage _s_.
 
-## TAI analyses
+## Transcriptome Age Index Analyses
 
 
 ### Flat Line Test
@@ -182,9 +320,13 @@ Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was int
 The `PlotPattern()` function first computes the `TAI` (given a PhyloExpressionSet) or the `TDI` (given a DivergenceExpressionSet) to visualize the TAI or TDI profile, their standard deviation and statistical significance.
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# simple use of the PlotPattern function
-# to plot the TAI of a given PhyloExpressionSet 
-PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI")
+# Plot the Transcriptome Age Index of a given PhyloExpressionSet 
+# Test Statistic : Flat Line Test (default)
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TAI" )
 ```
 
 The p-value (`p_flt`) above the TAI curve is returned by the [_FlatLineTest_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html). As described in the
@@ -196,7 +338,7 @@ documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatL
 In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles and _hourglass_ shape,
 one can obtain a p-value corresponding to the statistical significance of a visual _hourglass_ pattern referred to as `ReductiveHourglassTest` (`?ReductiveHourglassTest`).
 
-Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge (Drost et al., 2014), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
+Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge (Drost et al., 2015), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
 
@@ -207,13 +349,15 @@ For this example we divide _A. thaliana_ embryo development stored within the _P
 * late = stages 6 - 7 (Bent and Mature)
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# using the PlotPattern function
-# to plot the TAI of a given PhyloExpressionSet
-# and to perform the ReductiveHourglassTest to quantify
-# the statisical significance of the visual hourglass pattern
-PlotPattern(PhyloExpressionSetExample, TestStatistic = "ReductiveHourglassTest",
-            modules = list(early = 1:2, mid = 3:5, late = 6:7),
-            type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI")
+# Plot the Transcriptome Age Index of a given PhyloExpressionSet 
+# Test Statistic : Reductive Hourglass Test
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             TestStatistic = "ReductiveHourglassTest",
+             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TAI" )
 ```
 
 The corresponding p-value `p_rht` now denotes the p-value returned by the `ReductiveHourglassTest`
@@ -223,13 +367,18 @@ which is different from the p-value returned by the `FlatLineTest` (`p_flt`).
 To make sure that you selected the correct modules you can use the `shaded.area` argument to visualize the chosen modules:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# using the shaded.area argument to visualize the chosen modules
-PlotPattern(PhyloExpressionSetExample, TestStatistic = "ReductiveHourglassTest",
-            modules = list(early = 1:2, mid = 3:5, late = 6:7),
-            shaded.area = TRUE, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI")
+# Visualize the phylotypic period used for the Reductive Hourglass Test
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             TestStatistic = "ReductiveHourglassTest",
+             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+             shaded.area   = TRUE, 
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TAI" )
 ```
 
-__Note__, that defining a priori knowledge for the `ReductiveHourglassTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
+__Note__, defining a priori knowledge for the `ReductiveHourglassTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
 which in contrast would start at position 3, ... N.
 
 
@@ -242,7 +391,7 @@ The `EarlyConservationTest` tests whether an observed phylotranscriptomic patter
 a low-high-high pattern (monotonically increasing function) supporting the Early Conservation Model of embryogenesis.
 
 
-Analogous to the `ReductiveHourglassTest`, the `EarlyConservationTest` needs a priori biological knowledge (Drost et al., 2014).
+Analogous to the `ReductiveHourglassTest`, the `EarlyConservationTest` needs a priori biological knowledge (Drost et al., 2015).
 So again three `modules` have to be specified for the `EarlyConservationTest()` function.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
@@ -254,13 +403,15 @@ For this example we divide _A. thaliana_ embryo development stored within the _P
 * late = stages 6 - 7 (Bent and Mature)
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# using the PlotPattern function
-# to plot the TAI of a given PhyloExpressionSet
-# and to perform the EarlyConservationTest to test the
-# Early Conservation Hypothesis for the observed phylotranscriptomic pattern
-PlotPattern(PhyloExpressionSetExample, TestStatistic = "EarlyConservationTest",
-            modules = list(early = 1:2, mid = 3:5, late = 6:7),
-            type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI")
+# Plot the Transcriptome Age Index of a given PhyloExpressionSet 
+# Test Statistic : Reductive Early Conservation Test
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             TestStatistic = "EarlyConservationTest",
+             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TAI" )
 ```
 
 The corresponding p-value `p_ect` now denotes the p-value returned by the `EarlyConservationTest`
@@ -269,14 +420,14 @@ which is different from the p-value returned by the `FlatLineTest` (`p_flt`) and
 Since the present TAI pattern of the _PhyloExpressionSetExample_ doesn't support the Early Conservation Hypothesis,
 the p-value `p_ect` = 1.
 
-Also __note__ here, that defining a priori knowledge for the `EarlyConservationTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
+Also __note__, that defining a priori knowledge for the `EarlyConservationTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
 which in contrast would start at position 3, ... N.
 
 
 To obtain the numerical _TAI_ values, the `TAI()` function can be used:
 
 ```{r,eval=FALSE}
-# simply getting the TAI values of a given PhyloExpressionSet
+# Compute the Transcriptome Age Index values of a given PhyloExpressionSet
 TAI(PhyloExpressionSetExample) 
 ```
 
@@ -285,16 +436,19 @@ TAI(PhyloExpressionSetExample)
 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
 
 ```
-## TDI analyses
+## Transcriptome Divergence Index Analyses
 
 
 Analogous to the _TAI_ computations and visualization, the _TDI_ computations can be performed in a similar fashion:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# simple use of the PlotPattern function
-# to plot the TDI of a given DivergenceExpressionSet 
-PlotPattern(DivergenceExpressionSetExample, type = "l", lwd = 6,
-            xlab = "Ontogeny", ylab = "TDI")
+# Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
+# Test Statistic : Flat Line Test (default)
+PlotPattern( ExpressionSet = DivergenceExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6,
+             xlab          = "Ontogeny", 
+             ylab          = "TDI" )
 ```
 
 Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo development into the three modules:
@@ -304,13 +458,15 @@ Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo develop
 * late = stages 6 - 7 (Bent and Mature)
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# using the PlotPattern function
-# to plot the TDI of a given DivergenceExpressionSet
-# and to perform the ReductiveHourglassTest to quantify
-# the statisical significance of the visual hourglass pattern
-PlotPattern(DivergenceExpressionSetExample, TestStatistic = "ReductiveHourglassTest",
-            modules = list(early = 1:2, mid = 3:5, late = 6:7),
-            type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TDI")
+# Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
+# Test Statistic : Reductive Hourglass Test
+PlotPattern( ExpressionSet = DivergenceExpressionSetExample, 
+             TestStatistic = "ReductiveHourglassTest",
+             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TDI" )
 ```
 
 
@@ -321,20 +477,22 @@ And for the __EarlyConservationTest__ we again divide _A. thaliana_ embryo devel
 * late = stages 6 - 7 (Bent and Mature)
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# using the PlotPattern function
-# to plot the TDI of a given DivergenceExpressionSet
-# and to perform the EarlyConservationTest 
-# test the Early Conservation Hypothesis
-PlotPattern(DivergenceExpressionSetExample, TestStatistic = "EarlyConservationTest",
-            modules = list(early = 1:2, mid = 3:5, late = 6:7),
-            type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TDI")
+# Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
+# Test Statistic : Reductive Early Conservation Test
+PlotPattern( ExpressionSet = DivergenceExpressionSetExample, 
+             TestStatistic = "EarlyConservationTest",
+             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TDI" )
 ```
 
 
 To obtain the numerical TDI values for a given DivergenceExpressionSet simply run:
 
 ```{r,eval=FALSE}
-# getting the TDI values of a given DivergenceExpressionSet
+# Compute the Transcriptome Divergence Index values of a given DivergenceExpressionSet
 TDI(DivergenceExpressionSetExample) 
 ```
 
@@ -358,9 +516,14 @@ To further investigate the origins of the global __TAI__ or __TDI__ pattern it i
 Visualizing the mean gene expression of genes corresponding to the same Phylostratum or Divergence-Stratum class allows to detect development specific groups of Phylostrata or Divergence-Strata that are most expressed during the underlying developmental process. This might lead to correlating specific groups of Phylostrata or Divergence-Strata sharing similar evolutionary origins with common functions or functional contributions to a specific developmental process. 
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# visualizing the mean gene expression of each Phylostratum class
-PlotMeans(PhyloExpressionSetExample, Groups = list(1:12), legendName = "PS",
-          xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
+# Visualizing the mean gene expression of each Phylostratum class
+PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
+           Groups        = list(1:12), 
+           legendName    = "PS",
+           xlab          = "Ontogeny", 
+           lty           = 1, 
+           cex           = 0.7, 
+           lwd           = 5 ) 
 ```
 
 Here we see that the mean gene expression of Phylostratum group: PS1-3 (genes evolved before the establishment of embryogenesis in plants) are more expressed during _A. thaliana_ embryogenesis than PS4-12 (genes evolved during or after the establishment of embryogenesis in plants).
@@ -372,17 +535,24 @@ So the `PlotMeans()` function takes an PhyloExpressionSet or DivergenceExpressio
 For this example we separate groups of Phylostrata into __evolutionary old Phylostrata__ (PS1-3) in one plot versus __evolutionary younger Phylostrata__ (PS4-12) into another plot:
 
 ```{r, fig.height= 5, fig.width=9,eval=FALSE}
-# visualizing the mean gene expression of each Phylostratum class
-PlotMeans(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS",
-          xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
+# Visualizing the mean gene expression of each Phylostratum class
+# in two separate plots (groups)
+PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
+           Groups        = list(group_1 = 1:3, group_2 = 4:12), 
+           legendName    = "PS",
+           xlab          = "Ontogeny", 
+           lty           = 1, 
+           cex           = 0.7, 
+           lwd           = 5 ) 
 ```
 
 To obtain the numerical values (mean expression levels for all Phylostrata) run:
 
 ```{r,eval=FALSE}
-# using the age.apply() function implemented in the myTAI package
-# to compute the mean expression levels of all Phylostrata
-age.apply(PhyloExpressionSetExample, colMeans) 
+# Using the age.apply() function to compute the mean expression levels 
+# of all Phylostrata
+age.apply( ExpressionSet = PhyloExpressionSetExample, 
+           FUN           = colMeans ) 
 ```
 
 ```
@@ -407,17 +577,23 @@ Here the `age.apply()` function (`?age.apply`) takes a function as argument that
 For a DivergenceExpressionSet run:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# visualizing the mean gene expression of each Divergence-Stratum class
-PlotMeans(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS",
-          xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
+# Visualizing the mean gene expression of each Divergence-Stratum class
+PlotMeans( ExpressionSet = DivergenceExpressionSetExample, 
+           Groups        = list(1:10), 
+           legendName    = "DS",
+           xlab          = "Ontogeny", 
+           lty           = 1, 
+           cex           = 0.7, 
+           lwd           = 5 ) 
 ```
 
 To obtain the numerical values (mean expression levels for all Divergence-Strata) run:
 
 ```{r,eval=FALSE}
-# using the age.apply() function to compute the mean expression levels
+# Using the age.apply() function to compute the mean expression levels
 # of all Divergence-Strata
-age.apply(DivergenceExpressionSetExample, colMeans) 
+age.apply( ExpressionSet = DivergenceExpressionSetExample, 
+           FUN           = colMeans ) 
 ```
 
 ```
@@ -444,29 +620,44 @@ Introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journ
 The `PlotRE()` function can be used (analogous to the `PlotMeans()` function) to visualize the relative expression levels of a given PhyloExpressionSet and DivergenceExpressionSet:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# visualizing the mean gene expression of each Phylostratum class
-PlotRE(PhyloExpressionSetExample, Groups = list(1:10), legendName = "PS",
-          xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
+# Visualizing the mean gene expression of each Phylostratum class
+PlotRE( ExpressionSet = PhyloExpressionSetExample, 
+        Groups        = list(1:10), 
+        legendName    = "PS",
+        xlab          = "Ontogeny", 
+        lty           = 1, 
+        cex           = 0.7, 
+        lwd           = 5 ) 
 ```
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# visualizing the mean gene expression of each Divergence-Stratum class
-PlotRE(DivergenceExpressionSetExample, Groups = list(1:10), legendName = "DS",
-          xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
+# Visualizing the mean gene expression of each Divergence-Stratum class
+PlotRE( ExpressionSet = DivergenceExpressionSetExample, 
+        Groups        = list(1:10), 
+        legendName    = "DS",
+        xlab          = "Ontogeny", 
+        lty           = 1, 
+        cex           = 0.7, 
+        lwd           = 5 ) 
 ```
 
 or again by assigning Phylostratum or Divergence-Stratum groups that shall be visualized in different plots:
 
 ```{r,fig.height=5, fig.width=9,eval=FALSE}
-# visualizing the mean gene expression of each Phylostratum class
-PlotRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), legendName = "PS",
-          xlab = "Ontogeny", lty = 1, cex = 0.7, lwd = 5) 
+# Visualizing the mean gene expression of each Phylostratum class
+PlotRE( ExpressionSet = PhyloExpressionSetExample, 
+        Groups        = list(group_1 = 1:3, group_2 = 4:12), 
+        legendName    = "PS",
+        xlab          = "Ontogeny", 
+        lty           = 1, 
+        cex           = 0.7, 
+        lwd           = 5 ) 
 ```
 
 The relative expression levels can be obtained using the `REMatrix()` function:
 
 ```{r,eval=FALSE}
-# getting the relative expression levels for all Phylostrata
+# Getting the relative expression levels for all Phylostrata
 REMatrix(PhyloExpressionSetExample) 
 ```
 
@@ -488,7 +679,7 @@ REMatrix(PhyloExpressionSetExample)
 
 ```
 ```{r,eval=FALSE}
-# getting the relative expression levels for all Divergence-Strata
+# Getting the relative expression levels for all Divergence-Strata
 REMatrix(DivergenceExpressionSetExample) 
 ```
 
@@ -510,8 +701,9 @@ REMatrix(DivergenceExpressionSetExample)
 The same could also be done using the `age.apply()` function in combination with the `RE()` function:
 
 ```{r,eval=FALSE}
-# getting the relative expression levels for all Phylostrata
-age.apply(PhyloExpressionSetExample, RE) 
+# Getting the relative expression levels for all Phylostrata
+age.apply( ExpressionSet = PhyloExpressionSetExample, 
+           FUN           = RE ) 
 ```
 
 ```
@@ -535,9 +727,12 @@ age.apply(PhyloExpressionSetExample, RE)
 This bar plot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the `PlotMeans()` and `PlotRE()` functions:
 
 ```{r,fig.height=5, fig.width=7,eval=FALSE}
-# visualizing the mean relative expression of two Phylostratum groups
-PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), 
-          xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
+# Visualizing the mean relative expression of two Phylostratum groups
+PlotBarRE( ExpressionSet = PhyloExpressionSetExample, 
+           Groups        = list(group_1 = 1:3, group_2 = 4:12), 
+           xlab          = "Ontogeny", 
+           ylab          = "Mean Relative Expression", 
+           cex           = 2) 
 ```
 
 Here the argument `Groups = list(1:3, 4:12)` corresponds to dividing Phylostrata 1-12
@@ -548,16 +743,24 @@ A [Kruskal-Wallis Rank Sum Test](http://stat.ethz.ch/R-manual/R-patched/library/
 Additionally the ratio between both values represented by the bars to be compared can be visualized as function within the bar plot using the `ratio = TRUE` argument:
 
 ```{r, fig.height=5,fig.width=7,eval=FALSE}
-# visualizing the mean relative expression of two Phylostratum groups
-PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:12), ratio = TRUE,
-          xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
+# Visualizing the mean relative expression of two Phylostratum groups
+PlotBarRE( ExpressionSet = PhyloExpressionSetExample, 
+           Groups        = list(group_1 = 1:3, group_2 = 4:12), 
+           ratio         = TRUE,
+           xlab          = "Ontogeny", 
+           ylab          = "Mean Relative Expression", 
+           cex           = 2 ) 
 ```
 
 It is also possible to compare more than two groups:
 ```{r, fig.width=7,eval=FALSE}
-# visualizing the mean relative expression of three Phylostratum groups
-PlotBarRE(PhyloExpressionSetExample, Groups = list(1:3, 4:6, 7:12), wLength = 0.05,
-          xlab = "Ontogeny", ylab = "Mean Relative Expression", cex = 2) 
+# Visualizing the mean relative expression of three Phylostratum groups
+PlotBarRE( ExpressionSet = PhyloExpressionSetExample, 
+           Groups        = list(group_1 = 1:3, group_2 = 4:6, group_3 = 7:12), 
+           wLength       = 0.05,
+           xlab          = "Ontogeny", 
+           ylab          = "Mean Relative Expression", 
+           cex           = 2 ) 
 ```
 
 For the corresponding statistically significant stages, a _Posthoc_ test can be performed to detect the combinations of differing bars that cause the global statistical significance.
@@ -570,8 +773,14 @@ which allows you to modify the `cex.lab`, `cex.axis`, and `cex` arguments within
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # cex = 0.5, cex.lab = 0.5, cex.axis = 0.5
-PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI",
-            cex = 0.5, cex.lab = 0.5, cex.axis = 0.5)
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TAI",
+             cex           = 0.5, 
+             cex.lab       = 0.5, 
+             cex.axis      = 0.5 )
 ```
 
 The `cex` argument modifies the the p-value font size, the `cex.lab` argument modifies the font size of the x-axis and y-axis labels, and the `cex.axis` argument modifies the font size of the axis labels.
@@ -580,14 +789,26 @@ More examples:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # cex = 2, cex.lab = 1, cex.axis = 0.5 
-PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI",
-            cex = 2, cex.lab = 1, cex.axis = 0.5)
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TAI",
+             cex           = 2, 
+             cex.lab       = 1, 
+             cex.axis      = 0.5 )
 ```
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # cex = 0.5, cex.lab = 0.7, cex.axis = 1.5
-PlotPattern(PhyloExpressionSetExample, type = "l", lwd = 6, xlab = "Ontogeny", ylab = "TAI",
-            cex = 0.5, cex.lab = 0.7, cex.axis = 1.5)
+PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+             type          = "l", 
+             lwd           = 6, 
+             xlab          = "Ontogeny", 
+             ylab          = "TAI",
+             cex           = 0.5, 
+             cex.lab       = 0.7, 
+             cex.axis      = 1.5 )
 ```
 
 These arguments can analogously be used for all other plot functions, e.g. `PlotMeans()`, `PlotRE()`, etc.

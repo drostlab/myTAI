@@ -26,3 +26,4 @@ Suggests:
     rmarkdown (>= 0.3.3),
     devtools (>= 1.6.1)
 LinkingTo: Rcpp
+URL: https://github.com/HajkD/myTAI
