@@ -171,7 +171,7 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                 fitdistrplus::descdist(score_vector, boot = permutations)
                 
                 curve( expr = normDensity,
-                       xlim = c(min(score_vector),max(score_vector)),
+                       xlim = c(min(score_vector),max(score_vector,real_score)),
                        col  = "steelblue",
                        lwd  = 5,
                        xlab = "Scores",
@@ -183,6 +183,9 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                       breaks = permutations / (0.01 * permutations) )
                 
                 rug(score_vector)
+                # plot a red line at the position where we can find the real rh value
+                abline(v = real_score, lwd = 5, col = "darkred")
+                
                 #legend("topleft", legend = "A", bty = "n")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
