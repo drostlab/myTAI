@@ -94,6 +94,7 @@ MatchMap <- function(Map,ExpressionMatrix, accumulate = NULL)
   names(Map)[2] <- "GeneID"
   ExpressionMatrix[ , "GeneID"] <- tolower(ExpressionMatrix[ , "GeneID"])
   Map[ , "GeneID"] <- tolower(Map[ , "GeneID"])
+  GeneID <- NULL
   
   if(any(duplicated(Map[ , "GeneID"])))
           stop("You have duplicate Gene IDs in your Map. Please enter only unique Gene IDs.")
@@ -101,7 +102,7 @@ MatchMap <- function(Map,ExpressionMatrix, accumulate = NULL)
   if(!is.null(accumulate)){
         
           acc_fun <- match.fun(accumulate)
-          dplyr::summarise_each(dplyr::group_by(ExpressionMatrix, GeneID), dplyr::funs(acc_fun))
+          ExpressionMatrix <- dplyr::summarise_each(dplyr::group_by(ExpressionMatrix, GeneID), dplyr::funs(acc_fun))
            
   }
           
@@ -235,7 +236,7 @@ re.colors <- function(n)
 #' 
 #' # get 5 different colors for 5 different bars
 #' barplot_colors <- bar.colors(5)
-#' 
+#' @export
 bar.colors <- function(n)
 {
         
