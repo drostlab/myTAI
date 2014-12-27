@@ -16,6 +16,7 @@
 #' of the observed phylotranscriptomic pattern.
 #' @param runs specify the number of runs to be performed for goodness of fit computations, in case \code{plotHistogram} = \code{TRUE}.
 #' In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).
+#' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
 #' @details The \emph{reductive early conservation test} is a permutation test based on the following test statistic. 
 #'
 #' (1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
@@ -88,9 +89,13 @@
 #' @import foreach
 #' @export
 
-EarlyConservationTest <- function(ExpressionSet,modules = NULL,
-                                  permutations = 1000, lillie.test = FALSE, 
-                                  plotHistogram = FALSE, runs = 10){
+EarlyConservationTest <- function(ExpressionSet,
+                                  modules       = NULL,
+                                  permutations  = 1000, 
+                                  lillie.test   = FALSE, 
+                                  plotHistogram = FALSE, 
+                                  runs          = 10, 
+                                  parallel      = FALSE){
         
         is.ExpressionSet(ExpressionSet)
         
@@ -105,10 +110,6 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
         
         if(any(table(unlist(modules)) > 1))
                 stop("Intersecting modules are not defined for the ReductiveHourglassTest.")
-        
-        # since the doMC package is not available for Windows machines yet,
-        # the parallel version of this function cannot be used:
-        parallel <- FALSE
         
         nCols <- dim(ExpressionSet)[2]
         score_vector <- vector(mode = "numeric",length = permutations)
@@ -133,7 +134,7 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
         mu <- param$estimate[1]
         sigma <- param$estimate[2]
         
-        if(plotHistogram == TRUE){
+        if(plotHistogram){
                 # plot histogram of scores
                 normDensity <- function(x){
                         
@@ -141,15 +142,30 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                         
                 }
                 
-                if(lillie.test == TRUE)
+                if(lillie.test)
                         par(mfrow = c(2,2))
-                if(lillie.test == FALSE)
-                        par(mfrow = c(1,2))
+                if(!lillie.test)
+                        par(mfrow = c(1,3))
                 
                 fitdistrplus::descdist(score_vector, boot = permutations)
-                curve(normDensity,xlim = c(min(score_vector),max(score_vector)),col = "steelblue",lwd = 5,xlab = "Scores",ylab = "Frequency")
-                hist(score_vector,prob = TRUE,add = TRUE, breaks = permutations / (0.01 * permutations))
+                
+                curve( expr = normDensity,
+                       xlim = c(min(score_vector),max(score_vector,real_ecv)),
+                       col  = "steelblue",
+                       lwd  = 5,
+                       xlab = "Scores",
+                       ylab = "Frequency" )
+                
+                hist( x      = score_vector,
+                      prob   = TRUE,
+                      add    = TRUE, 
+                      breaks = permutations / (0.01 * permutations) )
+                
                 rug(score_vector)
+                
+                # plot a red line at the position where we can find the real ec value
+                abline(v = real_ecv, lwd = 5, col = "darkred")
+                
                 #legend("topleft", legend = "A", bty = "n")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
@@ -158,22 +174,28 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                 
                 #cat("\n")
                 
-                if(parallel == TRUE){
+                if(parallel){
                         
-                        # parallellizing the sampling process using the 'doMC' and 'parallel' package
-                        # register all given cores for parallelization
-                        # detectCores() returns the number of cores available on a multi-core machine
-                        cores <- parallel::detectCores()
-                        #doMC::registerDoMC(cores)
+                        ### Parallellizing the sampling process using the 'doParallel' and 'parallel' package
+                        ### register all given cores for parallelization
+                        par_cores <- parallel::makeForkCluster(parallel::detectCores())
+                        doParallel::registerDoParallel(par_cores)
                         
                         # perform the sampling process in parallel
-                        parallel_results <- foreach::foreach(iterators::iter(1:runs),.combine = "rbind") %dopar% {
+                        parallel_results <- foreach::foreach(i              = 1:runs,
+                                                             .combine       = "rbind",
+                                                             .errorhandling = "stop") %dopar% {
                                 
                                
-                                        data.frame(EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = TRUE,
-                                                              plotHistogram = FALSE, modules = modules)[c(1,3)])
+                                        data.frame(EarlyConservationTest( ExpressionSet = ExpressionSet,
+                                                                          permutations  = permutations,
+                                                                          lillie.test   = TRUE,
+                                                                          plotHistogram = FALSE, 
+                                                                          modules       = modules )[c(1,3)])
                                         
                         }
+                        
+                        parallel::stopCluster(par_cores)
                         
                         colnames(parallel_results) <- c("p.value","lillie.test")
                         
@@ -182,7 +204,7 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                         
                 }
                 
-                if(parallel == FALSE){
+                if(!parallel){
                         
                         # sequential computations of p-values 
 #                         if(runs >= 10){
@@ -192,15 +214,31 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
 #                         }
                         
                         for(i in 1:runs){
-                                if(lillie.test == TRUE)
-                                        ect <- EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = TRUE, 
-                                                                     plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),runs=NULL)
-                                if(lillie.test == FALSE)
-                                        ect <- EarlyConservationTest(ExpressionSet = ExpressionSet,permutations = permutations,lillie.test = FALSE, 
-                                                                     plotHistogram = FALSE,modules = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),runs=NULL)
+                                
+                                if(lillie.test){
+                                        
+                                        ect <- EarlyConservationTest( ExpressionSet = ExpressionSet,
+                                                                      permutations  = permutations,
+                                                                      lillie.test   = TRUE, 
+                                                                      plotHistogram = FALSE,
+                                                                      modules       = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),
+                                                                      runs          = NULL ) 
+                                }
+                                
+                                
+                                if(!lillie.test){
+                                        
+                                        ect <- EarlyConservationTest( ExpressionSet = ExpressionSet,
+                                                                      permutations  = permutations,
+                                                                      lillie.test   = FALSE, 
+                                                                      plotHistogram = FALSE,
+                                                                      modules       = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),
+                                                                      runs          = NULL )
+                                }
                                 
                                 p.vals_vec[i] <- ect$p.value
-                                if(lillie.test == TRUE)
+                                
+                                if(lillie.test)
                                         lillie_vec[i] <- ect$lillie.test
                                 
 #                                 if(runs >= 10){
@@ -210,13 +248,26 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
                         }
                 }
                 
-                plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), col = "darkblue", xlab = "Runs", ylab = "p-value")
+                plot( x    = p.vals_vec,
+                      type = "l" , 
+                      lwd  = 6, 
+                      ylim = c(0,1), 
+                      col  = "darkblue", 
+                      xlab = "Runs", 
+                      ylab = "p-value" )
+
                 abline(h = 0.05, lty = 2, lwd = 3)
                 #legend("topleft", legend = "B", bty = "n")
                 
-                if(lillie.test == TRUE){
+                if(lillie.test){
                         tbl <- table(factor(lillie_vec, levels = c("FALSE","TRUE")))
-                        barplot(tbl/sum(tbl) , beside = TRUE, names.arg = c("FALSE", "TRUE"), ylab = "relative frequency", main = paste0("runs = ",runs))
+                        
+                        barplot( height    = tbl/sum(tbl) , 
+                                 beside    = TRUE, 
+                                 names.arg = c("FALSE", "TRUE"), 
+                                 ylab      = "relative frequency", 
+                                 main      = paste0("runs = ",runs) )
+                        
                         #legend("topleft", legend = "C", bty = "n")
                 }
         }
@@ -231,20 +282,20 @@ EarlyConservationTest <- function(ExpressionSet,modules = NULL,
         sd_vals <- vector(mode = "numeric",length = nCols-2)
         sd_vals <- apply(resMatrix,2,sd)
         
-        if(lillie.test == TRUE){
+        if(lillie.test){
                 # perform Lilliefors K-S-Test
                 lillie_p.val <- nortest::lillie.test(score_vector)$p.value
                 # does the Lilliefors test pass the criterion
                 lillie_bool <- (lillie_p.val > 0.05)
                 
-                if((lillie_p.val < 0.05) & (plotHistogram == FALSE)){
+                if((lillie_p.val < 0.05) & (!plotHistogram)){
                         warning("Lilliefors (Kolmogorov-Smirnov) test for normality did not pass the p > 0.05 criterion!")
                 }
         }
         
-        if(lillie.test == TRUE)
+        if(lillie.test)
                 return(list(p.value = pval,std.dev = sd_vals,lillie.test = lillie_bool))
-        if(lillie.test == FALSE)
+        if(!lillie.test)
                 return(list(p.value = pval,std.dev = sd_vals,lillie.test = NA))
         
         
