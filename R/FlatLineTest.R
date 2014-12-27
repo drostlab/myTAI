@@ -5,6 +5,7 @@
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \emph{FlatLineTest}.
 #' @param plotHistogram a boolean value specifying whether a detailed statistical analysis concerning the goodness of fit shall be performed.
 #' @param runs specify the number of runs to be performed for goodness of fit computations. In most cases runs = 100 is a reasonable choice.
+#' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
 #' @details Internally the function performs N phylotranscriptomics pattern computations (\code{\link{TAI}} or \code{\link{TDI}}) based on sampled PhyloExpressionSets or DivergenceExpressionSets (see \code{\link{bootMatrix}}). 
 #' The test statistics is being developed as follows:
 #'
@@ -83,18 +84,13 @@
 #' @import foreach
 #' @export
 FlatLineTest <- function(ExpressionSet, permutations = 1000, 
-                         plotHistogram = FALSE, runs = 10)
+                         plotHistogram = FALSE, runs = 10, parallel = FALSE)
 {
         
         is.ExpressionSet(ExpressionSet)
         
         if((plotHistogram == TRUE) & is.null(runs))
                 stop("Please specify the number of runs to be performed for the goodness of fit computations.")
-        
-        
-        # since the doMC package is not available for Windows machines yet,
-        # the parallel version of this function cannot be used:
-        parallel <- FALSE
         
         nCols <- dim(ExpressionSet)[2]
         resMatrix <- matrix(NA_real_, permutations,(nCols-2))
@@ -134,46 +130,70 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000,
                 # plot a Cullen and Frey graph
                 fitdistrplus::descdist(var_values, boot = permutations)
                 # plot the histogram and the fitted curve
-                curve(gammaDensity,xlim = c(min(var_values),max(c(var_values,real.var))),
-                      col = "steelblue",lwd=5,xlab = "Variances",ylab="Frequency", 
-                      main = paste0("permutations = ",permutations))
+                curve( expr = gammaDensity,
+                       xlim = c(min(var_values),max(c(var_values,real.var))),
+                       col  = "steelblue",
+                       lwd  = 5,
+                       xlab = "Variances",
+                       ylab = "Frequency", 
+                       main = paste0("permutations = ",permutations) )
                 
-                histogram <- hist(var_values,prob = TRUE,add = TRUE, breaks = permutations / (0.01 * permutations))
+                histogram <- hist( x      = var_values,
+                                   prob   = TRUE,
+                                   add    = TRUE, 
+                                   breaks = permutations / (0.01 * permutations) )
                 rug(var_values)
                 
                 abline(v = real.var, lty = 1, lwd = 4, col = "darkred")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
                 
-                if(parallel == TRUE){
-                        ### Parallellizing the sampling process using the 'doMC' and 'parallel' package
+                if(parallel){
+                        
+                        ### Parallellizing the sampling process using the 'doParallel' and 'parallel' package
                         ### register all given cores for parallelization
-                        ### detectCores(all.tests = TRUE, logical = FALSE) returns the number of cores available on a multi-core machine
-                        cores <- parallel::detectCores()
-                        #doMC::registerDoMC(cores)
+                        par_cores <- parallel::makeForkCluster(parallel::detectCores())
+                        doParallel::registerDoParallel(par_cores)
                         
                         ### Perform the sampling process in parallel
-                        p.vals_vec <- as.vector(foreach::foreach(i = 1:runs,.combine="c") %dopar% {FlatLineTest(ExpressionSet)$p.value})
+                        p.vals_vec <- as.vector(foreach::foreach(i              = 1:runs,
+                                                                 .combine       = "c",
+                                                                 .errorhandling = "stop") %dopar% 
+                                                        {
+                                                                FlatLineTest( ExpressionSet = ExpressionSet,
+                                                                              permutations = permutations )$p.value
+                                                        
+                                                        }
+                                                )
+                        
+                        parallel::stopCluster(par_cores)
                         
                 }
                 
-                if(parallel == FALSE){
+                if(!parallel){
                         # sequential computations of p-values 
                         # initializing the progress bar
                         #progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
                                 
                         
                         for(i in 1:runs){
-                                p.vals_vec[i] <- FlatLineTest(ExpressionSet)$p.value
+                                
+                                p.vals_vec[i] <- FlatLineTest( ExpressionSet = ExpressionSet,
+                                                               permutations = permutations )$p.value
                                 
                                 # printing out the progress
                                 #setTxtProgressBar(progressBar,i)
                         }
                 }
                 
-                plot(p.vals_vec,type = "l" , lwd = 6, ylim = c(0,1), 
-                     col = "darkblue", xlab = "Runs", ylab = "p-value", 
-                     main = paste0("runs = ",runs))
+                plot( x    = p.vals_vec,
+                      type = "l" , 
+                      lwd  = 6, 
+                      ylim = c(0,1), 
+                      col  = "darkblue", 
+                      xlab = "Runs", 
+                      ylab = "p-value", 
+                      main = paste0("runs = ",runs) )
                 
                 abline(h = 0.05, lty = 2, lwd = 3, col = "darkred")
                 
