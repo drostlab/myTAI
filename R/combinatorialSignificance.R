@@ -63,7 +63,7 @@
 #' This function is also able to perform all computations in parallel using multicore processing. The underlying statistical tests are written in C++ and optimized for fast computations.
 #' 
 #' @return a numeric vector storing the p-values returned by the underlying test statistic for all possible replicate combinations.
-#' @references Drost et al. 2014, Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+#' @references Drost et al. 2015, Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{expand.grid}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 #' @examples
@@ -138,26 +138,30 @@ combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "
   p.vals <- vector(mode = "numeric",length = nCombinations)
   first_cols_names <- as.character(colnames(ExpressionSet)[1:2])
   
-  if(parallel == TRUE){
+  if(parallel){
           
-          stop("The parallel version does not work yet!")
+    
           
-    # parallellizing the sampling process using the 'doMC' and 'parallel' package
-    # register all given cores for parallelization
-    # detectCores(all.tests = TRUE, logical = FALSE) returns the number of cores available on a multi-core machine
-    cores <- parallel::detectCores()
-    #doMC::registerDoMC(cores)
+    ### Parallellizing the sampling process using the 'doParallel' and 'parallel' package
+    ### register all given cores for parallelization
+    par_cores <- parallel::makeForkCluster(parallel::detectCores())
+    doParallel::registerDoParallel(par_cores)
     
     # perform the sampling process in parallel
-    p.vals <- as.vector(foreach::foreach(i = 1:nCombinations,.combine = "c") %dopar% {
+    p.vals <- as.vector(foreach::foreach(i              = 1:nCombinations,
+                                         .combine       = "c",
+                                         .errorhandling = "stop") %dopar% {
       
       FlatLineTest(as.data.frame(ExpressionSet[c(first_cols_names,as.character(combinatorialMatrix[i , ]))]), permutations = permutations)$p.value
       
     })
+    
+    parallel::stopCluster(par_cores)
+    
   }
   
   
-  if(parallel == FALSE){
+  if(!parallel){
     # sequential computations of p-values 
 #     if(nCombinations > 10){
 #       # initializing the progress bar

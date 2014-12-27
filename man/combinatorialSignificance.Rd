@@ -98,7 +98,7 @@ p.vector <- combinatorialSignificance(PhyloExpressionSetExample,
 Hajk-Georg Drost
 }
 \references{
-Drost et al. 2014, Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+Drost et al. 2015, Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 }
 \seealso{
 \code{\link{expand.grid}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
