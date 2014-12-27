@@ -4,12 +4,15 @@
 \alias{MatchMap}
 \title{Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix}
 \usage{
-MatchMap(Map, ExpressionMatrix)
+MatchMap(Map, ExpressionMatrix, accumulate = NULL)
 }
 \arguments{
 \item{Map}{a standard \emph{Phylostratigraphic Map} or \emph{Divergence Map} object.}
 
 \item{ExpressionMatrix}{a standard ExpressionMatrix object.}
+
+\item{accumulate}{an accumulation function such as \code{mean()}, \code{median()}, or \code{min()}
+to accumulate multiple expression levels that map to the same unique gene id present in the \code{ExpressionMatrix}.}
 }
 \value{
 a standard PhyloExpressionSet or DivergenceExpressionSet object.
@@ -67,6 +70,6 @@ Domazet-Loso T, Brajkovic J, Tautz D (2007) A phylostratigraphy approach to unco
 
   Quint M., Drost H.G., Gabel A., Ullrich K.K., Boenn M., Grosse I. (2012) A transcriptomic hourglass in plant embryogenesis. Nature 490: 98-101.
 
-  Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+  Drost et al. (2015), Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
 }
 
