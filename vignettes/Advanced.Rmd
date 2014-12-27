@@ -30,6 +30,8 @@ Both methods are computationally expensive and include many methodologies and ev
 Nevertheless, the [orthologr](https://github.com/HajkD/orthologr) package aims to automate [Divergence Stratigraphy](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)
 and can be used to obtain a Divergence Map for a _query organism of interest_.
 
+A more detailed description of Divergence-Stratigraphy can be found in the [Divergence-Stratigraphy Vignette](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) that is included in [orthologr](https://github.com/HajkD/orthologr).
+
 
 ## Fast Installation Guide for orthologr
 
@@ -124,10 +126,10 @@ library("biomartr", lib.loc = "C:/Program Files/R/R-3.1.1/library")
 ```{r,eval=FALSE}
 # download the proteome of Arabidopsis thaliana from refseq
 # and store the corresponding proteome file in '_ncbi_downloads/proteomes'
-getProteome( db           = "refseq", 
-             kingdom      = "plant",
-             organism     = "Arabidopsis thaliana",
-             clean_folder = FALSE )
+Ath_Proteome <- getProteome( db           = "refseq", 
+                             kingdom      = "plant",
+                             organism     = "Arabidopsis thaliana",
+                             clean_folder = FALSE )
 
 ```
 
@@ -153,8 +155,8 @@ Athaliana_DM <- divergence_stratigraphy(
 
 __Note__, that you can specify the `comp_cores` argument in case you work with an multicore machine.
 
-The next step is to combine the `divergence map` of _A. thaliana_ (`Athaliana_DM`) with an
-gene expression set covering a developmental process of interest (in our case _A. thaliana_ embryogenesis).
+The next step is to combine the `Divergence Map` of _A. thaliana_ (`Athaliana_DM`) with an
+gene expression set covering a biological process of interest (in our case _A. thaliana_ embryogenesis).
 We obtain an example gene expression set covering _A. thaliana_ embryogenesis from the ExpressionMatrix stored
 in `PhyloExpressionSetExample`.
 This results in an standard DivergenceExpressionSet object. 
@@ -198,8 +200,6 @@ head(PhyloExpressionSetExample)
 6            1 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
 
 ```
-
-
 
 
 
