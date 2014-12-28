@@ -10,15 +10,53 @@ Phylotranscriptomics defines the concept of combining genetic sequence informati
 gene expression levels to capture evolutionary signals during developmental processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)).
 
 
+## Tutorials
+
+Three tutorials will get you started with this package:
+
+- [An Introduction to the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
+- [Intermediate concepts of the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
+- [Advanced topics using the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
+
+
+You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
+
+```r
+
+# first install the myTAI package 
+# -> see "Fast Installation Guide" for the current development version
+install.packages("myTAI", build_vignettes = TRUE, dependencies = TRUE)
+
+# source the myTAI package
+library(myTAI)
+
+# look for all tutorials (vignettes) available in the myTAI package
+# this will open your web browser
+browseVignettes("myTAI")
+
+# or as single tutorials
+
+# open tutorial: Introduction
+ vignette("Introduction", package = "myTAI")
+
+# open tutorial: Intermediate
+ vignette("Intermediate", package = "myTAI")
+
+# open tutorial: Advanced
+ vignette("Advanced", package = "myTAI")
+
+
+```
+
 In the `myTAI` framework you can find:
 
-#### The following phylotranscriptiomics measures:
+#### Phylotranscriptiomics Measures:
 
 * `TAI()` : Function to compute the Transcriptome Age Index (TAI)
 * `TDI()` : Function to compute the Transcriptome Divergence Index (TDI)
 * `REMatrix()` : Function to compute the relative expression profiles of all phylostrata or divergence-strata
 
-#### The following visualization and analytics tools:
+#### Visualization and Analytics Tools:
 
 * `PlotPattern()` : Function to plot the TAI or TDI profiles and perform statistical tests
 * `PlotCorrelation()` : Function to plot the correlation between phylostratum values and divergence-stratum values
@@ -28,7 +66,7 @@ In the `myTAI` framework you can find:
 * `PlotDistribution()` : Function to plot the frequency distribution of genes within the corresponding phylostratigraphic map or divergence map
 
 
-#### The following statistical framework and test statistics:
+#### A Statistical Framework and Test Statistics:
 
 * `FlatLineTest()` : Function to perform the __Flat Line Test__ that quantifies the statistical significance of an observed
 phylotranscriptomics pattern (significant deviation from a frat line = no evolutionary signal)
@@ -37,13 +75,13 @@ phylotranscriptomics pattern (significant deviation from a frat line = no evolut
 
 All three functions also include visual analytics tools to quantify the goodness of test statistics.
 
-#### Minor functions for better usibility and additional analytics
+#### Minor Functions for Better Usibility and Additional Analyses
 
 `age.apply()`, `bootMatrix()`, `combinatorialSignificance()`, `ecScore()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`,
 `RE()`, `rhScore()`, and `tf()`
 
 
-## Fast installation guide
+## Fast Installation Guide
 
 ```r
 
@@ -83,45 +121,6 @@ This package provides a broad toolbox for common phylotranscriptomics analyses a
 Using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package, 
 all computationally expansive functions have been written in C++ 
 to enable fast analytics on phylotranscriptomics datasets.
-
-
-## Tutorials
-
-Three tutorials will get you started with this package:
-
-- [An Introduction to the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
-- [Intermediate concepts of the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
-- [Advanced topics using the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
-
-
-You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
-
-```r
-
-# first install the myTAI package 
-# -> see "Fast Installation Guide" for the current development version
-install.packages("myTAI", build_vignettes = TRUE, dependencies = TRUE)
-
-# source the myTAI package
-library(myTAI)
-
-# look for all tutorials (vignettes) available in the myTAI package
-# this will open your web browser
-browseVignettes("myTAI")
-
-# or as single tutorials
-
-# open tutorial: Introduction
- vignette("Introduction", package = "myTAI")
-
-# open tutorial: Intermediate
- vignette("Intermediate", package = "myTAI")
-
-# open tutorial: Advanced
- vignette("Advanced", package = "myTAI")
-
-
-```
 
 
 ## Discussions and Bug Reports
