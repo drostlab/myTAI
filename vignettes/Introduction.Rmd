@@ -130,7 +130,7 @@ __Note__, that within the code of each function, the argument `ExpressionSet` al
 ## Downloading Published PhyloExpressionSets or DivergenceExpressionSets
 
 The `myTAI` package provides the statistical framework for existing PhyloExpressionSets or DivergenceExpressionSets. To re-analyze, reproduce, or further investigate phenomena of existing PhyloExpressionSets or DivergenceExpressionSets, you can use the following
-procedure to download published datasets. In this example we will download `Supplementary Table S3` from [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses).
+procedure to download published datasets. In this example we will download `Supplementary Table S3` from [Drost et al., 2015](http://mbe.oxfordjournals.org/content/early/2015/03/05/molbev.msv012.full.pdf).
 
 
 
