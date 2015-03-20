@@ -246,7 +246,7 @@ bar.colors <- function(n)
 }
 
 
-#' @title Testing the validaty of a PhyloExpressionSet or DivergenceExpressionSet standard
+#' @title Testing the validity of a PhyloExpressionSet or DivergenceExpressionSet standard
 #' @description This function tests whether a given ExpressionSet follows the pre-defined PhyloExpressionSet or DivergenceExpressionSet standard.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet that shall be tested for format validity.
 #' @author Hajk-Georg Drost
