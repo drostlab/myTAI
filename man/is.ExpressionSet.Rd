@@ -2,7 +2,7 @@
 % Please edit documentation in R/base.R
 \name{is.ExpressionSet}
 \alias{is.ExpressionSet}
-\title{Testing the validaty of a PhyloExpressionSet or DivergenceExpressionSet standard}
+\title{Testing the validity of a PhyloExpressionSet or DivergenceExpressionSet standard}
 \usage{
 is.ExpressionSet(ExpressionSet)
 }

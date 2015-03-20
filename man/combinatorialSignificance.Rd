@@ -31,7 +31,7 @@ developmental stage or experiment, this function allows to compute the p-values 
 the statistical significance of the underlying pattern for all combinations of replicates.
 }
 \details{
-#' The intention of this analysis is to validate that there exists no sequence of replicates
+The intention of this analysis is to validate that there exists no sequence of replicates
 (for all possible combination of replicates) that results in a non-significant pattern,
 when the initial pattern with combined replicates was shown to be significant.
 

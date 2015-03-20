@@ -97,7 +97,7 @@ ReductiveHourglassTest(PhyloExpressionSetExample,
 Hajk-Georg Drost
 }
 \references{
-Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+Drost HG et al. (2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol. Biol. Evol. doi:10.1093/molbev/msv012.
 
 Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 

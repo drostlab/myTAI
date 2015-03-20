@@ -13,7 +13,10 @@
 #' This random \code{TAI} or \code{TDI} profile matrix can then be used to perform statistical tests 
 #' (such as the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}) based on the significance of \code{TAI} or \code{TDI} patterns.
 #' @return a numeric matrix representing N randomly permuted \code{TAI} or \code{TDI} profiles.
-#' @references Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' @references 
+#' Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
+#' 
+#' Drost HG et al. (2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol. Biol. Evol. doi:10.1093/molbev/msv012.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 #' @examples 
