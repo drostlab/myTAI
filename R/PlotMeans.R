@@ -86,7 +86,7 @@ PlotMeans <- function(ExpressionSet,Groups = NULL,legendName = NULL,...)
         
         
         # define arguments for different graphics functions
-        plot.args <- c("lwd","col","lty","xlab","cex.lab","main")
+        plot.args <- c("lwd","col","lty","xlab","cex.lab","main","cex.main")
         axis.args <- c("las", "cex.axis")
         legend.args <- c("border","angle","density","box.lwd","cex")
         dots <- list(...)
