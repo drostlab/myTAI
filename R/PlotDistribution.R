@@ -1,7 +1,7 @@
-#' @title Plot the frequency distribution of Phylostrata or Divergence-Strata
+#' @title Plot the frequency distribution of PS or DS
 #' @description This function plots the frequency distribution of genes within the 
 #' corresponding \emph{phylostratigraphic map} or \emph{divergence map} and can be used to fastly visualize the PS or DS distribution of a given phylostratum vector or divergence-stratum vector.
-#' @param PhyloExpressionSet a standard PhyloExpressionSet object.
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param plotText a boolean value specifying whether the total number of genes 
 #' belonging to a corresponding phylostratum or divergence-stratum class
 #' shall be plotted above each bar of the barplot.
@@ -40,7 +40,7 @@
 #'
 #' @export
 
-PlotDistribution <- function(PhyloExpressionSet,plotText = TRUE,as.ratio = FALSE,...)
+PlotDistribution <- function(ExpressionSet, plotText = TRUE, as.ratio = FALSE, ...)
 {
         
         is.ExpressionSet(PhyloExpressionSet)

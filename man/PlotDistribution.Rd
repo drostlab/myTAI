@@ -2,12 +2,12 @@
 % Please edit documentation in R/PlotDistribution.R
 \name{PlotDistribution}
 \alias{PlotDistribution}
-\title{Plot the frequency distribution of Phylostrata or Divergence-Strata}
+\title{Plot the frequency distribution of PS or DS}
 \usage{
-PlotDistribution(PhyloExpressionSet, plotText = TRUE, as.ratio = FALSE, ...)
+PlotDistribution(ExpressionSet, plotText = TRUE, as.ratio = FALSE, ...)
 }
 \arguments{
-\item{PhyloExpressionSet}{a standard PhyloExpressionSet object.}
+\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
 \item{plotText}{a boolean value specifying whether the total number of genes
 belonging to a corresponding phylostratum or divergence-stratum class
