@@ -1,12 +1,11 @@
 Package: myTAI
 Type: Package
-Title: A Framework to Perform Phylotranscriptomics Analyses for Evolutionary Developmental Biology Research
+Title: A Software Framework to Perform Phylotranscriptomics
 Version: 0.0.2
 Date: 2014-12-27
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
-Description: A statistical framework to combine evolutionary information with transcriptome data to detect evolutionary signals and conserved stages in biological processes
-License: GPL-3
+Description: myTAI is a software framework that allows you to perform phylotranscriptomics analyses to detect signals of evolutionary conservation in biological processes
 VignetteBuilder: knitr
 NeedsCompilation: yes
 Depends:
