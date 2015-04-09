@@ -4,10 +4,10 @@
 \alias{PlotDistribution}
 \title{Plot the frequency distribution of PS or DS}
 \usage{
-PlotDistribution(ExpressionSet, plotText = TRUE, as.ratio = FALSE, ...)
+PlotDistribution(PhyloExpressionSet, plotText = TRUE, as.ratio = FALSE, ...)
 }
 \arguments{
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+\item{PhyloExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
 \item{plotText}{a boolean value specifying whether the total number of genes
 belonging to a corresponding phylostratum or divergence-stratum class
