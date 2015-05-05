@@ -11,6 +11,7 @@ pow <- function(x,power)
 #' also storing only unique gene ids.
 #' @param Map a standard \emph{Phylostratigraphic Map} or \emph{Divergence Map} object.
 #' @param ExpressionMatrix  a standard ExpressionMatrix object.
+#' @param remove.duplicates a logical value indicating whether duplicate gene ids should be removed from the data set.
 #' @param accumulate an accumulation function such as \code{mean()}, \code{median()}, or \code{min()}
 #' to accumulate multiple expression levels that map to the same unique gene id present in the \code{ExpressionMatrix}.
 #' @details
@@ -44,7 +45,7 @@ pow <- function(x,power)
 #' 
 #'   Quint M., Drost H.G., Gabel A., Ullrich K.K., Boenn M., Grosse I. (2012) A transcriptomic hourglass in plant embryogenesis. Nature 490: 98-101.
 #' 
-#'   Drost et al. (2015), Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+#'   Drost et al. Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis. (2015) 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 #' 
 #' @author Hajk-Georg Drost
 #' @examples
@@ -87,7 +88,7 @@ pow <- function(x,power)
 #'         
 #'         
 #'@export
-MatchMap <- function(Map,ExpressionMatrix, accumulate = NULL)
+MatchMap <- function(Map,ExpressionMatrix, remove.duplicates = FALSE, accumulate = NULL)
 {
   
   names(ExpressionMatrix)[1] <- "GeneID"
@@ -95,6 +96,9 @@ MatchMap <- function(Map,ExpressionMatrix, accumulate = NULL)
   ExpressionMatrix[ , "GeneID"] <- tolower(ExpressionMatrix[ , "GeneID"])
   Map[ , "GeneID"] <- tolower(Map[ , "GeneID"])
   GeneID <- NULL
+  
+  if(remove.duplicates)
+          Map <- Map[-which(duplicated(Map[ , "GeneID"])) , ]
   
   if(any(duplicated(Map[ , "GeneID"])))
           stop("You have duplicate Gene IDs in your Map. Please enter only unique Gene IDs.")
@@ -118,8 +122,7 @@ MatchMap <- function(Map,ExpressionMatrix, accumulate = NULL)
           return(res_tbl[ , c(ncol(res_tbl),1:(ncol(res_tbl)-1))])
           
   } else {
-          
-          stop("Something went wrong with matching Map and ExpressionMatrix! Plaese check for duplicate entries!")
+          stop("Something went wrong with matching Map and ExpressionMatrix! Please check for duplicate entries!")
   }
   
 }
