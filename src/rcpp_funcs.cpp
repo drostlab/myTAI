@@ -109,7 +109,7 @@ NumericMatrix cpp_bootMatrix(NumericMatrix ExpressionMatrix, NumericVector AgeVe
 
 // @export
 // [[Rcpp::export]]
-  NumericMatrix cpp_pMatrix(NumericMatrix ExpressionSet, NumericVector AgeVector)
+  NumericMatrix cpp_pMatrix(NumericMatrix ExpressionSet,NumericVector AgeVector)
   {
     
     int nRows = ExpressionSet.nrow();
