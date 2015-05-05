@@ -1,7 +1,17 @@
+myTAI 0.0.3
+===========
+
+### New Features in v. 0.0.3
+
+- Function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
+duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) during the process of matching a Map with an ExpressionSet
+
+
+
 myTAI 0.0.2
 ===========
 
-## New Features
+### New Features in v. 0.0.2
 
 - `combinatorialSignificance()`, `FlatLineTest()`, `ReductiveHourglassTest()`, and `EarlyConservationTest()`
 now support multicore processing
@@ -9,11 +19,11 @@ now support multicore processing
 - `MatchMap()` has been entirely rewritten and is now based on [dplyr](http://cran.rstudio.com/web/packages/dplyr/); additionally
 it now has a new argument `accumulate` that allows you to accumulate multiple expression levels to a unique expressiion level for a unique gene id
 
-## Vignettes
+### Vignettes
 
 All three Vignettes: `Introduction`, `Intermediate`, and `Advanced` have been updated and extended.
 
-## Bug Fixes
+### Bug Fixes
 
 - two small bugs in `ReductiveHourglassTest()` and `EarlyConservationTest()` have been fixed that caused
 that instead of displaying 3 or 4 plots (`par(mfrow=c(1,3))` or `par(mfrow=c(2,2))`) only 1 plot has been generated
