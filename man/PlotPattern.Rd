@@ -100,24 +100,41 @@ data(PhyloExpressionSetExample)
 # the statistical significance of the present TAI pattern and will be drawn as 'p = ... '
 # in the plot
 
-PlotPattern(PhyloExpressionSetExample, TestStatistic = "FlatLineTest",
-            permutations = 100, type = "l", xlab = "Ontogeny",
-            ylab = "TAI", lwd = 9)
+PlotPattern(ExpressionSet = PhyloExpressionSetExample,
+            TestStatistic = "FlatLineTest",
+            permutations  = 100,
+            type          = "l",
+            xlab          = "Ontogeny",
+            ylab          = "TAI",
+            lwd           = 9)
 
 # an example performing the ReductiveHourglassTest and printing the p-value
 # and shaded area of the presumptive phylotypic period into the plot
 # Here the 'p = ...' denotes the p-value that is returned by the ReductiveHourglassTest
 
-PlotPattern(PhyloExpressionSetExample,TestStatistic = "ReductiveHourglassTest",
-            modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 100, p.value = TRUE, shaded.area = TRUE,
-            xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
+PlotPattern(
+            ExpressionSet = PhyloExpressionSetExample,
+            TestStatistic = "ReductiveHourglassTest",
+            modules       = list(early = 1:2,mid = 3:5,late = 6:7),
+            permutations  = 100,
+            p.value       = TRUE,
+            shaded.area   = TRUE,
+            xlab          = "Ontogeny",
+            ylab          = "TAI",
+            type          = "l",
+            lwd           = 9)
 
 # testing for early conservation model
-PlotPattern(PhyloExpressionSetExample,TestStatistic = "EarlyConservationTest",
-            modules = list(early = 1:2,mid = 3:5,late = 6:7),
-            permutations = 100, p.value = TRUE, shaded.area = TRUE,
-            xlab = "Ontogeny", ylab = "TAI", type = "l", lwd = 9)
+PlotPattern( ExpressionSet = PhyloExpressionSetExample,
+             TestStatistic = "EarlyConservationTest",
+            modules        = list(early = 1:2,mid = 3:5,late = 6:7),
+            permutations   = 100,
+            p.value        = TRUE,
+            shaded.area    = TRUE,
+            xlab           = "Ontogeny",
+            ylab           = "TAI",
+            type           = "l",
+            lwd            = 9)
 }
 \author{
 Hajk-Georg Drost
