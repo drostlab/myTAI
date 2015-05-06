@@ -8,6 +8,7 @@ Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
 Description: myTAI is a software framework that allows you to perform phylotranscriptomics analyses to detect signals of evolutionary conservation in biological processes
 VignetteBuilder: knitr
 NeedsCompilation: yes
+License: GPL-3
 Depends:
     R (>= 3.1.1)
 Imports:
