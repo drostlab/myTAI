@@ -1,4 +1,4 @@
-#' @title Transform the gene expression set of a given PhyloExpressionSet or DivergenceExpressionSet
+#' @title Transform Gene Expression Levels
 #' @description This function transforms the gene expression set stored in an input 
 #' PhloExpressionSet or DivergenceExpressionSet object and returns a 
 #' PhloExpressionSet or DivergenceExpressionSet object with transformed expression levels. 

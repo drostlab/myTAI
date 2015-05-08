@@ -2,8 +2,7 @@
 % Please edit documentation in R/PlotCorrelation.R
 \name{PlotCorrelation}
 \alias{PlotCorrelation}
-\title{Plot the correlation between Phylostrata and Divergence-Strata
- of a given PhyloExpressionSet and DivergenceExpressionSet}
+\title{Plot the Correlation Between Phylostrata and Divergence Strata}
 \usage{
 PlotCorrelation(PhyloExpressionSet, DivergenceExpressionSet,
   method = "pearson", linearModel = FALSE, main.text = NULL, ...)

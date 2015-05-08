@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotMeans.R
 \name{PlotMeans}
 \alias{PlotMeans}
-\title{Plot the Mean Expression Profiles of Phylostrata or Divergence-Strata}
+\title{Plot the Mean Expression Profiles of Phylostrata or Divergence Strata}
 \usage{
 PlotMeans(ExpressionSet, Groups = NULL, legendName = NULL, ...)
 }

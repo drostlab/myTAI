@@ -2,7 +2,7 @@
 % Please edit documentation in R/tf.R
 \name{tf}
 \alias{tf}
-\title{Transform the gene expression set of a given PhyloExpressionSet or DivergenceExpressionSet}
+\title{Transform Gene Expression Levels}
 \usage{
 tf(ExpressionSet, FUN)
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{PhyloExpressionSetExample}
 \alias{PhyloExpressionSetExample}
-\title{A standard PhyloExpressionSet example}
+\title{An Example PhyloExpressionSet Data Set}
 \source{
 \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
 }

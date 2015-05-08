@@ -3,7 +3,7 @@
 \docType{data}
 \name{DivergenceExpressionSetExample}
 \alias{DivergenceExpressionSetExample}
-\title{A standard DivergenceExpressionSet example}
+\title{An Example DivergenceExpressionSet Data Set}
 \source{
 \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
 }

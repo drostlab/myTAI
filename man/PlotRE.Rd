@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotRE.R
 \name{PlotRE}
 \alias{PlotRE}
-\title{Plot relative expression levels}
+\title{Plot Relative Expression Levels}
 \usage{
 PlotRE(ExpressionSet, Groups = NULL, legendName = NULL, ...)
 }

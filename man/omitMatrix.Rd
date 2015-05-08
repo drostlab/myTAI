@@ -2,7 +2,7 @@
 % Please edit documentation in R/base.R
 \name{omitMatrix}
 \alias{omitMatrix}
-\title{Compute TAI or TDI profiles omitting a given gene}
+\title{Compute TAI or TDI Profiles Omitting a Given Gene}
 \usage{
 omitMatrix(ExpressionSet)
 }

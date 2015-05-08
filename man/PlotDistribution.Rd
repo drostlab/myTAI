@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotDistribution.R
 \name{PlotDistribution}
 \alias{PlotDistribution}
-\title{Plot the frequency distribution of PS or DS}
+\title{Plot the Frequency Distribution of Phylostrata or Divergence Strata}
 \usage{
 PlotDistribution(PhyloExpressionSet, plotText = TRUE, as.ratio = FALSE, ...)
 }

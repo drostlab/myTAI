@@ -2,7 +2,7 @@
 % Please edit documentation in R/rel_exp.R
 \name{REMatrix}
 \alias{REMatrix}
-\title{Compute relative expression profiles for Phylostrata or Divergence-Strata
+\title{Compute a Relative Expression Matrix
 available in a PhyloExpressionSet or DivergenceExpressionSet}
 \usage{
 REMatrix(ExpressionSet)

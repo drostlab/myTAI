@@ -1,4 +1,4 @@
-#' @title Plot the Mean Expression Profiles of Phylostrata or Divergence-Strata
+#' @title Plot the Mean Expression Profiles of Phylostrata or Divergence Strata
 #' @description This function computes for each phylostratum or divergence-stratum the corresponding mean expression profile
 #' and plots the profiles in N different windows corresponding to the given Phylostratum-Classes
 #' that shall be compared.

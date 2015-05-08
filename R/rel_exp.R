@@ -1,4 +1,4 @@
-#' @title Transform to relative expression levels
+#' @title Transform to Relative Expression Levels
 #' @description This function computes the relative expression profiles of any given gene expression set. 
 #' The relative expression profile is being computed as follows:
 #' 
@@ -42,7 +42,7 @@ RE <- function(ExpressionMatrix)
         return(RE)
 }
 
-#' @title Compute relative expression profiles for Phylostrata or Divergence-Strata
+#' @title Compute a Relative Expression Matrix
 #' available in a PhyloExpressionSet or DivergenceExpressionSet
 #' @description This function computes the relative expression profiles of 
 #' all given phylostrata or divergence-strata within a given PhyloExpressionSet or DivergenceExpressionSet.

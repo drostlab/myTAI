@@ -1,4 +1,4 @@
-#' @title Plot relative expression levels
+#' @title Plot Relative Expression Levels
 #' @description 
 #' This function computes for each phylostratum or divergence stratum the corresponding relative expression profile
 #' and plots the profiles in N different windows corresponding to the given phylostratum classes 

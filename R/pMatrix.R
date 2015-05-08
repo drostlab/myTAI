@@ -1,9 +1,9 @@
-#' @title Compute the partial TAI or TDI values for each single gene 
+#' @title Compute Partial TAI or TDI Values 
 #' in a standard PhyloExpressionSet or DivergenceExpressionSet object
 #' @description This function computes the partial \code{\link{TAI}} or \code{\link{TDI}} 
 #' values for each single gene in a PhyloExpressionSet or DivergenceExpressionSet object.
 #'
-#' In detail, each gene gets a 'TAI contribution profile' or 'TDI contribution profile'. 
+#' In detail, each gene gets a \emph{TAI contribution profile} or \emph{TDI contribution profile}. 
 #'
 #' \deqn{TAI_is = f_is * ps_i}
 #'

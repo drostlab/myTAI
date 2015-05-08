@@ -129,7 +129,7 @@ MatchMap <- function(Map,ExpressionMatrix, remove.duplicates = FALSE, accumulate
 }
 
 
-#' @title Compute TAI or TDI profiles omitting a given gene
+#' @title Compute TAI or TDI Profiles Omitting a Given Gene
 #' @description For each gene i, exclude the corresponding gene i from the global
 #'  PhyloExpressionSet or DivergenceExpressionSet and compute the \code{\link{TAI}} or \code{\link{TDI}} 
 #'  profile for the corresponding global PhyloExpressionSet or DivergenceExpressionSet
@@ -235,12 +235,11 @@ re.colors <- function(n)
 #' @param n the number of colors to be in the palette. 
 #' @return a character vector containing different color names that can be used for barplots.
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{palette}}
 #' @examples
 #' 
 #' # get 5 different colors for 5 different bars
 #' barplot_colors <- bar.colors(5)
-#' @export
+
 bar.colors <- function(n)
 {
         
@@ -250,7 +249,7 @@ bar.colors <- function(n)
 }
 
 
-#' @title Testing the validity of a PhyloExpressionSet or DivergenceExpressionSet standard
+#' @title Test ExpressionSet Standard
 #' @description This function tests whether a given ExpressionSet follows the pre-defined PhyloExpressionSet or DivergenceExpressionSet standard.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet that shall be tested for format validity.
 #' @author Hajk-Georg Drost

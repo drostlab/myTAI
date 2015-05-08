@@ -2,7 +2,7 @@
 % Please edit documentation in R/rel_exp.R
 \name{RE}
 \alias{RE}
-\title{Transform to relative expression levels}
+\title{Transform to Relative Expression Levels}
 \usage{
 RE(ExpressionMatrix)
 }
