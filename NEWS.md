@@ -3,14 +3,19 @@ myTAI 0.0.3
 
 ### New Features in v. 0.0.3
 
-- a new function `CollapseReplicates()` is now available in `myTAI` allowing users to combine replicate expression levels in ExpressionSet onjects
+- a new function `CollapseReplicates()` is now available in `myTAI` allowing users to combine replicate expression levels in ExpressionSet objects
 
 - a new function `FilterRNASeqCT()` is now available in `myTAI` allowing users to filter expression levels of `ExpresisonSet` objects deriving from RNA-Seq count tables  
 
-- Function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
+- function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
 duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) during the process of matching a Map with an ExpressionSet
 
 - function `combinatorialSignificance()` is now named `CombinatorialSignificance()`
+
+- changing the title and description of the `myTAI` package 
+
+- some minor changes in vignettes and within the documentation of functions
+
 
 myTAI 0.0.2
 ===========
