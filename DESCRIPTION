@@ -1,17 +1,17 @@
 Package: myTAI
 Type: Package
-Title: A Software Framework to Perform Phylotranscriptomics
+Title: Performing Phylotranscriptomics with R
 Version: 0.0.2
-Date: 2014-12-27
+Date: 2015-05-15
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
-Description: myTAI is a software framework that allows you to perform phylotranscriptomics analyses to detect signals of evolutionary conservation in biological processes
+Description: The myTAI package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
 VignetteBuilder: knitr
 NeedsCompilation: yes
 License: GPL-3
-Depends:
+Depends: 
     R (>= 3.1.1)
-Imports:
+Imports: 
     Rcpp (>= 0.11.3),
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.0-2),
@@ -19,10 +19,11 @@ Imports:
     foreach (>= 1.4.2),
     doParallel (>= 1.0.8),
     dplyr (>= 0.3.0)
-Suggests:
+Suggests: 
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
-    devtools (>= 1.6.1)
+    devtools (>= 1.6.1),
+    testthat (>= 0.9.1)
 LinkingTo: Rcpp
 URL: https://github.com/HajkD/myTAI
 BugReports: https://github.com/HajkD/myTAI/issues
