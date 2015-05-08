@@ -54,15 +54,15 @@ age.apply <- function(ExpressionSet,FUN, ... ,as.list = FALSE)
         is.ExpressionSet(ExpressionSet)
         
         f <- match.fun(FUN)
-        ncols <- dim(ExpressionSet)[2]
+        ncols <- ncol(ExpressionSet)
         s <- split(ExpressionSet, ExpressionSet[ , 1])
         
-        if(as.list == FALSE){
+        if(!as.list){
                 res <- t(as.data.frame(lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))))
                 rownames(res) <- levels(as.factor(ExpressionSet[ , 1]))
         }
         
-        if(as.list == TRUE){
+        if(as.list){
                 res <- lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))
                 names(res) <- levels(as.factor(ExpressionSet[ , 1]))
         }
