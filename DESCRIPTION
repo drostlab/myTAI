@@ -25,3 +25,4 @@ Suggests:
     devtools (>= 1.6.1)
 LinkingTo: Rcpp
 URL: https://github.com/HajkD/myTAI
+BugReports: https://github.com/HajkD/myTAI/issues
