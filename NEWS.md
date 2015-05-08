@@ -3,6 +3,8 @@ myTAI 0.0.3
 
 ### New Features in v. 0.0.3
 
+- a new function `CollapseReplicates()` is now available in `myTAI` allowing users to combine replicate expression levels in ExpressionSet onjects
+
 - a new function `FilterRNASeqCT()` is now available in `myTAI` allowing users to filter expression levels of `ExpresisonSet` objects deriving from RNA-Seq count tables  
 
 - Function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
