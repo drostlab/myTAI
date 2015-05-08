@@ -51,7 +51,6 @@ FilterRNASeqCT <- function(ExpressionSet, cut.off, method = "const", n = NULL){
         
         is.ExpressionSet(ExpressionSet)
         
-        colnames(ExpressionSet)[1] <- "GeneID"
         ncols <- ncol(ExpressionSet)
         
         if(method == "const"){
