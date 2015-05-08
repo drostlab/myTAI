@@ -2,8 +2,7 @@
 % Please edit documentation in R/rel_exp.R
 \name{REMatrix}
 \alias{REMatrix}
-\title{Compute a Relative Expression Matrix
-available in a PhyloExpressionSet or DivergenceExpressionSet}
+\title{Compute a Relative Expression Matrix}
 \usage{
 REMatrix(ExpressionSet)
 }

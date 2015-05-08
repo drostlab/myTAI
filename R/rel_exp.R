@@ -43,7 +43,6 @@ RE <- function(ExpressionMatrix)
 }
 
 #' @title Compute a Relative Expression Matrix
-#' available in a PhyloExpressionSet or DivergenceExpressionSet
 #' @description This function computes the relative expression profiles of 
 #' all given phylostrata or divergence-strata within a given PhyloExpressionSet or DivergenceExpressionSet.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
