@@ -77,17 +77,18 @@
 #' # and 2 replicates for stage 3
 #' # FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000
 #' # BUT NOTE THAT THIS TAKES MUCH MORE COMPUTATION TIME
-#' p.vector <- combinatorialSignificance(PhyloExpressionSetExample, 
-#'                                       replicates = c(2,3,2), 
+#' p.vector <- CombinatorialSignificance(ExpressionSet = PhyloExpressionSetExample, 
+#'                                       replicates    = c(2,3,2), 
 #'                                       TestStatistic = "FlatLineTest", 
-#'                                       permutations = 10, parallel = FALSE)
+#'                                       permutations  = 10, 
+#'                                       parallel      = FALSE)
 #'
 #'
 #'
 #'
 #' @import foreach
 #' @export
-combinatorialSignificance <- function(ExpressionSet,
+CombinatorialSignificance <- function(ExpressionSet,
                                       replicates,
                                       TestStatistic = "FlatLineTest", 
                                       permutations  = 1000, 
