@@ -1,4 +1,4 @@
-#' @title Compute the statistical significance of each replicate combination
+#' @title Compute the Statistical Significance of Each Replicate Combination
 #' @description In case a PhyloExpressionSet or DivergenceExpressionSet stores replicates for each
 #' developmental stage or experiment, this function allows to compute the p-values quantifying
 #' the statistical significance of the underlying pattern for all combinations of replicates.
@@ -87,8 +87,11 @@
 #'
 #' @import foreach
 #' @export
-combinatorialSignificance <- function(ExpressionSet,replicates,TestStatistic = "FlatLineTest", 
-                                      permutations = 1000, parallel = FALSE)
+combinatorialSignificance <- function(ExpressionSet,
+                                      replicates,
+                                      TestStatistic = "FlatLineTest", 
+                                      permutations  = 1000, 
+                                      parallel      = FALSE)
 {
   
   is.ExpressionSet(ExpressionSet)

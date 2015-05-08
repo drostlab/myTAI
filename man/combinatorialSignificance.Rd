@@ -2,7 +2,7 @@
 % Please edit documentation in R/combinatorialSignificance.R
 \name{combinatorialSignificance}
 \alias{combinatorialSignificance}
-\title{Compute the statistical significance of each replicate combination}
+\title{Compute the Statistical Significance of Each Replicate Combination}
 \usage{
 combinatorialSignificance(ExpressionSet, replicates,
   TestStatistic = "FlatLineTest", permutations = 1000, parallel = FALSE)

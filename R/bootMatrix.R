@@ -1,4 +1,4 @@
-#' @title Compute a permutation matrix for test statistics
+#' @title Compute a Permutation Matrix for Test Statistics
 #' @description This function computes the TAI for a row permutated PhyloExpressionSet or DivergenceExpressionSet.
 #'
 #' One can specify the number of permutations which corresponds to the number of \code{\link{TAI}} or \code{\link{TDI}} profiles

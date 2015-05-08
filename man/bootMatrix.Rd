@@ -2,7 +2,7 @@
 % Please edit documentation in R/bootMatrix.R
 \name{bootMatrix}
 \alias{bootMatrix}
-\title{Compute a permutation matrix for test statistics}
+\title{Compute a Permutation Matrix for Test Statistics}
 \usage{
 bootMatrix(ExpressionSet, permutations = 1000)
 }
