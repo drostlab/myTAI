@@ -1,4 +1,4 @@
-#' @title Age class specific apply function
+#' @title Age Category Specific apply Function
 #' @description 
 #' This function takes a standard PhyloExpressionSet or DivergenceExpressionSet object
 #' as argument and performs any given function to the sub expression matrix of each phylotranscriptomic age class.

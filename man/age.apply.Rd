@@ -2,7 +2,7 @@
 % Please edit documentation in R/age.apply.R
 \name{age.apply}
 \alias{age.apply}
-\title{Age class specific apply function}
+\title{Age Category Specific apply Function}
 \usage{
 age.apply(ExpressionSet, FUN, ..., as.list = FALSE)
 }
