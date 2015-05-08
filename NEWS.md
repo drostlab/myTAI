@@ -10,7 +10,7 @@ myTAI 0.0.3
 - Function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
 duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) during the process of matching a Map with an ExpressionSet
 
-
+- function `combinatorialSignificance()` is now named `CombinatorialSignificance()`
 
 myTAI 0.0.2
 ===========
