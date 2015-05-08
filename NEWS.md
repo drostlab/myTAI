@@ -12,6 +12,8 @@ duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) 
 
 - function `combinatorialSignificance()` is now named `CombinatorialSignificance()`
 
+- `bar.colors()` is now an internal function
+
 - changing the title and description of the `myTAI` package 
 
 - some minor changes in vignettes and within the documentation of functions
