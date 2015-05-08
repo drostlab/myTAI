@@ -5,6 +5,7 @@ pow <- function(x,power)
   return(x^power)
 }
 
+CollapseFromTo <- function(x,from,to,FUN){  f <- match.fun(FUN); return(apply(x[ , from:to], 1 , f)) }
 
 #' @title Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix
 #' @details This function matches a \emph{Phylostratigraphic Map} or \emph{Divergence Map} only storing unique gene ids with a ExpressionMatrix
