@@ -2,8 +2,7 @@
 % Please edit documentation in R/pMatrix.R
 \name{pMatrix}
 \alias{pMatrix}
-\title{Compute Partial TAI or TDI Values
-in a standard PhyloExpressionSet or DivergenceExpressionSet object}
+\title{Compute Partial TAI or TDI Values}
 \usage{
 pMatrix(ExpressionSet)
 }

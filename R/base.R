@@ -46,7 +46,7 @@ CollapseFromTo <- function(x,from,to,FUN){  f <- match.fun(FUN); return(apply(x[
 #' 
 #'   Quint M., Drost H.G., Gabel A., Ullrich K.K., Boenn M., Grosse I. (2012) A transcriptomic hourglass in plant embryogenesis. Nature 490: 98-101.
 #' 
-#'   Drost et al. Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis. (2015) 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+#'   Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 #' 
 #' @author Hajk-Georg Drost
 #' @examples

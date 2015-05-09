@@ -14,9 +14,9 @@
 #' (such as the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTest}}) based on the significance of \code{TAI} or \code{TDI} patterns.
 #' @return a numeric matrix representing N randomly permuted \code{TAI} or \code{TDI} profiles.
 #' @references 
-#' Quint M et al. \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): (2012) 98-101.
+#' Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490):  98-101.
 #' 
-#' Drost HG et al. \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol (2015) 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+#' Drost HG et al. (2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 #' @examples 

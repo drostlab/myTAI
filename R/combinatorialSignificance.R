@@ -63,7 +63,7 @@
 #' This function is also able to perform all computations in parallel using multicore processing. The underlying statistical tests are written in C++ and optimized for fast computations.
 #' 
 #' @return a numeric vector storing the p-values returned by the underlying test statistic for all possible replicate combinations.
-#' @references Drost et al. 2015, Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+#' @references Drost HG et al. \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol (2015) 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{expand.grid}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 #' @examples

@@ -70,9 +70,12 @@
 #' \code{p_ect} = p-value of the corresponding \code{\link{EarlyConservationTest}}
 #' 
 #' @references 
-#' Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
+#' Domazet-Loso T and Tautz D. (2010). "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
 #'
-#' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' 
+#' Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+#' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}},
 #'  \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}

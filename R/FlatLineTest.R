@@ -38,6 +38,8 @@
 #' }
 #' @references 
 #' 
+#' Drost HG et al. \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol (2015) 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+#' 
 #' Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 #'
 #' M. L. Delignette-Muller, R. Pouillot, J.-B. Denis and C. Dutang (2014), fitdistrplus: help to fit of a parametric distribution to non-censored or censored data.
