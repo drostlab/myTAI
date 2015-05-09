@@ -1,4 +1,4 @@
-context("Test: age.apply() .")
+context("Test: age.apply() ")
 
 # adapted from: https://github.com/hadley/dplyr/blob/master/tests/testthat/test-arrange.r 
 equal_df <- function(df1, df2) {
