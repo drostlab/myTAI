@@ -102,6 +102,7 @@ CombinatorialSignificance <- function(ExpressionSet,
   
   ncols <- dim(ExpressionSet)[2]
   
+  # in case all stages have the exact same number of replicates
   if(length(replicates) == 1){
   
      if((ncols - 2) %% replicates != 0)
@@ -117,6 +118,7 @@ CombinatorialSignificance <- function(ExpressionSet,
      combinatorialMatrix <- expand.grid(replicateName.List, stringsAsFactors = FALSE)
   }
   
+  # in case stages have variable number of replicates per stage
   if(length(replicates) > 1){
     
     nStages <- length(replicates)
