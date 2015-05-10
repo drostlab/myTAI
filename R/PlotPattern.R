@@ -18,6 +18,7 @@
 #' @param shaded.area a boolean value specifying whether a shaded area shall 
 #' be drawn for the developmental stages defined to be the presumptive phylotypic period.
 #' @param y.ticks a numeric value specifying the number of ticks to be drawn on the y-axis.
+#' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotPattern}. Default is \code{custom.perm.matrix = NULL}.
 #' @param \dots default plot parameters.
 #' @details 
 #' 
@@ -137,28 +138,35 @@
 #' 
 #' @export
 
-PlotPattern <- function(ExpressionSet, TestStatistic = "FlatLineTest",
-                        modules = NULL, permutations = 1000,lillie.test = FALSE,
-                        digits.ylab = 4, p.value = TRUE, shaded.area = FALSE, y.ticks = 4,...)
+PlotPattern <- function(ExpressionSet, 
+                        TestStatistic      = "FlatLineTest",
+                        modules            = NULL, 
+                        permutations       = 1000,
+                        lillie.test        = FALSE,
+                        digits.ylab        = 4, 
+                        p.value            = TRUE, 
+                        shaded.area        = FALSE, 
+                        y.ticks            = 4,
+                        custom.perm.matrix = NULL, ...)
 {
         
         is.ExpressionSet(ExpressionSet)
         
-        if(is.null(TestStatistic)){
+        if (is.null(TestStatistic)){
                 
                 plot(TAI(ExpressionSet), ...)
                 
         } else {
         
         
-        if(!(is.element(TestStatistic, c("FlatLineTest","ReductiveHourglassTest","EarlyConservationTest")))){
+        if (!(is.element(TestStatistic, c("FlatLineTest","ReductiveHourglassTest","EarlyConservationTest")))){
                 stop("Please enter a correct string for the test statistic: 'FlatLineTest', 'EarlyConservationTest' or 'ReductiveHourglassTest'.")
         }
         
-        if((is.element(TestStatistic,c("ReductiveHourglassTest","EarlyConservationTest"))) & is.null(modules))
+        if ((is.element(TestStatistic,c("ReductiveHourglassTest","EarlyConservationTest"))) & is.null(modules))
                 stop("Please specify the modules for the ReductiveHourglassTest or EarlyConservationTest: modules = list(early = ..., mid = ..., late = ...).")
         
-        if((!is.null(modules)) & (TestStatistic == "FlatLineTest"))
+        if ((!is.null(modules)) & (TestStatistic == "FlatLineTest"))
                 warning("You don't need to specify the modules argument for the FlatLineTest.")
         
         nCols <- dim(ExpressionSet)[2]
@@ -167,51 +175,95 @@ PlotPattern <- function(ExpressionSet, TestStatistic = "FlatLineTest",
         age <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
         
 
-        if(TestStatistic == "FlatLineTest"){
+        if (TestStatistic == "FlatLineTest"){
                 
-                resList <- FlatLineTest( ExpressionSet = ExpressionSet,
-                                         permutations  = permutations )
+                if (is.null(custom.perm.matrix)){
+                        
+                        resList <- FlatLineTest( ExpressionSet = ExpressionSet,
+                                                 permutations  = permutations )
+                }
                 
+                else if (!is.null(custom.perm.matrix)){
+                        
+                        resList <- FlatLineTest( ExpressionSet      = ExpressionSet,
+                                                 custom.perm.matrix = custom.perm.matrix)
+                        
+                }
         }
         
-        if(TestStatistic == "ReductiveHourglassTest"){
+        if (TestStatistic == "ReductiveHourglassTest"){
                 
-                if(lillie.test){
+                if (lillie.test){
                         
-                        resList <- ReductiveHourglassTest( ExpressionSet = ExpressionSet,
-                                                           modules       = modules, 
-                                                           permutations  = permutations, 
-                                                           lillie.test   = TRUE )
+                        if (is.null(custom.perm.matrix)){
+                                resList <- ReductiveHourglassTest( ExpressionSet = ExpressionSet,
+                                                                   modules       = modules, 
+                                                                   permutations  = permutations, 
+                                                                   lillie.test   = TRUE )
+                        }
+                        
+                        else if (!is.null(custom.perm.matrix)){
+                                resList <- ReductiveHourglassTest( ExpressionSet      = ExpressionSet,
+                                                                   modules            = modules, 
+                                                                   lillie.test        = TRUE,
+                                                                   custom.perm.matrix = custom.perm.matrix)
+                        }
                 }
                 
                 if(!lillie.test){
                         
-                        resList <- ReductiveHourglassTest( ExpressionSet = ExpressionSet,
-                                                           modules       = modules, 
-                                                           permutations  = permutations, 
-                                                           lillie.test   = FALSE )
+                        if (is.null(custom.perm.matrix)){
+                                resList <- ReductiveHourglassTest( ExpressionSet = ExpressionSet,
+                                                                   modules       = modules, 
+                                                                   permutations  = permutations, 
+                                                                   lillie.test   = FALSE )
+                        }
+                        
+                        else if (!is.null(custom.perm.matrix)){
+                                resList <- ReductiveHourglassTest( ExpressionSet      = ExpressionSet,
+                                                                   modules            = modules, 
+                                                                   lillie.test        = FALSE,
+                                                                   custom.perm.matrix = custom.perm.matrix)
+                        }
                 }
-                
         }
         
         if(TestStatistic == "EarlyConservationTest"){
                 
                 if(lillie.test){
                         
-                        resList <- EarlyConservationTest( ExpressionSet = ExpressionSet,
-                                                          modules       = modules, 
-                                                          permutations  = permutations, 
-                                                          lillie.test   = TRUE )
+                        if (is.null(custom.perm.matrix)){
+                                resList <- EarlyConservationTest( ExpressionSet = ExpressionSet,
+                                                                  modules       = modules, 
+                                                                  permutations  = permutations, 
+                                                                  lillie.test   = TRUE )
+                        }
+                        
+                        else if (!is.null(custom.perm.matrix)){
+                                resList <- EarlyConservationTest( ExpressionSet      = ExpressionSet,
+                                                                  modules            = modules, 
+                                                                  lillie.test        = TRUE,
+                                                                  custom.perm.matrix = custom.perm.matrix)
+                        }
                 }
                 
                 if(!lillie.test){
                         
-                        resList <- EarlyConservationTest( ExpressionSet = ExpressionSet,
-                                                          modules       = modules, 
-                                                          permutations  = permutations, 
-                                                          lillie.test   = FALSE )
+                        if (is.null(custom.perm.matrix)){
+                                resList <- EarlyConservationTest( ExpressionSet = ExpressionSet,
+                                                                  modules       = modules, 
+                                                                  permutations  = permutations, 
+                                                                  lillie.test   = FALSE )
+                        }
+                        
+                        else if (!is.null(custom.perm.matrix)){
+                                resList <- EarlyConservationTest( ExpressionSet      = ExpressionSet,
+                                                                  modules            = modules, 
+                                                                  lillie.test        = FALSE,
+                                                                  custom.perm.matrix = custom.perm.matrix)
+                        }
+                        
                 }
-                
         }
         
         # get p-value and standard deviation values from the test statistic 

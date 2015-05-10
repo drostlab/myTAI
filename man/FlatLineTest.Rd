@@ -5,29 +5,30 @@
 \title{Perform the Flat Line Test}
 \usage{
 FlatLineTest(ExpressionSet, permutations = 1000, plotHistogram = FALSE,
-  runs = 10, parallel = FALSE)
+  runs = 10, parallel = FALSE, custom.perm.matrix = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{permutations}{a numeric value specifying the number of permutations to be performed for the \emph{FlatLineTest}.}
+\item{permutations}{a numeric value specifying the number of permutations that shall be performed for the \emph{FlatLineTest}.}
 
-\item{plotHistogram}{a boolean value specifying whether a detailed statistical analysis concerning the goodness of fit shall be performed.}
+\item{plotHistogram}{a logical value indicating whether a detailed statistical analysis concerning the goodness of fit should be performed.}
 
 \item{runs}{specify the number of runs to be performed for goodness of fit computations. In most cases runs = 100 is a reasonable choice.}
 
 \item{parallel}{performing \code{runs} in parallel (takes all cores of your multicore machine).}
+
+\item{custom.perm.matrix}{a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.}
 }
 \value{
 a list object containing the list elements:
 \itemize{
-\item p.value the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.
-\item std.dev the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
+\item \code{p.value} the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.
+\item \code{std.dev} the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
 }
 }
 \description{
-This function computes N phylotranscriptomics profiles of a randomly sampled (row-permutations: random permutations of phylostratum or divergence-stratum assignments)
-PhyloExpressionSets or DivergenceExpressionSets.
+This function quantifies the statistical significance of an observed phylotranscriptomic pattern. In detail, the \emph{Flat Line Test} quantifies any significant deviation of an observed phylotranscriptomic pattern from a flat line.
 }
 \details{
 Internally the function performs N phylotranscriptomics pattern computations (\code{\link{TAI}} or \code{\link{TDI}}) based on sampled PhyloExpressionSets or DivergenceExpressionSets (see \code{\link{bootMatrix}}).
@@ -68,13 +69,21 @@ data(PhyloExpressionSetExample)
 
 # example PhyloExpressionSet using 1000 permutations
 FlatLineTest(PhyloExpressionSetExample,
-             permutations = 1000, plotHistogram = FALSE)
+             permutations  = 1000,
+             plotHistogram = FALSE)
+
+# use your own permutation matrix based on which p-values (FlatLineTest)
+# shall be computed
+custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
+
+FlatLineTest(PhyloExpressionSetExample,
+             custom.perm.matrix = custom_perm_matrix)
 }
 \author{
 Hajk-Georg Drost
 }
 \references{
-Drost HG et al. \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol (2015) 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+Drost HG et al.(2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 
 Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 

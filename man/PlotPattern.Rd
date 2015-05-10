@@ -6,7 +6,8 @@
 \usage{
 PlotPattern(ExpressionSet, TestStatistic = "FlatLineTest", modules = NULL,
   permutations = 1000, lillie.test = FALSE, digits.ylab = 4,
-  p.value = TRUE, shaded.area = FALSE, y.ticks = 4, ...)
+  p.value = TRUE, shaded.area = FALSE, y.ticks = 4,
+  custom.perm.matrix = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -33,6 +34,8 @@ or experiments that correspond to each module. For example,
 be drawn for the developmental stages defined to be the presumptive phylotypic period.}
 
 \item{y.ticks}{a numeric value specifying the number of ticks to be drawn on the y-axis.}
+
+\item{custom.perm.matrix}{a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotPattern}. Default is \code{custom.perm.matrix = NULL}.}
 
 \item{\dots}{default plot parameters.}
 }
