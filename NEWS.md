@@ -5,12 +5,14 @@ myTAI 0.0.3
 
 - a new function `CollapseReplicates()` is now available in `myTAI` allowing users to combine replicate expression levels in ExpressionSet objects
 
-- a new function `FilterRNASeqCT()` is now available in `myTAI` allowing users to filter expression levels of `ExpresisonSet` objects deriving from RNA-Seq count tables  
+- a new function `FilterRNASeqCT()` is now available in `myTAI` allowing users to filter expression levels of `ExpressionSet` objects deriving from RNA-Seq count tables  
 
 - function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
 duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) during the process of matching a Map with an ExpressionSet
 
 - `EarlyConservationTest()` now has a new parameter `gof.warning` allowing users to choose whether or not non significant goodness of fit results should be printed as warning
+
+- now when specifying `TestStatistic = NULL` in `PlotPattern()` only the TAI/TDI profile is drawn (without performing any test statistics); this is equavalent to performing: `plot(TAI(PhyloExpressionSetExample)`
 
 - function `combinatorialSignificance()` is now named `CombinatorialSignificance()`
 

@@ -70,9 +70,9 @@
 #' \code{p_ect} = p-value of the corresponding \code{\link{EarlyConservationTest}}
 #' 
 #' @references 
-#' Domazet-Loso T and Tautz D. (2010). "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.
+#' Domazet-Loso T and Tautz D. (2010). \emph{A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns}. Nature (468): 815-818.
 #'
-#' Quint M et al. (2012). "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
 #' 
 #' Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 #' 
@@ -83,6 +83,15 @@
 #' 
 #' # load PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
+#'
+#' # only visualize the TAI profile without any test statistics...
+#' # this is equavalent to performing: plot(TAI(PhyloExpressionSetExample), type = "l", lwd = 6)
+#' PlotPattern(ExpressionSet = PhyloExpressionSetExample,
+#'             TestStatistic = NULL,
+#'             type          = "l",
+#'             xlab          = "Ontogeny",
+#'             ylab          = "TAI",
+#'             lwd           = 9)
 #'
 #' # the simplest example of plotting the TAI profile of a given PhyloExpressionSet:
 #' # In this case (default) the FlatLineTest will be performed to quantify
@@ -134,6 +143,13 @@ PlotPattern <- function(ExpressionSet, TestStatistic = "FlatLineTest",
 {
         
         is.ExpressionSet(ExpressionSet)
+        
+        if(is.null(TestStatistic)){
+                
+                plot(TAI(ExpressionSet), ...)
+                
+        } else {
+        
         
         if(!(is.element(TestStatistic, c("FlatLineTest","ReductiveHourglassTest","EarlyConservationTest")))){
                 stop("Please enter a correct string for the test statistic: 'FlatLineTest', 'EarlyConservationTest' or 'ReductiveHourglassTest'.")
@@ -279,6 +295,7 @@ PlotPattern <- function(ExpressionSet, TestStatistic = "FlatLineTest",
                 }
                 usr <- par('usr')
                 rect(modules[[2]][1], usr[3], modules[[2]][length(modules[[2]])], usr[4], col = col2alpha("midnightblue",alpha = 0.2)) 
+        }
         }
 }
 
