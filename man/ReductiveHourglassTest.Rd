@@ -6,7 +6,7 @@
 \usage{
 ReductiveHourglassTest(ExpressionSet, modules = NULL, permutations = 1000,
   lillie.test = FALSE, plotHistogram = FALSE, runs = 10,
-  parallel = FALSE)
+  parallel = FALSE, custom.perm.matrix = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -28,19 +28,21 @@ of the observed phylotranscriptomic pattern.}
 In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).}
 
 \item{parallel}{performing \code{runs} in parallel (takes all cores of your multicore machine).}
+
+\item{custom.perm.matrix}{a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.}
 }
 \value{
 a list object containing the list elements:
 
-p.value : the p-value quantifying the statistical significance (high-low-high pattern) of the given phylotranscriptomics pattern.
+\code{p.value} : the p-value quantifying the statistical significance (high-low-high pattern) of the given phylotranscriptomics pattern.
 
-std.dev : the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
+\code{std.dev} : the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
 
-lillie.test : a boolean value specifying whether the \emph{Lillifors KS-Test} returned a p-value > 0.05,
+\code{lillie.test} : a boolean value specifying whether the \emph{Lillifors KS-Test} returned a p-value > 0.05,
 which indicates that fitting the permuted scores with a normal distribution seems plausible.
 }
 \description{
-The \emph{Reductive Hourglass Test} has been developed to statistically evaluate the
+The \emph{Reductive Hourglass Test} aims to statistically evaluate the
 existence of a phylotranscriptomic hourglass pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern)
 does not follow an hourglass like shape. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
@@ -92,6 +94,15 @@ data(PhyloExpressionSetExample)
 ReductiveHourglassTest(PhyloExpressionSetExample,
                        modules = list(early = 1:2, mid = 3:5, late = 6:7),
                        permutations = 1000)
+
+
+# use your own permutation matrix based on which p-values (ReductiveHourglassTest)
+# shall be computed
+custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
+
+ReductiveHourglassTest(PhyloExpressionSetExample,
+                     modules = list(early = 1:2, mid = 3:5, late = 6:7),
+                     custom.perm.matrix = custom_perm_matrix)
 }
 \author{
 Hajk-Georg Drost

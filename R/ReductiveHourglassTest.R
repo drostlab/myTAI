@@ -1,5 +1,5 @@
 #' @title Perform the Reductive Hourglass Test
-#' @description The \emph{Reductive Hourglass Test} has been developed to statistically evaluate the
+#' @description The \emph{Reductive Hourglass Test} aims to statistically evaluate the
 #' existence of a phylotranscriptomic hourglass pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
 #' does not follow an hourglass like shape. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
@@ -17,6 +17,7 @@
 #' @param runs specify the number of runs to be performed for goodness of fit computations, in case \code{plotHistogram} = \code{TRUE}.
 #' In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).
 #' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
+#' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.
 #' @details 
 #' The reductive hourglass test is a permutation test based on the following test statistic. 
 #'
@@ -54,11 +55,11 @@
 #' This allows to quantify the permutation bias and their implications on the goodness of fit.
 #' @return a list object containing the list elements:
 #' 
-#' p.value : the p-value quantifying the statistical significance (high-low-high pattern) of the given phylotranscriptomics pattern.
+#' \code{p.value} : the p-value quantifying the statistical significance (high-low-high pattern) of the given phylotranscriptomics pattern.
 #'
-#' std.dev : the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
+#' \code{std.dev} : the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
 #' 
-#' lillie.test : a boolean value specifying whether the \emph{Lillifors KS-Test} returned a p-value > 0.05, 
+#' \code{lillie.test} : a boolean value specifying whether the \emph{Lillifors KS-Test} returned a p-value > 0.05, 
 #' which indicates that fitting the permuted scores with a normal distribution seems plausible.
 #' @references 
 #' 
@@ -107,28 +108,39 @@
 #'                        permutations = 1000)
 #'
 #'
+#' # use your own permutation matrix based on which p-values (ReductiveHourglassTest)
+#' # shall be computed
+#' custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
 #' 
+#' ReductiveHourglassTest(PhyloExpressionSetExample,
+#'                      modules = list(early = 1:2, mid = 3:5, late = 6:7),
+#'                      custom.perm.matrix = custom_perm_matrix)
+#'
 #' 
 #' @import foreach
 #' @export
 
-ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
-                                   permutations = 1000, lillie.test = FALSE, 
-                                   plotHistogram = FALSE,
-                                   runs = 10, parallel = FALSE)
+ReductiveHourglassTest <- function(ExpressionSet,
+                                   modules            = NULL,
+                                   permutations       = 1000, 
+                                   lillie.test        = FALSE, 
+                                   plotHistogram      = FALSE,
+                                   runs               = 10, 
+                                   parallel           = FALSE,
+                                   custom.perm.matrix = NULL)
 {
         
         
         is.ExpressionSet(ExpressionSet)
+        
+        if(is.null(modules))
+                stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.")
         
         if(length(modules) != 3)
                 stop("Please specify three modules: early, mid, and late to perform the ReductiveHourglassTest.")
         
         if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
                 stop("The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet.")
-        
-        if(is.null(modules))
-                stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.")
         
         if(any(table(unlist(modules)) > 1))
                 stop("Intersecting modules are not defined for the ReductiveHourglassTest.")
@@ -143,7 +155,13 @@ ReductiveHourglassTest <- function(ExpressionSet,modules = NULL,
                               method = "min",scoringMethod = "mean-mean")
         
         ### compute the bootstrap matrix 
-        resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
+        if (is.null(custom.perm.matrix)){
+                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))       
+        }
+        
+        else if (!is.null(custom.perm.matrix)){
+                resMatrix <- custom.perm.matrix
+        }
         
         ### compute the global phylotranscriptomics destruction scores foe each sampled age vector
         score_vector <- apply(resMatrix, 1 ,rhScore,early = modules[[1]],mid = modules[[2]],late = modules[[3]],method = "min",scoringMethod = "mean-mean")
