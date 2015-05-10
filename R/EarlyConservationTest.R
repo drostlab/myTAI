@@ -1,5 +1,5 @@
 #' @title Perform the Reductive Early Conservation Test
-#' @description The \emph{Reductive Early Conservation Test} has been developed to statistically evaluate the
+#' @description The \emph{Reductive Early Conservation Test} aims to statistically evaluate the
 #' existence of a monotonically increasing phylotranscriptomic pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
 #' does not follow an early conservation like pattern. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
@@ -18,6 +18,7 @@
 #' In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).
 #' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
 #' @param gof.warning a logical value indicating whether non significant goodness of fit results should be printed as warning. Default is \code{gof.warning = FALSE}.
+#' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.
 #' @details The \emph{reductive early conservation test} is a permutation test based on the following test statistic. 
 #'
 #' (1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
@@ -85,19 +86,26 @@
 #'                        permutations = 1000)
 #'
 #' 
+#' # use your own permutation matrix based on which p-values (EarlyConservationTest)
+#' # shall be computed
+#' custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
 #' 
-#' 
+#' EarlyConservationTest(PhyloExpressionSetExample,
+#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
+#'                        custom.perm.matrix = custom_perm_matrix)
+#'                        
 #' @import foreach
 #' @export
 
 EarlyConservationTest <- function(ExpressionSet,
-                                  modules       = NULL,
-                                  permutations  = 1000, 
-                                  lillie.test   = FALSE, 
-                                  plotHistogram = FALSE, 
-                                  runs          = 10, 
-                                  parallel      = FALSE,
-                                  gof.warning   = FALSE){
+                                  modules            = NULL,
+                                  permutations       = 1000, 
+                                  lillie.test        = FALSE, 
+                                  plotHistogram      = FALSE, 
+                                  runs               = 10, 
+                                  parallel           = FALSE,
+                                  gof.warning        = FALSE,
+                                  custom.perm.matrix = NULL){
         
         is.ExpressionSet(ExpressionSet)
         
@@ -124,9 +132,15 @@ EarlyConservationTest <- function(ExpressionSet,
         real_ecv <- ecScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]])
                 
         ### compute the bootstrap matrix 
-        resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
+        if (is.null(custom.perm.matrix)){
+                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
+        }
         
-        ### compute the global phylotranscriptomics destruction scores foe each sampled age vector
+        else if (!is.null(custom.perm.matrix)){
+                resMatrix <- custom.perm.matrix
+        }
+        
+        ### compute the global phylotranscriptomics destruction scores for each sampled age vector
         score_vector <- apply(resMatrix, 1 ,ecScore,early = modules[[1]],
                               mid = modules[[2]],late = modules[[3]])
         
