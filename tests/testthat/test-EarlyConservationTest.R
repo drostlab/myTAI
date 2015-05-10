@@ -57,3 +57,23 @@ test_that("error occurs when modules aren't specified...",{
 })
 
 
+TestBootMatrix <- bootMatrix(PhyloExpressionSetExample, 1000)
+
+res <- EarlyConservationTest(PhyloExpressionSetExample,
+                      modules = list(early = 1:2, mid = 3:5, late = 6:7),
+                      custom.perm.matrix = TestBootMatrix)
+
+estimates <- fitdistrplus::fitdist(apply(TestBootMatrix,1,ecScore,early = 1:2,mid=3:5,late=6:7),distr = "norm") 
+
+real_score <- ecScore(TAI(PhyloExpressionSetExample),1:2,3:5,6:7) 
+        
+test_that("EarlyConservationTest() computes correct values...", {
+        
+        expect_equal(res$p.value,pnorm(real_score,mean = estimates$estimate[1],sd = estimates$estimate[2],lower.tail = FALSE))
+        expect_equal(res$std.dev,apply(TestBootMatrix ,2,sd))
+        
+})
+
+
+
+
