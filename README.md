@@ -8,6 +8,9 @@ The `myTAI` package allows users to capture evolutionary signals in developmenta
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
 gene expression levels to capture evolutionary signals during development ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
 
+This subfield of Evolutionary Developmental Biology aims to investigate stages or periods
+of evolutionary conservation or constraint in developmental processes of extant species.
+
 
 ## Tutorials
 
