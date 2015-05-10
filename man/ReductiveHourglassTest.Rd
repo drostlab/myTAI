@@ -6,7 +6,7 @@
 \usage{
 ReductiveHourglassTest(ExpressionSet, modules = NULL, permutations = 1000,
   lillie.test = FALSE, plotHistogram = FALSE, runs = 10,
-  parallel = FALSE, custom.perm.matrix = NULL)
+  parallel = FALSE, gof.warning = FALSE, custom.perm.matrix = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -28,6 +28,8 @@ of the observed phylotranscriptomic pattern.}
 In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).}
 
 \item{parallel}{performing \code{runs} in parallel (takes all cores of your multicore machine).}
+
+\item{gof.warning}{a logical value indicating whether non significant goodness of fit results should be printed as warning. Default is \code{gof.warning = FALSE}.}
 
 \item{custom.perm.matrix}{a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.}
 }

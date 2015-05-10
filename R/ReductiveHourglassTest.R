@@ -17,6 +17,7 @@
 #' @param runs specify the number of runs to be performed for goodness of fit computations, in case \code{plotHistogram} = \code{TRUE}.
 #' In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).
 #' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
+#' @param gof.warning a logical value indicating whether non significant goodness of fit results should be printed as warning. Default is \code{gof.warning = FALSE}.
 #' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.
 #' @details 
 #' The reductive hourglass test is a permutation test based on the following test statistic. 
@@ -127,6 +128,7 @@ ReductiveHourglassTest <- function(ExpressionSet,
                                    plotHistogram      = FALSE,
                                    runs               = 10, 
                                    parallel           = FALSE,
+                                   gof.warning        = FALSE,
                                    custom.perm.matrix = NULL)
 {
         
@@ -327,7 +329,7 @@ ReductiveHourglassTest <- function(ExpressionSet,
                 # does the Lilliefors test pass the criterion
                 lillie_bool <- (lillie_p.val > 0.05)
                 
-                if((lillie_p.val < 0.05) & (plotHistogram == FALSE)){
+                if(gof.warning & (lillie_p.val < 0.05) & (plotHistogram == FALSE)){
                         warning("Lilliefors (Kolmogorov-Smirnov) test for normality did not pass the p > 0.05 criterion!")
                 }
         }
