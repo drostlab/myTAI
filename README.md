@@ -1,13 +1,12 @@
 myTAI
 =====
 
-### A Framework to Perform Phylotranscriptomics Analyses and Visualization for Evolutionary Developmental Biology Research.
+### Performing Phylotranscriptomics with R
 
-The present collection of [R](http://cran.r-project.org/) functions can be used to perform phylotranscriptomics 
-analyses and visualization to investigate phenomena within the field of Evolutionary Developmental Biology.
+The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
     
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
-gene expression levels to capture evolutionary signals during developmental processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)).
+gene expression levels to capture evolutionary signals during developmental processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
 
 
 ## Tutorials
@@ -77,25 +76,18 @@ All three functions also include visual analytics tools to quantify the goodness
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `bootMatrix()`, `combinatorialSignificance()`, `ecScore()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`,
+`age.apply()`, `bootMatrix()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`,
 `RE()`, `rhScore()`, and `tf()`
 
 
-## Fast Installation Guide
+## Installation Guide For Developer Version
 
 ```r
-
-# install myTAI version 0.0.1 from CRAN
-install.packages("myTAI")
-
-
 # The developer version can be installed directly from github:
 
 # install.packages("devtools")
 
-# install the current version of myTAI on your system
-# this can take some time since the vignettes are
-# very comprehensive and take some time to build
+# install developer version of myTAI
 library(devtools)
 install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
@@ -116,13 +108,6 @@ library("myTAI", lib.loc = "C:/Program Files/R/R-3.1.1/library")
 
 ```
 
-This package provides a broad toolbox for common phylotranscriptomics analyses and also includes statistical tests to verify observed phenomena and transcriptomic patterns.
-
-Using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package, 
-all computationally expansive functions have been written in C++ 
-to enable fast analytics on phylotranscriptomics datasets.
-
-
 ## Discussions and Bug Reports
 
 I would be very happy to learn more about potential improvements of the concepts and functions
@@ -131,7 +116,7 @@ provided in this package.
 Furthermore, in case you find some bugs or need additional (more flexible) functionality of parts
 of this package, please let me know:
 
-hajk-georg.drost@informatik.uni-halle.de
+https://github.com/HajkD/myTAI/issues
 
 
 ## Acknowledgement
@@ -145,7 +130,7 @@ fruitful discussions that led to projects like this one.
 Furthermore, I would like to thank Alexander Gabel and Jan Grau for valuable discussions
 on how to improve some methodological concepts of some analyses present in this package.
 
-I would also like to thank the Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
+I would also like to thank Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
 who worked intensively with this package and helped me to improve the usability and logic of the package environment.
 
 
