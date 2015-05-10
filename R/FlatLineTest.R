@@ -1,11 +1,11 @@
 #' @title Perform the Flat Line Test
-#' @description This function computes N phylotranscriptomics profiles of a randomly sampled (row-permutations: random permutations of phylostratum or divergence-stratum assignments) 
-#' PhyloExpressionSets or DivergenceExpressionSets.
+#' @description This function quantifies the statistical significance of an observed phylotranscriptomic pattern. In detail, the \emph{Flat Line Test} quantifies any significant deviation of an observed phylotranscriptomic pattern from a flat line.  
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
-#' @param permutations a numeric value specifying the number of permutations to be performed for the \emph{FlatLineTest}.
-#' @param plotHistogram a boolean value specifying whether a detailed statistical analysis concerning the goodness of fit shall be performed.
+#' @param permutations a numeric value specifying the number of permutations that shall be performed for the \emph{FlatLineTest}.
+#' @param plotHistogram a logical value indicating whether a detailed statistical analysis concerning the goodness of fit should be performed.
 #' @param runs specify the number of runs to be performed for goodness of fit computations. In most cases runs = 100 is a reasonable choice.
 #' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
+#' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.
 #' @details Internally the function performs N phylotranscriptomics pattern computations (\code{\link{TAI}} or \code{\link{TDI}}) based on sampled PhyloExpressionSets or DivergenceExpressionSets (see \code{\link{bootMatrix}}). 
 #' The test statistics is being developed as follows:
 #'
@@ -33,12 +33,12 @@
 #' The \emph{goodness of fit} for the random vector \emph{V_p} is quantified statistically by an adapted Lilliefors (Kolmogorov-Smirnov) test for gamma distributions.
 #' @return a list object containing the list elements:
 #' \itemize{
-#' \item p.value the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.
-#' \item std.dev the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
+#' \item \code{p.value} the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.
+#' \item \code{std.dev} the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
 #' }
 #' @references 
 #' 
-#' Drost HG et al. \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol (2015) 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+#' Drost HG et al.(2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 #' 
 #' Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 #'
@@ -79,19 +79,29 @@
 #'
 #' # example PhyloExpressionSet using 1000 permutations
 #' FlatLineTest(PhyloExpressionSetExample, 
-#'              permutations = 1000, plotHistogram = FALSE)
-#'
+#'              permutations  = 1000, 
+#'              plotHistogram = FALSE)
 #' 
+#' # use your own permutation matrix based on which p-values (FlatLineTest)
+#' # shall be computed
+#' custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
+#' 
+#' FlatLineTest(PhyloExpressionSetExample,
+#'              custom.perm.matrix = custom_perm_matrix)
 #' 
 #' @import foreach
 #' @export
-FlatLineTest <- function(ExpressionSet, permutations = 1000, 
-                         plotHistogram = FALSE, runs = 10, parallel = FALSE)
+FlatLineTest <- function(ExpressionSet, 
+                         permutations       = 1000, 
+                         plotHistogram      = FALSE, 
+                         runs               = 10, 
+                         parallel           = FALSE,
+                         custom.perm.matrix = NULL)
 {
         
         is.ExpressionSet(ExpressionSet)
         
-        if((plotHistogram == TRUE) & is.null(runs))
+        if(plotHistogram & is.null(runs))
                 stop("Please specify the number of runs to be performed for the goodness of fit computations.")
         
         nCols <- dim(ExpressionSet)[2]
@@ -105,7 +115,16 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000,
         real.var <- var(age.real)
         ### sample only the phylostrata (row-permutations) 
         
-        resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
+        if (is.null(custom.perm.matrix)){
+                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
+                
+        }
+        
+        else if (!is.null(custom.perm.matrix)){
+                
+                resMatrix <- custom.perm.matrix
+        }
+        
         var_values <- apply(resMatrix,1,var)
         #random_mean_age <- apply(resMatrix,2,mean)
         ### estimate the parameters (shape,rate) 
@@ -117,7 +136,7 @@ FlatLineTest <- function(ExpressionSet, permutations = 1000,
         ### estimate the rate:
         rate <- gamma_MME$estimate[2]
         
-        if(plotHistogram == TRUE){
+        if(plotHistogram){
                 ### Perform a Kolmogorov–Smirnov test to quantify a
                 ### Gamma-distribution as Null-Distribution
                 #KS.Test.Output <- ks.test(var_values,"pgamma",shape = shape,rate = rate)
