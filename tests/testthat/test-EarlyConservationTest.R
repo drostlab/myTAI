@@ -34,7 +34,26 @@ test_that("lillie.test is NA..", {
                                                  permutations = 1000)$lillie.test))
 })
 
+test_that("lillie.test is computed...",{
+        
+        expect_true(EarlyConservationTest(PhyloExpressionSetExample,
+                                                modules = list(early = 1:2, mid = 3:5, late = 6:7),
+                                                permutations = 1000, lillie.test = TRUE)$lillie.test %in% c(TRUE,FALSE))
+        
+})
+
+test_that("error occurs when module selection does not match number of developmental stages..",{
+        
+        expect_error(EarlyConservationTest(PhyloExpressionSetExample,
+                                           modules = list(early = 1:2, mid = 3:5, late = 6:8),
+                                           permutations = 1000),"The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet.")
+})
 
 
+test_that("error occurs when modules aren't specified...",{
+        
+        expect_error(EarlyConservationTest(PhyloExpressionSetExample,
+                                           permutations = 1000))
+})
 
 
