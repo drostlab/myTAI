@@ -11,14 +11,16 @@ gene expression levels to capture evolutionary signals during development ([Doma
 This subfield of Evolutionary Developmental Biology aims to investigate stages or periods
 of evolutionary conservation or constraint in developmental processes of extant species.
 
+`myTAI` provides easy to use and optimized functions to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, a customized visualization framework implemented in myTAI allows users to generate publication quality plots of their custom phylotranscriptomic analyses.
+
 
 ## Tutorials
 
 Three tutorials will get you started with this package:
 
-- [An Introduction to the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
-- [Intermediate concepts of the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
-- [Advanced topics using the myTAI package](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
+- [A Brief Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
+- [Intermediate Concepts of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
+- [Advanced Topics of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
 
 
 You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
@@ -57,6 +59,7 @@ In the `myTAI` framework you can find:
 * `TAI()` : Function to compute the Transcriptome Age Index (TAI)
 * `TDI()` : Function to compute the Transcriptome Divergence Index (TDI)
 * `REMatrix()` : Function to compute the relative expression profiles of all phylostrata or divergence-strata
+* `RE()` : Function to transform mean expression levels to relative expression levels
 
 #### Visualization and Analytics Tools:
 
@@ -79,11 +82,10 @@ All three functions also include visual analytics tools to quantify the goodness
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `bootMatrix()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`,
-`RE()`, `rhScore()`, and `tf()`
+`age.apply()`, `bootMatrix()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`, `rhScore()`, and `tf()`
 
 
-## Installation Guide For Developer Version
+## Install Developer Version of myTAI
 
 ```r
 # The developer version can be installed directly from github:
