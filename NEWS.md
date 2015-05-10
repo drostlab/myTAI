@@ -10,6 +10,8 @@ myTAI 0.0.3
 - function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
 duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) during the process of matching a Map with an ExpressionSet
 
+- `FlatLineTest()`, `ReductiveHourglassTest()`, `EarlyConservationTest()`, and `PlotPattern()` implement a new argument `custom.perm.matrix` allowing users to pass their own (custom) permutation matrix to the corresponding function. All subsequent test statistics and p-value/std.dev computations are then based on this custom permutation matrix
+
 - `EarlyConservationTest()` now has a new parameter `gof.warning` allowing users to choose whether or not non significant goodness of fit results should be printed as warning
 
 - now when specifying `TestStatistic = NULL` in `PlotPattern()` only the TAI/TDI profile is drawn (without performing any test statistics); this is equavalent to performing: `plot(TAI(PhyloExpressionSetExample)`
