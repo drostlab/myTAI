@@ -10,6 +10,8 @@ myTAI 0.0.3
 - function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
 duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) during the process of matching a Map with an ExpressionSet
 
+- `EarlyConservationTest()` now has a new parameter `gof.warning` allowing users to choose whether or not non significant goodness of fit results should be printed as warning
+
 - function `combinatorialSignificance()` is now named `CombinatorialSignificance()`
 
 - `bar.colors()` is now an internal function

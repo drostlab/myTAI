@@ -6,7 +6,7 @@
 \usage{
 EarlyConservationTest(ExpressionSet, modules = NULL, permutations = 1000,
   lillie.test = FALSE, plotHistogram = FALSE, runs = 10,
-  parallel = FALSE)
+  parallel = FALSE, gof.warning = FALSE)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -28,6 +28,8 @@ of the observed phylotranscriptomic pattern.}
 In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).}
 
 \item{parallel}{performing \code{runs} in parallel (takes all cores of your multicore machine).}
+
+\item{gof.warning}{a logical value indicating whether non significant goodness of fit results should be printed as warning. Default is \code{gof.warning = FALSE}.}
 }
 \value{
 a list object containing the list elements:
@@ -40,7 +42,7 @@ a list object containing the list elements:
 which indicates that fitting the permuted scores with a normal distribution seems plausible.
 }
 \description{
-The \emph{Early Conservation Test} has been developed to statistically evaluate the
+The \emph{Reductive Early Conservation Test} has been developed to statistically evaluate the
 existence of a monotonically increasing phylotranscriptomic pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern)
 does not follow an early conservation like pattern. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does

@@ -1,5 +1,5 @@
 #' @title Perform the Reductive Early Conservation Test
-#' @description The \emph{Early Conservation Test} has been developed to statistically evaluate the
+#' @description The \emph{Reductive Early Conservation Test} has been developed to statistically evaluate the
 #' existence of a monotonically increasing phylotranscriptomic pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
 #' does not follow an early conservation like pattern. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
@@ -17,6 +17,7 @@
 #' @param runs specify the number of runs to be performed for goodness of fit computations, in case \code{plotHistogram} = \code{TRUE}.
 #' In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).
 #' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
+#' @param gof.warning a logical value indicating whether non significant goodness of fit results should be printed as warning. Default is \code{gof.warning = FALSE}.
 #' @details The \emph{reductive early conservation test} is a permutation test based on the following test statistic. 
 #'
 #' (1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
@@ -95,21 +96,22 @@ EarlyConservationTest <- function(ExpressionSet,
                                   lillie.test   = FALSE, 
                                   plotHistogram = FALSE, 
                                   runs          = 10, 
-                                  parallel      = FALSE){
+                                  parallel      = FALSE,
+                                  gof.warning   = FALSE){
         
         is.ExpressionSet(ExpressionSet)
-        
-        if(length(modules) != 3)
-                stop("Please specify three modules: early, mid, and late to perform the ReductiveHourglassTest.")
-        
-        if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
-                stop("The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet.")
         
         if(is.null(modules))
                 stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.")
         
+        if(length(modules) != 3)
+                stop("Please specify three modules: early, mid, and late to perform the EarlyConservationTest.")
+        
+        if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
+                stop("The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet.")
+        
         if(any(table(unlist(modules)) > 1))
-                stop("Intersecting modules are not defined for the ReductiveHourglassTest.")
+                stop("Intersecting modules are not defined for the EarlyConservationTest.")
         
         nCols <- dim(ExpressionSet)[2]
         score_vector <- vector(mode = "numeric",length = permutations)
@@ -135,6 +137,10 @@ EarlyConservationTest <- function(ExpressionSet,
         sigma <- param$estimate[2]
         
         if(plotHistogram){
+                
+                if(runs < 1)
+                        stop("You need at least one run...")
+                
                 # plot histogram of scores
                 normDensity <- function(x){
                         
@@ -288,7 +294,7 @@ EarlyConservationTest <- function(ExpressionSet,
                 # does the Lilliefors test pass the criterion
                 lillie_bool <- (lillie_p.val > 0.05)
                 
-                if((lillie_p.val < 0.05) & (!plotHistogram)){
+                if(gof.warning & (lillie_p.val < 0.05) & (!plotHistogram)){
                         warning("Lilliefors (Kolmogorov-Smirnov) test for normality did not pass the p > 0.05 criterion!")
                 }
         }
