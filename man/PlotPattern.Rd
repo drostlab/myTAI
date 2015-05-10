@@ -147,6 +147,18 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
             ylab           = "TAI",
             type           = "l",
             lwd            = 9)
+
+
+# use your own permutation matrix
+custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
+
+PlotPattern(ExpressionSet      = PhyloExpressionSetExample,
+            TestStatistic      = "FlatLineTest",
+            custom.perm.matrix = custom_perm_matrix,
+            type               = "l",
+            xlab               = "Ontogeny",
+            ylab               = "TAI",
+            lwd                = 9)
 }
 \author{
 Hajk-Georg Drost
