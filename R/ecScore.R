@@ -45,6 +45,9 @@
 #'  # compute the early conservation score for the TDI profile
 #'  ec_score <- ecScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7)
 #'  
+#'  # compute ecScore() vector from bootMatrix()
+#'  apply(bootMatrix(PhyloExpressionSetExample,10),1,ecScore,early = 1:2,mid = 3:5,late = 6:7)
+#'  
 #'  
 #' @export
 
