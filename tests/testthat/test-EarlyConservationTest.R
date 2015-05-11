@@ -67,7 +67,7 @@ estimates <- fitdistrplus::fitdist(apply(TestBootMatrix,1,ecScore,early = 1:2,mi
 
 real_score <- ecScore(TAI(PhyloExpressionSetExample),1:2,3:5,6:7) 
         
-test_that("EarlyConservationTest() computes correct values...", {
+test_that("EarlyConservationTest() computes correct std.dev and p.values values...", {
         
         expect_equal(res$p.value,pnorm(real_score,mean = estimates$estimate[1],sd = estimates$estimate[2],lower.tail = FALSE))
         expect_equal(res$std.dev,apply(TestBootMatrix ,2,sd))
