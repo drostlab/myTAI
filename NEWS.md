@@ -3,6 +3,8 @@ myTAI 0.0.3
 
 ### New Features in v. 0.0.3
 
+- a new function `pStrata()` allowing users to compute partial TAI/TDI values for all Phylostrata or Divergence Strata
+
 - a new function `CollapseReplicates()` is now available in `myTAI` allowing users to combine replicate expression levels in ExpressionSet objects
 
 - a new function `FilterRNASeqCT()` is now available in `myTAI` allowing users to filter expression levels of `ExpressionSet` objects deriving from RNA-Seq count tables  
