@@ -15,7 +15,8 @@
 #' Default is \code{main.text} = \code{NULL}.
 #' @param \dots default plot parameters.
 #' @return a jitter-correlation-plot of PS and DS correlation.
-#' @references  Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
+#' @references  Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
+#' Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{cor}}
 #' @examples 
@@ -26,16 +27,18 @@
 #'  
 #' # plot the PS and DS correlation
 #' PlotCorrelation(PhyloExpressionSetExample, DivergenceExpressionSetExample, 
-#'                 method = "pearson", linearModel = TRUE, 
-#'                 main.text = "Pearson's ")
+#'                 method      = "pearson", 
+#'                 linearModel = TRUE, 
+#'                 main.text   = "Pearson's ")
 #' 
 #' 
 #' 
 #' @export
 
 PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
-                            method = "pearson",linearModel = FALSE, 
-                            main.text = NULL,...)
+                            method      = "pearson",
+                            linearModel = FALSE, 
+                            main.text   = NULL,...)
 {
         
         is.ExpressionSet(PhyloExpressionSet)
