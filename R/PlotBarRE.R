@@ -158,9 +158,9 @@ PlotBarRE <- function(ExpressionSet,Groups = NULL,wLength = 0.1,ratio = FALSE,..
                 do.call(graphics::text,c(list(apply(REBarPlot,2,mean),0.95,labels = pValNames),
                                          dots[!is.element(names(dots),c(barplot.args))]))
                 
-                arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
+                suppressWarnings(arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
                        y1 = ifelse((StdErr.RE.ClassValues) == 0,MeanREClassValues + (1/999),
-                                   MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength)
+                                   MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength))
                 
                 par(xpd = TRUE)
                 legend("topleft",inset = c(+0.2,0),legend = paste("Group ",1:length(Groups),sep = ""),
@@ -181,9 +181,9 @@ PlotBarRE <- function(ExpressionSet,Groups = NULL,wLength = 0.1,ratio = FALSE,..
                 do.call(graphics::text,c(list(colMeans(REBarPlot),1.15,labels = pValNames),
                                          dots[!is.element(names(dots),c(barplot.args))]))
                 
-                arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
+                suppressWarnings(arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
                        y1 = ifelse((StdErr.RE.ClassValues) == 0,MeanREClassValues + (1/999),
-                                   MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength)
+                                   MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength))
                 
                 legend("topleft",legend = paste("Group ",1:length(Groups),sep = ""),fill = barColors,bty = "n",ncol = ceiling(nGroups/2))
         }
