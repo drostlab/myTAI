@@ -60,17 +60,19 @@ FilterRNASeqCT <- function(ExpressionSet, cut.off, method = "const", n = NULL){
         else if (method == "min-set"){
                 CandidateSet <- unique( unlist( apply( ExpressionSet[ , 3:ncols], 2 ,function(x) list(which(x < cut.off))) ) )
                 # count for each gene how many stages are above the cutoff; aco = above cut off
-                MinSet <- apply(ExpressionSet[CandidateSet, 3:ncols],1,function(x) sum(x > cut.off))
-                NEGs <- which(MinSet <= ceiling((ncols-2)/2))
+                CandidateExpressionSet <- ExpressionSet[CandidateSet, ]
+                MinSet <- apply(CandidateExpressionSet[ , 3:ncols],1,function(x) sum(x > cut.off))
+                NEGs <- match(CandidateExpressionSet[which(MinSet <= ceiling((ncols-2)/2)),2],ExpressionSet[ , 2])
+                
         } 
         else if (method == "n-set"){
                 if(is.null(n))
                         stop("Please specify the number of stages n for which expresssion levels need to be above the cutoff to be retained in the count table.")
-        
-                        CandidateSet <- unique( unlist( apply( ExpressionSet[ , 3:ncols], 2 ,function(x) list(which(x < cut.off))) ) )
-        # count for each gene how many stages are above the cutoff; aco = above cut off
-                        MinSet <- apply(ExpressionSet[CandidateSet, 3:ncols],1,function(x) sum(x > cut.off))
-                        NEGs <- which(MinSet <= n)
+                CandidateSet <- unique( unlist( apply( ExpressionSet[ , 3:ncols], 2 ,function(x) list(which(x < cut.off))) ) )
+                
+                CandidateExpressionSet <- ExpressionSet[CandidateSet, ]
+                MinSet <- apply(CandidateExpressionSet[ , 3:ncols],1,function(x) sum(x > cut.off))
+                NEGs <- match(CandidateExpressionSet[which(MinSet <= n),2],ExpressionSet[ , 2])
         } 
         
         if(length(NEGs) > 1){
