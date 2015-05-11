@@ -68,6 +68,10 @@ FilterRNASeqCT <- function(ExpressionSet, cut.off, method = "const", n = NULL){
         else if (method == "n-set"){
                 if(is.null(n))
                         stop("Please specify the number of stages n for which expresssion levels need to be above the cutoff to be retained in the count table.")
+                
+                if(n > (ncols-2))
+                        stop("n is larger than the number of available stages in your ExpressionSet...")
+                        
                 CandidateSet <- unique( unlist( apply( ExpressionSet[ , 3:ncols], 2 ,function(x) list(which(x < cut.off))) ) )
                 
                 CandidateExpressionSet <- ExpressionSet[CandidateSet, ]
