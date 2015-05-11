@@ -74,6 +74,6 @@ Domazet-Loso T. and Tautz D. 2010. "A phylogenetically based transcriptome age i
 Myles Hollander and Douglas A. Wolfe (1973), Nonparametric Statistical Methods. New York: John Wiley & Sons. Pages 115-120.
 }
 \seealso{
-\code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{kruskal.test}}
+\code{\link{RE}}, \code{\link{REMatrix}},\code{\link{PlotRE}}, \code{\link{kruskal.test}}
 }
 

@@ -36,7 +36,7 @@
 #' Myles Hollander and Douglas A. Wolfe (1973), Nonparametric Statistical Methods. New York: John Wiley & Sons. Pages 115-120.
 #' 
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{kruskal.test}}
+#' @seealso \code{\link{RE}}, \code{\link{REMatrix}},\code{\link{PlotRE}}, \code{\link{kruskal.test}}
 #' @examples
 #' 
 #' # read standard phylotranscriptomics data
