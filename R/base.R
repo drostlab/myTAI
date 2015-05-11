@@ -135,7 +135,7 @@ MatchMap <- function(Map,ExpressionMatrix, remove.duplicates = FALSE, accumulate
 #'  profile for the corresponding global PhyloExpressionSet or DivergenceExpressionSet
 #'  with excluded gene i. 
 #'  
-#'  This results in a TAI or TDI profile Matrix storing the \code{\link{TAI}} or \code{\link{TDI}} profile for each omitted gene i.
+#'  This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI profile for each omitted gene i.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.        
 #' @return a numeric matrix storing TAI or TDI profile for each omitted gene i.
 #' @author Hajk-Georg Drost

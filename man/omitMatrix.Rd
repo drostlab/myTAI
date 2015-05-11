@@ -18,7 +18,7 @@ For each gene i, exclude the corresponding gene i from the global
  profile for the corresponding global PhyloExpressionSet or DivergenceExpressionSet
  with excluded gene i.
 
- This results in a TAI or TDI profile Matrix storing the \code{\link{TAI}} or \code{\link{TDI}} profile for each omitted gene i.
+ This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI profile for each omitted gene i.
 }
 \examples{
 # read standard phylotranscriptomics data
