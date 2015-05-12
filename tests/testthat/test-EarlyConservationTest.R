@@ -4,7 +4,7 @@ data(PhyloExpressionSetExample)
 
 nonStandardExpressionSet <- PhyloExpressionSetExample[ , 2:9] 
 
-test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to CombinatorialSignificance()",{
+test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to EarlyConservationTest()",{
         expect_error(EarlyConservationTest(nonStandardExpressionSet,
                                            modules = list(early = 1:2, mid = 3:5, late = 6:7),
                                            permutations = 1000),"The present input object does not fulfill the ExpressionSet standard.")
