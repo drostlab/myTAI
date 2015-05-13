@@ -52,14 +52,3 @@ test_that("Error occurs in case a TestStatistic other than FlatLineTest has been
 })
 
 
-
-test_that("parallel processing is working properly..",{
-        
-        expect_equal(length(CombinatorialSignificance(ExpressionSet = PhyloExpressionSetExample,
-                                                      replicates    = c(2,3,2),
-                                                      TestStatistic = "FlatLineTest",
-                                                      permutations  = 10,
-                                                      parallel      = TRUE)), prod(c(2,3,2)))
-        
-})
-

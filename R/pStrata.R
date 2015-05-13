@@ -22,6 +22,7 @@
 pStrata <- function(ExpressionSet){
         
         is.ExpressionSet(ExpressionSet)
+        AGE <- NULL
         
         df <- as.data.frame(cbind(ExpressionSet[ , 1], pMatrix(ExpressionSet)))
         colnames(df)[1] <- "AGE"
