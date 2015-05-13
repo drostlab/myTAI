@@ -17,18 +17,31 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-The `myTAI` package provides a statistical framework and a collection of functions that can be used to perform phylotranscriptomics analyses and
-visualization to investigate phenomena within the field of __Evolutionary Developmental Biology__. 
+## Performing Phylotranscriptomics with R
 
-The goal of this package is to provide a broad range of users (as well as the phylotranscriptomics community) with an easy to use and computationally optimized framework for reproducible research in the fields referred to as __Evolutionary Developmental Biology__ and __Phylotranscriptomics__ and to allow a better comparability between molecular phenomena resulting from _in silico_ data analyses. 
+The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
+    
+Phylotranscriptomics defines the concept of combining genetic sequence information with 
+gene expression levels to capture evolutionary signals during development ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
 
-A series of tutorials aim to introduce you to the `myTAI` package: 
+This subfield of Evolutionary Developmental Biology aims to investigate stages or periods
+of evolutionary conservation or constraint in developmental processes of extant species.
+
+`myTAI` provides easy to use and optimized functions to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, a customized visualization framework implemented in myTAI allows users to generate publication quality plots of their custom phylotranscriptomic analyses.
+
+The goal of `myTAI` is to provide a broad range of users interested in the evolution of developmental transcriptomes with an easy to use and computationally optimized framework for reproducible research and modular pipeline implementation. 
+
+A series of tutorials aim to guide you through the `myTAI` package: 
 
 * __1) Introduction:__ Vignette - Introduction to the myTAI package
 * __2) Intermediate:__ Vignette - Intermediate Analyses and Test Statistics
-* __3) Advanced:__ Vignette - Advanced use of the myTAI package and data retrieval performing divergence stratigraphy using the [orthologr](https://github.com/HajkD/orthologr) package
+* __3) Advanced:__ Vignette - Data Retrieval and Divergence Stratigraphy using the [orthologr](https://github.com/HajkD/orthologr) package
 
 Internally, computationally intensive functions have been written in C++ using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package to allow fast analytics in phylotranscriptomics research.
+
+## Historical and Biological Background
+
+
 
 ## Getting Started
 
