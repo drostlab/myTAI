@@ -234,6 +234,7 @@ re.colors <- function(n)
 #' @description A nice color palette for barplots with several bars.
 #' @param n the number of colors to be in the palette. 
 #' @return a character vector containing different color names that can be used for barplots.
+#' @details This function can be used to select colors for bar plots. 
 #' @author Hajk-Georg Drost
 #' @examples
 #' 
