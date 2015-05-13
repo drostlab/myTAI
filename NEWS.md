@@ -1,13 +1,19 @@
-myTAI 0.0.3
+myTAI 0.1.0
 ===========
 
-### New Features in v. 0.0.3
+### Main News
 
-- a new function `pStrata()` allowing users to compute partial TAI/TDI values for all Phylostrata or Divergence Strata
+- now all functions have unit tests
 
-- a new function `CollapseReplicates()` is now available in `myTAI` allowing users to combine replicate expression levels in ExpressionSet objects
+### New Functions
 
-- a new function `FilterRNASeqCT()` is now available in `myTAI` allowing users to filter expression levels of `ExpressionSet` objects deriving from RNA-Seq count tables  
+- a new function `pStrata()` allows users to compute partial TAI/TDI values for all Phylostrata or Divergence Strata
+
+- a new function `CollapseReplicates()` allows users to combine replicate expression levels in ExpressionSet objects
+
+- a new function `FilterRNASeqCT()` allows users to filter expression levels of `ExpressionSet` objects deriving from RNA-Seq count tables  
+
+### Updates
 
 - function `MatchMap()` now receives a new argument `remove.duplicates` allowing users to delete
 duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) during the process of matching a Map with an ExpressionSet
@@ -28,7 +34,7 @@ duplicate gene ids (that might be stored in the input PhyoMap or DivergenceMap) 
 myTAI 0.0.2
 ===========
 
-### New Features in v. 0.0.2
+## New Features in v. 0.0.2
 
 - `combinatorialSignificance()`, `FlatLineTest()`, `ReductiveHourglassTest()`, and `EarlyConservationTest()`
 now support multicore processing
