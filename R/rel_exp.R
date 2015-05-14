@@ -80,7 +80,8 @@ RE <- function(ExpressionMatrix)
 
 REMatrix <- function(ExpressionSet)
 {
-        
+        if(ncol(ExpressionSet) < 4)
+                stop("You need at least 2 stages (= expression columns in your data.frame) to comptute relative expression levels...")
         is.ExpressionSet(ExpressionSet)
         return(age.apply(ExpressionSet = ExpressionSet, RE))
         
