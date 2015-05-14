@@ -29,6 +29,8 @@ test_that("REMatrix() computes correct values...",{
         expect_true(equal_df(REMatrix(DivergenceExpressionSetExample), TestREMatrix2))
 })
 
-
+test_that("error occurs when when REMatrix() is computed on only one developmental stage ",{
+        expect_error(REMatrix(PhyloExpressionSetExample[ , 1:3]))
+})
 
 
