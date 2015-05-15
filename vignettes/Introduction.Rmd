@@ -45,7 +45,116 @@ Internally, computationally intensive functions have been written in C++ using t
 
 ## Getting Started
 
+The first step in performing phylotranscriptomic analyses is to
+perform `Phylostratigraphy` and `Divergence Stratigraphy` to assign
+each protein coding genes of an organism of interest an evolutionary age ([Phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995))
+or degree of selection pressure ([Divergence Stratigraphy](http://mbe.oxfordjournals.org/content/32/5/1221.full)). The resulting
+`Phylostratigraphic Map` and `Divergence Map` of the corresponding organism of interest is then matched
+with a transcriptome data set covering the developmental process of interest.
+
+The following code illustrates how a typical `Phylostratigraphic Map` and `Divergence Map` are structured:
+
+
+```{r,eval=FALSE}
+library(myTAI)
+
+# load example data sets
+data(PhyloExpressionSetExample)
+data(DivergenceExpressionSetExample)
+
+# show an example structure of a Phylostratigraphic Map
+head(PhyloExpressionSetExample[ , c("Phylostratum","GeneID")])
+
+```
+
+```
+  Phylostratum      GeneID
+1            1 at1g01040.2
+2            1 at1g01050.1
+3            1 at1g01070.1
+4            1 at1g01080.2
+5            1 at1g01090.1
+6            1 at1g01120.1
+```
+
+```{r,eval=FALSE}
+# show an example structure of a Divergence Map
+head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
+
+```
+
+```
+  Divergence.stratum      GeneID
+1                  1 at1g01050.1
+2                  1 at1g01120.1
+3                  1 at1g01140.3
+4                  1 at1g01170.1
+5                  1 at1g01230.1
+6                  1 at1g01540.2
+```
+
+### Performing Phylostratigraphy
+
+You can find a `Perl Script` for performing Phylostratigraphy in [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/README.md). 
+
+Methodologically, the process of performing `Phylostratigraphy` can be summarized by the following algorithm:
+
+1) Define a toxonomy for the organism of interest.
+
+2) Sort all genomes stored in your curated data base (e.g., NCBI nr or any other custom data base) into age categories (= phylostrata) according to the previously defined taxonomy (step 1).
+
+3) Perform BLAST homology searches using all protein sequences of the query organism (organism of interest) against a curated data dase.
+
+4) Detect the most distant homolog fulfilling the `E-value` criterium and assign this gene to the phylostratum of the corresponding homolog.
+
+5) In case no homolog was found the corresponding gene is labeled as _organism specific_ denoting the youngest phylostratum.
+
+#### Step by Step Instructions: Phylostratigraphy
+
+Here, we will construct an example `Phylostratigraphic Map` for _Arabidopsis thaliana_. 
+
+In the first step, please go to [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/createPsMap.pl) and download the `Perl Script`
+to run the `Phylostratigraphy` algorithm. Now please install the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package to be able to automatically define a taxonomy for _A. thaliana_. 
+
+
+### Performing Divergence Stratigraphy
+
+[Divergence Stratigraphy](http://mbe.oxfordjournals.org/content/32/5/1221.full) is a computational method to determine the degree of selection pressure acting on each
+protein coding gene of a query organism against a reference organism.
+
+A detailed tutorial on how to perform Divergence Stratigraphy for any pairwise genome comparison can
+be found in the [Divergence Stratigraphy Vignette](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) of the [orthologr](https://github.com/HajkD/orthologr) package in which the `divergence_stratigraphy()` algorithm is implemented.
+
+Following steps summarize the `Divergence Stratigraphy` algorithm:
+
+1) Orthology Inference using BLAST reciprocal best hit based on `blastp` algorithm
+
+2) Pairwise global amino acid alignments of orthologous genes using the [Needleman-Wunsch algorithm](http://www.sciencedirect.com/science/article/pii/0022283670900574)
+
+3) Codon alignments of orthologous genes using [PAL2NAL](http://www.bork.embl.de/pal2nal/)
+
+4) dNdS estimation using [Comeron's method (1995)](http://link.springer.com/article/10.1007/BF00173196)
+
+5) Assigning estimated dNdS values to divergence strata (deciles of all dNdS values)
+
+
+#### Step by Step Instructions: Divergence Stratigraphy
+
+
 All functions implemented in the `myTAI` package expect a specific data format as input data. These standardized data formats are referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__.
+
+
+### PhyloExpressionSet Specifications
+
+A __PhyloExpressionSet__ specifies the combination of a `Phylostratigraphic Map` with an `Gene Expression Set`.
+
+
+
+### DivergenceExpressionSet Specifications
+
+
+
+
 
 The simplest way to get introduced into the standard formats referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__ is to look at the example data sets that come with the `myTAI` package.
 
@@ -201,46 +310,6 @@ For this purpose the following datasets need to be generated or obtained:
 Each step can be performed independent of all other steps and the resulting datasets
 can also be used for different (independent) studies and analyses.
 
-### Generating a Phylostratigraphic Map of an Organism
-
-A Phylostratigraphic Map can be generated via [Phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995).
-You can find a `Perl Script` for performing Phylostratigraphy in [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/README.md). After performing Phylostratigraphy the resulting Phylostratigraphic Map stores
-the Phylostratum assignment of genes in the first column and the corresponding gene id in the second column.
-
-```{r,eval=FALSE}
-head(Athaliana_PhyloExpressionSet[ , c("Phylostratum","GeneID")])
-```
-
-```
-  Phylostratum      GeneID
-1            1 at1g01040.2
-2            1 at1g01050.1
-3            1 at1g01070.1
-4            1 at1g01080.2
-5            1 at1g01090.1
-6            1 at1g01120.1
-```
-
-### Generating a Divergence Map of an Organism
-
-A Divergence Map can be generated via [Divergence-Stratigraphy](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/README.md). A detailed description on how to perform Divergence-Stratigraphy using the
-[orthologr](https://github.com/HajkD/orthologr) package can be found in the `Advanced Vignette`.
-After performing Divergence-Stratigraphy the resulting Divergence Map stores
-the Divergence-Stratum assignment of genes in the first column and the corresponding gene id in the second column.
-
-```{r,eval=FALSE}
-head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
-```
-
-```
-  Divergence.stratum      GeneID
-1                  1 at1g01050.1
-2                  1 at1g01120.1
-3                  1 at1g01140.3
-4                  1 at1g01170.1
-5                  1 at1g01230.1
-6                  1 at1g01540.2
-```
 
 ### Transcriptome Data
 
