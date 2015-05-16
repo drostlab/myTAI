@@ -37,8 +37,6 @@ A series of tutorials aim to guide you through the `myTAI` package:
 * __2) Intermediate:__ Vignette - Intermediate Analyses and Test Statistics
 * __3) Advanced:__ Vignette - Data Retrieval and Divergence Stratigraphy using the [orthologr](https://github.com/HajkD/orthologr) package
 
-Internally, computationally intensive functions have been written in C++ using the [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html) package to allow fast analytics in phylotranscriptomics research.
-
 ## Historical and Biological Background
 
 
@@ -93,6 +91,8 @@ head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
 6                  1 at1g01540.2
 ```
 
+Hence, a standard `Phylostratigraphic Map` or `Divergence Map` stores the _gene age_ or _sequence divergence_ information in the first column and the corresponding _gene id_ in the second column. 
+
 ### Performing Phylostratigraphy
 
 You can find a `Perl Script` for performing Phylostratigraphy in [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/README.md). 
@@ -109,13 +109,105 @@ Methodologically, the process of performing `Phylostratigraphy` can be summarize
 
 5) In case no homolog was found the corresponding gene is labeled as _organism specific_ denoting the youngest phylostratum.
 
-#### Step by Step Instructions: Phylostratigraphy
+#### Step by Step Instructions: `Phylostratigraphy`
 
 Here, we will construct an example `Phylostratigraphic Map` for _Arabidopsis thaliana_. 
 
 In the first step, please go to [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/createPsMap.pl) and download the `Perl Script`
-to run the `Phylostratigraphy` algorithm. Now please install the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package to be able to automatically define a taxonomy for _A. thaliana_. 
+to run the `Phylostratigraphy` algorithm. Now please install the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package to be able to automatically define a taxonomy for _A. thaliana_. After installing `biomartr` on your system, you can retrieve taxonomic classification information for any annotated species by typing (here we use _A. thaliana_ as example): 
 
+```{r,eval=FALSE}
+library(biomartr)
+
+# retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
+# from NCBI Taxonomy
+taxonomy( organism = "Arabidopsis thaliana", 
+          db       = "ncbi",
+          output   = "classification" )
+```
+
+```
+                   name         rank      id
+1    cellular organisms      no rank  131567
+2             Eukaryota superkingdom    2759
+3         Viridiplantae      kingdom   33090
+4          Streptophyta       phylum   35493
+5        Streptophytina      no rank  131221
+6           Embryophyta      no rank    3193
+7          Tracheophyta      no rank   58023
+8         Euphyllophyta      no rank   78536
+9         Spermatophyta      no rank   58024
+10        Magnoliophyta      no rank    3398
+11      Mesangiospermae      no rank 1437183
+12       eudicotyledons      no rank   71240
+13           Gunneridae      no rank   91827
+14         Pentapetalae      no rank 1437201
+15               rosids     subclass   71275
+16              malvids      no rank   91836
+17          Brassicales        order    3699
+18         Brassicaceae       family    3700
+19           Camelineae        tribe  980083
+20          Arabidopsis        genus    3701
+21 Arabidopsis thaliana      species    3702
+```
+The resulting classification table shows all taxonomic categories starting with the _oldest_ taxonomic category (`cellular organisms`) down to the _youngest_ taxonomic category (`Arabidopsis thaliana`). The `taxonomy ids` stored in the third column are used to classify proteomes stored in  the curated data base (e.g. NCBI nr) into corresponding taxonomic categories stored in the first column. 
+
+Due to the coverage of sequenced genomes and predicted proteomes in some cases only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
+taxonomic category (see [Fig. 1 c](http://mbe.oxfordjournals.org/content/32/5/1221/F1.expansion.html)). These 12 taxonomic categories are respresented as 12 `phylostrata` starting with the _oldest_ `phylostratum` (= `PS1` = `cellular organisms`) up to the _youngest_ `phylostratum` (= `PS12` = `A. thaliana`).
+
+This representation of taxonomic categories as `phylostrata` labeled as discrete values _1, 2, ..., n_  is stored in all `Phylostratigraphic Maps`.
+
+```
+  Phylostratum      GeneID
+1            1 at1g01040.2
+2            1 at1g01050.1
+3            1 at1g01070.1
+4            1 at1g01080.2
+5            1 at1g01090.1
+6            1 at1g01120.1
+```
+
+Here, all genes correspond to `Phylostratum 1` (PS1) representing the taxonomic category `cellular organisms`.
+
+
+In case you would like to add more information to the underlying taxonomy, please consult the  [Taxonomy](https://github.com/HajkD/biomartr/blob/master/vignettes/Taxonomy.Rmd#taxonomic-information-retrieval) Vignette of the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package.
+
+
+The next step is to run the `createPsMap.pl` script (see also [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses)).
+
+Now the following steps have to be done to create a `Phylostratigraphic Map` for _A. thaliana_:
+    
+1) Make sure that [BLAST](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.21/) is installed on your machine.
+
+2) Download the sequence database [phyloBlastDB_Drost_Gabel_Grosse_Quint.fa](http://msbi.ipb-halle.de/download/phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz) used for BLAST searches and unpack it (`tar xfvj phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz`).
+
+3) Make sure that the header of your FASTA-files (e.g. Athaliana_167_protein.fa) fullfills the following specification:<br />
+  <code>>GeneID | [organism_name] | [taxonomy]</code><br />
+  Notice, the taxonomy begins after the node "Cellular organisms" e.g.
+  
+```
+>NP_146894.1 | [Aeropyrum pernix] | [Archaea; Crenarchaeota; Thermoprotei; Desulfurococcales; Desulfurococcaceae; Aeropyrum]
+or
+>YP_001514406.1 | [Acaryochloris marina MBIC11017] | [Bacteria; Cyanobacteria; Oscillatoriophycideae; Chroococcales; Acaryochloris; Acaryochloris marina]
+or
+>ATCG00500.1|PACid:19637947 | [Arabidopsis thaliana] | [Eukaryota; Viridiplantae; Streptophyta; Streptophytina; Embryophyta; Tracheophyta; Euphyllophyta; Spermatophyta; Magnoliophyta; eudicotyledons; core eudicotyledons; rosids; malvids; Brassicales; Brassicaceae; Camelineae; Arabidopsis]
+```
+
+4) Use the following command to start the Perl script
+```terminal
+perl createPsMap.pl -i Athaliana_167_protein_with_new_Header.fa -d phyloBlastDB_Drost_Gabel_Grosse_Quint.fa -p BLAST_Athaliana 
+                    -r athaliana_blast_results -t 30 -a 64             
+Arguments:
+-i,--input          input file name in FASTA format
+-d,--database       BLAST sequence database name
+-p,--prefix         Prefix for generated mysql-files containing BLAST results
+-r,--resultTable    mysql table name
+-t,--threshold      threshold for sequence length (Default 30 amino acids)
+-a                  threads for BLAST searches
+-e,--evalue         e-value threshold for BLAST 
+```
+
+__Note__ that `Phylostratigraphy` needs large computational resources, because of billions of sequence comparisons between genes of the query organism and thousands of classified proteomes stored in the curated data base. For this task we use a computing cluster with several thousand nodes to be able to solve this task in a few hours to days. Hence, when running the `createPsMap.pl` script on a laptop or local machine with a small number of computing cores, the task will likely take weeks or months to terminate.
 
 ### Performing Divergence Stratigraphy
 
@@ -138,7 +230,7 @@ Following steps summarize the `Divergence Stratigraphy` algorithm:
 5) Assigning estimated dNdS values to divergence strata (deciles of all dNdS values)
 
 
-#### Step by Step Instructions: Divergence Stratigraphy
+#### Step by Step Instructions: `Divergence Stratigraphy`
 
 
 All functions implemented in the `myTAI` package expect a specific data format as input data. These standardized data formats are referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__.
