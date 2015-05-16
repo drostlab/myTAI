@@ -170,7 +170,7 @@ This representation of taxonomic categories as `phylostrata` labeled as discrete
 Here, all genes correspond to `Phylostratum 1` (PS1) representing the taxonomic category `cellular organisms`.
 
 
-In case you would like to add more information to the underlying taxonomy, please consult the  [Taxonomy](https://github.com/HajkD/biomartr/blob/master/vignettes/Taxonomy.Rmd#taxonomic-information-retrieval) Vignette of the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package.
+The `taxonomy()` functions allows you to retrieve taxonomic classification information for any annotated organism of interest by specifying its `scientific name`, e.g. `Arabidopsis thaliana`, `Homo sapiens`, `Mus musculus`, etc. In case you would like to add more information to the underlying taxonomy, please consult the  [Taxonomy](https://github.com/HajkD/biomartr/blob/master/vignettes/Taxonomy.Rmd#taxonomic-information-retrieval) Vignette of the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package.
 
 
 The next step is to run the `createPsMap.pl` script (see also [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses)).
