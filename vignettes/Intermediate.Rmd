@@ -24,10 +24,10 @@ This __Intermediate__ vignette introduces more detailed analyses and more specia
 to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, etc.) and introduces the statistical framework to quantify the significance of observed phenomena.
 
 
-## Investigating the statistical significance of phylotranscriptomic patterns
+## Investigating the Statistical Significance of Phylotranscriptomic Patterns
 
 Three methods have been proposed to quantify the statistical significance of the observed phylotranscriptomics patterns
-(Quint et al. 2012, Drost et al., 2015).
+([Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html), [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
 
 * __FlatLineTest__
 * __ReductiveHourglassTest__
