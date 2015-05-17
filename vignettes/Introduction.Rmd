@@ -43,7 +43,23 @@ A series of tutorials aim to guide you through the `myTAI` package:
 
 ## Getting Started
 
-The first step in performing phylotranscriptomic analyses is to
+The following sections provide step by step tutorials on `phylotranscriptomic analyses`. 
+
+As already mentioned above, phylotranscriptomic analyses are based on the combination of genetic sequence information with transcriptome data. 
+
+For this purpose the following data sets need to be generated or obtained to be able to perform phylotranscriptomic analyses:
+
+- Phylostratigraphic Map of an Organism (of Interest)
+
+- Divergence Map of an Organism (of Interest)
+
+- Transcriptome Data Covering a Specific Experiment for the Organism (of Interest)
+
+Each step can be performed independent of all other steps and the resulting data sets
+can also be used for different (independent) studies and analyses.
+
+
+So, the first step in performing phylotranscriptomic analyses is to
 perform `Phylostratigraphy` and `Divergence Stratigraphy` to assign
 each protein coding genes of an organism of interest an evolutionary age ([Phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995))
 or degree of selection pressure ([Divergence Stratigraphy](http://mbe.oxfordjournals.org/content/32/5/1221.full)). The resulting
@@ -232,51 +248,113 @@ Following steps summarize the `Divergence Stratigraphy` algorithm:
 
 #### Step by Step Instructions: `Divergence Stratigraphy`
 
+The first step is to install the [orthologr](https://github.com/HajkD/orthologr) package on your machine. In the following example we will compute a `Divergence Map` for _A. thaliana_ versus _A. lyrata_.
 
-All functions implemented in the `myTAI` package expect a specific data format as input data. These standardized data formats are referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__.
+Downloading the CDS files of `A. thaliana` and `A. lyrata`:
+
+```r
+# download the CDS file of A. thaliana
+download.file( url      = "ftp://ftp.jgi-psf.org/pub/compgen/phytozome/v9.0/Athaliana/annotation/Athaliana_167_cds.fa.gz", 
+               destfile = "Athaliana_167_cds.fa.gz" )
+               
+# download the CDS file of A. lyrata
+download.file( url      = "ftp://ftp.jgi-psf.org/pub/compgen/phytozome/v9.0/Alyrata/annotation/Alyrata_107_cds.fa.gz", 
+               destfile = "Alyrata_107_cds.fa.gz" )
+```
+
+Compute the `Divergence Map` of `A. thaliana` versus `A. lyrata`:
+
+```r
+library(orthologr)
+
+# compute the divergence map of A. thaliana vs. A. lyrata
+Ath_vs_Aly_DM <- divergence_stratigraphy(
+                         query_file      = "Athaliana_167_cds.fa",
+                         subject_file    = "Alyrata_107_cds.fa",
+                         eval            = "1E-5", 
+                         ortho_detection = "RBH",
+                         comp_cores      = 1, 
+                         quiet           = TRUE, 
+                         clean_folders   = TRUE )
+   
+
+```
+
+In case you are working on a multicore machine, you can specify the `comp_cores` argument to perform `divergence_stratigraphy()` using multiple computing cores. 
+
+Now the resulting `Divergence Map` stored the `divergence stratum` in the first column and the corresoponding `gene id` in the second column.
+
+```
+  Divergence.stratum      GeneID
+1                  1 at1g01050.1
+2                  1 at1g01120.1
+3                  1 at1g01140.3
+4                  1 at1g01170.1
+5                  1 at1g01230.1
+6                  1 at1g01540.2
+```
+
+For a more detailed tutorial on how to use the `divergence_stratigraphy()` function implemented in [orthologr](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) please consult the [Divergence Stratigraphy Vignette](https://github.com/HajkD/orthologr).
+
+## `PhyloExpressionSet` and `DivergenceExpressionSet`
+
+All functions implemented in the `myTAI` package expect a specific data format as input data. These standardized data formats are referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__. The following sections will give you an overview about these data formats.
 
 
-### PhyloExpressionSet Specifications
+### `PhyloExpressionSet` Specifications
 
-A __PhyloExpressionSet__ specifies the combination of a `Phylostratigraphic Map` with an `Gene Expression Set`.
+A `PhyloExpressionSet` specifies the combination of a `Phylostratigraphic Map` with an `Gene Expression Set`. Hence, the to generate a `PhyloExpressionSet` the following two tables need to be joined:
 
+```
+# a Phylostratigraphic Map
 
+  Phylostratum      GeneID
+1            1 at1g01040.2
+2            1 at1g01050.1
+3            1 at1g01070.1
+4            1 at1g01080.2
+5            1 at1g01090.1
+6            1 at1g01120.1
+```
+and a 
 
-### DivergenceExpressionSet Specifications
+```
+# gene expression set
 
+       GeneID     Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
+1 at1g01040.2  2173.6352  1911.2001  1152.5553  1291.4224  1000.2529   962.9772 1696.4274
+2 at1g01050.1  1501.0141  1817.3086  1665.3089  1564.7612  1496.3207  1114.6435 1071.6555
+3 at1g01070.1  1212.7927  1233.0023   939.2000   929.6195   864.2180   877.2060  894.8189
+4 at1g01080.2  1016.9203   936.3837  1181.3381  1329.4734  1392.6429  1287.9746  861.2605
+5 at1g01090.1 11424.5667 16778.1685 34366.6493 39775.6405 56231.5689 66980.3673 7772.5617
+6 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
+```
 
+In this example the `gene expression set` covers seven stages of _A. thaliana_ embryo development. This data format is defined as `ExpressionMatrix` in the `myTAI` data format specification.
 
+The function `MatchMap()` allows you to join a `Phylostratigraphic Map` with an `ExpressionMatrix` to obtain a `PhyloExpressionSet`.
 
-
-The simplest way to get introduced into the standard formats referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__ is to look at the example data sets that come with the `myTAI` package.
 
 ```{r,eval=FALSE}
 library(myTAI)
 
-# load an example PhyloExpressionSet stored in the myTAI package
-data(PhyloExpressionSetExample) 
+data(PhyloExpressionSetExample)
 
-# load an example DivergenceExpressionSet stored in the myTAI package
-data(DivergenceExpressionSetExample) 
-```
+Example.PhylostratigraphicMap <- PhyloExpressionSetExample[ , 1:2]
+Example.ExpressionMatrix <- PhyloExpressionSetExample[ , 2:9]
 
-Now, we want to have a look at the data sets and their standard format.
+# join a PhylostratigraphicMap with an ExpressionMatrix
+Example.PhyloExpressionSet <- MatchMap(Example.PhylostratigraphicMap, Example.ExpressionMatrix)
 
-* __First__ for a PhyloExpressionSet:
-
-```{r,eval=FALSE}
-
-head(PhyloExpressionSetExample, 3) # head of an example standard PhyloExpressionSet
-
+# look at a standard PhyloExpressionSet
+head(Example.PhyloExpressionSet, 3)
 ```
 
 ```
-
-  Phylostratum      GeneID   Zygote Quadrant Globular     Heart  Torpedo      Bent    Mature
-1            1 at1g01040.2 2173.635 1911.200 1152.555 1291.4224 1000.253  962.9772 1696.4274
-2            1 at1g01050.1 1501.014 1817.309 1665.309 1564.7612 1496.321 1114.6435 1071.6555
-3            1 at1g01070.1 1212.793 1233.002  939.200  929.6195  864.218  877.2060  894.8189
-
+Phylostratum      GeneID    Zygote  Quadrant  Globular    Heart  Torpedo     Bent   Mature
+1            4 at1g01010.1  878.2158  828.2301  776.0703 753.9589 775.3377 756.2460 999.9118
+2            2 at1g01020.1 1004.9710 1106.2621 1037.5141 939.0830 961.5249 871.4684 997.5953
+3            3 at1g01030.1  819.4880  771.6396  810.8717 866.7780 773.7893 747.9941 785.6105
 ```
 
 As you can see, a standard PhyloExpressionSet is a `data.frame` storing the Phylostratum assignment of a given gene in the first column, the gene id of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. This format is crucial for all functions that are implemented in the `myTAI` package.
@@ -317,12 +395,17 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
   
 ```
 
-This `PhyloExpressionSetExample` data set stored within the `myTAI` package stores the time course (seven stages) of _Arabidopsis thaliana_ embryo development. Again, the first column represents the Phylostratum assignment of a given gene, the second column stores the gene id of the corresponding gene, and columns 3 to 9 store the gene expression set of _A. thaliana_ embryo development. 
+The `PhyloExpressionSetExample` data set stored within the `myTAI` package stores the time course (seven stages) of _Arabidopsis thaliana_ embryo development. Again, the first column represents the Phylostratum assignment of a given gene, the second column stores the gene id of the corresponding gene, and columns 3 to 9 store the gene expression set of _A. thaliana_ embryo development. 
 
-* __Second__ for a DivergenceExpressionSet:
+### `DivergenceExpressionSet` Specifications
+
+A `DivergenceExpressionSet` specifies the combination of a `Divergence Map` with an `Gene Expression Set`. A `DivergenceExpressionSet` can be generated analogous to a `PhyloExpressionSet` by joining a `Divergence Map` with an `ExpressionMatrix` using the `MatchMap()` function.
+
+The following `DivergenceExpressionSet` example shows the standard `DivergenceExpressionSet` data set format.
 
 ```{r,eval=FALSE}
-head(DivergenceExpressionSetExample, 3) # head of an example standard DivergenceExpressionSet
+# head of an example standard DivergenceExpressionSet
+head(DivergenceExpressionSetExample, 3) 
 ```
 
 ```
@@ -333,15 +416,14 @@ head(DivergenceExpressionSetExample, 3) # head of an example standard Divergence
 
 ```
 
-
-Analogous to a standard PhyloExpressionSet, a standard DivergenceExpressionSet is a `data.frame` storing the Divergence-Stratum assignment of a given gene in the first column, the gene id of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. __This format is crucial for all functions that are implemented in the `myTAI` package__.
+Analogous to a standard `PhyloExpressionSet`, a standard `DivergenceExpressionSet` is a `data.frame` storing the Divergence Stratum assignment of a given gene in the first column, the gene id of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. __This format is crucial for all functions that are implemented in the `myTAI` package__.
 
 Keeping these standard data formats in mind will provide you with the most important requirements to get started with the `myTAI` package.
 
 __Note__, that within the code of each function, the argument `ExpressionSet` always refers to either a PhyloExpressionSet or a DivergenceExpressionSet, whereas in specialized functions some arguments are specified as _PhyloExpressionSet_ when they take an PhyloExpressionSet as input data set, or specified as _DivergenceExpressionSet_ when they take an _DivergenceExpressionSet_ as input data set.
 
 
-## Downloading Published PhyloExpressionSets or DivergenceExpressionSets
+## Skip `Phylostratigraphy` and `Divergence Stratigraphy` and Download Already Published `PhyloExpressionSets` or `DivergenceExpressionSets`
 
 The `myTAI` package provides the statistical framework for existing PhyloExpressionSets or DivergenceExpressionSets. To re-analyze, reproduce, or further investigate phenomena of existing PhyloExpressionSets or DivergenceExpressionSets, you can use the following
 procedure to download published datasets. In this example we will download `Supplementary Table S3` from [Drost et al., 2015](http://mbe.oxfordjournals.org/content/early/2015/03/05/molbev.msv012.full.pdf).
@@ -386,116 +468,6 @@ TAI(Athaliana_PhyloExpressionSet)
 ```
 
 
-## Creating Your Own PhyloExpressionSet or DivergenceExpressionSet
-
-Phylotranscriptomics combines evolutionary information obtained from
-Phylostratigraphy and Divergence-Stratigraphy with corresponding transcriptome data.
-
-For this purpose the following datasets need to be generated or obtained:
-
-- Phylostratigraphic Map of an Organism (of Interest)
-
-- Divergence Map of an Organism (of Interest)
-
-- Transcriptome Data Covering a Specific Experiment for the Organism (of Interest)
-
-Each step can be performed independent of all other steps and the resulting datasets
-can also be used for different (independent) studies and analyses.
-
-
-### Transcriptome Data
-
-Any transcriptome data of interest can be used to perform phylotranscriptomics analyses.
-In the following sections as well as in the documentation of `myTAI` functions
-transcriptome data is referred to as `ExpressionMatrix`.
-
-It is assumed that a `ExpressionMatrix` used to perform phylotranscriptomics analyses
-does not include duplicate expression values for a gene and has the following format:
-
-```{r, eval=FALSE}
-head(DivergenceExpressionSetExample[ , 2:9])
-```
-
-```
-       GeneID    Zygote  Quadrant  Globular     Heart   Torpedo      Bent     Mature
-1 at1g01050.1 1501.0141 1817.3086 1665.3089 1564.7612 1496.3207 1114.6435  1071.6555
-2 at1g01120.1  844.0414  787.5929  859.6267  931.6180  942.8453  870.2625   792.7542
-3 at1g01140.3 1041.4291  908.3929 1068.8832  967.7490 1055.1901 1109.4662   825.4633
-4 at1g01170.1 1361.6646 1042.1991 1225.5625 1211.7386 1674.5224 2136.4284 10662.4763
-5 at1g01230.1  894.1276  946.6993  933.0931  965.1859  870.9218  843.1814   794.6536
-6 at1g01540.2 1464.3065 1451.4255 2378.7054 1993.9326 1800.2420 2119.9220  1020.2640
-```
-
-So the Gene IDs are stored in the first column and the corresponding gene expression matrix
-is stored in the following columns.
-
-Now you can use the `?MatchMap` function to combine a Phylostratigraphic Map or Divergence Map
-with a transcriptome dataset of interest.
-
-
-```{r,eval=FALSE}
-# load a standard PhyloExpressionSet
-data(PhyloExpressionSetExample)
-
-# in a standard PhyloExpressionSet,
-# column one and column two denote a standard
-# Phylostratigraphic Map
-PhyloMap <- PhyloExpressionSetExample[ , 1:2]
-
-# look at the Phylostratigraphic Map standard
-head(PhyloMap)
-```
-
-```
-  Phylostratum      GeneID
-1            1 at1g01040.2
-2            1 at1g01050.1
-3            1 at1g01070.1
-4            1 at1g01080.2
-5            1 at1g01090.1
-6            1 at1g01120.1
-```
-
-```{r,eval=FALSE}
-# in a standard PhyloExpressionSet, column two combined
-# with column 3 - N denote a standard ExpressionMatrix
-ExpressionMatrixExample <- PhyloExpressionSetExample[ , c(2,3:9)]
-
-head(ExpressionMatrixExample)
-```
-
-```
-       GeneID     Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
-1 at1g01040.2  2173.6352  1911.2001  1152.5553  1291.4224  1000.2529   962.9772 1696.4274
-2 at1g01050.1  1501.0141  1817.3086  1665.3089  1564.7612  1496.3207  1114.6435 1071.6555
-3 at1g01070.1  1212.7927  1233.0023   939.2000   929.6195   864.2180   877.2060  894.8189
-4 at1g01080.2  1016.9203   936.3837  1181.3381  1329.4734  1392.6429  1287.9746  861.2605
-5 at1g01090.1 11424.5667 16778.1685 34366.6493 39775.6405 56231.5689 66980.3673 7772.5617
-6 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
-```
-
-```{r,eval=FALSE}
-# now we can use the MatchMap function to merge both data sets
-# to obtain a standard PhyloExpressionSet
-
-PES <- MatchMap(PhyloMap, ExpressionMatrixExample)
-
-head(PES)
-```
-
-```
-  Phylostratum      GeneID    Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
-1            4 at1g01010.1  878.2158  828.2301  776.0703  753.9589  775.3377  756.2460  999.9118
-2            2 at1g01020.1 1004.9710 1106.2621 1037.5141  939.0830  961.5249  871.4684  997.5953
-3            3 at1g01030.1  819.4880  771.6396  810.8717  866.7780  773.7893  747.9941  785.6105
-4            1 at1g01040.2 2173.6352 1911.2001 1152.5553 1291.4224 1000.2529  962.9772 1696.4274
-5            1 at1g01050.1 1501.0141 1817.3086 1665.3089 1564.7612 1496.3207 1114.6435 1071.6555
-6            2 at1g01060.1  787.0917  802.3522  738.8684  754.8027  716.0982  670.1015  809.2199
-```
-
-Using the `MatchMap()` function you can combine any data set storing evolutionary information (e.g. generated by performing Phylostratigraphy or Divergence-Stratigraphy)
-with transcriptome data representing a biological process of interest to detect evolutionary signals and
-conserved stages within this biological process.
 
 
 ## Performing a Standard Workflow for Phylotranscriptomics Analyses 
@@ -546,12 +518,24 @@ __Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as 
 ### 1) Plotting the _Transcriptome Age Index_ and the _Transcriptome Divergence Index_
 
 
-Mathematically the _Transcriptome Age Index_ (TAI) introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
+Mathematically the _Transcriptome Age Index_ (TAI) introduced by [Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
 
-Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage _s_.
+
+$TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
+
+where $ps_i$ denotes the phylostratum assignment of gene $i$ and $e_{is}$ denotes
+the gene expression level of gene $i$ at developmental time point $s$. 
+
+Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage _s_.
+
+$TDI_s = \sum_{i = 1}^n \frac{ds_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
+
+where $ds_i$ denotes the divergence stratum assignment of gene $i$ and $e_{is}$ denotes
+the gene expression level of gene $i$ at developmental time point $s$. 
 
 ## Transcriptome Age Index Analyses
 
+[Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) introduced three statistical tests to quantify the significance of observed TAI patterns: `Flat Line Test`, `Reductive Hourglass Test`, and `Reductive Early Conservation Test`.
 
 ### Flat Line Test
 
