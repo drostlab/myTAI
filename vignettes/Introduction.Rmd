@@ -524,7 +524,7 @@ Mathematically the _Transcriptome Age Index_ (TAI) introduced by [Domazet-Loso a
 $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 
 where $ps_i$ denotes the phylostratum assignment of gene $i$ and $e_{is}$ denotes
-the gene expression level of gene $i$ at developmental time point $s$. 
+the gene expression level of gene $i$ at developmental time point $s$. A lower value of TAI describes an older transcriptome age, whereas a higher value of TAI denotes a younger transcriptome age.
 
 Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage _s_.
 
@@ -532,6 +532,8 @@ $TDI_s = \sum_{i = 1}^n \frac{ds_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 
 where $ds_i$ denotes the divergence stratum assignment of gene $i$ and $e_{is}$ denotes
 the gene expression level of gene $i$ at developmental time point $s$. 
+A lower value of TDI describes an more conserved transcriptome (in terms of sequence dissimilarity), whereas a higher value of TDI denotes a more variable transcriptome.
+
 
 ## Transcriptome Age Index Analyses
 
