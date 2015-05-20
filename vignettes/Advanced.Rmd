@@ -75,5 +75,5 @@ Ath_Proteome <- getProteome( db           = "refseq",
 
 Internally, the `getProteome()` function creates a directory named `_ncbi_downloads/proteome` in which corresponding proteomes are loaded and then sourced as data.table object into the current R session. When specifying `clean_folder = FALSE`, the `_ncbi_downloads/proteomes` folder will not be removed and the corresponding proteome does not need to be downloaded again when sourcing it into the current R session via `getProteome()`.
 
-
+[Here](https://github.com/HajkD/published_phylomaps) you can find a collection of scripts and documentation of already published `Phylostratigraphic Maps` and `Divergence Maps` and step by step instructions on how to retrieve them to be able to use them together with `myTAI`.
 
