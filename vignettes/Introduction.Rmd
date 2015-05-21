@@ -37,9 +37,6 @@ A series of tutorials aim to guide you through the `myTAI` package:
 * __2) Intermediate:__ Vignette - Intermediate Analyses and Test Statistics
 * __3) Advanced:__ Vignette - Data Retrieval and Divergence Stratigraphy using the [orthologr](https://github.com/HajkD/orthologr) package
 
-## Historical and Biological Background
-
-
 
 ## Getting Started
 
@@ -332,7 +329,7 @@ and a
 
 In this example the `gene expression set` covers seven stages of _A. thaliana_ embryo development. This data format is defined as `ExpressionMatrix` in the `myTAI` data format specification.
 
-The function `MatchMap()` allows you to join a `Phylostratigraphic Map` with an `ExpressionMatrix` to obtain a `PhyloExpressionSet`.
+The function `MatchMap()` allows you to join a `Phylostratigraphic Map` with an `ExpressionMatrix` to obtain a `PhyloExpressionSet`. In some cases, the GeneIDs stored in the `ExpressionMatrix` and in the `Phylostratigraphic Map` do not match. This is due to GeneID mappings between different data bases and annotations. To map non matching GeneIDs between data bases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package. The `biomartr` package allows you to map GeneIDs between data base annotations.
 
 
 ```{r,eval=FALSE}
@@ -399,7 +396,7 @@ The `PhyloExpressionSetExample` data set stored within the `myTAI` package store
 
 ### `DivergenceExpressionSet` Specifications
 
-A `DivergenceExpressionSet` specifies the combination of a `Divergence Map` with an `Gene Expression Set`. A `DivergenceExpressionSet` can be generated analogous to a `PhyloExpressionSet` by joining a `Divergence Map` with an `ExpressionMatrix` using the `MatchMap()` function.
+A `DivergenceExpressionSet` specifies the combination of a `Divergence Map` with an `Gene Expression Set`. A `DivergenceExpressionSet` can be generated analogous to a `PhyloExpressionSet` by joining a `Divergence Map` with an `ExpressionMatrix` using the `MatchMap()` function. In some cases, the GeneIDs stored in the `ExpressionMatrix` and in the `Divergence Map` do not match. This is due to GeneID mappings between different data bases and annotations. To map non matching GeneIDs between data bases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package. The `biomartr` package allows you to map GeneIDs between data base annotations.
 
 The following `DivergenceExpressionSet` example shows the standard `DivergenceExpressionSet` data set format.
 
@@ -426,7 +423,7 @@ __Note__, that within the code of each function, the argument `ExpressionSet` al
 ## Skip `Phylostratigraphy` and `Divergence Stratigraphy` and Download Already Published `PhyloExpressionSets` or `DivergenceExpressionSets`
 
 The `myTAI` package provides the statistical framework for existing PhyloExpressionSets or DivergenceExpressionSets. To re-analyze, reproduce, or further investigate phenomena of existing PhyloExpressionSets or DivergenceExpressionSets, you can use the following
-procedure to download published datasets. In this example we will download `Supplementary Table S3` from [Drost et al., 2015](http://mbe.oxfordjournals.org/content/early/2015/03/05/molbev.msv012.full.pdf).
+procedure to download published datasets. In this example we will download `Supplementary Table S3` from [Drost et al., 2015](http://mbe.oxfordjournals.org/content/early/2015/03/05/molbev.msv012.full.pdf). A list of published `Phylostratigraphic Maps` and `Divergence Maps` can be found [here](https://github.com/HajkD/published_phylomaps).
 
 
 
