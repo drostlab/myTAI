@@ -74,7 +74,7 @@ In the `myTAI` framework you can find:
 #### A Statistical Framework and Test Statistics:
 
 * `FlatLineTest()` : Function to perform the __Flat Line Test__ that quantifies the statistical significance of an observed
-phylotranscriptomics pattern (significant deviation from a frat line = no evolutionary signal)
+phylotranscriptomics pattern (significant deviation from a frat line = evolutionary signal)
 * `ReductiveHourglassTest()` : Function to perform the __Reductive Hourglass Test__ that statistically evaluates the existence of a phylotranscriptomic hourglass pattern (hourglass model)
 * `EarlyConservationTest()` : Function to perform the __Reductive Early Conservation Test__ that statistically evaluates the existence of a monotonically increasing phylotranscriptomic pattern (early conservation model)
 
@@ -82,7 +82,7 @@ All three functions also include visual analytics tools to quantify the goodness
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `bootMatrix()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`, `rhScore()`, and `tf()`
+`age.apply()`, `bootMatrix()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`, `pStrata()`, `rhScore()`, and `tf()`
 
 
 ## Install Developer Version of myTAI
