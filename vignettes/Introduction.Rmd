@@ -165,10 +165,10 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 The resulting classification table shows all taxonomic categories starting with the _oldest_ taxonomic category (`cellular organisms`) down to the _youngest_ taxonomic category (`Arabidopsis thaliana`). The `taxonomy ids` stored in the third column are used to classify proteomes stored in  the curated data base (e.g. NCBI nr) into corresponding taxonomic categories stored in the first column. 
 
-Due to the coverage of sequenced genomes and predicted proteomes in some cases only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
+In some cases (due to the coverage of sequenced genomes and predicted proteomes) only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
 taxonomic category (see [Fig. 1 c](http://mbe.oxfordjournals.org/content/32/5/1221/F1.expansion.html)). These 12 taxonomic categories are respresented as 12 `phylostrata` starting with the _oldest_ `phylostratum` (= `PS1` = `cellular organisms`) up to the _youngest_ `phylostratum` (= `PS12` = `A. thaliana`).
 
-This representation of taxonomic categories as `phylostrata` labeled as discrete values _1, 2, ..., n_  is stored in all `Phylostratigraphic Maps`.
+This representation of taxonomic categories as `phylostrata` are labeled as discrete values _1, 2, ..., n_  and are stored in all `Phylostratigraphic Maps`.
 
 ```
   Phylostratum      GeneID
@@ -220,7 +220,7 @@ Arguments:
 -e,--evalue         e-value threshold for BLAST 
 ```
 
-__Note__ that `Phylostratigraphy` needs large computational resources, because of billions of sequence comparisons between genes of the query organism and thousands of classified proteomes stored in the curated data base. For this task we use a computing cluster with several thousand nodes to be able to solve this task in a few hours to days. Hence, when running the `createPsMap.pl` script on a laptop or local machine with a small number of computing cores, the task will likely take weeks or months to terminate.
+__Note__ that `Phylostratigraphy` needs large computational resources, because of thousands of sequence comparisons between genes of the query organism and thousands of classified proteomes stored in the curated data base. For this task we use a computing cluster with several thousand nodes to be able to solve this task in a few hours to days. Hence, when running the `createPsMap.pl` script on a laptop or local machine with a small number of computing cores, the task will likely take weeks or months to terminate.
 
 ### Performing Divergence Stratigraphy
 
@@ -279,7 +279,7 @@ Ath_vs_Aly_DM <- divergence_stratigraphy(
 
 In case you are working on a multicore machine, you can specify the `comp_cores` argument to perform `divergence_stratigraphy()` using multiple computing cores. 
 
-Now the resulting `Divergence Map` stored the `divergence stratum` in the first column and the corresoponding `gene id` in the second column.
+Now the resulting `Divergence Map` stores the `divergence stratum` in the first column and the corresponding `gene id` in the second column.
 
 ```
   Divergence.stratum      GeneID
@@ -300,7 +300,7 @@ All functions implemented in the `myTAI` package expect a specific data format a
 
 ### `PhyloExpressionSet` Specifications
 
-A `PhyloExpressionSet` specifies the combination of a `Phylostratigraphic Map` with an `Gene Expression Set`. Hence, the to generate a `PhyloExpressionSet` the following two tables need to be joined:
+A `PhyloExpressionSet` specifies the combination of a `Phylostratigraphic Map` with an `Gene Expression Set`. Hence, to generate a `PhyloExpressionSet` the following two tables need to be joined:
 
 ```
 # a Phylostratigraphic Map
@@ -428,14 +428,18 @@ procedure to download published datasets. In this example we will download `Supp
 
 
 ```{r,eval=FALSE}
-# install.packages("gdata")
-library(gdata)
+# install the readxl package
+install.packages("readxl")
+
+# load package readxl
+library(readxl)
+
 url_phyloSet <- "http://files.figshare.com/1798296/Supplementary_table_S3.xls"
 
 download.file( url      =  url_phyloSet,
                destfile = "PhyloExpressionSetTables.xls" )
 
-Athaliana_PhyloExpressionSet <- read.xls("PhyloExpressionSetTables.xls", sheet = 3)
+Athaliana_PhyloExpressionSet <- read_excel("PhyloExpressionSetTables.xls", sheet = 3)
 
 head(Athaliana_PhyloExpressionSet)
 
@@ -464,7 +468,7 @@ TAI(Athaliana_PhyloExpressionSet)
 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
 ```
 
-
+You can also use already published `Phylostratigraphic Maps` and `Divergence Maps` that can be found [here](https://github.com/HajkD/published_phylomaps) and match them with your transcriptome data of interest using the `MatchMap()` function. This procedure allows you to generate your own `PhyloExpressionSet` and `DivergenceExpressionSet` to perform phylotranscriptomic analyses with `myTAI`.
 
 
 ## Performing a Standard Workflow for Phylotranscriptomics Analyses 
@@ -523,7 +527,7 @@ $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 where $ps_i$ denotes the phylostratum assignment of gene $i$ and $e_{is}$ denotes
 the gene expression level of gene $i$ at developmental time point $s$. A lower value of TAI describes an older transcriptome age, whereas a higher value of TAI denotes a younger transcriptome age.
 
-Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage _s_.
+Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage $s$.
 
 $TDI_s = \sum_{i = 1}^n \frac{ds_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 
@@ -552,15 +556,15 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
 ```
 
 The p-value (`p_flt`) above the TAI curve is returned by the [_FlatLineTest_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html). As described in the
-documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatLineTest` is the default statistical test to quantify the statistical significance of the observed phylotranscriptomic pattern. In detail, the test quantifies any statistically significant deviation of the phylotranscriptomic pattern from a flat line.
+documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatLineTest` is the default statistical test to quantify the statistical significance of the observed phylotranscriptomic pattern. In detail, the test quantifies any statistically significant deviation of the phylotranscriptomic pattern from a flat line. Here, we define any significant deviation of a phylotranscriptomic pattern from a flat line as evolutionary signal. Furthermore, we define corresponding stages of deviation as evolutionary conserved or variable (less conserved) depending on the magnitude of `TAI` values.
 
 ### Reductive Hourglass Test
 
 
-In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles and _hourglass_ shape,
-one can obtain a p-value corresponding to the statistical significance of a visual _hourglass_ pattern referred to as `ReductiveHourglassTest` (`?ReductiveHourglassTest`).
+In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles an _hourglass_ shape,
+one can obtain a p-value quantifying the statistical significance of a visual _hourglass_ pattern based on the `ReductiveHourglassTest` (`?ReductiveHourglassTest`).
 
-Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge (Drost et al., 2015), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
+Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
 
@@ -586,7 +590,7 @@ The corresponding p-value `p_rht` now denotes the p-value returned by the `Reduc
 which is different from the p-value returned by the `FlatLineTest` (`p_flt`).
 
 
-To make sure that you selected the correct modules you can use the `shaded.area` argument to visualize the chosen modules:
+To make sure that correct modules have been selected to perform the `ReductiveHourglassTest`, you can use the `shaded.area` argument to visualize chosen modules:
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Visualize the phylotypic period used for the Reductive Hourglass Test
@@ -613,7 +617,7 @@ The `EarlyConservationTest` tests whether an observed phylotranscriptomic patter
 a low-high-high pattern (monotonically increasing function) supporting the Early Conservation Model of embryogenesis.
 
 
-Analogous to the `ReductiveHourglassTest`, the `EarlyConservationTest` needs a priori biological knowledge (Drost et al., 2015).
+Analogous to the `ReductiveHourglassTest`, the `EarlyConservationTest` needs a priori biological knowledge [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1).
 So again three `modules` have to be specified for the `EarlyConservationTest()` function.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
@@ -673,7 +677,7 @@ PlotPattern( ExpressionSet = DivergenceExpressionSetExample,
              ylab          = "TDI" )
 ```
 
-Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo development into the three modules:
+Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo development into three modules:
 
 * early = stages 1 - 2 (Zygote and Quadrant)
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
@@ -692,7 +696,7 @@ PlotPattern( ExpressionSet = DivergenceExpressionSetExample,
 ```
 
 
-And for the __EarlyConservationTest__ we again divide _A. thaliana_ embryo development into the three modules:
+And for the __EarlyConservationTest__ we again divide _A. thaliana_ embryo development into three modules:
 
 * early = stages 1 - 2 (Zygote and Quadrant)
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
@@ -727,7 +731,7 @@ TDI(DivergenceExpressionSetExample)
 
 
 
-The __TAI__ or __TDI__ pattern are very useful to gain a first insight into the mean transcriptome age or mean sequence divergence of genes being most active during the corresponding developmental stage or experiment.
+__TAI__ or __TDI__ patterns are very useful to gain a first insight into the mean transcriptome age or mean sequence divergence of genes being most active during the corresponding developmental stage or experiment.
 
 To further investigate the origins of the global __TAI__ or __TDI__ pattern it is useful to visualize the mean gene expression of each Phylostratum or Divergence-Stratum class.
 
@@ -837,7 +841,7 @@ age.apply( ExpressionSet = DivergenceExpressionSetExample,
 
 
 
-Introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html), relative expression levels are defined as a linear transformation of the mean expression levels (of each Phylostratum or Divergence-Stratum) into the interval [0,1] ([Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)). This allows the comparability between mean expression patterns  between Phylostrata or Divergence-Strata independent from their actual magnitude.
+Introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html), relative expression levels are defined as a linear transformation of the mean expression levels (of each Phylostratum or Divergence-Stratum) into the interval $[0,1]$ ([Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)). This allows the comparability between mean expression patterns  between Phylostrata or Divergence-Strata independent from their actual magnitude.
 
 The `PlotRE()` function can be used (analogous to the `PlotMeans()` function) to visualize the relative expression levels of a given PhyloExpressionSet and DivergenceExpressionSet:
 
