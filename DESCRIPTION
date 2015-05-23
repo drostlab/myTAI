@@ -5,7 +5,7 @@ Version: 0.1.0
 Date: 2015-05-23
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
-Description: This package allows users interested in the evolution of biological (developmental) processes to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
+Description: A statistical framework allowing users interested in the evolution of biological (developmental) processes to capture evolutionary signals in developmental transcriptomes.
 VignetteBuilder: knitr
 NeedsCompilation: yes
 License: GPL-3
