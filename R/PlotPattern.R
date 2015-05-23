@@ -166,7 +166,8 @@ PlotPattern <- function(ExpressionSet,
         
         if (is.null(TestStatistic)){
                 
-                plot(TAI(ExpressionSet), ...)
+                plot(TAI(ExpressionSet), xaxt = "n", ...)
+                axis(1,1:(ncol(ExpressionSet)-2),names(ExpressionSet)[3:ncol(ExpressionSet)])
                 
         } else {
         
