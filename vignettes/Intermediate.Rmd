@@ -544,7 +544,7 @@ the overall impression (sum of all individual analyses) must be considered to ob
 
 ## Data Transformation
 
-Motivated by the discussion raised by [Piasecka et al., 2013](http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1003476#pgen-1003476-g004), the influence of gene expression transformation on the global phylotranscriptomics pattern does not seem negligible. Hence, different transformations can result in qualitatively different TAI or TDI patterns.
+Motivated by the discussion raised by Piasecka et al., 2013, the influence of gene expression transformation on the global phylotranscriptomics pattern does not seem negligible. Hence, different transformations can result in qualitatively different TAI or TDI patterns.
 
 Initially, the TAI and TDI formulas were defined for absolute expression levels. So using the initial TAI and TDI formulas with transformed expression levels can result in qualitatively different patterns when compared with non-transformed expression levels, but might also belong to a different class of models, since different valid expression level transformation functions result in different patterns.
 
