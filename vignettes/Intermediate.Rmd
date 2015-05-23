@@ -27,18 +27,18 @@ to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, e
 ## Investigating the Statistical Significance of Phylotranscriptomic Patterns
 
 Three methods have been proposed to quantify the statistical significance of the observed phylotranscriptomics patterns
-([Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html), [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
+([Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
 
-* __FlatLineTest__
-* __ReductiveHourglassTest__
-* __EarlyConservationTest__
+* __Flat Line Test__
+* __Reductive Hourglass Test__
+* __Reductive Early Conservation Test__
 
 Here, we will build the test statistic of each test step by step so that future modifications
 or new test statistics can be built upon the existing methods implemented in the `myTAI` package.
 
 
 
-### FlatLineTest
+### Flat Line Test
 
 The __Flat Line Test__ is a permutation test quantifying the statistical significance of an observed phylotranscriptomic pattern. The goal is to detect any evolutionary signal within a developmental time course that significantly deviates from a flat line.
 
@@ -135,9 +135,9 @@ var(TAI(randomPhyloExpressionSetExample))
 [1] 0.0004102549
 ```
 
-We observe that the variance of the randomly assigned TAI profile is much smaller than the variance of the correctly assigned TAI profile. Here we use the variance to quantify the _flatness_ of a given TAI profile. In theory the variance of a perfect flat line would be zero. So any TAI profile that is close to zero would resemble a flat line. But how exactly are the variances of randomly assigned TAI profiles distributed. For this purpose the `bootMatrix()` function was implemented.
+We observe that the variance of the randomly assigned TAI profile is much smaller than the variance of the correctly assigned TAI profile. Here we use the variance to quantify the _flatness_ of a given TAI profile. In theory the variance of a perfect flat line would be zero. So any TAI profile that is close to zero would resemble a flat line. But how exactly are the variances of randomly assigned TAI profiles distributed? For this purpose the `bootMatrix()` function was implemented.
 
-The `bootMatrix()` takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N `TAI` or `TDI` profiles of based on randomly assigned Phylostrata or Divergence-Strata.
+The `bootMatrix()` takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N `TAI` or `TDI` profiles based on randomly assigned Phylostrata or Divergence-Strata.
 
 ```{r,eval=FALSE}
 # Compute 1000 TAI profiles based on randomly assigned Phylostrata
@@ -241,7 +241,7 @@ pgamma(var_real, shape = shape,rate = rate, lower.tail = FALSE)
 Hence, the variance of the correct TAI profile significantly deviates from random TAI profiles 
 and this allows us to assume that the underlying TAI profile captures a real evolutionary signal.
 
-### Using the FlatLineTest() function
+### Using the `FlatLineTest()` Function
 
 This entire procedure of computing the p-value having the variance of TAI profiles as test statistic is done by the `FlatLineTest()` function.
 
@@ -342,15 +342,15 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
 
 The Reductive Hourglass Test is a permutation test based on the following test statistic.
 
-(1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
+(1) A set of developmental stages is partitioned into three modules - `early`, `mid`, and `late` - based on prior biological knowledge (see [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) for details).
 
-(2) The mean TAI or TDI value for each of the three modules T_early_, T_mid_, and T_late_ are computed.
+(2) The mean TAI or TDI value for each of the three modules $T_{early}$, $T_{mid}$, and $T_{late}$ are computed.
 
-(3) The two differences D1 = T_early_ - T_mid_ and D2 = T_late_ - T_mid_ are calculated.
+(3) The two differences D1 = $T_{early}$ - $T_{mid}$ and D2 = $T_{late}$ - $T_{mid}$ are calculated.
 
-(4) The minimum D_min_ of D1 and D2 is computed as final test statistic of the __Reductive Hourglass Test__.
+(4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reductive Hourglass Test__.
 
-In order to determine the statistical significance of an observed minimum difference D_min_ the following permutation test was performed. Based on the `bootMatrix()` D_min_ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector D_min_ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
 
 
 
@@ -384,25 +384,25 @@ ReductiveHourglassTest( ExpressionSet = PhyloExpressionSetExample,
 The corresponding output shows the p-value returned by the __Reductive Hourglass Test__,
 the standard deviation of randomly permuted TAI profiles returned by `bootMatrix()`
  (`apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)`) and in case the argument `lillie.test = TRUE`,
-a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality is being returned. In case `lillie.test` is `TRUE`, the 
-[Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) 
- passed the goodness of fit criterion, in case `lillie.test` is `FALSE` the corresponding goodness of fit by a normal distribution is not statistically significant.
+a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality. In case `lillie.test` is `TRUE` the corresponding 
+[Lilliefors (Kolmogorov-Smirnov)](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) 
+ test passed the goodness of fit criterion. In case `lillie.test` is `FALSE` the corresponding goodness of fit by a normal distribution is not statistically significant.
 
 Analogous to the `plotHistogram` argument that is present in the `FlatLineTest()` function,
 the `ReductiveHourglassTest()` function also takes an argument `plotHistogram`. When `plotHistogram = TRUE`,
 the `ReductiveHourglassTest()` function returns a multi-plot showing:
 
 * A Cullen and Frey skewness-kurtosis plot. 
-This plot illustrates which distributions seem plausible to fit the resulting permutation vector D_min_. 
+This plot illustrates which distributions seem plausible to fit the resulting permutation vector $D_{min}$. 
 Here a normal distribution seems most plausible.
 
-* A histogram of D_min_ combined with the density plot is visualized. 
-D_min_ is then fitted by a normal distribution. 
+* A histogram of $D_{min}$ combined with the density plot is visualized. 
+$D_{min}$ is then fitted by a normal distribution. 
 The corresponding parameters are estimated by moment matching estimation.
 
 * A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
 
-* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (TRUE) or not significant (FALSE). 
+* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
 This allows to quantify the permutation bias and their implications on the goodness of fit.
 
 
@@ -465,15 +465,15 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
 
 The reductive early conservation test is a permutation test based on the following test statistic.
 
-(1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
+(1) A set of developmental stages is partitioned into three modules - `early`, `mid`, and `late` - based on prior biological knowledge.
 
-(2) The mean TAI or TDI value for each of the three modules T_early_, T_mid_, and T_late_ are computed.
+(2) The mean TAI or TDI value for each of the three modules $T_{early}$, $T_{mid}$, and $T_{late}$ are computed.
 
-(3) The two differences D1 = T_mid_ - T_early_ and D2 = T_late_ - T_early_ are calculated.
+(3) The two differences D1 = $T_{mid}$ - $T_{early}$ and D2 = $T_{late}$ - $T_{early}$ are calculated.
 
-(4) The minimum D_min_ of D1 and D2 is computed as final test statistic of the __Reductive Early Conservation Test__.
+(4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reductive Early Conservation Test__.
 
-In order to determine the statistical significance of an observed minimum difference D_min_ the following permutation test was performed. Based on the `bootMatrix()` D_min_ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector D_min_ is statistically quantified by an [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by an [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
 
 
 To perform the __Reductive Early Conservation Test__ you can use the `EarlyConservationTest()` function.
@@ -508,16 +508,16 @@ the `EarlyConservationTest()` function also takes an argument `plotHistogram`. W
 the `EarlyConservationTest()` function returns a multi-plot showing:
 
 * A Cullen and Frey skewness-kurtosis plot. 
-This plot illustrates which distributions seem plausible to fit the resulting permutation vector D_min_. 
+This plot illustrates which distributions seem plausible to fit the resulting permutation vector $D_{min}$. 
 Again a normal distribution seems most appropriate.
 
-* A histogram of D_min_ combined with the density plot is visualized. 
-D_min_ is then fitted by a normal distribution. 
+* A histogram of $D_{min}$ combined with the density plot is visualized. 
+$D_{min}$ is then fitted by a normal distribution. 
 The corresponding parameters are estimated by moment matching estimation.
 
 * A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
 
-* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (TRUE) or not significant (FALSE). 
+* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
 This allows to quantify the permutation bias and their implications on the goodness of fit.
 
 
@@ -551,9 +551,9 @@ Initially, the TAI and TDI formulas were defined for absolute expression levels.
 The purpose of the `tf()` function is to allow the user to study the qualitative impact of different transformation functions on the global TAI and TDI pattern,
 or on any subsequent phylotranscriptomics analysis.
 
-The examples using the `PhyloExpressionSetExample` data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the `FlatLineTest()`, `ReductiveHourglassTest()`, or `EarlyConservationTest()` (Drost et al., 2015) to quantify the significance of observed patterns.
+The examples using the `PhyloExpressionSetExample` data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the `FlatLineTest()`, `ReductiveHourglassTest()`, or `EarlyConservationTest()` [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) to quantify the significance of observed patterns.
 
-The `tf()` function takes a standard PhyloExpressionSet or DivergenceExpressionSet and transformation function and returns the corresponding ExpressionSet with
+The `tf()` function takes a standard `PhyloExpressionSet` or `DivergenceExpressionSet` and transformation function and returns the corresponding `ExpressionSet` with
 transformed gene expression levels.
 
 ```{r, fig.width= 7, fig.height= 5}
@@ -708,11 +708,11 @@ PlotPattern( ExpressionSet = tf(DivergenceExpressionSetExample, sqrt),
 
 ```
 
-As a result, observed patterns should always be quantified using a statistical tests 
+As a result, observed patterns should always be quantified using statistical tests 
 (for ex. `FlatLineTest()`, `ReductiveHourglassTest()`, and `EarlyConservationTest()`).
 In case the observed pattern is significant, qualitative differences of the observed patterns based on different data transformations must be investigated in more detail,
 since most data transformations are known to cause different effects on a measure that
-isn't robust against data transformation.
+isn't robust against data transformations.
 
 
 
