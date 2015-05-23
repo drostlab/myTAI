@@ -1,5 +1,4 @@
 
-#### Small function to compute the power of a given variable x
 pow <- function(x,power)
 {
   return(x^power)
@@ -20,7 +19,7 @@ CollapseFromTo <- function(x,from,to,FUN){  f <- match.fun(FUN); return(apply(x[
 #' In phylotranscriptomics analyses two major techniques are performed to
 #' obtain standard \emph{Phylostratigraphic map} or \emph{Divergence map} objects.
 #' 
-#' To obtain a \emph{Phylostratigraphic Map}, \emph{Phylostratigraphy} (Domazet-Lošo et al., 2007) has to be performed. To obtain a \emph{Divergence Map}, 
+#' To obtain a \emph{Phylostratigraphic Map}, \emph{Phylostratigraphy} (Domazet-Loso et al., 2007) has to be performed. To obtain a \emph{Divergence Map}, 
 #' orthologous gene detection, Ka/Ks computations, and decilation (Quint et al., 2012; Drost et al., 2015) have to be performed.
 #' 
 #' The resulting standard \emph{Phylostratigraphic Map} or \emph{Divergence Map} objects consist of 2 colums storing the phylostratum assignment 

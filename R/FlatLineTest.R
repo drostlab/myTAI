@@ -137,10 +137,7 @@ FlatLineTest <- function(ExpressionSet,
         rate <- gamma_MME$estimate[2]
         
         if(plotHistogram){
-                ### Perform a Kolmogorov–Smirnov test to quantify a
-                ### Gamma-distribution as Null-Distribution
-                #KS.Test.Output <- ks.test(var_values,"pgamma",shape = shape,rate = rate)
-                # plot histogram of standard deviations
+                
                 gammaDensity <- function(x){
                         
                         return(dgamma(x = x,shape = shape,rate = rate))
