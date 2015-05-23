@@ -20,8 +20,7 @@ Either a numeric matrix storing the return values of the applied function for ea
 or a numeric list storing the return values of the applied function for each age class in a list.
 }
 \description{
-This function takes a standard PhyloExpressionSet or DivergenceExpressionSet object
-as argument and performs any given function to the sub expression matrix of each phylotranscriptomic age class.
+This function performs the split-apply-combine methodology on Phylostrata or Divergence Strata stored within the input ExpressionSet.
 
 This function is very useful to perform any phylostratum or divergence-stratum specific analysis.
 }
