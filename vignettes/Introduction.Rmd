@@ -519,7 +519,7 @@ __Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as 
 ### 1) Plotting the _Transcriptome Age Index_ and the _Transcriptome Divergence Index_
 
 
-Mathematically the _Transcriptome Age Index_ (TAI) introduced by [Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
+Mathematically the _Transcriptome Age Index_ (TAI) introduced by Domazet-Loso and Tautz, 2010 represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
 
 
 $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
@@ -555,7 +555,7 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
              ylab          = "TAI" )
 ```
 
-The p-value (`p_flt`) above the TAI curve is returned by the [_FlatLineTest_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html). As described in the
+The p-value (`p_flt`) above the TAI curve is returned by the `FlatLineTest`. As described in the
 documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatLineTest` is the default statistical test to quantify the statistical significance of the observed phylotranscriptomic pattern. In detail, the test quantifies any statistically significant deviation of the phylotranscriptomic pattern from a flat line. Here, we define any significant deviation of a phylotranscriptomic pattern from a flat line as evolutionary signal. Furthermore, we define corresponding stages of deviation as evolutionary conserved or variable (less conserved) depending on the magnitude of `TAI` values.
 
 ### Reductive Hourglass Test
