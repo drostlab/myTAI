@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
     
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
-gene expression levels to capture evolutionary signals during development ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
+gene expression levels to capture evolutionary signals during development (Domazet-Loso and Tautz, 2010; Quint et al., 2012; Drost et al., 2015).
 
 This subfield of Evolutionary Developmental Biology aims to investigate stages or periods
 of evolutionary conservation or constraint in developmental processes of extant species.
@@ -165,7 +165,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 The resulting classification table shows all taxonomic categories starting with the _oldest_ taxonomic category (`cellular organisms`) down to the _youngest_ taxonomic category (`Arabidopsis thaliana`). The `taxonomy ids` stored in the third column are used to classify proteomes stored in  the curated data base (e.g. NCBI nr) into corresponding taxonomic categories stored in the first column. 
 
-In some cases (due to the coverage of sequenced genomes and predicted proteomes) only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
+In some cases (due to the coverage of sequenced genomes and predicted proteomes) only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, Quint et al., 2012 and Drost et al., 2015 summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
 taxonomic category (see [Fig. 1 c](http://mbe.oxfordjournals.org/content/32/5/1221/F1.expansion.html)). These 12 taxonomic categories are respresented as 12 `phylostrata` starting with the _oldest_ `phylostratum` (= `PS1` = `cellular organisms`) up to the _youngest_ `phylostratum` (= `PS12` = `A. thaliana`).
 
 This representation of taxonomic categories as `phylostrata` are labeled as discrete values _1, 2, ..., n_  and are stored in all `Phylostratigraphic Maps`.
@@ -423,7 +423,7 @@ __Note__, that within the code of each function, the argument `ExpressionSet` al
 ## Skip `Phylostratigraphy` and `Divergence Stratigraphy` and Download Already Published `PhyloExpressionSets` or `DivergenceExpressionSets`
 
 The `myTAI` package provides the statistical framework for existing PhyloExpressionSets or DivergenceExpressionSets. To re-analyze, reproduce, or further investigate phenomena of existing PhyloExpressionSets or DivergenceExpressionSets, you can use the following
-procedure to download published datasets. In this example we will download `Supplementary Table S3` from [Drost et al., 2015](http://mbe.oxfordjournals.org/content/early/2015/03/05/molbev.msv012.full.pdf). A list of published `Phylostratigraphic Maps` and `Divergence Maps` can be found [here](https://github.com/HajkD/published_phylomaps).
+procedure to download published datasets. In this example we will download `Supplementary Table S3` from Drost et al., 2015. A list of published `Phylostratigraphic Maps` and `Divergence Maps` can be found [here](https://github.com/HajkD/published_phylomaps).
 
 
 
@@ -527,7 +527,7 @@ $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 where $ps_i$ denotes the phylostratum assignment of gene $i$ and $e_{is}$ denotes
 the gene expression level of gene $i$ at developmental time point $s$. A lower value of TAI describes an older transcriptome age, whereas a higher value of TAI denotes a younger transcriptome age.
 
-Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage $s$.
+Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by Quint et al., 2012 and Drost et al., 2015 as weighted arithmetic mean of the degree of sequence divergence of the transcriptome being expressed during a corresponding developmental stage $s$.
 
 $TDI_s = \sum_{i = 1}^n \frac{ds_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 
@@ -841,7 +841,7 @@ age.apply( ExpressionSet = DivergenceExpressionSetExample,
 
 
 
-Introduced by [Domazet-Loso and Tautz (2010)](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html), relative expression levels are defined as a linear transformation of the mean expression levels (of each Phylostratum or Divergence-Stratum) into the interval $[0,1]$ ([Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html)). This allows the comparability between mean expression patterns  between Phylostrata or Divergence-Strata independent from their actual magnitude.
+Introduced by Domazet-Loso and Tautz, (2010), relative expression levels are defined as a linear transformation of the mean expression levels (of each Phylostratum or Divergence-Stratum) into the interval $[0,1]$ (Quint et al. (2012)). This allows the comparability between mean expression patterns  between Phylostrata or Divergence-Strata independent from their actual magnitude.
 
 The `PlotRE()` function can be used (analogous to the `PlotMeans()` function) to visualize the relative expression levels of a given PhyloExpressionSet and DivergenceExpressionSet:
 
@@ -948,7 +948,7 @@ age.apply( ExpressionSet = PhyloExpressionSetExample,
 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000
 
 ```
-[Quint et al. (2012)](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) introduced an additional way of visualizing the difference of relative expression levels between groups of Phylostrata/Divergence-Strata.
+Quint et al. (2012) introduced an additional way of visualizing the difference of relative expression levels between groups of Phylostrata/Divergence-Strata.
 
 This bar plot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the `PlotMeans()` and `PlotRE()` functions:
 
@@ -1039,4 +1039,10 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
 
 These arguments can analogously be used for all other plot functions, e.g. `PlotMeans()`, `PlotRE()`, etc.
 
+## References
 
+Domazet-Loso T. and Tautz D. __A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns__. _Nature_ (2010) 468: 815-8.
+
+Quint M. et al. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ (2012) 490: 98-101.
+
+Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231.
