@@ -5,7 +5,7 @@
 \alias{PhyloExpressionSetExample}
 \title{An Example PhyloExpressionSet Data Set}
 \source{
-\url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
+http://www.plantphysiol.org/content/156/1/346/suppl/DC1
 }
 \value{
 a standard PhyloExpressionSet object.
@@ -28,10 +28,10 @@ Hajk-Georg Drost
 }
 \references{
 Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
-Supplementary Table 2 : \url{http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html}
+Supplementary Table 2 : http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html
 
 Xiang D et al. 2011. "Genome-Wide Analysis Reveals Gene Expression and Metabolic Network Dynamics during Embryo Development in Arabidopsis". Plant Physiology (156): 346-356.
-Supplemental Table 1 : \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
+Supplemental Table 1 : http://www.plantphysiol.org/content/156/1/346/suppl/DC1
 }
 \seealso{
 \code{\link{DivergenceExpressionSetExample}}

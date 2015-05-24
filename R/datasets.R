@@ -15,16 +15,16 @@
 #' @references 
 #' 
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
-#' Supplementary Table 2 : \url{http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html}
+#' Supplementary Table 2 : http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html
 #' 
 #' Xiang D et al. 2011. "Genome-Wide Analysis Reveals Gene Expression and Metabolic Network Dynamics during Embryo Development in Arabidopsis". Plant Physiology (156): 346-356.
-#' Supplemental Table 1 : \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
+#' Supplemental Table 1 : http://www.plantphysiol.org/content/156/1/346/suppl/DC1
 #' 
 #' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{PhyloExpressionSetExample}}
 #' @name DivergenceExpressionSetExample
-#' @source \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
+#' @source http://www.plantphysiol.org/content/156/1/346/suppl/DC1
 NULL
 
 
@@ -44,14 +44,14 @@ NULL
 #' @references 
 #' 
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
-#' Supplementary Table 2 : \url{http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html}
+#' Supplementary Table 2 : http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html
 #' 
 #' Xiang D et al. 2011. "Genome-Wide Analysis Reveals Gene Expression and Metabolic Network Dynamics during Embryo Development in Arabidopsis". Plant Physiology (156): 346-356.
-#' Supplemental Table 1 : \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
+#' Supplemental Table 1 : http://www.plantphysiol.org/content/156/1/346/suppl/DC1
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{DivergenceExpressionSetExample}}
 #' @name PhyloExpressionSetExample
-#' @source \url{http://www.plantphysiol.org/content/156/1/346/suppl/DC1}
+#' @source http://www.plantphysiol.org/content/156/1/346/suppl/DC1
 NULL
 
 
