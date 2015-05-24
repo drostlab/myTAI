@@ -6,7 +6,7 @@ myTAI
 The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
     
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
-gene expression levels to capture evolutionary signals during development ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
+gene expression levels to capture evolutionary signals during development (Domazet-Loso and Tautz, 2010; Quint et al., 2012; Drost et al., 2015).
 
 This subfield of Evolutionary Developmental Biology aims to investigate stages or periods
 of evolutionary conservation or constraint in developmental processes of extant species.
@@ -112,6 +112,14 @@ devtools::install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = T
 library("myTAI", lib.loc = "C:/Program Files/R/R-3.1.1/library")
 
 ```
+
+## References
+
+Domazet-Lošo T. and Tautz D. __A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns__. _Nature_ (2010) 468: 815-8.
+
+Quint M. et al. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ (2012) 490: 98-101.
+
+Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231.
 
 ## Discussions and Bug Reports
 
