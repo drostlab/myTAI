@@ -2,7 +2,7 @@ Package: myTAI
 Type: Package
 Title: Performing Phylotranscriptomics with R
 Version: 0.1.0
-Date: 2015-05-23
+Date: 2015-05-24
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
 Description: A statistical framework allowing users interested in the evolution of biological (developmental) processes to capture evolutionary signals in developmental transcriptomes.
