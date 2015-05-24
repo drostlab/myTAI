@@ -27,7 +27,7 @@ to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, e
 ## Investigating the Statistical Significance of Phylotranscriptomic Patterns
 
 Three methods have been proposed to quantify the statistical significance of the observed phylotranscriptomics patterns
-([Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
+(Quint et al., 2012; Drost et al., 2015).
 
 * __Flat Line Test__
 * __Reductive Hourglass Test__
@@ -342,7 +342,7 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
 
 The Reductive Hourglass Test is a permutation test based on the following test statistic.
 
-(1) A set of developmental stages is partitioned into three modules - `early`, `mid`, and `late` - based on prior biological knowledge (see [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) for details).
+(1) A set of developmental stages is partitioned into three modules - `early`, `mid`, and `late` - based on prior biological knowledge (see Drost et al., 2015 for details).
 
 (2) The mean TAI or TDI value for each of the three modules $T_{early}$, $T_{mid}$, and $T_{late}$ are computed.
 
@@ -551,7 +551,7 @@ Initially, the TAI and TDI formulas were defined for absolute expression levels.
 The purpose of the `tf()` function is to allow the user to study the qualitative impact of different transformation functions on the global TAI and TDI pattern,
 or on any subsequent phylotranscriptomics analysis.
 
-The examples using the `PhyloExpressionSetExample` data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the `FlatLineTest()`, `ReductiveHourglassTest()`, or `EarlyConservationTest()` [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) to quantify the significance of observed patterns.
+The examples using the `PhyloExpressionSetExample` data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the `FlatLineTest()`, `ReductiveHourglassTest()`, or `EarlyConservationTest()` (Drost et al., 2015) to quantify the significance of observed patterns.
 
 The `tf()` function takes a standard `PhyloExpressionSet` or `DivergenceExpressionSet` and transformation function and returns the corresponding `ExpressionSet` with
 transformed gene expression levels.
@@ -713,6 +713,16 @@ As a result, observed patterns should always be quantified using statistical tes
 In case the observed pattern is significant, qualitative differences of the observed patterns based on different data transformations must be investigated in more detail,
 since most data transformations are known to cause different effects on a measure that
 isn't robust against data transformations.
+
+## References
+
+Domazet-Loso T. and Tautz D. __A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns__. _Nature_ (2010) 468: 815-8.
+
+Quint M. et al. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ (2012) 490: 98-101.
+
+Piasecka B. et al. __The hourglass and the early conservation models - co-existing patterns of developmental constraints in vertebrates__. _PLoS Genet_. (2013) 9:e1003476.
+
+Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231.
 
 
 
