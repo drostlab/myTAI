@@ -60,6 +60,8 @@ In the `myTAI` framework you can find:
 * `TDI()` : Function to compute the Transcriptome Divergence Index (TDI)
 * `REMatrix()` : Function to compute the relative expression profiles of all phylostrata or divergence-strata
 * `RE()` : Function to transform mean expression levels to relative expression levels
+* `pTAI()` : Compute the Phylostratum Contribution to the global TAI
+* `pTDI()` : Compute the Divergence Stratum Contribution to the global TDI
 
 #### Visualization and Analytics Tools:
 
