@@ -22,7 +22,7 @@
 #' @param \dots default plot parameters.
 #' @details 
 #' 
-#' #' This function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. 
+#' This function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern. 
 #' The user can choose between the \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, or \code{\link{EarlyConservationTest}}. 
 #' The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line. 
 #' Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
@@ -325,6 +325,10 @@ PlotPattern <- function(ExpressionSet,
                                       labels = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab)), 
                                  dots[!is.element(names(dots),c(plot.args,legend.args))]))
         
+        do.call(graphics::axis,c(list(side = 2,at = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab),
+                                      labels = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab)), 
+                                 dots[!is.element(names(dots),c(plot.args,legend.args))]))
+        
         # age + std.err
         lines(age + sd_vals,lwd = 2,col = "darkgrey")
         # age - std.err
@@ -333,18 +337,18 @@ PlotPattern <- function(ExpressionSet,
         if(p.value == TRUE){
                 
                 if(TestStatistic == "FlatLineTest"){
-                        do.call(graphics::legend,c(x = "topleft",bty = "n",legend = paste("p_flt = ",format(pval,digits = 3),sep = ""),
-                                           dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                        do.call(graphics::legend,c(list(x = "topleft",bty = "n",legend = paste("p_flt = ",format(pval,digits = 3),sep = ""),
+                                           dots[!is.element(names(dots),c(plot.args,axis.args))])))
                 }
                 
                 if(TestStatistic == "ReductiveHourglassTest"){
-                        do.call(graphics::legend,c(x = "topleft",bty = "n",legend = paste("p_rht = ",format(pval,digits = 3),sep = ""),
-                                                   dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                        do.call(graphics::legend,c(list(x = "topleft",bty = "n",legend = paste("p_rht = ",format(pval,digits = 3),sep = ""),
+                                                   dots[!is.element(names(dots),c(plot.args,axis.args))])))
                 }
                 
                 if(TestStatistic == "EarlyConservationTest"){
-                        do.call(graphics::legend,c(x = "topleft",bty = "n",legend = paste("p_ect = ",format(pval,digits = 3),sep = ""),
-                                                   dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                        do.call(graphics::legend,c(list(x = "topleft",bty = "n",legend = paste("p_ect = ",format(pval,digits = 3),sep = ""),
+                                                   dots[!is.element(names(dots),c(plot.args,axis.args))])))
                 }
                 
         }

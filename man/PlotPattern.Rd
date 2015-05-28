@@ -55,7 +55,7 @@ Function to plot the TAI or TDI of a given PhyloExpressionSet or DivergenceExpre
 This function plot the \code{\link{TAI}} or \code{\link{TDI}} of a given PhyloExpressionSet or DivergenceExpressionSet object.
 }
 \details{
-#' This function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern.
+This function computes a permutation test quantifying the statistical significance of the prensent phylotranscriptomics pattern.
 The user can choose between the \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}, or \code{\link{EarlyConservationTest}}.
 The \code{\link{FlatLineTest}} tests for any significant deviation from a flat line.
 Each period or stage that significantly deviates from a flat line, might be governed by stronger selective pressure (in terms of natural selection) compared to other stages or periods of development.
