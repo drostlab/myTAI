@@ -3,6 +3,8 @@ myTAI 0.2.0
 
 ### New Functions
 
+- a new function `PlotContribution()` allows users to visualize the Phylostratum or Divergence Stratum contribution to the global TAI/TDI pattern
+
 - a new function `pTAI()` allows users to compute the phylostratum contribution to the global TAI pattern
 
 - a new function `pTDI()` allows users to compute the divergence stratum contribution to the global TDI pattern
