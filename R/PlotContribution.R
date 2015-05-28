@@ -40,6 +40,8 @@ PlotContribution <- function(ExpressionSet,
         if(is.null(legendName))
                 stop("Please specify whether your input ExpressionSet stores 'PS' or 'DS'.")
         
+        is.ExpressionSet(ExpressionSet)
+        
         ncols <- ncol(ExpressionSet)
         nPS <- length(table(ExpressionSet[ , 1]))
                 
