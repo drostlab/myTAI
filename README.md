@@ -71,7 +71,7 @@ In the `myTAI` framework you can find:
 * `PlotBarRE()` : Function to plot the mean relative expression levels of phylostratum or divergence-stratum classes as barplot
 * `PlotMeans()` : Function to plot the mean expression profiles of phylostrata or divergence-strata
 * `PlotDistribution()` : Function to plot the frequency distribution of genes within the corresponding phylostratigraphic map or divergence map
-
+* `PlotContribution()` : Plot the Phylostratum or Divergence Stratum Contribution to the Global TAI/TDI Pattern
 
 #### A Statistical Framework and Test Statistics:
 
