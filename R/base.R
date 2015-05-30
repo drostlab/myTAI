@@ -282,5 +282,14 @@ is.ExpressionSet <- function(ExpressionSet){
 }
 
 
+get.contingency.tbl <- function(x, index){
+        
+        contig.tbl <- matrix(NA_real_,ncol = 2, nrow = 2)
+        contig.tbl <- rbind(c(x[index, 1],x[index, 2]),
+                 c(sum(x[-index, 1]),sum(x[-index, 2])))
+        colnames(contig.tbl) <- c("BG","TestSet")
+        rownames(contig.tbl) <- c(paste0("PS",index),paste0("-PS",index))
+        return(contig.tbl)
 
+}
 
