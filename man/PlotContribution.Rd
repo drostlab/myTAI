@@ -31,10 +31,10 @@ data(PhyloExpressionSetExample)
  data(DivergenceExpressionSetExample)
 
  # visualize phylostratum contribution to global TAI
- PlotContribution(PhyloExpressionSetExample)
+ PlotContribution(PhyloExpressionSetExample, legendName = "PS")
 
  # visualize divergence stratum contribution to global TDI
- PlotContribution(DivergenceExpressionSetExample)
+ PlotContribution(DivergenceExpressionSetExample, legendName = "DS")
 }
 \author{
 Hajk-Georg Drost
