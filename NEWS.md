@@ -3,6 +3,8 @@ myTAI 0.2.0
 
 ### New Functions
 
+- a new function `PlotEnrichment()` allows users to visualize the Phylostratum or Divergence Stratum enrichment of a given Gene Set as well as computing Fisher's exact test to quantify the statistical significance of enrichment
+
 - a new function `PlotContribution()` allows users to visualize the Phylostratum or Divergence Stratum contribution to the global TAI/TDI pattern
 
 - a new function `pTAI()` allows users to compute the phylostratum contribution to the global TAI pattern
