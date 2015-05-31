@@ -3,6 +3,11 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param test.set a character vector storing the gene ids for which PS/DS enrichment analyses should be performed.
 #' @param measure a character string specifying the measure that should be used to quantify over and under representation of PS/DS. Measures can either be \code{measure = "foldchange"} (odds) or \code{measure = "log-foldchange"} (log-odds).
+#' @param complete.bg a logical value indicating whether the entire background set
+#'  of the input \code{ExpressionSet} should be considered when performing Fisher's exact
+#'  test (\code{complete.bg = TRUE}) or whether genes that are stored in \code{test.set}
+#'  should be excluded from the background set before performing Fisher's exact test
+#'  (\code{complete.bg = FALSE}).
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
 #' @param over.col color of the overrepresentation bars.
 #' @param under.col color of the underrepresentation bars.
@@ -49,6 +54,10 @@
 #' set.seed(123)
 #' test_set <- sample(PhyloExpressionSetExample[ , 2],1000)
 #' 
+#' ## Examples with complete.bg = TRUE
+#' ## Hence: the entire background set of the input ExpressionSet is considered 
+#' ## when performing Fisher's exact test 
+#' 
 #' # measure: log-foldchange
 #' PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
 #'                test.set      = test_set , 
@@ -61,12 +70,33 @@
 #'                test.set      = test_set , 
 #'                legendName    = "PS", 
 #'                measure       = "foldchange")
+#'    
 #'                
+#' ## Examples with complete.bg = FALSE
+#' ## Hence: the test.set genes are excluded from the background set before
+#' ## Fisher's exact test is performed
+#'      
+#'                                        
+#' # measure: log-foldchange
+#' PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
+#'                test.set      = test_set ,
+#'                 complete.bg  = FALSE,
+#'                legendName    = "PS", 
+#'                measure       = "log-foldchange")
+#'                
+#'                
+#' # measure: foldchange
+#' PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
+#'                test.set      = test_set , 
+#'                complete.bg   = FALSE,
+#'                legendName    = "PS", 
+#'                measure       = "foldchange")                                  
 #' @export
 
 PlotEnrichment <- function(ExpressionSet,
                            test.set,
                            measure      = "log-foldchange",
+                           complete.bg  = TRUE,
                            legendName   = NULL,
                            over.col     = "steelblue",
                            under.col    = "midnightblue",
@@ -87,9 +117,16 @@ PlotEnrichment <- function(ExpressionSet,
         if (length(test.set) > nrow(ExpressionSet))
                 stop("Your input GeneID vector stores more elements than are available in your ExpressionSet object...")
         
+       
         MatchedGeneIDs <- na.omit(match(tolower(test.set),tolower(ExpressionSet[ , 2])))
         age.distr.test.set <- ExpressionSet[MatchedGeneIDs , 1:2]
         
+        # exclude test.set genes from the background set
+        # before performing Fisher's exact test
+        if(complete.bg)
+                ExpressionSet <- ExpressionSet[-MatchedGeneIDs , ]
+
+
         if (length(age.distr.test.set[ , 2]) != length(test.set))
                 warning(length(test.set) - length(age.distr.test.set[ , 2]), " out of ",length(test.set)," genes could not be found within the ExpressionSet object.")
         

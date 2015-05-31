@@ -5,9 +5,9 @@
 \title{Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set}
 \usage{
 PlotEnrichment(ExpressionSet, test.set, measure = "log-foldchange",
-  legendName = NULL, over.col = "steelblue", under.col = "midnightblue",
-  epsilon = 1e-05, cex.legend = 1, cex.asterisk = 1, plot.bars = TRUE,
-  ...)
+  complete.bg = TRUE, legendName = NULL, over.col = "steelblue",
+  under.col = "midnightblue", epsilon = 1e-05, cex.legend = 1,
+  cex.asterisk = 1, plot.bars = TRUE, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -15,6 +15,12 @@ PlotEnrichment(ExpressionSet, test.set, measure = "log-foldchange",
 \item{test.set}{a character vector storing the gene ids for which PS/DS enrichment analyses should be performed.}
 
 \item{measure}{a character string specifying the measure that should be used to quantify over and under representation of PS/DS. Measures can either be \code{measure = "foldchange"} (odds) or \code{measure = "log-foldchange"} (log-odds).}
+
+\item{complete.bg}{a logical value indicating whether the entire background set
+of the input \code{ExpressionSet} should be considered when performing Fisher's exact
+test (\code{complete.bg = TRUE}) or whether genes that are stored in \code{test.set}
+should be excluded from the background set before performing Fisher's exact test
+(\code{complete.bg = FALSE}).}
 
 \item{legendName}{a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.}
 
@@ -62,6 +68,10 @@ data(PhyloExpressionSetExample)
 set.seed(123)
 test_set <- sample(PhyloExpressionSetExample[ , 2],1000)
 
+## Examples with complete.bg = TRUE
+## Hence: the entire background set of the input ExpressionSet is considered
+## when performing Fisher's exact test
+
 # measure: log-foldchange
 PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
                test.set      = test_set ,
@@ -72,6 +82,27 @@ PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
 # measure: foldchange
 PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
                test.set      = test_set ,
+               legendName    = "PS",
+               measure       = "foldchange")
+
+
+## Examples with complete.bg = FALSE
+## Hence: the test.set genes are excluded from the background set before
+## Fisher's exact test is performed
+
+
+# measure: log-foldchange
+PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
+               test.set      = test_set ,
+                complete.bg  = FALSE,
+               legendName    = "PS",
+               measure       = "log-foldchange")
+
+
+# measure: foldchange
+PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
+               test.set      = test_set ,
+               complete.bg   = FALSE,
                legendName    = "PS",
                measure       = "foldchange")
 }
