@@ -2,7 +2,7 @@
 #' @description This function computes and visualizes the significance of enriched (over or underrepresented) Phylostrata or Divergence Strata within an input \code{test.set}.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param test.set a character vector storing the gene ids for which PS/DS enrichment analyses should be performed.
-#' @param measure a character string specifying the measure that should be used to quantify over and under representation of PS/DS. 
+#' @param measure a character string specifying the measure that should be used to quantify over and under representation of PS/DS. Measures can either be \code{measure = "foldchange"} (odds) or \code{measure = "log-foldchange"} (log-odds).
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
 #' @param over.col color of the overrepresentation bars.
 #' @param under.col color of the underrepresentation bars.
@@ -11,8 +11,37 @@
 #' @param cex.legend the \code{cex} value for the legend.
 #' @param cex.asterisk the \code{cex} value for the asterisk.
 #' @param ... default graphics parameters.
-#' @details This
+#' @details 
+#' 
+#' This \emph{Phylostratum} or \emph{Divergence Stratum} enrichment analysis is motivated 
+#' by Sestak and Domazet-Loso (2015) who perform \emph{Phylostratum} or \emph{Divergence Stratum} enrichment analyses to correlate organ evolution with the origin of organ specific genes. 
+#' 
+#' In detail this function takes the \emph{Phylostratum} or \emph{Divergence Stratum} distribution of all genes stored in the input \code{ExpressionSet} as background set and
+#' the \emph{Phylostratum} or \emph{Divergence Stratum} distribution of the \code{test.set} and performes a \code{\link{fisher.test}} for each \emph{Phylostratum} or \emph{Divergence Stratum} to quantify the statistical significance of over- or underrepresentated \emph{Phylostrata} or \emph{Divergence Strata} within the set of selected \code{test.set} genes. 
+#' 
+#' To visualize the odds or log-odds of over or underrepresented genes within the \code{test.set} the following procedure is performed:
+#' 
+#' \itemize{
+#' \item N_ij denotes the number of genes in group j and deriving from PS i, with i = 1, .. , n and j = background (j = 1) or \code{test.set} (j = 2)
+#' \item N_i. denotes the total number of genes within PS i
+#' \item N_.j denotes the total number of genes within group j
+#' \item N_.. is the total number of genes within all groups j and all PS i
+#' \item f_ij = N_ij / N_.. and g_ij = f_ij / f_.j denote relative frequencies between groups
+#' }
+#' 
+#'  The result is the fold-change value (odds) denoted as C = g_i2 / f_i. which is visualized symmetrically above and below zero or the log fold-change value (log-odds). 
+#'  
+#'  Therefore, the C value is defined as C' = -1/C for C values below 1.
+#'  
+#'  
+#'  
+#'  
+#'  
 #' @author Hajk-Georg Drost
+#' @references
+#' 
+#' Sestak and Domazet-Loso (2015). Phylostratigraphic Profiles in Zebrafish Uncover Chordate Origins of the Vertebrate Brain. Mol. Biol. Evol. 32(2): 299-312. 
+#' 
 #' @examples
 #' 
 #' data(PhyloExpressionSetExample)
@@ -158,7 +187,7 @@ PlotEnrichment <- function(ExpressionSet,
                                 measure_ylab <- "Fold Change"
                         
                         if (measure == "log-foldchange")
-                                measure_ylab <- "Log Fold Change"
+                                measure_ylab <- "Log odds"
                         
                         barPlotFoldChanges <- barplot(ResultMatrix[ , 2],
                                                       beside    = FALSE,
