@@ -129,30 +129,61 @@ PlotEnrichment <- function(ExpressionSet,
         
         colnames(ResultMatrix) <- c("BG_Set","Test_Set")
         rownames(ResultMatrix) <- paste0(legendName,1:nPS)
-        
-        # plot the results and only show the values (gi2 - f_i_dot) 
-        # denoting under/over-representation of group2 = TestSet when compared
-        # with group 1 = BackgroundSet
-        
-        bar.colors <- vector("character",nPS)
-        bar.colors[UpRegulated] <- over.col
-        bar.colors[DownRegulated] <- under.col
-        
-        max.lim.val <- max(abs(c(floor(min(ResultMatrix[ , 2]) - 0.1), ceiling(max(ResultMatrix[ , 2]) + 0.3))))
-        ylim.range <- range(-max.lim.val,max.lim.val)
-        
-        if(plot.bars){
                 
-                barPlotFoldChanges <- barplot(ResultMatrix[ , 2],
-                                              beside    = FALSE,
-                                              col       = bar.colors,
-                                              lwd       = 4,
-                                              space     = 1,
-                                              names.arg = paste0(legendName,1:nPS),
-                                              ylim      = ylim.range,
-                                              border    = "white", ...)
+        if (plot.bars){
                 
-                abline(h = 0,col = "black",lty = 1,lwd = 4)
+                dots <- list(...)
+                ellipsis.names <- names(dots)
+                
+                # plot the results and only show the values (gi2 - f_i_dot) 
+                # denoting under/over-representation of group2 = TestSet when compared
+                # with group 1 = BackgroundSet
+                
+                bar.colors <- vector("character",nPS)
+                bar.colors[UpRegulated] <- over.col
+                bar.colors[DownRegulated] <- under.col
+                
+                max.lim.val <- max(abs(c(floor(min(ResultMatrix[ , 2]) - 0.1), ceiling(max(ResultMatrix[ , 2]) + 0.3))))
+                ylim.range <- range(-max.lim.val,max.lim.val)
+                
+                if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) || (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
+                        
+                        if (legendName == "PS")
+                                age_xlab <- "Phylostratum"
+                        
+                        if (legendName == "DS")
+                                age_xlab <- "Divergence Stratum"
+                        
+                        if (measure == "foldchange")
+                                measure_ylab <- "Fold Change"
+                        
+                        if (measure == "log-foldchange")
+                                measure_ylab <- "Log Fold Change"
+                        
+                        barPlotFoldChanges <- barplot(ResultMatrix[ , 2],
+                                                      beside    = FALSE,
+                                                      col       = bar.colors,
+                                                      lwd       = 4,
+                                                      space     = 1,
+                                                      names.arg = paste0(legendName,1:nPS),
+                                                      ylim      = ylim.range,
+                                                      border    = "white",
+                                                      xlab      = age_xlab, 
+                                                      ylab      = measure_ylab, ...)
+                        
+                } else {
+                        
+                        barPlotFoldChanges <- barplot(ResultMatrix[ , 2],
+                                                      beside    = FALSE,
+                                                      col       = bar.colors,
+                                                      lwd       = 4,
+                                                      space     = 1,
+                                                      names.arg = paste0(legendName,1:nPS),
+                                                      ylim      = ylim.range,
+                                                      border    = "white", ...)
+                }
+                
+                abline(h = 0, col = "black", lty = 1,lwd = 4)
                 legend("topright",
                        legend = c("over-represented","under-represented"),
                        fill   = c(over.col,under.col),
