@@ -7,13 +7,13 @@
 PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL, ...)
 }
 \arguments{
-\item{ExpressionSet}{}
+\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{gene.set}{}
+\item{gene.set}{a character vector storing the gene ids for which gene expression profiles shall be visualized.}
 
-\item{get.subset}{}
+\item{get.subset}{a logical value indicating whether or not an \code{ExpressionSet} subset of the selected \code{gene.set} should be retuned.}
 
-\item{colors}{}
+\item{colors}{colors for gene expression profiles. Default: \code{colors = NULL}, hence default colours are used.}
 
 \item{...}{additional parameters passed to \code{\link{matplot}}.}
 }
@@ -22,7 +22,18 @@ This function simply visualizes the gene expression profiles of
 a defined subset of genes stored in the input \code{ExpressionSet}.
 }
 \examples{
-data(PhyloExpressioNSetExample)
+data(PhyloExpressionSetExample)
+
+# png("test_png.png",700,400)
+PlotGeneSet(ExpressionSet = PhyloExpressionSetExample,
+            gene.set      = PhyloExpressionSetExample[1:5, 2],
+            type          = "l",
+            lty           = 1,
+            lwd           = 4,
+            xlab          = "Ontogeny",
+            ylab          = "Expression Level")
+
+# dev.off()
 }
 \author{
 Hajk-Georg Drost
