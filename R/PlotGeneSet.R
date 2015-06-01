@@ -30,7 +30,7 @@ PlotGeneSet <- function(ExpressionSet,
         
         is.ExpressionSet(ExpressionSet)
         
-        GeneSubSet.indixes <- match(tolower(gene.set), tolower(ExpressionSet[ , 2]))
+        GeneSubSet.indixes <- na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
         
 #         if (is.na(GeneSubSet.indixes))
 #                 stop ("None of your input gene ids could be found in the ExpressionSet.")
