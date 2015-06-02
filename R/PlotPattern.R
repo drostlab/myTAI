@@ -325,9 +325,6 @@ PlotPattern <- function(ExpressionSet,
                                       labels = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab)), 
                                  dots[!is.element(names(dots),c(plot.args,legend.args))]))
         
-        do.call(graphics::axis,c(list(side = 2,at = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab),
-                                      labels = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab)), 
-                                 dots[!is.element(names(dots),c(plot.args,legend.args))]))
         
         # age + std.err
         lines(age + sd_vals,lwd = 2,col = "darkgrey")
