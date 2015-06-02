@@ -6,6 +6,8 @@
 #' @param gene.set a character vector storing the gene ids for which gene expression profiles shall be visualized. 
 #' @param get.subset a logical value indicating whether or not an \code{ExpressionSet} subset of the selected \code{gene.set} should be retuned. 
 #' @param colors colors for gene expression profiles. Default: \code{colors = NULL}, hence default colours are used.
+#' @param y.ticks a numeric value specifying the number of ticks to be drawn on the y-axis.
+#' @param digits.ylab a numeric value specifying the number of digits shown for the expression levels on the y-axis.
 #' @param ... additional parameters passed to \code{\link{matplot}}.
 #' @author Hajk-Georg Drost
 #' @examples
@@ -21,6 +23,15 @@
 #'             ylab          = "Expression Level")
 #' 
 #' # dev.off()
+#' 
+#' # In case you would like to work with the expression levels
+#' # of selected genes you can specify the 'get.subset' argument:
+#' 
+#' PlotGeneSet(ExpressionSet = PhyloExpressionSetExample, 
+#'             gene.set      = PhyloExpressionSetExample[1:5, 2], 
+#'             get.subset    = TRUE)
+#' 
+#' 
 #' @export
 
 PlotGeneSet <- function(ExpressionSet, 
@@ -48,26 +59,27 @@ PlotGeneSet <- function(ExpressionSet,
                                     
         if (length(colors) != length(gene.set))
                 stop ("The number of colors and the number of genes do not match.")
+        
+        if(!get.subset){
+                # define arguments for different graphics functions
+                plot.args <- c("type","lwd","col","cex.lab","main","xlab","ylab")
+                axis.args <- c("las", "cex.axis")
+                legend.args <- c("border","angle","density","box.lwd","cex")
+                dots <- list(...)
+                ellipsis.names <- names(dots)
                 
-        # define arguments for different graphics functions
-        plot.args <- c("type","lwd","col","cex.lab","main","xlab","ylab")
-        axis.args <- c("las", "cex.axis")
-        legend.args <- c("border","angle","density","box.lwd","cex")
-        dots <- list(...)
-        ellipsis.names <- names(dots)
+                ylim.range <- range(min(GeneSubSet[ , 3:ncols]),max(GeneSubSet[ , 3:ncols]))  
                 
-        ylim.range <- range(min(GeneSubSet[ , 3:ncols]),max(GeneSubSet[ , 3:ncols]))  
-                
-        if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) | (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
-                
-                par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
+                if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) | (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
                         
-                do.call(graphics::matplot,c(list(x = t(GeneSubSet[ , 3:ncols]), 
-                                                 col  = colors[1:length(GeneSubSet.indixes)], 
-                                                 axes = FALSE), 
-                                            dots[!is.element(names(dots),c(axis.args,legend.args))]))
-                                
-        } else {      
+                        par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
+                        
+                        do.call(graphics::matplot,c(list(x = t(GeneSubSet[ , 3:ncols]), 
+                                                         col  = colors[1:length(GeneSubSet.indixes)], 
+                                                         axes = FALSE), 
+                                                    dots[!is.element(names(dots),c(axis.args,legend.args))]))
+                        
+                } else {      
                         do.call(graphics::matplot,c(list(x = t(GeneSubSet[ , 3:ncols]), 
                                                          col  = colors[1:length(GeneSubSet.indixes)], 
                                                          xaxt = "n", 
@@ -85,12 +97,14 @@ PlotGeneSet <- function(ExpressionSet,
                                          dots[!is.element(names(dots),c(plot.args,legend.args))]))
                 
                 do.call(graphics::legend, c(list("topright", 
-                       inset  = c(-0.2,0), 
-                       legend = GeneSubSet[ , 2], 
-                       title  = "Genes", 
-                       col    = colors[1:length(GeneSubSet.indixes)],
-                       lwd    = 4,
-                       bty    = "n"), dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                                                 inset  = c(-0.2,0), 
+                                                 legend = GeneSubSet[ , 2], 
+                                                 title  = "Genes", 
+                                                 col    = colors[1:length(GeneSubSet.indixes)],
+                                                 lwd    = 4,
+                                                 bty    = "n"), dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                
+        }
 
         if (get.subset)
                 return(GeneSubSet)

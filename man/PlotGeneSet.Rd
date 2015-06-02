@@ -4,7 +4,8 @@
 \alias{PlotGeneSet}
 \title{Plot the Expression Profiles of a Gene Set}
 \usage{
-PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL, ...)
+PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL,
+  y.ticks = 6, digits.ylab = 4, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -14,6 +15,10 @@ PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL, ...)
 \item{get.subset}{a logical value indicating whether or not an \code{ExpressionSet} subset of the selected \code{gene.set} should be retuned.}
 
 \item{colors}{colors for gene expression profiles. Default: \code{colors = NULL}, hence default colours are used.}
+
+\item{y.ticks}{a numeric value specifying the number of ticks to be drawn on the y-axis.}
+
+\item{digits.ylab}{a numeric value specifying the number of digits shown for the expression levels on the y-axis.}
 
 \item{...}{additional parameters passed to \code{\link{matplot}}.}
 }
@@ -34,6 +39,13 @@ PlotGeneSet(ExpressionSet = PhyloExpressionSetExample,
             ylab          = "Expression Level")
 
 # dev.off()
+
+# In case you would like to work with the expression levels
+# of selected genes you can specify the 'get.subset' argument:
+
+PlotGeneSet(ExpressionSet = PhyloExpressionSetExample,
+            gene.set      = PhyloExpressionSetExample[1:5, 2],
+            get.subset    = TRUE)
 }
 \author{
 Hajk-Georg Drost
