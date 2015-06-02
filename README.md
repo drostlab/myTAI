@@ -73,6 +73,8 @@ In the `myTAI` framework you can find:
 * `PlotDistribution()` : Function to plot the frequency distribution of genes within the corresponding phylostratigraphic map or divergence map
 * `PlotContribution()` : Plot the Phylostratum or Divergence Stratum Contribution to the Global TAI/TDI Pattern
 * `PlotEnrichment()` : Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set
+* `PlotGeneSet()` : Plot the Expression Profiles of a Gene Set
+
 
 #### A Statistical Framework and Test Statistics:
 
