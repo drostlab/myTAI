@@ -26,6 +26,10 @@ PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL,
 This function simply visualizes the gene expression profiles of
 a defined subset of genes stored in the input \code{ExpressionSet}.
 }
+\details{
+This function simply visualizes or subsets the gene expression levels of a set of genes
+that are stored in the input \code{ExpressionSet}.
+}
 \examples{
 data(PhyloExpressionSetExample)
 

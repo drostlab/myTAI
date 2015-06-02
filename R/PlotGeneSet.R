@@ -10,6 +10,11 @@
 #' @param digits.ylab a numeric value specifying the number of digits shown for the expression levels on the y-axis.
 #' @param ... additional parameters passed to \code{\link{matplot}}.
 #' @author Hajk-Georg Drost
+#' @details
+#' 
+#' This function simply visualizes or subsets the gene expression levels of a set of genes
+#' that are stored in the input \code{ExpressionSet}.
+#' 
 #' @examples
 #' data(PhyloExpressionSetExample)
 #' 
