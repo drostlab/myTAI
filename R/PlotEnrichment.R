@@ -131,7 +131,7 @@ PlotEnrichment <- function(ExpressionSet,
 
 
         if (length(age.distr.test.set[ , 2]) != length(test.set))
-                warning(length(test.set) - length(age.distr.test.set[ , 2]), " out of ",length(test.set)," genes could not be found within the ExpressionSet object.")
+                warning("Only ",length(age.distr.test.set[ , 2]), " out of your ",length(test.set)," gene ids could be found in the ExpressionSet.")
         
         age.table <- table(ExpressionSet[ , 1])
         nPS <- length(age.table)
