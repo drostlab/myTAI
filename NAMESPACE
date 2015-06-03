@@ -3,6 +3,7 @@
 export(CollapseReplicates)
 export(CombinatorialSignificance)
 export(EarlyConservationTest)
+export(EnrichmentTest)
 export(FilterRNASeqCT)
 export(FlatLineTest)
 export(MatchMap)
