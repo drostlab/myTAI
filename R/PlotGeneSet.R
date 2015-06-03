@@ -66,8 +66,7 @@ PlotGeneSet <- function(ExpressionSet,
         }
         
         if (is.null(colors))
-                colors <- re.colors(length(GeneSubSet.indixes))
-                                    
+                 colors <- colorRampPalette(brewer.pal(8,"Dark2"))(length(GeneSubSet.indixes))                   
         if(!get.subset){
                 # define arguments for different graphics functions
                 plot.args <- c("type","lwd","col","cex.lab","main","xlab","ylab")
