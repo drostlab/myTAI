@@ -1,5 +1,6 @@
 context("Test: PlotGeneSet() ")
 
+# http://stats.stackexchange.com/questions/118033/best-series-of-colors-to-use-for-differentiating-series-in-publication-quality
 
 equal_df <- function(df1,df2){
         rownames(df1) <- NULL
