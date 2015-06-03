@@ -62,6 +62,8 @@ In the `myTAI` framework you can find:
 * `RE()` : Function to transform mean expression levels to relative expression levels
 * `pTAI()` : Compute the Phylostratum Contribution to the global TAI
 * `pTDI()` : Compute the Divergence Stratum Contribution to the global TDI
+* `pMatrix()` : Compute Partial TAI or TDI Values
+* `pStrata()` : Compute Partial Strata Values
 
 #### Visualization and Analytics Tools:
 
@@ -83,12 +85,13 @@ phylotranscriptomics pattern (significant deviation from a frat line = evolution
 * `ReductiveHourglassTest()` : Function to perform the __Reductive Hourglass Test__ that statistically evaluates the existence of a phylotranscriptomic hourglass pattern (hourglass model)
 * `EarlyConservationTest()` : Function to perform the __Reductive Early Conservation Test__ that statistically evaluates the existence of a monotonically increasing phylotranscriptomic pattern (early conservation model)
 * `EnrichmentTest()` : Phylostratum or Divergence Stratum Enrichment of a given Gene Set based on Fisher's Test
+* `bootMatrix()` : Compute a Permutation Matrix for Test Statistics
 
 All three functions also include visual analytics tools to quantify the goodness of test statistics.
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `bootMatrix()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `pMatrix()`, `pStrata()`, `rhScore()`, and `tf()`
+`age.apply()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
 
 
 ## Install Developer Version of myTAI
