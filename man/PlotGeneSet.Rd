@@ -33,6 +33,7 @@ that are stored in the input \code{ExpressionSet}.
 \examples{
 data(PhyloExpressionSetExample)
 
+# the best parameter setting to visualize this plot:
 # png("test_png.png",700,400)
 PlotGeneSet(ExpressionSet = PhyloExpressionSetExample,
             gene.set      = PhyloExpressionSetExample[1:5, 2],
