@@ -40,7 +40,7 @@ test_that("error occurs when test.set inlcudes more genes than are available in 
 
 test_that("Missing genes are reported by warning....",{
         
-        expect_warning(PlotEnrichment(PhyloExpressionSetExample,missing_genes_example,legendName = "PS"),"Only 10 out of your 12 gene ids could be found in the ExpressionSet.")
+        expect_warning(PlotEnrichment(PhyloExpressionSetExample,missing_genes_example,legendName = "PS", plot.bars = FALSE),"Only 10 out of your 12 gene ids could be found in the ExpressionSet.")
         
 })
 
