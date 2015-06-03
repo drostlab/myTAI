@@ -39,9 +39,6 @@
 #'  Therefore, the C value is defined as C' = -1/C for C values below 1.
 #'  
 #'  
-#'  
-#'  
-#'  
 #' @author Hajk-Georg Drost
 #' @references
 #' 
@@ -90,7 +87,9 @@
 #'                test.set      = test_set , 
 #'                complete.bg   = FALSE,
 #'                legendName    = "PS", 
-#'                measure       = "foldchange")                                  
+#'                measure       = "foldchange")     
+#'                
+#' @seealso \code{\link{EnrichmentTest}}, \code{\link{fisher.test}}         
 #' @export
 
 PlotEnrichment <- function(ExpressionSet,
@@ -119,6 +118,10 @@ PlotEnrichment <- function(ExpressionSet,
         
        
         MatchedGeneIDs <- na.omit(match(tolower(test.set),tolower(ExpressionSet[ , 2])))
+        
+        if(length(MatchedGeneIDs) == 0)
+                stop("None of your input gene ids could be found in the ExpressionSet.")
+        
         age.distr.test.set <- ExpressionSet[MatchedGeneIDs , 1:2]
         
         # exclude test.set genes from the background set
