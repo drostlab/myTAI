@@ -65,8 +65,9 @@ PlotGeneSet <- function(ExpressionSet,
                         stop ("The number of colors and the number of genes do not match.")
         }
         
+        # http://www.compbiome.com/2010/12/r-using-rcolorbrewer-to-colour-your.html
         if (is.null(colors))
-                 colors <- colorRampPalette(brewer.pal(8,"Dark2"))(length(GeneSubSet.indixes))                   
+                 colors <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(8,"Dark2"))(length(GeneSubSet.indixes))                   
         if(!get.subset){
                 # define arguments for different graphics functions
                 plot.args <- c("type","lwd","col","cex.lab","main","xlab","ylab")

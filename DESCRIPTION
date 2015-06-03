@@ -18,7 +18,8 @@ Imports:
     parallel (>= 3.1.1),
     foreach (>= 1.4.2),
     doParallel (>= 1.0.8),
-    dplyr (>= 0.3.0)
+    dplyr (>= 0.3.0),
+    RColorBrewer (>= 1.1-2)
 Suggests: 
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
