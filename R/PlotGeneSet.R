@@ -18,6 +18,7 @@
 #' @examples
 #' data(PhyloExpressionSetExample)
 #' 
+#' # the best parameter setting to visualize this plot:
 #' # png("test_png.png",700,400)
 #' PlotGeneSet(ExpressionSet = PhyloExpressionSetExample, 
 #'             gene.set      = PhyloExpressionSetExample[1:5, 2], 
@@ -50,21 +51,23 @@ PlotGeneSet <- function(ExpressionSet,
         
         GeneSubSet.indixes <- na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
         
-#         if (is.na(GeneSubSet.indixes))
-#                 stop ("None of your input gene ids could be found in the ExpressionSet.")
+        if (length(GeneSubSet.indixes) == 0)
+                stop ("None of your input gene ids could be found in the ExpressionSet.")
                                     
         if (length(GeneSubSet.indixes) != length(gene.set))
-                warning ("Only ",length(GeneSubSet.indixes), " out of your ", length(gene.set), "gene ids could be found in the ExpressionSet.")
+                warning ("Only ",length(GeneSubSet.indixes), " out of your ", length(gene.set), " gene ids could be found in the ExpressionSet.")
         
         GeneSubSet <- ExpressionSet[GeneSubSet.indixes , ]
         ncols <- ncol(GeneSubSet)
         
+        if(!is.null(colors)){
+                if (length(colors) != length(gene.set))
+                        stop ("The number of colors and the number of genes do not match.")
+        }
+        
         if (is.null(colors))
                 colors <- re.colors(length(GeneSubSet.indixes))
                                     
-        if (length(colors) != length(gene.set))
-                stop ("The number of colors and the number of genes do not match.")
-        
         if(!get.subset){
                 # define arguments for different graphics functions
                 plot.args <- c("type","lwd","col","cex.lab","main","xlab","ylab")
