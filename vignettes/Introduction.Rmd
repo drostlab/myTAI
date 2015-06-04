@@ -727,6 +727,200 @@ TDI(DivergenceExpressionSetExample)
 4.532029 4.563200 4.485705 4.500868 4.466477 4.530704 4.690292
 
 ```
+
+### `Phylostratum` or `Divergence Stratum` specific contribution to the global transcriptome index profile
+
+Another way to visualize the cumulative contribution of each `Phylostratum` or `Divergence Stratum` to the global Transcriptome Age Index or Transcriptome Divergence Index profile was introduced by Domazet-Loso and Tautz, 2010 (Fig. 1b). This `Phylostratum` or `Divergence Stratum` specific contribution on the global TAI or TDI pattern can be visualized using:
+
+#### Example: `Phylostrata`
+
+```{r,eval = FALSE}
+# visualize phylostrata contribution to the global TAI pattern
+ PlotContribution(PhyloExpressionSetExample, legendName = "PS", lwd = 6)
+```
+
+The exact values of the `Phylostratum` specific cumulative TAI values can be obtained
+using the `pTAI()` function:
+
+```{r,eval = FALSE}
+pTAI(PhyloExpressionSetExample)
+```
+ 
+```
+      Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
+1  0.3929533 0.3935308 0.4142106 0.4115399 0.4216806 0.4178302 0.3883815
+2  0.9521021 0.9547833 0.9748522 0.9674842 0.9632213 0.9285336 0.8661883
+3  1.0502814 1.0477016 1.0576104 1.0556300 1.0549156 1.0187303 0.9722031
+4  1.3861830 1.3810595 1.3837548 1.3928030 1.3876006 1.3632945 1.3656170
+5  1.5527473 1.5489829 1.5360986 1.5500708 1.5468767 1.5531699 1.5769758
+6  1.8114772 1.8171167 1.7806803 1.7968463 1.8020203 1.8223456 1.9207232
+7  1.8766090 1.8739449 1.8317327 1.8530276 1.8573216 1.8776292 1.9952325
+8  1.9417254 1.9357499 1.8877436 1.9089144 1.9117438 1.9478303 2.0778287
+9  2.0339192 2.0294517 1.9823091 1.9982678 1.9915249 2.0413791 2.1878074
+10 2.4215868 2.4361137 2.3489524 2.3347670 2.3028346 2.3797112 2.5142773
+11 2.4900201 2.5079107 2.4104647 2.3980760 2.3651571 2.4422093 2.5961316
+12 3.2299418 3.2256139 3.1071348 3.1166934 3.0739935 3.1765113 3.3903336
+```
+
+#### Example: `Divergence Strata`
+
+Analogously, the `Divergence Stratum` specific influence on the global TDI pattern can be visualized using:
+
+```{r,eval = FALSE}
+# visualize divergence stratum contribution to global TDI
+ PlotContribution(DivergenceExpressionSetExample, legendName = "DS", lwd = 6)
+```
+
+The exact values of the `Divergence Stratum` specific cumulative TDI values can be obtained
+using the `pTDI()` function:
+
+```{r,eval = FALSE}
+pTDI(DivergenceExpressionSetExample)
+```
+
+```
+      Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
+1  0.2174378 0.2207644 0.2309211 0.2214881 0.2195601 0.2047938 0.1704023
+2  0.4800055 0.4762352 0.4821244 0.4752145 0.4799418 0.4695871 0.4288670
+3  0.7742988 0.7597816 0.7797646 0.7826244 0.8033702 0.8034316 0.7769026
+4  1.1463780 1.1285545 1.1408903 1.1528497 1.1694967 1.1784113 1.1933157
+5  1.5652686 1.5489672 1.5545589 1.5698173 1.5934158 1.6003011 1.6330444
+6  2.0899161 2.0609661 2.0666314 2.1015199 2.1163138 2.1306059 2.1932280
+7  2.6262330 2.6035894 2.6012719 2.6453427 2.6477490 2.6664143 2.8085434
+8  3.2211299 3.1990804 3.1767694 3.2319604 3.2292835 3.2693046 3.4412353
+9  3.8396769 3.8299654 3.7793476 3.8353941 3.8272391 3.8971210 4.0753877
+10 4.5320286 4.5632002 4.4857052 4.5008685 4.4664774 4.5307040 4.6902921
+```
+
+In both cases (`Phylostrata` and `Divergence Strata`) the `pTAI()` and `pTDI()`
+functions return a numeric matrix storing the cumulative TAI or TDI values
+for each `Phylostratum` and `Divergence Stratum`. Note, that the TAI values
+of `Phylostratum` 12 (in the `pTAI()` matrix) are equivalent to `TAI(PhyloExpressionSetExample)`.
+
+```{r,eval = FALSE}
+# show that the cumulative TAI value of PS 12 is
+# equavalent to the global TAI() values
+pTAI(PhyloExpressionSetExample)[12 , ]
+
+# >  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+# > 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
+
+TAI(PhyloExpressionSetExample)
+
+# >  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+# > 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334
+```
+
+This can be explained by the definition of the TAI. Here the sum of all
+partial TAI values over all `Phylostrata` is equals the global TAI values:
+
+```{r,eval = FALSE}
+
+# show that the colSum() of partial TAI values
+# over all Phylostrata equals the global TAI() values
+apply(pStrata(PhyloExpressionSetExample) , 2 , sum)
+
+# >  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+# > 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334
+
+```
+
+Now, the `PlotContribution()` only differs from `apply(pStrata(PhyloExpressionSetExample) , 2 , sum)` by exchanging the `sum()` by `cumsum()`.
+
+
+```{r,eval = FALSE}
+
+# show that apply(pStrata(PhyloExpressionSetExample) , 2 , cumsum)
+# is equivalent to pTAI()
+apply(pStrata(PhyloExpressionSetExample) , 2 , cumsum)
+
+```
+
+```
+      Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
+1  0.3929533 0.3935308 0.4142106 0.4115399 0.4216806 0.4178302 0.3883815
+2  0.9521021 0.9547833 0.9748522 0.9674842 0.9632213 0.9285336 0.8661883
+3  1.0502814 1.0477016 1.0576104 1.0556300 1.0549156 1.0187303 0.9722031
+4  1.3861830 1.3810595 1.3837548 1.3928030 1.3876006 1.3632945 1.3656170
+5  1.5527473 1.5489829 1.5360986 1.5500708 1.5468767 1.5531699 1.5769758
+6  1.8114772 1.8171167 1.7806803 1.7968463 1.8020203 1.8223456 1.9207232
+7  1.8766090 1.8739449 1.8317327 1.8530276 1.8573216 1.8776292 1.9952325
+8  1.9417254 1.9357499 1.8877436 1.9089144 1.9117438 1.9478303 2.0778287
+9  2.0339192 2.0294517 1.9823091 1.9982678 1.9915249 2.0413791 2.1878074
+10 2.4215868 2.4361137 2.3489524 2.3347670 2.3028346 2.3797112 2.5142773
+11 2.4900201 2.5079107 2.4104647 2.3980760 2.3651571 2.4422093 2.5961316
+12 3.2299418 3.2256139 3.1071348 3.1166934 3.0739935 3.1765113 3.3903336
+```
+
+```{r,eval = FALSE}
+
+pTAI(PhyloExpressionSetExample)
+```
+
+```
+      Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
+1  0.3929533 0.3935308 0.4142106 0.4115399 0.4216806 0.4178302 0.3883815
+2  0.9521021 0.9547833 0.9748522 0.9674842 0.9632213 0.9285336 0.8661883
+3  1.0502814 1.0477016 1.0576104 1.0556300 1.0549156 1.0187303 0.9722031
+4  1.3861830 1.3810595 1.3837548 1.3928030 1.3876006 1.3632945 1.3656170
+5  1.5527473 1.5489829 1.5360986 1.5500708 1.5468767 1.5531699 1.5769758
+6  1.8114772 1.8171167 1.7806803 1.7968463 1.8020203 1.8223456 1.9207232
+7  1.8766090 1.8739449 1.8317327 1.8530276 1.8573216 1.8776292 1.9952325
+8  1.9417254 1.9357499 1.8877436 1.9089144 1.9117438 1.9478303 2.0778287
+9  2.0339192 2.0294517 1.9823091 1.9982678 1.9915249 2.0413791 2.1878074
+10 2.4215868 2.4361137 2.3489524 2.3347670 2.3028346 2.3797112 2.5142773
+11 2.4900201 2.5079107 2.4104647 2.3980760 2.3651571 2.4422093 2.5961316
+12 3.2299418 3.2256139 3.1071348 3.1166934 3.0739935 3.1765113 3.3903336
+```
+
+This `pTAI()` matrix is what is being visualized inside `PlotContribution()`.
+
+__Note__ that the `pStrata()` function returns the partial TAI or TDI values 
+for each `Phylostratum` or `Divergence Stratum`, whereas `pMatrix()` returns
+the partial TAI or TDI value for each gene.
+
+```{r,eval = FALSE}
+# compute partial TAI values for each Phylostratum
+pStrata(PhyloExpressionSetExample)
+```
+
+```
+       Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature
+1  0.39295331 0.39353082 0.41421061 0.41153988 0.42168061 0.41783018 0.38838151
+2  0.55914875 0.56125250 0.56064163 0.55594427 0.54154068 0.51070341 0.47780681
+3  0.09817938 0.09291830 0.08275821 0.08814585 0.09169432 0.09019669 0.10601483
+4  0.33590159 0.33335787 0.32614435 0.33717297 0.33268496 0.34456426 0.39341385
+5  0.16656429 0.16792339 0.15234382 0.15726786 0.15927610 0.18987539 0.21135880
+6  0.25872990 0.26813378 0.24458170 0.24677547 0.25514358 0.26917571 0.34374736
+7  0.06513175 0.05682826 0.05105236 0.05618130 0.05530130 0.05528356 0.07450933
+8  0.06511643 0.06180498 0.05601089 0.05588683 0.05442226 0.07020109 0.08259620
+9  0.09219381 0.09370185 0.09456557 0.08935340 0.07978112 0.09354879 0.10997873
+10 0.38766762 0.40666192 0.36664326 0.33649918 0.31130963 0.33833215 0.32646984
+11 0.06843326 0.07179705 0.06151227 0.06330899 0.06232254 0.06249801 0.08185437
+12 0.73992167 0.71770319 0.69667019 0.71861745 0.70883635 0.73430205 0.79420194
+```
+
+```{r,eval = FALSE}
+# compute partial TAI values for each gene
+dplyr::glimpse(pMatrix(PhyloExpressionSetExample))
+```
+
+```
+Observations: 25260
+Variables:
+$ Zygote   (dbl) 3.597950e-05, 2.484581e-05, 2.007498e-05, 1.683276e-05, 1.891073e-...
+$ Quadrant (dbl) 3.203218e-05, 3.045853e-05, 2.066542e-05, 1.569402e-05, 2.812062e-...
+$ Globular (dbl) 2.013329e-05, 2.909027e-05, 1.640631e-05, 2.063608e-05, 6.003300e-...
+$ Heart    (dbl) 2.311604e-05, 2.800871e-05, 1.663988e-05, 2.379714e-05, 7.119708e-...
+$ Torpedo  (dbl) 1.813626e-05, 2.713080e-05, 1.566972e-05, 2.525094e-05, 1.019572e-...
+$ Bent     (dbl) 1.685284e-05, 1.950712e-05, 1.535178e-05, 2.254055e-05, 1.172208e-...
+$ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.229886e-...
+```
+
+You can receive all gene specific partial TAI values by typing `pMatrix(PhyloExpressionSetExample)`.
+
+Analogously, `pStrata()` and `pMatrix()` can be used for `Divergence Strata` by substituting `PhyloExpressionSetExample` by `DivergenceExpressionSetExample`.
+
 ### 2) Mean Expression and Relative Expression of single phylostrata or divergence-strata
 
 
