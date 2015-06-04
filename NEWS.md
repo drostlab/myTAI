@@ -1,6 +1,11 @@
 myTAI 0.2.0
 ===========
 
+### Vignettes
+
+- adding examples for `pStrata()`, `pMatrix()`, `pTAI()`, `pTDI()`, and `PlotContribution()`
+to the __Introduction__ Vignette
+
 ### New Functions
 
 - a new function `EnrichmentTest()` allows users to perform a Fisher's exact test based enrichment analysis of over or underrepresented Phylostrata or Divergence Strata within a given gene set without having to plot the result
