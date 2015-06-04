@@ -730,7 +730,8 @@ TDI(DivergenceExpressionSetExample)
 
 ### `Phylostratum` or `Divergence Stratum` specific contribution to the global transcriptome index profile
 
-Another way to visualize the cumulative contribution of each `Phylostratum` or `Divergence Stratum` to the global Transcriptome Age Index or Transcriptome Divergence Index profile was introduced by Domazet-Loso and Tautz, 2010 (Fig. 1b). This `Phylostratum` or `Divergence Stratum` specific contribution on the global TAI or TDI pattern can be visualized using:
+Another way to visualize the cumulative contribution of each `Phylostratum` or `Divergence Stratum` to the global Transcriptome Age Index or Transcriptome Divergence Index profile was introduced by Domazet-Loso and Tautz, 2010 (Fig. 1b). The advantage of visualizing the cumulative contribution of each `Phylostratum` or `Divergence Stratum` to the global pattern is to study how the final (global) TAI or TDI
+profile emerges from the cumulative distribution of each `Phylostratum` or `Divergence Stratum`. This `Phylostratum` or `Divergence Stratum` specific contribution on the global TAI or TDI pattern can be visualized using `PlotContribution()`:
 
 #### Example: `Phylostrata`
 
@@ -920,6 +921,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 You can receive all gene specific partial TAI values by typing `pMatrix(PhyloExpressionSetExample)`.
 
 Analogously, `pStrata()` and `pMatrix()` can be used for `Divergence Strata` by substituting `PhyloExpressionSetExample` by `DivergenceExpressionSetExample`.
+
 
 ### 2) Mean Expression and Relative Expression of single phylostrata or divergence-strata
 
