@@ -3,6 +3,8 @@ myTAI 0.2.0
 
 ### Vignettes
 
+- adding new vignette __Enrichment__ providing step-by-step instructions on how to perform PS and DS enrichment analyses with `PlotEnrichment()`
+
 - adding examples for `pStrata()`, `pMatrix()`, `pTAI()`, `pTDI()`, and `PlotContribution()`
 to the __Introduction__ Vignette
 
