@@ -20,7 +20,7 @@ In this vignette we will use the data set published by Sestak and Domazet-Loso, 
 
 ## Enrichment Analyses using `PlotEnrichment()`
 
-The `PlotEnrichment()` function implemented in `myTAI` computes and visualizes the significance of enriched (over or underrepresented) `Phylostrata` or `Divergence Strata` within an input set of specific genes. In detail this function takes the `Phylostratum` or `Divergence Stratum` distribution of all genes stored in the input `ExpressionSet` as background set and the `Phylostratum` or `Divergence Stratum` distribution of the specific gene set and performes a Fisher's exact test for each `Phylostratum` or `Divergence Stratum` to quantify the statistical significance of over- or underrepresentated `Phylostrata` or `Divergence Strata` within the set of selected genes.
+The `PlotEnrichment()` function implemented in `myTAI` computes and visualizes the significance of enriched (over or underrepresented) `Phylostrata` or `Divergence Strata` within an input set of specific genes. In detail this function takes the `Phylostratum` or `Divergence Stratum` distribution of all genes stored in the input `ExpressionSet` as background set and the `Phylostratum` or `Divergence Stratum` distribution of the specific gene set and performes a [Fisher's exact test](http://en.wikipedia.org/wiki/Fisher%27s_exact_test) for each `Phylostratum` or `Divergence Stratum` to quantify the statistical significance of over- or underrepresentated `Phylostrata` or `Divergence Strata` within the set of selected genes.
 
 ### Example Data Set Retrieval
 
@@ -31,7 +31,7 @@ Download the `Phylostratigraphic Map` of _D. rerio_:
 
 ```r
 # download the Phylostratigraphic Map of Danio rerio
-# from Šestak and Domazet-Lošo, 2015
+# from -estak and Domazet-Loso, 2015
 download.file( url      = "http://mbe.oxfordjournals.org/content/suppl/2014/11/17/msu319.DC1/TableS3-2.xlsx", 
                destfile = "MBE_2015a_Drerio_PhyloMap.xlsx" )
                
@@ -64,6 +64,22 @@ head(Drerio.PhyloMap)
 4           1 ZDB-GENE-000208-23
 5           1  ZDB-GENE-000209-3
 6           1  ZDB-GENE-000209-4
+```
+
+
+```{r,eval=FALSE}
+# read expression data (organ specific genes) from Sestak and Domazet-Loso, 2015
+Drerio.OrganSpecificExpression <- read_excel("MBE_2015a_Drerio_PhyloMap.xlsx", sheet = 2, skip = 3)
+
+# select only brain specific genes
+Drerio.Brain.Genes <- unique(na.omit(Drerio.OrganSpecificExpression[ , "brain"]))
+
+# visualize enriched Phylostrata of genes annotated as brain specific
+PlotEnrichment(Drerio.PhyloMap,
+               test.set     = Drerio.Brain.Genes[ , 1],
+               use.only.map = TRUE,
+               legendName   = "PS")
+
 ```
 
 
