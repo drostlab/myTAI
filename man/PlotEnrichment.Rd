@@ -4,15 +4,17 @@
 \alias{PlotEnrichment}
 \title{Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set}
 \usage{
-PlotEnrichment(ExpressionSet, test.set, measure = "log-foldchange",
-  complete.bg = TRUE, legendName = NULL, over.col = "steelblue",
-  under.col = "midnightblue", epsilon = 1e-05, cex.legend = 1,
-  cex.asterisk = 1, plot.bars = TRUE, ...)
+PlotEnrichment(ExpressionSet, test.set, use.only.map = FALSE,
+  measure = "log-foldchange", complete.bg = TRUE, legendName = NULL,
+  over.col = "steelblue", under.col = "midnightblue", epsilon = 1e-05,
+  cex.legend = 1, cex.asterisk = 1, plot.bars = TRUE, ...)
 }
 \arguments{
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object (in case \code{only.map = FALSE}).}
 
 \item{test.set}{a character vector storing the gene ids for which PS/DS enrichment analyses should be performed.}
+
+\item{use.only.map}{a logical value indicating whether instead of a standard \code{ExpressionSet} only a \code{Phylostratigraphic Map} or \code{Divergene Map} is passed to this function.}
 
 \item{measure}{a character string specifying the measure that should be used to quantify over and under representation of PS/DS. Measures can either be \code{measure = "foldchange"} (odds) or \code{measure = "log-foldchange"} (log-odds).}
 
