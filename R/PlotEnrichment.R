@@ -169,7 +169,7 @@ PlotEnrichment <- function(ExpressionSet,
         f_ij <- N_ij / N_dot_dot
         
         # between group sum
-        f_i_dot <- colSums(f_ij)
+        f_i_dot <- rowSums(f_ij)
         
         # within group sum
         f_dot_j <- colSums(f_ij)
@@ -194,7 +194,8 @@ PlotEnrichment <- function(ExpressionSet,
                 # epsilon is a shift operator to omit log2(0) = -Inf vals
                 # ResultMatrix[,1] shows over or underrepresentation of group 1 by factor X compared to group 2
                 # ResultMatrix[,2] shows over or underrepresentation of group 2 by factor X compared to group 1
-                ResultMatrix <- cbind( (g_ij[ , 1] / f_i_dot),(g_ij[ , 2] / f_i_dot) )
+                 ResultMatrix <- cbind( (g_ij[ , 1] / f_i_dot),(g_ij[ , 2] / f_i_dot) )
+                
                 
                 # detect up and down regulated age classes 
                 ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2]!=0)), 2] <- (-(1 / (ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2] !=0 )), 2])))
