@@ -1,7 +1,8 @@
 #' @title Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set
 #' @description This function computes and visualizes the significance of enriched (over or underrepresented) Phylostrata or Divergence Strata within an input \code{test.set}.
-#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
+#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object (in case \code{only.map = FALSE}).
 #' @param test.set a character vector storing the gene ids for which PS/DS enrichment analyses should be performed.
+#' @param use.only.map a logical value indicating whether instead of a standard \code{ExpressionSet} only a \code{Phylostratigraphic Map} or \code{Divergene Map} is passed to this function.
 #' @param measure a character string specifying the measure that should be used to quantify over and under representation of PS/DS. Measures can either be \code{measure = "foldchange"} (odds) or \code{measure = "log-foldchange"} (log-odds).
 #' @param complete.bg a logical value indicating whether the entire background set
 #'  of the input \code{ExpressionSet} should be considered when performing Fisher's exact
@@ -94,6 +95,7 @@
 
 PlotEnrichment <- function(ExpressionSet,
                            test.set,
+                           use.only.map     = FALSE,
                            measure      = "log-foldchange",
                            complete.bg  = TRUE,
                            legendName   = NULL,
@@ -104,8 +106,14 @@ PlotEnrichment <- function(ExpressionSet,
                            cex.asterisk = 1,
                            plot.bars    = TRUE, ...){
         
-        is.ExpressionSet(ExpressionSet)
-        
+        # check for correct data input (ExpressionSet or Phylomap/Divergencemap) 
+        if(!use.only.map){
+                is.ExpressionSet(ExpressionSet)
+        } else {
+                if(!is.numeric(ExpressionSet[ , 1]) | !is.character(ExpressionSet[ , 2]))
+                        stop("Please pass a standard Phylo Map or Divergence Map to this function...")
+        }
+                
         if (!is.element(measure , c("log-foldchange","foldchange")))
                 stop("Please select a measure which is supported by this function...")
         
