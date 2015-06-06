@@ -116,15 +116,10 @@ PlotEnrichment <- function(ExpressionSet,
                 
         if (!is.element(measure , c("log-foldchange","foldchange")))
                 stop("Please select a measure which is supported by this function...")
-        
-        
-#         if (!is.character(test.set))
-#                 stop("Your input GeneIDs should be character strings...")
-        
+       
         if (length(test.set) > nrow(ExpressionSet))
                 stop("Your input GeneID vector stores more elements than are available in your ExpressionSet object...")
         
-       
         MatchedGeneIDs <- na.omit(match(tolower(test.set),tolower(ExpressionSet[ , 2])))
         
         if(length(MatchedGeneIDs) == 0)
@@ -136,7 +131,6 @@ PlotEnrichment <- function(ExpressionSet,
         # before performing Fisher's exact test
         if(complete.bg)
                 ExpressionSet <- ExpressionSet[-MatchedGeneIDs , ]
-
 
         if (length(age.distr.test.set[ , 2]) != length(test.set))
                 warning("Only ",length(age.distr.test.set[ , 2]), " out of your ",length(test.set)," gene ids could be found in the ExpressionSet.")
@@ -151,9 +145,6 @@ PlotEnrichment <- function(ExpressionSet,
         N_ij <- cbind(table(FactorBackgroundSet),table(FactorTestSet));
         # naming the 2 groups : group1 = "Background" ; group2 = "Test"
         colnames(N_ij) <- c("Group 1: Background","Group 2: Test")
-        
-         
-        #return(fisher.test(N_ij[ , 1],N_ij[ , 2],simulate.p.value = TRUE))
         
         enrichment.p_vals <- vector("numeric",nPS)
         enrichment.p_vals <- sapply(1:nPS,
@@ -195,7 +186,6 @@ PlotEnrichment <- function(ExpressionSet,
                 # ResultMatrix[,1] shows over or underrepresentation of group 1 by factor X compared to group 2
                 # ResultMatrix[,2] shows over or underrepresentation of group 2 by factor X compared to group 1
                  ResultMatrix <- cbind( (g_ij[ , 1] / f_i_dot),(g_ij[ , 2] / f_i_dot) )
-                
                 
                 # detect up and down regulated age classes 
                 ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2]!=0)), 2] <- (-(1 / (ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2] !=0 )), 2])))
@@ -282,7 +272,6 @@ PlotEnrichment <- function(ExpressionSet,
         }
         
         return(list(p.values = enrichment.p_vals, enrichment.matrix = ResultMatrix))
-        
 }        
         
         
