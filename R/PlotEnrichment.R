@@ -120,6 +120,9 @@ PlotEnrichment <- function(ExpressionSet,
         if (length(test.set) > nrow(ExpressionSet))
                 stop("Your input GeneID vector stores more elements than are available in your ExpressionSet object...")
         
+        age.table <- table(ExpressionSet[ , 1])
+        nPS <- length(age.table)
+        
         MatchedGeneIDs <- na.omit(match(tolower(test.set),tolower(ExpressionSet[ , 2])))
         
         if(length(MatchedGeneIDs) == 0)
@@ -135,9 +138,6 @@ PlotEnrichment <- function(ExpressionSet,
         if (length(age.distr.test.set[ , 2]) != length(test.set))
                 warning("Only ",length(age.distr.test.set[ , 2]), " out of your ",length(test.set)," gene ids could be found in the ExpressionSet.")
         
-        age.table <- table(ExpressionSet[ , 1])
-        nPS <- length(age.table)
-        
         FactorBackgroundSet <- factor(ExpressionSet[ , 1],levels = names(age.table))
         FactorTestSet <- factor(age.distr.test.set[ , 1],levels = names(age.table))
         
@@ -151,7 +151,7 @@ PlotEnrichment <- function(ExpressionSet,
                                     function(index) fisher.test(get.contingency.tbl(N_ij,index))$p.value,
                                     simplify = "array")
         
-        names(enrichment.p_vals) <- paste0(legendName,1:nPS)
+        names(enrichment.p_vals) <- paste0(legendName,names(age.table))
         
         # number of all genes in N_ij
         N_dot_dot <- sum(N_ij)
@@ -175,7 +175,29 @@ PlotEnrichment <- function(ExpressionSet,
                 # epsilon is a shift operator to omit log2(0) = -Inf vals
                 # ResultMatrix[,1] shows over or underrepresentation of group 1 by factor X compared to group 2
                 # ResultMatrix[,2] shows over or underrepresentation of group 2 by factor X compared to group 1
-                ResultMatrix <- cbind( (log2(g_ij[ , 1] + epsilon) - log2(f_i_dot + epsilon)), (log2(g_ij[ , 2] + epsilon) - log2(f_i_dot + epsilon)) )
+                group_1 <- vector("numeric",nPS)
+                group_2 <- vector("numeric",nPS)
+                
+                for(i in 1:nPS){
+                        if(f_i_dot[i] > 0){
+                                if(g_ij[i , 1] > 0){
+                                        group_1[i] <- (log2(g_ij[i , 1] + epsilon) - log2(f_i_dot[i] + epsilon))
+                                } else {
+                                        group_1[i] <- 0
+                                }
+                                
+                                if(g_ij[i , 2] > 0){
+                                        group_2[i] <- (log2(g_ij[i , 2] + epsilon) - log2(f_i_dot[i] + epsilon))
+                                } else {
+                                        group_2[i] <- 0
+                                }
+                                
+                        } else {
+                                group_1[i] <- 0
+                                group_2[i] <- 0
+                        }
+                } 
+                ResultMatrix <- cbind(group_1, group_2)
                 
                 UpRegulated <- which(ResultMatrix[ , 2] >= 0)
                 DownRegulated <- which(ResultMatrix[ , 2] < 0)
@@ -185,8 +207,31 @@ PlotEnrichment <- function(ExpressionSet,
                 # epsilon is a shift operator to omit log2(0) = -Inf vals
                 # ResultMatrix[,1] shows over or underrepresentation of group 1 by factor X compared to group 2
                 # ResultMatrix[,2] shows over or underrepresentation of group 2 by factor X compared to group 1
-                 ResultMatrix <- cbind( (g_ij[ , 1] / f_i_dot),(g_ij[ , 2] / f_i_dot) )
+                group_1 <- vector("numeric",nPS)
+                group_2 <- vector("numeric",nPS)
                 
+                for(i in 1:nPS){
+                        if(f_i_dot[i] > 0){
+                                if(g_ij[i , 1] > 0){
+                                        group_1[i] <- (g_ij[i , 1] / f_i_dot[i])
+                                } else {
+                                        group_1[i] <- 0
+                                }
+                                        
+                                if(g_ij[i , 2] > 0){
+                                        group_2[i] <- (g_ij[i , 2] / f_i_dot[i])
+                                } else {
+                                        group_2[i] <- 0
+                                }
+                                
+                        } else {
+                                group_1[i] <- 0
+                                group_2[i] <- 0
+                        }
+                } 
+                
+                ResultMatrix <- cbind(group_1 ,group_2 )
+                cat(ResultMatrix)
                 # detect up and down regulated age classes 
                 ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2]!=0)), 2] <- (-(1 / (ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2] !=0 )), 2])))
                 # define a value for INF values
