@@ -21,7 +21,7 @@ Three tutorials will get you started with this package:
 - [A Brief Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
 - [Intermediate Concepts of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
 - [Advanced Topics of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
-
+- [Perform Age Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd)
 
 You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
@@ -49,7 +49,9 @@ browseVignettes("myTAI")
 # open tutorial: Advanced
  vignette("Advanced", package = "myTAI")
 
-
+# open tutorial: Enrichment
+ vignette("Enrichment", package = "myTAI")
+ 
 ```
 
 In the `myTAI` framework you can find:
