@@ -238,8 +238,47 @@ or `Divergence Strata` are denoted as significantly enriched or not. So always b
 the interpretation when retaining or removing the `test.set` from the background set,
 because both options are valid and have advantages and disatvantages and depend on a valid interpretation.
 
+### The `EnrichmentTest()` Function
 
-### Combine Functional Annotation with Enrichment Analyses
+We implemented the helper function `EnrichmentTest()` to speed up accessing P-values and
+the enrichment matrix returned by an enrichment analysis.
+
+```{r,eval = FALSE}
+EnrichmentTest(Drerio.PhyloMap,
+               test.set     = Drerio.Brain.Genes[ , 1],
+               measure      = "log-foldchange",
+               use.only.map = TRUE)
+```
+
+```
+$p.values
+           1            2            3            4            5            6 
+8.283490e-01 8.362880e-05 6.778981e-02 1.373816e-02 7.946309e-13 6.017041e-01 
+           7            8            9           10           11           12 
+2.185021e-03 2.281194e-03 8.943147e-01 5.699612e-01 4.717058e-02 9.367759e-01 
+          13           14 
+3.929949e-03 1.593834e-05 
+
+$enrichment.matrix
+         BG_Set     Test_Set
+1  -0.001132832  0.007668216
+2   0.023733936 -0.172380714
+3  -0.040879607  0.250587496
+4  -0.048920465  0.294399729
+5  -0.114888949  0.603817643
+6   0.008678915 -0.060350168
+7  -0.062948352  0.367240944
+8   0.115630474 -1.206210187
+9  -0.007353969  0.048964218
+10 -0.031971192  0.200141519
+11  0.039742253 -0.303363314
+12 -0.002418079  0.016311853
+13  0.101449988 -0.984621732
+14  0.098211044 -0.938724783
+```
+
+
+## Combine Functional Annotation with Enrichment Analyses
 
 The greatest advantage of `Phylostratum` and `Divergence Stratum` enrichment analyses can be unfolded
 when it is based on the functional annotation of the `test.set`. The [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) vignette of our [biomartr](https://github.com/HajkD/biomartr) package will show you how to retrieve functional
