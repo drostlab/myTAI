@@ -13,14 +13,14 @@ vignette: >
 `Phylostratum` and `Divergence Stratum` enrichment analyses have been performed by several
 studies to correlate organ or metabolic pathway evolution with the origin of organ or pathway specific genes (Sestak and Domazet-Loso, 2015).
 
-In detail, `Phylostratum` and `Divergence Stratum` enrichment analyses can be performed analogously to [Gene Ontology](http://geneontology.org/page/go-enrichment-analysis) and [Kegg](http://www.genome.jp/kegg/) enrichment analyses to study the enrichment of evolutionary age or sequence divergence in a set of selected genes against the entire transcriptome. In case specific age categories are significantly over- or underrepresented in the selected gene set, assumptions or potential correlations between the the evolutionary origin of a particular organ or metabolic pathway can be implied. 
+In detail, `Phylostratum` and `Divergence Stratum` enrichment analyses can be performed analogously to [Gene Ontology](http://geneontology.org/page/go-enrichment-analysis) and [Kegg](http://www.genome.jp/kegg/) enrichment analyses to study the enrichment of evolutionary age or sequence divergence in a set of selected genes against the entire genome/transcriptome. In case specific age categories are significantly over- or underrepresented in the selected gene set, assumptions or potential correlations between the evolutionary origin of a particular organ or metabolic pathway can be implied. 
 
 In this vignette we will use the data set published by Sestak and Domazet-Loso, 2015 to demonstrate how to perform enrichment analyses using `myTAI`.
 
 
 ## Enrichment Analyses using `PlotEnrichment()`
 
-The `PlotEnrichment()` function implemented in `myTAI` computes and visualizes the significance of enriched (over or underrepresented) `Phylostrata` or `Divergence Strata` within an input set of specific genes. In detail this function takes the `Phylostratum` or `Divergence Stratum` distribution of all genes stored in the input `ExpressionSet` as background set and the `Phylostratum` or `Divergence Stratum` distribution of the specific gene set and performes a [Fisher's exact test](http://en.wikipedia.org/wiki/Fisher%27s_exact_test) for each `Phylostratum` or `Divergence Stratum` to quantify the statistical significance of over- or underrepresentated `Phylostrata` or `Divergence Strata` within the set of selected genes.
+The `PlotEnrichment()` function implemented in `myTAI` computes and visualizes the significance of enriched (over- or underrepresented) `Phylostrata` or `Divergence Strata` within an input set of process/tissue specific genes. In detail this function takes the `Phylostratum` or `Divergence Stratum` distribution of all genes stored in the input `ExpressionSet` as background set and the `Phylostratum` or `Divergence Stratum` distribution of the specific gene set and performes a [Fisher's exact test](http://en.wikipedia.org/wiki/Fisher%27s_exact_test) for each `Phylostratum` or `Divergence Stratum` to quantify the statistical significance of over- or underrepresentated `Phylostrata` or `Divergence Strata` within the set of selected genes.
 
 ### Example Data Set Retrieval
 
@@ -66,6 +66,13 @@ head(Drerio.PhyloMap)
 6           1  ZDB-GENE-000209-4
 ```
 
+Now, `Drerio.PhyloMap` stores the `Phylostratigraphic Map` of _D. rerio_ which is used
+as backround set to perform enrichment analyses with `PlotEnrichment()`.
+
+### Enrichment Analyses
+
+Now, the `PlotEnrichment()` function visualizes the over- and underrepresented `Phylostrata` of brain specific genes when compared with the total number of genes stored in the `Phylostratigraphic Map` of _D. rerio_.
+
 
 ```{r,eval=FALSE}
 # read expression data (organ specific genes) from Sestak and Domazet-Loso, 2015
@@ -77,10 +84,171 @@ Drerio.Brain.Genes <- unique(na.omit(Drerio.OrganSpecificExpression[ , "brain"])
 # visualize enriched Phylostrata of genes annotated as brain specific
 PlotEnrichment(Drerio.PhyloMap,
                test.set     = Drerio.Brain.Genes[ , 1],
+               measure      = "log-foldchange",
                use.only.map = TRUE,
                legendName   = "PS")
 
 ```
+
+
+Here, the first argument is either a standard `ExpressionSet` object (in case `use.only.map = FALSE`: default) or a `Phylostratigraphic Map` or `Divergence Map` (in case `use.only.map = TRUE`; see [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) for details). The second argument `test.set` specifies the gene ids also stored in the corresponding `ExpressionSet` or `Phylostratigraphic Map/ Divergence Map` for which enrichment shall be quantified and visualized.
+
+To visualize the odds or log-odds of over- or underrepresented genes within the `test.set` the following procedure is performed:
+
+- $N_{ij}$ denotes the number of genes in group j and deriving from PS $i$, with $i = 1, .. , n$ and where $j = 1$ denotes the background set and $j = 2$ denotes the `test.set`
+
+- $N_{i.}$ denotes the total number of genes within PS $i$
+
+- $N_{.j}$ denotes the total number of genes within group $j$
+
+- $N_{..}$ is the total number of genes within all groups $j$ and all PS $i$
+
+- $f_{ij}$ = $N_{ij}$ / $N_{..}$ and $g_{ij}$ = $f_{ij}$ / $f_{.j}$ denote relative frequencies between groups
+- $f_{i.}$ denotes the between group sum of $f_{ij}$
+
+The result is the __fold-change value__ (odds; `measure = "foldchange"`) denoted as $C_2 = g_{i2} / f_{i.}$ which is visualized above and below zero or the __log fold-change__ value (log-odds; `measure = "log-foldchange"`), where $log_2$(C) = $log_2$($g_{i2}$) - $log_2$($f_{i.}$) which is visualized symmetrically above and below zero by `PlotEnrichment()`. Analogously, $C_1 = g_{i1} / f_{i.}$ but is not visualized by this function.
+
+
+Internally, `PlotEnrichment()` performs a Fisher's exact test for each `Phylostratum` or `Divergence Stratum` separately, to quantify the significance of over- or underrepresentation of corresponding `Phylostrata` or `Divergence Strata` within the `test.set` when compared with the entire `ExpressionSet`. `PlotEnrichment()` visualizes significantly enriched (over- or underrepresented) `Phylostrata` or `Divergence Strata` with asterisks '*'.
+
+Notation:
+
+- '*' = P-Value $<=$ 0.05
+- '**' = P-Value $<=$ 0.005
+- '***' = P-Value $<=$ 0.0005
+
+As you noticed, when performing `PlotEnrichment()` function, the p-values and the
+enrichment matrix (storing $C_1$ and $C_2$).
+
+```{r,eval = FALSE}
+PlotEnrichment(Drerio.PhyloMap,
+               test.set     = Drerio.Brain.Genes[ , 1],
+               measure      = "log-foldchange",
+               use.only.map = TRUE,
+               legendName   = "PS")
+```
+
+```
+$p.values
+         PS1          PS2          PS3          PS4          PS5          PS6 
+8.283490e-01 8.362880e-05 6.778981e-02 1.373816e-02 7.946309e-13 6.017041e-01 
+         PS7          PS8          PS9         PS10         PS11         PS12 
+2.185021e-03 2.281194e-03 8.943147e-01 5.699612e-01 4.717058e-02 9.367759e-01 
+        PS13         PS14 
+3.929949e-03 1.593834e-05 
+
+$enrichment.matrix
+           BG_Set     Test_Set
+PS1  -0.001132832  0.007668216
+PS2   0.023733936 -0.172380714
+PS3  -0.040879607  0.250587496
+PS4  -0.048920465  0.294399729
+PS5  -0.114888949  0.603817643
+PS6   0.008678915 -0.060350168
+PS7  -0.062948352  0.367240944
+PS8   0.115630474 -1.206210187
+PS9  -0.007353969  0.048964218
+PS10 -0.031971192  0.200141519
+PS11  0.039742253 -0.303363314
+PS12 -0.002418079  0.016311853
+PS13  0.101449988 -0.984621732
+PS14  0.098211044 -0.938724783
+```
+
+In case you are only interested in the p-values of the Fisher test and the enrichment matrix without illustrating the barplot,
+you can specify the `plot.bars = FALSE` argument to only retrieve the numeric results.
+
+```{r,eval = FALSE}
+# specify plot.bars = FALSE to retrieve only numeric results
+EnrichmentResult <- PlotEnrichment(Drerio.PhyloMap,
+                                   test.set     = Drerio.Brain.Genes[ , 1],
+                                   measure      = "log-foldchange",
+                                   use.only.map = TRUE,
+                                   legendName   = "PS",
+                                   plot.bars    = FALSE)
+
+# access p-values quantifying the enrichment for each Phylostratum
+EnrichmentResult$p.values
+```
+
+```
+         PS1          PS2          PS3          PS4          PS5          PS6 
+8.283490e-01 8.362880e-05 6.778981e-02 1.373816e-02 7.946309e-13 6.017041e-01 
+         PS7          PS8          PS9         PS10         PS11         PS12 
+2.185021e-03 2.281194e-03 8.943147e-01 5.699612e-01 4.717058e-02 9.367759e-01 
+        PS13         PS14 
+3.929949e-03 1.593834e-05
+```
+
+```{r, eval = FALSE}
+# access enrichment matrix storing C_1 and C_2
+EnrichmentResult$enrichment.matrix
+
+```
+
+```
+           BG_Set     Test_Set
+PS1  -0.001132832  0.007668216
+PS2   0.023733936 -0.172380714
+PS3  -0.040879607  0.250587496
+PS4  -0.048920465  0.294399729
+PS5  -0.114888949  0.603817643
+PS6   0.008678915 -0.060350168
+PS7  -0.062948352  0.367240944
+PS8   0.115630474 -1.206210187
+PS9  -0.007353969  0.048964218
+PS10 -0.031971192  0.200141519
+PS11  0.039742253 -0.303363314
+PS12 -0.002418079  0.016311853
+PS13  0.101449988 -0.984621732
+PS14  0.098211044 -0.938724783
+```
+
+### Defining the Background Set
+
+The Fisher test which is performed inside `PlotEnrichment()` assumes
+that all genes stored in the input `ExpressionSet` or `Phylostratigraphic Map`/`Divergence Map` are used to define the background set for constructing the test statistic. However,
+since in most cases the `test.set` is an subset of the input `ExpressionSet` or `Phylostratigraphic Map`/`Divergence Map` one could also specify the `complete.bg` argument to remove all `test.set` genes from the background set when performing the Fisher test abd visualization.
+
+The following two examples allow you to compare the results when retaining all genes as backround set compared with the option to remove `test.set` genes from the background set.
+
+```{r,eval = FALSE}
+# complete.bg = TRUE (default) -> retain test.set genes in background set
+PlotEnrichment(Drerio.PhyloMap,
+               test.set     = Drerio.Brain.Genes[ , 1],
+               measure      = "log-foldchange",
+               complete.bg  = TRUE,
+               use.only.map = TRUE,
+               legendName   = "PS")
+```
+
+```{r,eval = FALSE}
+# complete.bg = FALSE -> remove test.set genes from background set
+PlotEnrichment(Drerio.PhyloMap,
+               test.set     = Drerio.Brain.Genes[ , 1],
+               measure      = "log-foldchange",
+               complete.bg  = FALSE,
+               use.only.map = TRUE,
+               legendName   = "PS")
+```
+
+As you can see, although some p-values change values, the qualitative result did not change.
+In border line cases however, the results might influence whether or not some `Phylostrata`
+or `Divergence Strata` are denoted as significantly enriched or not. So always be aware of
+the interpretation when retaining or removing the `test.set` from the background set,
+because both options are valid and have advantages and disatvantages and depend on a valid interpretation.
+
+
+### Combine Functional Annotation with Enrichment Analyses
+
+The greatest advantage of `Phylostratum` and `Divergence Stratum` enrichment analyses can be unfolded
+when it is based on the functional annotation of the `test.set`. The [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) vignette of our [biomartr](https://github.com/HajkD/biomartr) package will show you how to retrieve functional
+annotation for a subset of genes. Categorizing genes into common functional groups or processes via `biomartr` will then allow you to search for genes deriving from enriched `Phylostrata` or `Divergence Strata`. The [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) vignette showed you how `Phylostrata` or `Divergence Strata` can be linked with the origin of evolutionary events.
+This correlation between the predicted origin of genes (`Phylostratigraphic Map`) or its
+current state of selection between closely related species (`Divergence Map`) and their
+functional annotation allows you to detect signals of potential evolutionary origins of
+specific biological functions, processes, or tissues and their active maintenance between
+closely related species.
 
 
 ## References
