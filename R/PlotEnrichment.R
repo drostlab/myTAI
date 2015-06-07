@@ -28,17 +28,15 @@
 #' To visualize the odds or log-odds of over or underrepresented genes within the \code{test.set} the following procedure is performed:
 #' 
 #' \itemize{
-#' \item N_ij denotes the number of genes in group j and deriving from PS i, with i = 1, .. , n and j = background (j = 1) or \code{test.set} (j = 2)
+#' \item N_ij denotes the number of genes in group j and deriving from PS i, with \emph{i = 1, .. , n} and where \emph{j = 1} denotes the background set and \emph{j = 2} denotes the \code{test.set}
 #' \item N_i. denotes the total number of genes within PS i
 #' \item N_.j denotes the total number of genes within group j
 #' \item N_.. is the total number of genes within all groups j and all PS i
 #' \item f_ij = N_ij / N_.. and g_ij = f_ij / f_.j denote relative frequencies between groups
+#' \item f_i. denotes the between group sum of f_ij
 #' }
 #' 
-#'  The result is the fold-change value (odds) denoted as C = g_i2 / f_i. which is visualized symmetrically above and below zero or the log fold-change value (log-odds). 
-#'  
-#'  Therefore, the C value is defined as C' = -1/C for C values below 1.
-#'  
+#'  The result is the fold-change value (odds) denoted as C = g_i2 / f_i. which is visualized above and below zero. 
 #'  
 #' @author Hajk-Georg Drost
 #' @references
@@ -108,6 +106,10 @@ PlotEnrichment <- function(ExpressionSet,
         
         # check for correct data input (ExpressionSet or Phylomap/Divergencemap) 
         if(!use.only.map){
+                
+                if (dim(ExpressionSet) < 3)
+                        warning("Are you sure that you are using an ExpressionSet and not a Phylomap/Divergencemap ?")
+                
                 is.ExpressionSet(ExpressionSet)
         } else {
                 if(!is.numeric(ExpressionSet[ , 1]) | !is.character(ExpressionSet[ , 2]))
