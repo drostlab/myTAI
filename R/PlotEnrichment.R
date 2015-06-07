@@ -243,7 +243,7 @@ PlotEnrichment <- function(ExpressionSet,
         }
         
         colnames(ResultMatrix) <- c("BG_Set","Test_Set")
-        rownames(ResultMatrix) <- paste0(legendName,1:nPS)
+        rownames(ResultMatrix) <- paste0(legendName,names(age.table))
                 
         if (plot.bars){
                 
@@ -280,7 +280,7 @@ PlotEnrichment <- function(ExpressionSet,
                                                       col       = bar.colors,
                                                       lwd       = 4,
                                                       space     = 1,
-                                                      names.arg = paste0(legendName,1:nPS),
+                                                      names.arg = paste0(legendName,names(age.table)),
                                                       ylim      = ylim.range,
                                                       border    = "white",
                                                       xlab      = age_xlab, 
@@ -293,7 +293,7 @@ PlotEnrichment <- function(ExpressionSet,
                                                       col       = bar.colors,
                                                       lwd       = 4,
                                                       space     = 1,
-                                                      names.arg = paste0(legendName,1:nPS),
+                                                      names.arg = paste0(legendName,names(age.table)),
                                                       ylim      = ylim.range,
                                                       border    = "white", ...)
                 }
