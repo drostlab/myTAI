@@ -107,7 +107,7 @@ PlotEnrichment <- function(ExpressionSet,
         # check for correct data input (ExpressionSet or Phylomap/Divergencemap) 
         if(!use.only.map){
                 
-                if (dim(ExpressionSet) < 3)
+                if (ncol(ExpressionSet) < 3)
                         warning("Are you sure that you are using an ExpressionSet and not a Phylomap/Divergencemap ?")
                 
                 is.ExpressionSet(ExpressionSet)
