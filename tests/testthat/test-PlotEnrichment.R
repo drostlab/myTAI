@@ -52,3 +52,48 @@ test_that("Error occurs when none of the input gene ids match with the Expressio
           })
 
 
+
+TestSetPS1_3 <- PhyloExpressionSetExample[which(PhyloExpressionSetExample[ , 1] %in% c(1,2,3)), 2]
+
+TestSetPS1_2 <- PhyloExpressionSetExample[which(PhyloExpressionSetExample[ , 1] %in% c(1,2)), 2]
+
+TestSetPS1 <- PhyloExpressionSetExample[which(PhyloExpressionSetExample[ , 1] %in% c(1)), 2]
+
+
+test_that("PlotEnrichment() executes with only 3 out of 12 PS present in the test.set",{
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_3,measure = "log-foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[4:12 , 2] == 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_3,measure = "log-foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[1:3 , 2] > 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_3,measure = "foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[4:12 , 2] == 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_3,measure = "foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[1:3 , 2] > 0)))
+})
+
+
+test_that("PlotEnrichment() executes with only 2 out of 12 PS present in the test.set",{
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_2,measure = "log-foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[4:12 , 2] == 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_2,measure = "log-foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[1:3 , 2] > 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_2,measure = "foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[4:12 , 2] == 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1_2,measure = "foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[1:3 , 2] > 0)))
+})
+
+
+test_that("PlotEnrichment() executes with only 1 out of 12 PS present in the test.set",{
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1,measure = "log-foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[4:12 , 2] == 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1,measure = "log-foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[1:3 , 2] > 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1,measure = "foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[4:12 , 2] == 0)))
+        
+        expect_true(all(which(PlotEnrichment(PhyloExpressionSetExample,TestSetPS1,measure = "foldchange",legendName = "PS", plot.bars = FALSE)$enrichment.matrix[1:3 , 2] > 0)))
+})
+
+
+
