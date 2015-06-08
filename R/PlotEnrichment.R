@@ -233,7 +233,7 @@ PlotEnrichment <- function(ExpressionSet,
                 } 
                 
                 ResultMatrix <- cbind(group_1 ,group_2 )
-                cat(ResultMatrix)
+                
                 # detect up and down regulated age classes 
                 ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2]!=0)), 2] <- (-(1 / (ResultMatrix[which((ResultMatrix[ , 2] < 1) & (ResultMatrix[ , 2] !=0 )), 2])))
                 # define a value for INF values
