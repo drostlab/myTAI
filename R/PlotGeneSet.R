@@ -6,6 +6,7 @@
 #' @param gene.set a character vector storing the gene ids for which gene expression profiles shall be visualized. 
 #' @param get.subset a logical value indicating whether or not an \code{ExpressionSet} subset of the selected \code{gene.set} should be retuned. 
 #' @param colors colors for gene expression profiles. Default: \code{colors = NULL}, hence default colours are used.
+#' @param plot.legend a logical value indicating whether gene ids should be printed as legend next to the plot.
 #' @param y.ticks a numeric value specifying the number of ticks to be drawn on the y-axis.
 #' @param digits.ylab a numeric value specifying the number of digits shown for the expression levels on the y-axis.
 #' @param ... additional parameters passed to \code{\link{matplot}}.
@@ -44,6 +45,7 @@ PlotGeneSet <- function(ExpressionSet,
                         gene.set, 
                         get.subset  = FALSE, 
                         colors      = NULL,
+                        plot.legend = TRUE,
                         y.ticks     = 6,
                         digits.ylab = 4, ... ){
         
@@ -80,7 +82,8 @@ PlotGeneSet <- function(ExpressionSet,
                 
                 if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) | (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
                         
-                        par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
+                        if(plot.legend)
+                                par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
                         
                         do.call(graphics::matplot,c(list(x = t(GeneSubSet[ , 3:ncols]), 
                                                          col  = colors[1:length(GeneSubSet.indixes)], 
@@ -88,6 +91,10 @@ PlotGeneSet <- function(ExpressionSet,
                                                     dots[!is.element(names(dots),c(axis.args,legend.args))]))
                         
                 } else {      
+                        
+                        if(plot.legend)
+                                par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
+                        
                         do.call(graphics::matplot,c(list(x = t(GeneSubSet[ , 3:ncols]), 
                                                          col  = colors[1:length(GeneSubSet.indixes)], 
                                                          xaxt = "n", 
@@ -104,14 +111,15 @@ PlotGeneSet <- function(ExpressionSet,
                                               labels = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab)), 
                                          dots[!is.element(names(dots),c(plot.args,legend.args))]))
                 
-                do.call(graphics::legend, c(list("topright", 
-                                                 inset  = c(-0.2,0), 
-                                                 legend = GeneSubSet[ , 2], 
-                                                 title  = "Genes", 
-                                                 col    = colors[1:length(GeneSubSet.indixes)],
-                                                 lwd    = 4,
-                                                 bty    = "n"), dots[!is.element(names(dots),c(plot.args,axis.args))]))
-                
+                if(plot.legend){
+                        do.call(graphics::legend, c(list("topright", 
+                                                         inset  = c(-0.2,0), 
+                                                         legend = GeneSubSet[ , 2], 
+                                                         title  = "Genes", 
+                                                         col    = colors[1:length(GeneSubSet.indixes)],
+                                                         lwd    = 4,
+                                                         bty    = "n"), dots[!is.element(names(dots),c(plot.args,axis.args))]))
+                }
         }
 
         if (get.subset)

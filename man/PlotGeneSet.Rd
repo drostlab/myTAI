@@ -5,7 +5,7 @@
 \title{Plot the Expression Profiles of a Gene Set}
 \usage{
 PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL,
-  y.ticks = 6, digits.ylab = 4, ...)
+  plot.legend = TRUE, y.ticks = 6, digits.ylab = 4, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -15,6 +15,8 @@ PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL,
 \item{get.subset}{a logical value indicating whether or not an \code{ExpressionSet} subset of the selected \code{gene.set} should be retuned.}
 
 \item{colors}{colors for gene expression profiles. Default: \code{colors = NULL}, hence default colours are used.}
+
+\item{plot.legend}{a logical value indicating whether gene ids should be printed as legend next to the plot.}
 
 \item{y.ticks}{a numeric value specifying the number of ticks to be drawn on the y-axis.}
 
