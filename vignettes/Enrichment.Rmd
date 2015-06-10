@@ -306,7 +306,27 @@ provide evidence, that brain specific genes might indeed have originated during 
 This example shall illustrate how the `PlotEnrichment()` function can be used to trace
 the evolutionary origin of tissue or process specific genes by investigating their age enrichment.
 
+In case you also have an `ExpressionSet` storing the `Phylostratigraphic Map` of _D. rerio_
+as well as an expression set, you can use the `PlotGeneSet()` function implemented in `myTAI` to furthermore, visualize the expression levels of brain specific genes which 
+have been shown to be significantly enriched in `Metazoa` specific phylostrata.
 
+Example:
+
+```{r, eval = FALSE}
+# the best parameter setting to visualize this plot:
+# png("DrerioBrainSpecificGeneExpression.png",700,400)
+PlotGeneSet(ExpressionSet = DrerioPhyloExpressionSet,
+            gene.set      = Drerio.Brain.Genes[ , 1],
+            type          = "l",
+            lty           = 1,
+            lwd           = 4,
+            xlab          = "Ontogeny",
+            ylab          = "Expression Level")
+
+# dev.off()
+```
+
+Here `DrerioPhyloExpressionSet` denotes a hypothetical `ExpressionSet` of _D. rerio_ development.
 
 ## Combine Functional Annotation with Enrichment Analyses
 
