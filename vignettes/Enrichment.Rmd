@@ -243,6 +243,16 @@ because both options are valid and have advantages and disatvantages and depend 
 For the _D. rerio_ brain genes example you can see that PS4, PS5, and PS7 are significantly
 overrepresented in the set of brain specific genes. 
 
+```{r, eval = FALSE}
+
+PlotEnrichment(Drerio.PhyloMap,
+               test.set     = Drerio.Brain.Genes[ , 1],
+               measure      = "foldchange",
+               complete.bg  = TRUE,
+               use.only.map = TRUE,
+               legendName   = "PS")
+```
+
 Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the [biomartr](https://github.com/HajkD/biomartr) package (see [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) and [Taxonomy](https://github.com/HajkD/biomartr/blob/master/vignettes/Taxonomy.Rmd) for details).
 
 
