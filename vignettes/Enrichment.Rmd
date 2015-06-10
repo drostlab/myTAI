@@ -317,6 +317,7 @@ Example:
 # png("DrerioBrainSpecificGeneExpression.png",700,400)
 PlotGeneSet(ExpressionSet = DrerioPhyloExpressionSet,
             gene.set      = Drerio.Brain.Genes[ , 1],
+            plot.legend   = FALSE,
             type          = "l",
             lty           = 1,
             lwd           = 4,
