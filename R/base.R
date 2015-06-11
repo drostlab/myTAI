@@ -218,13 +218,13 @@ harmonic.mean <- function(x)
 re.colors <- function(n)
 {
         
-        colos <- c("black","red","green","brown","darkmagenta",
-                   "blue","darkred","darkblue","darkgreen", "orange",
-                   "azure4","gold4","greenyellow","hotpink4",
-                   "mediumorchid3","mediumorchid3","peachpuff4",
-                   "hotpink","lightgoldenrod", "peru", "slateblue3", "yellow4", "yellowgreen")
+#         colos <- c("black","red","green","brown","darkmagenta",
+#                    "blue","darkred","darkblue","darkgreen", "orange",
+#                    "azure4","gold4","greenyellow","hotpink4",
+#                    "mediumorchid3","mediumorchid3","peachpuff4",
+#                    "hotpink","lightgoldenrod", "peru", "slateblue3", "yellow4", "yellowgreen")
         
-        return(colos[1:n])
+        return(grDevices::colorRampPalette(RColorBrewer::brewer.pal(8,"Dark2"))(n) )
         
 }
 
