@@ -22,6 +22,11 @@ to the __Introduction__ Vignette
 
 - a new function `pTDI()` allows users to compute the divergence stratum contribution to the global TDI pattern
 
+### Minor Updates
+
+- PlotRE() and PlotMeans() are now based on colors from the RColorBrewer package
+
+
 myTAI 0.1.0
 ===========
 
