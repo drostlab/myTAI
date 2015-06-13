@@ -16,12 +16,13 @@ of evolutionary conservation or constraint in developmental processes of extant 
 
 ## Tutorials
 
-Three tutorials will get you started with this package:
+These tutorials will get you started with this package:
 
 - [A Brief Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
 - [Intermediate Concepts of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
 - [Advanced Topics of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
 - [Perform Age Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd)
+- [Gene Expression Analysis with myTAI](https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd)
 
 You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
@@ -40,17 +41,20 @@ browseVignettes("myTAI")
 
 # or as single tutorials
 
-# open tutorial: Introduction
+# open tutorial: Introduction to Phylotranscriptomics and myTAI
  vignette("Introduction", package = "myTAI")
 
-# open tutorial: Intermediate
+# open tutorial: Intermediate Concepts of Phylotranscriptomics
  vignette("Intermediate", package = "myTAI")
 
-# open tutorial: Advanced
+# open tutorial: Advanced Concepts of Phylotranscriptomics
  vignette("Advanced", package = "myTAI")
 
-# open tutorial: Enrichment
+# open tutorial: Age Enrichment Analyses
  vignette("Enrichment", package = "myTAI")
+ 
+# open tutorial: Gene Expression Analysis with myTAI
+ vignette("Expression", package = "myTAI")
  
 ```
 
@@ -93,7 +97,7 @@ All three functions also include visual analytics tools to quantify the goodness
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
+`age.apply()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `geom.mean()`,`MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
 
 
 ## Install Developer Version of myTAI
