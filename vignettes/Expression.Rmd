@@ -14,17 +14,17 @@ In the [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Intro
 to capture evolutionary signals in developmental transcriptomes. Furthermore,
 in the [Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd) vignette we provide a use case to correlate specific
 groups or sets of genes with their predicted evolutionary origin. Here, we aim to
-combine the previously intorduced techniques to  ... by performing _classic_ gene expression analyses in an evolutionary context. 
+combine previously introduced techniques with _classic_ gene expression analyses to detect possible functional causes for the observed transcriptome conservation. 
 
-In other words, phylotranscriptomics allows us to detect stages or periods of evolutionary conservation and is able to predict the evolutionary orgin of process or trait specific genes
+In other words, phylotranscriptomics allows us to detect stages or periods of evolutionary conservation and is able to predict the evolutionary origin of process or trait specific genes
 based on enrichment analyses. By combining evolutionary enrichment analyses with the
 functional annotation of process or trait specific genes (see [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Phylotranscriptomics.Rmd) for details) the detection of evolutionary signals can be correlated with 
-functional processes. Then, performing gene expression analyses on these process or trait specific genes allows to provide evidence for potential causes of stage/period specific evolutionary transcriptome conservation. 
+functional processes. Then, performing gene expression analyses on corresponding process or trait specific genes allows users to detect potential causes of stage/period specific evolutionary transcriptome conservation. 
 
 
 The following sections introduce main gene expression data analysis techniques implemented in `myTAI`:
 
-- Detection of Differenentially Expressed Genes (DEGs) 
+- Detection of Differentially Expressed Genes (DEGs) 
 
 - Collapsing Replicate Samples
 
