@@ -20,7 +20,7 @@ In this vignette we will use the data set published by Sestak and Domazet-Loso, 
 
 ## Enrichment Analyses using `PlotEnrichment()`
 
-The `PlotEnrichment()` function implemented in `myTAI` computes and visualizes the significance of enriched (over- or underrepresented) `Phylostrata` or `Divergence Strata` within an input set of process/tissue specific genes. In detail this function takes the `Phylostratum` or `Divergence Stratum` distribution of all genes stored in the input `ExpressionSet` as background set and the `Phylostratum` or `Divergence Stratum` distribution of the specific gene set and performes a [Fisher's exact test](http://en.wikipedia.org/wiki/Fisher%27s_exact_test) for each `Phylostratum` or `Divergence Stratum` to quantify the statistical significance of over- or underrepresentated `Phylostrata` or `Divergence Strata` within the set of selected genes. In other words, the frequency distribution of `Phylostrata` or `Divergence Strata` in the complete sample is compared with the frequency distribution of `Phylostrata` or `Divergence Strata` in the set of selected genes and over- or underrepresentation is visualized by log-odds (or odds), where a log-odd of zero means that both frequency distributions are equal (see also Sestak and Domazet-Loso, 2015).
+The `PlotEnrichment()` function implemented in `myTAI` computes and visualizes the significance of enriched (over- or underrepresented) `Phylostrata` or `Divergence Strata` within an input set of process/tissue specific genes. In detail this function takes the `Phylostratum` or `Divergence Stratum` distribution of all genes stored in the input `ExpressionSet` as background set and the `Phylostratum` or `Divergence Stratum` distribution of the specific gene set and performs a Fisher's exact test for each `Phylostratum` or `Divergence Stratum` to quantify the statistical significance of over- or under-represented `Phylostrata` or `Divergence Strata` within the set of selected genes. In other words, the frequency distribution of `Phylostrata` or `Divergence Strata` in the complete sample is compared with the frequency distribution of `Phylostrata` or `Divergence Strata` in the set of selected genes and over- or under-representation is visualized by log-odds (or odds), where a log-odd of zero means that both frequency distributions are equal (see also Sestak and Domazet-Loso, 2015).
 
 ### Example Data Set Retrieval
 
@@ -31,7 +31,7 @@ Download the `Phylostratigraphic Map` of _D. rerio_:
 
 ```r
 # download the Phylostratigraphic Map of Danio rerio
-# from -estak and Domazet-Loso, 2015
+# from Sestak and Domazet-Loso, 2015
 download.file( url      = "http://mbe.oxfordjournals.org/content/suppl/2014/11/17/msu319.DC1/TableS3-2.xlsx", 
                destfile = "MBE_2015a_Drerio_PhyloMap.xlsx" )
                
@@ -67,7 +67,7 @@ head(Drerio.PhyloMap)
 ```
 
 Now, `Drerio.PhyloMap` stores the `Phylostratigraphic Map` of _D. rerio_ which is used
-as backround set to perform enrichment analyses with `PlotEnrichment()`.
+as background set to perform enrichment analyses with `PlotEnrichment()`.
 
 ### Enrichment Analyses
 
@@ -109,7 +109,7 @@ To visualize the odds or log-odds of over- or underrepresented genes within the 
 The result is the __fold-change value__ (odds; `measure = "foldchange"`) denoted as $C_2 = g_{i2} / f_{i.}$ which is visualized above and below zero or the __log fold-change__ value (log-odds; `measure = "log-foldchange"`), where $log_2$(C) = $log_2$($g_{i2}$) - $log_2$($f_{i.}$) which is visualized symmetrically above and below zero by `PlotEnrichment()`. Analogously, $C_1 = g_{i1} / f_{i.}$ but is not visualized by this function.
 
 
-Internally, `PlotEnrichment()` performs a Fisher's exact test for each `Phylostratum` or `Divergence Stratum` separately, to quantify the significance of over- or underrepresentation of corresponding `Phylostrata` or `Divergence Strata` within the `test.set` when compared with the entire `ExpressionSet`. `PlotEnrichment()` visualizes significantly enriched (over- or underrepresented) `Phylostrata` or `Divergence Strata` with asterisks '*'.
+Internally, `PlotEnrichment()` performs a Fisher's exact test for each `Phylostratum` or `Divergence Stratum` separately, to quantify the significance of over- or under-representation of corresponding `Phylostrata` or `Divergence Strata` within the `test.set` when compared with the entire `ExpressionSet`. `PlotEnrichment()` visualizes significantly enriched (over- or underrepresented) `Phylostrata` or `Divergence Strata` with asterisks '*'.
 
 Notation:
 
@@ -155,7 +155,7 @@ PS13  0.101449988 -0.984621732
 PS14  0.098211044 -0.938724783
 ```
 
-In case you are only interested in the p-values of the Fisher test and the enrichment matrix without illustrating the barplot,
+In case you are only interested in the p-values of the Fisher test and the enrichment matrix without illustrating the bar plot,
 you can specify the `plot.bars = FALSE` argument to only retrieve the numeric results.
 
 ```{r,eval = FALSE}
@@ -208,9 +208,9 @@ PS14  0.098211044 -0.938724783
 
 The Fisher test which is performed inside `PlotEnrichment()` assumes
 that all genes stored in the input `ExpressionSet` or `Phylostratigraphic Map`/`Divergence Map` are used to define the background set for constructing the test statistic. However,
-since in most cases the `test.set` is an subset of the input `ExpressionSet` or `Phylostratigraphic Map`/`Divergence Map` one could also specify the `complete.bg` argument to remove all `test.set` genes from the background set when performing the Fisher test abd visualization.
+since in most cases the `test.set` is an subset of the input `ExpressionSet` or `Phylostratigraphic Map`/`Divergence Map` one could also specify the `complete.bg` argument to remove all `test.set` genes from the background set when performing the Fisher test and visualization.
 
-The following two examples allow you to compare the results when retaining all genes as backround set compared with the option to remove `test.set` genes from the background set.
+The following two examples allow you to compare the results when retaining all genes as background set compared with the option to remove `test.set` genes from the background set.
 
 ```{r,eval = FALSE}
 # complete.bg = TRUE (default) -> retain test.set genes in background set
@@ -236,12 +236,12 @@ As you can see, although some p-values change values, the qualitative result did
 In border line cases however, the results might influence whether or not some `Phylostrata`
 or `Divergence Strata` are denoted as significantly enriched or not. So always be aware of
 the interpretation when retaining or removing the `test.set` from the background set,
-because both options are valid and have advantages and disatvantages and depend on a valid interpretation.
+because both options are valid and have advantages and disadvantages and depend on a valid interpretation.
 
 ## Interpretation of Enrichment Results
 
 For the _D. rerio_ brain genes example you can see that PS4, PS5, and PS7 are significantly
-overrepresented in the set of brain specific genes. 
+over-represented in the set of brain specific genes. 
 
 ```{r, eval = FALSE}
 
@@ -296,12 +296,12 @@ taxonomy(organism = "Danio rerio")
 28         Danio rerio      species    7955
 ```
 
-Sestak and Domazet-Loso, 2015 callapsed these 28 taxonomic nodes into 14 taxonomic nodes
+Sestak and Domazet-Loso, 2015 collapsed these 28 taxonomic nodes into 14 taxonomic nodes
 (see `Figure 2` in Sestak and Domazet-Loso, 2015) and labelled them as phylostrata 1 to phylostrata 14, where PS1 represents `cellular organisms` and PS14 represents `D. rerio` specific genes.
 Based on the phylostrata categorization of Sestak and Domazet-Loso, 2015, PS4 represents `Holozoa (= Metazoa + allies)`, PS5 represents `Metazoa`, and PS7 represents `Bilateria`. 
 
-Now, the overrepresentation results of brain specific genes returned by `PlotEnrichment()`
-provide evidence, that brain specific genes might indeed have originated during the emergence of the nervous system at the metazoan–eumetazoan transition leading to the interpretation that the vertebrate brain has a stepwise adaptive history where most of its extant organization was already present in the chordate ancestor as argued by Sestak and Domazet-Loso, 2015.
+Now, the over-representation results of brain specific genes returned by `PlotEnrichment()`
+provide evidence, that brain specific genes might indeed have originated during the emergence of the nervous system at the metazoan-eumetazoan transition leading to the interpretation that the vertebrate brain has a step wise adaptive history where most of its extant organization was already present in the chordate ancestor as argued by Sestak and Domazet-Loso, 2015.
 
 This example shall illustrate how the `PlotEnrichment()` function can be used to trace
 the evolutionary origin of tissue or process specific genes by investigating their age enrichment.
