@@ -1,0 +1,131 @@
+---
+title: "Gene Expression Analysis with `myTAI`"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Gene Expression Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+## Introduction
+
+In the [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) vignette we showed how phylotranscriptomics can be applied
+to capture evolutionary signals in developmental transcriptomes. Furthermore,
+in the [Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd) vignette we provide a use case to correlate specific
+groups or sets of genes with their predicted evolutionary origin. Here, we aim to
+combine the previously intorduced techniques to  ... by performing _classic_ gene expression analyses in an evolutionary context. 
+
+In other words, phylotranscriptomics allows us to detect stages or periods of evolutionary conservation and is able to predict the evolutionary orgin of process or trait specific genes
+based on enrichment analyses. By combining evolutionary enrichment analyses with the
+functional annotation of process or trait specific genes (see [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Phylotranscriptomics.Rmd) for details) the detection of evolutionary signals can be correlated with 
+functional processes. Then, performing gene expression analyses on these process or trait specific genes allows to provide evidence for potential causes of stage/period specific evolutionary transcriptome conservation. 
+
+
+The following sections introduce main gene expression data analysis techniques implemented in `myTAI`:
+
+- Detection of Differenentially Expressed Genes (DEGs) 
+
+- Collapsing Replicate Samples
+
+- Filter for Expressed Genes
+
+## Detection of Differenentially Expressed Genes (DEGs) 
+
+
+## Collapsing Replicate Samples
+
+```{r,eval=FALSE}
+library(myTAI)
+
+# load example data
+data(PhyloExpressionSetExample)
+
+# genrate an example PhyloExpressionSet with replicates
+ExampleReplicateExpressionSet <- PhyloExpressionSetExample[ ,1:8]
+
+# rename stages
+names(ExampleReplicateExpressionSet)[3:8] <- c("Stage_1_Repl_1","Stage_1_Repl_2",
+                                               "Stage_2_Repl_1","Stage_2_Repl_2",
+                                               "Stage_3_Repl_1","Stage_3_Repl_2")
+# have a look at the example dataset
+head(ExampleReplicateExpressionSet, 5)
+```
+
+```
+  Phylostratum      GeneID Stage_1_Repl_1 Stage_1_Repl_2 Stage_2_Repl_1 Stage_2_Repl_2
+1            1 at1g01040.2       2173.635      1911.2001       1152.555      1291.4224
+2            1 at1g01050.1       1501.014      1817.3086       1665.309      1564.7612
+3            1 at1g01070.1       1212.793      1233.0023        939.200       929.6195
+4            1 at1g01080.2       1016.920       936.3837       1181.338      1329.4734
+5            1 at1g01090.1      11424.567     16778.1685      34366.649     39775.6405
+  Stage_3_Repl_1 Stage_3_Repl_2
+1       1000.253       962.9772
+2       1496.321      1114.6435
+3        864.218       877.2060
+4       1392.643      1287.9746
+5      56231.569     66980.3673
+```
+
+Now, assume that this example `PhyloExpressionSet` stores three developmental stages and 2
+biological replicates for each developmental stage. Of course, we could now compute and visualize the TAI profile by typing:
+
+```{r,eval=FALSE}
+# visualize the TAI profile over 3 stages of development
+# and 2 replicates per stage
+PlotPattern(ExpressionSet = ExampleReplicateExpressionSet,
+            type          = "l",
+            lwd           = 6)
+
+```
+
+Usually, one would expect that variation in replicate values is smaller than variation between developmental stages. In this example however we constructed replicate values that
+vary larger than expression levels between developmental stages. 
+For many applications it might be useful to visualize TAI/TDI values of replicates as well,
+but normally replicate values are collapsed to one gene and stage specific value after
+differential gene expression analyses and replicate quality control have been performed.
+
+The `myTAI` package implements a customized function `CollapseReplicates()` to collapse
+replicates stored in a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object.
+
+
+```{r,eval=FALSE}
+# combine the expression levels of the 2 replicates (const) per stage
+# using geom.mean as window function and rename new stages to: "S1","S2","S3"
+CollapssedPhyloExpressionSet <- CollapseReplicates(
+                                       ExpressionSet = ExampleReplicateExpressionSet,
+                                       nrep          = 2,
+                                       FUN           = geom.mean,
+                                       stage.names   = c("S1","S2","S3"))
+
+# have a look at the collpased PhyloExpressionSet
+head(CollapssedPhyloExpressionSet)
+
+```
+
+```
+   Phylostratum      GeneID         S1         S2         S3
+1            1 at1g01040.2  2038.1982  1220.0147   981.4381
+2            1 at1g01050.1  1651.6070  1614.2524  1291.4582
+3            1 at1g01070.1  1222.8557   934.3975   870.6878
+4            1 at1g01080.2   975.8215  1253.2189  1339.2866
+5            1 at1g01090.1 13844.9740 36972.3612 61371.0937
+6            1 at1g01120.1   815.3288   894.8987   905.8272
+```
+
+The `nrep` argument specifies either a constant number of replicates per stage or
+a numeric vector storing variable numbers of replicates for each developmental stage.
+In our example, each developmental stage had a constant (equal) number of replicates 
+per developmental stage (`nrep = 2`). In case a variable stage specific number of replicates
+are present, one could specify  `nrep = c(2,3,2)` defining the case that developmental stage 1 stores 2 replicates, stage 2 stores 3 replicates, and stage 3, again stores 2 replicates.
+
+The argument `FUN` specifies the window function to collapse replicate expression levels to
+a single stage specific value. In this example, we chose the `geom.mean()` (geometric mean) function
+implemented in `myTAI`, because our example `PhyloExpressionSet` stores absolute expression levels. Notice that the mathematical equivalent of performing arithmetic mean (`mean()`)
+computations on `log` expression levels is to perform the geometric mean (`geom.mean()`) on
+absolute expression levels.
+
+## Filter for Expressed Genes
+
+
+
