@@ -206,9 +206,6 @@ std.error <- function(x)
 geom.mean <- function(x)
 {
         if(is.numeric(x)){
-                if(length(x) == 1)
-                        stop("Please enter at least 2 values to compute a geometric mean.")
-                
                 return(cpp_geom_mean(as.vector(x)))
         } else{
                 stop("Please enter a numeric vector.")
