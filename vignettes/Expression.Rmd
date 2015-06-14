@@ -35,6 +35,12 @@ The following sections introduce main gene expression data analysis techniques i
 
 ## Collapsing Replicate Samples
 
+After performing differential gene expression analyses, replicate expression levels
+are collapsed to a single stage specific expression level. For this purpose, `myTAI`
+implementes the `CollapseReplicates()` function, allowing users to combine replicate
+expression levels stored in a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object to a stage specific expression level using a specified [window function](http://cran.r-project.org/web/packages/dplyr/vignettes/window-functions.html).
+
+
 ```{r,eval=FALSE}
 library(myTAI)
 
@@ -79,15 +85,13 @@ PlotPattern(ExpressionSet = ExampleReplicateExpressionSet,
 
 ```
 
-Usually, one would expect that variation in replicate values is smaller than variation between developmental stages. In this example however we constructed replicate values that
+Usually, one would expect that variations in replicate values are smaller than variations between developmental stages. In this example however, we constructed replicate values that
 vary larger than expression levels between developmental stages. 
 For many applications it might be useful to visualize TAI/TDI values of replicates as well,
 but normally replicate values are collapsed to one gene and stage specific value after
 differential gene expression analyses and replicate quality control have been performed.
 
-The `myTAI` package implements a customized function `CollapseReplicates()` to collapse
-replicates stored in a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object.
-
+The following example illustrates how to collapse replicates with `CollapseReplicates()`:
 
 ```{r,eval=FALSE}
 # combine the expression levels of the 2 replicates (const) per stage
@@ -117,13 +121,16 @@ The `nrep` argument specifies either a constant number of replicates per stage o
 a numeric vector storing variable numbers of replicates for each developmental stage.
 In our example, each developmental stage had a constant (equal) number of replicates 
 per developmental stage (`nrep = 2`). In case a variable stage specific number of replicates
-are present, one could specify  `nrep = c(2,3,2)` defining the case that developmental stage 1 stores 2 replicates, stage 2 stores 3 replicates, and stage 3, again stores 2 replicates.
+is present, one could specify  `nrep = c(2,3,2)` defining the case that developmental stage 1 stores 2 replicates, stage 2 stores 3 replicates, and stage 3 again, stores 2 replicates.
 
 The argument `FUN` specifies the window function to collapse replicate expression levels to
 a single stage specific value. In this example, we chose the `geom.mean()` (geometric mean) function
 implemented in `myTAI`, because our example `PhyloExpressionSet` stores absolute expression levels. Notice that the mathematical equivalent of performing arithmetic mean (`mean()`)
 computations on `log` expression levels is to perform the geometric mean (`geom.mean()`) on
 absolute expression levels.
+
+The `stage.names` argument then specifies the new names of collapsed stages.
+
 
 ## Filter for Expressed Genes
 
