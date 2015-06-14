@@ -16,12 +16,6 @@ test_that("geom.mean() computes correct values",{
         expect_equal(geom.mean(1:10000),test_geom_mean(1:10000))
 })
 
-test_that("geom.mean() throws an error when only one value as passed to the function",{
-
-        expect_error(geom.mean(1),"Please enter at least 2 values to compute a geometric mean.")
-})
-
-
 test_that("geom.mean() throws an error when only non-numeric value as passed to the function",{
         
         expect_error(geom.mean("A"),"Please enter a numeric vector.")
