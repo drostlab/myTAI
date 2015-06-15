@@ -21,6 +21,10 @@ cpp_geom_mean <- function(x) {
     .Call('myTAI_cpp_geom_mean', PACKAGE = 'myTAI', x)
 }
 
+cpp_harmonic_mean <- function(x) {
+    .Call('myTAI_cpp_harmonic_mean', PACKAGE = 'myTAI', x)
+}
+
 cpp_omitMatrix <- function(ExpressionSet, AgeVector) {
     .Call('myTAI_cpp_omitMatrix', PACKAGE = 'myTAI', ExpressionSet, AgeVector)
 }
