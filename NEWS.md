@@ -28,7 +28,7 @@ to the __Introduction__ Vignette
 ### Minor Updates
 
 - `PlotRE()` and `PlotMeans()` are now based on colors from the RColorBrewer package
-- `geom.mean()` now is an external function accessible to the `myTAI` user
+- `geom.mean()` and `harm.mean()` now are external functions accessible to the `myTAI` user
 
 myTAI 0.1.0
 ===========
