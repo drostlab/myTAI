@@ -10,6 +10,7 @@ test_geom_mean <- function(x){
 
 test_that("geom.mean() computes correct values",{
         
+        expect_equal(geom.mean(c(1,4,1/32)),0.5)
         expect_equal(geom.mean(1:10),test_geom_mean(1:10))
         expect_equal(geom.mean(1:100),test_geom_mean(1:100))
         expect_equal(geom.mean(1:1000),test_geom_mean(1:1000))
