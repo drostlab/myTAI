@@ -97,7 +97,7 @@ All three functions also include visual analytics tools to quantify the goodness
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `CollapseReplicates()`,`CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `geom.mean()`,`MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
+`age.apply()`, `CollapseReplicates()`, `CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `geom.mean()`, `harm.mean()`, `MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
 
 
 ## Install Developer Version of myTAI
