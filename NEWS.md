@@ -25,9 +25,10 @@ to the __Introduction__ Vignette
 
 - a new function `pTDI()` allows users to compute the divergence stratum contribution to the global TDI pattern
 
-### Minor Updates
+### Updates
 
-- `PlotRE()` and `PlotMeans()` are now based on colors from the RColorBrewer package
+- `PlotRE()` and `PlotMeans()` are now based on colors from the RColorBrewer package (default)
+- `PlotRE()` and `PlotMeans()` now have a new argument `colors` allowing unsers to choose custom colors for the visualized relative or mean expression profiles 
 - `geom.mean()` and `harm.mean()` now are external functions accessible to the `myTAI` user
 
 myTAI 0.1.0
