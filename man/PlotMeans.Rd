@@ -4,7 +4,8 @@
 \alias{PlotMeans}
 \title{Plot the Mean Expression Profiles of Phylostrata or Divergence Strata}
 \usage{
-PlotMeans(ExpressionSet, Groups = NULL, legendName = NULL, ...)
+PlotMeans(ExpressionSet, Groups = NULL, legendName = NULL, colors = NULL,
+  ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -16,6 +17,8 @@ It is also possible to define more than 2 groups of evolutionary ages.
 For ex. \code{Groups} = list(c(1:3),c(4:8),c(9:12)).}
 
 \item{legendName}{a character string specifying whether "PS" or "DS" are used.}
+
+\item{colors}{colors for mean expression profiles. Default: \code{colors = NULL}, hence default colours are used.}
 
 \item{\dots}{default graphics parameters.}
 }
@@ -55,6 +58,18 @@ PlotMeans(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)),
 # Hence, make sure that your groups are within this range!
 PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)),
           legendName = "DS", lty = 1, lwd = 5)
+
+
+# adding custom colors for relative expression levels:
+# -> colors should be ordered by PS/DS starting with PS1,2,3...
+PlotMeans(PhyloExpressionSetExample,
+       Groups     = list(c(1:3), c(4:12)),
+       legendName = "PS",
+       colors     = c("black","red","green","brown","darkmagenta",
+       "blue","darkred","darkblue","darkgreen", "orange",
+       "azure4","gold4"),
+       lty        = 1,
+       lwd        = 5)
 }
 \author{
 Hajk-Georg Drost
