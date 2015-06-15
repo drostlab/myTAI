@@ -9,6 +9,7 @@
 #' It is also possible to define more than 2 groups of evolutionary ages.
 #' For ex. \code{Groups} = list(c(1:3),c(4:8),c(9:12)).
 #' @param legendName a character string specifying whether "PS" or "DS" are used.
+#' @param colors colors for mean expression profiles. Default: \code{colors = NULL}, hence default colours are used.
 #' @param \dots default graphics parameters.
 #' @details 
 #' 
@@ -43,9 +44,23 @@
 #' PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), 
 #'           legendName = "DS", lty = 1, lwd = 5)
 #'
+#'
+#'# adding custom colors for relative expression levels:
+#' # -> colors should be ordered by PS/DS starting with PS1,2,3...
+#' PlotMeans(PhyloExpressionSetExample,
+#'        Groups     = list(c(1:3), c(4:12)), 
+#'        legendName = "PS",
+#'        colors     = c("black","red","green","brown","darkmagenta",
+#'        "blue","darkred","darkblue","darkgreen", "orange",
+#'        "azure4","gold4"), 
+#'        lty        = 1, 
+#'        lwd        = 5)
 #' @export 
 
-PlotMeans <- function(ExpressionSet,Groups = NULL,legendName = NULL,...)
+PlotMeans <- function(ExpressionSet,
+                      Groups     = NULL,
+                      legendName = NULL,
+                      colors     = NULL, ...)
 {
         
         is.ExpressionSet(ExpressionSet)
@@ -74,7 +89,12 @@ PlotMeans <- function(ExpressionSet,Groups = NULL,legendName = NULL,...)
         colnames(MeanValsMatrix) <- names(ExpressionSet)[3:nCols]
         nGroups <- length(Groups)
         ### each PS class gets its corresponding color
-        colos <- re.colors(nPS)
+        if(!is.null(colors)){
+                colos <- colors
+        } else {
+                colos <- re.colors(nPS)
+        }
+        
         nElements <- sapply(Groups,length)
         iterator <- 0
         ### for each phylostratum in the given dataset
