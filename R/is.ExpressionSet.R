@@ -12,6 +12,7 @@
 #' @export
 is.ExpressionSet <- function(ExpressionSet){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         ncols <- dim(ExpressionSet)[2]
         
         d.f_bool <- is.data.frame(ExpressionSet)
