@@ -2,6 +2,7 @@
 
 export(CollapseReplicates)
 export(CombinatorialSignificance)
+export(DiffGenes)
 export(EarlyConservationTest)
 export(EnrichmentTest)
 export(FilterRNASeqCT)
