@@ -13,6 +13,10 @@ to the __Introduction__ Vignette
 
 ### New Functions
 
+- a new function `SelectGeneSet()` allows users to fastly select a subset of genes in an ExpressionSet
+
+- a new function `DiffGenes()` allows users to perform differential gene expression analysis with ExpressionSet objects
+
 - a new function `EnrichmentTest()` allows users to perform a Fisher's exact test based enrichment analysis of over or underrepresented Phylostrata or Divergence Strata within a given gene set without having to plot the result
 
 - a new function `PlotGeneSet()` allows users to visualize the expression profiles of a given gene set
