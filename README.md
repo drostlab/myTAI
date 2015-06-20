@@ -95,9 +95,16 @@ phylotranscriptomics pattern (significant deviation from a frat line = evolution
 
 All three functions also include visual analytics tools to quantify the goodness of test statistics.
 
+#### Differential Gene Expression Analysis
+
+* `DiffGenes()` : Implements Popular Methods for Differential Gene Expression Analysis
+* `CollapseReplicates()` : Combine Replicates in an ExpressionSet
+* `CombinatorialSignificance()` : Compute the Statistical Significance of Each Replicate Combination
+* `Expressed()` : Filter Expression Levels in Gene Expression Matrices (define expressed genes)
+
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `CollapseReplicates()`, `CombinatorialSignificance()`, `ecScore()`, `FilterRNASeqCT()`, `geom.mean()`, `harm.mean()`, `MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
+`age.apply()`, `ecScore()`, `geom.mean()`, `harm.mean()`, `MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
 
 
 ## Install Developer Version of myTAI
