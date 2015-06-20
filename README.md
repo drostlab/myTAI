@@ -101,6 +101,8 @@ All three functions also include visual analytics tools to quantify the goodness
 * `CollapseReplicates()` : Combine Replicates in an ExpressionSet
 * `CombinatorialSignificance()` : Compute the Statistical Significance of Each Replicate Combination
 * `Expressed()` : Filter Expression Levels in Gene Expression Matrices (define expressed genes)
+* `SelectGeneSet()` : Select a Subset of Genes in an ExpressionSet
+
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
