@@ -1,4 +1,4 @@
-context("Test: FilterRNASeqCT() ")
+context("Test: Expressed() ")
 
 data(PhyloExpressionSetExample)
 
@@ -11,8 +11,8 @@ equal_df <- function(df1, df2) {
 
 nonStandardExpressionSet <- PhyloExpressionSetExample[ , 2:9] 
 
-test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to FilterRNASeqCT()",{
-        expect_error(FilterRNASeqCT(ExpressionSet = nonStandardExpressionSet,
+test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to Expressed()",{
+        expect_error(Expressed(ExpressionSet = nonStandardExpressionSet,
                                     cut.off       = 1000),"The present input object does not fulfill the ExpressionSet standard.")
 })
 
@@ -22,34 +22,34 @@ TestExpressionSet_completePES <- PhyloExpressionSetExample[1:10, ]
 
 test_that("correct rows are removed (filtered) from the count table. Method: 'const'",{
         
-        expect_true(equal_df(FilterRNASeqCT(TestExpressionSet_completePES,1000,"const"),TestExpressionSet_completePES[-c(1,3,4,6,8,9), ]))
+        expect_true(equal_df(Expressed(TestExpressionSet_completePES,1000,"const"),TestExpressionSet_completePES[-c(1,3,4,6,8,9), ]))
         
 })
 
 
 test_that("correct rows are removed (filtered) from the count table. Method: 'min-set'",{
         
-        expect_true(equal_df(FilterRNASeqCT(TestExpressionSet_completePES,1000,"min-set"),TestExpressionSet_completePES[-c(3,6,8,9), ]))
+        expect_true(equal_df(Expressed(TestExpressionSet_completePES,1000,"min-set"),TestExpressionSet_completePES[-c(3,6,8,9), ]))
         
 })
 
 
 test_that("correct rows are removed (filtered) from the count table. Method: 'n-set'",{
         
-        expect_true(equal_df(FilterRNASeqCT(TestExpressionSet_completePES,800,"n-set",5),TestExpressionSet_completePES[-c(6,8,9), ]))
+        expect_true(equal_df(Expressed(TestExpressionSet_completePES,800,"n-set",5),TestExpressionSet_completePES[-c(6,8,9), ]))
         
 })
 
 
 test_that("error occurs when n is larger than the number of available stages when choosing method = 'n-set'",{
         
-        expect_error(FilterRNASeqCT(TestExpressionSet_completePES,800,"n-set",8),"n is larger than the number of available stages in your ExpressionSet...")
+        expect_error(Expressed(TestExpressionSet_completePES,800,"n-set",8),"n is larger than the number of available stages in your ExpressionSet...")
 })
 
 
 test_that("error occurs when method = 'n-set', but n = NULL",{
         
-        expect_error(FilterRNASeqCT(TestExpressionSet_completePES,800,"n-set"),"Please specify the number of stages n for which expresssion levels need to be above the cutoff to be retained in the count table.")
+        expect_error(Expressed(TestExpressionSet_completePES,800,"n-set"),"Please specify the number of stages n for which expresssion levels need to be above the cutoff to be retained in the count table.")
 })
 
 
