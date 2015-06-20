@@ -167,15 +167,15 @@ The `stage.names` argument then specifies the new names of collapsed stages.
 ## Filter for Expressed Genes
 
 After differential gene expression analyses and replicate aggregation have been performed,
-some studies filter gene expression levels in RNA-Seq count tables for non-expressed genes.
-In other words, most studies performing RNA-Seq experiments filter for FPKM/RPKM values < 1
-to remove them from their processed (final) count table.
+some studies filter gene expression levels in RNA-Seq count tables or microarray expression matrices for non-expressed genes.
+In other words, in most studies performing RNA-Seq experiments for example, FPKM/RPKM values < 1
+are remove from the processed (final) count table.
 
-For this purpose `myTAI` implements the `FilterRNASeqCT()` function to filter (remove) expression levels in RNA-Seq count tables which do not pass a defined expression threshold.
+For this purpose `myTAI` implements the `Expressed()` function to filter (remove) expression levels in RNA-Seq count tables which do not pass a defined expression threshold.
 
-The `FilterRNASeqCT()` function takes a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object storing a RNA-Seq count table (CT) and removes genes from this count table that have an expression level below a defined `cut.off` value.
+The `Expressed()` function takes a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object storing a RNA-Seq count table (CT) or microarray gene expression matrix and removes genes from this count table or gene expression matrix that have an expression level below a defined `cut.off` value.
 
-`FilterRNASeqCT()` allows users to choose from several gene extraction methods (see `?FilterRNASeqCT` for details):
+`Expressed()` allows users to choose from several gene extraction methods (see `?Expressed` for details):
 
 * `const`: all genes that have at least one stage that undercuts the expression `cut.off` will be excluded from the `ExpressionSet`
 
@@ -192,17 +192,15 @@ nrow(PhyloExpressionSetExample)
 
 # remove genes that have an expression level below 8000
 # in at least one developmental stage
-FilterConst <- FilterRNASeqCT(ExpressionSet = PhyloExpressionSetExample,
-                              cut.off       = 8000,
-                              method        = "const")
+FilterConst <- Expressed(ExpressionSet = PhyloExpressionSetExample,
+                         cut.off       = 8000,
+                         method        = "const")
 
 nrow(FilterConst) # check number of retained genes
 #> [1] 449
 ```
 
 As you can see, only 449 out of 25260 genes in `PhyloExpressionSetExample` have an absolute expression level above `8000` when omitting genes using `method = 'const'`.
-
-__Notice:__ the same function can be applied to gene expression data deriving from microarray platforms. 
 
 
 ## Compute the Statistical Significance of Each Replicate Combination
