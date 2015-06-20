@@ -47,8 +47,13 @@ quantification technology.
 
 ## Fold-Changes
 
-A fold change in gene expression is simply the ratio of the gene expression level of one sample against a second sample: $\frac{e_{i1}}{e_i2}$, where $e_{i1}$ is the expression level of gene $i$ in sample one and $e_{i2}$ is the expression level of gene $i$ in sample two. In case replicate 
-expression levels are present for each sample the ratio of arithmetic means of the corresponding replicates is computed: $\frac{\bar{e}_{i1}}{\bar{e}_i2}$, where $\bar{e}_{i1}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample one and $\bar{e}_{i2}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample two.
+A fold change in gene expression is simply the ratio of the gene expression level of one sample against a second sample: $\frac{e_{i1}}{e_{i2}}$, where $e_{i1}$ is the expression level of gene $i$ in sample one and $e_{i2}$ is the expression level of gene $i$ in sample two. In case replicate 
+expression levels are present for each sample the ratio of arithmetic means of the corresponding replicates is computed: $\frac{\bar{e}_{i1}}{\bar{e}_{i2}}$, where $\bar{e}_{i1}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample one and $\bar{e}_{i2}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample two.
+
+* __Advantages:__
+
+* __Disadvantages:__
+
 
 ### Example: Fold-Change
 
@@ -64,6 +69,16 @@ DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
 
 head(DEGs)
 ```
+
+```
+   Phylostratum      GeneID    S1->S2    S1->S3    S2->S1    S2->S3    S3->S1    S3->S2
+1            1 at1g01040.2 1.6713881 2.0806706 0.5983051 1.2448758 0.4806143 0.8032930
+2            1 at1g01050.1 1.0273222 1.2709185 0.9734045 1.2371177 0.7868325 0.8083305
+3            1 at1g01070.1 1.3087379 1.4044799 0.7640949 1.0731560 0.7120073 0.9318310
+4            1 at1g01080.2 0.7779572 0.7286769 1.2854177 0.9366542 1.3723503 1.0676299
+5            1 at1g01090.1 0.3803866 0.2288961 2.6289042 0.6017460 4.3687939 1.6618307
+```
+
 
 ## Collapsing Replicate Samples
 
