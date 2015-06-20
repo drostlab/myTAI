@@ -53,7 +53,9 @@ DiffGenes <- function(ExpressionSet,
                 
                 # get all combinations of stages to perform
                 # foldchange computations
-                combin.stages <- expand.grid(1:nStages,1:nStages)
+                #combin.stages <- expand.grid(1:nStages,1:nStages)
+                combin.stages <- data.frame(Var1 = as.vector(sapply(1:nStages,function(x) rep(x,nStages))),
+                           Var2 = rep(1:nStages,nStages))
                 
                 test_combin_func <- function(x){
                         if (x[1] == x[2])
