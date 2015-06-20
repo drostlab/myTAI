@@ -20,7 +20,7 @@
 #' SelectGeneSet(ExpressionSet = PhyloExpressionSetExample,
 #'             gene.set      = PhyloExpressionSetExample[1:5, 2])
 #'             
-#' @seealso \code{\link{PlotGeneSet}}, \code{\link{PlotEnrichment}}             
+#' @seealso \code{\link{PlotGeneSet}}, \code{\link{PlotEnrichment}}, \code{\link{DiffGenes}}             
 #' @export
 
 SelectGeneSet <- function(ExpressionSet, gene.set) {

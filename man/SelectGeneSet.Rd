@@ -32,6 +32,6 @@ SelectGeneSet(ExpressionSet = PhyloExpressionSetExample,
 Hajk-Georg Drost
 }
 \seealso{
-\code{\link{PlotGeneSet}}, \code{\link{PlotEnrichment}}
+\code{\link{PlotGeneSet}}, \code{\link{PlotEnrichment}}, \code{\link{DiffGenes}}
 }
 
