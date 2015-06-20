@@ -128,7 +128,9 @@ DiffGenes <- function(ExpressionSet,
                                 }
                 }
                 
-                
+                if(!is.null(stage.names))
+                        names(ExpressionSet)[3:ncol(ExpressionSet)] <- stage.names
+        
                 DEG.ExpressionSet <- data.frame(ExpressionSet[ , 1:2], DEGMatrix) 
                 names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
                                               apply(combin.stages,1,function(x) paste0(names(ExpressionSet)[x[1] + 2],"->",names(ExpressionSet)[x[2] + 2])))
