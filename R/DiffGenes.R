@@ -14,11 +14,20 @@
 #' \itemize{
 #' \item \code{method = "foldchange"}: ratio of replicate means between developmental stages.
 #' \item \code{method = "log-foldchange"}: difference of replicate log-means between developmental stages.
+#' \item \code{method = "t.test"}: Welch t.test between replicate expression levels between two samples.
 #' }
 #' @examples 
 #' 
 #' data(PhyloExpressionSetExample)
 #' 
+#' # Detection of DEGs using the fold-change measure
+#' DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+#'                   nrep          = 2,
+#'                   method        = "foldchange",
+#'                   stage.names   = c("S1","S2","S3"))
+#' 
+#' 
+#' head(DEGs)
 #' @export
 
 DiffGenes <- function(ExpressionSet,
