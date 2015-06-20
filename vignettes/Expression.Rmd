@@ -10,7 +10,7 @@ vignette: >
 
 ## Introduction
 
-In the [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) vignette we showed how phylotranscriptomics can be applied
+In the [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) vignette we introduced and discussed how phylotranscriptomics can be applied
 to capture evolutionary signals in developmental transcriptomes. Furthermore,
 in the [Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd) vignette we provide a use case to correlate specific
 groups or sets of genes with their predicted evolutionary origin. Here, we aim to
@@ -34,12 +34,42 @@ The following sections introduce main gene expression data analysis techniques i
 
 ## Detection of Differenentially Expressed Genes (DEGs) 
 
+A variety of methods have been published to detect differentially expressed genes. Some methods
+are based on non-statistical quantification of expression differences (e.g. fold-change and log-fold-change), but most methods are based on statistical tests to quantify the significance 
+of differences in gene expression between samples. These statistical methods can furthermore, be divided into two methodological categories: parametric tests and non-parametric tests.
+The `DiffGenes()` function available in `myTAI` implements the most popular and useful methods 
+to detect differentially expressed genes. In the literature different methods have been introduced
+and discussed for microarray technologies versus RNA-Seq technologies. 
+
+In this section we will introduce all methods implemented in `DiffGenes()` using small examples
+and will furthermore, discuss published advantages and disadvantages of each method and each mRNA
+quantification technology.
+
+## Fold-Changes
+
+A fold change in gene expression is simply the ratio of the gene expression level of one sample against a second sample: $\frac{e_{i1}}{e_i2}$, where $e_{i1}$ is the expression level of gene $i$ in sample one and $e_{i2}$ is the expression level of gene $i$ in sample two. In case replicate 
+expression levels are present for each sample the ratio of arithmetic means of the corresponding replicates is computed: $\frac{\bar{e}_{i1}}{\bar{e}_i2}$, where $\bar{e}_{i1}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample one and $\bar{e}_{i2}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample two.
+
+### Example: Fold-Change
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the fold-change measure
+DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+                  nrep          = 2,
+                  method        = "foldchange",
+                  stage.names   = c("S1","S2","S3"))
+
+
+head(DEGs)
+```
 
 ## Collapsing Replicate Samples
 
 After performing differential gene expression analyses, replicate expression levels
 are collapsed to a single stage specific expression level. For this purpose, `myTAI`
-implementes the `CollapseReplicates()` function, allowing users to combine replicate
+implements the `CollapseReplicates()` function, allowing users to combine replicate
 expression levels stored in a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object to a stage specific expression level using a specified [window function](http://cran.r-project.org/web/packages/dplyr/vignettes/window-functions.html).
 
 
@@ -177,7 +207,7 @@ __Notice:__ the same function can be applied to gene expression data deriving fr
 
 ## Compute the Statistical Significance of Each Replicate Combination
 
-In some cases (high variability of replicates) it might be useful to varify that there is no sequence of replicates (for all possible combination of replicates) that results in a non-significant `TAI` or `TDI` pattern, when the initial pattern with combined replicates was shown to be significant.
+In some cases (high variability of replicates) it might be useful to verify that there is no sequence of replicates (for all possible combination of replicates) that results in a non-significant `TAI` or `TDI` pattern, when the initial pattern with combined replicates was shown to be significant.
 
 The `CombinatorialSignificance()` function implemented in `myTAI` allows you to compute the p-values quantifying the statistical significance of the underlying pattern for all combinations of replicates.
 
@@ -211,7 +241,7 @@ $n$ denotes the number of developmental stages and $m$ denotes the number of rep
 
 Note, that in case you have a large amount of stages/experiments and a large amount of replicates the computation time will increase by $n^m$. For 11 stages and 4 replicates, $4^{11}$ = 4194304 p-values have to be computed. Each p-value computation itself is based on a permutation test running with $1,000, 10,000, ...$ or more permutations. Be aware that this might take some time.
 
-The p-value vector returned by this function can then be used to plot the p-values to see whether an critical value $\alpha$ is exeeded or not (e.g. $\alpha = 0.05$).
+The p-value vector returned by this function can then be used to plot the p-values to see whether an critical value $\alpha$ is exceeded or not (e.g. $\alpha = 0.05$).
 
 ```{r,eval=FALSE}
 
