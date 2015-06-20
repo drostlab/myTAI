@@ -1,7 +1,7 @@
-#' @title Filter Expression Levels in RNASeq Count Tables
-#' @description This function takes an ExpressionSet object that is based
-#' on a RNASeq count table (CT) and removes genes from this CT that
-#' have an expression level below a defined \code{cut.off} value.
+#' @title Filter for Expressed Genes
+#' @description This function takes an ExpressionSet object and removes genes from the gene expression matrix that
+#' have an expression level below a defined \code{cut.off} value. Hence, this function allows to remove
+#' genes that have been defined as not expressed and returns an \code{ExpressionSet} retaining only expressed genes.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param cut.off a numeric value specifying the expression cut off to define genes as \emph{not expressed} in case they express values that lie below this threshold.
 #' @param method a method how to treat gene expression in multiple stages. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.
@@ -22,32 +22,35 @@
 #' 
 #' # remove genes that have an expression level below 8000 
 #' # in at least one developmental stage
-#' FilterConst <- FilterRNASeqCT(ExpressionSet = PhyloExpressionSetExample, 
-#'                               cut.off       = 8000, 
-#'                               method        = "const")
+#' FilterConst <- Expressed(ExpressionSet = PhyloExpressionSetExample, 
+#'                          cut.off       = 8000, 
+#'                          method        = "const")
 #'                               
 #' dim(FilterConst) # check number of retained genes
 #' 
 #' # remove genes that have an expression level below 8000 
 #' # in at least ceiling(n/2) developmental stages (in this case: ceiling(7/2) = 4 stages)
-#' FilterMinSet <- FilterRNASeqCT(ExpressionSet = PhyloExpressionSetExample, 
-#'                                cut.off       = 8000, 
-#'                                method        = "min-set")
+#' FilterMinSet <- Expressed(ExpressionSet = PhyloExpressionSetExample, 
+#'                           cut.off       = 8000, 
+#'                           method        = "min-set")
 #'                                
 #' dim(FilterMinSet) # check number of retained genes
 #' 
 #' # remove genes that have an expression level below 8000 
 #' # in at least n developmental stages (in this case: 5 stages)
-#' FilterNSet <- FilterRNASeqCT(ExpressionSet = PhyloExpressionSetExample, 
-#'                              cut.off       = 8000, 
-#'                              method        = "n-set",
-#'                              n             = 5)
+#' FilterNSet <- Expressed(ExpressionSet = PhyloExpressionSetExample, 
+#'                         cut.off       = 8000, 
+#'                         method        = "n-set",
+#'                         n             = 5)
 #'                                
 #' dim(FilterMinSet) # check number of retained genes
 #' 
 #' @export
 
-FilterRNASeqCT <- function(ExpressionSet, cut.off, method = "const", n = NULL){
+Expressed <- function(ExpressionSet,
+                      cut.off,
+                      method = "const",
+                      n      = NULL){
         
         is.ExpressionSet(ExpressionSet)
         
