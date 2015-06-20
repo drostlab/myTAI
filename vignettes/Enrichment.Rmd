@@ -329,6 +329,18 @@ PlotGeneSet(ExpressionSet = DrerioPhyloExpressionSet,
 
 Here `DrerioPhyloExpressionSet` denotes a hypothetical `ExpressionSet` of _D. rerio_ development.
 
+Additionally, the `SelectGeneSet()` function allows you to obtain the `ExpresisonSet` subset of selected genes (`gene.set`) for subsequent analyses.
+
+```{r, eval = FALSE}
+# select the ExpressionSet subset of Brain specific genes
+Brain.PhyloExpressionSet <- SelectGeneSet( ExpressionSet = DrerioPhyloExpressionSet,
+                                           gene.set      = Drerio.Brain.Genes[ , 1] )
+        
+head(Brain.PhyloExpressionSet)
+```
+
+
+
 ## Combine Functional Annotation with Enrichment Analyses
 
 The greatest advantage of `Phylostratum` and `Divergence Stratum` enrichment analyses can be unfolded
