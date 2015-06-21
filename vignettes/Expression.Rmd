@@ -67,6 +67,9 @@ variance between replicates is also quantified by the p-value returned by the su
 
 ### Example: Fold-Change
 
+For the following example we assume that `PhyloExpressionSetExample[1:5,1:8]`
+stores 5 genes and 3 developmental stages with 2 replicate expression levels per stage.
+
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
 
@@ -89,14 +92,22 @@ head(DEGs)
 5            1 at1g01090.1 0.3803866 0.2288961 2.6289042 0.6017460 4.3687939 1.6618307
 ```
 
+The resulting output shows all combinations of fold-changes between samples (developmental stages).
+Here, `S1->S2` denotes that the fold-change was computed for expression levels of stage `S1` against stage
+`S2`.
 
 ### Example: Log-Fold-Change
+
+When selecting `method = "log-foldchange"` it is assumed that your input `ExpressionSet`
+stores `log2` expression levels. Here, we transform absolute expression levels stored in
+`PhyloExpressionSetExample` to `log2` expression levels using the `tf()` function before 
+log-fold-changes are computed.
 
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
 
 # Detection of DEGs using the logfold-change measure
-log.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+log.DEGs <- DiffGenes(ExpressionSet = tf(PhyloExpressionSetExample[1:5,1:8],log2),
                       nrep          = 2,
                       method        = "log-foldchange",
                       stage.names   = c("S1","S2","S3"))
