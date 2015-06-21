@@ -41,6 +41,18 @@ DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
 
 
 head(DEGs)
+
+
+# Detection of DEGs using the log-fold-change measure
+# when choosing method = "log-foldchange" it is assumed that
+# your input expression matrix stores log2 expression levels
+log.DEGs <- DiffGenes(ExpressionSet = tf(PhyloExpressionSetExample[1:5,1:8],log2),
+                      nrep          = 2,
+                      method        = "log-foldchange",
+                      stage.names   = c("S1","S2","S3"))
+
+
+head(log.DEGs)
 }
 \author{
 Hajk-Georg Drost
