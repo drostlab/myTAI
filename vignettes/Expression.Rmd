@@ -50,9 +50,19 @@ quantification technology.
 A fold change in gene expression is simply the ratio of the gene expression level of one sample against a second sample: $\frac{e_{i1}}{e_{i2}}$, where $e_{i1}$ is the expression level of gene $i$ in sample one and $e_{i2}$ is the expression level of gene $i$ in sample two. In case replicate 
 expression levels are present for each sample the ratio of arithmetic means of the corresponding replicates is computed: $\frac{\bar{e}_{i1}}{\bar{e}_{i2}}$, where $\bar{e}_{i1}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample one and $\bar{e}_{i2}$ is the arithmetic mean of replicate expression levels of gene $i$ in sample two.
 
-* __Advantages:__
+* __Advantages:__ Given a small number of replicate values the statistical evaluation of differentially expressed genes might be biased (depending on the statistical test chosen)
+by underlying sample distributions which are not fulfilled or because a small number of
+replicate values is not sufficient enough to perform non-parametric tests. Here, fold-changes
+provide a simple way to quantify gene expression differences between samples by $n$-fold enrichment. 
+In our opinion, although the process of choosing a threshold for defining genes as being differentially
+expressed or not based on fold-change values is purely subjective and relies on common sense,
+in some cases this procedure will be more suitable than defining differentially expressed genes based
+p-values obtained from a test statistic with violated test assumptions.
 
-* __Disadvantages:__
+* __Disadvantages:__ If used appropriately, statistical tests not only systematically 
+quantify the significance of the observed gene-by-gene differences of expression, but furthermore, accounts the variance of replicate expression levels when comparing the
+mean difference of replicate expression levels between samples. Hence, the gene specific
+variance between replicates is also quantified by the p-value returned by the sufficient test statistic which is not quantified by a simple fold-change measure. 
 
 
 ### Example: Fold-Change
@@ -79,6 +89,82 @@ head(DEGs)
 5            1 at1g01090.1 0.3803866 0.2288961 2.6289042 0.6017460 4.3687939 1.6618307
 ```
 
+
+### Example: Log-Fold-Change
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the logfold-change measure
+log.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+                      nrep          = 2,
+                      method        = "log-foldchange",
+                      stage.names   = c("S1","S2","S3"))
+
+
+head(log.DEGs)
+```
+
+```
+  Phylostratum      GeneID      S1->S2     S1->S3      S2->S1      S2->S3     S3->S1      S3->S2
+1            1 at1g01040.2  0.74104679  1.0570486 -0.74104679  0.31600182 -1.0570486 -0.31600182
+2            1 at1g01050.1  0.03888868  0.3458715 -0.03888868  0.30698280 -0.3458715 -0.30698280
+3            1 at1g01070.1  0.38817621  0.4900360 -0.38817621  0.10185975 -0.4900360 -0.10185975
+4            1 at1g01080.2 -0.36223724 -0.4566488  0.36223724 -0.09441158  0.4566488  0.09441158
+5            1 at1g01090.1 -1.39446159 -2.1272350  1.39446159 -0.73277345  2.1272350  0.73277345
+```
+
+## Welch t-test
+
+### Example: Welch t-test
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by a Welch t-test
+ttest.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+                        nrep          = 2,
+                        method        = "t.test",
+                        stage.names   = c("S1","S2","S3"))
+
+
+head(ttest.DEGs)
+```
+
+```
+  Phylostratum      GeneID      S1->S2      S1->S3      S2->S1     S2->S3      S3->S1     S3->S2
+1            1 at1g01040.2 0.055197999 0.073335839 0.055197999 0.15953099 0.073335839 0.15953099
+2            1 at1g01050.1 0.828665428 0.293704699 0.828665428 0.33894092 0.293704699 0.33894092
+3            1 at1g01070.1 0.007037106 0.002629415 0.007037106 0.01981887 0.002629415 0.01981887
+4            1 at1g01080.2 0.112918417 0.036087824 0.112918417 0.45730348 0.036087824 0.45730348
+5            1 at1g01090.1 0.026369854 0.035285481 0.026369854 0.08957681 0.035285481 0.08957681
+```
+
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by a Welch t-test
+# and furthermore, adjust p-values for multiple comparison
+# using the Benjamini & Hochberg (1995) method: method = "BH"
+ttest.DEGs.p_adjust <- DiffGenes(ExpressionSet   = PhyloExpressionSetExample[1:5,1:8],
+                                 nrep            = 2,
+                                 method          = "t.test",
+                                 p.adjust.method = "BH",
+                                 stage.names     = c("S1","S2","S3"))
+
+
+head(ttest.DEGs.p_adjust)
+```
+
+```
+  Phylostratum      GeneID     S1->S2      S1->S3     S2->S1     S2->S3      S3->S1     S3->S2
+1            1 at1g01040.2 0.11000376 0.110003758 0.11000376 0.15953099 0.110003758 0.15953099
+2            1 at1g01050.1 0.82866543 0.508411378 0.82866543 0.50841138 0.508411378 0.50841138
+3            1 at1g01070.1 0.01055566 0.007888246 0.01055566 0.01981887 0.007888246 0.01981887
+4            1 at1g01080.2 0.16937763 0.108263471 0.16937763 0.45730348 0.108263471 0.45730348
+5            1 at1g01090.1 0.05292822 0.052928221 0.05292822 0.08957681 0.052928221 0.08957681
+```
 
 ## Collapsing Replicate Samples
 
