@@ -170,3 +170,10 @@ test_that("n-set with n = 6 computes the same values as const; comparison = 'bot
 })
 
 
+test_that("error occurs when only one cut.off is specified when selecting comparison = 'both'",{
+        
+        expect_error(Expressed(PhyloExpressionSetExample,2000,"n-set",comparison = "both",n = 6),
+                     "When choosing: comparison == 'both', the cut.off argument needs to store two cut.off values: lower-cut.off and upper-cut.off")
+})
+
+
