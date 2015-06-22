@@ -279,21 +279,21 @@ The `stage.names` argument then specifies the new names of collapsed stages.
 ## Filter for Expressed Genes
 
 After differential gene expression analyses and replicate aggregation have been performed,
-some studies filter gene expression levels in RNA-Seq count tables or microarray expression matrices for non-expressed genes.
-In other words, in most studies performing RNA-Seq experiments for example, FPKM/RPKM values < 1
+some studies filter gene expression levels in RNA-Seq count tables or microarray expression matrices for non-expressed or outlier genes.
+For example, in most studies performing RNA-Seq experiments FPKM/RPKM values < 1
 are remove from the processed (final) count table.
 
-For this purpose `myTAI` implements the `Expressed()` function to filter (remove) expression levels in RNA-Seq count tables which do not pass a defined expression threshold.
+For this purpose `myTAI` implements the `Expressed()` function to filter (remove) expression levels in RNA-Seq count tables or microarray expression matrices which do not pass a defined expression threshold.
 
 The `Expressed()` function takes a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object storing a RNA-Seq count table (CT) or microarray gene expression matrix and removes genes from this count table or gene expression matrix that have an expression level below a defined `cut.off` value.
 
 `Expressed()` allows users to choose from several gene extraction methods (see `?Expressed` for details):
 
-* `const`: all genes that have at least one stage that undercuts the expression `cut.off` will be excluded from the `ExpressionSet`
+* `const`:  all genes that have at least one stage that undercuts or exceeds the expression `cut.off` will be excluded from the `ExpressionSet`. Hence, for a 7 stage `ExpressionSet` genes passing the expression level `cut.off` in 6 stages will be retained in the `ExpressionSet`.
 
-* `min-set`: genes that undercut the expression level `cut.off` in `ceiling(n/2)` stages will be excluded from the `ExpressionSet`
+* `min-set`: genes passing the expression level `cut.off` in `ceiling(n/2)` stages will be retained in the `ExpressionSet`, where `n` is the number of stages in the `ExpressionSet`.
 
-* `n-set`: genes that undercut the expression level `cut.off` in `n` stages will be excluded from the `ExpressionSet`
+* `n-set`: genes passing the expression level `cut.off` in `n` stages will be retained in the `ExpressionSet`. Here, the argument `n` deining the number of stages for which the threshold criteria should be fulfilled needs to be specified.
 
 
 ```{r,eval = FALSE}
@@ -306,13 +306,84 @@ nrow(PhyloExpressionSetExample)
 # in at least one developmental stage
 FilterConst <- Expressed(ExpressionSet = PhyloExpressionSetExample,
                          cut.off       = 8000,
+                         comparison    = "below", 
                          method        = "const")
 
 nrow(FilterConst) # check number of retained genes
 #> [1] 449
 ```
 
-As you can see, only 449 out of 25260 genes in `PhyloExpressionSetExample` have an absolute expression level above `8000` when omitting genes using `method = 'const'`.
+As you can see, only 449 out of 25260 genes in `PhyloExpressionSetExample` have an absolute expression level above `8000` when omitting genes using `method = 'const'`. The argument `comparison` specifies  whether genes having expression levels below, above, or below AND above (both) the `cut.off` value should be removed from the dataset. 
+
+The following comparison methods can be selected:
+
+* `comparison = "below"`: define genes as not expressed which undercut the `cut-off` threshold.
+* `comparison = "above"`: define genes as outliers which exceed the `cut-off` threshold.
+* `comparison = "both"`: remove genes fulfilling the `comparison = "below"` AND `comparison = "above"` criteria.
+
+
+```{r,eval = FALSE}
+
+# again: check number of genes in PhyloExpressionSetExample
+nrow(PhyloExpressionSetExample)
+#> [1] 25260
+
+# remove genes that have an expression level above 12000
+# in at least one developmental stage (outlier removal)
+FilterConst.above <- Expressed(ExpressionSet = PhyloExpressionSetExample,
+                               cut.off       = 12000,
+                               comparison    = "above", 
+                               method        = "const")
+
+nrow(FilterConst.above) # check number of retained genes
+#> [1] 23547
+```
+
+For this example 25260 - 23547 = 1713 have been classified as outliers (expression levels above 12000)
+and were removed from the dataset.
+
+
+```{r,eval = FALSE}
+
+# again: check number of genes in PhyloExpressionSetExample
+nrow(PhyloExpressionSetExample)
+#> [1] 25260
+
+# remove genes that have an expression level below 8000 AND above 12000
+# in at least one developmental stage (non-expressed genes AND outlier removal)
+FilterConst.both <-  Expressed(ExpressionSet = PhyloExpressionSetExample,
+                               cut.off       = c(8000,12000),
+                               comparison    = "both", 
+                               method        = "const")
+
+nrow(FilterConst.both) # check number of retained genes
+#> [1] 2
+```
+
+When selecting `comparison = 'both'`, the `cut.off` argument receives 2 threshold values:
+the _below_ `cut.off` as first element and the _above_ `cut.off` as second element. In this case
+`cut.off = c(8000,12000)`. In this case only 2 genes fulfill these criteria.
+
+
+Analogously, you can specify the number of stages that should fulfill the threshold criteria using
+the `n-set` method.
+
+
+```{r,eval = FALSE}
+# remove genes that have an expression level below 8000
+# in at least 5 developmental stages (in this case: n = 2 stages fulfilling the criteria)
+FilterNSet <- Expressed(ExpressionSet = PhyloExpressionSetExample,
+                        cut.off       = 8000,
+                        method        = "n-set",
+                        comparison    = "below",
+                        n             = 3)
+
+nrow(FilterMinSet) # check number of retained genes
+#> [1] 20
+```
+
+Here, 20 genes are fulfilling these criteria.
+
 
 
 ## Compute the Statistical Significance of Each Replicate Combination
