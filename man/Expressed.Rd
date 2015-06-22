@@ -32,7 +32,7 @@ This filter function allows users to remove genes from the \code{ExpressionSet} 
 Following extraction criteria are implemented in this function:
 \itemize{
 \item \code{const}: all genes that have at least one stage that undercuts or exceeds the expression \code{cut.off} will be excluded from the \code{ExpressionSet}. Hence, for a 7 stage \code{ExpressionSet} genes passing the expression level \code{cut.off} in 6 stages will be retained in the \code{ExpressionSet}.
-\item \code{min-set}: genes passing the expression level \code{cut.off} in \code{ceiling(n/2)} stages will be retained in the \code{ExpressionSet}., where \emph{n} is the number of stages in the \code{ExpressionSet}.
+\item \code{min-set}: genes passing the expression level \code{cut.off} in \code{ceiling(n/2)} stages will be retained in the \code{ExpressionSet}, where \emph{n} is the number of stages in the \code{ExpressionSet}.
 \item \code{n-set}: genes passing the expression level \code{cut.off} in \code{n} stages will be retained in the \code{ExpressionSet}. Here, the argument \code{n} needs to be specified.
 }
 }
