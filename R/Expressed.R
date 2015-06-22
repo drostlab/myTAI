@@ -5,8 +5,8 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param cut.off a numeric value specifying the expression cut-off to define genes as \emph{not expressed} (\code{comparison = "below"}) , \emph{outliers} (\code{comparison = "above"}), or both (\code{comparison = "both"}). See \code{comparison} for details. In case \code{comparison = "both"}, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{cut.off} value at the first position and the upper \code{cut.off} value at the second position.
 #' @param method a method defining how to treat gene expression values in multiple stages. The corresponding method that is chosen allows to control the stage-wise fulfillment of the threshold criteria. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.
-#' @param comparison a character string specifying whether genes should be extracted that are
-#'  below, above, or below AND above (both) the \code{cut.off} value.
+#' @param comparison a character string specifying whether genes having expression levels
+#'  below, above, or below AND above (both) the \code{cut.off} value should be extracted from the dataset.
 #'  In case \code{comparison = "both"} is chosen, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{cut.off} value at the first position and the upper \code{cut.off} value
 #' at the second position. 
 #' @param n a numeric value for \code{method = "n-set"}.
@@ -16,9 +16,9 @@
 #' 
 #' Following extraction criteria are implemented in this function: 
 #' \itemize{
-#' \item \code{const}: all genes that have at least one stage that undercuts or exceeds the expression \code{cut.off} will be excluded from the \code{ExpressionSet}. Hence, for a 7 stage \code{ExpressionSet} genes that pass the expression level \code{cut.off} in 6 stages will be retained in the \code{ExpressionSet}.
-#' \item \code{min-set}: genes that pass the expression level \code{cut.off} in \code{ceiling(n/2)} stages will be retained in the \code{ExpressionSet}.
-#' \item \code{n-set}: genes that pass the expression level \code{cut.off} in \code{n} stages will be retained in the \code{ExpressionSet}. Here, the argument \code{n} needs to be specified.
+#' \item \code{const}: all genes that have at least one stage that undercuts or exceeds the expression \code{cut.off} will be excluded from the \code{ExpressionSet}. Hence, for a 7 stage \code{ExpressionSet} genes passing the expression level \code{cut.off} in 6 stages will be retained in the \code{ExpressionSet}.
+#' \item \code{min-set}: genes passing the expression level \code{cut.off} in \code{ceiling(n/2)} stages will be retained in the \code{ExpressionSet}., where \emph{n} is the number of stages in the \code{ExpressionSet}.
+#' \item \code{n-set}: genes passing the expression level \code{cut.off} in \code{n} stages will be retained in the \code{ExpressionSet}. Here, the argument \code{n} needs to be specified.
 #' }
 #' 
 #' @examples
