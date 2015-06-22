@@ -4,30 +4,36 @@
 \alias{Expressed}
 \title{Filter for Expressed Genes}
 \usage{
-Expressed(ExpressionSet, cut.off, method = "const", n = NULL)
+Expressed(ExpressionSet, cut.off, method = "const", comparison = "below",
+  n = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{cut.off}{a numeric value specifying the expression cut off to define genes as \emph{not expressed} in case they express values that lie below this threshold.}
+\item{cut.off}{a numeric value specifying the expression cut-off to define genes as \emph{not expressed} (\code{comparison = "below"}) , \emph{outliers} (\code{comparison = "above"}), or both (\code{comparison = "both"}). See \code{comparison} for details. In case \code{comparison = "both"}, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{cut.off} value at the first position and the upper \code{cut.off} value at the second position.}
 
-\item{method}{a method how to treat gene expression in multiple stages. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.}
+\item{method}{a method defining how to treat gene expression values in multiple stages. The corresponding method that is chosen allows to control the stage-wise fulfillment of the threshold criteria. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.}
+
+\item{comparison}{a character string specifying whether genes should be extracted that are
+ below, above, or below AND above (both) the \code{cut.off} value.
+ In case \code{comparison = "both"} is chosen, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{cut.off} value at the first position and the upper \code{cut.off} value
+at the second position.}
 
 \item{n}{a numeric value for \code{method = "n-set"}.}
 }
 \description{
 This function takes an ExpressionSet object and removes genes from the gene expression matrix that
-have an expression level below a defined \code{cut.off} value. Hence, this function allows to remove
-genes that have been defined as not expressed and returns an \code{ExpressionSet} retaining only expressed genes.
+have an expression level below, above, or below AND above a defined \code{cut.off} value. Hence, this function allows to remove
+genes that have been defined as \emph{not expressed} or \emph{outliers} and returns an \code{ExpressionSet} retaining only expressed genes.
 }
 \details{
-This filter function allows users to remove genes from the \code{ExpressionSet} object that undercut a certain expression level \code{cut.off}.
+This filter function allows users to remove genes from the \code{ExpressionSet} object that undercut or exceed a certain expression level \code{cut.off}.
 
 Following extraction criteria are implemented in this function:
 \itemize{
-\item \code{const}: all genes that have at least one stage that undercuts the expression \code{cut.off} will be excluded from the \code{ExpressionSet}.
-\item \code{min-set}: genes that undercut the expression level \code{cut.off} in \code{ceiling(n/2)} stages will be excluded from the \code{ExpressionSet}.
-\item \code{n-set}: genes that undercut the expression level \code{cut.off} in \code{n} stages will be excluded from the \code{ExpressionSet}.
+\item \code{const}: all genes that have at least one stage that undercuts or exceeds the expression \code{cut.off} will be excluded from the \code{ExpressionSet}. Hence, for a 7 stage \code{ExpressionSet} genes that pass the expression level \code{cut.off} in 6 stages will be retained in the \code{ExpressionSet}.
+\item \code{min-set}: genes that pass the expression level \code{cut.off} in \code{ceiling(n/2)} stages will be retained in the \code{ExpressionSet}.
+\item \code{n-set}: genes that pass the expression level \code{cut.off} in \code{n} stages will be retained in the \code{ExpressionSet}. Here, the argument \code{n} needs to be specified.
 }
 }
 \examples{
@@ -37,24 +43,47 @@ data(PhyloExpressionSetExample)
 # in at least one developmental stage
 FilterConst <- Expressed(ExpressionSet = PhyloExpressionSetExample,
                          cut.off       = 8000,
-                         method        = "const")
+                         method        = "const",
+                         comparison    = "below")
 
 dim(FilterConst) # check number of retained genes
 
 # remove genes that have an expression level below 8000
-# in at least ceiling(n/2) developmental stages (in this case: ceiling(7/2) = 4 stages)
+# in at least 3 developmental stages
+(in this case: ceiling(7/2) = 4 stages fulfilling the cut-off criteria)
 FilterMinSet <- Expressed(ExpressionSet = PhyloExpressionSetExample,
                           cut.off       = 8000,
-                          method        = "min-set")
+                          method        = "min-set",
+                          comparison    = "below")
 
 dim(FilterMinSet) # check number of retained genes
 
 # remove genes that have an expression level below 8000
-# in at least n developmental stages (in this case: 5 stages)
+# in at least 5 developmental stages (in this case: n = 2 stages fulfilling the criteria)
 FilterNSet <- Expressed(ExpressionSet = PhyloExpressionSetExample,
                         cut.off       = 8000,
                         method        = "n-set",
-                        n             = 5)
+                        comparison    = "below",
+                        n             = 2)
+
+dim(FilterMinSet) # check number of retained genes
+
+
+
+# remove expression levels that exceed the cut.off criteria
+FilterMinSet <- Expressed(ExpressionSet = PhyloExpressionSetExample,
+                          cut.off       = 12000,
+                          method        = "min-set",
+                          comparison    = "above")
+
+dim(FilterMinSet) # check number of retained genes
+
+
+# remove expression levels that undercut AND exceed the cut.off criteria
+FilterMinSet <- Expressed(ExpressionSet = PhyloExpressionSetExample,
+                          cut.off       = c(8000,12000),
+                          method        = "min-set",
+                          comparison    = "both")
 
 dim(FilterMinSet) # check number of retained genes
 }
