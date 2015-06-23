@@ -106,7 +106,14 @@ All three functions also include visual analytics tools to quantify the goodness
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
-`age.apply()`, `ecScore()`, `geom.mean()`, `harm.mean()`, `MatchMap()`, `omitMatrix()`, `rhScore()`, and `tf()`
+* `MatchMap()` : Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix
+* `tf()` : Transform Gene Expression Levels
+* `age.apply()` : Age Category Specific apply Function
+* `ecScore()` : Compute the Hourglass Score for the EarlyConservationTest
+* `geom.mean()` : Geometric Mean
+* `harm.mean()` : Harmonic Mean
+* `omitMatrix()` : Compute TAI or TDI Profiles Omitting a Given Gene
+* `rhScore()` : Compute the Hourglass Score for the Reductive Hourglass Test
 
 
 ## Install Developer Version of myTAI
