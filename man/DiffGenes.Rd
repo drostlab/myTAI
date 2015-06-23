@@ -34,8 +34,8 @@ Detect differentially expressed genes (DEGs) in a standard \code{ExpressionSet} 
 Available methods for the detection of differentially expressed genes:
 
 \itemize{
-\item \code{method = "foldchange"}: ratio of replicate means between developmental stages. Here, the \code{DiffGenes} functions assumes that absolute expression levels are stored in your input \code{ExpresisonSet}.
-\item \code{method = "log-foldchange"}: difference of replicate log-means between developmental stages.Here, the \code{DiffGenes} functions assumes that \code{log2} transformed expression levels are stored in your input \code{ExpresisonSet}.
+\item \code{method = "foldchange"}: ratio of replicate geometric means between developmental stages. Here, the \code{DiffGenes} functions assumes that absolute expression levels are stored in your input \code{ExpresisonSet}.
+\item \code{method = "log-foldchange"}: difference of replicate arithmetic means between developmental stages. Here, the \code{DiffGenes} functions assumes that \code{log2} transformed expression levels are stored in your input \code{ExpresisonSet}.
 \item \code{method = "t.test"}: Welch t.test between replicate expression levels between two samples.
 }
 

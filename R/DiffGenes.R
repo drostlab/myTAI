@@ -13,11 +13,12 @@
 #' @author Hajk-Georg Drost
 #' @details 
 #' 
+#' 
 #' Available methods for the detection of differentially expressed genes:
 #' 
 #' \itemize{
-#' \item \code{method = "foldchange"}: ratio of replicate means between developmental stages. Here, the \code{DiffGenes} functions assumes that absolute expression levels are stored in your input \code{ExpresisonSet}.
-#' \item \code{method = "log-foldchange"}: difference of replicate log-means between developmental stages.Here, the \code{DiffGenes} functions assumes that \code{log2} transformed expression levels are stored in your input \code{ExpresisonSet}.
+#' \item \code{method = "foldchange"}: ratio of replicate geometric means between developmental stages. Here, the \code{DiffGenes} functions assumes that absolute expression levels are stored in your input \code{ExpresisonSet}.
+#' \item \code{method = "log-foldchange"}: difference of replicate arithmetic means between developmental stages. Here, the \code{DiffGenes} functions assumes that \code{log2} transformed expression levels are stored in your input \code{ExpresisonSet}.
 #' \item \code{method = "t.test"}: Welch t.test between replicate expression levels between two samples.
 #' }
 #' 
@@ -106,10 +107,24 @@ DiffGenes <- function(ExpressionSet,
         ncols <- ncol(ExpressionSet)
         
         if (is.element(method,c("foldchange","log-foldchange"))){
-                CollapsedExpressionSet <- CollapseReplicates(ExpressionSet = ExpressionSet,
-                                                             nrep          = nrep,
-                                                             FUN           = mean,
-                                                             stage.names   = stage.names)
+                
+                # assume absolute expression levels: so accumulation (window) function = geom.mean
+                if ( method == "foldchange"){
+                        CollapsedExpressionSet <- CollapseReplicates(ExpressionSet = ExpressionSet,
+                                                                     nrep          = nrep,
+                                                                     FUN           = geom.mean,
+                                                                     stage.names   = stage.names)
+                        
+                } 
+                
+                # assume log expression levels: so accumulation (window) function = mean
+                if (method == "log-foldchange"){
+                        CollapsedExpressionSet <- CollapseReplicates(ExpressionSet = ExpressionSet,
+                                                                     nrep          = nrep,
+                                                                     FUN           = mean,
+                                                                     stage.names   = stage.names)
+                }
+                
                 
                 nStages <- ncol(CollapsedExpressionSet) - 2
                 
