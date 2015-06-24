@@ -15,7 +15,7 @@ Expressed(ExpressionSet, cut.off, method = "const", comparison = "below",
 \item{method}{a method defining how to treat gene expression values in multiple stages. The corresponding method that is chosen allows to control the stage-wise fulfillment of the threshold criteria. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.}
 
 \item{comparison}{a character string specifying whether genes having expression levels
- below, above, or below AND above (both) the \code{cut.off} value should be extracted from the dataset.
+ below, above, or below AND above (both) the \code{cut.off} value should be excluded from the dataset.
  In case \code{comparison = "both"} is chosen, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{cut.off} value at the first position and the upper \code{cut.off} value
 at the second position.}
 
@@ -50,7 +50,7 @@ dim(FilterConst) # check number of retained genes
 
 # remove genes that have an expression level below 8000
 # in at least 3 developmental stages
-(in this case: ceiling(7/2) = 4 stages fulfilling the cut-off criteria)
+# (in this case: ceiling(7/2) = 4 stages fulfilling the cut-off criteria)
 FilterMinSet <- Expressed(ExpressionSet = PhyloExpressionSetExample,
                           cut.off       = 8000,
                           method        = "min-set",
