@@ -151,6 +151,28 @@ taxonomy( organism = "Arabidopsis",
 1 3701
 ```
 
+So far, the following data bases can be accesses to retrieve taxonomic information:
+
+* `db = "eol"` : Encylopedia of Life
+* `db = "tnrs"` : Taxonomic Name Resolution Service
+* `db = "itis"` : Integrated Taxonomic Information Service
+* `db = "phylomatic"` : Phylomatic
+* `db = "ubio"` : uBio
+* `db = "gnr"` : Global Names Resolver
+* `db = "gni"` : Global Names Index
+* `db = "iucn"` : IUCN Red List
+* `db = "tp"` : Tropicos
+* `db = "plantminer"` : Plantminer
+* `db = "col"` : Catalogue of Life
+* `db = "ncbi"` : National Center for Biotechnology Information
+* `db = "vascan"` : CANADENSYS Vascan name search API
+* `db = "ipni"` : International Plant Names Index (IPNI)
+* `db = "bold"` : Barcode of Life Data Systems (BOLD)
+* `db = "nbn"` : National Biodiversity Network (UK)
+
+
+## Retrieve Children Nodes
+
 Another `output` supported by `taxonomy()` is `children` that returns the immediate children taxa
 for a query organism. This feature is useful to determine species relationships for quantifying recent evolutionary conservation with Divergence Stratigraphy. 
 
@@ -182,6 +204,5 @@ taxonomy( organism = "Arabidopsis",
 17         3702                                               Arabidopsis thaliana        species
 ```
 
-Analogous to `output = "classification"` and `output = "taxid"`, databases `ncbi`, `col`, and `itis` can be selected.
 
 
