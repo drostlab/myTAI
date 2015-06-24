@@ -23,6 +23,7 @@ These tutorials will get you started with this package:
 - [Advanced Topics of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
 - [Perform Age Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd)
 - [Gene Expression Analysis with myTAI](https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd)
+- [Taxonomic Information Retrieval](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd)
 
 You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
@@ -55,6 +56,9 @@ browseVignettes("myTAI")
  
 # open tutorial: Gene Expression Analysis with myTAI
  vignette("Expression", package = "myTAI")
+ 
+ # open tutorial: Taxonomic Information Retrieval with myTAI
+ vignette("Taxonomy", package = "myTAI")
  
 ```
 
@@ -103,6 +107,9 @@ All three functions also include visual analytics tools to quantify the goodness
 * `Expressed()` : Filter Expression Levels in Gene Expression Matrices (define expressed genes)
 * `SelectGeneSet()` : Select a Subset of Genes in an ExpressionSet
 
+#### Taxonomic Information Retrieval
+
+* `taxonomy()` : Retrieving Taxonomic Information of a Query Organism
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
