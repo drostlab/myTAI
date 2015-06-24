@@ -124,14 +124,13 @@ Methodologically, the process of performing `Phylostratigraphy` can be summarize
 
 #### Step by Step Instructions: `Phylostratigraphy`
 
+
 Here, we will construct an example `Phylostratigraphic Map` for _Arabidopsis thaliana_. 
 
 In the first step, please go to [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/createPsMap.pl) and download the `Perl Script`
-to run the `Phylostratigraphy` algorithm. Now please install the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package to be able to automatically define a taxonomy for _A. thaliana_. After installing `biomartr` on your system, you can retrieve taxonomic classification information for any annotated species by typing (here we use _A. thaliana_ as example): 
+to run the `Phylostratigraphy` algorithm. The phyostratigraphic approach is based on taxonomic classification of the organism of interest. The `taxonomy()` function implemented in `myTAI` automatically defines a taxonomy for your organism of interest. You can retrieve taxonomic classification information for any annotated species by typing (here we use _A. thaliana_ as example): 
 
 ```{r,eval=FALSE}
-library(biomartr)
-
 # retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
 # from NCBI Taxonomy
 taxonomy( organism = "Arabidopsis thaliana", 
@@ -183,7 +182,7 @@ This representation of taxonomic categories as `phylostrata` are labeled as disc
 Here, all genes correspond to `Phylostratum 1` (PS1) representing the taxonomic category `cellular organisms`.
 
 
-The `taxonomy()` functions allows you to retrieve taxonomic classification information for any annotated organism of interest by specifying its `scientific name`, e.g. `Arabidopsis thaliana`, `Homo sapiens`, `Mus musculus`, etc. In case you would like to add more information to the underlying taxonomy, please consult the  [Taxonomy](https://github.com/HajkD/biomartr/blob/master/vignettes/Taxonomy.Rmd#taxonomic-information-retrieval) Vignette of the [biomartr](https://github.com/HajkD/biomartr#installation-guide) package.
+The `taxonomy()` functions allows you to retrieve taxonomic classification information for any annotated organism of interest by specifying its `scientific name`, e.g. `Arabidopsis thaliana`, `Homo sapiens`, `Mus musculus`, etc. In case you would like to add more information to the underlying taxonomy, please consult the  [Taxonomy](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd) Vignette.
 
 
 The next step is to run the `createPsMap.pl` script (see also [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses)).
@@ -244,6 +243,7 @@ Following steps summarize the `Divergence Stratigraphy` algorithm:
 
 
 #### Step by Step Instructions: `Divergence Stratigraphy`
+
 
 The first step is to install the [orthologr](https://github.com/HajkD/orthologr) package on your machine. In the following example we will compute a `Divergence Map` for _A. thaliana_ versus _A. lyrata_.
 
