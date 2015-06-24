@@ -4,7 +4,10 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param nrep either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.
 #' @param method method to detect differentially expressed genes.
-#' @param comparison
+#' @param comparison a character string specifying whether genes having fold-change or p-values
+#'  below, above, or below AND above (both) the \code{alpha} value should be excluded from the dataset.
+#'  In case \code{comparison = "both"} is chosen, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{alpha} value at the first position and the upper \code{alpha} value
+#' at the second position. 
 #' @param alpha a numeric value specifying the cut-off value above which Genes fulfilling the corresponding fold-change, log-fold-change, or p-value should be retained and returned by \code{DiffGenes}.
 #' @param filter.method a method how to \code{alpha} values in multiple stages. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.
 #' @param n a numeric value for \code{method = "n-set"}.
@@ -42,6 +45,7 @@
 #' # Detection of DEGs using the fold-change measure
 #' DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[ ,1:8],
 #'                   nrep          = 2,
+#'                   comparison    = "below",
 #'                   method        = "foldchange",
 #'                   stage.names   = c("S1","S2","S3"))
 #' 
@@ -54,6 +58,7 @@
 #' # your input expression matrix stores log2 expression levels 
 #' log.DEGs <- DiffGenes(ExpressionSet = tf(PhyloExpressionSetExample[1:5,1:8],log2),
 #'                       nrep          = 2,
+#'                       comparison    = "below",
 #'                       method        = "log-foldchange",
 #'                       stage.names   = c("S1","S2","S3"))
 #' 
