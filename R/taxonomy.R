@@ -7,6 +7,29 @@
 #' Implemented are: \code{output} = \code{"classification"}, \code{"taxid"}, \code{"children"}.
 #' @details This function is based on the powerful package \pkg{taxize} and implements
 #' the customized retrieval of taxonomic information for a query organism. 
+#' 
+#' The following data bases can be selected to retrieve taxonomic information:
+#' 
+#' \itemize{
+#' \item \code{db = "eol"} : Encylopedia of Life
+#' \item \code{db = "tnrs"} : Taxonomic Name Resolution Service
+#' \item \code{db = "itis"} : Integrated Taxonomic Information Service
+#' \item \code{db = "phylomatic"} : Phylomatic
+#' \item \code{db = "ubio"} : uBio
+#' \item \code{db = "gnr"} : Global Names Resolver
+#' \item \code{db = "gni"} : Global Names Index
+#' \item \code{db = "iucn"} : IUCN Red List
+#' \item \code{db = "tp"} : Tropicos
+#' \item \code{db = "plantminer"} : Plantminer
+#' \item \code{db = "col"} : Catalogue of Life
+#' \item \code{db = "ncbi"} : National Center for Biotechnology Information
+#' \item \code{db = "vascan"} : CANADENSYS Vascan name search API
+#' \item \code{db = "ipni"} : International Plant Names Index (IPNI)
+#' \item \code{db = "bold"} : Barcode of Life Data Systems (BOLD)
+#' \item \code{db = "nbn"} : National Biodiversity Network (UK)
+#' }
+#' 
+#' 
 #' @author Hajk-Georg Drost
 #' @examples
 #' 
@@ -57,7 +80,9 @@ taxonomy <- function(organism, db = "ncbi", output = "classification"){
         if(!is.element(output,c("classification","taxid","children")))
                 stop("The output '",output,"' is not supported by this function.")
         
-        if(!is.element(db,c("ncbi","col","itis")))
+        if(!is.element(db,c("ncbi","col","itis","tnrs","phylomatic","ubio",
+                            "gnr","gni","iucn","tp","plantminer","tpl",
+                            "gisd","vascan","ipni","bold","nbn")))
                 stop("Database '",db,"' is not supported by this function.")
         
         name <- id <- NULL
