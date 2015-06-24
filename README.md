@@ -109,7 +109,7 @@ All three functions also include visual analytics tools to quantify the goodness
 
 #### Taxonomic Information Retrieval
 
-* `taxonomy()` : Retrieving Taxonomic Information of a Query Organism
+* `taxonomy()` : Retrieve Taxonomic Information for any Organism of Interest
 
 #### Minor Functions for Better Usibility and Additional Analyses
 
