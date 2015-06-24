@@ -3,6 +3,8 @@ myTAI 0.2.0
 
 ### Vignettes
 
+- adding new vignette __Taxonomy__ providing spep by step instructions on retrieving taxonomic information for any organism of interest
+
 - adding new vignette __Expression Analysis__ providing use cases to perform gene expression
 data analysis with `myTAI`
 
@@ -12,6 +14,8 @@ data analysis with `myTAI`
 to the __Introduction__ Vignette
 
 ### New Functions
+
+- a new function `taxonomy()` allows users to retrieve taxonomic information for any organism of interest
 
 - a new function `SelectGeneSet()` allows users to fastly select a subset of genes in an ExpressionSet
 
@@ -31,6 +35,8 @@ to the __Introduction__ Vignette
 
 ### Updates
 
+- `FilterRNASeqCT()` has been renamed to `Expressed()` allowing users to apply this filter function
+to RNA-Seq data as well as to microarray data 
 - `PlotRE()` and `PlotMeans()` are now based on colors from the RColorBrewer package (default)
 - `PlotRE()` and `PlotMeans()` now have a new argument `colors` allowing unsers to choose custom colors for the visualized relative or mean expression profiles 
 - `geom.mean()` and `harm.mean()` now are external functions accessible to the `myTAI` user
