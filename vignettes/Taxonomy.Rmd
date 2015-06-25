@@ -169,5 +169,17 @@ taxonomy( organism = "Arabidopsis",
 17         3702                                               Arabidopsis thaliana        species
 ```
 
+```{r, eval=FALSE}
+# retrieve children taxa of the query organism stored in the correspondning database
+taxonomy( organism = "Arabidopsis", 
+          db       = "itis", 
+          output   = "children" )
+```
 
-
+```
+   parentname parenttsn rankname             taxonname    tsn
+1 Arabidopsis     23040  Species  Arabidopsis thaliana  23041
+2 Arabidopsis     23040  Species Arabidopsis arenicola 823113
+3 Arabidopsis     23040  Species   Arabidopsis arenosa 823130
+4 Arabidopsis     23040  Species    Arabidopsis lyrata 823171
+```
