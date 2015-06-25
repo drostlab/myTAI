@@ -70,7 +70,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 
 The `organism` argument takes the scientific name of a query organism, the `db` argument
 specifies that database from which the corresponding taxonomic information shall be retrieved,
-e.g. `ncbi` (NCBI Taxonomy), `itis` (Integrated Taxonomic Information System), or `col` (Catalogue of Life), and the `output` argument specifies the type of taxonomic information
+e.g. `ncbi` (NCBI Taxonomy) and `itis` (Integrated Taxonomic Information System) and the `output` argument specifies the type of taxonomic information
 shall shall be returned for the query organism, e.g. `classification`, `taxid`, or `children`.
 
 The output of `classification` is a `data.frame` storing the taxonomic hierarchy of `Arabidopsis thaliana`
@@ -78,27 +78,6 @@ starting with `cellular organisms` up to `Arabidopsis thaliana`. The first colum
 the second column the taxonomic rank, and the third column the NCBI Taxonomy id for corresponding taxa.
 
 Analogous `classification` information can be obtained from different databases.
-
-
-```{r, eval=FALSE}
-# retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
-# from Catalogue of Life
-taxonomy( organism = "Arabidopsis thaliana", 
-          db       = "col",
-          output   = "classification" )
-
-```
-
-```
-                  name    rank       id
-1              Plantae Kingdom 20726692
-2         Tracheophyta  Phylum 20726693
-3        Magnoliopsida   Class 20726694
-4          Brassicales   Order 20733059
-5         Brassicaceae  Family 20733060
-6          Arabidopsis   Genus 20872710
-7 Arabidopsis thaliana Species  7144206
-```
 
 
 ```{r, eval=FALSE}
@@ -140,35 +119,21 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 
 ```{r, eval=FALSE}
-# retrieving the taxonomy id of the query organism from NCBI Taxonomy
+# retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service
 taxonomy( organism = "Arabidopsis", 
-          db       = "ncbi", 
+          db       = "itis", 
           output   = "taxid" )
 ```
 
 ```
     id
-1 3701
+1 23040
 ```
 
 So far, the following data bases can be accesses to retrieve taxonomic information:
 
-* `db = "eol"` : Encylopedia of Life
-* `db = "tnrs"` : Taxonomic Name Resolution Service
 * `db = "itis"` : Integrated Taxonomic Information Service
-* `db = "phylomatic"` : Phylomatic
-* `db = "ubio"` : uBio
-* `db = "gnr"` : Global Names Resolver
-* `db = "gni"` : Global Names Index
-* `db = "iucn"` : IUCN Red List
-* `db = "tp"` : Tropicos
-* `db = "plantminer"` : Plantminer
-* `db = "col"` : Catalogue of Life
 * `db = "ncbi"` : National Center for Biotechnology Information
-* `db = "vascan"` : CANADENSYS Vascan name search API
-* `db = "ipni"` : International Plant Names Index (IPNI)
-* `db = "bold"` : Barcode of Life Data Systems (BOLD)
-* `db = "nbn"` : National Biodiversity Network (UK)
 
 
 ## Retrieve Children Nodes
