@@ -9,10 +9,10 @@ taxonomy(organism, db = "ncbi", output = "classification")
 \arguments{
 \item{organism}{a character string specifying the scientific name of a query organism.}
 
-\item{db}{a character string specifying the database to query, e.g. \code{db} = \code{"itis"}, \code{"col"}, or \code{"ncbi"}.}
+\item{db}{a character string specifying the database to query, e.g. \code{db} = \code{"itis"} or \code{"ncbi"}.}
 
 \item{output}{a character string specifying the taxonomic information that shall be returned.
-Implemented are: \code{output} = \code{"classification"}, \code{"taxid"}, \code{"children"}.}
+Implemented are: \code{output} = \code{"classification"}, \code{"taxid"}, or \code{"children"}.}
 }
 \description{
 This function takes the scientific name of a query organism
@@ -25,56 +25,41 @@ the customized retrieval of taxonomic information for a query organism.
 The following data bases can be selected to retrieve taxonomic information:
 
 \itemize{
-\item \code{db = "eol"} : Encylopedia of Life
-\item \code{db = "tnrs"} : Taxonomic Name Resolution Service
 \item \code{db = "itis"} : Integrated Taxonomic Information Service
-\item \code{db = "phylomatic"} : Phylomatic
-\item \code{db = "ubio"} : uBio
-\item \code{db = "gnr"} : Global Names Resolver
-\item \code{db = "gni"} : Global Names Index
-\item \code{db = "iucn"} : IUCN Red List
-\item \code{db = "tp"} : Tropicos
-\item \code{db = "plantminer"} : Plantminer
-\item \code{db = "col"} : Catalogue of Life
 \item \code{db = "ncbi"} : National Center for Biotechnology Information
-\item \code{db = "vascan"} : CANADENSYS Vascan name search API
-\item \code{db = "ipni"} : International Plant Names Index (IPNI)
-\item \code{db = "bold"} : Barcode of Life Data Systems (BOLD)
-\item \code{db = "nbn"} : National Biodiversity Network (UK)
 }
 }
 \examples{
+\dontrun{
 # retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
 # from NCBI Taxonomy
 taxonomy("Arabidopsis thaliana",db = "ncbi")
 
-# the same can be applied to databases : "ncbi", "eol", and "itis"
-# taxonomy("Arabidopsis thaliana",db = "ncbi")
-# taxonomy("Arabidopsis thaliana",db = "col")
-# taxonomy("Arabidopsis thaliana",db = "itis")
+# the same can be applied to database : "itis"
+ taxonomy("Arabidopsis thaliana",db = "itis")
 
 # retrieving the taxonomic hierarchy of "Arabidopsis"
- taxonomy("Arabidopsis",db = "ncbi") # analogous : db = "ncbi", "eol", or "itis"
+ taxonomy("Arabidopsis",db = "ncbi") # analogous : db = "ncbi" or "itis"
 
 # or just "Arabidopsis"
-# taxonomy("Arabidopsis",db = "ncbi")
+ taxonomy("Arabidopsis",db = "ncbi")
 
 # retrieving the taxonomy id of the query organism and in the correspondning database
 # taxonomy("Arabidopsis thaliana",db = "ncbi", output = "taxid")
 
-# the same can be applied to databases : "ncbi", "eol", and "itis"
-# taxonomy("Arabidopsis thaliana",db = "ncbi", output = "taxid")
-# taxonomy("Arabidopsis thaliana",db = "col", output = "taxid")
-# taxonomy("Arabidopsis thaliana",db = "itis", output = "taxid")
+# the same can be applied to databases : "ncbi" and "itis"
+ taxonomy("Arabidopsis thaliana",db = "ncbi", output = "taxid")
+ taxonomy("Arabidopsis thaliana",db = "itis", output = "taxid")
 
 
 # retrieve children taxa of the query organism stored in the correspondning database
-# taxonomy("Arabidopsis",db = "ncbi", output = "children")
+ taxonomy("Arabidopsis",db = "ncbi", output = "children")
 
-# the same can be applied to databases : "ncbi", "eol", and "itis"
-# taxonomy("Arabidopsis thaliana",db = "ncbi", output = "children")
-# taxonomy("Arabidopsis thaliana",db = "col", output = "children")
-# taxonomy("Arabidopsis thaliana",db = "itis", output = "children")
+# the same can be applied to databases : "ncbi" and "itis"
+ taxonomy("Arabidopsis thaliana",db = "ncbi", output = "children")
+ taxonomy("Arabidopsis thaliana",db = "itis", output = "children")
+
+}
 }
 \author{
 Hajk-Georg Drost
