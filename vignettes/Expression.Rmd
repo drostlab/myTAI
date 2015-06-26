@@ -127,7 +127,54 @@ head(log.DEGs)
 
 ## Welch t-test
 
+The `Welch t-test` is a parametric test to statistically quantify the difference of sample means in cases where the assumption of homogeneity of variance (equal variances in the two populations) is violated (Boslaugh, 2013). The `Welch t-test` is a sufficient parameter test for small sample sizes and thus, has been used to detect differentially expressed genes based on p-values returned by the test statistic (Hahne et al., 2008). 
+
+In detail, the test statistic is computed as follows:
+
+$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
+
+where $\bar{x}_1$ and $\bar{x}_2$ are sample means, $s_1^2$ and $s_2^2$ are the sample variances, and $n_1$ and $n_2$ are the sample sizes.
+
+The degrees of freedom for Welch's t-test are then computed as follows:
+
+$df = \frac{\big(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\big)^2}{\frac{s_1^4}{n_1^2 (n_1 - 1)} + \frac{s_2^4}{n_2^2 (n_2 - 1)}}$
+
+
+To perform a sufficient `Welch t-test` the following assumptions about the input data need to be fulfilled to test whether two samples come from populations with equal means:
+
+__Assumptions about input data__
+
+* independent samples
+* continuous data
+* (approximate) normality
+
+
+Nevertheless, although in most cases `log2` expression levels are used to perform 
+the `Welch t-test` assuming that expression levels are log-normal distributed which 
+approximates a normal distribution in infinity, in most cases the small number of replicates is not sufficient enough to fulfill the (approximate) normality assumption 
+of the `Welch t-test`.
+
+Due to this fact, non-parametric, sampling based, or generalized linear model based
+methods have been proposed to quantify p-values of differential expression. Nevertheless, the `DiffGenes()` function implements the `Welch t-test` for the 
+detection of differentially expressed genes, allowing users to compare the results with
+more recent DEG detection methods/methodologies also implemented in `DiffGenes()`.
+
+
+* __Advantages:__ 
+  + DEG detection based on statistical quantification 
+  + Parametric test resulting in a strong test statistic
+  + Can handle small sample sizes
+
+* __Disadvantages:__
+  + Test assumptions must be fulfilled to return sufficient p-values  
+  + Can hardly assure normality with very sample sizes of $n = 3,4,5,..$ (replicates)
+  + Pairwise comparisons between different stages or experiments
+
 ### Example: Welch t-test
+
+Performing `Welch t-test` with `DiffGenes()` can be done by specifying `method = "t.test"`. Internally `DiffGenes()` performs a two sided `Welch t-test`. This means
+that the `Welch t-test` quantifies only whether or not a gene is significantly
+differentially expressed, but not the direction of enrichment (over-expressed or under-expressed).
 
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
@@ -150,6 +197,8 @@ head(ttest.DEGs)
 4            1 at1g01080.2 0.112918417 0.036087824 0.112918417 0.45730348 0.036087824 0.45730348
 5            1 at1g01090.1 0.026369854 0.035285481 0.026369854 0.08957681 0.035285481 0.08957681
 ```
+
+The resulting `data.frame` stores the p-values of stage-wise comparisons for each gene. To adjust p-values for multiple testing of stage-wise comparisons you can specify the `p.adjust.method` argument with one of the p-value adjustment methods implemented in `DiffGenes()`.
 
 
 ```{r, eval=FALSE}
