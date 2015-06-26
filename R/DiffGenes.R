@@ -4,6 +4,7 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param nrep either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.
 #' @param method method to detect differentially expressed genes.
+#' @param p.adjust.method p value correction method.
 #' @param comparison a character string specifying whether genes having fold-change or p-values
 #'  below, above, or below AND above (both) the \code{alpha} value should be excluded from the dataset.
 #'  In case \code{comparison = "both"} is chosen, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{alpha} value at the first position and the upper \code{alpha} value
@@ -11,7 +12,6 @@
 #' @param alpha a numeric value specifying the cut-off value above which Genes fulfilling the corresponding fold-change, log-fold-change, or p-value should be retained and returned by \code{DiffGenes}.
 #' @param filter.method a method how to \code{alpha} values in multiple stages. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.
 #' @param n a numeric value for \code{method = "n-set"}.
-#' @param p.adjust.method p value correction method.
 #' @param stage.names a character vector specifying the new names of collapsed stages.
 #' @author Hajk-Georg Drost
 #' @details 
@@ -97,11 +97,11 @@
 DiffGenes <- function(ExpressionSet,
                       nrep,
                       method          = "foldchange",
+                      p.adjust.method = NULL,
                       comparison      = NULL,
                       alpha           = NULL,
                       filter.method   = NULL,
                       n               = NULL,
-                      p.adjust.method = NULL,
                       stage.names     = NULL){
         
         is.ExpressionSet(ExpressionSet)

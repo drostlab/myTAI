@@ -4,9 +4,9 @@
 \alias{DiffGenes}
 \title{Differential Gene Expression Analysis}
 \usage{
-DiffGenes(ExpressionSet, nrep, method = "foldchange", comparison = NULL,
-  alpha = NULL, filter.method = NULL, n = NULL, p.adjust.method = NULL,
-  stage.names = NULL)
+DiffGenes(ExpressionSet, nrep, method = "foldchange",
+  p.adjust.method = NULL, comparison = NULL, alpha = NULL,
+  filter.method = NULL, n = NULL, stage.names = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -14,6 +14,8 @@ DiffGenes(ExpressionSet, nrep, method = "foldchange", comparison = NULL,
 \item{nrep}{either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.}
 
 \item{method}{method to detect differentially expressed genes.}
+
+\item{p.adjust.method}{p value correction method.}
 
 \item{comparison}{a character string specifying whether genes having fold-change or p-values
  below, above, or below AND above (both) the \code{alpha} value should be excluded from the dataset.
@@ -25,8 +27,6 @@ at the second position.}
 \item{filter.method}{a method how to \code{alpha} values in multiple stages. Options are \code{"const"}, \code{"min-set"}, and \code{"n-set"}.}
 
 \item{n}{a numeric value for \code{method = "n-set"}.}
-
-\item{p.adjust.method}{p value correction method.}
 
 \item{stage.names}{a character vector specifying the new names of collapsed stages.}
 }
