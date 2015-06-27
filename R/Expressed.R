@@ -81,6 +81,9 @@ Expressed <- function(ExpressionSet,
                       comparison = "below",
                       n          = NULL){
         
+        if(!is.element(method,c("const","min-set","n-set")))
+                stop("Please specify a filter method that is implemented in this function!", call. = FALSE)
+        
         if (!is.element(comparison,c("below","above","both")))
                 stop("Please select an appropriate comparison method implemented in this function.", call. = FALSE)
         
