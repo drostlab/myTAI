@@ -206,7 +206,7 @@ DiffGenes <- function(ExpressionSet,
                         
                         if (!is.null(p.adjust.method)){
                                 
-                                DEGMatrix <- t(apply(DEGMatrix,1,p.adjust,method = p.adjust.method)) 
+                                DEGMatrix <- apply(DEGMatrix,2,p.adjust,method = p.adjust.method) 
                         }
                         
                         
