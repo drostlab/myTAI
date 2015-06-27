@@ -284,6 +284,30 @@ In this example, only 1 out of 10 genes fulfills the p-value criteria (`alpha`) 
 
 #### Rank top p-values
 
+Finally, you can rank genes in increasing p-value order for each stage comparison by typing:
+
+```{r,eval = FALSE}
+
+ttest.DEGs.p_adjust <- DiffGenes(ExpressionSet   = tf(PhyloExpressionSetExample[1:500,1:8],log2),
+                                 nrep            = 2,
+                                 method          = "t.test",
+                                 p.adjust.method = "BH",
+                                 stage.names     = c("S1","S2","S3"))
+
+
+head(ttest.DEGs.p_adjust[order(ttest.DEGs.p_adjust[ , "S1->S2"], decreasing = FALSE) , 1:3])
+```
+
+```
+    Phylostratum      GeneID   S1->S2
+54             1 at1g02400.1 0.151388
+119            1 at1g03870.1 0.151388
+137            1 at1g04380.1 0.151388
+289            1 at1g08110.4 0.151388
+383            1 at1g10360.1 0.151388
+413            1 at1g11040.1 0.151388
+```
+
 
 ## Collapsing Replicate Samples
 
