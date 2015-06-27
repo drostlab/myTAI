@@ -109,7 +109,7 @@ DiffGenes <- function(ExpressionSet,
         is.ExpressionSet(ExpressionSet)
         
         if (!is.element(method,c("foldchange","log-foldchange","t.test")))
-                stop("Please enter a method to detect differentially expressed genes that is implemented in DiffGenes().")
+                stop("Please enter a method to detect differentially expressed genes that is implemented in DiffGenes().", call. = FALSE)
         
         ncols <- ncol(ExpressionSet)
         
@@ -222,7 +222,7 @@ DiffGenes <- function(ExpressionSet,
                         
                         } else {
                                 stop("Something went wrong with the constant number of replicates per stage.
-                                     Are you sure that each stage has the same exact number of replicates?")
+                                     Are you sure that each stage has the same exact number of replicates?", call. = FALSE)
                                 }
                 }
                 
@@ -235,14 +235,23 @@ DiffGenes <- function(ExpressionSet,
                 
                 if (!is.null(alpha)){
                         
-                        if (!dplyr::between(alpha,
-                                          min(DEG.ExpressionSet[ , 3:ncol(DEG.ExpressionSet)]),
-                                          max(DEG.ExpressionSet[ , 3:ncol(DEG.ExpressionSet)]))){
-                                stop("Please specify a value for alpha that lies within the range of fold-change or p-values.")
+                        if (is.element(method, c("foldchange","log-foldchange"))){
+                                if (!dplyr::between(alpha,
+                                                    min(DEG.ExpressionSet[ , 3:ncol(DEG.ExpressionSet)]),
+                                                    max(DEG.ExpressionSet[ , 3:ncol(DEG.ExpressionSet)]))){
+                                        stop("Please specify a value for alpha that lies within the range of fold-change or p-values.", call. = FALSE)
+                                }       
                         }
                         
+                        else if (is.element(method, c("t.test"))){
+                                
+                                if (!dplyr::between(alpha,0,1))
+                                        stop("Please specify a value for alpha that lies within the range of fold-change or p-values.", call. = FALSE)
+                        }
+                        
+                        
                         if (any(c(is.null(alpha),is.null(filter.method),is.null(comparison))))
-                                stop("Arguments alpha, comparison, and filter.method neet to be specified to remove non expressed genes.")
+                                stop("Arguments alpha, comparison, and filter.method neet to be specified to remove non expressed genes.", call. = FALSE)
                         
                         return( Expressed(ExpressionSet    = DEG.ExpressionSet,
                                                 cut.off    = alpha, 
