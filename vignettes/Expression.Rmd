@@ -176,30 +176,56 @@ Performing `Welch t-test` with `DiffGenes()` can be done by specifying `method =
 that the `Welch t-test` quantifies only whether or not a gene is significantly
 differentially expressed, but not the direction of enrichment (over-expressed or under-expressed).
 
+The `PhyloExpressionSetExample` we use in the following example stores absolute expression levels.
+In case your `ExpressionSet` also stores absolute expression levels (which is likely due to the `ExpressionSet` standard for Phylotranscriptomics analyses), you can use the `tf()` function implemented in
+`myTAI` to transform absolute expression levels to `log2` expression
+levels before performing `DiffGenes()` with a `Welch t-test`, e.g.
+`tf(PhyloExpressionSetExample[1:5,1:8],log2)`. In general, using `log2` transformed expression levels as input
+`ExpressionSet` of `DiffGenes()` allows us to (at least) assume that samples (replicate expression levels) used to perform the `Welch t-test` are log-normal distributed and therefore, somewhat approximate
+normal distributed.
+
+Please notice however, that RNA-Seq data can include count values of 0. So when transforming absolute
+counts to `log2` counts infinity values of `log2(0) = -Inf` will be produced and therefore, p-value
+computations will not be possible. To avoid this case you could either remove RNA-Seq count values of 0 from
+the input dataset using the `Expressed()` function (see section _Filter for Expressed Genes_), e.g.
+pass `tf(Expressed(PhyloExpressionSetExample[1:5,1:8], cut.off = 1),log2)` as `ExpressionSet` argument to
+`DiffGenes()` or shift all count values by a constant value, e.g. pass
+`tf(PhyloExpressionSetExample[1:5,1:8], function(x) log2(x + 1))` as `ExpressionSet` argument to
+`DiffGenes()`.
+
+Internally, `DiffGenes()` will also check for 0 values in input data and will automatically shift all 
+expression levels by `+1` in case 0 values are included.
+
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
 
 # Detection of DEGs using the p-value returned by a Welch t-test
-ttest.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+ttest.DEGs <- DiffGenes(ExpressionSet = tf(PhyloExpressionSetExample[1:5,1:8],log2),
                         nrep          = 2,
                         method        = "t.test",
                         stage.names   = c("S1","S2","S3"))
 
-
-head(ttest.DEGs)
+# look at the results
+ttest.DEGs
 ```
 
 ```
-  Phylostratum      GeneID      S1->S2      S1->S3      S2->S1     S2->S3      S3->S1     S3->S2
-1            1 at1g01040.2 0.055197999 0.073335839 0.055197999 0.15953099 0.073335839 0.15953099
-2            1 at1g01050.1 0.828665428 0.293704699 0.828665428 0.33894092 0.293704699 0.33894092
-3            1 at1g01070.1 0.007037106 0.002629415 0.007037106 0.01981887 0.002629415 0.01981887
-4            1 at1g01080.2 0.112918417 0.036087824 0.112918417 0.45730348 0.036087824 0.45730348
-5            1 at1g01090.1 0.026369854 0.035285481 0.026369854 0.08957681 0.035285481 0.08957681
+  Phylostratum      GeneID      S1->S2     S1->S3      S2->S1     S2->S3     S3->S1     S3->S2
+1            1 at1g01040.2 0.027832572 0.04020203 0.027832572 0.13481563 0.04020203 0.13481563
+2            1 at1g01050.1 0.852379466 0.31471871 0.852379466 0.36326955 0.31471871 0.36326955
+3            1 at1g01070.1 0.003200692 0.00113536 0.003200692 0.02236621 0.00113536 0.02236621
+4            1 at1g01080.2 0.086426813 0.03092924 0.086426813 0.45999438 0.03092924 0.45999438
+5            1 at1g01090.1 0.090387087 0.04638872 0.090387087 0.04978092 0.04638872 0.04978092
 ```
 
 The resulting `data.frame` stores the p-values of stage-wise comparisons for each gene. To adjust p-values for multiple testing of stage-wise comparisons you can specify the `p.adjust.method` argument with one of the p-value adjustment methods implemented in `DiffGenes()`.
 
+In detail, correcting for multiple testing allows to appropriately choose selection cut-offs for p-values
+fulfilling the differential expression criteria. Hahne et al., 2008 (p. 87) give a nice example of
+correcting for multiple testing to determine appropriate selection cut-offs.
+
+Please consult the documentation of `?p.adjust` to see which p-value adjustment methods are implemented
+in `DiffGenes()`.
 
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
@@ -207,24 +233,57 @@ data("PhyloExpressionSetExample")
 # Detection of DEGs using the p-value returned by a Welch t-test
 # and furthermore, adjust p-values for multiple comparison
 # using the Benjamini & Hochberg (1995) method: method = "BH"
-ttest.DEGs.p_adjust <- DiffGenes(ExpressionSet   = PhyloExpressionSetExample[1:5,1:8],
+ttest.DEGs.p_adjust <- DiffGenes(ExpressionSet   = tf(PhyloExpressionSetExample[1:5,1:8],log2),
                                  nrep            = 2,
                                  method          = "t.test",
                                  p.adjust.method = "BH",
                                  stage.names     = c("S1","S2","S3"))
 
 
-head(ttest.DEGs.p_adjust)
+ttest.DEGs.p_adjust
 ```
 
 ```
-  Phylostratum      GeneID     S1->S2      S1->S3     S2->S1     S2->S3      S3->S1     S3->S2
-1            1 at1g01040.2 0.11000376 0.110003758 0.11000376 0.15953099 0.110003758 0.15953099
-2            1 at1g01050.1 0.82866543 0.508411378 0.82866543 0.50841138 0.508411378 0.50841138
-3            1 at1g01070.1 0.01055566 0.007888246 0.01055566 0.01981887 0.007888246 0.01981887
-4            1 at1g01080.2 0.16937763 0.108263471 0.16937763 0.45730348 0.108263471 0.45730348
-5            1 at1g01090.1 0.05292822 0.052928221 0.05292822 0.08957681 0.052928221 0.08957681
+  Phylostratum      GeneID     S1->S2    S1->S3     S2->S1    S2->S3    S3->S1    S3->S2
+1            1 at1g01040.2 0.06958143 0.0579859 0.06958143 0.2246927 0.0579859 0.2246927
+2            1 at1g01050.1 0.85237947 0.3147187 0.85237947 0.4540869 0.3147187 0.4540869
+3            1 at1g01070.1 0.01600346 0.0056768 0.01600346 0.1118311 0.0056768 0.1118311
+4            1 at1g01080.2 0.11298386 0.0579859 0.11298386 0.4599944 0.0579859 0.4599944
+5            1 at1g01090.1 0.11298386 0.0579859 0.11298386 0.1244523 0.0579859 0.1244523
 ```
+
+The resulting p-value adjusted `data.frame` can be used to filter for differentially expressed genes.
+Here, specifying the arguments: `comparison`, `alpha`, and `filter.method` in `DiffGenes()` allows
+you to obtain only significant differentially expressed genes.
+
+```{r,eval=FALSE}
+# Detection of DEGs using the p-value returned by a Welch t-test
+# and furthermore, adjust p-values for multiple comparison
+# using the Benjamini & Hochberg (1995) method: method = "BH"
+# and filter for significantly differentially expressed genes (alpha = 0.05) 
+ttest.DEGs.p_adjust.filtered <- DiffGenes(ExpressionSet   = tf(PhyloExpressionSetExample[1:10 ,1:8],log2),
+                                          nrep            = 2,
+                                          method          = "t.test",
+                                          p.adjust.method = "BH",
+                                          stage.names     = c("S1","S2","S3"),
+                                          comparison      = "above",
+                                          alpha           = 0.05,
+                                          filter.method   = "n-set",
+                                          n               = 1)
+
+# look at the genes fulfilling the filter criteria 
+ttest.DEGs.p_adjust.filtered
+```
+
+```
+ Phylostratum      GeneID     S1->S2    S1->S3     S2->S1    S2->S3    S3->S1    S3->S2
+3            1 at1g01070.1 0.03200692 0.0113536 0.03200692 0.2192432 0.0113536 0.2192432
+```
+
+In this example, only 1 out of 10 genes fulfills the p-value criteria (`alpha`) in at least one stage comparison.
+
+#### Rank top p-values
+
 
 ## Collapsing Replicate Samples
 
@@ -252,18 +311,12 @@ head(ExampleReplicateExpressionSet, 5)
 ```
 
 ```
-  Phylostratum      GeneID Stage_1_Repl_1 Stage_1_Repl_2 Stage_2_Repl_1 Stage_2_Repl_2
-1            1 at1g01040.2       2173.635      1911.2001       1152.555      1291.4224
-2            1 at1g01050.1       1501.014      1817.3086       1665.309      1564.7612
-3            1 at1g01070.1       1212.793      1233.0023        939.200       929.6195
-4            1 at1g01080.2       1016.920       936.3837       1181.338      1329.4734
-5            1 at1g01090.1      11424.567     16778.1685      34366.649     39775.6405
-  Stage_3_Repl_1 Stage_3_Repl_2
-1       1000.253       962.9772
-2       1496.321      1114.6435
-3        864.218       877.2060
-4       1392.643      1287.9746
-5      56231.569     66980.3673
+  Phylostratum      GeneID      S1->S2     S1->S3      S2->S1     S2->S3     S3->S1     S3->S2
+1            1 at1g01040.2 0.060303051 0.06030305 0.060303051 0.13481563 0.06030305 0.13481563
+2            1 at1g01050.1 0.852379466 0.54490432 0.852379466 0.54490432 0.54490432 0.54490432
+3            1 at1g01070.1 0.004801037 0.00340608 0.004801037 0.02236621 0.00340608 0.02236621
+4            1 at1g01080.2 0.129640220 0.09278773 0.129640220 0.45999438 0.09278773 0.45999438
+5            1 at1g01090.1 0.090387087 0.07467138 0.090387087 0.07467138 0.07467138 0.07467138
 ```
 
 Now, assume that this example `PhyloExpressionSet` stores three developmental stages and 2
