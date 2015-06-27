@@ -55,6 +55,11 @@ Following extraction criteria are implemented in this function:
 \item \code{n-set}: genes passing the \code{alpha} value in \code{n} stages will be retained in the \code{ExpressionSet}. Here, the argument \code{n} needs to be specified.
 }
 }
+\note{
+In case input \code{ExpressionSet} objects store 0 values, internally all expression levels are
+shifted by \code{+1} to allow sufficient fold-change and p-value computations. Additionally, a warning
+is printed to the console in case expression levels have been automatically shifted.
+}
 \examples{
 data(PhyloExpressionSetExample)
 

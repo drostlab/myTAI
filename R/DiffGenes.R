@@ -90,7 +90,9 @@
 #' # now check whether each example has at least one stage with a p-value <= 0.05
 #' head(DEGs.alpha)
 #' 
-#' 
+#' @note In case input \code{ExpressionSet} objects store 0 values, internally all expression levels are 
+#' shifted by \code{+1} to allow sufficient fold-change and p-value computations. Additionally, a warning
+#' is printed to the console in case expression levels have been automatically shifted.
 #' @seealso \code{\link{Expressed}}
 #' @export
 
@@ -110,6 +112,14 @@ DiffGenes <- function(ExpressionSet,
                 stop("Please enter a method to detect differentially expressed genes that is implemented in DiffGenes().")
         
         ncols <- ncol(ExpressionSet)
+        
+        # test whether or not input data stores 0 values
+        # if yes -> shift expression levels by +1
+        if (any(apply(ExpressionSet[ , 3:ncols],2, function(x) x == 0))){
+                
+                ExpressionSet <- tf(ExpressionSet, function(x) x + 1)
+                warning("Your input ExpressionSet stores 0 values. Therefore, all expression levels have been shifted by +1 to allow sufficient fold-change or p-value computations.")
+        }
         
         if (is.element(method,c("foldchange","log-foldchange"))){
                 
