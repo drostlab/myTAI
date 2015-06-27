@@ -82,13 +82,13 @@ Expressed <- function(ExpressionSet,
                       n          = NULL){
         
         if (!is.element(comparison,c("below","above","both")))
-                stop("Please select an appropriate comparison method implemented in this function.")
+                stop("Please select an appropriate comparison method implemented in this function.", call. = FALSE)
         
         if ((length(cut.off) != 2) & (comparison == "both"))
-                stop("When choosing: comparison == 'both', the cut.off argument needs to store two cut.off values: lower-cut.off and upper-cut.off")
+                stop("When choosing: comparison == 'both', the cut.off argument needs to store two cut.off values: lower-cut.off and upper-cut.off", call. = FALSE)
         
         if ((length(cut.off) > 1) & (comparison != "both"))
-                stop("When choosing: comparison == 'below' or 'above', the cut.off argument needs to store only one cut.off value.")
+                stop("When choosing: comparison == 'below' or 'above', the cut.off argument needs to store only one cut.off value.", call. = FALSE)
         
         is.ExpressionSet(ExpressionSet)
         ncols <- ncol(ExpressionSet)
@@ -130,7 +130,7 @@ Expressed <- function(ExpressionSet,
                 }
                 
                 if(length(CandidateSet) == 0)
-                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.")
+                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.", call. = FALSE)
                 
                 # count for each gene how many stages are above the cutoff; aco = above cut off
                 CandidateExpressionSet <- ExpressionSet[CandidateSet, ]
@@ -158,17 +158,17 @@ Expressed <- function(ExpressionSet,
                 }
                         
                 if(length(MinSetGenes) == 0)
-                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.")
+                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.", call. = FALSE)
                 
                 NEGs <- match(CandidateExpressionSet[MinSetGenes, 2],ExpressionSet[ , 2])
                 
         } 
         else if (method == "n-set"){
                 if(is.null(n))
-                        stop("Please specify the number of stages n for which expresssion levels need to be above the cutoff to be retained in the count table.")
+                        stop("Please specify the number of stages n for which expresssion levels need to be above the cutoff to be retained in the count table.", call. = FALSE)
                 
                 if(n > (ncols-2))
-                        stop("n is larger than the number of available stages in your ExpressionSet...")
+                        stop("n is larger than the number of available stages in your ExpressionSet...", call. = FALSE)
                         
                 if (comparison == "below")
                         CandidateSet <- unique( unlist( apply( ExpressionSet[ , 3:ncols], 2 ,function(x) list(which(x < cut.off))) ) )
@@ -186,7 +186,7 @@ Expressed <- function(ExpressionSet,
                 }
                 
                 if(length(CandidateSet) == 0)
-                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.")
+                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.", call. = FALSE)
                 
                 CandidateExpressionSet <- ExpressionSet[CandidateSet, ]
                 
@@ -216,7 +216,7 @@ Expressed <- function(ExpressionSet,
 #                 MinSetGenes <- which(MinSet <= n)
                 
                 if(length(MinSetGenes) == 0)
-                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.")
+                        stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.", call. = FALSE)
                 
                 NEGs <- match(CandidateExpressionSet[MinSetGenes , 2],ExpressionSet[ , 2])
         } 
@@ -224,7 +224,7 @@ Expressed <- function(ExpressionSet,
         if (nrow(ExpressionSet[ -NEGs , ]) > 0){
                 return(ExpressionSet[ -NEGs , ])
         } else {
-                stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.")        
+                stop("None of the genes fulfilles the threshold criteria. Please choose a less conservative threshold or filter method.", call. = FALSE)        
                 }
 }
 
