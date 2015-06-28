@@ -140,7 +140,6 @@ DiffGenes <- function(ExpressionSet,
                                                                      stage.names   = stage.names)
                 }
                 
-                
                 nStages <- ncol(CollapsedExpressionSet) - 2
                 
                 # get all combinations of stages to perform
@@ -176,16 +175,24 @@ DiffGenes <- function(ExpressionSet,
         else if (is.element(method,c("t.test"))){
                 
                 # in case a constant number of replicates per stage is given
-                if (length(nrep) == 1){
-                        if ((ncols - 2) %% nrep != 0)
-                                stop("The number of stages and the number of replicates do not match.")
+                if (length(nrep) > 0){
                         
                         # automatically rename replicate stages to 1.1, 1.2, ... , n.1, n.2
-                        # in case nrep = 2
-                        nStages <- (ncols - 2) / nrep
-                        # get all combinations of stages to perform
-                        # foldchange computations
-                        #combin.stages <- expand.grid(1:nStages,1:nStages)
+                        if (length(nrep) == 1){
+                                if ((ncols - 2) %% nrep != 0)
+                                        stop("The number of stages and the number of replicates do not match.")
+                                # in case nrep = 2
+                                nStages <- (ncols - 2) / nrep
+                                # get all combinations of stages to perform
+                                # t-test computations
+                        }
+                        
+                        else if (length(nrep) > 1){
+                                if (!((ncols - 2) == sum(nrep)))
+                                        stop("The number of stages and the number of replicates do not match.")
+                                nStages <- length(nrep)
+                        }
+                        
                         combin.stages <- data.frame(Var1 = as.vector(sapply(1:nStages,function(x) rep(x,nStages))),
                                                     Var2 = rep(1:nStages,nStages))
                         
@@ -199,9 +206,18 @@ DiffGenes <- function(ExpressionSet,
                         
                         idx <- vector("numeric",2)
                         DEGMatrix <- matrix(NA_real_,nrow = nrow(ExpressionSet),ncol = nrow(combin.stages))
-                        # indices for further computations
-                        IndexOne <- seq(1, ncol(ExpressionSet)-2, nrep)
-                        IndexTwo <- seq(1 + nrep - 1, ncol(ExpressionSet)-2, nrep)
+                        # determine stage indices for nrep = const
+                        if (length(nrep) == 1){
+                                # indices for further computations
+                                IndexOne <- seq(1, ncol(ExpressionSet)-2, nrep)
+                                IndexTwo <- seq(1 + nrep - 1, ncol(ExpressionSet)-2, nrep)
+                        }
+                        
+                        else if (length(nrep) > 1){
+                                
+                                IndexOne <- GetColumnIndexFromTo(nrep)[ , "From"]
+                                IndexTwo <- GetColumnIndexFromTo(nrep)[ , "To"]
+                        }
                         
                         for (k in 1:nrow(combin.stages)){
                                 idx <- as.numeric(combin.stages[k, ])
@@ -221,17 +237,28 @@ DiffGenes <- function(ExpressionSet,
                         
                         
                         } else {
-                                stop("Something went wrong with the constant number of replicates per stage.
-                                     Are you sure that each stage has the same exact number of replicates?", call. = FALSE)
+                                stop("Something went wrong with the number of replicates per stage.
+                                     Are you sure that each stage has the correct number of replicates?", call. = FALSE)
                                 }
                 }
                 
-                if (!is.null(stage.names))
-                        names(ExpressionSet)[3:ncol(ExpressionSet)] <- stage.names
-        
                 DEG.ExpressionSet <- data.frame(ExpressionSet[ , 1:2], DEGMatrix) 
-                names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
-                                              apply(combin.stages,1,function(x) paste0(names(ExpressionSet)[x[1] + 2],"->",names(ExpressionSet)[x[2] + 2])))
+                
+                if (!is.null(stage.names)){
+                        
+                        DefaultStageNames <- stage.names
+                        
+                        names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
+                                                      apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"->",DefaultStageNames[x[2]])))
+                        
+                } else {
+                        
+                        DefaultStageNames <- paste0("S",1:nStages)
+                                
+                        names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
+                                                      apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"->",DefaultStageNames[x[2]])))
+                }
+                
                 
                 if (!is.null(alpha)){
                         
