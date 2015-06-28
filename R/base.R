@@ -77,3 +77,29 @@ get.contingency.tbl <- function(x, index){
 
 }
 
+
+# Function to determine the row indices
+# GetColumnIndexFromTo(nrep = c(2,3,2))
+# nrep is a variable number of columns (replicates per stage)
+GetColumnIndexFromTo <- function(nrep){
+        
+        IndexOne <- vector("numeric")
+        IndexTwo <- vector("numeric")
+        
+        IndexOne[1] <- 1
+        IndexTwo[1] <- nrep[1]
+        
+        for (i in 2:length(nrep)){
+                
+                IndexOne[i] <-  IndexTwo[i - 1] + 1
+                IndexTwo[i] <- IndexOne[i] - 1 + nrep[i]
+        }
+        
+        res <- cbind(IndexOne,IndexTwo)
+        colnames(res) <- c("From","To")
+        rownames(res) <- paste0("CollapsedStage",1:length(nrep))
+        return(res)
+}
+
+
+
