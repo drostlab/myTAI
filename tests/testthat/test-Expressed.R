@@ -18,6 +18,13 @@ test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to
 })
 
 
+test_that("error occurs when wrong filter method is specified in Expressed()",{
+        
+        expect_error(Expressed(TestExpressionSet_completePES,1000,"m-set"),
+                     "Please specify a filter method that is implemented in this function!")
+        
+})
+
 # a test set for a complete PhyloExpressionSet in ExpressionSet notation (standard)
 TestExpressionSet_completePES <- PhyloExpressionSetExample[1:10, ]
 
