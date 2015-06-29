@@ -108,7 +108,8 @@ DiffGenes <- function(ExpressionSet,
         
         is.ExpressionSet(ExpressionSet)
         
-        if (!is.element(method,c("foldchange","log-foldchange","t.test")))
+        if (!is.element(method,c("foldchange","log-foldchange","t.test",
+                                 "wilcox.test","doubletail","smallp","deviance")))
                 stop("Please enter a method to detect differentially expressed genes that is implemented in DiffGenes().", call. = FALSE)
         
         ncols <- ncol(ExpressionSet)
@@ -172,7 +173,7 @@ DiffGenes <- function(ExpressionSet,
                 }
         }
         
-        else if (is.element(method,c("t.test"))){
+        else if (is.element(method,c("t.test","wilcox.test","doubletail","smallp","deviance"))){
                 
                 # in case a constant number of replicates per stage is given
                 if (length(nrep) > 0){
@@ -222,12 +223,49 @@ DiffGenes <- function(ExpressionSet,
                         for (k in 1:nrow(combin.stages)){
                                 idx <- as.numeric(combin.stages[k, ])
                                 # perform Welch t-test
-                                DEGMatrix[ , k] <-  apply(ExpressionSet[, 3:ncol(ExpressionSet)], 1, function(x){
-                                        t.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-                                               x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
-                                               alternative = "two.sided",
-                                               var.equal   = FALSE)$p.value
-                                })
+                                
+                                if (method == "t.test"){
+                                        DEGMatrix[ , k] <-  apply(ExpressionSet[, 3:ncol(ExpressionSet)], 1, function(x){
+                                                t.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                       x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+                                                       alternative = "two.sided",
+                                                       var.equal   = FALSE)$p.value
+                                        })
+                                        }
+                                        
+                                        if (method == "wilcox.test"){
+                                                DEGMatrix[ , k] <-  apply(ExpressionSet[, 3:ncol(ExpressionSet)], 1, function(x){
+                                                        wilcox.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                            x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+                                                            alternative = "two.sided")$p.value
+                                                })
+                                        } 
+                                        
+                                        if (method == "doubletail"){
+                                                
+                                                DEGMatrix[ , k] <-  edgeR::exactTestDoubleTail(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                                                        y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+                                                                                        dispersion = 0.2,
+                                                                                        big.count = 900)
+                                                        
+                                        }
+                                
+                                if (method == "smallp"){
+                                        
+                                        DEGMatrix[ , k] <-  edgeR::exactTestBySmallP(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                                                y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+                                                                                dispersion = 0.2)
+                                        
+                                }
+                                
+                                if (method == "deviance"){
+                                        
+                                        DEGMatrix[ , k] <-  edgeR::exactTestByDeviance(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                                                     y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+                                                                                     dispersion = 0.2)
+                                        
+                                }
+                                
                         }
                         
                         if (!is.null(p.adjust.method)){
@@ -236,12 +274,15 @@ DiffGenes <- function(ExpressionSet,
                         }
                         
                         
-                        } else {
-                                stop("Something went wrong with the number of replicates per stage.
+                } else {
+                        stop("Something went wrong with the number of replicates per stage.
                                      Are you sure that each stage has the correct number of replicates?", call. = FALSE)
                                 }
                 }
                 
+        
+        
+        
                 DEG.ExpressionSet <- data.frame(ExpressionSet[ , 1:2], DEGMatrix) 
                 
                 if (!is.null(stage.names)){
