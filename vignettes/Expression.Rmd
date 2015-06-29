@@ -27,7 +27,7 @@ The following sections introduce main gene expression data analysis techniques i
 - Detection of Differentially Expressed Genes (DEGs) 
  + Fold-Change
  + Welch t-test
- + Wilcoxon Rank Sum Test (Mann–Whitney U test)
+ + Wilcoxon Rank Sum Test (Mann-Whitney U test)
  + Negative Binomial (Exact Tests)
  
 - Collapsing Replicate Samples
@@ -312,7 +312,7 @@ head(ttest.DEGs.p_adjust[order(ttest.DEGs.p_adjust[ , "S1->S2"], decreasing = FA
 413            1 at1g11040.1 0.151388
 ```
 
-## Wilcoxon–Mann–Whitney test (Mann–Whitney U test)
+## Wilcoxon-Mann-Whitney test (Mann-Whitney U test)
 
 ## Negative Binomial (Exact Tests)
 

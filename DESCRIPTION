@@ -20,7 +20,8 @@ Imports:
     doParallel (>= 1.0.8),
     dplyr (>= 0.3.0),
     RColorBrewer (>= 1.1-2),
-    taxize (>= 0.6.0)
+    taxize (>= 0.6.0),
+    edgeR (>= 3.10.2)
 Suggests: 
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
