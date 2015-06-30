@@ -314,7 +314,40 @@ head(ttest.DEGs.p_adjust[order(ttest.DEGs.p_adjust[ , "S1->S2"], decreasing = FA
 
 ## Wilcoxon-Mann-Whitney test (Mann-Whitney U test)
 
+The Wilcoxon-Mann-Whitney test is a _nonparametric_ test to quantify the shift 
+empirical distribution parameters. _Nonparametric_ tests are useful when sample populations
+do not meet the test assumptions of _parametric_ tests. 
+
+
 ## Negative Binomial (Exact Tests)
+
+
+### Install edgeR Package
+
+The detection of DEGs using negative binomial models is based on the powerful implementations
+provided by the [edgeR](http://www.bioconductor.org/packages/release/bioc/html/edgeR.html) package. Hence, before using the negative binomial models in `DiffGenes()` you need to install 
+the edgeR package.
+
+```{r,eval=FALSE}
+# install edgeR
+source("http://bioconductor.org/biocLite.R")
+biocLite("edgeR")
+```
+
+## Generalized Linear Models
+
+
+### Install edgeR Package
+
+The detection of DEGs using generalized linear models is based on the powerful implementations
+provided by the [edgeR](http://www.bioconductor.org/packages/release/bioc/html/edgeR.html) package. Hence, before using the negative binomial models in `DiffGenes()` you need to install 
+the edgeR package.
+
+```{r,eval=FALSE}
+# install edgeR
+source("http://bioconductor.org/biocLite.R")
+biocLite("edgeR")
+```
 
 ## Collapsing Replicate Samples
 
