@@ -165,7 +165,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 The resulting classification table shows all taxonomic categories starting with the _oldest_ taxonomic category (`cellular organisms`) down to the _youngest_ taxonomic category (`Arabidopsis thaliana`). The `taxonomy ids` stored in the third column are used to classify proteomes stored in  the curated data base (e.g. NCBI nr) into corresponding taxonomic categories stored in the first column. 
 
 In some cases (due to the coverage of sequenced genomes and predicted proteomes) only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, Quint et al., 2012 and Drost et al., 2015 summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
-taxonomic category (see [Fig. 1 c](http://mbe.oxfordjournals.org/content/32/5/1221/F1.expansion.html)). These 12 taxonomic categories are respresented as 12 `phylostrata` starting with the _oldest_ `phylostratum` (= `PS1` = `cellular organisms`) up to the _youngest_ `phylostratum` (= `PS12` = `A. thaliana`).
+taxonomic category (see [Fig. 1 c](http://mbe.oxfordjournals.org/content/32/5/1221/F1.expansion.html)). These 12 taxonomic categories are represented as 12 `phylostrata` starting with the _oldest_ `phylostratum` (= `PS1` = `cellular organisms`) up to the _youngest_ `phylostratum` (= `PS12` = `A. thaliana`).
 
 This representation of taxonomic categories as `phylostrata` are labeled as discrete values _1, 2, ..., n_  and are stored in all `Phylostratigraphic Maps`.
 
@@ -193,7 +193,7 @@ Now the following steps have to be done to create a `Phylostratigraphic Map` for
 
 2) Download the sequence database [phyloBlastDB_Drost_Gabel_Grosse_Quint.fa](http://msbi.ipb-halle.de/download/phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz) used for BLAST searches and unpack it by opening the Terminal application and typing `tar xfvj phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz`.
 
-3) Make sure that the header of your FASTA-files (e.g. Athaliana_167_protein.fa) fullfills the following specification:<br />
+3) Make sure that the header of your FASTA-files (e.g. Athaliana_167_protein.fa) fulfills the following specification:<br />
   <code>>GeneID | [organism_name] | [taxonomy]</code><br />
   Notice, the taxonomy begins after the node "Cellular organisms" e.g.
   
@@ -258,6 +258,8 @@ download.file( url      = "ftp://ftp.jgi-psf.org/pub/compgen/phytozome/v9.0/Atha
 download.file( url      = "ftp://ftp.jgi-psf.org/pub/compgen/phytozome/v9.0/Alyrata/annotation/Alyrata_107_cds.fa.gz", 
                destfile = "Alyrata_107_cds.fa.gz" )
 ```
+
+Now the files `Athaliana_167_cds.fa.gz` and `Alyrata_107_cds.fa.gz` need to be unpacked.
 
 Compute the `Divergence Map` of `A. thaliana` versus `A. lyrata`:
 
