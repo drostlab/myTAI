@@ -189,9 +189,9 @@ The next step is to run the `createPsMap.pl` script (see also [Drost et al., 201
 
 Now the following steps have to be done to create a `Phylostratigraphic Map` for _A. thaliana_:
     
-1) Make sure that [BLAST](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.21/) is installed on your machine.
+1) Make sure that [BLAST](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.21/), [Perl](https://www.perl.org/), and [BioPerl](http://www.bioperl.org/wiki/Installing_BioPerl) are installed on your machine.
 
-2) Download the sequence database [phyloBlastDB_Drost_Gabel_Grosse_Quint.fa](http://msbi.ipb-halle.de/download/phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz) used for BLAST searches and unpack it (`tar xfvj phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz`).
+2) Download the sequence database [phyloBlastDB_Drost_Gabel_Grosse_Quint.fa](http://msbi.ipb-halle.de/download/phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz) used for BLAST searches and unpack it by opening the Terminal application and typing `tar xfvj phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz`.
 
 3) Make sure that the header of your FASTA-files (e.g. Athaliana_167_protein.fa) fullfills the following specification:<br />
   <code>>GeneID | [organism_name] | [taxonomy]</code><br />
