@@ -49,6 +49,8 @@ In this section we will introduce all methods implemented in `DiffGenes()` using
 and will furthermore, discuss published advantages and disadvantages of each method and each mRNA
 quantification technology.
 
+__Note__ that when using `DiffGenes()` it is assumed that your input dataset has been normalized before passing it to `DiffGenes()`. For RNA-Seq data `DiffGenes()` assumes that the libraries have been normalized to have the same size, i.e., to have the same expected column sum under the null hypothesis.
+
 ## Fold-Changes
 
 A fold change in gene expression is simply the ratio of the gene expression level of one sample against a second sample: $\frac{e_{i1}}{e_{i2}}$, where $e_{i1}$ is the expression level of gene $i$ in sample one and $e_{i2}$ is the expression level of gene $i$ in sample two. In case replicate 
