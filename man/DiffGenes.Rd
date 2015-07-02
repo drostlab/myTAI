@@ -34,12 +34,24 @@ at the second position.}
 Detect differentially expressed genes (DEGs) in a standard \code{ExpressionSet} object.
 }
 \details{
+All methods to perform dection of differentially expressed genes assume that your input
+dataset has been normalized before passing it to \emph{DiffGenes}. For RNA-Seq data
+\emph{DiffGenes} assumes that the libraries have been normalized to have the same size, i.e.,
+to have the same expected column sum under the null hypothesis. If this isn't the case
+please run \code{\link[edgeR]{equalizeLibSizes}} before calling \emph{DiffGenes}.
+
 Available methods for the detection of differentially expressed genes:
 
 \itemize{
-\item \code{method = "foldchange"}: ratio of replicate geometric means between developmental stages. Here, the \code{DiffGenes} functions assumes that absolute expression levels are stored in your input \code{ExpresisonSet}.
-\item \code{method = "log-foldchange"}: difference of replicate arithmetic means between developmental stages. Here, the \code{DiffGenes} functions assumes that \code{log2} transformed expression levels are stored in your input \code{ExpresisonSet}.
-\item \code{method = "t.test"}: Welch t.test between replicate expression levels between two samples.
+\item \code{method = "foldchange"}: ratio of replicate geometric means between developmental stages.
+ Here, the \emph{DiffGenes} functions assumes that absolute expression levels are stored in your input \code{ExpresisonSet}.
+\item \code{method = "log-foldchange"}: difference of replicate arithmetic means between developmental stages. Here, the \emph{DiffGenes} functions assumes that \emph{log2a}
+transformed expression levels are stored in your input \code{ExpresisonSet}.
+\item \code{method = "t.test"}: Welch t.test between replicate expression levels of two samples.
+\item \code{method = "wilcox.test"}: Wilcoxon Rank Sum Test between replicate expression levels of two samples.
+\item \code{method = "doubletail"}: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see \code{\link[edgeR]{exactTestByDeviance}} for details).
+\item \code{method = "smallp"}: Performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see \code{\link[edgeR]{exactTestBySmallP}} for details).
+\item \code{method = "deviance"}: Computes two-sided p-values by doubling the smaller tail probability (see \code{\link[edgeR]{exactTestDoubleTail}} for details).
 }
 
 
