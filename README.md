@@ -33,6 +33,12 @@ You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 # -> see "Fast Installation Guide" for the current development version
 install.packages("myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
+# to perform differential gene expression analyses with myTAI
+# please install the edgeR package
+# install edgeR
+source("http://bioconductor.org/biocLite.R")
+biocLite("edgeR")
+
 # source the myTAI package
 library(myTAI)
 
