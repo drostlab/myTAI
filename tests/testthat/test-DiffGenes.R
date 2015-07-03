@@ -19,8 +19,8 @@ test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to
                      , "The present input object does not fulfill the ExpressionSet standard.")
 })
 
-
-
+set.seed(123)
+ExampleMicroarrayTable <- PhyloExpressionSetExample[sample(1:22000,10) , 1:8] 
 
 
 
