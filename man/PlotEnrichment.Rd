@@ -5,9 +5,10 @@
 \title{Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set}
 \usage{
 PlotEnrichment(ExpressionSet, test.set, use.only.map = FALSE,
-  measure = "log-foldchange", complete.bg = TRUE, legendName = NULL,
+  measure = "log-foldchange", complete.bg = TRUE, legendName = "",
   over.col = "steelblue", under.col = "midnightblue", epsilon = 1e-05,
-  cex.legend = 1, cex.asterisk = 1, plot.bars = TRUE, ...)
+  cex.legend = 1, cex.asterisk = 1, plot.bars = TRUE,
+  p.adjust.method = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object (in case \code{only.map = FALSE}).}
@@ -38,6 +39,8 @@ should be excluded from the background set before performing Fisher's exact test
 
 \item{plot.bars}{a logical value specifying whether or not bars should be visualized or whether only \code{p.values} and \code{enrichment.matrix} should be returned.}
 
+\item{p.adjust.method}{correction method to adjust p-values for multiple comparisons (see \code{\link{p.adjust}} for possible methods). E.g., \code{p.adjust.method = "BH"} (Benjamini & Hochberg (1995)) or \code{p.adjust.method = "bonferroni"} (Bonferroni correction).}
+
 \item{...}{default graphics parameters.}
 }
 \description{
@@ -62,12 +65,16 @@ To visualize the odds or log-odds of over or underrepresented genes within the \
 }
 
  The result is the fold-change value (odds) denoted as C = g_i2 / f_i. which is visualized above and below zero.
+
+ In case a large number of Phylostrata or Divergence Strata is included in the input
+ \code{ExpressionSet}, p-values returned by \code{PlotEnrichment} should be adjusted for
+ multiple comparisons.
 }
 \examples{
 data(PhyloExpressionSetExample)
 
 set.seed(123)
-test_set <- sample(PhyloExpressionSetExample[ , 2],1000)
+test_set <- sample(PhyloExpressionSetExample[ , 2],10000)
 
 ## Examples with complete.bg = TRUE
 ## Hence: the entire background set of the input ExpressionSet is considered
