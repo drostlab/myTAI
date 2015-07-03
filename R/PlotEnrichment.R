@@ -16,6 +16,7 @@
 #' @param plot.bars a logical value specifying whether or not bars should be visualized or whether only \code{p.values} and \code{enrichment.matrix} should be returned.
 #' @param cex.legend the \code{cex} value for the legend.
 #' @param cex.asterisk the \code{cex} value for the asterisk.
+#' @param p.adjust.method correction method to adjust p-values for multiple comparisons (see \code{\link{p.adjust}} for possible methods). E.g., \code{p.adjust.method = "BH"} (Benjamini & Hochberg (1995)) or \code{p.adjust.method = "bonferroni"} (Bonferroni correction).
 #' @param ... default graphics parameters.
 #' @details 
 #' 
@@ -38,6 +39,10 @@
 #' 
 #'  The result is the fold-change value (odds) denoted as C = g_i2 / f_i. which is visualized above and below zero. 
 #'  
+#'  In case a large number of Phylostrata or Divergence Strata is included in the input 
+#'  \code{ExpressionSet}, p-values returned by \code{PlotEnrichment} should be adjusted for
+#'  multiple comparisons.
+#'  
 #' @author Hajk-Georg Drost
 #' @references
 #' 
@@ -48,7 +53,7 @@
 #' data(PhyloExpressionSetExample)
 #' 
 #' set.seed(123)
-#' test_set <- sample(PhyloExpressionSetExample[ , 2],1000)
+#' test_set <- sample(PhyloExpressionSetExample[ , 2],10000)
 #' 
 #' ## Examples with complete.bg = TRUE
 #' ## Hence: the entire background set of the input ExpressionSet is considered 
@@ -93,16 +98,17 @@
 
 PlotEnrichment <- function(ExpressionSet,
                            test.set,
-                           use.only.map     = FALSE,
-                           measure      = "log-foldchange",
-                           complete.bg  = TRUE,
-                           legendName   = NULL,
-                           over.col     = "steelblue",
-                           under.col    = "midnightblue",
-                           epsilon      = 0.00001,
-                           cex.legend   = 1,
-                           cex.asterisk = 1,
-                           plot.bars    = TRUE, ...){
+                           use.only.map    = FALSE,
+                           measure         = "log-foldchange",
+                           complete.bg     = TRUE,
+                           legendName      = "",
+                           over.col        = "steelblue",
+                           under.col       = "midnightblue",
+                           epsilon         = 0.00001,
+                           cex.legend      = 1,
+                           cex.asterisk    = 1,
+                           plot.bars       = TRUE,
+                           p.adjust.method = NULL, ...){
         
         # check for correct data input (ExpressionSet or Phylomap/Divergencemap) 
         if(!use.only.map){
@@ -308,6 +314,12 @@ PlotEnrichment <- function(ExpressionSet,
                 
                 pValNames <- vector("character",nPS)
                 pValNames <- rep("",nPS)
+                
+                # adding multiple testing correction option
+                if(!is.null(p.adjust.method)){
+                        enrichment.p_vals <- p.adjust(enrichment.p_vals,method = p.adjust.method, n = nPS)
+                }
+                
                 pValNames[which(enrichment.p_vals <= 0.05)] <- "*"
                 pValNames[which(enrichment.p_vals <= 0.005)] <- "**"
                 pValNames[which(enrichment.p_vals <= 0.0005)] <- "***"
