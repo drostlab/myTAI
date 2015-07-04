@@ -4,7 +4,8 @@
 \alias{PlotBarRE}
 \title{Plot the Mean Relative Expression Levels as Barplot}
 \usage{
-PlotBarRE(ExpressionSet, Groups = NULL, wLength = 0.1, ratio = FALSE, ...)
+PlotBarRE(ExpressionSet, Groups = NULL, wLength = 0.1, ratio = FALSE,
+  p.adjust.method = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -23,6 +24,9 @@ a smaller \code{wLength} parameter should be used for better visualizations.}
 mean relative expression level of phylostrata belonging to the same phylostratum class.
 In case \code{ratio} = TRUE, the ratio of the mean relative expression level of
 the two phylostrata classes is plotted as lines within the barplot. This parameter can only be used for 2 class comparisons.}
+
+\item{p.adjust.method}{correction method to adjust p-values for multiple comparisons (see \code{\link{p.adjust}} for possible methods).
+ E.g., \code{p.adjust.method = "BH"} (Benjamini & Hochberg (1995)) or \code{p.adjust.method = "bonferroni"} (Bonferroni correction).}
 
 \item{\dots}{default graphics parameters.}
 }
@@ -43,25 +47,38 @@ the differences of mean relative expression of these two (or more) corresponding
 As test-statistic, the function performs a nonparametric \code{\link{kruskal.test}}
  based on relative expression values stored within each defined phylostratum class.
 }
+\details{
+In case a large number of developmental stages is included in the input \code{ExpressionSet},
+ p-values returned by \code{PlotBarRE} should be adjusted for multiple comparisons which can be done
+ by specifying the \code{p.adjust.method} argument.
+}
 \examples{
 # read standard phylotranscriptomics data
-
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
 
 # example PhyloExpressionSet
+PlotBarRE(ExpressionSet = PhyloExpressionSetExample,
+          Groups        = list(c(1:3), c(4:12)))
 
-PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)))
 
 # example DivergenceExpressionSet
+PlotBarRE(ExpressionSet = DivergenceExpressionSetExample,
+          Groups        = list(c(1:5), c(6:10)))
 
-PlotBarRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)))
+
+# Perform PlotBarRE() with p-value adjustment method Benjamini & Hochberg (1995)
+PlotBarRE(ExpressionSet   = PhyloExpressionSetExample,
+          Groups          = list(c(1:3), c(4:12)),
+          p.adjust.method = "BH")
+
 
 # Example: plot ratio
 # the ratio curve visualizes the ratio between bar 1 / bar 2
 # the z - axis shows the corresponding ratio value of bar 1 / bar 2
-
-PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), ratio = TRUE)
+PlotBarRE(ExpressionSet = PhyloExpressionSetExample,
+          Groups        = list(c(1:3), c(4:12)),
+          ratio         = TRUE)
 }
 \author{
 Hajk-Georg Drost
