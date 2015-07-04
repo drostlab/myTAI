@@ -68,7 +68,7 @@ To visualize the odds or log-odds of over or underrepresented genes within the \
 
  In case a large number of Phylostrata or Divergence Strata is included in the input
  \code{ExpressionSet}, p-values returned by \code{PlotEnrichment} should be adjusted for
- multiple comparisons.
+ multiple comparisons which can be done by specifying the \code{p.adjust.method} argument.
 }
 \examples{
 data(PhyloExpressionSetExample)
