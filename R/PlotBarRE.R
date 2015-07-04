@@ -17,6 +17,8 @@
 #'  mean relative expression level of phylostrata belonging to the same phylostratum class.
 #'  In case \code{ratio} = TRUE, the ratio of the mean relative expression level of 
 #'  the two phylostrata classes is plotted as lines within the barplot. This parameter can only be used for 2 class comparisons.
+#'  @param p.adjust.method correction method to adjust p-values for multiple comparisons (see \code{\link{p.adjust}} for possible methods).
+#'   E.g., \code{p.adjust.method = "BH"} (Benjamini & Hochberg (1995)) or \code{p.adjust.method = "bonferroni"} (Bonferroni correction).
 #'  @param \dots default graphics parameters. 
 #'  @return A barplot comparing Phylostratum-Classes by its mean relative expression levels.
 #' Significant stages are marked by '*' referring to statistically significant differences:
@@ -27,6 +29,11 @@
 #'
 #' (3) '***' = P-Value <= 0.0005  
 #' 
+#' @details 
+#' In case a large number of developmental stages is included in the input \code{ExpressionSet},
+#'  p-values returned by \code{PlotBarRE} should be adjusted for multiple comparisons which can be done
+#'  by specifying the \code{p.adjust.method} argument.
+#'  
 #' @references 
 #' 
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
@@ -40,28 +47,39 @@
 #' @examples
 #' 
 #' # read standard phylotranscriptomics data
-#'
 #' data(PhyloExpressionSetExample)
 #' data(DivergenceExpressionSetExample)
 #' 
 #' # example PhyloExpressionSet
-#' 
-#' PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)))
+#' PlotBarRE(ExpressionSet = PhyloExpressionSetExample,
+#'           Groups        = list(c(1:3), c(4:12)))
+#'
 #'
 #' # example DivergenceExpressionSet
+#' PlotBarRE(ExpressionSet = DivergenceExpressionSetExample,
+#'           Groups        = list(c(1:5), c(6:10)))
 #'
-#' PlotBarRE(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)))
 #'
+#' # Perform PlotBarRE() with p-value adjustment method Benjamini & Hochberg (1995)
+#' PlotBarRE(ExpressionSet   = PhyloExpressionSetExample,
+#'           Groups          = list(c(1:3), c(4:12)),
+#'           p.adjust.method = "BH")
+#'        
+#'              
 #' # Example: plot ratio
 #' # the ratio curve visualizes the ratio between bar 1 / bar 2
 #' # the z - axis shows the corresponding ratio value of bar 1 / bar 2
-#'
-#' PlotBarRE(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), ratio = TRUE)
-#'
+#' PlotBarRE(ExpressionSet = PhyloExpressionSetExample,
+#'           Groups        = list(c(1:3), c(4:12)),
+#'           ratio         = TRUE)
 #' 
 #' @export
 
-PlotBarRE <- function(ExpressionSet,Groups = NULL,wLength = 0.1,ratio = FALSE,...)
+PlotBarRE <- function(ExpressionSet,
+                      Groups          = NULL,
+                      wLength         = 0.1,
+                      ratio           = FALSE,
+                      p.adjust.method = NULL, ...)
 {
         
         is.ExpressionSet(ExpressionSet)
@@ -106,7 +124,11 @@ PlotBarRE <- function(ExpressionSet,Groups = NULL,wLength = 0.1,ratio = FALSE,..
         if(nGroups == 2){
                 for(j in 1:(nCols-2)){
                         
-                        testForConstantValues <- try(kruskal.test(list(REmatrix[match(as.character(Groups[[1]]), rownames(REmatrix)) , j], REmatrix[match(as.character(Groups[[2]]), rownames(REmatrix)) , j])), silent = FALSE)
+                        testForConstantValues <- try(kruskal.test(list(REmatrix[match(as.character(Groups[[1]]),
+                                                                                      rownames(REmatrix)) , j],
+                                                                       REmatrix[match(as.character(Groups[[2]]),
+                                                                                      rownames(REmatrix)) , j])),
+                                                     silent = FALSE)
                         
                         if(is(testForConstantValues, "try-error")){
                                 warning("Something went wrong with the Kruskal-Wallis Rank Sum Test... the p-value has been set to p = 1.")
@@ -133,6 +155,11 @@ PlotBarRE <- function(ExpressionSet,Groups = NULL,wLength = 0.1,ratio = FALSE,..
                         pValues[s] <- kruskal.test(AnovaListValues)$p.value
                         
                 }
+        }
+        
+        if(!is.null(p.adjust.method)){
+                
+                pValues <- p.adjust(pValues, method = p.adjust.method, n = nPS)
         }
         
         pValNames <- rep("",nCols-2)
