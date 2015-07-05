@@ -131,20 +131,20 @@ PlotEnrichment <- function(ExpressionSet,
         age.table <- table(ExpressionSet[ , 1])
         nPS <- length(age.table)
         
-        MatchedGeneIDs <- na.omit(match(tolower(test.set),tolower(ExpressionSet[ , 2])))
+        MatchedGeneIDs <- stats::na.omit(match(tolower(test.set),tolower(ExpressionSet[ , 2])))
         
-        if(length(MatchedGeneIDs) == 0)
+        if (length(MatchedGeneIDs) == 0)
                 stop("None of your input gene ids could be found in the ExpressionSet.")
         
         age.distr.test.set <- ExpressionSet[MatchedGeneIDs , 1:2]
         
         # exclude test.set genes from the background set
         # before performing Fisher's exact test
-        if(complete.bg)
+        if (complete.bg)
                 ExpressionSet <- ExpressionSet[-MatchedGeneIDs , ]
 
         if (length(age.distr.test.set[ , 2]) != length(test.set))
-                warning("Only ",length(age.distr.test.set[ , 2]), " out of your ",length(test.set)," gene ids could be found in the ExpressionSet.")
+                warning ("Only ",length(age.distr.test.set[ , 2]), " out of your ",length(test.set)," gene ids could be found in the ExpressionSet.")
         
         FactorBackgroundSet <- factor(ExpressionSet[ , 1],levels = names(age.table))
         FactorTestSet <- factor(age.distr.test.set[ , 1],levels = names(age.table))
@@ -156,7 +156,7 @@ PlotEnrichment <- function(ExpressionSet,
         
         enrichment.p_vals <- vector("numeric",nPS)
         enrichment.p_vals <- sapply(1:nPS,
-                                    function(index) fisher.test(get.contingency.tbl(N_ij,index))$p.value,
+                                    function(index) stats::fisher.test(get.contingency.tbl(N_ij,index))$p.value,
                                     simplify = "array")
         
         names(enrichment.p_vals) <- paste0(legendName,names(age.table))
@@ -281,35 +281,35 @@ PlotEnrichment <- function(ExpressionSet,
                         if (measure == "log-foldchange")
                                 measure_ylab <- "Log odds"
                         
-                        barPlotFoldChanges <- barplot(ResultMatrix[ , 2],
-                                                      beside    = FALSE,
-                                                      col       = bar.colors,
-                                                      lwd       = 4,
-                                                      space     = 1,
-                                                      names.arg = paste0(legendName,names(age.table)),
-                                                      ylim      = ylim.range,
-                                                      border    = "white",
-                                                      xlab      = age_xlab, 
-                                                      ylab      = measure_ylab, ...)
+                        barPlotFoldChanges <- graphics::barplot(ResultMatrix[ , 2],
+                                                                beside    = FALSE,
+                                                                col       = bar.colors,
+                                                                lwd       = 4,
+                                                                space     = 1,
+                                                                names.arg = paste0(legendName,names(age.table)),
+                                                                ylim      = ylim.range,
+                                                                border    = "white",
+                                                                xlab      = age_xlab, 
+                                                                ylab      = measure_ylab, ...)
                         
                 } else {
                         
-                        barPlotFoldChanges <- barplot(ResultMatrix[ , 2],
-                                                      beside    = FALSE,
-                                                      col       = bar.colors,
-                                                      lwd       = 4,
-                                                      space     = 1,
-                                                      names.arg = paste0(legendName,names(age.table)),
-                                                      ylim      = ylim.range,
-                                                      border    = "white", ...)
+                        barPlotFoldChanges <- graphics::barplot(ResultMatrix[ , 2],
+                                                                beside    = FALSE,
+                                                                col       = bar.colors,
+                                                                lwd       = 4,
+                                                                space     = 1,
+                                                                names.arg = paste0(legendName,names(age.table)),
+                                                                ylim      = ylim.range,
+                                                                border    = "white", ...)
                 }
                 
-                abline(h = 0, col = "black", lty = 1,lwd = 4)
-                legend("topright",
-                       legend = c("over-represented","under-represented"),
-                       fill   = c(over.col,under.col),
-                       bty    = "n",
-                       cex    = cex.legend)
+                graphics::abline(h = 0, col = "black", lty = 1,lwd = 4)
+                graphics::legend("topright",
+                                 legend = c("over-represented","under-represented"),
+                                 fill   = c(over.col,under.col),
+                                 bty    = "n",
+                                 cex    = cex.legend)
                 
                 
                 pValNames <- vector("character",nPS)
@@ -317,17 +317,17 @@ PlotEnrichment <- function(ExpressionSet,
                 
                 # adding multiple testing correction option
                 if(!is.null(p.adjust.method)){
-                        enrichment.p_vals <- p.adjust(enrichment.p_vals,method = p.adjust.method, n = nPS)
+                        enrichment.p_vals <- stats::p.adjust(enrichment.p_vals,method = p.adjust.method, n = nPS)
                 }
                 
                 pValNames[which(enrichment.p_vals <= 0.05)] <- "*"
                 pValNames[which(enrichment.p_vals <= 0.005)] <- "**"
                 pValNames[which(enrichment.p_vals <= 0.0005)] <- "***"
                 
-                text(x      = barPlotFoldChanges,
-                     y      = (max(ResultMatrix[ , 2]) + (ylim.range[2] / 5)),
-                     labels = pValNames,
-                     cex    = cex.asterisk)
+                graphics::text(x      = barPlotFoldChanges,
+                               y      = (max(ResultMatrix[ , 2]) + (ylim.range[2] / 5)),
+                               labels = pValNames,
+                               cex    = cex.asterisk)
         }
         
         return(list(p.values = enrichment.p_vals, enrichment.matrix = ResultMatrix))
