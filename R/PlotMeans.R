@@ -115,7 +115,7 @@ PlotMeans <- function(ExpressionSet,
         
         ### plot the rel. exp. levels in k different windows
         if(length(Groups) > 1)
-                par(mfrow = rev(n2mfrow(nGroups)))
+                graphics::par(mfrow = rev(grDevices::n2mfrow(nGroups)))
         
         for(j in 1:nGroups){
                 
