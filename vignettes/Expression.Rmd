@@ -216,12 +216,12 @@ ttest.DEGs
 ```
 
 ```
-  Phylostratum      GeneID      S1->S2     S1->S3      S2->S1     S2->S3     S3->S1     S3->S2
-1            1 at1g01040.2 0.027832572 0.04020203 0.027832572 0.13481563 0.04020203 0.13481563
-2            1 at1g01050.1 0.852379466 0.31471871 0.852379466 0.36326955 0.31471871 0.36326955
-3            1 at1g01070.1 0.003200692 0.00113536 0.003200692 0.02236621 0.00113536 0.02236621
-4            1 at1g01080.2 0.086426813 0.03092924 0.086426813 0.45999438 0.03092924 0.45999438
-5            1 at1g01090.1 0.090387087 0.04638872 0.090387087 0.04978092 0.04638872 0.04978092
+  Phylostratum      GeneID     S1<->S2    S1<->S3    S2<->S3
+1            1 at1g01040.2 0.027832572 0.04020203 0.13481563
+2            1 at1g01050.1 0.852379466 0.31471871 0.36326955
+3            1 at1g01070.1 0.003200692 0.00113536 0.02236621
+4            1 at1g01080.2 0.086426813 0.03092924 0.45999438
+5            1 at1g01090.1 0.090387087 0.04638872 0.04978092
 ```
 
 The resulting `data.frame` stores the p-values of stage-wise comparisons for each gene. To adjust p-values for multiple testing of stage-wise comparisons you can specify the `p.adjust.method` argument with one of the p-value adjustment methods implemented in `DiffGenes()`.
@@ -250,12 +250,12 @@ ttest.DEGs.p_adjust
 ```
 
 ```
-  Phylostratum      GeneID     S1->S2    S1->S3     S2->S1    S2->S3    S3->S1    S3->S2
-1            1 at1g01040.2 0.06958143 0.0579859 0.06958143 0.2246927 0.0579859 0.2246927
-2            1 at1g01050.1 0.85237947 0.3147187 0.85237947 0.4540869 0.3147187 0.4540869
-3            1 at1g01070.1 0.01600346 0.0056768 0.01600346 0.1118311 0.0056768 0.1118311
-4            1 at1g01080.2 0.11298386 0.0579859 0.11298386 0.4599944 0.0579859 0.4599944
-5            1 at1g01090.1 0.11298386 0.0579859 0.11298386 0.1244523 0.0579859 0.1244523
+  Phylostratum      GeneID    S1<->S2   S1<->S3   S2<->S3
+1            1 at1g01040.2 0.06958143 0.0579859 0.2246927
+2            1 at1g01050.1 0.85237947 0.3147187 0.4540869
+3            1 at1g01070.1 0.01600346 0.0056768 0.1118311
+4            1 at1g01080.2 0.11298386 0.0579859 0.4599944
+5            1 at1g01090.1 0.11298386 0.0579859 0.1244523
 ```
 
 The resulting p-value adjusted `data.frame` can be used to filter for differentially expressed genes.
@@ -282,8 +282,8 @@ ttest.DEGs.p_adjust.filtered
 ```
 
 ```
- Phylostratum      GeneID     S1->S2    S1->S3     S2->S1    S2->S3    S3->S1    S3->S2
-3            1 at1g01070.1 0.03200692 0.0113536 0.03200692 0.2192432 0.0113536 0.2192432
+  Phylostratum      GeneID    S1<->S2   S1<->S3   S2<->S3
+3            1 at1g01070.1 0.03200692 0.0113536 0.2192432
 ```
 
 In this example, only 1 out of 10 genes fulfills the p-value criteria (`alpha`) in at least one stage comparison.
@@ -301,11 +301,11 @@ ttest.DEGs.p_adjust <- DiffGenes(ExpressionSet   = tf(PhyloExpressionSetExample[
                                  stage.names     = c("S1","S2","S3"))
 
 
-head(ttest.DEGs.p_adjust[order(ttest.DEGs.p_adjust[ , "S1->S2"], decreasing = FALSE) , 1:3])
+head(ttest.DEGs.p_adjust[order(ttest.DEGs.p_adjust[ , "S1<->S2"], decreasing = FALSE) , 1:3])
 ```
 
 ```
-    Phylostratum      GeneID   S1->S2
+    Phylostratum      GeneID  S1<->S2
 54             1 at1g02400.1 0.151388
 119            1 at1g03870.1 0.151388
 137            1 at1g04380.1 0.151388
@@ -320,9 +320,61 @@ The Wilcoxon-Mann-Whitney test is a _nonparametric_ test to quantify the shift
 empirical distribution parameters. _Nonparametric_ tests are useful when sample populations
 do not meet the test assumptions of _parametric_ tests. 
 
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by a Wilcoxon-Mann-Whitney test
+Wilcox.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+                        nrep          = 2,
+                        method        = "wilcox.test",
+                        stage.names   = c("S1","S2","S3"))
+
+# look at the results
+Wilcox.DEGs
+```
+
+```
+  Phylostratum      GeneID   S1<->S2   S1<->S3   S2<->S3
+1            1 at1g01040.2 0.3333333 0.3333333 0.3333333
+2            1 at1g01050.1 1.0000000 0.3333333 0.3333333
+3            1 at1g01070.1 0.3333333 0.3333333 0.3333333
+4            1 at1g01080.2 0.3333333 0.3333333 0.6666667
+5            1 at1g01090.1 0.3333333 0.3333333 0.3333333
+```
+
+Again, you can adjust p-values by specifying the `p.adjust.method` argument.
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by a Wilcoxon-Mann-Whitney test
+# and furthermore, adjust p-values for multiple comparison
+# using the Benjamini & Hochberg (1995) method: method = "BH"
+# and filter for significantly differentially expressed genes (alpha = 0.05)
+Wilcox.DEGs.adj <- DiffGenes(ExpressionSet  = PhyloExpressionSetExample[1:5,1:8],
+                            nrep            = 2,
+                            method          = "wilcox.test",
+                            stage.names     = c("S1","S2","S3"),
+                            p.adjust.method = "BH")
+
+# look at the results
+Wilcox.DEGs.adj
+```
+
+```
+  Phylostratum      GeneID   S1<->S2   S1<->S3   S2<->S3
+1            1 at1g01040.2 0.4166667 0.3333333 0.4166667
+2            1 at1g01050.1 1.0000000 0.3333333 0.4166667
+3            1 at1g01070.1 0.4166667 0.3333333 0.4166667
+4            1 at1g01080.2 0.4166667 0.3333333 0.6666667
+5            1 at1g01090.1 0.4166667 0.3333333 0.4166667
+```
+
 
 ## Negative Binomial (Exact Tests)
 
+Exact Tests for Differences between Two Groups of Negative-Binomial Counts based on the
+`edgeR` function `exactTest()`.
 
 ### Install edgeR Package
 
@@ -336,6 +388,59 @@ source("http://bioconductor.org/biocLite.R")
 biocLite("edgeR")
 ```
 
+### Double Tail Method
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by the Double Tail Method
+DoubleTail.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+                        nrep          = 2,
+                        method        = "doubletail",
+                        stage.names   = c("S1","S2","S3"))
+
+# look at the results
+DoubleTail.DEGs
+```
+
+```
+  Phylostratum      GeneID    S1<->S2     S1<->S3   S2<->S3
+1            1 at1g01040.2 0.26026604 0.110233012 0.6304508
+2            1 at1g01050.1 0.95314428 0.598102712 0.6398757
+3            1 at1g01070.1 0.55461941 0.456018563 0.8774231
+4            1 at1g01080.2 0.58130025 0.487028051 0.8860005
+5            1 at1g01090.1 0.03615134 0.001773543 0.2645537
+```
+
+Again, you can adjust p-values by specifying the `p.adjust.method` argument.
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by the Double Tail Method
+# and furthermore, adjust p-values for multiple comparison
+# using the Benjamini & Hochberg (1995) method: method = "BH"
+# and filter for significantly differentially expressed genes (alpha = 0.05)
+DoubleTail.DEGs.adj <- DiffGenes(ExpressionSet  = PhyloExpressionSetExample[1:5,1:8],
+                                nrep            = 2,
+                                method          = "doubletail",
+                                stage.names     = c("S1","S2","S3"),
+                                p.adjust.method = "BH")
+
+# look at the results
+DoubleTail.DEGs.adj
+```
+
+```
+  Phylostratum      GeneID   S1<->S2     S1<->S3   S2<->S3
+1            1 at1g01040.2 0.6506651 0.275582530 0.8860005
+2            1 at1g01050.1 0.9531443 0.598102712 0.8860005
+3            1 at1g01070.1 0.7266253 0.598102712 0.8860005
+4            1 at1g01080.2 0.7266253 0.598102712 0.8860005
+5            1 at1g01090.1 0.1807567 0.008867715 0.8860005
+```
+
+
 ## Generalized Linear Models
 
 
@@ -345,11 +450,7 @@ The detection of DEGs using generalized linear models is based on the powerful i
 provided by the [edgeR](http://www.bioconductor.org/packages/release/bioc/html/edgeR.html) package. Hence, before using the negative binomial models in `DiffGenes()` you need to install 
 the edgeR package.
 
-```{r,eval=FALSE}
-# install edgeR
-source("http://bioconductor.org/biocLite.R")
-biocLite("edgeR")
-```
+
 
 ## Collapsing Replicate Samples
 
@@ -377,12 +478,12 @@ head(ExampleReplicateExpressionSet, 5)
 ```
 
 ```
-  Phylostratum      GeneID      S1->S2     S1->S3      S2->S1     S2->S3     S3->S1     S3->S2
-1            1 at1g01040.2 0.060303051 0.06030305 0.060303051 0.13481563 0.06030305 0.13481563
-2            1 at1g01050.1 0.852379466 0.54490432 0.852379466 0.54490432 0.54490432 0.54490432
-3            1 at1g01070.1 0.004801037 0.00340608 0.004801037 0.02236621 0.00340608 0.02236621
-4            1 at1g01080.2 0.129640220 0.09278773 0.129640220 0.45999438 0.09278773 0.45999438
-5            1 at1g01090.1 0.090387087 0.07467138 0.090387087 0.07467138 0.07467138 0.07467138
+  Phylostratum      GeneID Stage_1_Repl_1 Stage_1_Repl_2 Stage_2_Repl_1 Stage_2_Repl_2 Stage_3_Repl_1 Stage_3_Repl_2
+1            1 at1g01040.2       2173.635      1911.2001       1152.555      1291.4224       1000.253       962.9772
+2            1 at1g01050.1       1501.014      1817.3086       1665.309      1564.7612       1496.321      1114.6435
+3            1 at1g01070.1       1212.793      1233.0023        939.200       929.6195        864.218       877.2060
+4            1 at1g01080.2       1016.920       936.3837       1181.338      1329.4734       1392.643      1287.9746
+5            1 at1g01090.1      11424.567     16778.1685      34366.649     39775.6405      56231.569     66980.3673
 ```
 
 Now, assume that this example `PhyloExpressionSet` stores three developmental stages and 2
