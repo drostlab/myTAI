@@ -44,7 +44,6 @@ PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
         is.ExpressionSet(PhyloExpressionSet)
         is.ExpressionSet(DivergenceExpressionSet)
         
-        
         if(!is.element(method, c("pearson", "kendall", "spearman")))
                 stop("Please choose a correlation method that is supported by this function.")
         
@@ -57,7 +56,7 @@ PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
         
         PS_DS.Subset <- merge(PhyloExpressionSet[ , 1:2], DivergenceExpressionSet[ , 1:2],by = "GeneID")
         
-        CorrelationCoefficient <- cor(PS_DS.Subset[ , 2],PS_DS.Subset[ , 3],method = method)
+        CorrelationCoefficient <- stats::cor(PS_DS.Subset[ , 2],PS_DS.Subset[ , 3],method = method)
         CorrCoeffasCharacter <- as.character(round(CorrelationCoefficient,3))
         
         nrows <- dim(PS_DS.Subset)[1]
@@ -68,13 +67,13 @@ PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
         DS <- jitter(PS_DS.Subset[ , 3],1.5)
         
         if(!is.null(main.text))
-                plot(PS,DS,main = paste0(main.text,method," = ",CorrCoeffasCharacter), ...)
+                graphics::plot(PS,DS,main = paste0(main.text,method," = ",CorrCoeffasCharacter), ...)
         
         if(is.null(main.text))
-                plot(PS,DS,main = paste0(method," = ",CorrCoeffasCharacter), ...)
+                graphics::plot(PS,DS,main = paste0(method," = ",CorrCoeffasCharacter), ...)
         
         if(linearModel == TRUE)
-                abline(lm(PS_DS.Subset[ , 3]~PS_DS.Subset[ , 2]),lwd = 5,col = "red")
+                graphics::abline(stats::lm(PS_DS.Subset[ , 3]~PS_DS.Subset[ , 2]),lwd = 5,col = "red")
         
 }
 
