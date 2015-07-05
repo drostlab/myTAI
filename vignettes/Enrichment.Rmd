@@ -338,7 +338,8 @@ head(Brain.PhyloExpressionSet)
 
 ### Adjust P-values for Multiple Comparisons
 
-In case a large number of Phylostrata or Divergence Strata is included in the input `ExpressionSet`, p-values returned by `PlotEnrichment()` should be adjusted for multiple comparisons. For this purpose `PlotEnrichment()` includes the argument `p.adjust.method`:
+In case a large number of Phylostrata or Divergence Strata is included in the input `ExpressionSet`, p-values returned by `PlotEnrichment()` should be adjusted for multiple comparisons. For this purpose `PlotEnrichment()` includes the argument `p.adjust.method`. 
+All methods implemented in `?p.adjust` can be specified:
 
 
 ```{r,eval = FALSE}
@@ -354,7 +355,7 @@ PlotEnrichment(Drerio.PhyloMap,
 ```
 
 Please consult these reviews ([Biostatistics Handbook](http://www.biostathandbook.com/multiplecomparisons.html), [Gelman et al., 2008](http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf), and [Slides](http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf)) to decide whether or not to apply p-value adjustment
-for your own dataset. 
+to your own dataset. 
 
 
 ## Combine Functional Annotation with Enrichment Analyses
