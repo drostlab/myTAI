@@ -153,12 +153,18 @@ ReductiveHourglassTest <- function(ExpressionSet,
         real_age <- vector(mode = "numeric",length = nCols-2)
         real_age <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
         ### compute the real reductive hourglass scores of the observed phylotranscriptomics pattern
-        real_score <- rhScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],
-                              method = "min",scoringMethod = "mean-mean")
+        real_score <- rhScore(real_age,
+                              early         = modules[[1]],
+                              mid           = modules[[2]],
+                              late          = modules[[3]],
+                              method        = "min",
+                              scoringMethod = "mean-mean")
         
         ### compute the bootstrap matrix 
         if (is.null(custom.perm.matrix)){
-                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))       
+                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),
+                                            as.vector(ExpressionSet[ , 1]),
+                                            as.numeric(permutations))       
         }
         
         else if (!is.null(custom.perm.matrix)){
@@ -179,34 +185,32 @@ ReductiveHourglassTest <- function(ExpressionSet,
                 # plot histogram of scores
                 normDensity <- function(x){
                         
-                        return(dnorm(x,mu,sigma))
+                        return(stats::dnorm(x,mu,sigma))
                         
                 }
                 
                 if(lillie.test)
-                        par(mfrow = c(2,2))
+                        graphics::par(mfrow = c(2,2))
                 if(!lillie.test)
-                        par(mfrow = c(1,3))
+                        graphics::par(mfrow = c(1,3))
                 
                 fitdistrplus::descdist(score_vector, boot = permutations)
                 
-                curve( expr = normDensity,
-                       xlim = c(min(score_vector),max(score_vector,real_score)),
-                       col  = "steelblue",
-                       lwd  = 5,
-                       xlab = "Scores",
-                       ylab = "Frequency" )
+                graphics::curve( expr = normDensity,
+                                 xlim = c(min(score_vector),max(score_vector,real_score)),
+                                 col  = "steelblue",
+                                 lwd  = 5,
+                                 xlab = "Scores",
+                                 ylab = "Frequency" )
                 
-                hist( x      = score_vector,
-                      prob   = TRUE,
-                      add    = TRUE, 
-                      breaks = permutations / (0.01 * permutations) )
+                graphics::hist( x      = score_vector,
+                                prob   = TRUE,
+                                add    = TRUE, 
+                                breaks = permutations / (0.01 * permutations) )
                 
-                rug(score_vector)
+                graphics::rug(score_vector)
                 # plot a red line at the position where we can find the real rh value
-                abline(v = real_score, lwd = 5, col = "darkred")
-                
-                #legend("topleft", legend = "A", bty = "n")
+                graphics::abline(v = real_score, lwd = 5, col = "darkred")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
                 lillie_vec <- vector(mode = "logical", length = runs)
