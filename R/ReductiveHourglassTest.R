@@ -218,7 +218,7 @@ ReductiveHourglassTest <- function(ExpressionSet,
                 
                 cat("\n")
                 
-                if(parallel){
+                if (parallel){
                         
                         ### Parallellizing the sampling process using the 'doParallel' and 'parallel' package
                         ### register all given cores for parallelization
@@ -247,8 +247,7 @@ ReductiveHourglassTest <- function(ExpressionSet,
                         
                 }
                 
-                
-                if(!parallel){
+                if (!parallel){
                         
                         
                         # sequential computations of p-values 
@@ -258,9 +257,9 @@ ReductiveHourglassTest <- function(ExpressionSet,
 #                                 
 #                         }
                         
-                        for(i in 1:runs){
+                        for (i in 1:runs){
                                 
-                                if(lillie.test){
+                                if (lillie.test){
                                         rht <- ReductiveHourglassTest( ExpressionSet = ExpressionSet,
                                                                        permutations  = permutations,
                                                                        lillie.test   = TRUE, 
@@ -269,7 +268,7 @@ ReductiveHourglassTest <- function(ExpressionSet,
                                                                        runs          = NULL )
                                 } 
                                         
-                               if(!lillie.test){
+                               if (!lillie.test){
                                        
                                         rht <- ReductiveHourglassTest( ExpressionSet        = ExpressionSet,
                                                                        permutations         = permutations,
@@ -293,39 +292,36 @@ ReductiveHourglassTest <- function(ExpressionSet,
                 
                 #cat("\n")
                 
-                plot( x    = p.vals_vec,
-                      type = "l" , 
-                      lwd  = 6, 
-                      ylim = c(0,1), 
-                      col  = "darkblue", 
-                      xlab = "Runs", 
-                      ylab = "p-value" )
+                graphics::plot( x    = p.vals_vec,
+                                type = "l" , 
+                                lwd  = 6, 
+                                ylim = c(0,1), 
+                                col  = "darkblue", 
+                                xlab = "Runs", 
+                                ylab = "p-value" )
 
-                abline(h = 0.05, lty = 2, lwd = 3)
-                #legend("topleft", legend = "B", bty = "n")
-                
-                if(lillie.test){
+                graphics::abline(h = 0.05, lty = 2, lwd = 3)
+
+                if (lillie.test){
                         tbl <- table(factor(lillie_vec, levels = c("FALSE","TRUE")))
                         
-                        barplot( height    = tbl/sum(tbl), 
-                                 beside    = TRUE, 
-                                 names.arg = c("FALSE", "TRUE"), 
-                                 ylab      = "relative frequency", 
-                                 main      = paste0("runs = ",runs) )
-                        
-                        #legend("topleft", legend = "C", bty = "n")
+                        graphics::barplot( height    = tbl/sum(tbl), 
+                                           beside    = TRUE, 
+                                           names.arg = c("FALSE", "TRUE"), 
+                                           ylab      = "Relative Frequency", 
+                                           main      = paste0("runs = ",runs) )
                 }
         }
         
         
         #if(real_score >= 0)
-        pval <- pnorm(real_score,mean = mu,sd = sigma,lower.tail = FALSE)
+        pval <- stats::pnorm(real_score,mean = mu,sd = sigma,lower.tail = FALSE)
         
         #if(real_score < 0)
         #pval <- pnorm(real_score,mean=mu,sd=sigma,lower.tail=TRUE)
         ### computing the standard deviation of the sampled TAI values for each stage separately
         sd_vals <- vector(mode = "numeric",length = nCols-2)
-        sd_vals <- apply(resMatrix,2,sd)
+        sd_vals <- apply(resMatrix,2,stats::sd)
         
         if(lillie.test){
                 # perform Lilliefors K-S-Test
