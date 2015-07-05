@@ -96,7 +96,7 @@
 #' 
 #' # now again have a look at the range and find
 #' # that fold-change values of 2 are the min value
-#' apply(DEGs.alpha[ , 3:8],2,range)
+#' apply(DEGs.alpha[ , 3:5],2,range)
 #' 
 #' # now check whether each example has at least one stage with a p-value <= 0.05
 #' head(DEGs.alpha)
