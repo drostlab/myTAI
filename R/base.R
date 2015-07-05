@@ -16,7 +16,7 @@ quant <- function(ExpressionMatrix,quantile = 0.9)
         threshold <- vector(mode = "numeric",length = nCols)
         
         for(i in 1:nCols){
-                threshold[i] <- as.numeric(quantile(ExpressionMatrix[ , i],probs = quantile))
+                threshold[i] <- as.numeric(stats::quantile(ExpressionMatrix[ , i],probs = quantile))
         }
         return (threshold)
 }
@@ -100,6 +100,5 @@ GetColumnIndexFromTo <- function(nrep){
         rownames(res) <- paste0("CollapsedStage",1:length(nrep))
         return(res)
 }
-
 
 
