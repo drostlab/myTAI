@@ -51,7 +51,7 @@ PlotGeneSet <- function(ExpressionSet,
         
         is.ExpressionSet(ExpressionSet)
         
-        GeneSubSet.indixes <- na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
+        GeneSubSet.indixes <- stats::na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
         
         if (length(GeneSubSet.indixes) == 0)
                 stop ("None of your input gene ids could be found in the ExpressionSet.")
@@ -83,7 +83,7 @@ PlotGeneSet <- function(ExpressionSet,
                 if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) | (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
                         
                         if(plot.legend)
-                                par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
+                                graphics::par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
                         
                         do.call(graphics::matplot,c(list(x = t(GeneSubSet[ , 3:ncols]), 
                                                          col  = colors[1:length(GeneSubSet.indixes)], 
@@ -93,7 +93,7 @@ PlotGeneSet <- function(ExpressionSet,
                 } else {      
                         
                         if(plot.legend)
-                                par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
+                                graphics::par(mar = c(5.1, 4.1, 4.1, 8.1), xpd = TRUE)
                         
                         do.call(graphics::matplot,c(list(x = t(GeneSubSet[ , 3:ncols]), 
                                                          col  = colors[1:length(GeneSubSet.indixes)], 
