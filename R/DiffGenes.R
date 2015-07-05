@@ -121,7 +121,7 @@ DiffGenes <- function(ExpressionSet,
         
         if (!is.element(method,c("foldchange","log-foldchange","t.test",
                                  "wilcox.test","doubletail","smallp","deviance")))
-                stop("Please enter a method to detect differentially expressed genes that is implemented in DiffGenes().", call. = FALSE)
+                stop ("Please enter a method to detect differentially expressed genes that is implemented in DiffGenes().", call. = FALSE)
         
         ncols <- ncol(ExpressionSet)
         
@@ -130,7 +130,7 @@ DiffGenes <- function(ExpressionSet,
         if (any(apply(ExpressionSet[ , 3:ncols],2, function(x) x == 0))){
                 
                 ExpressionSet <- tf(ExpressionSet, function(x) x + 1)
-                warning("Your input ExpressionSet stores 0 values. Therefore, all expression levels have been shifted by +1 to allow sufficient fold-change or p-value computations.")
+                warning ("Your input ExpressionSet stores 0 values. Therefore, all expression levels have been shifted by +1 to allow sufficient fold-change or p-value computations.")
         }
         
         if (is.element(method,c("foldchange","log-foldchange"))){
@@ -205,16 +205,20 @@ DiffGenes <- function(ExpressionSet,
                                 nStages <- length(nrep)
                         }
                         
-                        combin.stages <- data.frame(Var1 = as.vector(sapply(1:nStages,function(x) rep(x,nStages))),
-                                                    Var2 = rep(1:nStages,nStages))
-                        
-                        test_combin_func <- function(x){
-                                ifelse(x[1] == x[2],FALSE,TRUE) 
-                        }
-                        
-                        # delete all comparisons: 1->1, 2->2, 3->3, ...
-                        false_comb <- which(!apply(combin.stages,1,test_combin_func))
-                        combin.stages <- as.data.frame(combin.stages[-false_comb, ])
+                        # determine all possible combinations of stagewise comparisons
+                        combin.tbl <- t(combn(1:nStages,m = 2))
+                        combin.stages <- data.frame(Var1 = combin.tbl[ , 1],
+                                                    Var2 = combin.tbl[ , 2])
+#                         combin.stages <- data.frame(Var1 = as.vector(sapply(1:(nStages-1),function(x) rep(x,nStages))),
+#                                                     Var2 = rep(1:nStages,nStages - 1))
+#                         
+#                         test_combin_func <- function(x){
+#                                 ifelse(x[1] == x[2],FALSE,TRUE) 
+#                         }
+#                         
+#                         # delete all comparisons: 1<->1, 2<->2, 3<->3, ...
+#                         false_comb <- which(!apply(combin.stages,1,test_combin_func))
+#                         combin.stages <- as.data.frame(combin.stages[-false_comb, ])
                         
                         idx <- vector("numeric",2)
                         DEGMatrix <- matrix(NA_real_,nrow = nrow(ExpressionSet),ncol = nrow(combin.stages))
@@ -288,25 +292,40 @@ DiffGenes <- function(ExpressionSet,
                                      Are you sure that each stage has the correct number of replicates?", call. = FALSE)
                                 }
                 }
-                
-        
-        
-        
+
                 DEG.ExpressionSet <- data.frame(ExpressionSet[ , 1:2], DEGMatrix) 
                 
                 if (!is.null(stage.names)){
                         
                         DefaultStageNames <- stage.names
                         
-                        names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
-                                                      apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"->",DefaultStageNames[x[2]])))
+                        if (is.element(method,c("foldchange","log-foldchange"))){
+                                names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
+                                                              apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"->",DefaultStageNames[x[2]])))
+                        } else {
+                                
+                                names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
+                                                              apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"<->",DefaultStageNames[x[2]])))
+                        }
+                        
                         
                 } else {
                         
-                        DefaultStageNames <- paste0("S",1:nStages)
+                        if (is.element(method,c("foldchange","log-foldchange"))){
                                 
-                        names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
-                                                      apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"->",DefaultStageNames[x[2]])))
+                                DefaultStageNames <- paste0("S",1:nStages)
+                                
+                                names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
+                                                              apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"->",DefaultStageNames[x[2]])))
+                        } else {
+                                
+                                DefaultStageNames <- paste0("S",1:nStages)
+                                
+                                names(DEG.ExpressionSet) <- c(names(ExpressionSet)[1:2],
+                                                              apply(combin.stages,1,function(x) paste0(DefaultStageNames[x[1]],"<->",DefaultStageNames[x[2]])))
+                                
+                        }
+                        
                 }
                 
                 
