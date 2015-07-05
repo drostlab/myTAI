@@ -166,21 +166,19 @@ PlotPattern <- function(ExpressionSet,
         
         if (is.null(TestStatistic)){
                 
-                plot(TAI(ExpressionSet), xaxt = "n", ...)
-                axis(1,1:(ncol(ExpressionSet)-2),names(ExpressionSet)[3:ncol(ExpressionSet)])
-                
+                graphics::plot(TAI(ExpressionSet), xaxt = "n", ...)
+                graphics::axis(1,1:(ncol(ExpressionSet)-2),names(ExpressionSet)[3:ncol(ExpressionSet)])
         } else {
-        
         
         if (!(is.element(TestStatistic, c("FlatLineTest","ReductiveHourglassTest","EarlyConservationTest")))){
                 stop("Please enter a correct string for the test statistic: 'FlatLineTest', 'EarlyConservationTest' or 'ReductiveHourglassTest'.")
         }
         
         if ((is.element(TestStatistic,c("ReductiveHourglassTest","EarlyConservationTest"))) & is.null(modules))
-                stop("Please specify the modules for the ReductiveHourglassTest or EarlyConservationTest: modules = list(early = ..., mid = ..., late = ...).")
+                stop ("Please specify the modules for the ReductiveHourglassTest or EarlyConservationTest: modules = list(early = ..., mid = ..., late = ...).")
         
         if ((!is.null(modules)) & (TestStatistic == "FlatLineTest"))
-                warning("You don't need to specify the modules argument for the FlatLineTest.")
+                warning ("You don't need to specify the modules argument for the FlatLineTest.")
         
         nCols <- dim(ExpressionSet)[2]
         resList <- vector("list", length = 2)
@@ -327,9 +325,9 @@ PlotPattern <- function(ExpressionSet,
         
         
         # age + std.err
-        lines(age + sd_vals,lwd = 2,col = "darkgrey")
+        graphics::lines(age + sd_vals,lwd = 2,col = "darkgrey")
         # age - std.err
-        lines(age - sd_vals,lwd = 2,col = "darkgrey")
+        graphics::lines(age - sd_vals,lwd = 2,col = "darkgrey")
         
         if(p.value == TRUE){
                 
@@ -356,11 +354,11 @@ PlotPattern <- function(ExpressionSet,
         if(shaded.area == TRUE){
                 #abline(v=c(mid[1],mid[length(mid)]),col="black",lty="dotted")
                 col2alpha <- function (color, alpha = 0.2){
-                        rgbCode <- col2rgb(color)[,1]
-                        rgb(rgbCode[1], rgbCode[2], rgbCode[3], 255 * alpha, maxColorValue = 255)
+                        rgbCode <- grDevices::col2rgb(color)[,1]
+                        grDevices::rgb(rgbCode[1], rgbCode[2], rgbCode[3], 255 * alpha, maxColorValue = 255)
                 }
-                usr <- par('usr')
-                rect(modules[[2]][1], usr[3], modules[[2]][length(modules[[2]])], usr[4], col = col2alpha("midnightblue",alpha = 0.2)) 
+                usr <- graphics::par('usr')
+                graphics::rect(modules[[2]][1], usr[3], modules[[2]][length(modules[[2]])], usr[4], col = col2alpha("midnightblue",alpha = 0.2)) 
         }
         }
 }
