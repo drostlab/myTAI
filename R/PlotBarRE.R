@@ -117,20 +117,23 @@ PlotBarRE <- function(ExpressionSet,
         ### as well as the Std.Error of the relative expression levels
         ### included in each PS-Group
         for(i in 1:nGroups){
-                MeanREClassValues[i , ] <- colMeans(REmatrix[match(as.character(Groups[[i]]), rownames(REmatrix)) , ])
-                StdErr.RE.ClassValues[i , ] <- apply(REmatrix[match(as.character(Groups[[i]]), rownames(REmatrix)) , ],2,std.error)
+                MeanREClassValues[i , ] <- colMeans(REmatrix[match(as.character(Groups[[i]]),
+                                                                   rownames(REmatrix)) , ])
+                
+                StdErr.RE.ClassValues[i , ] <- apply(REmatrix[match(as.character(Groups[[i]]),
+                                                                    rownames(REmatrix)) , ],2,std.error)
         }   
         
         if(nGroups == 2){
                 for(j in 1:(nCols-2)){
                         
-                        testForConstantValues <- try(kruskal.test(list(REmatrix[match(as.character(Groups[[1]]),
+                        testForConstantValues <- try(stats::kruskal.test(list(REmatrix[match(as.character(Groups[[1]]),
                                                                                       rownames(REmatrix)) , j],
                                                                        REmatrix[match(as.character(Groups[[2]]),
                                                                                       rownames(REmatrix)) , j])),
                                                      silent = FALSE)
                         
-                        if(is(testForConstantValues, "try-error")){
+                        if(methods::is(testForConstantValues, "try-error")){
                                 warning("Something went wrong with the Kruskal-Wallis Rank Sum Test... the p-value has been set to p = 1.")
                                 pValues[j] <- 1
                         } 
@@ -152,14 +155,14 @@ PlotBarRE <- function(ExpressionSet,
                                 AnovaListValues[k] <- list(REmatrix[match(as.character(Groups[[k]]), rownames(REmatrix)) , s])
                         }
                         
-                        pValues[s] <- kruskal.test(AnovaListValues)$p.value
+                        pValues[s] <- stats::kruskal.test(AnovaListValues)$p.value
                         
                 }
         }
         
         if(!is.null(p.adjust.method)){
                 
-                pValues <- p.adjust(pValues, method = p.adjust.method, n = nPS)
+                pValues <- stats::p.adjust(pValues, method = p.adjust.method, n = nPS)
         }
         
         pValNames <- rep("",nCols-2)
@@ -182,19 +185,25 @@ PlotBarRE <- function(ExpressionSet,
                                                               col = barColors,border = "white"),
                                                          dots[!is.element(names(dots),c(text.args))]))
                 
-                do.call(graphics::text,c(list(apply(REBarPlot,2,mean),0.95,labels = pValNames),
+                do.call(graphics::text,c(list(apply(REBarPlot,2,stats::mean),0.95,labels = pValNames),
                                          dots[!is.element(names(dots),c(barplot.args))]))
                 
                 suppressWarnings(arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
                        y1 = ifelse((StdErr.RE.ClassValues) == 0,MeanREClassValues + (1/999),
                                    MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength))
                 
-                par(xpd = TRUE)
-                legend("topleft",inset = c(+0.2,0),legend = paste("Group ",1:length(Groups),sep = ""),
-                       fill = barColors,bty = "n",cex = 1.3,ncol = ceiling(nGroups/2))
-                par(xpd = FALSE)
+                graphics::par(xpd = TRUE)
+                graphics::legend("topleft",
+                                 inset  = c(+0.2,0),
+                                 legend = paste("Group ",1:length(Groups),sep = ""),
+                                 fill   = barColors,
+                                 bty    = "n",
+                                 cex    = 1.3,
+                                 ncol   = ceiling(nGroups/2))
+                
+                graphics::par(xpd = FALSE)
                 if(nGroups == 2){
-                        lines(colMeans(REBarPlot), REFoldChangeOfMeanREValues,lty = 2,lwd = 5,col = "darkblue")
+                        graphics::lines(colMeans(REBarPlot), REFoldChangeOfMeanREValues,lty = 2,lwd = 5,col = "darkblue")
                         do.call(graphics::axis,c(list(4,seq(0,1,0.2),format(seq(0,max(FoldChangeOfMeanREValues),length.out = 6),digits = 2)),
                                                  dots[!is.element(names(dots),c(text.args))]))
                 }
@@ -208,7 +217,7 @@ PlotBarRE <- function(ExpressionSet,
                 do.call(graphics::text,c(list(colMeans(REBarPlot),1.15,labels = pValNames),
                                          dots[!is.element(names(dots),c(barplot.args))]))
                 
-                suppressWarnings(arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
+                suppressWarnings(graphics::arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
                        y1 = ifelse((StdErr.RE.ClassValues) == 0,MeanREClassValues + (1/999),
                                    MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength))
                 
