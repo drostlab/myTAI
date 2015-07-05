@@ -61,15 +61,14 @@
 
 taxonomy <- function(organism, db = "ncbi", output = "classification"){
         
-        if(!is.element(output,c("classification","taxid","children")))
-                stop("The output '",output,"' is not supported by this function.")
+        if (!is.element(output,c("classification","taxid","children")))
+                stop ("The output '",output,"' is not supported by this function.")
         
-        if(!is.element(db,c("ncbi","itis")))
-                stop("Database '",db,"' is not supported by this function.")
+        if (!is.element(db,c("ncbi","itis")))
+                stop ("Database '",db,"' is not supported by this function.")
         
         name <- id <- NULL
-        
-        
+
         if (db == "ncbi")
                 tax_hierarchy <- as.data.frame(taxize::classification(taxize::get_uid(organism), db = "ncbi")[[1]])
         
