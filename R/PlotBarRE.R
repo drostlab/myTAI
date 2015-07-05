@@ -185,7 +185,7 @@ PlotBarRE <- function(ExpressionSet,
                                                               col = barColors,border = "white"),
                                                          dots[!is.element(names(dots),c(text.args))]))
                 
-                do.call(graphics::text,c(list(apply(REBarPlot,2,stats::mean),0.95,labels = pValNames),
+                do.call(graphics::text,c(list(apply(REBarPlot,2,mean),0.95,labels = pValNames),
                                          dots[!is.element(names(dots),c(barplot.args))]))
                 
                 suppressWarnings(arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
