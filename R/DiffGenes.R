@@ -206,20 +206,10 @@ DiffGenes <- function(ExpressionSet,
                         }
                         
                         # determine all possible combinations of stagewise comparisons
-                        combin.tbl <- t(combn(1:nStages,m = 2))
+                        combin.tbl <- t(utils::combn(1:nStages,m = 2))
                         combin.stages <- data.frame(Var1 = combin.tbl[ , 1],
                                                     Var2 = combin.tbl[ , 2])
-#                         combin.stages <- data.frame(Var1 = as.vector(sapply(1:(nStages-1),function(x) rep(x,nStages))),
-#                                                     Var2 = rep(1:nStages,nStages - 1))
-#                         
-#                         test_combin_func <- function(x){
-#                                 ifelse(x[1] == x[2],FALSE,TRUE) 
-#                         }
-#                         
-#                         # delete all comparisons: 1<->1, 2<->2, 3<->3, ...
-#                         false_comb <- which(!apply(combin.stages,1,test_combin_func))
-#                         combin.stages <- as.data.frame(combin.stages[-false_comb, ])
-                        
+
                         idx <- vector("numeric",2)
                         DEGMatrix <- matrix(NA_real_,nrow = nrow(ExpressionSet),ncol = nrow(combin.stages))
                         # determine stage indices for nrep = const
@@ -241,18 +231,18 @@ DiffGenes <- function(ExpressionSet,
                                 
                                 if (method == "t.test"){
                                         DEGMatrix[ , k] <-  apply(ExpressionSet[, 3:ncol(ExpressionSet)], 1, function(x){
-                                                t.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-                                                       x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
-                                                       alternative = "two.sided",
-                                                       var.equal   = FALSE)$p.value
+                                                stats::t.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                              x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+                                                              alternative = "two.sided",
+                                                              var.equal   = FALSE)$p.value
                                         })
                                         }
                                         
                                         if (method == "wilcox.test"){
                                                 DEGMatrix[ , k] <-  apply(ExpressionSet[, 3:ncol(ExpressionSet)], 1, function(x){
-                                                        wilcox.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-                                                            x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
-                                                            alternative = "two.sided")$p.value
+                                                        stats::wilcox.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                                           x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+                                                                           alternative = "two.sided")$p.value
                                                 })
                                         } 
                                         
@@ -285,7 +275,7 @@ DiffGenes <- function(ExpressionSet,
                         
                         if (!is.null(p.adjust.method)){
                                 
-                                DEGMatrix <- apply(DEGMatrix,2,p.adjust,method = p.adjust.method) 
+                                DEGMatrix <- apply(DEGMatrix,2,stats::p.adjust,method = p.adjust.method) 
                         }
                 } else {
                         stop("Something went wrong with the number of replicates per stage.
@@ -347,7 +337,7 @@ DiffGenes <- function(ExpressionSet,
                         
                         
                         if (any(c(is.null(alpha),is.null(filter.method),is.null(comparison))))
-                                stop("Arguments alpha, comparison, and filter.method neet to be specified to remove non expressed genes.", call. = FALSE)
+                                stop ("Arguments alpha, comparison, and filter.method neet to be specified to remove non expressed genes.", call. = FALSE)
                         
                         return( Expressed(ExpressionSet    = DEG.ExpressionSet,
                                                 cut.off    = alpha, 
