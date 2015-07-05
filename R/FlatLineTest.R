@@ -112,11 +112,13 @@ FlatLineTest <- function(ExpressionSet,
         age.real <- vector(mode = "numeric",length = nCols-2)
         age.real <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
         ### compute the real variance of TAIs of the observed TAI/TDI-Hourglass pattern
-        real.var <- var(age.real)
+        real.var <- stats::var(age.real)
         ### sample only the phylostrata (row-permutations) 
         
         if (is.null(custom.perm.matrix)){
-                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
+                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),
+                                            as.vector(ExpressionSet[ , 1]),
+                                            as.numeric(permutations))
                 
         }
         
@@ -125,7 +127,7 @@ FlatLineTest <- function(ExpressionSet,
                 resMatrix <- custom.perm.matrix
         }
         
-        var_values <- apply(resMatrix,1,var)
+        var_values <- apply(resMatrix,1,stats::var)
         #random_mean_age <- apply(resMatrix,2,mean)
         ### estimate the parameters (shape,rate) 
         ### of the gamma distributed variance values
@@ -140,29 +142,29 @@ FlatLineTest <- function(ExpressionSet,
                 
                 gammaDensity <- function(x){
                         
-                        return(dgamma(x = x,shape = shape,rate = rate))
+                        return(stats::dgamma(x = x,shape = shape,rate = rate))
                         
                 }
                 
-                par(mfrow = c(1,3))
+                graphics::par(mfrow = c(1,3))
                 # plot a Cullen and Frey graph
                 fitdistrplus::descdist(var_values, boot = permutations)
                 # plot the histogram and the fitted curve
-                curve( expr = gammaDensity,
-                       xlim = c(min(var_values),max(c(var_values,real.var))),
-                       col  = "steelblue",
-                       lwd  = 5,
-                       xlab = "Variances",
-                       ylab = "Frequency", 
-                       main = paste0("permutations = ",permutations) )
+                graphics::curve( expr = gammaDensity,
+                                 xlim = c(min(var_values),max(c(var_values,real.var))),
+                                 col  = "steelblue",
+                                 lwd  = 5,
+                                 xlab = "Variances",
+                                 ylab = "Frequency", 
+                                 main = paste0("permutations = ",permutations) )
                 
-                histogram <- hist( x      = var_values,
-                                   prob   = TRUE,
-                                   add    = TRUE, 
-                                   breaks = permutations / (0.01 * permutations) )
-                rug(var_values)
+                histogram <- graphics::hist( x      = var_values,
+                                             prob   = TRUE,
+                                             add    = TRUE, 
+                                             breaks = permutations / (0.01 * permutations) )
+                graphics::rug(var_values)
                 
-                abline(v = real.var, lty = 1, lwd = 4, col = "darkred")
+                graphics::abline(v = real.var, lty = 1, lwd = 4, col = "darkred")
                 
                 p.vals_vec <- vector(mode = "numeric", length = runs)
                 
@@ -204,21 +206,21 @@ FlatLineTest <- function(ExpressionSet,
                         }
                 }
                 
-                plot( x    = p.vals_vec,
-                      type = "l" , 
-                      lwd  = 6, 
-                      ylim = c(0,1), 
-                      col  = "darkblue", 
-                      xlab = "Runs", 
-                      ylab = "p-value", 
-                      main = paste0("runs = ",runs) )
+                graphics::plot( x    = p.vals_vec,
+                                type = "l" , 
+                                lwd  = 6, 
+                                ylim = c(0,1), 
+                                col  = "darkblue", 
+                                xlab = "Runs", 
+                                ylab = "P-value", 
+                                main = paste0("runs = ",runs) )
                 
-                abline(h = 0.05, lty = 2, lwd = 3, col = "darkred")
+                graphics::abline(h = 0.05, lty = 2, lwd = 3, col = "darkred")
                 
         }
         
-        pval <- pgamma(real.var,shape = shape,rate = rate,lower.tail = FALSE)
-        sd_values <- apply(resMatrix,2,sd)
+        pval <- stats::pgamma(real.var,shape = shape,rate = rate,lower.tail = FALSE)
+        sd_values <- apply(resMatrix,2,stats::sd)
         
         #cat("\n")
         return(list(p.value = pval,std.dev = sd_values))
