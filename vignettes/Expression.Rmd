@@ -233,6 +233,8 @@ correcting for multiple testing to determine appropriate selection cut-offs.
 Please consult the documentation of `?p.adjust` to see which p-value adjustment methods are implemented
 in `DiffGenes()`.
 
+Please also consult these reviews ([Biostatistics Handbook](http://www.biostathandbook.com/multiplecomparisons.html), [Gelman et al., 2008](http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf), and [Slides](http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf)) to decide whether or not to apply p-value adjustment to your own dataset.
+
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
 
@@ -374,7 +376,7 @@ Wilcox.DEGs.adj
 ## Negative Binomial (Exact Tests)
 
 Exact Tests for Differences between Two Groups of Negative-Binomial Counts based on the
-`edgeR` function `exactTest()`.
+`edgeR` function `exactTest()`. Please consult the [edgeR Users Guide](http://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf) for mathematical details.
 
 ### Install edgeR Package
 
@@ -440,6 +442,110 @@ DoubleTail.DEGs.adj
 5            1 at1g01090.1 0.1807567 0.008867715 0.8860005
 ```
 
+### Small-P Method
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by the Small-P Method
+SmallP.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+                        nrep          = 2,
+                        method        = "smallp",
+                        stage.names   = c("S1","S2","S3"))
+
+# look at the results
+SmallP.DEGs
+```
+
+```
+  Phylostratum      GeneID    S1<->S2     S1<->S3   S2<->S3
+1            1 at1g01040.2 0.26026604 0.110233012 0.6304508
+2            1 at1g01050.1 0.95314428 0.598102712 0.6398757
+3            1 at1g01070.1 0.55461941 0.456018563 0.8774231
+4            1 at1g01080.2 0.58130025 0.487028051 0.8860005
+5            1 at1g01090.1 0.03615134 0.001773543 0.2645537
+```
+
+Again, you can adjust p-values by specifying the `p.adjust.method` argument.
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by the Small-P Method
+# and furthermore, adjust p-values for multiple comparison
+# using the Benjamini & Hochberg (1995) method: method = "BH"
+# and filter for significantly differentially expressed genes (alpha = 0.05)
+SmallP.DEGs.adj <- DiffGenes(ExpressionSet  = PhyloExpressionSetExample[1:5,1:8],
+                                nrep            = 2,
+                                method          = "smallp",
+                                stage.names     = c("S1","S2","S3"),
+                                p.adjust.method = "BH")
+
+# look at the results
+SmallP.DEGs.adj
+```
+
+```
+  Phylostratum      GeneID   S1<->S2     S1<->S3   S2<->S3
+1            1 at1g01040.2 0.6506651 0.275582530 0.8860005
+2            1 at1g01050.1 0.9531443 0.598102712 0.8860005
+3            1 at1g01070.1 0.7266253 0.598102712 0.8860005
+4            1 at1g01080.2 0.7266253 0.598102712 0.8860005
+5            1 at1g01090.1 0.1807567 0.008867715 0.8860005
+```
+
+
+### Deviance Method
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by the Deviance
+Deviance.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
+                        nrep          = 2,
+                        method        = "deviance",
+                        stage.names   = c("S1","S2","S3"))
+
+# look at the results
+Deviance.DEGs
+```
+
+```
+  Phylostratum      GeneID    S1<->S2     S1<->S3   S2<->S3
+1            1 at1g01040.2 0.26026604 0.110233012 0.6304508
+2            1 at1g01050.1 0.95314428 0.598102712 0.6398757
+3            1 at1g01070.1 0.55461941 0.456018563 0.8774231
+4            1 at1g01080.2 0.58130025 0.487028051 0.8860005
+5            1 at1g01090.1 0.03615134 0.001773543 0.2645537
+```
+
+Again, you can adjust p-values by specifying the `p.adjust.method` argument.
+
+```{r, eval=FALSE}
+data("PhyloExpressionSetExample")
+
+# Detection of DEGs using the p-value returned by the Deviance Method
+# and furthermore, adjust p-values for multiple comparison
+# using the Benjamini & Hochberg (1995) method: method = "BH"
+# and filter for significantly differentially expressed genes (alpha = 0.05)
+Deviance.DEGs.adj <- DiffGenes(ExpressionSet  = PhyloExpressionSetExample[1:5,1:8],
+                                nrep            = 2,
+                                method          = "deviance",
+                                stage.names     = c("S1","S2","S3"),
+                                p.adjust.method = "BH")
+
+# look at the results
+Deviance.DEGs.adj
+```
+
+```
+  Phylostratum      GeneID   S1<->S2     S1<->S3   S2<->S3
+1            1 at1g01040.2 0.6506651 0.275582530 0.8860005
+2            1 at1g01050.1 0.9531443 0.598102712 0.8860005
+3            1 at1g01070.1 0.7266253 0.598102712 0.8860005
+4            1 at1g01080.2 0.7266253 0.598102712 0.8860005
+5            1 at1g01090.1 0.1807567 0.008867715 0.8860005
+```
 
 ## Generalized Linear Models
 
