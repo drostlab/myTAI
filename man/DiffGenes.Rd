@@ -4,7 +4,7 @@
 \alias{DiffGenes}
 \title{Differential Gene Expression Analysis}
 \usage{
-DiffGenes(ExpressionSet, nrep, method = "foldchange",
+DiffGenes(ExpressionSet, nrep, method = "foldchange", lib.size = NULL,
   p.adjust.method = NULL, comparison = NULL, alpha = NULL,
   filter.method = NULL, n = NULL, stage.names = NULL)
 }
@@ -14,6 +14,8 @@ DiffGenes(ExpressionSet, nrep, method = "foldchange",
 \item{nrep}{either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.}
 
 \item{method}{method to detect differentially expressed genes.}
+
+\item{lib.size}{the library sizes to equalize library sizes by quantile-to-quantile normalization (see \code{\link[edgeR]{equalizeLibSizes}}).}
 
 \item{p.adjust.method}{p value correction method.}
 

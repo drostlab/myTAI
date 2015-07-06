@@ -4,6 +4,7 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param nrep either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.
 #' @param method method to detect differentially expressed genes.
+#' @param lib.size the library sizes to equalize library sizes by quantile-to-quantile normalization (see \code{\link[edgeR]{equalizeLibSizes}}).
 #' @param p.adjust.method p value correction method.
 #' @param comparison a character string specifying whether genes having fold-change or p-values
 #'  below, above, or below AND above (both) the \code{alpha} value should be excluded from the dataset.
@@ -110,6 +111,7 @@
 DiffGenes <- function(ExpressionSet,
                       nrep,
                       method          = "foldchange",
+                      lib.size        = NULL,
                       p.adjust.method = NULL,
                       comparison      = NULL,
                       alpha           = NULL,
@@ -236,40 +238,47 @@ DiffGenes <- function(ExpressionSet,
                                                               alternative = "two.sided",
                                                               var.equal   = FALSE)$p.value
                                         })
-                                        }
+                                }
                                         
-                                        if (method == "wilcox.test"){
-                                                DEGMatrix[ , k] <-  apply(ExpressionSet[, 3:ncol(ExpressionSet)], 1, function(x){
-                                                        stats::wilcox.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                if (method == "wilcox.test"){
+                                        DEGMatrix[ , k] <-  apply(ExpressionSet[, 3:ncol(ExpressionSet)], 1, function(x){
+                                                                           stats::wilcox.test(x[seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
                                                                            x[seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
                                                                            alternative = "two.sided")$p.value
-                                                })
-                                        } 
+                                                                })
+                                } 
                                         
-                                        if (method == "doubletail"){
+                                if (is.element(method, c("doubletail","smallp","deviance"))){
                                                 
-                                                DEGMatrix[ , k] <-  edgeR::exactTestDoubleTail(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-                                                                                        y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
-                                                                                        dispersion = 0.2,
-                                                                                        big.count = 900)
+                                        if (is.null(lib.size))
+                                                stop ("Please specify a library size.", call. = FALSE)
+                                                        
+                                        # combine stage replicates to a common replicate matrix
+                                        # fulfilling the edgeR exactTest() function specification
+                                        compStageMatrix <- cbind(ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+                                                                 ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])])
+                                        
+                                        # number of replicates in each stage to compare
+                                        nrep.1 <- length(seq(IndexOne[idx[1]],IndexTwo[idx[1]]))
+                                        nrep.2 <- length(seq(IndexOne[idx[2]],IndexTwo[idx[2]]))
+                                        
+                                        exactTestObject <- edgeR::DGEList(counts   = compStageMatrix,
+                                                                          group    = c(rep(1,nrep.1),rep(2,nrep.2)),
+                                                                          lib.size = rep(lib.size, nrep.1 + nrep.2))
+                                        
+                                        DEGMatrix[ , k] <- edgeR::exactTest(object           = exactTestObject,
+                                                                            pair             = 1:2,
+                                                                            dispersion       = 0.2,
+                                                                            rejection.region = method,
+                                                                            big.count        = 900,
+                                                                            prior.count      = 0.125)$table[ , "PValue"]
+                                                        
+#                                       DEGMatrix[ , k] <-  edgeR::exactTestDoubleTail(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+#                                                                                 y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+#                                                                                 dispersion = 0.2,
+#                                                                                 big.count = 900)
                                                         
                                         }
-                                
-                                if (method == "smallp"){
-                                        
-                                        DEGMatrix[ , k] <-  edgeR::exactTestBySmallP(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-                                                                                y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
-                                                                                dispersion = 0.2)
-                                        
-                                }
-                                
-                                if (method == "deviance"){
-                                        
-                                        DEGMatrix[ , k] <-  edgeR::exactTestByDeviance(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-                                                                                     y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
-                                                                                     dispersion = 0.2)
-                                        
-                                }
                                 
                         }
                         
