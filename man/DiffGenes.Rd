@@ -51,9 +51,9 @@ Available methods for the detection of differentially expressed genes:
 transformed expression levels are stored in your input \code{ExpresisonSet}.
 \item \code{method = "t.test"}: Welch t.test between replicate expression levels of two samples.
 \item \code{method = "wilcox.test"}: Wilcoxon Rank Sum Test between replicate expression levels of two samples.
-\item \code{method = "doubletail"}: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see \code{\link[edgeR]{exactTestByDeviance}} for details).
+\item \code{method = "doubletail"}: Computes two-sided p-values by doubling the smaller tail probability (see \code{\link[edgeR]{exactTestDoubleTail}} for details).
 \item \code{method = "smallp"}: Performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see \code{\link[edgeR]{exactTestBySmallP}} for details).
-\item \code{method = "deviance"}: Computes two-sided p-values by doubling the smaller tail probability (see \code{\link[edgeR]{exactTestDoubleTail}} for details).
+\item \code{method = "deviance"}: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see \code{\link[edgeR]{exactTestByDeviance}} for details).
 }
 
 
