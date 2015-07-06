@@ -392,6 +392,11 @@ biocLite("edgeR")
 
 ### Double Tail Method
 
+This method computes two-sided p-values by doubling the smaller tail probability (see `?exactTestByDeviance` for details).
+To compute P-values for stagewise comparisons based on negative binomial models, the `DiffGenes()` argument 
+`method = "doubletail"`, the number of replicates per stage `nrep`, and the library size to equalize library 
+sizes by quantile-to-quantile normalization `lib.size` need to be specified (see also `?equalizeLibSizes`).
+
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
 
@@ -399,6 +404,7 @@ data("PhyloExpressionSetExample")
 DoubleTail.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
                         nrep          = 2,
                         method        = "doubletail",
+                        lib.size      = 1000,
                         stage.names   = c("S1","S2","S3"))
 
 # look at the results
@@ -426,6 +432,7 @@ data("PhyloExpressionSetExample")
 DoubleTail.DEGs.adj <- DiffGenes(ExpressionSet  = PhyloExpressionSetExample[1:5,1:8],
                                 nrep            = 2,
                                 method          = "doubletail",
+                                lib.size        = 1000,
                                 stage.names     = c("S1","S2","S3"),
                                 p.adjust.method = "BH")
 
@@ -444,6 +451,11 @@ DoubleTail.DEGs.adj
 
 ### Small-P Method
 
+This method performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see `exactTestBySmallP` for details).
+To compute P-values for stagewise comparisons based on negative binomial models, the `DiffGenes()` argument 
+`method = "doubletail"`, the number of replicates per stage `nrep`, and the library size to equalize library 
+sizes by quantile-to-quantile normalization `lib.size` need to be specified (see also `?equalizeLibSizes`).
+
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
 
@@ -451,6 +463,7 @@ data("PhyloExpressionSetExample")
 SmallP.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
                         nrep          = 2,
                         method        = "smallp",
+                        lib.size      = 1000,
                         stage.names   = c("S1","S2","S3"))
 
 # look at the results
@@ -478,6 +491,7 @@ data("PhyloExpressionSetExample")
 SmallP.DEGs.adj <- DiffGenes(ExpressionSet  = PhyloExpressionSetExample[1:5,1:8],
                                 nrep            = 2,
                                 method          = "smallp",
+                                lib.size        = 1000,
                                 stage.names     = c("S1","S2","S3"),
                                 p.adjust.method = "BH")
 
@@ -497,6 +511,12 @@ SmallP.DEGs.adj
 
 ### Deviance Method
 
+This method uses the deviance goodness of fit statistics to define the rejection region, 
+and is therefore equivalent to a conditional likelihood ratio test (see `exactTestByDeviance` for details).
+To compute P-values for stagewise comparisons based on negative binomial models, the `DiffGenes()` argument 
+`method = "doubletail"`, the number of replicates per stage `nrep`, and the library size to equalize library 
+sizes by quantile-to-quantile normalization `lib.size` need to be specified (see also `?equalizeLibSizes`).
+
 ```{r, eval=FALSE}
 data("PhyloExpressionSetExample")
 
@@ -504,6 +524,7 @@ data("PhyloExpressionSetExample")
 Deviance.DEGs <- DiffGenes(ExpressionSet = PhyloExpressionSetExample[1:5,1:8],
                         nrep          = 2,
                         method        = "deviance",
+                        lib.size      = 1000,
                         stage.names   = c("S1","S2","S3"))
 
 # look at the results
@@ -528,9 +549,10 @@ data("PhyloExpressionSetExample")
 # and furthermore, adjust p-values for multiple comparison
 # using the Benjamini & Hochberg (1995) method: method = "BH"
 # and filter for significantly differentially expressed genes (alpha = 0.05)
-Deviance.DEGs.adj <- DiffGenes(ExpressionSet  = PhyloExpressionSetExample[1:5,1:8],
+Deviance.DEGs.adj <- DiffGenes(ExpressionSet    = PhyloExpressionSetExample[1:5,1:8],
                                 nrep            = 2,
                                 method          = "deviance",
+                                lib.size        = 1000,
                                 stage.names     = c("S1","S2","S3"),
                                 p.adjust.method = "BH")
 
