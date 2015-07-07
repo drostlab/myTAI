@@ -569,17 +569,6 @@ Deviance.DEGs.adj
 5            1 at1g01090.1 0.1807567 0.008867715 0.8860005
 ```
 
-## Generalized Linear Models
-
-
-### Install edgeR Package
-
-The detection of DEGs using generalized linear models is based on the powerful implementations
-provided by the [edgeR](http://www.bioconductor.org/packages/release/bioc/html/edgeR.html) package. Hence, before using the negative binomial models in `DiffGenes()` you need to install 
-the edgeR package.
-
-
-
 ## Collapsing Replicate Samples
 
 After performing differential gene expression analyses, replicate expression levels
