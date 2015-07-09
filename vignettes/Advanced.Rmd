@@ -19,19 +19,19 @@ knitr::opts_chunk$set(
 
 ## Overview 
 
-In the [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) vignette you learned how to perform the most fundamental computations
+In the [Introduction](Introduction.html) vignette users learned how to perform the most fundamental computations
 and visualizations for phylotranscriptomics analyses using the `myTAI` package.
-Especially the _Introduction_ vignette showed you how to perform `Phylostratigraphy` and `Divergence Stratigraphy` as well as the construction of `PhyloExpressionSets` and `DivergenceExpressionSets`.
+Especially in the _Introduction_ vignette we demonstrated how to perform `Phylostratigraphy` and `Divergence Stratigraphy` as well as the construction of `PhyloExpressionSets` and `DivergenceExpressionSets`.
 
 
-In the [Intermediate](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd) vignette you learned about more detailed analyses and more specialized techniques 
+In the [Intermediate](Intermediate.html) vignette users learned about more detailed analyses and more specialized techniques 
 to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, etc.).
 
-This vignette shows you how to retrieve already published `Phylostratigraphic Maps` and `Divergence Maps` and how you can integrate these data sets into your phylotranscriptomics pipeline.
+This vignette aims to provide users with in-depth tutorials on how to retrieve published `Phylostratigraphic Maps` and `Divergence Maps` and how they can integrate these data sets into their own phylotranscriptomics pipeline.
 
 ## Biological Sequence Retrieval with `biomartr`
 
-Both methods `Phylostratigraphy` and `Divergence Stratigraphy` need genome or proteome information for their analyses. This section will show you how to retrieve biological sequences in `*.fasta` format to be able to perform `Phylostratigraphy` and `Divergence Stratigraphy`.
+Both methods `Phylostratigraphy` and `Divergence Stratigraphy` need genome or proteome information for their analyses. This section will show users how to retrieve biological sequences in `*.fasta` format to be able to perform `Phylostratigraphy` and `Divergence Stratigraphy`.
 
 The _classical_ way to download biological sequences is via the `Terminal`:
 ```shell
@@ -51,7 +51,7 @@ Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz
 
 ```
 
-Alternatively, you can use the Biological Data Retrieval package [biomartr](https://github.com/HajkD/biomartr)
+Alternatively, users can use the Biological Data Retrieval package [biomartr](https://github.com/HajkD/biomartr)
 to download proteomes from the refseq database (see [Sequence Retrieval Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Sequence_Retrieval.Rmd) for details).
 
 ```{r,eval=FALSE}
