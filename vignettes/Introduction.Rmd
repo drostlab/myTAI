@@ -179,7 +179,7 @@ This representation of taxonomic categories as `phylostrata` are labeled as disc
 Here, all genes corresponing to `Phylostratum 1` (PS1) represent the taxonomic category `cellular organisms`.
 
 
-The `taxonomy()` function allows users to retrieve taxonomic classification information for any annotated organism of interest by specifying its `scientific name`, e.g. `Arabidopsis thaliana`, `Homo sapiens`, `Mus musculus`, etc. In case you would like to retrieve more information about each functionality and database connection implemented in the `taxonomy()`  function please consult the  [Taxonomy](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd) Vignette.
+The `taxonomy()` function allows users to retrieve taxonomic classification information for any annotated organism of interest by specifying its `scientific name`, e.g. `Arabidopsis thaliana`, `Homo sapiens`, `Mus musculus`, etc. In case you would like to retrieve more information about each functionality and database connection implemented in the `taxonomy()`  function please consult the  [Taxonomy](Taxonomy.html) Vignette.
 
 
 The next step is to run the `createPsMap.pl` script (see also [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses)).
