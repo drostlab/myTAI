@@ -91,7 +91,7 @@ PlotEnrichment(Drerio.PhyloMap,
 ```
 
 
-Here, the first argument is either a standard `ExpressionSet` object (in case `use.only.map = FALSE`: default) or a `Phylostratigraphic Map` or `Divergence Map` (in case `use.only.map = TRUE`; see [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) for details). The second argument `test.set` specifies the gene ids also stored in the corresponding `ExpressionSet` or `Phylostratigraphic Map/ Divergence Map` for which enrichment shall be quantified and visualized.
+Here, the first argument is either a standard `ExpressionSet` object (in case `use.only.map = FALSE`: default) or a `Phylostratigraphic Map` or `Divergence Map` (in case `use.only.map = TRUE`; see [Introduction](Introduction.html) for details). The second argument `test.set` specifies the gene ids also stored in the corresponding `ExpressionSet` or `Phylostratigraphic Map/ Divergence Map` for which enrichment shall be quantified and visualized.
 
 To visualize the odds or log-odds of over- or underrepresented genes within the `test.set` the following procedure is performed:
 
@@ -117,8 +117,8 @@ Notation:
 - '**' = P-Value $<=$ 0.005
 - '***' = P-Value $<=$ 0.0005
 
-As you noticed, when performing `PlotEnrichment()` function, the p-values and the
-enrichment matrix (storing $C_1$ and $C_2$).
+Users will notice that when performing the `PlotEnrichment()` function, the p-values and the
+enrichment matrix (storing $C_1$ and $C_2$) will be returned.
 
 ```{r,eval = FALSE}
 PlotEnrichment(Drerio.PhyloMap,
@@ -155,8 +155,8 @@ PS13  0.101449988 -0.984621732
 PS14  0.098211044 -0.938724783
 ```
 
-In case you are only interested in the p-values of the Fisher test and the enrichment matrix without illustrating the bar plot,
-you can specify the `plot.bars = FALSE` argument to only retrieve the numeric results.
+In case users are only interested in the p-values of the Fisher test and the enrichment matrix without illustrating the bar plot,
+they can specify the `plot.bars = FALSE` argument to only retrieve the numeric results.
 
 ```{r,eval = FALSE}
 # specify plot.bars = FALSE to retrieve only numeric results
@@ -210,7 +210,7 @@ The Fisher test which is performed inside `PlotEnrichment()` assumes
 that all genes stored in the input `ExpressionSet` or `Phylostratigraphic Map`/`Divergence Map` are used to define the background set for constructing the test statistic. However,
 since in most cases the `test.set` is an subset of the input `ExpressionSet` or `Phylostratigraphic Map`/`Divergence Map` one could also specify the `complete.bg` argument to remove all `test.set` genes from the background set when performing the Fisher test and visualization.
 
-The following two examples allow you to compare the results when retaining all genes as background set compared with the option to remove `test.set` genes from the background set.
+The following two examples allow users to compare the results when retaining all genes as background set compared with the option to remove `test.set` genes from the background set.
 
 ```{r,eval = FALSE}
 # complete.bg = TRUE (default) -> retain test.set genes in background set
@@ -232,7 +232,7 @@ PlotEnrichment(Drerio.PhyloMap,
                legendName   = "PS")
 ```
 
-As you can see, although some p-values change values, the qualitative result did not change.
+Users will notice that although some p-values change, the qualitative result did not change.
 In border line cases however, the results might influence whether or not some `Phylostrata`
 or `Divergence Strata` are denoted as significantly enriched or not. So always be aware of
 the interpretation when retaining or removing the `test.set` from the background set,
@@ -253,7 +253,7 @@ PlotEnrichment(Drerio.PhyloMap,
                legendName   = "PS")
 ```
 
-Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `taxonomy()` funtion (see [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) and [Taxonomy](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd) for details).
+Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `taxonomy()` funtion (see [Introduction](Introduction.html) and [Taxonomy](Taxonomy.html) for details).
 
 
 ```{r, eval=FALSE}
@@ -295,7 +295,7 @@ taxonomy(organism = "Danio rerio")
 
 Sestak and Domazet-Loso, 2015 collapsed these 28 taxonomic nodes into 14 taxonomic nodes
 (see `Figure 2` in Sestak and Domazet-Loso, 2015) and labelled them as phylostrata 1 to phylostrata 14, where PS1 represents `cellular organisms` and PS14 represents `D. rerio` specific genes.
-Based on the phylostrata categorization of Sestak and Domazet-Loso, 2015, PS4 represents `Holozoa (= Metazoa + allies)`, PS5 represents `Metazoa`, and PS7 represents `Bilateria`. 
+Based on the phylostratum categorization of Sestak and Domazet-Loso, 2015, PS4 represents `Holozoa (= Metazoa + allies)`, PS5 represents `Metazoa`, and PS7 represents `Bilateria`. 
 
 Now, the over-representation results of brain specific genes returned by `PlotEnrichment()`
 provide evidence, that brain specific genes might indeed have originated during the emergence of the nervous system at the metazoan-eumetazoan transition leading to the interpretation that the vertebrate brain has a step wise adaptive history where most of its extant organization was already present in the chordate ancestor as argued by Sestak and Domazet-Loso, 2015.
@@ -303,8 +303,8 @@ provide evidence, that brain specific genes might indeed have originated during 
 This example shall illustrate how the `PlotEnrichment()` function can be used to trace
 the evolutionary origin of tissue or process specific genes by investigating their age enrichment.
 
-In case you also have an `ExpressionSet` storing the `Phylostratigraphic Map` of _D. rerio_
-as well as an expression set, you can use the `PlotGeneSet()` function implemented in `myTAI` to furthermore, visualize the expression levels of brain specific genes which 
+In case users have an `ExpressionSet` storing the `Phylostratigraphic Map` of _D. rerio_
+as well as an expression set, they can furthermore use the `PlotGeneSet()` function implemented in `myTAI` to visualize the expression levels of brain specific genes which 
 have been shown to be significantly enriched in `Metazoa` specific phylostrata.
 
 Example:
@@ -326,7 +326,7 @@ PlotGeneSet(ExpressionSet = DrerioPhyloExpressionSet,
 
 Here `DrerioPhyloExpressionSet` denotes a hypothetical `ExpressionSet` of _D. rerio_ development.
 
-Additionally, the `SelectGeneSet()` function allows you to obtain the `ExpresisonSet` subset of selected genes (`gene.set`) for subsequent analyses.
+Additionally, the `SelectGeneSet()` function allows users to obtain the `ExpresisonSet` subset of selected genes (`gene.set`) for subsequent analyses.
 
 ```{r, eval = FALSE}
 # select the ExpressionSet subset of Brain specific genes
@@ -339,7 +339,7 @@ head(Brain.PhyloExpressionSet)
 ### Adjust P-values for Multiple Comparisons
 
 In case a large number of Phylostrata or Divergence Strata is included in the input `ExpressionSet`, p-values returned by `PlotEnrichment()` should be adjusted for multiple comparisons. For this purpose `PlotEnrichment()` includes the argument `p.adjust.method`. 
-All methods implemented in `?p.adjust` can be specified:
+Here, all methods implemented in `?p.adjust` can be specified:
 
 
 ```{r,eval = FALSE}
@@ -361,11 +361,11 @@ to your own dataset.
 ## Combine Functional Annotation with Enrichment Analyses
 
 The greatest advantage of `Phylostratum` and `Divergence Stratum` enrichment analyses can be unfolded
-when it is based on the functional annotation of the `test.set`. The [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Phylotranscriptomics.Rmd) vignettes of our [biomartr](https://github.com/HajkD/biomartr) package will show you how to retrieve functional
-annotation for a subset of genes. Categorizing genes into common functional groups or processes via `biomartr` will then allow you to search for genes deriving from enriched `Phylostrata` or `Divergence Strata`. The [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) vignette showed you how `Phylostrata` or `Divergence Strata` can be linked with the origin of evolutionary events.
+when it is based on the functional annotation of the `test.set`. The [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Phylotranscriptomics.Rmd) vignettes of our [biomartr](https://github.com/HajkD/biomartr) package provide detailed tutorials on how to retrieve functional
+annotation for a subset of genes. Categorizing genes into common functional groups or processes via `biomartr` will then allow users to search for genes deriving from enriched `Phylostrata` or `Divergence Strata`. The [Introduction](Introduction.html) vignette illustrated how `Phylostrata` or `Divergence Strata` can be linked with the origin of evolutionary events.
 This correlation between the predicted origin of genes (`Phylostratigraphic Map`) or its
 current state of selection between closely related species (`Divergence Map`) and their
-functional annotation allows you to detect signals of potential evolutionary origins of
+functional annotation furthermore allows users to detect signals of potential evolutionary origins of
 specific biological functions, processes, or tissues and their active maintenance between
 closely related species.
 
