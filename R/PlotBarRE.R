@@ -188,7 +188,7 @@ PlotBarRE <- function(ExpressionSet,
                 do.call(graphics::text,c(list(apply(REBarPlot,2,mean),0.95,labels = pValNames),
                                          dots[!is.element(names(dots),c(barplot.args))]))
                 
-                suppressWarnings(arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
+                suppressWarnings(graphics::arrows(x0 = REBarPlot,y0 = ifelse(MeanREClassValues > 0,MeanREClassValues, (1/999)),x1 = REBarPlot,
                        y1 = ifelse((StdErr.RE.ClassValues) == 0,MeanREClassValues + (1/999),
                                    MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength))
                 
@@ -221,7 +221,7 @@ PlotBarRE <- function(ExpressionSet,
                        y1 = ifelse((StdErr.RE.ClassValues) == 0,MeanREClassValues + (1/999),
                                    MeanREClassValues + StdErr.RE.ClassValues),code = 2, angle = 90, length = wLength))
                 
-                legend("topleft",legend = paste("Group ",1:length(Groups),sep = ""),fill = barColors,bty = "n",ncol = ceiling(nGroups/2))
+                graphics::legend("topleft",legend = paste("Group ",1:length(Groups),sep = ""),fill = barColors,bty = "n",ncol = ceiling(nGroups/2))
         }
         
 }
