@@ -17,13 +17,13 @@ knitr::opts_chunk$set(
 ```
 
 
-This vignette will introduce you to the retrieval of taxonomic information with `myTAI`. 
-Most taxonomy functions implemented in `myTAI` rely on the powerful package [taxize](http://cran.r-project.org/web/packages/taxize/index.html).
+This vignette will introduce users to the retrieval of taxonomic information with `myTAI`. 
+The `taxonomy()` function implemented in `myTAI` relies on the powerful package [taxize](http://cran.r-project.org/web/packages/taxize/index.html).
 Nevertheless, taxonomic information retrieval has been customized for the `myTAI` standard
 and for organism specific information retrieval.
 
 Specifically, the `taxonomy()` function implemented in `myTAI` can be used to classify genomes
-according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy (see [Introduction](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd) for details).
+according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy (see [Introduction](Introduction.html) for details).
 
 
 ## Taxonomic Information Retrieval
@@ -71,7 +71,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 The `organism` argument takes the scientific name of a query organism, the `db` argument
 specifies that database from which the corresponding taxonomic information shall be retrieved,
 e.g. `ncbi` (NCBI Taxonomy) and `itis` (Integrated Taxonomic Information System) and the `output` argument specifies the type of taxonomic information
-shall shall be returned for the query organism, e.g. `classification`, `taxid`, or `children`.
+that shall be returned for the query organism, e.g. `classification`, `taxid`, or `children`.
 
 The output of `classification` is a `data.frame` storing the taxonomic hierarchy of `Arabidopsis thaliana`
 starting with `cellular organisms` up to `Arabidopsis thaliana`. The first column stores the taxonomic name,
@@ -183,3 +183,6 @@ taxonomy( organism = "Arabidopsis",
 3 Arabidopsis     23040  Species   Arabidopsis arenosa 823130
 4 Arabidopsis     23040  Species    Arabidopsis lyrata 823171
 ```
+
+These results allow us to choose `subject` organisms for [Divergence Stratigraphy](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd).
+
