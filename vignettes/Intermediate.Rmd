@@ -189,7 +189,7 @@ abline(v = var_real, lwd = 5, col = "red")
 This plot illustrates that variances based on random `TAI` profiles seem to have a smaller variance than the variance based on the correct `TAI` profile. To obtain a p-value that now quantifies this difference, we need to fit the histogram of `variance_vector` with a specific probability distribution. 
 
 
-Visually it would be possible to choose a gamma distribution to fit the histogram of `variance_vector`. To validate this choice a [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment) provided by the [fitdistrplus](http://cran.r-project.org/web/packages/fitdistrplus/index.html) package can be used.
+Visually it would be possible to choose a gamma distribution to fit the histogram of `variance_vector`. To validate this choice a [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment) provided by the __fitdistrplus__ package can be used.
 
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}

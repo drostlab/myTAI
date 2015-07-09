@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 
 This vignette will introduce users to the retrieval of taxonomic information with `myTAI`. 
-The `taxonomy()` function implemented in `myTAI` relies on the powerful package [taxize](http://cran.r-project.org/web/packages/taxize/index.html).
+The `taxonomy()` function implemented in `myTAI` relies on the powerful package [taxize](https://github.com/ropensci/taxize).
 Nevertheless, taxonomic information retrieval has been customized for the `myTAI` standard
 and for organism specific information retrieval.
 
