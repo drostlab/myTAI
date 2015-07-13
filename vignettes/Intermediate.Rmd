@@ -63,7 +63,7 @@ head(PhyloExpressionSetExample, 3)
 
 ```
 
-As you can see the first column of the `PhyloExpressionSetExample` stores the Phylostratum assignments of the corresponding genes.
+Users will observe that the first column of the `PhyloExpressionSetExample` stores the Phylostratum assignments of the corresponding genes.
 The permutation test is based on random sampling of the Phylostratum assignment of genes. The underlying assumption is that
 the `TAI` profile of correctly assigned Phylostrata is significantly deviating from `TAI` profiles based on randomly assigned Phylostrata.
 
@@ -113,7 +113,7 @@ PlotPattern( ExpressionSet =  randomPhyloExpressionSetExample,
              p.value       = FALSE ) 
 ```
 
-As you can see, the visual pattern of the correctly assigned `TAI` profile and the randomly assigned `TAI` profile differ qualitatively.
+Users will observe that the visual pattern of the correctly assigned `TAI` profile and the randomly assigned `TAI` profile differ qualitatively.
 
 Now we investigate the variance of the two observed patterns.
 
