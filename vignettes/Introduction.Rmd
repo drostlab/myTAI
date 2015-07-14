@@ -161,8 +161,26 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 The resulting classification table shows all taxonomic categories starting with the _oldest_ taxonomic category (`cellular organisms`) down to the _youngest_ taxonomic category (`Arabidopsis thaliana`). The `taxonomy ids` stored in the third column are used to classify proteomes stored in  the curated data base (e.g. NCBI nr) into corresponding taxonomic categories stored in the first column. 
 
-In some cases (due to the coverage of sequenced genomes and predicted proteomes) only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, Quint et al., 2012 and Drost et al., 2015 summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
+In some cases (due to the coverage of sequenced genomes and predicted proteomes) only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, recently we summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
 taxonomic category (see [Fig. 1 c](http://mbe.oxfordjournals.org/content/32/5/1221/F1.expansion.html)). These 12 taxonomic categories are represented as 12 `phylostrata` starting with the _oldest_ `phylostratum` (= `PS1` = `cellular organisms`) up to the _youngest_ `phylostratum` (= `PS12` = `A. thaliana`).
+
+
+| Taxonomy                  | Phylostratum |
+|:-------------------------:|:------------:|
+|   cell. organisms         |  1           |
+|   Eukaryota               |  2           |
+|   Viridiplantae           |  3           |
+|   Embryophyta             |  4           |
+|   Tracheophyta            |  5           |
+|   Magnoliophyta           |  6           |
+|   Eudicotyledons          |  7           |
+|   Core Eudicotyledons     |  8           |
+|   Rosids                  |  9           |
+|   Brassicales             |  10          |
+|   Arabidopsis             |  11          |
+|   A. thaliana             |  12          |
+
+: Collapsed Taxonomy (Phylostratigraphic Map) used by Drost _et al_, 2015.
 
 This representation of taxonomic categories as `phylostrata` are labeled as discrete values _1, 2, ..., n_  and are stored in all `Phylostratigraphic Maps`.
 
