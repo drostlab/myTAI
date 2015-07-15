@@ -350,7 +350,7 @@ The Reductive Hourglass Test is a permutation test based on the following test s
 
 4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reductive Hourglass Test__.
 
-In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
 
 
 
@@ -473,7 +473,7 @@ The reductive early conservation test is a permutation test based on the followi
 
 4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reductive Early Conservation Test__.
 
-In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by an [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by an [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
 
 
 To perform the __Reductive Early Conservation Test__ you can use the `EarlyConservationTest()` function.
@@ -716,13 +716,21 @@ isn't robust against data transformations.
 
 ## References
 
-Domazet-Loso T. and Tautz D. __A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns__. _Nature_ (2010) 468: 815-8.
+Domazet-Loso, T. & Tautz, D. __A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns__. _Nature_ __468__, 815-8 (2010).
 
-Quint M. et al. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ (2012) 490: 98-101.
+Quint, M. _et al_. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ __490__, 98-101 (2012).
 
-Piasecka B. et al. __The hourglass and the early conservation models - co-existing patterns of developmental constraints in vertebrates__. _PLoS Genet_. (2013) 9:e1003476.
+Drost, H.G. _et al_. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ __32__ (5), 1221-1231 (2015).
 
-Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231.
+Piasecka, B. _et al_. __The hourglass and the early conservation models - co-existing patterns of developmental constraints in vertebrates__. _PLoS Genet_.  __9__:e1003476 (2013).
+
+Quackenbush, J. Computational Analysis of Microarray Data. _Nature Reviews_. __2__, 418-427 (2001).
+
+Quackenbush, J. Microarray data normalization and transformation. _Nature Genetics_. __32__, 496-501 (2002).
+
+Yeung, K.Y. _et al_. Model-based clustering and data transformations for gene expression data. _Bioinformatics_. __17__, 977-987 (2001).
+
+Yeung, K.Y. _et al_. Supplement to _Model-based clustering and data transformations for gene expression data – Data Transformations and the Gaussian mixture assumption_. _Bioinformatics_. __17__, 977-987 (2001).
 
 
 
