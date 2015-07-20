@@ -83,7 +83,7 @@ Drerio.Brain.Genes <- unique(na.omit(Drerio.OrganSpecificExpression[ , "brain"])
 
 # visualize enriched Phylostrata of genes annotated as brain specific
 PlotEnrichment(Drerio.PhyloMap,
-               test.set     = Drerio.Brain.Genes[ , 1],
+               test.set     = Drerio.Brain.Genes,
                measure      = "log-foldchange",
                use.only.map = TRUE,
                legendName   = "PS")
@@ -122,7 +122,7 @@ enrichment matrix (storing $C_1$ and $C_2$) will be returned.
 
 ```{r,eval = FALSE}
 PlotEnrichment(Drerio.PhyloMap,
-               test.set     = Drerio.Brain.Genes[ , 1],
+               test.set     = Drerio.Brain.Genes,
                measure      = "log-foldchange",
                use.only.map = TRUE,
                legendName   = "PS")
@@ -161,7 +161,7 @@ they can specify the `plot.bars = FALSE` argument to only retrieve the numeric r
 ```{r,eval = FALSE}
 # specify plot.bars = FALSE to retrieve only numeric results
 EnrichmentResult <- PlotEnrichment(Drerio.PhyloMap,
-                                   test.set     = Drerio.Brain.Genes[ , 1],
+                                   test.set     = Drerio.Brain.Genes,
                                    measure      = "log-foldchange",
                                    use.only.map = TRUE,
                                    legendName   = "PS",
@@ -215,7 +215,7 @@ The following two examples allow users to compare the results when retaining all
 ```{r,eval = FALSE}
 # complete.bg = TRUE (default) -> retain test.set genes in background set
 PlotEnrichment(Drerio.PhyloMap,
-               test.set     = Drerio.Brain.Genes[ , 1],
+               test.set     = Drerio.Brain.Genes,
                measure      = "log-foldchange",
                complete.bg  = TRUE,
                use.only.map = TRUE,
@@ -225,7 +225,7 @@ PlotEnrichment(Drerio.PhyloMap,
 ```{r,eval = FALSE}
 # complete.bg = FALSE -> remove test.set genes from background set
 PlotEnrichment(Drerio.PhyloMap,
-               test.set     = Drerio.Brain.Genes[ , 1],
+               test.set     = Drerio.Brain.Genes,
                measure      = "log-foldchange",
                complete.bg  = FALSE,
                use.only.map = TRUE,
@@ -244,9 +244,8 @@ For the _D. rerio_ brain genes example you can see that PS4, PS5, and PS7 are si
 over-represented in the set of brain specific genes. 
 
 ```{r, eval = FALSE}
-
 PlotEnrichment(Drerio.PhyloMap,
-               test.set     = Drerio.Brain.Genes[ , 1],
+               test.set     = Drerio.Brain.Genes,
                measure      = "foldchange",
                complete.bg  = TRUE,
                use.only.map = TRUE,
@@ -313,7 +312,7 @@ Example:
 # the best parameter setting to visualize this plot:
 # png("DrerioBrainSpecificGeneExpression.png",700,400)
 PlotGeneSet(ExpressionSet = DrerioPhyloExpressionSet,
-            gene.set      = Drerio.Brain.Genes[ , 1],
+            gene.set      = Drerio.Brain.Genes,
             plot.legend   = FALSE,
             type          = "l",
             lty           = 1,
@@ -331,7 +330,7 @@ Additionally, the `SelectGeneSet()` function allows users to obtain the `Expresi
 ```{r, eval = FALSE}
 # select the ExpressionSet subset of Brain specific genes
 Brain.PhyloExpressionSet <- SelectGeneSet( ExpressionSet = DrerioPhyloExpressionSet,
-                                           gene.set      = Drerio.Brain.Genes[ , 1] )
+                                           gene.set      = Drerio.Brain.Genes )
         
 head(Brain.PhyloExpressionSet)
 ```
@@ -345,7 +344,7 @@ Here, all methods implemented in `?p.adjust` can be specified:
 ```{r,eval = FALSE}
 # adjust p-values for multiple comparisons with Benjamini & Hochberg (1995)
 PlotEnrichment(Drerio.PhyloMap,
-               test.set        = Drerio.Brain.Genes[ , 1],
+               test.set        = Drerio.Brain.Genes,
                measure         = "log-foldchange",
                complete.bg     = FALSE,
                use.only.map    = TRUE,
