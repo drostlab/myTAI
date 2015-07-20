@@ -730,7 +730,7 @@ Quackenbush, J. Microarray data normalization and transformation. _Nature Geneti
 
 Yeung, K.Y. _et al_. Model-based clustering and data transformations for gene expression data. _Bioinformatics_. __17__, 977-987 (2001).
 
-Yeung, K.Y. _et al_. Supplement to _Model-based clustering and data transformations for gene expression data – Data Transformations and the Gaussian mixture assumption_. _Bioinformatics_. __17__, 977-987 (2001).
+Yeung, K.Y. _et al_. Supplement to _Model-based clustering and data transformations for gene expression data - Data Transformations and the Gaussian mixture assumption_. _Bioinformatics_. __17__, 977-987 (2001).
 
 
 
