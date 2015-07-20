@@ -7,8 +7,10 @@ myTAI 0.3.0
 
 ### New Functions
 
+
 ### Updates
 
+- `PlotGeneSet()` and `SelectGeneSet()` now have a new argument `use.only.map` specifying whether or not instead of using a standard `ExpressionSet` a `Phylostratigraphic Map` or `Divergene Map` is passed to the function.
 
 
 myTAI 0.2.0
