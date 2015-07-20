@@ -3,6 +3,8 @@ myTAI 0.3.0
 
 ### Vignettes
 
+- fixed a wrong example in the Enrichment vignette (https://github.com/HajkD/myTAI/commit/8d52fd60c274361dc9028dec3409abf60a738d8a)
+
 ### New Functions
 
 ### Updates
