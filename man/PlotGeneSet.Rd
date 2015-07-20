@@ -4,8 +4,9 @@
 \alias{PlotGeneSet}
 \title{Plot the Expression Profiles of a Gene Set}
 \usage{
-PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL,
-  plot.legend = TRUE, y.ticks = 6, digits.ylab = 4, ...)
+PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE,
+  use.only.map = FALSE, colors = NULL, plot.legend = TRUE, y.ticks = 6,
+  digits.ylab = 4, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -13,6 +14,8 @@ PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE, colors = NULL,
 \item{gene.set}{a character vector storing the gene ids for which gene expression profiles shall be visualized.}
 
 \item{get.subset}{a logical value indicating whether or not an \code{ExpressionSet} subset of the selected \code{gene.set} should be retuned.}
+
+\item{use.only.map}{a logical value indicating whether instead of a standard \code{ExpressionSet} only a \code{Phylostratigraphic Map} or \code{Divergene Map} is passed to the function.}
 
 \item{colors}{colors for gene expression profiles. Default: \code{colors = NULL}, hence default colours are used.}
 
@@ -53,8 +56,20 @@ PlotGeneSet(ExpressionSet = PhyloExpressionSetExample,
 PlotGeneSet(ExpressionSet = PhyloExpressionSetExample,
             gene.set      = PhyloExpressionSetExample[1:5, 2],
             get.subset    = TRUE)
+
+
+# get a gene subset using only a phylostratihraphic map
+ExamplePSMap <- PhyloExpressionSetExample[ , 1:2]
+
+PlotGeneSet(ExpressionSet = ExamplePSMap,
+            gene.set      = PhyloExpressionSetExample[1:5, 2],
+            get.subset    = TRUE,
+            use.only.map  = TRUE)
 }
 \author{
 Hajk-Georg Drost
+}
+\seealso{
+\code{\link{SelectGeneSet}}, \code{\link{PlotEnrichment}}, \code{\link{DiffGenes}}
 }
 

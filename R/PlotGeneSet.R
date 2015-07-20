@@ -5,6 +5,7 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param gene.set a character vector storing the gene ids for which gene expression profiles shall be visualized. 
 #' @param get.subset a logical value indicating whether or not an \code{ExpressionSet} subset of the selected \code{gene.set} should be retuned. 
+#' @param use.only.map a logical value indicating whether instead of a standard \code{ExpressionSet} only a \code{Phylostratigraphic Map} or \code{Divergene Map} is passed to the function.
 #' @param colors colors for gene expression profiles. Default: \code{colors = NULL}, hence default colours are used.
 #' @param plot.legend a logical value indicating whether gene ids should be printed as legend next to the plot.
 #' @param y.ticks a numeric value specifying the number of ticks to be drawn on the y-axis.
@@ -16,6 +17,7 @@
 #' This function simply visualizes or subsets the gene expression levels of a set of genes
 #' that are stored in the input \code{ExpressionSet}.
 #' 
+#' @seealso \code{\link{SelectGeneSet}}, \code{\link{PlotEnrichment}}, \code{\link{DiffGenes}}  
 #' @examples
 #' data(PhyloExpressionSetExample)
 #' 
@@ -39,17 +41,27 @@
 #'             get.subset    = TRUE)
 #' 
 #' 
+#' # get a gene subset using only a phylostratihraphic map
+#' ExamplePSMap <- PhyloExpressionSetExample[ , 1:2]
+#' 
+#' PlotGeneSet(ExpressionSet = ExamplePSMap, 
+#'             gene.set      = PhyloExpressionSetExample[1:5, 2], 
+#'             get.subset    = TRUE,
+#'             use.only.map  = TRUE)
+#'             
 #' @export
 
 PlotGeneSet <- function(ExpressionSet, 
                         gene.set, 
-                        get.subset  = FALSE, 
-                        colors      = NULL,
-                        plot.legend = TRUE,
-                        y.ticks     = 6,
-                        digits.ylab = 4, ... ){
+                        get.subset   = FALSE,
+                        use.only.map = FALSE,
+                        colors       = NULL,
+                        plot.legend  = TRUE,
+                        y.ticks      = 6,
+                        digits.ylab  = 4, ... ){
         
-        is.ExpressionSet(ExpressionSet)
+        if (!use.only.map)
+                is.ExpressionSet(ExpressionSet)
         
         GeneSubSet.indixes <- stats::na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
         
