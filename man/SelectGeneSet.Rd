@@ -4,12 +4,14 @@
 \alias{SelectGeneSet}
 \title{Select a Subset of Genes in an ExpressionSet}
 \usage{
-SelectGeneSet(ExpressionSet, gene.set)
+SelectGeneSet(ExpressionSet, gene.set, use.only.map = FALSE)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
 \item{gene.set}{a character vector storing the gene ids for which gene expression profiles shall be visualized.}
+
+\item{use.only.map}{a logical value indicating whether instead of a standard \code{ExpressionSet} only a \code{Phylostratigraphic Map} or \code{Divergene Map} is passed to the function.}
 }
 \description{
 Select a subset of genes stored in the input \code{ExpressionSet}.
@@ -27,6 +29,14 @@ data(PhyloExpressionSetExample)
 # the PhyloExpressionSetExample
 SelectGeneSet(ExpressionSet = PhyloExpressionSetExample,
             gene.set      = PhyloExpressionSetExample[1:5, 2])
+
+
+# get a gene subset using only a phylostratihraphic map
+ExamplePSMap <- PhyloExpressionSetExample[ , 1:2]
+
+SelectGeneSet(ExpressionSet = ExamplePSMap,
+              gene.set      = PhyloExpressionSetExample[1:5, 2],
+              use.only.map  = TRUE)
 }
 \author{
 Hajk-Georg Drost
