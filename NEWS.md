@@ -1,16 +1,15 @@
-myTAI 0.3.0
+myTAI 0.2.1
 ===========
 
 ### Vignettes
 
 - fixed a wrong example in the Enrichment vignette (https://github.com/HajkD/myTAI/commit/8d52fd60c274361dc9028dec3409abf60a738d8a)
 
-### New Functions
-
 
 ### Updates
 
 - `PlotGeneSet()` and `SelectGeneSet()` now have a new argument `use.only.map` specifying whether or not instead of using a standard `ExpressionSet` a `Phylostratigraphic Map` or `Divergene Map` is passed to the function.
+- a wrong version of the edgeR Bioconductor package was imported causing version 0.2.0 to fail R CMD Check on unix based systems
 
 
 myTAI 0.2.0
