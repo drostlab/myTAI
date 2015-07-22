@@ -1,5 +1,3 @@
-# Sample .travis.yml for R projects
-
 language: r
 bioc_required: true
 bioc_packages: 
@@ -7,19 +5,7 @@ bioc_packages:
 warnings_are_errors: true
 sudo: required
 r_check_revdep: false
-
-env:
- global:
-   - CRAN: http://cran.rstudio.com
-   - R_BUILD_ARGS="--no-build-vignettes --no-manual"
-   - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
-   - BIOC_USE_DEVEL="FALSE"
-   - R_CHECK_TIME="TRUE"
-   - R_CHECK_TESTS="TRUE"
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+r_check_args: "--no-build-vignettes --no-manual --as-cran"
+cran: http://cran.rstudio.com/
 
   
