@@ -29,18 +29,33 @@ These tutorials will get you started with this package:
 
 You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
-```r
+## Installation
 
-# first install the myTAI package 
-# -> see "Fast Installation Guide" for the current development version
-install.packages("myTAI", repos = "https://cran.rstudio.com/", dependencies = TRUE, type = "source")
+Users can download `myTAI` from [CRAN](https://cran.r-project.org/web/packages/myTAI/index.html) :
+
+```r
+# install biomartr from CRAN
+install.packages("myTAI",
+                 repos        = "https://cran.rstudio.com/",
+                 dependencies = TRUE,
+                 type         = "source")
+```
+
+### Package Dependencies
+
+
+```r
 
 # to perform differential gene expression analyses with myTAI
 # please install the edgeR package
 # install edgeR
 source("http://bioconductor.org/biocLite.R")
 biocLite("edgeR")
+```
 
+## Getting started with `myTAI`
+
+```r
 # source the myTAI package
 library(myTAI)
 
