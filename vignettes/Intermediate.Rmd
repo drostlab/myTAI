@@ -630,7 +630,7 @@ the resulting phylotranscriptomic patterns qualitatively differ:
 
 ### log2 transformation
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 
 data(PhyloExpressionSetExample)
 
@@ -648,7 +648,7 @@ PlotPattern( ExpressionSet = tf(PhyloExpressionSetExample, log2),
 
 ### sqrt transformation
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 
 data(PhyloExpressionSetExample)
 
@@ -676,7 +676,7 @@ The same accounts for `TDI` profiles:
 
 ### log2 transformation
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(DivergenceExpressionSetExample)
 
 # plotting the TDI using log2 transformed expression levels
@@ -693,7 +693,7 @@ PlotPattern( ExpressionSet = tf(DivergenceExpressionSetExample, log2),
 
 ### sqrt transformation
 
-```{r, fig.width= 7, fig.height= 5}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(DivergenceExpressionSetExample)
 
 # plotting the TDI using sqrt transformed expression levels
