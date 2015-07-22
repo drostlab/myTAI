@@ -21,11 +21,4 @@ notifications:
     on_success: change
     on_failure: change
 
-install:
-  - ./travis-tool.sh install_bioc_deps
-  
-  
-on_failure:
-  - ./travis-tool.sh dump_logs
-  
   
