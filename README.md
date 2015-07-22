@@ -33,7 +33,7 @@ You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
 # first install the myTAI package 
 # -> see "Fast Installation Guide" for the current development version
-install.packages("myTAI", build_vignettes = TRUE, dependencies = TRUE)
+install.packages("myTAI", repos = "https://cran.rstudio.com/", dependencies = TRUE, type = "source")
 
 # to perform differential gene expression analyses with myTAI
 # please install the edgeR package
