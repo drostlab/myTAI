@@ -1,6 +1,8 @@
 myTAI
 =====
 
+[![Travis-CI Build Status](https://travis-ci.org/HajkD/myTAI.svg?branch=master)](https://travis-ci.org/HajkD/myTAI)
+
 ### Performing Phylotranscriptomics with R
 
 The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.

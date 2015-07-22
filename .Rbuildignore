@@ -4,3 +4,4 @@
 .Rprofile
 man-roxygen
 NEWS\.md
+^\.travis\.yml$
