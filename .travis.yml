@@ -4,6 +4,8 @@ language: r
 bioc_required: true
 warnings_are_errors: true
 sudo: required
+r_check_revdep: false
+bioc_packages: edgeR
 
 env:
  global:
@@ -20,7 +22,6 @@ notifications:
     on_failure: change
 
 install:
-  - ./travis-tool.sh install_bioc edgeR
   - ./travis-tool.sh install_bioc_deps
   
   
