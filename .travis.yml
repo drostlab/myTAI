@@ -7,6 +7,8 @@ sudo: required
 env:
  global:
    - CRAN: http://cran.rstudio.com
+   - R_BUILD_ARGS="--no-build-vignettes --no-manual"
+   - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
    - BIOC_USE_DEVEL="FALSE"
    - R_CHECK_TIME="TRUE"
    - R_CHECK_TESTS="TRUE"
@@ -18,3 +20,4 @@ notifications:
 
 install:
   - ./travis-tool.sh install_bioc edgeR
+  - ./travis-tool.sh install_bioc_deps
