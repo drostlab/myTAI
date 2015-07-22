@@ -27,14 +27,14 @@ These tutorials will get you started with this package:
 - [Gene Expression Analysis with myTAI](https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd)
 - [Taxonomic Information Retrieval](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd)
 
-You can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
+Users can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
 ## Installation
 
 Users can download `myTAI` from [CRAN](https://cran.r-project.org/web/packages/myTAI/index.html) :
 
 ```r
-# install biomartr from CRAN
+# install myTAI 0.2.1 from CRAN
 install.packages("myTAI",
                  repos        = "https://cran.rstudio.com/",
                  dependencies = TRUE,
@@ -45,7 +45,6 @@ install.packages("myTAI",
 
 
 ```r
-
 # to perform differential gene expression analyses with myTAI
 # please install the edgeR package
 # install edgeR
@@ -146,7 +145,10 @@ All three functions also include visual analytics tools to quantify the goodness
 * `rhScore()` : Compute the Hourglass Score for the Reductive Hourglass Test
 
 
-## Install Developer Version of myTAI
+## Developer Version of `myTAI`
+
+The developer version of `myTAI` might include more functionality than the stable version on CRAN.
+Hence users can download the current developer version of `myTAI` by typing:
 
 ```r
 # The developer version can be installed directly from github:
