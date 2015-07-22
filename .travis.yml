@@ -1,6 +1,7 @@
 # Sample .travis.yml for R projects
 
 language: r
+bioc_required: true
 warnings_are_errors: true
 sudo: required
 
@@ -21,3 +22,9 @@ notifications:
 install:
   - ./travis-tool.sh install_bioc edgeR
   - ./travis-tool.sh install_bioc_deps
+  
+  
+on_failure:
+  - ./travis-tool.sh dump_logs
+  
+  
