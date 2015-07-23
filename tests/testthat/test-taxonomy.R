@@ -59,33 +59,33 @@ context("Test: taxonomy() ")
 #         expect_equal(as.numeric(taxonomy("Arabidopsis thaliana",db = "tnrs", output = "taxid")),3702)
 # })
 
-test_that("db = itis interface works properly...",{
-        
-        test.tax <- taxonomy("Arabidopsis thaliana",db = "itis")
-        expect_equal(test.tax[nrow(test.tax), 1],"Arabidopsis thaliana")
-        
-        
-        
-        test.tax2 <- taxonomy("Arabidopsis",db = "itis")
-        expect_equal(test.tax2[nrow(test.tax2), 1],"Arabidopsis")
-        
-        
-        
-        test.tax3 <- taxonomy("Homo sapiens",db = "itis")
-        expect_equal(test.tax3[nrow(test.tax3), 1],"Homo sapiens")
-        
-        
-        
-        test.tax4 <- taxonomy("Mus musculus",db = "itis")
-        expect_equal(test.tax4[nrow(test.tax4), 1],"Mus musculus")
-        
-        
-        
-        test.tax5 <- taxonomy("Danio rerio",db = "itis")
-        expect_equal(test.tax5[nrow(test.tax5), 1],"Danio rerio")
-        
-        expect_equal(as.numeric(taxonomy("Arabidopsis thaliana",db = "itis", output = "taxid")),23041)
-})
+# test_that("db = itis interface works properly...",{
+#         
+#         test.tax <- taxonomy("Arabidopsis thaliana",db = "itis")
+#         expect_equal(test.tax[nrow(test.tax), 1],"Arabidopsis thaliana")
+#         
+#         
+#         
+#         test.tax2 <- taxonomy("Arabidopsis",db = "itis")
+#         expect_equal(test.tax2[nrow(test.tax2), 1],"Arabidopsis")
+#         
+#         
+#         
+#         test.tax3 <- taxonomy("Homo sapiens",db = "itis")
+#         expect_equal(test.tax3[nrow(test.tax3), 1],"Homo sapiens")
+#         
+#         
+#         
+#         test.tax4 <- taxonomy("Mus musculus",db = "itis")
+#         expect_equal(test.tax4[nrow(test.tax4), 1],"Mus musculus")
+#         
+#         
+#         
+#         test.tax5 <- taxonomy("Danio rerio",db = "itis")
+#         expect_equal(test.tax5[nrow(test.tax5), 1],"Danio rerio")
+#         
+#         expect_equal(as.numeric(taxonomy("Arabidopsis thaliana",db = "itis", output = "taxid")),23041)
+# })
 
 
 # test_that("db = phylomatic interface works properly...",{
@@ -298,33 +298,33 @@ test_that("db = itis interface works properly...",{
 #         
 # })
 
-test_that("db = ncbi interface works properly...",{
-        
-        test.tax <- taxonomy("Arabidopsis thaliana",db = "ncbi")
-        expect_equal(test.tax[nrow(test.tax), 1],"Arabidopsis thaliana")
-        
-        
-        
-        test.tax2 <- taxonomy("Arabidopsis",db = "ncbi")
-        expect_equal(test.tax2[nrow(test.tax2), 1],"Arabidopsis")
-        
-        
-        
-        test.tax3 <- taxonomy("Homo sapiens",db = "ncbi")
-        expect_equal(test.tax3[nrow(test.tax3), 1],"Homo sapiens")
-        
-        
-        
-        test.tax4 <- taxonomy("Mus musculus",db = "ncbi")
-        expect_equal(test.tax4[nrow(test.tax4), 1],"Mus musculus")
-        
-        
-        
-        test.tax5 <- taxonomy("Danio rerio",db = "ncbi")
-        expect_equal(test.tax5[nrow(test.tax5), 1],"Danio rerio")
-        
-        
-})
+# test_that("db = ncbi interface works properly...",{
+#         
+#         test.tax <- taxonomy("Arabidopsis thaliana",db = "ncbi")
+#         expect_equal(test.tax[nrow(test.tax), 1],"Arabidopsis thaliana")
+#         
+#         
+#         
+#         test.tax2 <- taxonomy("Arabidopsis",db = "ncbi")
+#         expect_equal(test.tax2[nrow(test.tax2), 1],"Arabidopsis")
+#         
+#         
+#         
+#         test.tax3 <- taxonomy("Homo sapiens",db = "ncbi")
+#         expect_equal(test.tax3[nrow(test.tax3), 1],"Homo sapiens")
+#         
+#         
+#         
+#         test.tax4 <- taxonomy("Mus musculus",db = "ncbi")
+#         expect_equal(test.tax4[nrow(test.tax4), 1],"Mus musculus")
+#         
+#         
+#         
+#         test.tax5 <- taxonomy("Danio rerio",db = "ncbi")
+#         expect_equal(test.tax5[nrow(test.tax5), 1],"Danio rerio")
+#         
+#         
+# })
 
 # test_that("db = vascan interface works properly...",{
 #         
