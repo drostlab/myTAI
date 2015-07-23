@@ -1,3 +1,15 @@
+myTAI 0.3.0.9000
+===========
+
+### Vignettes
+
+
+### New Functions
+
+
+### Updates
+
+
 myTAI 0.2.1
 ===========
 
