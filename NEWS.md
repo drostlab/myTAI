@@ -6,6 +6,7 @@ myTAI 0.3.0.9000
 
 ### New Functions
 
+- a new function `PlotCategoryExprBars()` allowing users to plot the expression levels of each age or divergence category as barplot or violinplot
 
 ### Updates
 
