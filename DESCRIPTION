@@ -26,7 +26,9 @@ Imports:
     graphics (>= 3.1.1),
     stats (>= 3.1.1),
     grDevices (>= 3.1.1),
-    utils (>= 3.1.1)
+    utils (>= 3.1.1),
+    reshape2 (>= 1.4.1),
+    ggplot2 (>= 1.0.1)
 Suggests: 
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
