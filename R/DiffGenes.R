@@ -247,7 +247,7 @@ DiffGenes <- function(ExpressionSet,
                                                                            alternative = "two.sided")$p.value
                                                                 })
                                 } 
-                                        
+                                
                                 if (is.element(method, c("doubletail","smallp","deviance"))){
                                                 
                                         if (is.null(lib.size))
