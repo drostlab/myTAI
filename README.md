@@ -108,7 +108,7 @@ In the `myTAI` framework you can find:
 * `PlotContribution()` : Plot the Phylostratum or Divergence Stratum Contribution to the Global TAI/TDI Pattern
 * `PlotEnrichment()` : Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set
 * `PlotGeneSet()` : Plot the Expression Profiles of a Gene Set
-
+* `PlotCategoryExprBars()` : Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
 
 #### A Statistical Framework and Test Statistics:
 
