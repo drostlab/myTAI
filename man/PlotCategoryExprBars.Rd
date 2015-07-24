@@ -78,9 +78,11 @@ PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
 # as violoin plot
 PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
                      legendName    = "PS",
-                     distr.type    = "violoin",
+                     distr.type    = "violin",
                      type          = "stage-centered",
                      log.expr      = TRUE)
+
+
 
 
 # analogous for DivergenceExpressionSets
