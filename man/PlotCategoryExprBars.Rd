@@ -4,13 +4,16 @@
 \alias{PlotCategoryExprBars}
 \title{Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot}
 \usage{
-PlotCategoryExprBars(ExpressionSet, legendName, type = "category-centered",
-  distr.type = "barplot", log.expr = FALSE)
+PlotCategoryExprBars(ExpressionSet, legendName, test.stat = TRUE,
+  type = "category-centered", distr.type = "barplot", log.expr = FALSE)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
 \item{legendName}{a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.}
+
+\item{test.stat}{a logical value indicating whether a Benjamini-Hochberg adjusted \code{\link{kruskal.test}} should be applied to determine
+significant differences in age or divergence category specific expression.}
 
 \item{type}{type of age or divergence category comparison. Specifications can be \code{type = "category-centered"} or \code{type = "stage-centered"}.}
 
@@ -64,7 +67,7 @@ PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
                      log.expr      = TRUE)
 
 
-
+\dontrun{
 # stage-centered visualization of PS specific expression level distributions (log-scale)
 PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
                      legendName    = "PS",
@@ -91,6 +94,8 @@ PlotCategoryExprBars(ExpressionSet = DivergenceExpressionSetExample,
                      type          = "category-centered",
                      distr.type    = "barplot",
                      log.expr      = TRUE)
+
+}
 }
 \author{
 Hajk-Georg Drost
