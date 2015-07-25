@@ -4,6 +4,8 @@
 #' corresponding transcriptome.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
+#' @param test.stat a logical value indicating whether a Benjamini-Hochberg adjusted \code{\link{kruskal.test}} should be applied to determine
+#' significant differences in age or divergence category specific expression.
 #' @param type type of age or divergence category comparison. Specifications can be \code{type = "category-centered"} or \code{type = "stage-centered"}.
 #' @param distr.type format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "barplot"} or
 #' \code{distr.type = "violin"}. 
@@ -48,7 +50,7 @@
 #'                      log.expr      = TRUE)
 #'                      
 #' 
-#' 
+#' \dontrun{
 #' # stage-centered visualization of PS specific expression level distributions (log-scale)
 #' PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
@@ -76,12 +78,13 @@
 #'                      distr.type    = "barplot",
 #'                      log.expr      = TRUE)
 #'
-#'
+#'}
 #' @seealso \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{age.apply}}
 #' @export         
 
 PlotCategoryExprBars <- function(ExpressionSet,
                              legendName,
+                             test.stat  = TRUE,
                              type       = "category-centered",
                              distr.type = "barplot",
                              log.expr   = FALSE){
@@ -98,6 +101,36 @@ PlotCategoryExprBars <- function(ExpressionSet,
                 stop ("Please specify 'distr.type' as either 'barplot' or 'violin'.")
         
         ncols <- ncol(ExpressionSet)
+        nPS <- length(names(table(ExpressionSet[ , 1])))
+        
+        if (!log.expr)
+                max.value <- max(ExpressionSet[ , 3:ncols])
+        
+        if (log.expr)
+                max.value <- max(tf(ExpressionSet,log2)[ , 3:ncols])
+        
+        if (test.stat){
+                
+                if (type == "stage-centered"){
+                        # perform a Kruskal Test to detect stages of significant PS or DS variation using BH adjusted p-values
+                        
+                        if (log.expr){
+                                p_stage.cetered <- stats::p.adjust(as.numeric(age.apply(tf(ExpressionSet,log2), function(x) format(stats::kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH")       
+                        }
+                        
+                        else if (!log.expr){
+                                p_stage.cetered <- p.adjust(as.numeric(age.apply(ExpressionSet, function(x) format(kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH") 
+                        }
+                        
+                        pValNames <- rep("",ncols-2)
+                        pValNames[which(p_stage.cetered <= 0.05)] <- "*"
+                        pValNames[which(p_stage.cetered <= 0.005)] <- "**"
+                        pValNames[which(p_stage.cetered <= 0.0005)] <- "***"
+                        pValNames[which(is.na(pValNames))] <- ""
+                } 
+                
+        }
+        
         colnames(ExpressionSet)[1] <- legendName
         # reshape ExpressionSet from wide-format to long-format
         
@@ -131,7 +164,11 @@ PlotCategoryExprBars <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::annotate("text",x = 1:nPS, y = rep(max.value,nPS),label = pValNames, colour = "red", size = 5) + 
+                                                ggplot2::theme_minimal()
+                                        
+                                        # ggplot2::geom_text(data = ReshapedExpressionSet, aes(label = pValNames, x = Stage, y = median(length(Stage))),  size=5)
+                                        # ggplot2::annotate("text",x = 1:nPS, y = rep(max.value,nPS),label = pValNames, colour = "red", size = 5)
                                 }
                         } 
                         
