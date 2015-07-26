@@ -125,11 +125,11 @@ PlotCategoryExprBars <- function(ExpressionSet,
                                 p_stage.cetered <- p.adjust(as.numeric(age.apply(ExpressionSet, function(x) format(kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH") 
                         }
                         
-                        pValNames <- rep("",ncols-2)
+                        pValNames <- rep("n.s.",ncols-2)
                         pValNames[which(p_stage.cetered <= 0.05)] <- "*"
                         pValNames[which(p_stage.cetered <= 0.005)] <- "**"
                         pValNames[which(p_stage.cetered <= 0.0005)] <- "***"
-                        pValNames[which(is.na(pValNames))] <- ""
+                        pValNames[which(is.na(pValNames))] <- "n.s."
                 } 
                 
         }
@@ -163,14 +163,22 @@ PlotCategoryExprBars <- function(ExpressionSet,
                                 
                                 else if (type == "stage-centered"){
                                         
+#                                         pval_mapping <- data.frame(PS = 1:nPS, x_coord = rep(ifelse(nPS < 3, 1, 3),nPS),max_value = rep(max.value,nPS),pvals = pValNames)
+#                                         print(pval_mapping)
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_boxplot() + 
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
-                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::annotate("text",x = 1:nPS, y = rep(max.value,nPS),label = pValNames, colour = "red", size = 5) + 
-                                                ggplot2::theme_minimal()
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) +
+                                                ggplot2::theme(axis.title.x = ggplot2::element_text(angle = 90,vjust = 0.5, hjust = 1)) + ggplot2::theme_minimal() 
+                                        
+                                        
+                                        # ggplot2::geom_text(data = pval_mapping, ggplot2::aes(x = x_coord, y = max_value,label = pvals), colour = "red", size = 5)
+                                        
+                                        # ggplot2::annotate("text",x = pval_mapping[ , "x_coord"], y = pval_mapping[ , "max_value"],label = pval_mapping[ , "pvals"], colour = "red", size = 5, fill = pval_mapping[ , "PS"])
                                         
                                         # ggplot2::geom_text(data = ReshapedExpressionSet, aes(label = pValNames, x = Stage, y = median(length(Stage))),  size=5)
+                                                # ggplot2::geom_text(data = pval_mapping, ggplot2::aes(x = pval_mapping[ , "x_coord"], y = pval_mapping[ , "max_value"],label = pval_mapping[ , "pvals"]), colour = "red", size = 5)
+                                                
                                         # ggplot2::annotate("text",x = 1:nPS, y = rep(max.value,nPS),label = pValNames, colour = "red", size = 5)
                                 }
                         } 
@@ -340,6 +348,18 @@ PlotCategoryExprBars <- function(ExpressionSet,
                 }
         } 
         
+        
+        stat.result <- t(as.data.frame(pValNames))
+        
+        if (legendName == "PS") 
+                colnames(stat.result) <- paste0("PS",1:nPS)
+        
+        if (legendName == "DS") 
+                colnames(stat.result) <- paste0("DS",1:nPS)
+        
+        rownames(stat.result) <- type
+        
+        print(stat.result)
         return (res)
 }
 
