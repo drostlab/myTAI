@@ -169,7 +169,7 @@ PlotBarRE <- function(ExpressionSet,
         pValNames[which(pValues <= 0.05)] <- "*"
         pValNames[which(pValues <= 0.005)] <- "**"
         pValNames[which(pValues <= 0.0005)] <- "***"
-        
+        pValNames[which(is.na(pValNames))] <- ""
         
         # define arguments for different graphics functions
         barplot.args <- c("xlab","cex.lab","cex.axis","horiz","main","density","add","cex.names")
