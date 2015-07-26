@@ -323,6 +323,7 @@ PlotEnrichment <- function(ExpressionSet,
                 pValNames[which(enrichment.p_vals <= 0.05)] <- "*"
                 pValNames[which(enrichment.p_vals <= 0.005)] <- "**"
                 pValNames[which(enrichment.p_vals <= 0.0005)] <- "***"
+                pValNames[which(is.na(pValNames))] <- ""
                 
                 graphics::text(x      = barPlotFoldChanges,
                                y      = (max(ResultMatrix[ , 2]) + (ylim.range[2] / 5)),
