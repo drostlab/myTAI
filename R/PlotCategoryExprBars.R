@@ -103,6 +103,9 @@ PlotCategoryExprBars <- function(ExpressionSet,
         ncols <- ncol(ExpressionSet)
         nPS <- length(names(table(ExpressionSet[ , 1])))
         
+        # global variable definition
+        PS <- DS <- value <- Stage <- NULL
+        
         if (!log.expr)
                 max.value <- max(ExpressionSet[ , 3:ncols])
         
@@ -212,7 +215,7 @@ PlotCategoryExprBars <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_boxplot() + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
@@ -307,7 +310,7 @@ PlotCategoryExprBars <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_violin(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
