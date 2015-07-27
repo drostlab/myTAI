@@ -132,6 +132,26 @@ PlotCategoryExprBars <- function(ExpressionSet,
                         pValNames[which(is.na(pValNames))] <- "n.s."
                 } 
                 
+                if (type == "category-centered"){
+                        # perform a Kruskal Test to detect stages of significant PS or DS variation using BH adjusted p-values
+                        
+                        if (log.expr){
+                                
+                                p_stage.cetered <-   p.adjust(as.numeric(apply(tf(ExpressionSet,log2)[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
+                                
+                        }
+                        
+                        else if (!log.expr){
+                                p_stage.cetered <-  p.adjust(as.numeric(apply(ExpressionSet[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
+                                
+                        }
+                        
+                        pValNames <- rep("n.s.",ncols-2)
+                        pValNames[which(p_stage.cetered <= 0.05)] <- "*"
+                        pValNames[which(p_stage.cetered <= 0.005)] <- "**"
+                        pValNames[which(p_stage.cetered <= 0.0005)] <- "***"
+                        pValNames[which(is.na(pValNames))] <- "n.s."
+                }
         }
         
         colnames(ExpressionSet)[1] <- legendName
@@ -351,12 +371,24 @@ PlotCategoryExprBars <- function(ExpressionSet,
         
         stat.result <- t(as.data.frame(pValNames))
         
-        if (legendName == "PS") 
-                colnames(stat.result) <- paste0("PS",1:nPS)
+        if (legendName == "PS"){
+                if (type == "stage-centered")
+                        colnames(stat.result) <- paste0("PS",1:nPS)
+                
+                if (type == "category-centered")
+                        colnames(stat.result) <- names(ExpressionSet)[3:ncols]
+                
+        } 
+                
         
-        if (legendName == "DS") 
-                colnames(stat.result) <- paste0("DS",1:nPS)
-        
+        if (legendName == "DS"){
+                if (type == "stage-centered")
+                        colnames(stat.result) <- paste0("DS",1:nPS)
+                
+                if (type == "category-centered")
+                        colnames(stat.result) <- names(ExpressionSet)[3:ncols]
+        } 
+                
         rownames(stat.result) <- type
         
         print(stat.result)
