@@ -21,19 +21,20 @@ knitr::opts_chunk$set(
 
 In the [Introduction](Introduction.html) vignette users learned how to perform the most fundamental computations
 and visualizations for phylotranscriptomics analyses using the `myTAI` package.
-Especially in the _Introduction_ vignette we demonstrated how to perform `Phylostratigraphy` and `Divergence Stratigraphy` as well as the construction of `PhyloExpressionSets` and `DivergenceExpressionSets`.
+Especially in the _Introduction_ vignette we demonstrated how to perform `Phylostratigraphy` and `Divergence Stratigraphy` as well as the construction of `PhyloExpressionSets` and `DivergenceExpressionSets` using the `MatchMap()` function.
 
 
 In the [Intermediate](Intermediate.html) vignette users learned about more detailed analyses and more specialized techniques 
 to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, etc.).
 
-This vignette aims to provide users with in-depth tutorials on how to retrieve published `Phylostratigraphic Maps` and `Divergence Maps` and how they can integrate these data sets into their own phylotranscriptomics pipeline.
+This vignette aims to provide users with in-depth tutorials on how to retrieve published `Phylostratigraphic Maps` and `Divergence Maps`, the integrattion of these data sets into cutomized phylotranscriptomics pipelines, and additional types of phylotranscriptomics analyses focusing on the expression level distributions of all age or divergence categories.
 
 ## Biological Sequence Retrieval with `biomartr`
 
-Both methods `Phylostratigraphy` and `Divergence Stratigraphy` need genome or proteome information for their analyses. This section will show users how to retrieve biological sequences in `*.fasta` format to be able to perform `Phylostratigraphy` and `Divergence Stratigraphy`.
+Both methods `Phylostratigraphy` and `Divergence Stratigraphy` need genome or proteome information for their analyses. This section introduces users to the retrieval of biological sequences stored as `*.fasta` format to be able to perform `Phylostratigraphy` and `Divergence Stratigraphy`.
 
-The _classical_ way to download biological sequences is via the `Terminal`:
+The _classical_ way to download biological sequences is via the `Terminal` application:
+
 ```shell
 
 # download CDS file of A. thaliana
@@ -55,28 +56,51 @@ Alternatively, users can use the Biological Data Retrieval package [biomartr](ht
 to download proteomes from the refseq database (see [Sequence Retrieval Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Sequence_Retrieval.Rmd) for details).
 
 ```{r,eval=FALSE}
-# install.packages("devtools")
-
-# install the current version of biomartr on your system
-library(devtools)
-install_github("HajkD/biomartr", build_vignettes = TRUE, dependencies = TRUE)
+# install biomartr from CRAN
+install.packages("biomartr",
+                 repos        = "https://cran.rstudio.com/",
+                 dependencies = TRUE)
 ```
 
 ```{r,eval=FALSE}
 # download the proteome of Arabidopsis thaliana from refseq
 # and store the corresponding proteome file in '_ncbi_downloads/proteomes'
-Ath_Proteome <- getProteome( db           = "refseq", 
-                             kingdom      = "plant",
-                             organism     = "Arabidopsis thaliana",
-                             clean_folder = FALSE )
-
+getProteome( db       = "refseq", 
+             kingdom  = "plant",
+             organism = "Arabidopsis thaliana",
+             path     = file.path("_ncbi_downloads","proteomes") )
 ```
 
-Internally, the `getProteome()` function creates a directory named `_ncbi_downloads/proteome` in which corresponding proteomes are loaded and then sourced as data.table object into the current R session. When specifying `clean_folder = FALSE`, the `_ncbi_downloads/proteomes` folder will not be removed and the corresponding proteome does not need to be downloaded again when sourcing it into the current R session via `getProteome()`.
+
+The `getProteome()` function creates a directory named `_ncbi_downloads/proteomes` into which the orresponding proteome named `Arabidopsis_thaliana_protein.faa.gz` is downloaded. The `read_proteome()` function enables users to work with the proteome as data.table object.
+
+
+```{r,eval=FALSE}
+# path to proteome: '_ncbi_downloads/proteomes/Arabidopsis_thaliana_protein.faa.gz'
+file_path <- file.path("_ncbi_downloads","proteomes","Arabidopsis_thaliana_protein.faa.gz")
+# read proteome as data.table object
+Ath_proteome <- read_proteome(file_path, format = "fasta")
+```
+
+In case users would like to store the proteome file at a different location, they can specify the `path = file.path("put","your","path","here")` argument.
 
 ## Download Published `Phylostratigraphic Maps` and `Divergence Maps` 
 
-[Here](https://github.com/HajkD/published_phylomaps) you can find a collection of scripts and documentation of already published `Phylostratigraphic Maps` and `Divergence Maps` and step by step instructions on how to retrieve them to be able to use them together with `myTAI`. Omitting the process of performing `Phylostratigrahy` and `Divergence Stratigraphy` yourself allows you to quickly combine already published `Phylostratigraphic Maps` and `Divergence Maps` with an gene expression data set of your interest to capture evolutionary signals with `myTAI`. 
+Performing the `Phylostratigraphy` and `Divergence Stratigraphy` algorithms is a time consuming and computationally
+complex task. However, the corresponding `Phylostratigraphic Maps` and `Divergence Maps` need to be computed only
+once for each organism of interest. Hence, already published `Phylostratigraphic Maps` and `Divergence Maps` can be used without any additional computational tasks to combine them with any corresponding expression dataset of interest to capture evolutionary signals with `myTAI`. 
+
+[Here](https://github.com/HajkD/published_phylomaps) we provide a collection of scripts and documentation of already published `Phylostratigraphic Maps` and `Divergence Maps` and step by step instructions on how to retrieve them for the use with `myTAI`. 
+
+Only in cases where users whish to create custom `Phylostratigraphic Maps` and `Divergence Maps` based on specialized reference databases or more recent genome version, the `Phylostratigraphy` and `Divergence Stratigraphy` algorithms need to be performed. 
+
+
+## Investigating Age or Divergence Category Specific Expression Level Distributions
+
+
+
+
+
 
 
 
