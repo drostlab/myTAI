@@ -1,4 +1,4 @@
-#' @title Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
+#' @title Plot the Expression Levels of each Age or Divergence Category as Barplot, Violinplot, or Dotplot
 #' @description This function visualizes the expression level distribution of each phylostratum during each time point or experiment
 #' as barplot or violin plot enabling users to quantify the age (PS) or divergence category (DS) specific contribution to the
 #' corresponding transcriptome.
@@ -11,13 +11,21 @@
 #' \code{distr.type = "violin"}. 
 #' @param log.expr a logical value specifying whether or not expression levels should be log2-transformed before visualization.
 #' @author Hajk-Georg Drost
-#' @details This way of visualizing the gene expression distribution of each age (PS) or divergence category (DS) during
+#' @details This way of visualizing the gene expression distribution of each age (PS) or divergence (DS) category during
 #' all developmental stages or experiments allows users to detect specific age or divergence categories contributing significant
 #' levels of gene expression to the underlying biological process (transcriptome).
 #' 
-#' This quantification allows to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome
+#' This quantification allows users to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome
 #' than other genes originating from different PS or DS categories. More specialized analyses such as \code{\link{PlotMeans}}, \code{\link{PlotRE}},
 #' \code{\link{PlotBarRE}}, etc. will then allow to study the exact mean expression patterns of these age or divergence categories.
+#' 
+#' The statistical quantification of differences between expression levels of different age or divergence categories
+#' is done by performing a \code{\link{kruskal.test}} with Benjamini & Hochberg p-value adjustment for multiple comparisons.
+#' 
+#' \itemize{
+#' \item \code{type = "category-centered"} Here, the \code{\link{kruskal.test}} quantifies the differences of gene expression between all combinations of age or divergence categories for each stage or experiment separately. Here, a significant p-value quantifies that there is at least one pairwise comparison for which age or divergence categories significantly differ in their gene expression distribution. This type of analysis allows users to detect stages or experiments that show high diviation between age or divergence category contributions to the overall transcriptome or no significant deviations of age or divergence categories, suggesting equal age or divergence category contributions to the overall transcriptome.   
+#' \item \code{type = "stage-centered"} Here, the \code{\link{kruskal.test}} quantifies the differences of gene expression between all stages or experiments for each age or divergence category separately. Hence, the test quantifies whether or not the gene expression distribution of a single age or divergence category significantly changes throughout development or experiments. This type of analysis allows users to detect specific age or divergence categories that significantly change their expression levels throughout development or experiments.
+#' }
 #' 
 #' Argument Specifications:
 #' 
@@ -53,6 +61,8 @@
 #'
 #' (3) '***' = P-Value <= 0.0005  
 #' 
+#' (4) 'n.s.' = not significant = P-Value > 0.05
+#' 
 #' @examples 
 #' 
 #' data(PhyloExpressionSetExample)
@@ -61,6 +71,7 @@
 #' # category-centered visualization of PS specific expression level distributions (log-scale)
 #' PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
+#'                      test.stat     = TRUE,
 #'                      type          = "category-centered",
 #'                      distr.type    = "barplot",
 #'                      log.expr      = TRUE)
@@ -70,6 +81,7 @@
 #' # stage-centered visualization of PS specific expression level distributions (log-scale)
 #' PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
+#'                      test.stat     = TRUE,
 #'                      distr.type    = "barplot",
 #'                      type          = "stage-centered",
 #'                      log.expr      = TRUE)
@@ -80,6 +92,7 @@
 #' # as violoin plot
 #' PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
+#'                      test.stat     = TRUE,
 #'                      distr.type    = "violin",
 #'                      type          = "stage-centered",
 #'                      log.expr      = TRUE)
@@ -90,12 +103,14 @@
 #' # analogous for DivergenceExpressionSets
 #' PlotCategoryExprBars(ExpressionSet = DivergenceExpressionSetExample,
 #'                      legendName    = "DS",
+#'                      test.stat     = TRUE,
 #'                      type          = "category-centered",
 #'                      distr.type    = "barplot",
 #'                      log.expr      = TRUE)
 #'
 #'}
-#' @seealso \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{age.apply}}
+#' @seealso \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{age.apply}},
+#' \code{\link{pTAI}}, \code{\link{pTDI}}, \code{\link{pStrata}}, \code{\link{pMatrix}}, \code{\link{TAI}}, \code{\link{TDI}}
 #' @export         
 
 PlotCategoryExprBars <- function(ExpressionSet,
