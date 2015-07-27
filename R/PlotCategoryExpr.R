@@ -69,7 +69,7 @@
 #' data(DivergenceExpressionSetExample)
 #'
 #' # category-centered visualization of PS specific expression level distributions (log-scale)
-#' PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
+#' PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
 #'                      test.stat     = TRUE,
 #'                      type          = "category-centered",
@@ -79,7 +79,7 @@
 #' 
 #' \dontrun{
 #' # stage-centered visualization of PS specific expression level distributions (log-scale)
-#' PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
+#' PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
 #'                      test.stat     = TRUE,
 #'                      distr.type    = "barplot",
@@ -90,7 +90,7 @@
 #'                                                                
 #' # category-centered visualization of PS specific expression level distributions (log-scale)
 #' # as violoin plot
-#' PlotCategoryExprBars(ExpressionSet = PhyloExpressionSetExample,
+#' PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
 #'                      test.stat     = TRUE,
 #'                      distr.type    = "violin",
@@ -101,7 +101,7 @@
 #'
 #'
 #' # analogous for DivergenceExpressionSets
-#' PlotCategoryExprBars(ExpressionSet = DivergenceExpressionSetExample,
+#' PlotCategoryExpr(ExpressionSet = DivergenceExpressionSetExample,
 #'                      legendName    = "DS",
 #'                      test.stat     = TRUE,
 #'                      type          = "category-centered",
@@ -113,7 +113,7 @@
 #' \code{\link{pTAI}}, \code{\link{pTDI}}, \code{\link{pStrata}}, \code{\link{pMatrix}}, \code{\link{TAI}}, \code{\link{TDI}}
 #' @export         
 
-PlotCategoryExprBars <- function(ExpressionSet,
+PlotCategoryExpr <- function(ExpressionSet,
                              legendName,
                              test.stat  = TRUE,
                              type       = "category-centered",
