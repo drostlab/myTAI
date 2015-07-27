@@ -97,16 +97,87 @@ Only in cases where users whish to create custom `Phylostratigraphic Maps` and `
 
 ## Investigating Age or Divergence Category Specific Expression Level Distributions
 
+Gene expression levels are a fundamental aspect of phylotranscriptomics studies. In detail, phylotranscriptomic
+measures aim to quantify the expression intensity of genes deriving from common age or divergence categories
+to detect stages of evolutionary constraints. Hence, the gene expression distribution of age or divergence categories
+as well as their differences within and between stages or categories allow us to investigate the age (PS) or divergence (DS) category specific contribution to the corresponding transcriptome.
+
+For this purpose, the `PlotCategoryExpr()` aims to visualize the expression level distribution of each phylostratum during each time point or experiment as barplot, dot plot, or violin plot enabling users to quantify the age (PS) or divergence (DS) category specific contribution to the corresponding transcriptome.
+
+This way of visualizing the gene expression distribution of each age (PS) or divergence (DS) category during all developmental stages or experiments allows users to detect specific age or divergence categories contributing significant levels of gene expression to the underlying biological process (transcriptome).
+
+```{r,eval =FALSE}
+library(myTAI)
+
+data(PhyloExpressionSetExample)
+
+# category-centered visualization of PS specific expression level distributions (log-scale)
+PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
+                 legendName    = "PS",
+                 test.stat     = TRUE,
+                 type          = "category-centered",
+                 distr.type    = "boxplot",
+                 log.expr      = TRUE)
+```
+
+```
+                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
+category-centered "***"  "***"    "***"    "***" "***"   "***" "***"
+```
+
+The resulting boxplot illustrates the log expression levels of each phylostratum during each developmental stage.
+Additionally, a Kruskal-Wallis Rank Sum Test as well as a Benjamini & Hochberg p-value adjustment for multiple comparisons is performed (`test.stat = TRUE`) to statistically quantify the differences between expression levels of different age or divergence categories. This type of analysis allows users to detect stages or experiments that show high diviation between age or divergence category contributions to the overall transcriptome or no significant deviations of age or divergence categories, suggesting equal age or divergence category contributions to the overall transcriptome. The corresponding P-values are printed to the console using the following notation:
+
+- '*' = P-Value $\leq$ 0.05
+
+- '**' = P-Value $\leq$ 0.005
+
+- '***' = P-Value $\leq$ 0.0005
+
+- 'n.s.' = not significant = P-Value > 0.05
+
+In this case all developmental stages show significant differences in phylostratum specific gene expression.
+
+__Please notice that users need to define the `legendName` argument as `PS` or `DS` to specify whether the input
+`ExpressionSet` is a `PhyloExpressionSet` (`legendName = 'PS'`) or `DivergenceExpressionSet` (`legendName = 'DS'`).__
+
+Alternatively, users can investigate the differences of gene expression __between__ all stages or experiments for __each__ age or divergence category by specifying `type = 'stage-centered'`.
 
 
+```{r,eval =FALSE}
+library(myTAI)
 
+data(PhyloExpressionSetExample)
 
+# stage-centered visualization of PS specific expression level distributions (log-scale)
+PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
+                 legendName    = "PS",
+                 test.stat     = TRUE,
+                 type          = "stage-centered",
+                 distr.type    = "boxplot",
+                 log.expr      = TRUE)
+```
 
+```
+               PS1   PS2   PS3    PS4 PS5    PS6 PS7    PS8    PS9    PS10  PS11   PS12 
+stage-centered "***" "***" "n.s." "*" "n.s." "*" "n.s." "n.s." "n.s." "***" "n.s." "***"
+```
 
+Here, the Kruskal-Wallis Rank Sum Test (with Benjamini & Hochberg p-value adjustment) quantifies whether or not the gene expression distribution of a single age or divergence category significantly changes throughout development or experiments. This type of analysis allows users to detect specific age or divergence categories that significantly change their expression levels throughout development or experiments.
 
+In this case, users will observe that PS3,5,7-9,11 do not show significant differences of gene expression between
+developmental stages suggesting that their contribution to the overall transcriptome remains constant throughout development.
 
+Finally, users can choose the following plot types to visualize expression distributions:
 
+Argument: `distr.type`
 
+- `distr.type = "boxplot"` This specification allows users to visualize the expression distribution of all PS or DS as boxplot.
 
+- `distr.type = "violin"` This specification allows users to visualize the expression distribution of all PS or DS as violin plot.
+
+- `distr.type = "dotplot"` This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
+
+Together, studies perfomed with `PlotCategoryExpr()` allow users to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome than other genes originating from different PS or DS categories. More specialized analyses such as `PlotMeans()`, `PlotRE()`, `PlotBarRE()`, `TAI()`, `TDI()`, etc. will then allow them to study the exact mean expression patterns of these age or divergence categories.
 
 
