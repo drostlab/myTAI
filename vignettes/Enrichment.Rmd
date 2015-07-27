@@ -113,9 +113,9 @@ Internally, `PlotEnrichment()` performs a Fisher's exact test for each `Phylostr
 
 Notation:
 
-- '*' = P-Value $<=$ 0.05
-- '**' = P-Value $<=$ 0.005
-- '***' = P-Value $<=$ 0.0005
+- '*' = P-Value $\leq$ 0.05
+- '**' = P-Value $\leq$ 0.005
+- '***' = P-Value $\leq$ 0.0005
 
 Users will notice that when performing the `PlotEnrichment()` function, the p-values and the
 enrichment matrix (storing $C_1$ and $C_2$) will be returned.
