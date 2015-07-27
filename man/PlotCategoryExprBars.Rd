@@ -17,10 +17,23 @@ significant differences in age or divergence category specific expression.}
 
 \item{type}{type of age or divergence category comparison. Specifications can be \code{type = "category-centered"} or \code{type = "stage-centered"}.}
 
-\item{distr.type}{format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "barplot"} or
+\item{distr.type}{format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "barplot"}, \code{distr.type = "dotplot"}, or
 \code{distr.type = "violin"}.}
 
 \item{log.expr}{a logical value specifying whether or not expression levels should be log2-transformed before visualization.}
+}
+\value{
+A boxplot, violin plot, or dot plot visualizing the gene expression levels of
+different PS or DS categories.
+
+Furthermore, the statistical test results returned from the \code{\link{kruskal.test}} are printed
+to the console.
+
+(1) '*'   = P-Value <= 0.05
+
+(2) '**'  = P-Value <= 0.005
+
+(3) '***' = P-Value <= 0.0005
 }
 \description{
 This function visualizes the expression level distribution of each phylostratum during each time point or experiment
@@ -53,6 +66,7 @@ Argument: distr.type
 \itemize{
 \item \code{distr.type = "barplot"} This specification allows users to visualize the expression distribution of all PS or DS as barplot.
 \item \code{distr.type = "violin"} This specification allows users to visualize the expression distribution of all PS or DS as violin plot.
+\item \code{distr.type = "dotplot"} This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
 }
 }
 \examples{
