@@ -108,7 +108,7 @@ In the `myTAI` framework you can find:
 * `PlotContribution()` : Plot the Phylostratum or Divergence Stratum Contribution to the Global TAI/TDI Pattern
 * `PlotEnrichment()` : Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set
 * `PlotGeneSet()` : Plot the Expression Profiles of a Gene Set
-* `PlotCategoryExprBars()` : Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
+* `PlotCategoryExpr()` : Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
 
 #### A Statistical Framework and Test Statistics:
 
@@ -128,6 +128,7 @@ All three functions also include visual analytics tools to quantify the goodness
 * `CombinatorialSignificance()` : Compute the Statistical Significance of Each Replicate Combination
 * `Expressed()` : Filter Expression Levels in Gene Expression Matrices (define expressed genes)
 * `SelectGeneSet()` : Select a Subset of Genes in an ExpressionSet
+* `PlotReplicateQuality()` : Plot the Quality of Biological Replicates
 
 #### Taxonomic Information Retrieval
 
