@@ -7,7 +7,7 @@
 #' @param test.stat a logical value indicating whether a Benjamini-Hochberg adjusted \code{\link{kruskal.test}} should be applied to determine
 #' significant differences in age or divergence category specific expression.
 #' @param type type of age or divergence category comparison. Specifications can be \code{type = "category-centered"} or \code{type = "stage-centered"}.
-#' @param distr.type format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "barplot"} or
+#' @param distr.type format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "barplot"}, \code{distr.type = "dotplot"}, or
 #' \code{distr.type = "violin"}. 
 #' @param log.expr a logical value specifying whether or not expression levels should be log2-transformed before visualization.
 #' @author Hajk-Georg Drost
@@ -36,7 +36,23 @@
 #' \itemize{
 #' \item \code{distr.type = "barplot"} This specification allows users to visualize the expression distribution of all PS or DS as barplot.
 #' \item \code{distr.type = "violin"} This specification allows users to visualize the expression distribution of all PS or DS as violin plot.
+#' \item \code{distr.type = "dotplot"} This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
 #' }
+#' 
+#' @return 
+#' 
+#' A boxplot, violin plot, or dot plot visualizing the gene expression levels of
+#' different PS or DS categories.
+#' 
+#' Furthermore, the statistical test results returned from the \code{\link{kruskal.test}} are printed
+#' to the console.
+#' 
+#' (1) '*'   = P-Value <= 0.05 
+#'
+#' (2) '**'  = P-Value <= 0.005  
+#'
+#' (3) '***' = P-Value <= 0.0005  
+#' 
 #' @examples 
 #' 
 #' data(PhyloExpressionSetExample)
@@ -97,8 +113,8 @@ PlotCategoryExprBars <- function(ExpressionSet,
         if (!is.element(type, c("category-centered","stage-centered")))
                 stop ("Please specify 'type' as either 'category-centered' or 'stage-centered'.")
         
-        if (!is.element(distr.type, c("barplot","violin")))
-                stop ("Please specify 'distr.type' as either 'barplot' or 'violin'.")
+        if (!is.element(distr.type, c("barplot","violin","dotplot")))
+                stop ("Please specify 'distr.type' as either 'barplot', 'dotplot', or 'violin'.")
         
         ncols <- ncol(ExpressionSet)
         nPS <- length(names(table(ExpressionSet[ , 1])))
@@ -359,6 +375,102 @@ PlotCategoryExprBars <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_violin(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                        } 
+                }
+        } 
+        
+        
+        if (distr.type == "dotplot"){
+                
+                if (legendName == "PS"){
+                        
+                        if (!log.expr){
+                                
+                                if (type == "category-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = PS, y = value, fill = PS))  + ggplot2::geom_dotplot(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ Stage, labeller = ggplot2::label_parsed)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                                
+                                else if (type == "stage-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                        } 
+                        
+                        else if (log.expr){
+                                
+                                if (type == "category-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = PS, y = log2(value), fill = PS))  + ggplot2::geom_dotplot(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ Stage, labeller = ggplot2::label_parsed)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                                
+                                else if (type == "stage-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                                
+                        } 
+                        
+                }
+                
+                if (legendName == "DS"){
+                        
+                        if (!log.expr){
+                                
+                                if (type == "category-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = DS, y = value, fill = DS))  + ggplot2::geom_dotplot(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ Stage, labeller = ggplot2::label_parsed)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                                
+                                else if (type == "stage-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                        } 
+                        
+                        else if (log.expr){
+                                
+                                if (type == "category-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = DS, y = log2(value), fill = DS))  + ggplot2::geom_dotplot(trim = FALSE) + 
+                                                ggplot2::facet_grid(. ~ Stage, labeller = ggplot2::label_parsed)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
+                                                ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                }
+                                
+                                else if (type == "stage-centered"){
+                                        
+                                        res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
                                                 ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
