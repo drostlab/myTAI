@@ -1,13 +1,13 @@
-#' @title Plot the Expression Levels of each Age or Divergence Category as Barplot, Violinplot, or Dotplot
+#' @title Plot the Expression Levels of each Age or Divergence Category as Boxplot, Violinplot, or Dotplot
 #' @description This function visualizes the expression level distribution of each phylostratum during each time point or experiment
-#' as barplot or violin plot enabling users to quantify the age (PS) or divergence category (DS) specific contribution to the
+#' as boxplot, dot plot, or violin plot enabling users to quantify the age (PS) or divergence (DS) category specific contribution to the
 #' corresponding transcriptome.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
 #' @param test.stat a logical value indicating whether a Benjamini-Hochberg adjusted \code{\link{kruskal.test}} should be applied to determine
 #' significant differences in age or divergence category specific expression.
 #' @param type type of age or divergence category comparison. Specifications can be \code{type = "category-centered"} or \code{type = "stage-centered"}.
-#' @param distr.type format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "barplot"}, \code{distr.type = "dotplot"}, or
+#' @param distr.type format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "boxplot"}, \code{distr.type = "dotplot"}, or
 #' \code{distr.type = "violin"}. 
 #' @param log.expr a logical value specifying whether or not expression levels should be log2-transformed before visualization.
 #' @author Hajk-Georg Drost
@@ -42,7 +42,7 @@
 #' Argument: distr.type
 #' 
 #' \itemize{
-#' \item \code{distr.type = "barplot"} This specification allows users to visualize the expression distribution of all PS or DS as barplot.
+#' \item \code{distr.type = "boxplot"} This specification allows users to visualize the expression distribution of all PS or DS as boxplot.
 #' \item \code{distr.type = "violin"} This specification allows users to visualize the expression distribution of all PS or DS as violin plot.
 #' \item \code{distr.type = "dotplot"} This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
 #' }
@@ -73,7 +73,7 @@
 #'                      legendName    = "PS",
 #'                      test.stat     = TRUE,
 #'                      type          = "category-centered",
-#'                      distr.type    = "barplot",
+#'                      distr.type    = "boxplot",
 #'                      log.expr      = TRUE)
 #'                      
 #' 
@@ -82,7 +82,7 @@
 #' PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
 #'                      test.stat     = TRUE,
-#'                      distr.type    = "barplot",
+#'                      distr.type    = "boxplot",
 #'                      type          = "stage-centered",
 #'                      log.expr      = TRUE)
 #' 
@@ -105,7 +105,7 @@
 #'                      legendName    = "DS",
 #'                      test.stat     = TRUE,
 #'                      type          = "category-centered",
-#'                      distr.type    = "barplot",
+#'                      distr.type    = "boxplot",
 #'                      log.expr      = TRUE)
 #'
 #'}
@@ -117,7 +117,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                              legendName,
                              test.stat  = TRUE,
                              type       = "category-centered",
-                             distr.type = "barplot",
+                             distr.type = "boxplot",
                              log.expr   = FALSE){
         
         is.ExpressionSet(ExpressionSet)
@@ -128,8 +128,8 @@ PlotCategoryExpr <- function(ExpressionSet,
         if (!is.element(type, c("category-centered","stage-centered")))
                 stop ("Please specify 'type' as either 'category-centered' or 'stage-centered'.")
         
-        if (!is.element(distr.type, c("barplot","violin","dotplot")))
-                stop ("Please specify 'distr.type' as either 'barplot', 'dotplot', or 'violin'.")
+        if (!is.element(distr.type, c("boxplot","violin","dotplot")))
+                stop ("Please specify 'distr.type' as either 'boxplot', 'dotplot', or 'violin'.")
         
         ncols <- ncol(ExpressionSet)
         nPS <- length(names(table(ExpressionSet[ , 1])))
@@ -197,7 +197,7 @@ PlotCategoryExpr <- function(ExpressionSet,
         ReshapedExpressionSet[ , 1] <- factor(ReshapedExpressionSet[ , 1], ordered = TRUE)
         colnames(ReshapedExpressionSet)[2] <- "Stage"
        
-        if (distr.type == "barplot"){
+        if (distr.type == "boxplot"){
                 
                 if (legendName == "PS"){
                         

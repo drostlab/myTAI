@@ -2,10 +2,10 @@
 % Please edit documentation in R/PlotCategoryExpr.R
 \name{PlotCategoryExpr}
 \alias{PlotCategoryExpr}
-\title{Plot the Expression Levels of each Age or Divergence Category as Barplot, Violinplot, or Dotplot}
+\title{Plot the Expression Levels of each Age or Divergence Category as Boxplot, Violinplot, or Dotplot}
 \usage{
 PlotCategoryExpr(ExpressionSet, legendName, test.stat = TRUE,
-  type = "category-centered", distr.type = "barplot", log.expr = FALSE)
+  type = "category-centered", distr.type = "boxplot", log.expr = FALSE)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -17,7 +17,7 @@ significant differences in age or divergence category specific expression.}
 
 \item{type}{type of age or divergence category comparison. Specifications can be \code{type = "category-centered"} or \code{type = "stage-centered"}.}
 
-\item{distr.type}{format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "barplot"}, \code{distr.type = "dotplot"}, or
+\item{distr.type}{format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "boxplot"}, \code{distr.type = "dotplot"}, or
 \code{distr.type = "violin"}.}
 
 \item{log.expr}{a logical value specifying whether or not expression levels should be log2-transformed before visualization.}
@@ -39,7 +39,7 @@ to the console.
 }
 \description{
 This function visualizes the expression level distribution of each phylostratum during each time point or experiment
-as barplot or violin plot enabling users to quantify the age (PS) or divergence category (DS) specific contribution to the
+as boxplot, dot plot, or violin plot enabling users to quantify the age (PS) or divergence (DS) category specific contribution to the
 corresponding transcriptome.
 }
 \details{
@@ -74,7 +74,7 @@ Argument: type
 Argument: distr.type
 
 \itemize{
-\item \code{distr.type = "barplot"} This specification allows users to visualize the expression distribution of all PS or DS as barplot.
+\item \code{distr.type = "boxplot"} This specification allows users to visualize the expression distribution of all PS or DS as boxplot.
 \item \code{distr.type = "violin"} This specification allows users to visualize the expression distribution of all PS or DS as violin plot.
 \item \code{distr.type = "dotplot"} This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
 }
@@ -88,7 +88,7 @@ PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                      legendName    = "PS",
                      test.stat     = TRUE,
                      type          = "category-centered",
-                     distr.type    = "barplot",
+                     distr.type    = "boxplot",
                      log.expr      = TRUE)
 
 
@@ -97,7 +97,7 @@ PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                      legendName    = "PS",
                      test.stat     = TRUE,
-                     distr.type    = "barplot",
+                     distr.type    = "boxplot",
                      type          = "stage-centered",
                      log.expr      = TRUE)
 
@@ -120,7 +120,7 @@ PlotCategoryExpr(ExpressionSet = DivergenceExpressionSetExample,
                      legendName    = "DS",
                      test.stat     = TRUE,
                      type          = "category-centered",
-                     distr.type    = "barplot",
+                     distr.type    = "boxplot",
                      log.expr      = TRUE)
 
 }
