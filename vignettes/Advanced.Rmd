@@ -284,5 +284,7 @@ stage-centered "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n
 stage-centered "n.s."
 ```
 
-
+For example, users interested in the enrichment of PS or DS values in _D. rerio_ brain genes
+(see [Enrichment Vignette](Enrichment.html) for details) could also visualize their gene expression
+distributions throughout development with `PlotCategoryExpr()` in cases where expression data is available.
 
