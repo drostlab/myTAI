@@ -225,4 +225,64 @@ category-centered "***"  "***"    "***"    "***" "***"   "***" "***"
 ```
 
 
+## Gene Subset Age or Divergence Category Specific Expression Level Distributions
+
+In some cases, users wish to visualize the gene expression distributions for a subset of genes
+in contrast to the entire transcriptome. For this purpose, the `gene.set` argument allows users to specify
+the gene ids of a subset of genes that shall be matched in the input `ExpressionSet` and for which 
+expression level distributions shall be visualized.
+
+
+```{r,eval =FALSE}
+data(PhyloExpressionSetExample)
+
+# define an example gene subset (500 genes) which
+# can be found in the input ExpressionSet
+set.seed(234)
+example.gene.set <- PhyloExpressionSetExample[sample(1:25260,500) , 2]
+
+# visualize the gene expression distributions for these 500 genes (category-centered)
+PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
+                 legendName    = "PS",
+                 test.stat     = TRUE,
+                 type          = "category-centered",
+                 distr.type    = "boxplot",
+                 log.expr      = TRUE,
+                 gene.set      = example.gene.set)
+```
+
+```
+                  Zygote Quadrant Globular Heart Torpedo Bent Mature
+category-centered "*"    "*"      "*"      "*"   "*"     "*"  "n.s."
+```
+
+Or analogously `stage-centered`:
+
+
+```{r,eval =FALSE}
+data(PhyloExpressionSetExample)
+
+# define an example gene subset (500 genes) which
+# can be found in the input ExpressionSet
+set.seed(234)
+example.gene.set <- PhyloExpressionSetExample[sample(1:25260,500) , 2]
+
+# visualize the gene expression distributions for these 500 genes (stage-centered)
+PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
+                 legendName    = "PS",
+                 test.stat     = TRUE,
+                 type          = "stage-centered",
+                 distr.type    = "boxplot",
+                 log.expr      = TRUE,
+                 gene.set      = example.gene.set)
+```
+
+```
+               PS1    PS2    PS3    PS4    PS5    PS6    PS7    PS8    PS9    PS10   PS11  
+stage-centered "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s."
+               PS12  
+stage-centered "n.s."
+```
+
+
 
