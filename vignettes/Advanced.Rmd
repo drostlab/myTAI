@@ -181,3 +181,48 @@ Argument: `distr.type`
 Together, studies perfomed with `PlotCategoryExpr()` allow users to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome than other genes originating from different PS or DS categories. More specialized analyses such as `PlotMeans()`, `PlotRE()`, `PlotBarRE()`, `TAI()`, `TDI()`, etc. will then allow them to study the exact mean expression patterns of these age or divergence categories.
 
 
+Users will notice that so far all examples shown above specified `log.expr = TRUE` illustrating boxplots based
+on log2 expression levels. This way of visualization allows better visual comparisons between age or divergence categories. However, when specifying `log.expr = FALSE` absolute expression levels will be visualized in the corresponding boxplot.
+
+
+Alternatively, instead of specifying `log.expr = TRUE` users can directly pass log2 transformed expression levels to `PlotCategoryExpr()` via `tf(PhyloExpressionSetExample,log2)` (when `log.expr = FALSE`):
+
+
+```{r,eval =FALSE}
+data(PhyloExpressionSetExample)
+
+# category-centered visualization of PS specific expression level distributions (log-scale)
+PlotCategoryExpr(ExpressionSet = tf(PhyloExpressionSetExample, log2),
+                 legendName    = "PS",
+                 test.stat     = TRUE,
+                 type          = "category-centered",
+                 distr.type    = "boxplot",
+                 log.expr      = FALSE)
+```
+
+```
+                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
+category-centered "***"  "***"    "***"    "***" "***"   "***" "***" 
+```
+
+Or any other expression level transformation, e.g. `sqrt`.
+
+```{r,eval =FALSE}
+data(PhyloExpressionSetExample)
+
+# category-centered visualization of PS specific expression level distributions (sqrt-scale)
+PlotCategoryExpr(ExpressionSet = tf(PhyloExpressionSetExample, sqrt),
+                 legendName    = "PS",
+                 test.stat     = TRUE,
+                 type          = "category-centered",
+                 distr.type    = "boxplot",
+                 log.expr      = FALSE)
+```
+
+```
+                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
+category-centered "***"  "***"    "***"    "***" "***"   "***" "***" 
+```
+
+
+
