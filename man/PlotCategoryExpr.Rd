@@ -5,7 +5,8 @@
 \title{Plot the Expression Levels of each Age or Divergence Category as Boxplot, Violinplot, or Dotplot}
 \usage{
 PlotCategoryExpr(ExpressionSet, legendName, test.stat = TRUE,
-  type = "category-centered", distr.type = "boxplot", log.expr = FALSE)
+  type = "category-centered", distr.type = "boxplot", log.expr = FALSE,
+  gene.set = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -20,7 +21,9 @@ significant differences in age or divergence category specific expression.}
 \item{distr.type}{format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "boxplot"}, \code{distr.type = "dotplot"}, or
 \code{distr.type = "violin"}.}
 
-\item{log.expr}{a logical value specifying whether or not expression levels should be log2-transformed before visualization.}
+\item{log.expr}{a logical value specifying whether or not expression levels should internally be log2-transformed before visualization.}
+
+\item{gene.set}{a character vector storing the gene ids for which gene expression levels shall be visualized.}
 }
 \value{
 A boxplot, violin plot, or dot plot visualizing the gene expression levels of
@@ -78,6 +81,10 @@ Argument: distr.type
 \item \code{distr.type = "violin"} This specification allows users to visualize the expression distribution of all PS or DS as violin plot.
 \item \code{distr.type = "dotplot"} This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
 }
+
+
+Finally, users can specify a \code{gene.set} (a subset of genes included in the input \code{ExpressioSet})
+for which expression levels should be visualized as boxplot, dotplot, or violinplot.
 }
 \examples{
 data(PhyloExpressionSetExample)
@@ -122,6 +129,19 @@ PlotCategoryExpr(ExpressionSet = DivergenceExpressionSetExample,
                      type          = "category-centered",
                      distr.type    = "boxplot",
                      log.expr      = TRUE)
+
+
+# visualize the expression levels of 500 example genes
+set.seed(234)
+example.gene.set <- PhyloExpressionSetExample[sample(1:25260,500) , 2]
+
+PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
+                 legendName    = "PS",
+                 test.stat     = TRUE,
+                 type          = "category-centered",
+                 distr.type    = "boxplot",
+                 log.expr      = TRUE,
+                 gene.set      = example.gene.set)
 
 }
 }
