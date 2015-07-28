@@ -9,7 +9,8 @@
 #' @param type type of age or divergence category comparison. Specifications can be \code{type = "category-centered"} or \code{type = "stage-centered"}.
 #' @param distr.type format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "boxplot"}, \code{distr.type = "dotplot"}, or
 #' \code{distr.type = "violin"}. 
-#' @param log.expr a logical value specifying whether or not expression levels should be log2-transformed before visualization.
+#' @param log.expr a logical value specifying whether or not expression levels should internally be log2-transformed before visualization.
+#' @param gene.set a character vector storing the gene ids for which gene expression levels shall be visualized.
 #' @author Hajk-Georg Drost
 #' @details This way of visualizing the gene expression distribution of each age (PS) or divergence (DS) category during
 #' all developmental stages or experiments allows users to detect specific age or divergence categories contributing significant
@@ -46,6 +47,10 @@
 #' \item \code{distr.type = "violin"} This specification allows users to visualize the expression distribution of all PS or DS as violin plot.
 #' \item \code{distr.type = "dotplot"} This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
 #' }
+#' 
+#' 
+#' Finally, users can specify a \code{gene.set} (a subset of genes included in the input \code{ExpressioSet})
+#' for which expression levels should be visualized as boxplot, dotplot, or violinplot.
 #' 
 #' @return 
 #' 
@@ -108,6 +113,19 @@
 #'                      distr.type    = "boxplot",
 #'                      log.expr      = TRUE)
 #'
+#'
+#' # visualize the expression levels of 500 example genes
+#' set.seed(234)
+#' example.gene.set <- PhyloExpressionSetExample[sample(1:25260,500) , 2]
+#' 
+#' PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
+#'                  legendName    = "PS",
+#'                  test.stat     = TRUE,
+#'                  type          = "category-centered",
+#'                  distr.type    = "boxplot",
+#'                  log.expr      = TRUE,
+#'                  gene.set      = example.gene.set)
+#'                  
 #'}
 #' @seealso \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{age.apply}},
 #' \code{\link{pTAI}}, \code{\link{pTDI}}, \code{\link{pStrata}}, \code{\link{pMatrix}}, \code{\link{TAI}}, \code{\link{TDI}}
@@ -118,7 +136,8 @@ PlotCategoryExpr <- function(ExpressionSet,
                              test.stat  = TRUE,
                              type       = "category-centered",
                              distr.type = "boxplot",
-                             log.expr   = FALSE){
+                             log.expr   = FALSE,
+                             gene.set   = NULL){
         
         is.ExpressionSet(ExpressionSet)
         
@@ -136,6 +155,23 @@ PlotCategoryExpr <- function(ExpressionSet,
         
         # global variable definition
         PS <- DS <- value <- Stage <- NULL
+        
+        # determine gene subset
+        if (!is.null(gene.set)){
+                GeneSubSet.indixes <- stats::na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
+                
+                if (length(GeneSubSet.indixes) == 0)
+                        stop ("None of your input gene ids could be found in the ExpressionSet.")
+                
+                if (length(GeneSubSet.indixes) != length(gene.set))
+                        warning ("Only ",length(GeneSubSet.indixes), " out of your ", length(gene.set), " gene ids could be found in the ExpressionSet.")
+                
+                GeneSubSet <- ExpressionSet[GeneSubSet.indixes , ]
+                ncols <- ncol(GeneSubSet)
+                
+                ExpressionSet <- GeneSubSet
+        }
+        
         
         if (!log.expr)
                 max.value <- max(ExpressionSet[ , 3:ncols])
@@ -156,7 +192,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 p_stage.cetered <- p.adjust(as.numeric(age.apply(ExpressionSet, function(x) format(kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH") 
                         }
                         
-                        pValNames <- rep("n.s.",ncols-2)
+                        pValNames <- rep("n.s.",length(names(table(ExpressionSet[ , 1]))))
                         pValNames[which(p_stage.cetered <= 0.05)] <- "*"
                         pValNames[which(p_stage.cetered <= 0.005)] <- "**"
                         pValNames[which(p_stage.cetered <= 0.0005)] <- "***"
@@ -168,19 +204,19 @@ PlotCategoryExpr <- function(ExpressionSet,
                         
                         if (log.expr){
                                 
-                                p_stage.cetered <-   p.adjust(as.numeric(apply(tf(ExpressionSet,log2)[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
+                                p_category.cetered <-   p.adjust(as.numeric(apply(tf(ExpressionSet,log2)[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
                                 
                         }
                         
                         else if (!log.expr){
-                                p_stage.cetered <-  p.adjust(as.numeric(apply(ExpressionSet[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
+                                p_category.cetered <-  p.adjust(as.numeric(apply(ExpressionSet[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
                                 
                         }
                         
                         pValNames <- rep("n.s.",ncols-2)
-                        pValNames[which(p_stage.cetered <= 0.05)] <- "*"
-                        pValNames[which(p_stage.cetered <= 0.005)] <- "**"
-                        pValNames[which(p_stage.cetered <= 0.0005)] <- "***"
+                        pValNames[which(p_category.cetered <= 0.05)] <- "*"
+                        pValNames[which(p_category.cetered <= 0.005)] <- "**"
+                        pValNames[which(p_category.cetered <= 0.0005)] <- "***"
                         pValNames[which(is.na(pValNames))] <- "n.s."
                 }
         }
@@ -194,7 +230,7 @@ PlotCategoryExpr <- function(ExpressionSet,
         else if (legendName == "DS")
                 ReshapedExpressionSet <- reshape2::melt(ExpressionSet[ ,c(1,3:ncols)], id.vars = "DS")
         
-        ReshapedExpressionSet[ , 1] <- factor(ReshapedExpressionSet[ , 1], ordered = TRUE)
+        ReshapedExpressionSet[ , 1] <- factor(ReshapedExpressionSet[ , 1], ordered = TRUE, levels = 1:nPS)
         colnames(ReshapedExpressionSet)[2] <- "Stage"
        
         if (distr.type == "boxplot"){
@@ -499,8 +535,15 @@ PlotCategoryExpr <- function(ExpressionSet,
         stat.result <- t(as.data.frame(pValNames))
         
         if (legendName == "PS"){
-                if (type == "stage-centered")
-                        colnames(stat.result) <- paste0("PS",1:nPS)
+                if (type == "stage-centered"){
+                        
+                        if (is.null(gene.set))
+                                colnames(stat.result) <- paste0("PS",1:nPS)
+                        
+                        if (!is.null(gene.set))
+                                colnames(stat.result) <- paste0("PS",names(table(ExpressionSet[ , 1])))
+                }
+                        
                 
                 if (type == "category-centered")
                         colnames(stat.result) <- names(ExpressionSet)[3:ncols]
@@ -509,9 +552,14 @@ PlotCategoryExpr <- function(ExpressionSet,
                 
         
         if (legendName == "DS"){
-                if (type == "stage-centered")
-                        colnames(stat.result) <- paste0("DS",1:nPS)
-                
+                if (type == "stage-centered"){
+                        if (is.null(gene.set))
+                                colnames(stat.result) <- paste0("DS",1:nPS)
+                        
+                        if (!is.null(gene.set))
+                                colnames(stat.result) <- paste0("DS",names(table(ExpressionSet[ , 1])))
+                }
+
                 if (type == "category-centered")
                         colnames(stat.result) <- names(ExpressionSet)[3:ncols]
         } 
