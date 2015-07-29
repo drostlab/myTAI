@@ -4,14 +4,12 @@
 \alias{PlotReplicateQuality}
 \title{Plot the Quality of Biological Replicates}
 \usage{
-PlotReplicateQuality(ExpressionSet, nrep, stage.names, ...)
+PlotReplicateQuality(ExpressionSet, nrep, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
 \item{nrep}{either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.}
-
-\item{stage.names}{a character vector specifying the new names of collapsed stages.}
 
 \item{...}{additional graphics parameters.}
 }

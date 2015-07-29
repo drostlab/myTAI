@@ -3,7 +3,6 @@
 #' biological variation between replicates and stages (experiments).
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param nrep either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.
-#' @param stage.names a character vector specifying the new names of collapsed stages.
 #' @param ... additional graphics parameters.
 #' @author Hajk-Georg Drost
 #' @details The following quality checks can be performed:
@@ -13,7 +12,7 @@
 #' }
 #' 
 #' @export
-PlotReplicateQuality <- function(ExpressionSet, nrep, stage.names, ...){
+PlotReplicateQuality <- function(ExpressionSet, nrep, ...){
         
         if (!all(sapply(nrep,function(x) x > 1, simplify = TRUE)))
                 stop("Please insert at least 2 replicates per stage.")
@@ -35,25 +34,23 @@ PlotReplicateQuality <- function(ExpressionSet, nrep, stage.names, ...){
                 nStages <- length(nrep)
         }
         
-        
         stage.cols <- re.colors(nStages)
         
         # receive variance distribution of replicates
         CollapsedExpressionSet <- CollapseReplicates(ExpressionSet = ExpressionSet,
                                                      nrep          = nrep,
-                                                     FUN           = function(x) log(var(x)),
-                                                     stage.names   = stage.names)
+                                                     FUN           = function(x) log(var(x)))
         
-        
+        col.index <- 1
         graphics::plot(density(CollapsedExpressionSet[ , 3]), col = stage.cols[1],main = "Distributions of replicate log variances", ...)
         apply(CollapsedExpressionSet[ , 4:(3 + nStages - 1)], 2 ,function(x) {
                 
-                graphics::lines(density(x),col = stage.cols[col.index], ...)
-                col.index <- col.index + 1
+                graphics::lines(density(x),col = stage.cols[col.index])
+                col.index <<- col.index + 1
                 
         })
         
-        graphics::legend("topleft", bty = "n", legend = stage.names, fill = stage.cols)
+        graphics::legend("topleft", bty = "n", legend = paste0("S",1:nStages), fill = stage.cols, ncol = ifelse(nStages <= 4, 1, floor(nStages/2)))
 }
 
 
