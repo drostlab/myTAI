@@ -55,7 +55,7 @@ PlotReplicateQuality <- function(ExpressionSet,
         apply(CollapsedExpressionSet[ , 4:(3 + nStages - 1)], 2 ,function(x) {
                 
                 col.index <<- col.index + 1
-                graphics::lines(density(x),col = stage.cols[col.index])
+                graphics::lines(density(x),col = stage.cols[col.index], ...)
                 
                 
         })
