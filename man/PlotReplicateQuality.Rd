@@ -5,7 +5,7 @@
 \title{Plot the Quality of Biological Replicates}
 \usage{
 PlotReplicateQuality(ExpressionSet, nrep, FUN = function(x) log(var(x)),
-  legend.pos = "topleft", ...)
+  legend.pos = "topleft", stage.names = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -16,6 +16,8 @@ PlotReplicateQuality(ExpressionSet, nrep, FUN = function(x) log(var(x)),
 The default function is the log(var(x)) quantifying the variance between replicates.}
 
 \item{legend.pos}{the position of the legend, e.g. 'topleft', or 'topright' (see \code{\link{legend}}).}
+
+\item{stage.names}{a character vector specifying the stage names.}
 
 \item{...}{additional graphics parameters.}
 }
