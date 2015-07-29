@@ -189,7 +189,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                         }
                         
                         else if (!log.expr){
-                                p_stage.cetered <- p.adjust(as.numeric(age.apply(ExpressionSet, function(x) format(kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH") 
+                                p_stage.cetered <- p.adjust(as.numeric(age.apply(ExpressionSet, function(x) format(stats::kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH") 
                         }
                         
                         pValNames <- rep("n.s.",length(names(table(ExpressionSet[ , 1]))))
