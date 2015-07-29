@@ -3,16 +3,24 @@
 #' biological variation between replicates and stages (experiments).
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param nrep either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.
+#' @param FUN a function that should be applied to quantify the variablity or quality of replicates.
+#' The default function is the log(var(x)) quantifying the variance between replicates.
+#' @param legend.pos the position of the legend, e.g. 'topleft', or 'topright' (see \code{\link{legend}}).
 #' @param ... additional graphics parameters.
 #' @author Hajk-Georg Drost
 #' @details The following quality checks can be performed:
 #' \itemize{
-#' \item
+#' \item Quantification of variability between replicates as density function. 
 #' \item
 #' }
 #' 
 #' @export
-PlotReplicateQuality <- function(ExpressionSet, nrep, ...){
+
+PlotReplicateQuality <- function(ExpressionSet,
+                                 nrep,
+                                 FUN        = function(x) log(var(x)),
+                                 legend.pos = "topleft", ...){
+        
         
         if (!all(sapply(nrep,function(x) x > 1, simplify = TRUE)))
                 stop("Please insert at least 2 replicates per stage.")
@@ -36,21 +44,23 @@ PlotReplicateQuality <- function(ExpressionSet, nrep, ...){
         
         stage.cols <- re.colors(nStages)
         
+        custom.FUN <- match.fun(FUN)
         # receive variance distribution of replicates
         CollapsedExpressionSet <- CollapseReplicates(ExpressionSet = ExpressionSet,
                                                      nrep          = nrep,
-                                                     FUN           = function(x) log(var(x)))
+                                                     FUN           = custom.FUN)
         
-        col.index <- 1
+        col.index <<- 1
         graphics::plot(density(CollapsedExpressionSet[ , 3]), col = stage.cols[1],main = "Distributions of replicate log variances", ...)
         apply(CollapsedExpressionSet[ , 4:(3 + nStages - 1)], 2 ,function(x) {
                 
-                graphics::lines(density(x),col = stage.cols[col.index])
                 col.index <<- col.index + 1
+                graphics::lines(density(x),col = stage.cols[col.index])
+                
                 
         })
         
-        graphics::legend("topleft", bty = "n", legend = paste0("S",1:nStages), fill = stage.cols, ncol = ifelse(nStages <= 4, 1, floor(nStages/2)))
+        graphics::legend(legend.pos, bty = "n", legend = paste0("S",1:nStages), fill = stage.cols, ncol = ifelse(nStages <= 4, 1, floor(nStages/2)))
 }
 
 
