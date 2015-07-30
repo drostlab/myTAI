@@ -35,7 +35,7 @@ The following quality checks can be performed:
 data(PhyloExpressionSetExample)
 
 # visualize log(var(x)) between replicates for each gene and developmental stage
-PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[ , 1:8],
+PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[1:5000 , 1:8],
                      nrep          = 2,
                      legend.pos   = "topright",
                      ylim          = c(0,0.2),
