@@ -192,7 +192,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                         }
                         
                         else if (!log.expr){
-                                p_stage.cetered <- p.adjust(as.numeric(age.apply(ExpressionSet, function(x) format(stats::kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH") 
+                                p_stage.cetered <- stats::p.adjust(as.numeric(age.apply(ExpressionSet, function(x) format(stats::kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH") 
                         }
                         
                         pValNames <- rep("n.s.",length(names(table(ExpressionSet[ , 1]))))
@@ -206,11 +206,11 @@ PlotCategoryExpr <- function(ExpressionSet,
                         # perform a Kruskal Test to detect stages of significant PS or DS variation using BH adjusted p-values
                         
                         if (log.expr){
-                                p_category.cetered <-   p.adjust(as.numeric(apply(tf(ExpressionSet,log2)[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
+                                p_category.cetered <-   stats::p.adjust(as.numeric(apply(tf(ExpressionSet,log2)[ , 3:ncols], 2 , function(x) stats::kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
                         }
                         
                         else if (!log.expr){
-                                p_category.cetered <-  p.adjust(as.numeric(apply(ExpressionSet[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
+                                p_category.cetered <-  stats::p.adjust(as.numeric(apply(ExpressionSet[ , 3:ncols], 2 , function(x) stats::kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
                         }
                         
                         pValNames <- rep("n.s.",ncols-2)
