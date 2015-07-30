@@ -1,4 +1,4 @@
-myTAI 0.3.0.9000
+myTAI 0.3.0
 ===========
 
 ### Vignettes
