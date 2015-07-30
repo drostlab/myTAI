@@ -172,7 +172,6 @@ PlotCategoryExpr <- function(ExpressionSet,
                 ExpressionSet <- GeneSubSet
         }
         
-        
         if (!log.expr)
                 max.value <- max(ExpressionSet[ , 3:ncols])
         
@@ -203,14 +202,11 @@ PlotCategoryExpr <- function(ExpressionSet,
                         # perform a Kruskal Test to detect stages of significant PS or DS variation using BH adjusted p-values
                         
                         if (log.expr){
-                                
                                 p_category.cetered <-   p.adjust(as.numeric(apply(tf(ExpressionSet,log2)[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
-                                
                         }
                         
                         else if (!log.expr){
                                 p_category.cetered <-  p.adjust(as.numeric(apply(ExpressionSet[ , 3:ncols], 2 , function(x) kruskal.test(x, g = ExpressionSet[ , 1])$p.value)), method = "BH") 
-                                
                         }
                         
                         pValNames <- rep("n.s.",ncols-2)
@@ -289,9 +285,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
                                 }
-                                
                         } 
-                        
                 }
                 
                 if (legendName == "DS"){
@@ -435,7 +429,6 @@ PlotCategoryExpr <- function(ExpressionSet,
                 }
         } 
         
-        
         if (distr.type == "dotplot"){
                 
                 if (legendName == "PS"){
@@ -531,42 +524,41 @@ PlotCategoryExpr <- function(ExpressionSet,
                 }
         } 
         
-        
-        stat.result <- t(as.data.frame(pValNames))
-        
-        if (legendName == "PS"){
-                if (type == "stage-centered"){
-                        
-                        if (is.null(gene.set))
-                                colnames(stat.result) <- paste0("PS",1:nPS)
-                        
-                        if (!is.null(gene.set))
-                                colnames(stat.result) <- paste0("PS",names(table(ExpressionSet[ , 1])))
-                }
-                        
+        if (test.stat){
+                stat.result <- t(as.data.frame(pValNames))
                 
-                if (type == "category-centered")
-                        colnames(stat.result) <- names(ExpressionSet)[3:ncols]
-                
-        } 
-                
-        
-        if (legendName == "DS"){
-                if (type == "stage-centered"){
-                        if (is.null(gene.set))
-                                colnames(stat.result) <- paste0("DS",1:nPS)
+                if (legendName == "PS"){
+                        if (type == "stage-centered"){
+                                
+                                if (is.null(gene.set))
+                                        colnames(stat.result) <- paste0("PS",1:nPS)
+                                
+                                if (!is.null(gene.set))
+                                        colnames(stat.result) <- paste0("PS",names(table(ExpressionSet[ , 1])))
+                        }
                         
-                        if (!is.null(gene.set))
-                                colnames(stat.result) <- paste0("DS",names(table(ExpressionSet[ , 1])))
-                }
-
-                if (type == "category-centered")
-                        colnames(stat.result) <- names(ExpressionSet)[3:ncols]
-        } 
+                        if (type == "category-centered")
+                                colnames(stat.result) <- names(ExpressionSet)[3:ncols]
+                } 
                 
-        rownames(stat.result) <- type
+                if (legendName == "DS"){
+                        if (type == "stage-centered"){
+                                if (is.null(gene.set))
+                                        colnames(stat.result) <- paste0("DS",1:nPS)
+                                
+                                if (!is.null(gene.set))
+                                        colnames(stat.result) <- paste0("DS",names(table(ExpressionSet[ , 1])))
+                        }
+                        
+                        if (type == "category-centered")
+                                colnames(stat.result) <- names(ExpressionSet)[3:ncols]
+                } 
+                
+                rownames(stat.result) <- type
+                
+                print(stat.result)
+        }
         
-        print(stat.result)
         return (res)
 }
 
