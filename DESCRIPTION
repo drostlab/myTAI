@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
 Title: Performing Phylotranscriptomics with R
-Version: 0.3.0.9000
+Version: 0.3.0
 Date: 2015-07-22
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
