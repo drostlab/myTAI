@@ -255,7 +255,8 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) +
-                                                ggplot2::theme(axis.title.x = ggplot2::element_text(angle = 90,vjust = 0.5, hjust = 1)) + ggplot2::theme_minimal() 
+                                                ggplot2::theme(legend.position = "bottom") +
+                                                ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1)) 
                                         
                                         
                                         # ggplot2::geom_text(data = pval_mapping, ggplot2::aes(x = x_coord, y = max_value,label = pvals), colour = "red", size = 5)
@@ -286,7 +287,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1)) 
                                 }
                         } 
                 }
@@ -310,7 +311,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                         
@@ -331,7 +332,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                 }
@@ -358,7 +359,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                         
@@ -379,11 +380,9 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
-                                
                         } 
-                        
                 }
                 
                 if (legendName == "DS"){
@@ -405,7 +404,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                         
@@ -426,7 +425,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                 }
@@ -453,7 +452,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                         
@@ -474,11 +473,9 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
-                                
                         } 
-                        
                 }
                 
                 if (legendName == "DS"){
@@ -500,7 +497,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                         
@@ -521,7 +518,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                                 ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
-                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal()
+                                                ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                                 }
                         } 
                 }
