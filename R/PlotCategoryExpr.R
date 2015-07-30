@@ -150,6 +150,9 @@ PlotCategoryExpr <- function(ExpressionSet,
         if (!is.element(distr.type, c("boxplot","violin","dotplot")))
                 stop ("Please specify 'distr.type' as either 'boxplot', 'dotplot', or 'violin'.")
         
+        if (!is.logical(log.expr))
+                stop ("'log.expr' can only be TRUE or FALSE.")
+        
         ncols <- ncol(ExpressionSet)
         nPS <- length(names(table(ExpressionSet[ , 1])))
         
