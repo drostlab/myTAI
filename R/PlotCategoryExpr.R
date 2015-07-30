@@ -73,6 +73,8 @@
 #' data(PhyloExpressionSetExample)
 #' data(DivergenceExpressionSetExample)
 #'
+#'\dontrun{
+#'
 #' # category-centered visualization of PS specific expression level distributions (log-scale)
 #' PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",
@@ -82,7 +84,6 @@
 #'                      log.expr      = TRUE)
 #'                      
 #' 
-#' \dontrun{
 #' # stage-centered visualization of PS specific expression level distributions (log-scale)
 #' PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 #'                      legendName    = "PS",

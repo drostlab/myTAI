@@ -90,6 +90,8 @@ for which expression levels should be visualized as boxplot, dotplot, or violinp
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
 
+\dontrun{
+
 # category-centered visualization of PS specific expression level distributions (log-scale)
 PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                      legendName    = "PS",
@@ -99,7 +101,6 @@ PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                      log.expr      = TRUE)
 
 
-\dontrun{
 # stage-centered visualization of PS specific expression level distributions (log-scale)
 PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                      legendName    = "PS",
