@@ -17,7 +17,7 @@
 #' @examples 
 #' data(PhyloExpressionSetExample)
 #' 
-#' # visualize the sd() between replicates
+#' # visualize log(var(x)) between replicates for each gene and developmental stage 
 #' PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[ , 1:8],
 #'                      nrep          = 2,
 #'                      legend.pos   = "topright",
