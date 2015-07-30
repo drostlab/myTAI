@@ -4,14 +4,13 @@ myTAI 0.3.0.9000
 ### Vignettes
 
 - adding examples for `PlotCategoryExpr()` to `Advanced` Vignette
-
+- adding examples for `PlotReplicateQuality()` to `Expression`
+ vignette
+ 
 ### New Functions
 
 - a new function `PlotCategoryExpr()` allowing users to plot the expression levels of each age or divergence category as boxplot, dot plot or violin plot
-
 - a new function `PlotReplicateQuality()` allowing users to visualize the quality of biological replicates
-
-### Updates
 
 
 myTAI 0.2.1
