@@ -62,7 +62,7 @@ PlotReplicateQuality <- function(ExpressionSet,
                                                      nrep          = nrep,
                                                      FUN           = custom.FUN)
         
-        col.index <<- 1
+        col.index <- 1
         graphics::plot(density(CollapsedExpressionSet[ , 3]), col = stage.cols[1],main = "Distributions of replicate log variances", ...)
         apply(CollapsedExpressionSet[ , 4:(3 + nStages - 1)], 2 ,function(x) {
                 
