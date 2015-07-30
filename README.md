@@ -18,7 +18,7 @@ of evolutionary conservation or constraint in developmental processes of extant 
 
 ## Tutorials
 
-These tutorials will get you started with this package:
+These tutorials introduce users to `myTAI`:
 
 - [A Brief Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
 - [Intermediate Concepts of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
@@ -84,7 +84,7 @@ browseVignettes("myTAI")
  
 ```
 
-In the `myTAI` framework you can find:
+In the `myTAI` framework users can find:
 
 #### Phylotranscriptiomics Measures:
 
