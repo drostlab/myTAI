@@ -573,6 +573,53 @@ Deviance.DEGs.adj
 5            1 at1g01090.1 0.1807567 0.008867715 0.8860005
 ```
 
+
+## Replicate Quality Check
+
+Users can also perform replicate quality checks to quantify the variability between replicate expression levels fo each
+stage separately.
+
+The `PlotReplicateQuality()` is designed to perform customized replicate variablity checks for any `ExpressionSet` object storing 
+replicates.
+
+```{r,eval=FALSE}
+data(PhyloExpressionSetExample)
+
+# visualize the sd() between replicates
+PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[ , 1:8],
+                     nrep          = 2,
+                     legend.pos   = "topright",
+                     ylim          = c(0,0.2),
+                     lwd           = 6)
+
+```
+
+The resulting plot visualizes the kernel density estimates for the variance (log variance) between replicates.
+Each curve represents the density function for the replicate variation within one stage or experiment.
+In this case the variance between replicates of `Stage 1` to `Stage 3` (each including 2 replicates) seem to deviate from each other allowing the conclusion that each stage has a different expression level variability between replicates.
+
+The `FUN` argument implemented in `PlotReplicateQuality()` allows users to furthermore, specify customized criteria quantifying
+replicate varibility. Please notice that the function specified in `FUN` will be performed separately on each gene and stage.
+
+In the following example the median bbsolute deviation function `mad()` is used to quantify replicate variability.
+
+```{r,eval=FALSE}
+data(PhyloExpressionSetExample)
+
+# visualize the mad() between replicates
+PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[ , 1:8],
+                     nrep          = 2,
+                     FUN           = mad,
+                     legend.pos    = "topright",
+                     ylim          = c(0,0.015),
+                     lwd           = 6)
+
+```
+
+In general, users are not limited to specific functions implememnted in R. By writing customized functions such as
+`FUN = function(x) return((x - mean(x))^2)` users can define their own criteria to quantify replicate variability and
+can then apply this criteria to `PlotReplicateQuality()` by specifying the `FUN` argument.
+
 ## Collapsing Replicate Samples
 
 After performing differential gene expression analyses, replicate expression levels
