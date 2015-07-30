@@ -29,7 +29,7 @@
 
 PlotReplicateQuality <- function(ExpressionSet,
                                  nrep,
-                                 FUN         = function(x) log(var(x)),
+                                 FUN         = function(x) log(stats::var(x)),
                                  legend.pos  = "topleft",
                                  stage.names = NULL, ...){
         
@@ -63,11 +63,11 @@ PlotReplicateQuality <- function(ExpressionSet,
                                                      FUN           = custom.FUN)
         
         col.index <- 1
-        graphics::plot(density(CollapsedExpressionSet[ , 3]), col = stage.cols[1],main = "Distributions of replicate log variances", ...)
+        graphics::plot(stats::density(CollapsedExpressionSet[ , 3]), col = stage.cols[1],main = "Distributions of replicate log variances", ...)
         apply(CollapsedExpressionSet[ , 4:(3 + nStages - 1)], 2 ,function(x) {
                 
                 col.index <<- col.index + 1
-                graphics::lines(density(x),col = stage.cols[col.index], ...)
+                graphics::lines(stats::density(x),col = stage.cols[col.index], ...)
                 
                 
         })
