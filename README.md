@@ -119,7 +119,7 @@ phylotranscriptomics pattern (significant deviation from a frat line = evolution
 * `EnrichmentTest()` : Phylostratum or Divergence Stratum Enrichment of a given Gene Set based on Fisher's Test
 * `bootMatrix()` : Compute a Permutation Matrix for Test Statistics
 
-All three functions also include visual analytics tools to quantify the goodness of test statistics.
+All functions also include visual analytics tools to quantify the goodness of test statistics.
 
 #### Differential Gene Expression Analysis
 
