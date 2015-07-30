@@ -29,8 +29,17 @@ biological variation between replicates and stages (experiments).
 The following quality checks can be performed:
 \itemize{
 \item Quantification of variability between replicates as density function.
-\item
 }
+}
+\examples{
+data(PhyloExpressionSetExample)
+
+# visualize the sd() between replicates
+PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[ , 1:8],
+                     nrep          = 2,
+                     legend.pos   = "topright",
+                     ylim          = c(0,0.2),
+                     lwd           = 6)
 }
 \author{
 Hajk-Georg Drost
