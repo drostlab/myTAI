@@ -1,7 +1,6 @@
 myTAI
 =====
 
-[![Travis-CI Build Status](https://travis-ci.org/HajkD/myTAI.svg?branch=master)](https://travis-ci.org/HajkD/myTAI)
 
 ### Performing Phylotranscriptomics with R
 
