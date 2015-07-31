@@ -34,11 +34,10 @@ Users can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 Users can download `myTAI` from [CRAN](https://cran.r-project.org/web/packages/myTAI/index.html) :
 
 ```r
-# install myTAI 0.2.1 from CRAN
+# install myTAI 0.3.0 from CRAN
 install.packages("myTAI",
                  repos        = "https://cran.rstudio.com/",
-                 dependencies = TRUE,
-                 type         = "source")
+                 dependencies = TRUE)
 ```
 
 ### Package Dependencies
