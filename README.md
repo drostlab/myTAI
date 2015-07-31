@@ -35,9 +35,7 @@ Users can download `myTAI` from [CRAN](https://cran.r-project.org/web/packages/m
 
 ```r
 # install myTAI 0.3.0 from CRAN
-install.packages("myTAI",
-                 repos        = "https://cran.rstudio.com/",
-                 dependencies = TRUE)
+install.packages("myTAI", dependencies = TRUE)
 ```
 
 ### Package Dependencies
