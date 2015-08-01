@@ -105,6 +105,7 @@ In the `myTAI` framework users can find:
 * `PlotEnrichment()` : Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set
 * `PlotGeneSet()` : Plot the Expression Profiles of a Gene Set
 * `PlotCategoryExpr()` : Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
+* `PlotGroupDiffs()` : Plot the significant differences between gene expression distributions of PS or DS groups
 
 #### A Statistical Framework and Test Statistics:
 
