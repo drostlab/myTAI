@@ -1,3 +1,14 @@
+myTAI 0.4.0
+===========
+
+### Vignettes
+
+### New Functions
+
+- a new function `PlotGroupDiffs()` allowing users to plot the he significant differences between gene expression distributions of PS or DS groups
+
+### Updates
+
 myTAI 0.3.0
 ===========
 
