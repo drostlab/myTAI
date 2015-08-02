@@ -12,7 +12,7 @@
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles. 
 #' @param stat.test the statistical test to quantify PS or DS group differences.
 #' @param plot.p.vals a logical value indicating whether the plot should be drawn or only the p-value should be returned without drawing the P-Value plot.
-#' @param ...
+#' @param ... additional plot parameters.
 #' @author Hajk-Georg Drost
 #' @details 
 #' The purpose of this function is to detect groups of PS or DS that significantly differ in their gene expression

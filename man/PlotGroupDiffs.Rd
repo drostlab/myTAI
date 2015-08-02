@@ -22,7 +22,7 @@ the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).}
 
 \item{plot.p.vals}{a logical value indicating whether the plot should be drawn or only the p-value should be returned without drawing the P-Value plot.}
 
-\item{...}{}
+\item{...}{additional plot parameters.}
 }
 \description{
 This function performs a statistical test to quantify the statistical significance between
