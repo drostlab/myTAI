@@ -46,6 +46,16 @@ PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
                type          = "b",
                lwd           = 6,
                xlab          = "Ontogeny")
+
+
+# only receive the p-values without the corresponding plot
+PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+               Groups        = list(group_1 = 1:3,group_2 = 4:12),
+               legendName    = "PS",
+               plot.p.vals   = FALSE,
+               type          = "b",
+               lwd           = 6,
+               xlab          = "Ontogeny")
 }
 \author{
 Hajk-Georg Drost
