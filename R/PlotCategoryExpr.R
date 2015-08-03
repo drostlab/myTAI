@@ -558,6 +558,9 @@ PlotCategoryExpr <- function(ExpressionSet,
                 rownames(stat.result) <- type
                 
                 print(stat.result)
+                cat("\n")
+                print("# Genes: ")
+                print(table(GeneSubSet[ , 1]))
         }
         
         return (res)
