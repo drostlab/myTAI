@@ -288,3 +288,40 @@ For example, users interested in the enrichment of PS or DS values in _D. rerio_
 (see [Enrichment Vignette](Enrichment.html) for details) could also visualize their gene expression
 distributions throughout development with `PlotCategoryExpr()` in cases where expression data is available.
 
+
+## Computing the significant differences between gene expression distributions of PS or DS groups
+
+The `PlotGroupDiffs()` function performs a test to quantify the statistical significance between the global expression level distributions of groups of PS or DS. It therefore allows users to investigate significant groups of PS or DS that significantly differ in their gene expression level distibution within specific developmental stages or experiments.
+
+Analogous to the `PlotRE()` or `PlotMeans()` function (see [Introduction](Introduction.html) for details),
+users need to pass the `Groups` to `PlotGroupDiffs()` specifying the groups that shall be compared.
+
+```{r,eval=FALSE}
+data(PhyloExpressionSetExample)
+
+PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+               Groups        = list(group_1 = 1:3,group_2 = 4:12),
+               legendName    = "PS",
+               type          = "b",
+               lwd           = 6,
+               xlab          = "Ontogeny")
+
+```
+
+In cases where no plot shall be drawn and only the resulting p-value shall be returned
+users can specify the `plot.p.vals = FALSE` argument to receive only p-values returned by the 
+underlying test statistic.
+
+```{r,eval=FALSE}
+# only receive the p-values without the corresponding plot
+PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+               Groups        = list(group_1 = 1:3,group_2 = 4:12),
+               legendName    = "PS",
+               plot.p.vals   = FALSE,
+               type          = "b",
+               lwd           = 6,
+               xlab          = "Ontogeny")
+
+```
+
+
