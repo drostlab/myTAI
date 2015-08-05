@@ -25,8 +25,8 @@ the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).}
 \item{...}{additional plot parameters.}
 }
 \description{
-This function performs a statistical test to quantify the statistical significance between
-the global expression level distributions of groups of PS or DS. In therefore, allows users to investigate
+This function performs a test to quantify the statistical significance between
+the global expression level distributions of groups of PS or DS. It therefore, allows users to investigate
 significant groups of PS or DS that significantly differ in their gene expression level distibution
 within specific developmental stages or experiments.
 }
