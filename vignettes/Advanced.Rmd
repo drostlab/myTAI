@@ -291,7 +291,10 @@ distributions throughout development with `PlotCategoryExpr()` in cases where ex
 
 ## Computing the significant differences between gene expression distributions of PS or DS groups
 
-The `PlotGroupDiffs()` function performs a test to quantify the statistical significance between the global expression level distributions of groups of PS or DS. It therefore allows users to investigate significant groups of PS or DS that significantly differ in their gene expression level distibution within specific developmental stages or experiments.
+As proposed by Quint et al., 2012 in some cases users whish to compare the difference
+of group specific expression levels using a statsitical test.
+
+For this purpose, the `PlotGroupDiffs()` function performs a test to quantify the statistical significance between the global expression level distributions of groups of PS or DS. It therefore allows users to investigate significant groups of PS or DS that significantly differ in their gene expression level distibution within specific developmental stages or experiments.
 
 Analogous to the `PlotRE()` or `PlotMeans()` function (see [Introduction](Introduction.html) for details),
 users need to pass the `Groups` to `PlotGroupDiffs()` specifying the groups that shall be compared.
