@@ -126,6 +126,7 @@ All functions also include visual analytics tools to quantify the goodness of te
 * `Expressed()` : Filter Expression Levels in Gene Expression Matrices (define expressed genes)
 * `SelectGeneSet()` : Select a Subset of Genes in an ExpressionSet
 * `PlotReplicateQuality()` : Plot the Quality of Biological Replicates
+* `GroupDiffs()` : Quantify the significant differences between gene expression distributions of PS or DS groups
 
 #### Taxonomic Information Retrieval
 
