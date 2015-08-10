@@ -58,6 +58,9 @@ PlotGroupDiffs <- function(ExpressionSet,
         if (is.null(legendName))
                 stop ("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.")
         
+        if (!is.element(stat.test,c("wilcox.test")))
+                stop (stat.test, " is not implemented in this function.")
+        
         ### getting the PS names available in the given expression set
         age_names <- as.character(names(table(ExpressionSet[ , 1])))
         ncols <- ncol(ExpressionSet)
@@ -82,6 +85,10 @@ PlotGroupDiffs <- function(ExpressionSet,
                         p.val.stages[i] <- wilcox.test(ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[1]]), i + 2],
                                                        ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[2]]), i + 2])$p.value 
                 }
+                
+                p.val.stages <- t(as.data.frame(p.val.stages))
+                colnames(p.val.stages) <- names(ExpressionSet)[3:ncols]
+                rownames(p.val.stages) <- paste0("p.value ( ",stat.test," )")
         }
         
         if (plot.p.vals){
