@@ -11,7 +11,8 @@ myTAI 0.4.0
 
 ### Updates
 
-
+- `PlotDistribution()` now uses ggplot2 to visualize the PS or DS distribution and
+is also based on the new function `PlotSelectedAgeDistr()`; furthermore it loses arguments `plotText` and `...` and gains a new argument `legendName`
 
 
 myTAI 0.3.0
