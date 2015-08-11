@@ -4,17 +4,18 @@
 \alias{PlotDistribution}
 \title{Plot the Frequency Distribution of Phylostrata or Divergence Strata}
 \usage{
-PlotDistribution(PhyloExpressionSet, plotText = TRUE, as.ratio = FALSE, ...)
+PlotDistribution(PhyloExpressionSet, legendName = "PS", as.ratio = FALSE,
+  use.only.map = FALSE)
 }
 \arguments{
 \item{PhyloExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{plotText}{a boolean value specifying whether the total number of genes
-belonging to a corresponding phylostratum or divergence-stratum class
-shall be plotted above each bar of the barplot.}
+\item{legendName}{a character string specifying whether "PS" or "DS" are visualized.}
 
 \item{as.ratio}{a boolean value specifying whether the relative frequencies
 instead of absolute frequencies shall be plotted.}
+
+\item{use.only.map}{logical value indicating whether or not a Phylostratigraphic Map or Divergence Map should be passed to the \code{ExpressionSet} argument instead of a standard \code{ExpressionSet} object.}
 
 \item{\dots}{default plot parameters.}
 }
@@ -43,17 +44,19 @@ on their evolutionary origins or evolutionary relationships.
 data(PhyloExpressionSetExample)
 
 # plot the phylostratum distribution of a PhyloExpressionSet
-PlotDistribution(PhyloExpressionSetExample, plotText = TRUE)
+PlotDistribution(PhyloExpressionSetExample)
 
 # plot the relative frequency distribution of a PhyloExpressionSet
-PlotDistribution(PhyloExpressionSetExample, plotText = TRUE, as.ratio = TRUE)
+PlotDistribution(PhyloExpressionSetExample, as.ratio = TRUE)
 
 
 # a example for visualizing the PS distribution for a subset of genes
-PlotDistribution(PhyloExpressionSetExample[sample(20000,5000) , ],
-                 plotText = TRUE, as.ratio = TRUE)
+PlotDistribution(PhyloExpressionSetExample[sample(20000,5000) , ], as.ratio = TRUE)
 }
 \author{
 Hajk-Georg Drost
+}
+\seealso{
+\code{\link{PlotSelectedAgeDistr}}
 }
 
