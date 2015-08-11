@@ -43,6 +43,8 @@ PlotSelectedAgeDistr <- function(ExpressionSet, gene.set,
         if (!use.only.map)
                 is.ExpressionSet(ExpressionSet)
         
+        AgeCategory <- GeneCount <- NULL
+        
         GeneSubSet <- SelectGeneSet(ExpressionSet = ExpressionSet,
                                     gene.set      = gene.set,
                                     use.only.map  = use.only.map)
