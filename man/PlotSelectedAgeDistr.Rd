@@ -12,7 +12,7 @@ PlotSelectedAgeDistr(ExpressionSet, gene.set, legendName = NULL,
 
 \item{gene.set}{a character vector storing the gene ids for which gene expression profiles shall be visualized.}
 
-\item{legendName}{a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.}
+\item{legendName}{a character string specifying whether "PS" or "DS" are are visualized.}
 
 \item{as.ratio}{logical value indicating whether or not relative frequencies shall be visualized.}
 
