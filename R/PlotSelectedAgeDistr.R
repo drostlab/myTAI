@@ -7,6 +7,8 @@
 #' @param as.ratio logical value indicating whether or not relative frequencies shall be visualized.
 #' @param use.only.map logical value indicating whether or not a Phylostratigraphic Map or Divergence Map should be passed to the \code{ExpressionSet} argument instead of a standard \code{ExpressionSet} object.
 #' @param col colour of the bars.
+#' @param xlab label of the x-axis.
+#' @param ylab label of the y-axis.
 #' @author Hajk-Georg Drost
 #' @examples 
 #' data(PhyloExpressionSetExample)
@@ -35,7 +37,9 @@ PlotSelectedAgeDistr <- function(ExpressionSet, gene.set,
                                  legendName   = NULL,
                                  as.ratio     = FALSE,
                                  use.only.map = FALSE,
-                                 col          = "turquoise4"){
+                                 col          = "turquoise4",
+                                 xlab         = NULL,
+                                 ylab         = NULL){
         
         if (is.null(legendName))
                 stop ("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.")
@@ -54,12 +58,27 @@ PlotSelectedAgeDistr <- function(ExpressionSet, gene.set,
         nPS <- length(names(table(ExpressionSet[ , 1])))
         
         if (!as.ratio){
-                ylab.name <- "# Genes\n"
+                
+                if (is.null(xlab)){
+                        xlab <- paste0("\n",legendName)
+                }
+                
+                if (is.null(ylab)){
+                        ylab <- "# Genes\n"
+                }
+                
                 AgeDistr <- table(factor(GeneSubSet[ , 1], levels = 1:nPS))
         }
                 
         if (as.ratio){
-                ylab.name <- "Rel. Number Of  Genes\n"
+                
+                if (is.null(xlab)){
+                        xlab <- paste0("\n",legendName)
+                }
+                
+                if (is.null(ylab)){
+                        ylab <- "Rel. Number Of  Genes\n"
+                }
                 AgeDistr <- table(factor(GeneSubSet[ , 1], levels = 1:nPS))
                 AgeDistr <- format(AgeDistr / sum(AgeDistr), digits = 2)
         }
@@ -67,7 +86,7 @@ PlotSelectedAgeDistr <- function(ExpressionSet, gene.set,
         GeneSubSet.LongFormat <- data.frame(AgeCategory = paste0(legendName,names(AgeDistr)), GeneCount = as.numeric(AgeDistr))
         # get the correct order of PS or DS by specifying levels = paste0(legendName,names(AgeDistr))
         GeneSubSet.LongFormat[ , 1] <- factor(GeneSubSet.LongFormat[ , 1], levels = paste0(legendName,names(AgeDistr)))
-        plot.res <- ggplot2::ggplot(GeneSubSet.LongFormat, ggplot2::aes(x = AgeCategory, y = GeneCount), order = FALSE) + ggplot2::geom_bar(stat="identity", fill = col) + ggplot2::labs(x = paste0("\n",legendName), y = ylab.name)  + ggplot2::geom_text(ggplot2::aes( label = GeneCount, y =  GeneCount), stat= "identity", vjust = -.3) + ggplot2::theme_minimal()
+        plot.res <- ggplot2::ggplot(GeneSubSet.LongFormat, ggplot2::aes(x = AgeCategory, y = GeneCount), order = FALSE) + ggplot2::geom_bar(stat="identity", fill = col) + ggplot2::labs(x = xlab, y = ylab)  + ggplot2::geom_text(ggplot2::aes( label = GeneCount, y =  GeneCount), stat= "identity", vjust = -.3) + ggplot2::theme_minimal()
         
         return (plot.res)
 }

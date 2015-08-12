@@ -5,7 +5,8 @@
 \title{Plot the PS or DS distribution of a selected set of genes}
 \usage{
 PlotSelectedAgeDistr(ExpressionSet, gene.set, legendName = NULL,
-  as.ratio = FALSE, use.only.map = FALSE, col = "turquoise4")
+  as.ratio = FALSE, use.only.map = FALSE, col = "turquoise4",
+  xlab = NULL, ylab = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -19,6 +20,10 @@ PlotSelectedAgeDistr(ExpressionSet, gene.set, legendName = NULL,
 \item{use.only.map}{logical value indicating whether or not a Phylostratigraphic Map or Divergence Map should be passed to the \code{ExpressionSet} argument instead of a standard \code{ExpressionSet} object.}
 
 \item{col}{colour of the bars.}
+
+\item{xlab}{label of the x-axis.}
+
+\item{ylab}{label of the y-axis.}
 }
 \description{
 This function visualizes the PS or DS distribution of a selected set of genes
