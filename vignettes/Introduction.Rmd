@@ -518,8 +518,7 @@ or display it as relative frequencies:
 # Plot phylostrata as relative frequency distribution
 PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample, 
                   as.ratio           = TRUE, 
-                  xlab               = "Phylostratum", 
-                  cex                = 0.7 )
+                  xlab               = "Phylostratum")
 ```
 
 
