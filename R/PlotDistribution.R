@@ -6,7 +6,8 @@
 #' @param as.ratio a boolean value specifying whether the relative frequencies
 #' instead of absolute frequencies shall be plotted.
 #' @param use.only.map logical value indicating whether or not a Phylostratigraphic Map or Divergence Map should be passed to the \code{ExpressionSet} argument instead of a standard \code{ExpressionSet} object.
-#' @param \dots default plot parameters.
+#' @param xlab label of the x-axis.
+#' @param ylab label of the y-axis.
 #' @details 
 #' The frequency distribution of all genes or a subset of genes might be of interest for subsequent analyses.
 #'
@@ -39,15 +40,21 @@
 #' @seealso \code{\link{PlotSelectedAgeDistr}}
 #' @export
 
-PlotDistribution <- function(PhyloExpressionSet, legendName = "PS", as.ratio = FALSE, use.only.map = FALSE)
+PlotDistribution <- function(PhyloExpressionSet,
+                             legendName   = "PS",
+                             as.ratio     = FALSE,
+                             use.only.map = FALSE,
+                             xlab         = NULL,
+                             ylab         = NULL)
 {
-        
         
         PlotSelectedAgeDistr(ExpressionSet = PhyloExpressionSet,
                              gene.set      = PhyloExpressionSet[ , 2],
                              legendName    = legendName,
                              as.ratio      = as.ratio,
-                             use.only.map  = use.only.map)
+                             use.only.map  = use.only.map,
+                             xlab          = xlab,
+                             ylab          = ylab)
         
         
 }

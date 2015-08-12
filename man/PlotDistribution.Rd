@@ -5,7 +5,7 @@
 \title{Plot the Frequency Distribution of Phylostrata or Divergence Strata}
 \usage{
 PlotDistribution(PhyloExpressionSet, legendName = "PS", as.ratio = FALSE,
-  use.only.map = FALSE)
+  use.only.map = FALSE, xlab = NULL, ylab = NULL)
 }
 \arguments{
 \item{PhyloExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -17,7 +17,9 @@ instead of absolute frequencies shall be plotted.}
 
 \item{use.only.map}{logical value indicating whether or not a Phylostratigraphic Map or Divergence Map should be passed to the \code{ExpressionSet} argument instead of a standard \code{ExpressionSet} object.}
 
-\item{\dots}{default plot parameters.}
+\item{xlab}{label of the x-axis.}
+
+\item{ylab}{label of the y-axis.}
 }
 \value{
 a barplot showing the phylostratum distribution or
