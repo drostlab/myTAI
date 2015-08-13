@@ -11,9 +11,6 @@
 #' @param method a character string specifying the correlation method to cbe used, e.g. "pearson", "kendall", "spearman".  
 #' @param linearModel a boolean value specifying whether a linear model should be
 #' fitted to the data and furthermore, should be visualized in the corresponding plot.
-#' @param main.text a character string specifying the text that shall be written as main. 
-#' Default is \code{main.text} = \code{NULL}.
-#' @param \dots default plot parameters.
 #' @return a jitter-correlation-plot of PS and DS correlation.
 #' @references  Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
 #' Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
@@ -28,8 +25,7 @@
 #' # plot the PS and DS correlation
 #' PlotCorrelation(PhyloExpressionSetExample, DivergenceExpressionSetExample, 
 #'                 method      = "pearson", 
-#'                 linearModel = TRUE, 
-#'                 main.text   = "Pearson's ")
+#'                 linearModel = TRUE)
 #' 
 #' 
 #' 
@@ -37,8 +33,7 @@
 
 PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
                             method      = "pearson",
-                            linearModel = FALSE, 
-                            main.text   = NULL,...)
+                            linearModel = FALSE)
 {
         
         is.ExpressionSet(PhyloExpressionSet)
@@ -49,6 +44,8 @@ PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
         
         colnames(PhyloExpressionSet)[2] <- "GeneID"
         colnames(DivergenceExpressionSet)[2] <- "GeneID"
+        nPS <- length(names(table(PhyloExpressionSet[ , 1])))
+        nDS <- length(names(table(DivergenceExpressionSet[ , 1])))
         
         # convert ids to lower case
         PhyloExpressionSet[ , "GeneID"] <- tolower(PhyloExpressionSet[ , "GeneID"])
@@ -66,14 +63,23 @@ PlotCorrelation <- function(PhyloExpressionSet,DivergenceExpressionSet,
         PS <- jitter(PS_DS.Subset[ , 2],1.5)
         DS <- jitter(PS_DS.Subset[ , 3],1.5)
         
-        if(!is.null(main.text))
-                graphics::plot(PS,DS,main = paste0(main.text,method," = ",CorrCoeffasCharacter), ...)
+        CorDF <- data.frame(PS = PS, DS = DS)
         
-        if(is.null(main.text))
-                graphics::plot(PS,DS,main = paste0(method," = ",CorrCoeffasCharacter), ...)
+        if (!linearModel){
+                
+                res.plot <- ggplot2::ggplot(CorDF, ggplot2::aes(x=PS, y=DS)) + ggplot2::ggtitle(paste0(method," = ",CorrCoeffasCharacter)) +
+                        ggplot2::geom_point(shape=1) +  ggplot2::theme_minimal()
+                
+        }
         
-        if(linearModel == TRUE)
-                graphics::abline(stats::lm(PS_DS.Subset[ , 3]~PS_DS.Subset[ , 2]),lwd = 5,col = "red")
+        if (linearModel){
+         
+                res.plot <- ggplot2::ggplot(CorDF, ggplot2::aes(x=PS, y=DS)) + ggplot2::ggtitle(paste0(method," = ",CorrCoeffasCharacter)) +
+                        ggplot2::geom_point(shape=1) + 
+                        ggplot2::geom_smooth(method="auto") + ggplot2::theme_minimal()       
+                
+        }
         
+        return(res.plot)
 }
 
