@@ -5,7 +5,7 @@
 \title{Plot the Correlation Between Phylostrata and Divergence Strata}
 \usage{
 PlotCorrelation(PhyloExpressionSet, DivergenceExpressionSet,
-  method = "pearson", linearModel = FALSE, main.text = NULL, ...)
+  method = "pearson", linearModel = FALSE)
 }
 \arguments{
 \item{PhyloExpressionSet}{a standard PhyloExpressionSet object.}
@@ -16,11 +16,6 @@ PlotCorrelation(PhyloExpressionSet, DivergenceExpressionSet,
 
 \item{linearModel}{a boolean value specifying whether a linear model should be
 fitted to the data and furthermore, should be visualized in the corresponding plot.}
-
-\item{main.text}{a character string specifying the text that shall be written as main.
-Default is \code{main.text} = \code{NULL}.}
-
-\item{\dots}{default plot parameters.}
 }
 \value{
 a jitter-correlation-plot of PS and DS correlation.
@@ -41,8 +36,7 @@ subsequent analyses (Quint et al., 2012).
 # plot the PS and DS correlation
 PlotCorrelation(PhyloExpressionSetExample, DivergenceExpressionSetExample,
                 method      = "pearson",
-                linearModel = TRUE,
-                main.text   = "Pearson's ")
+                linearModel = TRUE)
 }
 \author{
 Hajk-Georg Drost
