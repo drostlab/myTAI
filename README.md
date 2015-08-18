@@ -82,7 +82,7 @@ browseVignettes("myTAI")
 
 In the `myTAI` framework users can find:
 
-#### Phylotranscriptiomics Measures:
+#### Phylotranscriptomics Measures:
 
 * `TAI()` : Function to compute the Transcriptome Age Index (TAI)
 * `TDI()` : Function to compute the Transcriptome Divergence Index (TDI)
