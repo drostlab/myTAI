@@ -253,7 +253,7 @@ PlotCategoryExpr <- function(ExpressionSet,
 #                                         pval_mapping <- data.frame(PS = 1:nPS, x_coord = rep(ifelse(nPS < 3, 1, 3),nPS),max_value = rep(max.value,nPS),pvals = pValNames)
 #                                         print(pval_mapping)
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_boxplot() + 
-                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) +
                                                 ggplot2::theme(legend.position = "bottom") +
@@ -285,7 +285,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_boxplot() + 
-                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1)) 
@@ -309,7 +309,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_boxplot() + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -330,7 +330,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_boxplot() + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -357,7 +357,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_violin(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -378,7 +378,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_violin(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -402,7 +402,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_violin(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -423,7 +423,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_violin(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -450,7 +450,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -471,7 +471,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nPhylostratum", y = "log2(expression level)\n") + 
+                                                ggplot2::facet_grid(. ~ PS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -495,7 +495,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = value, fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "Expression Level\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "Expression Level\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
@@ -516,7 +516,7 @@ PlotCategoryExpr <- function(ExpressionSet,
                                 else if (type == "stage-centered"){
                                         
                                         res <- ggplot2::ggplot(ReshapedExpressionSet, ggplot2::aes(x = Stage, y = log2(value), fill = Stage))  + ggplot2::geom_dotplot(trim = FALSE) + 
-                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDivergence Stratum", y = "log2(expression level)\n") + 
+                                                ggplot2::facet_grid(. ~ DS, labeller = ggplot2::label_both)  + ggplot2::labs(x = "\nDevelopmental Stage", y = "log2(expression level)\n") + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(3), color = I("black")) + 
                                                 ggplot2::geom_point(stat = "summary", fun.y = "mean", size = I(2.2), color = I("orange")) + 
                                                 ggplot2::theme(legend.position = "bottom") + ggplot2::theme_minimal() + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
