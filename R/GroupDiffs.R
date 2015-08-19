@@ -11,6 +11,7 @@
 #' the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles. 
 #' @param stat.test the statistical test to quantify PS or DS group differences.
+#' @param gene.set a character vector storing the gene ids for which group specific differences shall be statistically quantified.
 #' @param ... additional plot parameters.
 #' @author Hajk-Georg Drost
 #' @details 
@@ -22,24 +23,41 @@
 #' @examples 
 #' 
 #' data(PhyloExpressionSetExample)
-#' 
+#' # perform a Wilcoxon Rank Sum test to statistically quantify the
+#' # difference between PS-Group 1 expression levels versus PS-Group 2
+#' # expression levels
 #' GroupDiffs(ExpressionSet = PhyloExpressionSetExample,
 #'            Groups       = list(group_1 = 1:3,group_2 = 4:12),
 #'            legendName   = "PS")
-#'                
-#'                
+#' 
+#' # quantify the significant difference of a selected set of genes
+#' set.seed(123)
+#' ExampleGeneSet <- sample(PhyloExpressionSetExample[ , 2],5000)  
+#'              
+#' GroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+#'            Groups       = list(group_1 = 1:3,group_2 = 4:12),
+#'            legendName   = "PS",
+#'            gene.set     = ExampleGeneSet)               
+#' 
 #' 
 #' @seealso \code{\link{PlotGroupDiffs}}, \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}
 #' @export
 
-GroupDiffs <- function(ExpressionSet, Groups = NULL, legendName = NULL,
-                       stat.test = "wilcox.test", ...){
+GroupDiffs <- function(ExpressionSet,
+                       Groups     = NULL, 
+                       legendName = NULL,
+                       stat.test  = "wilcox.test",
+                       gene.set   = NULL, ...){
         
         
         PlotGroupDiffs(ExpressionSet = ExpressionSet,
                        Groups        = Groups,
                        legendName    = legendName,
                        stat.test     = stat.test,
-                       plot.p.vals   = FALSE, ...)
+                       plot.p.vals   = FALSE,
+                       gene.set      = gene.set, ...)
         
 }
+
+
+
