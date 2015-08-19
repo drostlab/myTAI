@@ -12,6 +12,7 @@
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles. 
 #' @param stat.test the statistical test to quantify PS or DS group differences.
 #' @param plot.p.vals a logical value indicating whether the plot should be drawn or only the p-value should be returned without drawing the P-Value plot.
+#' @param gene.set a character vector storing the gene ids for which group specific differences shall be statistically quantified.
 #' @param ... additional plot parameters.
 #' @author Hajk-Georg Drost
 #' @details 
@@ -40,6 +41,18 @@
 #'                type          = "b",
 #'                lwd           = 6,
 #'                xlab          = "Ontogeny")
+#'                
+#'                
+#' # quantify the significant difference of a selected set of genes
+#' # only receive the p-values without the corresponding plot
+#' set.seed(123)
+#' ExampleGeneSet <- sample(PhyloExpressionSetExample[ , 2],5000)
+#'                               
+#' PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+#'                Groups        = list(group_1 = 1:3,group_2 = 4:12),
+#'                legendName    = "PS",
+#'                plot.p.vals   = FALSE,
+#'                gene.set      = ExampleGeneSet)                 
 #' 
 #' @seealso \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}
 #' @export
@@ -48,7 +61,8 @@ PlotGroupDiffs <- function(ExpressionSet,
                            Groups      = NULL,
                            legendName  = NULL,
                            stat.test   = "wilcox.test",
-                           plot.p.vals = TRUE, ...){
+                           plot.p.vals = TRUE,
+                           gene.set    = NULL, ...){
         
         is.ExpressionSet(ExpressionSet)
        
@@ -77,6 +91,11 @@ PlotGroupDiffs <- function(ExpressionSet,
                 
                 if (length(Groups) > 2)
                         stop ("To perform a pairwise wilcox.test you can only specify two sets of group elements.")
+                
+        if (!is.null(gene.set)){
+                
+                ExpressionSet <- SelectGeneSet(ExpressionSet = ExpressionSet, gene.set = gene.set)
+        }        
                 
                 p.val.stages <- vector("numeric", length = nStages)
                 
