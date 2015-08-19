@@ -38,12 +38,9 @@ groups of PS or DS in a specific developmental stage or experiment.
 \examples{
 data(PhyloExpressionSetExample)
 
-    GroupDiffs(ExpressionSet = PhyloExpressionSetExample,
-               Groups        = list(group_1 = 1:3,group_2 = 4:12),
-               legendName    = "PS",
-               type          = "b",
-               lwd           = 6,
-               xlab          = "Ontogeny")
+GroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+           Groups       = list(group_1 = 1:3,group_2 = 4:12),
+           legendName   = "PS")
 }
 \author{
 Hajk-Georg Drost
