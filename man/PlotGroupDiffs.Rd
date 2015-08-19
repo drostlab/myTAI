@@ -5,7 +5,7 @@
 \title{Plot the significant differences between gene expression distributions of PS or DS groups}
 \usage{
 PlotGroupDiffs(ExpressionSet, Groups = NULL, legendName = NULL,
-  stat.test = "wilcox.test", plot.p.vals = TRUE, ...)
+  stat.test = "wilcox.test", plot.p.vals = TRUE, gene.set = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -21,6 +21,8 @@ the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).}
 \item{stat.test}{the statistical test to quantify PS or DS group differences.}
 
 \item{plot.p.vals}{a logical value indicating whether the plot should be drawn or only the p-value should be returned without drawing the P-Value plot.}
+
+\item{gene.set}{a character vector storing the gene ids for which group specific differences shall be statistically quantified.}
 
 \item{...}{additional plot parameters.}
 }
@@ -56,6 +58,18 @@ PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
                type          = "b",
                lwd           = 6,
                xlab          = "Ontogeny")
+
+
+# quantify the significant difference of a selected set of genes
+# only receive the p-values without the corresponding plot
+set.seed(123)
+ExampleGeneSet <- sample(PhyloExpressionSetExample[ , 2],5000)
+
+PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+               Groups        = list(group_1 = 1:3,group_2 = 4:12),
+               legendName    = "PS",
+               plot.p.vals   = FALSE,
+               gene.set      = ExampleGeneSet)
 }
 \author{
 Hajk-Georg Drost
