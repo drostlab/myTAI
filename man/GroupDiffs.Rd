@@ -5,7 +5,7 @@
 \title{Quantify the significant differences between gene expression distributions of PS or DS groups}
 \usage{
 GroupDiffs(ExpressionSet, Groups = NULL, legendName = NULL,
-  stat.test = "wilcox.test", ...)
+  stat.test = "wilcox.test", gene.set = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -19,6 +19,8 @@ the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).}
 \item{legendName}{a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.}
 
 \item{stat.test}{the statistical test to quantify PS or DS group differences.}
+
+\item{gene.set}{a character vector storing the gene ids for which group specific differences shall be statistically quantified.}
 
 \item{...}{additional plot parameters.}
 }
@@ -37,10 +39,21 @@ groups of PS or DS in a specific developmental stage or experiment.
 }
 \examples{
 data(PhyloExpressionSetExample)
-
+# perform a Wilcoxon Rank Sum test to statistically quantify the
+# difference between PS-Group 1 expression levels versus PS-Group 2
+# expression levels
 GroupDiffs(ExpressionSet = PhyloExpressionSetExample,
            Groups       = list(group_1 = 1:3,group_2 = 4:12),
            legendName   = "PS")
+
+# quantify the significant difference of a selected set of genes
+set.seed(123)
+ExampleGeneSet <- sample(PhyloExpressionSetExample[ , 2],5000)
+
+GroupDiffs(ExpressionSet = PhyloExpressionSetExample,
+           Groups       = list(group_1 = 1:3,group_2 = 4:12),
+           legendName   = "PS",
+           gene.set     = ExampleGeneSet)
 }
 \author{
 Hajk-Georg Drost
