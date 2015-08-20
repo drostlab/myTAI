@@ -6,7 +6,7 @@ myTAI 0.4.0
 ### New Functions
 
 - a new function `PlotSelectedAgeDistr()` allowing unsers to visualize the PS or DS gene distribution of a subset of genes stored in the input ExpressionSet object
-- a new function `PlotGroupDiffs()` allowing users to plot the he significant differences between gene expression distributions of PS or DS groups
+- a new function `PlotGroupDiffs()` allowing users to plot the significant differences between gene expression distributions of PS or DS groups
 - a new function `GroupDiffs()` allowing users to perform statistical tests to quantify the gene expression level differences between all genes of defined PS or DS groups 
 
 ### Updates
@@ -16,6 +16,10 @@ is also based on the new function `PlotSelectedAgeDistr()`; furthermore it loses
 
 - remove arguments 'main.text' and '...' from `PlotCorrelation()`
 - `PlotCorrelation()` is now based on ggplot2
+- `PlotGroupDiffs()` receives a new argument `gene.set` allowing users to statistically quantify the group specific PS/DS differences of a selected set of genes
+- analogously to `PlotGroupDiffs()` the function `GroupDiffs()` also receives a new argument `gene.set` allowing users to statistically quantify the group specific PS/DS differences of a selected set of genes
+- Fixing wrong x-axis labeling in `PlotCategoryExpr()` when `type = "stage-centered"` is specified
+- `PlotCategoryExpr()` now also prints out the PS/DS absolute frequency distribution of the selected `gene.set`
 
 myTAI 0.3.0
 ===========
