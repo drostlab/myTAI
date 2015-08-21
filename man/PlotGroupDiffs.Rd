@@ -5,7 +5,7 @@
 \title{Plot the significant differences between gene expression distributions of PS or DS groups}
 \usage{
 PlotGroupDiffs(ExpressionSet, Groups = NULL, legendName = NULL,
-  stat.test = "wilcox.test", plot.p.vals = TRUE, gene.set = NULL, ...)
+  stat.test = "wilcox.test", plot.type = NULL, gene.set = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -20,7 +20,7 @@ the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).}
 
 \item{stat.test}{the statistical test to quantify PS or DS group differences.}
 
-\item{plot.p.vals}{a logical value indicating whether the plot should be drawn or only the p-value should be returned without drawing the P-Value plot.}
+\item{plot.type}{the type of plot that shall be drawn to visualized the difference in PS/DS group specific expression .}
 
 \item{gene.set}{a character vector storing the gene ids for which group specific differences shall be statistically quantified.}
 
@@ -38,6 +38,9 @@ level distributions on a global (transcriptome) level. Since relative expression
 PS or DS specific mean expression levels (\code{\link{PlotMeans}}) are biased by highly expressed genes,
 this function allows users to objectively test the significant difference of transcriptome expression between
 groups of PS or DS in a specific developmental stage or experiment.
+
+In particular, this function divides (for each developmental stage separately) the gene expression levels into two groups: Group1 = genes deriving from selected PS/DS in group 1 and
+Group2 = genes deriving from selected PS/DS in group 2. Within each stage the expression level distributions between group 1 and group 2 are statistically quantified using a \code{\link{wilcox.test}}.
 }
 \examples{
 data(PhyloExpressionSetExample)
@@ -70,11 +73,17 @@ PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
                legendName    = "PS",
                plot.p.vals   = FALSE,
                gene.set      = ExampleGeneSet)
+
+
+# plot differences as boxplot for each developmental stage
+PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
+           Groups        = list(group_1 = 1:3,group_2 = 4:12),
+           legendName    = "PS", plot.type = "boxplot")
 }
 \author{
 Hajk-Georg Drost
 }
 \seealso{
-\code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}
+\code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}, \code{\link{GroupDiffs}}
 }
 
