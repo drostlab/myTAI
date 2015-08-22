@@ -305,6 +305,7 @@ data(PhyloExpressionSetExample)
 PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
                Groups        = list(group_1 = 1:3,group_2 = 4:12),
                legendName    = "PS",
+               plot.type     = "p-vals",
                type          = "b",
                lwd           = 6,
                xlab          = "Ontogeny")
@@ -312,7 +313,7 @@ PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
 ```
 
 In cases where no plot shall be drawn and only the resulting p-value shall be returned
-users can specify the `plot.p.vals = FALSE` argument to receive only p-values returned by the 
+users can specify the `plot.type = NULL` argument to receive only p-values returned by the 
 underlying test statistic.
 
 ```{r,eval=FALSE}
@@ -320,11 +321,24 @@ underlying test statistic.
 PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
                Groups        = list(group_1 = 1:3,group_2 = 4:12),
                legendName    = "PS",
-               plot.p.vals   = FALSE,
-               type          = "b",
-               lwd           = 6,
-               xlab          = "Ontogeny")
+               plot.type     = NULL)
 
 ```
+
+Optionally, users can also visualize the difference in expression level distributions 
+of groups of PS/DS during each developmental stage by specifying the `plot.type = "boxplot"`
+argument.
+
+```{r,eval=FALSE}
+# visualize difference as boxplot
+PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
+               Groups        = list(group_1 = 1:3,group_2 = 4:12),
+               legendName    = "PS",
+               plot.type     = "boxplot")
+
+```
+
+Here, we use log2 transformed expression levels for better visualization (`tf(PhyloExpressionSetExample,log2)`).
+
 
 
