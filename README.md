@@ -26,7 +26,12 @@ These tutorials introduce users to `myTAI`:
 - [Gene Expression Analysis with myTAI](https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd)
 - [Taxonomic Information Retrieval](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd)
 
-Users can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
+
+## NEWS
+
+The current status of the package as well as a detailed history of the
+functionality of each version of `myTAI` can be found in the [NEWS](https://github.com/HajkD/myTAI/blob/master/NEWS.md) section.
+
 
 ## Installation
 
@@ -49,6 +54,8 @@ biocLite("edgeR")
 ```
 
 ## Getting started with `myTAI`
+
+Users can also read the tutorials within ([RStudio](http://www.rstudio.com/)) :
 
 ```r
 # source the myTAI package
