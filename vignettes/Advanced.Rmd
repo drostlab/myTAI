@@ -340,5 +340,9 @@ PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
 
 Here, we use log2 transformed expression levels for better visualization (`tf(PhyloExpressionSetExample,log2)`).
 
+Internally, the `PlotGroupDiffs()` function performs a Wilcoxon Rank Sum test to quantify the statistical significance of PS/DS group expression. This quantification allows users to detect developmental stages of significant expression level differences between PS/DS groups. In this example we chose genes originated before the evolution of embryogenesis evolved in plants (Group1 = PS1-3) versus genes originated after the evolution of embryogenesis evolved in plants (Group2 = PS4-12). As a result, we observe that indeed the
+difference in total gene expression between these groups is significant throughout embryogenesis.
+In terms of the P-value quantification we observe that the P-value is minimized towards the phylotypic period. Hence, the expression level difference between the studied PS groups is maximized during the phylotypic period.
+
 
 
