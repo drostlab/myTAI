@@ -11,6 +11,7 @@
 #' the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles. 
 #' @param stat.test the statistical test to quantify PS or DS group differences.
+#' @param col colors for the two box plots representing the expression level distributions of selected PS/DS groups.
 #' @param plot.type the type of plot that shall be drawn to visualized the difference in PS/DS group specific expression .
 #' @param gene.set a character vector storing the gene ids for which group specific differences shall be statistically quantified.
 #' @param ... additional plot parameters.
@@ -61,7 +62,8 @@
 #' # plot differences as boxplot for each developmental stage
 #' PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
 #'                Groups        = list(group_1 = 1:3,group_2 = 4:12),
-#'                legendName    = "PS", plot.type = "boxplot")
+#'                legendName    = "PS",
+#'                plot.type     = "boxplot")
 #' 
 #' 
 #' @seealso \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}, \code{\link{GroupDiffs}}
@@ -71,6 +73,7 @@ PlotGroupDiffs <- function(ExpressionSet,
                            Groups      = NULL,
                            legendName  = NULL,
                            stat.test   = "wilcox.test",
+                           col         = c("turquoise3","magenta3"),
                            plot.type   = NULL,
                            gene.set    = NULL, ...){
         
@@ -81,6 +84,8 @@ PlotGroupDiffs <- function(ExpressionSet,
         
         if (is.null(legendName))
                 stop ("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.")
+        if (length(col) > 2)
+                stop ("Please enter only two colors for the two groups.")
         
         if (!is.element(stat.test,c("wilcox.test")))
                 stop (stat.test, " is not implemented in this function.")
@@ -115,8 +120,9 @@ PlotGroupDiffs <- function(ExpressionSet,
                 GroupCategoryList <- 1
                 group.names <- c("Group1","Group2")  
                 
-                if (plot.type == "boxplot")
-                        par(mfrow = n2mfrow(nStages))
+                if (!is.null(plot.type))
+                        if (plot.type == "boxplot")
+                                par(mfrow = n2mfrow(nStages))
                 
                 for (i in 1:nStages){
                         
@@ -125,11 +131,12 @@ PlotGroupDiffs <- function(ExpressionSet,
                         
                         p.val.stages[i] <- wilcox.test(ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[1]]), i + 2],
                                                        ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[2]]), i + 2])$p.value 
-                        
-                        if (plot.type == "boxplot"){
-                                dataList <- lapply(group.names, get, envir=environment())
-                                names(dataList) <- group.names
-                                boxplot(dataList,xlab = "Groups", ylab = "Expression Level", main = paste0(names(ExpressionSet)[i + 2],"  ( P = ",format(p.val.stages[i],digits = 2)," )"), col = c("deepskyblue4","magenta4"))  
+                        if (!is.null(plot.type)){
+                                if (plot.type == "boxplot"){
+                                        dataList <- lapply(group.names, get, envir=environment())
+                                        names(dataList) <- group.names
+                                        boxplot(dataList,xlab = "Groups", ylab = "Expression Level", main = paste0(names(ExpressionSet)[i + 2],"  ( P = ",format(p.val.stages[i],digits = 2)," )"), col = col)  
+                                }  
                         }
                 }
                 
@@ -140,8 +147,8 @@ PlotGroupDiffs <- function(ExpressionSet,
         
         
         if (!is.null(plot.type)){
-                
                 if (plot.type == "p-vals"){
+                        
                         # define arguments for different graphics functions
                         plot.args <- c("lwd","col","lty","xlab","cex.lab","main","type")
                         axis.args <- c("las", "cex.axis")
@@ -150,7 +157,7 @@ PlotGroupDiffs <- function(ExpressionSet,
                         ellipsis.names <- names(dots)
                         
                         
-                        do.call(graphics::plot,c(list(x = p.val.stages, xaxt = "n", ylab = "P-Value"),dots[!is.element(names(dots),c(axis.args,legend.args))]))
+                        do.call(graphics::plot,c(list(x = 1:nStages,y = p.val.stages, xaxt = "n", ylab = "P-Value"),dots[!is.element(names(dots),c(axis.args,legend.args))]))
                         do.call(graphics::axis,c(list(side = 1,at = seq(1,nStages,1), labels = names(ExpressionSet)[3:ncols]), 
                                                  dots[!is.element(names(dots),c(plot.args,legend.args))]))   
                         

@@ -5,7 +5,8 @@
 \title{Plot the significant differences between gene expression distributions of PS or DS groups}
 \usage{
 PlotGroupDiffs(ExpressionSet, Groups = NULL, legendName = NULL,
-  stat.test = "wilcox.test", plot.type = NULL, gene.set = NULL, ...)
+  stat.test = "wilcox.test", col = c("turquoise3", "magenta3"),
+  plot.type = NULL, gene.set = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -19,6 +20,8 @@ the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)).}
 \item{legendName}{a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.}
 
 \item{stat.test}{the statistical test to quantify PS or DS group differences.}
+
+\item{col}{colors for the two box plots representing the expression level distributions of selected PS/DS groups.}
 
 \item{plot.type}{the type of plot that shall be drawn to visualized the difference in PS/DS group specific expression .}
 
@@ -77,8 +80,9 @@ PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
 
 # plot differences as boxplot for each developmental stage
 PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
-           Groups        = list(group_1 = 1:3,group_2 = 4:12),
-           legendName    = "PS", plot.type = "boxplot")
+               Groups        = list(group_1 = 1:3,group_2 = 4:12),
+               legendName    = "PS",
+               plot.type     = "boxplot")
 }
 \author{
 Hajk-Georg Drost
