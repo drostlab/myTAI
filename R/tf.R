@@ -103,8 +103,8 @@ tf <- function(ExpressionSet, FUN){
         
         ncols <- dim(ExpressionSet)[2]
         f <- match.fun(FUN)
-        
-        return(data.frame(ExpressionSet[ , 1:2] , apply(ExpressionSet[ , 3:ncols] , 2 , f)))
-        
-        
+        res <- data.frame(ExpressionSet[ , 1:2] , apply(ExpressionSet[ , 3:ncols] , 2 , f))
+        names(res) <- names(ExpressionSet)
+        return(res)
 }
+
