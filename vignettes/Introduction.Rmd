@@ -264,7 +264,7 @@ Following steps summarize the `Divergence Stratigraphy` algorithm:
 ### Step by Step Instructions: `Divergence Stratigraphy`
 
 
-The first step is to install the [orthologr](https://github.com/HajkD/orthologr) package on your machine. In the following example we will compute a `Divergence Map` for _A. thaliana_ versus _A. lyrata_.
+The first step is to install the [orthologr](https://github.com/HajkD/orthologr#installation-guide) package and the [BLAST command line tool](https://github.com/HajkD/orthologr/blob/master/vignettes/Install.Rmd#install-blast) on your machine. In the following example we will compute a `Divergence Map` for _A. thaliana_ versus _A. lyrata_.
 
 Downloading the CDS files of `A. thaliana` and `A. lyrata`:
 
@@ -298,6 +298,27 @@ Ath_vs_Aly_DM <- divergence_stratigraphy(
 
 ```
 
+
+__Since version 0.4.0 myTAI now includes its own DivergenceStratigraphy() function which is based on the divergence_stratigraphy() function implemented in `orthologr`!__
+
+```r
+library(myTAI)
+
+# Since myTAI v. 0.4.0
+# Compute the divergence map of A. thaliana vs. A. lyrata
+Ath_vs_Aly_DM <- DivergenceStratigraphy(
+                         query_file      = "Athaliana_167_cds.fa",
+                         subject_file    = "Alyrata_107_cds.fa",
+                         eval            = "1E-5", 
+                         ortho_detection = "RBH",
+                         comp_cores      = 1, 
+                         quiet           = TRUE, 
+                         clean_folders   = TRUE )
+   
+
+```
+
+
 In case users are working on a multicore machine, they can specify the `comp_cores` argument to perform `divergence_stratigraphy()` using multiple computing cores. 
 
 Now the resulting `Divergence Map` stores the `divergence stratum` in the first column and the corresponding `gene id` in the second column.
@@ -312,7 +333,8 @@ Now the resulting `Divergence Map` stores the `divergence stratum` in the first 
 6                  1 at1g01540.2
 ```
 
-For a more detailed tutorial on how to use the `divergence_stratigraphy()` function implemented in [orthologr](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) please consult the [Divergence Stratigraphy Vignette](https://github.com/HajkD/orthologr).
+For a more detailed tutorial on how to use the `divergence_stratigraphy()` function implemented in [orthologr](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) please consult the [Divergence Stratigraphy Vignette](https://github.com/HajkD/orthologr) and for learning about the new functionality of
+the `DivergenceStratigraphy()` function implemented in `myTAI` please consult the [Stratigraphy Vignette](Stratigraphy.Rmd).
 
 ## `PhyloExpressionSet` and `DivergenceExpressionSet`
 
