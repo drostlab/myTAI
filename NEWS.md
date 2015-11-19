@@ -2,9 +2,11 @@ myTAI 0.4.0
 ===========
 
 ### Vignettes
+- a new vignette `Stratigraphy` introducing the functionality of the `Phylostratigraphy()` and `DivergenceStratigraphy()` functions
 
 ### New Functions
 
+- a new function `DivergenceStratigraphy()` allowing users to perform the Divergence Stratigraphy Algorithm implemented in the [orthologr](https://github.com/HajkD/orthologr) package directly with `myTAI`
 - a new function `PlotSelectedAgeDistr()` allowing unsers to visualize the PS or DS gene distribution of a subset of genes stored in the input ExpressionSet object
 - a new function `PlotGroupDiffs()` allowing users to plot the significant differences between gene expression distributions of PS or DS groups
 - a new function `GroupDiffs()` allowing users to perform statistical tests to quantify the gene expression level differences between all genes of defined PS or DS groups 
