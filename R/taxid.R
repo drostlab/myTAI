@@ -31,13 +31,11 @@ taxid <- function(db.path, download = FALSE, update = FALSE, filter = NULL){
                 utils::unzip(file.path(db.path,"taxcat.zip"))
         }
         
-        ncbi.taxcat <- data.table::fread("categories.dmp", sep = "\t")
-        data.table::setnames(ncbi.taxcat, old = c("V1","V2","V3"),
-                             new = c("top_level_category","species_level_taxid","tax_id"))
+        top_level_category <- NULL
         
-        data.table::setkey(ncbi.taxcat,"tax_id")
-        
-        
+        ncbi.taxcat <- readr::read_tsv("categories.dmp", col_names = TRUE)
+        colnames(ncbi.taxcat) <- c("top_level_category","species_level_taxid","tax_id")
+
         if (is.null(filter))
                 return (ncbi.taxcat)
         
@@ -49,14 +47,14 @@ taxid <- function(db.path, download = FALSE, update = FALSE, filter = NULL){
                 if (is.element(filter, c("Archea","Bacteria","Eukaryota","Viruses","Unclassified"))){
                         
                      filtered.taxids <-  switch(filter, 
-                                                Archea       = dplyr::filter(ncbi.taxcat,top_level_category == "A"),
-                                                Bacteria     = dplyr::filter(ncbi.taxcat,top_level_category == "B"),
-                                                Eukaryota    = dplyr::filter(ncbi.taxcat,top_level_category == "E"),
-                                                Viruses      = dplyr::filter(ncbi.taxcat,top_level_category == "V"),
-                                                Unclassified = dplyr::filter(ncbi.taxcat,top_level_category == "U")
+                                                Archea       = dplyr::filter(dplyr::tbl_df(ncbi.taxcat),top_level_category == "A"),
+                                                Bacteria     = dplyr::filter(dplyr::tbl_df(ncbi.taxcat),top_level_category == "B"),
+                                                Eukaryota    = dplyr::filter(dplyr::tbl_df(ncbi.taxcat),top_level_category == "E"),
+                                                Viruses      = dplyr::filter(dplyr::tbl_df(ncbi.taxcat),top_level_category == "V"),
+                                                Unclassified = dplyr::filter(dplyr::tbl_df(ncbi.taxcat),top_level_category == "U")
                                )
                 }
-                
+                return(filtered.taxids)
         }
 }
 
