@@ -13,11 +13,11 @@
 #' @param blast.path a character string specifying the path to the BLAST program (in case you don't use the default path).
 #' @param cores a numeric value specifying the number of cores that shall be used to perform
 #'  parallel computations on a multicore machine.
-#'  @param dnds.threshold a numeric value specifying the dnds threshold for genes that shall be retained.
+#' @param dnds.threshold a numeric value specifying the dnds threshold for genes that shall be retained.
 #' Hence all genes having a dNdS value <= \code{dnds.threshold} are retained. Default is \code{dnds.threshold} = 2.
 #' @param quiet a logical value specifying whether a successful interface call to the \code{blastp} algorithm shall be printed out to the console.
 #' @param clean a logical value specifying whether the internal folder structure shall be deleted (cleaned) after
-#'  processing this function. Default is \code{clean_folders} = \code{FALSE}. Hence, all BLAST results, pairwise alignments, and dNdS computation results stored in the \code{\link{tempdir()}} folder will be removed and only the \code{Sequence Divergence Map} is returned.
+#'  processing this function. Default is \code{clean_folders} = \code{FALSE}. Hence, all BLAST results, pairwise alignments, and dNdS computation results stored in the \code{\link{tempdir}} folder will be removed and only the \code{Sequence Divergence Map} is returned.
 #' @param ds.values a logical value specifying whether divegrence stratum values (ds values) or dNdS values shall be returned
 #' by \code{divergence_stratigraphy}. Default is \code{ds.values} = \code{TRUE}.
 #' @details 
