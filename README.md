@@ -19,7 +19,8 @@ of evolutionary conservation or constraint in developmental processes of extant 
 
 These tutorials introduce users to `myTAI`:
 
-- [A Brief Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
+- [Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
+- [Perform Divergence Stratigraphy](https://github.com/HajkD/myTAI/blob/master/vignettes/Stratigraphy.Rmd)
 - [Intermediate Concepts of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
 - [Advanced Topics of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
 - [Perform Age Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd)
@@ -70,6 +71,9 @@ browseVignettes("myTAI")
 # open tutorial: Introduction to Phylotranscriptomics and myTAI
  vignette("Introduction", package = "myTAI")
 
+# open tutorial: Perform Divergence Stratigraphy
+ vignette("Stratigraphy", package = "myTAI")
+ 
 # open tutorial: Intermediate Concepts of Phylotranscriptomics
  vignette("Intermediate", package = "myTAI")
 
@@ -88,6 +92,10 @@ browseVignettes("myTAI")
 ```
 
 In the `myTAI` framework users can find:
+
+#### Divergence Stratigraphy Algorithm
+
+* `DivergenceStratigraphy()` : Perform Divergence Stratigraphy
 
 #### Phylotranscriptomics Measures:
 
