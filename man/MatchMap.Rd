@@ -20,10 +20,11 @@ to accumulate multiple expression levels that map to the same unique gene id pre
 \value{
 a standard PhyloExpressionSet or DivergenceExpressionSet object.
 }
-\details{
+\description{
 This function matches a \emph{Phylostratigraphic Map} or \emph{Divergence Map} only storing unique gene ids with a ExpressionMatrix
 also storing only unique gene ids.
-
+}
+\details{
 In phylotranscriptomics analyses two major techniques are performed to
 obtain standard \emph{Phylostratigraphic map} or \emph{Divergence map} objects.
 

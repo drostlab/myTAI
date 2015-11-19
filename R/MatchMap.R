@@ -1,5 +1,5 @@
 #' @title Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix
-#' @details This function matches a \emph{Phylostratigraphic Map} or \emph{Divergence Map} only storing unique gene ids with a ExpressionMatrix
+#' @description This function matches a \emph{Phylostratigraphic Map} or \emph{Divergence Map} only storing unique gene ids with a ExpressionMatrix
 #' also storing only unique gene ids.
 #' @param Map a standard \emph{Phylostratigraphic Map} or \emph{Divergence Map} object.
 #' @param ExpressionMatrix  a standard ExpressionMatrix object.
