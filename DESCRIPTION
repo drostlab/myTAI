@@ -5,13 +5,14 @@ Version: 0.4.0.9000
 Date: 2015-07-22
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
-Description: A statistical framework allowing users interested in the evolution of biological processes to capture evolutionary signals in transcriptomes.
+Description: A statistical framework allowing users interested in the evolution
+    of biological processes to capture evolutionary signals in transcriptomes.
 VignetteBuilder: knitr
 NeedsCompilation: yes
 License: GPL-3
-Depends: 
+Depends:
     R (>= 3.1.1)
-Imports: 
+Imports:
     Rcpp (>= 0.11.3),
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.0-2),
@@ -19,6 +20,7 @@ Imports:
     foreach (>= 1.4.2),
     doParallel (>= 1.0.8),
     dplyr (>= 0.3.0),
+    data.table (>= 1.9.4),
     RColorBrewer (>= 1.1-2),
     taxize (>= 0.6.0),
     edgeR,
@@ -28,8 +30,11 @@ Imports:
     grDevices (>= 3.1.1),
     utils (>= 3.1.1),
     reshape2 (>= 1.4.1),
-    ggplot2 (>= 1.0.1)
-Suggests: 
+    ggplot2 (>= 1.0.1),
+    orthologr (>= 0.0.1),
+    biomartr (>= 0.0.2),
+    stringr (>= 1.0.0)
+Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
     devtools (>= 1.6.1),
@@ -37,3 +42,4 @@ Suggests:
 LinkingTo: Rcpp
 URL: https://github.com/HajkD/myTAI
 BugReports: https://github.com/HajkD/myTAI/issues
+RoxygenNote: 5.0.0
