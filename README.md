@@ -14,6 +14,11 @@ of evolutionary conservation or constraint in developmental processes of extant 
 
 `myTAI` provides easy to use and optimized functions to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, a customized visualization framework implemented in myTAI allows users to generate publication quality plots of their custom phylotranscriptomic analyses.
 
+## Citation
+
+
+> Drost HG, Gabel A, Grosse I, Quint M. Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis. Mol. Biol. Evol. (2015) 32 (5): 1221-1231. doi:10.1093/molbev/msv012
+
 
 ## Tutorials
 
