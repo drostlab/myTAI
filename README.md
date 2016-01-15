@@ -4,13 +4,20 @@ myTAI
 
 ### Performing Phylotranscriptomics with R
 
+Development is the major process establishing complex life on earth. 
+Hence, studying the evolution of developmental processes allows us to
+understand the key machanisms that control and constraint the evolution and 
+diversification of complex organisms on this planet. To study the evolution of developmental
+processes an evolutionary transcriptomics apprach (= phylotranscriptomics) has been proposed 
+aiming to quantify the evolutionary conservation of developmental transcriptomes. 
+
 The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
     
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
 gene expression levels to capture evolutionary signals during development (Domazet-Loso and Tautz, 2010; Quint et al., 2012; Drost et al., 2015).
 
-This subfield of Evolutionary Developmental Biology aims to investigate stages or periods
-of evolutionary conservation or constraint in developmental processes of extant species.
+This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
+of evolutionary conservation in developmental processes of extant species.
 
 `myTAI` provides easy to use and optimized functions to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, a customized visualization framework implemented in myTAI allows users to generate publication quality plots of their custom phylotranscriptomic analyses.
 
