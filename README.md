@@ -8,7 +8,7 @@ Development is the major process establishing complex life on earth.
 Hence, studying the evolution of developmental processes allows us to
 understand the key machanisms that control and constraint the evolution and 
 diversification of complex organisms on this planet. To study the evolution of developmental
-processes an evolutionary transcriptomics apprach (= phylotranscriptomics) has been proposed 
+processes an evolutionary transcriptomics approach (= phylotranscriptomics) has been proposed 
 aiming to quantify the evolutionary conservation of developmental transcriptomes. 
 
 The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
