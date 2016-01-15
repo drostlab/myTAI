@@ -302,7 +302,7 @@ For this purpose, the `PlotGroupDiffs()` function performs a test to quantify th
 Analogous to the `PlotRE()` or `PlotMeans()` function (see [Introduction](Introduction.html) for details),
 users need to pass the `Groups` to `PlotGroupDiffs()` specifying the groups that shall be compared.
 
-```{r,eval= TRUE}
+```{r,eval= TRUE, fig.width= 14, fig.height= 7,warning=FALSE}
 library(myTAI)
 
 data(PhyloExpressionSetExample)
@@ -321,8 +321,10 @@ In cases where no plot shall be drawn and only the resulting p-value shall be re
 users can specify the `plot.type = NULL` argument to receive only p-values returned by the 
 underlying test statistic.
 
-```{r,eval= TRUE}
+```{r,eval= TRUE, fig.width= 14, fig.height= 7,warning=FALSE}
 library(myTAI)
+
+data(PhyloExpressionSetExample)
 
 # only receive the p-values without the corresponding plot
 PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
@@ -336,8 +338,10 @@ Optionally, users can also visualize the difference in expression level distribu
 of groups of PS/DS during each developmental stage by specifying the `plot.type = "boxplot"`
 argument.
 
-```{r,eval= TRUE}
+```{r,eval= TRUE,fig.width= 14, fig.height= 7,warning=FALSE}
 library(myTAI)
+
+data(PhyloExpressionSetExample)
 
 # visualize difference as boxplot
 PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
