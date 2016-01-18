@@ -19,7 +19,7 @@ gene expression levels to capture evolutionary signals during developmental proc
 This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
 of evolutionary conservation in developmental processes of extant species.
 
-`myTAI` provides easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, customized visualization functions implemented in myTAI allow users to generate publication quality plots for their own phylotranscriptomics research.
+`myTAI` provides an easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own phylotranscriptomics research.
 
 ## Citation
 
