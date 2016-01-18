@@ -13,13 +13,13 @@ aiming to quantify the evolutionary conservation of developmental transcriptomes
 
 The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
     
-Phylotranscriptomics defines the concept of combining genetic sequence information with 
-gene expression levels to capture evolutionary signals during development ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221), [Drost et al., 2015b](http://www.biorxiv.org/content/early/2015/12/28/035527)).
+Phylotranscriptomics defines the concept of combining genetic sequence conservation information with 
+gene expression levels to capture evolutionary signals during developmental processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221), [Drost et al., 2015b](http://www.biorxiv.org/content/early/2015/12/28/035527)).
 
 This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
 of evolutionary conservation in developmental processes of extant species.
 
-`myTAI` provides easy to use and optimized functions to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, a customized visualization framework implemented in myTAI allows users to generate publication quality plots of their custom phylotranscriptomic analyses.
+`myTAI` provides easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, customized visualization functions implemented in myTAI allow users to generate publication quality plots for their own phylotranscriptomics research.
 
 ## Citation
 
