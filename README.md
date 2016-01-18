@@ -9,12 +9,12 @@ Hence, studying the evolution of developmental processes allows us to
 understand the key machanisms that control and constraint the evolution and 
 diversification of complex organisms on this planet. To study the evolution of developmental
 processes an evolutionary transcriptomics approach (= phylotranscriptomics) has been proposed 
-aiming to quantify the evolutionary conservation of developmental transcriptomes. 
+aiming to quantify the evolutionary conservation of developmental transcriptomes ([Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221)). 
 
 The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
     
 Phylotranscriptomics defines the concept of combining genetic sequence information with 
-gene expression levels to capture evolutionary signals during development (Domazet-Loso and Tautz, 2010; Quint et al., 2012; Drost et al., 2015).
+gene expression levels to capture evolutionary signals during development ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221), [Drost et al., 2015b](http://www.biorxiv.org/content/early/2015/12/28/035527)).
 
 This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
 of evolutionary conservation in developmental processes of extant species.
