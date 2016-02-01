@@ -32,7 +32,6 @@ of evolutionary conservation in developmental processes of extant species.
 These tutorials introduce users to `myTAI`:
 
 - [Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
-- [Perform Divergence Stratigraphy](https://github.com/HajkD/myTAI/blob/master/vignettes/Stratigraphy.Rmd)
 - [Intermediate Concepts of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
 - [Advanced Topics of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
 - [Perform Age Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd)
