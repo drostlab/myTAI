@@ -2,7 +2,7 @@ myTAI
 =====
 
 
-### Performing Phylotranscriptomics with R
+### Performing Evolutionary Transcriptomics with R
 
 Development is the major process establishing complex life on earth. 
 Hence, studying the evolution of developmental processes allows us to
