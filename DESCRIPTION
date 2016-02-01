@@ -33,13 +33,13 @@ Imports:
     orthologr (>= 0.0.1),
     biomartr (>= 0.0.2),
     stringr (>= 1.0.0),
-    readr (>= 0.2.2),
-    mgcv
+    readr (>= 0.2.2)
 Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
     devtools (>= 1.6.1),
-    testthat (>= 0.9.1)
+    testthat (>= 0.9.1),
+    mgcv
 LinkingTo: Rcpp
 URL: https://github.com/HajkD/myTAI
 BugReports: https://github.com/HajkD/myTAI/issues
