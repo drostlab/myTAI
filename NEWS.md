@@ -1,9 +1,6 @@
 myTAI 0.4.0
 ===========
 
-### Vignettes
-- a new vignette `Stratigraphy` introducing the functionality of the `Phylostratigraphy()` and `DivergenceStratigraphy()` functions
-
 ### New Functions
 
 - a new function `DivergenceStratigraphy()` allowing users to perform the Divergence Stratigraphy Algorithm implemented in the [orthologr](https://github.com/HajkD/orthologr) package directly with `myTAI`
