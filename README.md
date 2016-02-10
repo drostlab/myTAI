@@ -17,25 +17,19 @@ diversification of complex organisms on this planet. To study the evolution of d
 processes an evolutionary transcriptomics approach (= phylotranscriptomics) has been proposed 
 aiming to quantify the evolutionary conservation of developmental transcriptomes ([Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221)). 
 
-The `myTAI` package allows users to capture evolutionary information that is hidden in developmental transcriptomes using an evolutionary transcriptomics approach.
+The `myTAI` package allows users to capture evolutionary information that is hidden in transcriptomes using an evolutionary transcriptomics approach.
     
 Phylotranscriptomics defines the concept of combining genetic sequence conservation information with 
-gene expression levels to quantify transcriptome conservation throughout developmental processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221), [Drost et al., 2015b](http://www.biorxiv.org/content/early/2015/12/28/035527)).
+gene expression levels to quantify transcriptome conservation throughout biological processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221), [Drost et al., 2015b](http://www.biorxiv.org/content/early/2015/12/28/035527)).
 
 This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
-of evolutionary conservation in developmental processes of extant species. However, although
+of evolutionary conservation in biological processes of extant species. However, although
 motivated by and applied to developmental processes, the `myTAI` package is implemented
 to quantify transcriptome conservation in any transcriptome experiment of interest and
 therefore aims to provide a standard approach to investigate the evolution of biological
 processes in the context of transcriptome conservation.
 
 In particular, `myTAI` provides an easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own phylotranscriptomics research.
-
-## Citation
-
-
-> Drost HG, Gabel A, Grosse I, Quint M. Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis. Mol. Biol. Evol. (2015) 32 (5): 1221-1231. doi:10.1093/molbev/msv012
-
 
 ## Tutorials
 
