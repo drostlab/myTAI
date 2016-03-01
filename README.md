@@ -20,7 +20,7 @@ aiming to quantify the evolutionary conservation of developmental transcriptomes
 The `myTAI` package allows users to capture evolutionary information that is hidden in transcriptomes using an evolutionary transcriptomics approach.
     
 Phylotranscriptomics defines the concept of combining genetic sequence conservation information with 
-gene expression levels to quantify transcriptome conservation throughout biological processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221), [Drost et al., 2015b](http://www.biorxiv.org/content/early/2015/12/28/035527)).
+gene expression levels to quantify transcriptome conservation throughout biological processes ([Domazet-Loso and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html); [Quint et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html); [Drost et al., 2015a](http://mbe.oxfordjournals.org/content/32/5/1221), [Drost et al., 2015b](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)).
 
 This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
 of evolutionary conservation in biological processes of extant species. However, although
@@ -216,9 +216,11 @@ library("myTAI", lib.loc = "C:/Program Files/R/R-3.1.1/library")
 
 Domazet-Lošo T. and Tautz D. __A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns__. _Nature_ (2010) 468: 815-8.
 
-Quint M. et al. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ (2012) 490: 98-101.
+Quint M, Drost HG, et al. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ (2012) 490: 98-101.
 
 Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231.
+
+Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan PT, Dekkers BJW, Bentsink L, Hilhorst H, Ligterink W, Wellmer F, Grosse I, and Quint M. __Post-embryonic hourglass patterns mark ontogenetic transitions in plant development__. _Mol. Biol. Evol._ (2016) [doi:10.1093/molbev/msw039](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1) 
 
 ## Discussions and Bug Reports
 
