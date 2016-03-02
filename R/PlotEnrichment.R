@@ -110,6 +110,8 @@ PlotEnrichment <- function(ExpressionSet,
                            plot.bars       = TRUE,
                            p.adjust.method = NULL, ...){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
+        
         # check for correct data input (ExpressionSet or Phylomap/Divergencemap) 
         if(!use.only.map){
                 
@@ -131,7 +133,7 @@ PlotEnrichment <- function(ExpressionSet,
         age.table <- table(ExpressionSet[ , 1])
         nPS <- length(age.table)
         
-        MatchedGeneIDs <- stats::na.omit(match(tolower(test.set),tolower(ExpressionSet[ , 2])))
+        MatchedGeneIDs <- stats::na.omit(match(tolower(unlist(test.set)),tolower(unlist(ExpressionSet[ , 2]))))
         
         if (length(MatchedGeneIDs) == 0)
                 stop("None of your input gene ids could be found in the ExpressionSet.")
