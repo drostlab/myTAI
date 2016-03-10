@@ -31,6 +31,12 @@ processes in the context of transcriptome conservation.
 
 In particular, `myTAI` provides an easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own phylotranscriptomics research.
 
+### Citation
+
+> Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231. [doi:10.1093/molbev/msv012](http://mbe.oxfordjournals.org/content/32/5/1221.abstract?sid=767aea12-1eb3-40be-8c6a-e2861f159b46)
+>
+> Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan PT, Dekkers BJW, Bentsink L, Hilhorst H, Ligterink W, Wellmer F, Grosse I, and Quint M. __Post-embryonic hourglass patterns mark ontogenetic transitions in plant development__. _Mol. Biol. Evol._ (2016) [doi:10.1093/molbev/msw039](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1) 
+
 ## Tutorials
 
 These tutorials introduce users to `myTAI`:
