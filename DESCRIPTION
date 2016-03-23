@@ -1,11 +1,11 @@
 Package: myTAI
 Type: Package
-Title: Performing Evolutionary Transcriptomics with R
+Title: Perform Evolutionary Transcriptomics
 Version: 0.4.0
 Date: 2015-07-22
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
-Description: A software tool allowing users interested in the evolution of biological processes to capture evolutionary signals in transcriptomes. The aim of this tool is to provide a transcriptomic analysis environment for answering developmental transcriptomic questions in an evolutionary context (= Evolutionary Transcriptomics).
+Description: Investigate the evolution of biological processes by capturing evolutionary signals in transcriptomes. The aim of this tool is to provide a transcriptomic analysis environment for answering developmental transcriptomic questions in an evolutionary context (= Evolutionary Transcriptomics).
 VignetteBuilder: knitr
 NeedsCompilation: yes
 License: GPL-3
@@ -30,7 +30,6 @@ Imports:
     utils (>= 3.1.1),
     reshape2 (>= 1.4.1),
     ggplot2 (>= 1.0.1),
-    orthologr (>= 0.0.1),
     biomartr (>= 0.0.2),
     stringr (>= 1.0.0),
     readr (>= 0.2.2)
