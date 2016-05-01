@@ -145,7 +145,7 @@ double cpp_std_error(NumericVector x)
   
 }
   
- 
+// @export 
 // [[Rcpp::export]] 
 double cpp_geom_mean(NumericVector x)
 {
@@ -155,7 +155,7 @@ double cpp_geom_mean(NumericVector x)
 } 
 
 
-
+// @export
 // [[Rcpp::export]] 
 double cpp_harmonic_mean(NumericVector x)
 {
