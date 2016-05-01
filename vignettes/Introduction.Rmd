@@ -264,7 +264,7 @@ __Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as 
 ### Visualizing the _Transcriptome Age Index_ and the _Transcriptome Divergence Index_
 
 
-Mathematically the _Transcriptome Age Index_ (TAI) introduced by Domazet-Loso and Tautz, 2010 represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
+Mathematically, the _Transcriptome Age Index_ (TAI) introduced by Domazet-Loso and Tautz, 2010 represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
 
 
 $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
