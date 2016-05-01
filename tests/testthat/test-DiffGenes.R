@@ -26,8 +26,8 @@ test_that("Correct fold change values are computed..",{
         set.seed(123)
         ExampleMicroarrayTable <- PhyloExpressionSetExample[sample(1:22000,10) , 1:8] 
         
-        stage.1 <- apply( cbind(ExampleMicroarrayTable[ , 3],ExampleMicroarrayTable[ , 4]) , 1 , geom.mean )
-        stage.2 <- apply( cbind(ExampleMicroarrayTable[ , 5],ExampleMicroarrayTable[ , 6]) , 1 , geom.mean )
+        stage.1 <- apply( cbind(ExampleMicroarrayTable[ , 3],ExampleMicroarrayTable[ , 4]) , 1 , myTAI::geom.mean )
+        stage.2 <- apply( cbind(ExampleMicroarrayTable[ , 5],ExampleMicroarrayTable[ , 6]) , 1 , myTAI::geom.mean )
         
         
         expect_equal(DiffGenes(ExpressionSet = ExampleMicroarrayTable,
@@ -46,8 +46,8 @@ test_that("Correct log fold change values are computed..",{
         set.seed(123)
         ExampleMicroarrayTable <- PhyloExpressionSetExample[sample(1:22000,10) , 1:8] 
         
-        stage.1 <- apply( cbind(ExampleMicroarrayTable[ , 3],ExampleMicroarrayTable[ , 4]) , 1 , geom.mean )
-        stage.2 <- apply( cbind(ExampleMicroarrayTable[ , 5],ExampleMicroarrayTable[ , 6]) , 1 , geom.mean )
+        stage.1 <- apply( cbind(ExampleMicroarrayTable[ , 3],ExampleMicroarrayTable[ , 4]) , 1 , myTAI::geom.mean )
+        stage.2 <- apply( cbind(ExampleMicroarrayTable[ , 5],ExampleMicroarrayTable[ , 6]) , 1 , myTAI::geom.mean )
         
         
         expect_equal(DiffGenes(ExpressionSet = tf(ExampleMicroarrayTable,log2),
@@ -76,7 +76,7 @@ test_that("Correct p-values based on the t-test are computed..",{
 
 
 test_that("Correct p-values based on the wilcox.test are computed..",{
-        
+
         set.seed(123)
         ExampleMicroarrayTable <- PhyloExpressionSetExample[sample(1:22000,10) , 1:8] 
         
