@@ -2,7 +2,7 @@ myTAI
 =====
 
 
-### Performing Evolutionary Transcriptomics with R
+### Perform Evolutionary Transcriptomics with R
 
 > To put aside for a moment the matter-of-factness of an exact scientist,
 > I will confess that I frequently have the feeling in my experimental work of holding 
