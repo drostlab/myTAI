@@ -17,60 +17,32 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
-## Performing Phylotranscriptomics with R
+## Perform Evolutionary Transcriptomics with R
 
-The `myTAI` package allows users to capture evolutionary signals in developmental transcriptomes using a phylotranscriptomic approach.
-    
-Phylotranscriptomics defines the concept of combining genetic sequence information with 
-gene expression levels to capture evolutionary signals during development (Domazet-Loso and Tautz, 2010; Quint et al., 2012; Drost et al., 2015).
-
-This subfield of Evolutionary Developmental Biology aims to investigate stages or periods
-of evolutionary conservation or constraint in developmental processes of extant species.
-
-`myTAI` provides easy to use and optimized functions to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, a customized visualization framework implemented in myTAI allows users to generate publication quality plots of their custom phylotranscriptomic analyses.
-
-The goal of `myTAI` is to provide a broad range of users interested in the evolution of developmental transcriptomes with an easy to use and computationally optimized framework for reproducible research and modular pipeline implementation. 
+The main goal of `myTAI` is to take any gene age assignment table and expression dataset as input
+and quantify the transcriptome conservation of the studied biological process or treatment. 
+For this purpose, myTAI combines a gene age assignment table and expression dataset and provides
+functionality to capture evolutionary signatures that are hidden in these transcriptomes. This approach allows to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability.
 
 
 ## Getting Started
 
-An introduction to Phylotranscriptomics as a scientific discipline and its historical context can be found in Drost _et al._, 2015. 
+`myTAI` takes either a _phylostratigraphic map_ (gene age assignment table) or a _divergence stratigraphic map_ (sequence divergence assignment table) and an expression dataset as input and provides functions to capture and investigate evolutionary signatures that are hidden in these transcriptomes. 
 
-The following sections provide step by step tutorials on `phylotranscriptomic analyses`. 
+The three input tables: _phylostratigraphic map_, _divergence stratigraphic map_, and the expression dataset need
+to fulfill specific data formats when using myTAI.
 
-As already mentioned above, phylotranscriptomic analyses are based on the combination of genetic sequence information with transcriptome data. 
-
-For this purpose the following data sets need to be generated or obtained to be able to perform phylotranscriptomic analyses:
-
-- Phylostratigraphic Map of an organism (of interest)
-
-- Divergence Map of an organism (of interest)
-
-- Transcriptome data covering a specific experiment for the organism (of interest)
-
-Each step can be performed independent of all other steps and the resulting data sets
-can also be used for different (independent) studies and analyses.
-
-### Phylostratigraphy and Divergence Stratigraphy 
-
-The first step in performing phylotranscriptomic analyses is to
-perform `Phylostratigraphy` and `Divergence Stratigraphy` to assign
-each protein coding genes of an organism of interest an evolutionary age ([Phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995))
-or degree of selection pressure ([Divergence Stratigraphy](http://mbe.oxfordjournals.org/content/32/5/1221.full)). The resulting
-`Phylostratigraphic Map` and `Divergence Map` of the corresponding organism of interest is then matched
-with a transcriptome data set covering the developmental process of interest.
-
-The following code illustrates how the `Phylostratigraphic Map` and `Divergence Map` table format is structured:
-
+The following code illustrates how an example _phylostratigraphic map_ and _divergence stratigraphic map_ table  is structured:
 
 ```{r,eval=FALSE}
+# load myTAI
 library(myTAI)
 
-# load example data sets
+# load example data sets (stored in myTAI)
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
 
-# show an example structure of a Phylostratigraphic Map
+# show an example phylostratigraphic map of Arabidopsis thaliana
 head(PhyloExpressionSetExample[ , c("Phylostratum","GeneID")])
 
 ```
@@ -84,6 +56,12 @@ head(PhyloExpressionSetExample[ , c("Phylostratum","GeneID")])
 5            1 at1g01090.1
 6            1 at1g01120.1
 ```
+
+In detail, a _phylostratigraphic map_ stores the gene age assignment generated with [phylostratigraphy](https://github.com/AlexGa/Phylostratigraphy) in the
+first columns and the corresponding gene id in the second column.
+
+Analogously, a divergence stratigraphic map stores the gene age assignment generated with [divergence stratigraphy](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) in the
+first column and the corresponding gene id in the second column:
 
 ```{r,eval=FALSE}
 # show an example structure of a Divergence Map
@@ -101,262 +79,37 @@ head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
 6                  1 at1g01540.2
 ```
 
-Hence, a standard `Phylostratigraphic Map` or `Divergence Map` stores the _gene age_ or _sequence divergence_ information in the first column and the corresponding _gene id_ in the second column. 
+Hence, myTAI relies on pre-computed _phylostratigraphic maps_ and _divergence stratigraphic maps_.
+For this purpose, users can consult the following resources to generate or retrieve _phylostratigraphic maps_ and _divergence stratigraphic maps_ which can then be used with myTAI.
 
-### Performing Phylostratigraphy
+### Generate or retrieve phylostratigraphic maps
 
-Users will find a `Perl Script` for performing Phylostratigraphy in [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/README.md). 
+- generate a phylostratigraphic map with [createPSmap.pl](https://github.com/AlexGa/Phylostratigraphy) (implemented by Alexander Gabel)
+- generate a phylostratigraphic map with [phylostratigraphy.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022) (implemented by Cheng et al. 2015)
+- generate a phylostratigraphic map with [phylo_pipeline.py](https://mynotebook.labarchives.com/share/Shuqing_Xu/NTIuMHw2NDQyMi80MC9UcmVlTm9kZS8zNDEyODM1NjE2fDEzMi4w) (implemented by Shuqing Xu)
+- generate a phylostratigraphic map with [ORFanFinder](http://bioinformatics.oxfordjournals.org/content/early/2016/03/26/bioinformatics.btw122.full.pdf)
+- generate a gene age map with [Protein Historian](https://lighthouse.ucsf.edu/ProteinHistorian/)
+- download pre-computed and published [phylostratigraphic maps](https://github.com/HajkD/published_phylomaps)
 
-Methodologically, the process of performing `Phylostratigraphy` can be summarized by the following algorithm:
+### Generate or retrieve divergence stratigraphic maps
 
-1) Define a toxonomy for the organism of interest
+- generate a [divergence stratigraphic map](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) with [orthologr](https://github.com/HajkD/orthologr) (implemented by Hajk-Georg Drost)
+- generate a divergence stratigraphic map with [compute_dNdS.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022) (implemented by Cheng et al. 2015)
+- retrieve phylogeny-based orthology and paralogy predictions from [MetaPhOrs](http://orthology.phylomedb.org/)
+- download pre-computed and published [divergence stratigraphic maps](https://github.com/HajkD/published_phylomaps)
 
-2) Sort all genomes stored in your curated data base (e.g., NCBI nr or any other custom data base) into age categories (= phylostrata) according to the previously defined taxonomy (step 1)
+In general, users can construct their own gene age assignment methods and are not limited to the methods listed above. 
+After formatting the corresponding results to the _phylostratigraphic map_ or _divergence stratigraphic map_
+specification (age assignment in the first column and gene id in the second column), users can use
+any function in myTAI with their custom gene age assignment table.
 
-3) Perform BLAST homology searches using all protein sequences of the query organism (organism of interest) against a curated data base
 
-4) Detect the most distant homolog fulfilling the `E-value` criterium and assign this gene to the phylostratum of the corresponding homolog
+### Expression dataset specification
 
-5) In case no homolog was found the corresponding gene is labeled as _organism specific_ denoting the youngest phylostratum
+The aim of any phylotranscriptomics study is to quantify transcriptome conservation in biological processes.
+For this purpose, users need to provide the transcriptome dataset of their studied biological process.
 
-### Step by Step Instructions: `Phylostratigraphy`
-
-
-Here, we will construct an example `Phylostratigraphic Map` for _Arabidopsis thaliana_. 
-
-In the first step, please go to [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses/blob/master/createPsMap.pl) and download the `Perl Script`
-to run the `Phylostratigraphy` algorithm. The phyostratigraphic approach is based on taxonomic classification of the organism of interest. The `taxonomy()` function implemented in `myTAI` automatically defines a taxonomy for an organism of interest. Users can retrieve taxonomic classification information for any annotated species by typing (here we use _A. thaliana_ as example): 
-
-```{r,eval=FALSE}
-# retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
-# from NCBI Taxonomy
-taxonomy( organism = "Arabidopsis thaliana", 
-          db       = "ncbi",
-          output   = "classification" )
-```
-
-```
-                   name         rank      id
-1    cellular organisms      no rank  131567
-2             Eukaryota superkingdom    2759
-3         Viridiplantae      kingdom   33090
-4          Streptophyta       phylum   35493
-5        Streptophytina      no rank  131221
-6           Embryophyta      no rank    3193
-7          Tracheophyta      no rank   58023
-8         Euphyllophyta      no rank   78536
-9         Spermatophyta      no rank   58024
-10        Magnoliophyta      no rank    3398
-11      Mesangiospermae      no rank 1437183
-12       eudicotyledons      no rank   71240
-13           Gunneridae      no rank   91827
-14         Pentapetalae      no rank 1437201
-15               rosids     subclass   71275
-16              malvids      no rank   91836
-17          Brassicales        order    3699
-18         Brassicaceae       family    3700
-19           Camelineae        tribe  980083
-20          Arabidopsis        genus    3701
-21 Arabidopsis thaliana      species    3702
-```
-The resulting classification table shows all taxonomic categories starting with the _oldest_ taxonomic category (`cellular organisms`) down to the _youngest_ taxonomic category (`Arabidopsis thaliana`). The `taxonomy ids` stored in the third column are used to classify proteomes stored in  the curated data base (e.g. NCBI nr) into corresponding taxonomic categories stored in the first column. 
-
-In some cases (due to the coverage of sequenced genomes and predicted proteomes) only a very small number of proteomes are classified into a specific taxonomic category. In this case, taxonomic categories can be summarized. For example, recently we summarized the taxonomic categories shown above into 12 categories, so that a minimum amount of proteomes represent a corresponding 
-taxonomic category (see [Fig. 1 c](http://mbe.oxfordjournals.org/content/32/5/1221/F1.expansion.html)). These 12 taxonomic categories are represented as 12 `phylostrata` starting with the _oldest_ `phylostratum` (= `PS1` = `cellular organisms`) up to the _youngest_ `phylostratum` (= `PS12` = `A. thaliana`).
-
-
-| Taxonomy                  | Phylostratum |
-|:-------------------------:|:------------:|
-|   cell. organisms         |  1           |
-|   Eukaryota               |  2           |
-|   Viridiplantae           |  3           |
-|   Embryophyta             |  4           |
-|   Tracheophyta            |  5           |
-|   Magnoliophyta           |  6           |
-|   Eudicotyledons          |  7           |
-|   Core Eudicotyledons     |  8           |
-|   Rosids                  |  9           |
-|   Brassicales             |  10          |
-|   Arabidopsis             |  11          |
-|   A. thaliana             |  12          |
-
-: Collapsed Taxonomy (Phylostratigraphic Map) used by Drost _et al_, 2015.
-
-This representation of taxonomic categories as `phylostrata` are labeled as discrete values _1, 2, ..., n_  and are stored in all `Phylostratigraphic Maps`.
-
-```
-  Phylostratum      GeneID
-1            1 at1g01040.2
-2            1 at1g01050.1
-3            1 at1g01070.1
-4            1 at1g01080.2
-5            1 at1g01090.1
-6            1 at1g01120.1
-```
-
-Here, all genes corresponding to `Phylostratum 1` (PS1) represent the taxonomic category `cellular organisms`.
-
-
-The `taxonomy()` function allows users to retrieve taxonomic classification information for any annotated organism of interest by specifying its `scientific name`, e.g. `Arabidopsis thaliana`, `Homo sapiens`, `Mus musculus`, etc. In case users would like to retrieve more information about each functionality and database connection implemented in the `taxonomy()`  function please consult the [Taxonomy](Taxonomy.html) Vignette.
-
-
-The next step is to run the `createPsMap.pl` script (see also [Drost et al., 2015](https://github.com/HajkD/Active-maintenance-of-phylotranscriptomic-hourglasses)).
-
-Now the following steps have to be done to create a `Phylostratigraphic Map` for _A. thaliana_:
-    
-1) Users need to make sure that [BLAST](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.21/), [Perl](https://www.perl.org/), and [BioPerl](http://www.bioperl.org/wiki/Installing_BioPerl) are installed on their machine.
-
-2) Download the sequence database [phyloBlastDB_Drost_Gabel_Grosse_Quint.fa](http://msbi.ipb-halle.de/download/phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz) used for BLAST searches and unpack it by opening the Terminal application and typing `tar xfvj phyloBlastDB_Drost_Gabel_Grosse_Quint.fa.tbz`.
-
-3) Make sure that the header of your FASTA-files (e.g. Athaliana_167_protein.fa) fulfills the following specification:<br />
-  <code>>GeneID | [organism_name] | [taxonomy]</code><br />
-  Notice, the taxonomy begins after the node "Cellular organisms" e.g.
-  
-```
->NP_146894.1 | [Aeropyrum pernix] | [Archaea; Crenarchaeota; Thermoprotei; Desulfurococcales; Desulfurococcaceae; Aeropyrum]
-
-or
-
->YP_001514406.1 | [Acaryochloris marina MBIC11017] | [Bacteria; Cyanobacteria; Oscillatoriophycideae; Chroococcales; Acaryochloris; Acaryochloris marina]
-
-or
-
->ATCG00500.1|PACid:19637947 | [Arabidopsis thaliana] | [Eukaryota; Viridiplantae; Streptophyta; Streptophytina; Embryophyta; Tracheophyta; Euphyllophyta; Spermatophyta; Magnoliophyta; eudicotyledons; core eudicotyledons; rosids; malvids; Brassicales; Brassicaceae; Camelineae; Arabidopsis]
-```
-
-4) Use the following command to start the Perl script
-```terminal
-perl createPsMap.pl -i Athaliana_167_protein_with_new_Header.fa -d phyloBlastDB_Drost_Gabel_Grosse_Quint.fa -p BLAST_Athaliana 
-                    -r athaliana_blast_results -t 30 -a 64             
-Arguments:
--i,--input          input file name in FASTA format
--d,--database       BLAST sequence database name
--p,--prefix         Prefix for generated mysql-files containing BLAST results
--r,--resultTable    mysql table name
--t,--threshold      threshold for sequence length (Default 30 amino acids)
--a                  threads for BLAST searches
--e,--evalue         e-value threshold for BLAST 
-```
-
-__Note__ that `Phylostratigraphy` needs large computational resources, because of thousands of sequence comparisons between genes of the query organism and thousands of classified proteomes stored in the curated data base. For this task we use a computing cluster with several thousand nodes to be able to solve this task in a few hours to days. Hence, when running the `createPsMap.pl` script on a laptop or local machine with a small number of computing cores, the task will likely take weeks or months to terminate. Users aiming to adapt the `createPsMap.pl` to their own computing environment need to be able to parallelize the `createPsMap.pl` on each node of the computing cluster.
-
-### Performing Divergence Stratigraphy
-
-[Divergence Stratigraphy](http://mbe.oxfordjournals.org/content/32/5/1221.full) is a computational method to determine the degree of selection pressure acting on each
-protein coding gene of a query organism against a reference organism.
-
-A detailed tutorial on how to perform Divergence Stratigraphy for any pairwise genome comparison can
-be found in the [Divergence Stratigraphy Vignette](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) of the [orthologr](https://github.com/HajkD/orthologr) package in which the `divergence_stratigraphy()` algorithm is implemented.
-
-Following steps summarize the `Divergence Stratigraphy` algorithm:
-
-1) Orthology Inference using BLAST reciprocal best hit based on the `blastp` algorithm
-
-2) Pairwise global amino acid alignments of orthologous genes using the [Needleman-Wunsch algorithm](http://www.sciencedirect.com/science/article/pii/0022283670900574)
-
-3) Codon alignments of orthologous genes using [PAL2NAL](http://www.bork.embl.de/pal2nal/)
-
-4) dNdS estimation using [Comeron's method (1995)](http://link.springer.com/article/10.1007/BF00173196)
-
-5) Assigning estimated dNdS values to divergence strata (deciles of all dNdS values)
-
-
-### Step by Step Instructions: `Divergence Stratigraphy`
-
-
-The first step is to install the [orthologr](https://github.com/HajkD/orthologr#installation-guide) package and the [BLAST command line tool](https://github.com/HajkD/orthologr/blob/master/vignettes/Install.Rmd#install-blast) on your machine. In the following example we will compute a `Divergence Map` for _A. thaliana_ versus _A. lyrata_.
-
-Downloading the CDS files of `A. thaliana` and `A. lyrata`:
-
-```r
-# download the CDS file of A. thaliana
-download.file( url      = "ftp://ftp.jgi-psf.org/pub/compgen/phytozome/v9.0/Athaliana/annotation/Athaliana_167_cds.fa.gz", 
-               destfile = "Athaliana_167_cds.fa.gz" )
-               
-# download the CDS file of A. lyrata
-download.file( url      = "ftp://ftp.jgi-psf.org/pub/compgen/phytozome/v9.0/Alyrata/annotation/Alyrata_107_cds.fa.gz", 
-               destfile = "Alyrata_107_cds.fa.gz" )
-```
-
-Now the files `Athaliana_167_cds.fa.gz` and `Alyrata_107_cds.fa.gz` need to be unpacked.
-
-Compute the `Divergence Map` of `A. thaliana` versus `A. lyrata`:
-
-```r
-library(orthologr)
-
-# compute the divergence map of A. thaliana vs. A. lyrata
-Ath_vs_Aly_DM <- divergence_stratigraphy(
-                         query_file      = "Athaliana_167_cds.fa",
-                         subject_file    = "Alyrata_107_cds.fa",
-                         eval            = "1E-5", 
-                         ortho_detection = "RBH",
-                         comp_cores      = 1, 
-                         quiet           = TRUE, 
-                         clean_folders   = TRUE )
-   
-
-```
-
-
-__Since version 0.4.0 myTAI now includes its own DivergenceStratigraphy() function which is based on the divergence_stratigraphy() function implemented in `orthologr`!__
-
-```r
-library(myTAI)
-
-# Since myTAI v. 0.4.0
-# Compute the divergence map of A. thaliana vs. A. lyrata
-Ath_vs_Aly_DM <- DivergenceStratigraphy(
-                         query_file      = "Athaliana_167_cds.fa",
-                         subject_file    = "Alyrata_107_cds.fa",
-                         eval            = "1E-5", 
-                         ortho_detection = "RBH",
-                         comp_cores      = 1, 
-                         quiet           = TRUE, 
-                         clean_folders   = TRUE )
-   
-
-```
-
-
-In case users are working on a multicore machine, they can specify the `comp_cores` argument to perform `divergence_stratigraphy()` using multiple computing cores. 
-
-Now the resulting `Divergence Map` stores the `divergence stratum` in the first column and the corresponding `gene id` in the second column.
-
-```
-  Divergence.stratum      GeneID
-1                  1 at1g01050.1
-2                  1 at1g01120.1
-3                  1 at1g01140.3
-4                  1 at1g01170.1
-5                  1 at1g01230.1
-6                  1 at1g01540.2
-```
-
-For a more detailed tutorial on how to use the `divergence_stratigraphy()` function implemented in [orthologr](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) please consult the [Divergence Stratigraphy Vignette](https://github.com/HajkD/orthologr) and for learning about the new functionality of
-the `DivergenceStratigraphy()` function implemented in `myTAI` please consult the [Stratigraphy Vignette](Stratigraphy.Rmd).
-
-## `PhyloExpressionSet` and `DivergenceExpressionSet`
-
-All functions implemented in the `myTAI` package expect a specific data format as input data. These standardized data formats are referred to as __PhyloExpressionSet__ and __DivergenceExpressionSet__. The following sections will give users an overview about these data formats.
-
-
-### `PhyloExpressionSet` Specifications
-
-A `PhyloExpressionSet` specifies the combination of a `Phylostratigraphic Map` with an `Gene Expression Set`. Hence, to generate a `PhyloExpressionSet` the following two tables need to be joined:
-
-```
-# a Phylostratigraphic Map
-
-  Phylostratum      GeneID
-1            1 at1g01040.2
-2            1 at1g01050.1
-3            1 at1g01070.1
-4            1 at1g01080.2
-5            1 at1g01090.1
-6            1 at1g01120.1
-```
-and a 
+In the following examples we will use a `gene expression dataset` covering seven stages of _Arabidopsis thaliana_ embryo development. This data format is defined as `ExpressionMatrix` in the `myTAI` data format specification.
 
 ```
 # gene expression set
@@ -370,10 +123,9 @@ and a
 6 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
 ```
 
-In this example the `gene expression set` covers seven stages of _A. thaliana_ embryo development. This data format is defined as `ExpressionMatrix` in the `myTAI` data format specification.
+The function `MatchMap()` allows users to join a _phylostratigraphic map_ with an _ExpressionMatrix_ to obtain a joined table referred to as _PhyloExpressionSet_. In some cases, the GeneIDs stored in the `ExpressionMatrix` and in the _phylostratigraphic map_ do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package. The `biomartr` package allows users to map GeneIDs between database annotations.
 
-The function `MatchMap()` allows users to join a `Phylostratigraphic Map` with an `ExpressionMatrix` to obtain a `PhyloExpressionSet`. In some cases, the GeneIDs stored in the `ExpressionMatrix` and in the `Phylostratigraphic Map` do not match. This is due to GeneID mappings between different data bases and annotations. To map non matching GeneIDs between data bases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package. The `biomartr` package allows users to map GeneIDs between data base annotations.
-
+After matching a _phylostratigraphic map_ with an _ExpressionMatrix_ using the `MatchMap()` function, a standard _PhyloExpressionSet_ is returned storing the phylostratum assignment of a given gene in the first column, the _gene id_ of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. This format is crucial for all functions that are implemented in the `myTAI` package.
 
 ```{r,eval=FALSE}
 library(myTAI)
@@ -400,9 +152,29 @@ Phylostratum      GeneID    Zygote  Quadrant  Globular    Heart  Torpedo     Ben
 3            3 at1g01030.1  819.4880  771.6396  810.8717 866.7780 773.7893 747.9941 785.6105
 ```
 
-After matching a `Phylostratigraphic Map` with an `ExpressionMatrix` using the `MatchMap()` function, a standard `PhyloExpressionSet` is returned storing the Phylostratum assignment of a given gene in the first column, the _gene id_ of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. This format is crucial for all functions that are implemented in the `myTAI` package.
 
-Each function implemented in `myTAI` checks whether or not the PhyloExpressionSet standard is fulfilled.
+
+Analogous to a standard _PhyloExpressionSet_, a standard _DivergenceExpressionSet_ is a `data.frame` storing the divergence stratum assignment of a given gene in the first column, the gene id of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. 
+
+The following `DivergenceExpressionSet` example illustrates the standard `DivergenceExpressionSet` data set format.
+
+```{r,eval=FALSE}
+# head of an example standard DivergenceExpressionSet
+head(DivergenceExpressionSetExample, 3) 
+```
+
+```
+  Divergence.stratum      GeneID    Zygote  Quadrant  Globular    Heart   Torpedo      Bent    Mature
+1                  1 at1g01050.1 1501.0141 1817.3086 1665.3089 1564.761 1496.3207 1114.6435 1071.6555
+2                  1 at1g01120.1  844.0414  787.5929  859.6267  931.618  942.8453  870.2625  792.7542
+3                  1 at1g01140.3 1041.4291  908.3929 1068.8832  967.749 1055.1901 1109.4662  825.4633
+
+```
+
+A _DivergenceExpressionSet_ defines the joined table between a _divergence stratigraphic map_ and a _Expression Set_. A _DivergenceExpressionSet_ can be generated analogous to a _PhyloExpressionSet_ by joining a _divergence  stratigraphic map_ with an _ExpressionMatrix_ using the `MatchMap()` function. In some cases, the GeneIDs stored in the _ExpressionMatrix_ and in the _divergence stratigraphic map_ do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package.
+
+
+Each function implemented in `myTAI` checks internally whether or not the _PhyloExpressionSet_ or _DivergenceExpressionSet_ standard is fulfilled.
 
 ```{r,eval=FALSE}
 # used by all myTAI functions to check the validity of the PhyloExpressionSet standard
@@ -438,92 +210,16 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
   
 ```
 
-The `PhyloExpressionSetExample` data set stored within the `myTAI` package stores the time course (seven stages) of _Arabidopsis thaliana_ embryo development. Again, the first column represents the Phylostratum assignment of a given gene, the second column stores the gene id of the corresponding gene, and columns 3 to 9 store the gene expression set of _A. thaliana_ embryo development. 
-
-### `DivergenceExpressionSet` Specifications
-
-A `DivergenceExpressionSet` specifies the combination of a `Divergence Map` with an `Gene Expression Set`. A `DivergenceExpressionSet` can be generated analogous to a `PhyloExpressionSet` by joining a `Divergence Map` with an `ExpressionMatrix` using the `MatchMap()` function. In some cases, the GeneIDs stored in the `ExpressionMatrix` and in the `Divergence Map` do not match. This is due to GeneID mappings between different data bases and annotations. To map non matching GeneIDs between data bases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package.
-
-The following `DivergenceExpressionSet` example illustrates the standard `DivergenceExpressionSet` data set format.
-
-```{r,eval=FALSE}
-# head of an example standard DivergenceExpressionSet
-head(DivergenceExpressionSetExample, 3) 
-```
-
-```
-  Divergence.stratum      GeneID    Zygote  Quadrant  Globular    Heart   Torpedo      Bent    Mature
-1                  1 at1g01050.1 1501.0141 1817.3086 1665.3089 1564.761 1496.3207 1114.6435 1071.6555
-2                  1 at1g01120.1  844.0414  787.5929  859.6267  931.618  942.8453  870.2625  792.7542
-3                  1 at1g01140.3 1041.4291  908.3929 1068.8832  967.749 1055.1901 1109.4662  825.4633
-
-```
-
-Analogous to a standard `PhyloExpressionSet`, a standard `DivergenceExpressionSet` is a `data.frame` storing the Divergence Stratum assignment of a given gene in the first column, the gene id of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. 
-
-__The PhyloExpressionSet and DivergenceExpressioNSet formats are crucial for all functions that are implemented in the `myTAI` package__.
+__The PhyloExpressionSet and DivergenceExpressionSet formats are crucial for all functions that are implemented in the `myTAI` package__.
 
 Keeping these standard data formats in mind will provide users with the most important requirements to get started with the `myTAI` package.
 
 __Note__, that within the code of each function, the argument `ExpressionSet` always refers to either a PhyloExpressionSet or a DivergenceExpressionSet, whereas in specialized functions some arguments are specified as _PhyloExpressionSet_ when they take an PhyloExpressionSet as input data set, or specified as _DivergenceExpressionSet_ when they take an _DivergenceExpressionSet_ as input data set.
 
-
-## Skip `Phylostratigraphy` and `Divergence Stratigraphy` and Download Already Published `PhyloExpressionSets` or `DivergenceExpressionSets`
-
-The `myTAI` package also provides the statistical framework for existing PhyloExpressionSets or DivergenceExpressionSets. To re-analyze, reproduce, or further investigate phenomena of existing PhyloExpressionSets or DivergenceExpressionSets, users can use the following
-procedure to download published datasets. In this example we will download `Supplementary Table S3` from Drost et al., 2015. 
-
-Users can find a detailed list of [published Phylostratigraphic Maps and Divergence Maps](https://github.com/HajkD/published_phylomaps) by following the link.
-
-
-
-```{r,eval=FALSE}
-# install the readxl package
-install.packages("readxl")
-
-# load package readxl
-library(readxl)
-
-url_phyloSet <- "http://files.figshare.com/1798296/Supplementary_table_S3.xls"
-
-download.file( url      =  url_phyloSet,
-               destfile = "PhyloExpressionSetTables.xls" )
-
-Athaliana_PhyloExpressionSet <- read_excel("PhyloExpressionSetTables.xls", sheet = 3)
-
-head(Athaliana_PhyloExpressionSet)
-
-```
-
-```
-  Phylostratum      GeneID     Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
-1            1 at1g01040.2  2173.6352  1911.2001  1152.5553  1291.4224  1000.2529   962.9772 1696.4274
-2            1 at1g01050.1  1501.0141  1817.3086  1665.3089  1564.7612  1496.3207  1114.6435 1071.6555
-3            1 at1g01070.1  1212.7927  1233.0023   939.2000   929.6195   864.2180   877.2060  894.8189
-4            1 at1g01080.2  1016.9203   936.3837  1181.3381  1329.4734  1392.6429  1287.9746  861.2605
-5            1 at1g01090.1 11424.5667 16778.1685 34366.6493 39775.6405 56231.5689 66980.3673 7772.5617
-6            1 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
-```
-
-This way users can download all published PhyloExpressionSets or DivergenceExpressionSets
-to perform phylotranscriptomics analyses.
-
-```{r,eval=FALSE}
-# Compute the Transcriptome Age Index of the downloaded PhyloExpressionSet
-TAI(Athaliana_PhyloExpressionSet)
-```
-
-```
-  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
-3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
-```
-
-Users can also use [published Phylostratigraphic Maps and Divergence Maps](https://github.com/HajkD/published_phylomaps) and match them with their own transcriptome data of interest using the `MatchMap()` function. This procedure allows users to generate custom `PhyloExpressionSet` and `DivergenceExpressionSet` to perform phylotranscriptomic analyses with `myTAI`.
-
-
 ## Performing a Standard Workflow for Phylotranscriptomics Analyses 
 
-Before starting any computation, sometimes it is good to visualize the Phylostratum distribution of genes stored within a given PhyloExpressionSet.
+In the beginning of each phylotranscriptomics study users should investigate the distribution
+of PS or DS within a given PhyloExpressionSet or DivergenceExpressionSet.
 
 For this purpose, the `PlotDistribution()` function was implemented:
 
@@ -544,7 +240,7 @@ PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample,
 ```
 
 
-Another important feature to check is whether the Phylostratum assignment and Divergence-Stratum assignment of the genes stored within the PhyloExpressionSet and DivergenceExpressionSet are correlated (linear dependent). This is important to be able to assume the linear independence of __TAI__ and __TDI__ measures. This step is useful, because the TAI and TDI measures aim to quantify different signals of evolutionary conservation. Whereas the TAI measure aims to quantify evolutionary signals based on gene origin along the tree of life, the TDI measure is based on quantifying the selection pressure acting on orthologous genes between closely related species.
+Another important feature to check is whether the phylostratum assignment and divergence stratum assignment of the genes stored within the PhyloExpressionSet and DivergenceExpressionSet are correlated (linear dependent). This is important to be able to assume the linear independence of __TAI__ and __TDI__ measures. This step is useful, because the TAI and TDI measures aim to quantify different signatures of evolutionary conservation. Whereas the TAI measure aims to quantify evolutionary signatures based on gene origin along the tree of life, the TDI measure is based on quantifying the selection pressure acting on orthologous genes between closely related species.
 
 
 For this purpose the `PlotCorrelation()` function was implemented:
@@ -560,7 +256,7 @@ PlotCorrelation( PhyloExpressionSet      = PhyloExpressionSetExample,
                  linearModel             = TRUE )
 ```
 
-In this case Phylostratum and Divergence-Stratum assignments of the intersecting set of genes that are stored within the PhyloExpressionSet and DivergenceExpressionSet are weakly correlated, but can be assumed to be linear independent.
+In this case phylostratum and divergence stratum assignments of the intersecting set of genes that are stored within the PhyloExpressionSet and DivergenceExpressionSet are weakly correlated, but can be assumed to be linear independent.
 
 __Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as __first argument__ and a DivergenceExpressionSet as __second argument__.
 
