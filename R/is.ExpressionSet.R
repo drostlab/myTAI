@@ -18,7 +18,7 @@ is.ExpressionSet <- function(ExpressionSet){
         d.f_bool <- is.data.frame(ExpressionSet)
         age.vector_bool <- is.numeric(ExpressionSet[ , 1])
         gene.vector_bool <- ifelse(is.factor(ExpressionSet[ , 2]),is.character(levels(ExpressionSet[ , 2])),is.character(ExpressionSet[ , 2]))
-        expression.matrix_bool <- all(sapply(ExpressionSet[ , 3:ncols], is.numeric))
+        expression.matrix_bool <- all(sapply(as.matrix(ExpressionSet[ , 3:ncols]), is.numeric))
         any.NA.values_bool <- !any(is.na(ExpressionSet))
         
         
