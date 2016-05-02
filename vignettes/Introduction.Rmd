@@ -283,17 +283,21 @@ A lower value of TDI describes an more conserved transcriptome (in terms of sequ
 
 ## Transcriptome Age Index Analyses
 
-[Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full) introduced three statistical tests to quantify the significance of observed TAI patterns: `Flat Line Test`, `Reductive Hourglass Test`, and `Reductive Early Conservation Test`.
+Evolutionary signatures of transcriptomes can be captured by computing transcriptome indices at different measured stages of development, combining these computed values to a transcriptome index profile across the measured stages, and comparing the resulting profile with a flat line. A profile not significantly deviating from a flat line indicates the absence of significant variations of the computed transcriptome index from stage to stage. In contrast, a profile significantly deviating from a flat line indicates the presence of significant variations from stage to stage. We refer to any transcriptome index profile significantly deviating from a flat line as phylotranscriptomic pattern or evolutionary signature.
+
+Previously, we introduced three statistical tests to quantify the significance of observed TAI or TDI patterns: `Flat Line Test`, `Reductive Hourglass Test`, and `Reductive Early Conservation Test` ([Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
+
+The `PlotPattern()` function introduced in the following sections is the main analytics function of myTAI. `PlotPattern()` allows users to visualize TAI or TDI patterns and internally performs the following statistical tests to assess their significance.
 
 ### Flat Line Test
 
-
-The `PlotPattern()` function first computes the `TAI` (given a PhyloExpressionSet) or the `TDI` (given a DivergenceExpressionSet) to visualize the TAI or TDI profile, their standard deviation, and statistical significance.
+The `PlotPattern()` function with option `TestStatistic = "FlatLineTest",` first computes the `TAI` (given a PhyloExpressionSet) or the `TDI` (given a DivergenceExpressionSet) profile as well as their standard deviation, and statistical significance.
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Plot the Transcriptome Age Index of a given PhyloExpressionSet 
 # Test Statistic : Flat Line Test (default)
-PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
+PlotPattern( ExpressionSet = PhyloExpressionSetExample,
+             TestStatistic = "FlatLineTest,
              type          = "l", 
              lwd           = 6, 
              xlab          = "Ontogeny", 
@@ -301,7 +305,7 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
 ```
 
 The p-value (`p_flt`) above the TAI curve is returned by the `FlatLineTest`. As described in the
-documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatLineTest` is the default statistical test to quantify the statistical significance of the observed phylotranscriptomic pattern. In detail, the test quantifies any statistically significant deviation of the phylotranscriptomic pattern from a flat line. Here, we define any significant deviation of a phylotranscriptomic pattern from a flat line as evolutionary signal. Furthermore, we define corresponding stages of deviation as evolutionary conserved or variable (less conserved) depending on the magnitude of `TAI` and corresponding p-values.
+documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatLineTest` is the default statistical test to quantify the statistical significance of the observed phylotranscriptomic pattern. In detail, the test quantifies any statistically significant deviation of the phylotranscriptomic pattern from a flat line. Here, we define any significant deviation of a phylotranscriptomic pattern from a flat line as evolutionary signature Furthermore, we define corresponding stages of deviation as evolutionary conserved or variable (less conserved) depending on the magnitude of `TAI` and corresponding p-values.
 
 ### Reductive Hourglass Test
 
@@ -309,7 +313,7 @@ documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatL
 In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles an _hourglass_ shape,
 one can obtain a p-value quantifying the statistical significance of a visual _hourglass_ pattern based on the `ReductiveHourglassTest` (`?ReductiveHourglassTest`).
 
-Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
+Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge ([Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1)), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
 
