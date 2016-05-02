@@ -628,7 +628,7 @@ head(PES.absolute)
 When transforming the `ExpressionMatrix` of the `PhyloExpressionSetExample` using different transformation functions,
 the resulting phylotranscriptomic patterns qualitatively differ:
 
-### log2 transformation
+### log2 transformation (TAI)
 
 ```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 
@@ -646,7 +646,7 @@ PlotPattern( ExpressionSet = tf(PhyloExpressionSetExample, log2),
 
 ```
 
-### sqrt transformation
+### sqrt transformation (TAI)
 
 ```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 
@@ -674,7 +674,7 @@ since the original TAI and TDI measure were defined for absolute expression leve
 
 The same accounts for `TDI` profiles:
 
-### log2 transformation
+### log2 transformation (TDI)
 
 ```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(DivergenceExpressionSetExample)
@@ -691,7 +691,7 @@ PlotPattern( ExpressionSet = tf(DivergenceExpressionSetExample, log2),
 
 ```
 
-### sqrt transformation
+### sqrt transformation (TDI)
 
 ```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(DivergenceExpressionSetExample)
