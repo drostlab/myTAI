@@ -65,7 +65,7 @@ functionality of each version of `myTAI` can be found in the [NEWS](https://gith
 Users can download `myTAI` from [CRAN](https://cran.r-project.org/package=myTAI) :
 
 ```r
-# install myTAI 0.3.0 from CRAN
+# install myTAI 0.4.0 from CRAN
 install.packages("myTAI", dependencies = TRUE)
 ```
 
