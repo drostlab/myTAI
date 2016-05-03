@@ -3,7 +3,6 @@
 ^cran-comments\.md$
 .Rprofile
 man-roxygen
-NEWS\.md
 README.html
 README.Rmd
 ^\.httr-oauth$
