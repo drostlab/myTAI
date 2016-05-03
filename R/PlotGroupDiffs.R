@@ -122,20 +122,20 @@ PlotGroupDiffs <- function(ExpressionSet,
                 
                 if (!is.null(plot.type))
                         if (plot.type == "boxplot")
-                                par(mfrow = n2mfrow(nStages))
+                                graphics::par(mfrow = grDevices::n2mfrow(nStages))
                 
                 for (i in 1:nStages){
                         
                         Group1 <- ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[1]]), i + 2]
                         Group2 <- ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[2]]), i + 2]
                         
-                        p.val.stages[i] <- wilcox.test(ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[1]]), i + 2],
+                        p.val.stages[i] <- stats::wilcox.test(ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[1]]), i + 2],
                                                        ExpressionSet[which(ExpressionSet[ , 1] %in% Groups[[2]]), i + 2])$p.value 
                         if (!is.null(plot.type)){
                                 if (plot.type == "boxplot"){
                                         dataList <- lapply(group.names, get, envir=environment())
                                         names(dataList) <- group.names
-                                        boxplot(dataList,xlab = "Groups", ylab = "Expression Level", main = paste0(names(ExpressionSet)[i + 2],"  ( P = ",format(p.val.stages[i],digits = 2)," )"), col = col)  
+                                        graphics::boxplot(dataList,xlab = "Groups", ylab = "Expression Level", main = paste0(names(ExpressionSet)[i + 2],"  ( P = ",format(p.val.stages[i],digits = 2)," )"), col = col)  
                                 }  
                         }
                 }
