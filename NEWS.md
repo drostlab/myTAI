@@ -67,7 +67,7 @@ to the __Introduction__ Vignette
 
 - a new function `taxonomy()` allows users to retrieve taxonomic information for any organism of interest; this function has been taken from the [biomartr](https://github.com/HajkD/biomartr) package and was removed from `biomartr` afterwards. Please notice, that in myTAI version 0.1.0 the Introduction vignette referenced to the `taxonomy()` function in `biomartr`. This is no longer the case (since myTAI version 0.2.0), because now `taxonomy()` is implemented in myTAI. 
 
-- the new `taxonomy()` function is based on the powerful R package [taxize](http://cran.r-project.org/web/packages/taxize/index.html).
+- the new `taxonomy()` function is based on the powerful R package [taxize](https://github.com/ropensci/taxize).
 
 - a new function `SelectGeneSet()` allows users to fastly select a subset of genes in an ExpressionSet
 
@@ -134,7 +134,7 @@ myTAI 0.0.2
 - `combinatorialSignificance()`, `FlatLineTest()`, `ReductiveHourglassTest()`, and `EarlyConservationTest()`
 now support multicore processing
 
-- `MatchMap()` has been entirely rewritten and is now based on [dplyr](http://cran.rstudio.com/web/packages/dplyr/); additionally
+- `MatchMap()` has been entirely rewritten and is now based on [dplyr](https://github.com/hadley/dplyr); additionally
 it now has a new argument `accumulate` that allows you to accumulate multiple expression levels to a unique expressiion level for a unique gene id
 
 ### Vignettes
