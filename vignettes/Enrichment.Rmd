@@ -360,7 +360,7 @@ to your own dataset.
 ## Combine Functional Annotation with Enrichment Analyses
 
 The greatest advantage of `Phylostratum` and `Divergence Stratum` enrichment analyses can be unfolded
-when it is based on the functional annotation of the `test.set`. The [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Phylotranscriptomics.Rmd) vignettes of our [biomartr](https://github.com/HajkD/biomartr) package provide detailed tutorials on how to retrieve functional
+when it is based on the functional annotation of the `test.set`. The [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Evolutionary_Transcriptomics.Rmd) vignettes of our [biomartr](https://github.com/HajkD/biomartr) package provide detailed tutorials on how to retrieve functional
 annotation for a subset of genes. Categorizing genes into common functional groups or processes via `biomartr` will then allow users to search for genes deriving from enriched `Phylostrata` or `Divergence Strata`. The [Introduction](Introduction.html) vignette illustrated how `Phylostrata` or `Divergence Strata` can be linked with the origin of evolutionary events.
 This correlation between the predicted origin of genes (`Phylostratigraphic Map`) or its
 current state of selection between closely related species (`Divergence Map`) and their
