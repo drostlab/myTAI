@@ -18,7 +18,7 @@ combine previously introduced techniques with _classic_ gene expression analyses
 
 In other words, phylotranscriptomics allows us to detect stages or periods of evolutionary conservation and is able to predict the evolutionary origin of process or trait specific genes
 based on enrichment analyses. By combining evolutionary enrichment analyses with the
-functional annotation of process or trait specific genes (see [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Phylotranscriptomics.Rmd) for details) the detection of evolutionary signals can be correlated with 
+functional annotation of process or trait specific genes (see [Functional Annotation](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) and [Phylotranscriptomics](https://github.com/HajkD/biomartr/blob/master/vignettes/Evolutionary_Transcriptomics.Rmd) for details) the detection of evolutionary signals can be correlated with 
 functional processes. Then, performing gene expression analyses on corresponding process or trait specific genes allows users to detect potential causes of stage/period specific evolutionary transcriptome conservation. 
 
 
