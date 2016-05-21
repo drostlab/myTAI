@@ -13,13 +13,11 @@ myTAI
 Development is the major process establishing complex life on earth. 
 Hence, studying the evolution of developmental processes allows us to
 understand the key machanisms that control and constraint the evolution and 
-diversification of complex organisms on this planet. To study the evolution of developmental
-processes an evolutionary transcriptomics approach (= phylotranscriptomics) has been proposed 
-aiming to quantify the evolutionary conservation of developmental transcriptomes ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)). 
+diversification of complex organisms on this planet. Evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of developmental transcriptomes ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)). 
 
-The `myTAI` package allows users to capture evolutionary information that is hidden in transcriptomes using an evolutionary transcriptomics approach.
-    
-This evolutionary transcriptomics approach (= phylotranscriptomics) defines the concept of combining genetic sequence conservation information with gene expression levels to quantify transcriptome conservation throughout biological processes ([Domazet-Loso and Tautz, 2010 _Nature_](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) ; [Quint, Drost et al., 2012 _Nature_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) ; [Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)).
+In general, the `myTAI` package implements methods to quantify transcriptome conservation in biological processes.
+
+This evolutionary transcriptomics approach (= phylotranscriptomics) summarizes the concept of combining the phylogenetic age of genes or their sequence conservation with gene expression levels to quantify transcriptome conservation throughout biological processes ([Domazet-Loso and Tautz, 2010 _Nature_](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) ; [Quint, Drost et al., 2012 _Nature_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) ; [Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)).
 
 This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
 of evolutionary conservation in biological processes of extant species. However, although
@@ -28,7 +26,7 @@ to quantify transcriptome conservation in any transcriptome experiment of intere
 therefore aims to provide a standard approach to investigate the evolution of biological
 processes in the context of transcriptome conservation.
 
-In particular, `myTAI` provides an easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and developmental process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own phylotranscriptomics research.
+In particular, `myTAI` provides an easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and biological process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own phylotranscriptomics research.
 
 The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome
 conservation with `myTAI` and how to interpret the results generated with this software tool.
