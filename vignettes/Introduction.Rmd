@@ -19,20 +19,42 @@ knitr::opts_chunk$set(
 
 ## Perform Evolutionary Transcriptomics with R
 
-The main goal of `myTAI` is to take any gene age assignment table and expression dataset as input
-and quantify the transcriptome conservation of the studied biological process or treatment. 
-For this purpose, myTAI combines a gene age assignment table and expression dataset and provides
-functionality to capture evolutionary signatures that are hidden in these transcriptomes. This approach allows to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability.
+Gene age inference is the foundation of most evolutionary transcriptomics studies.
+The concept behind evolutionary transcriptomics is to combine these gene age estimates with gene expression
+data to quantify the average transcriptome age within a biological process of interest.
+
+In particular, this approach allowed the quantification of transcriptome conservation of animal and plant embryos passing through embryogenesis by first individually estimating the gene ages of specific animal and plant genomes and combining these gene age estimates with transcriptome data covering several stages of embryo development ([Domazet-Loso and Tautz, 2010 _Nature_](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) ; [Quint, Drost et al., 2012 _Nature_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) ; [Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)).
+
+The [myTAI](https://github.com/HajkD/myTAI) package aims to provide a standard tool for evolutionary transcriptomics studies and relies on gene age and sequence conservation estimates as input. This approach allows researchers to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability.
 
 
 ## Getting Started
 
-`myTAI` takes either a _phylostratigraphic map_ (gene age assignment table) or a _divergence stratigraphic map_ (sequence divergence assignment table) and an expression dataset as input and provides functions to capture and investigate evolutionary signatures that are hidden in these transcriptomes. 
+As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)).
+
+In particular, Moyers & Zhang argue that [genomic phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 1) underestimates gene age for a considerable fraction of genes, 2) is biased for rapidly evolving proteins which are short, and/or their most conserved block of sites is small, and 3) these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori ([Moyers & Zhang, 2015](http://mbe.oxfordjournals.org/content/32/1/258.long);  [Moyers & Zhang, 2016](http://mbe.oxfordjournals.org/content/33/5/1245); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, these arguments are based on simulated data (and the approach has been questioned; pers. comm. with Tomislav Domazet-Lošo) and therefore an objective benchmarking set representing the tree of life is still missing.
+
+Based on this debate a recent study suggested to perform gene age inference by combining thirteen common orthology inference algorithms to create gene age datasets and then characterize the error around each age-call on a per-gene and per-algorithm basis. Using this approach systematic error was found to be a large factor in estimating gene age, suggesting that simple consensus algorithms are not enough to give a reliable point estimate ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, by generating a consensus gene age and quantifying the possible error in each workflow step, [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) provide a very useful [database](http://geneages.org/) of
+consensus gene ages for a variety of genomes. 
+
+Alternatively, [Stephen Smith, 2016](https://bib.oxfordjournals.org/content/early/2016/04/20/bib.bbw034.full) argues that _de novo_ gene birth/death and gene family expansion/contraction studies should avoid drawing direct inferences of evolutionary relatedness from measures of sequence similarity alone, and should instead, where possible, use more rigorous phylogeny-based methods. For this purpose, I recommend researchers to consult the [phylomedb database](http://orthology.phylomedb.org/) to retrieve phylogeny-based gene orthology relationships and use these age estimates in combination with `myTAI`.
+
+Evidently, these advancements in gene age research are very recent and gene age inference is a very young and active field of genomic research. Therefore, many more studies need to address the robust and realistic inference
+of gene age and a community standard is still missing.
+
+Despite the ongoing debate about how to correctly infer gene age, users of `myTAI` can perform any gene age inference method they find most appropriate for their biological question and pass this gene age inference table as input to `myTAI`. To do so, users need to follow the following data format specifications to use their gene age inference table with `myTAI`.
+
+The rational behind gene age inference is to assign each protein coding gene of an organism of iterest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see  [Tautz & Domazet-Lošo, 2011](http://www.nature.com/nrg/journal/v12/n10/abs/nrg3053.html))). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _phylostratigraphic map_.
+
+Alternatively, we recently proposed an alternative method (Divergence Stratigraphy) to quantify the sequence conservation of protein coding genes between closely related species to study the active maintenance of transcriptome conservation patterns that were captured using a gene age inference approach ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221)). Analogous to gene age inference methods,
+divergence stratigraphy generates a table storing the sequence conservation estimate in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _divergence stratigraphic map_.
+
+`myTAI` takes either a _phylostratigraphic map_ or a _divergence stratigraphic map_ and an expression dataset as input and provides functions to quantify the average transcriptome age or average transcriptome conservation within a biological process of interest. 
 
 The three input tables: _phylostratigraphic map_, _divergence stratigraphic map_, and the expression dataset need
-to fulfill specific data formats when using myTAI.
+to fulfill specific data formats when using `myTAI`.
 
-The following code illustrates how an example _phylostratigraphic map_ and _divergence stratigraphic map_ table  is structured:
+The following code illustrates an example structure of a _phylostratigraphic map_ and _divergence stratigraphic map_:
 
 ```{r,eval=FALSE}
 # load myTAI
@@ -57,10 +79,10 @@ head(PhyloExpressionSetExample[ , c("Phylostratum","GeneID")])
 6            1 at1g01120.1
 ```
 
-In detail, a _phylostratigraphic map_ stores the gene age assignment generated with [phylostratigraphy](https://github.com/AlexGa/Phylostratigraphy) in the
+In detail, a _phylostratigraphic map_ stores the gene age assignment generated with e.g. [phylostratigraphy](https://github.com/AlexGa/Phylostratigraphy) in the
 first columns and the corresponding gene id in the second column.
 
-Analogously, a divergence stratigraphic map stores the gene age assignment generated with [divergence stratigraphy](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) in the
+Analogously, a divergence stratigraphic map stores the gene age assignment generated with e.g. [divergence stratigraphy](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) in the
 first column and the corresponding gene id in the second column:
 
 ```{r,eval=FALSE}
@@ -79,8 +101,8 @@ head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
 6                  1 at1g01540.2
 ```
 
-Hence, myTAI relies on pre-computed _phylostratigraphic maps_ and _divergence stratigraphic maps_.
-For this purpose, users can consult the following resources to generate or retrieve _phylostratigraphic maps_ and _divergence stratigraphic maps_ which can then be used with myTAI.
+Hence, `myTAI` relies on pre-computed _phylostratigraphic maps_ and _divergence stratigraphic maps_.
+For this purpose, researchers can consult the following resources to generate or retrieve _phylostratigraphic maps_ and _divergence stratigraphic maps_ which can then be used with `myTAI`.
 
 ### Generate or retrieve phylostratigraphic maps
 
@@ -90,6 +112,8 @@ For this purpose, users can consult the following resources to generate or retri
 - generate a phylostratigraphic map with [ORFanFinder](http://bioinformatics.oxfordjournals.org/content/early/2016/03/26/bioinformatics.btw122.full.pdf)
 - generate a gene age map with [Protein Historian](https://lighthouse.ucsf.edu/ProteinHistorian/)
 - download pre-computed and published [phylostratigraphic maps](https://github.com/HajkD/published_phylomaps)
+- use a gene age consensus approach to estimating gene ages for model organisms [Liebeskind et al., 2016](http://geneages.org/)
+
 
 ### Generate or retrieve divergence stratigraphic maps
 
@@ -106,7 +130,7 @@ any function in myTAI with their custom gene age assignment table.
 
 ### Expression dataset specification
 
-The aim of any phylotranscriptomics study is to quantify transcriptome conservation in biological processes.
+The aim of any evolutionary transcriptomics study is to quantify transcriptome conservation in biological processes.
 For this purpose, users need to provide the transcriptome dataset of their studied biological process.
 
 In the following examples we will use a `gene expression dataset` covering seven stages of _Arabidopsis thaliana_ embryo development. This data format is defined as `ExpressionMatrix` in the `myTAI` data format specification.
@@ -218,8 +242,8 @@ __Note__, that within the code of each function, the argument `ExpressionSet` al
 
 ## Performing a Standard Workflow for Phylotranscriptomics Analyses 
 
-In the beginning of each phylotranscriptomics study users should investigate the distribution
-of PS or DS within a given PhyloExpressionSet or DivergenceExpressionSet.
+At the beginning of each evolutionary transcriptomics study, researchers should investigate the distribution
+of gene age (in case of phylostratigraphy = phylostratum (PS)) or sequence conservation (in case of divergence stratigraphy = divergence stratum (DS)) within a given PhyloExpressionSet or DivergenceExpressionSet.
 
 For this purpose, the `PlotDistribution()` function was implemented:
 
@@ -262,6 +286,10 @@ __Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as 
 
 
 ### Visualizing the _Transcriptome Age Index_ and the _Transcriptome Divergence Index_
+
+The main goal of any evolutionary transcriptomics study is to quantify the average age of a transcriptome 
+or the average conservation of a transcriptome within a biological process of interest.
+For this purpose, several measures were introduced:
 
 
 Mathematically, the _Transcriptome Age Index_ (TAI) introduced by Domazet-Loso and Tautz, 2010 represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
