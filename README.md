@@ -26,7 +26,7 @@ to quantify transcriptome conservation in any transcriptome experiment of intere
 therefore aims to provide a standard approach to investigate the evolution of biological
 processes in the context of transcriptome conservation.
 
-In particular, `myTAI` provides an easy to use and optimized software framework to perform phylostrancriptomic analyses for any annotated organism and biological process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own phylotranscriptomics research.
+The [myTAI](https://github.com/HajkD/myTAI) package aims to provide a standard tool for evolutionary transcriptomics studies and relies on gene age and sequence conservation estimates as input. This approach allows researchers to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability. In particular, `myTAI` provides an easy to use and optimized software framework to perform evolutionary transcriptomics analyses for any annotated organism and biological process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own evolutionary transcriptomics research.
 
 The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome
 conservation with `myTAI` and how to interpret the results generated with this software tool.
