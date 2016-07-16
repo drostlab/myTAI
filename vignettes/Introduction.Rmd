@@ -17,6 +17,27 @@ knitr::opts_chunk$set(
   tidy = FALSE)
 ```
 
+
+## Installation
+
+Users can download `myTAI` from [CRAN](https://cran.r-project.org/package=myTAI) :
+
+```r
+# install myTAI 0.4.0 from CRAN
+install.packages("myTAI", dependencies = TRUE)
+```
+
+### Package Dependencies
+
+
+```r
+# to perform differential gene expression analyses with myTAI
+# please install the edgeR package
+# install edgeR
+source("http://bioconductor.org/biocLite.R")
+biocLite("edgeR")
+```
+
 ## Perform Evolutionary Transcriptomics with R
 
 Gene age inference is the foundation of most evolutionary transcriptomics studies.
@@ -32,7 +53,7 @@ The [myTAI](https://github.com/HajkD/myTAI) package aims to provide a standard t
 
 As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)).
 
-In particular, Moyers & Zhang argue that [genomic phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 1) underestimates gene age for a considerable fraction of genes, 2) is biased for rapidly evolving proteins which are short, and/or their most conserved block of sites is small, and 3) these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori ([Moyers & Zhang, 2015](http://mbe.oxfordjournals.org/content/32/1/258.long);  [Moyers & Zhang, 2016](http://mbe.oxfordjournals.org/content/33/5/1245); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, these arguments are based on simulated data (and the approach has been questioned; pers. comm. with Tomislav Domazet-Lošo) and therefore an objective benchmarking set representing the tree of life is still missing.
+In particular, Moyers & Zhang argue that [genomic phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 1) underestimates gene age for a considerable fraction of genes, 2) is biased for rapidly evolving proteins which are short, and/or their most conserved block of sites is small, and 3) these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori ([Moyers & Zhang, 2015](http://mbe.oxfordjournals.org/content/32/1/258.long);  [Moyers & Zhang, 2016](http://mbe.oxfordjournals.org/content/33/5/1245); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, these arguments are based on simulated data (and the approach has been questioned; pers. comm. with Tomislav Domazet-Loso) and therefore an objective benchmarking set representing the tree of life is still missing.
 
 Based on this debate a recent study suggested to perform gene age inference by combining thirteen common orthology inference algorithms to create gene age datasets and then characterize the error around each age-call on a per-gene and per-algorithm basis. Using this approach systematic error was found to be a large factor in estimating gene age, suggesting that simple consensus algorithms are not enough to give a reliable point estimate ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, by generating a consensus gene age and quantifying the possible error in each workflow step, [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) provide a very useful [database](http://geneages.org/) of
 consensus gene ages for a variety of genomes. 
@@ -44,7 +65,7 @@ of gene age and a community standard is still missing.
 
 Despite the ongoing debate about how to correctly infer gene age, users of `myTAI` can perform any gene age inference method they find most appropriate for their biological question and pass this gene age inference table as input to `myTAI`. To do so, users need to follow the following data format specifications to use their gene age inference table with `myTAI`.
 
-The rational behind gene age inference is to assign each protein coding gene of an organism of iterest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see  [Tautz & Domazet-Lošo, 2011](http://www.nature.com/nrg/journal/v12/n10/abs/nrg3053.html))). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _phylostratigraphic map_.
+The rational behind gene age inference is to assign each protein coding gene of an organism of iterest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see  [Tautz & Domazet-Loso, 2011](http://www.nature.com/nrg/journal/v12/n10/abs/nrg3053.html))). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _phylostratigraphic map_.
 
 Alternatively, we recently proposed an alternative method (Divergence Stratigraphy) to quantify the sequence conservation of protein coding genes between closely related species to study the active maintenance of transcriptome conservation patterns that were captured using a gene age inference approach ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221)). Analogous to gene age inference methods,
 divergence stratigraphy generates a table storing the sequence conservation estimate in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _divergence stratigraphic map_.
