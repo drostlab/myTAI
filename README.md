@@ -31,6 +31,16 @@ The [myTAI](https://github.com/HajkD/myTAI) package aims to provide a standard t
 The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome
 conservation with `myTAI` and how to interpret the results generated with this software tool.
 
+### Citation
+
+**Please cite one of the following papers when using `myTAI` for your own research (depending on your application). This will allow me to continue
+working on this software tool and will motivate me to extend its functionality and usability. Many thanks in advance :)**
+
+> Drost HG, Gabel A, Domazet-Loso T, Quint M, Grosse I. 2016. __Capturing Evolutionary Signatures in Transcriptomes with myTAI__. [bioRxiv](http://biorxiv.org/content/early/2016/05/03/051565)
+>
+> Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan PT, Dekkers BJW, Bentsink L, Hilhorst H, Ligterink W, Wellmer F, Grosse I, and Quint M. 2016. __Post-embryonic hourglass patterns mark ontogenetic transitions in plant development__. _Mol. Biol. Evol._ 33 (5): 1158-1163. [doi:10.1093/molbev/msw039](http://mbe.oxfordjournals.org/content/33/5/1158) 
+>
+> Drost HG, Gabel A, Grosse I, Quint M. 2015. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ 32 (5): 1221-1231. [doi:10.1093/molbev/msv012](http://mbe.oxfordjournals.org/content/32/5/1221.abstract?sid=767aea12-1eb3-40be-8c6a-e2861f159b46)
 
 ## Tutorials
 
