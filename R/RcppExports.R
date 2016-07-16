@@ -17,6 +17,7 @@ cpp_std_error <- function(x) {
     .Call('myTAI_cpp_std_error', PACKAGE = 'myTAI', x)
 }
 
+#' @export 
 cpp_geom_mean <- function(x) {
     .Call('myTAI_cpp_geom_mean', PACKAGE = 'myTAI', x)
 }
