@@ -115,6 +115,7 @@ In the `myTAI` framework users can find:
 
 #### Visualization and Analytics Tools:
 
+* `PlotSignature()` : Plot evolutionary signatures across transcriptomes
 * `PlotPattern()` : Function to plot the TAI or TDI profiles and perform statistical tests
 * `PlotCorrelation()` : Function to plot the correlation between phylostratum values and divergence-stratum values
 * `PlotRE()` : Function to plot the relative expression profiles
