@@ -1,6 +1,11 @@
 myTAI 0.5.0
 ===========
 
+### New Functions
+
+- new function `PlotSignature()` allows users to plot evolutionary signatures across transcriptomes 
+(new main visualization function aiming to replace the `PlotPattern()` function)
+
 ### Updates
 
 - now R/RcppExports.R and src/rcpp_funcs.cpp are included in the package due to previous compilation problems (see also [stackoverflow discussion](http://stackoverflow.com/questions/34585560/travis-ci-r-package-error-in-documentation))
