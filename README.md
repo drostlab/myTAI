@@ -2,34 +2,19 @@ myTAI
 =====
 
 
-### Perform Evolutionary Transcriptomics with R
+### Evolutionary Transcriptomics with R
 
-> To put aside for a moment the matter-of-factness of an exact scientist,
-> I will confess that I frequently have the feeling in my experimental work of holding 
-> a dialogue with someone who is considerably brighter than me.
->
-> \- Hans Spemann
+Today, phenotypic phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level by using transcriptomics approaches. Transcriptomes denote the total number of quantified transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment/ disease versus non treatment/ non disease transcriptomes are being compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although transcriptomics studies are based on a powerful methodology little is known about the evolution of such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.
 
-Development is the major process establishing complex life on earth. 
-Hence, studying the evolution of developmental processes allows us to
-understand the key machanisms that control and constraint the evolution and 
-diversification of complex organisms on this planet. Evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of developmental transcriptomes ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)). 
+Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. This quantification on the highest level is achieved through transcriptome indices ([Domazet-Lošo and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/abs/nature09632.html); [Drost et al., 2016a](http://biorxiv.org/content/early/2016/05/03/051565)) which denote weighted means of gene age or rate of protein substitutions. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes ([Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221); [Drost et al., 2016a](http://biorxiv.org/content/early/2016/05/03/051565); [Drost et al., 2016b](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)) to investigate how transcriptomes underlying biological processes are constrained or channeled due to evolutionary history (Dollow's law).
 
-In general, the `myTAI` package implements methods to quantify transcriptome conservation in biological processes.
 
-This evolutionary transcriptomics approach (= phylotranscriptomics) summarizes the concept of combining the phylogenetic age of genes or their sequence conservation with gene expression levels to quantify transcriptome conservation throughout biological processes ([Domazet-Loso and Tautz, 2010 _Nature_](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) ; [Quint, Drost et al., 2012 _Nature_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) ; [Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)).
+For the purpose of performing large scale evolutionary transcriptomics studies, the `myTAI` package implements frameworks to allow researchers to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability. 
 
-This subfield of Evolutionary Developmental Biology aims to determine and investigate stages or periods
-of evolutionary conservation in biological processes of extant species. However, although
-motivated by and applied to developmental processes, the `myTAI` package is implemented
-to quantify transcriptome conservation in any transcriptome experiment of interest and
-therefore aims to provide a standard approach to investigate the evolution of biological
-processes in the context of transcriptome conservation.
+I hope that `myTAI` will become the community standard tool to perform evolutionary transcriptomics studies and I am happy to add required functionality upon request.
 
-The [myTAI](https://github.com/HajkD/myTAI) package aims to provide a standard tool for evolutionary transcriptomics studies and relies on gene age and sequence conservation estimates as input. This approach allows researchers to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability. In particular, `myTAI` provides an easy to use and optimized software framework to perform evolutionary transcriptomics analyses for any annotated organism and biological process of interest. Additionally, customized visualization functions implemented in `myTAI` allow users to generate publication quality plots for their own evolutionary transcriptomics research.
 
-The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome
-conservation with `myTAI` and how to interpret the results generated with this software tool.
+The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome onservation with `myTAI` and how to interpret the results generated with this software tool.
 
 ### Citation
 
