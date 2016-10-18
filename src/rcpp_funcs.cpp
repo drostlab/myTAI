@@ -1,11 +1,11 @@
 //#include <RcppArmadilloExtensions/sample.h>
 #include <Rcpp.h>
+#include <math.h>
 // // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::plugins(cpp11)]]
 
 using namespace Rcpp;
 using namespace std;
-
 
 /* This whole 'permut' function has been adapted and taken from:
    http://gallery.rcpp.org/articles/stl-random-shuffle/
@@ -16,9 +16,7 @@ using namespace std;
 */
 inline int randWrapper(const int n)
 { 
-  
   return floor(unif_rand() * n); 
-  
 }
 
 NumericVector permut(NumericVector a)
@@ -145,7 +143,7 @@ double cpp_std_error(NumericVector x)
   
 }
   
-//' @export 
+// @export 
 // [[Rcpp::export]] 
 double cpp_geom_mean(NumericVector x)
 {
