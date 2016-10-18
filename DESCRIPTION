@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
 Title: Perform Evolutionary Transcriptomics Studies
-Version: 0.4.0
+Version: 0.5.0
 Date: 2015-07-22
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hgd23@cam.ac.uk>
@@ -29,6 +29,8 @@ Imports:
     reshape2 (>= 1.4.1),
     ggplot2 (>= 1.0.1),
     readr (>= 0.2.2),
+    tibble,
+    scales,
     edgeR
 Suggests:
     knitr (>= 1.6),
