@@ -136,16 +136,17 @@ ReductiveHourglassTest <- function(ExpressionSet,
         is.ExpressionSet(ExpressionSet)
         
         if(is.null(modules))
-                stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.")
-        
-        if(length(modules) != 3)
-                stop("Please specify three modules: early, mid, and late to perform the ReductiveHourglassTest.")
-        
-        if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
-                stop("The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet.")
+                stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
         
         if(any(table(unlist(modules)) > 1))
-                stop("Intersecting modules are not defined for the ReductiveHourglassTest.")
+                stop("Intersecting modules are not defined for the ReductiveHourglassTest.", call. = FALSE)
+        
+        if(length(modules) != 3)
+                stop("Please specify three modules: early, mid, and late to perform the ReductiveHourglassTest.", call. = FALSE)
+        
+        if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
+                stop("The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet.", call. = FALSE)
+        
         
         nCols <- dim(ExpressionSet)[2]
         score_vector <- vector(mode = "numeric",length = permutations)
