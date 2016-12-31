@@ -6,8 +6,10 @@
 \usage{
 PlotSignature(ExpressionSet, measure = "TAI",
   TestStatistic = "FlatLineTest", modules = NULL, permutations = 1000,
-  xlab = "Ontogeny", ylab = "Transcriptome Index", main = "", lwd = 4,
-  alpha = 0.1, y.ticks = 10)
+  lillie.test = FALSE, p.value = TRUE, shaded.area = TRUE,
+  custom.perm.matrix = NULL, xlab = "Ontogeny",
+  ylab = "Transcriptome Index", main = "", lwd = 4, alpha = 0.1,
+  y.ticks = 10)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -23,9 +25,52 @@ or experiments that correspond to each module. For example,
 \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.}
 
 \item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}} or \code{\link{ReductiveHourglassTest}}.}
+
+\item{lillie.test}{a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.}
+
+\item{p.value}{a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.}
+
+\item{shaded.area}{a boolean value specifying whether a shaded area shall 
+be drawn for the developmental stages defined to be the presumptive phylotypic period.}
+
+\item{custom.perm.matrix}{a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotPattern}. Default is \code{custom.perm.matrix = NULL}.}
+
+\item{xlab}{label of x-axis.}
+
+\item{ylab}{label of y-axis.}
+
+\item{main}{figure title.}
+
+\item{lwd}{line width.}
+
+\item{alpha}{transparency of the shaded area. Default is \code{alpha = 0.1}.}
+
+\item{y.ticks}{number of ticks on the y-axis. Default is \code{ticks = 10}.}
 }
 \description{
-E
+Main function to visualize transcriptome indices.
+}
+\details{
+This function substitutes the functionality of the \code{\link{PlotPattern}} function
+and is based on ggplot2 insead of base R graphics.
+}
+\examples{
+data(PhyloExpressionSetExample)
+
+# plot TAI pattern and perform flat line test
+PlotSignature(PhyloExpressionSetExample, 
+              measure       = "TAI", 
+              permutations  = 1000,
+              TestStatistic = "FlatLineTest",
+              ylab = "Transcriptome Age Index")
+              
+# plot TAI pattern and perform reductive hourglass test
+PlotSignature(PhyloExpressionSetExample, 
+              measure       = "TAI", 
+              permutations  = 1000,
+              TestStatistic = "ReductiveHourglassTest",
+              modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+              ylab = "Transcriptome Age Index")
 }
 \author{
 Hajk-Georg Drost
