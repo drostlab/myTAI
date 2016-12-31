@@ -79,7 +79,8 @@
 #' 
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}},
-#'  \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}
+#'  \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}},
+#'  \code{\link{PlotSignature}}
 #' @examples
 #' 
 #' # load PhyloExpressionSet

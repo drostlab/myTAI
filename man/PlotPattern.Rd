@@ -175,6 +175,7 @@ Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscripto
 }
 \seealso{
 \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}},
- \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}
+ \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}},
+ \code{\link{PlotSignature}}
 }
 
