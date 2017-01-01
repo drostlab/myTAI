@@ -12,7 +12,9 @@ PlotSignature(ExpressionSet, measure = "TAI",
   y.ticks = 10)
 }
 \arguments{
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+\item{ExpressionSet}{a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.}
+
+\item{measure}{type of transcriptome index that shall be computed. E.g. \code{measure = "TAI"} (Transcriptome Age Index), \code{measure = "TDI"} (Transcriptome Divergence Index), \code{measure = "TPI"} (Transcriptome Polymorphism Index).}
 
 \item{TestStatistic}{a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
 Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
@@ -53,6 +55,13 @@ Main function to visualize transcriptome indices.
 \details{
 This function substitutes the functionality of the \code{\link{PlotPattern}} function
 and is based on ggplot2 insead of base R graphics.
+
+The following transcriptome indices can be computed and visualized with this function:
+\itemize{
+\item Transcriptome Age Index (\code{\link{TAI}})
+\item Transcriptome Divergence Index (\code{\link{TDI}})
+\item Transcriptome Polymorphism Index (\code{\link{TPI}})
+}
 }
 \examples{
 data(PhyloExpressionSetExample)
