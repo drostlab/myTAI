@@ -3,8 +3,10 @@ myTAI 0.5.0
 
 ### New Functions
 
-- new function `PlotSignature()` allows users to plot evolutionary signatures across transcriptomes 
-(new main visualization function aiming to replace the `PlotPattern()` function)
+- new function `PlotSignature()` allows users to plot evolutionary signatures across transcriptomes (based on ggplot2 -> new main visualization function aiming to replace the `PlotPattern()` function)
+
+- new function `TPI()` allows users to compute the Transcriptome Polymorphism Index introduced by [Gossmann et al., 2015](http://mbe.oxfordjournals.org/content/33/7/1669).
+
 
 ### Updates
 
