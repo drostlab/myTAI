@@ -61,7 +61,7 @@ PlotSignature <-
                  permutations = 1000,
                  lillie.test  = FALSE,
                  p.value = TRUE,
-                 shaded.area  = TRUE,
+                 shaded.area  = FALSE,
                  custom.perm.matrix = NULL,
                  xlab = "Ontogeny",
                  ylab = "Transcriptome Index",
@@ -300,7 +300,7 @@ PlotSignature <-
                                         xmin = modules[[2]][1],
                                         xmax = modules[[2]][length(modules[[2]])],
                                         ymin = min(TI) - (min(TI) / 50),
-                                        ymax = Inf), fill = "#009E73", alpha = alpha * 0.5)  
+                                        ymax = Inf), fill = "#4d004b", alpha = alpha * 0.5)  
                 }
                 
                 stage.names <- names(ExpressionSet)[3:ncol(ExpressionSet)]
