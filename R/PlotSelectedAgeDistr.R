@@ -83,10 +83,22 @@ PlotSelectedAgeDistr <- function(ExpressionSet, gene.set,
                 AgeDistr <- format(AgeDistr / sum(AgeDistr), digits = 2)
         }
                 
-        GeneSubSet.LongFormat <- data.frame(AgeCategory = paste0(legendName,names(AgeDistr)), GeneCount = as.numeric(AgeDistr))
+        GeneSubSet.LongFormat <-
+                data.frame(AgeCategory = paste0(legendName, names(AgeDistr)),
+                           GeneCount = as.numeric(AgeDistr))
         # get the correct order of PS or DS by specifying levels = paste0(legendName,names(AgeDistr))
-        GeneSubSet.LongFormat[ , 1] <- factor(GeneSubSet.LongFormat[ , 1], levels = paste0(legendName,names(AgeDistr)))
-        plot.res <- ggplot2::ggplot(GeneSubSet.LongFormat, ggplot2::aes(x = AgeCategory, y = GeneCount), order = FALSE) + ggplot2::geom_bar(stat="identity", fill = col) + ggplot2::labs(x = xlab, y = ylab)  + ggplot2::geom_text(ggplot2::aes( label = GeneCount, y =  GeneCount), stat= "identity", vjust = -.3) + ggplot2::theme_minimal()
+        GeneSubSet.LongFormat[, 1] <-
+                factor(GeneSubSet.LongFormat[, 1], levels = paste0(legendName, names(AgeDistr)))
+        plot.res <-
+                ggplot2::ggplot(GeneSubSet.LongFormat,
+                                ggplot2::aes(x = AgeCategory, y = GeneCount),
+                                order = FALSE) + 
+                ggplot2::geom_bar(stat = "identity", fill = col) + 
+                ggplot2::labs(x = xlab, y = ylab)  + 
+                ggplot2::geom_text(ggplot2::aes(label = GeneCount, y =  GeneCount),
+                                   stat = "identity",
+                                   vjust = -.3) + 
+                ggplot2::theme_minimal()
         
         return (plot.res)
 }
