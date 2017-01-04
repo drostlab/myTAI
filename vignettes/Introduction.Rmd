@@ -340,21 +340,21 @@ The `PlotPattern()` function introduced in the following sections is the main an
 
 ### Flat Line Test
 
-The `PlotPattern()` function with option `TestStatistic = "FlatLineTest",` first computes the `TAI` (given a PhyloExpressionSet) or the `TDI` (given a DivergenceExpressionSet) profile as well as their standard deviation, and statistical significance.
+The `PlotSignature()` function with option `TestStatistic = "FlatLineTest",` first computes the `TAI` (given a PhyloExpressionSet and argument specification `measure = "TAI"`) or the `TDI` (given a DivergenceExpressionSet and argument specification `measure = "TDI"`) profile as well as their standard deviation, and statistical significance.
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+data(PhyloExpressionSetExample)
 # Plot the Transcriptome Age Index of a given PhyloExpressionSet 
 # Test Statistic : Flat Line Test (default)
-PlotPattern( ExpressionSet = PhyloExpressionSetExample,
-             TestStatistic = "FlatLineTest,
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TAI" )
+PlotSignature( ExpressionSet = PhyloExpressionSetExample,
+               measure       = "TAI", 
+               TestStatistic = "FlatLineTest",
+               xlab          = "Ontogeny", 
+               ylab          = "TAI" )
 ```
 
 The p-value (`p_flt`) above the TAI curve is returned by the `FlatLineTest`. As described in the
-documentation of `PlotPattern()` (`?PlotPattern` or `?FlatLineTest`), the `FlatLineTest` is the default statistical test to quantify the statistical significance of the observed phylotranscriptomic pattern. In detail, the test quantifies any statistically significant deviation of the phylotranscriptomic pattern from a flat line. Here, we define any significant deviation of a phylotranscriptomic pattern from a flat line as evolutionary signature Furthermore, we define corresponding stages of deviation as evolutionary conserved or variable (less conserved) depending on the magnitude of `TAI` and corresponding p-values.
+documentation of `PlotSignature()` (`?PlotSignature` or `?FlatLineTest`), the `FlatLineTest` is the default statistical test to quantify the statistical significance of the observed phylotranscriptomic pattern. In detail, the test quantifies any statistically significant deviation of the phylotranscriptomic pattern from a flat line. Here, we define any significant deviation of a phylotranscriptomic pattern from a flat line as evolutionary signature Furthermore, we define corresponding stages of deviation as evolutionary conserved or variable (less conserved) depending on the magnitude of `TAI` and corresponding p-values.
 
 ### Reductive Hourglass Test
 
@@ -372,16 +372,15 @@ For this example we divide _A. thaliana_ embryo development stored within the _P
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
 # Plot the Transcriptome Age Index of a given PhyloExpressionSet 
 # Test Statistic : Reductive Hourglass Test
-PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
-             TestStatistic = "ReductiveHourglassTest",
-             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TAI" )
+PlotSignature( ExpressionSet = PhyloExpressionSetExample,
+               measure       = "TAI",
+               TestStatistic = "ReductiveHourglassTest",
+               modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+               xlab          = "Ontogeny", 
+               ylab          = "TAI" )
 ```
 
 The corresponding p-value `p_rht` now denotes the p-value returned by the `ReductiveHourglassTest`
@@ -392,19 +391,21 @@ To make sure that correct modules have been selected to perform the `ReductiveHo
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Visualize the phylotypic period used for the Reductive Hourglass Test
-PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
-             TestStatistic = "ReductiveHourglassTest",
-             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
-             shaded.area   = TRUE, 
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TAI" )
+PlotSignature( ExpressionSet = PhyloExpressionSetExample,
+               measure       = "TAI",
+               TestStatistic = "ReductiveHourglassTest",
+               modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+               shaded.area   = TRUE, 
+               xlab          = "Ontogeny", 
+               ylab          = "TAI" )
 ```
 
 __Note__ that for defining a priori knowledge for the `ReductiveHourglassTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
 which in contrast would start at position 3, ... N + 2.
 
+In a biological context, it is not always clear which stages could define the ealy, mid, and late 
+modules. For animal embryogenesis, it has been suggested to choose early, mid, and late modules
+according to the morphological conservation of animal embryos (e.g. mid-stage vertebrate embryos seem to be morphologically conserved). For plants, in contrast no morphological conservation has been reported and thus the averge expression of embryo defective genes has been used to define modules (Drost et al. 2015).
 
 ### Reductive Early Conservation Test
 
@@ -429,13 +430,12 @@ For this example we divide _A. thaliana_ embryo development stored within the _P
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Plot the Transcriptome Age Index of a given PhyloExpressionSet 
 # Test Statistic : Reductive Early Conservation Test
-PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
-             TestStatistic = "EarlyConservationTest",
-             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TAI" )
+PlotSignature( ExpressionSet = PhyloExpressionSetExample,
+               measure       = "TAI",
+               TestStatistic = "EarlyConservationTest",
+               modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+               xlab          = "Ontogeny", 
+               ylab          = "TAI" )
 ```
 
 The corresponding p-value `p_ect` now denotes the p-value returned by the `EarlyConservationTest`
@@ -468,11 +468,11 @@ Analogous to the _TAI_ computations and visualization, the _TDI_ computations ca
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
 # Test Statistic : Flat Line Test (default)
-PlotPattern( ExpressionSet = DivergenceExpressionSetExample, 
-             type          = "l", 
-             lwd           = 6,
-             xlab          = "Ontogeny", 
-             ylab          = "TDI" )
+PlotSignature( ExpressionSet = DivergenceExpressionSetExample,
+               measure       = "TDI",
+               TestStatistic = "FlatLineTest",
+               xlab          = "Ontogeny", 
+               ylab          = "TDI" )
 ```
 
 Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo development into three modules:
@@ -484,13 +484,12 @@ Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo develop
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
 # Test Statistic : Reductive Hourglass Test
-PlotPattern( ExpressionSet = DivergenceExpressionSetExample, 
-             TestStatistic = "ReductiveHourglassTest",
-             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TDI" )
+PlotSignature( ExpressionSet = DivergenceExpressionSetExample,
+               measure       = "TDI",
+               TestStatistic = "ReductiveHourglassTest",
+               modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+               xlab          = "Ontogeny", 
+               ylab          = "TDI" )
 ```
 
 
@@ -503,13 +502,12 @@ And for the __EarlyConservationTest__ we again divide _A. thaliana_ embryo devel
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
 # Test Statistic : Reductive Early Conservation Test
-PlotPattern( ExpressionSet = DivergenceExpressionSetExample, 
-             TestStatistic = "EarlyConservationTest",
-             modules       = list(early = 1:2, mid = 3:5, late = 6:7),
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TDI" )
+PlotSignature( ExpressionSet = DivergenceExpressionSetExample,
+               measure       = "TDI",
+               TestStatistic = "EarlyConservationTest",
+               modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+               xlab          = "Ontogeny", 
+               ylab          = "TDI" )
 ```
 
 
@@ -529,7 +527,7 @@ TDI(DivergenceExpressionSetExample)
 ### `Phylostratum` or `Divergence Stratum` specific contribution to the global transcriptome index profile
 
 Another way to visualize the cumulative contribution of each `Phylostratum` or `Divergence Stratum` to the global Transcriptome Age Index or Transcriptome Divergence Index profile was introduced by Domazet-Loso and Tautz, 2010 (Fig. 1b). The advantage of visualizing the cumulative contribution of each `Phylostratum` or `Divergence Stratum` to the global pattern is to study how the final (global) TAI or TDI
-profile emerges from the cumulative distribution of each `Phylostratum` or `Divergence Stratum`. This `Phylostratum` or `Divergence Stratum` specific contribution on the global TAI or TDI pattern can be visualized using `PlotContribution()`:
+profile emerges from the cumulative TAI/TDI distribution of each `Phylostratum` or `Divergence Stratum`. This `Phylostratum` or `Divergence Stratum` specific contribution on the global TAI or TDI pattern can be visualized using `PlotContribution()`:
 
 #### Example: `Phylostrata`
 
@@ -537,9 +535,13 @@ profile emerges from the cumulative distribution of each `Phylostratum` or `Dive
 # visualize phylostrata contribution to the global TAI pattern
  PlotContribution( ExpressionSet = PhyloExpressionSetExample,
                    legendName    = "PS",
-                   lwd           = 6,
-                   cex           = 0.5)
+                   xlab           = "Ontogeny",
+                   ylab           = "Transcriptome Age Index",
+                   y.ticks        = 10)
 ```
+
+The `y.ticks` argument allows users to to adjust the number of ticks that shall be visualized on
+the y-axis.
 
 The exact values of the `Phylostratum` specific cumulative TAI profiles can be obtained
 using the `pTAI()` function:
@@ -620,25 +622,21 @@ This can be explained by the definition of the TAI. Here the sum of all
 partial TAI values over all `Phylostrata` is equals the global TAI values:
 
 ```{r,eval = FALSE}
-
 # show that the colSum() of partial TAI values
 # over all Phylostrata equals the global TAI() values
 apply(pStrata(PhyloExpressionSetExample) , 2 , sum)
 
 # >  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
 # > 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334
-
 ```
 
 Now, the `PlotContribution()` only differs from `apply(pStrata(PhyloExpressionSetExample) , 2 , sum)` by exchanging the `sum()` by `cumsum()`.
 
 
 ```{r,eval = FALSE}
-
 # show that apply(pStrata(PhyloExpressionSetExample) , 2 , cumsum)
 # is equivalent to pTAI()
 apply(pStrata(PhyloExpressionSetExample) , 2 , cumsum)
-
 ```
 
 ```
@@ -658,7 +656,6 @@ apply(pStrata(PhyloExpressionSetExample) , 2 , cumsum)
 ```
 
 ```{r,eval = FALSE}
-
 pTAI(PhyloExpressionSetExample)
 ```
 
@@ -729,15 +726,11 @@ Analogously, `pStrata()` and `pMatrix()` can be used for `Divergence Strata` by 
 
 ### Mean Expression and Relative Expression of Single Phylostrata or Divergence Strata
 
-
-
 __TAI__ or __TDI__ patterns are very useful to gain a first insight into the mean transcriptome age or mean sequence divergence of genes being most active during the corresponding developmental stage or experiment.
 
 To further investigate the origins of the global __TAI__ or __TDI__ pattern it is useful to visualize the mean gene expression of each Phylostratum or Divergence-Stratum class.
 
 ### Mean Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
-
-
 
 Visualizing the mean gene expression of genes corresponding to the same Phylostratum or Divergence Stratum class allows users to detect biological process specific groups of Phylostrata or Divergence Strata that are most expressed during the underlying biological process. This might lead to correlating specific groups of Phylostrata or Divergence Strata sharing similar evolutionary origins with common functions or functional contributions to a specific developmental process. 
 
