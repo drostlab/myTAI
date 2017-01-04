@@ -188,7 +188,9 @@ PlotCategoryExpr <- function(ExpressionSet,
                         # perform a Kruskal Test to detect stages of significant PS or DS variation using BH adjusted p-values
                         
                         if (log.expr){
-                                p_stage.cetered <- stats::p.adjust(as.numeric(age.apply(tf(ExpressionSet,log2), function(x) format(stats::kruskal.test(data.frame(x))$p.value,digits = 3))), method = "BH")       
+                                p_stage.cetered <-
+                                        stats::p.adjust(as.numeric(age.apply(tf(ExpressionSet, log2), function(x)
+                                                format(stats::kruskal.test(data.frame(x))$p.value, digits = 3))), method = "BH")       
                         }
                         
                         else if (!log.expr){
