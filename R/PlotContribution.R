@@ -34,8 +34,7 @@ PlotContribution <- function(ExpressionSet,
                              xlab = "Ontogeny",
                              ylab = "Transcriptome Index",
                              main = "",
-                             digits.ylab = 10,
-                             y.ticks     = 5){
+                             y.ticks     = 10){
         
         if(is.null(legendName))
                 stop("Please specify whether your input ExpressionSet stores 'PS' or 'DS'.")
