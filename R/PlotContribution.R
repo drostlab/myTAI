@@ -1,14 +1,11 @@
-#' @title Plot the Phylostratum or Divergence Stratum Contribution to the Global Pattern
+#' @title Plot Cumuative Transcriptome Index
 #' @description This function computes the cumulative contribution of each Phylostratum or Divergence Stratum to the global \code{\link{TAI}} or \code{\link{TDI}} profile.
-#' 
-#' 
-#' 
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
-#' @param colors a character vector specifying the colors that should be used for each Phylostratum/Divergence Stratum. Default: \code{colors = NULL}, meaning that default colors are used.
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.
-#' @param digits.ylab a numeric value specifying the number of digits shown for the TAI or TDI values on the y-axis.
+#' @param xlab label of x-axis.
+#' @param ylab label of y-axis.
+#' @param main main title.
 #' @param y.ticks a numeric value specifying the number of ticks to be drawn on the y-axis.
-#' @param ... additional \code{\link{plot}} parameters.
 #' @details
 #' Introduced by Domazet-Loso and Tautz (2010), this function allows users to visualize the cumulative contribution of each Phylostratum or Divergence Stratum to the global Transcriptome Age Index or Transcriptome Divergence Index profile to quantify how each Phylostratum or Divergence Stratum influences the profile of the global TAI or TDI pattern. 
 #' 
@@ -28,14 +25,17 @@
 #' 
 #' Domazet-Loso T. and Tautz D. (2010). A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns. Nature (468): 815-818.
 #'    
-#' @seealso \code{\link{pTAI}}, \code{\link{pTDI}}, \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{PlotPattern}}
+#' @seealso \code{\link{pTAI}}, \code{\link{pTDI}}, \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{PlotSignature}}
 #' @export         
 
 PlotContribution <- function(ExpressionSet, 
                              colors      = NULL, 
-                             legendName  = NULL, 
-                             digits.ylab = 3,
-                             y.ticks     = 5, ...){
+                             legendName  = NULL,
+                             xlab = "Ontogeny",
+                             ylab = "Transcriptome Index",
+                             main = "",
+                             digits.ylab = 10,
+                             y.ticks     = 5){
         
         if(is.null(legendName))
                 stop("Please specify whether your input ExpressionSet stores 'PS' or 'DS'.")
@@ -44,64 +44,71 @@ PlotContribution <- function(ExpressionSet,
         
         ncols <- ncol(ExpressionSet)
         nPS <- length(table(ExpressionSet[ , 1]))
-                
-        if(is.null(colors)){
-                
-                colos <- re.colors(nPS)
-                
-        } 
-        else if (!is.null(colors)) {
-                if(length(colors) != nPS)
-                        stop("The number of colors and number of PS/DS do not match...")
-                
-                colos <- colors
-        }
         
         # define contribution matrix
         contrMatrix <- matrix(NA_real_,ncol = ncols,nrow = nPS)
         contrMatrix <- pTAI(ExpressionSet)
-        
-        ylim.range <- range(0,max(contrMatrix) + (max(contrMatrix)/5)) 
-        
-        # define arguments for different graphics functions
-        plot.args <- c("type","lwd","col","cex.lab","main","xlab","ylab")
-        axis.args <- c("las", "cex.axis")
-        legend.args <- c("border","angle","density","box.lwd","cex")
-        dots <- list(...)
-        ellipsis.names <- names(dots)
-                
-        if((length(ellipsis.names[grep("ylab",ellipsis.names)]) > 0) || (length(ellipsis.names[grep("xlab",ellipsis.names)]) > 0)){
-                
-                do.call(graphics::matplot,c(list(x = t(contrMatrix), ylim = ylim.range, type = "l",lty = 1,col = colos, axes = FALSE), 
-                                                 dots[!is.element(names(dots),c(axis.args,legend.args))]))
-                }
-                
-                # default: xlab = "Ontogeny" and ylab = "Age Index"
-                else {
-                        if (legendName == "PS"){
-                                do.call(graphics::matplot,c(list(x = t(contrMatrix),ylim = ylim.range, type = "l",lty = 1,col = colos,axes = FALSE, 
-                                                              xlab = "Ontogeny",ylab = "Transcriptome Age Index" ), dots[!is.element(names(dots),c(axis.args,legend.args))]))  
-                        }
-                        
-                        else if (legendName == "DS"){
-                                do.call(graphics::matplot,c(list(x = t(contrMatrix),ylim = ylim.range, type = "l",lty = 1,col = colos, axes = FALSE, 
-                                                              xlab = "Ontogeny",ylab = "Transcriptome Divergence Index" ), dots[!is.element(names(dots),c(axis.args,legend.args))])) 
-                                
-                        }
-                        
-                }
-                
-                do.call(graphics::axis,c(list(side = 1,at = 1:(ncols-2),
-                                              labels = names(ExpressionSet)[3:ncols]),dots[!is.element(names(dots),c(plot.args,legend.args))]))
-                
-                do.call(graphics::axis,c(list(side = 2,at = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab),
-                                              labels = format(seq(ylim.range[1],ylim.range[2],length.out = y.ticks),digits = digits.ylab)), 
-                                         dots[!is.element(names(dots),c(plot.args,legend.args))]))
-                
-                do.call(graphics::legend,c(list(x = "top",bty = "n",legend = paste0(legendName,1:nPS),fill = colos, ncol = floor(nPS/2)),
-                                           dots[!is.element(names(dots),c(plot.args,axis.args))]))
-                
 
+        if (legendName == "PS") {
+                
+                contrMatrix <- data.frame(PS = paste0("PS",1:nrow(contrMatrix)),contrMatrix, 
+                                          stringsAsFactors = FALSE)
+                contrMatrix <- tibble::as_tibble(contrMatrix)
+                contrMatrix <- reshape2::melt(contrMatrix, id.vars = "PS")
+                colnames(contrMatrix)[2:3] <- c("stage", "par_value")
+                
+                p <- ggplot2::ggplot(contrMatrix, ggplot2::aes( factor(stage, levels = unique(stage)), par_value, group = PS, fill = factor(PS, levels = paste0("PS",1:nrow(contrMatrix))))) + 
+                        ggplot2::geom_line(ggplot2::aes(color = factor(PS, levels = paste0("PS",1:nrow(contrMatrix)))), size = 3) +
+                        ggplot2::labs(x = xlab, y = ylab, title = main, colour = "PS") +
+                        ggplot2::theme_minimal() +
+                        ggplot2::theme(
+                                title            = ggplot2::element_text(size = 18, face = "bold"),
+                                legend.title     = ggplot2::element_text(size = 14, face = "bold"),
+                                legend.text      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.title       = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.y      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.x      = ggplot2::element_text(size = 18, face = "bold"),
+                                panel.background = ggplot2::element_blank(),
+                                strip.text.x     = ggplot2::element_text(
+                                        size           = 18,
+                                        colour         = "black",
+                                        face           = "bold"
+                                )
+                        ) +
+                        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
+        }
+        
+        
+        if (legendName == "DS") {
+                
+                contrMatrix <- data.frame(DS = paste0("DS",1:nrow(contrMatrix)),contrMatrix, 
+                                          stringsAsFactors = FALSE)
+                contrMatrix <- tibble::as_tibble(contrMatrix)
+                contrMatrix <- reshape2::melt(contrMatrix, id.vars = "DS")
+                colnames(contrMatrix)[2:3] <- c("stage", "par_value")
+                
+                p <- ggplot2::ggplot(contrMatrix, ggplot2::aes( factor(stage, levels = unique(stage)), par_value, group = DS, fill = factor(DS, levels = paste0("DS",1:nrow(contrMatrix))))) + 
+                        ggplot2::geom_line(ggplot2::aes(color = factor(DS, levels = paste0("DS",1:nrow(contrMatrix)))), size = 3) +
+                        ggplot2::labs(x = xlab, y = ylab, title = main, colour = "DS") +
+                        ggplot2::theme_minimal() +
+                        ggplot2::theme(
+                                title            = ggplot2::element_text(size = 18, face = "bold"),
+                                legend.title     = ggplot2::element_text(size = 14, face = "bold"),
+                                legend.text      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.title       = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.y      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.x      = ggplot2::element_text(size = 18, face = "bold"),
+                                panel.background = ggplot2::element_blank(),
+                                strip.text.x     = ggplot2::element_text(
+                                        size           = 18,
+                                        colour         = "black",
+                                        face           = "bold"
+                                )
+                        ) +
+                        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
+        }
+        
+        print(p)
 }
 
 
