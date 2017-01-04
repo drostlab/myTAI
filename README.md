@@ -99,7 +99,6 @@ browseVignettes("myTAI")
  
  # open tutorial: Taxonomic Information Retrieval with myTAI
  vignette("Taxonomy", package = "myTAI")
- 
 ```
 
 In the `myTAI` framework users can find:
@@ -108,6 +107,7 @@ In the `myTAI` framework users can find:
 
 * `TAI()` : Function to compute the Transcriptome Age Index (TAI)
 * `TDI()` : Function to compute the Transcriptome Divergence Index (TDI)
+* `TPI()` : Function to compute the Transcriptome Polymorphism Index (TPI)
 * `REMatrix()` : Function to compute the relative expression profiles of all phylostrata or divergence-strata
 * `RE()` : Function to transform mean expression levels to relative expression levels
 * `pTAI()` : Compute the Phylostratum Contribution to the global TAI
@@ -117,14 +117,14 @@ In the `myTAI` framework users can find:
 
 #### Visualization and Analytics Tools:
 
-* `PlotSignature()` : Plot evolutionary signatures across transcriptomes
-* `PlotPattern()` : Function to plot the TAI or TDI profiles and perform statistical tests
+* `PlotSignature()` : Main visualization function to plot evolutionary signatures across transcriptomes
+* `PlotPattern()` : Base graphics function to plot evolutionary signatures across transcriptomes
+* `PlotContribution()` : Plot Cumuative Transcriptome Index
 * `PlotCorrelation()` : Function to plot the correlation between phylostratum values and divergence-stratum values
 * `PlotRE()` : Function to plot the relative expression profiles
 * `PlotBarRE()` : Function to plot the mean relative expression levels of phylostratum or divergence-stratum classes as barplot
 * `PlotMeans()` : Function to plot the mean expression profiles of phylostrata or divergence-strata
 * `PlotDistribution()` : Function to plot the frequency distribution of genes within the corresponding phylostratigraphic map or divergence map
-* `PlotContribution()` : Plot the Phylostratum or Divergence Stratum Contribution to the Global TAI/TDI Pattern
 * `PlotEnrichment()` : Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set
 * `PlotGeneSet()` : Plot the Expression Profiles of a Gene Set
 * `PlotCategoryExpr()` : Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
