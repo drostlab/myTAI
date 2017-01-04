@@ -6,7 +6,7 @@
 \usage{
 PlotContribution(ExpressionSet, colors = NULL, legendName = NULL,
   xlab = "Ontogeny", ylab = "Transcriptome Index", main = "",
-  digits.ylab = 10, y.ticks = 5)
+  y.ticks = 10)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
