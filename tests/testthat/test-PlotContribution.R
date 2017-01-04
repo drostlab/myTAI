@@ -5,6 +5,17 @@ data(DivergenceExpressionSetExample)
 
 nonStandardExpressionSet <- PhyloExpressionSetExample[ , 2:9] 
 
+
+test_that("PlotContribution() works properly with PhyloExpressionSet input...",{
+        
+        expect_silent(PlotContribution(PhyloExpressionSetExample, legendName = "PS"))
+})
+
+test_that("PlotContribution() works properly with DivergenceExpressionSet input...",{
+        
+        expect_silent(PlotContribution(DivergenceExpressionSetExample, legendName = "DS"))
+})
+
 test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to PlotContribution()",{
         expect_error(PlotContribution(nonStandardExpressionSet, legendName = "PS"),"The present input object does not fulfill the ExpressionSet standard.")
 })
