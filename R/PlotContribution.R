@@ -29,7 +29,6 @@
 #' @export         
 
 PlotContribution <- function(ExpressionSet, 
-                             colors      = NULL, 
                              legendName  = NULL,
                              xlab = "Ontogeny",
                              ylab = "Transcriptome Index",
@@ -38,6 +37,8 @@ PlotContribution <- function(ExpressionSet,
         
         if(is.null(legendName))
                 stop("Please specify whether your input ExpressionSet stores 'PS' or 'DS'.")
+        
+        DS <- par_value <-  PS <- stage <- NULL
         
         is.ExpressionSet(ExpressionSet)
         
