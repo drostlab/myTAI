@@ -47,6 +47,7 @@ test_that("MatchMap works properly when duplicates are removed via remove.duplic
 }) 
 
 test_that("MatchMap works properly when duplicates in ExpressionMatrix are accumulated via accumulate = max",{
+        TestMap <- PhyloExpressionSetExample[c(243,2456,6891,14819,21205), 1:2]
         
         MM <- MatchMap(TestMap,PhyloExpressionSetExample[c(243,2456,243,6891,14819,21205,14819), 2:9], accumulate = max)
         IJ <- dplyr::inner_join(TestMap,TestExpressionSet,by = "GeneID")
