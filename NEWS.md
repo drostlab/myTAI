@@ -16,6 +16,14 @@ myTAI 0.5.0
 
 - `MatchMap()` is now based on `dplyr::inner_join()` to match age category table with and gene expression dataset
 
+- `PlotCorrelation()` has been extended and optimized for producing high publication quality plots  
+
+### Vignettes
+
+- In `Introduction` vignette: add new ggplot2 based examples
+
+ 
+ 
 myTAI 0.4.0
 ===========
 
