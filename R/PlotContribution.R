@@ -75,7 +75,8 @@ PlotContribution <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) +
-                        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
+                        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) + 
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(contrMatrix)))
         }
         
         
@@ -105,7 +106,8 @@ PlotContribution <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) +
-                        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
+                        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) + 
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(contrMatrix)))
         }
         
         print(p)
