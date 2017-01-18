@@ -20,7 +20,7 @@
 #' @param ylab label of y-axis.
 #' @param main figure title.
 #' @param lwd line width.
-#' @param alpha transparency of the shaded area. Default is \code{alpha = 0.1}.
+#' @param alpha transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.
 #' @param y.ticks number of ticks on the y-axis. Default is \code{ticks = 10}.
 #' @author Hajk-Georg Drost
 #' @details 
