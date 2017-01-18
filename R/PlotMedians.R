@@ -34,14 +34,14 @@
 #' data(DivergenceExpressionSetExample)
 #'
 #' # plot evolutionary old PS (PS1-3) vs evolutionary young PS (PS4-12)
-#' PlotMedian(PhyloExpressionSetExample,
+#' PlotMedians(PhyloExpressionSetExample,
 #'           Groups = list(c(1:3), c(4:12)), 
 #'           legendName = "PS",
 #'           adjust.range = TRUE)
 #'
 #' # if users wish to not adjust the y-axis scale when 
 #' # 2 groups are selected they can specify: adjust.range = FALSE
-#' PlotMedian(PhyloExpressionSetExample,
+#' PlotMedians(PhyloExpressionSetExample,
 #'           Groups = list(c(1:3), c(4:12)), 
 #'           legendName = "PS",
 #'           adjust.range = FALSE)
@@ -50,7 +50,7 @@
 #' # plot conserved DS (DS1-5) vs divergent DS (PS6-10)
 #' # NOTE: DS are always defined in the range 1, 2, ... , 10.
 #' # Hence, make sure that your groups are within this range!
-#' PlotMedian(DivergenceExpressionSetExample,
+#' PlotMedians(DivergenceExpressionSetExample,
 #'           Groups = list(c(1:5), c(6:10)), 
 #'           legendName = "DS",
 #'           adjust.range = TRUE)
@@ -128,11 +128,6 @@ PlotMedians <- function(ExpressionSet,
                 mMatrixGroup1 <- dplyr::filter(mMatrix, age %in% Groups[[1]])
                 mMatrixGroup2 <- dplyr::filter(mMatrix, age %in% Groups[[2]])
                 
-                getColors <- function(n) {
-                        h <- seq(15, 375, length = n + 1)
-                        return(grDevices::hcl(h = h, l = 65, c = 100)[1:n])
-                }
-                
                 p1 <- ggplot2::ggplot(mMatrixGroup1, ggplot2::aes( factor(stage, levels = unique(stage)), expr, group = age, fill = factor(age, levels = age_names[Groups[[1]]]))) + 
                         ggplot2::geom_line(ggplot2::aes(color = factor(age, levels = age_names[Groups[[1]]])), size = 3) +
                         ggplot2::labs(x = xlab, y = ylab, title = main, colour = legendName) +
@@ -151,7 +146,9 @@ PlotMedians <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) +
-                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[1]]])
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[1]]]) +
+                        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0))
+                
                 if (!adjust.range) {
                         
                         p1 <- p1 + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
@@ -175,7 +172,9 @@ PlotMedians <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) + 
-                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[2]]])
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[2]]]) +
+                        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0))
+                
                 
                 if (!adjust.range) {
                         
