@@ -45,7 +45,7 @@ be drawn for the developmental stages defined to be the presumptive phylotypic p
 
 \item{lwd}{line width.}
 
-\item{alpha}{transparency of the shaded area. Default is \code{alpha = 0.1}.}
+\item{alpha}{transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.}
 
 \item{y.ticks}{number of ticks on the y-axis. Default is \code{ticks = 10}.}
 }
