@@ -5,12 +5,18 @@
 #' For ex. evolutionary users can compare old phylostrata: PS1-3 (Class 1) and evolutionary young phylostrata: PS4-12 (Class 2). 
 #' In this example, the list could be assigned as, \code{Groups = list(c(1:3), c(4:12))}. 
 #' The group options is limited to 2 Groups.
+#' @param modules a list storing three elements for specifying the modules: early, mid, and late. 
+#' Each element expects a numeric vector specifying the developmental stages 
+#' or experiments that correspond to each module. For example, 
+#' \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules. Default is \code{modules = NULL}. 
+#' But if specified, a shaded are will be drawn to illustrate stages corresponding to the mid module.
 #' @param legendName a character string specifying the legend title.
 #' @param xlab label of x-axis.
 #' @param ylab label of y-axis.
 #' @param main main text.
 #' @param y.ticks number of ticks that shall be drawn on the y-axis.
 #' @param adjust.range logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is \code{adjust.range = TRUE}.
+#' @param alpha transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.
 #' @details 
 #' 
 #' This plot may be useful to compare the absolute mean expression        
@@ -59,15 +65,19 @@
 
 PlotMeans <- function(ExpressionSet,
                       Groups     = NULL,
+                      modules    = NULL,
                       legendName = "age",
                       xlab = "Ontogeny",
                       ylab = "Mean Expression Level",
                       main = "",
                       y.ticks = 10,
-                      adjust.range = TRUE)
+                      adjust.range = TRUE,
+                      alpha = 0.008)
 {
         
         is.ExpressionSet(ExpressionSet)
+        
+        stage <- expr <- age <- NULL
         
         if(is.null(Groups))
                 stop("Your Groups list does not store any items.", call. = FALSE)
@@ -120,6 +130,15 @@ PlotMeans <- function(ExpressionSet,
                         ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) + 
                         ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))) 
                 
+                
+                if (!is.null(modules)) {
+                        p <- p + ggplot2::geom_rect(data = mMatrix,ggplot2::aes(
+                                        xmin = modules[[2]][1],
+                                        xmax = modules[[2]][length(modules[[2]])],
+                                        ymin = min(MeanValsMatrix) - (min(MeanValsMatrix) / 50),
+                                        ymax = Inf), fill = "#4d004b", alpha = alpha)  
+                }
+                
                 return(p)
         }
         
@@ -153,6 +172,14 @@ PlotMeans <- function(ExpressionSet,
                         p1 <- p1 + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
                 }
                 
+                if (!is.null(modules)) {
+                        p1 <- p1 + ggplot2::geom_rect(data = mMatrixGroup1, ggplot2::aes(
+                                xmin = modules[[2]][1],
+                                xmax = modules[[2]][length(modules[[2]])],
+                                ymin = min(MeanValsMatrix),
+                                ymax = Inf), fill = "#4d004b", alpha = alpha)  
+                }
+                
                 p2 <- ggplot2::ggplot(mMatrixGroup2, ggplot2::aes( factor(stage, levels = unique(stage)), expr, group = age, fill = factor(age, levels = age_names[Groups[[2]]]))) + 
                         ggplot2::geom_line(ggplot2::aes(color = factor(age, levels = age_names[Groups[[2]]])), size = 3) +
                         ggplot2::labs(x = xlab, y = ylab, title = main, colour = legendName) +
@@ -179,13 +206,21 @@ PlotMeans <- function(ExpressionSet,
                         p2 <- p2 + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) 
                 }
                         
-                
+        
                 if (adjust.range){
                         p1 <- p1 + ggplot2::scale_y_continuous(limits = c(min(MeanValsMatrix), max(MeanValsMatrix)), breaks = scales::pretty_breaks(n = y.ticks))
 
                         p2 <- p2 + ggplot2::scale_y_continuous(limits = c(min(MeanValsMatrix), max(MeanValsMatrix)), breaks = scales::pretty_breaks(n = y.ticks))    
                 }
 
+                if (!is.null(modules)) {
+                        p2 <- p2 + ggplot2::geom_rect(data = mMatrixGroup2,ggplot2::aes(
+                                xmin = modules[[2]][1],
+                                xmax = modules[[2]][length(modules[[2]])],
+                                ymin = min(MeanValsMatrix),
+                                ymax = Inf), fill = "#4d004b", alpha = alpha)  
+                }
+                
                 return(gridExtra::grid.arrange(p1, p2, ncol = 2))
         }
 }
