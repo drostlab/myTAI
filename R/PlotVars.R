@@ -151,7 +151,9 @@ PlotVars <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) +
-                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[1]]])
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[1]]]) +
+                        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0))
+                
                 if (!adjust.range) {
                         
                         p1 <- p1 + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
@@ -175,7 +177,8 @@ PlotVars <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) + 
-                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[2]]])
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[2]]]) +
+                        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0))
                 
                 if (!adjust.range) {
                         
