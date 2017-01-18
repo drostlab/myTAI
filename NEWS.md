@@ -23,6 +23,8 @@ myTAI 0.5.0
 
 - `PlotMeans()` is now based on ggplot2 and lost all base graphics arguments.
 
+- `PlotRE()` is now based on ggplot2 and lost all base graphics arguments.
+
 ### Vignettes
 
 - In `Introduction` vignette: add new ggplot2 based examples
