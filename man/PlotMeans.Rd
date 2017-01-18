@@ -4,9 +4,9 @@
 \alias{PlotMeans}
 \title{Plot the Mean Expression Profiles}
 \usage{
-PlotMeans(ExpressionSet, Groups = NULL, legendName = "age",
-  xlab = "Ontogeny", ylab = "Mean Expression Level", main = "",
-  y.ticks = 10, adjust.range = TRUE)
+PlotMeans(ExpressionSet, Groups = NULL, modules = NULL,
+  legendName = "age", xlab = "Ontogeny", ylab = "Mean Expression Level",
+  main = "", y.ticks = 10, adjust.range = TRUE, alpha = 0.008)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -15,6 +15,12 @@ PlotMeans(ExpressionSet, Groups = NULL, legendName = "age",
 For ex. evolutionary users can compare old phylostrata: PS1-3 (Class 1) and evolutionary young phylostrata: PS4-12 (Class 2). 
 In this example, the list could be assigned as, \code{Groups = list(c(1:3), c(4:12))}. 
 The group options is limited to 2 Groups.}
+
+\item{modules}{a list storing three elements for specifying the modules: early, mid, and late. 
+Each element expects a numeric vector specifying the developmental stages 
+or experiments that correspond to each module. For example, 
+\code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules. Default is \code{modules = NULL}. 
+But if specified, a shaded are will be drawn to illustrate stages corresponding to the mid module.}
 
 \item{legendName}{a character string specifying the legend title.}
 
@@ -27,6 +33,8 @@ The group options is limited to 2 Groups.}
 \item{y.ticks}{number of ticks that shall be drawn on the y-axis.}
 
 \item{adjust.range}{logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is \code{adjust.range = TRUE}.}
+
+\item{alpha}{transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.}
 }
 \value{
 a plot showing mean expression profiles of each age category.
