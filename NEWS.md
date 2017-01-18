@@ -7,6 +7,9 @@ myTAI 0.5.0
 
 - new function `TPI()` allows users to compute the Transcriptome Polymorphism Index introduced by [Gossmann et al., 2015](http://mbe.oxfordjournals.org/content/33/7/1669).
 
+- new function `PlotMedians()` allows users to compute and visualize the median expression of all age categories
+
+- new function `PlotVars()` allows users to compute and visualize the expression variance of all age categories
 
 ### Updates
 
