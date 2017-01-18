@@ -69,6 +69,8 @@ PlotMedians <- function(ExpressionSet,
         
         is.ExpressionSet(ExpressionSet)
         
+        stage <- expr <- age <- NULL
+        
         if(is.null(Groups))
                 stop("Your Groups list does not store any items.", call. = FALSE)
         
@@ -92,7 +94,7 @@ PlotMedians <- function(ExpressionSet,
         rownames(MeanValsMatrix) <- age_names
         colnames(MeanValsMatrix) <- names(ExpressionSet)[3:nCols]
         
-        MeanValsMatrix <- age.apply(ExpressionSet, function(x) apply(x, 2, median))
+        MeanValsMatrix <- age.apply(ExpressionSet, function(x) apply(x, 2, stats::median))
         mean.age <- data.frame(age = age_names, MeanValsMatrix, stringsAsFactors = FALSE)
         mMatrix <- tibble::as_tibble(reshape2::melt(mean.age, id.vars = "age"))
         colnames(mMatrix)[2:3] <- c("stage", "expr")
