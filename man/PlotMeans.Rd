@@ -2,39 +2,41 @@
 % Please edit documentation in R/PlotMeans.R
 \name{PlotMeans}
 \alias{PlotMeans}
-\title{Plot the Mean Expression Profiles of Phylostrata or Divergence Strata}
+\title{Plot the Mean Expression Profiles}
 \usage{
-PlotMeans(ExpressionSet, Groups = NULL, legendName = NULL, colors = NULL,
-  ...)
+PlotMeans(ExpressionSet, Groups = NULL, legendName = "age",
+  xlab = "Ontogeny", ylab = "Mean Expression Level", main = "",
+  y.ticks = 10, adjust.range = TRUE)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{Groups}{a list containing the phylostrata or divergence-strata that correspond to the same phylostratum class or divergence class.
-For ex. evolutionary old phylostrata: PS1-3 (Class 1) and evolutionary young phylostrata: PS4-12 (Class 2). 
-In this case, the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)). 
-It is also possible to define more than 2 groups of evolutionary ages.
-For ex. \code{Groups} = list(c(1:3),c(4:8),c(9:12)).}
+\item{Groups}{a list containing the age categories for which mean expression levels shall be drawn.
+For ex. evolutionary users can compare old phylostrata: PS1-3 (Class 1) and evolutionary young phylostrata: PS4-12 (Class 2). 
+In this example, the list could be assigned as, \code{Groups = list(c(1:3), c(4:12))}. 
+The group options is limited to 2 Groups.}
 
-\item{legendName}{a character string specifying whether "PS" or "DS" are used.}
+\item{legendName}{a character string specifying the legend title.}
 
-\item{colors}{colors for mean expression profiles. Default: \code{colors = NULL}, hence default colours are used.}
+\item{xlab}{label of x-axis.}
 
-\item{\dots}{default graphics parameters.}
+\item{ylab}{label of y-axis.}
+
+\item{main}{main text.}
+
+\item{y.ticks}{number of ticks that shall be drawn on the y-axis.}
+
+\item{adjust.range}{logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is \code{adjust.range = TRUE}.}
 }
 \value{
-a plot showing mean expression profiles of 
-phylostrata or divergence-strata corresponding to the same phylostratum
-class or divergence class.
+a plot showing mean expression profiles of each age category.
 }
 \description{
-This function computes for each phylostratum or divergence-stratum the corresponding mean expression profile
-and plots the profiles in N different windows corresponding to the given Phylostratum-Classes
-that shall be compared.
+This function computes for each age category the corresponding mean expression profile.
 }
 \details{
 This plot may be useful to compare the absolute mean expression        
-levels of each phylostratum or divergence-stratum class.
+levels of each age category across stages.
 
 In different developmental processes different phylostratum or divergence-stratum
 classes might be more expressed than others, hence contributing more to the overall
@@ -43,7 +45,8 @@ This plot can help to identify the phylostratum or divergence-stratum classes
 that contributes most to the overall transcriptome of the given developmental process.
 }
 \examples{
-
+### Example using a PhyloExpressionSet
+### and DivergenceExpressionSet
 # load PhyloExpressionSet
 data(PhyloExpressionSetExample)
 
@@ -51,26 +54,27 @@ data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
 
 # plot evolutionary old PS (PS1-3) vs evolutionary young PS (PS4-12)
-PlotMeans(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), 
-          legendName = "PS", lty = 1, lwd = 5)
+PlotMeans(PhyloExpressionSetExample,
+          Groups = list(c(1:3), c(4:12)), 
+          legendName = "PS",
+          adjust.range = TRUE)
 
+# if users wish to not adjust the y-axis scale when 
+# 2 groups are selected they can specify: adjust.range = FALSE
+PlotMeans(PhyloExpressionSetExample,
+          Groups = list(c(1:3), c(4:12)), 
+          legendName = "PS",
+          adjust.range = FALSE)
+          
+          
 # plot conserved DS (DS1-5) vs divergent DS (PS6-10)
 # NOTE: DS are always defined in the range 1, 2, ... , 10.
 # Hence, make sure that your groups are within this range!
-PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), 
-          legendName = "DS", lty = 1, lwd = 5)
+PlotMeans(DivergenceExpressionSetExample,
+          Groups = list(c(1:5), c(6:10)), 
+          legendName = "DS",
+          adjust.range = TRUE)
 
-
-# adding custom colors for relative expression levels:
-# -> colors should be ordered by PS/DS starting with PS1,2,3...
-PlotMeans(PhyloExpressionSetExample,
-       Groups     = list(c(1:3), c(4:12)), 
-       legendName = "PS",
-       colors     = c("black","red","green","brown","darkmagenta",
-       "blue","darkred","darkblue","darkgreen", "orange",
-       "azure4","gold4"), 
-       lty        = 1, 
-       lwd        = 5)
 }
 \author{
 Hajk-Georg Drost
