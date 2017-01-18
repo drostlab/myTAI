@@ -123,11 +123,13 @@ In the `myTAI` framework users can find:
 * `PlotCorrelation()` : Function to plot the correlation between phylostratum values and divergence-stratum values
 * `PlotRE()` : Function to plot the relative expression profiles
 * `PlotBarRE()` : Function to plot the mean relative expression levels of phylostratum or divergence-stratum classes as barplot
-* `PlotMeans()` : Function to plot the mean expression profiles of phylostrata or divergence-strata
-* `PlotDistribution()` : Function to plot the frequency distribution of genes within the corresponding phylostratigraphic map or divergence map
+* `PlotMeans()` : Function to plot the mean expression profiles of age categories
+* `PlotMedians()` : Function to plot the median expression profiles of age categories
+* `PlotVars()` : Function to plot the expression variance profiles of age categories
+* `PlotDistribution()` : Function to plot the frequency distribution of genes within the corresponding age categories
+* `PlotCategoryExpr()` : Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
 * `PlotEnrichment()` : Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set
 * `PlotGeneSet()` : Plot the Expression Profiles of a Gene Set
-* `PlotCategoryExpr()` : Plot the Expression Levels of each Age or Divergence Category as Barplot or Violinplot
 * `PlotGroupDiffs()` : Plot the significant differences between gene expression distributions of PS or DS groups
 * `PlotSelectedAgeDistr()` : Plot the PS or DS distribution of a selected set of genes
 
