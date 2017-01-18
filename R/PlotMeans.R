@@ -118,7 +118,7 @@ PlotMeans <- function(ExpressionSet,
                                 )
                         ) +
                         ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) + 
-                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix)))
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))) 
                 
                 return(p)
         }
@@ -127,12 +127,7 @@ PlotMeans <- function(ExpressionSet,
                 
                 mMatrixGroup1 <- dplyr::filter(mMatrix, age %in% Groups[[1]])
                 mMatrixGroup2 <- dplyr::filter(mMatrix, age %in% Groups[[2]])
-                
-                getColors <- function(n) {
-                        h <- seq(15, 375, length = n + 1)
-                        return(grDevices::hcl(h = h, l = 65, c = 100)[1:n])
-                }
-                
+               
                 p1 <- ggplot2::ggplot(mMatrixGroup1, ggplot2::aes( factor(stage, levels = unique(stage)), expr, group = age, fill = factor(age, levels = age_names[Groups[[1]]]))) + 
                         ggplot2::geom_line(ggplot2::aes(color = factor(age, levels = age_names[Groups[[1]]])), size = 3) +
                         ggplot2::labs(x = xlab, y = ylab, title = main, colour = legendName) +
@@ -151,7 +146,8 @@ PlotMeans <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) +
-                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[1]]])
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[1]]]) +
+                        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0))
                 if (!adjust.range) {
                         
                         p1 <- p1 + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
@@ -175,7 +171,8 @@ PlotMeans <- function(ExpressionSet,
                                         face           = "bold"
                                 )
                         ) + 
-                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[2]]])
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[2]]]) +
+                        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = -90, hjust = 0))
                 
                 if (!adjust.range) {
                         
