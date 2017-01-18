@@ -1,33 +1,32 @@
-#' @title Plot the Mean Expression Profiles of Phylostrata or Divergence Strata
-#' @description This function computes for each phylostratum or divergence-stratum the corresponding mean expression profile
-#' and plots the profiles in N different windows corresponding to the given Phylostratum-Classes
-#' that shall be compared.
+#' @title Plot the Mean Expression Profiles
+#' @description This function computes for each age category the corresponding mean expression profile.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
-#' @param Groups a list containing the phylostrata or divergence-strata that correspond to the same phylostratum class or divergence class.
-#' For ex. evolutionary old phylostrata: PS1-3 (Class 1) and evolutionary young phylostrata: PS4-12 (Class 2). 
-#' In this case, the list could be assigned as, \code{Groups} = list(c(1:3), c(4:12)). 
-#' It is also possible to define more than 2 groups of evolutionary ages.
-#' For ex. \code{Groups} = list(c(1:3),c(4:8),c(9:12)).
-#' @param legendName a character string specifying whether "PS" or "DS" are used.
-#' @param colors colors for mean expression profiles. Default: \code{colors = NULL}, hence default colours are used.
-#' @param \dots default graphics parameters.
+#' @param Groups a list containing the age categories for which mean expression levels shall be drawn.
+#' For ex. evolutionary users can compare old phylostrata: PS1-3 (Class 1) and evolutionary young phylostrata: PS4-12 (Class 2). 
+#' In this example, the list could be assigned as, \code{Groups = list(c(1:3), c(4:12))}. 
+#' The group options is limited to 2 Groups.
+#' @param legendName a character string specifying the legend title.
+#' @param xlab label of x-axis.
+#' @param ylab label of y-axis.
+#' @param main main text.
+#' @param y.ticks number of ticks that shall be drawn on the y-axis.
+#' @param adjust.range logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is \code{adjust.range = TRUE}.
 #' @details 
 #' 
 #' This plot may be useful to compare the absolute mean expression        
-#' levels of each phylostratum or divergence-stratum class.
+#' levels of each age category across stages.
 #'
 #'In different developmental processes different phylostratum or divergence-stratum
 #' classes might be more expressed than others, hence contributing more to the overall
 #' phylotranscriptomics pattern (\code{\link{TAI}} or \code{\link{TDI}}).
 #' This plot can help to identify the phylostratum or divergence-stratum classes 
 #' that contributes most to the overall transcriptome of the given developmental process.
-#' @return a plot showing mean expression profiles of 
-#' phylostrata or divergence-strata corresponding to the same phylostratum
-#' class or divergence class.
+#' @return a plot showing mean expression profiles of each age category.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{PlotRE}}
 #' @examples
-#' 
+#' ### Example using a PhyloExpressionSet
+#' ### and DivergenceExpressionSet
 #' # load PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
 #'
@@ -35,49 +34,54 @@
 #' data(DivergenceExpressionSetExample)
 #'
 #' # plot evolutionary old PS (PS1-3) vs evolutionary young PS (PS4-12)
-#' PlotMeans(PhyloExpressionSetExample,Groups = list(c(1:3), c(4:12)), 
-#'           legendName = "PS", lty = 1, lwd = 5)
+#' PlotMeans(PhyloExpressionSetExample,
+#'           Groups = list(c(1:3), c(4:12)), 
+#'           legendName = "PS",
+#'           adjust.range = TRUE)
 #'
+#' # if users wish to not adjust the y-axis scale when 
+#' # 2 groups are selected they can specify: adjust.range = FALSE
+#' PlotMeans(PhyloExpressionSetExample,
+#'           Groups = list(c(1:3), c(4:12)), 
+#'           legendName = "PS",
+#'           adjust.range = FALSE)
+#'           
+#'           
 #' # plot conserved DS (DS1-5) vs divergent DS (PS6-10)
 #' # NOTE: DS are always defined in the range 1, 2, ... , 10.
 #' # Hence, make sure that your groups are within this range!
-#' PlotMeans(DivergenceExpressionSetExample,Groups = list(c(1:5), c(6:10)), 
-#'           legendName = "DS", lty = 1, lwd = 5)
+#' PlotMeans(DivergenceExpressionSetExample,
+#'           Groups = list(c(1:5), c(6:10)), 
+#'           legendName = "DS",
+#'           adjust.range = TRUE)
 #'
-#'
-#'# adding custom colors for relative expression levels:
-#' # -> colors should be ordered by PS/DS starting with PS1,2,3...
-#' PlotMeans(PhyloExpressionSetExample,
-#'        Groups     = list(c(1:3), c(4:12)), 
-#'        legendName = "PS",
-#'        colors     = c("black","red","green","brown","darkmagenta",
-#'        "blue","darkred","darkblue","darkgreen", "orange",
-#'        "azure4","gold4"), 
-#'        lty        = 1, 
-#'        lwd        = 5)
 #' @export 
 
 PlotMeans <- function(ExpressionSet,
                       Groups     = NULL,
-                      legendName = NULL,
-                      colors     = NULL, ...)
+                      legendName = "age",
+                      xlab = "Ontogeny",
+                      ylab = "Mean Expression Level",
+                      main = "",
+                      y.ticks = 10,
+                      adjust.range = TRUE)
 {
         
         is.ExpressionSet(ExpressionSet)
         
         if(is.null(Groups))
-                stop("Your Groups list does not store any items.")
-        
-        if(is.null(legendName))
-                stop("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.")
+                stop("Your Groups list does not store any items.", call. = FALSE)
         
         ### getting the PS names available in the given expression set
         age_names <- as.character(names(table(ExpressionSet[ , 1])))
         
         # test whether all group elements are available in the age vector
-        ra <- range(ExpressionSet[ , 1])
+        # ra <- range(ExpressionSet[ , 1])
         if(!all(unlist(Groups) %in% as.numeric(age_names)))
-                stop("There are items in your Group elements that are not available in the age column of your ExpressionSet.")
+                stop("There are items in your Group elements that are not available in the age column of your ExpressionSet.", call. = FALSE)
+        
+        if (length(Groups) > 2)
+                stop("Please specify at maximum 2 groups that shall be compared.", call. = FALSE)
         
         ### getting the PS names available in the given expression set
         nPS <- length(age_names)
@@ -87,77 +91,105 @@ PlotMeans <- function(ExpressionSet,
         MeanValsMatrix <- matrix(NA_real_,nPS,nCols-2)
         rownames(MeanValsMatrix) <- age_names
         colnames(MeanValsMatrix) <- names(ExpressionSet)[3:nCols]
-        nGroups <- length(Groups)
-        ### each PS class gets its corresponding color
-        if(!is.null(colors)){
-                colos <- colors
-        } else {
-                colos <- re.colors(nPS)
+
+        MeanValsMatrix <- age.apply(ExpressionSet, colMeans)
+        mean.age <- data.frame(age = age_names, MeanValsMatrix, stringsAsFactors = FALSE)
+        mMatrix <- tibble::as_tibble(reshape2::melt(mean.age, id.vars = "age"))
+        colnames(mMatrix)[2:3] <- c("stage", "expr")
+
+        if (length(Groups) == 1) {
+                
+                p <- ggplot2::ggplot(mMatrix, ggplot2::aes( factor(stage, levels = unique(stage)), expr, group = age, fill = factor(age, levels = age_names))) + 
+                        ggplot2::geom_line(ggplot2::aes(color = factor(age, levels = age_names)), size = 3) +
+                        ggplot2::labs(x = xlab, y = ylab, title = main, colour = legendName) +
+                        ggplot2::theme_minimal() +
+                        ggplot2::theme(
+                                title            = ggplot2::element_text(size = 18, face = "bold"),
+                                legend.title     = ggplot2::element_text(size = 14, face = "bold"),
+                                legend.text      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.title       = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.y      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.x      = ggplot2::element_text(size = 18, face = "bold"),
+                                panel.background = ggplot2::element_blank(),
+                                strip.text.x     = ggplot2::element_text(
+                                        size           = 18,
+                                        colour         = "black",
+                                        face           = "bold"
+                                )
+                        ) +
+                        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) + 
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix)))
+                
+                return(p)
         }
         
-        nElements <- sapply(Groups,length)
-        iterator <- 0
-        ### for each phylostratum in the given dataset
-        
-        MeanValsMatrix <- age.apply(ExpressionSet, colMeans)
-        
-        ylim_min <- min(MeanValsMatrix) - (min(range(MeanValsMatrix))/6)
-        ylim_max <- max(MeanValsMatrix) + (max(range(MeanValsMatrix))/5)
-        
-        
-        # define arguments for different graphics functions
-        plot.args <- c("lwd","col","lty","xlab","cex.lab","main","cex.main")
-        axis.args <- c("las", "cex.axis")
-        legend.args <- c("border","angle","density","box.lwd","cex")
-        dots <- list(...)
-        ellipsis.names <- names(dots)
-        
-        
-        ### plot the rel. exp. levels in k different windows
-        if(length(Groups) > 1)
-                graphics::par(mfrow = rev(grDevices::n2mfrow(nGroups)))
-        
-        for(j in 1:nGroups){
+        if (length(Groups) == 2) {
                 
-                if(j < 2){
-                        
-                        do.call(graphics::matplot,c(list(t(MeanValsMatrix[match(as.character(Groups[[j]]), rownames(MeanValsMatrix)) , ]),type = "l",
-                                                         ylab = "Mean Expression Level",ylim = c(ylim_min,ylim_max), axes = FALSE, col = colos[match(as.character(Groups[[j]]), age_names)]),
-                                                    dots[!is.element(names(dots),c(axis.args,legend.args))]))
-                        
-                        do.call(graphics::axis,c(list(1,seq(1,nCols-2,1),names(ExpressionSet)[3:nCols]),
-                                                 dots[!is.element(names(dots),c(plot.args,legend.args))]))
-                        
-                        do.call(graphics::axis,c(list(2,seq(ylim_min,ylim_max,length.out = 5),format(seq(ylim_min,ylim_max,length.out = 5),digits = 6)),
-                                                 dots[!is.element(names(dots),c(plot.args,legend.args))]))
-                        
-                        do.call(graphics::legend,c(list("top", legend = paste(legendName,age_names[match(as.character(Groups[[j]]), age_names)],sep = ""),
-                                                        fill = colos[match(as.character(Groups[[j]]), age_names)],bty = "n",ncol = ceiling(nElements[j]/2)),
-                                                   dots[!is.element(names(dots),c(axis.args,plot.args))]))
-                        
-                        iterator <- nElements[j]
-                        
+                mMatrixGroup1 <- dplyr::filter(mMatrix, age %in% Groups[[1]])
+                mMatrixGroup2 <- dplyr::filter(mMatrix, age %in% Groups[[2]])
+                
+                getColors <- function(n) {
+                        h <- seq(15, 375, length = n + 1)
+                        return(grDevices::hcl(h = h, l = 65, c = 100)[1:n])
                 }
                 
-                else{
+                p1 <- ggplot2::ggplot(mMatrixGroup1, ggplot2::aes( factor(stage, levels = unique(stage)), expr, group = age, fill = factor(age, levels = age_names[Groups[[1]]]))) + 
+                        ggplot2::geom_line(ggplot2::aes(color = factor(age, levels = age_names[Groups[[1]]])), size = 3) +
+                        ggplot2::labs(x = xlab, y = ylab, title = main, colour = legendName) +
+                        ggplot2::theme_minimal() +
+                        ggplot2::theme(
+                                title            = ggplot2::element_text(size = 18, face = "bold"),
+                                legend.title     = ggplot2::element_text(size = 14, face = "bold"),
+                                legend.text      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.title       = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.y      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.x      = ggplot2::element_text(size = 18, face = "bold"),
+                                panel.background = ggplot2::element_blank(),
+                                strip.text.x     = ggplot2::element_text(
+                                        size           = 18,
+                                        colour         = "black",
+                                        face           = "bold"
+                                )
+                        ) +
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[1]]])
+                if (!adjust.range) {
                         
-                        do.call(graphics::matplot,c(list(t(MeanValsMatrix[match(as.character(Groups[[j]]), rownames(MeanValsMatrix)) , ]),type = "l",
-                                                         ylab = "Mean Expression Level",ylim = c(ylim_min,ylim_max), axes = FALSE, col = colos[match(as.character(Groups[[j]]), age_names)]),
-                                                    dots[!is.element(names(dots),c(axis.args,legend.args))]))
-                        
-                        do.call(graphics::axis,c(list(1,seq(1,nCols-2,1),names(ExpressionSet)[3:nCols]),
-                                                 dots[!is.element(names(dots),c(plot.args,legend.args))]))
-                        
-                        do.call(graphics::axis,c(list(2,seq(ylim_min,ylim_max,length.out = 5),format(seq(ylim_min,ylim_max,length.out = 5),digits = 6)),
-                                                 dots[!is.element(names(dots),c(plot.args,legend.args))]))
-                        
-                        do.call(graphics::legend,c(list("top",legend = paste(legendName,age_names[match(as.character(Groups[[j]]), age_names)],sep = ""),
-                                                        fill = colos[match(as.character(Groups[[j]]), age_names)],bty = "n",ncol = ceiling(nElements[j]/2)),
-                                                   dots[!is.element(names(dots),c(axis.args,plot.args))]))
-                        
-                        iterator <- nElements[j]
-                        
+                        p1 <- p1 + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks))
                 }
+                
+                p2 <- ggplot2::ggplot(mMatrixGroup2, ggplot2::aes( factor(stage, levels = unique(stage)), expr, group = age, fill = factor(age, levels = age_names[Groups[[2]]]))) + 
+                        ggplot2::geom_line(ggplot2::aes(color = factor(age, levels = age_names[Groups[[2]]])), size = 3) +
+                        ggplot2::labs(x = xlab, y = ylab, title = main, colour = legendName) +
+                        ggplot2::theme_minimal() +
+                        ggplot2::theme(
+                                title            = ggplot2::element_text(size = 18, face = "bold"),
+                                legend.title     = ggplot2::element_text(size = 14, face = "bold"),
+                                legend.text      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.title       = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.y      = ggplot2::element_text(size = 18, face = "bold"),
+                                axis.text.x      = ggplot2::element_text(size = 18, face = "bold"),
+                                panel.background = ggplot2::element_blank(),
+                                strip.text.x     = ggplot2::element_text(
+                                        size           = 18,
+                                        colour         = "black",
+                                        face           = "bold"
+                                )
+                        ) + 
+                        ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix))[Groups[[2]]])
+                
+                if (!adjust.range) {
+                        
+                        p2 <- p2 + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) 
+                }
+                        
+                
+                if (adjust.range){
+                        p1 <- p1 + ggplot2::scale_y_continuous(limits = c(min(MeanValsMatrix), max(MeanValsMatrix)), breaks = scales::pretty_breaks(n = y.ticks))
+
+                        p2 <- p2 + ggplot2::scale_y_continuous(limits = c(min(MeanValsMatrix), max(MeanValsMatrix)), breaks = scales::pretty_breaks(n = y.ticks))    
+                }
+
+                return(gridExtra::grid.arrange(p1, p2, ncol = 2))
         }
 }
 
