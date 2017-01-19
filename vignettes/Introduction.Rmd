@@ -2,6 +2,7 @@
 title: "Introduction to the myTAI Package"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Introduction to the myTAI package}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,27 +19,62 @@ knitr::opts_chunk$set(
 ```
 
 
+# Table of Contents
+1. [Scientific Introduction](#example2)
+2. [Installation](#installation)
+3. [Getting Started](#getting-started)
+4. [Retrieval of phylogenetic or taxonomic information](#Retrieval-of-phylogenetic-or-taxonomic- information)
+
+
+## Scientific Introduction: Performing Evolutionary Transcriptomics with R
+
+In the past years, a large body of scientific studies aimed at investigating the molecular basis of variation and conservation within biological processes. These transcriptomics studies allowed us to get a glimpse into the molecular patterns and processes that underly complex biological processes such as development or cell differentiation.
+
+Although powerful for investigating the molecular mechanisms that determine the biological process of interest, these datasets rarely capture the evolutionary history of how these expression patterns emerged or to what extent they are possibly constrained. By combining
+transcriptomics studies with a comparative approach, however, we can capture some evolutionary signatures that allow us to understand the variability or constraint of particular sets of genes. This evolutionary transcriptomics approach relies on the comparison of transcriptomes between species using orthologous or homologous genes as a phylogenetic component. This method seeks to determine stages of biological processes in which gene expression patterns are more variable or more constrained than others. 
+
+Finding such transcriptome conservation or variability patterns within a biological process of interest, allows us to reconstruct parts of the evolutionary history of that particular process and might guide us in developing methods to modify such processes.
+
+The myTAI package provides an analytics tool to perform evolutionary transcriptomics studies for detecting evolutionary signatures in transcriptome data. It furthermore, seeks to provide a consistent way to design a computationally reproducible analytics process that achieves a high degree of transparency when conducting evolutionary transcriptomics studies.
+
+
 ## Installation
 
-Users can download `myTAI` from [CRAN](https://cran.r-project.org/package=myTAI) :
+### Package dependencies
+If users are interested in performing differential gene expression analyses with `myTAI`, they may install the `edgeR` package.
+
+### Install the `edgeR` package
 
 ```r
-# install myTAI 0.4.0 from CRAN
-install.packages("myTAI", dependencies = TRUE)
-```
-
-### Package Dependencies
-
-
-```r
-# to perform differential gene expression analyses with myTAI
-# please install the edgeR package
-# install edgeR
 source("http://bioconductor.org/biocLite.R")
 biocLite("edgeR")
 ```
 
-## Perform Evolutionary Transcriptomics with R
+Users can download `myTAI` from [CRAN](https://cran.r-project.org/package=myTAI) :
+
+```r
+# install myTAI from CRAN
+install.packages("myTAI", dependencies = TRUE)
+```
+
+## Getting Started
+
+Using embryo development of the plant _Arabidopsis thaliana_ as an example, we ask the user to imagine how one would investigate the differences of developmental transcriptomes across developmental stages. 
+
+![Figure 1](Figures/Fig1.pdf)
+
+Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development. Embryo development is divided into three phases: early embryogenesis (purple), mid-embryogenesis (green), and late embryogenesis (brown). This boxplot illustrates that the overall distributions of log2 expression levels (y-axis) hardly differ between developmental stages (x-axis) although the difference on the global scale is statistically significant (Kruskal-Wallis Rank Sum Test: p < 2e-16). Hence, a clear visual pattern of gene expression differences between early, mid, and late embryogenesis on the global scale can not be inferred. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221).
+
+
+The objective of performing evolutionary transcriptomics studies is to classify a transcriptome into different categories of genes sharing similar evolutionary origins (detectable homologs) or genes that share similar phylogenetic relationships (orthologous genes) and to study the overall expression patterns of these classified genes throughout the biological process of interest. Thus, by introducing a phylogenetic or taxonomic variable to a transcriptome dataset, we can determine 
+
+
+![Figure 2](Figures/Fig2.pdf)
+
+Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development classified into distinctive age categories. Each box represents the developmental stage during _A. thaliana_ embryogenesis, the y-axis denotes the log2 expression levels of genes that fall into the corresponding age category shown on the x-axis. Hence, each boxplot represents the gene expression distribution of genes that are classified into the corresponding age class during a specific developmental stage. The gene age distribution of _A. thaliana_ genes range from PS1 to PS12 where PS1 represents the evolutionarily most distant age category (cellular org.) and PS12 the evolutionary most recent age category (_A. thaliana_ specific). Yellow dots in the boxplots denote the mean expression level of the corresponding expression distribution. This visualization illustrates that although the global gene expression distributions do not change visually between developmental stages (Fig. 1), the global gene expression distributions of age categories differ between stages of _A. thaliana_ embryo development, and thus, allow studying the effect of transcriptome evolution and conservation on embryo development. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221).
+
+
+## Retrieval of phylogenetic or taxonomic information
 
 Gene age inference is the foundation of most evolutionary transcriptomics studies.
 The concept behind evolutionary transcriptomics is to combine these gene age estimates with gene expression
@@ -47,9 +83,6 @@ data to quantify the average transcriptome age within a biological process of in
 In particular, this approach allowed the quantification of transcriptome conservation of animal and plant embryos passing through embryogenesis by first individually estimating the gene ages of specific animal and plant genomes and combining these gene age estimates with transcriptome data covering several stages of embryo development ([Domazet-Loso and Tautz, 2010 _Nature_](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) ; [Quint, Drost et al., 2012 _Nature_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) ; [Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)).
 
 The [myTAI](https://github.com/HajkD/myTAI) package aims to provide a standard tool for evolutionary transcriptomics studies and relies on gene age and sequence conservation estimates as input. This approach allows researchers to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability.
-
-
-## Getting Started
 
 As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)).
 
@@ -738,11 +771,7 @@ Visualizing the mean gene expression of genes corresponding to the same Phylostr
 # Visualizing the mean gene expression of each Phylostratum class
 PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
            Groups        = list(1:12), 
-           legendName    = "PS",
-           xlab          = "Ontogeny", 
-           lty           = 1, 
-           cex           = 0.7, 
-           lwd           = 5 ) 
+           legendName    = "PS") 
 ```
 
 Here we see that the mean gene expression of Phylostratum group: PS1-3 (genes evolved before the establishment of embryogenesis in plants) are more expressed during _A. thaliana_ embryogenesis than PS4-12 (genes evolved during or after the establishment of embryogenesis in plants).
@@ -758,11 +787,7 @@ For this example we separate groups of Phylostrata into __evolutionary old Phylo
 # in two separate plots (groups)
 PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
            Groups        = list(group_1 = 1:3, group_2 = 4:12), 
-           legendName    = "PS",
-           xlab          = "Ontogeny", 
-           lty           = 1, 
-           cex           = 0.7, 
-           lwd           = 5 ) 
+           legendName    = "PS") 
 ```
 
 To obtain the numerical values (mean expression levels for all Phylostrata) run:
@@ -792,6 +817,21 @@ age.apply( ExpressionSet = PhyloExpressionSetExample,
 
 ```
 Here the `age.apply()` function (`?age.apply`) takes a function as argument that itself receives a `data.frame` as argument (e.g. `colMeans()`).
+
+Users may also specify a shaded area corresponding to the modules that were specified when
+using the `PlotSignature()` function.
+
+```{r, fig.height= 5, fig.width=9,eval=FALSE}
+# Visualizing the mean gene expression of each Phylostratum class
+# and draw an shaded area for the mid-module.
+PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
+           Groups        = list(1:12),
+           modules       = list(1:2,3:5,6:7),
+           legendName    = "PS") 
+```
+
+The `PlotMedians()` and `PlotVars()` functions can be used to visualize the median and variance
+of expression profiles that correspond to the age categories of interest. 
 
 For a DivergenceExpressionSet run:
 
@@ -831,9 +871,12 @@ age.apply( ExpressionSet = DivergenceExpressionSetExample,
 
 ```
 
+The `PlotMedians()` and `PlotVars()` functions can be used to visualize the median and variance
+of expression profiles that correspond to the age categories of interest. Values can
+be retrieved via `age.apply(PhyloExpressionSetExample, function(x) apply(x, 2, median))`
+and `age.apply(PhyloExpressionSetExample, function(x) apply(x, 2, var))`.
+
 ### Relative Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet
-
-
 
 Introduced by Domazet-Loso and Tautz, (2010), relative expression levels are defined as a linear transformation of the mean expression levels (of each Phylostratum or Divergence-Stratum) into the interval $[0,1]$ (Quint et al., 2012 and Drost et al., 2015). This procedure allows users to compare mean expression patterns between Phylostrata or Divergence Strata independent from their actual magnitude. Hence, relative expression
 profiles aim to correlate the mean expression profiles of groups of Phylostrata or
@@ -846,12 +889,9 @@ The `PlotRE()` function can be used (analogous to the `PlotMeans()` function) to
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Visualizing the mean gene expression of each Phylostratum class
 PlotRE( ExpressionSet = PhyloExpressionSetExample, 
-        Groups        = list(1:10), 
+        Groups        = list(1:12), 
         legendName    = "PS",
-        xlab          = "Ontogeny", 
-        lty           = 1, 
-        cex           = 0.7, 
-        lwd           = 5 ) 
+        xlab          = "Ontogeny") 
 ```
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
@@ -859,10 +899,7 @@ PlotRE( ExpressionSet = PhyloExpressionSetExample,
 PlotRE( ExpressionSet = DivergenceExpressionSetExample, 
         Groups        = list(1:10), 
         legendName    = "DS",
-        xlab          = "Ontogeny", 
-        lty           = 1, 
-        cex           = 0.7, 
-        lwd           = 5 ) 
+        xlab          = "Ontogeny") 
 ```
 
 or again by assigning Phylostratum or Divergence Stratum groups that shall be visualized in different plots:
@@ -872,10 +909,19 @@ or again by assigning Phylostratum or Divergence Stratum groups that shall be vi
 PlotRE( ExpressionSet = PhyloExpressionSetExample, 
         Groups        = list(group_1 = 1:3, group_2 = 4:12), 
         legendName    = "PS",
-        xlab          = "Ontogeny", 
-        lty           = 1, 
-        cex           = 0.7, 
-        lwd           = 5 ) 
+        xlab          = "Ontogeny") 
+```
+
+Users may also specify a shaded area corresponding to the modules that were specified when
+using the `PlotSignature()` function.
+
+```{r,fig.height=5, fig.width=9,eval=FALSE}
+# Visualizing the mean gene expression of each Phylostratum class
+PlotRE( ExpressionSet = PhyloExpressionSetExample, 
+        Groups        = list(1:12),
+        modules = list(1:2,3:5,6:7),
+        legendName    = "PS",
+        xlab          = "Ontogeny") 
 ```
 
 The relative expression levels can be obtained using the `REMatrix()` function:
@@ -992,8 +1038,8 @@ For the corresponding statistically significant stages, a _Posthoc_ test can be 
 
 # Supplementary Information
 
-Most visualization functions in the _`myTAI`_ package have an __ellipsis__ argument (`?dotsMethods`)
-which allows you to modify the `cex.lab`, `cex.axis`, and `cex` arguments within the plot.
+Some visualization functions in the _`myTAI`_ package have an __ellipsis__ argument (`?dotsMethods`)
+which allows users to modify the graphics arguments `cex.lab`, `cex.axis`, and `cex` within the plot.
 
 ```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # cex = 0.5, cex.lab = 0.5, cex.axis = 0.5
@@ -1059,6 +1105,21 @@ PlotPattern( ExpressionSet = PhyloExpressionSetExample,
 dev.off()
 ```
 
+
+When using ggplot2 based functions such as `PlotSignature()`, `PlotMeans()`, `PlotRE()`, etc. users can rely on
+the [cowplot package](https://github.com/wilkelab/cowplot).
+
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+# store ggplot2 graphic in variable p
+p <- PlotSignature(ExpressionSet = PhyloExpressionSetExample,
+                   ylab          = "Transcriptome Age Index")
+
+# save ggplot2 based TAI profile to a local machine with save_plot()
+cowplot::save_plot("ExampleTAIProfile.pdf",
+                   p,
+                   base_height = 8,
+                   base_width = 12 )
+```
 
 ## References
 
