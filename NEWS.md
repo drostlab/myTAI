@@ -27,6 +27,7 @@ myTAI 0.5.0
 
 ### Vignettes
 
+- In `Introduction` vignette: complete restructuring of the Introduction 
 - In `Introduction` vignette: add new ggplot2 based examples
 
  
