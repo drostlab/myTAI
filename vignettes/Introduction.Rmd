@@ -25,17 +25,18 @@ knitr::opts_chunk$set(
 3. [Getting Started](#getting-started)
 4. [Retrieval of phylogenetic or taxonomic information](#retrieval-of-phylogenetic-or-taxonomic-information)
 
+xy. [First Example Protocol](#)
 
 ## Scientific Introduction: Performing Evolutionary Transcriptomics with R
 
 In the past years, a large body of scientific studies aimed at investigating the molecular basis of variation and conservation within biological processes. These transcriptomics studies allowed us to get a glimpse into the molecular patterns and processes that underly complex biological processes such as development or cell differentiation.
 
-Although powerful for investigating the molecular mechanisms that determine the biological process of interest, these datasets rarely capture the evolutionary history of how these expression patterns emerged or to what extent they are possibly constrained. By combining
-transcriptomics studies with a comparative approach, however, we can capture some evolutionary signatures that allow us to understand the variability or constraint of particular sets of genes. This evolutionary transcriptomics approach relies on the comparison of transcriptomes between species using orthologous or homologous genes as a phylogenetic component. This method seeks to determine stages of biological processes in which gene expression patterns are more variable or more constrained than others. 
+Although powerful for investigating the molecular mechanisms that determine the biological process of interest, these datasets rarely capture the evolutionary history of __how__ these expression patterns emerged or to __what extent__ they are possibly constrained. By combining
+transcriptomics studies with a comparative approach, however, we can capture some evolutionary signatures that allow us to understand the variability or constraint of particular sets of genes. This evolutionary transcriptomics approach relies on the comparison of transcriptomes between species using orthologous or homologous genes as a phylogenetic variable This method seeks to determine stages of biological processes in which gene expression patterns are more variable or more constrained than others. 
 
 Finding such transcriptome conservation or variability patterns within a biological process of interest, allows us to reconstruct parts of the evolutionary history of that particular process and might guide us in developing methods to modify such processes.
 
-The myTAI package provides an analytics tool to perform evolutionary transcriptomics studies for detecting evolutionary signatures in transcriptome data. It furthermore, seeks to provide a consistent way to design a computationally reproducible analytics process that achieves a high degree of transparency when conducting evolutionary transcriptomics studies.
+The myTAI package provides an analytics tool to perform evolutionary transcriptomics studies and is designed to detect evolutionary signatures in transcriptome data. It furthermore, seeks to provide a consistent way to design a computationally reproducible analytics process that achieves a high degree of transparency when conducting evolutionary transcriptomics studies.
 
 
 ## Installation
@@ -61,17 +62,34 @@ install.packages("myTAI", dependencies = TRUE)
 
 Using embryo development of the plant _Arabidopsis thaliana_ as an example, we ask the user to imagine how one would investigate the differences of developmental transcriptomes across developmental stages. 
 
-![Figure 1](Figures/Fig1.pdf)
+<img src="Figures/Fig1.pdf" alt="Figure 1" style="text-align: center; width:600px;height:300px;">
 
-Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development. Embryo development is divided into three phases: early embryogenesis (purple), mid-embryogenesis (green), and late embryogenesis (brown). This boxplot illustrates that the overall distributions of log2 expression levels (y-axis) hardly differ between developmental stages (x-axis) although the difference on the global scale is statistically significant (Kruskal-Wallis Rank Sum Test: p < 2e-16). Hence, a clear visual pattern of gene expression differences between early, mid, and late embryogenesis on the global scale can not be inferred. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221).
+<p style="font-size:10px;"> Figure 1: Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development. Embryo development is divided into three phases: early embryogenesis (purple), mid-embryogenesis (green), and late embryogenesis (brown). This boxplot illustrates that the overall distributions of log2 expression levels (y-axis) hardly differ between developmental stages (x-axis) although the difference on the global scale is statistically significant (Kruskal-Wallis Rank Sum Test: p < 2e-16). Hence, a clear visual pattern of gene expression differences between early, mid, and late embryogenesis on the global scale can not be inferred. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221). </p>
 
 
 The objective of performing evolutionary transcriptomics studies is to classify a transcriptome into different categories of genes sharing similar evolutionary origins (detectable homologs) or genes that share similar phylogenetic relationships (orthologous genes) and to study the overall expression patterns of these classified genes throughout the biological process of interest. Thus, by introducing a phylogenetic or taxonomic variable to a transcriptome dataset, we can determine stages or time points that are under stronger constraints than others, indicating switches between biological programs or functions.
 
 
-![Figure 2](Figures/Fig2.pdf)
+<img src="Figures/Fig2.pdf" alt="Figure 2" style="text-align: center; width:700px;height:300px;">
 
-Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development classified into distinctive age categories. Each box represents the developmental stage during _A. thaliana_ embryogenesis, the y-axis denotes the log2 expression levels of genes that fall into the corresponding age category shown on the x-axis. Hence, each boxplot represents the gene expression distribution of genes that are classified into the corresponding age class during a specific developmental stage. The gene age distribution of _A. thaliana_ genes range from PS1 to PS12 where PS1 represents the evolutionarily most distant age category (cellular org.) and PS12 the evolutionary most recent age category (_A. thaliana_ specific). Yellow dots in the boxplots denote the mean expression level of the corresponding expression distribution. This visualization illustrates that although the global gene expression distributions do not change visually between developmental stages (Fig. 1), the global gene expression distributions of age categories differ between stages of _A. thaliana_ embryo development, and thus, allow studying the effect of transcriptome evolution and conservation on embryo development. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221).
+<p style="font-size:10px;"> Figure 2: Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development classified into distinctive age categories. Each box represents the developmental stage during _A. thaliana_ embryogenesis, the y-axis denotes the log2 expression levels of genes that fall into the corresponding age category shown on the x-axis. Hence, each boxplot represents the gene expression distribution of genes that are classified into the corresponding age class during a specific developmental stage. The gene age distribution of _A. thaliana_ genes range from PS1 to PS12 where PS1 represents the evolutionarily most distant age category (cellular org.) and PS12 the evolutionary most recent age category (_A. thaliana_ specific). Yellow dots in the boxplots denote the mean expression level of the corresponding expression distribution. This visualization illustrates that although the global gene expression distributions do not change visually between developmental stages (Fig. 1), the global gene expression distributions of age categories differ between stages of _A. thaliana_ embryo development, and thus, allow studying the effect of transcriptome evolution and conservation on embryo development. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221). </p>
+
+Conceptually, the idea behind evolutionary transcriptomics studies is to combine the phylogenetic relationship between species (usually retrieved from comparative genomics studies) with transcriptome data quantifying a particular biological process of interest (e.g. mutant gene expression versus WT gene expression, stress responses, cell differentiation, development, etc.). Usually, transcriptome data comes from Next Generation Sequencing technologies such as RNA-Seq or from Microarray experiments.
+
+
+<p style="text-align: center; font-size:20px;"> Phylogenetic Information + Transcriptome Data </p>
+
+Or in other words:
+
+<p style="text-align: center; font-size:20px;"> Comparative Genomics + Transcriptomics = Evolutionary Transcriptomics </p>
+
+In theory, any published or newly generated transcriptome dataset can be used to capture evolutionary signatures with `myTAI`.
+
+`myTAI` is designed to receive phylogenetic information obtained from comparative genomics data and transcriptome data as input and internally combines these datasets to perform evolutionary transcriptomics analyses.
+
+<img src="Figures/Fig3.pdf" alt="Figure 1" style="text-align: center; width:650px;height:650px;">
+
+<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](http://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), or by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221)) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
 
 
 ## Retrieval of phylogenetic or taxonomic information
