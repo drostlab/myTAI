@@ -6,7 +6,7 @@
 \usage{
 PlotMeans(ExpressionSet, Groups = NULL, modules = NULL,
   legendName = "age", xlab = "Ontogeny", ylab = "Mean Expression Level",
-  main = "", y.ticks = 10, adjust.range = TRUE, alpha = 0.008)
+  main = "", y.ticks = 10, adjust.range = TRUE, alpha = 0.008, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -35,6 +35,8 @@ But if specified, a shaded are will be drawn to illustrate stages corresponding 
 \item{adjust.range}{logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is \code{adjust.range = TRUE}.}
 
 \item{alpha}{transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.}
+
+\item{...}{place holder for old version of PlotMeans that was based on base graphics instead of ggplot2.}
 }
 \value{
 a plot showing mean expression profiles of each age category.
