@@ -6,7 +6,7 @@
 \usage{
 PlotRE(ExpressionSet, Groups = NULL, modules = NULL, legendName = "age",
   xlab = "Ontogeny", ylab = "Relative Expression Level", main = "",
-  y.ticks = 10, adjust.range = TRUE, alpha = 0.008)
+  y.ticks = 10, adjust.range = TRUE, alpha = 0.008, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -35,16 +35,16 @@ But if specified, a shaded are will be drawn to illustrate stages corresponding 
 \item{adjust.range}{logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is \code{adjust.range = TRUE}.}
 
 \item{alpha}{transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.}
+
+\item{...}{place holder for old version of PlotRE that was based on base graphics instead of ggplot2.}
 }
 \value{
 a plot showing the relative expression profiles of phylostrata or divergence-strata belonging to the same group.
 }
 \description{
-This function computes for each phylostratum or divergence stratum the corresponding relative expression profile
-and plots the profiles in N different windows corresponding to the given phylostratum classes 
-or divergence-stratum classes that shall be compared.
+This function computes for each age category the corresponding relative expression profile.
 
-For each phylostratum or divergence-stratum the corresponding relative expression profile is being computed as follows:
+For each age category the corresponding relative expression profile is being computed as follows:
 
 \deqn{f_js = ( e_js - e_j min ) / ( e_j max - e_j min )}
 
