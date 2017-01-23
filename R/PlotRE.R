@@ -30,6 +30,7 @@
 #' @param y.ticks number of ticks that shall be drawn on the y-axis.
 #' @param adjust.range logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is \code{adjust.range = TRUE}.
 #' @param alpha transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.
+#' @param ... place holder for old version of PlotRE that was based on base graphics instead of ggplot2.
 #' @details Studying the relative expression profiles of each phylostratum or divergence-stratum enables the detection
 #' of common gene expression patterns shared by several phylostrata or divergence-strata.
 #'
@@ -79,7 +80,7 @@ PlotRE <- function(ExpressionSet,
                    main = "",
                    y.ticks = 10,
                    adjust.range = TRUE,
-                   alpha = 0.008)
+                   alpha = 0.008, ...)
 {
         
         is.ExpressionSet(ExpressionSet)
