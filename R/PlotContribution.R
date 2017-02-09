@@ -110,7 +110,8 @@ PlotContribution <- function(ExpressionSet,
                         ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(contrMatrix)))
         }
         
-        print(p)
+        p <- p + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
+        return(p)
 }
 
 
