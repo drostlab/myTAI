@@ -121,7 +121,7 @@ PlotMedians <- function(ExpressionSet,
                         ) +
                         ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) + 
                         ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix)))
-                
+                p <- p + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                 return(p)
         }
         
@@ -189,7 +189,8 @@ PlotMedians <- function(ExpressionSet,
                         
                         p2 <- p2 + ggplot2::scale_y_continuous(limits = c(min(MeanValsMatrix), max(MeanValsMatrix)), breaks = scales::pretty_breaks(n = y.ticks))    
                 }
-                
+                p1 <- p1 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
+                p2 <- p2 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                 return(gridExtra::grid.arrange(p1, p2, ncol = 2))
         }
 }
