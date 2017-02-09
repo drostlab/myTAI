@@ -245,7 +245,7 @@ PlotSignature <-
                         TI.ggplot + ggplot2::annotate(
                                 "text",
                                 x = 2,
-                                y = max(TI$TI) + (max(TI$TI) / 10),
+                                y = max(TI$TI) + (max(TI$TI) / 30),
                                 label = paste0("p_flt = ", pval),
                                 size = 6
                         )
@@ -308,6 +308,8 @@ PlotSignature <-
                 cat("\n")
                 cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
         }
+        
+        TI.ggplot <- TI.ggplot + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
         return (TI.ggplot)
 }
 
