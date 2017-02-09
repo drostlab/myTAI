@@ -328,51 +328,6 @@ __Note__, that within the code of each function, the argument `ExpressionSet` al
 
 ## Performing a Standard Workflow for Phylotranscriptomics Analyses 
 
-At the beginning of each evolutionary transcriptomics study, researchers should investigate the distribution
-of gene age (in case of phylostratigraphy = phylostratum (PS)) or sequence conservation (in case of divergence stratigraphy = divergence stratum (DS)) within a given PhyloExpressionSet or DivergenceExpressionSet.
-
-For this purpose, the `PlotDistribution()` function was implemented:
-
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# Display the phylostratum distribution (gene frequency distribution) 
-# of a PhyloExpressionSet as absolute frequency distribution
-PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample, 
-                  xlab               = "Phylostratum" )
-```
-
-or display it as relative frequencies: 
-
-```{r, fig.width= 7, fig.height= 4,eval=FALSE}
-# Plot phylostrata as relative frequency distribution
-PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample, 
-                  as.ratio           = TRUE, 
-                  xlab               = "Phylostratum")
-```
-
-
-Another important feature to check is whether the phylostratum assignment and divergence stratum assignment of the genes stored within the PhyloExpressionSet and DivergenceExpressionSet are correlated (linear dependent). This is important to be able to assume the linear independence of __TAI__ and __TDI__ measures. This step is useful, because the TAI and TDI measures aim to quantify different signatures of evolutionary conservation. Whereas the TAI measure aims to quantify evolutionary signatures based on gene origin along the tree of life, the TDI measure is based on quantifying the selection pressure acting on orthologous genes between closely related species.
-
-
-For this purpose the `PlotCorrelation()` function was implemented:
-
-```{r, fig.width= 5, fig.height= 4,eval=FALSE}
-# Visualizing the correlation between Phylostratum and Divergence-Stratum assignments
-# of the intersecting set of genes that are stored within the PhyloExpressionSet
-# and DivergenceExpressionSet
-
-PlotCorrelation( PhyloExpressionSet      = PhyloExpressionSetExample,
-                 DivergenceExpressionSet = DivergenceExpressionSetExample,
-                 method                  = "kendall", 
-                 linearModel             = TRUE )
-```
-
-In this case phylostratum and divergence stratum assignments of the intersecting set of genes that are stored within the PhyloExpressionSet and DivergenceExpressionSet are weakly correlated, but can be assumed to be linear independent.
-
-__Note__: The `PlotCorrelation()` function always takes a PhyloExpressionSet as __first argument__ and a DivergenceExpressionSet as __second argument__.
-
-
-### Visualizing the _Transcriptome Age Index_ and the _Transcriptome Divergence Index_
-
 The main goal of any evolutionary transcriptomics study is to quantify the average age of a transcriptome 
 or the average conservation of a transcriptome within a biological process of interest.
 For this purpose, several measures were introduced:
@@ -1069,6 +1024,27 @@ PlotBarRE( ExpressionSet = PhyloExpressionSetExample,
 
 For the corresponding statistically significant stages, a _Posthoc_ test can be performed to detect the combinations of differing bars that cause the global statistical significance.
 
+## Visualize age distributions 
+
+Users can visualize the age distributions using the `PlotDistribution()` function.
+
+For this purpose, the `PlotDistribution()` function was implemented:
+
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+# Display the phylostratum distribution (gene frequency distribution) 
+# of a PhyloExpressionSet as absolute frequency distribution
+PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample, 
+                  xlab               = "Phylostratum" )
+```
+
+or display it as relative frequencies: 
+
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+# Plot phylostrata as relative frequency distribution
+PlotDistribution( PhyloExpressionSet = PhyloExpressionSetExample, 
+                  as.ratio           = TRUE, 
+                  xlab               = "Phylostratum")
+```
 
 ### Saving Plots on Local Machine
 
