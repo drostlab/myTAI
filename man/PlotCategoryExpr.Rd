@@ -147,11 +147,10 @@ PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                  
 }
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{age.apply}},
 \code{\link{pTAI}}, \code{\link{pTDI}}, \code{\link{pStrata}}, \code{\link{pMatrix}}, \code{\link{TAI}}, \code{\link{TDI}}
 }
-
+\author{
+Hajk-Georg Drost
+}

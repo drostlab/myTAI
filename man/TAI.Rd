@@ -39,9 +39,6 @@ TAIs <- TAI(PhyloExpressionSetExample)
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Domazet-Loso T. and Tautz D. (2010). \emph{A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns}. Nature (468): 815-818.
 
@@ -52,4 +49,6 @@ Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscripto
 \seealso{
 \code{\link{TDI}}, \code{\link{PlotPattern}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 }
-
+\author{
+Hajk-Georg Drost
+}

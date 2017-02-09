@@ -37,9 +37,6 @@ TDIs <- TDI(DivergenceExpressionSetExample)
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
 
@@ -48,4 +45,6 @@ Drost HG et al. (2015). \emph{Evidence for Active Maintenance of Phylotranscript
 \seealso{
 \code{\link{TAI}},  \code{\link{PlotPattern}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 }
-
+\author{
+Hajk-Georg Drost
+}

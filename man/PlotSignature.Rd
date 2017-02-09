@@ -84,4 +84,3 @@ PlotSignature(PhyloExpressionSetExample,
 \author{
 Hajk-Georg Drost
 }
-

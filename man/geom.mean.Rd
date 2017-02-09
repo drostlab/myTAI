@@ -21,4 +21,3 @@ geom.mean(x)
 \author{
 Hajk-Georg Drost
 }
-

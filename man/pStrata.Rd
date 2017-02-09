@@ -31,4 +31,3 @@ all.equal(colSums(partialStrata),colSums(pMatrix(PhyloExpressionSetExample)))
 \author{
 Hajk-Georg Drost
 }
-

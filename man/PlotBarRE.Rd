@@ -82,9 +82,6 @@ PlotBarRE(ExpressionSet = PhyloExpressionSetExample,
           ratio         = TRUE)
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 
@@ -95,4 +92,6 @@ Myles Hollander and Douglas A. Wolfe (1973), Nonparametric Statistical Methods. 
 \seealso{
 \code{\link{RE}}, \code{\link{REMatrix}},\code{\link{PlotRE}}, \code{\link{kruskal.test}}
 }
-
+\author{
+Hajk-Georg Drost
+}

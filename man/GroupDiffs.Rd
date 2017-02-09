@@ -58,10 +58,9 @@ GroupDiffs(ExpressionSet = PhyloExpressionSetExample,
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{PlotGroupDiffs}}, \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}
 }
-
+\author{
+Hajk-Georg Drost
+}

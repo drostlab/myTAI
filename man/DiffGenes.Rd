@@ -127,10 +127,9 @@ apply(DEGs.alpha[ , 3:5],2,range)
 head(DEGs.alpha)
 
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{Expressed}}
 }
-
+\author{
+Hajk-Georg Drost
+}

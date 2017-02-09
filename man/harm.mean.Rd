@@ -21,4 +21,3 @@ harm.mean(x)
 \author{
 Hajk-Georg Drost
 }
-

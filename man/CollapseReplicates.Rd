@@ -42,4 +42,3 @@ CollapseReplicates(ExpressionSet = PhyloExpressionSetExample[1:5,1:9],
 \author{
 Hajk-Georg Drost
 }
-

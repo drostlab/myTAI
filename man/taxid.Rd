@@ -38,4 +38,3 @@ Virus.taxids <- taxid(db.path = getwd(), filter = "Viruses")
 \author{
 Hajk-Georg Drost
 }
-

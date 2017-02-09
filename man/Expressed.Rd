@@ -92,4 +92,3 @@ dim(FilterMinSet) # check number of retained genes
 \author{
 Hajk-Georg Drost
 }
-

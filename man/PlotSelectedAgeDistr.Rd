@@ -49,10 +49,9 @@ PlotSelectedAgeDistr(ExpressionSet = PhyloExpressionSetExample,
                      as.ratio      = FALSE)
 
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{PlotDistribution}}
 }
-
+\author{
+Hajk-Georg Drost
+}

@@ -37,4 +37,3 @@ omMatrix_ds <- omitMatrix(DivergenceExpressionSetExample)
 \author{
 Hajk-Georg Drost
 }
-

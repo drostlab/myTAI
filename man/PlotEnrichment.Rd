@@ -116,13 +116,12 @@ PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
                measure       = "foldchange")     
                
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Sestak and Domazet-Loso (2015). Phylostratigraphic Profiles in Zebrafish Uncover Chordate Origins of the Vertebrate Brain. Mol. Biol. Evol. 32(2): 299-312.
 }
 \seealso{
 \code{\link{EnrichmentTest}}, \code{\link{fisher.test}}
 }
-
+\author{
+Hajk-Georg Drost
+}

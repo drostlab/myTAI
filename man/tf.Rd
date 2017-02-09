@@ -75,9 +75,6 @@ PlotPattern(ExpressionSet = tf(PhyloExpressionSetExample, log2),
             TestStatistic = "FlatLineTest")
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Piasecka B, Lichocki P, Moretti S, et al. (2013) The hourglass and the early conservation models--co-existing patterns of developmental constraints in vertebrates. PLoS Genet. 9(4): e1003476.
 
@@ -116,4 +113,6 @@ G. E. P. Box and D. R. Cox (1964) An Analysis of Transformations. Journal of the
 \seealso{
 \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 }
-
+\author{
+Hajk-Georg Drost
+}

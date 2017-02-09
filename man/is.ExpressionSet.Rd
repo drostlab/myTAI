@@ -23,4 +23,3 @@ is.ExpressionSet(PhyloExpressionSetExample)
 \author{
 Hajk-Georg Drost
 }
-

@@ -109,9 +109,6 @@ ReductiveHourglassTest(PhyloExpressionSetExample,
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 
@@ -146,4 +143,6 @@ Stephens, M.A. (1974): EDF statistics for goodness of fit and some comparisons. 
 \seealso{
 \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
 }
-
+\author{
+Hajk-Georg Drost
+}

@@ -46,4 +46,3 @@ PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[1:5000 , 1:8],
 \author{
 Hajk-Georg Drost
 }
-

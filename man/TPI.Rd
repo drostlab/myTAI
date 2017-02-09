@@ -38,13 +38,12 @@ TPIs <- TPI(PolymorphismExpressionSet)
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Gossmann et al. (2015). \emph{Transcriptomes of Plant Gametophytes Have a Higher Proportion of Rapidly Evolving and Young Genes than Sporophytes}. Mol Biol Evol. 33 (7): 1669-1678.
 }
 \seealso{
 \code{\link{TAI}}, \code{\link{TDI}},  \code{\link{PlotSignature}}, \code{\link{PlotPattern}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
 }
-
+\author{
+Hajk-Georg Drost
+}

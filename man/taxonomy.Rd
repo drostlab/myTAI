@@ -61,9 +61,6 @@ taxonomy("Arabidopsis thaliana",db = "ncbi")
  
 }
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Scott Chamberlain and Eduard Szocs (2013). taxize - taxonomic search and retrieval in R. F1000Research,
 2:191. URL: http://f1000research.com/articles/2-191/v2.
@@ -72,4 +69,6 @@ Scott Chamberlain, Eduard Szocs, Carl Boettiger, Karthik Ram, Ignasi Bartomeus, 
 (2014) taxize: Taxonomic information from around the web. R package version 0.3.0.
 https://github.com/ropensci/taxize
 }
-
+\author{
+Hajk-Georg Drost
+}

@@ -41,10 +41,9 @@ E.Result$enrichment.matrix
 E.Result$p.values
 
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{PlotEnrichment}}, \code{\link{fisher.test}}
 }
-
+\author{
+Hajk-Georg Drost
+}

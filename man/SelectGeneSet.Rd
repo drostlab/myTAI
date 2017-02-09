@@ -39,10 +39,9 @@ SelectGeneSet(ExpressionSet = ExamplePSMap,
               use.only.map  = TRUE)          
             
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{PlotGeneSet}}, \code{\link{PlotEnrichment}}, \code{\link{DiffGenes}}
 }
-
+\author{
+Hajk-Georg Drost
+}

@@ -47,9 +47,6 @@ PlotCorrelation(PhyloExpressionSetExample,
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
 Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
@@ -57,4 +54,6 @@ Drost HG et al. (2015) \emph{Evidence for Active Maintenance of Phylotranscripto
 \seealso{
 \code{\link{cor}}
 }
-
+\author{
+Hajk-Georg Drost
+}

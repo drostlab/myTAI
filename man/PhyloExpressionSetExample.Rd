@@ -23,9 +23,6 @@ This dataset covers 7 developmental stages of Arabidopsis thaliana embryo develo
 The initial gene expression dataset was published by Xiang et al., 2011 (see references section) and was then
 used by Quint et al., 2012 (see references section) to assign evolutionary ages to each gene expression profile.
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 Supplementary Table 2 : http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html
@@ -36,4 +33,6 @@ Supplemental Table 1 : http://www.plantphysiol.org/content/156/1/346/suppl/DC1
 \seealso{
 \code{\link{DivergenceExpressionSetExample}}
 }
-
+\author{
+Hajk-Georg Drost
+}

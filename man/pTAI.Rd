@@ -24,13 +24,12 @@ data(PhyloExpressionSetExample)
 pTAI(PhyloExpressionSetExample)
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Domazet-Loso T. and Tautz D. (2010). \emph{A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns}. Nature (468): 815-818.
 }
 \seealso{
 \code{\link{pTDI}}, \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{PlotPattern}}
 }
-
+\author{
+Hajk-Georg Drost
+}

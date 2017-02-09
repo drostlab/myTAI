@@ -99,13 +99,12 @@ p.vector <- CombinatorialSignificance(ExpressionSet = PhyloExpressionSetExample,
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Drost HG et al. (2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
 }
 \seealso{
 \code{\link{expand.grid}}, \code{\link{FlatLineTest}}
 }
-
+\author{
+Hajk-Georg Drost
+}

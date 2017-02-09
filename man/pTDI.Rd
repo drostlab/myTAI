@@ -24,9 +24,6 @@ data(DivergenceExpressionSetExample)
 pTAI(DivergenceExpressionSetExample)
 
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Domazet-Loso T. and Tautz D. (2010). \emph{A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns}. Nature (468): 815-818.
 
@@ -37,4 +34,6 @@ Drost HG et al. (2015). Evidence for Active Maintenance of Phylotranscriptomic H
 \seealso{
 \code{\link{pTAI}}, \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{PlotPattern}}
 }
-
+\author{
+Hajk-Georg Drost
+}

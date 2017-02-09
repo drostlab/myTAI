@@ -60,10 +60,9 @@ age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , var))
 age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list = TRUE)
 
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}, \code{\link{RE}}, \code{\link{REMatrix}}
 }
-
+\author{
+Hajk-Georg Drost
+}

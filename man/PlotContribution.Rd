@@ -38,13 +38,12 @@ Introduced by Domazet-Loso and Tautz (2010), this function allows users to visua
  PlotContribution(DivergenceExpressionSetExample, legendName = "DS")
  
 }
-\author{
-Hajk-Georg Drost
-}
 \references{
 Domazet-Loso T. and Tautz D. (2010). A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns. Nature (468): 815-818.
 }
 \seealso{
 \code{\link{pTAI}}, \code{\link{pTDI}}, \code{\link{TAI}}, \code{\link{TDI}}, \code{\link{PlotSignature}}
 }
-
+\author{
+Hajk-Georg Drost
+}

@@ -87,10 +87,9 @@ PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
 
 
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}, \code{\link{GroupDiffs}}
 }
-
+\author{
+Hajk-Georg Drost
+}

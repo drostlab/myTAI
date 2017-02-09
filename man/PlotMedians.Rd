@@ -76,10 +76,9 @@ PlotMedians(DivergenceExpressionSetExample,
           adjust.range = TRUE)
 
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{PlotRE}}
 }
-
+\author{
+Hajk-Georg Drost
+}

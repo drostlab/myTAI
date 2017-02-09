@@ -63,10 +63,9 @@ stored in the \code{age_vals} argument.
  
  
 }
-\author{
-Hajk-Georg Drost
-}
 \seealso{
 \code{\link{EarlyConservationTest}}, \code{\link{TAI}}, \code{\link{TDI}}
 }
-
+\author{
+Hajk-Georg Drost
+}
