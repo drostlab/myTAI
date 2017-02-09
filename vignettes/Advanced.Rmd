@@ -27,74 +27,6 @@ Especially in the _Introduction_ vignette we demonstrated how to perform `Phylos
 In the [Intermediate](Intermediate.html) vignette users learned about more detailed analyses and more specialized techniques 
 to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, etc.).
 
-This vignette aims to provide users with in-depth tutorials on how to retrieve published `Phylostratigraphic Maps` and `Divergence Maps`, the integrattion of these data sets into cutomized phylotranscriptomics pipelines, and additional types of phylotranscriptomics analyses focusing on the expression level distributions of all age or divergence categories.
-
-## Biological Sequence Retrieval with `biomartr`
-
-Both methods `Phylostratigraphy` and `Divergence Stratigraphy` need genome or proteome information for their analyses. This section introduces users to the retrieval of biological sequences stored as `*.fasta` format to be able to perform `Phylostratigraphy` and `Divergence Stratigraphy`.
-
-The _classical_ way to download biological sequences is via the `Terminal` application:
-
-```shell
-
-# download CDS file of A. thaliana
-curl ftp://ftp.ensemblgenomes.org/pub/
-plants/release-23/fasta/arabidopsis_thaliana/
-cds/Arabidopsis_thaliana.TAIR10.23.cds.all.fa.gz 
--o Arabidopsis_thaliana.TAIR10.23.cds.all.fa.gz
-
-# download CDS file of A. lyrata
-curl ftp://ftp.ensemblgenomes.org/pub/plants/
-release-23/fasta/arabidopsis_lyrata/cds/
-Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz 
--o Arabidopsis_lyrata.v.1.0.23.cds.all.fa.gz
-
-
-```
-
-Alternatively, users can use the Biological Data Retrieval package [biomartr](https://github.com/HajkD/biomartr)
-to download proteomes from the refseq database (see [Sequence Retrieval Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Sequence_Retrieval.Rmd) for details).
-
-```{r,eval=FALSE}
-# install biomartr from CRAN
-install.packages("biomartr",
-                 repos        = "https://cran.rstudio.com/",
-                 dependencies = TRUE)
-```
-
-```{r,eval=FALSE}
-# download the proteome of Arabidopsis thaliana from refseq
-# and store the corresponding proteome file in '_ncbi_downloads/proteomes'
-getProteome( db       = "refseq", 
-             kingdom  = "plant",
-             organism = "Arabidopsis thaliana",
-             path     = file.path("_ncbi_downloads","proteomes") )
-```
-
-
-The `getProteome()` function creates a directory named `_ncbi_downloads/proteomes` into which the orresponding proteome named `Arabidopsis_thaliana_protein.faa.gz` is downloaded. The `read_proteome()` function enables users to work with the proteome as data.table object.
-
-
-```{r,eval=FALSE}
-# path to proteome: '_ncbi_downloads/proteomes/Arabidopsis_thaliana_protein.faa.gz'
-file_path <- file.path("_ncbi_downloads","proteomes","Arabidopsis_thaliana_protein.faa.gz")
-# read proteome as data.table object
-Ath_proteome <- read_proteome(file_path, format = "fasta")
-```
-
-In case users would like to store the proteome file at a different location, they can specify the `path = file.path("put","your","path","here")` argument.
-
-## Download Published `Phylostratigraphic Maps` and `Divergence Maps` 
-
-Performing the `Phylostratigraphy` and `Divergence Stratigraphy` algorithms is a time consuming and computationally
-complex task. However, the corresponding `Phylostratigraphic Maps` and `Divergence Maps` need to be computed only
-once for each organism of interest. Hence, already published `Phylostratigraphic Maps` and `Divergence Maps` can be used without any additional computational tasks to combine them with any corresponding expression dataset of interest to capture evolutionary signals with `myTAI`. 
-
-[Here](https://github.com/HajkD/published_phylomaps) we provide a collection of scripts and documentation of already published `Phylostratigraphic Maps` and `Divergence Maps` and step by step instructions on how to retrieve them for the use with `myTAI`. 
-
-Only in cases where users whish to create custom `Phylostratigraphic Maps` and `Divergence Maps` based on specialized reference databases or more recent genome version, the `Phylostratigraphy` and `Divergence Stratigraphy` algorithms need to be performed. 
-
-
 ## Investigating Age or Divergence Category Specific Expression Level Distributions
 
 Gene expression levels are a fundamental aspect of phylotranscriptomics studies. In detail, phylotranscriptomic
@@ -106,11 +38,9 @@ For this purpose, the `PlotCategoryExpr()` aims to visualize the expression leve
 
 This way of visualizing the gene expression distribution of each age (PS) or divergence (DS) category during all developmental stages or experiments allows users to detect specific age or divergence categories contributing significant levels of gene expression to the underlying biological process (transcriptome).
 
-```{r,eval = TRUE, fig.width= 9, fig.height= 7}
+```{r,eval = TRUE, fig.width= 7, fig.height= 5}
 library(myTAI)
-
 data(PhyloExpressionSetExample)
-
 # category-centered visualization of PS specific expression level distributions (log-scale)
 PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                  legendName    = "PS",
@@ -144,11 +74,9 @@ __Please notice that users need to define the `legendName` argument as `PS` or `
 Alternatively, users can investigate the differences of gene expression __between__ all stages or experiments for __each__ age or divergence category by specifying `type = 'stage-centered'`.
 
 
-```{r,eval = TRUE, fig.width= 9, fig.height= 7}
+```{r,eval = TRUE, fig.width= 7, fig.height= 5}
 library(myTAI)
-
 data(PhyloExpressionSetExample)
-
 # stage-centered visualization of PS specific expression level distributions (log-scale)
 PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                  legendName    = "PS",
@@ -188,9 +116,8 @@ on log2 expression levels. This way of visualization allows better visual compar
 Alternatively, instead of specifying `log.expr = TRUE` users can directly pass log2 transformed expression levels to `PlotCategoryExpr()` via `tf(PhyloExpressionSetExample,log2)` (when `log.expr = FALSE`):
 
 
-```{r,eval = TRUE, fig.width= 9, fig.height= 7}
+```{r,eval = TRUE, fig.width= 7, fig.height= 5}
 data(PhyloExpressionSetExample)
-
 # category-centered visualization of PS specific expression level distributions (log-scale)
 PlotCategoryExpr(ExpressionSet = tf(PhyloExpressionSetExample, log2),
                  legendName    = "PS",
@@ -207,9 +134,8 @@ category-centered "***"  "***"    "***"    "***" "***"   "***" "***"
 
 Or any other expression level transformation, e.g. `sqrt`.
 
-```{r,eval = TRUE, fig.width= 9, fig.height= 7}
+```{r,eval = TRUE, fig.width= 7, fig.height= 5}
 data(PhyloExpressionSetExample)
-
 # category-centered visualization of PS specific expression level distributions (sqrt-scale)
 PlotCategoryExpr(ExpressionSet = tf(PhyloExpressionSetExample, sqrt),
                  legendName    = "PS",
@@ -224,7 +150,6 @@ PlotCategoryExpr(ExpressionSet = tf(PhyloExpressionSetExample, sqrt),
 category-centered "***"  "***"    "***"    "***" "***"   "***" "***" 
 ```
 
-
 ## Gene Subset Age or Divergence Category Specific Expression Level Distributions
 
 In some cases, users wish to visualize the gene expression distributions for a subset of genes
@@ -233,15 +158,13 @@ the gene ids of a subset of genes that shall be matched in the input `Expression
 expression level distributions shall be visualized.
 
 
-```{r,eval = TRUE, fig.width= 9, fig.height= 7}
+```{r,eval = TRUE, fig.width= 7, fig.height= 5}
 library(myTAI)
 data(PhyloExpressionSetExample)
-
 # define an example gene subset (500 genes) which
 # can be found in the input ExpressionSet
 set.seed(234)
 example.gene.set <- PhyloExpressionSetExample[sample(1:25260,500) , 2]
-
 # visualize the gene expression distributions for these 500 genes (category-centered)
 PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                  legendName    = "PS",
@@ -259,17 +182,13 @@ category-centered "*"    "*"      "*"      "*"   "*"     "*"  "n.s."
 
 Or analogously `stage-centered`:
 
-
-```{r,eval = TRUE, fig.width= 9, fig.height= 7}
+```{r,eval = TRUE, fig.width= 7, fig.height= 5}
 library(myTAI)
-
 data(PhyloExpressionSetExample)
-
 # define an example gene subset (500 genes) which
 # can be found in the input ExpressionSet
 set.seed(234)
 example.gene.set <- PhyloExpressionSetExample[sample(1:25260,500) , 2]
-
 # visualize the gene expression distributions for these 500 genes (stage-centered)
 PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                  legendName    = "PS",
@@ -304,7 +223,6 @@ users need to pass the `Groups` to `PlotGroupDiffs()` specifying the groups that
 
 ```{r,eval= TRUE, fig.width= 7, fig.height= 7,warning=FALSE}
 library(myTAI)
-
 data(PhyloExpressionSetExample)
 
 PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
@@ -314,7 +232,6 @@ PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
                type          = "b",
                lwd           = 6,
                xlab          = "Ontogeny")
-
 ```
 
 In cases where no plot shall be drawn and only the resulting p-value shall be returned
@@ -323,15 +240,12 @@ underlying test statistic.
 
 ```{r,eval= TRUE, fig.width= 9, fig.height= 7,warning=FALSE}
 library(myTAI)
-
 data(PhyloExpressionSetExample)
-
 # only receive the p-values without the corresponding plot
 PlotGroupDiffs(ExpressionSet = PhyloExpressionSetExample,
                Groups        = list(group_1 = 1:3,group_2 = 4:12),
                legendName    = "PS",
                plot.type     = NULL)
-
 ```
 
 Optionally, users can also visualize the difference in expression level distributions 
@@ -340,15 +254,12 @@ argument.
 
 ```{r,eval= TRUE,fig.width= 9, fig.height= 12,warning=FALSE}
 library(myTAI)
-
 data(PhyloExpressionSetExample)
-
 # visualize difference as boxplot
 PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
                Groups        = list(group_1 = 1:3,group_2 = 4:12),
                legendName    = "PS",
                plot.type     = "boxplot")
-
 ```
 
 Here, we use log2 transformed expression levels for better visualization (`tf(PhyloExpressionSetExample,log2)`).
