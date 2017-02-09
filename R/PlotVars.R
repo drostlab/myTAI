@@ -121,7 +121,7 @@ PlotVars <- function(ExpressionSet,
                         ) +
                         ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y.ticks)) + 
                         ggplot2::scale_colour_manual(values = custom.myTAI.cols(nrow(mMatrix)))
-                
+                p <- p + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                 return(p)
         }
         
@@ -129,11 +129,6 @@ PlotVars <- function(ExpressionSet,
                 
                 mMatrixGroup1 <- dplyr::filter(mMatrix, age %in% Groups[[1]])
                 mMatrixGroup2 <- dplyr::filter(mMatrix, age %in% Groups[[2]])
-                
-                getColors <- function(n) {
-                        h <- seq(15, 375, length = n + 1)
-                        return(grDevices::hcl(h = h, l = 65, c = 100)[1:n])
-                }
                 
                 p1 <- ggplot2::ggplot(mMatrixGroup1, ggplot2::aes( factor(stage, levels = unique(stage)), expr, group = age, fill = factor(age, levels = age_names[Groups[[1]]]))) + 
                         ggplot2::geom_line(ggplot2::aes(color = factor(age, levels = age_names[Groups[[1]]])), size = 3) +
@@ -193,7 +188,8 @@ PlotVars <- function(ExpressionSet,
                         
                         p2 <- p2 + ggplot2::scale_y_continuous(limits = c(min(MeanValsMatrix), max(MeanValsMatrix)), breaks = scales::pretty_breaks(n = y.ticks))    
                 }
-                
+                p1 <- p1 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
+                p2 <- p2 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                 return(gridExtra::grid.arrange(p1, p2, ncol = 2))
         }
 }
