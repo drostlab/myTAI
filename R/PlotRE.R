@@ -146,7 +146,7 @@ PlotRE <- function(ExpressionSet,
                                 ymin = min(MeanValsMatrix) - (min(MeanValsMatrix) / 50),
                                 ymax = Inf), fill = "#4d004b", alpha = alpha)  
                 }
-                
+                p <- p + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                 return(p)
         }
         
@@ -228,7 +228,8 @@ PlotRE <- function(ExpressionSet,
                                 ymin = min(MeanValsMatrix),
                                 ymax = Inf), fill = "#4d004b", alpha = alpha)  
                 }
-                
+                p1 <- p1 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
+                p2 <- p2 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                 return(gridExtra::grid.arrange(p1, p2, ncol = 2))
         }
 }
