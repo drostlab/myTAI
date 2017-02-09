@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 # Table of Contents
 1. [Scientific Introduction](#scientific-introduction-performing-evolutionary-transcriptomics-with-r)
 2. [Installation](#installation)
-3. [Getting Started](#getting-started)
+3. [Motivation](#motivation)
 4. [Retrieval of phylogenetic or taxonomic information](#retrieval-of-phylogenetic-or-taxonomic-information)
 
 xy. [First Example Protocol](#)
@@ -32,7 +32,7 @@ xy. [First Example Protocol](#)
 In the past years, a large body of scientific studies aimed at investigating the molecular basis of variation and conservation within biological processes. These transcriptomics studies allowed us to get a glimpse into the molecular patterns and processes that underly complex biological processes such as development or cell differentiation.
 
 Although powerful for investigating the molecular mechanisms that determine the biological process of interest, these datasets rarely capture the evolutionary history of __how__ these expression patterns emerged or to __what extent__ they are possibly constrained. By combining
-transcriptomics studies with a comparative approach, however, we can capture some evolutionary signatures that allow us to understand the variability or constraint of particular sets of genes. This evolutionary transcriptomics approach relies on the comparison of transcriptomes between species using orthologous or homologous genes as a phylogenetic variable This method seeks to determine stages of biological processes in which gene expression patterns are more variable or more constrained than others. 
+transcriptomics studies with a comparative approach, however, we can capture some evolutionary signatures that allow us to understand the variability or constraint of particular sets of genes. This evolutionary transcriptomics approach relies on the comparison of transcriptomes between species using orthologous or homologous genes as a phylogenetic variable. This method seeks to determine stages of biological processes in which gene expression patterns are more variable or more constrained than others. 
 
 Finding such transcriptome conservation or variability patterns within a biological process of interest, allows us to reconstruct parts of the evolutionary history of that particular process and might guide us in developing methods to modify such processes.
 
@@ -58,7 +58,7 @@ Users can download `myTAI` from [CRAN](https://cran.r-project.org/package=myTAI)
 install.packages("myTAI", dependencies = TRUE)
 ```
 
-## Getting Started
+## Motivation
 
 Using embryo development of the plant _Arabidopsis thaliana_ as an example, we ask the user to imagine how one would investigate the differences of developmental transcriptomes across developmental stages. 
 
@@ -89,22 +89,25 @@ In theory, any published or newly generated transcriptome dataset can be used to
 
 <img src="Figures/Fig3.pdf" alt="Figure 1" style="text-align: center; width:650px;height:650px;">
 
-<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression)), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](http://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221)), or phylogenetic reconciliation (see [Doyon et al, 2011](https://www.ncbi.nlm.nih.gov/pubmed/21949266)) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
+<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](http://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221) ), or phylogenetic reconciliation (see [Doyon et al, 2011](https://www.ncbi.nlm.nih.gov/pubmed/21949266) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
 
 
 ## Retrieval of phylogenetic or taxonomic information
 
-Gene age inference is the foundation of most evolutionary transcriptomics studies.
-The concept behind evolutionary transcriptomics is to combine these gene age estimates with gene expression
-data to quantify the average transcriptome age within a biological process of interest.
+There are different methods and tools for phylogenetic or taxonomic information retrieval such as phylogenetic trees, genomic phylostratography based gene age inference, dNdS estimation of orthologous genes or phylogenetic reconciliation. Below users can find the most recent tools and resources for retrieving or computing phylogenetic or taxonomic relationships for an organism of interest.
 
-In particular, this approach allowed the quantification of transcriptome conservation of animal and plant embryos passing through embryogenesis by first individually estimating the gene ages of specific animal and plant genomes and combining these gene age estimates with transcriptome data covering several stages of embryo development ([Domazet-Loso and Tautz, 2010 _Nature_](http://www.nature.com/nature/journal/v468/n7325/full/nature09632.html) ; [Quint, Drost et al., 2012 _Nature_](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) ; [Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221) ; [Drost et al., 2016 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1)).
 
-The [myTAI](https://github.com/HajkD/myTAI) package aims to provide a standard tool for evolutionary transcriptomics studies and relies on gene age and sequence conservation estimates as input. This approach allows researchers to study the evolution of biological processes and to detect stages or periods of evolutionary conservation or variability.
+### Phylogenetic comparative methods
+
+
+
+### Phylogenetic reconciliation
+
+### Genomic phylostratography based gene age inference
 
 As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)).
 
-In particular, Moyers & Zhang argue that [genomic phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 1) underestimates gene age for a considerable fraction of genes, 2) is biased for rapidly evolving proteins which are short, and/or their most conserved block of sites is small, and 3) these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori ([Moyers & Zhang, 2015](http://mbe.oxfordjournals.org/content/32/1/258.long);  [Moyers & Zhang, 2016](http://mbe.oxfordjournals.org/content/33/5/1245); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, these arguments were based on simulated data and were inconclusive due to [errors in their analyses](http://mbe.oxfordjournals.org/content/33/11/3031.full?etoc). Furthermore, [Domazet-Loso et al., 2016](http://www.biorxiv.org/content/early/2016/06/26/060756.abstract) provide convincing evidence that there is __no__ phylostratigraphic bias. In general, however, an objective benchmarking set representing the tree of life is still missing and therefore any procedure aiming to quantify gene ages will be biased to some degree.
+In particular, Moyers & Zhang argue that [genomic phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 1) underestimates gene age for a considerable fraction of genes, 2) is biased for rapidly evolving proteins which are short, and/or their most conserved block of sites is small, and 3) these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori ([Moyers & Zhang, 2015](http://mbe.oxfordjournals.org/content/32/1/258.long);  [Moyers & Zhang, 2016](http://mbe.oxfordjournals.org/content/33/5/1245); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, these arguments were based on simulated data and were inconclusive due to [errors in their analyses](http://mbe.oxfordjournals.org/content/33/11/3031.full?etoc). Furthermore, [Domazet-Loso et al., 2017](https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284) provide convincing evidence that there is __no__ phylostratigraphic bias. In general, however, an objective benchmarking set representing the tree of life is still missing and therefore any procedure aiming to quantify gene ages will be biased to some degree.
 
 Based on this debate a recent study suggested to perform gene age inference by combining thirteen common orthology inference algorithms to create gene age datasets and then characterize the error around each age-call on a per-gene and per-algorithm basis. Using this approach systematic error was found to be a large factor in estimating gene age, suggesting that simple consensus algorithms are not enough to give a reliable point estimate ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). However, by generating a consensus gene age and quantifying the possible error in each workflow step, [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) provide a very useful [database](http://geneages.org/) of
 consensus gene ages for a variety of genomes. 
@@ -118,14 +121,45 @@ Despite the ongoing debate about how to correctly infer gene age, users of `myTA
 
 The rational behind gene age inference is to assign each protein coding gene of an organism of iterest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see  [Tautz & Domazet-Loso, 2011](http://www.nature.com/nrg/journal/v12/n10/abs/nrg3053.html))). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _phylostratigraphic map_.
 
-Alternatively, we recently proposed an alternative method (Divergence Stratigraphy) to quantify the sequence conservation of protein coding genes between closely related species to study the active maintenance of transcriptome conservation patterns that were captured using a gene age inference approach ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221)). Analogous to gene age inference methods,
+
+__Generate or retrieve phylostratigraphic maps:__
+
+- generate a phylostratigraphic map with [createPSmap.pl](https://github.com/AlexGa/Phylostratigraphy) (implemented by Alexander Gabel)
+- generate a phylostratigraphic map with [phylostratigraphy.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022) (implemented by Cheng et al. 2015)
+- generate a phylostratigraphic map with [phylo_pipeline.py](https://mynotebook.labarchives.com/share/Shuqing_Xu/NTIuMHw2NDQyMi80MC9UcmVlTm9kZS8zNDEyODM1NjE2fDEzMi4w) (implemented by Shuqing Xu)
+- generate a phylostratigraphic map with [ORFanFinder](http://bioinformatics.oxfordjournals.org/content/early/2016/03/26/bioinformatics.btw122.full.pdf)
+- generate a gene age map with [Protein Historian](https://lighthouse.ucsf.edu/ProteinHistorian/)
+- download pre-computed and published [phylostratigraphic maps](https://github.com/HajkD/published_phylomaps)
+- use a gene age consensus approach to estimating gene ages for model organisms [Liebeskind et al., 2016](http://geneages.org/)
+
+
+### dNdS estimation of orthologous genes
+
+We recently proposed to use the classical dNdS measure to quantify the sequence conservation of protein coding genes between closely related species. This way, we combine the information about the selective pressure acting on a particular gene with its expression level during a particular time point or condition. We refer to this approach as Divergence Stratigraphy ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221)). Analogous to gene age inference methods,
 divergence stratigraphy generates a table storing the sequence conservation estimate in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _divergence stratigraphic map_.
 
-`myTAI` takes either a _phylostratigraphic map_ or a _divergence stratigraphic map_ and an expression dataset as input and provides functions to quantify the average transcriptome age or average transcriptome conservation within a biological process of interest. 
 
-The three input tables: _phylostratigraphic map_, _divergence stratigraphic map_, and the expression dataset need
-to fulfill specific data formats when using `myTAI`.
+__Generate or retrieve divergence stratigraphic maps:__
 
+- generate a [divergence stratigraphic map](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) with [orthologr](https://github.com/HajkD/orthologr) (implemented by Hajk-Georg Drost)
+- generate a divergence stratigraphic map with [compute_dNdS.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022) (implemented by Cheng et al. 2015)
+- retrieve phylogeny-based orthology and paralogy predictions from [MetaPhOrs](http://orthology.phylomedb.org/)
+- download pre-computed and published [divergence stratigraphic maps](https://github.com/HajkD/published_phylomaps)
+
+
+### Generate custom table
+
+
+In general, users can construct their own gene age assignment methods and are not limited to the methods listed above. 
+After formatting the corresponding results to the _age map_
+specification (age assignment in the first column and gene id in the second column), users can use
+any function in myTAI with their custom gene age assignment table.
+
+## Getting Started with `myTAI`
+
+`myTAI` takes an _age map_ and an expression dataset as input and combines them to capture evolutionary signatures in the transcriptome of interest. 
+
+### Defining input data standards
 The following code illustrates an example structure of a _phylostratigraphic map_ and _divergence stratigraphic map_:
 
 ```{r,eval=FALSE}
@@ -176,28 +210,8 @@ head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
 Hence, `myTAI` relies on pre-computed _phylostratigraphic maps_ and _divergence stratigraphic maps_.
 For this purpose, researchers can consult the following resources to generate or retrieve _phylostratigraphic maps_ and _divergence stratigraphic maps_ which can then be used with `myTAI`.
 
-### Generate or retrieve phylostratigraphic maps
-
-- generate a phylostratigraphic map with [createPSmap.pl](https://github.com/AlexGa/Phylostratigraphy) (implemented by Alexander Gabel)
-- generate a phylostratigraphic map with [phylostratigraphy.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022) (implemented by Cheng et al. 2015)
-- generate a phylostratigraphic map with [phylo_pipeline.py](https://mynotebook.labarchives.com/share/Shuqing_Xu/NTIuMHw2NDQyMi80MC9UcmVlTm9kZS8zNDEyODM1NjE2fDEzMi4w) (implemented by Shuqing Xu)
-- generate a phylostratigraphic map with [ORFanFinder](http://bioinformatics.oxfordjournals.org/content/early/2016/03/26/bioinformatics.btw122.full.pdf)
-- generate a gene age map with [Protein Historian](https://lighthouse.ucsf.edu/ProteinHistorian/)
-- download pre-computed and published [phylostratigraphic maps](https://github.com/HajkD/published_phylomaps)
-- use a gene age consensus approach to estimating gene ages for model organisms [Liebeskind et al., 2016](http://geneages.org/)
 
 
-### Generate or retrieve divergence stratigraphic maps
-
-- generate a [divergence stratigraphic map](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) with [orthologr](https://github.com/HajkD/orthologr) (implemented by Hajk-Georg Drost)
-- generate a divergence stratigraphic map with [compute_dNdS.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022) (implemented by Cheng et al. 2015)
-- retrieve phylogeny-based orthology and paralogy predictions from [MetaPhOrs](http://orthology.phylomedb.org/)
-- download pre-computed and published [divergence stratigraphic maps](https://github.com/HajkD/published_phylomaps)
-
-In general, users can construct their own gene age assignment methods and are not limited to the methods listed above. 
-After formatting the corresponding results to the _phylostratigraphic map_ or _divergence stratigraphic map_
-specification (age assignment in the first column and gene id in the second column), users can use
-any function in myTAI with their custom gene age assignment table.
 
 
 ### Expression dataset specification
@@ -440,7 +454,7 @@ which is different from the p-value returned by the `FlatLineTest` (`p_flt`).
 
 To make sure that correct modules have been selected to perform the `ReductiveHourglassTest`, users can use the `shaded.area` argument to visualize chosen modules:
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
 # Visualize the phylotypic period used for the Reductive Hourglass Test
 PlotSignature( ExpressionSet = PhyloExpressionSetExample,
                measure       = "TAI",
@@ -478,7 +492,7 @@ For this example we divide _A. thaliana_ embryo development stored within the _P
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
 # Plot the Transcriptome Age Index of a given PhyloExpressionSet 
 # Test Statistic : Reductive Early Conservation Test
 PlotSignature( ExpressionSet = PhyloExpressionSetExample,
@@ -516,7 +530,8 @@ TAI(PhyloExpressionSetExample)
 
 Analogous to the _TAI_ computations and visualization, the _TDI_ computations can be performed in a similar fashion:
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+data(DivergenceExpressionSetExample)
 # Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
 # Test Statistic : Flat Line Test (default)
 PlotSignature( ExpressionSet = DivergenceExpressionSetExample,
@@ -532,7 +547,8 @@ Again, for the __ReductiveHourglassTest__ we divide _A. thaliana_ embryo develop
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+data(DivergenceExpressionSetExample)
 # Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
 # Test Statistic : Reductive Hourglass Test
 PlotSignature( ExpressionSet = DivergenceExpressionSetExample,
@@ -550,7 +566,8 @@ And for the __EarlyConservationTest__ we again divide _A. thaliana_ embryo devel
 * mid = stages 3 - 5 (Globular, Heart, and Torpedo)
 * late = stages 6 - 7 (Bent and Mature)
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+data(DivergenceExpressionSetExample)
 # Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet 
 # Test Statistic : Reductive Early Conservation Test
 PlotSignature( ExpressionSet = DivergenceExpressionSetExample,
@@ -582,7 +599,8 @@ profile emerges from the cumulative TAI/TDI distribution of each `Phylostratum` 
 
 #### Example: `Phylostrata`
 
-```{r,eval = FALSE}
+```{r, fig.width= 7, fig.height= 5, eval = TRUE}
+data(PhyloExpressionSetExample)
 # visualize phylostrata contribution to the global TAI pattern
  PlotContribution( ExpressionSet = PhyloExpressionSetExample,
                    legendName    = "PS",
@@ -621,12 +639,11 @@ pTAI(PhyloExpressionSetExample)
 
 Analogously, the `Divergence Stratum` specific influence on the global TDI pattern can be visualized using:
 
-```{r,eval = FALSE}
+```{r, fig.width= 7, fig.height= 5, eval = TRUE}
+data(DivergenceExpressionSetExample)
 # visualize divergence stratum contribution to global TDI
  PlotContribution( ExpressionSet = DivergenceExpressionSetExample,
-                   legendName    = "DS",
-                   lwd           = 6,
-                   cex           = 0.5)
+                   legendName    = "DS")
 ```
 
 The exact values of the `Divergence Stratum` specific cumulative TDI values can be obtained
@@ -785,7 +802,7 @@ To further investigate the origins of the global __TAI__ or __TDI__ pattern it i
 
 Visualizing the mean gene expression of genes corresponding to the same Phylostratum or Divergence Stratum class allows users to detect biological process specific groups of Phylostrata or Divergence Strata that are most expressed during the underlying biological process. This might lead to correlating specific groups of Phylostrata or Divergence Strata sharing similar evolutionary origins with common functions or functional contributions to a specific developmental process. 
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
 # Visualizing the mean gene expression of each Phylostratum class
 PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
            Groups        = list(1:12), 
@@ -800,7 +817,7 @@ The `PlotMeans()` function takes an PhyloExpressionSet or DivergenceExpressionSe
 
 For this example we separate groups of Phylostrata into __evolutionary old Phylostrata__ (PS1-3) in one plot versus __evolutionary younger Phylostrata__ (PS4-12) into another plot:
 
-```{r, fig.height= 5, fig.width=9,eval=FALSE}
+```{r, fig.height= 5, fig.width=7,eval=TRUE}
 # Visualizing the mean gene expression of each Phylostratum class
 # in two separate plots (groups)
 PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
@@ -839,7 +856,7 @@ Here the `age.apply()` function (`?age.apply`) takes a function as argument that
 Users may also specify a shaded area corresponding to the modules that were specified when
 using the `PlotSignature()` function.
 
-```{r, fig.height= 5, fig.width=9,eval=FALSE}
+```{r, fig.height= 5, fig.width=7,eval=TRUE}
 # Visualizing the mean gene expression of each Phylostratum class
 # and draw an shaded area for the mid-module.
 PlotMeans( ExpressionSet = PhyloExpressionSetExample, 
@@ -853,15 +870,13 @@ of expression profiles that correspond to the age categories of interest.
 
 For a DivergenceExpressionSet run:
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+data(DivergenceExpressionSetExample)
 # Visualizing the mean gene expression of each Divergence Stratum class
 PlotMeans( ExpressionSet = DivergenceExpressionSetExample, 
            Groups        = list(1:10), 
            legendName    = "DS",
-           xlab          = "Ontogeny", 
-           lty           = 1, 
-           cex           = 0.7, 
-           lwd           = 5 ) 
+           xlab          = "Ontogeny") 
 ```
 
 To obtain the numerical values (mean expression levels for all Divergence Strata) run:
@@ -904,7 +919,7 @@ to similar biological processes.
 
 The `PlotRE()` function can be used (analogous to the `PlotMeans()` function) to visualize the relative expression levels of a given PhyloExpressionSet and DivergenceExpressionSet:
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
 # Visualizing the mean gene expression of each Phylostratum class
 PlotRE( ExpressionSet = PhyloExpressionSetExample, 
         Groups        = list(1:12), 
@@ -912,7 +927,8 @@ PlotRE( ExpressionSet = PhyloExpressionSetExample,
         xlab          = "Ontogeny") 
 ```
 
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+data(DivergenceExpressionSetExample)
 # Visualizing the mean gene expression of each Divergence Stratum class
 PlotRE( ExpressionSet = DivergenceExpressionSetExample, 
         Groups        = list(1:10), 
@@ -922,7 +938,7 @@ PlotRE( ExpressionSet = DivergenceExpressionSetExample,
 
 or again by assigning Phylostratum or Divergence Stratum groups that shall be visualized in different plots:
 
-```{r,fig.height=5, fig.width=9,eval=FALSE}
+```{r,fig.height=5, fig.width=7,eval=TRUE}
 # Visualizing the mean gene expression of each Phylostratum class
 PlotRE( ExpressionSet = PhyloExpressionSetExample, 
         Groups        = list(group_1 = 1:3, group_2 = 4:12), 
@@ -933,7 +949,7 @@ PlotRE( ExpressionSet = PhyloExpressionSetExample,
 Users may also specify a shaded area corresponding to the modules that were specified when
 using the `PlotSignature()` function.
 
-```{r,fig.height=5, fig.width=9,eval=FALSE}
+```{r,fig.height=5, fig.width=7,eval=TRUE}
 # Visualizing the mean gene expression of each Phylostratum class
 PlotRE( ExpressionSet = PhyloExpressionSetExample, 
         Groups        = list(1:12),
@@ -1014,13 +1030,13 @@ Quint et al. (2012) introduced an additional way of visualizing the difference o
 
 This bar plot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the `PlotMeans()` and `PlotRE()` functions:
 
-```{r,fig.height=5, fig.width=7,eval=FALSE}
+```{r,fig.height=5, fig.width=7,eval=TRUE}
 # Visualizing the mean relative expression of two Phylostratum groups
 PlotBarRE( ExpressionSet = PhyloExpressionSetExample, 
            Groups        = list(group_1 = 1:3, group_2 = 4:12), 
            xlab          = "Ontogeny", 
            ylab          = "Mean Relative Expression", 
-           cex           = 2) 
+           cex           = 1.5) 
 ```
 
 Here the argument `Groups = list(1:3, 4:12)` corresponds to dividing Phylostrata 1-12
@@ -1030,76 +1046,29 @@ A [Kruskal-Wallis Rank Sum Test](http://stat.ethz.ch/R-manual/R-patched/library/
 
 Additionally the ratio between both values represented by the bars to be compared can be visualized as function within the bar plot using the `ratio = TRUE` argument:
 
-```{r, fig.height=5,fig.width=7,eval=FALSE}
+```{r, fig.height=5,fig.width=7,eval=TRUE}
 # Visualizing the mean relative expression of two Phylostratum groups
 PlotBarRE( ExpressionSet = PhyloExpressionSetExample, 
            Groups        = list(group_1 = 1:3, group_2 = 4:12), 
            ratio         = TRUE,
            xlab          = "Ontogeny", 
            ylab          = "Mean Relative Expression", 
-           cex           = 2 ) 
+           cex           = 1.5 ) 
 ```
 
 It is also possible to compare more than two groups:
-```{r, fig.width=7,eval=FALSE}
+```{r, fig.width=7,eval=TRUE}
 # Visualizing the mean relative expression of three Phylostratum groups
 PlotBarRE( ExpressionSet = PhyloExpressionSetExample, 
            Groups        = list(group_1 = 1:3, group_2 = 4:6, group_3 = 7:12), 
            wLength       = 0.05,
            xlab          = "Ontogeny", 
            ylab          = "Mean Relative Expression", 
-           cex           = 2 ) 
+           cex           = 1.5 ) 
 ```
 
 For the corresponding statistically significant stages, a _Posthoc_ test can be performed to detect the combinations of differing bars that cause the global statistical significance.
 
-
-# Supplementary Information
-
-Some visualization functions in the _`myTAI`_ package have an __ellipsis__ argument (`?dotsMethods`)
-which allows users to modify the graphics arguments `cex.lab`, `cex.axis`, and `cex` within the plot.
-
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# cex = 0.5, cex.lab = 0.5, cex.axis = 0.5
-PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TAI",
-             cex           = 0.5, 
-             cex.lab       = 0.5, 
-             cex.axis      = 0.5 )
-```
-
-The `cex` argument modifies the the p-value font size, the `cex.lab` argument modifies the font size of the x-axis and y-axis labels, and the `cex.axis` argument modifies the font size of the axis labels.
-
-More examples:
-
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# cex = 2, cex.lab = 1, cex.axis = 0.5 
-PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TAI",
-             cex           = 2, 
-             cex.lab       = 1, 
-             cex.axis      = 0.5 )
-```
-
-```{r, fig.width= 7, fig.height= 5,eval=FALSE}
-# cex = 0.5, cex.lab = 0.7, cex.axis = 1.5
-PlotPattern( ExpressionSet = PhyloExpressionSetExample, 
-             type          = "l", 
-             lwd           = 6, 
-             xlab          = "Ontogeny", 
-             ylab          = "TAI",
-             cex           = 0.5, 
-             cex.lab       = 0.7, 
-             cex.axis      = 1.5 )
-```
-
-These arguments can analogously be used for all other plot functions, e.g. `PlotMeans()`, `PlotRE()`, etc.
 
 ### Saving Plots on Local Machine
 
