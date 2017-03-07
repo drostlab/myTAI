@@ -132,6 +132,8 @@ __Generate or retrieve phylostratigraphic maps:__
 - download pre-computed and published [phylostratigraphic maps](https://github.com/HajkD/published_phylomaps)
 - [Liebeskind et al., 2016](http://geneages.org/): use a gene age consensus approach to estimating gene ages for model organisms
 - [orthoscape](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1427-5): a cytoscape application for grouping and visualization KEGG based gene networks by taxonomy and homology principles (implemented by Mustafin et al., 2017)
+- [RecBlast](http://biorxiv.org/content/early/2017/03/02/112946): Cloud-Based Large Scale Orthology Detection (by Efrat Rapoport and Moran Neuhof)
+
 
 ### dNdS estimation of orthologous genes
 
@@ -146,6 +148,8 @@ __Generate or retrieve divergence stratigraphic maps:__
 - [MetaPhOrs](http://orthology.phylomedb.org/): retrieve phylogeny-based orthology and paralogy predictions
 - download pre-computed and published [divergence stratigraphic maps](https://github.com/HajkD/published_phylomaps)
 - [orthoscape](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1427-5): a cytoscape application for grouping and visualization KEGG based gene networks by taxonomy and homology principles (implemented by Mustafin et al., 2017)
+- [RecBlast](http://biorxiv.org/content/early/2017/03/02/112946): Cloud-Based Large Scale Orthology Detection (by Efrat Rapoport and Moran Neuhof)
+
 
 ### Generate custom table
 
