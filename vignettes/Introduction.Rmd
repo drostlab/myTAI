@@ -39,7 +39,7 @@ Finding such transcriptome conservation or variability patterns within a biologi
 
 The myTAI package provides an analytics tool to perform evolutionary transcriptomics studies and is designed to detect evolutionary signatures in transcriptome data. It furthermore, seeks to provide a consistent way to design a computationally reproducible analytics process that achieves a high degree of transparency when conducting evolutionary transcriptomics studies.
 
-Alternatively, instead of investigating the transcriptome conservation of a biological process of interest, `comparative transcriptomics` ( [Pantalacci and Sémon, 2014](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22595/abstract); [Roux et al., 2015](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22618/full) ) has been developed as a method to study the conservation and variation of gene expression profiles of orthologous genes between related species for a biological process of intest. 
+Alternatively, instead of investigating the transcriptome conservation of a biological process of interest, `comparative transcriptomics` ( [Pantalacci and Semon, 2014](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22595/abstract); [Roux et al., 2015](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22618/full) ) has been developed as a method to study the conservation and variation of gene expression profiles of orthologous genes between related species for a biological process of intest. 
 
 For some biological studies, it can be useful to choose both approaches, `comparative transcriptomics` and `transcriptome conservation quantification`, to independently confirm
 evolutionary constraints that might be present in a biological process of interest.
