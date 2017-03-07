@@ -24,8 +24,9 @@ knitr::opts_chunk$set(
 2. [Installation](#installation)
 3. [Motivation](#motivation)
 4. [Retrieval of phylogenetic or taxonomic information](#retrieval-of-phylogenetic-or-taxonomic-information)
+5. [Defining input data standards](#defining-input-data-standards)
+6. [Performing a Standard Workflow for Evolutionary Transcriptomics Analyses](#performing-a-standard-workflow-for-evolutionary-transcriptomics-analyses)
 
-xy. [First Example Protocol](#)
 
 ## Scientific Introduction: Performing Evolutionary Transcriptomics with R
 
@@ -37,6 +38,21 @@ transcriptomics studies with a comparative approach, however, we can capture som
 Finding such transcriptome conservation or variability patterns within a biological process of interest, allows us to reconstruct parts of the evolutionary history of that particular process and might guide us in developing methods to modify such processes.
 
 The myTAI package provides an analytics tool to perform evolutionary transcriptomics studies and is designed to detect evolutionary signatures in transcriptome data. It furthermore, seeks to provide a consistent way to design a computationally reproducible analytics process that achieves a high degree of transparency when conducting evolutionary transcriptomics studies.
+
+Alternatively, instead of investigating the transcriptome conservation of a biological process of interest, `comparative transcriptomics` ( [Pantalacci and Sémon, 2014](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22595/abstract); [Roux et al., 2015](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22618/full) ) has been developed as a method to study the conservation and variation of gene expression profiles of orthologous genes between related species for a biological process of intest. 
+
+For some biological studies, it can be useful to choose both approaches, `comparative transcriptomics` and `transcriptome conservation quantification`, to independently confirm
+evolutionary constraints that might be present in a biological process of interest.
+
+The advantage of `comparative transcriptomics` over `transcriptome conservation quantification` is that this method uses multiple species to confirm gene expression profile conservation within a biological process of interest. However, one should be aware that most `comparative transcriptomics` studies limit their quantification and inference on a subset of the transcriptome. Since `comparative transcriptomics` studies rely on transcripts of orthologous genes, the orthology inference method and the evolutionary distance between compared species can limit the set of investigated transcripts up to 1/3 of the actual transcriptome.
+
+In contrast, the advantage of `transcriptome conservation quantification` over `comparative transcriptomics` is that although `transcriptome conservation quantification` captures less evolutionary signal it can be performed using only one reference species. Thus, hundreds of thousands of transcriptome datasets that are publically accessible can be revisited and investigated in the light of `transcriptome conservation` without having to conduct new experiments to fulfill the experimental design standards of `comparative transcriptomics` studies. 
+
+Furthermore, although also possible in `comparative transcriptomics` studies, `transcriptome conservation quantification` allows to easily include miRNA or lncRNA expression levels to quantify transcriptome conservation. Hence, `transcriptome conservation quantification` experiments capture almost the entire transcriptome when screening for constrained stages or treatments in biological processes.
+
+In conclusion, `transcriptome conservation quantification` experiments can serve as a first approach to screen for the potential existence of (evolutionary/developmental/etc.) constraints within a biological process of interest. If constraints were found in particular stages or treatments which might limit the biological process of interest, `comparative transcriptomics` experiments can be designed to confirm the existence of those constraints in multiple species. 
+
+In this regard, the `myTAI` package serves as analytics tool to revisit existing transcriptome datasets to investigate them in the light of `transcriptome conservation`. 
 
 
 ## Installation
@@ -70,11 +86,11 @@ Using embryo development of the plant _Arabidopsis thaliana_ as an example, we a
 The objective of performing evolutionary transcriptomics studies is to classify a transcriptome into different categories of genes sharing similar evolutionary origins (detectable homologs) or genes that share similar phylogenetic relationships (orthologous genes) and to study the overall expression patterns of these classified genes throughout the biological process of interest. Thus, by introducing a phylogenetic or taxonomic variable to a transcriptome dataset, we can determine stages or time points that are under stronger constraints than others, indicating switches between biological programs or functions.
 
 
-<img src="Figures/Fig2.pdf" alt="Figure 2" style="text-align: center; width:700px;height:300px;">
+<img src="Figures/Fig2.pdf" alt="Figure 2" style="text-align: center; width:750px;height:250px;">
 
 <p style="font-size:10px;"> Figure 2: Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development classified into distinctive age categories. Each box represents the developmental stage during _A. thaliana_ embryogenesis, the y-axis denotes the log2 expression levels of genes that fall into the corresponding age category shown on the x-axis. Hence, each boxplot represents the gene expression distribution of genes that are classified into the corresponding age class during a specific developmental stage. The gene age distribution of _A. thaliana_ genes range from PS1 to PS12 where PS1 represents the evolutionarily most distant age category (cellular org.) and PS12 the evolutionary most recent age category (_A. thaliana_ specific). Yellow dots in the boxplots denote the mean expression level of the corresponding expression distribution. This visualization illustrates that although the global gene expression distributions do not change visually between developmental stages (Fig. 1), the global gene expression distributions of age categories differ between stages of _A. thaliana_ embryo development, and thus, allow studying the effect of transcriptome evolution and conservation on embryo development. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221). </p>
 
-Conceptually, the idea behind evolutionary transcriptomics studies is to combine the phylogenetic relationship between species (usually retrieved from comparative genomics studies) with transcriptome data quantifying a particular biological process of interest (e.g. mutant gene expression versus WT gene expression, stress responses, cell differentiation, development, etc.). Usually, transcriptome data comes from Next Generation Sequencing technologies such as RNA-Seq or from Microarray experiments.
+Conceptually, the idea behind evolutionary transcriptomics studies is to combine the phylogenetic relationship between species (usually retrieved from comparative genomics studies in terms of sequence homology) with transcriptome data of a reference species quantifying a particular biological process of interest (e.g. mutant gene expression versus WT gene expression, stress responses, cell differentiation, development, etc.). Usually, transcriptome data comes from Next Generation Sequencing technologies such as RNA-Seq or from Microarray experiments.
 
 
 <p style="text-align: center; font-size:20px;"> Phylogenetic Information + Transcriptome Data </p>
@@ -87,14 +103,14 @@ In theory, any published or newly generated transcriptome dataset can be used to
 
 `myTAI` is designed to receive phylogenetic information obtained from comparative genomics data and transcriptome data as input and internally combines these datasets to perform evolutionary transcriptomics analyses.
 
-<img src="Figures/Fig3.pdf" alt="Figure 1" style="text-align: center; width:650px;height:650px;">
+<img src="Figures/Fig3.pdf" alt="Figure 3" style="text-align: center; width:650px;height:650px;">
 
 <p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](http://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221) ), or phylogenetic reconciliation (see [Doyon et al, 2011](https://www.ncbi.nlm.nih.gov/pubmed/21949266) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
 
 
 ## Retrieval of phylogenetic or taxonomic information
 
-There are different methods and tools for phylogenetic or taxonomic information retrieval such as phylogenetic trees, genomic phylostratography based gene age inference, dNdS estimation of orthologous genes or phylogenetic reconciliation. Below users can find the most recent tools and resources for retrieving or computing phylogenetic or taxonomic relationships for an organism of interest.
+For the comparative genomics part there are different methods and tools to quantify sequence homolgy between genes, miRNAs, lncRNAs etc of a reference species and related species. For example, for phylogenetic or taxonomic information retrieval such as phylogenetic trees, genomic phylostratography based gene age inference, dNdS estimation of orthologous genes or phylogenetic reconciliation can be used. Below users can find the most recent tools and resources for retrieving or computing phylogenetic or taxonomic relationships for an organism of interest.
 
 
 ### Phylogenetic comparative methods
@@ -161,10 +177,10 @@ any function in myTAI with their custom gene age assignment table.
 
 ## Getting Started with `myTAI`
 
-`myTAI` takes an _age map_ and an expression dataset as input and combines them to capture evolutionary signatures in the transcriptome of interest. 
+`myTAI` takes an _age map_ and an expression dataset as input and combines both tables to the quantify transcriptome conservation for the biological process of interest. 
 
 ### Defining input data standards
-The following code illustrates an example structure of a _phylostratigraphic map_ and _divergence stratigraphic map_:
+The following code illustrates an example structure of an `age map`. Here we choose genomic phylostratigraphy and dNdS estimation as method to generate a _phylostratigraphic map_ and _divergence stratigraphic map_:
 
 ```{r,eval=FALSE}
 # load myTAI
@@ -211,12 +227,7 @@ head(DivergenceExpressionSetExample[ , c("Divergence.stratum","GeneID")])
 6                  1 at1g01540.2
 ```
 
-Hence, `myTAI` relies on pre-computed _phylostratigraphic maps_ and _divergence stratigraphic maps_.
-For this purpose, researchers can consult the following resources to generate or retrieve _phylostratigraphic maps_ and _divergence stratigraphic maps_ which can then be used with `myTAI`.
-
-
-
-
+Hence, `myTAI` relies on pre-computed _age maps_ fulfilling the aforementioned standard for all downstream analyses. It does not matter whether or not age maps contain categorized age values like in `phylostratigraphic maps` or e.g. phylogenetic distance values generated by phylogenetic inference. 
 
 ### Expression dataset specification
 
@@ -330,14 +341,16 @@ Keeping these standard data formats in mind will provide users with the most imp
 
 __Note__, that within the code of each function, the argument `ExpressionSet` always refers to either a PhyloExpressionSet or a DivergenceExpressionSet, whereas in specialized functions some arguments are specified as _PhyloExpressionSet_ when they take an PhyloExpressionSet as input data set, or specified as _DivergenceExpressionSet_ when they take an _DivergenceExpressionSet_ as input data set.
 
-## Performing a Standard Workflow for Phylotranscriptomics Analyses 
+## Performing a Standard Workflow for Evolutionary Transcriptomics Analyses 
 
-The main goal of any evolutionary transcriptomics study is to quantify the average age of a transcriptome 
-or the average conservation of a transcriptome within a biological process of interest.
-For this purpose, several measures were introduced:
+The main goal of any evolutionary transcriptomics study is to quantify transcriptome conservation at a particular stage or treatment. This is achieved by computing the average age of genes that contribute to the transcriptome at that stage or treatment. In other words, by multiplying the gene age value with the expression level of the corresponding gene and averaging over all genes, we obtain the mean age of the transcriptome. Hence, we can say that at a particular stage `genes that are most expressed at this stage or treatment have (on average) the evolutionary age XY`.
 
 
-Mathematically, the _Transcriptome Age Index_ (TAI) introduced by Domazet-Loso and Tautz, 2010 represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
+To obtain this mean age value, several measures were introduced:
+
+#### Transcriptome Age Index
+
+The first meansure named _Transcriptome Age Index_ (TAI) was introduced by Domazet-Loso and Tautz, 2010 and represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
 
 
 $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
@@ -345,7 +358,199 @@ $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 where $ps_i$ denotes the phylostratum assignment of gene $i$ and $e_{is}$ denotes
 the gene expression level of gene $i$ at developmental time point $s$. A lower value of TAI describes an older transcriptome age, whereas a higher value of TAI denotes a younger transcriptome age.
 
-Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by Quint et al., 2012 and Drost et al., 2015 as global measure of average transcriptome selection pressure where $s$ denotes the corresponding developmental stage.
+The following figure shows the TAI computations for the seven stages of _A. thaliana_ embryo development.
+
+```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+data(PhyloExpressionSetExample)
+# Plot the Transcriptome Age Index of a given PhyloExpressionSet 
+# Test Statistic : Flat Line Test (default)
+PlotSignature( ExpressionSet = PhyloExpressionSetExample,
+               measure       = "TAI", 
+               TestStatistic = "FlatLineTest",
+               xlab          = "Ontogeny", 
+               ylab          = "TAI" )
+```
+
+The x-axis shows the seven stages of _A. thaliana_ embryo development and the y-axis shows the corresponding mean transcriptome age (TAI) value. The lower the TAI value the older the mean transcriptome age and the higher the TAI value the younger the mean transcriptome age.
+
+The interpretation of the TAI values on the y-axis is given by the next figure.
+
+<img src="Figures/Fig4.pdf" alt="Figure 4" style="text-align: center; width:650px;height:650px;">
+
+In this example, a TAI value of 3.5 quantifies that genes that contribute most the transcriptome at a particular stage emerged on average between phylostratum 3 and phylostratum 4. Due to the nature of the arithmetic mean, this value does not represent the true origin of individual genes, and thus the TAI measure is only helpful to screen for stages that express (on average) older or younger genes. Subsequent analyses such as mean expression of age categories, relative expression levels, and gene expression level distributions for each age category will then reveal which exact genes or age categories generate the overall TAI value.
+
+To obtain a more detailed overview of which age categories contribute how much to
+each developmental stage, the gene expression level distributions for each age caterory and each developmental stage can be visualized (using the `PlotCategoryExpr()` function).
+
+```{r, fig.width= 9, fig.height= 5,eval=TRUE}
+data(PhyloExpressionSetExample)
+# category-centered visualization of PS 
+# specific expression level distributions (log-scale)
+PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
+                     legendName    = "PS",
+                     test.stat     = TRUE,
+                     type          = "category-centered",
+                     distr.type    = "boxplot",
+                     log.expr      = TRUE)
+```
+
+This figure shows that in all developmental stages, genes coming from PS1-3 are (on average) more expressed than genes coming from PS4-12. Interestingly, the gene expression level distributions of PS4-12 become more equally distributed towards the Torpedo stage which has been marked as the most conserved stage by TAI analysis. This general trend can be visualized using the `PlotMeans()` function.
+
+```{r, fig.width= 9, fig.height= 5,eval=TRUE}
+data(PhyloExpressionSetExample)
+# plot evolutionary old PS (PS1-3) vs
+# evolutionary young PS (PS4-12)
+PlotMeans(PhyloExpressionSetExample,
+          Groups = list(c(1:3), c(4:12)), 
+          legendName = "PS",
+          adjust.range = TRUE)
+```
+
+Here, users will observe that indeed PS1-3 genes are (on average) higher expressed than PS4-12 genes.
+
+Using a linear transformation of the mean expression levels into the interval $[0,1]$ (Quint et al., 2012 and Drost et al., 2015) we can compare mean expression patterns between Phylostrata independent from their actual mean expression magnitude. A relative expression level of 0 denotes the minimum mean expression level compared to all other stages and a relative expression level of 1 denotes the maximum mean expression level compared to all other stages.
+
+The following figure illustrates the average gene expression profile for each phylostratum.
+
+```{r, fig.width= 9, fig.height= 5,eval=TRUE}
+data(PhyloExpressionSetExample)
+# plot evolutionary old PS (PS1-3) vs
+# evolutionary young PS (PS4-12)
+PlotRE(PhyloExpressionSetExample,
+          Groups = list(c(1:3), c(4:12)), 
+          legendName = "PS",
+          adjust.range = TRUE)
+```
+
+Users will observe, that PS4-12 genes are down-regulated towards the Torpedo stage (marked as most conserved by TAI analysis) and up-regulated after the Torpedo stage.
+
+To cluster gene expression levels of PS4-12 genes we categorize _A. thaliana_ embryogenesis into three developmental modules (early, mid, and late) and cluster young genes (PS4-12) according to their fold-change pattern: High-Low-Low, High-Low-High, and Low-Low-High. 
+
+```{r,eval=TRUE,echo=FALSE,fig.width= 7, fig.height= 15}
+# select PS4-12 genes
+PhyloExpressionSetExample.PS4_12 <-
+        dplyr::filter(PhyloExpressionSetExample, Phylostratum %in% c(4:12))
+# categorize A. thaliana embryogenesis into three 
+# developmental modules (early, mid, and late)
+Ath.Embryogenesis.DiffGenes <-
+        DiffGenes(
+        ExpressionSet = PhyloExpressionSetExample.PS4_12,
+        nrep          = c(2, 3, 2),
+        stage.names   = c("Early", "Mid", "Late")
+        )
+
+# cluster young genes (PS4-12) according to their fold-change pattern: High-Low-Low        
+Ath.Embryo.High_Low_Low <-
+        PhyloExpressionSetExample.PS4_12[which((Ath.Embryogenesis.DiffGenes[, "Early->Mid"] > 3) &
+        (dplyr::between(Ath.Embryogenesis.DiffGenes[, "Mid->Late"], 1, 2))),]
+
+# cluster young genes (PS4-12) according to their fold-change pattern: High-Low-High
+Ath.Embryo.High_Low_High <-
+        PhyloExpressionSetExample.PS4_12[which((Ath.Embryogenesis.DiffGenes[, "Early->Mid"] > 3) &
+        (Ath.Embryogenesis.DiffGenes[, "Mid->Late"] < 0.2)),]
+
+# cluster young genes (PS4-12) according to their fold-change pattern: Low-Low-High        
+Ath.Embryo.Low_Low_High <-
+        PhyloExpressionSetExample.PS4_12[which((dplyr::between(Ath.Embryogenesis.DiffGenes[, "Early->Mid"], 1, 2)) &
+        (Ath.Embryogenesis.DiffGenes[, "Mid->Late"] < 0.2)),]
+        
+        
+        par(mfrow = c(3, 1))
+        matplot(
+        t(Ath.Embryo.High_Low_Low[, 3:9]),
+        type = "l",
+        lty = 1,
+        lwd = 2,
+        col = "lightblue",
+        xlab = "Ontogeny",
+        ylab = "Expression Level",
+        xaxt = "n",
+        cex.lab = 1.5,
+        cex.axis = 1.5,
+        main = "High-Low-Low"
+        )
+        lines(
+        colMeans(Ath.Embryo.High_Low_Low[, 3:9]),
+        lwd = 6 ,
+        col = "red",
+        cex.lab = 1.5,
+        cex.axis = 1.5,
+        cex = 1.5
+        )
+        axis(1, 1:7, names(PhyloExpressionSetExample)[3:9])
+        text(
+        4,
+        max(Ath.Embryo.High_Low_Low[, 3:9]) - 6000,
+        labels = paste0(nrow(Ath.Embryo.High_Low_Low), " Genes"),
+        cex = 2
+        )
+        
+        matplot(
+        t(Ath.Embryo.High_Low_High[, 3:9]),
+        type = "l",
+        lty = 1,
+        lwd = 2,
+        col = "lightblue",
+        xlab = "Ontogeny",
+        ylab = "Expression Level",
+        xaxt = "n",
+        cex.lab = 1.5,
+        cex.axis = 1.5,
+        main = "High-Low-High"
+        )
+        lines(
+        colMeans(Ath.Embryo.High_Low_High[, 3:9]),
+        lwd = 6 ,
+        col = "red",
+        cex.lab = 1.5,
+        cex.axis = 1.5,
+        cex = 1.5
+        )
+        axis(1, 1:7, names(PhyloExpressionSetExample)[3:9])
+        text(
+        4,
+        max(Ath.Embryo.High_Low_High[, 3:9]) - 6000,
+        labels = paste0(nrow(Ath.Embryo.High_Low_High), " Genes"),
+        cex = 2
+        )
+        
+        matplot(
+        t(Ath.Embryo.Low_Low_High[, 3:9]),
+        type = "l",
+        lty = 1,
+        lwd = 2,
+        col = "lightblue",
+        xlab = "Ontogeny",
+        ylab = "Expression Level",
+        xaxt = "n",
+        cex.lab = 1.5,
+        cex.axis = 1.5,
+        main = "Low-Low-High"
+        )
+        lines(
+        colMeans(Ath.Embryo.Low_Low_High[, 3:9]),
+        lwd = 6 ,
+        col = "red",
+        cex.lab = 1.5,
+        cex.axis = 1.5,
+        cex = 1.5
+        )
+        axis(1, 1:7, names(PhyloExpressionSetExample)[3:9])
+        text(
+        4,
+        max(Ath.Embryo.Low_Low_High[, 3:9]) - 6000,
+        labels = paste0(nrow(Ath.Embryo.Low_Low_High), " Genes"),
+        cex = 2
+        )
+```
+
+As a result, we find that there are two distinct sets of young genes: High-high-low and low-low-high. Almost none of the genes have a high-low-high pattern. 
+
+Finally, users can perform KEGG or GO Term enrichment analyses to obtain the annotated functions of these gene sets.
+
+#### Transcriptome Divergence Index
+
+Analogous to the TAI measure, the _Transcriptome Divergence Index_ (TDI) was introduced by Quint et al., 2012 and Drost et al., 2015 as a measure of average transcriptome selection pressure where $s$ denotes the corresponding developmental stage.
 
 $TDI_s = \sum_{i = 1}^n \frac{ds_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
 
@@ -353,6 +558,8 @@ where $ds_i$ denotes the divergence stratum assignment of gene $i$ and $e_{is}$ 
 the gene expression level of gene $i$ at developmental time point $s$. 
 A lower value of TDI describes an more conserved transcriptome (in terms of sequence dissimilarity), whereas a higher value of TDI denotes a more variable transcriptome.
 
+
+To assess the statistical significance of all introduced measures and analyses, we developed several test statistics that are introduced in the following sections.
 
 ## Transcriptome Age Index Analyses
 
