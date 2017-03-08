@@ -1,4 +1,4 @@
-#' @title Quantify the significant differences between gene expression distributions of PS or DS groups
+#' @title Quantify the significant differences between gene expression distributions of age groups
 #' @description This function performs a test to quantify the statistical significance between
 #' the global expression level distributions of groups of PS or DS. It therefore, allows users to investigate
 #' significant groups of PS or DS that significantly differ in their gene expression level distibution
