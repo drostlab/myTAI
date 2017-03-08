@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotBarRE.R
 \name{PlotBarRE}
 \alias{PlotBarRE}
-\title{Plot the Mean Relative Expression Levels as Barplot}
+\title{Plot Mean Relative Expression Levels as Barplot}
 \usage{
 PlotBarRE(ExpressionSet, Groups = NULL, wLength = 0.1, ratio = FALSE,
   p.adjust.method = NULL, ...)
