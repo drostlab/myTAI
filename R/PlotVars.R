@@ -1,4 +1,4 @@
-#' @title Plot the Variance of Expression Profiles
+#' @title Plot Variance of Expression Profiles
 #' @description This function computes for each age category the corresponding variance expression profile.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param Groups a list containing the age categories for which variance expression levels shall be drawn.
