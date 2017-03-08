@@ -1,4 +1,4 @@
-#' @title Perform the Reductive Early Conservation Test
+#' @title Perform Reductive Early Conservation Test
 #' @description The \emph{Reductive Early Conservation Test} aims to statistically evaluate the
 #' existence of a monotonically increasing phylotranscriptomic pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
