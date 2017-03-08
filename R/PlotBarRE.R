@@ -1,4 +1,4 @@
-#' @title Plot the Mean Relative Expression Levels as Barplot
+#' @title Plot Mean Relative Expression Levels as Barplot
 #' @description This function takes a PhyloExpressionSet or DivergenceExpressionSet object as input and computes
 #' for two or more defined phylostratum (divergence stratum) classes the statistical significance of
 #' the differences of mean relative expression of these two (or more) corresponding phylostratum (divergence stratum) classes.
