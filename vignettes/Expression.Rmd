@@ -625,7 +625,7 @@ can then apply this criteria to `PlotReplicateQuality()` by specifying the `FUN`
 After performing differential gene expression analyses, replicate expression levels
 are collapsed to a single stage specific expression level. For this purpose, `myTAI`
 implements the `CollapseReplicates()` function, allowing users to combine replicate
-expression levels stored in a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object to a stage specific expression level using a specified [window function](http://cran.r-project.org/web/packages/dplyr/vignettes/window-functions.html).
+expression levels stored in a standard `PhyloExpressionSet` or `DivergenceExpressionSet` object to a stage specific expression level using a specified window function.
 
 
 ```{r,eval=FALSE}
