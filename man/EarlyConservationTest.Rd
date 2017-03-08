@@ -2,7 +2,7 @@
 % Please edit documentation in R/EarlyConservationTest.R
 \name{EarlyConservationTest}
 \alias{EarlyConservationTest}
-\title{Perform the Reductive Early Conservation Test}
+\title{Perform Reductive Early Conservation Test}
 \usage{
 EarlyConservationTest(ExpressionSet, modules = NULL, permutations = 1000,
   lillie.test = FALSE, plotHistogram = FALSE, runs = 10,
