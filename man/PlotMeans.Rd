@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotMeans.R
 \name{PlotMeans}
 \alias{PlotMeans}
-\title{Plot the Mean Expression Profiles}
+\title{Plot Mean Expression Profiles}
 \usage{
 PlotMeans(ExpressionSet, Groups = NULL, modules = NULL,
   legendName = "age", xlab = "Ontogeny", ylab = "Mean Expression Level",
