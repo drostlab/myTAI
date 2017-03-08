@@ -2,7 +2,7 @@
 % Please edit documentation in R/FlatLineTest.R
 \name{FlatLineTest}
 \alias{FlatLineTest}
-\title{Perform the Flat Line Test}
+\title{Perform Flat Line Test}
 \usage{
 FlatLineTest(ExpressionSet, permutations = 1000, plotHistogram = FALSE,
   runs = 10, parallel = FALSE, custom.perm.matrix = NULL)
