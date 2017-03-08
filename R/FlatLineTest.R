@@ -1,4 +1,4 @@
-#' @title Perform the Flat Line Test
+#' @title Perform Flat Line Test
 #' @description This function quantifies the statistical significance of an observed phylotranscriptomic pattern. In detail, the \emph{Flat Line Test} quantifies any significant deviation of an observed phylotranscriptomic pattern from a flat line.  
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param permutations a numeric value specifying the number of permutations that shall be performed for the \emph{FlatLineTest}.
