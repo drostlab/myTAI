@@ -1,4 +1,4 @@
-#' @title Plot the Mean Expression Profiles
+#' @title Plot Mean Expression Profiles
 #' @description This function computes for each age category the corresponding mean expression profile.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param Groups a list containing the age categories for which mean expression levels shall be drawn.
