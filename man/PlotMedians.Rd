@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotMedians.R
 \name{PlotMedians}
 \alias{PlotMedians}
-\title{Plot the Median Expression Profiles}
+\title{Plot Median Expression Profiles}
 \usage{
 PlotMedians(ExpressionSet, Groups = NULL, legendName = "age",
   xlab = "Ontogeny", ylab = "Median Expression Level", main = "",
