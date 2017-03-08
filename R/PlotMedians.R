@@ -1,4 +1,4 @@
-#' @title Plot the Median Expression Profiles
+#' @title Plot Median Expression Profiles
 #' @description This function computes for each age category the corresponding median expression profile.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param Groups a list containing the age categories for which median expression levels shall be drawn.
