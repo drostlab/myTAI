@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotVars.R
 \name{PlotVars}
 \alias{PlotVars}
-\title{Plot the Variance of Expression Profiles}
+\title{Plot Variance of Expression Profiles}
 \usage{
 PlotVars(ExpressionSet, Groups = NULL, legendName = "age",
   xlab = "Ontogeny", ylab = "Variance(Expression Level)", main = "",
