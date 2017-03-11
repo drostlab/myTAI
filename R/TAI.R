@@ -34,7 +34,7 @@
 #' 
 #' 
 #' 
-#' @useDynLib myTAI
+#' @useDynLib myTAI, .registration = TRUE 
 #' @importFrom Rcpp sourceCpp
 #' @export
 
