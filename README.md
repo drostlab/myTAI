@@ -46,7 +46,7 @@ functionality of each version of `myTAI` can be found in the [NEWS](https://gith
 
 ## Installation
 
-Users can download `myTAI` from [CRAN](https://cran.r-project.org/package=myTAI) :
+Users can download `myTAI` from CRAN :
 
 ```r
 # install myTAI 0.4.0 from CRAN
@@ -184,7 +184,7 @@ install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 # install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
 
 # When working with Windows, first you need to install the
-# R package: rtools -> http://cran.r-project.org/bin/windows/Rtools/
+# R package: rtools 
 # or consult: http://www.rstudio.com/products/rpackages/devtools/
 
 # Afterwards you can install devtools -> install.packages("devtools")
