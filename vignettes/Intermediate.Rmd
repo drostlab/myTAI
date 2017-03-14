@@ -100,7 +100,7 @@ TAI(randomPhyloExpressionSetExample)
 ```
 Visualization: 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Visualize the TAI profile based on randomly assigned Phylostrata
 PlotSignature( ExpressionSet =  randomPhyloExpressionSetExample, 
                p.value       = FALSE ) 
@@ -249,7 +249,7 @@ Additionally the `FlatLineTest()` function allows to investigate the goodness
 of the test statistic.
 
 
-```{r, fig.width= 7, fig.height= 3,eval=TRUE}
+```{r, fig.width= 7, fig.height= 3,eval=FALSE}
 
 # perform the FlatLineTest and investigate the goodness of the test statistic
 FlatLineTest( ExpressionSet = PhyloExpressionSetExample, 
@@ -321,7 +321,7 @@ TAI(PhyloExpressionSetExample)
 ```
 Visualization: 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # visualize the TAI profile of correctly assigned Phylostrata
 PlotSignature( ExpressionSet = PhyloExpressionSetExample, 
                p.value       = FALSE ) 
@@ -358,7 +358,7 @@ into the three modules:
 * late module: Stages 6 - 7 = Bent and Mature
 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Perform the Reductive Hourglass Test
 ReductiveHourglassTest( ExpressionSet = PhyloExpressionSetExample,
                         modules       = list(early = 1:2, mid = 3:5, late = 6:7),
@@ -392,7 +392,7 @@ The corresponding parameters are estimated by moment matching estimation.
 This allows to quantify the permutation bias and their implications on the goodness of fit.
 
 
-```{r, fig.width= 7, fig.height= 6,eval=TRUE}
+```{r, fig.width= 7, fig.height= 6,eval=FALSE}
 # perform the Reductive Hourglass Test and plot the test statistic
 ReductiveHourglassTest( ExpressionSet = PhyloExpressionSetExample,
                         modules       = list(early = 1:2, mid = 3:5, late = 6:7),
@@ -437,7 +437,7 @@ TAI(PhyloExpressionSetExample)
 ```
 Visualization: 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # Visualize the TAI profile of correctly assigned Phylostrata
 PlotSignature( ExpressionSet = PhyloExpressionSetExample, 
                p.value       = FALSE ) 
@@ -473,7 +473,7 @@ into the three modules:
 * late module: Stages 6 - 7 = Bent and Mature
 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 
 # Perform the Reductive Early Conservation Test
 EarlyConservationTest( ExpressionSet = PhyloExpressionSetExample,
@@ -500,7 +500,7 @@ The corresponding parameters are estimated by moment matching estimation.
 This allows to quantify the permutation bias and their implications on the goodness of fit.
 
 
-```{r, fig.width= 7, fig.height= 6,eval=TRUE}
+```{r, fig.width= 7, fig.height= 6,eval=FALSE}
 # perform the Reductive Early Conservation Test and plot the test statistic
 EarlyConservationTest( ExpressionSet = PhyloExpressionSetExample,
                        modules       = list(early = 1:2, mid = 3:5, late = 6:7),
