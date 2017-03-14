@@ -38,7 +38,7 @@ For this purpose, the `PlotCategoryExpr()` aims to visualize the expression leve
 
 This way of visualizing the gene expression distribution of each age (PS) or divergence (DS) category during all developmental stages or experiments allows users to detect specific age or divergence categories contributing significant levels of gene expression to the underlying biological process (transcriptome).
 
-```{r,eval = TRUE, fig.width= 7, fig.height= 5}
+```{r,eval = FALSE, fig.width= 7, fig.height= 5}
 library(myTAI)
 data(PhyloExpressionSetExample)
 # category-centered visualization of PS specific expression level distributions (log-scale)
@@ -74,7 +74,7 @@ __Please notice that users need to define the `legendName` argument as `PS` or `
 Alternatively, users can investigate the differences of gene expression __between__ all stages or experiments for __each__ age or divergence category by specifying `type = 'stage-centered'`.
 
 
-```{r,eval = TRUE, fig.width= 7, fig.height= 5}
+```{r,eval = FALSE, fig.width= 7, fig.height= 5}
 library(myTAI)
 data(PhyloExpressionSetExample)
 # stage-centered visualization of PS specific expression level distributions (log-scale)
@@ -116,7 +116,7 @@ on log2 expression levels. This way of visualization allows better visual compar
 Alternatively, instead of specifying `log.expr = TRUE` users can directly pass log2 transformed expression levels to `PlotCategoryExpr()` via `tf(PhyloExpressionSetExample,log2)` (when `log.expr = FALSE`):
 
 
-```{r,eval = TRUE, fig.width= 7, fig.height= 5}
+```{r,eval = FALSE, fig.width= 7, fig.height= 5}
 data(PhyloExpressionSetExample)
 # category-centered visualization of PS specific expression level distributions (log-scale)
 PlotCategoryExpr(ExpressionSet = tf(PhyloExpressionSetExample, log2),
@@ -134,7 +134,7 @@ category-centered "***"  "***"    "***"    "***" "***"   "***" "***"
 
 Or any other expression level transformation, e.g. `sqrt`.
 
-```{r,eval = TRUE, fig.width= 7, fig.height= 5}
+```{r,eval = FALSE, fig.width= 7, fig.height= 5}
 data(PhyloExpressionSetExample)
 # category-centered visualization of PS specific expression level distributions (sqrt-scale)
 PlotCategoryExpr(ExpressionSet = tf(PhyloExpressionSetExample, sqrt),
@@ -158,7 +158,7 @@ the gene ids of a subset of genes that shall be matched in the input `Expression
 expression level distributions shall be visualized.
 
 
-```{r,eval = TRUE, fig.width= 7, fig.height= 5}
+```{r,eval = FALSE, fig.width= 7, fig.height= 5}
 library(myTAI)
 data(PhyloExpressionSetExample)
 # define an example gene subset (500 genes) which
@@ -182,7 +182,7 @@ category-centered "*"    "*"      "*"      "*"   "*"     "*"  "n.s."
 
 Or analogously `stage-centered`:
 
-```{r,eval = TRUE, fig.width= 7, fig.height= 5}
+```{r,eval = FALSE, fig.width= 7, fig.height= 5}
 library(myTAI)
 data(PhyloExpressionSetExample)
 # define an example gene subset (500 genes) which
@@ -221,7 +221,7 @@ For this purpose, the `PlotGroupDiffs()` function performs a test to quantify th
 Analogous to the `PlotRE()` or `PlotMeans()` function (see [Introduction](Introduction.html) for details),
 users need to pass the `Groups` to `PlotGroupDiffs()` specifying the groups that shall be compared.
 
-```{r,eval= TRUE, fig.width= 7, fig.height= 7,warning=FALSE}
+```{r,eval= FALSE, fig.width= 7, fig.height= 7,warning=FALSE}
 library(myTAI)
 data(PhyloExpressionSetExample)
 
@@ -238,7 +238,7 @@ In cases where no plot shall be drawn and only the resulting p-value shall be re
 users can specify the `plot.type = NULL` argument to receive only p-values returned by the 
 underlying test statistic.
 
-```{r,eval= TRUE, fig.width= 9, fig.height= 7,warning=FALSE}
+```{r,eval= FALSE, fig.width= 9, fig.height= 7,warning=FALSE}
 library(myTAI)
 data(PhyloExpressionSetExample)
 # only receive the p-values without the corresponding plot
@@ -252,7 +252,7 @@ Optionally, users can also visualize the difference in expression level distribu
 of groups of PS/DS during each developmental stage by specifying the `plot.type = "boxplot"`
 argument.
 
-```{r,eval= TRUE,fig.width= 9, fig.height= 12,warning=FALSE}
+```{r,eval= FALSE,fig.width= 9, fig.height= 12,warning=FALSE}
 library(myTAI)
 data(PhyloExpressionSetExample)
 # visualize difference as boxplot
