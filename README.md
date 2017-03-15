@@ -26,6 +26,35 @@ working on this software tool and will motivate me to extend its functionality a
 >
 > Drost HG, Gabel A, Grosse I, Quint M. 2015. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ 32 (5): 1221-1231. [doi:10.1093/molbev/msv012](http://mbe.oxfordjournals.org/content/32/5/1221.abstract?sid=767aea12-1eb3-40be-8c6a-e2861f159b46)
 
+
+## Installation
+
+Users can download `myTAI` from CRAN :
+
+```r
+# install myTAI 0.5.0 from CRAN
+source("http://bioconductor.org/biocLite.R")
+biocLite('myTAI')
+```
+
+## Install Developer Version
+Some bug fixes or new functionality will not be available on CRAN yet, but in
+the developer version here on GitHub. To download and install the most recent
+version of `myTAI` run:
+
+```r
+# install the developer version of myTAI on your system
+source("http://bioconductor.org/biocLite.R")
+biocLite("HajkD/myTAI")
+```
+
+## NEWS
+
+The current status of the package as well as a detailed history of the
+functionality of each version of `myTAI` can be found in the [NEWS](https://github.com/HajkD/myTAI/blob/master/NEWS.md) section.
+
+
+
 ## Tutorials
 
 These tutorials introduce users to `myTAI`:
@@ -37,21 +66,6 @@ These tutorials introduce users to `myTAI`:
 - [Gene Expression Analysis with myTAI](https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd)
 - [Taxonomic Information Retrieval](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd)
 
-
-## NEWS
-
-The current status of the package as well as a detailed history of the
-functionality of each version of `myTAI` can be found in the [NEWS](https://github.com/HajkD/myTAI/blob/master/NEWS.md) section.
-
-
-## Installation
-
-Users can download `myTAI` from CRAN :
-
-```r
-# install myTAI 0.4.0 from CRAN
-install.packages("myTAI", dependencies = TRUE)
-```
 
 ### Package Dependencies
 
