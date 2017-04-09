@@ -22,6 +22,8 @@ The following tutorials will provide use cases and detailed explainations of how
 **Please cite one of the following references when using `myTAI` for your own research (depending on your application). This will allow me to continue
 working on this software tool and will motivate me to extend its functionality and usability. Many thanks in advance :)**
 
+> Drost HG, Janitza P, Grosse I, Quint M. 2017. __Cross-kingdom comparison of the developmental hourglass__. _Current Opinion in Genetics & Development_ 45: 69–75. [dio:10.1016/j.gde.2017.03.003](http://www.sciencedirect.com/science/article/pii/S0959437X16302040)
+>
 > Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan PT, Dekkers BJW, Bentsink L, Hilhorst H, Ligterink W, Wellmer F, Grosse I, and Quint M. 2016. __Post-embryonic hourglass patterns mark ontogenetic transitions in plant development__. _Mol. Biol. Evol._ 33 (5): 1158-1163. [doi:10.1093/molbev/msw039](http://mbe.oxfordjournals.org/content/33/5/1158) 
 >
 > Drost HG, Gabel A, Grosse I, Quint M. 2015. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ 32 (5): 1221-1231. [doi:10.1093/molbev/msv012](http://mbe.oxfordjournals.org/content/32/5/1221.abstract?sid=767aea12-1eb3-40be-8c6a-e2861f159b46)
