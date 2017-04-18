@@ -26,7 +26,7 @@ pStrata <- function(ExpressionSet){
         
         df <- as.data.frame(cbind(ExpressionSet[ , 1], pMatrix(ExpressionSet)))
         colnames(df)[1] <- "AGE"
-        pStrataDF <- dplyr::summarise_each(dplyr::group_by(df,AGE),dplyr::funs(sum))
+        pStrataDF <- dplyr::summarise_all(dplyr::group_by(df,AGE),dplyr::funs(sum))
         colnames(pStrataDF)[1] <- names(ExpressionSet)[1]
         res <- as.matrix(pStrataDF[ , 2:(ncol(ExpressionSet)-1)])
         rownames(res) <- names(table(ExpressionSet[ , 1]))
