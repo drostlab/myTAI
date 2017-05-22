@@ -376,7 +376,7 @@ The x-axis shows the seven stages of _A. thaliana_ embryo development and the y-
 
 The interpretation of the TAI values on the y-axis is given by the next figure.
 
-<img src="Figures/Fig4.pdf" alt="Figure 4" style="text-align: center; width:650px;height:650px;">
+![](Figures/Fig4.png)
 
 In this example, a TAI value of 3.5 quantifies that genes that contribute most the transcriptome at a particular stage emerged on average between phylostratum 3 and phylostratum 4. Due to the nature of the arithmetic mean, this value does not represent the true origin of individual genes, and thus the TAI measure is only helpful to screen for stages that express (on average) older or younger genes. Subsequent analyses such as mean expression of age categories, relative expression levels, and gene expression level distributions for each age category will then reveal which exact genes or age categories generate the overall TAI value.
 
