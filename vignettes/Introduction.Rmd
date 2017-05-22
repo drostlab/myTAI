@@ -78,7 +78,7 @@ install.packages("myTAI", dependencies = TRUE)
 
 Using embryo development of the plant _Arabidopsis thaliana_ as an example, we ask the user to imagine how one would investigate the differences of developmental transcriptomes across developmental stages. 
 
-![](Figures/Fig1.pdf)
+![](Figures/Fig1.png)
 
 
 <p style="font-size:10px;"> Figure 1: Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development. Embryo development is divided into three phases: early embryogenesis (purple), mid-embryogenesis (green), and late embryogenesis (brown). This boxplot illustrates that the overall distributions of log2 expression levels (y-axis) hardly differ between developmental stages (x-axis) although the difference on the global scale is statistically significant (Kruskal-Wallis Rank Sum Test: p < 2e-16). Hence, a clear visual pattern of gene expression differences between early, mid, and late embryogenesis on the global scale can not be inferred. Adapted from [Drost, 2016](http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221). </p>
