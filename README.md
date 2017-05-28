@@ -1,6 +1,7 @@
 myTAI
 =====
-
+[![Travis-CI Build Status](https://travis-ci.org/HajkD/myTAI.svg?branch=master)](https://travis-ci.org/HajkD/myTAI)
+ [![rpackages.io rank](https://www.rpackages.io/badge/myTAI.svg)](https://www.rpackages.io/package/myTAI)
 
 ### Evolutionary Transcriptomics with R
 
