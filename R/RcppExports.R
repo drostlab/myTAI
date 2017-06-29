@@ -2,30 +2,30 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 cpp_TAI <- function(ExpressionSet, Phylostratum) {
-    .Call('myTAI_cpp_TAI', PACKAGE = 'myTAI', ExpressionSet, Phylostratum)
+    .Call(myTAI_cpp_TAI, ExpressionSet, Phylostratum)
 }
 
 cpp_bootMatrix <- function(ExpressionMatrix, AgeVector, permutations) {
-    .Call('myTAI_cpp_bootMatrix', PACKAGE = 'myTAI', ExpressionMatrix, AgeVector, permutations)
+    .Call(myTAI_cpp_bootMatrix, ExpressionMatrix, AgeVector, permutations)
 }
 
 cpp_pMatrix <- function(ExpressionSet, AgeVector) {
-    .Call('myTAI_cpp_pMatrix', PACKAGE = 'myTAI', ExpressionSet, AgeVector)
+    .Call(myTAI_cpp_pMatrix, ExpressionSet, AgeVector)
 }
 
 cpp_std_error <- function(x) {
-    .Call('myTAI_cpp_std_error', PACKAGE = 'myTAI', x)
+    .Call(myTAI_cpp_std_error, x)
 }
 
 cpp_geom_mean <- function(x) {
-    .Call('myTAI_cpp_geom_mean', PACKAGE = 'myTAI', x)
+    .Call(myTAI_cpp_geom_mean, x)
 }
 
 cpp_harmonic_mean <- function(x) {
-    .Call('myTAI_cpp_harmonic_mean', PACKAGE = 'myTAI', x)
+    .Call(myTAI_cpp_harmonic_mean, x)
 }
 
 cpp_omitMatrix <- function(ExpressionSet, AgeVector) {
-    .Call('myTAI_cpp_omitMatrix', PACKAGE = 'myTAI', ExpressionSet, AgeVector)
+    .Call(myTAI_cpp_omitMatrix, ExpressionSet, AgeVector)
 }
 
