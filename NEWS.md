@@ -1,6 +1,9 @@
 myTAI 0.6.0
 ===========
 
+### Updates
+
+- `is.ExpressionSet()` now prints out more detailed error messages when [ExpressionSet format](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd#defining-input-data-standards) is violated
 
 myTAI 0.5.0
 ===========
