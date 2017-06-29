@@ -87,3 +87,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"myTAI_cpp_TAI", (DL_FUNC) &myTAI_cpp_TAI, 2},
+    {"myTAI_cpp_bootMatrix", (DL_FUNC) &myTAI_cpp_bootMatrix, 3},
+    {"myTAI_cpp_pMatrix", (DL_FUNC) &myTAI_cpp_pMatrix, 2},
+    {"myTAI_cpp_std_error", (DL_FUNC) &myTAI_cpp_std_error, 1},
+    {"myTAI_cpp_geom_mean", (DL_FUNC) &myTAI_cpp_geom_mean, 1},
+    {"myTAI_cpp_harmonic_mean", (DL_FUNC) &myTAI_cpp_harmonic_mean, 1},
+    {"myTAI_cpp_omitMatrix", (DL_FUNC) &myTAI_cpp_omitMatrix, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_myTAI(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
