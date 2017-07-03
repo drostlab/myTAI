@@ -5,6 +5,24 @@ myTAI 0.6.0
 
 - `is.ExpressionSet()` now prints out more detailed error messages when [ExpressionSet format](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd#defining-input-data-standards) is violated
 
+- adapt `PlotContribution()` to new version of `dplyr` where `summarise_each()` is deprecated.
+
+Error message accuring after new `dplyr` release was:
+
+2. Failure: `PlotContribution()` works properly with DivergenceExpressionSet input... (@test-PlotContribution.R#16) 
+  PlotContribution(DivergenceExpressionSetExample, legendName = "DS") produced messages.
+  
+  
+  `summarise_each()` is deprecated.
+  Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
+  To map `funs` over all variables, use `summarise_all()`
+  `summarise_each()` is deprecated.
+  Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
+  To map `funs` over all variables, use `summarise_all()`
+  
+It's now fixed.  
+
+
 myTAI 0.5.0
 ===========
 
