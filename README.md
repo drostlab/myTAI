@@ -34,7 +34,7 @@ working on this software tool and will motivate me to extend its functionality a
 Users can download `myTAI` from CRAN :
 
 ```r
-# install myTAI 0.5.0 from CRAN
+# install myTAI 0.6.0 from CRAN
 source("http://bioconductor.org/biocLite.R")
 biocLite('myTAI')
 ```
