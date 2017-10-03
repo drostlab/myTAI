@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
-Title: Evolutionary Transcriptomics Analyses
-Version: 0.6.0
+Title: Evolutionary Transcriptomics
+Version: 0.6.0.900
 Date: 2017-06-29
 Author: Hajk-Georg Drost
 Maintainer: Hajk-Georg Drost <hgd23@cam.ac.uk>
