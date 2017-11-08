@@ -84,10 +84,10 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
                 apply(sqrtIndex, 2, function(x)
                         quantile(x,  probs = 0.025))
         ## plot
-        par(mfrow = c(1, 1))
-        par(mar = c(7, 5, 2, 2))
+        graphics::par(mfrow = c(1, 1))
+        graphics::par(mar = c(7, 5, 2, 2))
         allRatio <- c(rawRatio, logRatio, sqrtRatio)
-        plot(
+        graphics::plot(
                 logRatio,
                 type = "l",
                 col = "black",
@@ -99,15 +99,15 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
                 cex.axis = 1.2,
                 xaxt = 'n'
         )
-        lines(sqrtRatio,
+        graphics::lines(sqrtRatio,
               col = "black",
               lty = 2,
               lwd = 5)
-        lines(rawRatio,
+        graphics::lines(rawRatio,
               col = "black",
               lty = 3,
               lwd = 5)
-        legend(
+        graphics::legend(
                 "topleft",
                 c(
                         "Without transformation",
@@ -122,7 +122,7 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
         )
         devNames <- colnames(ExpressionSet)[c(-1,-2)]
         for (j in 1:length(devNames)) {
-                axis(
+                graphics::axis(
                         side = 1,
                         at = j,
                         labels = devNames[j],
