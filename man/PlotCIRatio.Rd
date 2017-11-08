@@ -21,7 +21,7 @@ The
 }
 \examples{
 data("PhyloExpressionSetExample")
-PlotCIRatio(PhyloExpressionSetExample, measure = "TAI", nbootstraps)
+PlotCIRatio(PhyloExpressionSetExample,"TAI",10)
 }
 \seealso{
 \code{\link{PlotSignature}}
