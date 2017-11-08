@@ -50,7 +50,7 @@ boxplot(pMatrix(PhyloExpressionSetExample),outline = FALSE)
 
 # boxplot of the pMatrix using log2 transformed expression levels
 boxplot(pMatrix(tf(PhyloExpressionSetExample,log2)))
-
+ 
 
 }
 \references{
