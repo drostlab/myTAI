@@ -1,11 +1,17 @@
 #' @title Plot Transcriptome Index using bootstrapping and confidence intervals
-#' @description Function to plot Transcriptome Index using bootstrapping and confidence intervals instead of permutation tests used in \code{\link{PlotSignature}}.
+#' @description 
+#' Function to plot and compare the confidence intervals of Transcriptome Index between transformed and non-transformed expression data 
+#' by using bootstrapping appraoches instead of permutation tests used in \code{\link{PlotSignature}}.
+#' @details 
+#' This function can be used to check potential outliers (e.g. a few exramly highly expressed genes) in transcriptome. 
+#' Since Transcriptome Index is weigthed mean, it could be easily affectd by outliers. So, we have to check potential outliers in the transcriptome data.
+#' Because log or sqrt trandformation can alleviate the effect of outliers, if there are some outliers, we could see the confidence intervals (genetated by bootstrapping) 
+#' from non-trandformed expression data are much higher and more variable than from log or sqrt trandformed expression data.
+#' In order to compare the range of confidence intervals in the same scale, we plotted the ratio of upper to lower confidence interval boundary across development.
 #' @param ExpressionSet a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.
 #' @param measure type of transcriptome index that shall be computed. E.g. measure = "TAI" (Transcriptome Age Index), measure = "TDI" (Transcriptome Divergence Index), measure = "TPI" (Transcriptome Polymorphism Index).
 #' @param nbootstraps number of independent bootstraps.
 #' @author Jialin Liu
-#' @details The 
-#' 
 #' @examples 
 #' data("PhyloExpressionSetExample")
 #' PlotCIRatio(PhyloExpressionSetExample,"TAI",10)
@@ -122,7 +128,7 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
                         labels = devNames[j],
                         las = 2,
                         cex.axis = 1.2
-                ) # Add development stages as labels, each color represents one meta development stage
+                ) # Add development stages as labels
         }
 }
 
