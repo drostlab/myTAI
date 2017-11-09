@@ -46,7 +46,7 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
                         ## raw expression value
                         rawIndex <- rbind(rawIndex, TAI(tempData))
                         ## log2 expression value
-                        tempData_log2 <- tf(tempData, function(x) log2(x + 0.001))
+                        tempData_log2 <- tf(tempData, function(x) log2(x + 1))
                         logIndex <-
                                 rbind(logIndex, TAI(tempData_log2))
                         ## square root expression value
@@ -58,7 +58,7 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
                         ## raw expression value
                         rawIndex <- rbind(rawIndex, TDI(tempData))
                         ## log2 expression value
-                        tempData_log2 <- tf(tempData, function(x) log2(x + 0.001))
+                        tempData_log2 <- tf(tempData, function(x) log2(x + 1))
                         logIndex <-
                                 rbind(logIndex, TDI(tempData_log2))
                         ## square root expression value
