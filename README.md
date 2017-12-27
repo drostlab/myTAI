@@ -18,6 +18,10 @@ I hope that `myTAI` will become the community standard tool to perform evolution
 
 The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome onservation with `myTAI` and how to interpret the results generated with this software tool.
 
+## Citation
+Please cite the following paper when using `myTAI` for your own research. This will allow me to continue working on this software tool and will motivate me to extend its functionality and usability in the next years. Many thanks in advance :)
+
+Drost HG, Gabel A, Jiu J, Quint M, Grosse I. myTAI: Evolutionary Transcriptomics with R. _Bioinformatics_ [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
 
 ## Installation
 
