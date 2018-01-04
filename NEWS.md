@@ -30,7 +30,7 @@ Error message accuring after new `dplyr` release was:
   Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
   To map `funs` over all variables, use `summarise_all()`
   
-It's now fixed.  
+Is now fixed.  
 
 
 myTAI 0.5.0
