@@ -6,7 +6,7 @@ citEntry(entry = "Article",
                    as.person("Gabel A"),
                    as.person("Jiu J"),
                    as.person("Quint M"),
-                   as.person("Grosse I"))
+                   as.person("Grosse I")),
   journal      = "Bioinformatics",
   year         = "2018",
   volume       = "",
