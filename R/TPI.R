@@ -37,12 +37,12 @@ TPI <- function(PolymorphismExpressionSet)
         is.ExpressionSet(PolymorphismExpressionSet)
         
         nCols <- dim(PolymorphismExpressionSet)[2]
-        ExpressionMatrix <- PolymorphismExpressionSet[ , 3:nCols]
-        Polymorphisms <- PolymorphismExpressionSet[ , 1]
-        TPIProfile <- vector(mode = "numeric",length = nCols-2)
+        ExpressionMatrix <- dplyr::select(PolymorphismExpressionSet, 3:ncol(PolymorphismExpressionSet))
+        Polymorphisms <- unlist(dplyr::select(PolymorphismExpressionSet, 1))
+        TPIProfile <- vector(mode = "numeric", length = nCols - 2)
         
         
-        TPIProfile <- cpp_TAI(as.matrix(ExpressionMatrix),as.vector(Polymorphisms))
+        TPIProfile <- cpp_TAI(as.matrix(ExpressionMatrix), as.vector(Polymorphisms))
         names(TPIProfile) <- names(ExpressionMatrix)
         
         return(TPIProfile)
