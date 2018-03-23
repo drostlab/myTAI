@@ -85,8 +85,8 @@ MatchMap <- function(Map,ExpressionMatrix, remove.duplicates = FALSE, accumulate
         
         names(ExpressionMatrix)[1] <- "GeneID"
         names(Map)[2] <- "GeneID"
-        ExpressionMatrix[ , "GeneID"] <- tolower(ExpressionMatrix[ , "GeneID"])
-        Map[ , "GeneID"] <- tolower(Map[ , "GeneID"])
+        ExpressionMatrix$GeneID <- tolower(ExpressionMatrix$GeneID)
+        Map$GeneID <- tolower(Map$GeneID)
 
         if(remove.duplicates)
                 Map <- Map[-which(duplicated(Map$GeneID)), ]
@@ -101,16 +101,16 @@ MatchMap <- function(Map,ExpressionMatrix, remove.duplicates = FALSE, accumulate
                 
         }
         
-        if(any(duplicated(ExpressionMatrix[ , "GeneID"])))
+        if(any(duplicated(ExpressionMatrix$GeneID)))
                 stop("You have duplicate Gene IDs in your ExpressionMatrix. Please enter only unique Gene IDs, or specify the 'accumulate' argument.", call. = FALSE)
         
         res_tbl <- as.data.frame(dplyr::inner_join(ExpressionMatrix, Map, by = "GeneID"))
         # joined_ExpressionMatrix <- dplyr::semi_join(ExpressionMatrix, Map, by = "GeneID")
         #res_tbl <- merge(joined_ExpressionMatrix,Map, by = "GeneID")
         
-        if(!any(duplicated(res_tbl[ , "GeneID"]))) {
+        if(!any(duplicated(res_tbl$GeneID))) {
                 
-                return(res_tbl[ , c(ncol(res_tbl),1:(ncol(res_tbl)-1))])
+                return(dplyr::select(res_tbl, c(ncol(res_tbl),1:(ncol(res_tbl) - 1))))
                 
         } else {
                 stop("Something went wrong with matching Map and ExpressionMatrix! Please check for duplicate entries!", call. = FALSE)
