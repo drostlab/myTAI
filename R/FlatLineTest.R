@@ -102,22 +102,22 @@ FlatLineTest <- function(ExpressionSet,
         is.ExpressionSet(ExpressionSet)
         
         if(plotHistogram & is.null(runs))
-                stop("Please specify the number of runs to be performed for the goodness of fit computations.")
+                stop("Please specify the number of runs to be performed for the goodness of fit computations.", call. = FALSE)
         
         nCols <- dim(ExpressionSet)[2]
-        resMatrix <- matrix(NA_real_, permutations,(nCols-2))
+        resMatrix <- matrix(NA_real_, permutations, (nCols - 2))
         var_values <- vector(mode = "numeric", length = permutations)
-        sd_values <- vector(mode = "numeric",length = nCols-2)
+        sd_values <- vector(mode = "numeric", length = nCols - 2)
         #random_mean_age <- vector(mode = "numeric", length = permutations)
-        age.real <- vector(mode = "numeric",length = nCols-2)
-        age.real <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
+        age.real <- vector(mode = "numeric",length = nCols - 2)
+        age.real <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))), as.vector(unlist(dplyr::select(ExpressionSet, 1))))
         ### compute the real variance of TAIs of the observed TAI/TDI-Hourglass pattern
         real.var <- stats::var(age.real)
         ### sample only the phylostrata (row-permutations) 
         
         if (is.null(custom.perm.matrix)){
-                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),
-                                            as.vector(ExpressionSet[ , 1]),
+                resMatrix <- cpp_bootMatrix(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),
+                                            as.vector(unlist(dplyr::select(ExpressionSet, 1))),
                                             as.numeric(permutations))
                 
         }
@@ -132,13 +132,13 @@ FlatLineTest <- function(ExpressionSet,
         ### estimate the parameters (shape,rate) 
         ### of the gamma distributed variance values
         ### using: method of moments estimation
-        gamma_MME <- fitdistrplus::fitdist(var_values,"gamma",method = "mme")
+        gamma_MME <- fitdistrplus::fitdist(var_values,"gamma", method = "mme")
         ### estimate shape:
         shape <- gamma_MME$estimate[1]
         ### estimate the rate:
         rate <- gamma_MME$estimate[2]
         
-        if(plotHistogram){
+        if (plotHistogram){
                 
                 gammaDensity <- function(x){
                         
@@ -151,12 +151,12 @@ FlatLineTest <- function(ExpressionSet,
                 fitdistrplus::descdist(var_values, boot = permutations)
                 # plot the histogram and the fitted curve
                 graphics::curve( expr = gammaDensity,
-                                 xlim = c(min(var_values),max(c(var_values,real.var))),
+                                 xlim = c(min(var_values), max(c(var_values,real.var))),
                                  col  = "steelblue",
                                  lwd  = 5,
                                  xlab = "Variances",
                                  ylab = "Frequency", 
-                                 main = paste0("permutations = ",permutations) )
+                                 main = paste0("permutations = ", permutations) )
                 
                 histogram <- graphics::hist( x      = var_values,
                                              prob   = TRUE,
