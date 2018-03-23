@@ -88,27 +88,27 @@ MatchMap <- function(Map,ExpressionMatrix, remove.duplicates = FALSE, accumulate
         ExpressionMatrix$GeneID <- tolower(ExpressionMatrix$GeneID)
         Map$GeneID <- tolower(Map$GeneID)
 
-        if(remove.duplicates)
+        if (remove.duplicates)
                 Map <- Map[-which(duplicated(Map$GeneID)), ]
         
-        if(any(duplicated(Map$GeneID)))
+        if (any(duplicated(Map$GeneID)))
                 stop("You have duplicate Gene IDs in your Map. Please enter only unique Gene IDs.", call. = FALSE)
         
-        if(!is.null(accumulate)){
+        if (!is.null(accumulate)){
                 GeneID <- NULL
                 acc_fun <- match.fun(accumulate)
-                ExpressionMatrix <- dplyr::summarise_each(dplyr::group_by(ExpressionMatrix, GeneID), dplyr::funs(acc_fun))
+                ExpressionMatrix <- dplyr::summarise_all(dplyr::group_by(ExpressionMatrix, GeneID), dplyr::funs(acc_fun))
                 
         }
         
-        if(any(duplicated(ExpressionMatrix$GeneID)))
+        if (any(duplicated(ExpressionMatrix$GeneID)))
                 stop("You have duplicate Gene IDs in your ExpressionMatrix. Please enter only unique Gene IDs, or specify the 'accumulate' argument.", call. = FALSE)
         
-        res_tbl <- as.data.frame(dplyr::inner_join(ExpressionMatrix, Map, by = "GeneID"))
+        res_tbl <- dplyr::inner_join(ExpressionMatrix, Map, by = "GeneID")
         # joined_ExpressionMatrix <- dplyr::semi_join(ExpressionMatrix, Map, by = "GeneID")
         #res_tbl <- merge(joined_ExpressionMatrix,Map, by = "GeneID")
         
-        if(!any(duplicated(res_tbl$GeneID))) {
+        if (!any(duplicated(res_tbl$GeneID))) {
                 
                 return(dplyr::select(res_tbl, c(ncol(res_tbl),1:(ncol(res_tbl) - 1))))
                 
