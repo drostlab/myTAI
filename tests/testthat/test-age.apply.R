@@ -10,7 +10,7 @@ equal_df <- function(df1, df2) {
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
 
-nonStandardExpressionSet <- PhyloExpressionSetExample[, 2:9]
+nonStandardExpressionSet <- PhyloExpressionSetExample[ , 2:9]
 
 test_that("is.ExpressionSet() throughs error when no ExpressionSet is entered to age.apply()",
           {
