@@ -126,7 +126,7 @@ EarlyConservationTest <- function(ExpressionSet,
         score_vector <- vector(mode = "numeric",length = permutations)
         resMatrix <- matrix(NA_real_, permutations,(nCols-2))
         real_age <- vector(mode = "numeric",length = nCols-2)
-        real_age <- cpp_TAI(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]))
+        real_age <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),as.vector(unlist(dplyr::select(ExpressionSet, 1))))
         
         # compute the real early conservation of the observed phylotranscriptomics pattern
         # ecScore = early conservation score
@@ -134,7 +134,7 @@ EarlyConservationTest <- function(ExpressionSet,
                 
         ### compute the bootstrap matrix 
         if (is.null(custom.perm.matrix)){
-                resMatrix <- cpp_bootMatrix(as.matrix(ExpressionSet[ , 3:nCols]),as.vector(ExpressionSet[ , 1]),as.numeric(permutations))
+                resMatrix <- cpp_bootMatrix(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),as.vector(unlist(dplyr::select(ExpressionSet, 1))),as.numeric(permutations))
         }
         
         else if (!is.null(custom.perm.matrix)){
