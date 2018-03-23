@@ -70,19 +70,19 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
         ## interval ratio
         rawRatio <-
                 apply(rawIndex, 2, function(x)
-                        quantile(x,  probs = 0.975)) /
+                        stats::quantile(x,  probs = 0.975)) /
                 apply(rawIndex, 2, function(x)
-                        quantile(x,  probs = 0.025))
+                    stats::quantile(x,  probs = 0.025))
         logRatio <-
                 apply(logIndex, 2, function(x)
-                        quantile(x,  probs = 0.975)) /
+                    stats::quantile(x,  probs = 0.975)) /
                 apply(logIndex, 2, function(x)
-                        quantile(x,  probs = 0.025))
+                    stats::quantile(x,  probs = 0.025))
         sqrtRatio <-
                 apply(sqrtIndex, 2, function(x)
-                        quantile(x,  probs = 0.975)) /
+                    stats::quantile(x,  probs = 0.975)) /
                 apply(sqrtIndex, 2, function(x)
-                        quantile(x,  probs = 0.025))
+                    stats::quantile(x,  probs = 0.025))
         ## plot
         graphics::par(mfrow = c(1, 1))
         graphics::par(mar = c(7, 5, 2, 2))
