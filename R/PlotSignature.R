@@ -79,6 +79,9 @@ PlotSignature <-
                         call. = FALSE
                 )
         
+        if (!is.element(TestStatistic, c("FlatLineTest", "ReductiveHourglassTest", "EarlyConservationTest")))
+            stop("Please choose a 'TestStatistic' that is supported by this function. E.g. TestStatistic = 'FlatLineTest', TestStatistic = 'ReductiveHourglassTest, TestStatistic = 'EarlyConservationTest'.", call. = FALSE)
+            
         cat("Plot signature: '",measure, "' and test statistic: '",TestStatistic,"'." )
         cat("\n")
                 
