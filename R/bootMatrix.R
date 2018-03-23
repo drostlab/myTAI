@@ -40,15 +40,13 @@ bootMatrix <- function(ExpressionSet,permutations = 1000)
         
         nCols <- ncol(ExpressionSet)
         bootstrapMatrix <- matrix(NA_real_, permutations, (nCols - 2))
-        ExprSet <- as.matrix(ExpressionSet[ , 3:nCols])
-        AgeVector <- as.vector(ExpressionSet[ , 1])
+        ExprSet <- as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet)))
+        AgeVector <- as.vector(unlist(dplyr::select(ExpressionSet, 1)))
         
         bootstrapMatrix <- cpp_bootMatrix(ExprSet, AgeVector, permutations)
         colnames(bootstrapMatrix) <- names(ExpressionSet)[3:nCols]
         rownames(bootstrapMatrix) <- 1:permutations
         
         return(bootstrapMatrix)
-        
-        
 }
 
