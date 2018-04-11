@@ -76,6 +76,7 @@ PlotMeans <- function(ExpressionSet,
                       alpha = 0.008, ...)
 {
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         stage <- expr <- age <- NULL
