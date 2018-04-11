@@ -81,6 +81,7 @@ Expressed <- function(ExpressionSet,
                       comparison = "below",
                       n          = NULL){
         
+    
         if(!is.element(method,c("const","min-set","n-set")))
                 stop("Please specify a filter method that is implemented in this function!", call. = FALSE)
         
@@ -93,6 +94,7 @@ Expressed <- function(ExpressionSet,
         if ((length(cut.off) > 1) & (comparison != "both"))
                 stop("When choosing: comparison == 'below' or 'above', the cut.off argument needs to store only one cut.off value.", call. = FALSE)
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         ncols <- ncol(ExpressionSet)
         
