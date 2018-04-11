@@ -77,22 +77,23 @@ PlotGroupDiffs <- function(ExpressionSet,
                            plot.type   = NULL,
                            gene.set    = NULL, ...){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
        
         if (is.null(Groups))
-                stop ("Your Groups list does not store any items.")
+                stop ("Your Groups list does not store any items.", call. = FALSE)
         
         if (is.null(legendName))
-                stop ("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.")
+                stop ("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.", call. = FALSE)
         if (length(col) > 2)
-                stop ("Please enter only two colors for the two groups.")
+                stop ("Please enter only two colors for the two groups.", call. = FALSE)
         
         if (!is.element(stat.test,c("wilcox.test")))
-                stop (stat.test, " is not implemented in this function.")
+                stop (stat.test, " is not implemented in this function.", call. = FALSE)
        
         if (!is.null(plot.type)) 
                 if (!is.element(plot.type,c("p-vals","boxplot")))
-                        stop ("Please select a plot.type that is supported by this function.")
+                        stop ("Please select a plot.type that is supported by this function.", call. = FALSE)
         
         ### getting the PS names available in the given expression set
         age_names <- as.character(names(table(ExpressionSet[ , 1])))
