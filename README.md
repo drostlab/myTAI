@@ -28,7 +28,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 Users can download `myTAI` from CRAN :
 
 ```r
-# install myTAI 0.6.0 from CRAN
+# install myTAI 0.7.0 from CRAN
 source("http://bioconductor.org/biocLite.R")
 biocLite('myTAI')
 ```
