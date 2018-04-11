@@ -40,6 +40,8 @@ PlotCorrelation <- function(PhyloExpressionSet, DivergenceExpressionSet,
                             ylab = "Divergencestratum")
 {
         
+        PhyloExpressionSet <- as.data.frame(PhyloExpressionSet)
+        DivergenceExpressionSet <- as.data.frame(DivergenceExpressionSet)
         is.ExpressionSet(PhyloExpressionSet)
         is.ExpressionSet(DivergenceExpressionSet)
         
