@@ -15,6 +15,6 @@ harm.mean <- function(x)
         if(is.numeric(x)){
                 return(cpp_harmonic_mean(as.vector(x)))
         } else{
-                stop("Please enter a numeric vector.")
+                stop("Please enter a numeric vector.", call. = FALSE)
         }
 }
