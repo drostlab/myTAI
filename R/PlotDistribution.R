@@ -47,7 +47,7 @@ PlotDistribution <- function(PhyloExpressionSet,
                              xlab         = NULL,
                              ylab         = NULL)
 {
-        
+        PhyloExpressionSet <- as.data.frame(PhyloExpressionSet)
         PlotSelectedAgeDistr(ExpressionSet = PhyloExpressionSet,
                              gene.set      = PhyloExpressionSet[ , 2],
                              legendName    = legendName,
