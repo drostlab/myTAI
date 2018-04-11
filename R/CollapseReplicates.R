@@ -30,6 +30,7 @@
 
 CollapseReplicates <- function(ExpressionSet, nrep, FUN, stage.names = NULL){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         ncols <- dim(ExpressionSet)[2]
         
