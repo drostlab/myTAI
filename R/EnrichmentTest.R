@@ -36,7 +36,7 @@ EnrichmentTest <- function(ExpressionSet,
                              complete.bg  = TRUE,
                              epsilon      = 1e-05){
         
-        
+        ExpressionSet <- as.data.frame(ExpressionSet)
         return( PlotEnrichment(ExpressionSet = ExpressionSet,
                                test.set      = test.set,
                                use.only.map  = use.only.map,
