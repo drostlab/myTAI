@@ -41,8 +41,9 @@ PlotSelectedAgeDistr <- function(ExpressionSet, gene.set,
                                  xlab         = NULL,
                                  ylab         = NULL){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         if (is.null(legendName))
-                stop ("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.")
+                stop ("Please specify the type of ExpressionSet you are working with: legendName = 'PS' or 'DS'.", call. = FALSE)
         
         if (!use.only.map)
                 is.ExpressionSet(ExpressionSet)
