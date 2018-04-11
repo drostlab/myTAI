@@ -7,7 +7,7 @@ myTAI
 
 Today, phenotypic phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level using transcriptomics approaches. Transcriptomes denote the total number of quantifiable transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment / disease versus non-treatment / non-disease transcriptomes are being compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although transcriptomics studies are based on a powerful methodology little is known about the evolution of such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.
 
-Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. This quantification on the highest level is achieved through transcriptome indices ([Domazet-Lošo and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/abs/nature09632.html); [Drost et al., 2016a](http://biorxiv.org/content/early/2016/05/03/051565)) which denote weighted means of gene age or rate of protein substitutions. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to evolutionary history (Dollow's law) ([Drost et al., 2017](http://www.sciencedirect.com/science/article/pii/S0959437X16302040)).
+Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. This quantification on the highest level is achieved through transcriptome indices ([Domazet-Lošo and Tautz, 2010](http://www.nature.com/nature/journal/v468/n7325/abs/nature09632.html); [Drost et al., 2016](http://biorxiv.org/content/early/2016/05/03/051565)) which denote weighted means of gene age or rate of protein substitutions. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to evolutionary history (Dollow's law) ([Drost et al., 2017](http://www.sciencedirect.com/science/article/pii/S0959437X16302040)).
 
 In principle, any transcriptome dataset published so far can be combined with evolutionary information. Thus, `myTAI` in combination with evolutionary information can be used to study corresponding transcriptomes with any available transcriptome dataset. 
 
@@ -21,7 +21,7 @@ The following tutorials will provide use cases and detailed explainations of how
 ## Citation
 Please cite the following paper when using `myTAI` for your own research. This will allow me to continue working on this software tool and will motivate me to extend its functionality and usability in the next years. Many thanks in advance :)
 
-> Drost HG, Gabel A, Jiu J, Quint M, Grosse I. __myTAI: evolutionary transcriptomics with R__ . _Bioinformatics_ (2018) [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
+> Drost et al. __myTAI: evolutionary transcriptomics with R__ . _Bioinformatics_ (2018) [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
 
 ## Installation
 
@@ -49,8 +49,6 @@ biocLite("HajkD/myTAI")
 The current status of the package as well as a detailed history of the
 functionality of each version of `myTAI` can be found in the [NEWS](https://github.com/HajkD/myTAI/blob/master/NEWS.md) section.
 
-
-
 ## Tutorials
 
 These tutorials introduce users to `myTAI`:
@@ -62,6 +60,36 @@ These tutorials introduce users to `myTAI`:
 - [Gene Expression Analysis with myTAI](https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd)
 - [Taxonomic Information Retrieval](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd)
 
+
+## Example
+
+```r
+library(myTAI)
+# example dataset covering 7 stages of A thaliana embryo development
+data("PhyloExpressionSetExample")
+# transform absolute expression levels to log2 expression levels
+ExprExample <- tf(PhyloExpressionSetExample, log2)
+# visualize global Transcriptome Age Index pattern
+PlotSignature(ExprExample)
+# plot expression level distributions for each age (=PS) category 
+# and each developmental stage 
+PlotCategoryExpr(ExprExample, "PS")
+# plot median expression of each age category seperated by old (PS1-3)
+# versus young (PS4-12) genes
+PlotMedians(ExprExample, Groups = list(1:3, 4:12))
+# plot mean expression of each age category seperated by old (PS1-3)
+# versus young (PS4-12) genes
+PlotMeans(ExprExample, Groups = list(1:3, 4:12))
+# plot relative mean expression of each age category seperated by old (PS1-3)
+# versus young (PS4-12) genes
+PlotRE(ExprExample, Groups = list(1:3, 4:12))
+# plot the significant differences between gene expression distributions 
+# of old (=group1) versus young (=group2) genes
+PlotGroupDiffs(ExpressionSet = ExprExample,
+               Groups        = list(group_1 = 1:3, group_2 = 4:12),
+               legendName    = "PS",
+               plot.type     = "boxplot")
+```
 
 ### Package Dependencies
 
