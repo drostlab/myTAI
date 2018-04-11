@@ -94,19 +94,20 @@ CombinatorialSignificance <- function(ExpressionSet,
                                       parallel      = FALSE)
 {
   
+  ExpressionSet <- as.data.frame(ExpressionSet)    
   is.ExpressionSet(ExpressionSet)
   
-  if(!is.element(TestStatistic, c("FlatLineTest"))){
-    stop("Please enter a correct string for the test statistic: 'FlatLineTest'.")
+  if (!is.element(TestStatistic, c("FlatLineTest"))) {
+    stop("Please enter a correct string for the test statistic: 'FlatLineTest'.", call. = FALSE)
   }
   
   ncols <- dim(ExpressionSet)[2]
   
   # in case all stages have the exact same number of replicates
-  if(length(replicates) == 1){
+  if (length(replicates) == 1) {
   
-     if((ncols - 2) %% replicates != 0)
-        stop("The number of stages and the number of replicates do not match.")
+     if ((ncols - 2) %% replicates != 0)
+        stop("The number of stages and the number of replicates do not match.", call. = FALSE)
   
      nStages <- (ncols - 2) / replicates
      replicateName.List <- lapply(lapply(1:nStages,rep,times = replicates),paste0,paste0(".",1:replicates))
@@ -124,7 +125,7 @@ CombinatorialSignificance <- function(ExpressionSet,
     nStages <- length(replicates)
     
     if(sum(replicates) != (ncols - 2))
-      stop("The number of stages and the number of replicates do not match.")
+      stop("The number of stages and the number of replicates do not match.", call. = FALSE)
     
     f <- function(x){ 
       unlist(lapply(lapply(x,rep,times = replicates[x]),paste0,paste0(".",1:replicates[x])))
