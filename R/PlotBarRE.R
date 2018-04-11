@@ -82,13 +82,14 @@ PlotBarRE <- function(ExpressionSet,
                       p.adjust.method = NULL, ...)
 {
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
-        if(is.null(Groups))
-                stop("Your Groups list does not store any items.")
+        if (is.null(Groups))
+                stop("Your Groups list does not store any items.", call. = FALSE)
         
-        if(any(sapply(Groups,function(x) length(x) < 2)))
-                stop("Each Group class needs to store at least two items.")
+        if (any(sapply(Groups,function(x) length(x) < 2)))
+                stop("Each Group class needs to store at least two items.", call. = FALSE)
         
         ### getting the PS names available in the given expression set
         age_names <- as.character(names(table(ExpressionSet[ , 1])))
@@ -96,7 +97,7 @@ PlotBarRE <- function(ExpressionSet,
         # test whether all group elements are available in the age vector
         ra <- range(ExpressionSet[ , 1])
         if(!all(unlist(Groups) %in% as.numeric(age_names)))
-                stop("There are items in your Group elements that are not available in the age column of your ExpressionSet.")
+                stop("There are items in your Group elements that are not available in the age column of your ExpressionSet.", call. = FALSE)
         
         PS.Table <- age_names
         nPS <- length(PS.Table)
@@ -134,7 +135,7 @@ PlotBarRE <- function(ExpressionSet,
                                                      silent = FALSE)
                         
                         if(methods::is(testForConstantValues, "try-error")){
-                                warning("Something went wrong with the Kruskal-Wallis Rank Sum Test... the p-value has been set to p = 1.")
+                                warning("Something went wrong with the Kruskal-Wallis Rank Sum Test... the p-value has been set to p = 1.", call. = FALSE)
                                 pValues[j] <- 1
                         } 
                         
