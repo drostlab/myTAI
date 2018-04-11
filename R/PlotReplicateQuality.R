@@ -35,13 +35,13 @@ PlotReplicateQuality <- function(ExpressionSet,
         
         
         if (!all(sapply(nrep,function(x) x > 1, simplify = TRUE)))
-                stop("Please insert at least 2 replicates per stage.")
+                stop("Please insert at least 2 replicates per stage.", call. = FALSE)
         
         ncols <- ncol(ExpressionSet)
         
         if (length(nrep) == 1){
                 if ((ncols - 2) %% nrep != 0)
-                        stop("The number of stages and the number of replicates do not match.")
+                        stop("The number of stages and the number of replicates do not match.", call. = FALSE)
                 # in case nrep = 2
                 nStages <- (ncols - 2) / nrep
                 # get all combinations of stages to perform
@@ -50,7 +50,7 @@ PlotReplicateQuality <- function(ExpressionSet,
         
         else if (length(nrep) > 1){
                 if (!((ncols - 2) == sum(nrep)))
-                        stop("The number of stages and the number of replicates do not match.")
+                        stop("The number of stages and the number of replicates do not match.", call. = FALSE)
                 nStages <- length(nrep)
         }
         
