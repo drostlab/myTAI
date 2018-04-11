@@ -67,6 +67,7 @@ PlotVars <- function(ExpressionSet,
                       adjust.range = TRUE) 
 {
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         stage <- expr <- age <- NULL
