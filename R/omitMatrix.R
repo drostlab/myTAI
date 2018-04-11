@@ -24,7 +24,7 @@
 #' @export
 omitMatrix <- function(ExpressionSet)
 {
-        
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         ncols <- dim(ExpressionSet)[2]
