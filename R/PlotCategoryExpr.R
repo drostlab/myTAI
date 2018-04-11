@@ -140,19 +140,20 @@ PlotCategoryExpr <- function(ExpressionSet,
                              log.expr   = FALSE,
                              gene.set   = NULL){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         if (!is.element(legendName, c("PS","DS")))
-                stop ("Please specify 'legendName' as either 'PS' or 'DS'.")
+                stop ("Please specify 'legendName' as either 'PS' or 'DS'.", call. = FALSE)
         
         if (!is.element(type, c("category-centered","stage-centered")))
-                stop ("Please specify 'type' as either 'category-centered' or 'stage-centered'.")
+                stop ("Please specify 'type' as either 'category-centered' or 'stage-centered'.", call. = FALSE)
         
         if (!is.element(distr.type, c("boxplot","violin","dotplot")))
-                stop ("Please specify 'distr.type' as either 'boxplot', 'dotplot', or 'violin'.")
+                stop ("Please specify 'distr.type' as either 'boxplot', 'dotplot', or 'violin'.", call. = FALSE)
         
         if (!is.logical(log.expr))
-                stop ("'log.expr' can only be TRUE or FALSE.")
+                stop ("'log.expr' can only be TRUE or FALSE.", call. = FALSE)
         
         ncols <- ncol(ExpressionSet)
         nPS <- length(names(table(ExpressionSet[ , 1])))
@@ -165,10 +166,10 @@ PlotCategoryExpr <- function(ExpressionSet,
                 GeneSubSet.indixes <- stats::na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
                 
                 if (length(GeneSubSet.indixes) == 0)
-                        stop ("None of your input gene ids could be found in the ExpressionSet.")
+                        stop ("None of your input gene ids could be found in the ExpressionSet.", call. = FALSE)
                 
                 if (length(GeneSubSet.indixes) != length(gene.set))
-                        warning ("Only ",length(GeneSubSet.indixes), " out of your ", length(gene.set), " gene ids could be found in the ExpressionSet.")
+                        warning ("Only ",length(GeneSubSet.indixes), " out of your ", length(gene.set), " gene ids could be found in the ExpressionSet.", call. = FALSE)
                 
                 GeneSubSet <- ExpressionSet[GeneSubSet.indixes , ]
                 ncols <- ncol(GeneSubSet)
