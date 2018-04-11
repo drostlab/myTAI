@@ -60,23 +60,24 @@ PlotGeneSet <- function(ExpressionSet,
                         y.ticks      = 6,
                         digits.ylab  = 4, ... ){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         if (!use.only.map)
                 is.ExpressionSet(ExpressionSet)
         
         GeneSubSet.indixes <- stats::na.omit(match(tolower(gene.set), tolower(ExpressionSet[ , 2])))
         
         if (length(GeneSubSet.indixes) == 0)
-                stop ("None of your input gene ids could be found in the ExpressionSet.")
+                stop ("None of your input gene ids could be found in the ExpressionSet.", call. = FALSE)
                                     
         if (length(GeneSubSet.indixes) != length(gene.set))
-                warning ("Only ",length(GeneSubSet.indixes), " out of your ", length(gene.set), " gene ids could be found in the ExpressionSet.")
+                warning ("Only ",length(GeneSubSet.indixes), " out of your ", length(gene.set), " gene ids could be found in the ExpressionSet.", call. = FALSE)
         
         GeneSubSet <- ExpressionSet[GeneSubSet.indixes , ]
         ncols <- ncol(GeneSubSet)
         
         if(!is.null(colors)){
                 if (length(colors) != length(gene.set))
-                        stop ("The number of colors and the number of genes do not match.")
+                        stop ("The number of colors and the number of genes do not match.", call. = FALSE)
         }
         
         # http://www.compbiome.com/2010/12/r-using-rcolorbrewer-to-colour-your.html
