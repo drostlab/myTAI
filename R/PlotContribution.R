@@ -36,7 +36,9 @@ PlotContribution <- function(ExpressionSet,
                              y.ticks     = 10){
         
         if(is.null(legendName))
-                stop("Please specify whether your input ExpressionSet stores 'PS' or 'DS'.")
+                stop("Please specify whether your input ExpressionSet stores 'PS' or 'DS'.", call. = FALSE)
+    
+        ExpressionSet <- as.data.frame(ExpressionSet)
         
         DS <- par_value <-  PS <- stage <- NULL
         
