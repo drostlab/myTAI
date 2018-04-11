@@ -49,7 +49,7 @@ GroupDiffs <- function(ExpressionSet,
                        stat.test  = "wilcox.test",
                        gene.set   = NULL, ...){
         
-        
+        ExpressionSet <- as.data.frame(ExpressionSet)
         PlotGroupDiffs(ExpressionSet = ExpressionSet,
                        Groups        = Groups,
                        legendName    = legendName,
