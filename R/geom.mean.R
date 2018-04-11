@@ -15,6 +15,6 @@ geom.mean <- function(x)
         if(is.numeric(x)){
                 return(cpp_geom_mean(as.vector(x)))
         } else{
-                stop("Please enter a numeric vector.")
+                stop("Please enter a numeric vector.", call. = FALSE)
         }
 }
