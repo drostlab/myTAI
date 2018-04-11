@@ -28,7 +28,7 @@ PlotCIRatio <- function(ExpressionSet, measure, nbootstraps) {
                         call. = FALSE
                 )
         
-        
+        ExpressionSet <- as.data.frame(ExpressionSet)
         names(ExpressionSet)[2] <- "GeneID"
         bootID <-
                 replicate(nbootstraps,
