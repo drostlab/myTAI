@@ -1,12 +1,17 @@
 myTAI 0.7.0
 ===========
 
-### Updates
+## Updates
 
 ### New Functions
 
 - new function `PlotCIRatio()` to compute and visualize TAI/TDI etc patters using bootstrapping and confidence intervals (contributed by @ljljolinq1010)
 
+
+### Update Functionality
+
+- all functions can now handle `tibble` data as input -> before there were errors
+thrown when input data wasn't in strict `data.frame` format
 
 myTAI 0.6.0
 ===========
