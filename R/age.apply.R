@@ -49,19 +49,19 @@
 #' @export
 age.apply <- function(ExpressionSet,FUN, ... ,as.list = FALSE)
 {
-        
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         f <- match.fun(FUN)
         ncols <- ncol(ExpressionSet)
         s <- split(ExpressionSet, ExpressionSet[ , 1])
         
-        if(!as.list){
+        if (!as.list) {
                 res <- t(as.data.frame(lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))))
                 rownames(res) <- levels(as.factor(ExpressionSet[ , 1]))
         }
         
-        if(as.list){
+        if (as.list) {
                 res <- lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))
                 names(res) <- levels(as.factor(ExpressionSet[ , 1]))
         }
