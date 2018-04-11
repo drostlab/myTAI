@@ -114,15 +114,6 @@ In theory, any published or newly generated transcriptome dataset can be used to
 For the comparative genomics part there are different methods and tools to quantify sequence homolgy between genes, miRNAs, lncRNAs etc of a reference species and related species. For example, for phylogenetic or taxonomic information retrieval such as phylogenetic trees, genomic phylostratography based gene age inference, dNdS estimation of orthologous genes or phylogenetic reconciliation can be used. Below users can find the most recent tools and resources for retrieving or computing phylogenetic or taxonomic relationships for an organism of interest.
 
 
-### Phylogenetic comparative methods
-
-
-
-### Phylogenetic reconciliation
-
-
-
-
 ### Genomic phylostratography based gene age inference
 
 As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)).
@@ -339,6 +330,17 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
   The present input object does not fulfill the ExpressionSet standard.
   
 ```
+
+__It might be that you work with a `tibble` object which will not be recognized by `is.ExpressionSet`. In that case, please convert your `tibble` object 
+to a `data.frame` using the function `as.data.frame()`.__
+
+```{r, eval = FALSE}
+# convert any tibble to a data.frame
+PhyloExpressionSetExample <- as.data.frame(PhyloExpressionSetExample)
+# now is.ExpressionSet() should return TRUE
+is.ExpressionSet(PhyloExpressionSetExample)
+```
+
 
 __The PhyloExpressionSet and DivergenceExpressionSet formats are crucial for all functions that are implemented in the `myTAI` package__.
 
