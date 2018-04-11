@@ -33,6 +33,7 @@
 
 SelectGeneSet <- function(ExpressionSet, gene.set, use.only.map = FALSE) {
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         return( PlotGeneSet(ExpressionSet = ExpressionSet,
                             gene.set      = gene.set,
                             get.subset    = TRUE,
