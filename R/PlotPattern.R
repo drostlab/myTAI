@@ -163,6 +163,7 @@ PlotPattern <- function(ExpressionSet,
                         custom.perm.matrix = NULL, ...)
 {
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         if (is.null(TestStatistic)){
