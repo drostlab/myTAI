@@ -119,6 +119,7 @@ DiffGenes <- function(ExpressionSet,
                       n               = NULL,
                       stage.names     = NULL){
         
+        ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         if (!is.element(method,c("foldchange","log-foldchange","t.test",
