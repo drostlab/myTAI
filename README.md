@@ -53,12 +53,12 @@ functionality of each version of `myTAI` can be found in the [NEWS](https://gith
 
 These tutorials introduce users to `myTAI`:
 
-- [Introduction to the myTAI Package](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd)
-- [Intermediate Concepts of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd)
-- [Advanced Topics of Phylotranscriptomics](https://github.com/HajkD/myTAI/blob/master/vignettes/Advanced.Rmd)
-- [Perform Age Enrichment Analyses](https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd)
-- [Gene Expression Analysis with myTAI](https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd)
-- [Taxonomic Information Retrieval](https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd)
+- [Introduction to the myTAI Package](../docs/articles/Introduction.html)
+- [Intermediate Concepts of Phylotranscriptomics](../docs/articles/Intermediate.html)
+- [Advanced Topics of Phylotranscriptomics](../docs/articles/Advanced.html)
+- [Perform Age Enrichment Analyses](../docs/articles/Enrichment.html)
+- [Gene Expression Analysis with myTAI](../docs/articles/Expression.html)
+- [Taxonomic Information Retrieval](../docs/articles/Taxonomy.html)
 
 
 ## Example
