@@ -1,3 +1,11 @@
+myTAI 0.8.0
+===========
+
+### Updated Functionality
+
+- fix remaining issues when input is a `tibble` 
+
+
 myTAI 0.7.0
 ===========
 
