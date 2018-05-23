@@ -7,3 +7,4 @@ README.html
 README.Rmd
 ^\.httr-oauth$
 ^\.travis\.yml$
+docs/
