@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Combine Replicates in an ExpressionSet — CollapseReplicates" />
 
 <meta property="og:description" content="This function takes an ExpressionSet object storing either a constant or variable number
@@ -39,8 +42,6 @@ of biological or technical replicates per stage and collapses replicate expressi
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -58,7 +59,7 @@ of biological or technical replicates per stage and collapses replicate expressi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -125,14 +126,16 @@ of biological or technical replicates per stage and collapses replicate expressi
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Combine Replicates in an ExpressionSet</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/CollapseReplicates.R'><code>R/CollapseReplicates.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/CollapseReplicates.R'><code>R/CollapseReplicates.R</code></a></small>
     <div class="hidden name"><code>CollapseReplicates.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function takes an <code>ExpressionSet</code> object storing either a constant or variable number
 of biological or technical replicates per stage and collapses replicate expression levels using a defined <code>FUN</code> (window function).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>CollapseReplicates</span>(<span class='no'>ExpressionSet</span>, <span class='no'>nrep</span>, <span class='no'>FUN</span>, <span class='kw'>stage.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     

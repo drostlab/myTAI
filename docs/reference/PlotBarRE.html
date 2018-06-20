@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Plot Mean Relative Expression Levels as Barplot — PlotBarRE" />
 
 <meta property="og:description" content="This function takes a PhyloExpressionSet or DivergenceExpressionSet object as input and computes
@@ -44,8 +47,6 @@ As test-statistic, the function performs a nonparametric kruskal.test
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -61,7 +62,7 @@ As test-statistic, the function performs a nonparametric kruskal.test
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -128,10 +129,11 @@ As test-statistic, the function performs a nonparametric kruskal.test
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot Mean Relative Expression Levels as Barplot</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotBarRE.R'><code>R/PlotBarRE.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotBarRE.R'><code>R/PlotBarRE.R</code></a></small>
     <div class="hidden name"><code>PlotBarRE.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function takes a PhyloExpressionSet or DivergenceExpressionSet object as input and computes
 for two or more defined phylostratum (divergence stratum) classes the statistical significance of
@@ -139,6 +141,7 @@ the differences of mean relative expression of these two (or more) corresponding
 As test-statistic, the function performs a nonparametric <code>kruskal.test</code>
  based on relative expression values stored within each defined phylostratum class.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>PlotBarRE</span>(<span class='no'>ExpressionSet</span>, <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>wLength</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>p.adjust.method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>

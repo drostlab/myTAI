@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Perform the Reductive Hourglass Test — ReductiveHourglassTest" />
 
 <meta property="og:description" content="The Reductive Hourglass Test aims to statistically evaluate the
@@ -44,8 +47,6 @@ indeed follow an hourglass (high-low-high) shape." />
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -61,7 +62,7 @@ indeed follow an hourglass (high-low-high) shape." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -128,10 +129,11 @@ indeed follow an hourglass (high-low-high) shape." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Perform the Reductive Hourglass Test</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/ReductiveHourglassTest.R'><code>R/ReductiveHourglassTest.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/ReductiveHourglassTest.R'><code>R/ReductiveHourglassTest.R</code></a></small>
     <div class="hidden name"><code>ReductiveHourglassTest.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>The <em>Reductive Hourglass Test</em> aims to statistically evaluate the
 existence of a phylotranscriptomic hourglass pattern based on <code><a href='TAI.html'>TAI</a></code> or <code><a href='TDI.html'>TDI</a></code> computations.
@@ -139,6 +141,7 @@ The corresponding p-value quantifies the probability that a given TAI or TDI pat
 does not follow an hourglass like shape. A p-value &lt; 0.05 indicates that the corresponding phylotranscriptomics pattern does
 indeed follow an hourglass (high-low-high) shape.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>ReductiveHourglassTest</span>(<span class='no'>ExpressionSet</span>, <span class='kw'>modules</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>permutations</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>lillie.test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>plotHistogram</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fl'>10</span>,

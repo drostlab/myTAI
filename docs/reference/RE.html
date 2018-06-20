@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Transform to Relative Expression Levels — RE" />
 
 <meta property="og:description" content="This function computes the relative expression profiles of any given gene expression set. 
@@ -49,8 +52,6 @@ levels \(f_s\) of all other stages s range between 0 and 1, accordingly." />
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -66,7 +67,7 @@ levels \(f_s\) of all other stages s range between 0 and 1, accordingly." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -133,10 +134,11 @@ levels \(f_s\) of all other stages s range between 0 and 1, accordingly." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Transform to Relative Expression Levels</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/rel_exp.R'><code>R/rel_exp.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/rel_exp.R'><code>R/rel_exp.R</code></a></small>
     <div class="hidden name"><code>RE.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function computes the relative expression profiles of any given gene expression set. 
 The relative expression profile is being computed as follows:</p>
@@ -149,6 +151,7 @@ with minimum \(e_s\) is 0, the relative expression level \(f_s\) of the
 developmental stage s with maximum \(e_s\) is 1, and the relative expression
 levels \(f_s\) of all other stages s range between 0 and 1, accordingly.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>RE</span>(<span class='no'>ExpressionMatrix</span>)</pre>
     

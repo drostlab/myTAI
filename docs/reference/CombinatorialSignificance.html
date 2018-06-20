@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Compute the Statistical Significance of Each Replicate Combination — CombinatorialSignificance" />
 
 <meta property="og:description" content="In case a PhyloExpressionSet or DivergenceExpressionSet stores replicates for each
@@ -42,8 +45,6 @@ the statistical significance of the underlying pattern for all combinations of r
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -59,7 +60,7 @@ the statistical significance of the underlying pattern for all combinations of r
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -126,15 +127,17 @@ the statistical significance of the underlying pattern for all combinations of r
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Compute the Statistical Significance of Each Replicate Combination</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/combinatorialSignificance.R'><code>R/combinatorialSignificance.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/combinatorialSignificance.R'><code>R/combinatorialSignificance.R</code></a></small>
     <div class="hidden name"><code>CombinatorialSignificance.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>In case a PhyloExpressionSet or DivergenceExpressionSet stores replicates for each
 developmental stage or experiment, this function allows to compute the p-values quantifying
 the statistical significance of the underlying pattern for all combinations of replicates.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>CombinatorialSignificance</span>(<span class='no'>ExpressionSet</span>, <span class='no'>replicates</span>,
   <span class='kw'>TestStatistic</span> <span class='kw'>=</span> <span class='st'>"FlatLineTest"</span>, <span class='kw'>permutations</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>

@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Plot the Quality of Biological Replicates — PlotReplicateQuality" />
 
 <meta property="og:description" content="This function performs several quality checks to validate the
@@ -39,8 +42,6 @@ biological variation between replicates and stages (experiments)." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -58,7 +59,7 @@ biological variation between replicates and stages (experiments)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -125,14 +126,16 @@ biological variation between replicates and stages (experiments)." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot the Quality of Biological Replicates</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotReplicateQuality.R'><code>R/PlotReplicateQuality.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotReplicateQuality.R'><code>R/PlotReplicateQuality.R</code></a></small>
     <div class="hidden name"><code>PlotReplicateQuality.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function performs several quality checks to validate the
 biological variation between replicates and stages (experiments).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>PlotReplicateQuality</span>(<span class='no'>ExpressionSet</span>, <span class='no'>nrep</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>)
   <span class='fu'>log</span>(<span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/cor'>var</a></span>(<span class='no'>x</span>)), <span class='kw'>legend.pos</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>, <span class='kw'>stage.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>

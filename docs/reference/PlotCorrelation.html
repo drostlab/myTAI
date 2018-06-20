@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Plot the Correlation Between Phylostrata and Divergence Strata — PlotCorrelation" />
 
 <meta property="og:description" content="This function plots the correlation coefficient between phylostratum values 
@@ -44,8 +47,6 @@ subsequent analyses (Quint et al., 2012)." />
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -61,7 +62,7 @@ subsequent analyses (Quint et al., 2012)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -128,10 +129,11 @@ subsequent analyses (Quint et al., 2012)." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot the Correlation Between Phylostrata and Divergence Strata</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotCorrelation.R'><code>R/PlotCorrelation.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotCorrelation.R'><code>R/PlotCorrelation.R</code></a></small>
     <div class="hidden name"><code>PlotCorrelation.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function plots the correlation coefficient between phylostratum values 
 and divergence-stratum values of a given PhyloExpressionSet and DivergenceExpressionSet.</p>      
@@ -139,6 +141,7 @@ and divergence-stratum values of a given PhyloExpressionSet and DivergenceExpres
 linear correlated so that the independence of PS and DS can be assumed for 
 subsequent analyses (Quint et al., 2012).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>PlotCorrelation</span>(<span class='no'>PhyloExpressionSet</span>, <span class='no'>DivergenceExpressionSet</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>, <span class='kw'>linearModel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Phylostratum"</span>,

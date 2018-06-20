@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Compute a Permutation Matrix for Test Statistics — bootMatrix" />
 
 <meta property="og:description" content="This function computes the TAI for a row permutated PhyloExpressionSet or DivergenceExpressionSet.
@@ -44,8 +47,6 @@ can be used for building test statistics based on the TAI or TDI profiles." />
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -61,7 +62,7 @@ can be used for building test statistics based on the TAI or TDI profiles." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -128,10 +129,11 @@ can be used for building test statistics based on the TAI or TDI profiles." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Compute a Permutation Matrix for Test Statistics</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/bootMatrix.R'><code>R/bootMatrix.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/bootMatrix.R'><code>R/bootMatrix.R</code></a></small>
     <div class="hidden name"><code>bootMatrix.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function computes the TAI for a row permutated PhyloExpressionSet or DivergenceExpressionSet.</p>
 <p>One can specify the number of permutations which corresponds to the number of <code><a href='TAI.html'>TAI</a></code> or <code><a href='TDI.html'>TDI</a></code> profiles
@@ -139,6 +141,7 @@ that are being returned as data matrix. The function then returns a <code>TAI</c
 the <code>TAI</code> or <code>TDI</code> profiles of the permutated PhyloExpressionSets or DivergenceExpressionSets. This procedure
 can be used for building test statistics based on the <code>TAI</code> or <code>TDI</code> profiles.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>bootMatrix</span>(<span class='no'>ExpressionSet</span>, <span class='kw'>permutations</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</pre>
     

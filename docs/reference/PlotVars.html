@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Plot Variance of Expression Profiles — PlotVars" />
 
 <meta property="og:description" content="This function computes for each age category the corresponding variance expression profile." />
@@ -38,8 +41,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -57,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -124,13 +125,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot Variance of Expression Profiles</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotVars.R'><code>R/PlotVars.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotVars.R'><code>R/PlotVars.R</code></a></small>
     <div class="hidden name"><code>PlotVars.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function computes for each age category the corresponding variance expression profile.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>PlotVars</span>(<span class='no'>ExpressionSet</span>, <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='st'>"age"</span>,
   <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Ontogeny"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Variance(Expression Level)"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>,
@@ -222,7 +225,7 @@ that contributes most to the overall transcriptome of the given developmental pr
 <span class='fu'>PlotVars</span>(<span class='no'>DivergenceExpressionSetExample</span>,
           <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='fu'>c</span>(<span class='fl'>1</span>:<span class='fl'>5</span>), <span class='fu'>c</span>(<span class='fl'>6</span>:<span class='fl'>10</span>)),
           <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='st'>"DS"</span>,
-          <span class='kw'>adjust.range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='PlotVars-3.png' alt='' width='700' height='433' /></div><div class='input'>
+          <span class='kw'>adjust.range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in grid.Call.graphics(C_setviewport, vp, TRUE): non-finite location and/or size for viewport</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

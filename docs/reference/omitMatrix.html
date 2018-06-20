@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Compute TAI or TDI Profiles Omitting a Given Gene — omitMatrix" />
 
 <meta property="og:description" content="For each gene i, exclude the corresponding gene i from the global
@@ -44,8 +47,6 @@ This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI pro
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -61,7 +62,7 @@ This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI pro
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -128,10 +129,11 @@ This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI pro
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Compute TAI or TDI Profiles Omitting a Given Gene</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/omitMatrix.R'><code>R/omitMatrix.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/omitMatrix.R'><code>R/omitMatrix.R</code></a></small>
     <div class="hidden name"><code>omitMatrix.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>For each gene i, exclude the corresponding gene i from the global
  PhyloExpressionSet or DivergenceExpressionSet and compute the <code><a href='TAI.html'>TAI</a></code> or <code><a href='TDI.html'>TDI</a></code> 
@@ -139,6 +141,7 @@ This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI pro
  with excluded gene i.</p> 
 <p>This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI profile for each omitted gene i.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>omitMatrix</span>(<span class='no'>ExpressionSet</span>)</pre>
     

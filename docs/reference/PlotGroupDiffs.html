@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Plot the significant differences between gene expression distributions of PS or DS groups — PlotGroupDiffs" />
 
 <meta property="og:description" content="This function performs a test to quantify the statistical significance between
@@ -43,8 +46,6 @@ within specific developmental stages or experiments." />
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -60,7 +61,7 @@ within specific developmental stages or experiments." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -127,16 +128,18 @@ within specific developmental stages or experiments." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot the significant differences between gene expression distributions of PS or DS groups</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotGroupDiffs.R'><code>R/PlotGroupDiffs.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/PlotGroupDiffs.R'><code>R/PlotGroupDiffs.R</code></a></small>
     <div class="hidden name"><code>PlotGroupDiffs.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function performs a test to quantify the statistical significance between
 the global expression level distributions of groups of PS or DS. It therefore, allows users to investigate
 significant groups of PS or DS that significantly differ in their gene expression level distibution
 within specific developmental stages or experiments.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>PlotGroupDiffs</span>(<span class='no'>ExpressionSet</span>, <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>stat.test</span> <span class='kw'>=</span> <span class='st'>"wilcox.test"</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"turquoise3"</span>, <span class='st'>"magenta3"</span>),
@@ -242,12 +245,9 @@ Group2 = genes deriving from selected PS/DS in group 2. Within each stage the ex
 <span class='fu'>PlotGroupDiffs</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='fu'><a href='tf.html'>tf</a></span>(<span class='no'>PhyloExpressionSetExample</span>,<span class='no'>log2</span>),
                <span class='kw'>Groups</span>        <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>group_1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,<span class='kw'>group_2</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>12</span>),
                <span class='kw'>legendName</span>    <span class='kw'>=</span> <span class='st'>"PS"</span>,
-               <span class='kw'>plot.type</span>     <span class='kw'>=</span> <span class='st'>"boxplot"</span>)</div><div class='output co'>#&gt;                               Zygote     Quadrant     Globular        Heart
-#&gt; p.value ( wilcox.test ) 3.362424e-34 3.017793e-42 1.987181e-71 1.546567e-66
-#&gt;                              Torpedo         Bent       Mature
-#&gt; p.value ( wilcox.test ) 1.174961e-85 9.975191e-90 1.007102e-74</div><div class='input'>
+               <span class='kw'>plot.type</span>     <span class='kw'>=</span> <span class='st'>"boxplot"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot.new(): figure margins too large</span></div><div class='input'>
 
-</div><div class='img'><img src='PlotGroupDiffs-1.png' alt='' width='700' height='433' /></div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

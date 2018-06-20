@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -96,9 +96,9 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to the myTAI Package</h1>
             
-            <h4 class="date">2018-04-12</h4>
+            <h4 class="date">2018-06-20</h4>
       
-      <small>Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd"><code>vignettes/Introduction.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd"><code>vignettes/Introduction.Rmd</code></a></small>
       <div class="hidden name"><code>Introduction.Rmd</code></div>
 
     </div>
@@ -154,14 +154,14 @@
 <a href="#motivation" class="anchor"></a>Motivation</h2>
 <p>Using embryo development of the plant <em>Arabidopsis thaliana</em> as an example, we ask the user to imagine how one would investigate the differences of developmental transcriptomes across developmental stages.</p>
 <div class="figure">
-<img src="../../../../R%20Projects/R%20Packages/myTAI/vignettes/Figures/Fig1.png">
+<img src="../../../../R%20Packages/Packages/myTAI/vignettes/Figures/Fig1.png">
 </div>
 <p style="font-size:10px;">
 Figure 1: Gene expression distributions (= developmental transcriptome) throughout seven stages of <em>A. thaliana</em> embryo development. Embryo development is divided into three phases: early embryogenesis (purple), mid-embryogenesis (green), and late embryogenesis (brown). This boxplot illustrates that the overall distributions of log2 expression levels (y-axis) hardly differ between developmental stages (x-axis) although the difference on the global scale is statistically significant (Kruskal-Wallis Rank Sum Test: p &lt; 2e-16). Hence, a clear visual pattern of gene expression differences between early, mid, and late embryogenesis on the global scale can not be inferred. Adapted from <a href="http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221">Drost, 2016</a>.
 </p>
 <p>The objective of performing evolutionary transcriptomics studies is to classify a transcriptome into different categories of genes sharing similar evolutionary origins (detectable homologs) or genes that share similar phylogenetic relationships (orthologous genes) and to study the overall expression patterns of these classified genes throughout the biological process of interest. Thus, by introducing a phylogenetic or taxonomic variable to a transcriptome dataset, we can determine stages or time points that are under stronger constraints than others, indicating switches between biological programs or functions.</p>
 <div class="figure">
-<img src="../../../../R%20Projects/R%20Packages/myTAI/vignettes/Figures/Fig2.png">
+<img src="../../../../R%20Packages/Packages/myTAI/vignettes/Figures/Fig2.png">
 </div>
 <p style="font-size:10px;">
 Figure 2: Gene expression distributions (= developmental transcriptome) throughout seven stages of <em>A. thaliana</em> embryo development classified into distinctive age categories. Each box represents the developmental stage during <em>A. thaliana</em> embryogenesis, the y-axis denotes the log2 expression levels of genes that fall into the corresponding age category shown on the x-axis. Hence, each boxplot represents the gene expression distribution of genes that are classified into the corresponding age class during a specific developmental stage. The gene age distribution of <em>A. thaliana</em> genes range from PS1 to PS12 where PS1 represents the evolutionarily most distant age category (cellular org.) and PS12 the evolutionary most recent age category (<em>A. thaliana</em> specific). Yellow dots in the boxplots denote the mean expression level of the corresponding expression distribution. This visualization illustrates that although the global gene expression distributions do not change visually between developmental stages (Fig. 1), the global gene expression distributions of age categories differ between stages of <em>A. thaliana</em> embryo development, and thus, allow studying the effect of transcriptome evolution and conservation on embryo development. Adapted from <a href="http://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221">Drost, 2016</a>.
@@ -177,7 +177,7 @@ Comparative Genomics + Transcriptomics = Evolutionary Transcriptomics
 <p>In theory, any published or newly generated transcriptome dataset can be used to capture evolutionary signatures with <code>myTAI</code>.</p>
 <p><code>myTAI</code> is designed to receive phylogenetic information obtained from comparative genomics data and transcriptome data as input and internally combines these datasets to perform evolutionary transcriptomics analyses.</p>
 <div class="figure">
-<img src="../../../../R%20Projects/R%20Packages/myTAI/vignettes/Figures/Fig3.png">
+<img src="../../../../R%20Packages/Packages/myTAI/vignettes/Figures/Fig3.png">
 </div>
 <p style="font-size:10px;">
 Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see <a href="http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression">Dunn, 2013</a> ), genomic phylostratography based gene age inference (see <a href="http://www.sciencedirect.com/science/article/pii/S0168952507002995">Domazet-Loso et al., 2007</a>; <a href="http://www.sciencedirect.com/science/article/pii/S016895251300111X">Capra et al., 2013</a>; <a href="http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113">Liebeskind et al., 2016</a> ), by dNdS estimation of orthologous genes (see <a href="http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html">Quint, Drost et al., 2012</a> and <a href="http://mbe.oxfordjournals.org/content/32/5/1221">Drost et al., 2015</a> ), or phylogenetic reconciliation (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/21949266">Doyon et al, 2011</a> ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code>, <code><a href="../reference/PlotRE.html">PlotRE()</a></code> and <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code>.
@@ -383,7 +383,7 @@ PhyloExpressionSetExample &lt;-<span class="st"> </span><span class="kw">as.data
 <p>The x-axis shows the seven stages of <em>A. thaliana</em> embryo development and the y-axis shows the corresponding mean transcriptome age (TAI) value. The lower the TAI value the older the mean transcriptome age and the higher the TAI value the younger the mean transcriptome age.</p>
 <p>The interpretation of the TAI values on the y-axis is given by the next figure.</p>
 <div class="figure">
-<img src="../../../../R%20Projects/R%20Packages/myTAI/vignettes/Figures/Fig4.png">
+<img src="../../../../R%20Packages/Packages/myTAI/vignettes/Figures/Fig4.png">
 </div>
 <p>In this example, a TAI value of 3.5 quantifies that genes that contribute most the transcriptome at a particular stage emerged on average between phylostratum 3 and phylostratum 4. Due to the nature of the arithmetic mean, this value does not represent the true origin of individual genes, and thus the TAI measure is only helpful to screen for stages that express (on average) older or younger genes. Subsequent analyses such as mean expression of age categories, relative expression levels, and gene expression level distributions for each age category will then reveal which exact genes or age categories generate the overall TAI value.</p>
 <p>To obtain a more detailed overview of which age categories contribute how much to each developmental stage, the gene expression level distributions for each age caterory and each developmental stage can be visualized (using the <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> function).</p>

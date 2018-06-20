@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Filter for Expressed Genes — Expressed" />
 
 <meta property="og:description" content="This function takes an ExpressionSet object and removes genes from the gene expression matrix that
@@ -42,8 +45,6 @@ genes that have been defined as not expressed or outliers and returns an Express
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -59,7 +60,7 @@ genes that have been defined as not expressed or outliers and returns an Express
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -126,15 +127,17 @@ genes that have been defined as not expressed or outliers and returns an Express
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Filter for Expressed Genes</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/Expressed.R'><code>R/Expressed.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/Expressed.R'><code>R/Expressed.R</code></a></small>
     <div class="hidden name"><code>Expressed.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function takes an ExpressionSet object and removes genes from the gene expression matrix that
 have an expression level below, above, or below AND above a defined <code>cut.off</code> value. Hence, this function allows to remove
 genes that have been defined as <em>not expressed</em> or <em>outliers</em> and returns an <code>ExpressionSet</code> retaining only expressed genes.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>Expressed</span>(<span class='no'>ExpressionSet</span>, <span class='no'>cut.off</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"const"</span>, <span class='kw'>comparison</span> <span class='kw'>=</span> <span class='st'>"below"</span>,
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>

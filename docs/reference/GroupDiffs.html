@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Quantify the significant differences between gene expression distributions of age groups — GroupDiffs" />
 
 <meta property="og:description" content="This function performs a test to quantify the statistical significance between
@@ -43,8 +46,6 @@ within specific developmental stages or experiments." />
 <![endif]-->
 
 
-
-
   </head>
 
   <body>
@@ -60,7 +61,7 @@ within specific developmental stages or experiments." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.7.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.8.0.9000</span>
       </span>
     </div>
 
@@ -127,16 +128,18 @@ within specific developmental stages or experiments." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Quantify the significant differences between gene expression distributions of age groups</h1>
-    <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/GroupDiffs.R'><code>R/GroupDiffs.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/GroupDiffs.R'><code>R/GroupDiffs.R</code></a></small>
     <div class="hidden name"><code>GroupDiffs.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function performs a test to quantify the statistical significance between
 the global expression level distributions of groups of PS or DS. It therefore, allows users to investigate
 significant groups of PS or DS that significantly differ in their gene expression level distibution
 within specific developmental stages or experiments.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>GroupDiffs</span>(<span class='no'>ExpressionSet</span>, <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>stat.test</span> <span class='kw'>=</span> <span class='st'>"wilcox.test"</span>, <span class='kw'>gene.set</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
