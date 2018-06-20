@@ -1,6 +1,5 @@
-# myTAI <img src="inst/myTAI.png" align="right" />
 
-myTAI
+# myTAI <img src="inst/myTAI.png" align="right" />
 =====
 [![Travis-CI Build Status](https://travis-ci.org/HajkD/myTAI.svg?branch=master)](https://travis-ci.org/HajkD/myTAI)
  [![rpackages.io rank](https://www.rpackages.io/badge/myTAI.svg)](https://www.rpackages.io/package/myTAI)
