@@ -4,7 +4,7 @@ myTAI
 [![Travis-CI Build Status](https://travis-ci.org/HajkD/myTAI.svg?branch=master)](https://travis-ci.org/HajkD/myTAI)
  [![rpackages.io rank](https://www.rpackages.io/badge/myTAI.svg)](https://www.rpackages.io/package/myTAI)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/myTAI)](https://github.com/metacran/cranlogs.app)
-
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/myTAI)](https://github.com/metacran/cranlogs.app)
  
 
 
