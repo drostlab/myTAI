@@ -1,3 +1,4 @@
+# myTAI <img src="inst/myTAI.png" align="right" />
 
 myTAI
 =====
