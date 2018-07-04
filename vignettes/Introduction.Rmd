@@ -135,10 +135,10 @@ The rational behind gene age inference is to assign each protein coding gene of 
 
 __Generate or retrieve phylostratigraphic maps:__
 
+- [R package: phylostratr](https://github.com/arendsee/phylostratr) which implements `Phylostratigraphy` as an `R package` - Please consult the [Vignettes](https://github.com/arendsee/phylostratr/tree/master/vignettes) for examples. 
 - [createPSmap.pl](https://github.com/AlexGa/Phylostratigraphy): generate a phylostratigraphic map (implemented by Alexander Gabel)
 - [phylostratigraphy.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022): generate a phylostratigraphic (implemented by Cheng et al. 2015)
 - [phylo_pipeline.py](https://mynotebook.labarchives.com/share/Shuqing_Xu/NTIuMHw2NDQyMi80MC9UcmVlTm9kZS8zNDEyODM1NjE2fDEzMi4w): generate a phylostratigraphic (implemented by Shuqing Xu)
-- [R package: phylostratr](https://github.com/arendsee/phylostratr) which implements `Phylostratigraphy` as an `R package` - Please consult the [Vignettes](https://github.com/arendsee/phylostratr/tree/master/vignettes) for examples. 
 - [ORFanFinder](http://bioinformatics.oxfordjournals.org/content/early/2016/03/26/bioinformatics.btw122.full.pdf): generate a phylostratigraphic map
 - `Protein Historian`: generate a gene age map
 - download pre-computed and published [phylostratigraphic maps](https://github.com/HajkD/published_phylomaps)
