@@ -5,7 +5,18 @@
 #' @param nrep either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.
 #' @param method method to detect differentially expressed genes.
 #' @param lib.size the library sizes to equalize library sizes by quantile-to-quantile normalization (see \code{\link[edgeR]{equalizeLibSizes}}).
-#' @param p.adjust.method p value correction method.
+#' @param p.adjust.method p value correction method that is passed to \code{\link{p.adjust}}.
+#' Available options are:
+#' \itemize{
+#' \code{p.adjust.method = "BH"} (Benjamini-Hochberg correction)
+#' \code{p.adjust.method = "bonferroni"} (Bonferroni correction)
+#' \code{p.adjust.method = "holm"}
+#' \code{p.adjust.method = "hochberg"}
+#' \code{p.adjust.method = "hommel"}
+#' \code{p.adjust.method = "BY"}
+#' \code{p.adjust.method = "fdr"}
+#' }
+#' If \code{p.adjust.method = NULL} (Default) then no p-value correction is performed.
 #' @param comparison a character string specifying whether genes having fold-change or p-values
 #'  below, above, or below AND above (both) the \code{alpha} value should be excluded from the dataset.
 #'  In case \code{comparison = "both"} is chosen, the \code{cut.off} argument must be a two dimensional vector defining the lower \code{alpha} value at the first position and the upper \code{alpha} value
