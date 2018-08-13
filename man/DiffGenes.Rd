@@ -17,7 +17,18 @@ DiffGenes(ExpressionSet, nrep, method = "foldchange", lib.size = NULL,
 
 \item{lib.size}{the library sizes to equalize library sizes by quantile-to-quantile normalization (see \code{\link[edgeR]{equalizeLibSizes}}).}
 
-\item{p.adjust.method}{p value correction method.}
+\item{p.adjust.method}{p value correction method that is passed to \code{\link{p.adjust}}.
+Available options are:
+\itemize{
+\code{p.adjust.method = "BH"} (Benjamini-Hochberg correction)
+\code{p.adjust.method = "bonferroni"} (Bonferroni correction)
+\code{p.adjust.method = "holm"}
+\code{p.adjust.method = "hochberg"}
+\code{p.adjust.method = "hommel"}
+\code{p.adjust.method = "BY"}
+\code{p.adjust.method = "fdr"}
+}
+If \code{p.adjust.method = NULL} (Default) then no p-value correction is performed.}
 
 \item{comparison}{a character string specifying whether genes having fold-change or p-values
  below, above, or below AND above (both) the \code{alpha} value should be excluded from the dataset.
