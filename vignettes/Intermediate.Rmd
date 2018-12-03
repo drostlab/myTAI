@@ -23,6 +23,12 @@ and visualizations for phylotranscriptomics analyses using the `myTAI` package.
 This __Intermediate__ vignette introduces more detailed analyses and more specialized techniques 
 to investigate the observed phylotranscriptomics patterns (`TAI`, `TDI`, `RE`, etc.) and introduces the statistical framework to quantify the significance of observed phenomena.
 
+- [1. Details: Flat Line Test](#flat-line-test)
+- [2. Details: Reductive Hourglass Test](#reductive-hourglass-test)
+- [3. Details: Reductive Early Conservation Test](#reductive-early-conservation-test)
+- [4. Details: Reverse Hourglass Test](#reverse-hourglass-test)
+- [5. Data Transformation for log(TAI) and sqrt(TAI) patterns](#data-transformation)
+
 
 ## Investigating the Statistical Significance of Phylotranscriptomic Patterns
 
@@ -518,6 +524,140 @@ This example shall illustrate that finding the right test statistic is a multi-s
 properties of the underlying permutation test. Although single aspects might fit or fit not corresponding criteria,
 the overall impression (sum of all individual analyses) must be considered to obtain a valid p-value.
 
+### Reverse Hourglass Test
+
+The __Reverse Hourglass Test__ has been developed to statistically evaluate the existence of a `reverse hourglass pattern` based on TAI or TDI computations. 
+The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) does not follow an reverse hourglass like shape. 
+A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does indeed follow a reverse hourglass (low-high-low) shape.
+
+To build the test statistic again we start with a standard PhyloExpressionSet.
+
+```{r,eval=TRUE, echo=FALSE}
+library(myTAI)
+
+# load an example PhyloExpressionSet stored in the myTAI package
+data(PhyloExpressionSetExample) 
+
+# look at the standardized data set format
+head(PhyloExpressionSetExample, 3) 
+```
+
+```
+  Phylostratum      GeneID   Zygote Quadrant Globular     Heart  Torpedo      Bent    Mature
+1            1 at1g01040.2 2173.635 1911.200 1152.555 1291.4224 1000.253  962.9772 1696.4274
+2            1 at1g01050.1 1501.014 1817.309 1665.309 1564.7612 1496.321 1114.6435 1071.6555
+3            1 at1g01070.1 1212.793 1233.002  939.200  929.6195  864.218  877.2060  894.8189
+
+```
+
+And again compute the `TAI()` profile of the `PhyloExpressionSetExample`.
+
+```{r,eval=FALSE}
+# TAI profile of correctly assigned Phylostrata
+TAI(PhyloExpressionSetExample) 
+```
+
+```
+  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
+
+```
+Visualization: 
+
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+# visualize the TAI profile of correctly assigned Phylostrata
+PlotSignature( ExpressionSet = PhyloExpressionSetExample, 
+               p.value       = FALSE ) 
+```
+
+The Reverse Hourglass Test is a permutation test based on the following test statistic.
+
+1) A set of developmental stages is partitioned into three modules - `early`, `mid`, and `late` - based on prior biological knowledge (see Drost et al., 2015 for details).
+
+2) The mean TAI or TDI value for each of the three modules $T_{early}$, $T_{mid}$, and $T_{late}$ are computed.
+
+3) The two differences D1 = $T_{mid}$ - $T_{early}$ and D2 = $T_{mid}$ - $T_{late}$ are calculated.
+
+4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reverse Hourglass Test__.
+
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+
+
+
+To perform the __Reverse Hourglass Test__ you can use the `ReverseHourglassTest()` function.
+Using this function you need to divide the given phylotranscriptomic pattern into
+three developmental modules:
+
+* early module
+* mid module
+* late module
+
+This can be done using the `modules` argument: `module = list(early = 1:2, mid = 3:5, late = 6:7)`.
+In this example (`PhyloExpressionSetExample`) we divide the corresponding developmental process
+into the three modules:
+
+* early module: Stages 1 - 2 = Zygote and Quadrant
+* mid module: Stages 3 - 5 = Globular, Heart, and Torpedo
+* late module: Stages 6 - 7 = Bent and Mature
+
+
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+# Perform the Reverse Hourglass Test
+ReverseHourglassTest( ExpressionSet = PhyloExpressionSetExample,
+                        modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+                        lillie.test   = TRUE ) 
+
+```
+
+```
+$p.value
+[1] 1
+
+$std.dev
+[1] 0.05598325 0.05469016 0.05386737 0.05248817 0.05161525 0.05411684 0.05605765
+
+$lillie.test
+[1] TRUE
+```
+
+The corresponding output shows the p-value returned by the __Reductive Hourglass Test__,
+the standard deviation of randomly permuted TAI profiles returned by `bootMatrix()`
+ (`apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)`) and in case the argument `lillie.test = TRUE`,
+a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality. In case `lillie.test` is `TRUE` the corresponding 
+[Lilliefors (Kolmogorov-Smirnov)](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) 
+ test passed the goodness of fit criterion. In case `lillie.test` is `FALSE` the corresponding goodness of fit by a normal distribution is not statistically significant.
+
+Analogous to the `plotHistogram` argument that is present in the `FlatLineTest()` function,
+the `ReductiveHourglassTest()` function also takes an argument `plotHistogram`. When `plotHistogram = TRUE`,
+the `ReductiveHourglassTest()` function returns a multi-plot showing:
+
+* A Cullen and Frey skewness-kurtosis plot. 
+This plot illustrates which distributions seem plausible to fit the resulting permutation vector $D_{min}$. 
+Here a normal distribution seems most plausible.
+
+* A histogram of $D_{min}$ combined with the density plot is visualized. 
+$D_{min}$ is then fitted by a normal distribution. 
+The corresponding parameters are estimated by moment matching estimation.
+
+* A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
+
+* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
+This allows to quantify the permutation bias and their implications on the goodness of fit.
+
+
+```{r, fig.width= 7, fig.height= 6,eval=FALSE}
+# perform the Reverse Hourglass Test and plot the test statistic
+ReverseHourglassTest( ExpressionSet = PhyloExpressionSetExample,
+                        modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+                        plotHistogram = TRUE, 
+                        lillie.test   = TRUE ) 
+
+```
+
+The corresponding output shows the `summary statistics` of the fitted normal distribution
+as well as the p-value, standard deviation, and [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) result.
+
+This example output nicely illustrates that although the Lilliefors (Kolmogorov-Smirnov) test for normality is violated for some permutations, the Cullen and Frey graph shows that there is no better approximation than a normal distribution (which is also supported visually by investigating the fitted frequency distribution). The corresponding p-value returned by `ReverseHourglassTest()` is significant and illustrates that the observed phylotranscriptomic pattern of PhyloExpressionSetExample does follow the Hourglass Model assumption.
 
 ## Data Transformation
 
