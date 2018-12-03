@@ -519,6 +519,39 @@ PhyloExpressionSetExample &lt;-<span class="st"> </span><span class="kw"><a href
 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
 </code></pre>
 </div>
+<div id="reverse-hourglass-test" class="section level3">
+<h3 class="hasAnchor">
+<a href="#reverse-hourglass-test" class="anchor"></a>Reverse Hourglass Test</h3>
+<p>In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles an <em>reverse hourglass</em> shape (low-high-low pattern), one can obtain a p-value quantifying the statistical significance of a visual <em>reverse hourglass</em> pattern based on the <code>ReverseHourglassTest</code> (<code><a href="../reference/ReverseHourglassTest.html">?ReverseHourglassTest</a></code>).</p>
+<p>Since the <code>ReverseHourglassTest</code> has been defined for a priori biological knowledge (<a href="http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1">Drost et al., 2015</a>), the <code>modules</code> argument within the <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code> function needs to be specified.</p>
+<p>Three modules need to be specified: an <strong>early-module</strong>, <strong>phylotypic module</strong> (mid), and a <strong>late-module</strong>.</p>
+<p>For this example we divide <em>A. thaliana</em> embryo development stored within the <em>PhyloExpressionSetExample</em> into the following three modules:</p>
+<ul>
+<li>early = stages 1 - 2 (Zygote and Quadrant)</li>
+<li>mid = stages 3 - 5 (Globular, Heart, and Torpedo)</li>
+<li>late = stages 6 - 7 (Bent and Mature)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the Transcriptome Age Index of a given PhyloExpressionSet </span>
+<span class="co"># Test Statistic : Reverse Hourglass Test</span>
+<span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,
+               <span class="dt">measure       =</span> <span class="st">"TAI"</span>,
+               <span class="dt">TestStatistic =</span> <span class="st">"ReverseHourglassTest"</span>,
+               <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),
+               <span class="dt">xlab          =</span> <span class="st">"Ontogeny"</span>, 
+               <span class="dt">ylab          =</span> <span class="st">"TAI"</span> )</code></pre></div>
+<p>The corresponding p-value <code>p_reverse_hourglass</code> now denotes the p-value returned by the <code>ReverseHourglassTest</code> which is different from the p-value returned by the <code>FlatLineTest</code> (<code>p_flt</code>).</p>
+<p>To make sure that correct modules have been selected to perform the <code>ReverseHourglassTest</code>, users can use the <code>shaded.area</code> argument to visualize chosen modules:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visualize the phylotypic period used for the Reductive Hourglass Test</span>
+<span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,
+               <span class="dt">measure       =</span> <span class="st">"TAI"</span>,
+               <span class="dt">TestStatistic =</span> <span class="st">"ReverseHourglassTest"</span>,
+               <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),
+               <span class="dt">shaded.area   =</span> <span class="ot">TRUE</span>, 
+               <span class="dt">xlab          =</span> <span class="st">"Ontogeny"</span>, 
+               <span class="dt">ylab          =</span> <span class="st">"TAI"</span> )</code></pre></div>
+<p><strong>Note</strong> that for defining a priori knowledge for the <code>ReverseHourglassTest</code> using the <code>modules</code> argument, modules need to start at stage 1, …, N and do not correspond to the column position in the <em>PhyloExpressionSet/DivergenceExpressionSet</em> which in contrast would start at position 3, … N + 2.</p>
+<p>In a biological context, it is not always clear which stages could define the ealy, mid, and late modules. For animal embryogenesis, it has been suggested to choose early, mid, and late modules according to the morphological conservation of animal embryos (e.g. mid-stage vertebrate embryos seem to be morphologically conserved). For plants, in contrast no morphological conservation has been reported and thus the averge expression of embryo defective genes has been used to define modules (Drost et al. 2015).</p>
+</div>
 </div>
 <div id="transcriptome-divergence-index-analyses" class="section level2">
 <h2 class="hasAnchor">

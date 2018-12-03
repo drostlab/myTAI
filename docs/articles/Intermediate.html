@@ -108,6 +108,13 @@
     
 <p>In the <strong>Introduction</strong> vignette users learned how to perform the most fundamental computations and visualizations for phylotranscriptomics analyses using the <code>myTAI</code> package.</p>
 <p>This <strong>Intermediate</strong> vignette introduces more detailed analyses and more specialized techniques to investigate the observed phylotranscriptomics patterns (<code>TAI</code>, <code>TDI</code>, <code>RE</code>, etc.) and introduces the statistical framework to quantify the significance of observed phenomena.</p>
+<ul>
+<li><a href="#flat-line-test">1. Details: Flat Line Test</a></li>
+<li><a href="#reductive-hourglass-test">2. Details: Reductive Hourglass Test</a></li>
+<li><a href="#reductive-early-conservation-test">3. Details: Reductive Early Conservation Test</a></li>
+<li><a href="#reverse-hourglass-test">4. Details: Reverse Hourglass Test</a></li>
+<li><a href="#data-transformation">5. Data Transformation for log(TAI) and sqrt(TAI) patterns</a></li>
+</ul>
 <div id="investigating-the-statistical-significance-of-phylotranscriptomic-patterns" class="section level2">
 <h2 class="hasAnchor">
 <a href="#investigating-the-statistical-significance-of-phylotranscriptomic-patterns" class="anchor"></a>Investigating the Statistical Significance of Phylotranscriptomic Patterns</h2>
@@ -147,7 +154,7 @@
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest '.</code></pre>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <pre><code>#&gt;   Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
-#&gt; 3.442376 3.450581 3.463984 3.466755 3.462376 3.474877 3.411153</code></pre>
+#&gt; 3.477610 3.477359 3.475310 3.485513 3.515593 3.504672 3.433017</code></pre>
 <pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
 3.543700 3.573999 3.554707 3.543376 3.582905 3.562813 3.523409 </code></pre>
 <p>Visualization:</p>
@@ -158,17 +165,17 @@
 <p>Now we investigate the variance of the two observed patterns.</p>
 <pre><code>#&gt; [1] 0.01147725</code></pre>
 <pre><code>[1] 0.01147725</code></pre>
-<pre><code>#&gt; [1] 0.0004576913</code></pre>
+<pre><code>#&gt; [1] 0.0006893725</code></pre>
 <pre><code>[1] 0.0004102549</code></pre>
 <p>We observe that the variance of the randomly assigned TAI profile is much smaller than the variance of the correctly assigned TAI profile. Here we use the variance to quantify the <em>flatness</em> of a given TAI profile. In theory the variance of a perfect flat line would be zero. So any TAI profile that is close to zero would resemble a flat line. But how exactly are the variances of randomly assigned TAI profiles distributed? For this purpose the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> function was implemented.</p>
 <p>The <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N <code>TAI</code> or <code>TDI</code> profiles based on randomly assigned Phylostrata or Divergence-Strata.</p>
 <pre><code>#&gt;     Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
-#&gt; 1 3.556373 3.555940 3.564371 3.552135 3.540932 3.597329 3.559200
-#&gt; 2 3.578958 3.562647 3.543260 3.553642 3.552000 3.558867 3.629249
-#&gt; 3 3.575064 3.554565 3.554083 3.558154 3.552331 3.593836 3.511084
-#&gt; 4 3.487841 3.478605 3.502732 3.502590 3.495563 3.501634 3.566647
-#&gt; 5 3.511729 3.522055 3.513109 3.517169 3.507797 3.468659 3.451292
-#&gt; 6 3.519712 3.520031 3.499051 3.493000 3.491151 3.466636 3.570516</code></pre>
+#&gt; 1 3.562005 3.584663 3.561341 3.552105 3.544820 3.568694 3.488701
+#&gt; 2 3.468806 3.491609 3.526658 3.527258 3.509076 3.502288 3.509925
+#&gt; 3 3.403370 3.439106 3.433226 3.427242 3.435436 3.414637 3.434494
+#&gt; 4 3.477342 3.482300 3.483284 3.496459 3.475179 3.451550 3.527596
+#&gt; 5 3.574572 3.582978 3.569541 3.565765 3.530029 3.539912 3.471563
+#&gt; 6 3.558841 3.534821 3.514870 3.516069 3.503444 3.505163 3.589924</code></pre>
 <pre><code>    Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
 1 3.578000 3.577732 3.552230 3.556756 3.555627 3.553580 3.510978
 2 3.590339 3.564544 3.589012 3.598754 3.583721 3.597553 3.633530
@@ -206,12 +213,12 @@ fitdistrplus<span class="op">::</span><span class="kw"><a href="https://www.rdoc
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 <pre><code>#&gt; summary statistics
 #&gt; ------
-#&gt; min:  2.205066e-05   max:  0.004521709 
-#&gt; median:  0.0005324309 
-#&gt; mean:  0.000697152 
-#&gt; estimated sd:  0.0005888013 
-#&gt; estimated skewness:  2.116237 
-#&gt; estimated kurtosis:  9.442811</code></pre>
+#&gt; min:  2.481388e-05   max:  0.006715145 
+#&gt; median:  0.0005125888 
+#&gt; mean:  0.0007266039 
+#&gt; estimated sd:  0.0006991608 
+#&gt; estimated skewness:  2.679342 
+#&gt; estimated kurtosis:  14.88535</code></pre>
 <p>Based on the observation that a gamma distribution is a suitable fit for <code>variance_vector</code>, we can now estimate the parameters of the gamma distribution that fits the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># estimate the parameters: shape and rate using 'moment matching estimation'</span>
 gamma_MME &lt;-<span class="st"> </span>fitdistrplus<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdist</a></span>(variance_vector,<span class="dt">distr =</span> <span class="st">"gamma"</span>, <span class="dt">method =</span> <span class="st">"mme"</span>)
@@ -241,7 +248,7 @@ histogram &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rd
 <p>Using the gamma distribution with estimated parameters the corresponding p-value of <code>var_real</code> can be computed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># p-value of var_real</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/GammaDist">pgamma</a></span>(var_real, <span class="dt">shape =</span> shape,<span class="dt">rate =</span> rate, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>#&gt; [1] 3.766777e-10</code></pre>
+<pre><code>#&gt; [1] 5.052281e-08</code></pre>
 <p>Hence, the variance of the correct TAI profile significantly deviates from random TAI profiles and this allows us to assume that the underlying TAI profile captures a real evolutionary signal.</p>
 </div>
 <div id="using-the-flatlinetest-function" class="section level3">
@@ -394,6 +401,78 @@ histogram &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rd
 <p>This example output nicely illustrates that although the <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality is violated, the <a href="https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment">Cullen and Frey graph</a> shows that there is no better approximation than a normal distribution (which is also supported visually by investigating the fitted frequency distribution). The corresponding p-value returned by the <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> is highly non-significant and illustrates that the observed phylotranscriptomic pattern of <code>PhyloExpressionSetExample</code> does not follow the Early Conservation Model assumption.</p>
 <p>This example shall illustrate that finding the right test statistic is a multi-step process of investigating different properties of the underlying permutation test. Although single aspects might fit or fit not corresponding criteria, the overall impression (sum of all individual analyses) must be considered to obtain a valid p-value.</p>
 </div>
+<div id="reverse-hourglass-test" class="section level3">
+<h3 class="hasAnchor">
+<a href="#reverse-hourglass-test" class="anchor"></a>Reverse Hourglass Test</h3>
+<p>The <strong>Reverse Hourglass Test</strong> has been developed to statistically evaluate the existence of a <code>reverse hourglass pattern</code> based on TAI or TDI computations. The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) does not follow an reverse hourglass like shape. A p-value &lt; 0.05 indicates that the corresponding phylotranscriptomics pattern does indeed follow a reverse hourglass (low-high-low) shape.</p>
+<p>To build the test statistic again we start with a standard PhyloExpressionSet.</p>
+<pre><code>#&gt;   Phylostratum      GeneID   Zygote Quadrant Globular     Heart  Torpedo      Bent    Mature
+#&gt; 1            1 at1g01040.2 2173.635 1911.200 1152.555 1291.4224 1000.253  962.9772 1696.4274
+#&gt; 2            1 at1g01050.1 1501.014 1817.309 1665.309 1564.7612 1496.321 1114.6435 1071.6555
+#&gt; 3            1 at1g01070.1 1212.793 1233.002  939.200  929.6195  864.218  877.2060  894.8189</code></pre>
+<pre><code>  Phylostratum      GeneID   Zygote Quadrant Globular     Heart  Torpedo      Bent    Mature
+1            1 at1g01040.2 2173.635 1911.200 1152.555 1291.4224 1000.253  962.9772 1696.4274
+2            1 at1g01050.1 1501.014 1817.309 1665.309 1564.7612 1496.321 1114.6435 1071.6555
+3            1 at1g01070.1 1212.793 1233.002  939.200  929.6195  864.218  877.2060  894.8189
+</code></pre>
+<p>And again compute the <code><a href="../reference/TAI.html">TAI()</a></code> profile of the <code>PhyloExpressionSetExample</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># TAI profile of correctly assigned Phylostrata</span>
+<span class="kw"><a href="../reference/TAI.html">TAI</a></span>(PhyloExpressionSetExample) </code></pre></div>
+<pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
+3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
+</code></pre>
+<p>Visualization:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># visualize the TAI profile of correctly assigned Phylostrata</span>
+<span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample, 
+               <span class="dt">p.value       =</span> <span class="ot">FALSE</span> ) </code></pre></div>
+<p>The Reverse Hourglass Test is a permutation test based on the following test statistic.</p>
+<ol style="list-style-type: decimal">
+<li><p>A set of developmental stages is partitioned into three modules - <code>early</code>, <code>mid</code>, and <code>late</code> - based on prior biological knowledge (see Drost et al., 2015 for details).</p></li>
+<li><p>The mean TAI or TDI value for each of the three modules <span class="math inline">\(T_{early}\)</span>, <span class="math inline">\(T_{mid}\)</span>, and <span class="math inline">\(T_{late}\)</span> are computed.</p></li>
+<li><p>The two differences D1 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{early}\)</span> and D2 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{late}\)</span> are calculated.</p></li>
+<li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1 and D2 is computed as final test statistic of the <strong>Reverse Hourglass Test</strong>.</p></li>
+</ol>
+<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by a <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
+<p>To perform the <strong>Reverse Hourglass Test</strong> you can use the <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code> function. Using this function you need to divide the given phylotranscriptomic pattern into three developmental modules:</p>
+<ul>
+<li>early module</li>
+<li>mid module</li>
+<li>late module</li>
+</ul>
+<p>This can be done using the <code>modules</code> argument: <code>module = list(early = 1:2, mid = 3:5, late = 6:7)</code>. In this example (<code>PhyloExpressionSetExample</code>) we divide the corresponding developmental process into the three modules:</p>
+<ul>
+<li>early module: Stages 1 - 2 = Zygote and Quadrant</li>
+<li>mid module: Stages 3 - 5 = Globular, Heart, and Torpedo</li>
+<li>late module: Stages 6 - 7 = Bent and Mature</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Perform the Reverse Hourglass Test</span>
+<span class="kw"><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,
+                        <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),
+                        <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </code></pre></div>
+<pre><code>$p.value
+[1] 1
+
+$std.dev
+[1] 0.05598325 0.05469016 0.05386737 0.05248817 0.05161525 0.05411684 0.05605765
+
+$lillie.test
+[1] TRUE</code></pre>
+<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</a></code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
+<p>Analogous to the <code>plotHistogram</code> argument that is present in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function also takes an argument <code>plotHistogram</code>. When <code>plotHistogram = TRUE</code>, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function returns a multi-plot showing:</p>
+<ul>
+<li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates which distributions seem plausible to fit the resulting permutation vector <span class="math inline">\(D_{min}\)</span>. Here a normal distribution seems most plausible.</p></li>
+<li><p>A histogram of <span class="math inline">\(D_{min}\)</span> combined with the density plot is visualized. <span class="math inline">\(D_{min}\)</span> is then fitted by a normal distribution. The corresponding parameters are estimated by moment matching estimation.</p></li>
+<li><p>A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.</p></li>
+<li><p>A bar plot showing the number of cases in which the underlying goodness of fit (returned by <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality) has shown to be significant (<code>TRUE</code>) or not significant (<code>FALSE</code>). This allows to quantify the permutation bias and their implications on the goodness of fit.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform the Reverse Hourglass Test and plot the test statistic</span>
+<span class="kw"><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,
+                        <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),
+                        <span class="dt">plotHistogram =</span> <span class="ot">TRUE</span>, 
+                        <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </code></pre></div>
+<p>The corresponding output shows the <code>summary statistics</code> of the fitted normal distribution as well as the p-value, standard deviation, and <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> result.</p>
+<p>This example output nicely illustrates that although the Lilliefors (Kolmogorov-Smirnov) test for normality is violated for some permutations, the Cullen and Frey graph shows that there is no better approximation than a normal distribution (which is also supported visually by investigating the fitted frequency distribution). The corresponding p-value returned by <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code> is significant and illustrates that the observed phylotranscriptomic pattern of PhyloExpressionSetExample does follow the Hourglass Model assumption.</p>
+</div>
 </div>
 <div id="data-transformation" class="section level2">
 <h2 class="hasAnchor">
@@ -470,7 +549,7 @@ PES.absolute &lt;-<span class="st"> </span><span class="kw"><a href="../referenc
                <span class="dt">ylab          =</span> <span class="st">"TAI"</span> )</code></pre></div>
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest '.
 #&gt; Significance status of signature:  significant.</code></pre>
-<p><img src="Intermediate_files/figure-html/unnamed-chunk-30-1.png" width="672"></p>
+<p><img src="Intermediate_files/figure-html/unnamed-chunk-35-1.png" width="672"></p>
 </div>
 <div id="sqrt-transformation-tai" class="section level3">
 <h3 class="hasAnchor">
@@ -484,7 +563,7 @@ PES.absolute &lt;-<span class="st"> </span><span class="kw"><a href="../referenc
                <span class="dt">ylab          =</span> <span class="st">"TAI"</span> )</code></pre></div>
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest '.
 #&gt; Significance status of signature:  significant.</code></pre>
-<p><img src="Intermediate_files/figure-html/unnamed-chunk-31-1.png" width="672"></p>
+<p><img src="Intermediate_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
 <p>For the <code>PhyloExpressionSetExample</code> all transformations result in a significant phylotranscriptomics pattern deviating from a flat line.</p>
 <p>Nevertheless, it is not clear which transformation is the most appropriate one since the original TAI and TDI measure were defined for absolute expression levels.</p>
 <p>The same accounts for <code>TDI</code> profiles:</p>
@@ -501,7 +580,7 @@ PES.absolute &lt;-<span class="st"> </span><span class="kw"><a href="../referenc
                <span class="dt">ylab          =</span> <span class="st">"TDI"</span> )</code></pre></div>
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest '.
 #&gt; Significance status of signature:  significant.</code></pre>
-<p><img src="Intermediate_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
+<p><img src="Intermediate_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
 </div>
 <div id="sqrt-transformation-tdi" class="section level3">
 <h3 class="hasAnchor">
@@ -515,7 +594,7 @@ PES.absolute &lt;-<span class="st"> </span><span class="kw"><a href="../referenc
                <span class="dt">ylab          =</span> <span class="st">"TDI"</span> )</code></pre></div>
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest '.
 #&gt; Significance status of signature:  significant.</code></pre>
-<p><img src="Intermediate_files/figure-html/unnamed-chunk-33-1.png" width="672"></p>
+<p><img src="Intermediate_files/figure-html/unnamed-chunk-38-1.png" width="672"></p>
 <p>As a result, observed patterns should always be quantified using statistical tests (for ex. <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code>, <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code>, and <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code>). In case the observed pattern is significant, qualitative differences of the observed patterns based on different data transformations must be investigated in more detail, since most data transformations are known to cause different effects on a measure that isn’t robust against data transformations.</p>
 </div>
 </div>
