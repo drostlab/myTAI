@@ -698,8 +698,59 @@ TAI(PhyloExpressionSetExample)
 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334 
 
 ```
-## Transcriptome Divergence Index Analyses
 
+
+### Reverse Hourglass Test
+
+In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles an _reverse hourglass_ shape (low-high-low pattern),
+one can obtain a p-value quantifying the statistical significance of a visual _reverse hourglass_ pattern based on the `ReverseHourglassTest` (`?ReverseHourglassTest`).
+
+Since the `ReverseHourglassTest` has been defined for a priori biological knowledge ([Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1)), the `modules` argument within the `ReverseHourglassTest()` function needs to be specified.
+
+Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
+
+For this example we divide _A. thaliana_ embryo development stored within the _PhyloExpressionSetExample_ into the following three modules:
+
+* early = stages 1 - 2 (Zygote and Quadrant)
+* mid = stages 3 - 5 (Globular, Heart, and Torpedo)
+* late = stages 6 - 7 (Bent and Mature)
+
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+# Plot the Transcriptome Age Index of a given PhyloExpressionSet 
+# Test Statistic : Reverse Hourglass Test
+PlotSignature( ExpressionSet = PhyloExpressionSetExample,
+               measure       = "TAI",
+               TestStatistic = "ReverseHourglassTest",
+               modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+               xlab          = "Ontogeny", 
+               ylab          = "TAI" )
+```
+
+The corresponding p-value `p_reverse_hourglass` now denotes the p-value returned by the `ReverseHourglassTest`
+which is different from the p-value returned by the `FlatLineTest` (`p_flt`).
+
+
+To make sure that correct modules have been selected to perform the `ReverseHourglassTest`, users can use the `shaded.area` argument to visualize chosen modules:
+
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
+# Visualize the phylotypic period used for the Reductive Hourglass Test
+PlotSignature( ExpressionSet = PhyloExpressionSetExample,
+               measure       = "TAI",
+               TestStatistic = "ReverseHourglassTest",
+               modules       = list(early = 1:2, mid = 3:5, late = 6:7),
+               shaded.area   = TRUE, 
+               xlab          = "Ontogeny", 
+               ylab          = "TAI" )
+```
+
+__Note__ that for defining a priori knowledge for the `ReverseHourglassTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
+which in contrast would start at position 3, ... N + 2.
+
+In a biological context, it is not always clear which stages could define the ealy, mid, and late 
+modules. For animal embryogenesis, it has been suggested to choose early, mid, and late modules
+according to the morphological conservation of animal embryos (e.g. mid-stage vertebrate embryos seem to be morphologically conserved). For plants, in contrast no morphological conservation has been reported and thus the averge expression of embryo defective genes has been used to define modules (Drost et al. 2015).
+
+## Transcriptome Divergence Index Analyses
 
 Analogous to the _TAI_ computations and visualization, the _TDI_ computations can be performed in a similar fashion:
 
