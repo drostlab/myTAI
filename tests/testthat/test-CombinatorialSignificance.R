@@ -3,7 +3,7 @@ context("Test: CombinatorialSignificance() ")
 data(PhyloExpressionSetExample)
 
 
-nonStandardExpressionSet <- PhyloExpressionSetExample[, 2:9]
+nonStandardExpressionSet <- PhyloExpressionSetExample[ , 2:9]
 
 test_that(
         "is.ExpressionSet() throughs error when no ExpressionSet is entered to CombinatorialSignificance()",
@@ -44,7 +44,7 @@ test_that("variable and constant replicate values for corresponding stages work 
                   
                   expect_equal(length(
                           CombinatorialSignificance(
-                                  ExpressionSet = PhyloExpressionSetExample[, 1:8],
+                                  ExpressionSet = PhyloExpressionSetExample[ , 1:8],
                                   replicates    = 2,
                                   TestStatistic = "FlatLineTest",
                                   permutations  = 10,
