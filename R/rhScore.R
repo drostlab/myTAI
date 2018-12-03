@@ -26,21 +26,13 @@
 #'                 Given the two accumulated values for each hourglass module: a_early and a_late,
 #'         we reduce the two given values by:
 #'                 
-#'                 \emph{"max"}
-#'         
-#'         \eqn{S = max{a_early,a_late}}
-#'         
-#'         \emph{"min"}
-#'         
-#'         \eqn{S = min{a_early,a_late}}
-#'         
-#'         \emph{"mean"}
-#'         
-#'         \eqn{S = mean{a_early,a_late}}
-#'         
-#'         All together this results in a global score \emph{S}.
-#'         This global score \emph{S} is being returned by this function \code{\link{rhScore}}.
-#'         
+#' \itemize{
+#' \item \emph{"max"}: \eqn{S = max{a_early,a_late}}
+#' \item \emph{"min"}: \eqn{S = min{a_early,a_late}}
+#' \item \emph{"mean"}: \eqn{S = mean{a_early,a_late}}
+#' }
+#'All together this results in a global score \emph{S}.
+#'This global score \emph{S} is being returned by this function \code{\link{rhScore}}.
 #' @param age_vals a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.
 #' @param early a numeric vector including the numeric stage values that correspond to the early phase of development.
 #' @param mid a numeric vector including the numeric stage values that correspond to the middle phase of development.
@@ -55,7 +47,7 @@
 #' @return a numeric value representing the hourglass destruction score.
 #' @author Hajk-Georg Drost
 #' @references
-#' Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+#' Drost et al. (2015), Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis. Mol Bio Evol.
 #' 
 #' @seealso \code{\link{ReductiveHourglassTest}}, \code{\link{TAI}}, \code{\link{TDI}}
 #' @examples
