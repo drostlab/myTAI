@@ -95,7 +95,8 @@
 #' http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf
 #'   
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
+#' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
+#' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{PlotSignature}}
 #' @examples
 #' 
 #' data(PhyloExpressionSetExample)
