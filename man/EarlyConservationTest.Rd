@@ -4,9 +4,10 @@
 \alias{EarlyConservationTest}
 \title{Perform Reductive Early Conservation Test}
 \usage{
-EarlyConservationTest(ExpressionSet, modules = NULL, permutations = 1000,
-  lillie.test = FALSE, plotHistogram = FALSE, runs = 10,
-  parallel = FALSE, gof.warning = FALSE, custom.perm.matrix = NULL)
+EarlyConservationTest(ExpressionSet, modules = NULL,
+  permutations = 1000, lillie.test = FALSE, plotHistogram = FALSE,
+  runs = 10, parallel = FALSE, gof.warning = FALSE,
+  custom.perm.matrix = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -117,7 +118,7 @@ Piasecka B, Lichocki P, Moretti S, et al. (2013) \emph{The hourglass and the ear
 patterns of developmental constraints in vertebrates}. PLoS Genet. 9(4): e1003476.
 }
 \seealso{
-\code{\link{ecScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}} , \code{\link{PlotPattern}}
+\code{\link{ecScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}}, \code{\link{ReverseHourglassTest}}, \code{\link{PlotSignature}}
 }
 \author{
 Hajk-Georg Drost
