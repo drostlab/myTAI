@@ -5,8 +5,8 @@
 \title{Plot the Expression Profiles of a Gene Set}
 \usage{
 PlotGeneSet(ExpressionSet, gene.set, get.subset = FALSE,
-  use.only.map = FALSE, colors = NULL, plot.legend = TRUE, y.ticks = 6,
-  digits.ylab = 4, ...)
+  use.only.map = FALSE, colors = NULL, plot.legend = TRUE,
+  y.ticks = 6, digits.ylab = 4, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

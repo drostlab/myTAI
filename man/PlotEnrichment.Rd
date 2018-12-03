@@ -6,9 +6,9 @@
 \usage{
 PlotEnrichment(ExpressionSet, test.set, use.only.map = FALSE,
   measure = "log-foldchange", complete.bg = TRUE, legendName = "",
-  over.col = "steelblue", under.col = "midnightblue", epsilon = 1e-05,
-  cex.legend = 1, cex.asterisk = 1, plot.bars = TRUE,
-  p.adjust.method = NULL, ...)
+  over.col = "steelblue", under.col = "midnightblue",
+  epsilon = 1e-05, cex.legend = 1, cex.asterisk = 1,
+  plot.bars = TRUE, p.adjust.method = NULL, ...)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object (in case \code{only.map = FALSE}).}
