@@ -4,9 +4,10 @@
 \alias{ReductiveHourglassTest}
 \title{Perform the Reductive Hourglass Test}
 \usage{
-ReductiveHourglassTest(ExpressionSet, modules = NULL, permutations = 1000,
-  lillie.test = FALSE, plotHistogram = FALSE, runs = 10,
-  parallel = FALSE, gof.warning = FALSE, custom.perm.matrix = NULL)
+ReductiveHourglassTest(ExpressionSet, modules = NULL,
+  permutations = 1000, lillie.test = FALSE, plotHistogram = FALSE,
+  runs = 10, parallel = FALSE, gof.warning = FALSE,
+  custom.perm.matrix = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
@@ -141,7 +142,8 @@ http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf
 http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf
 }
 \seealso{
-\code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}}, \code{\link{PlotPattern}}
+\code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
+\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{PlotSignature}}
 }
 \author{
 Hajk-Georg Drost
