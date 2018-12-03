@@ -1,7 +1,17 @@
 myTAI 0.9.0
 ===========
 
-### Updates
+### New Functions
+
+- new function `ReverseHourglassTest()` to perform a `Reverse Hourglass Test`.
+The Reverse Hourglass Test aims to statistically evaluate the existence of a reverse hourglass pattern based on TAI or TDI computations. The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) does follow an hourglass like shape. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does rather follow a reverse hourglass (low-high-low) shape.
+
+- new function `reversehourglassScore()` for computing the `Reverse Hourglass Score` for the `Reverse Hourglass Test`
+
+### Updated Functionality
+
+- function `PlotSignature()` receives a new `TestStatistic` (`TestStatistic = "ReverseHourglassTest"`) to perform a `revserse hourglass test` (= testing
+the significance of a low-high-low pattern) 
 
 
 myTAI 0.8.0
