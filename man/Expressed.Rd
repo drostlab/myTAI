@@ -4,8 +4,8 @@
 \alias{Expressed}
 \title{Filter for Expressed Genes}
 \usage{
-Expressed(ExpressionSet, cut.off, method = "const", comparison = "below",
-  n = NULL)
+Expressed(ExpressionSet, cut.off, method = "const",
+  comparison = "below", n = NULL)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
