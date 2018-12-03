@@ -1,21 +1,32 @@
 #' @title Plot evolutionary signatures across transcriptomes  
 #' @description Main function to visualize transcriptome indices.
 #' @param ExpressionSet a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.
-#' @param measure type of transcriptome index that shall be computed. E.g. \code{measure = "TAI"} (Transcriptome Age Index), \code{measure = "TDI"} (Transcriptome Divergence Index), \code{measure = "TPI"} (Transcriptome Polymorphism Index).
+#' @param measure type of transcriptome index that shall be computed. E.g. 
+#' \itemize{
+#' \item \code{measure = "TAI"} (Transcriptome Age Index)
+#' \item \code{measure = "TDI"} (Transcriptome Divergence Index)
+#' \item \code{measure = "TPI"} (Transcriptome Polymorphism Index)
+#' }
 #' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
-#' Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
-#' \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern).
-#' \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern).
-#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}} or \code{\link{EarlyConservationTest}}: early, mid, and late. 
+#' Possible values can be: 
+#' \itemize{
+#' \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
+#' \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
+#' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
+#' \item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
+#' }
+#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, or \code{\link{ReverseHourglassTest}}: early, mid, and late. 
 #' Each element expects a numeric vector specifying the developmental stages 
-#' or experiments that correspond to each module. For example, 
-#' \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.
-#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}} or \code{\link{ReductiveHourglassTest}}.
+#' or experiments that correspond to each module. For example:
+#' \itemize{
+#' \item \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.
+#' } 
+#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.
 #' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.
 #' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.
 #' @param shaded.area a boolean value specifying whether a shaded area shall 
 #' be drawn for the developmental stages defined to be the presumptive phylotypic period.
-#' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotPattern}. Default is \code{custom.perm.matrix = NULL}.
+#' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotSignature}. Default is \code{custom.perm.matrix = NULL}.
 #' @param xlab label of x-axis.
 #' @param ylab label of y-axis.
 #' @param main figure title.
@@ -79,8 +90,8 @@ PlotSignature <-
                         call. = FALSE
                 )
         
-        if (!is.element(TestStatistic, c("FlatLineTest", "ReductiveHourglassTest", "EarlyConservationTest")))
-            stop("Please choose a 'TestStatistic' that is supported by this function. E.g. TestStatistic = 'FlatLineTest', TestStatistic = 'ReductiveHourglassTest, TestStatistic = 'EarlyConservationTest'.", call. = FALSE)
+        if (!is.element(TestStatistic, c("FlatLineTest", "ReductiveHourglassTest", "EarlyConservationTest", "ReverseHourglassTest")))
+            stop("Please choose a 'TestStatistic' that is supported by this function. E.g. TestStatistic = 'FlatLineTest', TestStatistic = 'ReductiveHourglassTest', TestStatistic = 'EarlyConservationTest', TestStatistic = 'ReverseHourglassTest'.", call. = FALSE)
             
         cat("Plot signature: '",measure, "' and test statistic: '",TestStatistic,"'." )
         cat("\n")
@@ -158,6 +169,50 @@ PlotSignature <-
                         else if (!is.null(custom.perm.matrix)) {
                                 resList <-
                                         ReductiveHourglassTest(
+                                                ExpressionSet      = ExpressionSet,
+                                                modules            = modules,
+                                                lillie.test        = FALSE,
+                                                custom.perm.matrix = custom.perm.matrix
+                                        )
+                        }
+                }
+        }
+        
+        if (TestStatistic == "ReverseHourglassTest") {
+                if (lillie.test) {
+                        if (is.null(custom.perm.matrix)) {
+                                resList <- ReverseHourglassTest(
+                                        ExpressionSet = ExpressionSet,
+                                        modules       = modules,
+                                        permutations  = permutations,
+                                        lillie.test   = TRUE
+                                )
+                        }
+                        
+                        else if (!is.null(custom.perm.matrix)) {
+                                resList <-
+                                        ReverseHourglassTest(
+                                                ExpressionSet      = ExpressionSet,
+                                                modules            = modules,
+                                                lillie.test        = TRUE,
+                                                custom.perm.matrix = custom.perm.matrix
+                                        )
+                        }
+                }
+                
+                if (!lillie.test) {
+                        if (is.null(custom.perm.matrix)) {
+                                resList <- ReverseHourglassTest(
+                                        ExpressionSet = ExpressionSet,
+                                        modules       = modules,
+                                        permutations  = permutations,
+                                        lillie.test   = FALSE
+                                )
+                        }
+                        
+                        else if (!is.null(custom.perm.matrix)) {
+                                resList <-
+                                        ReverseHourglassTest(
                                                 ExpressionSet      = ExpressionSet,
                                                 modules            = modules,
                                                 lillie.test        = FALSE,
@@ -283,6 +338,34 @@ PlotSignature <-
                 cat("\n")
                 cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
         }   
+        
+        if (TestStatistic == "ReverseHourglassTest"){
+                
+                if (p.value) {
+                        TI.ggplot <-
+                                TI.ggplot + ggplot2::annotate(
+                                        "text",
+                                        x = 2,
+                                        y = max(TI$TI) + (max(TI$TI) / 30),
+                                        label = paste0("p_reverse_hourglass = ", pval),
+                                        size = 6
+                                )  
+                }
+                
+                if (shaded.area) {
+                        TI.ggplot <-
+                                TI.ggplot + ggplot2::geom_rect(data = TI,ggplot2::aes(
+                                        xmin = modules[[2]][1],
+                                        xmax = modules[[2]][length(modules[[2]])],
+                                        ymin = min(TI) - (min(TI) / 50),
+                                        ymax = Inf), fill = "#4d004b", alpha = alpha)  
+                }
+                
+                stage.names <- names(ExpressionSet)[3:ncol(ExpressionSet)]
+                cat("Modules: \n early = {",paste0(stage.names[modules[[1]]], " "),"}","\n","mid = {",paste0(stage.names[modules[[2]]], " "),"}","\n","late = {",paste0(stage.names[modules[[3]]], " "),"}")
+                cat("\n")
+                cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
+        }  
         
         if (TestStatistic == "EarlyConservationTest"){
                 
