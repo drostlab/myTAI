@@ -46,20 +46,13 @@ This function reduces the destruction of an hourglass shaped pattern to a single
                 Given the two accumulated values for each hourglass module: a_early and a_late,
         we reduce the two given values by:
                 
-                \emph{"max"}
-        
-        \eqn{S = max{a_early,a_late}}
-        
-        \emph{"min"}
-        
-        \eqn{S = min{a_early,a_late}}
-        
-        \emph{"mean"}
-        
-        \eqn{S = mean{a_early,a_late}}
-        
-        All together this results in a global score \emph{S}.
-        This global score \emph{S} is being returned by this function \code{\link{rhScore}}.
+\itemize{
+\item \emph{"max"}: \eqn{S = max{a_early,a_late}}
+\item \emph{"min"}: \eqn{S = min{a_early,a_late}}
+\item \emph{"mean"}: \eqn{S = mean{a_early,a_late}}
+}
+All together this results in a global score \emph{S}.
+This global score \emph{S} is being returned by this function \code{\link{rhScore}}.
 }
 \details{
 The gpScore is a heuristic score enabling to  construct a test statistic to determine  
@@ -95,7 +88,7 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
  
 }
 \references{
-Drost et al. (2014), Active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis.
+Drost et al. (2015), Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis. Mol Bio Evol.
 }
 \seealso{
 \code{\link{ReductiveHourglassTest}}, \code{\link{TAI}}, \code{\link{TDI}}
