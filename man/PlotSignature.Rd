@@ -5,28 +5,39 @@
 \title{Plot evolutionary signatures across transcriptomes}
 \usage{
 PlotSignature(ExpressionSet, measure = "TAI",
-  TestStatistic = "FlatLineTest", modules = NULL, permutations = 1000,
-  lillie.test = FALSE, p.value = TRUE, shaded.area = FALSE,
-  custom.perm.matrix = NULL, xlab = "Ontogeny",
+  TestStatistic = "FlatLineTest", modules = NULL,
+  permutations = 1000, lillie.test = FALSE, p.value = TRUE,
+  shaded.area = FALSE, custom.perm.matrix = NULL, xlab = "Ontogeny",
   ylab = "Transcriptome Index", main = "", lwd = 4, alpha = 0.1,
   y.ticks = 10)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.}
 
-\item{measure}{type of transcriptome index that shall be computed. E.g. \code{measure = "TAI"} (Transcriptome Age Index), \code{measure = "TDI"} (Transcriptome Divergence Index), \code{measure = "TPI"} (Transcriptome Polymorphism Index).}
+\item{measure}{type of transcriptome index that shall be computed. E.g. 
+\itemize{
+\item \code{measure = "TAI"} (Transcriptome Age Index)
+\item \code{measure = "TDI"} (Transcriptome Divergence Index)
+\item \code{measure = "TPI"} (Transcriptome Polymorphism Index)
+}}
 
 \item{TestStatistic}{a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
-Possible values can be: \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line.
-\code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern).
-\code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern).}
+Possible values can be: 
+\itemize{
+\item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
+\item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
+\item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
+\item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
+}}
 
-\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}} or \code{\link{EarlyConservationTest}}: early, mid, and late. 
+\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, or \code{\link{ReverseHourglassTest}}: early, mid, and late. 
 Each element expects a numeric vector specifying the developmental stages 
-or experiments that correspond to each module. For example, 
-\code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.}
+or experiments that correspond to each module. For example:
+\itemize{
+\item \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} devides a dataset storing seven developmental stages into 3 modules.
+}}
 
-\item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}} or \code{\link{ReductiveHourglassTest}}.}
+\item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.}
 
 \item{lillie.test}{a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.}
 
@@ -35,7 +46,7 @@ or experiments that correspond to each module. For example,
 \item{shaded.area}{a boolean value specifying whether a shaded area shall 
 be drawn for the developmental stages defined to be the presumptive phylotypic period.}
 
-\item{custom.perm.matrix}{a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotPattern}. Default is \code{custom.perm.matrix = NULL}.}
+\item{custom.perm.matrix}{a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotSignature}. Default is \code{custom.perm.matrix = NULL}.}
 
 \item{xlab}{label of x-axis.}
 
