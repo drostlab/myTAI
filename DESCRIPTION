@@ -2,7 +2,7 @@ Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
 Version: 0.8.0.9000
-Date: 2018-05-23
+Date: 2018-12-03
 Authors@R: person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hgd23@cam.ac.uk",
@@ -42,7 +42,7 @@ Suggests:
     devtools (>= 1.6.1),
     testthat (>= 0.9.1),
     mgcv
-LinkingTo: Rcpp
+LinkingTo: Rcpp, RcppArmadillo
 URL: https://github.com/HajkD/myTAI
 BugReports: https://github.com/HajkD/myTAI/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
