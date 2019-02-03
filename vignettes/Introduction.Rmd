@@ -116,7 +116,7 @@ For the comparative genomics part there are different methods and tools to quant
 
 ### Genomic phylostratography based gene age inference
 
-As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113); [Yin et al., 2018](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074); [Casola 2018](https://academic.oup.com/gbe/article/10/11/2906/5140197).
+As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113); [Yin et al., 2018](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074); [Casola 2018](https://academic.oup.com/gbe/article/10/11/2906/5140197)).
 
 In particular, Moyers & Zhang argue that [genomic phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 
 
