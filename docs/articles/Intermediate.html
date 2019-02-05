@@ -154,7 +154,7 @@
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest '.</code></pre>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <pre><code>#&gt;   Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
-#&gt; 3.466422 3.488428 3.495646 3.496013 3.506797 3.463541 3.389245</code></pre>
+#&gt; 3.509023 3.508096 3.525607 3.530896 3.509477 3.516558 3.563159</code></pre>
 <pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
 3.543700 3.573999 3.554707 3.543376 3.582905 3.562813 3.523409 </code></pre>
 <p>Visualization:</p>
@@ -165,17 +165,17 @@
 <p>Now we investigate the variance of the two observed patterns.</p>
 <pre><code>#&gt; [1] 0.01147725</code></pre>
 <pre><code>[1] 0.01147725</code></pre>
-<pre><code>#&gt; [1] 0.001594469</code></pre>
+<pre><code>#&gt; [1] 0.0003872097</code></pre>
 <pre><code>[1] 0.0004102549</code></pre>
 <p>We observe that the variance of the randomly assigned TAI profile is much smaller than the variance of the correctly assigned TAI profile. Here we use the variance to quantify the <em>flatness</em> of a given TAI profile. In theory the variance of a perfect flat line would be zero. So any TAI profile that is close to zero would resemble a flat line. But how exactly are the variances of randomly assigned TAI profiles distributed? For this purpose the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> function was implemented.</p>
 <p>The <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N <code>TAI</code> or <code>TDI</code> profiles based on randomly assigned Phylostrata or Divergence-Strata.</p>
 <pre><code>#&gt;     Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
-#&gt; 1 3.474120 3.478800 3.478647 3.491057 3.490772 3.499926 3.477072
-#&gt; 2 3.554253 3.540531 3.533908 3.522949 3.533968 3.542555 3.524436
-#&gt; 3 3.451429 3.444702 3.469026 3.480706 3.473284 3.482509 3.576852
-#&gt; 4 3.430803 3.433154 3.436687 3.436704 3.400120 3.381230 3.463794
-#&gt; 5 3.494985 3.480247 3.500368 3.495544 3.518639 3.516857 3.507584
-#&gt; 6 3.624289 3.632873 3.645891 3.629026 3.626362 3.595143 3.474762</code></pre>
+#&gt; 1 3.580835 3.539910 3.513707 3.521912 3.528104 3.543361 3.636693
+#&gt; 2 3.461521 3.444057 3.403056 3.411001 3.428876 3.441253 3.457641
+#&gt; 3 3.521691 3.538324 3.556966 3.563347 3.563537 3.554635 3.517139
+#&gt; 4 3.529431 3.521278 3.500941 3.500666 3.513847 3.549420 3.531531
+#&gt; 5 3.519608 3.507732 3.493925 3.498266 3.504370 3.543671 3.543162
+#&gt; 6 3.468701 3.485303 3.507073 3.500929 3.502069 3.492986 3.493320</code></pre>
 <pre><code>    Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
 1 3.578000 3.577732 3.552230 3.556756 3.555627 3.553580 3.510978
 2 3.590339 3.564544 3.589012 3.598754 3.583721 3.597553 3.633530
@@ -213,12 +213,12 @@ fitdistrplus<span class="op">::</span><span class="kw"><a href="https://www.rdoc
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 <pre><code>#&gt; summary statistics
 #&gt; ------
-#&gt; min:  1.863947e-05   max:  0.005443164 
-#&gt; median:  0.0005358226 
-#&gt; mean:  0.0007105954 
-#&gt; estimated sd:  0.0006425155 
-#&gt; estimated skewness:  2.454932 
-#&gt; estimated kurtosis:  12.14477</code></pre>
+#&gt; min:  2.890457e-05   max:  0.004567979 
+#&gt; median:  0.000490142 
+#&gt; mean:  0.0006800312 
+#&gt; estimated sd:  0.0006102226 
+#&gt; estimated skewness:  2.092799 
+#&gt; estimated kurtosis:  8.853218</code></pre>
 <p>Based on the observation that a gamma distribution is a suitable fit for <code>variance_vector</code>, we can now estimate the parameters of the gamma distribution that fits the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># estimate the parameters: shape and rate using 'moment matching estimation'</span>
 gamma_MME &lt;-<span class="st"> </span>fitdistrplus<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdist</a></span>(variance_vector,<span class="dt">distr =</span> <span class="st">"gamma"</span>, <span class="dt">method =</span> <span class="st">"mme"</span>)
@@ -248,7 +248,7 @@ histogram &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rd
 <p>Using the gamma distribution with estimated parameters the corresponding p-value of <code>var_real</code> can be computed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># p-value of var_real</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/GammaDist">pgamma</a></span>(var_real, <span class="dt">shape =</span> shape,<span class="dt">rate =</span> rate, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>#&gt; [1] 5.586162e-09</code></pre>
+<pre><code>#&gt; [1] 1.80424e-09</code></pre>
 <p>Hence, the variance of the correct TAI profile significantly deviates from random TAI profiles and this allows us to assume that the underlying TAI profile captures a real evolutionary signal.</p>
 </div>
 <div id="using-the-flatlinetest-function" class="section level3">
@@ -304,7 +304,7 @@ histogram &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rd
 <li><p>The two differences D1 = <span class="math inline">\(T_{early}\)</span> - <span class="math inline">\(T_{mid}\)</span> and D2 = <span class="math inline">\(T_{late}\)</span> - <span class="math inline">\(T_{mid}\)</span> are calculated.</p></li>
 <li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1 and D2 is computed as final test statistic of the <strong>Reductive Hourglass Test</strong>.</p></li>
 </ol>
-<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by a <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
+<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by a <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.XFnCFs_7TOR">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
 <p>To perform the <strong>Reductive Hourglass Test</strong> you can use the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function. Using this function you need to divide the given phylotranscriptomic pattern into three developmental modules:</p>
 <ul>
 <li>early module</li>

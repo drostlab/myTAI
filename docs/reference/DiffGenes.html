@@ -167,13 +167,13 @@
       <th>p.adjust.method</th>
       <td><p>p value correction method that is passed to <code><a href='https://www.rdocumentation.org/packages/stats/topics/p.adjust'>p.adjust</a></code>.
 Available options are:</p><ul>
-<li><p><code>p.adjust.method = "BH"</code> (Benjamini-Hochberg correction)
-<code>p.adjust.method = "bonferroni"</code> (Bonferroni correction)
-<code>p.adjust.method = "holm"</code>
-<code>p.adjust.method = "hochberg"</code>
-<code>p.adjust.method = "hommel"</code>
-<code>p.adjust.method = "BY"</code>
-<code>p.adjust.method = "fdr"</code></p></li>
+<li><p><code>p.adjust.method = "BH"</code> (Benjamini-Hochberg correction)</p></li>
+<li><p><code>p.adjust.method = "bonferroni"</code> (Bonferroni correction)</p></li>
+<li><p><code>p.adjust.method = "holm"</code></p></li>
+<li><p><code>p.adjust.method = "hochberg"</code></p></li>
+<li><p><code>p.adjust.method = "hommel"</code></p></li>
+<li><p><code>p.adjust.method = "BY"</code></p></li>
+<li><p><code>p.adjust.method = "fdr"</code></p></li>
 </ul><p>If <code>p.adjust.method = NULL</code> (Default) then no p-value correction is performed.</p></td>
     </tr>
     <tr>
@@ -218,7 +218,7 @@ transformed expression levels are stored in your input <code>ExpresisonSet</code
 <li><p><code>method = "wilcox.test"</code>: Wilcoxon Rank Sum Test between replicate expression levels of two samples.</p></li>
 <li><p><code>method = "doubletail"</code>: Computes two-sided p-values by doubling the smaller tail probability (see <code><a href='https://www.rdocumentation.org/packages/edgeR/topics/exactTest'>exactTestDoubleTail</a></code> for details).</p></li>
 <li><p><code>method = "smallp"</code>: Performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see <code><a href='https://www.rdocumentation.org/packages/edgeR/topics/exactTest'>exactTestBySmallP</a></code> for details).</p></li>
-<li><p><code>method = "deviance"</code>: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see <code><a href='https://www.rdocumentation.org/packages/edgeR/topics/exactTest'>exactTestByDeviance</a></code> for details).</p></li>
+<li><p><code>method = "deviance"</code>: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see <code>edgeR</code> package for details).</p></li>
 </ul>
     <p>Exclude non differentially expressed genes from the result dataset:</p>
 <p>When specifying the <code>alpha</code> argument you furthermore, need to specify the <code>filter.method</code> to decide how non differentially expressed genes should be classified in multiple sample comparisons and which genes should be retained in the final dataset returned by <code>DiffGenes</code>. In other words, all genes &lt; <code>alpha</code> based on the following <code>filter.method</code> are removed from the result dataset.</p>
