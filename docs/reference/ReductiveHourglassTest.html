@@ -269,10 +269,10 @@ of a parametric distribution to non-censored or censored data.</p>
 <span class='fu'>ReductiveHourglassTest</span>(<span class='no'>PhyloExpressionSetExample</span>,
                        <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>, <span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>),
                        <span class='kw'>permutations</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</div><div class='output co'>#&gt; $p.value
-#&gt; [1] 2.076781e-08
+#&gt; [1] 2.382328e-08
 #&gt; 
 #&gt; $std.dev
-#&gt; [1] 0.05590774 0.05594431 0.05424290 0.05263996 0.05248470 0.05268037 0.05718159
+#&gt; [1] 0.05603998 0.05500747 0.05465064 0.05312299 0.05185728 0.05310830 0.05594865
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA
@@ -285,11 +285,11 @@ of a parametric distribution to non-censored or censored data.</p>
 <span class='fu'>ReductiveHourglassTest</span>(<span class='no'>PhyloExpressionSetExample</span>,
                      <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>, <span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>),
                      <span class='kw'>custom.perm.matrix</span> <span class='kw'>=</span> <span class='no'>custom_perm_matrix</span>)</div><div class='output co'>#&gt; $p.value
-#&gt; [1] 3.959731e-08
+#&gt; [1] 9.107625e-09
 #&gt; 
 #&gt; $std.dev
 #&gt;     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature 
-#&gt; 0.05679438 0.05718713 0.05655494 0.05608444 0.05611715 0.05413704 0.05605443 
+#&gt; 0.04992104 0.04980443 0.04834711 0.04844813 0.04820667 0.05091763 0.05701022 
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA
