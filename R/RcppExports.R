@@ -2,30 +2,30 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 cpp_TAI <- function(ExpressionSet, Phylostratum) {
-    .Call(myTAI_cpp_TAI, ExpressionSet, Phylostratum)
+    .Call(`_myTAI_cpp_TAI`, ExpressionSet, Phylostratum)
 }
 
 cpp_bootMatrix <- function(ExpressionMatrix, AgeVector, permutations) {
-    .Call(myTAI_cpp_bootMatrix, ExpressionMatrix, AgeVector, permutations)
+    .Call(`_myTAI_cpp_bootMatrix`, ExpressionMatrix, AgeVector, permutations)
 }
 
 cpp_pMatrix <- function(ExpressionSet, AgeVector) {
-    .Call(myTAI_cpp_pMatrix, ExpressionSet, AgeVector)
+    .Call(`_myTAI_cpp_pMatrix`, ExpressionSet, AgeVector)
 }
 
 cpp_std_error <- function(x) {
-    .Call(myTAI_cpp_std_error, x)
+    .Call(`_myTAI_cpp_std_error`, x)
 }
 
 cpp_geom_mean <- function(x) {
-    .Call(myTAI_cpp_geom_mean, x)
+    .Call(`_myTAI_cpp_geom_mean`, x)
 }
 
 cpp_harmonic_mean <- function(x) {
-    .Call(myTAI_cpp_harmonic_mean, x)
+    .Call(`_myTAI_cpp_harmonic_mean`, x)
 }
 
 cpp_omitMatrix <- function(ExpressionSet, AgeVector) {
-    .Call(myTAI_cpp_omitMatrix, ExpressionSet, AgeVector)
+    .Call(`_myTAI_cpp_omitMatrix`, ExpressionSet, AgeVector)
 }
 
