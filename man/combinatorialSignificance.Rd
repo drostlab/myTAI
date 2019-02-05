@@ -60,8 +60,6 @@ statistical significance of each pattern derived by the corresponding combinatio
 \item 1.3, 2.2, 3.1 -> p-value for combination 8
 
 \item 1.3, 2.3, 3.1 -> p-value for combination 9
-
-\item \dots
 }
 This procedure yields 27 p-values for the \eqn{3^3} (\eqn{n_stages^n_replicates}) replicate combinations.
 
@@ -101,7 +99,7 @@ p.vector <- CombinatorialSignificance(ExpressionSet = PhyloExpressionSetExample,
 
 }
 \references{
-Drost HG et al. (2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+Drost HG et al. (2015) Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012
 }
 \seealso{
 \code{\link{expand.grid}}, \code{\link{FlatLineTest}}
