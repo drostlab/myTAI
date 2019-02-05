@@ -6,7 +6,7 @@ Date: 2019-02-05
 Authors@R: person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hgd23@cam.ac.uk",
-                comment = c(ORCID = "http://orcid.org/0000-0002-1567-306X"))
+                comment = c(ORCID = "https://orcid.org/0000-0002-1567-306X"))
 Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2017) <doi:10.1093/bioinformatics/btx835>). The aim of this tool is to provide a transcriptome analysis environment for answering questions regarding the evolution of biological processes (Drost et al. (2016) <doi:10.1101/051565>).
 VignetteBuilder: knitr
 NeedsCompilation: yes
