@@ -84,13 +84,6 @@ PlotSignature(PhyloExpressionSetExample,
               TestStatistic = "FlatLineTest",
               ylab = "Transcriptome Age Index")
               
-# plot TAI pattern and perform reductive hourglass test
-PlotSignature(PhyloExpressionSetExample, 
-              measure       = "TAI", 
-              permutations  = 1000,
-              TestStatistic = "ReductiveHourglassTest",
-              modules       = list(early = 1:2, mid = 3:5, late = 6:7),
-              ylab = "Transcriptome Age Index")
 }
 \author{
 Hajk-Georg Drost

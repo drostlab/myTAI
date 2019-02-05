@@ -26,7 +26,7 @@ In order to compare the range of confidence intervals in the same scale, we plot
 }
 \examples{
 data("PhyloExpressionSetExample")
-PlotCIRatio(PhyloExpressionSetExample,"TAI",10)
+PlotCIRatio(PhyloExpressionSetExample,"TAI",5)
 }
 \seealso{
 \code{\link{PlotSignature}}
