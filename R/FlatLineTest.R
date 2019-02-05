@@ -38,7 +38,7 @@
 #' }
 #' @references 
 #' 
-#' Drost HG et al.(2015). \emph{Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis}. Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012.
+#' Drost HG et al. (2015) Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012
 #' 
 #' Quint M et al. (2012). A transcriptomic hourglass in plant embryogenesis. Nature (490): 98-101.
 #'

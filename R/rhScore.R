@@ -47,7 +47,7 @@
 #' @return a numeric value representing the hourglass destruction score.
 #' @author Hajk-Georg Drost
 #' @references
-#' Drost et al. (2015), Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis. Mol Bio Evol.
+#' Drost HG et al. (2015) Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012
 #' 
 #' @seealso \code{\link{ReductiveHourglassTest}}, \code{\link{TAI}}, \code{\link{TDI}}
 #' @examples
