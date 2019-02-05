@@ -14,7 +14,7 @@
 #' @author Jialin Liu
 #' @examples 
 #' data("PhyloExpressionSetExample")
-#' PlotCIRatio(PhyloExpressionSetExample,"TAI",10)
+#' PlotCIRatio(PhyloExpressionSetExample,"TAI",5)
 #' @seealso \code{\link{PlotSignature}}
 #' @export
 
