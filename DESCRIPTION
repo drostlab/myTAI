@@ -2,7 +2,7 @@ Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
 Version: 0.9.0
-Date: 2018-12-03
+Date: 2019-02-04
 Authors@R: person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hgd23@cam.ac.uk",
