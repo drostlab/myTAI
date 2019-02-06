@@ -106,7 +106,7 @@ In theory, any published or newly generated transcriptome dataset can be used to
 
 ![](Figures/Fig3.png)
 
-<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](http://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221) ), or phylogenetic reconciliation (see [Doyon et al, 2011](https://www.ncbi.nlm.nih.gov/pubmed/21949266) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
+<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](http://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)), or phylogenetic reconciliation (see [Doyon et al, 2011](https://www.ncbi.nlm.nih.gov/pubmed/21949266) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
 
 
 ## Retrieval of phylogenetic or taxonomic information
@@ -191,7 +191,7 @@ __Generate or retrieve phylostratigraphic maps:__
 
 ### dNdS estimation of orthologous genes
 
-We recently proposed to use the classical dNdS measure to quantify the sequence conservation of protein coding genes between closely related species. This way, we combine the information about the selective pressure acting on a particular gene with its expression level during a particular time point or condition. We refer to this approach as Divergence Stratigraphy ([Drost et al., 2015 _Mol. Biol. Evol._](http://mbe.oxfordjournals.org/content/32/5/1221)). Analogous to gene age inference methods,
+We recently proposed to use the classical dNdS measure to quantify the sequence conservation of protein coding genes between closely related species. This way, we combine the information about the selective pressure acting on a particular gene with its expression level during a particular time point or condition. We refer to this approach as Divergence Stratigraphy ([Drost et al., 2015 _Mol. Biol. Evol._](https://academic.oup.com/mbe/article/32/5/1221/1125964)). Analogous to gene age inference methods,
 divergence stratigraphy generates a table storing the sequence conservation estimate in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _divergence stratigraphic map_.
 
 
@@ -614,7 +614,7 @@ To assess the statistical significance of all introduced measures and analyses, 
 
 Evolutionary signatures of transcriptomes can be captured by computing transcriptome indices at different measured stages of development, combining these computed values to a transcriptome index profile across the measured stages, and comparing the resulting profile with a flat line. A profile not significantly deviating from a flat line indicates the absence of significant variations of the computed transcriptome index from stage to stage. In contrast, a profile significantly deviating from a flat line indicates the presence of significant variations from stage to stage. We refer to any transcriptome index profile significantly deviating from a flat line as phylotranscriptomic pattern or evolutionary signature.
 
-Previously, we introduced three statistical tests to quantify the significance of observed TAI or TDI patterns: `Flat Line Test`, `Reductive Hourglass Test`, and `Reductive Early Conservation Test` ([Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.full)).
+Previously, we introduced three statistical tests to quantify the significance of observed TAI or TDI patterns: `Flat Line Test`, `Reductive Hourglass Test`, and `Reductive Early Conservation Test` ([Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)).
 
 The `PlotPattern()` function introduced in the following sections is the main analytics function of myTAI. `PlotPattern()` allows users to visualize TAI or TDI patterns and internally performs the following statistical tests to assess their significance.
 
@@ -642,7 +642,7 @@ documentation of `PlotSignature()` (`?PlotSignature` or `?FlatLineTest`), the `F
 In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles an _hourglass_ shape,
 one can obtain a p-value quantifying the statistical significance of a visual _hourglass_ pattern based on the `ReductiveHourglassTest` (`?ReductiveHourglassTest`).
 
-Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge ([Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1)), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
+Since the `ReductiveHourglassTest` has been defined for a priori biological knowledge ([Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)), the `modules` argument within the `ReductiveHourglassTest()` function needs to be specified.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
 
@@ -696,7 +696,7 @@ The `EarlyConservationTest` tests whether an observed phylotranscriptomic patter
 a low-high-high pattern (monotonically increasing function) supporting the Early Conservation Model of embryogenesis.
 
 
-Analogous to the `ReductiveHourglassTest`, the `EarlyConservationTest` needs a priori biological knowledge [Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1).
+Analogous to the `ReductiveHourglassTest`, the `EarlyConservationTest` needs a priori biological knowledge [Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964).
 So again three `modules` have to be specified for the `EarlyConservationTest()` function.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
@@ -747,7 +747,7 @@ TAI(PhyloExpressionSetExample)
 In case the observed phylotranscriptomic pattern not only significantly deviates from a flat line but also visually resembles an _reverse hourglass_ shape (low-high-low pattern),
 one can obtain a p-value quantifying the statistical significance of a visual _reverse hourglass_ pattern based on the `ReverseHourglassTest` (`?ReverseHourglassTest`).
 
-Since the `ReverseHourglassTest` has been defined for a priori biological knowledge ([Drost et al., 2015](http://mbe.oxfordjournals.org/content/32/5/1221.short?rss=1)), the `modules` argument within the `ReverseHourglassTest()` function needs to be specified.
+Since the `ReverseHourglassTest` has been defined for a priori biological knowledge ([Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)), the `modules` argument within the `ReverseHourglassTest()` function needs to be specified.
 
 Three modules need to be specified: an __early-module__, __phylotypic module__ (mid), and a __late-module__.
 
