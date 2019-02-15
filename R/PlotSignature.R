@@ -86,7 +86,7 @@ PlotSignature <-
         if (!is.element(TestStatistic, c("FlatLineTest", "ReductiveHourglassTest", "EarlyConservationTest", "ReverseHourglassTest")))
             stop("Please choose a 'TestStatistic' that is supported by this function. E.g. TestStatistic = 'FlatLineTest', TestStatistic = 'ReductiveHourglassTest', TestStatistic = 'EarlyConservationTest', TestStatistic = 'ReverseHourglassTest'.", call. = FALSE)
             
-        cat("Plot signature: '",measure, "' and test statistic: '",TestStatistic,"'." )
+        cat("Plot signature: '",measure, "' and test statistic: '",TestStatistic,"' running ", permutations, " permutations." )
         cat("\n")
                 
         Stage <- NULL        
