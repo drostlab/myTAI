@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
       </span>
     </div>
 
@@ -130,10 +130,16 @@
       <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="mytai-1-0-0" class="section level1">
+    <div id="mytai-0-9-1" class="section level1">
 <h1 class="page-header">
-<a href="#mytai-1-0-0" class="anchor"></a>myTAI 1.0.0<small> Unreleased </small>
+<a href="#mytai-0-9-1" class="anchor"></a>myTAI 0.9.1<small> Unreleased </small>
 </h1>
+<ul>
+<li>fixing a unit test that uses <code><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed(123)</a></code> which causes an error in the new R version <code>3.6.0</code> due to the switch from a <code>non-uniform "Rounding" sampler</code> to a <code>"Rejection" sampler</code> in the new R version; the corresponding unit test <code>test-PlotEnrichment.R</code> was adjusted accordingly. Here the CRAN statement:</li>
+</ul>
+<blockquote>
+<p>Note that this ensures using the (old) non-uniform “Rounding” sampler for all 3.x versions of R, and does not add an R version dependency. Note also that the new “Rejection” sampler which R will use from 3.6.0 onwards by default is definitely preferable over the old one, so that the above should really only be used as a temporary measure for reproduction of the previous behavior (and the run time tests relying on it).</p>
+</blockquote>
 </div>
     <div id="mytai-0-9-0" class="section level1">
 <h1 class="page-header">
@@ -435,7 +441,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#mytai-1-0-0">1.0.0</a></li>
+        <li><a href="#mytai-0-9-1">0.9.1</a></li>
         <li><a href="#mytai-0-9-0">0.9.0</a></li>
         <li><a href="#mytai-0-8-0">0.8.0</a></li>
         <li><a href="#mytai-0-7-0">0.7.0</a></li>
