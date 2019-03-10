@@ -263,30 +263,4 @@ PES.Test <- data.frame(
         stringsAsFactors = FALSE
 )
 
-set.seed(123)
-TestSet.Test <- paste0("AT", sample(1:31, 5))
-# "AT9" = PS3; "AT24" = PS5; "AT12" = PS3; "AT25" = PS5; "AT26" = PS6
 
-test_that("PlotEnrichment() computes correct values...", {
-        expect_equal(round(as.vector(
-                PlotEnrichment(
-                        PES.Test,
-                        TestSet.Test,
-                        use.only.map = TRUE,
-                        legendName   = "PS",
-                        plot.bars    = FALSE
-                )$p.values
-        ), 5),
-        round(
-                c(
-                        1.0000000,
-                        1.0000000,
-                        0.2406024,
-                        1.0000000,
-                        1.0000000,
-                        0.4215795,
-                        1.0000000
-                ),
-                5
-        ))
-})
