@@ -1,6 +1,25 @@
 myTAI 1.0.0
 ===========
 
+### New Functions
+
+
+myTAI 0.9.1
+===========
+
+- fixing a unit test that uses `set.seed(123)` which causes an error in the new
+R version `3.6.0` due to the switch from a `non-uniform "Rounding" sampler`
+to a `"Rejection" sampler` in the new R version; the corresponding unit test `test-PlotEnrichment.R`
+was adjusted accordingly. Here the CRAN statement:
+
+>Note that this ensures using the (old) non-uniform "Rounding" sampler
+for all 3.x versions of R, and does not add an R version dependency.
+Note also that the new "Rejection" sampler which R will use from 3.6.0
+onwards by default is definitely preferable over the old one, so that
+the above should really only be used as a temporary measure for
+reproduction of the previous behavior (and the run time tests relying on
+it).
+
 
 myTAI 0.9.0
 ===========
