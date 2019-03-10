@@ -38,7 +38,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 Users can download `myTAI` from CRAN :
 
 ```r
-# install myTAI 0.9.0 from CRAN
+# install myTAI 0.9.1 from CRAN
 install.packages("myTAI")
 ```
 
