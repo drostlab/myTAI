@@ -1,8 +1,8 @@
 Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
-Version: 1.0.0.9000
-Date: 2019-02-06
+Version: 0.1.9000
+Date: 2019-03-10
 Authors@R: person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hgd23@cam.ac.uk",
@@ -14,7 +14,6 @@ License: GPL-3
 Depends:
     R (>= 3.1.1)
 Imports:
-    biomartr,
     Rcpp (>= 0.12.0),
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.0-2),
