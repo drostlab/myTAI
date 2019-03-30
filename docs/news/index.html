@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9000</span>
       </span>
     </div>
 
@@ -130,9 +130,18 @@
       <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="mytai-1-0-0" class="section level1">
+<h1 class="page-header">
+<a href="#mytai-1-0-0" class="anchor"></a>myTAI 1.0.0<small> Unreleased </small>
+</h1>
+<div id="new-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New Functions</h3>
+</div>
+</div>
     <div id="mytai-0-9-1" class="section level1">
 <h1 class="page-header">
-<a href="#mytai-0-9-1" class="anchor"></a>myTAI 0.9.1<small> Unreleased </small>
+<a href="#mytai-0-9-1" class="anchor"></a>myTAI 0.9.1<small> 2019-03-10 </small>
 </h1>
 <ul>
 <li>fixing a unit test that uses <code><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed(123)</a></code> which causes an error in the new R version <code>3.6.0</code> due to the switch from a <code>non-uniform "Rounding" sampler</code> to a <code>"Rejection" sampler</code> in the new R version; the corresponding unit test <code>test-PlotEnrichment.R</code> was adjusted accordingly. Here the CRAN statement:</li>
@@ -145,9 +154,9 @@
 <h1 class="page-header">
 <a href="#mytai-0-9-0" class="anchor"></a>myTAI 0.9.0<small> 2019-02-06 </small>
 </h1>
-<div id="new-functions" class="section level3">
+<div id="new-functions-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions" class="anchor"></a>New Functions</h3>
+<a href="#new-functions-1" class="anchor"></a>New Functions</h3>
 <ul>
 <li><p>new function <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code> to perform a <code>Reverse Hourglass Test</code>. The Reverse Hourglass Test aims to statistically evaluate the existence of a reverse hourglass pattern based on TAI or TDI computations. The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) does follow an hourglass like shape. A p-value &lt; 0.05 indicates that the corresponding phylotranscriptomics pattern does rather follow a reverse hourglass (low-high-low) shape.</p></li>
 <li><p>new function <code><a href="../reference/reversehourglassScore.html">reversehourglassScore()</a></code> for computing the <code>Reverse Hourglass Score</code> for the <code>Reverse Hourglass Test</code></p></li>
@@ -181,9 +190,9 @@
 <div id="updates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#updates" class="anchor"></a>Updates</h2>
-<div id="new-functions-1" class="section level3">
+<div id="new-functions-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-1" class="anchor"></a>New Functions</h3>
+<a href="#new-functions-2" class="anchor"></a>New Functions</h3>
 <ul>
 <li>new function <code><a href="../reference/PlotCIRatio.html">PlotCIRatio()</a></code> to compute and visualize TAI/TDI etc patters using bootstrapping and confidence intervals (contributed by <a href='https://github.com/ljljolinq1010'>@ljljolinq1010</a>)</li>
 </ul>
@@ -220,9 +229,9 @@
 <h1 class="page-header">
 <a href="#mytai-0-5-0" class="anchor"></a>myTAI 0.5.0<small> 2017-03-14 </small>
 </h1>
-<div id="new-functions-2" class="section level3">
+<div id="new-functions-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-2" class="anchor"></a>New Functions</h3>
+<a href="#new-functions-3" class="anchor"></a>New Functions</h3>
 <ul>
 <li><p>new function <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> allows users to plot evolutionary signatures across transcriptomes (based on ggplot2 -&gt; new main visualization function aiming to replace the <code><a href="../reference/PlotPattern.html">PlotPattern()</a></code> function)</p></li>
 <li><p>new function <code><a href="../reference/TPI.html">TPI()</a></code> allows users to compute the Transcriptome Polymorphism Index introduced by <code>Gossmann et al., 2015</code>.</p></li>
@@ -255,9 +264,9 @@
 <h1 class="page-header">
 <a href="#mytai-0-4-0" class="anchor"></a>myTAI 0.4.0<small> 2016-05-04 </small>
 </h1>
-<div id="new-functions-3" class="section level3">
+<div id="new-functions-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-3" class="anchor"></a>New Functions</h3>
+<a href="#new-functions-4" class="anchor"></a>New Functions</h3>
 <ul>
 <li>a new function <code><a href="../reference/PlotSelectedAgeDistr.html">PlotSelectedAgeDistr()</a></code> allowing unsers to visualize the PS or DS gene distribution of a subset of genes stored in the input ExpressionSet object</li>
 <li>a new function <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> allowing users to plot the significant differences between gene expression distributions of PS or DS groups</li>
@@ -293,9 +302,9 @@
 <li>adding examples for <code><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality()</a></code> to <code>Expression</code> vignette</li>
 </ul>
 </div>
-<div id="new-functions-4" class="section level3">
+<div id="new-functions-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-4" class="anchor"></a>New Functions</h3>
+<a href="#new-functions-5" class="anchor"></a>New Functions</h3>
 <ul>
 <li>a new function <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> allowing users to plot the expression levels of each age or divergence category as boxplot, dot plot or violin plot</li>
 <li>a new function <code><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality()</a></code> allowing users to visualize the quality of biological replicates</li>
@@ -337,9 +346,9 @@
 <li><p>adding examples for <code><a href="../reference/pStrata.html">pStrata()</a></code>, <code><a href="../reference/pMatrix.html">pMatrix()</a></code>, <code><a href="../reference/pTAI.html">pTAI()</a></code>, <code><a href="../reference/pTDI.html">pTDI()</a></code>, and <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> to the <strong>Introduction</strong> Vignette</p></li>
 </ul>
 </div>
-<div id="new-functions-5" class="section level3">
+<div id="new-functions-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-5" class="anchor"></a>New Functions</h3>
+<a href="#new-functions-6" class="anchor"></a>New Functions</h3>
 <ul>
 <li><p>a new function <code><a href="../reference/taxonomy.html">taxonomy()</a></code> allows users to retrieve taxonomic information for any organism of interest; this function has been taken from the <a href="https://github.com/HajkD/biomartr">biomartr</a> package and was removed from <code>biomartr</code> afterwards. Please notice, that in myTAI version 0.1.0 the Introduction vignette referenced to the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function in <code>biomartr</code>. This is no longer the case (since myTAI version 0.2.0), because now <code><a href="../reference/taxonomy.html">taxonomy()</a></code> is implemented in myTAI.</p></li>
 <li><p>the new <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function is based on the powerful R package <a href="https://github.com/ropensci/taxize">taxize</a>.</p></li>
@@ -379,9 +388,9 @@
 <li>now all functions have unit tests</li>
 </ul>
 </div>
-<div id="new-functions-6" class="section level3">
+<div id="new-functions-7" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions-6" class="anchor"></a>New Functions</h3>
+<a href="#new-functions-7" class="anchor"></a>New Functions</h3>
 <ul>
 <li><p>a new function <code><a href="../reference/pStrata.html">pStrata()</a></code> allows users to compute partial TAI/TDI values for all Phylostrata or Divergence Strata</p></li>
 <li><p>a new function <code><a href="../reference/CollapseReplicates.html">CollapseReplicates()</a></code> allows users to combine replicate expression levels in ExpressionSet objects</p></li>
@@ -441,6 +450,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#mytai-1-0-0">1.0.0</a></li>
         <li><a href="#mytai-0-9-1">0.9.1</a></li>
         <li><a href="#mytai-0-9-0">0.9.0</a></li>
         <li><a href="#mytai-0-8-0">0.8.0</a></li>
