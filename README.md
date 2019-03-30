@@ -7,7 +7,6 @@
  
 
 
-
 # Evolutionary Transcriptomics with R
 
 ### Motivation
@@ -24,7 +23,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 ### Installation
 
-Users can download `myTAI` from CRAN :
+Please install the following package dependencies:
 
 ```r
 # Install core Bioconductor packages
@@ -47,7 +46,7 @@ install.packages("myTAI", dependencies = TRUE)
 
 Using `myTAI`, any existing or newly generated transcriptome dataset can be combined with evolutionary information (find [details here](https://hajkd.github.io/myTAI/articles/Introduction.html#retrieval-of-phylogenetic-or-taxonomic-information)) to retrieve novel insights about the evolutionary conservation of the transcriptome at hand. 
 
-For the purpose of performing large scale evolutionary transcriptomics studies, the `myTAI` package implements the quantification, statsitical assessment, and analytics functionality to allow researchers to study the evolution of biological processes by determining stages or periods of evolutionary conservation or variability in transcriptome data. 
+For the purpose of performing large scale evolutionary transcriptomics studies, the `myTAI` package implements the quantification, statistical assessment, and analytics functionality to allow researchers to study the evolution of biological processes by determining stages or periods of evolutionary conservation or variability in transcriptome data. 
 
 We hope that `myTAI` will become the community standard tool to perform evolutionary transcriptomics studies and we are happy to add required functionality upon request.
 
@@ -99,7 +98,7 @@ The following tutorials will provide use cases and detailed explainations of how
 
 ## Example
 
-### Load example data
+#### Load example data
 
 ```r
 library(myTAI)
@@ -261,37 +260,15 @@ All functions also include visual analytics tools to quantify the goodness of te
 * `rhScore()` : Compute the Hourglass Score for the Reductive Hourglass Test
 * `reversehourglassScore()`: Compute the Reverse Hourglass Score for the Reverse Hourglass Test
 
+## Discussions and Bug Reports
 
-## Developer Version of `myTAI`
+I would be very happy to learn more about potential improvements of the concepts and functions
+provided in this package.
 
-The developer version of `myTAI` might include more functionality than the stable version on CRAN.
-Hence users can download the current developer version of `myTAI` by typing:
+Furthermore, in case you find some bugs or need additional (more flexible) functionality of parts
+of this package, please let me know:
 
-```r
-# The developer version can be installed directly from github:
-
-# install.packages("devtools")
-
-# install developer version of myTAI
-library(devtools)
-install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
-
-# On Windows, this won't work - see ?build_github_devtools
-# install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
-
-# When working with Windows, first you need to install the
-# R package: rtools 
-# or consult: http://www.rstudio.com/products/rpackages/devtools/
-
-# Afterwards you can install devtools -> install.packages("devtools")
-# and then you can run:
-
-devtools::install_github("HajkD/myTAI", build_vignettes = TRUE, dependencies = TRUE)
-
-# and then call it from the library
-library("myTAI", lib.loc = "C:/Program Files/R/R-3.1.1/library")
-
-```
+https://github.com/HajkD/myTAI/issues
 
 ## References
 
@@ -303,29 +280,18 @@ Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylo
 
 Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan PT, Dekkers BJW, Bentsink L, Hilhorst H, Ligterink W, Wellmer F, Grosse I, and Quint M. __Post-embryonic hourglass patterns mark ontogenetic transitions in plant development__. _Mol. Biol. Evol._ (2016) [doi:10.1093/molbev/msw039](http://mbe.oxfordjournals.org/content/early/2016/02/23/molbev.msw039.short?rss=1) 
 
-## Discussions and Bug Reports
-
-I would be very happy to learn more about potential improvements of the concepts and functions
-provided in this package.
-
-Furthermore, in case you find some bugs or need additional (more flexible) functionality of parts
-of this package, please let me know:
-
-https://github.com/HajkD/myTAI/issues
-
 
 ## Acknowledgement
 
 I would like to thank several individuals for making this project possible.
 
 First I would like to thank Ivo Grosse and Marcel Quint for providing me a place
-and the environment to be able to work on fascinating topics of Evo-Devo research and for the
-fruitful discussions that led to projects like this one.
+and the environment to be able to work on fascinating topics of Evo-Devo research and for the fruitful discussions that led to projects like this one.
 
 Furthermore, I would like to thank Alexander Gabel and Jan Grau for valuable discussions
 on how to improve some methodological concepts of some analyses present in this package.
 
-I would also like to thank Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
+I would also like to thank my past Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
 who worked intensively with this package and helped me to improve the usability and logic of the package environment.
 
 
