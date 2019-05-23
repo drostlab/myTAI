@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
-Version: 0.1.9000
+Version: 1.0.0.9000
 Date: 2019-03-10
 Authors@R: c(
                 person("Hajk-Georg", "Drost",
