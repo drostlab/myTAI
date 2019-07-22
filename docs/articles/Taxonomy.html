@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@
     <div class="page-header toc-ignore">
       <h1>Retrieving Taxonomic Information</h1>
             
-            <h4 class="date">2019-03-30</h4>
+            <h4 class="date">2019-07-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd"><code>vignettes/Taxonomy.Rmd</code></a></small>
       <div class="hidden name"><code>Taxonomy.Rmd</code></div>
@@ -113,11 +113,11 @@
 <a href="#taxonomic-information-retrieval" class="anchor"></a>Taxonomic Information Retrieval</h2>
 <p>The <code>myTAI</code> package provides the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function to retrieve taxonomic information.</p>
 <p>In the following example we will obtain the taxonomic hierarchy of <code>Arabidopsis thaliana</code> from <a href="http://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span>
-<span class="co"># from NCBI Taxonomy</span>
-<span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, 
-          <span class="dt">db       =</span> <span class="st">"ncbi"</span>,
-          <span class="dt">output   =</span> <span class="st">"classification"</span> )</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># from NCBI Taxonomy</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>,</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">          <span class="dt">output   =</span> <span class="st">"classification"</span> )</a></code></pre></div>
 <pre><code>                   name         rank      id
 1    cellular organisms      no rank  131567
 2             Eukaryota superkingdom    2759
@@ -143,11 +143,11 @@
 <p>The <code>organism</code> argument takes the scientific name of a query organism, the <code>db</code> argument specifies that database from which the corresponding taxonomic information shall be retrieved, e.g. <code>ncbi</code> (NCBI Taxonomy) and <code>itis</code> (Integrated Taxonomic Information System) and the <code>output</code> argument specifies the type of taxonomic information that shall be returned for the query organism, e.g. <code>classification</code>, <code>taxid</code>, or <code>children</code>.</p>
 <p>The output of <code>classification</code> is a <code>data.frame</code> storing the taxonomic hierarchy of <code>Arabidopsis thaliana</code> starting with <code>cellular organisms</code> up to <code>Arabidopsis thaliana</code>. The first column stores the taxonomic name, the second column the taxonomic rank, and the third column the NCBI Taxonomy id for corresponding taxa.</p>
 <p>Analogous <code>classification</code> information can be obtained from different databases.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span>
-<span class="co"># from the Integrated Taxonomic Information System</span>
-<span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, 
-          <span class="dt">db       =</span> <span class="st">"itis"</span>,
-          <span class="dt">output   =</span> <span class="st">"classification"</span> )</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co"># from the Integrated Taxonomic Information System</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">          <span class="dt">db       =</span> <span class="st">"itis"</span>,</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">          <span class="dt">output   =</span> <span class="st">"classification"</span> )</a></code></pre></div>
 <pre><code>              name          rank     id
 1          Plantae       Kingdom 202422
 2    Viridiplantae    Subkingdom 954898
@@ -161,16 +161,16 @@
 10    Brassicaceae        Family  22669
 11     Arabidopsis         Genus  23040</code></pre>
 <p>The <code>output</code> argument allows you to directly access taxonomy ids for a query organism or species.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># retrieving the taxonomy id of the query organism from NCBI Taxonomy</span>
-<span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, 
-          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, 
-          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># retrieving the taxonomy id of the query organism from NCBI Taxonomy</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</a></code></pre></div>
 <pre><code>    id
 1 3702</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service</span>
-<span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, 
-          <span class="dt">db       =</span> <span class="st">"itis"</span>, 
-          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"itis"</span>, </a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</a></code></pre></div>
 <pre><code>    id
 1 23040</code></pre>
 <p>So far, the following data bases can be accesses to retrieve taxonomic information:</p>
@@ -185,10 +185,10 @@
 <h2 class="hasAnchor">
 <a href="#retrieve-children-nodes" class="anchor"></a>Retrieve Children Nodes</h2>
 <p>Another <code>output</code> supported by <code><a href="../reference/taxonomy.html">taxonomy()</a></code> is <code>children</code> that returns the immediate children taxa for a query organism. This feature is useful to determine species relationships for quantifying recent evolutionary conservation with Divergence Stratigraphy.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span>
-<span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, 
-          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, 
-          <span class="dt">output   =</span> <span class="st">"children"</span> )</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, </a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"children"</span> )</a></code></pre></div>
 <pre><code>   childtaxa_id                                                     childtaxa_name childtaxa_rank
 1       1547872                                              Arabidopsis umezawana        species
 2       1328956 (Arabidopsis thaliana x Arabidopsis arenosa) x Arabidopsis suecica        species
@@ -207,10 +207,10 @@
 15        45249                                                Arabidopsis suecica        species
 16        38785                                                Arabidopsis arenosa        species
 17         3702                                               Arabidopsis thaliana        species</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span>
-<span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, 
-          <span class="dt">db       =</span> <span class="st">"itis"</span>, 
-          <span class="dt">output   =</span> <span class="st">"children"</span> )</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"itis"</span>, </a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"children"</span> )</a></code></pre></div>
 <pre><code>   parentname parenttsn rankname             taxonname    tsn
 1 Arabidopsis     23040  Species  Arabidopsis thaliana  23041
 2 Arabidopsis     23040  Species Arabidopsis arenicola 823113
@@ -235,7 +235,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Alexander Gabel.</p>
 </div>
 
 <div class="pkgdown">

@@ -67,7 +67,7 @@ indeed follow an hourglass (high-low-high) shape." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -269,10 +269,10 @@ of a parametric distribution to non-censored or censored data.</p>
 <span class='fu'>ReductiveHourglassTest</span>(<span class='no'>PhyloExpressionSetExample</span>,
                        <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>, <span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>),
                        <span class='kw'>permutations</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</div><div class='output co'>#&gt; $p.value
-#&gt; [1] 2.382328e-08
+#&gt; [1] 3.31808e-09
 #&gt; 
 #&gt; $std.dev
-#&gt; [1] 0.05603998 0.05500747 0.05465064 0.05312299 0.05185728 0.05310830 0.05594865
+#&gt; [1] 0.05629646 0.05442829 0.05378830 0.05250336 0.05173308 0.05351928 0.05519306
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA
@@ -285,11 +285,11 @@ of a parametric distribution to non-censored or censored data.</p>
 <span class='fu'>ReductiveHourglassTest</span>(<span class='no'>PhyloExpressionSetExample</span>,
                      <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>, <span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>),
                      <span class='kw'>custom.perm.matrix</span> <span class='kw'>=</span> <span class='no'>custom_perm_matrix</span>)</div><div class='output co'>#&gt; $p.value
-#&gt; [1] 9.107625e-09
+#&gt; [1] 7.218752e-09
 #&gt; 
 #&gt; $std.dev
 #&gt;     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature 
-#&gt; 0.04992104 0.04980443 0.04834711 0.04844813 0.04820667 0.05091763 0.05701022 
+#&gt; 0.05530545 0.05276439 0.05133321 0.04978774 0.04747495 0.04833480 0.05863549 
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA
@@ -320,7 +320,7 @@ of a parametric distribution to non-censored or censored data.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Alexander Gabel.</p>
 </div>
 
 <div class="pkgdown">
