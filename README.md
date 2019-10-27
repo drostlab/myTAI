@@ -1,7 +1,6 @@
 
 # myTAI <img src="inst/myTAI.png" align="right" height="174" width="150" />
 [![Travis-CI Build Status](https://travis-ci.org/HajkD/myTAI.svg?branch=master)](https://travis-ci.org/HajkD/myTAI)
- [![rpackages.io rank](https://www.rpackages.io/badge/myTAI.svg)](https://www.rpackages.io/package/myTAI)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/myTAI)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/myTAI)](https://github.com/metacran/cranlogs.app)
  
@@ -259,6 +258,51 @@ All functions also include visual analytics tools to quantify the goodness of te
 * `omitMatrix()` : Compute TAI or TDI Profiles Omitting a Given Gene
 * `rhScore()` : Compute the Hourglass Score for the Reductive Hourglass Test
 * `reversehourglassScore()`: Compute the Reverse Hourglass Score for the Reverse Hourglass Test
+
+## Studies that successfully used `myTAI` to quantify transcriptome conservation:
+
+> - __Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis__
+>HG Drost, A Gabel, I Grosse, M Quint - __Molecular biology and evolution__, 2015
+>
+> - __Gene Expression Does Not Support the Developmental Hourglass Model in Three Animals with Spiralian Development__
+L Wu, KE Ferger, JD Lambert - __Molecular biology and evolution__, 2019
+>
+> - __The Transcriptional Landscape of Polyploid Wheats and their Diploid Ancestors during Embryogenesis and Grain Development__
+D Xiang, TD Quilichini, Z Liu, P Gao, Y Pan et al. - __The Plant Cell__, 2019
+>
+> - __Developmental constraints on genome evolution in four bilaterian model species__
+J Liu, M Robinson-Rechavi - __Genome biology and evolution__, 2018
+>
+> - __Reconstructing the transcriptional ontogeny of maize and sorghum supports an inverse hourglass model of inflorescence development__
+S Leiboff, S Hake - __Current Biology__, 2019
+>
+> - __Mapping selection within Drosophila melanogaster embryo's anatomy__
+I Salvador-Martínez et al. - __Molecular biology and evolution__, 2017
+>
+> - __Distribution and diversity of enzymes for polysaccharide degradation in fungi__
+R Berlemont - __Scientific reports__, 2017
+>
+> - __The origins and evolutionary history of human non-coding RNA regulatory networks__
+M Sherafatian, SJ Mowla - __Journal of bioinformatics and computational biology__, 2017
+>
+> - __Elucidating the endogenous synovial fluid proteome and peptidome of inflammatory arthritis using label-free mass spectrometry__
+SM Mahendran, EC Keystone, RJ Krawetz et al. - __Clinical proteomics__, 2019
+>
+> - __Phylostratr: a framework for phylostratigraphy__
+Z Arendsee, J Li, U Singh, A Seetharam et al. - __Bioinformatics__, 2019
+>
+> - __Pervasive convergent evolution and extreme phenotypes define chaperone requirements of protein homeostasis__
+Y Draceni, S Pechmann - __BioRxiv__, 2019
+>
+> - __Environmental DNA reveals landscape mosaic of wetland plant communities__
+ME Shackleton, GN Rees, G Watson et al. - __Global Ecology and Conservation__, 2019
+>
+> - __Algorithms for synteny-based phylostratigraphy and gene origin classification__
+Z Arendsee - 2019
+>
+> - __High expression of new genes in trochophore enlightening the ontogeny and evolution of trochozoans__
+F Xu, T Domazet-Lošo, D Fan, TL Dunwell, L Li et al. - __Scientific reports__, 2016
+
 
 ## Discussions and Bug Reports
 
