@@ -4,8 +4,14 @@
 \alias{PlotReplicateQuality}
 \title{Plot the Quality of Biological Replicates}
 \usage{
-PlotReplicateQuality(ExpressionSet, nrep, FUN = function(x)
-  log(stats::var(x)), legend.pos = "topleft", stage.names = NULL, ...)
+PlotReplicateQuality(
+  ExpressionSet,
+  nrep,
+  FUN = function(x) log(stats::var(x)),
+  legend.pos = "topleft",
+  stage.names = NULL,
+  ...
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

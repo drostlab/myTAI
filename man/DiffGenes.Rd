@@ -4,9 +4,18 @@
 \alias{DiffGenes}
 \title{Differential Gene Expression Analysis}
 \usage{
-DiffGenes(ExpressionSet, nrep, method = "foldchange", lib.size = NULL,
-  p.adjust.method = NULL, comparison = NULL, alpha = NULL,
-  filter.method = NULL, n = NULL, stage.names = NULL)
+DiffGenes(
+  ExpressionSet,
+  nrep,
+  method = "foldchange",
+  lib.size = NULL,
+  p.adjust.method = NULL,
+  comparison = NULL,
+  alpha = NULL,
+  filter.method = NULL,
+  n = NULL,
+  stage.names = NULL
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

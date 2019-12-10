@@ -4,9 +4,15 @@
 \alias{PlotCategoryExpr}
 \title{Plot the Expression Levels of each Age or Divergence Category as Boxplot, Violinplot, or Dotplot}
 \usage{
-PlotCategoryExpr(ExpressionSet, legendName, test.stat = TRUE,
-  type = "category-centered", distr.type = "boxplot",
-  log.expr = FALSE, gene.set = NULL)
+PlotCategoryExpr(
+  ExpressionSet,
+  legendName,
+  test.stat = TRUE,
+  type = "category-centered",
+  distr.type = "boxplot",
+  log.expr = FALSE,
+  gene.set = NULL
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

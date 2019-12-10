@@ -4,10 +4,17 @@
 \alias{ReverseHourglassTest}
 \title{Perform the Reverse Hourglass Test}
 \usage{
-ReverseHourglassTest(ExpressionSet, modules = NULL,
-  permutations = 1000, lillie.test = FALSE, plotHistogram = FALSE,
-  runs = 10, parallel = FALSE, gof.warning = FALSE,
-  custom.perm.matrix = NULL)
+ReverseHourglassTest(
+  ExpressionSet,
+  modules = NULL,
+  permutations = 1000,
+  lillie.test = FALSE,
+  plotHistogram = FALSE,
+  runs = 10,
+  parallel = FALSE,
+  gof.warning = FALSE,
+  custom.perm.matrix = NULL
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

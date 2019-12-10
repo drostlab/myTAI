@@ -4,10 +4,19 @@
 \alias{PlotPattern}
 \title{Plot the Transcriptome Age Index or Transcriptome Divergence Index}
 \usage{
-PlotPattern(ExpressionSet, TestStatistic = "FlatLineTest",
-  modules = NULL, permutations = 1000, lillie.test = FALSE,
-  digits.ylab = 4, p.value = TRUE, shaded.area = FALSE,
-  y.ticks = 4, custom.perm.matrix = NULL, ...)
+PlotPattern(
+  ExpressionSet,
+  TestStatistic = "FlatLineTest",
+  modules = NULL,
+  permutations = 1000,
+  lillie.test = FALSE,
+  digits.ylab = 4,
+  p.value = TRUE,
+  shaded.area = FALSE,
+  y.ticks = 4,
+  custom.perm.matrix = NULL,
+  ...
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

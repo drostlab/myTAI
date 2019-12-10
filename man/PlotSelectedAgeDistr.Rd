@@ -4,9 +4,16 @@
 \alias{PlotSelectedAgeDistr}
 \title{Plot the PS or DS distribution of a selected set of genes}
 \usage{
-PlotSelectedAgeDistr(ExpressionSet, gene.set, legendName = NULL,
-  as.ratio = FALSE, use.only.map = FALSE, col = "turquoise4",
-  xlab = NULL, ylab = NULL)
+PlotSelectedAgeDistr(
+  ExpressionSet,
+  gene.set,
+  legendName = NULL,
+  as.ratio = FALSE,
+  use.only.map = FALSE,
+  col = "turquoise4",
+  xlab = NULL,
+  ylab = NULL
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

@@ -4,9 +4,16 @@
 \alias{PlotVars}
 \title{Plot Variance of Expression Profiles}
 \usage{
-PlotVars(ExpressionSet, Groups = NULL, legendName = "age",
-  xlab = "Ontogeny", ylab = "Variance(Expression Level)", main = "",
-  y.ticks = 10, adjust.range = TRUE)
+PlotVars(
+  ExpressionSet,
+  Groups = NULL,
+  legendName = "age",
+  xlab = "Ontogeny",
+  ylab = "Variance(Expression Level)",
+  main = "",
+  y.ticks = 10,
+  adjust.range = TRUE
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

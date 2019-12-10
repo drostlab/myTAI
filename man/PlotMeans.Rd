@@ -4,10 +4,19 @@
 \alias{PlotMeans}
 \title{Plot Mean Expression Profiles}
 \usage{
-PlotMeans(ExpressionSet, Groups = NULL, modules = NULL,
-  legendName = "age", xlab = "Ontogeny",
-  ylab = "Mean Expression Level", main = "", y.ticks = 10,
-  adjust.range = TRUE, alpha = 0.008, ...)
+PlotMeans(
+  ExpressionSet,
+  Groups = NULL,
+  modules = NULL,
+  legendName = "age",
+  xlab = "Ontogeny",
+  ylab = "Mean Expression Level",
+  main = "",
+  y.ticks = 10,
+  adjust.range = TRUE,
+  alpha = 0.008,
+  ...
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

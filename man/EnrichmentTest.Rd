@@ -4,8 +4,14 @@
 \alias{EnrichmentTest}
 \title{Phylostratum or Divergence Stratum Enrichment of a given Gene Set based on Fisher's Test}
 \usage{
-EnrichmentTest(ExpressionSet, test.set, use.only.map = FALSE,
-  measure = "log-foldchange", complete.bg = TRUE, epsilon = 1e-05)
+EnrichmentTest(
+  ExpressionSet,
+  test.set,
+  use.only.map = FALSE,
+  measure = "log-foldchange",
+  complete.bg = TRUE,
+  epsilon = 1e-05
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

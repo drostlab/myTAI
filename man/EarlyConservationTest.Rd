@@ -4,10 +4,17 @@
 \alias{EarlyConservationTest}
 \title{Perform Reductive Early Conservation Test}
 \usage{
-EarlyConservationTest(ExpressionSet, modules = NULL,
-  permutations = 1000, lillie.test = FALSE, plotHistogram = FALSE,
-  runs = 10, parallel = FALSE, gof.warning = FALSE,
-  custom.perm.matrix = NULL)
+EarlyConservationTest(
+  ExpressionSet,
+  modules = NULL,
+  permutations = 1000,
+  lillie.test = FALSE,
+  plotHistogram = FALSE,
+  runs = 10,
+  parallel = FALSE,
+  gof.warning = FALSE,
+  custom.perm.matrix = NULL
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

@@ -4,8 +4,14 @@
 \alias{PlotContribution}
 \title{Plot Cumuative Transcriptome Index}
 \usage{
-PlotContribution(ExpressionSet, legendName = NULL, xlab = "Ontogeny",
-  ylab = "Transcriptome Index", main = "", y.ticks = 10)
+PlotContribution(
+  ExpressionSet,
+  legendName = NULL,
+  xlab = "Ontogeny",
+  ylab = "Transcriptome Index",
+  main = "",
+  y.ticks = 10
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

@@ -4,8 +4,14 @@
 \alias{PlotBarRE}
 \title{Plot Mean Relative Expression Levels as Barplot}
 \usage{
-PlotBarRE(ExpressionSet, Groups = NULL, wLength = 0.1, ratio = FALSE,
-  p.adjust.method = NULL, ...)
+PlotBarRE(
+  ExpressionSet,
+  Groups = NULL,
+  wLength = 0.1,
+  ratio = FALSE,
+  p.adjust.method = NULL,
+  ...
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

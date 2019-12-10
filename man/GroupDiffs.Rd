@@ -4,8 +4,14 @@
 \alias{GroupDiffs}
 \title{Quantify the significant differences between gene expression distributions of age groups}
 \usage{
-GroupDiffs(ExpressionSet, Groups = NULL, legendName = NULL,
-  stat.test = "wilcox.test", gene.set = NULL, ...)
+GroupDiffs(
+  ExpressionSet,
+  Groups = NULL,
+  legendName = NULL,
+  stat.test = "wilcox.test",
+  gene.set = NULL,
+  ...
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

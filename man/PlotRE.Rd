@@ -4,10 +4,19 @@
 \alias{PlotRE}
 \title{Plot Relative Expression Levels}
 \usage{
-PlotRE(ExpressionSet, Groups = NULL, modules = NULL,
-  legendName = "age", xlab = "Ontogeny",
-  ylab = "Relative Expression Level", main = "", y.ticks = 10,
-  adjust.range = TRUE, alpha = 0.008, ...)
+PlotRE(
+  ExpressionSet,
+  Groups = NULL,
+  modules = NULL,
+  legendName = "age",
+  xlab = "Ontogeny",
+  ylab = "Relative Expression Level",
+  main = "",
+  y.ticks = 10,
+  adjust.range = TRUE,
+  alpha = 0.008,
+  ...
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

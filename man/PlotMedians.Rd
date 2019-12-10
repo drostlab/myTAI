@@ -4,9 +4,16 @@
 \alias{PlotMedians}
 \title{Plot Median Expression Profiles}
 \usage{
-PlotMedians(ExpressionSet, Groups = NULL, legendName = "age",
-  xlab = "Ontogeny", ylab = "Median Expression Level", main = "",
-  y.ticks = 10, adjust.range = TRUE)
+PlotMedians(
+  ExpressionSet,
+  Groups = NULL,
+  legendName = "age",
+  xlab = "Ontogeny",
+  ylab = "Median Expression Level",
+  main = "",
+  y.ticks = 10,
+  adjust.range = TRUE
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

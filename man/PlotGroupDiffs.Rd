@@ -4,9 +4,16 @@
 \alias{PlotGroupDiffs}
 \title{Plot the significant differences between gene expression distributions of PS or DS groups}
 \usage{
-PlotGroupDiffs(ExpressionSet, Groups = NULL, legendName = NULL,
-  stat.test = "wilcox.test", col = c("turquoise3", "magenta3"),
-  plot.type = NULL, gene.set = NULL, ...)
+PlotGroupDiffs(
+  ExpressionSet,
+  Groups = NULL,
+  legendName = NULL,
+  stat.test = "wilcox.test",
+  col = c("turquoise3", "magenta3"),
+  plot.type = NULL,
+  gene.set = NULL,
+  ...
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

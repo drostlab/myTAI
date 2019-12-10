@@ -4,9 +4,13 @@
 \alias{CombinatorialSignificance}
 \title{Compute the Statistical Significance of Each Replicate Combination}
 \usage{
-CombinatorialSignificance(ExpressionSet, replicates,
-  TestStatistic = "FlatLineTest", permutations = 1000,
-  parallel = FALSE)
+CombinatorialSignificance(
+  ExpressionSet,
+  replicates,
+  TestStatistic = "FlatLineTest",
+  permutations = 1000,
+  parallel = FALSE
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

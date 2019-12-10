@@ -4,8 +4,14 @@
 \alias{FlatLineTest}
 \title{Perform Flat Line Test}
 \usage{
-FlatLineTest(ExpressionSet, permutations = 1000, plotHistogram = FALSE,
-  runs = 10, parallel = FALSE, custom.perm.matrix = NULL)
+FlatLineTest(
+  ExpressionSet,
+  permutations = 1000,
+  plotHistogram = FALSE,
+  runs = 10,
+  parallel = FALSE,
+  custom.perm.matrix = NULL
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}

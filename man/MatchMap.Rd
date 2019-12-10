@@ -4,8 +4,7 @@
 \alias{MatchMap}
 \title{Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix}
 \usage{
-MatchMap(Map, ExpressionMatrix, remove.duplicates = FALSE,
-  accumulate = NULL)
+MatchMap(Map, ExpressionMatrix, remove.duplicates = FALSE, accumulate = NULL)
 }
 \arguments{
 \item{Map}{a standard \emph{Phylostratigraphic Map} or \emph{Divergence Map} object.}

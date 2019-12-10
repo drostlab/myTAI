@@ -2,7 +2,6 @@
 #' @description In case a PhyloExpressionSet or DivergenceExpressionSet stores replicates for each
 #' developmental stage or experiment, this function allows to compute the p-values quantifying
 #' the statistical significance of the underlying pattern for all combinations of replicates.
-#' 
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param replicates a numeric vector storing the number of replicates within each developmental stage or experiment.
 #' In case replicate stores only one value, then the function assumes that each developmental stage or experiment
@@ -12,7 +11,6 @@
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}.
 #' @param parallel a boolean value specifying whether parallel processing (multicore processing) shall be performed.
 #' @details 
-#' 
 #' The intention of this analysis is to validate that there exists no sequence of replicates 
 #' (for all possible combination of replicates) that results in a non-significant pattern,
 #' when the initial pattern with combined replicates was shown to be significant.

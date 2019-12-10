@@ -4,12 +4,23 @@
 \alias{PlotSignature}
 \title{Plot evolutionary signatures across transcriptomes}
 \usage{
-PlotSignature(ExpressionSet, measure = "TAI",
-  TestStatistic = "FlatLineTest", modules = NULL,
-  permutations = 1000, lillie.test = FALSE, p.value = TRUE,
-  shaded.area = FALSE, custom.perm.matrix = NULL, xlab = "Ontogeny",
-  ylab = "Transcriptome Index", main = "", lwd = 4, alpha = 0.1,
-  y.ticks = 10)
+PlotSignature(
+  ExpressionSet,
+  measure = "TAI",
+  TestStatistic = "FlatLineTest",
+  modules = NULL,
+  permutations = 1000,
+  lillie.test = FALSE,
+  p.value = TRUE,
+  shaded.area = FALSE,
+  custom.perm.matrix = NULL,
+  xlab = "Ontogeny",
+  ylab = "Transcriptome Index",
+  main = "",
+  lwd = 4,
+  alpha = 0.1,
+  y.ticks = 10
+)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.}

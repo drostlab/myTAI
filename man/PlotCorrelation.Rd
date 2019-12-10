@@ -4,9 +4,14 @@
 \alias{PlotCorrelation}
 \title{Plot the Correlation Between Phylostrata and Divergence Strata}
 \usage{
-PlotCorrelation(PhyloExpressionSet, DivergenceExpressionSet,
-  method = "pearson", linearModel = FALSE, xlab = "Phylostratum",
-  ylab = "Divergencestratum")
+PlotCorrelation(
+  PhyloExpressionSet,
+  DivergenceExpressionSet,
+  method = "pearson",
+  linearModel = FALSE,
+  xlab = "Phylostratum",
+  ylab = "Divergencestratum"
+)
 }
 \arguments{
 \item{PhyloExpressionSet}{a standard PhyloExpressionSet object.}

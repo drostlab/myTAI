@@ -4,8 +4,14 @@
 \alias{PlotDistribution}
 \title{Plot the Frequency Distribution of Phylostrata or Divergence Strata}
 \usage{
-PlotDistribution(PhyloExpressionSet, legendName = "PS",
-  as.ratio = FALSE, use.only.map = FALSE, xlab = NULL, ylab = NULL)
+PlotDistribution(
+  PhyloExpressionSet,
+  legendName = "PS",
+  as.ratio = FALSE,
+  use.only.map = FALSE,
+  xlab = NULL,
+  ylab = NULL
+)
 }
 \arguments{
 \item{PhyloExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
