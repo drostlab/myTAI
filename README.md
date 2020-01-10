@@ -30,14 +30,14 @@ if (!requireNamespace("BiocManager"))
     install.packages("BiocManager")
 BiocManager::install()
 # Install package dependencies
-BiocManager::install("Biostrings", version = "3.8")
+BiocManager::install("Biostrings")
 BiocManager::install("edgeR")
 ```
 
 Now users can install `myTAI` from CRAN:
 
 ```r
-# install myTAI 0.9.1
+# install myTAI 0.9.2
 install.packages("myTAI", dependencies = TRUE)
 ```
 
@@ -116,6 +116,7 @@ PlotSignature(ExprExample)
 
 ![](docs/articles/Introduction_files/figure-html/unnamed-chunk-10-1.png)
 
+
 #### Quantify expression level distributions for each gene age category
 
 ```r
@@ -136,6 +137,7 @@ PlotMeans(ExprExample, Groups = list(1:3, 4:12))
 
 ![](docs/articles/Introduction_files/figure-html/unnamed-chunk-12-1.png)
 
+
 #### Quantify relative mean expression of each age category seperated by old versus young genes
 
 ```r
@@ -145,7 +147,6 @@ PlotRE(ExprExample, Groups = list(1:3, 4:12))
 ```
 
 ![](docs/articles/Introduction_files/figure-html/unnamed-chunk-13-1.png)
-
 
 ```r
 # plot the significant differences between gene expression distributions 
