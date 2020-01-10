@@ -8,21 +8,25 @@
 
 <title>Plot Variance of Expression Profiles — PlotVars • myTAI</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +34,11 @@
 
 
 
-<meta property="og:title" content="Plot Variance of Expression Profiles — PlotVars" />
 
+<meta property="og:title" content="Plot Variance of Expression Profiles — PlotVars" />
 <meta property="og:description" content="This function computes for each age category the corresponding variance expression profile." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -45,6 +50,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -63,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -71,7 +77,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -109,11 +115,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/HajkD/myTAI">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -124,6 +129,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -135,15 +141,20 @@
     </div>
 
     <div class="ref-description">
-    
     <p>This function computes for each age category the corresponding variance expression profile.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>PlotVars</span>(<span class='no'>ExpressionSet</span>, <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='st'>"age"</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Ontogeny"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Variance(Expression Level)"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>y.ticks</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>adjust.range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>PlotVars</span>(
+  <span class='no'>ExpressionSet</span>,
+  <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='st'>"age"</span>,
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Ontogeny"</span>,
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Variance(Expression Level)"</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>y.ticks</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>adjust.range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -183,11 +194,10 @@ The group options is limited to 2 Groups.</p></td>
       <td><p>logical indicating whether or not the y-axis scale shall be adjusted to the same range in case two groups are specified. Default is <code>adjust.range = TRUE</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a plot showing variance expression profiles of each age category.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This plot may be useful to compare the absolute variance expression        
@@ -197,30 +207,28 @@ classes might be more expressed than others, hence contributing more to the over
 phylotranscriptomics pattern (<code><a href='TAI.html'>TAI</a></code> or <code><a href='TDI.html'>TDI</a></code>).
 This plot can help to identify the phylostratum or divergence-stratum classes 
 that contributes most to the overall transcriptome of the given developmental process.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='PlotBarRE.html'>PlotBarRE</a></code>, <code><a href='RE.html'>RE</a></code>, <code><a href='REMatrix.html'>REMatrix</a></code>, <code><a href='PlotRE.html'>PlotRE</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Example using a PhyloExpressionSet</span>
 <span class='co'>### and DivergenceExpressionSet</span>
 <span class='co'># load PhyloExpressionSet</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
 
 <span class='co'># load PhyloExpressionSet</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>DivergenceExpressionSetExample</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>DivergenceExpressionSetExample</span>)
 
 <span class='co'># plot evolutionary old PS (PS1-3) vs evolutionary young PS (PS4-12)</span>
 <span class='fu'>PlotVars</span>(<span class='no'>PhyloExpressionSetExample</span>,
-          <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>:<span class='fl'>12</span>)),
+          <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>:<span class='fl'>12</span>)),
           <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='st'>"PS"</span>,
           <span class='kw'>adjust.range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='PlotVars-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># if users wish to not adjust the y-axis scale when </span>
 <span class='co'># 2 groups are selected they can specify: adjust.range = FALSE</span>
 <span class='fu'>PlotVars</span>(<span class='no'>PhyloExpressionSetExample</span>,
-          <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>:<span class='fl'>12</span>)),
+          <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>:<span class='fl'>12</span>)),
           <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='st'>"PS"</span>,
           <span class='kw'>adjust.range</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='PlotVars-2.png' alt='' width='700' height='433' /></div><div class='input'>
 
@@ -228,7 +236,7 @@ that contributes most to the overall transcriptome of the given developmental pr
 <span class='co'># NOTE: DS are always defined in the range 1, 2, ... , 10.</span>
 <span class='co'># Hence, make sure that your groups are within this range!</span>
 <span class='fu'>PlotVars</span>(<span class='no'>DivergenceExpressionSetExample</span>,
-          <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>6</span>:<span class='fl'>10</span>)),
+          <span class='kw'>Groups</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>:<span class='fl'>10</span>)),
           <span class='kw'>legendName</span> <span class='kw'>=</span> <span class='st'>"DS"</span>,
           <span class='kw'>adjust.range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='PlotVars-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
@@ -237,13 +245,9 @@ that contributes most to the overall transcriptome of the given developmental pr
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -252,19 +256,23 @@ that contributes most to the overall transcriptome of the given developmental pr
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost, Alexander Gabel.</p>
+  <p>Developed by Hajk-Georg Drost.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

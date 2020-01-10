@@ -8,21 +8,25 @@
 
 <title>Compute a Relative Expression Matrix — REMatrix • myTAI</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +34,12 @@
 
 
 
-<meta property="og:title" content="Compute a Relative Expression Matrix — REMatrix" />
 
+<meta property="og:title" content="Compute a Relative Expression Matrix — REMatrix" />
 <meta property="og:description" content="This function computes the relative expression profiles of 
 all given phylostrata or divergence-strata within a given PhyloExpressionSet or DivergenceExpressionSet." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -46,6 +51,7 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -64,7 +70,7 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -72,7 +78,7 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -110,11 +116,10 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/HajkD/myTAI">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -125,6 +130,7 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -136,14 +142,12 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
     </div>
 
     <div class="ref-description">
-    
     <p>This function computes the relative expression profiles of 
 all given phylostrata or divergence-strata within a given PhyloExpressionSet or DivergenceExpressionSet.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>REMatrix</span>(<span class='no'>ExpressionSet</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -152,7 +156,7 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
       <td><p>a standard PhyloExpressionSet or DivergenceExpressionSet object.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For each phylostratum or divergence-stratum the corresponding relative expression profile is being computed as follows:</p>
@@ -163,22 +167,19 @@ to a shift by \(e_j min\) and a subsequent shrinkage by \(e_j max - e_j min\).
 As a result, the relative expression level \(f_js\) of developmental stage s with minimum \(e_js\) is 0,
 the relative expression level \(f_js\) of the developmental stage s with maximum \(e_js\) is 1, 
 and the relative expression levels \(f_js\) of all other stages s range between 0 and 1, accordingly.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Domazet-Loso T and Tautz D. (2010). <em>A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns</em>. Nature (468): 815-818.</p>
 <p>Quint M et al. (2012). <em>A transcriptomic hourglass in plant embryogenesis</em>. Nature (490): 98-101.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='RE.html'>RE</a></code>, <code><a href='PlotRE.html'>PlotRE</a></code>, <code><a href='PlotBarRE.html'>PlotBarRE</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># read standard phylotranscriptomics data</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>DivergenceExpressionSetExample</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>DivergenceExpressionSetExample</span>)
 
 <span class='co'># example PhyloExpressionSet</span>
 <span class='fu'>REMatrix</span>(<span class='no'>PhyloExpressionSetExample</span>)</div><div class='output co'>#&gt;       Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature
@@ -213,13 +214,9 @@ and the relative expression levels \(f_js\) of all other stages s range between 
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -228,19 +225,23 @@ and the relative expression levels \(f_js\) of all other stages s range between 
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost, Alexander Gabel.</p>
+  <p>Developed by Hajk-Georg Drost.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

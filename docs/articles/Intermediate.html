@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Intermediate Phylotranscriptomics Analyses • myTAI</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Intermediate Phylotranscriptomics Analyses">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/HajkD/myTAI">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,12 +93,13 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Intermediate Phylotranscriptomics Analyses</h1>
             
-            <h4 class="date">2019-08-30</h4>
+            <h4 class="date">2020-01-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd"><code>vignettes/Intermediate.Rmd</code></a></small>
       <div class="hidden name"><code>Intermediate.Rmd</code></div>
@@ -130,13 +132,13 @@
 <a href="#flat-line-test" class="anchor"></a>Flat Line Test</h3>
 <p>The <strong>Flat Line Test</strong> is a permutation test quantifying the statistical significance of an observed phylotranscriptomic pattern. The goal is to detect any evolutionary signal within a developmental time course that significantly deviates from a flat line.</p>
 <p>To build the test statistic we start with a standard PhyloExpressionSet. The <code>myTAI</code> package provides an example PhyloExpressionSet named <code>PhyloExpressionSetExample</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(myTAI)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(myTAI)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># load an example PhyloExpressionSet stored in the myTAI package</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(PhyloExpressionSetExample) </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample) </a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co"># look at the standardized data set format</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(PhyloExpressionSetExample, <span class="dv">3</span>) </a></code></pre></div>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(PhyloExpressionSetExample, <span class="dv">3</span>) </a></code></pre></div>
 <pre><code>  Phylostratum      GeneID   Zygote Quadrant Globular     Heart  Torpedo      Bent    Mature
 1            1 at1g01040.2 2173.635 1911.200 1152.555 1291.4224 1000.253  962.9772 1696.4274
 2            1 at1g01050.1 1501.014 1817.309 1665.309 1564.7612 1496.321 1114.6435 1071.6555
@@ -147,14 +149,14 @@
 <pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334</code></pre>
 <p>Visualization:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(PhyloExpressionSetExample)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># Visualize the TAI profile of correctly assigned Phylostrata</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample, </a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">               <span class="dt">p.value       =</span> <span class="ot">FALSE</span> ) </a></code></pre></div>
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest ' running  1000  permutations.</code></pre>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <pre><code>#&gt;   Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
-#&gt; 3.482346 3.461471 3.463140 3.465086 3.450741 3.461084 3.434686</code></pre>
+#&gt; 3.475560 3.501209 3.529716 3.527837 3.566926 3.581589 3.499849</code></pre>
 <pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
 3.543700 3.573999 3.554707 3.543376 3.582905 3.562813 3.523409 </code></pre>
 <p>Visualization:</p>
@@ -165,17 +167,17 @@
 <p>Now we investigate the variance of the two observed patterns.</p>
 <pre><code>#&gt; [1] 0.01147725</code></pre>
 <pre><code>[1] 0.01147725</code></pre>
-<pre><code>#&gt; [1] 0.0002107777</code></pre>
+<pre><code>#&gt; [1] 0.001437461</code></pre>
 <pre><code>[1] 0.0004102549</code></pre>
 <p>We observe that the variance of the randomly assigned TAI profile is much smaller than the variance of the correctly assigned TAI profile. Here we use the variance to quantify the <em>flatness</em> of a given TAI profile. In theory the variance of a perfect flat line would be zero. So any TAI profile that is close to zero would resemble a flat line. But how exactly are the variances of randomly assigned TAI profiles distributed? For this purpose the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> function was implemented.</p>
 <p>The <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N <code>TAI</code> or <code>TDI</code> profiles based on randomly assigned Phylostrata or Divergence-Strata.</p>
 <pre><code>#&gt;     Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
-#&gt; 1 3.542410 3.535524 3.510932 3.525237 3.509417 3.502192 3.488649
-#&gt; 2 3.438291 3.440234 3.474731 3.501826 3.488862 3.471623 3.533849
-#&gt; 3 3.573714 3.544331 3.516249 3.516185 3.524865 3.595531 3.531151
-#&gt; 4 3.461991 3.462536 3.479028 3.449442 3.451272 3.452168 3.463077
-#&gt; 5 3.450325 3.475257 3.487326 3.483927 3.487696 3.504021 3.480014
-#&gt; 6 3.391245 3.393461 3.412734 3.416834 3.448273 3.476451 3.505368</code></pre>
+#&gt; 1 3.573225 3.564495 3.544119 3.554064 3.533416 3.510756 3.529310
+#&gt; 2 3.640732 3.635019 3.618912 3.624130 3.623355 3.599076 3.601996
+#&gt; 3 3.520466 3.506139 3.495151 3.499579 3.483699 3.507237 3.460001
+#&gt; 4 3.596963 3.577723 3.577371 3.567172 3.573634 3.535421 3.527624
+#&gt; 5 3.530669 3.527305 3.562586 3.561009 3.562462 3.553816 3.505275
+#&gt; 6 3.471192 3.486328 3.514700 3.514611 3.525498 3.517510 3.507837</code></pre>
 <pre><code>    Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
 1 3.578000 3.577732 3.552230 3.556756 3.555627 3.553580 3.510978
 2 3.590339 3.564544 3.589012 3.598754 3.583721 3.597553 3.633530
@@ -185,75 +187,75 @@
 6 3.539454 3.543827 3.595298 3.588149 3.582898 3.588062 3.565487</code></pre>
 <p>Based on this <code>booMatrix</code> we can compute the variance of each random TAI profile.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># compute the variance of the random TAI profile for each row</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">variance_vector &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(randomTAIs, <span class="dv">1</span> , var)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">variance_vector &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(randomTAIs, <span class="dv">1</span> , var)</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co"># and visualize the distribution of variances</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/hist">hist</a></span>(variance_vector, <span class="dt">breaks =</span> <span class="dv">100</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(variance_vector, <span class="dt">breaks =</span> <span class="dv">100</span>)</a></code></pre></div>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <p>Now it is interesting to see where we can find the variance of the correctly assigned TAI.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># variance of the TAI profile based on correctly assigned Phylostrata</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">var_real &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor">var</a></span>(<span class="kw"><a href="../reference/TAI.html">TAI</a></span>(PhyloExpressionSetExample)) </a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">var_real &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="kw"><a href="../reference/TAI.html">TAI</a></span>(PhyloExpressionSetExample)) </a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co"># visualize the distribution of variances</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/hist">hist</a></span>( <span class="dt">x      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(variance_vector,var_real), </a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>( <span class="dt">x      =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(variance_vector,var_real), </a>
 <a class="sourceLine" id="cb17-6" data-line-number="6">      <span class="dt">breaks =</span> <span class="dv">100</span>, </a>
 <a class="sourceLine" id="cb17-7" data-line-number="7">      <span class="dt">xlab   =</span> <span class="st">"variance"</span>, </a>
 <a class="sourceLine" id="cb17-8" data-line-number="8">      <span class="dt">main   =</span> <span class="st">"Histogram of variance_vector"</span> )</a>
 <a class="sourceLine" id="cb17-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co"># and plot a red line at the position where we can find the </span></a>
 <a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co"># real variance</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/abline">abline</a></span>(<span class="dt">v =</span> var_real, <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span>(<span class="dt">v =</span> var_real, <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</a></code></pre></div>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 <p>This plot illustrates that variances based on random <code>TAI</code> profiles seem to have a smaller variance than the variance based on the correct <code>TAI</code> profile. To obtain a p-value that now quantifies this difference, we need to fit the histogram of <code>variance_vector</code> with a specific probability distribution.</p>
 <p>Visually it would be possible to choose a gamma distribution to fit the histogram of <code>variance_vector</code>. To validate this choice a <a href="https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment">Cullen and Frey graph</a> provided by the <strong>fitdistrplus</strong> package can be used.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># install.packages("fitdistrplus")</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co"># plot a Cullen and Frey graph</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">fitdistrplus<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/descdist">descdist</a></span>(variance_vector)</a></code></pre></div>
+<a class="sourceLine" id="cb18-4" data-line-number="4">fitdistrplus<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/fitdistrplus/man/descdist.html">descdist</a></span>(variance_vector)</a></code></pre></div>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 <pre><code>#&gt; summary statistics
 #&gt; ------
-#&gt; min:  9.837748e-06   max:  0.004799986 
-#&gt; median:  0.0005251106 
-#&gt; mean:  0.0007259462 
-#&gt; estimated sd:  0.0006604243 
-#&gt; estimated skewness:  1.991546 
-#&gt; estimated kurtosis:  8.257463</code></pre>
+#&gt; min:  3.17645e-05   max:  0.004629548 
+#&gt; median:  0.0004865563 
+#&gt; mean:  0.0006747997 
+#&gt; estimated sd:  0.0006023562 
+#&gt; estimated skewness:  1.950247 
+#&gt; estimated kurtosis:  7.885322</code></pre>
 <p>Based on the observation that a gamma distribution is a suitable fit for <code>variance_vector</code>, we can now estimate the parameters of the gamma distribution that fits the data.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># estimate the parameters: shape and rate using 'moment matching estimation'</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">gamma_MME &lt;-<span class="st"> </span>fitdistrplus<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdist</a></span>(variance_vector,<span class="dt">distr =</span> <span class="st">"gamma"</span>, <span class="dt">method =</span> <span class="st">"mme"</span>)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">gamma_MME &lt;-<span class="st"> </span>fitdistrplus<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html">fitdist</a></span>(variance_vector,<span class="dt">distr =</span> <span class="st">"gamma"</span>, <span class="dt">method =</span> <span class="st">"mme"</span>)</a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co"># estimate shape:</span></a>
 <a class="sourceLine" id="cb20-4" data-line-number="4">shape &lt;-<span class="st"> </span>gamma_MME<span class="op">$</span>estimate[<span class="dv">1</span>]</a>
 <a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co"># estimate the rate:</span></a>
 <a class="sourceLine" id="cb20-6" data-line-number="6">rate &lt;-<span class="st"> </span>gamma_MME<span class="op">$</span>estimate[<span class="dv">2</span>]</a>
 <a class="sourceLine" id="cb20-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co"># define an expression written as function as input for the curve() function</span></a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">gamma_distr &lt;-<span class="st"> </span><span class="cf">function</span>(x){ <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/GammaDist">dgamma</a></span>(<span class="dt">x =</span> x, <span class="dt">shape =</span> shape, <span class="dt">rate =</span> rate)) }</a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">gamma_distr &lt;-<span class="st"> </span><span class="cf">function</span>(x){ <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/GammaDist.html">dgamma</a></span>(<span class="dt">x =</span> x, <span class="dt">shape =</span> shape, <span class="dt">rate =</span> rate)) }</a>
 <a class="sourceLine" id="cb20-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co"># plot the density function and the histogram of variance_vector</span></a>
-<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/curve">curve</a></span>( <span class="dt">expr =</span> gamma_distr,</a>
-<a class="sourceLine" id="cb20-13" data-line-number="13">       <span class="dt">xlim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(variance_vector),<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(variance_vector,var_real))),</a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span>( <span class="dt">expr =</span> gamma_distr,</a>
+<a class="sourceLine" id="cb20-13" data-line-number="13">       <span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(variance_vector),<span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(variance_vector,var_real))),</a>
 <a class="sourceLine" id="cb20-14" data-line-number="14">       <span class="dt">col  =</span> <span class="st">"steelblue"</span>,</a>
 <a class="sourceLine" id="cb20-15" data-line-number="15">       <span class="dt">lwd  =</span> <span class="dv">5</span>,</a>
 <a class="sourceLine" id="cb20-16" data-line-number="16">       <span class="dt">xlab =</span> <span class="st">"Variances"</span>, </a>
 <a class="sourceLine" id="cb20-17" data-line-number="17">       <span class="dt">ylab =</span> <span class="st">"Frequency"</span> )</a>
 <a class="sourceLine" id="cb20-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb20-19" data-line-number="19"><span class="co"># plot the histogram of variance_vector</span></a>
-<a class="sourceLine" id="cb20-20" data-line-number="20">histogram &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/hist">hist</a></span>(variance_vector,<span class="dt">prob =</span> <span class="ot">TRUE</span>,<span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">breaks =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb20-21" data-line-number="21"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/rug">rug</a></span>(variance_vector)</a>
+<a class="sourceLine" id="cb20-20" data-line-number="20">histogram &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(variance_vector,<span class="dt">prob =</span> <span class="ot">TRUE</span>,<span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">breaks =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb20-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/graphics/rug.html">rug</a></span>(variance_vector)</a>
 <a class="sourceLine" id="cb20-22" data-line-number="22"></a>
 <a class="sourceLine" id="cb20-23" data-line-number="23"><span class="co"># plot a red line at the position where we can find the real variance</span></a>
-<a class="sourceLine" id="cb20-24" data-line-number="24"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/abline">abline</a></span>(<span class="dt">v =</span> var_real, <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb20-24" data-line-number="24"><span class="kw"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span>(<span class="dt">v =</span> var_real, <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</a></code></pre></div>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
 <p>Using the gamma distribution with estimated parameters the corresponding p-value of <code>var_real</code> can be computed.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># p-value of var_real</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/GammaDist">pgamma</a></span>(var_real, <span class="dt">shape =</span> shape,<span class="dt">rate =</span> rate, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<pre><code>#&gt; [1] 1.01558e-08</code></pre>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/stats/GammaDist.html">pgamma</a></span>(var_real, <span class="dt">shape =</span> shape,<span class="dt">rate =</span> rate, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] 1.286891e-09</code></pre>
 <p>Hence, the variance of the correct TAI profile significantly deviates from random TAI profiles and this allows us to assume that the underlying TAI profile captures a real evolutionary signal.</p>
 </div>
 <div id="using-the-flatlinetest-function" class="section level3">
 <h3 class="hasAnchor">
-<a href="#using-the-flatlinetest-function" class="anchor"></a>Using the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> Function</h3>
+<a href="#using-the-flatlinetest-function" class="anchor"></a>Using the <code>FlatLineTest()</code> Function</h3>
 <p>This entire procedure of computing the p-value having the variance of TAI profiles as test statistic is done by the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># Perform the FlatLineTest</span></a>
 <a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw"><a href="../reference/FlatLineTest.html">FlatLineTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample, </a>
@@ -304,7 +306,7 @@
 <li><p>The two differences D1 = <span class="math inline">\(T_{early}\)</span> - <span class="math inline">\(T_{mid}\)</span> and D2 = <span class="math inline">\(T_{late}\)</span> - <span class="math inline">\(T_{mid}\)</span> are calculated.</p></li>
 <li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1 and D2 is computed as final test statistic of the <strong>Reductive Hourglass Test</strong>.</p></li>
 </ol>
-<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by a <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.XFnCFs_7TOR">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
+<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by a <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.XFnCFs_7TOR">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
 <p>To perform the <strong>Reductive Hourglass Test</strong> you can use the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function. Using this function you need to divide the given phylotranscriptomic pattern into three developmental modules:</p>
 <ul>
 <li>early module</li>
@@ -319,9 +321,9 @@
 </ul>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co"># Perform the Reductive Hourglass Test</span></a>
 <a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw"><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
 <a class="sourceLine" id="cb30-4" data-line-number="4">                        <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </a></code></pre></div>
-<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</a></code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
+<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code><a href="https://rdrr.io/r/base/apply.html">apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</a></code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
 <p>Analogous to the <code>plotHistogram</code> argument that is present in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function also takes an argument <code>plotHistogram</code>. When <code>plotHistogram = TRUE</code>, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function returns a multi-plot showing:</p>
 <ul>
 <li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates which distributions seem plausible to fit the resulting permutation vector <span class="math inline">\(D_{min}\)</span>. Here a normal distribution seems most plausible.</p></li>
@@ -331,7 +333,7 @@
 </ul>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># perform the Reductive Hourglass Test and plot the test statistic</span></a>
 <a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw"><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
 <a class="sourceLine" id="cb31-4" data-line-number="4">                        <span class="dt">plotHistogram =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb31-5" data-line-number="5">                        <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </a></code></pre></div>
 <p>The corresponding output shows the <code>summary statistics</code> of the fitted normal distribution as well as the p-value, standard deviation, and <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> result.</p>
@@ -342,13 +344,13 @@
 <a href="#reductive-early-conservation-test" class="anchor"></a>Reductive Early Conservation Test</h3>
 <p>The Early Conservation Test has been developed to statistically evaluate the existence of a monotonically increasing phylotranscriptomic pattern based on TAI or TDI computations. The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomic pattern) does not follow an early conservation like pattern. A p-value &lt; 0.05 indicates that the corresponding phylotranscriptomics pattern does indeed follow an early conservation (low-high-high) shape.</p>
 <p>To build the test statistic again we start with a standard PhyloExpressionSet.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(myTAI)</a>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(myTAI)</a>
 <a class="sourceLine" id="cb32-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb32-3" data-line-number="3"><span class="co"># load an example PhyloExpressionSet stored in the myTAI package</span></a>
-<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(PhyloExpressionSetExample) </a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample) </a>
 <a class="sourceLine" id="cb32-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb32-6" data-line-number="6"><span class="co"># look at the standardized data set format</span></a>
-<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(PhyloExpressionSetExample, <span class="dv">3</span>) </a></code></pre></div>
+<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(PhyloExpressionSetExample, <span class="dv">3</span>) </a></code></pre></div>
 <pre><code>#&gt;   Phylostratum      GeneID   Zygote Quadrant Globular     Heart  Torpedo      Bent    Mature
 #&gt; 1            1 at1g01040.2 2173.635 1911.200 1152.555 1291.4224 1000.253  962.9772 1696.4274
 #&gt; 2            1 at1g01050.1 1501.014 1817.309 1665.309 1564.7612 1496.321 1114.6435 1071.6555
@@ -369,7 +371,7 @@
 <li><p>The two differences D1 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{early}\)</span> and D2 = <span class="math inline">\(T_{late}\)</span> - <span class="math inline">\(T_{early}\)</span> are calculated.</p></li>
 <li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1 and D2 is computed as final test statistic of the <strong>Reductive Early Conservation Test</strong>.</p></li>
 </ol>
-<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by an <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
+<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by an <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
 <p>To perform the <strong>Reductive Early Conservation Test</strong> you can use the <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> function. Using this function you need to divide the given phylotranscriptomics pattern into three developmental modules:</p>
 <ul>
 <li>early module</li>
@@ -384,7 +386,7 @@
 </ul>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># Perform the Reductive Early Conservation Test</span></a>
 <a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw"><a href="../reference/EarlyConservationTest.html">EarlyConservationTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">                       <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">                       <span class="dt">modules       =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
 <a class="sourceLine" id="cb37-4" data-line-number="4">                       <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </a></code></pre></div>
 <p>Analogous to the <code>plotHistogram</code> argument that is present in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> and <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function, the <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> function also takes an argument <code>plotHistogram</code>. When <code>plotHistogram = TRUE</code>, the <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> function returns a multi-plot showing:</p>
 <ul>
@@ -395,7 +397,7 @@
 </ul>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co"># perform the Reductive Early Conservation Test and plot the test statistic</span></a>
 <a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw"><a href="../reference/EarlyConservationTest.html">EarlyConservationTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">                       <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">                       <span class="dt">modules       =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
 <a class="sourceLine" id="cb38-4" data-line-number="4">                       <span class="dt">plotHistogram =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb38-5" data-line-number="5">                       <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </a></code></pre></div>
 <p>This example output nicely illustrates that although the <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality is violated, the <a href="https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment">Cullen and Frey graph</a> shows that there is no better approximation than a normal distribution (which is also supported visually by investigating the fitted frequency distribution). The corresponding p-value returned by the <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> is highly non-significant and illustrates that the observed phylotranscriptomic pattern of <code>PhyloExpressionSetExample</code> does not follow the Early Conservation Model assumption.</p>
@@ -432,7 +434,7 @@
 <li><p>The two differences D1 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{early}\)</span> and D2 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{late}\)</span> are calculated.</p></li>
 <li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1 and D2 is computed as final test statistic of the <strong>Reverse Hourglass Test</strong>.</p></li>
 </ol>
-<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://www.rdocumentation.org/packages/fitdistrplus/topics/fitdist">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by a <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
+<p>In order to determine the statistical significance of an observed minimum difference <span class="math inline">\(D_{min}\)</span> the following permutation test was performed. Based on the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span> is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html">fitdistrplus::fitdist()</a></code>, and the corresponding p-value is computed by <code>pnorm</code> given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector <span class="math inline">\(D_{min}\)</span> is statistically quantified by a <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality.</p>
 <p>To perform the <strong>Reverse Hourglass Test</strong> you can use the <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code> function. Using this function you need to divide the given phylotranscriptomic pattern into three developmental modules:</p>
 <ul>
 <li>early module</li>
@@ -447,7 +449,7 @@
 </ul>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># Perform the Reverse Hourglass Test</span></a>
 <a class="sourceLine" id="cb44-2" data-line-number="2"><span class="kw"><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
 <a class="sourceLine" id="cb44-4" data-line-number="4">                        <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </a></code></pre></div>
 <pre><code>$p.value
 [1] 1
@@ -457,7 +459,7 @@ $std.dev
 
 $lillie.test
 [1] TRUE</code></pre>
-<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</a></code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
+<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code><a href="https://rdrr.io/r/base/apply.html">apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</a></code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
 <p>Analogous to the <code>plotHistogram</code> argument that is present in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function also takes an argument <code>plotHistogram</code>. When <code>plotHistogram = TRUE</code>, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function returns a multi-plot showing:</p>
 <ul>
 <li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates which distributions seem plausible to fit the resulting permutation vector <span class="math inline">\(D_{min}\)</span>. Here a normal distribution seems most plausible.</p></li>
@@ -467,7 +469,7 @@ $lillie.test
 </ul>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># perform the Reverse Hourglass Test and plot the test statistic</span></a>
 <a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw"><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest</a></span>( <span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">                        <span class="dt">modules       =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">early =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">mid =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">late =</span> <span class="dv">6</span><span class="op">:</span><span class="dv">7</span>),</a>
 <a class="sourceLine" id="cb46-4" data-line-number="4">                        <span class="dt">plotHistogram =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb46-5" data-line-number="5">                        <span class="dt">lillie.test   =</span> <span class="ot">TRUE</span> ) </a></code></pre></div>
 <p>The corresponding output shows the <code>summary statistics</code> of the fitted normal distribution as well as the p-value, standard deviation, and <a href="http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek">Lilliefors (Kolmogorov-Smirnov) test</a> result.</p>
@@ -482,16 +484,16 @@ $lillie.test
 <p>The purpose of the <code><a href="../reference/tf.html">tf()</a></code> function is to allow the user to study the qualitative impact of different transformation functions on the global TAI and TDI pattern, or on any subsequent phylotranscriptomic analysis.</p>
 <p>The examples using the <code>PhyloExpressionSetExample</code> data set show that using common gene expression transformation functions: log2 (Quackenbush, 2001 and 2002), sqrt (Yeung et al., 2001), boxcox, or inverse hyperbolic sine transformation, each transformation results in qualitatively different patterns. Nevertheless, for each resulting pattern the statistical significance can be tested using either the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code>, <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code>, or <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> (Drost et al., 2015) to quantify the significance of observed patterns.</p>
 <p>The <code><a href="../reference/tf.html">tf()</a></code> function takes a standard <code>PhyloExpressionSet</code> or <code>DivergenceExpressionSet</code> and transformation function and returns the corresponding <code>ExpressionSet</code> with transformed gene expression levels.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(myTAI)</a>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(myTAI)</a>
 <a class="sourceLine" id="cb47-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(PhyloExpressionSetExample)</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
 <a class="sourceLine" id="cb47-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb47-5" data-line-number="5"><span class="co"># a simple example is to transform the gene expression levels of a given PhyloExpressionSet</span></a>
 <a class="sourceLine" id="cb47-6" data-line-number="6"><span class="co"># using a sqrt or log2 transformation</span></a>
 <a class="sourceLine" id="cb47-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb47-8" data-line-number="8">PES.sqrt &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample, sqrt)</a>
 <a class="sourceLine" id="cb47-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb47-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(PES.sqrt)</a></code></pre></div>
+<a class="sourceLine" id="cb47-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(PES.sqrt)</a></code></pre></div>
 <pre><code>#&gt;   Phylostratum      GeneID    Zygote  Quadrant  Globular     Heart   Torpedo      Bent   Mature
 #&gt; 1            1 at1g01040.2  46.62226  43.71728  33.94930  35.93637  31.62678  31.03187 41.18771
 #&gt; 2            1 at1g01050.1  38.74292  42.62990  40.80820  39.55706  38.68230  33.38628 32.73615
@@ -501,7 +503,7 @@ $lillie.test
 #&gt; 6            1 at1g01120.1  29.05239  28.06409  29.31939  30.52242  30.70579  29.50021 28.15589</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">PES.log2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample, log2)</a>
 <a class="sourceLine" id="cb49-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(PES.log2)</a></code></pre></div>
+<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(PES.log2)</a></code></pre></div>
 <pre><code>  Phylostratum      GeneID    Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
 1            1 at1g01040.2 11.085894 10.900263 10.170620 10.334745  9.966149  9.911358 10.728284
 2            1 at1g01050.1 10.551722 10.827588 10.701574 10.611727 10.547204 10.122367 10.065625
@@ -518,8 +520,8 @@ $lillie.test
 <a class="sourceLine" id="cb51-7" data-line-number="7">PES.absolute &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tf.html">tf</a></span>(PES.log2 , <span class="cf">function</span>(x) <span class="dv">2</span><span class="op">^</span>x)</a>
 <a class="sourceLine" id="cb51-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb51-9" data-line-number="9"><span class="co"># which should be the same as  PhyloExpressionSetExample :</span></a>
-<a class="sourceLine" id="cb51-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb51-11" data-line-number="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(PES.absolute)</a></code></pre></div>
+<a class="sourceLine" id="cb51-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(PhyloExpressionSetExample)</a>
+<a class="sourceLine" id="cb51-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(PES.absolute)</a></code></pre></div>
 <pre><code>&gt; head(PhyloExpressionSetExample)
   Phylostratum      GeneID     Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
 1            1 at1g01040.2  2173.6352  1911.2001  1152.5553  1291.4224  1000.2529   962.9772 1696.4274
@@ -540,7 +542,7 @@ $lillie.test
 <div id="log2-transformation-tai" class="section level3">
 <h3 class="hasAnchor">
 <a href="#log2-transformation-tai" class="anchor"></a>log2 transformation (TAI)</h3>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(PhyloExpressionSetExample)</a>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
 <a class="sourceLine" id="cb53-2" data-line-number="2"><span class="co"># plotting the TAI using log2 transformed expression levels</span></a>
 <a class="sourceLine" id="cb53-3" data-line-number="3"><span class="co"># and performing the Flat Line Test to obtain the p-value</span></a>
 <a class="sourceLine" id="cb53-4" data-line-number="4"><span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample, log2),</a>
@@ -554,7 +556,7 @@ $lillie.test
 <div id="sqrt-transformation-tai" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sqrt-transformation-tai" class="anchor"></a>sqrt transformation (TAI)</h3>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(PhyloExpressionSetExample)</a>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
 <a class="sourceLine" id="cb55-2" data-line-number="2"><span class="co"># plotting the TAI using sqrt transformed expression levels</span></a>
 <a class="sourceLine" id="cb55-3" data-line-number="3"><span class="co"># and performing the Flat Line Test to obtain the p-value</span></a>
 <a class="sourceLine" id="cb55-4" data-line-number="4"><span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample, sqrt),</a>
@@ -571,7 +573,7 @@ $lillie.test
 <div id="log2-transformation-tdi" class="section level3">
 <h3 class="hasAnchor">
 <a href="#log2-transformation-tdi" class="anchor"></a>log2 transformation (TDI)</h3>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(DivergenceExpressionSetExample)</a>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(DivergenceExpressionSetExample)</a>
 <a class="sourceLine" id="cb57-2" data-line-number="2"><span class="co"># plotting the TDI using log2 transformed expression levels</span></a>
 <a class="sourceLine" id="cb57-3" data-line-number="3"><span class="co"># and performing the Flat Line Test to obtain the p-value</span></a>
 <a class="sourceLine" id="cb57-4" data-line-number="4"><span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(DivergenceExpressionSetExample, log2),</a>
@@ -585,7 +587,7 @@ $lillie.test
 <div id="sqrt-transformation-tdi" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sqrt-transformation-tdi" class="anchor"></a>sqrt transformation (TDI)</h3>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(DivergenceExpressionSetExample)</a>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(DivergenceExpressionSetExample)</a>
 <a class="sourceLine" id="cb59-2" data-line-number="2"><span class="co"># plotting the TDI using sqrt transformed expression levels</span></a>
 <a class="sourceLine" id="cb59-3" data-line-number="3"><span class="co"># and performing the Flat Line Test to obtain the p-value</span></a>
 <a class="sourceLine" id="cb59-4" data-line-number="4"><span class="kw"><a href="../reference/PlotSignature.html">PlotSignature</a></span>( <span class="dt">ExpressionSet =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(DivergenceExpressionSetExample, sqrt),</a>
@@ -613,6 +615,7 @@ $lillie.test
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -627,17 +630,20 @@ $lillie.test
 </div>
 
 
+
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost, Alexander Gabel.</p>
+  <p>Developed by Hajk-Georg Drost.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

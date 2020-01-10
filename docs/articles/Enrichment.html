@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enrichment Analyses • myTAI</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Enrichment Analyses">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/HajkD/myTAI">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,12 +93,13 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Enrichment Analyses</h1>
             
-            <h4 class="date">2019-08-30</h4>
+            <h4 class="date">2020-01-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Enrichment.Rmd"><code>vignettes/Enrichment.Rmd</code></a></small>
       <div class="hidden name"><code>Enrichment.Rmd</code></div>
@@ -115,7 +117,7 @@
 </div>
 <div id="enrichment-analyses-using-plotenrichment" class="section level2">
 <h2 class="hasAnchor">
-<a href="#enrichment-analyses-using-plotenrichment" class="anchor"></a>Enrichment Analyses using <code><a href="../reference/PlotEnrichment.html">PlotEnrichment()</a></code>
+<a href="#enrichment-analyses-using-plotenrichment" class="anchor"></a>Enrichment Analyses using <code>PlotEnrichment()</code>
 </h2>
 <p>The <code><a href="../reference/PlotEnrichment.html">PlotEnrichment()</a></code> function implemented in <code>myTAI</code> computes and visualizes the significance of enriched (over- or underrepresented) <code>Phylostrata</code> or <code>Divergence Strata</code> within an input set of process/tissue specific genes. In detail this function takes the <code>Phylostratum</code> or <code>Divergence Stratum</code> distribution of all genes stored in the input <code>ExpressionSet</code> as background set and the <code>Phylostratum</code> or <code>Divergence Stratum</code> distribution of the specific gene set and performs a Fisher’s exact test for each <code>Phylostratum</code> or <code>Divergence Stratum</code> to quantify the statistical significance of over- or under-represented <code>Phylostrata</code> or <code>Divergence Strata</code> within the set of selected genes. In other words, the frequency distribution of <code>Phylostrata</code> or <code>Divergence Strata</code> in the complete sample is compared with the frequency distribution of <code>Phylostrata</code> or <code>Divergence Strata</code> in the set of selected genes and over- or under-representation is visualized by log-odds (or odds), where a log-odd of zero means that both frequency distributions are equal (see also Sestak and Domazet-Loso, 2015).</p>
 <div id="example-data-set-retrieval" class="section level3">
@@ -125,15 +127,15 @@
 <p>Download the <code>Phylostratigraphic Map</code> of <em>D. rerio</em>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># download the Phylostratigraphic Map of Danio rerio</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># from Sestak and Domazet-Loso, 2015</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/download.file">download.file</a></span>( <span class="dt">url      =</span> <span class="st">"http://mbe.oxfordjournals.org/content/suppl/2014/11/17/msu319.DC1/TableS3-2.xlsx"</span>, </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>( <span class="dt">url      =</span> <span class="st">"http://mbe.oxfordjournals.org/content/suppl/2014/11/17/msu319.DC1/TableS3-2.xlsx"</span>, </a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">               <span class="dt">destfile =</span> <span class="st">"MBE_2015a_Drerio_PhyloMap.xlsx"</span> )</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">               </a></code></pre></div>
 <p>Read the <code>*.xlsx</code> file storing the <code>Phylostratigraphic Map</code> of <em>D. rerio</em> and format it for the use with <code>myTAI</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install the readxl package</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"readxl"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"readxl"</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># load package readxl</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(readxl)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(readxl)</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># read the excel file</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">DrerioPhyloMap.MBEa &lt;-<span class="st"> </span><span class="kw"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="st">"MBE_2015a_Drerio_PhyloMap.xlsx"</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">skip =</span> <span class="dv">4</span>)</a>
@@ -142,7 +144,7 @@
 <a class="sourceLine" id="cb2-11" data-line-number="11">Drerio.PhyloMap &lt;-<span class="st"> </span>DrerioPhyloMap.MBEa[ , <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co"># have a look at the final format</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(Drerio.PhyloMap)</a></code></pre></div>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(Drerio.PhyloMap)</a></code></pre></div>
 <pre><code>  Phylostrata            ZFIN_ID
 1           1 ZDB-GENE-000208-13
 2           1 ZDB-GENE-000208-17
@@ -160,7 +162,7 @@
 <a class="sourceLine" id="cb4-2" data-line-number="2">Drerio.OrganSpecificExpression &lt;-<span class="st"> </span><span class="kw"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="st">"MBE_2015a_Drerio_PhyloMap.xlsx"</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">skip =</span> <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># select only brain specific genes</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">Drerio.Brain.Genes &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unique">unique</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/na.fail">na.omit</a></span>(Drerio.OrganSpecificExpression[ , <span class="st">"brain"</span>]))</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">Drerio.Brain.Genes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(Drerio.OrganSpecificExpression[ , <span class="st">"brain"</span>]))</a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># visualize enriched Phylostrata of genes annotated as brain specific</span></a>
 <a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw"><a href="../reference/PlotEnrichment.html">PlotEnrichment</a></span>(Drerio.PhyloMap,</a>
@@ -339,11 +341,11 @@ PS14  0.098211044 -0.938724783</code></pre>
 <a class="sourceLine" id="cb17-2" data-line-number="2">Brain.PhyloExpressionSet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/SelectGeneSet.html">SelectGeneSet</a></span>( <span class="dt">ExpressionSet =</span> DrerioPhyloExpressionSet,</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">                                           <span class="dt">gene.set      =</span> Drerio.Brain.Genes )</a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">        </a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(Brain.PhyloExpressionSet)</a></code></pre></div>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(Brain.PhyloExpressionSet)</a></code></pre></div>
 <div id="adjust-p-values-for-multiple-comparisons" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adjust-p-values-for-multiple-comparisons" class="anchor"></a>Adjust P-values for Multiple Comparisons</h3>
-<p>In case a large number of Phylostrata or Divergence Strata is included in the input <code>ExpressionSet</code>, p-values returned by <code><a href="../reference/PlotEnrichment.html">PlotEnrichment()</a></code> should be adjusted for multiple comparisons. For this purpose <code><a href="../reference/PlotEnrichment.html">PlotEnrichment()</a></code> includes the argument <code>p.adjust.method</code>. Here, all methods implemented in <code><a href="https://www.rdocumentation.org/packages/stats/topics/p.adjust">?p.adjust</a></code> can be specified:</p>
+<p>In case a large number of Phylostrata or Divergence Strata is included in the input <code>ExpressionSet</code>, p-values returned by <code><a href="../reference/PlotEnrichment.html">PlotEnrichment()</a></code> should be adjusted for multiple comparisons. For this purpose <code><a href="../reference/PlotEnrichment.html">PlotEnrichment()</a></code> includes the argument <code>p.adjust.method</code>. Here, all methods implemented in <code><a href="https://rdrr.io/r/stats/p.adjust.html">?p.adjust</a></code> can be specified:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># adjust p-values for multiple comparisons with Benjamini &amp; Hochberg (1995)</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="../reference/PlotEnrichment.html">PlotEnrichment</a></span>(Drerio.PhyloMap,</a>
 <a class="sourceLine" id="cb18-3" data-line-number="3">               <span class="dt">test.set        =</span> Drerio.Brain.Genes,</a>
@@ -363,12 +365,13 @@ PS14  0.098211044 -0.938724783</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#performing-phylostratum-and-divergence-stratum-enrichment-analyses">Performing <code>Phylostratum</code> and <code>Divergence Stratum</code> Enrichment Analyses</a></li>
-      <li><a href="#enrichment-analyses-using-plotenrichment">Enrichment Analyses using <code><a href="--/reference/PlotEnrichment-html">PlotEnrichment()</a></code></a></li>
+      <li><a href="#enrichment-analyses-using-plotenrichment">Enrichment Analyses using <code>PlotEnrichment()</code></a></li>
       <li><a href="#interpretation-of-enrichment-results">Interpretation of Enrichment Results</a></li>
       <li><a href="#references">References</a></li>
       </ul>
@@ -378,17 +381,20 @@ PS14  0.098211044 -0.938724783</code></pre>
 </div>
 
 
+
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost, Alexander Gabel.</p>
+  <p>Developed by Hajk-Georg Drost.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

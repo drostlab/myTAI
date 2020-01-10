@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Evolutionary Transcriptomics • myTAI</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Evolutionary Transcriptomics">
 <meta property="og:description" content="Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2017) &lt;doi:10.1093/bioinformatics/btx835&gt;). The aim of this tool is to provide a transcriptome analysis environment for answering questions regarding the evolution of biological processes (Drost et al. (2016) &lt;doi:10.1101/051565&gt;).">
 <meta name="twitter:card" content="summary">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/HajkD/myTAI">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,6 +93,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="contents col-md-9">
 
@@ -122,15 +124,15 @@
 <a href="#installation" class="anchor"></a>Installation</h3>
 <p>Please install the following package dependencies:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Install core Bioconductor packages</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>))</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>()</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>))</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>()</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># Install package dependencies</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"Biostrings"</span>, <span class="dt">version =</span> <span class="st">"3.8"</span>)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"edgeR"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-6" data-line-number="6">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"Biostrings"</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"edgeR"</span>)</a></code></pre></div>
 <p>Now users can install <code>myTAI</code> from CRAN:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install myTAI 0.9.1</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"myTAI"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install myTAI 0.9.2</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"myTAI"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="short-package-description" class="section level3">
 <h3 class="hasAnchor">
@@ -151,14 +153,14 @@
 <h2 class="hasAnchor">
 <a href="#install-developer-version" class="anchor"></a>Install Developer Version</h2>
 <p>Some bug fixes or new functionality will not be available on CRAN yet, but in the developer version here on GitHub. To download and install the most recent version of <code>myTAI</code> run:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>))</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>()</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>))</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>()</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># Install package dependencies</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"Biostrings"</span>, <span class="dt">version =</span> <span class="st">"3.8"</span>)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"edgeR"</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"Biostrings"</span>, <span class="dt">version =</span> <span class="st">"3.8"</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"edgeR"</span>)</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># install developer version of myTAI</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"HajkD/myTAI"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-8" data-line-number="8">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"HajkD/myTAI"</span>)</a></code></pre></div>
 </div>
 <div id="news" class="section level2">
 <h2 class="hasAnchor">
@@ -184,9 +186,9 @@
 <div id="load-example-data" class="section level4">
 <h4 class="hasAnchor">
 <a href="#load-example-data" class="anchor"></a>Load example data</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(myTAI)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(myTAI)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># example dataset covering 7 stages of A thaliana embryo development</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># transform absolute expression levels to log2 expression levels</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">ExprExample &lt;-<span class="st"> </span><span class="kw"><a href="reference/tf.html">tf</a></span>(PhyloExpressionSetExample, log2)</a></code></pre></div>
 </div>
@@ -210,7 +212,7 @@
 <a href="#quantify-mean-expression-of-individual-gene-age-categories" class="anchor"></a>Quantify mean expression of individual gene age categories</h4>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># plot mean expression of each age category seperated by old (PS1-3)</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># versus young (PS4-12) genes</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="reference/PlotMeans.html">PlotMeans</a></span>(ExprExample, <span class="dt">Groups =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="reference/PlotMeans.html">PlotMeans</a></span>(ExprExample, <span class="dt">Groups =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
 <p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-12-1.png"></p>
 </div>
 <div id="quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes" class="section level4">
@@ -218,12 +220,12 @@
 <a href="#quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes" class="anchor"></a>Quantify relative mean expression of each age category seperated by old versus young genes</h4>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># plot relative mean expression of each age category seperated by old (PS1-3)</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># versus young (PS4-12) genes</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="reference/PlotRE.html">PlotRE</a></span>(ExprExample, <span class="dt">Groups =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="reference/PlotRE.html">PlotRE</a></span>(ExprExample, <span class="dt">Groups =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
 <p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-13-1.png"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># plot the significant differences between gene expression distributions </span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co"># of old (=group1) versus young (=group2) genes</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span>(<span class="dt">ExpressionSet =</span> ExprExample,</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">               <span class="dt">Groups        =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">group_1 =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">group_2 =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">12</span>),</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">               <span class="dt">Groups        =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">group_1 =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">group_2 =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">12</span>),</a>
 <a class="sourceLine" id="cb9-5" data-line-number="5">               <span class="dt">legendName    =</span> <span class="st">"PS"</span>,</a>
 <a class="sourceLine" id="cb9-6" data-line-number="6">               <span class="dt">plot.type     =</span> <span class="st">"boxplot"</span>)</a></code></pre></div>
 </div>
@@ -234,31 +236,31 @@
 </h2>
 <p>Users can also read the tutorials within (<a href="http://www.rstudio.com/">RStudio</a>) :</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># source the myTAI package</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(myTAI)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(myTAI)</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co"># look for all tutorials (vignettes) available in the myTAI package</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co"># this will open your web browser</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/browseVignettes">browseVignettes</a></span>(<span class="st">"myTAI"</span>)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes</a></span>(<span class="st">"myTAI"</span>)</a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co"># or as single tutorials</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co"># open tutorial: Introduction to Phylotranscriptomics and myTAI</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Introduction"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"> <span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"Introduction"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
 <a class="sourceLine" id="cb10-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co"># open tutorial: Intermediate Concepts of Phylotranscriptomics</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Intermediate"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"> <span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"Intermediate"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
 <a class="sourceLine" id="cb10-15" data-line-number="15"></a>
 <a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co"># open tutorial: Advanced Concepts of Phylotranscriptomics</span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Advanced"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"> <span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"Advanced"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
 <a class="sourceLine" id="cb10-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co"># open tutorial: Age Enrichment Analyses</span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Enrichment"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"> <span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"Enrichment"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
 <a class="sourceLine" id="cb10-21" data-line-number="21"> </a>
 <a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co"># open tutorial: Gene Expression Analysis with myTAI</span></a>
-<a class="sourceLine" id="cb10-23" data-line-number="23"> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Expression"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
+<a class="sourceLine" id="cb10-23" data-line-number="23"> <span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"Expression"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a>
 <a class="sourceLine" id="cb10-24" data-line-number="24"> </a>
 <a class="sourceLine" id="cb10-25" data-line-number="25"> <span class="co"># open tutorial: Taxonomic Information Retrieval with myTAI</span></a>
-<a class="sourceLine" id="cb10-26" data-line-number="26"> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Taxonomy"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb10-26" data-line-number="26"> <span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"Taxonomy"</span>, <span class="dt">package =</span> <span class="st">"myTAI"</span>)</a></code></pre></div>
 <p>In the <code>myTAI</code> framework users can find:</p>
 <div id="phylotranscriptomics-measures" class="section level4">
 <h4 class="hasAnchor">
@@ -392,6 +394,28 @@
 </ul>
 </div>
 </div>
+<div id="studies-that-successfully-used-mytai-to-quantify-transcriptome-conservation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#studies-that-successfully-used-mytai-to-quantify-transcriptome-conservation" class="anchor"></a>Studies that successfully used <code>myTAI</code> to quantify transcriptome conservation:</h2>
+<blockquote>
+<ul>
+<li><p><strong>Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis</strong> HG Drost, A Gabel, I Grosse, M Quint - <strong>Molecular biology and evolution</strong>, 2015</p></li>
+<li><p><strong>Gene Expression Does Not Support the Developmental Hourglass Model in Three Animals with Spiralian Development</strong> L Wu, KE Ferger, JD Lambert - <strong>Molecular biology and evolution</strong>, 2019</p></li>
+<li><p><strong>The Transcriptional Landscape of Polyploid Wheats and their Diploid Ancestors during Embryogenesis and Grain Development</strong> D Xiang, TD Quilichini, Z Liu, P Gao, Y Pan et al. - <strong>The Plant Cell</strong>, 2019</p></li>
+<li><p><strong>Developmental constraints on genome evolution in four bilaterian model species</strong> J Liu, M Robinson-Rechavi - <strong>Genome biology and evolution</strong>, 2018</p></li>
+<li><p><strong>Reconstructing the transcriptional ontogeny of maize and sorghum supports an inverse hourglass model of inflorescence development</strong> S Leiboff, S Hake - <strong>Current Biology</strong>, 2019</p></li>
+<li><p><strong>Mapping selection within Drosophila melanogaster embryo’s anatomy</strong> I Salvador-Martínez et al. - <strong>Molecular biology and evolution</strong>, 2017</p></li>
+<li><p><strong>Distribution and diversity of enzymes for polysaccharide degradation in fungi</strong> R Berlemont - <strong>Scientific reports</strong>, 2017</p></li>
+<li><p><strong>The origins and evolutionary history of human non-coding RNA regulatory networks</strong> M Sherafatian, SJ Mowla - <strong>Journal of bioinformatics and computational biology</strong>, 2017</p></li>
+<li><p><strong>Elucidating the endogenous synovial fluid proteome and peptidome of inflammatory arthritis using label-free mass spectrometry</strong> SM Mahendran, EC Keystone, RJ Krawetz et al. - <strong>Clinical proteomics</strong>, 2019</p></li>
+<li><p><strong>Phylostratr: a framework for phylostratigraphy</strong> Z Arendsee, J Li, U Singh, A Seetharam et al. - <strong>Bioinformatics</strong>, 2019</p></li>
+<li><p><strong>Pervasive convergent evolution and extreme phenotypes define chaperone requirements of protein homeostasis</strong> Y Draceni, S Pechmann - <strong>BioRxiv</strong>, 2019</p></li>
+<li><p><strong>Environmental DNA reveals landscape mosaic of wetland plant communities</strong> ME Shackleton, GN Rees, G Watson et al. - <strong>Global Ecology and Conservation</strong>, 2019</p></li>
+<li><p><strong>Algorithms for synteny-based phylostratigraphy and gene origin classification</strong> Z Arendsee - 2019</p></li>
+<li><p><strong>High expression of new genes in trochophore enlightening the ontogeny and evolution of trochozoans</strong> F Xu, T Domazet-Lošo, D Fan, TL Dunwell, L Li et al. - <strong>Scientific reports</strong>, 2016</p></li>
+</ul>
+</blockquote>
+</div>
 <div id="discussions-and-bug-reports" class="section level2">
 <h2 class="hasAnchor">
 <a href="#discussions-and-bug-reports" class="anchor"></a>Discussions and Bug Reports</h2>
@@ -446,8 +470,7 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/&lt;https://orcid.org/0000-0002-1567-306X&gt;&gt;" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li>Alexander Gabel <br><small class="roles"> Author </small>  </li>
+<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/http://orcid.org/0000-0002-1567-306X" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 </ul>
 </div>
 
@@ -455,7 +478,6 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/HajkD/myTAI"><img src="https://travis-ci.org/HajkD/myTAI.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://www.rpackages.io/package/myTAI"><img src="https://www.rpackages.io/badge/myTAI.svg" alt="rpackages.io rank"></a></li>
 <li><a href="https://github.com/metacran/cranlogs.app"><img src="http://cranlogs.r-pkg.org/badges/myTAI" alt="rstudio mirror downloads"></a></li>
 <li><a href="https://github.com/metacran/cranlogs.app"><img src="http://cranlogs.r-pkg.org/badges/grand-total/myTAI" alt="rstudio mirror downloads"></a></li>
 </ul>
@@ -463,17 +485,20 @@
 </div>
 </div>
 
+
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost, Alexander Gabel.</p>
+  <p>Developed by Hajk-Georg Drost.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
