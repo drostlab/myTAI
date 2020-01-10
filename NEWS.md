@@ -1,7 +1,10 @@
-myTAI 1.0.0
+myTAI 0.9.3
 ===========
 
-### New Functions
+
+myTAI 0.9.2
+===========
+- changing maintainer email-address
 
 
 myTAI 0.9.1
