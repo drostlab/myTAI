@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Intermediate Phylotranscriptomics Analyses</h1>
             
-            <h4 class="date">2020-01-10</h4>
+            <h4 class="date">2020-03-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Intermediate.Rmd"><code>vignettes/Intermediate.Rmd</code></a></small>
       <div class="hidden name"><code>Intermediate.Rmd</code></div>
@@ -156,7 +156,7 @@
 <pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest ' running  1000  permutations.</code></pre>
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <pre><code>#&gt;   Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
-#&gt; 3.475560 3.501209 3.529716 3.527837 3.566926 3.581589 3.499849</code></pre>
+#&gt; 3.471930 3.520489 3.490690 3.481371 3.464277 3.497790 3.491835</code></pre>
 <pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
 3.543700 3.573999 3.554707 3.543376 3.582905 3.562813 3.523409 </code></pre>
 <p>Visualization:</p>
@@ -167,17 +167,17 @@
 <p>Now we investigate the variance of the two observed patterns.</p>
 <pre><code>#&gt; [1] 0.01147725</code></pre>
 <pre><code>[1] 0.01147725</code></pre>
-<pre><code>#&gt; [1] 0.001437461</code></pre>
+<pre><code>#&gt; [1] 0.0003395862</code></pre>
 <pre><code>[1] 0.0004102549</code></pre>
 <p>We observe that the variance of the randomly assigned TAI profile is much smaller than the variance of the correctly assigned TAI profile. Here we use the variance to quantify the <em>flatness</em> of a given TAI profile. In theory the variance of a perfect flat line would be zero. So any TAI profile that is close to zero would resemble a flat line. But how exactly are the variances of randomly assigned TAI profiles distributed? For this purpose the <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> function was implemented.</p>
 <p>The <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N <code>TAI</code> or <code>TDI</code> profiles based on randomly assigned Phylostrata or Divergence-Strata.</p>
 <pre><code>#&gt;     Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
-#&gt; 1 3.573225 3.564495 3.544119 3.554064 3.533416 3.510756 3.529310
-#&gt; 2 3.640732 3.635019 3.618912 3.624130 3.623355 3.599076 3.601996
-#&gt; 3 3.520466 3.506139 3.495151 3.499579 3.483699 3.507237 3.460001
-#&gt; 4 3.596963 3.577723 3.577371 3.567172 3.573634 3.535421 3.527624
-#&gt; 5 3.530669 3.527305 3.562586 3.561009 3.562462 3.553816 3.505275
-#&gt; 6 3.471192 3.486328 3.514700 3.514611 3.525498 3.517510 3.507837</code></pre>
+#&gt; 1 3.540935 3.541815 3.494289 3.495357 3.480051 3.487155 3.593288
+#&gt; 2 3.502760 3.475847 3.475228 3.508719 3.523737 3.501697 3.486334
+#&gt; 3 3.504706 3.514717 3.534779 3.530594 3.506273 3.450425 3.453790
+#&gt; 4 3.488744 3.487787 3.516212 3.531963 3.534512 3.548496 3.598937
+#&gt; 5 3.549404 3.549214 3.531026 3.542789 3.578889 3.573318 3.495525
+#&gt; 6 3.473233 3.463708 3.485008 3.463751 3.480082 3.492535 3.525989</code></pre>
 <pre><code>    Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
 1 3.578000 3.577732 3.552230 3.556756 3.555627 3.553580 3.510978
 2 3.590339 3.564544 3.589012 3.598754 3.583721 3.597553 3.633530
@@ -215,12 +215,12 @@
 <p><img src="Intermediate_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 <pre><code>#&gt; summary statistics
 #&gt; ------
-#&gt; min:  3.17645e-05   max:  0.004629548 
-#&gt; median:  0.0004865563 
-#&gt; mean:  0.0006747997 
-#&gt; estimated sd:  0.0006023562 
-#&gt; estimated skewness:  1.950247 
-#&gt; estimated kurtosis:  7.885322</code></pre>
+#&gt; min:  1.307159e-05   max:  0.005067585 
+#&gt; median:  0.000525259 
+#&gt; mean:  0.0006882615 
+#&gt; estimated sd:  0.0006078582 
+#&gt; estimated skewness:  2.281592 
+#&gt; estimated kurtosis:  11.34117</code></pre>
 <p>Based on the observation that a gamma distribution is a suitable fit for <code>variance_vector</code>, we can now estimate the parameters of the gamma distribution that fits the data.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># estimate the parameters: shape and rate using 'moment matching estimation'</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">gamma_MME &lt;-<span class="st"> </span>fitdistrplus<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html">fitdist</a></span>(variance_vector,<span class="dt">distr =</span> <span class="st">"gamma"</span>, <span class="dt">method =</span> <span class="st">"mme"</span>)</a>
@@ -250,7 +250,7 @@
 <p>Using the gamma distribution with estimated parameters the corresponding p-value of <code>var_real</code> can be computed.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># p-value of var_real</span></a>
 <a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/stats/GammaDist.html">pgamma</a></span>(var_real, <span class="dt">shape =</span> shape,<span class="dt">rate =</span> rate, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<pre><code>#&gt; [1] 1.286891e-09</code></pre>
+<pre><code>#&gt; [1] 1.361756e-09</code></pre>
 <p>Hence, the variance of the correct TAI profile significantly deviates from random TAI profiles and this allows us to assume that the underlying TAI profile captures a real evolutionary signal.</p>
 </div>
 <div id="using-the-flatlinetest-function" class="section level3">

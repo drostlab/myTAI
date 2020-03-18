@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Retrieving Taxonomic Information</h1>
             
-            <h4 class="date">2020-01-10</h4>
+            <h4 class="date">2020-03-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Taxonomy.Rmd"><code>vignettes/Taxonomy.Rmd</code></a></small>
       <div class="hidden name"><code>Taxonomy.Rmd</code></div>
@@ -110,16 +110,25 @@
     
 <p>This vignette will introduce users to the retrieval of taxonomic information with <code>myTAI</code>. The <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function implemented in <code>myTAI</code> relies on the powerful package <a href="https://github.com/ropensci/taxize">taxize</a>. Nevertheless, taxonomic information retrieval has been customized for the <code>myTAI</code> standard and for organism specific information retrieval.</p>
 <p>Specifically, the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function implemented in <code>myTAI</code> can be used to classify genomes according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy (see <a href="Introduction.html">Introduction</a> for details).</p>
+<p>For larger taxonomy queries it may be useful to create an NCBI Account and set up an <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">ENTREZ API KEY</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages(c("taxize", "usethis"))</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">taxize<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/taxize/reference/key_helpers.html">use_entrez</a></span>()</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># Create your key from your (brand-new) account's. </span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># After generating your key set it as ENTREZ_KEY in .Renviron.</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># ENTREZ_KEY='youractualkeynotthisstring'</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co"># For that, use usethis::edit_r_environ()</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ</a></span>()</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a></code></pre></div>
 <div id="taxonomic-information-retrieval" class="section level2">
 <h2 class="hasAnchor">
 <a href="#taxonomic-information-retrieval" class="anchor"></a>Taxonomic Information Retrieval</h2>
 <p>The <code>myTAI</code> package provides the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function to retrieve taxonomic information.</p>
 <p>In the following example we will obtain the taxonomic hierarchy of <code>Arabidopsis thaliana</code> from <a href="http://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># from NCBI Taxonomy</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>,</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">          <span class="dt">output   =</span> <span class="st">"classification"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># from NCBI Taxonomy</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">myTAI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>,</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">          <span class="dt">output   =</span> <span class="st">"classification"</span> )</a></code></pre></div>
 <pre><code>                   name         rank      id
 1    cellular organisms      no rank  131567
 2             Eukaryota superkingdom    2759
@@ -145,11 +154,11 @@
 <p>The <code>organism</code> argument takes the scientific name of a query organism, the <code>db</code> argument specifies that database from which the corresponding taxonomic information shall be retrieved, e.g. <code>ncbi</code> (NCBI Taxonomy) and <code>itis</code> (Integrated Taxonomic Information System) and the <code>output</code> argument specifies the type of taxonomic information that shall be returned for the query organism, e.g. <code>classification</code>, <code>taxid</code>, or <code>children</code>.</p>
 <p>The output of <code>classification</code> is a <code>data.frame</code> storing the taxonomic hierarchy of <code>Arabidopsis thaliana</code> starting with <code>cellular organisms</code> up to <code>Arabidopsis thaliana</code>. The first column stores the taxonomic name, the second column the taxonomic rank, and the third column the NCBI Taxonomy id for corresponding taxa.</p>
 <p>Analogous <code>classification</code> information can be obtained from different databases.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co"># from the Integrated Taxonomic Information System</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">          <span class="dt">db       =</span> <span class="st">"itis"</span>,</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">          <span class="dt">output   =</span> <span class="st">"classification"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># from the Integrated Taxonomic Information System</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">myTAI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">          <span class="dt">db       =</span> <span class="st">"itis"</span>,</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">          <span class="dt">output   =</span> <span class="st">"classification"</span> )</a></code></pre></div>
 <pre><code>              name          rank     id
 1          Plantae       Kingdom 202422
 2    Viridiplantae    Subkingdom 954898
@@ -163,16 +172,16 @@
 10    Brassicaceae        Family  22669
 11     Arabidopsis         Genus  23040</code></pre>
 <p>The <code>output</code> argument allows you to directly access taxonomy ids for a query organism or species.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># retrieving the taxonomy id of the query organism from NCBI Taxonomy</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, </a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># retrieving the taxonomy id of the query organism from NCBI Taxonomy</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">myTAI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis thaliana"</span>, </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</a></code></pre></div>
 <pre><code>    id
 1 3702</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"itis"</span>, </a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">myTAI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"itis"</span>, </a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"taxid"</span> )</a></code></pre></div>
 <pre><code>    id
 1 23040</code></pre>
 <p>So far, the following data bases can be accesses to retrieve taxonomic information:</p>
@@ -187,10 +196,10 @@
 <h2 class="hasAnchor">
 <a href="#retrieve-children-nodes" class="anchor"></a>Retrieve Children Nodes</h2>
 <p>Another <code>output</code> supported by <code><a href="../reference/taxonomy.html">taxonomy()</a></code> is <code>children</code> that returns the immediate children taxa for a query organism. This feature is useful to determine species relationships for quantifying recent evolutionary conservation with Divergence Stratigraphy.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, </a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"children"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">myTAI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"ncbi"</span>, </a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"children"</span> )</a></code></pre></div>
 <pre><code>   childtaxa_id                                                     childtaxa_name childtaxa_rank
 1       1547872                                              Arabidopsis umezawana        species
 2       1328956 (Arabidopsis thaliana x Arabidopsis arenosa) x Arabidopsis suecica        species
@@ -209,10 +218,10 @@
 15        45249                                                Arabidopsis suecica        species
 16        38785                                                Arabidopsis arenosa        species
 17         3702                                               Arabidopsis thaliana        species</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="../reference/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"itis"</span>, </a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"children"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">myTAI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html">taxonomy</a></span>( <span class="dt">organism =</span> <span class="st">"Arabidopsis"</span>, </a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">          <span class="dt">db       =</span> <span class="st">"itis"</span>, </a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">          <span class="dt">output   =</span> <span class="st">"children"</span> )</a></code></pre></div>
 <pre><code>   parentname parenttsn rankname             taxonname    tsn
 1 Arabidopsis     23040  Species  Arabidopsis thaliana  23041
 2 Arabidopsis     23040  Species Arabidopsis arenicola 823113
