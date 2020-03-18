@@ -25,6 +25,19 @@ and for organism specific information retrieval.
 Specifically, the `taxonomy()` function implemented in `myTAI` can be used to classify genomes
 according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy (see [Introduction](Introduction.html) for details).
 
+For larger taxonomy queries it may be useful to create an NCBI Account and
+set up an [ENTREZ API KEY](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/).
+
+```r
+# install.packages(c("taxize", "usethis"))
+taxize::use_entrez()
+# Create your key from your (brand-new) account's. 
+# After generating your key set it as ENTREZ_KEY in .Renviron.
+# ENTREZ_KEY='youractualkeynotthisstring'
+# For that, use usethis::edit_r_environ()
+usethis::edit_r_environ()
+```
+
 
 ## Taxonomic Information Retrieval
 
@@ -37,10 +50,9 @@ In the following example we will obtain the taxonomic hierarchy of `Arabidopsis 
 ```{r, eval=FALSE}
 # retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
 # from NCBI Taxonomy
-taxonomy( organism = "Arabidopsis thaliana", 
+myTAI::taxonomy( organism = "Arabidopsis thaliana", 
           db       = "ncbi",
           output   = "classification" )
-
 ```
 
 ```
@@ -83,10 +95,9 @@ Analogous `classification` information can be obtained from different databases.
 ```{r, eval=FALSE}
 # retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
 # from the Integrated Taxonomic Information System
-taxonomy( organism = "Arabidopsis thaliana", 
+myTAI::taxonomy( organism = "Arabidopsis thaliana", 
           db       = "itis",
           output   = "classification" )
-
 ```
 
 ```
@@ -108,7 +119,7 @@ The `output` argument allows you to directly access taxonomy ids for a query org
 
 ```{r, eval=FALSE}
 # retrieving the taxonomy id of the query organism from NCBI Taxonomy
-taxonomy( organism = "Arabidopsis thaliana", 
+myTAI::taxonomy( organism = "Arabidopsis thaliana", 
           db       = "ncbi", 
           output   = "taxid" )
 ```
@@ -120,7 +131,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 
 ```{r, eval=FALSE}
 # retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service
-taxonomy( organism = "Arabidopsis", 
+myTAI::taxonomy( organism = "Arabidopsis", 
           db       = "itis", 
           output   = "taxid" )
 ```
@@ -143,7 +154,7 @@ for a query organism. This feature is useful to determine species relationships 
 
 ```{r, eval=FALSE}
 # retrieve children taxa of the query organism stored in the correspondning database
-taxonomy( organism = "Arabidopsis", 
+myTAI::taxonomy( organism = "Arabidopsis", 
           db       = "ncbi", 
           output   = "children" )
 ```
@@ -171,7 +182,7 @@ taxonomy( organism = "Arabidopsis",
 
 ```{r, eval=FALSE}
 # retrieve children taxa of the query organism stored in the correspondning database
-taxonomy( organism = "Arabidopsis", 
+myTAI::taxonomy( organism = "Arabidopsis", 
           db       = "itis", 
           output   = "children" )
 ```
