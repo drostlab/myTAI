@@ -3,7 +3,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/HajkD/myTAI.svg?branch=master)](https://travis-ci.org/HajkD/myTAI)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/myTAI)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/myTAI)](https://github.com/metacran/cranlogs.app)
- 
+[![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://academic.oup.com/bioinformatics/article/34/9/1589/4772684)  
 
 
 # Evolutionary Transcriptomics with R
