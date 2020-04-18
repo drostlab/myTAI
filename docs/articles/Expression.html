@@ -100,7 +100,7 @@
       <h1>Gene Expression Analysis with <code>myTAI</code>
 </h1>
             
-            <h4 class="date">2020-04-09</h4>
+            <h4 class="date">2020-04-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd"><code>vignettes/Expression.Rmd</code></a></small>
       <div class="hidden name"><code>Expression.Rmd</code></div>
@@ -659,7 +659,7 @@
 <h2 class="hasAnchor">
 <a href="#compute-the-statistical-significance-of-each-replicate-combination" class="anchor"></a>Compute the Statistical Significance of Each Replicate Combination</h2>
 <p>In some cases (high variability of replicates) it might be useful to verify that there is no sequence of replicates (for all possible combination of replicates) that results in a non-significant <code>TAI</code> or <code>TDI</code> pattern, when the initial pattern with combined replicates was shown to be significant.</p>
-<p>The <code><a href="../reference/CombinatorialSignificance.html">CombinatorialSignificance()</a></code> function implemented in <code>myTAI</code> allows users to compute the p-values quantifying the statistical significance of the underlying pattern for all combinations of replicates.</p>
+<p>The <code><a href="../reference/combinatorialSignificance.html">CombinatorialSignificance()</a></code> function implemented in <code>myTAI</code> allows users to compute the p-values quantifying the statistical significance of the underlying pattern for all combinations of replicates.</p>
 <div id="a-small-example" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-small-example" class="anchor"></a>A small Example:</h3>
@@ -688,7 +688,7 @@
 <a class="sourceLine" id="cb41-7" data-line-number="7"><span class="co"># and 2 replicates for stage 3</span></a>
 <a class="sourceLine" id="cb41-8" data-line-number="8"><span class="co"># FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000</span></a>
 <a class="sourceLine" id="cb41-9" data-line-number="9"><span class="co"># BUT </span><span class="al">NOTE</span><span class="co"> THAT THIS TAKES MUCH MORE COMPUTATION TIME</span></a>
-<a class="sourceLine" id="cb41-10" data-line-number="10">p.vector &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CombinatorialSignificance.html">CombinatorialSignificance</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
+<a class="sourceLine" id="cb41-10" data-line-number="10">p.vector &lt;-<span class="st"> </span><span class="kw"><a href="../reference/combinatorialSignificance.html">CombinatorialSignificance</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
 <a class="sourceLine" id="cb41-11" data-line-number="11">                                      <span class="dt">replicates    =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>),</a>
 <a class="sourceLine" id="cb41-12" data-line-number="12">                                      <span class="dt">TestStatistic =</span> <span class="st">"FlatLineTest"</span>,</a>
 <a class="sourceLine" id="cb41-13" data-line-number="13">                                      <span class="dt">permutations  =</span> <span class="dv">100</span>,</a>
@@ -698,7 +698,7 @@
 <p>Users will observe that none of the replicate combinations resulted in p-values &gt; 0.05 and thus we can assume that the phylotranscriptomic pattern computed based on collapsed replicates is not biased by insignificant replicate combinations.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/any.html">any</a></span>(p.vector <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.05</span>)</a>
 <a class="sourceLine" id="cb43-2" data-line-number="2"><span class="co">#&gt; FALSE</span></a></code></pre></div>
-<p><code><a href="../reference/CombinatorialSignificance.html">CombinatorialSignificance()</a></code> can perform all significance tests introduced in the <a href="Introduction.html">Introduction</a> and <a href="Intermediate.html">Intermediate</a> vignettes.</p>
+<p><code><a href="../reference/combinatorialSignificance.html">CombinatorialSignificance()</a></code> can perform all significance tests introduced in the <a href="Introduction.html">Introduction</a> and <a href="Intermediate.html">Intermediate</a> vignettes.</p>
 <p>Furthermore, the <code>parallel</code> argument allows users to perform significance computations in parallel on a multicore machine. This will speed up p-value computations for a large number of combinations.</p>
 </div>
 </div>

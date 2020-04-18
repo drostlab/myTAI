@@ -214,10 +214,10 @@ stored in the <code>age_vals</code> argument.</p>
  <span class='no'>ec_score</span> <span class='kw'>&lt;-</span> <span class='fu'>ecScore</span>(<span class='kw'>age_vals</span> <span class='kw'>=</span> <span class='no'>TDIs</span>,<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>,<span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>,<span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>)
 
  <span class='co'># compute ecScore() vector from bootMatrix()</span>
- <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span>(<span class='no'>PhyloExpressionSetExample</span>,<span class='fl'>10</span>),<span class='fl'>1</span>,<span class='no'>ecScore</span>,<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>,<span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>,<span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>)</div><div class='output co'>#&gt;            1            2            3            4            5            6 
-#&gt; -0.005656485  0.025928518  0.007615074 -0.040247132 -0.059133273 -0.020734331 
-#&gt;            7            8            9           10 
-#&gt; -0.044192976 -0.024035627 -0.060556318 -0.054648829 </div><div class='input'> 
+ <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span>(<span class='no'>PhyloExpressionSetExample</span>,<span class='fl'>10</span>),<span class='fl'>1</span>,<span class='no'>ecScore</span>,<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>,<span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>,<span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>)</div><div class='output co'>#&gt;           1           2           3           4           5           6 
+#&gt; -0.04475360 -0.03357842 -0.02314079 -0.06157343  0.05560210 -0.02515444 
+#&gt;           7           8           9          10 
+#&gt;  0.03429827 -0.06897974 -0.08713795 -0.03034854 </div><div class='input'> 
  
 </div></pre>
   </div>
