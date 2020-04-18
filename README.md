@@ -12,7 +12,7 @@
 
 Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and optimized framework to detect patterns of evolutionary constraints in any transcriptome dataset of interest.
 
-Please find a detailed documentation [here](https://hajkd.github.io/myTAI/articles/Introduction.html).
+Please find a detailed documentation [here](https://drostlab.github.io/myTAI/articles/Introduction.html).
 
 
 ## Citation
@@ -43,7 +43,7 @@ install.packages("myTAI", dependencies = TRUE)
 
 ### Short package description
 
-Using `myTAI`, any existing or newly generated transcriptome dataset can be combined with evolutionary information (find [details here](https://hajkd.github.io/myTAI/articles/Introduction.html#retrieval-of-phylogenetic-or-taxonomic-information)) to retrieve novel insights about the evolutionary conservation of the transcriptome at hand. 
+Using `myTAI`, any existing or newly generated transcriptome dataset can be combined with evolutionary information (find [details here](https://drostlab.github.io/myTAI/articles/Introduction.html#retrieval-of-phylogenetic-or-taxonomic-information)) to retrieve novel insights about the evolutionary conservation of the transcriptome at hand. 
 
 For the purpose of performing large scale evolutionary transcriptomics studies, the `myTAI` package implements the quantification, statistical assessment, and analytics functionality to allow researchers to study the evolution of biological processes by determining stages or periods of evolutionary conservation or variability in transcriptome data. 
 
@@ -55,10 +55,10 @@ Today, phenotypic phenomena such as morphological mutations, diseases or develop
 
 Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern
 then enables to detect stages of development or other biological processes that
-are evolutionarily conserved ([Drost et al., 2018](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)). This quantification on the highest level is achieved through transcriptome indices (e.g. [Transcriptome Age Index or Transcriptome Divergence Index](https://hajkd.github.io/myTAI/articles/Introduction.html#transcriptome-age-index)) which aim to quantify the average evolutionary age or sequence conseration of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow's law) ([Drost et al., 2017](http://www.sciencedirect.com/science/article/pii/S0959437X16302040)).
+are evolutionarily conserved ([Drost et al., 2018](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)). This quantification on the highest level is achieved through transcriptome indices (e.g. [Transcriptome Age Index or Transcriptome Divergence Index](https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index)) which aim to quantify the average evolutionary age or sequence conseration of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow's law) ([Drost et al., 2017](http://www.sciencedirect.com/science/article/pii/S0959437X16302040)).
 
 __Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years,
-please follow my [updated discussion about the gene age inference literature](https://hajkd.github.io/myTAI/articles/Introduction.html#genomic-phylostratography-based-gene-age-inference).__
+please follow my [updated discussion about the gene age inference literature](https://drostlab.github.io/myTAI/articles/Introduction.html#genomic-phylostratography-based-gene-age-inference).__
 
 
 ## Install Developer Version
@@ -75,24 +75,24 @@ BiocManager::install()
 BiocManager::install("Biostrings", version = "3.8")
 BiocManager::install("edgeR")
 # install developer version of myTAI
-BiocManager::install("HajkD/myTAI")
+BiocManager::install("drostlab/myTAI")
 ```
 
 ## NEWS
 
 The current status of the package as well as a detailed history of the
-functionality of each version of `myTAI` can be found in the [NEWS](https://hajkd.github.io/myTAI/news/index.html) section.
+functionality of each version of `myTAI` can be found in the [NEWS](https://drostlab.github.io/myTAI/news/index.html) section.
 
 ## Tutorials
 
 The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome onservation with `myTAI` and how to interpret the results generated with this software tool.
 
-- [Introduction to the myTAI Package](https://hajkd.github.io/myTAI/articles/Introduction.html)
-- [Intermediate Concepts of Phylotranscriptomics](https://hajkd.github.io/myTAI/articles/Intermediate.html)
-- [Advanced Topics of Phylotranscriptomics](https://hajkd.github.io/myTAI/articles/Advanced.html)
-- [Perform Age Enrichment Analyses](https://hajkd.github.io/myTAI/articles/Enrichment.html)
-- [Gene Expression Analysis with myTAI](https://hajkd.github.io/myTAI/articles/Expression.html)
-- [Taxonomic Information Retrieval](https://hajkd.github.io/myTAI/articles/Taxonomy.html)
+- [Introduction to the myTAI Package](https://drostlab.github.io/myTAI/articles/Introduction.html)
+- [Intermediate Concepts of Phylotranscriptomics](https://drostlab.github.io/myTAI/articles/Intermediate.html)
+- [Advanced Topics of Phylotranscriptomics](https://drostlab.github.io/myTAI/articles/Advanced.html)
+- [Perform Age Enrichment Analyses](https://drostlab.github.io/myTAI/articles/Enrichment.html)
+- [Gene Expression Analysis with myTAI](https://drostlab.github.io/myTAI/articles/Expression.html)
+- [Taxonomic Information Retrieval](https://drostlab.github.io/myTAI/articles/Taxonomy.html)
 
 
 ## Example
@@ -313,7 +313,7 @@ provided in this package.
 Furthermore, in case you find some bugs or need additional (more flexible) functionality of parts
 of this package, please let me know:
 
-https://github.com/HajkD/myTAI/issues
+https://github.com/drostlab/myTAI/issues
 
 ## References
 
