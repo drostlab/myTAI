@@ -42,6 +42,6 @@ Suggests:
     testthat (>= 0.9.1),
     mgcv
 LinkingTo: Rcpp, RcppArmadillo
-URL: https://github.com/HajkD/myTAI
-BugReports: https://github.com/HajkD/myTAI/issues
+URL: https://github.com/drostlab/myTAI
+BugReports: https://github.com/drostlab/myTAI/issues
 RoxygenNote: 7.0.2
