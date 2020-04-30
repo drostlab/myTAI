@@ -262,6 +262,12 @@ All functions also include visual analytics tools to quantify the goodness of te
 
 ## Studies that successfully used `myTAI` to quantify transcriptome conservation:
 
+> - __Evolutionary transcriptomics of metazoan biphasic life cycle supports a single intercalation origin of metazoan larvae__
+>J Wang, L Zhang, S Lian, Z Qin, X Zhu, X Dai, Z Huang et al. - __Nature Ecology & Evolution__, 2020
+>
+> - __Reconstructing the transcriptional ontogeny of maize and sorghum supports an inverse hourglass model of inflorescence development__ 
+> S Leiboff, S Hake - __Current Biology__, 2019
+>
 > - __Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis__
 >HG Drost, A Gabel, I Grosse, M Quint - __Molecular biology and evolution__, 2015
 >
@@ -273,9 +279,6 @@ D Xiang, TD Quilichini, Z Liu, P Gao, Y Pan et al. - __The Plant Cell__, 2019
 >
 > - __Developmental constraints on genome evolution in four bilaterian model species__
 J Liu, M Robinson-Rechavi - __Genome biology and evolution__, 2018
->
-> - __Reconstructing the transcriptional ontogeny of maize and sorghum supports an inverse hourglass model of inflorescence development__
-S Leiboff, S Hake - __Current Biology__, 2019
 >
 > - __Mapping selection within Drosophila melanogaster embryo's anatomy__
 I Salvador-Martínez et al. - __Molecular biology and evolution__, 2017
