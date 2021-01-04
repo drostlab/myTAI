@@ -1,6 +1,6 @@
 myTAI 0.9.3
 ===========
-
+- `edgeR` package dependency was removed from `myTAI`
 
 myTAI 0.9.2
 ===========
