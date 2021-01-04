@@ -33,7 +33,6 @@ Imports:
     readr (>= 0.2.2),
     tibble,
     scales,
-    edgeR,
     gridExtra
 Suggests:
     knitr (>= 1.6),
