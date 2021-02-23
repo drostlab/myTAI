@@ -2,12 +2,12 @@ Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
 Version: 0.9.3
-Date: 2020-01-09
+Date: 2021-02-22
 Authors@R: person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hajk-georg.drost@tuebingen.mpg.de",
                 comment = c(ORCID = "http://orcid.org/0000-0002-1567-306X"))
-Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2017) <doi:10.1093/bioinformatics/btx835>). The aim of this tool is to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest (usually derived from RNAseq data) (Drost et al. (2016) <doi:10.1101/051565>).
+Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2017) <doi:10.1093/bioinformatics/btx835>). The aim of this tool is to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest (Drost et al. (2016) <doi:10.1101/051565>).
 VignetteBuilder: knitr
 NeedsCompilation: yes
 License: GPL-3
