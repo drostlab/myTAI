@@ -70,11 +70,11 @@ myTAI 0.6.0
 
 ### Updates
 
-- `is.ExpressionSet()` now prints out more detailed error messages when [ExpressionSet format](https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd#defining-input-data-standards) is violated
+- `is.ExpressionSet()` now prints out more detailed error messages when [ExpressionSet format](https://github.com/drostlab/myTAI/blob/master/vignettes/Introduction.Rmd) is violated
 
 - adapt `PlotContribution()` to new version of `dplyr` where `summarise_each()` is deprecated.
 
-Error message accuring after new `dplyr` release was:
+Error message occurring after new `dplyr` release was:
 
 2. Failure: `PlotContribution()` works properly with DivergenceExpressionSet input... (@test-PlotContribution.R#16) 
   PlotContribution(DivergenceExpressionSetExample, legendName = "DS") produced messages.
@@ -107,7 +107,7 @@ myTAI 0.5.0
 
 - `PlotContribution()` is now based on ggplot2 and loses base graphics arguments
 
-- now R/RcppExports.R and src/rcpp_funcs.cpp are included in the package due to previous compilation problems (see also [stackoverflow discussion](http://stackoverflow.com/questions/34585560/travis-ci-r-package-error-in-documentation))
+- now R/RcppExports.R and src/rcpp_funcs.cpp are included in the package due to previous compilation problems (see also [stackoverflow discussion](https://stackoverflow.com/questions/34585560/travis-ci-r-package-error-in-documentation))
 
 - `MatchMap()` is now based on `dplyr::inner_join()` to match age category table with a gene expression dataset
 
@@ -191,7 +191,7 @@ to the __Introduction__ Vignette
 
 ### New Functions
 
-- a new function `taxonomy()` allows users to retrieve taxonomic information for any organism of interest; this function has been taken from the [biomartr](https://github.com/HajkD/biomartr) package and was removed from `biomartr` afterwards. Please notice, that in myTAI version 0.1.0 the Introduction vignette referenced to the `taxonomy()` function in `biomartr`. This is no longer the case (since myTAI version 0.2.0), because now `taxonomy()` is implemented in myTAI. 
+- a new function `taxonomy()` allows users to retrieve taxonomic information for any organism of interest; this function has been taken from the [biomartr](https://github.com/ropensci/biomartr) package and was removed from `biomartr` afterwards. Please notice, that in myTAI version 0.1.0 the Introduction vignette referenced to the `taxonomy()` function in `biomartr`. This is no longer the case (since myTAI version 0.2.0), because now `taxonomy()` is implemented in myTAI. 
 
 - the new `taxonomy()` function is based on the powerful R package [taxize](https://github.com/ropensci/taxize).
 
@@ -260,7 +260,7 @@ myTAI 0.0.2
 - `combinatorialSignificance()`, `FlatLineTest()`, `ReductiveHourglassTest()`, and `EarlyConservationTest()`
 now support multicore processing
 
-- `MatchMap()` has been entirely rewritten and is now based on [dplyr](https://github.com/hadley/dplyr); additionally
+- `MatchMap()` has been entirely rewritten and is now based on [dplyr](https://github.com/tidyverse/dplyr); additionally
 it now has a new argument `accumulate` that allows you to accumulate multiple expression levels to a unique expressiion level for a unique gene id
 
 ### Vignettes
