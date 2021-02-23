@@ -13,7 +13,7 @@ equal_df <- function(df1, df2) {
 TestREMatrix1 <-
         t(apply(dplyr::summarise_all(
                 dplyr::group_by(PhyloExpressionSetExample[, c(1, 3:9)], Phylostratum),
-                dplyr::funs(mean)
+                list(mean)
         )[, 2:8], 1, function(x)
                 (x - min(x)) / (max(x) - min(x))))
 rownames(TestREMatrix1) <- 1:12
@@ -21,7 +21,7 @@ rownames(TestREMatrix1) <- 1:12
 TestREMatrix2 <-
         t(apply(dplyr::summarise_all(
                 dplyr::group_by(DivergenceExpressionSetExample[, c(1, 3:9)], Divergence.stratum),
-                dplyr::funs(mean)
+                list(mean)
         )[, 2:8], 1, function(x)
                 (x - min(x)) / (max(x) - min(x))))
 rownames(TestREMatrix2) <- 1:10
