@@ -97,7 +97,7 @@ MatchMap <- function(Map,ExpressionMatrix, remove.duplicates = FALSE, accumulate
         if (!is.null(accumulate)){
                 GeneID <- NULL
                 acc_fun <- match.fun(accumulate)
-                ExpressionMatrix <- dplyr::summarise_all(dplyr::group_by(ExpressionMatrix, GeneID), dplyr::funs(acc_fun))
+                ExpressionMatrix <- dplyr::summarise_all(dplyr::group_by(ExpressionMatrix, GeneID), list(acc_fun))
                 
         }
         
