@@ -7,7 +7,7 @@ Authors@R: person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hajk-georg.drost@tuebingen.mpg.de",
                 comment = c(ORCID = "http://orcid.org/0000-0002-1567-306X"))
-Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2017) <doi:10.1093/bioinformatics/btx835>). The aim of this tool is to provide a transcriptome analysis environment for answering questions regarding the evolution of biological processes (Drost et al. (2016) <doi:10.1101/051565>).
+Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2017) <doi:10.1093/bioinformatics/btx835>). The aim of this tool is to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest (usually derived from RNAseq data) (Drost et al. (2016) <doi:10.1101/051565>).
 VignetteBuilder: knitr
 NeedsCompilation: yes
 License: GPL-3
@@ -33,14 +33,19 @@ Imports:
     readr (>= 0.2.2),
     tibble,
     scales,
-    gridExtra
+    gridExtra,
+    edgeR
 Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
     devtools (>= 1.6.1),
     testthat (>= 0.9.1),
     mgcv
-LinkingTo: Rcpp, RcppArmadillo
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo,
+    cpp11
 URL: https://github.com/drostlab/myTAI
 BugReports: https://github.com/drostlab/myTAI/issues
 RoxygenNote: 7.0.2
+SystemRequirements: C++11
