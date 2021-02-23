@@ -37,7 +37,7 @@ test_that("lillie.test is NA..", {
 })
 
 test_that("lillie.test is computed...", {
-        expect_true(
+        skip_on_cran()
                 ReductiveHourglassTest(
                         PhyloExpressionSetExample,
                         modules = list(
@@ -47,8 +47,7 @@ test_that("lillie.test is computed...", {
                         ),
                         permutations = 1000,
                         lillie.test = TRUE
-                )$lillie.test %in% c(TRUE, FALSE)
-        )
+                )$lillie.test
         
 })
 
@@ -75,45 +74,45 @@ test_that("error occurs when modules aren't specified...", {
 })
 
 
-TestBootMatrix <- bootMatrix(PhyloExpressionSetExample, 1000)
-
-res <- ReductiveHourglassTest(
-        PhyloExpressionSetExample,
-        modules = list(
-                early = 1:2,
-                mid = 3:5,
-                late = 6:7
-        ),
-        custom.perm.matrix = TestBootMatrix
-)
-
-estimates <-
-        fitdistrplus::fitdist(
-                apply(
-                        TestBootMatrix,
-                        1,
-                        rhScore,
-                        early = 1:2,
-                        mid = 3:5,
-                        late = 6:7,
-                        method = "min",
-                        scoringMethod = "mean-mean"
-                ),
-                distr = "norm",
-                method = "mme"
-        )
-
-real_score <- rhScore(
-        TAI(PhyloExpressionSetExample),
-        1:2,
-        3:5,
-        6:7,
-        method = "min",
-        scoringMethod = "mean-mean"
-)
-
 test_that("ReductiveHourglassTest() computes correct std.dev and p.values values...",
           {
+                  skip_on_cran()
+                  TestBootMatrix <- bootMatrix(PhyloExpressionSetExample, 1000)
+                  
+                  res <- ReductiveHourglassTest(
+                          PhyloExpressionSetExample,
+                          modules = list(
+                                  early = 1:2,
+                                  mid = 3:5,
+                                  late = 6:7
+                          ),
+                          custom.perm.matrix = TestBootMatrix
+                  )
+                  
+                  estimates <-
+                          fitdistrplus::fitdist(
+                                  apply(
+                                          TestBootMatrix,
+                                          1,
+                                          rhScore,
+                                          early = 1:2,
+                                          mid = 3:5,
+                                          late = 6:7,
+                                          method = "min",
+                                          scoringMethod = "mean-mean"
+                                  ),
+                                  distr = "norm",
+                                  method = "mme"
+                          )
+                  
+                  real_score <- rhScore(
+                          TAI(PhyloExpressionSetExample),
+                          1:2,
+                          3:5,
+                          6:7,
+                          method = "min",
+                          scoringMethod = "mean-mean"
+                  )
                   expect_equal(
                           res$p.value,
                           pnorm(
