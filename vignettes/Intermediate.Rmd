@@ -83,7 +83,7 @@ TAI(PhyloExpressionSetExample)
 ```
 Visualization: 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 data(PhyloExpressionSetExample)
 # Visualize the TAI profile of correctly assigned Phylostrata
 PlotSignature( ExpressionSet = PhyloExpressionSetExample, 
@@ -91,7 +91,7 @@ PlotSignature( ExpressionSet = PhyloExpressionSetExample,
 ```
 
 
-```{r,eval=TRUE, echo=FALSE}
+```{r,eval=FALSE, echo=FALSE}
 # randomly permute the Phylostratum assignment of all genes 
 randomPhyloExpressionSetExample <- data.frame( sample(PhyloExpressionSetExample[ , "Phylostratum"]), 
                                                PhyloExpressionSetExample[, 2:9] )
@@ -116,7 +116,7 @@ Users will observe that the visual pattern of the correctly assigned `TAI` profi
 
 Now we investigate the variance of the two observed patterns.
 
-```{r,eval=TRUE, echo=FALSE}
+```{r,eval=FALSE, echo=FALSE}
 # Variance of the TAI profile based on correctly assigned Phylostrata
 var(TAI(PhyloExpressionSetExample)) 
 ```
@@ -125,7 +125,7 @@ var(TAI(PhyloExpressionSetExample))
 [1] 0.01147725
 ```
 
-```{r,eval=TRUE, echo=FALSE}
+```{r,eval=FALSE, echo=FALSE}
 # Variance of the TAI profile based on randomly assigned Phylostrata
 var(TAI(randomPhyloExpressionSetExample)) 
 ```
@@ -138,7 +138,7 @@ We observe that the variance of the randomly assigned TAI profile is much smalle
 
 The `bootMatrix()` takes an PhyloExpressionSet or DivergenceExpressionSet as input and computes N `TAI` or `TDI` profiles based on randomly assigned Phylostrata or Divergence-Strata.
 
-```{r,eval=TRUE, echo=FALSE}
+```{r,eval=FALSE, echo=FALSE}
 # Compute 1000 TAI profiles based on randomly assigned Phylostrata
 randomTAIs <- bootMatrix( ExpressionSet = PhyloExpressionSetExample, 
                           permutations  = 1000 )
@@ -157,7 +157,7 @@ head(randomTAIs)
 ```
 Based on this `booMatrix` we can compute the variance of each random TAI profile.
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # compute the variance of the random TAI profile for each row
 variance_vector <- apply(randomTAIs, 1 , var)
 
@@ -168,7 +168,7 @@ hist(variance_vector, breaks = 100)
 Now it is interesting to see where we can find the variance of the correctly assigned TAI.
 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # variance of the TAI profile based on correctly assigned Phylostrata
 var_real <- var(TAI(PhyloExpressionSetExample)) 
 
@@ -189,7 +189,7 @@ This plot illustrates that variances based on random `TAI` profiles seem to have
 Visually it would be possible to choose a gamma distribution to fit the histogram of `variance_vector`. To validate this choice a [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment) provided by the __fitdistrplus__ package can be used.
 
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # install.packages("fitdistrplus")
 
 # plot a Cullen and Frey graph
@@ -199,7 +199,7 @@ fitdistrplus::descdist(variance_vector)
 Based on the observation that a gamma distribution is a suitable fit for `variance_vector`, we can now
 estimate the parameters of the gamma distribution that fits the data.
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 # estimate the parameters: shape and rate using 'moment matching estimation'
 gamma_MME <- fitdistrplus::fitdist(variance_vector,distr = "gamma", method = "mme")
 # estimate shape:
@@ -229,7 +229,7 @@ abline(v = var_real, lwd = 5, col = "red")
 Using the gamma distribution with estimated parameters the corresponding p-value of `var_real` can
 be computed.
 
-```{r,eval=TRUE}
+```{r,eval=FALSE}
 # p-value of var_real
 pgamma(var_real, shape = shape,rate = rate, lower.tail = FALSE)
 ```
@@ -272,7 +272,7 @@ The three resulting plots show:
 
 * a [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment)
 
-* a histogram of the test statistic and the corresponding [gamma distribution](http://en.wikipedia.org/wiki/Gamma_distribution) that
+* a histogram of the test statistic and the corresponding [gamma distribution](https://en.wikipedia.org/wiki/Gamma_distribution) that
 was fitted to the test statistic
 
 * a plot showing the p-values (`p_flt`) for 10 individual runs.
@@ -295,7 +295,7 @@ A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern d
 
 To build the test statistic again we start with a standard PhyloExpressionSet.
 
-```{r,eval=TRUE, echo=FALSE}
+```{r,eval=FALSE, echo=FALSE}
 library(myTAI)
 
 # load an example PhyloExpressionSet stored in the myTAI package
@@ -343,7 +343,7 @@ The Reductive Hourglass Test is a permutation test based on the following test s
 
 4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reductive Hourglass Test__.
 
-In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.XFnCFs_7TOR) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality.
 
 
 
@@ -376,8 +376,8 @@ ReductiveHourglassTest( ExpressionSet = PhyloExpressionSetExample,
 The corresponding output shows the p-value returned by the __Reductive Hourglass Test__,
 the standard deviation of randomly permuted TAI profiles returned by `bootMatrix()`
  (`apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)`) and in case the argument `lillie.test = TRUE`,
-a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality. In case `lillie.test` is `TRUE` the corresponding 
-[Lilliefors (Kolmogorov-Smirnov)](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) 
+a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality. In case `lillie.test` is `TRUE` the corresponding 
+[Lilliefors (Kolmogorov-Smirnov)](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) 
  test passed the goodness of fit criterion. In case `lillie.test` is `FALSE` the corresponding goodness of fit by a normal distribution is not statistically significant.
 
 Analogous to the `plotHistogram` argument that is present in the `FlatLineTest()` function,
@@ -394,7 +394,7 @@ The corresponding parameters are estimated by moment matching estimation.
 
 * A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
 
-* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
+* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
 This allows to quantify the permutation bias and their implications on the goodness of fit.
 
 
@@ -408,7 +408,7 @@ ReductiveHourglassTest( ExpressionSet = PhyloExpressionSetExample,
 ```
 
 The corresponding output shows the `summary statistics` of the fitted normal distribution
-as well as the p-value, standard deviation, and [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) result.
+as well as the p-value, standard deviation, and [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) result.
 
 This example output nicely illustrates that although the Lilliefors (Kolmogorov-Smirnov) test for normality is violated for some permutations, the Cullen and Frey graph shows that there is no better approximation than a normal distribution (which is also supported visually by investigating the fitted frequency distribution). The corresponding p-value returned by `ReductiveHourglassTest()` is significant and illustrates that the observed phylotranscriptomic pattern of PhyloExpressionSetExample does follow the Hourglass Model assumption.
 
@@ -420,7 +420,7 @@ A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern d
 
 To build the test statistic again we start with a standard PhyloExpressionSet.
 
-```{r,eval=TRUE}
+```{r,eval=FALSE}
 library(myTAI)
 
 # load an example PhyloExpressionSet stored in the myTAI package
@@ -460,7 +460,7 @@ The reductive early conservation test is a permutation test based on the followi
 
 4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reductive Early Conservation Test__.
 
-In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by an [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by an [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality.
 
 To perform the __Reductive Early Conservation Test__ you can use the `EarlyConservationTest()` function.
 Using this function you need to divide the given phylotranscriptomics pattern into
@@ -502,7 +502,7 @@ The corresponding parameters are estimated by moment matching estimation.
 
 * A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
 
-* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
+* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
 This allows to quantify the permutation bias and their implications on the goodness of fit.
 
 
@@ -515,7 +515,7 @@ EarlyConservationTest( ExpressionSet = PhyloExpressionSetExample,
 
 ```
 
-This example output nicely illustrates that although the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality is violated, the [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment) shows that there is no better approximation
+This example output nicely illustrates that although the [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality is violated, the [Cullen and Frey graph](https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment) shows that there is no better approximation
 than a normal distribution (which is also supported visually by investigating the fitted frequency distribution). The corresponding p-value
 returned by the `EarlyConservationTest()` is highly non-significant and illustrates that the observed phylotranscriptomic pattern of `PhyloExpressionSetExample`
 does not follow the Early Conservation Model assumption. 
@@ -532,7 +532,7 @@ A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern d
 
 To build the test statistic again we start with a standard PhyloExpressionSet.
 
-```{r,eval=TRUE, echo=FALSE}
+```{r,eval=FALSE, echo=FALSE}
 library(myTAI)
 
 # load an example PhyloExpressionSet stored in the myTAI package
@@ -580,7 +580,7 @@ The Reverse Hourglass Test is a permutation test based on the following test sta
 
 4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reverse Hourglass Test__.
 
-In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality.
 
 
 
@@ -623,8 +623,8 @@ $lillie.test
 The corresponding output shows the p-value returned by the __Reductive Hourglass Test__,
 the standard deviation of randomly permuted TAI profiles returned by `bootMatrix()`
  (`apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)`) and in case the argument `lillie.test = TRUE`,
-a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality. In case `lillie.test` is `TRUE` the corresponding 
-[Lilliefors (Kolmogorov-Smirnov)](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) 
+a logical value representing the goodness of fit statistic returned by the [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality. In case `lillie.test` is `TRUE` the corresponding 
+[Lilliefors (Kolmogorov-Smirnov)](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) 
  test passed the goodness of fit criterion. In case `lillie.test` is `FALSE` the corresponding goodness of fit by a normal distribution is not statistically significant.
 
 Analogous to the `plotHistogram` argument that is present in the `FlatLineTest()` function,
@@ -641,7 +641,7 @@ The corresponding parameters are estimated by moment matching estimation.
 
 * A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
 
-* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
+* A bar plot showing the number of cases in which the underlying goodness of fit (returned by [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality) has shown to be significant (`TRUE`) or not significant (`FALSE`). 
 This allows to quantify the permutation bias and their implications on the goodness of fit.
 
 
@@ -655,7 +655,7 @@ ReverseHourglassTest( ExpressionSet = PhyloExpressionSetExample,
 ```
 
 The corresponding output shows the `summary statistics` of the fitted normal distribution
-as well as the p-value, standard deviation, and [Lilliefors (Kolmogorov-Smirnov) test](http://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419#.VDjzFCl_vek) result.
+as well as the p-value, standard deviation, and [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) result.
 
 This example output nicely illustrates that although the Lilliefors (Kolmogorov-Smirnov) test for normality is violated for some permutations, the Cullen and Frey graph shows that there is no better approximation than a normal distribution (which is also supported visually by investigating the fitted frequency distribution). The corresponding p-value returned by `ReverseHourglassTest()` is significant and illustrates that the observed phylotranscriptomic pattern of PhyloExpressionSetExample does follow the Hourglass Model assumption.
 
@@ -741,7 +741,7 @@ the resulting phylotranscriptomic patterns qualitatively differ:
 
 ### log2 transformation (TAI)
 
-```{r, fig.width= 7, fig.height= 5, eval=TRUE}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(PhyloExpressionSetExample)
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
@@ -755,7 +755,7 @@ PlotSignature( ExpressionSet = tf(PhyloExpressionSetExample, log2),
 
 ### sqrt transformation (TAI)
 
-```{r, fig.width= 7, fig.height= 5, eval=TRUE}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(PhyloExpressionSetExample)
 # plotting the TAI using sqrt transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
@@ -775,7 +775,7 @@ The same accounts for `TDI` profiles:
 
 ### log2 transformation (TDI)
 
-```{r, fig.width= 7, fig.height= 5, eval=TRUE}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(DivergenceExpressionSetExample)
 # plotting the TDI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
@@ -787,7 +787,7 @@ PlotSignature( ExpressionSet = tf(DivergenceExpressionSetExample, log2),
 
 ### sqrt transformation (TDI)
 
-```{r, fig.width= 7, fig.height= 5, eval=TRUE}
+```{r, fig.width= 7, fig.height= 5, eval=FALSE}
 data(DivergenceExpressionSetExample)
 # plotting the TDI using sqrt transformed expression levels
 # and performing the Flat Line Test to obtain the p-value

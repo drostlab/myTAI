@@ -13,7 +13,7 @@ vignette: >
 `Phylostratum` and `Divergence Stratum` enrichment analyses have been performed by several
 studies to correlate organ or metabolic pathway evolution with the origin of organ or pathway specific genes (Sestak and Domazet-Loso, 2015).
 
-In detail, `Phylostratum` and `Divergence Stratum` enrichment analyses can be performed analogously to [Gene Ontology](http://geneontology.org/page/go-enrichment-analysis) and [Kegg](http://www.genome.jp/kegg/) enrichment analyses to study the enrichment of evolutionary age or sequence divergence in a set of selected genes against the entire genome/transcriptome. In case specific age categories are significantly over- or underrepresented in the selected gene set, assumptions or potential correlations between the evolutionary origin of a particular organ or metabolic pathway can be implied. 
+In detail, `Phylostratum` and `Divergence Stratum` enrichment analyses can be performed analogously to [Gene Ontology](https://geneontology.github.io/page/go-enrichment-analysis/) and [Kegg](https://www.genome.jp/kegg/) enrichment analyses to study the enrichment of evolutionary age or sequence divergence in a set of selected genes against the entire genome/transcriptome. In case specific age categories are significantly over- or underrepresented in the selected gene set, assumptions or potential correlations between the evolutionary origin of a particular organ or metabolic pathway can be implied. 
 
 In this vignette we will use the data set published by Sestak and Domazet-Loso, 2015 to demonstrate how to perform enrichment analyses using `myTAI`.
 

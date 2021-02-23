@@ -3,7 +3,7 @@ title: "Retrieving Taxonomic Information"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Taxonomic Information}
+  %\VignetteIndexEntry{Retrieving Taxonomic Information}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -44,7 +44,7 @@ usethis::edit_r_environ()
 The `myTAI` package provides the `taxonomy()` function to retrieve taxonomic information.
 
 
-In the following example we will obtain the taxonomic hierarchy of `Arabidopsis thaliana` from [NCBI Taxonomy](http://www.ncbi.nlm.nih.gov/taxonomy).
+In the following example we will obtain the taxonomic hierarchy of `Arabidopsis thaliana` from [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy).
 
 
 ```{r, eval=FALSE}
@@ -195,5 +195,5 @@ myTAI::taxonomy( organism = "Arabidopsis",
 4 Arabidopsis     23040  Species    Arabidopsis lyrata 823171
 ```
 
-These results allow us to choose `subject` organisms for [Divergence Stratigraphy](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd).
+These results allow us to choose `subject` organisms for [Divergence Stratigraphy](https://github.com/drostlab/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd).
 

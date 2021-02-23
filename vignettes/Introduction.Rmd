@@ -1,5 +1,5 @@
 ---
-title: "Introduction to the myTAI Package"
+title: "Introduction to the myTAI package"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 fig_caption: yes
@@ -39,7 +39,7 @@ Finding such transcriptome conservation or variability patterns within a biologi
 
 The myTAI package provides an analytics tool to perform evolutionary transcriptomics studies and is designed to detect evolutionary signatures in transcriptome data. It furthermore, seeks to provide a consistent way to design a computationally reproducible analytics process that achieves a high degree of transparency when conducting evolutionary transcriptomics studies.
 
-Alternatively, instead of investigating the transcriptome conservation of a biological process of interest, `comparative transcriptomics` ( [Pantalacci and Semon, 2014](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22595/abstract); [Roux et al., 2015](http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22618/full) ) has been developed as a method to study the conservation and variation of gene expression profiles of orthologous genes between related species for a biological process of intest. 
+Alternatively, instead of investigating the transcriptome conservation of a biological process of interest, `comparative transcriptomics` ( [Pantalacci and Semon, 2014](https://onlinelibrary.wiley.com/doi/abs/10.1002/jez.b.22595); [Roux et al., 2015](https://onlinelibrary.wiley.com/doi/full/10.1002/jez.b.22618) ) has been developed as a method to study the conservation and variation of gene expression profiles of orthologous genes between related species for a biological process of intest. 
 
 For some biological studies, it can be useful to choose both approaches, `comparative transcriptomics` and `transcriptome conservation quantification`, to independently confirm
 evolutionary constraints that might be present in a biological process of interest.
@@ -106,7 +106,7 @@ In theory, any published or newly generated transcriptome dataset can be used to
 
 ![](Figures/Fig3.png)
 
-<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](http://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html) and [Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)), or phylogenetic reconciliation (see [Doyon et al, 2011](https://www.ncbi.nlm.nih.gov/pubmed/21949266) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
+<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](https://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](https://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](https://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](https://www.nature.com/articles/nature11394) and [Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)), or phylogenetic reconciliation (see [Doyon et al, 2011](https://pubmed.ncbi.nlm.nih.gov/21949266/) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
 
 
 ## Retrieval of phylogenetic or taxonomic information
@@ -116,23 +116,23 @@ For the comparative genomics part there are different methods and tools to quant
 
 ### Genomic phylostratography based gene age inference
 
-As intensely discussed in the past years ([Capra et al., 2013](http://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113); [Yin et al., 2018](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074); [Casola 2018](https://academic.oup.com/gbe/article/10/11/2906/5140197)).
+As intensely discussed in the past years ([Capra et al., 2013](https://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](https://www.nature.com/articles/nmeth.3830.pdf); [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026)), gene age inference is not a trivial task and might be biased in some currently existing approaches ([Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026); [Yin et al., 2018](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074); [Casola 2018](https://academic.oup.com/gbe/article/10/11/2906/5140197)).
 
-In particular, Moyers & Zhang argue that [genomic phylostratigraphy](http://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 
+In particular, Moyers & Zhang argue that [genomic phylostratigraphy](https://www.sciencedirect.com/science/article/pii/S0168952507002995) (a prominent BLAST based gene age inference method) 
 
 1) underestimates gene age for a considerable fraction of genes, 
 
 2) is biased for rapidly evolving proteins which are short, and/or their most conserved block of sites is small, and 
 
-3) these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori ([Moyers & Zhang, 2015](http://mbe.oxfordjournals.org/content/32/1/258.long);  [Moyers & Zhang, 2016](http://mbe.oxfordjournals.org/content/33/5/1245); [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). 
+3) these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori ([Moyers & Zhang, 2015](https://academic.oup.com/mbe/article/32/1/258/2925575);  [Moyers & Zhang, 2016](https://academic.oup.com/mbe/article/33/5/1245/2579728); [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026)). 
 
-However, these arguments were based on simulated data and were inconclusive due to [errors in their analyses](http://mbe.oxfordjournals.org/content/33/11/3031.full?etoc). Furthermore, [Domazet-Loso et al., 2017](https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284) provide convincing evidence that there is __no__ phylostratigraphic bias. As a response,
+However, these arguments were based on simulated data and were inconclusive due to [errors in their analyses](https://academic.oup.com/mbe/article/33/11/3031/2272516). Furthermore, [Domazet-Loso et al., 2017](https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284) provide convincing evidence that there is __no__ phylostratigraphic bias. As a response,
 [Moyers & Zhang, 2017](https://academic.oup.com/gbe/article/9/6/1519/3867914) recently published a counter-study stating that a phylostratigraphic trend claimed by [Domazet-Loso et al., 2017](https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284) to be robust to error disappears when genes likely to be error-resistant are analyzed. [Moyers & Zhang, 2017](https://academic.oup.com/gbe/article/9/6/1519/3867914) further suggest a more robust methodology for controlling for the effects of error by first restricting to those genes which can be simulated and then removing those genes which, through simulation, have been shown to be error-prone (see also [Moyers & Zhang, 2018](https://academic.oup.com/gbe/article/10/8/2037/5061555)).
 
-In general, an objective benchmarking set representing the tree of life is still missing and therefore any procedure aiming to quantify gene ages will be biased to some degree. Based on this debate a recent study suggested to perform gene age inference by combining several common orthology inference algorithms to create gene age datasets and then characterize the error around each age-call on a per-gene and per-algorithm basis. Using this approach systematic error was found to be a large factor in estimating gene age, suggesting that simple consensus algorithms are not enough to give a reliable point estimate ([Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113)). This was also observed by [Moyers & Zhang, 2018](https://academic.oup.com/gbe/article/10/8/2037/5061555)) when running alternative tools such as `PSIBLAST`, `HMMER`, `OMA`, etc. However, by generating a consensus gene age and quantifying the possible error in each workflow step, [Liebeskind et al., 2016](http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113) provide a very useful [database](http://geneages.org/) of
+In general, an objective benchmarking set representing the tree of life is still missing and therefore any procedure aiming to quantify gene ages will be biased to some degree. Based on this debate a recent study suggested to perform gene age inference by combining several common orthology inference algorithms to create gene age datasets and then characterize the error around each age-call on a per-gene and per-algorithm basis. Using this approach systematic error was found to be a large factor in estimating gene age, suggesting that simple consensus algorithms are not enough to give a reliable point estimate ([Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026)). This was also observed by [Moyers & Zhang, 2018](https://academic.oup.com/gbe/article/10/8/2037/5061555)) when running alternative tools such as `PSIBLAST`, `HMMER`, `OMA`, etc. However, by generating a consensus gene age and quantifying the possible error in each workflow step, [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026) provide a very useful [database](https://github.com/marcottelab/Gene-Ages) of
 consensus gene ages for a variety of genomes. 
 
-Alternatively, [Stephen Smith, 2016](https://bib.oxfordjournals.org/content/early/2016/04/20/bib.bbw034.full) argues that _de novo_ gene birth/death and gene family expansion/contraction studies should avoid drawing direct inferences of evolutionary relatedness from measures of sequence similarity alone, and should instead, where possible, use more rigorous phylogeny-based methods. For this purpose, I recommend researchers to consult the [phylomedb database](http://orthology.phylomedb.org/) to retrieve phylogeny-based gene orthology relationships and use these age estimates in combination with `myTAI`. Alternatively, users might find the simulation based removal approach propsed by [Moyers & Zhang, 2018](https://academic.oup.com/gbe/article/10/8/2037/5061555) more suitable. 
+Alternatively, [Stephen Smith, 2016](https://doi.org/10.1093/bib/bbw034) argues that _de novo_ gene birth/death and gene family expansion/contraction studies should avoid drawing direct inferences of evolutionary relatedness from measures of sequence similarity alone, and should instead, where possible, use more rigorous phylogeny-based methods. For this purpose, I recommend researchers to consult the [phylomedb database](http://orthology.phylomedb.org/) to retrieve phylogeny-based gene orthology relationships and use these age estimates in combination with `myTAI`. Alternatively, users might find the simulation based removal approach proposed by [Moyers & Zhang, 2018](https://academic.oup.com/gbe/article/10/8/2037/5061555) more suitable. 
 
 Evidently, these advancements in gene age research are very recent and gene age inference is a very young and active field of genomic research. Therefore, many more studies need to address the robust and realistic inference of gene age and a community standard is still missing.
 
@@ -174,7 +174,7 @@ A recently introduced approach is called `synteny-based phylostratigraphy` ([Are
 
 Hence, all of the above mentioned approaches are far from being perfect and much more research is needed to systematically compare different approaches for gene age inference.   
 
-The overall rational behind gene age inference is to assign each protein coding gene of an organism of interest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see  [Tautz & Domazet-Loso, 2011](http://www.nature.com/nrg/journal/v12/n10/abs/nrg3053.html))). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _phylostratigraphic map_.
+The overall rational behind gene age inference is to assign each protein coding gene of an organism of interest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see  [Tautz & Domazet-Loso, 2011](https://www.nature.com/articles/nrg3053))). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named _phylostratigraphic map_.
 
 
 __Generate or retrieve phylostratigraphic maps:__
@@ -182,13 +182,13 @@ __Generate or retrieve phylostratigraphic maps:__
 - [R package: phylostratr](https://github.com/arendsee/phylostratr) which implements `Phylostratigraphy` as an `R package` - Please consult the [Vignettes](https://github.com/arendsee/phylostratr/tree/master/vignettes) for examples. 
 - [R package: fagin](https://github.com/arendsee/fagin): a synteny-based phylostratigraphy and finer classification of young genes (see also the [corresponding manuscript](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y) and [example applications](https://github.com/arendsee/fagin-case-studies))
 - [createPSmap.pl](https://github.com/AlexGa/Phylostratigraphy): generate a phylostratigraphic map (implemented by Alexander Gabel)
-- [phylostratigraphy.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022): generate a phylostratigraphic (implemented by Cheng et al. 2015)
+- [phylostratigraphy.pl](https://figshare.com/articles/dataset/A_developmental_hourglass_in_fungi/1284022): generate a phylostratigraphic (implemented by Cheng et al. 2015)
 - [phylo_pipeline.py](https://mynotebook.labarchives.com/share/Shuqing_Xu/NTIuMHw2NDQyMi80MC9UcmVlTm9kZS8zNDEyODM1NjE2fDEzMi4w): a Python script to generate a phylostratigraphic map (implemented by Shuqing Xu)
 - [Genomic-phylostratigraphy-tool](https://github.com/longjunwu/Genomic-phylostratigraphy-tool): a Python script to generate a phylostratigraphic map (implemented by Longjun Wu)
-- [ORFanFinder](http://bioinformatics.oxfordjournals.org/content/early/2016/03/26/bioinformatics.btw122.full.pdf): generate a phylostratigraphic map
+- [ORFanFinder](http://bcb.unl.edu/orfanfinder/): generate a phylostratigraphic map
 - `Protein Historian`: generate a gene age map
 - download pre-computed and published [phylostratigraphic maps](https://github.com/HajkD/published_phylomaps)
-- [Liebeskind et al., 2016](http://geneages.org/): use a gene age consensus approach to estimating gene ages for model organisms
+- [Liebeskind et al., 2016](https://github.com/marcottelab/Gene-Ages): use a gene age consensus approach to estimating gene ages for model organisms
 - [orthoscape](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1427-5): a cytoscape application for grouping and visualization KEGG based gene networks by taxonomy and homology principles (implemented by Mustafin et al., 2017)
 - [RecBlast](http://biorxiv.org/content/early/2017/03/02/112946): Cloud-Based Large Scale Orthology Detection (by Efrat Rapoport and Moran Neuhof)
 - [protTrace](https://github.com/BIONF/protTrace): A simulation based framework to estimate the evolutionary traceability of protein
@@ -202,8 +202,8 @@ divergence stratigraphy generates a table storing the sequence conservation esti
 
 __Generate or retrieve divergence stratigraphic maps:__
 
-- [orthologr](https://github.com/HajkD/orthologr): generate a [divergence stratigraphic map](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) (implemented by Hajk-Georg Drost)
-- [compute_dNdS.pl](https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022): generate a divergence stratigraphic map (implemented by Cheng et al. 2015)
+- [orthologr](https://github.com/drostlab/orthologr): generate a [divergence stratigraphic map](https://github.com/drostlab/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) (implemented by Hajk-Georg Drost)
+- [compute_dNdS.pl](https://figshare.com/articles/dataset/A_developmental_hourglass_in_fungi/1284022): generate a divergence stratigraphic map (implemented by Cheng et al. 2015)
 - [MetaPhOrs](http://orthology.phylomedb.org/): retrieve phylogeny-based orthology and paralogy predictions
 - download pre-computed and published [divergence stratigraphic maps](https://github.com/HajkD/published_phylomaps)
 - [orthoscape](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1427-5): a cytoscape application for grouping and visualization KEGG based gene networks by taxonomy and homology principles (implemented by Mustafin et al., 2017)
@@ -251,7 +251,7 @@ head(PhyloExpressionSetExample[ , c("Phylostratum","GeneID")])
 In detail, a _phylostratigraphic map_ stores the gene age assignment generated with e.g. [phylostratigraphy](https://github.com/AlexGa/Phylostratigraphy) in the
 first columns and the corresponding gene id in the second column.
 
-Analogously, a divergence stratigraphic map stores the gene age assignment generated with e.g. [divergence stratigraphy](https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) in the
+Analogously, a divergence stratigraphic map stores the gene age assignment generated with e.g. [divergence stratigraphy](https://github.com/drostlab/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd) in the
 first column and the corresponding gene id in the second column:
 
 ```{r,eval=FALSE}
@@ -291,7 +291,7 @@ In the following examples we will use a `gene expression dataset` covering seven
 6 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542
 ```
 
-The function `MatchMap()` allows users to join a _phylostratigraphic map_ with an _ExpressionMatrix_ to obtain a joined table referred to as _PhyloExpressionSet_. In some cases, the GeneIDs stored in the `ExpressionMatrix` and in the _phylostratigraphic map_ do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package. The `biomartr` package allows users to map GeneIDs between database annotations.
+The function `MatchMap()` allows users to join a _phylostratigraphic map_ with an _ExpressionMatrix_ to obtain a joined table referred to as _PhyloExpressionSet_. In some cases, the GeneIDs stored in the `ExpressionMatrix` and in the _phylostratigraphic map_ do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the [Functional Annotation Vignette](https://github.com/ropensci/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/ropensci/biomartr) package. The `biomartr` package allows users to map GeneIDs between database annotations.
 
 After matching a _phylostratigraphic map_ with an _ExpressionMatrix_ using the `MatchMap()` function, a standard _PhyloExpressionSet_ is returned storing the phylostratum assignment of a given gene in the first column, the _gene id_ of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. This format is crucial for all functions that are implemented in the `myTAI` package.
 
@@ -339,7 +339,7 @@ head(DivergenceExpressionSetExample, 3)
 
 ```
 
-A _DivergenceExpressionSet_ defines the joined table between a _divergence stratigraphic map_ and a _Expression Set_. A _DivergenceExpressionSet_ can be generated analogous to a _PhyloExpressionSet_ by joining a _divergence  stratigraphic map_ with an _ExpressionMatrix_ using the `MatchMap()` function. In some cases, the GeneIDs stored in the _ExpressionMatrix_ and in the _divergence stratigraphic map_ do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the [Functional Annotation Vignette](https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/HajkD/biomartr) package.
+A _DivergenceExpressionSet_ defines the joined table between a _divergence stratigraphic map_ and a _Expression Set_. A _DivergenceExpressionSet_ can be generated analogous to a _PhyloExpressionSet_ by joining a _divergence  stratigraphic map_ with an _ExpressionMatrix_ using the `MatchMap()` function. In some cases, the GeneIDs stored in the _ExpressionMatrix_ and in the _divergence stratigraphic map_ do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the [Functional Annotation Vignette](https://github.com/ropensci/biomartr/blob/master/vignettes/Functional_Annotation.Rmd) in the [biomartr](https://github.com/ropensci/biomartr) package.
 
 
 Each function implemented in `myTAI` checks internally whether or not the _PhyloExpressionSet_ or _DivergenceExpressionSet_ standard is fulfilled.
@@ -414,7 +414,7 @@ the gene expression level of gene $i$ at developmental time point $s$. A lower v
 
 The following figure shows the TAI computations for the seven stages of _A. thaliana_ embryo development.
 
-```{r, fig.width= 7, fig.height= 5,eval=TRUE}
+```{r, fig.width= 7, fig.height= 5,eval=FALSE}
 data(PhyloExpressionSetExample)
 # Plot the Transcriptome Age Index of a given PhyloExpressionSet 
 # Test Statistic : Flat Line Test (default)
@@ -436,7 +436,7 @@ In this example, a TAI value of 3.5 quantifies that genes that contribute most t
 To obtain a more detailed overview of which age categories contribute how much to
 each developmental stage, the gene expression level distributions for each age caterory and each developmental stage can be visualized (using the `PlotCategoryExpr()` function).
 
-```{r, fig.width= 9, fig.height= 5,eval=TRUE}
+```{r, fig.width= 9, fig.height= 5,eval=FALSE}
 data(PhyloExpressionSetExample)
 # category-centered visualization of PS 
 # specific expression level distributions (log-scale)
@@ -450,7 +450,7 @@ PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
 
 This figure shows that in all developmental stages, genes coming from PS1-3 are (on average) more expressed than genes coming from PS4-12. Interestingly, the gene expression level distributions of PS4-12 become more equally distributed towards the Torpedo stage which has been marked as the most conserved stage by TAI analysis. This general trend can be visualized using the `PlotMeans()` function.
 
-```{r, fig.width= 9, fig.height= 5,eval=TRUE}
+```{r, fig.width= 9, fig.height= 5,eval=FALSE}
 data(PhyloExpressionSetExample)
 # plot evolutionary old PS (PS1-3) vs
 # evolutionary young PS (PS4-12)
@@ -466,7 +466,7 @@ Using a linear transformation of the mean expression levels into the interval $[
 
 The following figure illustrates the average gene expression profile for each phylostratum.
 
-```{r, fig.width= 9, fig.height= 5,eval=TRUE}
+```{r, fig.width= 9, fig.height= 5,eval=FALSE}
 data(PhyloExpressionSetExample)
 # plot evolutionary old PS (PS1-3) vs
 # evolutionary young PS (PS4-12)
@@ -480,7 +480,7 @@ Users will observe, that PS4-12 genes are down-regulated towards the Torpedo sta
 
 To cluster gene expression levels of PS4-12 genes we categorize _A. thaliana_ embryogenesis into three developmental modules (early, mid, and late) and cluster young genes (PS4-12) according to their fold-change pattern: High-Low-Low, High-Low-High, and Low-Low-High. 
 
-```{r,eval=TRUE,echo=FALSE,fig.width= 7, fig.height= 15}
+```{r,eval=FALSE,echo=FALSE,fig.width= 7, fig.height= 15}
 # select PS4-12 genes
 PhyloExpressionSetExample.PS4_12 <-
         dplyr::filter(PhyloExpressionSetExample, Phylostratum %in% c(4:12))
