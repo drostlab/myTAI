@@ -1,7 +1,8 @@
 //#include <RcppArmadilloExtensions/sample.h>
 #include <Rcpp.h>
 #include <math.h>
-
+#include <map>
+#include <random>
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::plugins(cpp11)]]
 
@@ -23,12 +24,14 @@ NumericVector permut(const NumericVector& a)
 {
         
         // already added by sourceCpp(), but needed standalone
-        RNGScope scope;             
+        // RNGScope scope;             
         
         // clone a into b to leave a alone
         NumericVector b = clone(a);
         
-        random_shuffle(b.begin(), b.end(), randWrapper);
+        std::random_device rng;
+        std::mt19937 urng(rng());
+        std::shuffle(b.begin(), b.end(), urng);
         
         return b;
 }
