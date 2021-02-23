@@ -102,10 +102,6 @@ B.P. Durbin et al.: A variance-stabilizing transformation for gene-expression mi
 
 J. M. Bland et al.: Transforming data. BMJ 1996, 312:770
 
-\url{http://stats.stackexchange.com/questions/1444/how-should-i-transform-non-negative-data-including-zeros}
-
-\url{http://stats.stackexchange.com/questions/78929/how-can-i-estimate-theta-for-the-inverse-hyperbolic-sine-transformation}
-
 John B. Burbidge, Lonnie Magee and A. Leslie Robb (1988) Alternative Transformations to Handle Extreme Values of the Dependent Variable. Journal of the American Statistical Association, 83(401): 123-127.
 
 G. E. P. Box and D. R. Cox (1964) An Analysis of Transformations. Journal of the Royal Statistical Society. Series B (Methodological), 26(2): 211-252.
