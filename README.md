@@ -37,7 +37,7 @@ BiocManager::install("edgeR")
 Now users can install `myTAI` from CRAN:
 
 ```r
-# install myTAI 0.9.2
+# install myTAI 0.9.3
 install.packages("myTAI", dependencies = TRUE)
 ```
 
