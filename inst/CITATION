@@ -9,14 +9,14 @@ citEntry(entry = "Article",
                    as.person("Grosse I")),
   journal      = "Bioinformatics",
   year         = "2018",
-  volume       = "",
-  number       = "",
-  pages        = "",
+  volume       = "34",
+  number       = "9",
+  pages        = "1589-1590",
   url          = "",
   
   textVersion  =
   paste("Drost HG, Gabel A, Jiu J, Quint M, Grosse I.",
   " myTAI: evolutionary transcriptomics with R.",
   " Bioinformatics (2018).",
-  "doi:10.1093")
+  "doi:10.1093/bioinformatics/btx835")
 )
