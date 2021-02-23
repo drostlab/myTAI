@@ -91,7 +91,7 @@ data(PhyloExpressionSetExample)
 # plot TAI pattern and perform flat line test
 PlotSignature(PhyloExpressionSetExample, 
               measure       = "TAI", 
-              permutations  = 1000,
+              permutations  = 100,
               TestStatistic = "FlatLineTest",
               ylab = "Transcriptome Age Index")
               
