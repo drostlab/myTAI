@@ -14,7 +14,7 @@ is.ExpressionSet <- function(ExpressionSet){
         
         ncols <- dim(ExpressionSet)[2]
         
-        d.f_bool <- is.data.frame(ExpressionSet) | tibble::is.tibble(ExpressionSet)
+        d.f_bool <- is.data.frame(ExpressionSet) | tibble::is_tibble(ExpressionSet)
         
         if (!d.f_bool)
                 stop("ExpressionSet is not a data.frame or tibble.", call. = FALSE)
