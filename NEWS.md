@@ -1,6 +1,8 @@
 myTAI 0.9.3
 ===========
-- `edgeR` package dependency was removed from `myTAI`
+- removing the depreciated `std::random_shuffle()` function to sample `plylostratum` or `divergence stratum` columns and replacing it with `std::shuffle()`. See full discussion [here](https://meetingcpp.com/blog/items/stdrandom_shuffle-is-deprecated.html).
+- removing depreciated function calls such as `dplyr::funs()` and `tibble.is.tibble()`
+- updated unit tests
 
 myTAI 0.9.2
 ===========
