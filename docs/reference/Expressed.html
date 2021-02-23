@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="This function takes an ExpressionSet object and removes genes from the gene expression matrix that
 have an expression level below, above, or below AND above a defined cut.off value. Hence, this function allows to remove
 genes that have been defined as not expressed or outliers and returns an ExpressionSet retaining only expressed genes." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -57,7 +60,7 @@ genes that have been defined as not expressed or outliers and returns an Express
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,7 +82,7 @@ genes that have been defined as not expressed or outliers and returns an Express
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -119,8 +122,8 @@ genes that have been defined as not expressed or outliers and returns an Express
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/HajkD/myTAI">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/drostlab/myTAI/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -138,7 +141,7 @@ genes that have been defined as not expressed or outliers and returns an Express
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Filter for Expressed Genes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/Expressed.R'><code>R/Expressed.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/drostlab/myTAI/blob/master/R/Expressed.R'><code>R/Expressed.R</code></a></small>
     <div class="hidden name"><code>Expressed.Rd</code></div>
     </div>
 
@@ -148,13 +151,13 @@ have an expression level below, above, or below AND above a defined <code>cut.of
 genes that have been defined as <em>not expressed</em> or <em>outliers</em> and returns an <code>ExpressionSet</code> retaining only expressed genes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Expressed</span>(
-  <span class='no'>ExpressionSet</span>,
-  <span class='no'>cut.off</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"const"</span>,
-  <span class='kw'>comparison</span> <span class='kw'>=</span> <span class='st'>"below"</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>Expressed</span><span class='op'>(</span>
+  <span class='va'>ExpressionSet</span>,
+  <span class='va'>cut.off</span>,
+  method <span class='op'>=</span> <span class='st'>"const"</span>,
+  comparison <span class='op'>=</span> <span class='st'>"below"</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,66 +196,68 @@ at the second position.</p></td>
 <li><p><code>n-set</code>: genes passing the expression level <code>cut.off</code> in <code>n</code> stages will be retained in the <code>ExpressionSet</code>. Here, the argument <code>n</code> needs to be specified.</p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
 
 <span class='co'># remove genes that have an expression level below 8000 </span>
 <span class='co'># in at least one developmental stage</span>
-<span class='no'>FilterConst</span> <span class='kw'>&lt;-</span> <span class='fu'>Expressed</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='no'>PhyloExpressionSetExample</span>,
-                         <span class='kw'>cut.off</span>       <span class='kw'>=</span> <span class='fl'>8000</span>,
-                         <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"const"</span>,
-                         <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"below"</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>FilterConst</span>) <span class='co'># check number of retained genes</span></div><div class='output co'>#&gt; [1] 449   9</div><div class='input'>
+<span class='va'>FilterConst</span> <span class='op'>&lt;-</span> <span class='fu'>Expressed</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
+                         cut.off       <span class='op'>=</span> <span class='fl'>8000</span>, 
+                         method        <span class='op'>=</span> <span class='st'>"const"</span>,
+                         comparison    <span class='op'>=</span> <span class='st'>"below"</span><span class='op'>)</span>
+                              
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>FilterConst</span><span class='op'>)</span> <span class='co'># check number of retained genes</span>
+</div><div class='output co'>#&gt; [1] 449   9</div><div class='input'>
 <span class='co'># remove genes that have an expression level below 8000 </span>
 <span class='co'># in at least 3 developmental stages </span>
 <span class='co'># (in this case: ceiling(7/2) = 4 stages fulfilling the cut-off criteria)</span>
-<span class='no'>FilterMinSet</span> <span class='kw'>&lt;-</span> <span class='fu'>Expressed</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='no'>PhyloExpressionSetExample</span>,
-                          <span class='kw'>cut.off</span>       <span class='kw'>=</span> <span class='fl'>8000</span>,
-                          <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"min-set"</span>,
-                          <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"below"</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>FilterMinSet</span>) <span class='co'># check number of retained genes</span></div><div class='output co'>#&gt; [1] 830   9</div><div class='input'>
+<span class='va'>FilterMinSet</span> <span class='op'>&lt;-</span> <span class='fu'>Expressed</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
+                          cut.off       <span class='op'>=</span> <span class='fl'>8000</span>, 
+                          method        <span class='op'>=</span> <span class='st'>"min-set"</span>,
+                          comparison    <span class='op'>=</span> <span class='st'>"below"</span><span class='op'>)</span>
+                               
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>FilterMinSet</span><span class='op'>)</span> <span class='co'># check number of retained genes</span>
+</div><div class='output co'>#&gt; [1] 830   9</div><div class='input'>
 <span class='co'># remove genes that have an expression level below 8000 </span>
 <span class='co'># in at least 5 developmental stages (in this case: n = 2 stages fulfilling the criteria)</span>
-<span class='no'>FilterNSet</span> <span class='kw'>&lt;-</span> <span class='fu'>Expressed</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='no'>PhyloExpressionSetExample</span>,
-                        <span class='kw'>cut.off</span>       <span class='kw'>=</span> <span class='fl'>8000</span>,
-                        <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"n-set"</span>,
-                        <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"below"</span>,
-                        <span class='kw'>n</span>             <span class='kw'>=</span> <span class='fl'>2</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>FilterMinSet</span>) <span class='co'># check number of retained genes</span></div><div class='output co'>#&gt; [1] 830   9</div><div class='input'>
+<span class='va'>FilterNSet</span> <span class='op'>&lt;-</span> <span class='fu'>Expressed</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
+                        cut.off       <span class='op'>=</span> <span class='fl'>8000</span>, 
+                        method        <span class='op'>=</span> <span class='st'>"n-set"</span>,
+                        comparison    <span class='op'>=</span> <span class='st'>"below"</span>,
+                        n             <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+                               
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>FilterMinSet</span><span class='op'>)</span> <span class='co'># check number of retained genes</span>
+</div><div class='output co'>#&gt; [1] 830   9</div><div class='input'>
 
 
 <span class='co'># remove expression levels that exceed the cut.off criteria</span>
-<span class='no'>FilterMinSet</span> <span class='kw'>&lt;-</span> <span class='fu'>Expressed</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='no'>PhyloExpressionSetExample</span>,
-                          <span class='kw'>cut.off</span>       <span class='kw'>=</span> <span class='fl'>12000</span>,
-                          <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"min-set"</span>,
-                          <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"above"</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>FilterMinSet</span>) <span class='co'># check number of retained genes</span></div><div class='output co'>#&gt; [1] 24456     9</div><div class='input'>
+<span class='va'>FilterMinSet</span> <span class='op'>&lt;-</span> <span class='fu'>Expressed</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
+                          cut.off       <span class='op'>=</span> <span class='fl'>12000</span>, 
+                          method        <span class='op'>=</span> <span class='st'>"min-set"</span>,
+                          comparison    <span class='op'>=</span> <span class='st'>"above"</span><span class='op'>)</span>
+                               
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>FilterMinSet</span><span class='op'>)</span> <span class='co'># check number of retained genes</span>
+</div><div class='output co'>#&gt; [1] 24456     9</div><div class='input'>
 
 <span class='co'># remove expression levels that undercut AND exceed the cut.off criteria</span>
-<span class='no'>FilterMinSet</span> <span class='kw'>&lt;-</span> <span class='fu'>Expressed</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='no'>PhyloExpressionSetExample</span>,
-                          <span class='kw'>cut.off</span>       <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>8000</span>,<span class='fl'>12000</span>),
-                          <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"min-set"</span>,
-                          <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"both"</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>FilterMinSet</span>) <span class='co'># check number of retained genes</span></div><div class='output co'>#&gt; [1] 111   9</div><div class='input'>
+<span class='va'>FilterMinSet</span> <span class='op'>&lt;-</span> <span class='fu'>Expressed</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
+                          cut.off       <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>8000</span>,<span class='fl'>12000</span><span class='op'>)</span>, 
+                          method        <span class='op'>=</span> <span class='st'>"min-set"</span>,
+                          comparison    <span class='op'>=</span> <span class='st'>"both"</span><span class='op'>)</span>
+                               
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>FilterMinSet</span><span class='op'>)</span> <span class='co'># check number of retained genes</span>
+</div><div class='output co'>#&gt; [1] 111   9</div><div class='input'>
 
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Hajk-Georg Drost</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -263,7 +268,7 @@ at the second position.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

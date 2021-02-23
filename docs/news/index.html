@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -75,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -115,8 +119,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/HajkD/myTAI">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/drostlab/myTAI/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,26 +137,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/HajkD/myTAI/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/drostlab/myTAI/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="mytai-0-9-3" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-9-3" class="anchor"></a>myTAI 0.9.3<small> Unreleased </small>
+    <div id="mytai-093" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.3">
+<a href="#mytai-093" class="anchor"></a>myTAI 0.9.3<small> Unreleased </small>
 </h1>
+<ul>
+<li>removing the depreciated <code>std::random_shuffle()</code> function to sample <code>plylostratum</code> or <code>divergence stratum</code> columns and replacing it with <code>std::shuffle()</code>. See full discussion <a href="https://meetingcpp.com/blog/items/stdrandom_shuffle-is-deprecated.html">here</a>.</li>
+<li>removing depreciated function calls such as <code><a href="https://dplyr.tidyverse.org/reference/funs.html">dplyr::funs()</a></code> and <code>tibble.is.tibble()</code>
+</li>
+<li>updated unit tests</li>
+</ul>
 </div>
-    <div id="mytai-0-9-2" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-9-2" class="anchor"></a>myTAI 0.9.2<small> 2020-01-10 </small>
+    <div id="mytai-092" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.2">
+<a href="#mytai-092" class="anchor"></a>myTAI 0.9.2<small> 2020-01-10 </small>
 </h1>
 <ul>
 <li>changing maintainer email-address</li>
 </ul>
 </div>
-    <div id="mytai-0-9-1" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-9-1" class="anchor"></a>myTAI 0.9.1<small> 2019-03-10 </small>
+    <div id="mytai-091" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.1">
+<a href="#mytai-091" class="anchor"></a>myTAI 0.9.1<small> 2019-03-10 </small>
 </h1>
 <ul>
 <li>fixing a unit test that uses <code><a href="https://rdrr.io/r/base/Random.html">set.seed(123)</a></code> which causes an error in the new R version <code>3.6.0</code> due to the switch from a <code>non-uniform "Rounding" sampler</code> to a <code>"Rejection" sampler</code> in the new R version; the corresponding unit test <code>test-PlotEnrichment.R</code> was adjusted accordingly. Here the CRAN statement:</li>
@@ -161,9 +171,9 @@
 <p>Note that this ensures using the (old) non-uniform “Rounding” sampler for all 3.x versions of R, and does not add an R version dependency. Note also that the new “Rejection” sampler which R will use from 3.6.0 onwards by default is definitely preferable over the old one, so that the above should really only be used as a temporary measure for reproduction of the previous behavior (and the run time tests relying on it).</p>
 </blockquote>
 </div>
-    <div id="mytai-0-9-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-9-0" class="anchor"></a>myTAI 0.9.0<small> 2019-02-06 </small>
+    <div id="mytai-090" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.0">
+<a href="#mytai-090" class="anchor"></a>myTAI 0.9.0<small> 2019-02-06 </small>
 </h1>
 <div id="new-functions" class="section level3">
 <h3 class="hasAnchor">
@@ -181,9 +191,9 @@
 </ul>
 </div>
 </div>
-    <div id="mytai-0-8-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-8-0" class="anchor"></a>myTAI 0.8.0<small> 2018-05-23 </small>
+    <div id="mytai-080" class="section level1">
+<h1 class="page-header" data-toc-text="0.8.0">
+<a href="#mytai-080" class="anchor"></a>myTAI 0.8.0<small> 2018-05-23 </small>
 </h1>
 <div id="updated-functionality-1" class="section level3">
 <h3 class="hasAnchor">
@@ -194,9 +204,9 @@
 </ul>
 </div>
 </div>
-    <div id="mytai-0-7-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-7-0" class="anchor"></a>myTAI 0.7.0<small> 2018-04-11 </small>
+    <div id="mytai-070" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.0">
+<a href="#mytai-070" class="anchor"></a>myTAI 0.7.0<small> 2018-04-11 </small>
 </h1>
 <div id="updates" class="section level2">
 <h2 class="hasAnchor">
@@ -217,9 +227,9 @@
 </div>
 </div>
 </div>
-    <div id="mytai-0-6-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-6-0" class="anchor"></a>myTAI 0.6.0<small> 2017-07-03 </small>
+    <div id="mytai-060" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#mytai-060" class="anchor"></a>myTAI 0.6.0<small> 2017-07-03 </small>
 </h1>
 <div id="updates-1" class="section level3">
 <h3 class="hasAnchor">
@@ -230,15 +240,15 @@
 </ul>
 <p>Error message accuring after new <code>dplyr</code> release was:</p>
 <ol>
-<li>Failure: <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> works properly with DivergenceExpressionSet input… (<a href='https://github.com/test-PlotContribution'>@test-PlotContribution</a>.R<a href='https://github.com/HajkD/myTAI/issues/16'>#16</a>) PlotContribution(DivergenceExpressionSetExample, legendName = “DS”) produced messages.</li>
+<li>Failure: <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> works properly with DivergenceExpressionSet input… (<a href='https://github.com/test-PlotContribution'>@test-PlotContribution</a>.R<a href='https://github.com/drostlab/myTAI/issues/16'>#16</a>) PlotContribution(DivergenceExpressionSetExample, legendName = “DS”) produced messages.</li>
 </ol>
 <p><code>summarise_each()</code> is deprecated. Use <code>summarise_all()</code>, <code>summarise_at()</code> or <code>summarise_if()</code> instead. To map <code>funs</code> over all variables, use <code>summarise_all()</code> <code>summarise_each()</code> is deprecated. Use <code>summarise_all()</code>, <code>summarise_at()</code> or <code>summarise_if()</code> instead. To map <code>funs</code> over all variables, use <code>summarise_all()</code></p>
 <p>Is now fixed.</p>
 </div>
 </div>
-    <div id="mytai-0-5-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-5-0" class="anchor"></a>myTAI 0.5.0<small> 2017-03-14 </small>
+    <div id="mytai-050" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.0">
+<a href="#mytai-050" class="anchor"></a>myTAI 0.5.0<small> 2017-03-14 </small>
 </h1>
 <div id="new-functions-2" class="section level3">
 <h3 class="hasAnchor">
@@ -256,7 +266,7 @@
 <ul>
 <li><p><code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> is now based on ggplot2 and loses base graphics arguments</p></li>
 <li><p>now R/RcppExports.R and src/rcpp_funcs.cpp are included in the package due to previous compilation problems (see also <a href="http://stackoverflow.com/questions/34585560/travis-ci-r-package-error-in-documentation">stackoverflow discussion</a>)</p></li>
-<li><p><code><a href="../reference/MatchMap.html">MatchMap()</a></code> is now based on <code><a href="https://dplyr.tidyverse.org/reference/join.html">dplyr::inner_join()</a></code> to match age category table with a gene expression dataset</p></li>
+<li><p><code><a href="../reference/MatchMap.html">MatchMap()</a></code> is now based on <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">dplyr::inner_join()</a></code> to match age category table with a gene expression dataset</p></li>
 <li><p><code><a href="../reference/PlotCorrelation.html">PlotCorrelation()</a></code> has been extended and optimized for producing high publication quality plots</p></li>
 <li><p><code><a href="../reference/PlotMeans.html">PlotMeans()</a></code> is now based on ggplot2 and lost all base graphics arguments.</p></li>
 <li><p><code><a href="../reference/PlotRE.html">PlotRE()</a></code> is now based on ggplot2 and lost all base graphics arguments.</p></li>
@@ -271,9 +281,9 @@
 </ul>
 </div>
 </div>
-    <div id="mytai-0-4-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-4-0" class="anchor"></a>myTAI 0.4.0<small> 2016-05-04 </small>
+    <div id="mytai-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#mytai-040" class="anchor"></a>myTAI 0.4.0<small> 2016-05-04 </small>
 </h1>
 <div id="new-functions-3" class="section level3">
 <h3 class="hasAnchor">
@@ -289,21 +299,18 @@
 <a href="#updates-3" class="anchor"></a>Updates</h3>
 <ul>
 <li><p><code><a href="../reference/PlotDistribution.html">PlotDistribution()</a></code> now uses ggplot2 to visualize the PS or DS distribution and is also based on the new function <code><a href="../reference/PlotSelectedAgeDistr.html">PlotSelectedAgeDistr()</a></code>; furthermore it loses arguments <code>plotText</code> and <code>...</code> and gains a new argument <code>legendName</code></p></li>
-<li>remove arguments ‘main.text’ and ‘…’ from <code><a href="../reference/PlotCorrelation.html">PlotCorrelation()</a></code>
-</li>
-<li>
-<code><a href="../reference/PlotCorrelation.html">PlotCorrelation()</a></code> is now based on ggplot2</li>
-<li>
-<code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> receives a new argument <code>gene.set</code> allowing users to statistically quantify the group specific PS/DS differences of a selected set of genes</li>
-<li>analogously to <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> the function <code><a href="../reference/GroupDiffs.html">GroupDiffs()</a></code> also receives a new argument <code>gene.set</code> allowing users to statistically quantify the group specific PS/DS differences of a selected set of genes</li>
-<li>Fixing wrong x-axis labeling in <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> when <code>type = "stage-centered"</code> is specified</li>
+<li><p>remove arguments ‘main.text’ and ‘…’ from <code><a href="../reference/PlotCorrelation.html">PlotCorrelation()</a></code></p></li>
+<li><p><code><a href="../reference/PlotCorrelation.html">PlotCorrelation()</a></code> is now based on ggplot2</p></li>
+<li><p><code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> receives a new argument <code>gene.set</code> allowing users to statistically quantify the group specific PS/DS differences of a selected set of genes</p></li>
+<li><p>analogously to <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> the function <code><a href="../reference/GroupDiffs.html">GroupDiffs()</a></code> also receives a new argument <code>gene.set</code> allowing users to statistically quantify the group specific PS/DS differences of a selected set of genes</p></li>
+<li><p>Fixing wrong x-axis labeling in <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> when <code>type = "stage-centered"</code> is specified</p></li>
 <li><p><code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> now also prints out the PS/DS absolute frequency distribution of the selected <code>gene.set</code></p></li>
 </ul>
 </div>
 </div>
-    <div id="mytai-0-3-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-3-0" class="anchor"></a>myTAI 0.3.0<small> 2015-07-31 </small>
+    <div id="mytai-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#mytai-030" class="anchor"></a>myTAI 0.3.0<small> 2015-07-31 </small>
 </h1>
 <div id="vignettes-1" class="section level3">
 <h3 class="hasAnchor">
@@ -322,9 +329,9 @@
 </ul>
 </div>
 </div>
-    <div id="mytai-0-2-1" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-2-1" class="anchor"></a>myTAI 0.2.1<small> 2015-07-23 </small>
+    <div id="mytai-021" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.1">
+<a href="#mytai-021" class="anchor"></a>myTAI 0.2.1<small> 2015-07-23 </small>
 </h1>
 <div id="vignettes-2" class="section level3">
 <h3 class="hasAnchor">
@@ -343,9 +350,9 @@
 </ul>
 </div>
 </div>
-    <div id="mytai-0-2-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-2-0" class="anchor"></a>myTAI 0.2.0<small> 2015-07-10 </small>
+    <div id="mytai-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#mytai-020" class="anchor"></a>myTAI 0.2.0<small> 2015-07-10 </small>
 </h1>
 <div id="vignettes-3" class="section level3">
 <h3 class="hasAnchor">
@@ -388,9 +395,9 @@
 </ul>
 </div>
 </div>
-    <div id="mytai-0-1-0" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-1-0" class="anchor"></a>myTAI 0.1.0<small> 2015-05-24 </small>
+    <div id="mytai-010" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#mytai-010" class="anchor"></a>myTAI 0.1.0<small> 2015-05-24 </small>
 </h1>
 <div id="main-news" class="section level3">
 <h3 class="hasAnchor">
@@ -416,19 +423,19 @@
 <li><p><code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code>, <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code>, <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code>, and <code><a href="../reference/PlotPattern.html">PlotPattern()</a></code> implement a new argument <code>custom.perm.matrix</code> allowing users to pass their own (custom) permutation matrix to the corresponding function. All subsequent test statistics and p-value/std.dev computations are then based on this custom permutation matrix</p></li>
 <li><p><code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> and <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> now have a new parameter <code>gof.warning</code> allowing users to choose whether or not non significant goodness of fit results should be printed as warning</p></li>
 <li><p>now when specifying <code>TestStatistic = NULL</code> in <code><a href="../reference/PlotPattern.html">PlotPattern()</a></code> only the TAI/TDI profile is drawn (without performing any test statistics); this is equavalent to performing: <code>plot(TAI(PhyloExpressionSetExample)</code></p></li>
-<li><p>function <code>combinatorialSignificance()</code> is now named <code><a href="../reference/combinatorialSignificance.html">CombinatorialSignificance()</a></code></p></li>
+<li><p>function <code>combinatorialSignificance()</code> is now named <code><a href="../reference/CombinatorialSignificance.html">CombinatorialSignificance()</a></code></p></li>
 <li><p>changing the title and description of the <code>myTAI</code> package</p></li>
 <li><p>some minor changes in vignettes and within the documentation of functions</p></li>
 </ul>
 </div>
 </div>
-    <div id="mytai-0-0-2" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-0-2" class="anchor"></a>myTAI 0.0.2<small> 2014-12-27 </small>
+    <div id="mytai-002" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.2">
+<a href="#mytai-002" class="anchor"></a>myTAI 0.0.2<small> 2014-12-27 </small>
 </h1>
-<div id="new-features-in-v--0-0-2" class="section level2">
+<div id="new-features-in-v-002" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-in-v--0-0-2" class="anchor"></a>New Features in v. 0.0.2</h2>
+<a href="#new-features-in-v-002" class="anchor"></a>New Features in v. 0.0.2</h2>
 <ul>
 <li><p><code>combinatorialSignificance()</code>, <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code>, <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code>, and <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> now support multicore processing</p></li>
 <li><p><code><a href="../reference/MatchMap.html">MatchMap()</a></code> has been entirely rewritten and is now based on <a href="https://github.com/hadley/dplyr">dplyr</a>; additionally it now has a new argument <code>accumulate</code> that allows you to accumulate multiple expression levels to a unique expressiion level for a unique gene id</p></li>
@@ -448,36 +455,19 @@
 </div>
 </div>
 </div>
-    <div id="mytai-0-0-1" class="section level1">
-<h1 class="page-header">
-<a href="#mytai-0-0-1" class="anchor"></a>myTAI 0.0.1<small> 2014-11-01 </small>
+    <div id="mytai-001" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.1">
+<a href="#mytai-001" class="anchor"></a>myTAI 0.0.1<small> 2014-11-01 </small>
 </h1>
 <p>Introducing myTAI 0.0.1:</p>
 <p>A framework to perform phylotranscriptomics analyses for Evolutionary Developmental Biology research.</p>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#mytai-0-9-3">0.9.3</a></li>
-        <li><a href="#mytai-0-9-2">0.9.2</a></li>
-        <li><a href="#mytai-0-9-1">0.9.1</a></li>
-        <li><a href="#mytai-0-9-0">0.9.0</a></li>
-        <li><a href="#mytai-0-8-0">0.8.0</a></li>
-        <li><a href="#mytai-0-7-0">0.7.0</a></li>
-        <li><a href="#mytai-0-6-0">0.6.0</a></li>
-        <li><a href="#mytai-0-5-0">0.5.0</a></li>
-        <li><a href="#mytai-0-4-0">0.4.0</a></li>
-        <li><a href="#mytai-0-3-0">0.3.0</a></li>
-        <li><a href="#mytai-0-2-1">0.2.1</a></li>
-        <li><a href="#mytai-0-2-0">0.2.0</a></li>
-        <li><a href="#mytai-0-1-0">0.1.0</a></li>
-        <li><a href="#mytai-0-0-2">0.0.2</a></li>
-        <li><a href="#mytai-0-0-1">0.0.1</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -489,7 +479,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

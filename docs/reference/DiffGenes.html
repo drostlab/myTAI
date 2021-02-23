@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Differential Gene Expression Analysis — DiffGenes" />
 <meta property="og:description" content="Detect differentially expressed genes (DEGs) in a standard ExpressionSet object." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -117,8 +120,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/HajkD/myTAI">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/drostlab/myTAI/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -136,7 +139,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Differential Gene Expression Analysis</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/DiffGenes.R'><code>R/DiffGenes.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/drostlab/myTAI/blob/master/R/DiffGenes.R'><code>R/DiffGenes.R</code></a></small>
     <div class="hidden name"><code>DiffGenes.Rd</code></div>
     </div>
 
@@ -144,18 +147,18 @@
     <p>Detect differentially expressed genes (DEGs) in a standard <code>ExpressionSet</code> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>DiffGenes</span>(
-  <span class='no'>ExpressionSet</span>,
-  <span class='no'>nrep</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"foldchange"</span>,
-  <span class='kw'>lib.size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>p.adjust.method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>comparison</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>filter.method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stage.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>DiffGenes</span><span class='op'>(</span>
+  <span class='va'>ExpressionSet</span>,
+  <span class='va'>nrep</span>,
+  method <span class='op'>=</span> <span class='st'>"foldchange"</span>,
+  lib.size <span class='op'>=</span> <span class='cn'>NULL</span>,
+  p.adjust.method <span class='op'>=</span> <span class='cn'>NULL</span>,
+  comparison <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='cn'>NULL</span>,
+  filter.method <span class='op'>=</span> <span class='cn'>NULL</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stage.names <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -251,20 +254,24 @@ is printed to the console in case expression levels have been automatically shif
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='Expressed.html'>Expressed</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
 
 <span class='co'># Detection of DEGs using the fold-change measure</span>
-<span class='no'>DEGs</span> <span class='kw'>&lt;-</span> <span class='fu'>DiffGenes</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='no'>PhyloExpressionSetExample</span>[ ,<span class='fl'>1</span>:<span class='fl'>8</span>],
-                  <span class='kw'>nrep</span>          <span class='kw'>=</span> <span class='fl'>2</span>,
-                  <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"below"</span>,
-                  <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"foldchange"</span>,
-                  <span class='kw'>stage.names</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"S1"</span>,<span class='st'>"S2"</span>,<span class='st'>"S3"</span>))
+<span class='va'>DEGs</span> <span class='op'>&lt;-</span> <span class='fu'>DiffGenes</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> ,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span><span class='op'>]</span>,
+                  nrep          <span class='op'>=</span> <span class='fl'>2</span>,
+                  comparison    <span class='op'>=</span> <span class='st'>"below"</span>,
+                  method        <span class='op'>=</span> <span class='st'>"foldchange"</span>,
+                  stage.names   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"S1"</span>,<span class='st'>"S2"</span>,<span class='st'>"S3"</span><span class='op'>)</span><span class='op'>)</span>
 
 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>DEGs</span>)</div><div class='output co'>#&gt;   Phylostratum      GeneID    S1-&gt;S2    S1-&gt;S3    S2-&gt;S1    S2-&gt;S3    S3-&gt;S1
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>DEGs</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   Phylostratum      GeneID    S1-&gt;S2    S1-&gt;S3    S2-&gt;S1    S2-&gt;S3    S3-&gt;S1
 #&gt; 1            1 at1g01040.2 1.6706342 2.0767465 0.5985751 1.2430887 0.4815224
 #&gt; 2            1 at1g01050.1 1.0231405 1.2788699 0.9773829 1.2499456 0.7819403
 #&gt; 3            1 at1g01070.1 1.3087104 1.4044710 0.7641110 1.0731717 0.7120119
@@ -282,14 +289,15 @@ is printed to the console in case expression levels have been automatically shif
 <span class='co'># Detection of DEGs using the log-fold-change measure</span>
 <span class='co'># when choosing method = "log-foldchange" it is assumed that</span>
 <span class='co'># your input expression matrix stores log2 expression levels </span>
-<span class='no'>log.DEGs</span> <span class='kw'>&lt;-</span> <span class='fu'>DiffGenes</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='fu'><a href='tf.html'>tf</a></span>(<span class='no'>PhyloExpressionSetExample</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>:<span class='fl'>8</span>],<span class='no'>log2</span>),
-                      <span class='kw'>nrep</span>          <span class='kw'>=</span> <span class='fl'>2</span>,
-                      <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"below"</span>,
-                      <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"log-foldchange"</span>,
-                      <span class='kw'>stage.names</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"S1"</span>,<span class='st'>"S2"</span>,<span class='st'>"S3"</span>))
+<span class='va'>log.DEGs</span> <span class='op'>&lt;-</span> <span class='fu'>DiffGenes</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='fu'><a href='tf.html'>tf</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span><span class='op'>]</span>,<span class='va'>log2</span><span class='op'>)</span>,
+                      nrep          <span class='op'>=</span> <span class='fl'>2</span>,
+                      comparison    <span class='op'>=</span> <span class='st'>"below"</span>,
+                      method        <span class='op'>=</span> <span class='st'>"log-foldchange"</span>,
+                      stage.names   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"S1"</span>,<span class='st'>"S2"</span>,<span class='st'>"S3"</span><span class='op'>)</span><span class='op'>)</span>
 
 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>log.DEGs</span>)</div><div class='output co'>#&gt;   Phylostratum      GeneID      S1-&gt;S2     S1-&gt;S3      S2-&gt;S1      S2-&gt;S3
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>log.DEGs</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   Phylostratum      GeneID      S1-&gt;S2     S1-&gt;S3      S2-&gt;S1      S2-&gt;S3
 #&gt; 1            1 at1g01040.2  0.74039587  1.0543251 -0.74039587  0.31392926
 #&gt; 2            1 at1g01050.1  0.03300429  0.3548696 -0.03300429  0.32186526
 #&gt; 3            1 at1g01070.1  0.38814592  0.4900268 -0.38814592  0.10188092
@@ -305,28 +313,31 @@ is printed to the console in case expression levels have been automatically shif
 <span class='co'># Remove fold-change values &lt; 2 from the dataset:</span>
 
 <span class='co'>## first have a look at the range of fold-change values of all genes </span>
-<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>DEGs</span>[ , <span class='fl'>3</span>:<span class='fl'>8</span>],<span class='fl'>2</span>,<span class='no'>range</span>)</div><div class='output co'>#&gt;          S1-&gt;S2      S1-&gt;S3     S2-&gt;S1      S2-&gt;S3     S3-&gt;S1      S3-&gt;S2
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>DEGs</span><span class='op'>[</span> , <span class='fl'>3</span><span class='op'>:</span><span class='fl'>8</span><span class='op'>]</span>,<span class='fl'>2</span>,<span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          S1-&gt;S2      S1-&gt;S3     S2-&gt;S1      S2-&gt;S3     S3-&gt;S1      S3-&gt;S2
 #&gt; [1,]  0.1081031  0.04752967 0.06022388  0.06115996  0.0244683  0.06450549
 #&gt; [2,] 16.6047090 40.86920354 9.25042630 15.50255551 21.0394884 16.35056753</div><div class='input'>
 <span class='co'># now remove genes undercutting the alpha = 2 threshold</span>
 <span class='co'># hence, remove genes having p-values &lt;= 0.05 in at</span>
 <span class='co'># least one sample comparison</span>
-<span class='no'>DEGs.alpha</span> <span class='kw'>&lt;-</span> <span class='fu'>DiffGenes</span>(<span class='kw'>ExpressionSet</span> <span class='kw'>=</span> <span class='no'>PhyloExpressionSetExample</span>[<span class='fl'>1</span>:<span class='fl'>250</span> ,<span class='fl'>1</span>:<span class='fl'>8</span>],
-                        <span class='kw'>nrep</span>          <span class='kw'>=</span> <span class='fl'>2</span>,
-                        <span class='kw'>method</span>        <span class='kw'>=</span> <span class='st'>"t.test"</span>,
-                        <span class='kw'>alpha</span>         <span class='kw'>=</span> <span class='fl'>0.05</span>,
-                        <span class='kw'>comparison</span>    <span class='kw'>=</span> <span class='st'>"above"</span>,
-                        <span class='kw'>filter.method</span> <span class='kw'>=</span> <span class='st'>"n-set"</span>,
-                        <span class='kw'>n</span>             <span class='kw'>=</span> <span class='fl'>1</span>,
-                        <span class='kw'>stage.names</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"S1"</span>,<span class='st'>"S2"</span>,<span class='st'>"S3"</span>))
+<span class='va'>DEGs.alpha</span> <span class='op'>&lt;-</span> <span class='fu'>DiffGenes</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>250</span> ,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span><span class='op'>]</span>,
+                        nrep          <span class='op'>=</span> <span class='fl'>2</span>,
+                        method        <span class='op'>=</span> <span class='st'>"t.test"</span>,
+                        alpha         <span class='op'>=</span> <span class='fl'>0.05</span>,
+                        comparison    <span class='op'>=</span> <span class='st'>"above"</span>,
+                        filter.method <span class='op'>=</span> <span class='st'>"n-set"</span>,
+                        n             <span class='op'>=</span> <span class='fl'>1</span>,
+                        stage.names   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"S1"</span>,<span class='st'>"S2"</span>,<span class='st'>"S3"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># now again have a look at the range and find</span>
 <span class='co'># that fold-change values of 2 are the min value</span>
-<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>DEGs.alpha</span>[ , <span class='fl'>3</span>:<span class='fl'>5</span>],<span class='fl'>2</span>,<span class='no'>range</span>)</div><div class='output co'>#&gt;           S1&lt;-&gt;S2     S1&lt;-&gt;S3     S2&lt;-&gt;S3
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>DEGs.alpha</span><span class='op'>[</span> , <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span>,<span class='fl'>2</span>,<span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;           S1&lt;-&gt;S2     S1&lt;-&gt;S3     S2&lt;-&gt;S3
 #&gt; [1,] 0.0004200748 0.002629415 0.005515936
 #&gt; [2,] 0.2405307541 0.046734476 0.375736681</div><div class='input'>
 <span class='co'># now check whether each example has at least one stage with a p-value &lt;= 0.05</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>DEGs.alpha</span>)</div><div class='output co'>#&gt;    Phylostratum      GeneID     S1&lt;-&gt;S2     S1&lt;-&gt;S3    S2&lt;-&gt;S3
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>DEGs.alpha</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    Phylostratum      GeneID     S1&lt;-&gt;S2     S1&lt;-&gt;S3    S2&lt;-&gt;S3
 #&gt; 3             1 at1g01070.1 0.007037106 0.002629415 0.01981887
 #&gt; 5             1 at1g01090.1 0.026369854 0.035285481 0.08957681
 #&gt; 31            1 at1g01770.1 0.240530754 0.012040556 0.04951844
@@ -335,18 +346,10 @@ is printed to the console in case expression levels have been automatically shif
 #&gt; 93            1 at1g03190.1 0.016635354 0.012251604 0.14721584</div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Hajk-Georg Drost</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -357,7 +360,7 @@ is printed to the console in case expression levels have been automatically shif
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

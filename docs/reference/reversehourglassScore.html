@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -56,7 +60,6 @@ Given the two accumulated values for each hourglass module: a_early and a_late,
 &quot;mean&quot;: \(S = mean{a_early,a_late}\)
 All together this results in a global score S.
 This global score S is being returned by this function." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -74,7 +77,7 @@ This global score S is being returned by this function." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -96,7 +99,7 @@ This global score S is being returned by this function." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -136,8 +139,8 @@ This global score S is being returned by this function." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/HajkD/myTAI">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/drostlab/myTAI/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -155,7 +158,7 @@ This global score S is being returned by this function." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Compute the Reverse Hourglass Score for the Reverse Hourglass Test</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/reversehourglassScore.R'><code>R/reversehourglassScore.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/drostlab/myTAI/blob/master/R/reversehourglassScore.R'><code>R/reversehourglassScore.R</code></a></small>
     <div class="hidden name"><code>reversehourglassScore.Rd</code></div>
     </div>
 
@@ -182,7 +185,7 @@ This global score S is being returned by this function." />
 This global score <em>S</em> is being returned by this function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reversehourglassScore</span>(<span class='no'>age_vals</span>, <span class='no'>early</span>, <span class='no'>mid</span>, <span class='no'>late</span>, <span class='no'>method</span>, <span class='no'>scoringMethod</span>)</pre>
+    <pre class="usage"><span class='fu'>reversehourglassScore</span><span class='op'>(</span><span class='va'>age_vals</span>, <span class='va'>early</span>, <span class='va'>mid</span>, <span class='va'>late</span>, <span class='va'>method</span>, <span class='va'>scoringMethod</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,47 +229,44 @@ the significance of a present (phylotranscriptomic) hourglass pattern.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='ReverseHourglassTest.html'>ReverseHourglassTest</a></code>, <code><a href='TAI.html'>TAI</a></code>, <code><a href='TDI.html'>TDI</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
  <span class='co'># read standard phylotranscriptomics data</span>
- <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
- <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>DivergenceExpressionSetExample</span>)
+ <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
 
  <span class='co'># example PhyloExpressionSet:</span>
 
  <span class='co'># compute the TAI profile</span>
- <span class='no'>TAIs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='TAI.html'>TAI</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
+ <span class='va'>TAIs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='TAI.html'>TAI</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
 
  <span class='co'># compute the global hourglass destruction score </span>
  <span class='co'># for the TAIs profile using reduction method: mean(mean-mean)</span>
- <span class='no'>reversehourglass_score</span> <span class='kw'>&lt;-</span> <span class='fu'>reversehourglassScore</span>(<span class='kw'>age_vals</span> <span class='kw'>=</span> <span class='no'>TAIs</span>,<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>,<span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>,<span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>,
-                     <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,<span class='kw'>scoringMethod</span> <span class='kw'>=</span> <span class='st'>"mean-mean"</span>)
+ <span class='va'>reversehourglass_score</span> <span class='op'>&lt;-</span> <span class='fu'>reversehourglassScore</span><span class='op'>(</span>age_vals <span class='op'>=</span> <span class='va'>TAIs</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span>,
+                     method <span class='op'>=</span> <span class='st'>"mean"</span>,scoringMethod <span class='op'>=</span> <span class='st'>"mean-mean"</span><span class='op'>)</span>
 
 
  <span class='co'># example DivergenceExpressionSet:</span>
 
  <span class='co'># compute the TDI profile</span>
- <span class='no'>TDIs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='TDI.html'>TDI</a></span>(<span class='no'>DivergenceExpressionSetExample</span>)
+ <span class='va'>TDIs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='TDI.html'>TDI</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
 
  <span class='co'># compute the global hourglass destruction score for the TDIs profile </span>
  <span class='co'># using reduction method: mean(mean-mean)</span>
- <span class='no'>reversehourglass_score</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rhScore.html'>rhScore</a></span>(<span class='kw'>age_vals</span> <span class='kw'>=</span> <span class='no'>TDIs</span>,<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>,<span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>,<span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>,
-                     <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,<span class='kw'>scoringMethod</span> <span class='kw'>=</span> <span class='st'>"mean-mean"</span>)</div></pre>
+ <span class='va'>reversehourglass_score</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rhScore.html'>rhScore</a></span><span class='op'>(</span>age_vals <span class='op'>=</span> <span class='va'>TDIs</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span>,
+                     method <span class='op'>=</span> <span class='st'>"mean"</span>,scoringMethod <span class='op'>=</span> <span class='st'>"mean-mean"</span><span class='op'>)</span>
+ 
+ 
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Hajk-Georg Drost</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -277,7 +277,7 @@ the significance of a present (phylotranscriptomic) hourglass pattern.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

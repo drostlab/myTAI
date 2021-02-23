@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -41,7 +45,6 @@ existence of a phylotranscriptomic hourglass pattern based on TAI or TDI computa
 The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
 does not follow an hourglass like shape. A p-value &amp;lt; 0.05 indicates that the corresponding phylotranscriptomics pattern does
 indeed follow an hourglass (high-low-high) shape." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -59,7 +62,7 @@ indeed follow an hourglass (high-low-high) shape." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,7 +84,7 @@ indeed follow an hourglass (high-low-high) shape." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -121,8 +124,8 @@ indeed follow an hourglass (high-low-high) shape." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/HajkD/myTAI">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/drostlab/myTAI/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -140,7 +143,7 @@ indeed follow an hourglass (high-low-high) shape." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Perform the Reductive Hourglass Test</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HajkD/myTAI/blob/master/R/ReductiveHourglassTest.R'><code>R/ReductiveHourglassTest.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/drostlab/myTAI/blob/master/R/ReductiveHourglassTest.R'><code>R/ReductiveHourglassTest.R</code></a></small>
     <div class="hidden name"><code>ReductiveHourglassTest.Rd</code></div>
     </div>
 
@@ -152,17 +155,17 @@ does not follow an hourglass like shape. A p-value &lt; 0.05 indicates that the 
 indeed follow an hourglass (high-low-high) shape.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ReductiveHourglassTest</span>(
-  <span class='no'>ExpressionSet</span>,
-  <span class='kw'>modules</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>permutations</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>lillie.test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>plotHistogram</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>gof.warning</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>custom.perm.matrix</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ReductiveHourglassTest</span><span class='op'>(</span>
+  <span class='va'>ExpressionSet</span>,
+  modules <span class='op'>=</span> <span class='cn'>NULL</span>,
+  permutations <span class='op'>=</span> <span class='fl'>1000</span>,
+  lillie.test <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  plotHistogram <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  runs <span class='op'>=</span> <span class='fl'>10</span>,
+  parallel <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  gof.warning <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  custom.perm.matrix <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -266,22 +269,26 @@ of a parametric distribution to non-censored or censored data.</p>
 
     <div class='dont-index'><p><code><a href='rhScore.html'>rhScore</a></code>, <code><a href='bootMatrix.html'>bootMatrix</a></code>, <code><a href='FlatLineTest.html'>FlatLineTest</a></code>,
 <code><a href='ReverseHourglassTest.html'>ReverseHourglassTest</a></code>, <code><a href='EarlyConservationTest.html'>EarlyConservationTest</a></code>, <code><a href='PlotSignature.html'>PlotSignature</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PhyloExpressionSetExample</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
 
 <span class='co'># perform the reductive hourglass test for a PhyloExpressionSet</span>
 <span class='co'># here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,</span>
 <span class='co'># stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to</span>
 <span class='co'># module 3 = late</span>
-<span class='fu'>ReductiveHourglassTest</span>(<span class='no'>PhyloExpressionSetExample</span>,
-                       <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>, <span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>),
-                       <span class='kw'>permutations</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</div><div class='output co'>#&gt; $p.value
-#&gt; [1] 3.31808e-09
+<span class='fu'>ReductiveHourglassTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,
+                       modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>, 
+                       permutations <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $p.value
+#&gt; [1] 3.45251e-08
 #&gt; 
 #&gt; $std.dev
-#&gt; [1] 0.05629646 0.05442829 0.05378830 0.05250336 0.05173308 0.05351928 0.05519306
+#&gt; [1] 0.05788384 0.05566450 0.05538055 0.05332798 0.05203244 0.05324922 0.05713078
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA
@@ -289,16 +296,17 @@ of a parametric distribution to non-censored or censored data.</p>
 
 <span class='co'># use your own permutation matrix based on which p-values (ReductiveHourglassTest)</span>
 <span class='co'># shall be computed</span>
-<span class='no'>custom_perm_matrix</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span>(<span class='no'>PhyloExpressionSetExample</span>,<span class='fl'>100</span>)
+<span class='va'>custom_perm_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='fl'>100</span><span class='op'>)</span>
 
-<span class='fu'>ReductiveHourglassTest</span>(<span class='no'>PhyloExpressionSetExample</span>,
-                     <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>early</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>mid</span> <span class='kw'>=</span> <span class='fl'>3</span>:<span class='fl'>5</span>, <span class='kw'>late</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>7</span>),
-                     <span class='kw'>custom.perm.matrix</span> <span class='kw'>=</span> <span class='no'>custom_perm_matrix</span>)</div><div class='output co'>#&gt; $p.value
-#&gt; [1] 7.218752e-09
+<span class='fu'>ReductiveHourglassTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,
+                     modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>,
+                     custom.perm.matrix <span class='op'>=</span> <span class='va'>custom_perm_matrix</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $p.value
+#&gt; [1] 1.148712e-09
 #&gt; 
 #&gt; $std.dev
 #&gt;     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature 
-#&gt; 0.05530545 0.05276439 0.05133321 0.04978774 0.04747495 0.04833480 0.05863549 
+#&gt; 0.06209783 0.06228194 0.05901504 0.05557602 0.05287719 0.05361319 0.05257609 
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA
@@ -306,19 +314,10 @@ of a parametric distribution to non-censored or censored data.</p>
 
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Hajk-Georg Drost</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -329,7 +328,7 @@ of a parametric distribution to non-censored or censored data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

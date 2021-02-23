@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gene Expression Analysis with `myTAI` • myTAI</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Gene Expression Analysis with `myTAI`">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="myTAI">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,8 +79,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/HajkD/myTAI">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/drostlab/myTAI/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -94,15 +94,15 @@
 
       
 
-      </header><div class="row">
+      </header><script src="Expression_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Gene Expression Analysis with <code>myTAI</code>
+      <h1 data-toc-skip>Gene Expression Analysis with <code>myTAI</code>
 </h1>
             
-            <h4 class="date">2020-04-23</h4>
+            <h4 class="date">2021-02-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Expression.Rmd"><code>vignettes/Expression.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Expression.Rmd"><code>vignettes/Expression.Rmd</code></a></small>
       <div class="hidden name"><code>Expression.Rmd</code></div>
 
     </div>
@@ -116,10 +116,10 @@
 <p>In other words, phylotranscriptomics allows us to detect stages or periods of evolutionary conservation and is able to predict the evolutionary origin of process or trait specific genes based on enrichment analyses. By combining evolutionary enrichment analyses with the functional annotation of process or trait specific genes (see <a href="https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd">Functional Annotation</a> for details) the detection of evolutionary signals can be correlated with functional processes. Then, performing gene expression analyses on corresponding process or trait specific genes allows users to detect potential causes of stage/period specific evolutionary transcriptome conservation.</p>
 <p>The following sections introduce main gene expression data analysis techniques implemented in <code>myTAI</code>:</p>
 <ul>
-<li>Detection of Differentially Expressed Genes (DEGs)</li>
-<li>Fold-Change</li>
-<li>Welch t-test</li>
-<li>Wilcoxon Rank Sum Test (Mann-Whitney U test)</li>
+<li><p>Detection of Differentially Expressed Genes (DEGs)</p></li>
+<li><p>Fold-Change</p></li>
+<li><p>Welch t-test</p></li>
+<li><p>Wilcoxon Rank Sum Test (Mann-Whitney U test)</p></li>
 <li><p>Negative Binomial (Exact Tests)</p></li>
 <li><p>Collapsing Replicate Samples</p></li>
 <li><p>Filter for Expressed Genes</p></li>
@@ -145,16 +145,17 @@
 <h3 class="hasAnchor">
 <a href="#example-fold-change" class="anchor"></a>Example: Fold-Change</h3>
 <p>For the following example we assume that <code>PhyloExpressionSetExample[1:5,1:8]</code> stores 5 genes and 3 developmental stages with 2 replicate expression levels per stage.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># Detection of DEGs using the fold-change measure</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">DEGs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">                  <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">                  <span class="dt">method        =</span> <span class="st">"foldchange"</span>,</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">                  <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(DEGs)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the fold-change measure</span>
+<span class="va">DEGs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                  nrep          <span class="op">=</span> <span class="fl">2</span>,
+                  method        <span class="op">=</span> <span class="st">"foldchange"</span>,
+                  stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">DEGs</span><span class="op">)</span></code></pre></div>
 <pre><code>   Phylostratum      GeneID    S1-&gt;S2    S1-&gt;S3    S2-&gt;S1    S2-&gt;S3    S3-&gt;S1    S3-&gt;S2
 1            1 at1g01040.2 1.6713881 2.0806706 0.5983051 1.2448758 0.4806143 0.8032930
 2            1 at1g01050.1 1.0273222 1.2709185 0.9734045 1.2371177 0.7868325 0.8083305
@@ -167,16 +168,17 @@
 <h3 class="hasAnchor">
 <a href="#example-log-fold-change" class="anchor"></a>Example: Log-Fold-Change</h3>
 <p><strong>When selecting <code>method = "log-foldchange"</code> it is assumed that the input <code>ExpressionSet</code> stores <code>log2</code> expression levels. Here, we transform absolute expression levels stored in <code>PhyloExpressionSetExample</code> to <code>log2</code> expression levels using the <code><a href="../reference/tf.html">tf()</a></code> function before log-fold-changes are computed.</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># Detection of DEGs using the logfold-change measure</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">log.DEGs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],log2),</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">                      <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">                      <span class="dt">method        =</span> <span class="st">"log-foldchange"</span>,</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">                      <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(log.DEGs)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the logfold-change measure</span>
+<span class="va">log.DEGs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,<span class="va">log2</span><span class="op">)</span>,
+                      nrep          <span class="op">=</span> <span class="fl">2</span>,
+                      method        <span class="op">=</span> <span class="st">"log-foldchange"</span>,
+                      stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">log.DEGs</span><span class="op">)</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID      S1-&gt;S2     S1-&gt;S3      S2-&gt;S1      S2-&gt;S3     S3-&gt;S1      S3-&gt;S2
 1            1 at1g01040.2  0.74104679  1.0570486 -0.74104679  0.31600182 -1.0570486 -0.31600182
 2            1 at1g01050.1  0.03888868  0.3458715 -0.03888868  0.30698280 -0.3458715 -0.30698280
@@ -228,18 +230,19 @@
 <a href="#example-welch-t-test" class="anchor"></a>Example: Welch t-test</h3>
 <p>Performing <code>Welch t-test</code> with <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> can be done by specifying <code>method = "t.test"</code>. Internally <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> performs a two sided <code>Welch t-test</code>. This means that the <code>Welch t-test</code> quantifies only whether or not a gene is significantly differentially expressed, but not the direction of enrichment (over-expressed or under-expressed).</p>
 <p>The <code>PhyloExpressionSetExample</code> we use in the following example stores absolute expression levels. In case your <code>ExpressionSet</code> also stores absolute expression levels (which is likely due to the <code>ExpressionSet</code> standard for Phylotranscriptomics analyses), you can use the <code><a href="../reference/tf.html">tf()</a></code> function implemented in <code>myTAI</code> to transform absolute expression levels to <code>log2</code> expression levels before performing <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> with a <code>Welch t-test</code>, e.g. <code><a href="../reference/tf.html">tf(PhyloExpressionSetExample[1:5,1:8],log2)</a></code>. In general, using <code>log2</code> transformed expression levels as input <code>ExpressionSet</code> of <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> allows us to (at least) assume that samples (replicate expression levels) used to perform the <code>Welch t-test</code> are log-normal distributed and therefore, somewhat approximate normal distributed.</p>
-<p>Please notice however, that RNA-Seq data can include count values of 0. So when transforming absolute counts to <code>log2</code> counts infinity values of <code>log2(0) = -Inf</code> will be produced and therefore, p-value computations will not be possible. To avoid this case you could either remove RNA-Seq count values of 0 from the input dataset using the <code><a href="../reference/Expressed.html">Expressed()</a></code> function (see section <em>Filter for Expressed Genes</em>), e.g. pass <code><a href="../reference/tf.html">tf(Expressed(PhyloExpressionSetExample[1:5,1:8], cut.off = 1),log2)</a></code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> or shift all count values by a constant value, e.g. pass <code><a href="../reference/tf.html">tf(PhyloExpressionSetExample[1:5,1:8], function(x) log2(x + 1))</a></code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code>.</p>
+<p>Please notice however, that RNA-Seq data can include count values of 0. So when transforming absolute counts to <code>log2</code> counts infinity values of <code>log2(0) = -Inf</code> will be produced and therefore, p-value computations will not be possible. To avoid this case you could either remove RNA-Seq count values of 0 from the input dataset using the <code><a href="../reference/Expressed.html">Expressed()</a></code> function (see section <em>Filter for Expressed Genes</em>), e.g. pass <code><a href="../reference/tf.html">tf(Expressed(PhyloExpressionSetExample[1:5,1:8], cut.off = 1),log2)</a></code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> or shift all count values by a constant value, e.g. pass <code><a href="../reference/tf.html">tf(PhyloExpressionSetExample[1:5,1:8], function(x) log2(x + 1))</a></code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code>.</p>
 <p>Internally, <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> will also check for 0 values in input data and will automatically shift all expression levels by <code>+1</code> in case 0 values are included.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by a Welch t-test</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">ttest.DEGs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],log2),</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">                        <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">                        <span class="dt">method        =</span> <span class="st">"t.test"</span>,</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">                        <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">ttest.DEGs</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by a Welch t-test</span>
+<span class="va">ttest.DEGs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,<span class="va">log2</span><span class="op">)</span>,
+                        nrep          <span class="op">=</span> <span class="fl">2</span>,
+                        method        <span class="op">=</span> <span class="st">"t.test"</span>,
+                        stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">ttest.DEGs</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID     S1&lt;-&gt;S2    S1&lt;-&gt;S3    S2&lt;-&gt;S3
 1            1 at1g01040.2 0.027832572 0.04020203 0.13481563
 2            1 at1g01050.1 0.852379466 0.31471871 0.36326955
@@ -250,19 +253,20 @@
 <p>In detail, correcting for multiple testing allows to appropriately choose selection cut-offs for p-values fulfilling the differential expression criteria. Hahne et al., 2008 (p. 87) give a nice example of correcting for multiple testing to determine appropriate selection cut-offs.</p>
 <p>Please consult the documentation of <code><a href="https://rdrr.io/r/stats/p.adjust.html">?p.adjust</a></code> to see which p-value adjustment methods are implemented in <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code>.</p>
 <p>Please also consult these reviews (<a href="http://www.biostathandbook.com/multiplecomparisons.html">Biostatistics Handbook</a>, <a href="http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf">Gelman et al., 2008</a>, and <a href="http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf">Slides</a>) to decide whether or not to apply p-value adjustment to your own dataset.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by a Welch t-test</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># and furthermore, adjust p-values for multiple comparison</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">ttest.DEGs.p_adjust &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet   =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],log2),</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">                                 <span class="dt">nrep            =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">                                 <span class="dt">method          =</span> <span class="st">"t.test"</span>,</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">                                 <span class="dt">p.adjust.method =</span> <span class="st">"BH"</span>,</a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">                                 <span class="dt">stage.names     =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">ttest.DEGs.p_adjust</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by a Welch t-test</span>
+<span class="co"># and furthermore, adjust p-values for multiple comparison</span>
+<span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span>
+<span class="va">ttest.DEGs.p_adjust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet   <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,<span class="va">log2</span><span class="op">)</span>,
+                                 nrep            <span class="op">=</span> <span class="fl">2</span>,
+                                 method          <span class="op">=</span> <span class="st">"t.test"</span>,
+                                 p.adjust.method <span class="op">=</span> <span class="st">"BH"</span>,
+                                 stage.names     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+
+<span class="va">ttest.DEGs.p_adjust</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID    S1&lt;-&gt;S2   S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.06958143 0.0579859 0.2246927
 2            1 at1g01050.1 0.85237947 0.3147187 0.4540869
@@ -270,22 +274,23 @@
 4            1 at1g01080.2 0.11298386 0.0579859 0.4599944
 5            1 at1g01090.1 0.11298386 0.0579859 0.1244523</code></pre>
 <p>The resulting p-value adjusted <code>data.frame</code> can be used to filter for differentially expressed genes. Here, specifying the arguments: <code>comparison</code>, <code>alpha</code>, and <code>filter.method</code> in <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> allows users to obtain only significant differentially expressed genes.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Detection of DEGs using the p-value returned by a Welch t-test</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co"># and furthermore, adjust p-values for multiple comparison</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05) </span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">ttest.DEGs.p_adjust.filtered &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet   =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span> ,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],log2),</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">                                          <span class="dt">nrep            =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">                                          <span class="dt">method          =</span> <span class="st">"t.test"</span>,</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">                                          <span class="dt">p.adjust.method =</span> <span class="st">"BH"</span>,</a>
-<a class="sourceLine" id="cb9-9" data-line-number="9">                                          <span class="dt">stage.names     =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>),</a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">                                          <span class="dt">comparison      =</span> <span class="st">"above"</span>,</a>
-<a class="sourceLine" id="cb9-11" data-line-number="11">                                          <span class="dt">alpha           =</span> <span class="fl">0.05</span>,</a>
-<a class="sourceLine" id="cb9-12" data-line-number="12">                                          <span class="dt">filter.method   =</span> <span class="st">"n-set"</span>,</a>
-<a class="sourceLine" id="cb9-13" data-line-number="13">                                          <span class="dt">n               =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co"># look at the genes fulfilling the filter criteria </span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16">ttest.DEGs.p_adjust.filtered</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Detection of DEGs using the p-value returned by a Welch t-test</span>
+<span class="co"># and furthermore, adjust p-values for multiple comparison</span>
+<span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span>
+<span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05) </span>
+<span class="va">ttest.DEGs.p_adjust.filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet   <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span> ,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,<span class="va">log2</span><span class="op">)</span>,
+                                          nrep            <span class="op">=</span> <span class="fl">2</span>,
+                                          method          <span class="op">=</span> <span class="st">"t.test"</span>,
+                                          p.adjust.method <span class="op">=</span> <span class="st">"BH"</span>,
+                                          stage.names     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span>,
+                                          comparison      <span class="op">=</span> <span class="st">"above"</span>,
+                                          alpha           <span class="op">=</span> <span class="fl">0.05</span>,
+                                          filter.method   <span class="op">=</span> <span class="st">"n-set"</span>,
+                                          n               <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+
+<span class="co"># look at the genes fulfilling the filter criteria </span>
+<span class="va">ttest.DEGs.p_adjust.filtered</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID    S1&lt;-&gt;S2   S1&lt;-&gt;S3   S2&lt;-&gt;S3
 3            1 at1g01070.1 0.03200692 0.0113536 0.2192432</code></pre>
 <p>In this example, only 1 out of 10 genes fulfills the p-value criteria (<code>alpha = 0.05</code>) in at least one stage comparison.</p>
@@ -293,14 +298,15 @@
 <h4 class="hasAnchor">
 <a href="#rank-top-p-values" class="anchor"></a>Rank top p-values</h4>
 <p>Finally, users can rank genes in increasing p-value order for each stage comparison by typing:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">ttest.DEGs.p_adjust &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet   =</span> <span class="kw"><a href="../reference/tf.html">tf</a></span>(PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],log2),</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">                                 <span class="dt">nrep            =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">                                 <span class="dt">method          =</span> <span class="st">"t.test"</span>,</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">                                 <span class="dt">p.adjust.method =</span> <span class="st">"BH"</span>,</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">                                 <span class="dt">stage.names     =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ttest.DEGs.p_adjust[<span class="kw"><a href="https://rdrr.io/r/base/order.html">order</a></span>(ttest.DEGs.p_adjust[ , <span class="st">"S1&lt;-&gt;S2"</span>], <span class="dt">decreasing =</span> <span class="ot">FALSE</span>) , <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ttest.DEGs.p_adjust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet   <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,<span class="va">log2</span><span class="op">)</span>,
+                                 nrep            <span class="op">=</span> <span class="fl">2</span>,
+                                 method          <span class="op">=</span> <span class="st">"t.test"</span>,
+                                 p.adjust.method <span class="op">=</span> <span class="st">"BH"</span>,
+                                 stage.names     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ttest.DEGs.p_adjust</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">ttest.DEGs.p_adjust</span><span class="op">[</span> , <span class="st">"S1&lt;-&gt;S2"</span><span class="op">]</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> , <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>    Phylostratum      GeneID  S1&lt;-&gt;S2
 54             1 at1g02400.1 0.151388
 119            1 at1g03870.1 0.151388
@@ -316,16 +322,17 @@
 <h2 class="hasAnchor">
 <a href="#wilcoxon-mann-whitney-test-mann-whitney-u-test" class="anchor"></a>Wilcoxon-Mann-Whitney test (Mann-Whitney U test)</h2>
 <p>The Wilcoxon-Mann-Whitney test is a <em>nonparametric</em> test to quantify the shift in empirical distribution parameters. <em>Nonparametric</em> tests are useful when sample populations do not meet the test assumptions of <em>parametric</em> tests.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by a Wilcoxon-Mann-Whitney test</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">Wilcox.DEGs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">                        <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">                        <span class="dt">method        =</span> <span class="st">"wilcox.test"</span>,</a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">                        <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10">Wilcox.DEGs</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by a Wilcoxon-Mann-Whitney test</span>
+<span class="va">Wilcox.DEGs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                        nrep          <span class="op">=</span> <span class="fl">2</span>,
+                        method        <span class="op">=</span> <span class="st">"wilcox.test"</span>,
+                        stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">Wilcox.DEGs</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID   S1&lt;-&gt;S2   S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.3333333 0.3333333 0.3333333
 2            1 at1g01050.1 1.0000000 0.3333333 0.3333333
@@ -333,20 +340,21 @@
 4            1 at1g01080.2 0.3333333 0.3333333 0.6666667
 5            1 at1g01090.1 0.3333333 0.3333333 0.3333333</code></pre>
 <p>Again, users can adjust p-values by specifying the <code>p.adjust.method</code> argument.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by a Wilcoxon-Mann-Whitney test</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co"># and furthermore, adjust p-values for multiple comparison</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">Wilcox.DEGs.adj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet  =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">                            <span class="dt">nrep            =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">                            <span class="dt">method          =</span> <span class="st">"wilcox.test"</span>,</a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">                            <span class="dt">stage.names     =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>),</a>
-<a class="sourceLine" id="cb15-11" data-line-number="11">                            <span class="dt">p.adjust.method =</span> <span class="st">"BH"</span>)</a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb15-14" data-line-number="14">Wilcox.DEGs.adj</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by a Wilcoxon-Mann-Whitney test</span>
+<span class="co"># and furthermore, adjust p-values for multiple comparison</span>
+<span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span>
+<span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span>
+<span class="va">Wilcox.DEGs.adj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet  <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                            nrep            <span class="op">=</span> <span class="fl">2</span>,
+                            method          <span class="op">=</span> <span class="st">"wilcox.test"</span>,
+                            stage.names     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span>,
+                            p.adjust.method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">Wilcox.DEGs.adj</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID   S1&lt;-&gt;S2   S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.4166667 0.3333333 0.4166667
 2            1 at1g01050.1 1.0000000 0.3333333 0.4166667
@@ -362,25 +370,27 @@
 <h3 class="hasAnchor">
 <a href="#install-edger-package" class="anchor"></a>Install edgeR Package</h3>
 <p>The detection of DEGs using negative binomial models is based on the powerful implementations provided by the <a href="http://www.bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR</a> package. Hence, before using the negative binomial models in <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> users need to install the edgeR package.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># install edgeR</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">biocLite</span>(<span class="st">"edgeR"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install edgeR</span>
+<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"http://bioconductor.org/biocLite.R"</span><span class="op">)</span>
+<span class="fu">biocLite</span><span class="op">(</span><span class="st">"edgeR"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="double-tail-method" class="section level3">
 <h3 class="hasAnchor">
 <a href="#double-tail-method" class="anchor"></a>Double Tail Method</h3>
 <p>This method computes two-sided p-values by doubling the smaller tail probability (see <code>?exactTestByDeviance</code> for details). To compute p-values for stagewise comparisons based on negative binomial models, the <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> argument <code>method = "doubletail"</code>, the number of replicates per stage <code>nrep</code>, and <code>lib.size</code> quantifying the library size to equalize sample library sizes by quantile-to-quantile normalization need to be specified (see also <code>?equalizeLibSizes</code>).</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by the Double Tail Method</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">DoubleTail.DEGs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">                        <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">                        <span class="dt">method        =</span> <span class="st">"doubletail"</span>,</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">                        <span class="dt">lib.size      =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">                        <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11">DoubleTail.DEGs</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by the Double Tail Method</span>
+<span class="va">DoubleTail.DEGs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                        nrep          <span class="op">=</span> <span class="fl">2</span>,
+                        method        <span class="op">=</span> <span class="st">"doubletail"</span>,
+                        lib.size      <span class="op">=</span> <span class="fl">1000</span>,
+                        stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">DoubleTail.DEGs</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID    S1&lt;-&gt;S2     S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.26026604 0.110233012 0.6304508
 2            1 at1g01050.1 0.95314428 0.598102712 0.6398757
@@ -388,21 +398,22 @@
 4            1 at1g01080.2 0.58130025 0.487028051 0.8860005
 5            1 at1g01090.1 0.03615134 0.001773543 0.2645537</code></pre>
 <p>Again, users can adjust p-values by specifying the <code>p.adjust.method</code> argument.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by the Double Tail Method</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co"># and furthermore, adjust p-values for multiple comparison</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">DoubleTail.DEGs.adj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet  =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">                                <span class="dt">nrep            =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">                                <span class="dt">method          =</span> <span class="st">"doubletail"</span>,</a>
-<a class="sourceLine" id="cb20-10" data-line-number="10">                                <span class="dt">lib.size        =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb20-11" data-line-number="11">                                <span class="dt">stage.names     =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>),</a>
-<a class="sourceLine" id="cb20-12" data-line-number="12">                                <span class="dt">p.adjust.method =</span> <span class="st">"BH"</span>)</a>
-<a class="sourceLine" id="cb20-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb20-15" data-line-number="15">DoubleTail.DEGs.adj</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by the Double Tail Method</span>
+<span class="co"># and furthermore, adjust p-values for multiple comparison</span>
+<span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span>
+<span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span>
+<span class="va">DoubleTail.DEGs.adj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet  <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                                nrep            <span class="op">=</span> <span class="fl">2</span>,
+                                method          <span class="op">=</span> <span class="st">"doubletail"</span>,
+                                lib.size        <span class="op">=</span> <span class="fl">1000</span>,
+                                stage.names     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span>,
+                                p.adjust.method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">DoubleTail.DEGs.adj</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID   S1&lt;-&gt;S2     S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.6506651 0.275582530 0.8860005
 2            1 at1g01050.1 0.9531443 0.598102712 0.8860005
@@ -414,17 +425,18 @@
 <h3 class="hasAnchor">
 <a href="#small-p-method" class="anchor"></a>Small-P Method</h3>
 <p>This method performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see <code>exactTestBySmallP</code> for details). To compute p-values for stagewise comparisons based on negative binomial models, the <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> argument <code>method = "doubletail"</code>, the number of replicates per stage <code>nrep</code>, and <code>lib.size</code> quantifying the library size to equalize sample library sizes by quantile-to-quantile normalization need to be specified (see also <code>?equalizeLibSizes</code>).</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by the Small-P Method</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">SmallP.DEGs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">                        <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">                        <span class="dt">method        =</span> <span class="st">"smallp"</span>,</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">                        <span class="dt">lib.size      =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">                        <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb22-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">SmallP.DEGs</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by the Small-P Method</span>
+<span class="va">SmallP.DEGs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                        nrep          <span class="op">=</span> <span class="fl">2</span>,
+                        method        <span class="op">=</span> <span class="st">"smallp"</span>,
+                        lib.size      <span class="op">=</span> <span class="fl">1000</span>,
+                        stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">SmallP.DEGs</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID    S1&lt;-&gt;S2     S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.26026604 0.110233012 0.6304508
 2            1 at1g01050.1 0.95314428 0.598102712 0.6398757
@@ -432,21 +444,22 @@
 4            1 at1g01080.2 0.58130025 0.487028051 0.8860005
 5            1 at1g01090.1 0.03615134 0.001773543 0.2645537</code></pre>
 <p>Again, users can adjust p-values by specifying the <code>p.adjust.method</code> argument.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by the Small-P Method</span></a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="co"># and furthermore, adjust p-values for multiple comparison</span></a>
-<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span></a>
-<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span></a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">SmallP.DEGs.adj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet  =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb24-8" data-line-number="8">                                <span class="dt">nrep            =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb24-9" data-line-number="9">                                <span class="dt">method          =</span> <span class="st">"smallp"</span>,</a>
-<a class="sourceLine" id="cb24-10" data-line-number="10">                                <span class="dt">lib.size        =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb24-11" data-line-number="11">                                <span class="dt">stage.names     =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>),</a>
-<a class="sourceLine" id="cb24-12" data-line-number="12">                                <span class="dt">p.adjust.method =</span> <span class="st">"BH"</span>)</a>
-<a class="sourceLine" id="cb24-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb24-14" data-line-number="14"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb24-15" data-line-number="15">SmallP.DEGs.adj</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by the Small-P Method</span>
+<span class="co"># and furthermore, adjust p-values for multiple comparison</span>
+<span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span>
+<span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span>
+<span class="va">SmallP.DEGs.adj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet  <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                                nrep            <span class="op">=</span> <span class="fl">2</span>,
+                                method          <span class="op">=</span> <span class="st">"smallp"</span>,
+                                lib.size        <span class="op">=</span> <span class="fl">1000</span>,
+                                stage.names     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span>,
+                                p.adjust.method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">SmallP.DEGs.adj</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID   S1&lt;-&gt;S2     S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.6506651 0.275582530 0.8860005
 2            1 at1g01050.1 0.9531443 0.598102712 0.8860005
@@ -458,17 +471,18 @@
 <h3 class="hasAnchor">
 <a href="#deviance-method" class="anchor"></a>Deviance Method</h3>
 <p>This method uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see <code>exactTestByDeviance</code> for details). To compute p-values for stagewise comparisons based on negative binomial models, the <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> argument <code>method = "doubletail"</code>, the number of replicates per stage <code>nrep</code>, and <code>lib.size</code> quantifying the library size to equalize sample library sizes by quantile-to-quantile normalization need to be specified (see also <code>?equalizeLibSizes</code>).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by the Deviance</span></a>
-<a class="sourceLine" id="cb26-4" data-line-number="4">Deviance.DEGs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">                        <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb26-6" data-line-number="6">                        <span class="dt">method        =</span> <span class="st">"deviance"</span>,</a>
-<a class="sourceLine" id="cb26-7" data-line-number="7">                        <span class="dt">lib.size      =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb26-8" data-line-number="8">                        <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb26-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb26-10" data-line-number="10"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb26-11" data-line-number="11">Deviance.DEGs</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by the Deviance</span>
+<span class="va">Deviance.DEGs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                        nrep          <span class="op">=</span> <span class="fl">2</span>,
+                        method        <span class="op">=</span> <span class="st">"deviance"</span>,
+                        lib.size      <span class="op">=</span> <span class="fl">1000</span>,
+                        stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">Deviance.DEGs</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID    S1&lt;-&gt;S2     S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.26026604 0.110233012 0.6304508
 2            1 at1g01050.1 0.95314428 0.598102712 0.6398757
@@ -476,21 +490,22 @@
 4            1 at1g01080.2 0.58130025 0.487028051 0.8860005
 5            1 at1g01090.1 0.03615134 0.001773543 0.2645537</code></pre>
 <p>Again, users can adjust p-values by specifying the <code>p.adjust.method</code> argument.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"PhyloExpressionSetExample"</span>)</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="co"># Detection of DEGs using the p-value returned by the Deviance Method</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="co"># and furthermore, adjust p-values for multiple comparison</span></a>
-<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span></a>
-<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span></a>
-<a class="sourceLine" id="cb28-7" data-line-number="7">Deviance.DEGs.adj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/DiffGenes.html">DiffGenes</a></span>(<span class="dt">ExpressionSet    =</span> PhyloExpressionSetExample[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb28-8" data-line-number="8">                                <span class="dt">nrep            =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb28-9" data-line-number="9">                                <span class="dt">method          =</span> <span class="st">"deviance"</span>,</a>
-<a class="sourceLine" id="cb28-10" data-line-number="10">                                <span class="dt">lib.size        =</span> <span class="dv">1000</span>,</a>
-<a class="sourceLine" id="cb28-11" data-line-number="11">                                <span class="dt">stage.names     =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>),</a>
-<a class="sourceLine" id="cb28-12" data-line-number="12">                                <span class="dt">p.adjust.method =</span> <span class="st">"BH"</span>)</a>
-<a class="sourceLine" id="cb28-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb28-14" data-line-number="14"><span class="co"># look at the results</span></a>
-<a class="sourceLine" id="cb28-15" data-line-number="15">Deviance.DEGs.adj</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
+
+<span class="co"># Detection of DEGs using the p-value returned by the Deviance Method</span>
+<span class="co"># and furthermore, adjust p-values for multiple comparison</span>
+<span class="co"># using the Benjamini &amp; Hochberg (1995) method: method = "BH"</span>
+<span class="co"># and filter for significantly differentially expressed genes (alpha = 0.05)</span>
+<span class="va">Deviance.DEGs.adj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DiffGenes.html">DiffGenes</a></span><span class="op">(</span>ExpressionSet    <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                                nrep            <span class="op">=</span> <span class="fl">2</span>,
+                                method          <span class="op">=</span> <span class="st">"deviance"</span>,
+                                lib.size        <span class="op">=</span> <span class="fl">1000</span>,
+                                stage.names     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span>,
+                                p.adjust.method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span>
+
+<span class="co"># look at the results</span>
+<span class="va">Deviance.DEGs.adj</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID   S1&lt;-&gt;S2     S1&lt;-&gt;S3   S2&lt;-&gt;S3
 1            1 at1g01040.2 0.6506651 0.275582530 0.8860005
 2            1 at1g01050.1 0.9531443 0.598102712 0.8860005
@@ -504,46 +519,49 @@
 <a href="#replicate-quality-check" class="anchor"></a>Replicate Quality Check</h2>
 <p>Users can also perform replicate quality checks to quantify the variability between replicate expression levels fo each stage separately.</p>
 <p>The <code><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality()</a></code> is designed to perform customized replicate variablity checks for any <code>ExpressionSet</code> object storing replicates.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="co"># visualize the sd() between replicates</span></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="kw"><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample[ , <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb30-5" data-line-number="5">                     <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb30-6" data-line-number="6">                     <span class="dt">legend.pos   =</span> <span class="st">"topright"</span>,</a>
-<a class="sourceLine" id="cb30-7" data-line-number="7">                     <span class="dt">ylim          =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="fl">0.2</span>),</a>
-<a class="sourceLine" id="cb30-8" data-line-number="8">                     <span class="dt">lwd           =</span> <span class="dv">6</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
+
+<span class="co"># visualize the sd() between replicates</span>
+<span class="fu"><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span> , <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                     nrep          <span class="op">=</span> <span class="fl">2</span>,
+                     legend.pos   <span class="op">=</span> <span class="st">"topright"</span>,
+                     ylim          <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,
+                     lwd           <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></code></pre></div>
 <p>The resulting plot visualizes the kernel density estimates for the variance (log variance) between replicates. Each curve represents the density function for the replicate variation within one stage or experiment. In this case the variance between replicates of <code>Stage 1</code> to <code>Stage 3</code> (each including 2 replicates) seem to deviate from each other allowing the conclusion that each stage has a different expression level variability between replicates.</p>
 <p>The <code>FUN</code> argument implemented in <code><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality()</a></code> allows users to furthermore, specify customized criteria quantifying replicate varibility. Please notice that the function specified in <code>FUN</code> will be performed separately on each gene and stage.</p>
 <p>In the following example the median bbsolute deviation function <code><a href="https://rdrr.io/r/stats/mad.html">mad()</a></code> is used to quantify replicate variability.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="co"># visualize the mad() between replicates</span></a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="kw"><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample[ , <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>],</a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">                     <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6">                     <span class="dt">FUN           =</span> mad,</a>
-<a class="sourceLine" id="cb31-7" data-line-number="7">                     <span class="dt">legend.pos    =</span> <span class="st">"topright"</span>,</a>
-<a class="sourceLine" id="cb31-8" data-line-number="8">                     <span class="dt">ylim          =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="fl">0.015</span>),</a>
-<a class="sourceLine" id="cb31-9" data-line-number="9">                     <span class="dt">lwd           =</span> <span class="dv">6</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
+
+<span class="co"># visualize the mad() between replicates</span>
+<span class="fu"><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span> , <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,
+                     nrep          <span class="op">=</span> <span class="fl">2</span>,
+                     FUN           <span class="op">=</span> <span class="va">mad</span>,
+                     legend.pos    <span class="op">=</span> <span class="st">"topright"</span>,
+                     ylim          <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.015</span><span class="op">)</span>,
+                     lwd           <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></code></pre></div>
 <p>In general, users are not limited to specific functions implememnted in R. By writing customized functions such as <code>FUN = function(x) return((x - mean(x))^2)</code> users can define their own criteria to quantify replicate variability and can then apply this criteria to <code><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality()</a></code> by specifying the <code>FUN</code> argument.</p>
 </div>
 <div id="collapsing-replicate-samples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#collapsing-replicate-samples" class="anchor"></a>Collapsing Replicate Samples</h2>
 <p>After performing differential gene expression analyses, replicate expression levels are collapsed to a single stage specific expression level. For this purpose, <code>myTAI</code> implements the <code><a href="../reference/CollapseReplicates.html">CollapseReplicates()</a></code> function, allowing users to combine replicate expression levels stored in a standard <code>PhyloExpressionSet</code> or <code>DivergenceExpressionSet</code> object to a stage specific expression level using a specified window function.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(myTAI)</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="co"># load example data</span></a>
-<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="co"># genrate an example PhyloExpressionSet with replicates</span></a>
-<a class="sourceLine" id="cb32-7" data-line-number="7">ExampleReplicateExpressionSet &lt;-<span class="st"> </span>PhyloExpressionSetExample[ ,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]</a>
-<a class="sourceLine" id="cb32-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb32-9" data-line-number="9"><span class="co"># rename stages</span></a>
-<a class="sourceLine" id="cb32-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(ExampleReplicateExpressionSet)[<span class="dv">3</span><span class="op">:</span><span class="dv">8</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Stage_1_Repl_1"</span>,<span class="st">"Stage_1_Repl_2"</span>,</a>
-<a class="sourceLine" id="cb32-11" data-line-number="11">                                               <span class="st">"Stage_2_Repl_1"</span>,<span class="st">"Stage_2_Repl_2"</span>,</a>
-<a class="sourceLine" id="cb32-12" data-line-number="12">                                               <span class="st">"Stage_3_Repl_1"</span>,<span class="st">"Stage_3_Repl_2"</span>)</a>
-<a class="sourceLine" id="cb32-13" data-line-number="13"><span class="co"># have a look at the example dataset</span></a>
-<a class="sourceLine" id="cb32-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ExampleReplicateExpressionSet, <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
+
+<span class="co"># load example data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
+
+<span class="co"># genrate an example PhyloExpressionSet with replicates</span>
+<span class="va">ExampleReplicateExpressionSet</span> <span class="op">&lt;-</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span> ,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>
+
+<span class="co"># rename stages</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ExampleReplicateExpressionSet</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Stage_1_Repl_1"</span>,<span class="st">"Stage_1_Repl_2"</span>,
+                                               <span class="st">"Stage_2_Repl_1"</span>,<span class="st">"Stage_2_Repl_2"</span>,
+                                               <span class="st">"Stage_3_Repl_1"</span>,<span class="st">"Stage_3_Repl_2"</span><span class="op">)</span>
+<span class="co"># have a look at the example dataset</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ExampleReplicateExpressionSet</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>  Phylostratum      GeneID Stage_1_Repl_1 Stage_1_Repl_2 Stage_2_Repl_1 Stage_2_Repl_2 Stage_3_Repl_1 Stage_3_Repl_2
 1            1 at1g01040.2       2173.635      1911.2001       1152.555      1291.4224       1000.253       962.9772
 2            1 at1g01050.1       1501.014      1817.3086       1665.309      1564.7612       1496.321      1114.6435
@@ -551,23 +569,25 @@
 4            1 at1g01080.2       1016.920       936.3837       1181.338      1329.4734       1392.643      1287.9746
 5            1 at1g01090.1      11424.567     16778.1685      34366.649     39775.6405      56231.569     66980.3673</code></pre>
 <p>Now, assume that this example <code>PhyloExpressionSet</code> stores three developmental stages and 2 biological replicates for each developmental stage. Of course, we could now compute and visualize the TAI profile by typing:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># visualize the TAI profile over 3 stages of development</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co"># and 2 replicates per stage</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw"><a href="../reference/PlotPattern.html">PlotPattern</a></span>(<span class="dt">ExpressionSet =</span> ExampleReplicateExpressionSet,</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">            <span class="dt">type          =</span> <span class="st">"l"</span>,</a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">            <span class="dt">lwd           =</span> <span class="dv">6</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># visualize the TAI profile over 3 stages of development</span>
+<span class="co"># and 2 replicates per stage</span>
+<span class="fu"><a href="../reference/PlotPattern.html">PlotPattern</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">ExampleReplicateExpressionSet</span>,
+            type          <span class="op">=</span> <span class="st">"l"</span>,
+            lwd           <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></code></pre></div>
 <p>Usually, one would expect that variations in replicate values are smaller than variations between developmental stages. In this example however, we constructed replicate values that vary larger than expression levels between developmental stages. For many applications it might be useful to visualize TAI/TDI values of replicates as well, but normally replicate values are collapsed to one gene and stage specific value after differential gene expression analyses and replicate quality control have been performed.</p>
 <p>The following example illustrates how to collapse replicates with <code><a href="../reference/CollapseReplicates.html">CollapseReplicates()</a></code>:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># combine the expression levels of the 2 replicates (const) per stage</span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co"># using geom.mean as window function and rename new stages to: "S1","S2","S3"</span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">CollapssedPhyloExpressionSet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CollapseReplicates.html">CollapseReplicates</a></span>(</a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">                                       <span class="dt">ExpressionSet =</span> ExampleReplicateExpressionSet,</a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">                                       <span class="dt">nrep          =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb35-6" data-line-number="6">                                       <span class="dt">FUN           =</span> geom.mean,</a>
-<a class="sourceLine" id="cb35-7" data-line-number="7">                                       <span class="dt">stage.names   =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span>))</a>
-<a class="sourceLine" id="cb35-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="co"># have a look at the collpased PhyloExpressionSet</span></a>
-<a class="sourceLine" id="cb35-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(CollapssedPhyloExpressionSet)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># combine the expression levels of the 2 replicates (const) per stage</span>
+<span class="co"># using geom.mean as window function and rename new stages to: "S1","S2","S3"</span>
+<span class="va">CollapssedPhyloExpressionSet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CollapseReplicates.html">CollapseReplicates</a></span><span class="op">(</span>
+                                       ExpressionSet <span class="op">=</span> <span class="va">ExampleReplicateExpressionSet</span>,
+                                       nrep          <span class="op">=</span> <span class="fl">2</span>,
+                                       FUN           <span class="op">=</span> <span class="va">geom.mean</span>,
+                                       stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># have a look at the collpased PhyloExpressionSet</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">CollapssedPhyloExpressionSet</span><span class="op">)</span></code></pre></div>
 <pre><code>   Phylostratum      GeneID         S1         S2         S3
 1            1 at1g01040.2  2038.1982  1220.0147   981.4381
 2            1 at1g01050.1  1651.6070  1614.2524  1291.4582
@@ -591,19 +611,20 @@
 <li><p><code>min-set</code>: genes passing the expression level <code>cut.off</code> in <code><a href="https://rdrr.io/r/base/Round.html">ceiling(n/2)</a></code> stages will be retained in the <code>ExpressionSet</code>, where <code>n</code> is the number of stages in the <code>ExpressionSet</code>.</p></li>
 <li><p><code>n-set</code>: genes passing the expression level <code>cut.off</code> in <code>n</code> stages will be retained in the <code>ExpressionSet</code>. Here, the argument <code>n</code> is defining the number of stages for which the threshold criteria should be fulfilled.</p></li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># check number of genes in PhyloExpressionSetExample</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="co">#&gt; [1] 25260</span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5"><span class="co"># remove genes that have an expression level below 8000</span></a>
-<a class="sourceLine" id="cb37-6" data-line-number="6"><span class="co"># in at least one developmental stage</span></a>
-<a class="sourceLine" id="cb37-7" data-line-number="7">FilterConst &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expressed.html">Expressed</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb37-8" data-line-number="8">                         <span class="dt">cut.off       =</span> <span class="dv">8000</span>,</a>
-<a class="sourceLine" id="cb37-9" data-line-number="9">                         <span class="dt">comparison    =</span> <span class="st">"below"</span>, </a>
-<a class="sourceLine" id="cb37-10" data-line-number="10">                         <span class="dt">method        =</span> <span class="st">"const"</span>)</a>
-<a class="sourceLine" id="cb37-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb37-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(FilterConst) <span class="co"># check number of retained genes</span></a>
-<a class="sourceLine" id="cb37-13" data-line-number="13"><span class="co">#&gt; [1] 449</span></a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># check number of genes in PhyloExpressionSetExample</span>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
+<span class="co">#&gt; [1] 25260</span>
+
+<span class="co"># remove genes that have an expression level below 8000</span>
+<span class="co"># in at least one developmental stage</span>
+<span class="va">FilterConst</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Expressed.html">Expressed</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
+                         cut.off       <span class="op">=</span> <span class="fl">8000</span>,
+                         comparison    <span class="op">=</span> <span class="st">"below"</span>, 
+                         method        <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">FilterConst</span><span class="op">)</span> <span class="co"># check number of retained genes</span>
+<span class="co">#&gt; [1] 449</span></code></pre></div>
 <p>Users will observe that only 449 out of 25260 genes in <code>PhyloExpressionSetExample</code> have an absolute expression level above <code>8000</code> when omitting genes using <code>method = 'const'</code>. The argument <code>comparison</code> specifies whether genes having expression levels below, above, or below AND above (both) the <code>cut.off</code> value should be removed from the dataset.</p>
 <p>The following comparison methods can be selected:</p>
 <ul>
@@ -614,52 +635,55 @@
 <li>
 <code>comparison = "both"</code>: remove genes fulfilling the <code>comparison = "below"</code> <strong>AND</strong> <code>comparison = "above"</code> criteria.</li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co"># again: check number of genes in PhyloExpressionSetExample</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="co">#&gt; [1] 25260</span></a>
-<a class="sourceLine" id="cb38-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="co"># remove genes that have an expression level above 12000</span></a>
-<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="co"># in at least one developmental stage (outlier removal)</span></a>
-<a class="sourceLine" id="cb38-7" data-line-number="7">FilterConst.above &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expressed.html">Expressed</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb38-8" data-line-number="8">                               <span class="dt">cut.off       =</span> <span class="dv">12000</span>,</a>
-<a class="sourceLine" id="cb38-9" data-line-number="9">                               <span class="dt">comparison    =</span> <span class="st">"above"</span>, </a>
-<a class="sourceLine" id="cb38-10" data-line-number="10">                               <span class="dt">method        =</span> <span class="st">"const"</span>)</a>
-<a class="sourceLine" id="cb38-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb38-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(FilterConst.above) <span class="co"># check number of retained genes</span></a>
-<a class="sourceLine" id="cb38-13" data-line-number="13"><span class="co">#&gt; [1] 23547</span></a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># again: check number of genes in PhyloExpressionSetExample</span>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
+<span class="co">#&gt; [1] 25260</span>
+
+<span class="co"># remove genes that have an expression level above 12000</span>
+<span class="co"># in at least one developmental stage (outlier removal)</span>
+<span class="va">FilterConst.above</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Expressed.html">Expressed</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
+                               cut.off       <span class="op">=</span> <span class="fl">12000</span>,
+                               comparison    <span class="op">=</span> <span class="st">"above"</span>, 
+                               method        <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">FilterConst.above</span><span class="op">)</span> <span class="co"># check number of retained genes</span>
+<span class="co">#&gt; [1] 23547</span></code></pre></div>
 <p>For this example 25260 - 23547 = 1713 have been classified as outliers (expression levels above 12000) and were removed from the dataset.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># again: check number of genes in PhyloExpressionSetExample</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="co">#&gt; [1] 25260</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="co"># remove genes that have an expression level below 8000 AND above 12000</span></a>
-<a class="sourceLine" id="cb39-6" data-line-number="6"><span class="co"># in at least one developmental stage (non-expressed genes AND outlier removal)</span></a>
-<a class="sourceLine" id="cb39-7" data-line-number="7">FilterConst.both &lt;-<span class="st">  </span><span class="kw"><a href="../reference/Expressed.html">Expressed</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb39-8" data-line-number="8">                               <span class="dt">cut.off       =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">8000</span>,<span class="dv">12000</span>),</a>
-<a class="sourceLine" id="cb39-9" data-line-number="9">                               <span class="dt">comparison    =</span> <span class="st">"both"</span>, </a>
-<a class="sourceLine" id="cb39-10" data-line-number="10">                               <span class="dt">method        =</span> <span class="st">"const"</span>)</a>
-<a class="sourceLine" id="cb39-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb39-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(FilterConst.both) <span class="co"># check number of retained genes</span></a>
-<a class="sourceLine" id="cb39-13" data-line-number="13"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># again: check number of genes in PhyloExpressionSetExample</span>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
+<span class="co">#&gt; [1] 25260</span>
+
+<span class="co"># remove genes that have an expression level below 8000 AND above 12000</span>
+<span class="co"># in at least one developmental stage (non-expressed genes AND outlier removal)</span>
+<span class="va">FilterConst.both</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/Expressed.html">Expressed</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
+                               cut.off       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8000</span>,<span class="fl">12000</span><span class="op">)</span>,
+                               comparison    <span class="op">=</span> <span class="st">"both"</span>, 
+                               method        <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">FilterConst.both</span><span class="op">)</span> <span class="co"># check number of retained genes</span>
+<span class="co">#&gt; [1] 2</span></code></pre></div>
 <p>When selecting <code>comparison = 'both'</code>, the <code>cut.off</code> argument receives 2 threshold values: the <em>below</em> <code>cut.off</code> as first element and the <em>above</em> <code>cut.off</code> as second element. In this case <code>cut.off = c(8000,12000)</code>. Here, only 2 genes fulfill these criteria.</p>
 <p>Analogously, users can specify the number of stages that should fulfill the threshold criteria using the <code>n-set</code> method.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># remove genes that have an expression level below 8000</span></a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co"># in at least 5 developmental stages (in this case: n = 2 stages fulfilling the criteria)</span></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">FilterNSet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expressed.html">Expressed</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">                        <span class="dt">cut.off       =</span> <span class="dv">8000</span>,</a>
-<a class="sourceLine" id="cb40-5" data-line-number="5">                        <span class="dt">method        =</span> <span class="st">"n-set"</span>,</a>
-<a class="sourceLine" id="cb40-6" data-line-number="6">                        <span class="dt">comparison    =</span> <span class="st">"below"</span>,</a>
-<a class="sourceLine" id="cb40-7" data-line-number="7">                        <span class="dt">n             =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb40-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(FilterMinSet) <span class="co"># check number of retained genes</span></a>
-<a class="sourceLine" id="cb40-10" data-line-number="10"><span class="co">#&gt; [1] 20</span></a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># remove genes that have an expression level below 8000</span>
+<span class="co"># in at least 5 developmental stages (in this case: n = 2 stages fulfilling the criteria)</span>
+<span class="va">FilterNSet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Expressed.html">Expressed</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
+                        cut.off       <span class="op">=</span> <span class="fl">8000</span>,
+                        method        <span class="op">=</span> <span class="st">"n-set"</span>,
+                        comparison    <span class="op">=</span> <span class="st">"below"</span>,
+                        n             <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">FilterMinSet</span><span class="op">)</span> <span class="co"># check number of retained genes</span>
+<span class="co">#&gt; [1] 20</span></code></pre></div>
 <p>Here, 20 genes are fulfilling these criteria.</p>
 </div>
 <div id="compute-the-statistical-significance-of-each-replicate-combination" class="section level2">
 <h2 class="hasAnchor">
 <a href="#compute-the-statistical-significance-of-each-replicate-combination" class="anchor"></a>Compute the Statistical Significance of Each Replicate Combination</h2>
 <p>In some cases (high variability of replicates) it might be useful to verify that there is no sequence of replicates (for all possible combination of replicates) that results in a non-significant <code>TAI</code> or <code>TDI</code> pattern, when the initial pattern with combined replicates was shown to be significant.</p>
-<p>The <code><a href="../reference/combinatorialSignificance.html">CombinatorialSignificance()</a></code> function implemented in <code>myTAI</code> allows users to compute the p-values quantifying the statistical significance of the underlying pattern for all combinations of replicates.</p>
+<p>The <code><a href="../reference/CombinatorialSignificance.html">CombinatorialSignificance()</a></code> function implemented in <code>myTAI</code> allows users to compute the p-values quantifying the statistical significance of the underlying pattern for all combinations of replicates.</p>
 <div id="a-small-example" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-small-example" class="anchor"></a>A small Example:</h3>
@@ -678,51 +702,39 @@
 </ul>
 <p>This procedure yields 27 p-values for the <span class="math inline">\(3^3\)</span> (<span class="math inline">\(n^m\)</span>) replicate combinations, where <span class="math inline">\(n\)</span> denotes the number of developmental stages and <span class="math inline">\(m\)</span> denotes the number of replicates per stage.</p>
 <p>Note that in case users have a large amount of stages/experiments and a large amount of replicates the computation time will increase by <span class="math inline">\(n^m\)</span>. For 11 stages and 4 replicates, <span class="math inline">\(4^{11}\)</span> = 4194304 p-values have to be computed. Each p-value computation itself is based on a permutation test running with <span class="math inline">\(1,000, 10,000, ...\)</span> or more permutations. Be aware that this might take some time.</p>
-<p>The p-value vector returned by this function can then be used to plot the p-values to see whether an critical value <span class="math inline">\(\alpha\)</span> is exceeded or not (e.g. <span class="math inline">\(\alpha = 0.05\)</span>).</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># load a standard PhyloExpressionSet</span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(PhyloExpressionSetExample)</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="co"># we assume that the PhyloExpressionSetExample</span></a>
-<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="co"># consists of 3 developmental stages</span></a>
-<a class="sourceLine" id="cb41-6" data-line-number="6"><span class="co"># and 2 replicates for stage 1, 3 replicates for stage 2,</span></a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="co"># and 2 replicates for stage 3</span></a>
-<a class="sourceLine" id="cb41-8" data-line-number="8"><span class="co"># FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000</span></a>
-<a class="sourceLine" id="cb41-9" data-line-number="9"><span class="co"># BUT </span><span class="al">NOTE</span><span class="co"> THAT THIS TAKES MUCH MORE COMPUTATION TIME</span></a>
-<a class="sourceLine" id="cb41-10" data-line-number="10">p.vector &lt;-<span class="st"> </span><span class="kw"><a href="../reference/combinatorialSignificance.html">CombinatorialSignificance</a></span>(<span class="dt">ExpressionSet =</span> PhyloExpressionSetExample,</a>
-<a class="sourceLine" id="cb41-11" data-line-number="11">                                      <span class="dt">replicates    =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb41-12" data-line-number="12">                                      <span class="dt">TestStatistic =</span> <span class="st">"FlatLineTest"</span>,</a>
-<a class="sourceLine" id="cb41-13" data-line-number="13">                                      <span class="dt">permutations  =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb41-14" data-line-number="14">                                      <span class="dt">parallel      =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>The p-value vector returned by this function can then be used to plot the p-values to see whether an critical value <span class="math inline">\(\alpha\)</span> is exceeded or not (e.g. <span class="math inline">\(\alpha = 0.05\)</span>).</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load a standard PhyloExpressionSet</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
+
+<span class="co"># we assume that the PhyloExpressionSetExample</span>
+<span class="co"># consists of 3 developmental stages</span>
+<span class="co"># and 2 replicates for stage 1, 3 replicates for stage 2,</span>
+<span class="co"># and 2 replicates for stage 3</span>
+<span class="co"># FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000</span>
+<span class="co"># BUT NOTE THAT THIS TAKES MUCH MORE COMPUTATION TIME</span>
+<span class="va">p.vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CombinatorialSignificance.html">CombinatorialSignificance</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
+                                      replicates    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>,
+                                      TestStatistic <span class="op">=</span> <span class="st">"FlatLineTest"</span>,
+                                      permutations  <span class="op">=</span> <span class="fl">100</span>,
+                                      parallel      <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <pre><code> [1] 2.436296e-03 2.288593e-02 1.608399e-03 1.185615e-02 1.835306e-06 1.077012e-05
  [7] 2.025515e-07 5.148342e-07 1.654885e-07 6.251145e-06 9.265520e-10 1.047479e-06</code></pre>
 <p>Users will observe that none of the replicate combinations resulted in p-values &gt; 0.05 and thus we can assume that the phylotranscriptomic pattern computed based on collapsed replicates is not biased by insignificant replicate combinations.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/any.html">any</a></span>(p.vector <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.05</span>)</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="co">#&gt; FALSE</span></a></code></pre></div>
-<p><code><a href="../reference/combinatorialSignificance.html">CombinatorialSignificance()</a></code> can perform all significance tests introduced in the <a href="Introduction.html">Introduction</a> and <a href="Intermediate.html">Intermediate</a> vignettes.</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">p.vector</span> <span class="op">&gt;</span> <span class="fl">0.05</span><span class="op">)</span>
+<span class="co">#&gt; FALSE</span></code></pre></div>
+<p><code><a href="../reference/CombinatorialSignificance.html">CombinatorialSignificance()</a></code> can perform all significance tests introduced in the <a href="Introduction.html">Introduction</a> and <a href="Intermediate.html">Intermediate</a> vignettes.</p>
 <p>Furthermore, the <code>parallel</code> argument allows users to perform significance computations in parallel on a multicore machine. This will speed up p-value computations for a large number of combinations.</p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#introduction">Introduction</a></li>
-      <li><a href="#detection-of-differenentially-expressed-genes-degs">Detection of Differenentially Expressed Genes (DEGs)</a></li>
-      <li><a href="#fold-changes">Fold-Changes</a></li>
-      <li><a href="#welch-t-test">Welch t-test</a></li>
-      <li><a href="#wilcoxon-mann-whitney-test-mann-whitney-u-test">Wilcoxon-Mann-Whitney test (Mann-Whitney U test)</a></li>
-      <li><a href="#negative-binomial-exact-tests">Negative Binomial (Exact Tests)</a></li>
-      <li><a href="#replicate-quality-check">Replicate Quality Check</a></li>
-      <li><a href="#collapsing-replicate-samples">Collapsing Replicate Samples</a></li>
-      <li><a href="#filter-for-expressed-genes">Filter for Expressed Genes</a></li>
-      <li><a href="#compute-the-statistical-significance-of-each-replicate-combination">Compute the Statistical Significance of Each Replicate Combination</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -733,7 +745,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
