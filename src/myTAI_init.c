@@ -4,8 +4,8 @@
 #include <R_ext/Rdynload.h>
 
 /* FIXME: 
-Check these declarations against the C/Fortran source code.
-*/
+ Check these declarations against the C/Fortran source code.
+ */
 
 /* .Call calls */
 extern SEXP _myTAI_cpp_bootMatrix(SEXP, SEXP, SEXP);
@@ -15,7 +15,6 @@ extern SEXP _myTAI_cpp_omitMatrix(SEXP, SEXP);
 extern SEXP _myTAI_cpp_pMatrix(SEXP, SEXP);
 extern SEXP _myTAI_cpp_std_error(SEXP);
 extern SEXP _myTAI_cpp_TAI(SEXP, SEXP);
-
 
 static const R_CallMethodDef CallEntries[] = {
         {"_myTAI_cpp_bootMatrix",    (DL_FUNC) &_myTAI_cpp_bootMatrix,    3},
