@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@
       <a href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a>
     </li>
     <li>
-      <a href="../articles/Introduction.html">Introduction to the myTAI Package</a>
+      <a href="../articles/Introduction.html">Introduction to the myTAI package</a>
     </li>
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
@@ -141,13 +141,37 @@
       <small>Source: <a href='https://github.com/drostlab/myTAI/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="mytai-1009000" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0.9000">
+<a href="#mytai-1009000" class="anchor"></a>myTAI 1.0.0.9000<small> Unreleased </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
+<ul>
+<li>
+<code><a href="../reference/CollapseReplicates.html">CollapseReplicates()</a></code> now returns <code>tibble</code> objects</li>
+<li>
+<code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> received a new argument <code>y.ticks</code>
+</li>
+</ul>
+</div>
+<div id="bug-and-issue-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-and-issue-fixes" class="anchor"></a>Bug and Issue Fixes</h2>
+<ul>
+<li>
+<code>CollapseFromTo()</code> now has an exception when a replicate number <code>1</code> is passed to the function -&gt; previously this would cause an error to occur</li>
+</ul>
+</div>
+</div>
     <div id="mytai-093" class="section level1">
 <h1 class="page-header" data-toc-text="0.9.3">
-<a href="#mytai-093" class="anchor"></a>myTAI 0.9.3<small> Unreleased </small>
+<a href="#mytai-093" class="anchor"></a>myTAI 0.9.3<small> 2021-02-24 </small>
 </h1>
 <ul>
 <li>removing the depreciated <code>std::random_shuffle()</code> function to sample <code>plylostratum</code> or <code>divergence stratum</code> columns and replacing it with <code>std::shuffle()</code>. See full discussion <a href="https://meetingcpp.com/blog/items/stdrandom_shuffle-is-deprecated.html">here</a>.</li>
-<li>removing depreciated function calls such as <code><a href="https://dplyr.tidyverse.org/reference/funs.html">dplyr::funs()</a></code> and <code>tibble.is.tibble()</code>
+<li>removing depreciated function calls such as <code><a href="https://dplyr.tidyverse.org/reference/funs.html">dplyr::funs()</a></code> and <code><a href="https://tibble.tidyverse.org/reference/is.tibble.html">tibble::is.tibble()</a></code>
 </li>
 <li>updated unit tests</li>
 </ul>
@@ -235,10 +259,10 @@
 <h3 class="hasAnchor">
 <a href="#updates-1" class="anchor"></a>Updates</h3>
 <ul>
-<li><p><code><a href="../reference/is.ExpressionSet.html">is.ExpressionSet()</a></code> now prints out more detailed error messages when <a href="https://github.com/HajkD/myTAI/blob/master/vignettes/Introduction.Rmd#defining-input-data-standards">ExpressionSet format</a> is violated</p></li>
+<li><p><code><a href="../reference/is.ExpressionSet.html">is.ExpressionSet()</a></code> now prints out more detailed error messages when <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Introduction.Rmd">ExpressionSet format</a> is violated</p></li>
 <li><p>adapt <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> to new version of <code>dplyr</code> where <code>summarise_each()</code> is deprecated.</p></li>
 </ul>
-<p>Error message accuring after new <code>dplyr</code> release was:</p>
+<p>Error message occurring after new <code>dplyr</code> release was:</p>
 <ol>
 <li>Failure: <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> works properly with DivergenceExpressionSet input… (<a href='https://github.com/test-PlotContribution'>@test-PlotContribution</a>.R<a href='https://github.com/drostlab/myTAI/issues/16'>#16</a>) PlotContribution(DivergenceExpressionSetExample, legendName = “DS”) produced messages.</li>
 </ol>
@@ -265,7 +289,7 @@
 <a href="#updates-2" class="anchor"></a>Updates</h3>
 <ul>
 <li><p><code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> is now based on ggplot2 and loses base graphics arguments</p></li>
-<li><p>now R/RcppExports.R and src/rcpp_funcs.cpp are included in the package due to previous compilation problems (see also <a href="http://stackoverflow.com/questions/34585560/travis-ci-r-package-error-in-documentation">stackoverflow discussion</a>)</p></li>
+<li><p>now R/RcppExports.R and src/rcpp_funcs.cpp are included in the package due to previous compilation problems (see also <a href="https://stackoverflow.com/questions/34585560/travis-ci-r-package-error-in-documentation">stackoverflow discussion</a>)</p></li>
 <li><p><code><a href="../reference/MatchMap.html">MatchMap()</a></code> is now based on <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">dplyr::inner_join()</a></code> to match age category table with a gene expression dataset</p></li>
 <li><p><code><a href="../reference/PlotCorrelation.html">PlotCorrelation()</a></code> has been extended and optimized for producing high publication quality plots</p></li>
 <li><p><code><a href="../reference/PlotMeans.html">PlotMeans()</a></code> is now based on ggplot2 and lost all base graphics arguments.</p></li>
@@ -368,7 +392,7 @@
 <h3 class="hasAnchor">
 <a href="#new-functions-5" class="anchor"></a>New Functions</h3>
 <ul>
-<li><p>a new function <code><a href="../reference/taxonomy.html">taxonomy()</a></code> allows users to retrieve taxonomic information for any organism of interest; this function has been taken from the <a href="https://github.com/HajkD/biomartr">biomartr</a> package and was removed from <code>biomartr</code> afterwards. Please notice, that in myTAI version 0.1.0 the Introduction vignette referenced to the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function in <code>biomartr</code>. This is no longer the case (since myTAI version 0.2.0), because now <code><a href="../reference/taxonomy.html">taxonomy()</a></code> is implemented in myTAI.</p></li>
+<li><p>a new function <code><a href="../reference/taxonomy.html">taxonomy()</a></code> allows users to retrieve taxonomic information for any organism of interest; this function has been taken from the <a href="https://github.com/ropensci/biomartr">biomartr</a> package and was removed from <code>biomartr</code> afterwards. Please notice, that in myTAI version 0.1.0 the Introduction vignette referenced to the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function in <code>biomartr</code>. This is no longer the case (since myTAI version 0.2.0), because now <code><a href="../reference/taxonomy.html">taxonomy()</a></code> is implemented in myTAI.</p></li>
 <li><p>the new <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function is based on the powerful R package <a href="https://github.com/ropensci/taxize">taxize</a>.</p></li>
 <li><p>a new function <code><a href="../reference/SelectGeneSet.html">SelectGeneSet()</a></code> allows users to fastly select a subset of genes in an ExpressionSet</p></li>
 <li><p>a new function <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> allows users to perform differential gene expression analysis with ExpressionSet objects</p></li>
@@ -438,7 +462,7 @@
 <a href="#new-features-in-v-002" class="anchor"></a>New Features in v. 0.0.2</h2>
 <ul>
 <li><p><code>combinatorialSignificance()</code>, <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code>, <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code>, and <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> now support multicore processing</p></li>
-<li><p><code><a href="../reference/MatchMap.html">MatchMap()</a></code> has been entirely rewritten and is now based on <a href="https://github.com/hadley/dplyr">dplyr</a>; additionally it now has a new argument <code>accumulate</code> that allows you to accumulate multiple expression levels to a unique expressiion level for a unique gene id</p></li>
+<li><p><code><a href="../reference/MatchMap.html">MatchMap()</a></code> has been entirely rewritten and is now based on <a href="https://github.com/tidyverse/dplyr">dplyr</a>; additionally it now has a new argument <code>accumulate</code> that allows you to accumulate multiple expression levels to a unique expressiion level for a unique gene id</p></li>
 </ul>
 <div id="vignettes-4" class="section level3">
 <h3 class="hasAnchor">

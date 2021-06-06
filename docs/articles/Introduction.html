@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to the myTAI Package • myTAI</title>
+<title>Introduction to the myTAI package • myTAI</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to the myTAI Package">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to the myTAI package">
 <meta property="og:description" content="myTAI">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
       <a href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a>
     </li>
     <li>
-      <a href="../articles/Introduction.html">Introduction to the myTAI Package</a>
+      <a href="../articles/Introduction.html">Introduction to the myTAI package</a>
     </li>
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
@@ -97,9 +97,9 @@
       </header><script src="Introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Introduction to the myTAI Package</h1>
+      <h1 data-toc-skip>Introduction to the myTAI package</h1>
             
-            <h4 class="date">2021-02-23</h4>
+            <h4 class="date">2021-06-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Introduction.Rmd"><code>vignettes/Introduction.Rmd</code></a></small>
       <div class="hidden name"><code>Introduction.Rmd</code></div>
@@ -126,7 +126,7 @@
 <p>Although powerful for investigating the molecular mechanisms that determine the biological process of interest, these datasets rarely capture the evolutionary history of <strong>how</strong> these expression patterns emerged or to <strong>what extent</strong> they are possibly constrained. By combining transcriptomics studies with a comparative approach, however, we can capture some evolutionary signatures that allow us to understand the variability or constraint of particular sets of genes. This evolutionary transcriptomics approach relies on the comparison of transcriptomes between species using orthologous or homologous genes as a phylogenetic variable. This method seeks to determine stages of biological processes in which gene expression patterns are more variable or more constrained than others.</p>
 <p>Finding such transcriptome conservation or variability patterns within a biological process of interest, allows us to reconstruct parts of the evolutionary history of that particular process and might guide us in developing methods to modify such processes.</p>
 <p>The myTAI package provides an analytics tool to perform evolutionary transcriptomics studies and is designed to detect evolutionary signatures in transcriptome data. It furthermore, seeks to provide a consistent way to design a computationally reproducible analytics process that achieves a high degree of transparency when conducting evolutionary transcriptomics studies.</p>
-<p>Alternatively, instead of investigating the transcriptome conservation of a biological process of interest, <code>comparative transcriptomics</code> ( <a href="http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22595/abstract">Pantalacci and Semon, 2014</a>; <a href="http://onlinelibrary.wiley.com/doi/10.1002/jez.b.22618/full">Roux et al., 2015</a> ) has been developed as a method to study the conservation and variation of gene expression profiles of orthologous genes between related species for a biological process of intest.</p>
+<p>Alternatively, instead of investigating the transcriptome conservation of a biological process of interest, <code>comparative transcriptomics</code> ( <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/jez.b.22595">Pantalacci and Semon, 2014</a>; <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/jez.b.22618">Roux et al., 2015</a> ) has been developed as a method to study the conservation and variation of gene expression profiles of orthologous genes between related species for a biological process of intest.</p>
 <p>For some biological studies, it can be useful to choose both approaches, <code>comparative transcriptomics</code> and <code>transcriptome conservation quantification</code>, to independently confirm evolutionary constraints that might be present in a biological process of interest.</p>
 <p>The advantage of <code>comparative transcriptomics</code> over <code>transcriptome conservation quantification</code> is that this method uses multiple species to confirm gene expression profile conservation within a biological process of interest. However, one should be aware that most <code>comparative transcriptomics</code> studies limit their quantification and inference on a subset of the transcriptome. Since <code>comparative transcriptomics</code> studies rely on transcripts of orthologous genes, the orthology inference method and the evolutionary distance between compared species can limit the set of investigated transcripts up to 1/3 of the actual transcriptome.</p>
 <p>In contrast, the advantage of <code>transcriptome conservation quantification</code> over <code>comparative transcriptomics</code> is that although <code>transcriptome conservation quantification</code> captures less evolutionary signal it can be performed using only one reference species. Thus, hundreds of thousands of transcriptome datasets that are publically accessible can be revisited and investigated in the light of <code>transcriptome conservation</code> without having to conduct new experiments to fulfill the experimental design standards of <code>comparative transcriptomics</code> studies.</p>
@@ -179,7 +179,7 @@ Comparative Genomics + Transcriptomics = Evolutionary Transcriptomics
 <p><code>myTAI</code> is designed to receive phylogenetic information obtained from comparative genomics data and transcriptome data as input and internally combines these datasets to perform evolutionary transcriptomics analyses.</p>
 <p><img src="Figures/Fig3.png"></p>
 <p style="font-size:10px;">
-Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see <a href="http://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression">Dunn, 2013</a> ), genomic phylostratography based gene age inference (see <a href="http://www.sciencedirect.com/science/article/pii/S0168952507002995">Domazet-Loso et al., 2007</a>; <a href="http://www.sciencedirect.com/science/article/pii/S016895251300111X">Capra et al., 2013</a>; <a href="http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113">Liebeskind et al., 2016</a> ), by dNdS estimation of orthologous genes (see <a href="http://www.nature.com/nature/journal/v490/n7418/full/nature11394.html">Quint, Drost et al., 2012</a> and <a href="https://academic.oup.com/mbe/article/32/5/1221/1125964">Drost et al., 2015</a>), or phylogenetic reconciliation (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/21949266">Doyon et al, 2011</a> ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code>, <code><a href="../reference/PlotRE.html">PlotRE()</a></code> and <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code>.
+Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see <a href="https://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression">Dunn, 2013</a> ), genomic phylostratography based gene age inference (see <a href="https://www.sciencedirect.com/science/article/pii/S0168952507002995">Domazet-Loso et al., 2007</a>; <a href="https://www.sciencedirect.com/science/article/pii/S016895251300111X">Capra et al., 2013</a>; <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026">Liebeskind et al., 2016</a> ), by dNdS estimation of orthologous genes (see <a href="https://www.nature.com/articles/nature11394">Quint, Drost et al., 2012</a> and <a href="https://academic.oup.com/mbe/article/32/5/1221/1125964">Drost et al., 2015</a>), or phylogenetic reconciliation (see <a href="https://pubmed.ncbi.nlm.nih.gov/21949266/">Doyon et al, 2011</a> ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we examplify the output of the functions <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code>, <code><a href="../reference/PlotRE.html">PlotRE()</a></code> and <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code>.
 </p>
 </div>
 <div id="retrieval-of-phylogenetic-or-taxonomic-information" class="section level2">
@@ -189,16 +189,16 @@ Figure 3: Workflow describing the input and output of the myTAI package. The myT
 <div id="genomic-phylostratography-based-gene-age-inference" class="section level3">
 <h3 class="hasAnchor">
 <a href="#genomic-phylostratography-based-gene-age-inference" class="anchor"></a>Genomic phylostratography based gene age inference</h3>
-<p>As intensely discussed in the past years (<a href="http://www.sciencedirect.com/science/article/pii/S016895251300111X">Capra et al., 2013</a>; <a href="http://www.nature.com/nmeth/journal/v13/n5/pdf/nmeth.3830.pdf">Altenhoff et al., 2016</a>; <a href="http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113">Liebeskind et al., 2016</a>), gene age inference is not a trivial task and might be biased in some currently existing approaches (<a href="http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113">Liebeskind et al., 2016</a>; <a href="https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074">Yin et al., 2018</a>; <a href="https://academic.oup.com/gbe/article/10/11/2906/5140197">Casola 2018</a>).</p>
-<p>In particular, Moyers &amp; Zhang argue that <a href="http://www.sciencedirect.com/science/article/pii/S0168952507002995">genomic phylostratigraphy</a> (a prominent BLAST based gene age inference method)</p>
+<p>As intensely discussed in the past years (<a href="https://www.sciencedirect.com/science/article/pii/S016895251300111X">Capra et al., 2013</a>; <a href="https://www.nature.com/articles/nmeth.3830.pdf">Altenhoff et al., 2016</a>; <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026">Liebeskind et al., 2016</a>), gene age inference is not a trivial task and might be biased in some currently existing approaches (<a href="https://academic.oup.com/gbe/article/8/6/1812/2574026">Liebeskind et al., 2016</a>; <a href="https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074">Yin et al., 2018</a>; <a href="https://academic.oup.com/gbe/article/10/11/2906/5140197">Casola 2018</a>).</p>
+<p>In particular, Moyers &amp; Zhang argue that <a href="https://www.sciencedirect.com/science/article/pii/S0168952507002995">genomic phylostratigraphy</a> (a prominent BLAST based gene age inference method)</p>
 <ol style="list-style-type: decimal">
 <li><p>underestimates gene age for a considerable fraction of genes,</p></li>
 <li><p>is biased for rapidly evolving proteins which are short, and/or their most conserved block of sites is small, and</p></li>
-<li><p>these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori (<a href="http://mbe.oxfordjournals.org/content/32/1/258.long">Moyers &amp; Zhang, 2015</a>; <a href="http://mbe.oxfordjournals.org/content/33/5/1245">Moyers &amp; Zhang, 2016</a>; <a href="http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113">Liebeskind et al., 2016</a>).</p></li>
+<li><p>these biases create spurious nonuniform distributions of various gene properties among age groups, many of which cannot be predicted a priori (<a href="https://academic.oup.com/mbe/article/32/1/258/2925575">Moyers &amp; Zhang, 2015</a>; <a href="https://academic.oup.com/mbe/article/33/5/1245/2579728">Moyers &amp; Zhang, 2016</a>; <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026">Liebeskind et al., 2016</a>).</p></li>
 </ol>
-<p>However, these arguments were based on simulated data and were inconclusive due to <a href="http://mbe.oxfordjournals.org/content/33/11/3031.full?etoc">errors in their analyses</a>. Furthermore, <a href="https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284">Domazet-Loso et al., 2017</a> provide convincing evidence that there is <strong>no</strong> phylostratigraphic bias. As a response, <a href="https://academic.oup.com/gbe/article/9/6/1519/3867914">Moyers &amp; Zhang, 2017</a> recently published a counter-study stating that a phylostratigraphic trend claimed by <a href="https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284">Domazet-Loso et al., 2017</a> to be robust to error disappears when genes likely to be error-resistant are analyzed. <a href="https://academic.oup.com/gbe/article/9/6/1519/3867914">Moyers &amp; Zhang, 2017</a> further suggest a more robust methodology for controlling for the effects of error by first restricting to those genes which can be simulated and then removing those genes which, through simulation, have been shown to be error-prone (see also <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555">Moyers &amp; Zhang, 2018</a>).</p>
-<p>In general, an objective benchmarking set representing the tree of life is still missing and therefore any procedure aiming to quantify gene ages will be biased to some degree. Based on this debate a recent study suggested to perform gene age inference by combining several common orthology inference algorithms to create gene age datasets and then characterize the error around each age-call on a per-gene and per-algorithm basis. Using this approach systematic error was found to be a large factor in estimating gene age, suggesting that simple consensus algorithms are not enough to give a reliable point estimate (<a href="http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113">Liebeskind et al., 2016</a>). This was also observed by <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555">Moyers &amp; Zhang, 2018</a>) when running alternative tools such as <code>PSIBLAST</code>, <code>HMMER</code>, <code>OMA</code>, etc. However, by generating a consensus gene age and quantifying the possible error in each workflow step, <a href="http://gbe.oxfordjournals.org/content/early/2016/06/03/gbe.evw113">Liebeskind et al., 2016</a> provide a very useful <a href="http://geneages.org/">database</a> of consensus gene ages for a variety of genomes.</p>
-<p>Alternatively, <a href="https://bib.oxfordjournals.org/content/early/2016/04/20/bib.bbw034.full">Stephen Smith, 2016</a> argues that <em>de novo</em> gene birth/death and gene family expansion/contraction studies should avoid drawing direct inferences of evolutionary relatedness from measures of sequence similarity alone, and should instead, where possible, use more rigorous phylogeny-based methods. For this purpose, I recommend researchers to consult the <a href="http://orthology.phylomedb.org/">phylomedb database</a> to retrieve phylogeny-based gene orthology relationships and use these age estimates in combination with <code>myTAI</code>. Alternatively, users might find the simulation based removal approach propsed by <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555">Moyers &amp; Zhang, 2018</a> more suitable.</p>
+<p>However, these arguments were based on simulated data and were inconclusive due to <a href="https://academic.oup.com/mbe/article/33/11/3031/2272516">errors in their analyses</a>. Furthermore, <a href="https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284">Domazet-Loso et al., 2017</a> provide convincing evidence that there is <strong>no</strong> phylostratigraphic bias. As a response, <a href="https://academic.oup.com/gbe/article/9/6/1519/3867914">Moyers &amp; Zhang, 2017</a> recently published a counter-study stating that a phylostratigraphic trend claimed by <a href="https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284">Domazet-Loso et al., 2017</a> to be robust to error disappears when genes likely to be error-resistant are analyzed. <a href="https://academic.oup.com/gbe/article/9/6/1519/3867914">Moyers &amp; Zhang, 2017</a> further suggest a more robust methodology for controlling for the effects of error by first restricting to those genes which can be simulated and then removing those genes which, through simulation, have been shown to be error-prone (see also <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555">Moyers &amp; Zhang, 2018</a>).</p>
+<p>In general, an objective benchmarking set representing the tree of life is still missing and therefore any procedure aiming to quantify gene ages will be biased to some degree. Based on this debate a recent study suggested to perform gene age inference by combining several common orthology inference algorithms to create gene age datasets and then characterize the error around each age-call on a per-gene and per-algorithm basis. Using this approach systematic error was found to be a large factor in estimating gene age, suggesting that simple consensus algorithms are not enough to give a reliable point estimate (<a href="https://academic.oup.com/gbe/article/8/6/1812/2574026">Liebeskind et al., 2016</a>). This was also observed by <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555">Moyers &amp; Zhang, 2018</a>) when running alternative tools such as <code>PSIBLAST</code>, <code>HMMER</code>, <code>OMA</code>, etc. However, by generating a consensus gene age and quantifying the possible error in each workflow step, <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026">Liebeskind et al., 2016</a> provide a very useful <a href="https://github.com/marcottelab/Gene-Ages">database</a> of consensus gene ages for a variety of genomes.</p>
+<p>Alternatively, <a href="https://doi.org/10.1093/bib/bbw034">Stephen Smith, 2016</a> argues that <em>de novo</em> gene birth/death and gene family expansion/contraction studies should avoid drawing direct inferences of evolutionary relatedness from measures of sequence similarity alone, and should instead, where possible, use more rigorous phylogeny-based methods. For this purpose, I recommend researchers to consult the <a href="http://orthology.phylomedb.org/">phylomedb database</a> to retrieve phylogeny-based gene orthology relationships and use these age estimates in combination with <code>myTAI</code>. Alternatively, users might find the simulation based removal approach proposed by <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555">Moyers &amp; Zhang, 2018</a> more suitable.</p>
 <p>Evidently, these advancements in gene age research are very recent and gene age inference is a very young and active field of genomic research. Therefore, many more studies need to address the robust and realistic inference of gene age and a community standard is still missing.</p>
 <p>Despite the ongoing debate about how to correctly infer gene age, users of <code>myTAI</code> can perform any gene age inference method they find most appropriate for their biological question and pass this gene age inference table as input to <code>myTAI</code>. To do so, users need to follow the following data format specifications to use their gene age inference table with <code>myTAI</code>. However, even when users rely on established procedures such as phylostratigraphy the gene age inference bias will be present as ‘systematic error’ in all developmental stages for which TAI or TDI computations are performed. Thus, stages of constraint will be detectable in any case. Since TAI or TDI computations are indended to enable screening for conserved or constrained stages in developmental or biological processes for further downstream experimental studies, even simple approaches such as phylostratigraphy can give first evidence for the existence of transcriptomic contraints within a biological process. If researchers then wish to extract the exact candidate genes that might potentially cause such transcriptome constraints then I would advise to rely on more superior approaches of gene age inference as discussed above.</p>
 <p>In my opinion, what is completely missing in this entire debate is the bioinformatics/technical aspect of using BLAST or any other BLAST-like tool for gene age inference. Recently, it was intesely discussed how BLAST hits are biased by the use of the default argument <code>max_target_seqs</code> (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty833/5106166">Shah et al., 2018</a>). The main issue of how this <code>max_target_seqs</code> is set is that:</p>
@@ -214,7 +214,7 @@ Figure 3: Workflow describing the input and output of the myTAI package. The myT
 <p>In more detail, even if one study for example ran BLAST with <code>evalue 10</code> (default value in BLAST) and then subsequently filtered for hits that resulted in <code>evalue &lt; 0.0001</code> whereas another study ran BLAST directly with <code>evalue 0.0001</code>, according to <a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty1018/5239655">Gonzalez-Pech et al., 2018</a> these studies although referring to the same <code>E-value</code> threshold for filtering hits will result in different sets of filtered BLAST hits.</p>
 <p>A recently introduced approach is called <code>synteny-based phylostratigraphy</code> (<a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y">Arendsee et al., 2019</a>). Here, the authors provide a comparative analysis of genes across evolutionary clades, augmenting standard phylostratigraphy with a detailed, synteny-based analysis. Whereas standard phylostratigraphy searches the proteomes of related species for similarities to focal genes, their <code>fagin</code> pipeline first finds syntenic genomic intervals and then searches within these intervals for any trace of similarity. It searches the (<code>in silico</code> translated) amino acid sequence of all unannotated ORFs as well as all known CDS within the syntenic search space of the target genomes. If no amino acid similarity is found within the syntenic search space, their <code>fagin</code> pipeline will search for nucleotide similarity. Finding nucleotide sequence similarity, but not amino acid similarity, is consistent with a <code>de novo</code> origin of the focal gene. If no similarity of any sort is found, their <code>fagin</code> pipeline will use the syntenic data to infer a possible reason. Thus, they detect indels, scrambled synteny, assembly issues, and regions of uncertain synteny (<a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y">Arendsee et al., 2019</a>).</p>
 <p>Hence, all of the above mentioned approaches are far from being perfect and much more research is needed to systematically compare different approaches for gene age inference.</p>
-<p>The overall rational behind gene age inference is to assign each protein coding gene of an organism of interest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see <a href="http://www.nature.com/nrg/journal/v12/n10/abs/nrg3053.html">Tautz &amp; Domazet-Loso, 2011</a>)). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named <em>phylostratigraphic map</em>.</p>
+<p>The overall rational behind gene age inference is to assign each protein coding gene of an organism of interest with an evolutionary age estimate which aims to quantify its potential origin within the tree of life (detectable sequence homolog; orphan gene (see <a href="https://www.nature.com/articles/nrg3053">Tautz &amp; Domazet-Loso, 2011</a>)). Hence, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of iterest in the second column. This table is named <em>phylostratigraphic map</em>.</p>
 <p><strong>Generate or retrieve phylostratigraphic maps:</strong></p>
 <ul>
 <li>
@@ -224,19 +224,19 @@ Figure 3: Workflow describing the input and output of the myTAI package. The myT
 <li>
 <a href="https://github.com/AlexGa/Phylostratigraphy">createPSmap.pl</a>: generate a phylostratigraphic map (implemented by Alexander Gabel)</li>
 <li>
-<a href="https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022">phylostratigraphy.pl</a>: generate a phylostratigraphic (implemented by Cheng et al. 2015)</li>
+<a href="https://figshare.com/articles/dataset/A_developmental_hourglass_in_fungi/1284022">phylostratigraphy.pl</a>: generate a phylostratigraphic (implemented by Cheng et al. 2015)</li>
 <li>
 <a href="https://mynotebook.labarchives.com/share/Shuqing_Xu/NTIuMHw2NDQyMi80MC9UcmVlTm9kZS8zNDEyODM1NjE2fDEzMi4w">phylo_pipeline.py</a>: a Python script to generate a phylostratigraphic map (implemented by Shuqing Xu)</li>
 <li>
 <a href="https://github.com/longjunwu/Genomic-phylostratigraphy-tool">Genomic-phylostratigraphy-tool</a>: a Python script to generate a phylostratigraphic map (implemented by Longjun Wu)</li>
 <li>
-<a href="http://bioinformatics.oxfordjournals.org/content/early/2016/03/26/bioinformatics.btw122.full.pdf">ORFanFinder</a>: generate a phylostratigraphic map</li>
+<a href="http://bcb.unl.edu/orfanfinder/">ORFanFinder</a>: generate a phylostratigraphic map</li>
 <li>
 <code>Protein Historian</code>: generate a gene age map</li>
 <li>download pre-computed and published <a href="https://github.com/HajkD/published_phylomaps">phylostratigraphic maps</a>
 </li>
 <li>
-<a href="http://geneages.org/">Liebeskind et al., 2016</a>: use a gene age consensus approach to estimating gene ages for model organisms</li>
+<a href="https://github.com/marcottelab/Gene-Ages">Liebeskind et al., 2016</a>: use a gene age consensus approach to estimating gene ages for model organisms</li>
 <li>
 <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1427-5">orthoscape</a>: a cytoscape application for grouping and visualization KEGG based gene networks by taxonomy and homology principles (implemented by Mustafin et al., 2017)</li>
 <li>
@@ -252,9 +252,9 @@ Figure 3: Workflow describing the input and output of the myTAI package. The myT
 <p><strong>Generate or retrieve divergence stratigraphic maps:</strong></p>
 <ul>
 <li>
-<a href="https://github.com/HajkD/orthologr">orthologr</a>: generate a <a href="https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd">divergence stratigraphic map</a> (implemented by Hajk-Georg Drost)</li>
+<a href="https://github.com/drostlab/orthologr">orthologr</a>: generate a <a href="https://github.com/drostlab/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd">divergence stratigraphic map</a> (implemented by Hajk-Georg Drost)</li>
 <li>
-<a href="https://figshare.com/articles/A_developmental_hourglass_in_fungi/1284022">compute_dNdS.pl</a>: generate a divergence stratigraphic map (implemented by Cheng et al. 2015)</li>
+<a href="https://figshare.com/articles/dataset/A_developmental_hourglass_in_fungi/1284022">compute_dNdS.pl</a>: generate a divergence stratigraphic map (implemented by Cheng et al. 2015)</li>
 <li>
 <a href="http://orthology.phylomedb.org/">MetaPhOrs</a>: retrieve phylogeny-based orthology and paralogy predictions</li>
 <li>download pre-computed and published <a href="https://github.com/HajkD/published_phylomaps">divergence stratigraphic maps</a>
@@ -298,7 +298,7 @@ Figure 3: Workflow describing the input and output of the myTAI package. The myT
 5            1 at1g01090.1
 6            1 at1g01120.1</code></pre>
 <p>In detail, a <em>phylostratigraphic map</em> stores the gene age assignment generated with e.g. <a href="https://github.com/AlexGa/Phylostratigraphy">phylostratigraphy</a> in the first columns and the corresponding gene id in the second column.</p>
-<p>Analogously, a divergence stratigraphic map stores the gene age assignment generated with e.g. <a href="https://github.com/HajkD/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd">divergence stratigraphy</a> in the first column and the corresponding gene id in the second column:</p>
+<p>Analogously, a divergence stratigraphic map stores the gene age assignment generated with e.g. <a href="https://github.com/drostlab/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd">divergence stratigraphy</a> in the first column and the corresponding gene id in the second column:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show an example structure of a Divergence Map</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">[</span> , <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Divergence.stratum"</span>,<span class="st">"GeneID"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -325,7 +325,7 @@ Figure 3: Workflow describing the input and output of the myTAI package. The myT
 4 at1g01080.2  1016.9203   936.3837  1181.3381  1329.4734  1392.6429  1287.9746  861.2605
 5 at1g01090.1 11424.5667 16778.1685 34366.6493 39775.6405 56231.5689 66980.3673 7772.5617
 6 at1g01120.1   844.0414   787.5929   859.6267   931.6180   942.8453   870.2625  792.7542</code></pre>
-<p>The function <code><a href="../reference/MatchMap.html">MatchMap()</a></code> allows users to join a <em>phylostratigraphic map</em> with an <em>ExpressionMatrix</em> to obtain a joined table referred to as <em>PhyloExpressionSet</em>. In some cases, the GeneIDs stored in the <code>ExpressionMatrix</code> and in the <em>phylostratigraphic map</em> do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the <a href="https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd">Functional Annotation Vignette</a> in the <a href="https://github.com/HajkD/biomartr">biomartr</a> package. The <code>biomartr</code> package allows users to map GeneIDs between database annotations.</p>
+<p>The function <code><a href="../reference/MatchMap.html">MatchMap()</a></code> allows users to join a <em>phylostratigraphic map</em> with an <em>ExpressionMatrix</em> to obtain a joined table referred to as <em>PhyloExpressionSet</em>. In some cases, the GeneIDs stored in the <code>ExpressionMatrix</code> and in the <em>phylostratigraphic map</em> do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the <a href="https://github.com/ropensci/biomartr/blob/master/vignettes/Functional_Annotation.Rmd">Functional Annotation Vignette</a> in the <a href="https://github.com/ropensci/biomartr">biomartr</a> package. The <code>biomartr</code> package allows users to map GeneIDs between database annotations.</p>
 <p>After matching a <em>phylostratigraphic map</em> with an <em>ExpressionMatrix</em> using the <code><a href="../reference/MatchMap.html">MatchMap()</a></code> function, a standard <em>PhyloExpressionSet</em> is returned storing the phylostratum assignment of a given gene in the first column, the <em>gene id</em> of the corresponding gene in the second column, and the entire gene expression set (time series or treatments) starting with the third column. This format is crucial for all functions that are implemented in the <code>myTAI</code> package.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
@@ -357,7 +357,7 @@ Figure 3: Workflow describing the input and output of the myTAI package. The myT
 2                  1 at1g01120.1  844.0414  787.5929  859.6267  931.618  942.8453  870.2625  792.7542
 3                  1 at1g01140.3 1041.4291  908.3929 1068.8832  967.749 1055.1901 1109.4662  825.4633
 </code></pre>
-<p>A <em>DivergenceExpressionSet</em> defines the joined table between a <em>divergence stratigraphic map</em> and a <em>Expression Set</em>. A <em>DivergenceExpressionSet</em> can be generated analogous to a <em>PhyloExpressionSet</em> by joining a <em>divergence stratigraphic map</em> with an <em>ExpressionMatrix</em> using the <code><a href="../reference/MatchMap.html">MatchMap()</a></code> function. In some cases, the GeneIDs stored in the <em>ExpressionMatrix</em> and in the <em>divergence stratigraphic map</em> do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the <a href="https://github.com/HajkD/biomartr/blob/master/vignettes/Functional_Annotation.Rmd">Functional Annotation Vignette</a> in the <a href="https://github.com/HajkD/biomartr">biomartr</a> package.</p>
+<p>A <em>DivergenceExpressionSet</em> defines the joined table between a <em>divergence stratigraphic map</em> and a <em>Expression Set</em>. A <em>DivergenceExpressionSet</em> can be generated analogous to a <em>PhyloExpressionSet</em> by joining a <em>divergence stratigraphic map</em> with an <em>ExpressionMatrix</em> using the <code><a href="../reference/MatchMap.html">MatchMap()</a></code> function. In some cases, the GeneIDs stored in the <em>ExpressionMatrix</em> and in the <em>divergence stratigraphic map</em> do not match. This is due to GeneID mappings between different databases and annotations. To map non matching GeneIDs between databases and annotations, please consult the <a href="https://github.com/ropensci/biomartr/blob/master/vignettes/Functional_Annotation.Rmd">Functional Annotation Vignette</a> in the <a href="https://github.com/ropensci/biomartr">biomartr</a> package.</p>
 <p>Each function implemented in <code>myTAI</code> checks internally whether or not the <em>PhyloExpressionSet</em> or <em>DivergenceExpressionSet</em> standard is fulfilled.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># used by all myTAI functions to check the validity of the PhyloExpressionSet standard</span>
@@ -410,15 +410,12 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
                TestStatistic <span class="op">=</span> <span class="st">"FlatLineTest"</span>,
                xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span>, 
                ylab          <span class="op">=</span> <span class="st">"TAI"</span> <span class="op">)</span></code></pre></div>
-<pre><code>#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest ' running  1000  permutations.
-#&gt; Significance status of signature:  significant.</code></pre>
-<p><img src="Introduction_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <p>The x-axis shows the seven stages of <em>A. thaliana</em> embryo development and the y-axis shows the corresponding mean transcriptome age (TAI) value. The lower the TAI value the older the mean transcriptome age and the higher the TAI value the younger the mean transcriptome age.</p>
 <p>The interpretation of the TAI values on the y-axis is given by the next figure.</p>
 <p><img src="Figures/Fig4.png"></p>
 <p>In this example, a TAI value of 3.5 quantifies that genes that contribute most the transcriptome at a particular stage emerged on average between phylostratum 3 and phylostratum 4. Due to the nature of the arithmetic mean, this value does not represent the true origin of individual genes, and thus the TAI measure is only helpful to screen for stages that express (on average) older or younger genes. Subsequent analyses such as mean expression of age categories, relative expression levels, and gene expression level distributions for each age category will then reveal which exact genes or age categories generate the overall TAI value.</p>
 <p>To obtain a more detailed overview of which age categories contribute how much to each developmental stage, the gene expression level distributions for each age caterory and each developmental stage can be visualized (using the <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> function).</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
 <span class="co"># category-centered visualization of PS </span>
 <span class="co"># specific expression level distributions (log-scale)</span>
@@ -428,28 +425,8 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
                      type          <span class="op">=</span> <span class="st">"category-centered"</span>,
                      distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,
                      log.expr      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; Warning: Ignoring unknown parameters: fun.y
-
-#&gt; Warning: Ignoring unknown parameters: fun.y</code></pre>
-<pre><code>#&gt;                   Zygote Quadrant Globular Heart Torpedo Bent  Mature
-#&gt; category-centered "***"  "***"    "***"    "***" "***"   "***" "***"</code></pre>
-<pre><code>#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`
-#&gt; No summary function supplied, defaulting to `mean_se()`</code></pre>
-<p><img src="Introduction_files/figure-html/unnamed-chunk-11-1.png" width="864"></p>
 <p>This figure shows that in all developmental stages, genes coming from PS1-3 are (on average) more expressed than genes coming from PS4-12. Interestingly, the gene expression level distributions of PS4-12 become more equally distributed towards the Torpedo stage which has been marked as the most conserved stage by TAI analysis. This general trend can be visualized using the <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code> function.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
 <span class="co"># plot evolutionary old PS (PS1-3) vs</span>
 <span class="co"># evolutionary young PS (PS4-12)</span>
@@ -457,11 +434,10 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
           Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>, 
           legendName <span class="op">=</span> <span class="st">"PS"</span>,
           adjust.range <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="Introduction_files/figure-html/unnamed-chunk-12-1.png" width="864"></p>
 <p>Here, users will observe that indeed PS1-3 genes are (on average) higher expressed than PS4-12 genes.</p>
 <p>Using a linear transformation of the mean expression levels into the interval <span class="math inline">\([0,1]\)</span> (Quint et al., 2012 and Drost et al., 2015) we can compare mean expression patterns between Phylostrata independent from their actual mean expression magnitude. A relative expression level of 0 denotes the minimum mean expression level compared to all other stages and a relative expression level of 1 denotes the maximum mean expression level compared to all other stages.</p>
 <p>The following figure illustrates the average gene expression profile for each phylostratum.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
 <span class="co"># plot evolutionary old PS (PS1-3) vs</span>
 <span class="co"># evolutionary young PS (PS4-12)</span>
@@ -469,10 +445,8 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
           Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>, 
           legendName <span class="op">=</span> <span class="st">"PS"</span>,
           adjust.range <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="Introduction_files/figure-html/unnamed-chunk-13-1.png" width="864"></p>
 <p>Users will observe, that PS4-12 genes are down-regulated towards the Torpedo stage (marked as most conserved by TAI analysis) and up-regulated after the Torpedo stage.</p>
 <p>To cluster gene expression levels of PS4-12 genes we categorize <em>A. thaliana</em> embryogenesis into three developmental modules (early, mid, and late) and cluster young genes (PS4-12) according to their fold-change pattern: High-Low-Low, High-Low-High, and Low-Low-High.</p>
-<p><img src="Introduction_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <p>As a result, we find that there are two distinct sets of young genes: High-high-low and low-low-high. Almost none of the genes have a high-low-high pattern.</p>
 <p>Finally, users can perform KEGG or GO Term enrichment analyses to obtain the annotated functions of these gene sets.</p>
 </div>
@@ -495,7 +469,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <h3 class="hasAnchor">
 <a href="#flat-line-test" class="anchor"></a>Flat Line Test</h3>
 <p>The <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> function with option <code>TestStatistic = "FlatLineTest",</code> first computes the <code>TAI</code> (given a PhyloExpressionSet and argument specification <code>measure = "TAI"</code>) or the <code>TDI</code> (given a DivergenceExpressionSet and argument specification <code>measure = "TDI"</code>) profile as well as their standard deviation, and statistical significance.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
 <span class="co"># Plot the Transcriptome Age Index of a given PhyloExpressionSet </span>
 <span class="co"># Test Statistic : Flat Line Test (default)</span>
@@ -518,7 +492,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <li>mid = stages 3 - 5 (Globular, Heart, and Torpedo)</li>
 <li>late = stages 6 - 7 (Bent and Mature)</li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the Transcriptome Age Index of a given PhyloExpressionSet </span>
 <span class="co"># Test Statistic : Reductive Hourglass Test</span>
 <span class="fu"><a href="../reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
@@ -529,7 +503,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
                ylab          <span class="op">=</span> <span class="st">"TAI"</span> <span class="op">)</span></code></pre></div>
 <p>The corresponding p-value <code>p_rht</code> now denotes the p-value returned by the <code>ReductiveHourglassTest</code> which is different from the p-value returned by the <code>FlatLineTest</code> (<code>p_flt</code>).</p>
 <p>To make sure that correct modules have been selected to perform the <code>ReductiveHourglassTest</code>, users can use the <code>shaded.area</code> argument to visualize chosen modules:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualize the phylotypic period used for the Reductive Hourglass Test</span>
 <span class="fu"><a href="../reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
                measure       <span class="op">=</span> <span class="st">"TAI"</span>,
@@ -554,7 +528,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <li>mid = stages 3 - 5 (Globular, Heart, and Torpedo)</li>
 <li>late = stages 6 - 7 (Bent and Mature)</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the Transcriptome Age Index of a given PhyloExpressionSet </span>
 <span class="co"># Test Statistic : Reductive Early Conservation Test</span>
 <span class="fu"><a href="../reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
@@ -567,7 +541,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <p>Since the present TAI pattern of the <em>PhyloExpressionSetExample</em> doesn’t support the Early Conservation Hypothesis, the p-value <code>p_ect</code> = 1.</p>
 <p>Again <strong>note</strong> that for defining a priori knowledge for the <code>EarlyConservationTest</code> using the <code>modules</code> argument, modules need to start at stage 1, …, N and do not correspond to the column position in the <em>PhyloExpressionSet/DivergenceExpressionSet</em> which in contrast would start at position 3, … N + 2.</p>
 <p>To obtain the numerical <em>TAI</em> values, the <code><a href="../reference/TAI.html">TAI()</a></code> function can be used:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Compute the Transcriptome Age Index values of a given PhyloExpressionSet</span>
 <span class="fu"><a href="../reference/TAI.html">TAI</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span> </code></pre></div>
 <pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
@@ -586,7 +560,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <li>mid = stages 3 - 5 (Globular, Heart, and Torpedo)</li>
 <li>late = stages 6 - 7 (Bent and Mature)</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the Transcriptome Age Index of a given PhyloExpressionSet </span>
 <span class="co"># Test Statistic : Reverse Hourglass Test</span>
 <span class="fu"><a href="../reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
@@ -597,7 +571,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
                ylab          <span class="op">=</span> <span class="st">"TAI"</span> <span class="op">)</span></code></pre></div>
 <p>The corresponding p-value <code>p_reverse_hourglass</code> now denotes the p-value returned by the <code>ReverseHourglassTest</code> which is different from the p-value returned by the <code>FlatLineTest</code> (<code>p_flt</code>).</p>
 <p>To make sure that correct modules have been selected to perform the <code>ReverseHourglassTest</code>, users can use the <code>shaded.area</code> argument to visualize chosen modules:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualize the phylotypic period used for the Reductive Hourglass Test</span>
 <span class="fu"><a href="../reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
                measure       <span class="op">=</span> <span class="st">"TAI"</span>,
@@ -614,7 +588,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <h2 class="hasAnchor">
 <a href="#transcriptome-divergence-index-analyses" class="anchor"></a>Transcriptome Divergence Index Analyses</h2>
 <p>Analogous to the <em>TAI</em> computations and visualization, the <em>TDI</em> computations can be performed in a similar fashion:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span>
 <span class="co"># Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet </span>
 <span class="co"># Test Statistic : Flat Line Test (default)</span>
@@ -629,7 +603,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <li>mid = stages 3 - 5 (Globular, Heart, and Torpedo)</li>
 <li>late = stages 6 - 7 (Bent and Mature)</li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span>
 <span class="co"># Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet </span>
 <span class="co"># Test Statistic : Reductive Hourglass Test</span>
@@ -645,7 +619,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <li>mid = stages 3 - 5 (Globular, Heart, and Torpedo)</li>
 <li>late = stages 6 - 7 (Bent and Mature)</li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span>
 <span class="co"># Plot the Transcriptome Divergence Index of a given DivergenceExpressionSet </span>
 <span class="co"># Test Statistic : Reductive Early Conservation Test</span>
@@ -656,7 +630,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
                xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span>, 
                ylab          <span class="op">=</span> <span class="st">"TDI"</span> <span class="op">)</span></code></pre></div>
 <p>To obtain the numerical TDI values for a given DivergenceExpressionSet simply run:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Compute the Transcriptome Divergence Index values of a given DivergenceExpressionSet</span>
 <span class="fu"><a href="../reference/TDI.html">TDI</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span> </code></pre></div>
 <pre><code>  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 
@@ -670,7 +644,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <h4 class="hasAnchor">
 <a href="#example-phylostrata" class="anchor"></a>Example: <code>Phylostrata</code>
 </h4>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
 <span class="co"># visualize phylostrata contribution to the global TAI pattern</span>
  <span class="fu"><a href="../reference/PlotContribution.html">PlotContribution</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
@@ -680,7 +654,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
                    y.ticks        <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p>The <code>y.ticks</code> argument allows users to to adjust the number of ticks that shall be visualized on the y-axis.</p>
 <p>The exact values of the <code>Phylostratum</code> specific cumulative TAI profiles can be obtained using the <code><a href="../reference/pTAI.html">pTAI()</a></code> function:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pTAI.html">pTAI</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></code></pre></div>
 <pre><code>      Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
 1  0.3929533 0.3935308 0.4142106 0.4115399 0.4216806 0.4178302 0.3883815
@@ -701,13 +675,13 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <a href="#example-divergence-strata" class="anchor"></a>Example: <code>Divergence Strata</code>
 </h4>
 <p>Analogously, the <code>Divergence Stratum</code> specific influence on the global TDI pattern can be visualized using:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span>
 <span class="co"># visualize divergence stratum contribution to global TDI</span>
  <span class="fu"><a href="../reference/PlotContribution.html">PlotContribution</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">DivergenceExpressionSetExample</span>,
                    legendName    <span class="op">=</span> <span class="st">"DS"</span><span class="op">)</span></code></pre></div>
 <p>The exact values of the <code>Divergence Stratum</code> specific cumulative TDI values can be obtained using the <code><a href="../reference/pTDI.html">pTDI()</a></code> function:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pTDI.html">pTDI</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span></code></pre></div>
 <pre><code>      Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
 1  0.2174378 0.2207644 0.2309211 0.2214881 0.2195601 0.2047938 0.1704023
@@ -721,7 +695,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 9  3.8396769 3.8299654 3.7793476 3.8353941 3.8272391 3.8971210 4.0753877
 10 4.5320286 4.5632002 4.4857052 4.5008685 4.4664774 4.5307040 4.6902921</code></pre>
 <p>In both cases (<code>Phylostrata</code> and <code>Divergence Strata</code>) the <code><a href="../reference/pTAI.html">pTAI()</a></code> and <code><a href="../reference/pTDI.html">pTDI()</a></code> functions return a numeric matrix storing the cumulative TAI or TDI values for each <code>Phylostratum</code> and <code>Divergence Stratum</code>. Note, that the TAI values of <code>Phylostratum</code> 12 (in the <code><a href="../reference/pTAI.html">pTAI()</a></code> matrix) are equivalent to <code><a href="../reference/TAI.html">TAI(PhyloExpressionSetExample)</a></code>.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show that the cumulative TAI value of PS 12 is</span>
 <span class="co"># equavalent to the global TAI() values</span>
 <span class="fu"><a href="../reference/pTAI.html">pTAI</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span><span class="op">[</span><span class="fl">12</span> , <span class="op">]</span>
@@ -734,7 +708,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <span class="co"># &gt;  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature </span>
 <span class="co"># &gt; 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334</span></code></pre></div>
 <p>This can be explained by the definition of the TAI. Here the sum of all partial TAI values over all <code>Phylostrata</code> is equals the global TAI values:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show that the colSum() of partial TAI values</span>
 <span class="co"># over all Phylostrata equals the global TAI() values</span>
 <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="../reference/pStrata.html">pStrata</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span> , <span class="fl">2</span> , <span class="va">sum</span><span class="op">)</span>
@@ -742,7 +716,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 <span class="co"># &gt;  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature </span>
 <span class="co"># &gt; 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334</span></code></pre></div>
 <p>Now, the <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> only differs from <code><a href="https://rdrr.io/r/base/apply.html">apply(pStrata(PhyloExpressionSetExample) , 2 , sum)</a></code> by exchanging the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> by <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code>.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show that apply(pStrata(PhyloExpressionSetExample) , 2 , cumsum)</span>
 <span class="co"># is equivalent to pTAI()</span>
 <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="../reference/pStrata.html">pStrata</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span> , <span class="fl">2</span> , <span class="va">cumsum</span><span class="op">)</span></code></pre></div>
@@ -759,7 +733,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 10 2.4215868 2.4361137 2.3489524 2.3347670 2.3028346 2.3797112 2.5142773
 11 2.4900201 2.5079107 2.4104647 2.3980760 2.3651571 2.4422093 2.5961316
 12 3.2299418 3.2256139 3.1071348 3.1166934 3.0739935 3.1765113 3.3903336</code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pTAI.html">pTAI</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></code></pre></div>
 <pre><code>      Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
 1  0.3929533 0.3935308 0.4142106 0.4115399 0.4216806 0.4178302 0.3883815
@@ -776,7 +750,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 12 3.2299418 3.2256139 3.1071348 3.1166934 3.0739935 3.1765113 3.3903336</code></pre>
 <p>This <code><a href="../reference/pTAI.html">pTAI()</a></code> matrix is what is being visualized inside <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code>.</p>
 <p><strong>Note</strong> that the <code><a href="../reference/pStrata.html">pStrata()</a></code> function returns the partial TAI or TDI values for each <code>Phylostratum</code> or <code>Divergence Stratum</code>, whereas <code><a href="../reference/pMatrix.html">pMatrix()</a></code> returns the partial TAI or TDI value for each gene.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># compute partial TAI values for each Phylostratum</span>
 <span class="fu"><a href="../reference/pStrata.html">pStrata</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></code></pre></div>
 <pre><code>       Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature
@@ -792,9 +766,9 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 10 0.38766762 0.40666192 0.36664326 0.33649918 0.31130963 0.33833215 0.32646984
 11 0.06843326 0.07179705 0.06151227 0.06330899 0.06232254 0.06249801 0.08185437
 12 0.73992167 0.71770319 0.69667019 0.71861745 0.70883635 0.73430205 0.79420194</code></pre>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># compute partial TAI values for each gene</span>
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="fu"><a href="../reference/pMatrix.html">pMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="fu"><a href="../reference/pMatrix.html">pMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>Observations: 25260
 Variables:
 $ Zygote   (dbl) 3.597950e-05, 2.484581e-05, 2.007498e-05, 1.683276e-05, 1.891073e-...
@@ -818,7 +792,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 <h3 class="hasAnchor">
 <a href="#mean-expression-levels-of-a-phyloexpressionset-and-divergenceexpressionset" class="anchor"></a>Mean Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet</h3>
 <p>Visualizing the mean gene expression of genes corresponding to the same Phylostratum or Divergence Stratum class allows users to detect biological process specific groups of Phylostrata or Divergence Strata that are most expressed during the underlying biological process. This might lead to correlating specific groups of Phylostrata or Divergence Strata sharing similar evolutionary origins with common functions or functional contributions to a specific developmental process.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean gene expression of each Phylostratum class</span>
 <span class="fu"><a href="../reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
            Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, 
@@ -827,14 +801,14 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 <p>In different biological processes different Phylostratum groups or combination of groups might resemble the majority of expressed genes.</p>
 <p>The <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code> function takes an PhyloExpressionSet or DivergenceExpressionSet and visualizes for each Phylostratum the mean expression levels of all genes that correspond to this Phylostratum. The <code>Groups</code> argument takes a list storing the Phylostrata (classified into the same group) that shall be visualized on the same plot.</p>
 <p>For this example we separate groups of Phylostrata into <strong>evolutionary old Phylostrata</strong> (PS1-3) in one plot versus <strong>evolutionary younger Phylostrata</strong> (PS4-12) into another plot:</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean gene expression of each Phylostratum class</span>
 <span class="co"># in two separate plots (groups)</span>
 <span class="fu"><a href="../reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
            Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, 
            legendName    <span class="op">=</span> <span class="st">"PS"</span><span class="op">)</span> </code></pre></div>
 <p>To obtain the numerical values (mean expression levels for all Phylostrata) run:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Using the age.apply() function to compute the mean expression levels </span>
 <span class="co"># of all Phylostrata</span>
 <span class="fu"><a href="../reference/age.apply.html">age.apply</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
@@ -856,7 +830,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 </code></pre>
 <p>Here the <code><a href="../reference/age.apply.html">age.apply()</a></code> function (<code><a href="../reference/age.apply.html">?age.apply</a></code>) takes a function as argument that itself receives a <code>data.frame</code> as argument (e.g. <code><a href="https://rdrr.io/r/base/colSums.html">colMeans()</a></code>).</p>
 <p>Users may also specify a shaded area corresponding to the modules that were specified when using the <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> function.</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean gene expression of each Phylostratum class</span>
 <span class="co"># and draw an shaded area for the mid-module.</span>
 <span class="fu"><a href="../reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
@@ -865,7 +839,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
            legendName    <span class="op">=</span> <span class="st">"PS"</span><span class="op">)</span> </code></pre></div>
 <p>The <code><a href="../reference/PlotMedians.html">PlotMedians()</a></code> and <code><a href="../reference/PlotVars.html">PlotVars()</a></code> functions can be used to visualize the median and variance of expression profiles that correspond to the age categories of interest.</p>
 <p>For a DivergenceExpressionSet run:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span>
 <span class="co"># Visualizing the mean gene expression of each Divergence Stratum class</span>
 <span class="fu"><a href="../reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">DivergenceExpressionSetExample</span>, 
@@ -873,7 +847,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
            legendName    <span class="op">=</span> <span class="st">"DS"</span>,
            xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span><span class="op">)</span> </code></pre></div>
 <p>To obtain the numerical values (mean expression levels for all Divergence Strata) run:</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Using the age.apply() function to compute the mean expression levels</span>
 <span class="co"># of all Divergence Strata</span>
 <span class="fu"><a href="../reference/age.apply.html">age.apply</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">DivergenceExpressionSetExample</span>, 
@@ -898,13 +872,13 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 <a href="#relative-expression-levels-of-a-phyloexpressionset-and-divergenceexpressionset" class="anchor"></a>Relative Expression Levels of a PhyloExpressionSet and DivergenceExpressionSet</h3>
 <p>Introduced by Domazet-Loso and Tautz, (2010), relative expression levels are defined as a linear transformation of the mean expression levels (of each Phylostratum or Divergence-Stratum) into the interval <span class="math inline">\([0,1]\)</span> (Quint et al., 2012 and Drost et al., 2015). This procedure allows users to compare mean expression patterns between Phylostrata or Divergence Strata independent from their actual magnitude. Hence, relative expression profiles aim to correlate the mean expression profiles of groups of Phylostrata or Divergence Strata due to the assumption that genes or groups of genes sharing a similar expression profile might be regulated by similar gene regulatory mechanisms or contribute to similar biological processes.</p>
 <p>The <code><a href="../reference/PlotRE.html">PlotRE()</a></code> function can be used (analogous to the <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code> function) to visualize the relative expression levels of a given PhyloExpressionSet and DivergenceExpressionSet:</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean gene expression of each Phylostratum class</span>
 <span class="fu"><a href="../reference/PlotRE.html">PlotRE</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
         Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, 
         legendName    <span class="op">=</span> <span class="st">"PS"</span>,
         xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span><span class="op">)</span> </code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span>
 <span class="co"># Visualizing the mean gene expression of each Divergence Stratum class</span>
 <span class="fu"><a href="../reference/PlotRE.html">PlotRE</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">DivergenceExpressionSetExample</span>, 
@@ -912,14 +886,14 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
         legendName    <span class="op">=</span> <span class="st">"DS"</span>,
         xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span><span class="op">)</span> </code></pre></div>
 <p>or again by assigning Phylostratum or Divergence Stratum groups that shall be visualized in different plots:</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean gene expression of each Phylostratum class</span>
 <span class="fu"><a href="../reference/PlotRE.html">PlotRE</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
         Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, 
         legendName    <span class="op">=</span> <span class="st">"PS"</span>,
         xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span><span class="op">)</span> </code></pre></div>
 <p>Users may also specify a shaded area corresponding to the modules that were specified when using the <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> function.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean gene expression of each Phylostratum class</span>
 <span class="fu"><a href="../reference/PlotRE.html">PlotRE</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
         Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
@@ -927,7 +901,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
         legendName    <span class="op">=</span> <span class="st">"PS"</span>,
         xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span><span class="op">)</span> </code></pre></div>
 <p>The relative expression levels can be obtained using the <code><a href="../reference/REMatrix.html">REMatrix()</a></code> function:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting the relative expression levels for all Phylostrata</span>
 <span class="fu"><a href="../reference/REMatrix.html">REMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span> </code></pre></div>
 <pre><code>
@@ -945,7 +919,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000
 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000
 </code></pre>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting the relative expression levels for all Divergence-Strata</span>
 <span class="fu"><a href="../reference/REMatrix.html">REMatrix</a></span><span class="op">(</span><span class="va">DivergenceExpressionSetExample</span><span class="op">)</span> </code></pre></div>
 <pre><code>      Zygote  Quadrant   Globular      Heart    Torpedo      Bent    Mature
@@ -961,7 +935,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 10 0.7794318 1.0000000 0.61482564 0.22487531 0.00000000 0.1192539 0.4259882
 </code></pre>
 <p>The same result could also be obtained by using the <code><a href="../reference/age.apply.html">age.apply()</a></code> function in combination with the <code><a href="../reference/RE.html">RE()</a></code> function:</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting the relative expression levels for all Phylostrata</span>
 <span class="fu"><a href="../reference/age.apply.html">age.apply</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
            FUN           <span class="op">=</span> <span class="va">RE</span> <span class="op">)</span> </code></pre></div>
@@ -981,7 +955,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 </code></pre>
 <p>Quint et al. (2012) introduced an additional way of visualizing the difference of relative expression levels between groups of Phylostrata/Divergence-Strata.</p>
 <p>This bar plot comparing the mean relative expression levels of one Phylostratum/Divergence-Stratum group with all other groups can be plotted analogous to the <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code> and <code><a href="../reference/PlotRE.html">PlotRE()</a></code> functions:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean relative expression of two Phylostratum groups</span>
 <span class="fu"><a href="../reference/PlotBarRE.html">PlotBarRE</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
            Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, 
@@ -990,7 +964,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
            cex           <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> </code></pre></div>
 <p>Here the argument <code>Groups = list(1:3, 4:12)</code> corresponds to dividing Phylostrata 1-12 into Phylostratum groups defined as <em>origin before embryogenesis</em> (group one: PS1-3) and <em>origin during or after embryogenesis</em> (group two: PS4-12). A <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/kruskal.test.html">Kruskal-Wallis Rank Sum Test</a> is then performed to test the statistical significance of the different bars that are compared. The ’*’ corresponds to a statistically significant difference.</p>
 <p>Additionally the ratio between both values represented by the bars to be compared can be visualized as function within the bar plot using the <code>ratio = TRUE</code> argument:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean relative expression of two Phylostratum groups</span>
 <span class="fu"><a href="../reference/PlotBarRE.html">PlotBarRE</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
            Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, 
@@ -999,7 +973,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
            ylab          <span class="op">=</span> <span class="st">"Mean Relative Expression"</span>, 
            cex           <span class="op">=</span> <span class="fl">1.5</span> <span class="op">)</span> </code></pre></div>
 <p>It is also possible to compare more than two groups:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Visualizing the mean relative expression of three Phylostratum groups</span>
 <span class="fu"><a href="../reference/PlotBarRE.html">PlotBarRE</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
            Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, group_3 <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, 
@@ -1015,13 +989,13 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 <a href="#visualize-age-distributions" class="anchor"></a>Visualize age distributions</h2>
 <p>Users can visualize the age distributions using the <code><a href="../reference/PlotDistribution.html">PlotDistribution()</a></code> function.</p>
 <p>For this purpose, the <code><a href="../reference/PlotDistribution.html">PlotDistribution()</a></code> function was implemented:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Display the phylostratum distribution (gene frequency distribution) </span>
 <span class="co"># of a PhyloExpressionSet as absolute frequency distribution</span>
 <span class="fu"><a href="../reference/PlotDistribution.html">PlotDistribution</a></span><span class="op">(</span> PhyloExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
                   xlab               <span class="op">=</span> <span class="st">"Phylostratum"</span> <span class="op">)</span></code></pre></div>
 <p>or display it as relative frequencies:</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot phylostrata as relative frequency distribution</span>
 <span class="fu"><a href="../reference/PlotDistribution.html">PlotDistribution</a></span><span class="op">(</span> PhyloExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>, 
                   as.ratio           <span class="op">=</span> <span class="cn">TRUE</span>, 
@@ -1030,7 +1004,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 <h3 class="hasAnchor">
 <a href="#saving-plots-on-local-machine" class="anchor"></a>Saving Plots on Local Machine</h3>
 <p>To save plots generated with <code>myTAI</code> on a local machine users can use the following functions implemented in the R language: <code>png</code>, <code>pdf</code>, <code>svg</code>.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># save the TAI profile to a local machine with png()</span>
 <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="st">"ExampleTAIProfile.png"</span>, width <span class="op">=</span> <span class="fl">800</span>, height <span class="op">=</span> <span class="fl">600</span><span class="op">)</span>
 
@@ -1045,7 +1019,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 
 <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>When using ggplot2 based functions such as <code><a href="../reference/PlotSignature.html">PlotSignature()</a></code>, <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code>, <code><a href="../reference/PlotRE.html">PlotRE()</a></code>, etc. users can rely on the <a href="https://github.com/wilkelab/cowplot">cowplot package</a>.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># store ggplot2 graphic in variable p</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
                    ylab          <span class="op">=</span> <span class="st">"Transcriptome Age Index"</span><span class="op">)</span>

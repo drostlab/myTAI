@@ -10,6 +10,7 @@ PlotCategoryExpr(
   test.stat = TRUE,
   type = "category-centered",
   distr.type = "boxplot",
+  y.ticks = 10,
   log.expr = FALSE,
   gene.set = NULL
 )
@@ -26,6 +27,8 @@ significant differences in age or divergence category specific expression.}
 
 \item{distr.type}{format of visualizing age or divergence category specific expression distributions. Either \code{distr.type = "boxplot"}, \code{distr.type = "dotplot"}, or
 \code{distr.type = "violin"}.}
+
+\item{y.ticks}{number of y-axis ticks (default \code{y.ticks = 10}).}
 
 \item{log.expr}{a logical value specifying whether or not expression levels should internally be log2-transformed before visualization.}
 

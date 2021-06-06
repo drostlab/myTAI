@@ -76,7 +76,7 @@ rather follow a reverse hourglass (low-high-low) shape." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -111,7 +111,7 @@ rather follow a reverse hourglass (low-high-low) shape." />
       <a href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a>
     </li>
     <li>
-      <a href="../articles/Introduction.html">Introduction to the myTAI Package</a>
+      <a href="../articles/Introduction.html">Introduction to the myTAI package</a>
     </li>
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
@@ -282,11 +282,21 @@ of a parametric distribution to non-censored or censored data.</p>
 <span class='fu'>ReverseHourglassTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,
                        modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>,
                        permutations <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $p.value
+</div><div class='output co'>#&gt; $start.arg
+#&gt; $start.arg$mean
+#&gt; [1] -0.01667952
+#&gt; 
+#&gt; $start.arg$sd
+#&gt; [1] 0.02652036
+#&gt; 
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; </div><div class='output co'>#&gt; $p.value
 #&gt; [1] 1
 #&gt; 
 #&gt; $std.dev
-#&gt; [1] 0.05364423 0.05246228 0.05071124 0.04967963 0.04806965 0.04953946 0.05736249
+#&gt; [1] 0.05334036 0.05250949 0.05189108 0.05073399 0.04987003 0.05156433 0.05478124
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA
@@ -299,12 +309,22 @@ of a parametric distribution to non-censored or censored data.</p>
 <span class='fu'>ReverseHourglassTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,
                      modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>,
                      custom.perm.matrix <span class='op'>=</span> <span class='va'>custom_perm_matrix</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $p.value
+</div><div class='output co'>#&gt; $start.arg
+#&gt; $start.arg$mean
+#&gt; [1] -0.01545472
+#&gt; 
+#&gt; $start.arg$sd
+#&gt; [1] 0.02205814
+#&gt; 
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; </div><div class='output co'>#&gt; $p.value
 #&gt; [1] 1
 #&gt; 
 #&gt; $std.dev
 #&gt;     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature 
-#&gt; 0.05647735 0.05671197 0.05598295 0.05404487 0.05447502 0.05667906 0.05665409 
+#&gt; 0.05436841 0.05435583 0.05341696 0.05136032 0.05086934 0.05087431 0.05552438 
 #&gt; 
 #&gt; $lillie.test
 #&gt; [1] NA

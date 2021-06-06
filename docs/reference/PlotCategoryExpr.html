@@ -74,7 +74,7 @@ corresponding transcriptome." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@ corresponding transcriptome." />
       <a href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a>
     </li>
     <li>
-      <a href="../articles/Introduction.html">Introduction to the myTAI Package</a>
+      <a href="../articles/Introduction.html">Introduction to the myTAI package</a>
     </li>
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
@@ -157,6 +157,7 @@ corresponding transcriptome.</p>
   test.stat <span class='op'>=</span> <span class='cn'>TRUE</span>,
   type <span class='op'>=</span> <span class='st'>"category-centered"</span>,
   distr.type <span class='op'>=</span> <span class='st'>"boxplot"</span>,
+  y.ticks <span class='op'>=</span> <span class='fl'>10</span>,
   log.expr <span class='op'>=</span> <span class='cn'>FALSE</span>,
   gene.set <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
@@ -185,6 +186,10 @@ significant differences in age or divergence category specific expression.</p></
       <th>distr.type</th>
       <td><p>format of visualizing age or divergence category specific expression distributions. Either <code>distr.type = "boxplot"</code>, <code>distr.type = "dotplot"</code>, or
 <code>distr.type = "violin"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>y.ticks</th>
+      <td><p>number of y-axis ticks (default <code>y.ticks = 10</code>).</p></td>
     </tr>
     <tr>
       <th>log.expr</th>
