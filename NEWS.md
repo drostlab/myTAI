@@ -1,3 +1,16 @@
+myTAI 1.0.0.9000
+===========
+
+## New Features
+- `CollapseReplicates()` now returns `tibble` objects
+- `PlotCategoryExpr()` received a new argument `y.ticks` 
+
+## Bug and Issue Fixes
+
+- `CollapseFromTo()` now has an exception when a replicate number `1` is passed to the function
+-> previously this would cause an error to occur
+
+
 myTAI 0.9.3
 ===========
 - removing the depreciated `std::random_shuffle()` function to sample `plylostratum` or `divergence stratum` columns and replacing it with `std::shuffle()`. See full discussion [here](https://meetingcpp.com/blog/items/stdrandom_shuffle-is-deprecated.html).
