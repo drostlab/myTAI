@@ -7,8 +7,13 @@ pow <- function(x,power)
 
 CollapseFromTo <- function(x,from,to,FUN, ...){
         x <- as.data.frame(x)
-        f <- match.fun(FUN); return(apply(x[ , from:to], 1 , f, ...))
+        f <- match.fun(FUN) 
+        if (from == to){
+          return(x[ , from])
+        } else {
+          return(apply(x[ , from:to], 1 , f, ...))
         }
+  }
 
 
 quant <- function(ExpressionMatrix,quantile = 0.9)
