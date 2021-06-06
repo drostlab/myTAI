@@ -63,14 +63,18 @@ CollapseReplicates <- function(ExpressionSet, nrep, FUN, stage.names = NULL){
                         stop("Something went wrong with the constant number of replicates per stage. Are you sure that each stage has the same exact number of replicates?")
                 }
                 # concatenating the geneIDs to the new dataset at the first position 
-                FinalDataset <- data.frame(ExpressionSet[,1:2],DatasetWithCombinedReplicates);
+                FinalDataset <- data.frame(ExpressionSet[ ,1:2],DatasetWithCombinedReplicates);
                 
-                if(!is.null(stage.names))
+                if(!is.null(stage.names)) {
+                        if ((ncol(FinalDataset) - 2) != length(stage.names))
+                                stop("The number of stage names provided does not match with the number of collapsed stages. Please check what might have gone wrong.", call. = FALSE)
                         names(FinalDataset) <- c("Phylostratum","GeneID",stage.names)
+                }
+                        
                 if(is.null(stage.names))
                         names(FinalDataset) <- c("Phylostratum","GeneID",colnames(FinalDataset)[3:ncol(FinalDataset)])
                 
-                return(FinalDataset)
+                return(tibble::as_tibble(FinalDataset))
         }
         
         # in case a variable number of replicates per stage is given
@@ -105,12 +109,16 @@ CollapseReplicates <- function(ExpressionSet, nrep, FUN, stage.names = NULL){
                 
                 FinalDataset <- data.frame(ExpressionSet[ ,1:2],DatasetWithCombinedReplicates);
                 
-                if(!is.null(stage.names))
+                if(!is.null(stage.names)) {
+                        if ((ncol(FinalDataset) - 2) != length(stage.names))
+                                stop("The number of stage names provided does not match with the number of collapsed stages. Please check what might have gone wrong.", call. = FALSE)
                         names(FinalDataset) <- c("Phylostratum","GeneID",stage.names)
+                }
+                        
                 if(is.null(stage.names))
                         names(FinalDataset) <- c("Phylostratum","GeneID",colnames(FinalDataset)[3:ncol(FinalDataset)])
                 
-                return(FinalDataset)
+                return(tibble::as_tibble(FinalDataset))
         }
 }
 
