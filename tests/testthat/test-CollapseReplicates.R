@@ -79,7 +79,7 @@ test_that("CollapseReplicates() works with const. nrep = 2 and FUN = mean", {
                         mean,
                         c("S1", "S2", "S3")
                 ),
-                TestCollapsedDF1
+                tibble::as_tibble(TestCollapsedDF1)
         ))
         
 })
@@ -93,7 +93,7 @@ test_that("CollapseReplicates() works with const. nrep = 2 and FUN = 'mean' (quo
                                   "mean",
                                   c("S1", "S2", "S3")
                           ),
-                          TestCollapsedDF1
+                          tibble::as_tibble(TestCollapsedDF1)
                   ))
                   
           })
@@ -107,7 +107,7 @@ test_that("CollapseReplicates() works with const. nrep = 2 and FUN = median", {
                         median,
                         c("S1", "S2", "S3")
                 ),
-                TestCollapsedDF3
+                tibble::as_tibble(TestCollapsedDF3)
         ))
         
 })
@@ -115,7 +115,7 @@ test_that("CollapseReplicates() works with const. nrep = 2 and FUN = median", {
 test_that("CollapseReplicates() works with const. nrep = 2 and FUN = max", {
         expect_true(equal_df(
                 CollapseReplicates(PhyloExpressionSetExample[1:5, 1:8], 2, max, c("S1", "S2", "S3")),
-                TestCollapsedDF4
+                tibble::as_tibble(TestCollapsedDF4)
         ))
         
 })
@@ -129,7 +129,7 @@ test_that("CollapseReplicates() works with variable nrep = c(2,2,3) and FUN = me
                                   mean,
                                   c("S1", "S2", "S3")
                           ),
-                          TestCollapsedDF2
+                          tibble::as_tibble(TestCollapsedDF2)
                   ))
                   
           })
@@ -144,7 +144,7 @@ test_that("CollapseReplicates() works with variable nrep = c(2,2,3) and FUN = me
                                   median,
                                   c("S1", "S2", "S3")
                           ),
-                          TestCollapsedDF5
+                          tibble::as_tibble(TestCollapsedDF5)
                   ))
                   
           })
@@ -158,7 +158,7 @@ test_that("CollapseReplicates() works with variable nrep = c(2,2,3) and FUN = ma
                                   max,
                                   c("S1", "S2", "S3")
                           ),
-                          TestCollapsedDF6
+                          tibble::as_tibble(TestCollapsedDF6)
                   ))
                   
           })
@@ -181,7 +181,20 @@ colnames(TestCollapsedDF_stage.names)[3:5] <- paste0("X", 1:3)
 test_that("default stage.names work properly when stage.names = NULL", {
         expect_true(equal_df(
                 CollapseReplicates(PhyloExpressionSetExample[1:5, 1:8], 2, mean),
-                TestCollapsedDF_stage.names
+                tibble::as_tibble(TestCollapsedDF_stage.names)
+        ))
+        
+})
+
+test_that("CollapseReplicates() works with single replicates nrep = 1 and FUN = mean", {
+        expect_true(equal_df(
+                CollapseReplicates(
+                        PhyloExpressionSetExample[1:5, 1:5],
+                        1,
+                        mean,
+                        c("Zygote", "Quadrant", "Globular")
+                ),
+                tibble::as_tibble(PhyloExpressionSetExample[1:5, 1:5])
         ))
         
 })
