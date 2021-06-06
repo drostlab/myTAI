@@ -149,19 +149,19 @@ DiffGenes <- function(ExpressionSet,
                 
                 # assume absolute expression levels: so accumulation (window) function = geom.mean
                 if ( method == "foldchange"){
-                        CollapsedExpressionSet <- CollapseReplicates(ExpressionSet = ExpressionSet,
+                        CollapsedExpressionSet <- as.data.frame(CollapseReplicates(ExpressionSet = ExpressionSet,
                                                                      nrep          = nrep,
                                                                      FUN           = geom.mean,
-                                                                     stage.names   = stage.names)
+                                                                     stage.names   = stage.names))
                         
                 } 
                 
                 # assume log expression levels: so accumulation (window) function = mean
                 if (method == "log-foldchange"){
-                        CollapsedExpressionSet <- CollapseReplicates(ExpressionSet = ExpressionSet,
+                        CollapsedExpressionSet <- as.data.frame(CollapseReplicates(ExpressionSet = ExpressionSet,
                                                                      nrep          = nrep,
                                                                      FUN           = mean,
-                                                                     stage.names   = stage.names)
+                                                                     stage.names   = stage.names))
                 }
                 
                 nStages <- ncol(CollapsedExpressionSet) - 2
