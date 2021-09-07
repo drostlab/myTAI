@@ -4,7 +4,6 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param nrep either a numeric value specifying the constant number of replicates per stage or a numeric vector specifying the variable number of replicates for each stage position.
 #' @param method method to detect differentially expressed genes.
-#' @param lib.size the library sizes to equalize library sizes by quantile-to-quantile normalization (see \code{\link[edgeR]{equalizeLibSizes}}).
 #' @param p.adjust.method p value correction method that is passed to \code{\link{p.adjust}}.
 #' Available options are:\itemize{
 #' \item \code{p.adjust.method = "BH"} (Benjamini-Hochberg correction)
@@ -27,11 +26,10 @@
 #' @author Hajk-Georg Drost
 #' @details 
 #' 
-#' All methods to perform dection of differentially expressed genes assume that your input
+#' All methods to perform detection of differentially expressed genes assume that your input
 #' dataset has been normalized before passing it to \emph{DiffGenes}. For RNA-Seq data
 #' \emph{DiffGenes} assumes that the libraries have been normalized to have the same size, i.e.,
-#' to have the same expected column sum under the null hypothesis. If this isn't the case
-#' please run \code{\link[edgeR]{equalizeLibSizes}} before calling \emph{DiffGenes}. 
+#' to have the same expected column sum under the null hypothesis.  
 #' 
 #' Available methods for the detection of differentially expressed genes:
 #' 
@@ -42,9 +40,6 @@
 #' transformed expression levels are stored in your input \code{ExpresisonSet}.
 #' \item \code{method = "t.test"}: Welch t.test between replicate expression levels of two samples.
 #' \item \code{method = "wilcox.test"}: Wilcoxon Rank Sum Test between replicate expression levels of two samples.
-#' \item \code{method = "doubletail"}: Computes two-sided p-values by doubling the smaller tail probability (see \code{\link[edgeR]{exactTestDoubleTail}} for details).
-#' \item \code{method = "smallp"}: Performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see \code{\link[edgeR]{exactTestBySmallP}} for details).
-#' \item \code{method = "deviance"}: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see \code{edgeR} package for details).
 #' }
 #' 
 #' Exclude non differentially expressed genes from the result dataset:
@@ -258,37 +253,37 @@ DiffGenes <- function(ExpressionSet,
                                                                 })
                                 } 
                                 
-                                if (is.element(method, c("doubletail","smallp","deviance"))){
-                                                
-                                        if (is.null(lib.size))
-                                                stop ("Please specify a library size.", call. = FALSE)
-                                                        
-                                        # combine stage replicates to a common replicate matrix
-                                        # fulfilling the edgeR exactTest() function specification
-                                        compStageMatrix <- cbind(ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-                                                                 ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])])
-                                        
-                                        # number of replicates in each stage to compare
-                                        nrep.1 <- length(seq(IndexOne[idx[1]],IndexTwo[idx[1]]))
-                                        nrep.2 <- length(seq(IndexOne[idx[2]],IndexTwo[idx[2]]))
-                                        
-                                        exactTestObject <- edgeR::DGEList(counts   = compStageMatrix,
-                                                                          group    = c(rep(1,nrep.1),rep(2,nrep.2)),
-                                                                          lib.size = rep(lib.size, nrep.1 + nrep.2))
-                                        
-                                        DEGMatrix[ , k] <- edgeR::exactTest(object           = exactTestObject,
-                                                                            pair             = 1:2,
-                                                                            dispersion       = 0.2,
-                                                                            rejection.region = method,
-                                                                            big.count        = 900,
-                                                                            prior.count      = 0.125)$table[ , "PValue"]
-                                                        
-#                                       DEGMatrix[ , k] <-  edgeR::exactTestDoubleTail(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
-#                                                                                 y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
-#                                                                                 dispersion = 0.2,
-#                                                                                 big.count = 900)
-                                                        
-                                        }
+#                                 if (is.element(method, c("doubletail","smallp","deviance"))){
+#                                                 
+#                                         if (is.null(lib.size))
+#                                                 stop ("Please specify a library size.", call. = FALSE)
+#                                                         
+#                                         # combine stage replicates to a common replicate matrix
+#                                         # fulfilling the edgeR exactTest() function specification
+#                                         compStageMatrix <- cbind(ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+#                                                                  ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])])
+#                                         
+#                                         # number of replicates in each stage to compare
+#                                         nrep.1 <- length(seq(IndexOne[idx[1]],IndexTwo[idx[1]]))
+#                                         nrep.2 <- length(seq(IndexOne[idx[2]],IndexTwo[idx[2]]))
+#                                         
+#                                         exactTestObject <- edgeR::DGEList(counts   = compStageMatrix,
+#                                                                           group    = c(rep(1,nrep.1),rep(2,nrep.2)),
+#                                                                           lib.size = rep(lib.size, nrep.1 + nrep.2))
+#                                         
+#                                         DEGMatrix[ , k] <- edgeR::exactTest(object           = exactTestObject,
+#                                                                             pair             = 1:2,
+#                                                                             dispersion       = 0.2,
+#                                                                             rejection.region = method,
+#                                                                             big.count        = 900,
+#                                                                             prior.count      = 0.125)$table[ , "PValue"]
+#                                                         
+# #                                       DEGMatrix[ , k] <-  edgeR::exactTestDoubleTail(y1 = ExpressionSet[ , 2 + seq(IndexOne[idx[1]],IndexTwo[idx[1]])],
+# #                                                                                 y2 = ExpressionSet[ , 2 + seq(IndexOne[idx[2]],IndexTwo[idx[2]])],
+# #                                                                                 dispersion = 0.2,
+# #                                                                                 big.count = 900)
+#                                                         
+#                                         }
                                 
                         }
                         
