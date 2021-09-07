@@ -10,7 +10,11 @@
 
 ### Motivation
 
-Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and optimized framework to detect patterns of evolutionary constraints in any transcriptome dataset of interest.
+In the past years, scientific studies aimed to uncover the molecular basis of morphological variation. These studies often rely on transcriptomic data to establish the molecular patterns driving complex biological processes such as development or environmental response.
+
+Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest, they rarely capture __how__ these expression patterns emerged in the first place or to __what extent__ they are possibly constrained, thereby neglecting the the evolutionary history of genes contributing to the overall pool of expressed transcripts. To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate `gene age` information into classical gene expression analysis. 
+
+Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.
 
 Please find a detailed documentation [here](https://drostlab.github.io/myTAI/articles/Introduction.html).
 
@@ -22,19 +26,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 ### Installation
 
-Please install the following package dependencies:
-
-```r
-# Install core Bioconductor packages
-if (!requireNamespace("BiocManager"))
-    install.packages("BiocManager")
-BiocManager::install()
-# Install package dependencies
-BiocManager::install("Biostrings")
-BiocManager::install("edgeR")
-```
-
-Now users can install `myTAI` from CRAN:
+Users can install `myTAI` from [CRAN](https://cran.r-project.org/web/packages/myTAI/index.html):
 
 ```r
 # install myTAI 0.9.3
@@ -51,14 +43,14 @@ We hope that `myTAI` will become the community standard tool to perform evolutio
 
 ### Scientific background
 
-Today, phenotypic phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level using transcriptomics approaches. Transcriptomes denote the total number of quantifiable transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment / disease versus non-treatment / non-disease transcriptomes are being compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although transcriptomics studies are based on a powerful methodology little is known about the evolution of such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.
+Today, phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level using transcriptomics approaches. Transcriptomes denote the total number of quantifiable transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment / disease versus non-treatment / non-disease transcriptomes are being compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although classic transcriptomics studies are based on an established methodology, little is known about the evolution and conservation mechanisms underlying such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.
 
 Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern
 then enables to detect stages of development or other biological processes that
-are evolutionarily conserved ([Drost et al., 2018](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)). This quantification on the highest level is achieved through transcriptome indices (e.g. [Transcriptome Age Index or Transcriptome Divergence Index](https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index)) which aim to quantify the average evolutionary age or sequence conseration of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow's law) ([Drost et al., 2017](https://www.sciencedirect.com/science/article/pii/S0959437X16302040).
+are evolutionarily conserved ([Drost et al., 2018](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)). This quantification on the highest level is achieved through transcriptome indices (e.g. [Transcriptome Age Index or Transcriptome Divergence Index](https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index)) which aim to quantify the average evolutionary age or sequence conservation of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow's law) ([Drost et al., 2017](https://www.sciencedirect.com/science/article/pii/S0959437X16302040).
 
 __Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years,
-please follow my [updated discussion about the gene age inference literature](https://drostlab.github.io/myTAI/articles/Introduction.html#genomic-phylostratography-based-gene-age-inference).__
+please follow my [updated discussion about the gene age inference literature](https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html).__
 
 
 ## Install Developer Version
@@ -68,14 +60,8 @@ the developer version here on GitHub. To download and install the most recent
 version of `myTAI` run:
 
 ```r
-if (!requireNamespace("BiocManager"))
-    install.packages("BiocManager")
-BiocManager::install()
-# Install package dependencies
-BiocManager::install("Biostrings", version = "3.8")
-BiocManager::install("edgeR")
 # install developer version of myTAI
-BiocManager::install("drostlab/myTAI")
+devtools::install_github("drostlab/myTAI")
 ```
 
 ## NEWS
@@ -93,6 +79,7 @@ The following tutorials will provide use cases and detailed explainations of how
 - [Perform Age Enrichment Analyses](https://drostlab.github.io/myTAI/articles/Enrichment.html)
 - [Gene Expression Analysis with myTAI](https://drostlab.github.io/myTAI/articles/Expression.html)
 - [Taxonomic Information Retrieval](https://drostlab.github.io/myTAI/articles/Taxonomy.html)
+- [Discussing Genomic Phylostratigraphy](https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html)
 
 
 ## Example
@@ -188,6 +175,9 @@ browseVignettes("myTAI")
  
  # open tutorial: Taxonomic Information Retrieval with myTAI
  vignette("Taxonomy", package = "myTAI")
+ 
+ # open tutorial: Discussing Genomic Phylostratigraphy
+ vignette("Phylostratigraphy", package = "myTAI")
 ```
 
 In the `myTAI` framework users can find:
