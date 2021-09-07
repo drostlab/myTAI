@@ -84,6 +84,7 @@ For the comparative genomics part there are different methods and tools to quant
 
 __Generate or retrieve phylostratigraphic maps:__
 
+- [GenOrigin](http://genorigin.chenzxlab.cn/#!/): GenOrigin inferred gene age information of 9,102,113 genes from 565 species 
 - [R package: phylostratr](https://github.com/arendsee/phylostratr) which implements `Phylostratigraphy` as an `R package` - Please consult the [Vignettes](https://github.com/arendsee/phylostratr/tree/master/vignettes) for examples. 
 - [R package: fagin](https://github.com/arendsee/fagin): a synteny-based phylostratigraphy and finer classification of young genes (see also the [corresponding manuscript](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y) and [example applications](https://github.com/arendsee/fagin-case-studies))
 - [createPSmap.pl](https://github.com/AlexGa/Phylostratigraphy): generate a phylostratigraphic map (implemented by Alexander Gabel)
