@@ -1,4 +1,4 @@
-pandoc: 2.7.3
+pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
@@ -7,6 +7,7 @@ articles:
   Expression: Expression.html
   Intermediate: Intermediate.html
   Introduction: Introduction.html
+  Phylostratigraphy: Phylostratigraphy.html
   Taxonomy: Taxonomy.html
-last_built: 2021-06-06T13:44Z
+last_built: 2021-09-07T11:57Z
 

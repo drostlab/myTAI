@@ -69,6 +69,9 @@
       <a href="articles/Introduction.html">Introduction to the myTAI package</a>
     </li>
     <li>
+      <a href="articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a>
+    </li>
+    <li>
       <a href="articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
   </ul>
@@ -109,7 +112,9 @@
 <div id="motivation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h3>
-<p>Evolutionary transcriptomics studies can serve as a first approach to screen <em>in silico</em> for the potential existence of evolutionary constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in <code>myTAI</code> provide users with a standardized, automated and optimized framework to detect patterns of evolutionary constraints in any transcriptome dataset of interest.</p>
+<p>In the past years, scientific studies aimed to uncover the molecular basis of morphological variation. These studies often rely on transcriptomic data to establish the molecular patterns driving complex biological processes such as development or environmental response.</p>
+<p>Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest, they rarely capture <strong>how</strong> these expression patterns emerged in the first place or to <strong>what extent</strong> they are possibly constrained, thereby neglecting the the evolutionary history of genes contributing to the overall pool of expressed transcripts. To overcome this limitation, the <code>myTAI</code> package introduces procedures summarized under the term <code>evolutionary transcriptomics</code> to integrate <code>gene age</code> information into classical gene expression analysis.</p>
+<p>Evolutionary transcriptomics studies can serve as a first approach to screen <em>in silico</em> for the potential existence of evolutionary constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in <code>myTAI</code> provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.</p>
 <p>Please find a detailed documentation <a href="https://drostlab.github.io/myTAI/articles/Introduction.html">here</a>.</p>
 </div>
 <div id="citation" class="section level2">
@@ -122,17 +127,8 @@
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
-<p>Please install the following package dependencies:</p>
+<p>Users can install <code>myTAI</code> from <a href="https://cran.r-project.org/web/packages/myTAI/index.html">CRAN</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Install core Bioconductor packages</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co"># Install package dependencies</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"Biostrings"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"edgeR"</span><span class="op">)</span></code></pre></div>
-<p>Now users can install <code>myTAI</code> from CRAN:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install myTAI 0.9.3</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"myTAI"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
@@ -146,24 +142,18 @@
 <div id="scientific-background" class="section level3">
 <h3 class="hasAnchor">
 <a href="#scientific-background" class="anchor"></a>Scientific background</h3>
-<p>Today, phenotypic phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level using transcriptomics approaches. Transcriptomes denote the total number of quantifiable transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment / disease versus non-treatment / non-disease transcriptomes are being compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although transcriptomics studies are based on a powerful methodology little is known about the evolution of such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.</p>
-<p>Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern then enables to detect stages of development or other biological processes that are evolutionarily conserved (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684">Drost et al., 2018</a>). This quantification on the highest level is achieved through transcriptome indices (e.g. <a href="https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index">Transcriptome Age Index or Transcriptome Divergence Index</a>) which aim to quantify the average evolutionary age or sequence conseration of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow’s law) (<a href="https://www.sciencedirect.com/science/article/pii/S0959437X16302040">Drost et al., 2017</a>.</p>
-<p><strong>Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years, please follow my <a href="https://drostlab.github.io/myTAI/articles/Introduction.html#genomic-phylostratography-based-gene-age-inference">updated discussion about the gene age inference literature</a>.</strong></p>
+<p>Today, phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level using transcriptomics approaches. Transcriptomes denote the total number of quantifiable transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment / disease versus non-treatment / non-disease transcriptomes are being compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although classic transcriptomics studies are based on an established methodology, little is known about the evolution and conservation mechanisms underlying such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.</p>
+<p>Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern then enables to detect stages of development or other biological processes that are evolutionarily conserved (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684">Drost et al., 2018</a>). This quantification on the highest level is achieved through transcriptome indices (e.g. <a href="https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index">Transcriptome Age Index or Transcriptome Divergence Index</a>) which aim to quantify the average evolutionary age or sequence conservation of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow’s law) (<a href="https://www.sciencedirect.com/science/article/pii/S0959437X16302040">Drost et al., 2017</a>.</p>
+<p><strong>Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years, please follow my <a href="https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html">updated discussion about the gene age inference literature</a>.</strong></p>
 </div>
 </div>
 <div id="install-developer-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install-developer-version" class="anchor"></a>Install Developer Version</h2>
 <p>Some bug fixes or new functionality will not be available on CRAN yet, but in the developer version here on GitHub. To download and install the most recent version of <code>myTAI</code> run:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co"># Install package dependencies</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"Biostrings"</span>, version <span class="op">=</span> <span class="st">"3.8"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"edgeR"</span><span class="op">)</span>
-<span class="co"># install developer version of myTAI</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"drostlab/myTAI"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install developer version of myTAI</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"drostlab/myTAI"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="news" class="section level2">
 <h2 class="hasAnchor">
@@ -181,6 +171,7 @@
 <li><a href="https://drostlab.github.io/myTAI/articles/Enrichment.html">Perform Age Enrichment Analyses</a></li>
 <li><a href="https://drostlab.github.io/myTAI/articles/Expression.html">Gene Expression Analysis with myTAI</a></li>
 <li><a href="https://drostlab.github.io/myTAI/articles/Taxonomy.html">Taxonomic Information Retrieval</a></li>
+<li><a href="https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a></li>
 </ul>
 </div>
 <div id="example" class="section level2">
@@ -189,7 +180,7 @@
 <div id="load-example-data" class="section level4">
 <h4 class="hasAnchor">
 <a href="#load-example-data" class="anchor"></a>Load example data</h4>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
 <span class="co"># example dataset covering 7 stages of A thaliana embryo development</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
@@ -199,7 +190,7 @@
 <div id="quantify-transcriptome-conservation-using-tai" class="section level4">
 <h4 class="hasAnchor">
 <a href="#quantify-transcriptome-conservation-using-tai" class="anchor"></a>Quantify transcriptome conservation using TAI</h4>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualize global Transcriptome Age Index pattern</span>
 <span class="fu"><a href="reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span><span class="va">ExprExample</span><span class="op">)</span></code></pre></div>
 <p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-10-1.png"></p>
@@ -207,7 +198,7 @@
 <div id="quantify-expression-level-distributions-for-each-gene-age-category" class="section level4">
 <h4 class="hasAnchor">
 <a href="#quantify-expression-level-distributions-for-each-gene-age-category" class="anchor"></a>Quantify expression level distributions for each gene age category</h4>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot expression level distributions for each age (=PS) category </span>
 <span class="co"># and each developmental stage </span>
 <span class="fu"><a href="reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span><span class="va">ExprExample</span>, <span class="st">"PS"</span><span class="op">)</span></code></pre></div>
@@ -216,7 +207,7 @@
 <div id="quantify-mean-expression-of-individual-gene-age-categories" class="section level4">
 <h4 class="hasAnchor">
 <a href="#quantify-mean-expression-of-individual-gene-age-categories" class="anchor"></a>Quantify mean expression of individual gene age categories</h4>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot mean expression of each age category seperated by old (PS1-3)</span>
 <span class="co"># versus young (PS4-12) genes</span>
 <span class="fu"><a href="reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -225,12 +216,12 @@
 <div id="quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes" class="anchor"></a>Quantify relative mean expression of each age category seperated by old versus young genes</h4>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot relative mean expression of each age category seperated by old (PS1-3)</span>
 <span class="co"># versus young (PS4-12) genes</span>
 <span class="fu"><a href="reference/PlotRE.html">PlotRE</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-13-1.png"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the significant differences between gene expression distributions </span>
 <span class="co"># of old (=group1) versus young (=group2) genes</span>
 <span class="fu"><a href="reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">ExprExample</span>,
@@ -244,7 +235,7 @@
 <a href="#getting-started-with-mytai" class="anchor"></a>Getting started with <code>myTAI</code>
 </h2>
 <p>Users can also read the tutorials within (<a href="https://rstudio.com/">RStudio</a>) :</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># source the myTAI package</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
 
@@ -270,7 +261,10 @@
  <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"Expression"</span>, package <span class="op">=</span> <span class="st">"myTAI"</span><span class="op">)</span>
  
  <span class="co"># open tutorial: Taxonomic Information Retrieval with myTAI</span>
- <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"Taxonomy"</span>, package <span class="op">=</span> <span class="st">"myTAI"</span><span class="op">)</span></code></pre></div>
+ <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"Taxonomy"</span>, package <span class="op">=</span> <span class="st">"myTAI"</span><span class="op">)</span>
+ 
+ <span class="co"># open tutorial: Discussing Genomic Phylostratigraphy</span>
+ <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"Phylostratigraphy"</span>, package <span class="op">=</span> <span class="st">"myTAI"</span><span class="op">)</span></code></pre></div>
 <p>In the <code>myTAI</code> framework users can find:</p>
 <div id="phylotranscriptomics-measures" class="section level4">
 <h4 class="hasAnchor">

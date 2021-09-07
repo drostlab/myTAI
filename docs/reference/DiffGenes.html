@@ -110,6 +110,9 @@
       <a href="../articles/Introduction.html">Introduction to the myTAI package</a>
     </li>
     <li>
+      <a href="../articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a>
+    </li>
+    <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
   </ul>
@@ -176,10 +179,6 @@
       <td><p>method to detect differentially expressed genes.</p></td>
     </tr>
     <tr>
-      <th>lib.size</th>
-      <td><p>the library sizes to equalize library sizes by quantile-to-quantile normalization (see <code><a href='https://rdrr.io/pkg/edgeR/man/equalizeLibSizes.html'>equalizeLibSizes</a></code>).</p></td>
-    </tr>
-    <tr>
       <th>p.adjust.method</th>
       <td><p>p value correction method that is passed to <code><a href='https://rdrr.io/r/stats/p.adjust.html'>p.adjust</a></code>.
 Available options are:</p><ul>
@@ -219,11 +218,10 @@ at the second position.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>All methods to perform dection of differentially expressed genes assume that your input
+    <p>All methods to perform detection of differentially expressed genes assume that your input
 dataset has been normalized before passing it to <em>DiffGenes</em>. For RNA-Seq data
 <em>DiffGenes</em> assumes that the libraries have been normalized to have the same size, i.e.,
-to have the same expected column sum under the null hypothesis. If this isn't the case
-please run <code><a href='https://rdrr.io/pkg/edgeR/man/equalizeLibSizes.html'>equalizeLibSizes</a></code> before calling <em>DiffGenes</em>.</p>
+to have the same expected column sum under the null hypothesis.</p>
 <p>Available methods for the detection of differentially expressed genes:</p>
 <ul>
 <li><p><code>method = "foldchange"</code>: ratio of replicate geometric means between developmental stages.
@@ -232,9 +230,6 @@ please run <code><a href='https://rdrr.io/pkg/edgeR/man/equalizeLibSizes.html'>e
 transformed expression levels are stored in your input <code>ExpresisonSet</code>.</p></li>
 <li><p><code>method = "t.test"</code>: Welch t.test between replicate expression levels of two samples.</p></li>
 <li><p><code>method = "wilcox.test"</code>: Wilcoxon Rank Sum Test between replicate expression levels of two samples.</p></li>
-<li><p><code>method = "doubletail"</code>: Computes two-sided p-values by doubling the smaller tail probability (see <code><a href='https://rdrr.io/pkg/edgeR/man/exactTest.html'>exactTestDoubleTail</a></code> for details).</p></li>
-<li><p><code>method = "smallp"</code>: Performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see <code><a href='https://rdrr.io/pkg/edgeR/man/exactTest.html'>exactTestBySmallP</a></code> for details).</p></li>
-<li><p><code>method = "deviance"</code>: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see <code>edgeR</code> package for details).</p></li>
 </ul>
 
 <p>Exclude non differentially expressed genes from the result dataset:</p>

@@ -24,8 +24,6 @@ DiffGenes(
 
 \item{method}{method to detect differentially expressed genes.}
 
-\item{lib.size}{the library sizes to equalize library sizes by quantile-to-quantile normalization (see \code{\link[edgeR]{equalizeLibSizes}}).}
-
 \item{p.adjust.method}{p value correction method that is passed to \code{\link{p.adjust}}.
 Available options are:\itemize{
 \item \code{p.adjust.method = "BH"} (Benjamini-Hochberg correction)
@@ -55,11 +53,10 @@ at the second position.}
 Detect differentially expressed genes (DEGs) in a standard \code{ExpressionSet} object.
 }
 \details{
-All methods to perform dection of differentially expressed genes assume that your input
+All methods to perform detection of differentially expressed genes assume that your input
 dataset has been normalized before passing it to \emph{DiffGenes}. For RNA-Seq data
 \emph{DiffGenes} assumes that the libraries have been normalized to have the same size, i.e.,
-to have the same expected column sum under the null hypothesis. If this isn't the case
-please run \code{\link[edgeR]{equalizeLibSizes}} before calling \emph{DiffGenes}. 
+to have the same expected column sum under the null hypothesis.  
 
 Available methods for the detection of differentially expressed genes:
 
@@ -70,9 +67,6 @@ Available methods for the detection of differentially expressed genes:
 transformed expression levels are stored in your input \code{ExpresisonSet}.
 \item \code{method = "t.test"}: Welch t.test between replicate expression levels of two samples.
 \item \code{method = "wilcox.test"}: Wilcoxon Rank Sum Test between replicate expression levels of two samples.
-\item \code{method = "doubletail"}: Computes two-sided p-values by doubling the smaller tail probability (see \code{\link[edgeR]{exactTestDoubleTail}} for details).
-\item \code{method = "smallp"}: Performs the method of small probabilities as proposed by Robinson and Smyth (2008) (see \code{\link[edgeR]{exactTestBySmallP}} for details).
-\item \code{method = "deviance"}: Uses the deviance goodness of fit statistics to define the rejection region, and is therefore equivalent to a conditional likelihood ratio test (see \code{edgeR} package for details).
 }
 
 Exclude non differentially expressed genes from the result dataset:
