@@ -1,5 +1,8 @@
 myTAI 1.0.0.9000
 ===========
+## New Functions
+- New function `TEI()` computes the Transcriptome Evolutionary Index 
+
 
 ## New Features
 - `CollapseReplicates()` now returns `tibble` objects
