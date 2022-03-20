@@ -34,8 +34,6 @@
 #' 
 #' 
 #' 
-#' @useDynLib myTAI, .registration = TRUE 
-#' @importFrom Rcpp sourceCpp
 #' @export
 
 TAI <- function(PhyloExpressionSet)
