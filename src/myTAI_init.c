@@ -15,20 +15,24 @@ extern SEXP _myTAI_cpp_omitMatrix(SEXP, SEXP);
 extern SEXP _myTAI_cpp_pMatrix(SEXP, SEXP);
 extern SEXP _myTAI_cpp_std_error(SEXP);
 extern SEXP _myTAI_cpp_TAI(SEXP, SEXP);
+extern SEXP _myTAI_fun();
+extern SEXP _myTAI_rcpp_tei_parallel(SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
-        {"_myTAI_cpp_bootMatrix",    (DL_FUNC) &_myTAI_cpp_bootMatrix,    3},
-        {"_myTAI_cpp_geom_mean",     (DL_FUNC) &_myTAI_cpp_geom_mean,     1},
-        {"_myTAI_cpp_harmonic_mean", (DL_FUNC) &_myTAI_cpp_harmonic_mean, 1},
-        {"_myTAI_cpp_omitMatrix",    (DL_FUNC) &_myTAI_cpp_omitMatrix,    2},
-        {"_myTAI_cpp_pMatrix",       (DL_FUNC) &_myTAI_cpp_pMatrix,       2},
-        {"_myTAI_cpp_std_error",     (DL_FUNC) &_myTAI_cpp_std_error,     1},
-        {"_myTAI_cpp_TAI",           (DL_FUNC) &_myTAI_cpp_TAI,           2},
-        {NULL, NULL, 0}
+  {"_myTAI_cpp_bootMatrix",    (DL_FUNC) &_myTAI_cpp_bootMatrix,    3},
+  {"_myTAI_cpp_geom_mean",     (DL_FUNC) &_myTAI_cpp_geom_mean,     1},
+  {"_myTAI_cpp_harmonic_mean", (DL_FUNC) &_myTAI_cpp_harmonic_mean, 1},
+  {"_myTAI_cpp_omitMatrix",    (DL_FUNC) &_myTAI_cpp_omitMatrix,    2},
+  {"_myTAI_cpp_pMatrix",       (DL_FUNC) &_myTAI_cpp_pMatrix,       2},
+  {"_myTAI_cpp_std_error",     (DL_FUNC) &_myTAI_cpp_std_error,     1},
+  {"_myTAI_cpp_TAI",           (DL_FUNC) &_myTAI_cpp_TAI,           2},
+  {"_myTAI_fun",               (DL_FUNC) &_myTAI_fun,               0},
+  {"_myTAI_rcpp_tei_parallel", (DL_FUNC) &_myTAI_rcpp_tei_parallel, 3},
+  {NULL, NULL, 0}
 };
 
 void R_init_myTAI(DllInfo *dll)
 {
-        R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
-        R_useDynamicSymbols(dll, FALSE);
+  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+  R_useDynamicSymbols(dll, FALSE);
 }

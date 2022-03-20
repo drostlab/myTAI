@@ -1,8 +1,11 @@
 //#include <RcppArmadilloExtensions/sample.h>
-#include <Rcpp.h>
+#include <RcppArmadillo.h>
 #include <math.h>
 #include <map>
 #include <random>
+#include <RcppThread.h>
+#include <string.h>
+// [[Rcpp::depends(RcppThread)]]
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::plugins(cpp11)]]
 
@@ -202,4 +205,44 @@ NumericMatrix cpp_omitMatrix(const NumericMatrix& ExpressionSet, const NumericVe
         }
         
         return ResultMatrix;
+}
+
+
+
+//' @title rcpp_tei_parallel
+//' @name rcpp_tei_parallel
+//' @description computes the phylogenetically based
+//' transcriptome evolutionary index (TEI)
+//' @return list
+//' @param expression ExpressionSet as sparseMatrix
+//' @param ps named Phylostratum
+//' @param ncores number of cores
+//' @examples
+//' ## load example sequence data
+//' data("PhyloExpressionSetExample", package="myTAI")
+//' spmat <- as(data.matrix(PhyloExpressionSetExample[,-c(1,2)]), "sparseMatrix")
+//' rownames(spmat) <- PhyloExpressionSetExample$GeneID
+//' ps <- setNames(PhyloExpressionSetExample$Phylostratum, PhyloExpressionSetExample$GeneID)
+//' rcpp_tei_parallel(spmat, ps)
+// @export rcpp_tei_parallel
+//' @author Kristian K Ullrich
+// [[Rcpp::export]]
+Rcpp::List rcpp_tei_parallel(const arma::sp_mat& expression,
+                             Rcpp::NumericVector ps,
+                             int ncores = 1){
+  std::vector< std::string > psnames =  ps.attr("names");
+  int n_col = expression.n_cols;
+  Rcpp::NumericVector sumx(n_col);
+  Rcpp::NumericVector teisum(n_col);
+  Rcpp::NumericVector tei(n_col);
+  RcppThread::ProgressBar bar(n_col, 1);
+  RcppThread::parallelFor(0, n_col, [&] (int j) {
+    for (size_t i = 0; i < expression.n_rows; i++) {
+      sumx[j] += expression(i, j);
+      teisum[j] += expression(i, j) * ps[i];
+      tei[j] = teisum[j]/sumx[j];
+    }
+  }, ncores);
+  return Rcpp::List::create(Rcpp::Named("sumx") = sumx,
+                            Rcpp::Named("teisum") = teisum, Rcpp::Named("tei") = tei);
 }

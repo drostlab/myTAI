@@ -2,9 +2,15 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include <RcppArmadillo.h>
+#include <RcppThread.h>
 #include <Rcpp.h>
 
 using namespace Rcpp;
+
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
 
 // cpp_TAI
 NumericVector cpp_TAI(const NumericMatrix& ExpressionSet, const NumericVector& Phylostratum);
@@ -85,6 +91,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const NumericMatrix& >::type ExpressionSet(ExpressionSetSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type AgeVector(AgeVectorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_omitMatrix(ExpressionSet, AgeVector));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_tei_parallel
+Rcpp::List rcpp_tei_parallel(const arma::sp_mat& expression, Rcpp::NumericVector ps, int ncores);
+RcppExport SEXP _myTAI_rcpp_tei_parallel(SEXP expressionSEXP, SEXP psSEXP, SEXP ncoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type expression(expressionSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type ps(psSEXP);
+    Rcpp::traits::input_parameter< int >::type ncores(ncoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_tei_parallel(expression, ps, ncores));
     return rcpp_result_gen;
 END_RCPP
 }
