@@ -3,6 +3,8 @@
 
 #' @title rcpp_tei_parallel
 #' @name rcpp_tei_parallel
+#' @import Rcpp
+#' @import Matrix
 #' @description computes the phylogenetically based
 #' transcriptome evolutionary index (TEI)
 #' @return list
