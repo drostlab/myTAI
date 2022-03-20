@@ -31,7 +31,7 @@ developmental stages.
 }
 \description{
 This function computes the phylogenetically based transcriptome evolutionary
-index (TEI) similar to the \code{\link{TAI}} introduced by \code{Domazet-Loso & Tautz, 2010}.
+index (TEI) similar to Domazet-Loso & Tautz, 2010.
 }
 \details{
 The TEI measure represents the weighted arithmetic mean
@@ -51,7 +51,7 @@ and ps_i denotes the corresponding phylostratum of gene i,
 data(PhyloExpressionSetExample, package = "myTAI")
 
 # computing the TEI profile of a given PhyloExpressionSet object
-TEIs <- TEI(PhyloExpressionSetExample)
+TEI <- TEI(PhyloExpressionSetExample)
 
 }
 \references{
@@ -67,7 +67,5 @@ Drost HG et al. (2015)
 Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012
 }
 \author{
-Kristian K Ullrich
-
 Kristian K Ullrich
 }
