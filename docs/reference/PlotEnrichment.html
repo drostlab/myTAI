@@ -115,6 +115,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -263,131 +266,139 @@ the <em>Phylostratum</em> or <em>Divergence Stratum</em> distribution of the <co
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
-<span class='va'>test_set</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>2</span><span class='op'>]</span>,<span class='fl'>10000</span><span class='op'>)</span>
-
-<span class='co'>## Examples with complete.bg = TRUE</span>
-<span class='co'>## Hence: the entire background set of the input ExpressionSet is considered </span>
-<span class='co'>## when performing Fisher's exact test </span>
-
-<span class='co'># measure: log-foldchange</span>
-<span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,
-               test.set      <span class='op'>=</span> <span class='va'>test_set</span> , 
-               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, 
-               measure       <span class='op'>=</span> <span class='st'>"log-foldchange"</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotEnrichment-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $p.values
-#&gt;       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 
-#&gt; 0.4693540 0.2894449 0.9407912 0.7844042 0.6941342 0.3376881 0.7599214 0.3534216 
-#&gt;       PS9      PS10      PS11      PS12 
-#&gt; 0.2070409 0.5247578 0.8226034 0.4035404 
-#&gt; 
-#&gt; $enrichment.matrix
-#&gt;            BG_Set     Test_Set
-#&gt; PS1  -0.007173974  0.010879188
-#&gt; PS2   0.013314604 -0.020557911
-#&gt; PS3   0.004816575 -0.007381227
-#&gt; PS4  -0.006219847  0.009440103
-#&gt; PS5   0.016601366 -0.025707696
-#&gt; PS6  -0.027725930  0.041308721
-#&gt; PS7   0.022156857 -0.034481130
-#&gt; PS8  -0.068477640  0.098607672
-#&gt; PS9  -0.081220293  0.115747944
-#&gt; PS10  0.024420954 -0.038081789
-#&gt; PS11 -0.020107047  0.030153208
-#&gt; PS12  0.022430353 -0.034915301
-#&gt; </div><div class='input'>               
-               
-<span class='co'># measure: foldchange</span>
-<span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,
-               test.set      <span class='op'>=</span> <span class='va'>test_set</span> , 
-               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, 
-               measure       <span class='op'>=</span> <span class='st'>"foldchange"</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotEnrichment-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $p.values
-#&gt;       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 
-#&gt; 0.4693540 0.2894449 0.9407912 0.7844042 0.6941342 0.3376881 0.7599214 0.3534216 
-#&gt;       PS9      PS10      PS11      PS12 
-#&gt; 0.2070409 0.5247578 0.8226034 0.4035404 
-#&gt; 
-#&gt; $enrichment.matrix
-#&gt;         BG_Set  Test_Set
-#&gt; PS1  0.9950396  1.007570
-#&gt; PS2  1.0092721 -1.014352
-#&gt; PS3  1.0033453 -1.005131
-#&gt; PS4  0.9956976  1.006565
-#&gt; PS5  1.0115771 -1.017984
-#&gt; PS6  0.9809623  1.029052
-#&gt; PS7  1.0154904 -1.024211
-#&gt; PS8  0.9536013  1.070804
-#&gt; PS9  0.9452185  1.083597
-#&gt; PS10 1.0170758 -1.026755
-#&gt; PS11 0.9861409  1.021149
-#&gt; PS12 1.0156713 -1.024500
-#&gt; </div><div class='input'>   
-               
-<span class='co'>## Examples with complete.bg = FALSE</span>
-<span class='co'>## Hence: the test.set genes are excluded from the background set before</span>
-<span class='co'>## Fisher's exact test is performed</span>
-     
-                                       
-<span class='co'># measure: log-foldchange</span>
-<span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,
-               test.set      <span class='op'>=</span> <span class='va'>test_set</span> ,
-                complete.bg  <span class='op'>=</span> <span class='cn'>FALSE</span>,
-               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, 
-               measure       <span class='op'>=</span> <span class='st'>"log-foldchange"</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotEnrichment-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $p.values
-#&gt;       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 
-#&gt; 0.6315000 0.4817838 0.9727738 0.8469003 0.7924055 0.5264504 0.8657001 0.5361027 
-#&gt;       PS9      PS10      PS11      PS12 
-#&gt; 0.3975804 0.6883696 0.8910157 0.5916625 
-#&gt; 
-#&gt; $enrichment.matrix
-#&gt;            BG_Set     Test_Set
-#&gt; PS1  -0.003093762  0.007785426
-#&gt; PS2   0.005800680 -0.014757232
-#&gt; PS3   0.002089538 -0.005291689
-#&gt; PS4  -0.002683565  0.006756538
-#&gt; PS5   0.007244479 -0.018463217
-#&gt; PS6  -0.011836114  0.029472607
-#&gt; PS7   0.009695676 -0.024785453
-#&gt; PS8  -0.028657241  0.069950431
-#&gt; PS9  -0.033781176  0.081966769
-#&gt; PS10  0.010698553 -0.027383236
-#&gt; PS11 -0.008615890  0.021537317
-#&gt; PS12  0.009816700 -0.025098601
-#&gt; </div><div class='input'>               
-               
-<span class='co'># measure: foldchange</span>
-<span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,
-               test.set      <span class='op'>=</span> <span class='va'>test_set</span> , 
-               complete.bg   <span class='op'>=</span> <span class='cn'>FALSE</span>,
-               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, 
-               measure       <span class='op'>=</span> <span class='st'>"foldchange"</span><span class='op'>)</span>     
-</div><div class='img'><img src='PlotEnrichment-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; $p.values
-#&gt;       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 
-#&gt; 0.6315000 0.4817838 0.9727738 0.8469003 0.7924055 0.5264504 0.8657001 0.5361027 
-#&gt;       PS9      PS10      PS11      PS12 
-#&gt; 0.3975804 0.6883696 0.8910157 0.5916625 
-#&gt; 
-#&gt; $enrichment.matrix
-#&gt;         BG_Set  Test_Set
-#&gt; PS1  0.9978578  1.005411
-#&gt; PS2  1.0040290 -1.010282
-#&gt; PS3  1.0014499 -1.003676
-#&gt; PS4  0.9981414  1.004695
-#&gt; PS5  1.0050356 -1.012884
-#&gt; PS6  0.9918281  1.020642
-#&gt; PS7  1.0067492 -1.017344
-#&gt; PS8  0.9803147  1.049725
-#&gt; PS9  0.9768405  1.058501
-#&gt; PS10 1.0074452 -1.019167
-#&gt; PS11 0.9940378  1.015061
-#&gt; PS12 1.0068286 -1.017552
-#&gt; </div><div class='input'>               
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>test_set</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>2</span><span class='op'>]</span>,<span class='fl'>10000</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Examples with complete.bg = TRUE</span></span>
+<span class='r-in'><span class='co'>## Hence: the entire background set of the input ExpressionSet is considered </span></span>
+<span class='r-in'><span class='co'>## when performing Fisher's exact test </span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># measure: log-foldchange</span></span>
+<span class='r-in'><span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>               test.set      <span class='op'>=</span> <span class='va'>test_set</span> , </span>
+<span class='r-in'>               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, </span>
+<span class='r-in'>               measure       <span class='op'>=</span> <span class='st'>"log-foldchange"</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotEnrichment-1.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.values</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.4693540 0.2894449 0.9407912 0.7844042 0.6941342 0.3376881 0.7599214 0.3534216 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS9      PS10      PS11      PS12 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.2070409 0.5247578 0.8226034 0.4035404 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $enrichment.matrix</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            BG_Set     Test_Set</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS1  -0.007173974  0.010879188</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS2   0.013314604 -0.020557911</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS3   0.004816575 -0.007381227</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS4  -0.006219847  0.009440103</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS5   0.016601366 -0.025707696</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS6  -0.027725930  0.041308721</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS7   0.022156857 -0.034481130</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS8  -0.068477640  0.098607672</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS9  -0.081220293  0.115747944</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS10  0.024420954 -0.038081789</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS11 -0.020107047  0.030153208</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS12  0.022430353 -0.034915301</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'>               </span>
+<span class='r-in'>               </span>
+<span class='r-in'><span class='co'># measure: foldchange</span></span>
+<span class='r-in'><span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>               test.set      <span class='op'>=</span> <span class='va'>test_set</span> , </span>
+<span class='r-in'>               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, </span>
+<span class='r-in'>               measure       <span class='op'>=</span> <span class='st'>"foldchange"</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotEnrichment-2.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.values</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.4693540 0.2894449 0.9407912 0.7844042 0.6941342 0.3376881 0.7599214 0.3534216 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS9      PS10      PS11      PS12 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.2070409 0.5247578 0.8226034 0.4035404 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $enrichment.matrix</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         BG_Set  Test_Set</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS1  0.9950396  1.007570</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS2  1.0092721 -1.014352</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS3  1.0033453 -1.005131</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS4  0.9956976  1.006565</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS5  1.0115771 -1.017984</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS6  0.9809623  1.029052</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS7  1.0154904 -1.024211</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS8  0.9536013  1.070804</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS9  0.9452185  1.083597</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS10 1.0170758 -1.026755</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS11 0.9861409  1.021149</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS12 1.0156713 -1.024500</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'>   </span>
+<span class='r-in'>               </span>
+<span class='r-in'><span class='co'>## Examples with complete.bg = FALSE</span></span>
+<span class='r-in'><span class='co'>## Hence: the test.set genes are excluded from the background set before</span></span>
+<span class='r-in'><span class='co'>## Fisher's exact test is performed</span></span>
+<span class='r-in'>     </span>
+<span class='r-in'>                                       </span>
+<span class='r-in'><span class='co'># measure: log-foldchange</span></span>
+<span class='r-in'><span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>               test.set      <span class='op'>=</span> <span class='va'>test_set</span> ,</span>
+<span class='r-in'>                complete.bg  <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span class='r-in'>               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, </span>
+<span class='r-in'>               measure       <span class='op'>=</span> <span class='st'>"log-foldchange"</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotEnrichment-3.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.values</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6315000 0.4817838 0.9727738 0.8469003 0.7924055 0.5264504 0.8657001 0.5361027 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS9      PS10      PS11      PS12 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.3975804 0.6883696 0.8910157 0.5916625 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $enrichment.matrix</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            BG_Set     Test_Set</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS1  -0.003093762  0.007785426</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS2   0.005800680 -0.014757232</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS3   0.002089538 -0.005291689</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS4  -0.002683565  0.006756538</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS5   0.007244479 -0.018463217</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS6  -0.011836114  0.029472607</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS7   0.009695676 -0.024785453</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS8  -0.028657241  0.069950431</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS9  -0.033781176  0.081966769</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS10  0.010698553 -0.027383236</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS11 -0.008615890  0.021537317</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS12  0.009816700 -0.025098601</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'>               </span>
+<span class='r-in'>               </span>
+<span class='r-in'><span class='co'># measure: foldchange</span></span>
+<span class='r-in'><span class='fu'>PlotEnrichment</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>               test.set      <span class='op'>=</span> <span class='va'>test_set</span> , </span>
+<span class='r-in'>               complete.bg   <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span class='r-in'>               legendName    <span class='op'>=</span> <span class='st'>"PS"</span>, </span>
+<span class='r-in'>               measure       <span class='op'>=</span> <span class='st'>"foldchange"</span><span class='op'>)</span>     </span>
+<span class='r-plt img'><img src='PlotEnrichment-4.png' alt='' width='700' height='433' /></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.values</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS1       PS2       PS3       PS4       PS5       PS6       PS7       PS8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.6315000 0.4817838 0.9727738 0.8469003 0.7924055 0.5264504 0.8657001 0.5361027 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       PS9      PS10      PS11      PS12 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.3975804 0.6883696 0.8910157 0.5916625 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $enrichment.matrix</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         BG_Set  Test_Set</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS1  0.9978578  1.005411</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS2  1.0040290 -1.010282</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS3  1.0014499 -1.003676</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS4  0.9981414  1.004695</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS5  1.0050356 -1.012884</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS6  0.9918281  1.020642</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS7  1.0067492 -1.017344</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS8  0.9803147  1.049725</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS9  0.9768405  1.058501</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS10 1.0074452 -1.019167</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS11 0.9940378  1.015061</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PS12 1.0068286 -1.017552</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'>               </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -399,7 +410,7 @@ the <em>Phylostratum</em> or <em>Divergence Stratum</em> distribution of the <co
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

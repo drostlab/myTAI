@@ -74,6 +74,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -97,12 +100,12 @@
 
       
 
-      </header><script src="Introduction_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="Introduction_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to the myTAI package</h1>
             
-            <h4 class="date">2021-09-07</h4>
+            <h4 class="date">2022-03-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Introduction.Rmd"><code>vignettes/Introduction.Rmd</code></a></small>
       <div class="hidden name"><code>Introduction.Rmd</code></div>
@@ -652,7 +655,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 8  3.2211299 3.1990804 3.1767694 3.2319604 3.2292835 3.2693046 3.4412353
 9  3.8396769 3.8299654 3.7793476 3.8353941 3.8272391 3.8971210 4.0753877
 10 4.5320286 4.5632002 4.4857052 4.5008685 4.4664774 4.5307040 4.6902921</code></pre>
-<p>In both cases (<code>Phylostrata</code> and <code>Divergence Strata</code>) the <code><a href="../reference/pTAI.html">pTAI()</a></code> and <code><a href="../reference/pTDI.html">pTDI()</a></code> functions return a numeric matrix storing the cumulative TAI or TDI values for each <code>Phylostratum</code> and <code>Divergence Stratum</code>. Note, that the TAI values of <code>Phylostratum</code> 12 (in the <code><a href="../reference/pTAI.html">pTAI()</a></code> matrix) are equivalent to <code><a href="../reference/TAI.html">TAI(PhyloExpressionSetExample)</a></code>.</p>
+<p>In both cases (<code>Phylostrata</code> and <code>Divergence Strata</code>) the <code><a href="../reference/pTAI.html">pTAI()</a></code> and <code><a href="../reference/pTDI.html">pTDI()</a></code> functions return a numeric matrix storing the cumulative TAI or TDI values for each <code>Phylostratum</code> and <code>Divergence Stratum</code>. Note, that the TAI values of <code>Phylostratum</code> 12 (in the <code><a href="../reference/pTAI.html">pTAI()</a></code> matrix) are equivalent to <code>TAI(PhyloExpressionSetExample)</code>.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show that the cumulative TAI value of PS 12 is</span>
 <span class="co"># equavalent to the global TAI() values</span>
@@ -673,7 +676,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 
 <span class="co"># &gt;  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature </span>
 <span class="co"># &gt; 3.229942 3.225614 3.107135 3.116693 3.073993 3.176511 3.390334</span></code></pre></div>
-<p>Now, the <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> only differs from <code><a href="https://rdrr.io/r/base/apply.html">apply(pStrata(PhyloExpressionSetExample) , 2 , sum)</a></code> by exchanging the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> by <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code>.</p>
+<p>Now, the <code><a href="../reference/PlotContribution.html">PlotContribution()</a></code> only differs from <code>apply(pStrata(PhyloExpressionSetExample) , 2 , sum)</code> by exchanging the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> by <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code>.</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show that apply(pStrata(PhyloExpressionSetExample) , 2 , cumsum)</span>
 <span class="co"># is equivalent to pTAI()</span>
@@ -726,7 +729,7 @@ Error in is.ExpressionSet(PhyloExpressionSetExample[, 2:5]) :
 12 0.73992167 0.71770319 0.69667019 0.71861745 0.70883635 0.73430205 0.79420194</code></pre>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># compute partial TAI values for each gene</span>
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="fu"><a href="../reference/pMatrix.html">pMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pillar/man/glimpse.html">glimpse</a></span><span class="op">(</span><span class="fu"><a href="../reference/pMatrix.html">pMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>Observations: 25260
 Variables:
 $ Zygote   (dbl) 3.597950e-05, 2.484581e-05, 2.007498e-05, 1.683276e-05, 1.891073e-...
@@ -736,7 +739,7 @@ $ Heart    (dbl) 2.311604e-05, 2.800871e-05, 1.663988e-05, 2.379714e-05, 7.11970
 $ Torpedo  (dbl) 1.813626e-05, 2.713080e-05, 1.566972e-05, 2.525094e-05, 1.019572e-...
 $ Bent     (dbl) 1.685284e-05, 1.950712e-05, 1.535178e-05, 2.254055e-05, 1.172208e-...
 $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.229886e-...</code></pre>
-<p>You can receive all gene specific partial TAI values by typing <code><a href="../reference/pMatrix.html">pMatrix(PhyloExpressionSetExample)</a></code>.</p>
+<p>You can receive all gene specific partial TAI values by typing <code>pMatrix(PhyloExpressionSetExample)</code>.</p>
 <p>Analogously, <code><a href="../reference/pStrata.html">pStrata()</a></code> and <code><a href="../reference/pMatrix.html">pMatrix()</a></code> can be used for <code>Divergence Strata</code> by substituting <code>PhyloExpressionSetExample</code> by <code>DivergenceExpressionSetExample</code>.</p>
 </div>
 </div>
@@ -823,7 +826,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 9  1649.254 1659.455 1522.214 1485.560 1453.689 1584.176 1767.276
 10 1660.750 1735.086 1605.275 1473.854 1398.067 1438.258 1541.633
 </code></pre>
-<p>The <code><a href="../reference/PlotMedians.html">PlotMedians()</a></code> and <code><a href="../reference/PlotVars.html">PlotVars()</a></code> functions can be used to visualize the median and variance of expression profiles that correspond to the age categories of interest. Values can be retrieved via <code><a href="../reference/age.apply.html">age.apply(PhyloExpressionSetExample, function(x) apply(x, 2, median))</a></code> and <code><a href="../reference/age.apply.html">age.apply(PhyloExpressionSetExample, function(x) apply(x, 2, var))</a></code>.</p>
+<p>The <code><a href="../reference/PlotMedians.html">PlotMedians()</a></code> and <code><a href="../reference/PlotVars.html">PlotVars()</a></code> functions can be used to visualize the median and variance of expression profiles that correspond to the age categories of interest. Values can be retrieved via <code>age.apply(PhyloExpressionSetExample, function(x) apply(x, 2, median))</code> and <code>age.apply(PhyloExpressionSetExample, function(x) apply(x, 2, var))</code>.</p>
 </div>
 <div id="relative-expression-levels-of-a-phyloexpressionset-and-divergenceexpressionset" class="section level3">
 <h3 class="hasAnchor">
@@ -983,7 +986,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
                    ylab          <span class="op">=</span> <span class="st">"Transcriptome Age Index"</span><span class="op">)</span>
 
 <span class="co"># save ggplot2 based TAI profile to a local machine with save_plot()</span>
-<span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/save_plot.html">save_plot</a></span><span class="op">(</span><span class="st">"ExampleTAIProfile.pdf"</span>,
+<span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/save_plot.html">save_plot</a></span><span class="op">(</span><span class="st">"ExampleTAIProfile.pdf"</span>,
                    <span class="va">p</span>,
                    base_height <span class="op">=</span> <span class="fl">8</span>,
                    base_width <span class="op">=</span> <span class="fl">12</span> <span class="op">)</span></code></pre></div>
@@ -1010,7 +1013,7 @@ $ Mature   (dbl) 2.684331e-05, 1.695727e-05, 1.415911e-05, 1.362810e-05, 1.22988
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

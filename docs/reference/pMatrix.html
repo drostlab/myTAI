@@ -122,6 +122,9 @@ where TAI_is or TDI_is is the partial TAI or TDI value of gene i,
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -191,26 +194,28 @@ and also gives an overall impression of the contribution of each gene to the glo
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-
-<span class='co'># read standard phylotranscriptomics data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># example PhyloExpressionSet</span>
-<span class='va'>PTM_ps</span> <span class='op'>&lt;-</span> <span class='fu'>pMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># example DivergenceExpressionSet</span>
-<span class='va'>PTM_ds</span> <span class='op'>&lt;-</span> <span class='fu'>pMatrix</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># boxplot of the pMatrix</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></span><span class='op'>(</span><span class='fu'>pMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>,outline <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='img'><img src='pMatrix-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># boxplot of the pMatrix using log2 transformed expression levels</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></span><span class='op'>(</span><span class='fu'>pMatrix</span><span class='op'>(</span><span class='fu'><a href='tf.html'>tf</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='pMatrix-2.png' alt='' width='700' height='433' /></div><div class='input'> 
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># read standard phylotranscriptomics data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example PhyloExpressionSet</span></span>
+<span class='r-in'><span class='va'>PTM_ps</span> <span class='op'>&lt;-</span> <span class='fu'>pMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example DivergenceExpressionSet</span></span>
+<span class='r-in'><span class='va'>PTM_ds</span> <span class='op'>&lt;-</span> <span class='fu'>pMatrix</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># boxplot of the pMatrix</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></span><span class='op'>(</span><span class='fu'>pMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>,outline <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='pMatrix-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># boxplot of the pMatrix using log2 transformed expression levels</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></span><span class='op'>(</span><span class='fu'>pMatrix</span><span class='op'>(</span><span class='fu'><a href='tf.html'>tf</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='pMatrix-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'> </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -222,7 +227,7 @@ and also gives an overall impression of the contribution of each gene to the glo
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

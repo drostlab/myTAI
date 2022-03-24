@@ -116,6 +116,9 @@ This function is very useful to perform any phylostratum or divergence-stratum s
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -196,166 +199,171 @@ developmental stage s.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> 
- <span class='co'># source the example dataset</span>
- <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
- 
-<span class='co'># Example 1</span>
-<span class='co'># get the relative expression profiles for each phylostratum</span>
-<span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='va'>RE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature
-#&gt; 1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000
-#&gt; 2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063
-#&gt; 3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000
-#&gt; 4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000
-#&gt; 5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000
-#&gt; 6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000
-#&gt; 7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000
-#&gt; 8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000
-#&gt; 9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000
-#&gt; 10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046
-#&gt; 11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000
-#&gt; 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000</div><div class='input'>
-<span class='co'># this is analogous to </span>
-<span class='fu'><a href='REMatrix.html'>REMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature
-#&gt; 1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000
-#&gt; 2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063
-#&gt; 3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000
-#&gt; 4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000
-#&gt; 5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000
-#&gt; 6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000
-#&gt; 7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000
-#&gt; 8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000
-#&gt; 9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000
-#&gt; 10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046
-#&gt; 11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000
-#&gt; 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000</div><div class='input'><span class='co'># Example 2</span>
-<span class='co'># compute the mean expression profiles for each phylostratum</span>
-<span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='va'>colMeans</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
-#&gt; 1  2607.882 2579.372 2604.856 2525.704 2554.825 2622.757 2696.331
-#&gt; 2  2597.258 2574.745 2467.679 2388.045 2296.410 2243.716 2321.709
-#&gt; 3  2528.272 2363.159 2019.436 2099.079 2155.642 2196.875 2855.866
-#&gt; 4  1925.320 1887.078 1771.399 1787.175 1740.823 1867.981 2358.893
-#&gt; 5  2378.883 2368.593 2061.729 2077.087 2076.693 2564.904 3157.761
-#&gt; 6  1658.253 1697.242 1485.401 1462.613 1492.861 1631.741 2304.683
-#&gt; 7  1993.321 1717.659 1480.525 1590.009 1545.078 1600.264 2385.409
-#&gt; 8  1781.653 1670.106 1452.180 1414.052 1359.376 1816.718 2364.070
-#&gt; 9  1758.119 1764.748 1708.815 1575.727 1388.920 1687.314 2193.930
-#&gt; 10 2414.456 2501.390 2163.810 1938.060 1770.039 1993.032 2127.015
-#&gt; 11 1999.163 2071.456 1702.779 1710.290 1662.099 1726.865 2501.443
-#&gt; 12 2126.189 2036.804 1896.964 1909.578 1859.485 1995.732 2387.343</div><div class='input'>
-<span class='co'># Example 3</span>
-<span class='co'># compute the variance profiles for each phylostratum</span>
-<span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>x</span> , <span class='fl'>2</span> , <span class='va'>var</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature
-#&gt; 1  46858320 44033012 44106145 38877224 37548528 39453762 48129006
-#&gt; 2  46867279 42686867 36090002 32587501 29232620 28376678 30460806
-#&gt; 3  41783430 37194145 17928194 20312145 21038520 24918360 57471592
-#&gt; 4  19261723 17160926 13850827 14557261 13350847 19932521 42637133
-#&gt; 5  32592884 31153055 21527988 22233611 23096264 45694558 78388518
-#&gt; 6  12118906 13540947  8706851  8870013 10758437 17580299 58334320
-#&gt; 7  30355579 18174987  7117039 10899294 12633952 15875758 55103241
-#&gt; 8  13397069 11015110  6730029  5014969  3743414 27906852 52729250
-#&gt; 9  11342446 12741601 14947365  8479977  4709920 22850095 41873875
-#&gt; 10 47788107 50703428 35831030 30053404 22091444 35323704 36885550
-#&gt; 11 24104869 30970830 12777528 14043089 16961809 24200949 56830372
-#&gt; 12 30642509 27840568 23658038 23072584 22502870 29014330 49513851</div><div class='input'>
-<span class='co'># Example 4</span>
-<span class='co'># compute the range for each phylostratum</span>
-<span class='co'># Note: in this case, the range() function returns 2 values for each phylostratum</span>
-<span class='co'># and each developmental stage, hence one should use the argument 'as.list = TRUE'</span>
-<span class='co'># to make sure that the results are returned properly </span>
-<span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>x</span> , <span class='fl'>2</span> , <span class='va'>range</span><span class='op'>)</span>, as.list <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $`1`
-#&gt;         Zygote   Quadrant   Globular      Heart    Torpedo       Bent
-#&gt; [1,]   585.206   554.8961   548.0507   568.1412   540.0542   535.9804
-#&gt; [2,] 71936.292 68151.2904 72995.7957 67833.2550 64942.5576 69482.5093
-#&gt;          Mature
-#&gt; [1,]   532.3402
-#&gt; [2,] 77475.7206
-#&gt; 
-#&gt; $`2`
-#&gt;          Zygote   Quadrant   Globular      Heart    Torpedo       Bent
-#&gt; [1,]   580.6445   574.6997   560.7247   547.7568   557.0626   530.3735
-#&gt; [2,] 73999.5109 66168.5626 68717.7230 64428.0043 64437.4151 68692.2235
-#&gt;          Mature
-#&gt; [1,]   562.4309
-#&gt; [2,] 67137.1151
-#&gt; 
-#&gt; $`3`
-#&gt;          Zygote   Quadrant   Globular      Heart    Torpedo       Bent
-#&gt; [1,]   623.1659   589.5403   580.2586   588.6726   566.7765   558.5507
-#&gt; [2,] 68451.1737 67297.4233 60605.4226 61712.1844 54853.5566 55114.0385
-#&gt;          Mature
-#&gt; [1,]   596.9872
-#&gt; [2,] 67058.7800
-#&gt; 
-#&gt; $`4`
-#&gt;          Zygote   Quadrant   Globular      Heart    Torpedo       Bent
-#&gt; [1,]   589.5377   574.8131   560.7161   559.2638   569.3281   553.8426
-#&gt; [2,] 64147.2534 63952.2243 57847.7659 61816.6287 48750.3696 60011.1444
-#&gt;          Mature
-#&gt; [1,]   572.2069
-#&gt; [2,] 75420.3483
-#&gt; 
-#&gt; $`5`
-#&gt;         Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature
-#&gt; [1,]   571.478   572.2143   597.7567   588.9979   567.5319   571.7144   564.607
-#&gt; [2,] 66824.532 55393.2659 54161.7005 56953.2335 56346.4812 61459.7431 81105.580
-#&gt; 
-#&gt; $`6`
-#&gt;          Zygote   Quadrant  Globular      Heart   Torpedo      Bent     Mature
-#&gt; [1,]   589.0266   576.3678   568.514   575.5234   567.864   554.431   569.6375
-#&gt; [2,] 61492.5176 58588.9023 54426.657 53748.3906 57102.640 61177.576 81496.1486
-#&gt; 
-#&gt; $`7`
-#&gt;          Zygote   Quadrant   Globular     Heart    Torpedo       Bent
-#&gt; [1,]   605.8876   581.1317   592.6554   591.897   560.0847   563.6024
-#&gt; [2,] 62256.6328 56018.9987 25729.4257 34192.828 44443.2861 50930.9745
-#&gt;          Mature
-#&gt; [1,]   561.2506
-#&gt; [2,] 71635.6409
-#&gt; 
-#&gt; $`8`
-#&gt;          Zygote   Quadrant   Globular      Heart    Torpedo       Bent
-#&gt; [1,]   637.9878   569.1286   584.7325   605.0823   594.4442   600.2223
-#&gt; [2,] 41138.0802 40931.4758 33941.3019 29157.0095 23359.8204 68783.3661
-#&gt;          Mature
-#&gt; [1,]   556.4985
-#&gt; [2,] 68490.5460
-#&gt; 
-#&gt; $`9`
-#&gt;          Zygote   Quadrant   Globular      Heart  Torpedo       Bent     Mature
-#&gt; [1,]   641.0205   616.7897   581.1254   581.5667   586.88   591.8835   579.5047
-#&gt; [2,] 33543.3348 34506.4575 48067.4038 31816.1675 21583.04 65310.1500 67092.0569
-#&gt; 
-#&gt; $`10`
-#&gt;          Zygote   Quadrant   Globular      Heart   Torpedo       Bent
-#&gt; [1,]   615.9278   592.7529   574.7775   575.9234   572.552   578.3298
-#&gt; [2,] 66638.5047 62675.8417 67192.4804 64719.1091 60300.004 66748.8375
-#&gt;          Mature
-#&gt; [1,]   582.9723
-#&gt; [2,] 67226.2424
-#&gt; 
-#&gt; $`11`
-#&gt;          Zygote   Quadrant   Globular      Heart    Torpedo       Bent
-#&gt; [1,]   619.2366   592.5207   597.7823   591.3239   566.7128   583.1649
-#&gt; [2,] 47624.9229 57584.7661 35765.6619 28663.2997 40557.9861 56151.2591
-#&gt;          Mature
-#&gt; [1,]   607.0129
-#&gt; [2,] 59611.1041
-#&gt; 
-#&gt; $`12`
-#&gt;          Zygote   Quadrant   Globular      Heart    Torpedo       Bent
-#&gt; [1,]   604.2214   569.8133   554.2327   569.9091   543.0326   532.1237
-#&gt; [2,] 65504.4362 64548.6717 68522.0261 65165.0830 59914.2792 64947.7257
-#&gt;          Mature
-#&gt; [1,]   563.0654
-#&gt; [2,] 68435.7395
-#&gt; </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'> </span>
+<span class='r-in'> <span class='co'># source the example dataset</span></span>
+<span class='r-in'> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'> </span>
+<span class='r-in'><span class='co'># Example 1</span></span>
+<span class='r-in'><span class='co'># get the relative expression profiles for each phylostratum</span></span>
+<span class='r-in'><span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='va'>RE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># this is analogous to </span></span>
+<span class='r-in'><span class='fu'><a href='REMatrix.html'>REMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000</span>
+<span class='r-in'><span class='co'># Example 2</span></span>
+<span class='r-in'><span class='co'># compute the mean expression profiles for each phylostratum</span></span>
+<span class='r-in'><span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='va'>colMeans</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  2607.882 2579.372 2604.856 2525.704 2554.825 2622.757 2696.331</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  2597.258 2574.745 2467.679 2388.045 2296.410 2243.716 2321.709</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  2528.272 2363.159 2019.436 2099.079 2155.642 2196.875 2855.866</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  1925.320 1887.078 1771.399 1787.175 1740.823 1867.981 2358.893</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  2378.883 2368.593 2061.729 2077.087 2076.693 2564.904 3157.761</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  1658.253 1697.242 1485.401 1462.613 1492.861 1631.741 2304.683</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  1993.321 1717.659 1480.525 1590.009 1545.078 1600.264 2385.409</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  1781.653 1670.106 1452.180 1414.052 1359.376 1816.718 2364.070</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  1758.119 1764.748 1708.815 1575.727 1388.920 1687.314 2193.930</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 2414.456 2501.390 2163.810 1938.060 1770.039 1993.032 2127.015</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 1999.163 2071.456 1702.779 1710.290 1662.099 1726.865 2501.443</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 2126.189 2036.804 1896.964 1909.578 1859.485 1995.732 2387.343</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Example 3</span></span>
+<span class='r-in'><span class='co'># compute the variance profiles for each phylostratum</span></span>
+<span class='r-in'><span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>x</span> , <span class='fl'>2</span> , <span class='va'>var</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  46858320 44033012 44106145 38877224 37548528 39453762 48129006</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  46867279 42686867 36090002 32587501 29232620 28376678 30460806</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  41783430 37194145 17928194 20312145 21038520 24918360 57471592</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  19261723 17160926 13850827 14557261 13350847 19932521 42637133</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  32592884 31153055 21527988 22233611 23096264 45694558 78388518</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  12118906 13540947  8706851  8870013 10758437 17580299 58334320</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  30355579 18174987  7117039 10899294 12633952 15875758 55103241</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  13397069 11015110  6730029  5014969  3743414 27906852 52729250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  11342446 12741601 14947365  8479977  4709920 22850095 41873875</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 47788107 50703428 35831030 30053404 22091444 35323704 36885550</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 24104869 30970830 12777528 14043089 16961809 24200949 56830372</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 30642509 27840568 23658038 23072584 22502870 29014330 49513851</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Example 4</span></span>
+<span class='r-in'><span class='co'># compute the range for each phylostratum</span></span>
+<span class='r-in'><span class='co'># Note: in this case, the range() function returns 2 values for each phylostratum</span></span>
+<span class='r-in'><span class='co'># and each developmental stage, hence one should use the argument 'as.list = TRUE'</span></span>
+<span class='r-in'><span class='co'># to make sure that the results are returned properly </span></span>
+<span class='r-in'><span class='fu'>age.apply</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>x</span> , <span class='fl'>2</span> , <span class='va'>range</span><span class='op'>)</span>, as.list <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`1`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Zygote   Quadrant   Globular      Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   585.206   554.8961   548.0507   568.1412   540.0542   535.9804</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 71936.292 68151.2904 72995.7957 67833.2550 64942.5576 69482.5093</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   532.3402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 77475.7206</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`2`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   580.6445   574.6997   560.7247   547.7568   557.0626   530.3735</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 73999.5109 66168.5626 68717.7230 64428.0043 64437.4151 68692.2235</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   562.4309</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 67137.1151</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`3`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   623.1659   589.5403   580.2586   588.6726   566.7765   558.5507</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 68451.1737 67297.4233 60605.4226 61712.1844 54853.5566 55114.0385</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   596.9872</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 67058.7800</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`4`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   589.5377   574.8131   560.7161   559.2638   569.3281   553.8426</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 64147.2534 63952.2243 57847.7659 61816.6287 48750.3696 60011.1444</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   572.2069</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 75420.3483</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`5`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Zygote   Quadrant   Globular      Heart    Torpedo       Bent    Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   571.478   572.2143   597.7567   588.9979   567.5319   571.7144   564.607</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 66824.532 55393.2659 54161.7005 56953.2335 56346.4812 61459.7431 81105.580</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`6`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant  Globular      Heart   Torpedo      Bent     Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   589.0266   576.3678   568.514   575.5234   567.864   554.431   569.6375</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 61492.5176 58588.9023 54426.657 53748.3906 57102.640 61177.576 81496.1486</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`7`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular     Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   605.8876   581.1317   592.6554   591.897   560.0847   563.6024</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 62256.6328 56018.9987 25729.4257 34192.828 44443.2861 50930.9745</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   561.2506</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 71635.6409</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`8`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   637.9878   569.1286   584.7325   605.0823   594.4442   600.2223</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 41138.0802 40931.4758 33941.3019 29157.0095 23359.8204 68783.3661</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   556.4985</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 68490.5460</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`9`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart  Torpedo       Bent     Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   641.0205   616.7897   581.1254   581.5667   586.88   591.8835   579.5047</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 33543.3348 34506.4575 48067.4038 31816.1675 21583.04 65310.1500 67092.0569</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`10`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart   Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   615.9278   592.7529   574.7775   575.9234   572.552   578.3298</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 66638.5047 62675.8417 67192.4804 64719.1091 60300.004 66748.8375</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   582.9723</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 67226.2424</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`11`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   619.2366   592.5207   597.7823   591.3239   566.7128   583.1649</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 47624.9229 57584.7661 35765.6619 28663.2997 40557.9861 56151.2591</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   607.0129</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 59611.1041</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`12`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Zygote   Quadrant   Globular      Heart    Torpedo       Bent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   604.2214   569.8133   554.2327   569.9091   543.0326   532.1237</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 65504.4362 64548.6717 68522.0261 65165.0830 59914.2792 64947.7257</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]   563.0654</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 68435.7395</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -367,7 +375,7 @@ developmental stage s.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

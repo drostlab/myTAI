@@ -74,6 +74,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -97,12 +100,12 @@
 
       
 
-      </header><script src="Advanced_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="Advanced_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced Phylotranscriptomics Analyses</h1>
             
-            <h4 class="date">2021-09-07</h4>
+            <h4 class="date">2022-03-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Advanced.Rmd"><code>vignettes/Advanced.Rmd</code></a></small>
       <div class="hidden name"><code>Advanced.Rmd</code></div>
@@ -168,7 +171,7 @@ stage-centered "***" "***" "n.s." "*" "n.s." "*" "n.s." "n.s." "n.s." "***" "n.s
 </ul>
 <p>Together, studies perfomed with <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> allow users to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome than other genes originating from different PS or DS categories. More specialized analyses such as <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code>, <code><a href="../reference/PlotRE.html">PlotRE()</a></code>, <code><a href="../reference/PlotBarRE.html">PlotBarRE()</a></code>, <code><a href="../reference/TAI.html">TAI()</a></code>, <code><a href="../reference/TDI.html">TDI()</a></code>, etc. will then allow them to study the exact mean expression patterns of these age or divergence categories.</p>
 <p>Users will notice that so far all examples shown above specified <code>log.expr = TRUE</code> illustrating boxplots based on log2 expression levels. This way of visualization allows better visual comparisons between age or divergence categories. However, when specifying <code>log.expr = FALSE</code> absolute expression levels will be visualized in the corresponding boxplot.</p>
-<p>Alternatively, instead of specifying <code>log.expr = TRUE</code> users can directly pass log2 transformed expression levels to <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> via <code><a href="../reference/tf.html">tf(PhyloExpressionSetExample,log2)</a></code> (when <code>log.expr = FALSE</code>):</p>
+<p>Alternatively, instead of specifying <code>log.expr = TRUE</code> users can directly pass log2 transformed expression levels to <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> via <code>tf(PhyloExpressionSetExample,log2)</code> (when <code>log.expr = FALSE</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
 <span class="co"># category-centered visualization of PS specific expression level distributions (log-scale)</span>
@@ -271,7 +274,7 @@ stage-centered "n.s."</code></pre>
                Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
                legendName    <span class="op">=</span> <span class="st">"PS"</span>,
                plot.type     <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></code></pre></div>
-<p>Here, we use log2 transformed expression levels for better visualization (<code><a href="../reference/tf.html">tf(PhyloExpressionSetExample,log2)</a></code>).</p>
+<p>Here, we use log2 transformed expression levels for better visualization (<code>tf(PhyloExpressionSetExample,log2)</code>).</p>
 <p>Internally, the <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> function performs a Wilcoxon Rank Sum test to quantify the statistical significance of PS/DS group expression. This quantification allows users to detect developmental stages of significant expression level differences between PS/DS groups. In this example we chose genes originated before the evolution of embryogenesis evolved in plants (Group1 = PS1-3) versus genes originated after the evolution of embryogenesis evolved in plants (Group2 = PS4-12). As a result, we observe that indeed the difference in total gene expression between these groups is significant throughout embryogenesis. In terms of the P-value quantification we observe that the P-value is minimized towards the phylotypic period. Hence, the expression level difference between the studied PS groups is maximized during the phylotypic period.</p>
 </div>
   </div>
@@ -287,7 +290,7 @@ stage-centered "n.s."</code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

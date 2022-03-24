@@ -115,6 +115,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -196,38 +199,40 @@
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
-<span class='va'>test_set</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>2</span><span class='op'>]</span>,<span class='fl'>1000</span><span class='op'>)</span>
-
-<span class='va'>E.Result</span> <span class='op'>&lt;-</span> <span class='fu'>EnrichmentTest</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,
-                           test.set      <span class='op'>=</span> <span class='va'>test_set</span> ,
-                           measure       <span class='op'>=</span> <span class='st'>"log-foldchange"</span><span class='op'>)</span>
-                           
-<span class='co'># get the log-fold change table</span>
-<span class='va'>E.Result</span><span class='op'>$</span><span class='va'>enrichment.matrix</span>
-</div><div class='output co'>#&gt;           BG_Set     Test_Set
-#&gt; 1  -0.0004337003  0.010481817
-#&gt; 2   0.0017181154 -0.042321022
-#&gt; 3   0.0056691770 -0.144837926
-#&gt; 4  -0.0021020073  0.050078271
-#&gt; 5   0.0044161681 -0.111500196
-#&gt; 6  -0.0113320413  0.250731629
-#&gt; 7   0.0167409104 -0.480258084
-#&gt; 8  -0.0004004521  0.009681065
-#&gt; 9   0.0166840812 -0.478313742
-#&gt; 10  0.0021668586 -0.053590619
-#&gt; 11  0.0114655330 -0.310378255
-#&gt; 12 -0.0039843952  0.093435996</div><div class='input'>
-<span class='co'># get P-values for the enrichment significance for each Phylostratum</span>
-<span class='va'>E.Result</span><span class='op'>$</span><span class='va'>p.values</span>
-</div><div class='output co'>#&gt;         1         2         3         4         5         6         7         8 
-#&gt; 0.8665888 0.6054816 0.6418368 0.6730864 0.7200825 0.1238752 0.4403599 0.8772462 
-#&gt;         9        10        11        12 
-#&gt; 0.3351155 0.9329851 0.7095475 0.5673222 </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>test_set</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>2</span><span class='op'>]</span>,<span class='fl'>1000</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>E.Result</span> <span class='op'>&lt;-</span> <span class='fu'>EnrichmentTest</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>                           test.set      <span class='op'>=</span> <span class='va'>test_set</span> ,</span>
+<span class='r-in'>                           measure       <span class='op'>=</span> <span class='st'>"log-foldchange"</span><span class='op'>)</span></span>
+<span class='r-in'>                           </span>
+<span class='r-in'><span class='co'># get the log-fold change table</span></span>
+<span class='r-in'><span class='va'>E.Result</span><span class='op'>$</span><span class='va'>enrichment.matrix</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           BG_Set     Test_Set</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  -0.0004337003  0.010481817</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2   0.0017181154 -0.042321022</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   0.0056691770 -0.144837926</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  -0.0021020073  0.050078271</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   0.0044161681 -0.111500196</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  -0.0113320413  0.250731629</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   0.0167409104 -0.480258084</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  -0.0004004521  0.009681065</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   0.0166840812 -0.478313742</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  0.0021668586 -0.053590619</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11  0.0114655330 -0.310378255</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 -0.0039843952  0.093435996</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get P-values for the enrichment significance for each Phylostratum</span></span>
+<span class='r-in'><span class='va'>E.Result</span><span class='op'>$</span><span class='va'>p.values</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         1         2         3         4         5         6         7         8 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.8665888 0.6054816 0.6418368 0.6730864 0.7200825 0.1238752 0.4403599 0.8772462 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         9        10        11        12 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.3351155 0.9329851 0.7095475 0.5673222 </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +244,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

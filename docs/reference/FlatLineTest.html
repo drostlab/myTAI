@@ -115,6 +115,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -244,54 +247,36 @@ is computed from this null distribution.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># read standard phylotranscriptomics data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># example PhyloExpressionSet using 1000 permutations</span>
-<span class='fu'>FlatLineTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, 
-             permutations  <span class='op'>=</span> <span class='fl'>1000</span>, 
-             plotHistogram <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 1.478864
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 2193.982
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; </div><div class='output co'>#&gt; $p.value
-#&gt; [1] 6.247769e-11
-#&gt; 
-#&gt; $std.dev
-#&gt; [1] 0.05376029 0.05210501 0.05090467 0.04994535 0.04956924 0.05190159 0.05595720
-#&gt; </div><div class='input'>
-<span class='co'># use your own permutation matrix based on which p-values (FlatLineTest)</span>
-<span class='co'># shall be computed</span>
-<span class='va'>custom_perm_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='fl'>100</span><span class='op'>)</span>
-
-<span class='fu'>FlatLineTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,
-             custom.perm.matrix <span class='op'>=</span> <span class='va'>custom_perm_matrix</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 1.385998
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 1905.602
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; </div><div class='output co'>#&gt; $p.value
-#&gt; [1] 1.195713e-09
-#&gt; 
-#&gt; $std.dev
-#&gt;     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature 
-#&gt; 0.05081926 0.04928884 0.05042939 0.04878794 0.04777686 0.04779623 0.05547097 
-#&gt; </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># read standard phylotranscriptomics data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example PhyloExpressionSet using 1000 permutations</span></span>
+<span class='r-in'><span class='fu'>FlatLineTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, </span>
+<span class='r-in'>             permutations  <span class='op'>=</span> <span class='fl'>1000</span>, </span>
+<span class='r-in'>             plotHistogram <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.149108e-10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $std.dev</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.05435870 0.05397902 0.05287674 0.05161667 0.05002024 0.05078462 0.05514320</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># use your own permutation matrix based on which p-values (FlatLineTest)</span></span>
+<span class='r-in'><span class='co'># shall be computed</span></span>
+<span class='r-in'><span class='va'>custom_perm_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>FlatLineTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>             custom.perm.matrix <span class='op'>=</span> <span class='va'>custom_perm_matrix</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4.398572e-15</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $std.dev</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.05767655 0.05655764 0.05540385 0.05411558 0.05380763 0.05307761 0.05320929 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -303,7 +288,7 @@ is computed from this null distribution.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

@@ -116,6 +116,9 @@ Quint et al., 2012." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -186,15 +189,15 @@ weights for the divergence-stratum value) over all gene divergence categories de
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># reading a standard DivergenceExpressionSet</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># computing the TDI profile of a given DivergenceExpressionSet object</span>
-<span class='va'>TDIs</span> <span class='op'>&lt;-</span> <span class='fu'>TDI</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># reading a standard DivergenceExpressionSet</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># computing the TDI profile of a given DivergenceExpressionSet object</span></span>
+<span class='r-in'><span class='va'>TDIs</span> <span class='op'>&lt;-</span> <span class='fu'>TDI</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -206,7 +209,7 @@ weights for the divergence-stratum value) over all gene divergence categories de
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

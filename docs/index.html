@@ -74,6 +74,9 @@
     <li>
       <a href="articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -143,7 +146,7 @@
 <h3 class="hasAnchor">
 <a href="#scientific-background" class="anchor"></a>Scientific background</h3>
 <p>Today, phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level using transcriptomics approaches. Transcriptomes denote the total number of quantifiable transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment / disease versus non-treatment / non-disease transcriptomes are being compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although classic transcriptomics studies are based on an established methodology, little is known about the evolution and conservation mechanisms underlying such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.</p>
-<p>Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern then enables to detect stages of development or other biological processes that are evolutionarily conserved (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684">Drost et al., 2018</a>). This quantification on the highest level is achieved through transcriptome indices (e.g. <a href="https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index">Transcriptome Age Index or Transcriptome Divergence Index</a>) which aim to quantify the average evolutionary age or sequence conservation of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow’s law) (<a href="https://www.sciencedirect.com/science/article/pii/S0959437X16302040">Drost et al., 2017</a>.</p>
+<p>Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern then enables to detect stages of development or other biological processes that are evolutionarily conserved (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684">Drost et al., 2018</a>). This quantification on the highest level is achieved through transcriptome indices (e.g. <a href="https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index">Transcriptome Age Index or Transcriptome Divergence Index</a>) which aim to quantify the average evolutionary age or sequence conservation of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollow’s law) (<a href="https://www.sciencedirect.com/science/article/pii/S0959437X16302040">Drost et al., 2017</a>).</p>
 <p><strong>Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years, please follow my <a href="https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html">updated discussion about the gene age inference literature</a>.</strong></p>
 </div>
 </div>
@@ -153,7 +156,7 @@
 <p>Some bug fixes or new functionality will not be available on CRAN yet, but in the developer version here on GitHub. To download and install the most recent version of <code>myTAI</code> run:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install developer version of myTAI</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"drostlab/myTAI"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"drostlab/myTAI"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="news" class="section level2">
 <h2 class="hasAnchor">
@@ -478,6 +481,7 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/http://orcid.org/0000-0002-1567-306X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Kristian K Ullrich <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0003-4308-9626" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -495,7 +499,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

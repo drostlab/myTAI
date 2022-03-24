@@ -115,6 +115,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -177,24 +180,25 @@
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># get the partial contribution of divergence strata to the global</span>
-<span class='co'># TDI pattern</span>
-<span class='fu'><a href='pTAI.html'>pTAI</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature
-#&gt; 1  0.2174378 0.2207644 0.2309211 0.2214881 0.2195601 0.2047938 0.1704023
-#&gt; 2  0.4800055 0.4762352 0.4821244 0.4752145 0.4799418 0.4695871 0.4288670
-#&gt; 3  0.7742988 0.7597816 0.7797646 0.7826244 0.8033702 0.8034316 0.7769026
-#&gt; 4  1.1463780 1.1285545 1.1408903 1.1528497 1.1694967 1.1784113 1.1933157
-#&gt; 5  1.5652686 1.5489672 1.5545589 1.5698173 1.5934158 1.6003011 1.6330444
-#&gt; 6  2.0899161 2.0609661 2.0666314 2.1015199 2.1163138 2.1306059 2.1932280
-#&gt; 7  2.6262330 2.6035894 2.6012719 2.6453427 2.6477490 2.6664143 2.8085434
-#&gt; 8  3.2211299 3.1990804 3.1767694 3.2319604 3.2292835 3.2693046 3.4412353
-#&gt; 9  3.8396769 3.8299654 3.7793476 3.8353941 3.8272391 3.8971210 4.0753877
-#&gt; 10 4.5320286 4.5632002 4.4857052 4.5008685 4.4664774 4.5307040 4.6902921</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get the partial contribution of divergence strata to the global</span></span>
+<span class='r-in'><span class='co'># TDI pattern</span></span>
+<span class='r-in'><span class='fu'><a href='pTAI.html'>pTAI</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  0.2174378 0.2207644 0.2309211 0.2214881 0.2195601 0.2047938 0.1704023</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  0.4800055 0.4762352 0.4821244 0.4752145 0.4799418 0.4695871 0.4288670</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  0.7742988 0.7597816 0.7797646 0.7826244 0.8033702 0.8034316 0.7769026</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  1.1463780 1.1285545 1.1408903 1.1528497 1.1694967 1.1784113 1.1933157</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  1.5652686 1.5489672 1.5545589 1.5698173 1.5934158 1.6003011 1.6330444</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  2.0899161 2.0609661 2.0666314 2.1015199 2.1163138 2.1306059 2.1932280</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  2.6262330 2.6035894 2.6012719 2.6453427 2.6477490 2.6664143 2.8085434</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  3.2211299 3.1990804 3.1767694 3.2319604 3.2292835 3.2693046 3.4412353</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  3.8396769 3.8299654 3.7793476 3.8353941 3.8272391 3.8971210 4.0753877</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 4.5320286 4.5632002 4.4857052 4.5008685 4.4664774 4.5307040 4.6902921</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -206,7 +210,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

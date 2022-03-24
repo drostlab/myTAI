@@ -124,6 +124,9 @@ levels \(f_s\) of all other stages s range between 0 and 1, accordingly." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -194,16 +197,17 @@ levels \(f_s\) of all other stages s range between 0 and 1, accordingly.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># read standard phylotranscriptomics data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># relative expression profile of PS1 genes</span>
-<span class='fu'>RE</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>1</span><span class='op'>]</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>9</span> <span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature 
-#&gt; 0.4816246 0.3145330 0.4638918 0.0000000 0.1706749 0.5688023 1.0000000 </div><div class='input'>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># read standard phylotranscriptomics data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># relative expression profile of PS1 genes</span></span>
+<span class='r-in'><span class='fu'>RE</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>1</span><span class='op'>]</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>9</span> <span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Zygote  Quadrant  Globular     Heart   Torpedo      Bent    Mature </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.4816246 0.3145330 0.4638918 0.0000000 0.1706749 0.5688023 1.0000000 </span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -215,7 +219,7 @@ levels \(f_s\) of all other stages s range between 0 and 1, accordingly.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

@@ -116,6 +116,9 @@ as histogram." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -208,25 +211,27 @@ as histogram.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># generate an example gene set</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
-<span class='va'>ExGeneSet</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>5000</span><span class='op'>)</span>
-
-<span class='co'># gene count example</span>
-<span class='fu'>PlotSelectedAgeDistr</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,
-                     gene.set      <span class='op'>=</span> <span class='va'>ExGeneSet</span>,
-                     legendName    <span class='op'>=</span> <span class='st'>"PS"</span>,
-                     as.ratio      <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotSelectedAgeDistr-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># relative gene count example</span>
-<span class='fu'>PlotSelectedAgeDistr</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,
-                     gene.set      <span class='op'>=</span> <span class='va'>ExGeneSet</span>,
-                     legendName    <span class='op'>=</span> <span class='st'>"PS"</span>,
-                     as.ratio      <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotSelectedAgeDistr-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># generate an example gene set</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ExGeneSet</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>5000</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># gene count example</span></span>
+<span class='r-in'><span class='fu'>PlotSelectedAgeDistr</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>                     gene.set      <span class='op'>=</span> <span class='va'>ExGeneSet</span>,</span>
+<span class='r-in'>                     legendName    <span class='op'>=</span> <span class='st'>"PS"</span>,</span>
+<span class='r-in'>                     as.ratio      <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotSelectedAgeDistr-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># relative gene count example</span></span>
+<span class='r-in'><span class='fu'>PlotSelectedAgeDistr</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>                     gene.set      <span class='op'>=</span> <span class='va'>ExGeneSet</span>,</span>
+<span class='r-in'>                     legendName    <span class='op'>=</span> <span class='st'>"PS"</span>,</span>
+<span class='r-in'>                     as.ratio      <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotSelectedAgeDistr-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -238,7 +243,7 @@ as histogram.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

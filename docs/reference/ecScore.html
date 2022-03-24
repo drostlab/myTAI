@@ -123,6 +123,9 @@ stored in the age_vals argument." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -200,36 +203,37 @@ stored in the <code>age_vals</code> argument.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
- <span class='co'># read standard phylotranscriptomics data</span>
- <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
- <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
- <span class='co'># Example PhyloExpressionSet:</span>
-
- <span class='co'># compute the TAI profile</span>
- <span class='va'>TAIs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='TAI.html'>TAI</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
- <span class='co'># compute the early conservation score for the TAI profile</span>
- <span class='va'>ec_score</span> <span class='op'>&lt;-</span> <span class='fu'>ecScore</span><span class='op'>(</span>age_vals <span class='op'>=</span> <span class='va'>TAIs</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>
-
-
- <span class='co'># Example DivergenceExpressionSet:</span>
-
- <span class='co'># compute the TDI profile</span>
- <span class='va'>TDIs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='TDI.html'>TDI</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
- <span class='co'># compute the early conservation score for the TDI profile</span>
- <span class='va'>ec_score</span> <span class='op'>&lt;-</span> <span class='fu'>ecScore</span><span class='op'>(</span>age_vals <span class='op'>=</span> <span class='va'>TDIs</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>
- 
- <span class='co'># compute ecScore() vector from bootMatrix()</span>
- <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='fl'>10</span><span class='op'>)</span>,<span class='fl'>1</span>,<span class='va'>ecScore</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            1            2            3            4            5            6 
-#&gt;  0.002128269 -0.025173341 -0.073688271  0.021710739 -0.061536330  0.005659810 
-#&gt;            7            8            9           10 
-#&gt; -0.043525517  0.011142451  0.014546347 -0.047740586 </div><div class='input'> 
- 
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'> <span class='co'># read standard phylotranscriptomics data</span></span>
+<span class='r-in'> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># Example PhyloExpressionSet:</span></span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># compute the TAI profile</span></span>
+<span class='r-in'> <span class='va'>TAIs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='TAI.html'>TAI</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># compute the early conservation score for the TAI profile</span></span>
+<span class='r-in'> <span class='va'>ec_score</span> <span class='op'>&lt;-</span> <span class='fu'>ecScore</span><span class='op'>(</span>age_vals <span class='op'>=</span> <span class='va'>TAIs</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># Example DivergenceExpressionSet:</span></span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># compute the TDI profile</span></span>
+<span class='r-in'> <span class='va'>TDIs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='TDI.html'>TDI</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='co'># compute the early conservation score for the TDI profile</span></span>
+<span class='r-in'> <span class='va'>ec_score</span> <span class='op'>&lt;-</span> <span class='fu'>ecScore</span><span class='op'>(</span>age_vals <span class='op'>=</span> <span class='va'>TDIs</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-in'> </span>
+<span class='r-in'> <span class='co'># compute ecScore() vector from bootMatrix()</span></span>
+<span class='r-in'> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='fl'>10</span><span class='op'>)</span>,<span class='fl'>1</span>,<span class='va'>ecScore</span>,early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>,late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            1            2            3            4            5            6 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.055265572 -0.024983905  0.011062537 -0.069224760  0.001381349 -0.028715840 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            7            8            9           10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.020633659  0.052460543  0.002459704  0.000171182 </span>
+<span class='r-in'> </span>
+<span class='r-in'> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -241,7 +245,7 @@ stored in the <code>age_vals</code> argument.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

@@ -116,6 +116,9 @@ Gossmann et al., 2015." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -185,16 +188,16 @@ weights) for the synonymous vs non-synonymous polymorphism ratios.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># reading a standard PolymorphismExpressionSet</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PolymorphismExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># computing the TPI profile of a given PolymorphismExpressionSet object</span>
-<span class='va'>TPIs</span> <span class='op'>&lt;-</span> <span class='fu'>TPI</span><span class='op'>(</span><span class='va'>PolymorphismExpressionSet</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># reading a standard PolymorphismExpressionSet</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PolymorphismExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># computing the TPI profile of a given PolymorphismExpressionSet object</span></span>
+<span class='r-in'><span class='va'>TPIs</span> <span class='op'>&lt;-</span> <span class='fu'>TPI</span><span class='op'>(</span><span class='va'>PolymorphismExpressionSet</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -206,7 +209,7 @@ weights) for the synonymous vs non-synonymous polymorphism ratios.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

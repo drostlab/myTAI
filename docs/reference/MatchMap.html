@@ -116,6 +116,9 @@ also storing only unique gene ids." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -204,51 +207,52 @@ one expression level for one unique gene.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>        
-<span class='co'># load a standard PhyloExpressionSet</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-        
-<span class='co'># in a standard PhyloExpressionSet, </span>
-<span class='co'># column one and column two denote a standard </span>
-<span class='co'># phylostratigraphic map</span>
-<span class='va'>PhyloMap</span> <span class='op'>&lt;-</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span>
-        
-<span class='co'># look at the phylostratigraphic map standard</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>PhyloMap</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Phylostratum      GeneID
-#&gt; 1            1 at1g01040.2
-#&gt; 2            1 at1g01050.1
-#&gt; 3            1 at1g01070.1
-#&gt; 4            1 at1g01080.2
-#&gt; 5            1 at1g01090.1
-#&gt; 6            1 at1g01120.1</div><div class='input'>        
-<span class='co'># in a standard PhyloExpressionSet, column two combined </span>
-<span class='co'># with column 3 - N denote a standard ExpressionMatrix</span>
-<span class='va'>ExpressionMatrixExample</span> <span class='op'>&lt;-</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span><span class='op'>]</span>
-        
-<span class='co'># these two data sets shall illustrate an example </span>
-<span class='co'># phylostratigraphic map that is returned</span>
-<span class='co'># by a standard phylostratigraphy run, and a expression set </span>
-<span class='co'># that is the result of expression data analysis </span>
-<span class='co'># (background correction, normalization, ...)</span>
-        
-<span class='co'># now we can use the MatchMap function to merge both data sets</span>
-<span class='co'># to obtain a standard PhyloExpressionSet</span>
-        
-<span class='va'>PES</span> <span class='op'>&lt;-</span> <span class='fu'>MatchMap</span><span class='op'>(</span><span class='va'>PhyloMap</span>, <span class='va'>ExpressionMatrixExample</span><span class='op'>)</span>
-        
-<span class='co'># note that the function returns a head() </span>
-<span class='co'># of the matched gene ids to enable</span>
-<span class='co'># the user to find potential mis-matches</span>
-        
-<span class='co'># the entire procedure is analogous to merge() </span>
-<span class='co'># with two data sets sharing the same gene ids </span>
-<span class='co'># as column (primary key)</span>
-<span class='va'>PES_merge</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>PhyloMap</span>, <span class='va'>ExpressionMatrixExample</span><span class='op'>)</span>
-        
-        
-        
-</div></pre>
+    <pre class="examples"><span class='r-in'>        </span>
+<span class='r-in'><span class='co'># load a standard PhyloExpressionSet</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='co'># in a standard PhyloExpressionSet, </span></span>
+<span class='r-in'><span class='co'># column one and column two denote a standard </span></span>
+<span class='r-in'><span class='co'># phylostratigraphic map</span></span>
+<span class='r-in'><span class='va'>PhyloMap</span> <span class='op'>&lt;-</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='co'># look at the phylostratigraphic map standard</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>PhyloMap</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Phylostratum      GeneID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1            1 at1g01040.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2            1 at1g01050.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3            1 at1g01070.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4            1 at1g01080.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5            1 at1g01090.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6            1 at1g01120.1</span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='co'># in a standard PhyloExpressionSet, column two combined </span></span>
+<span class='r-in'><span class='co'># with column 3 - N denote a standard ExpressionMatrix</span></span>
+<span class='r-in'><span class='va'>ExpressionMatrixExample</span> <span class='op'>&lt;-</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span><span class='op'>]</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='co'># these two data sets shall illustrate an example </span></span>
+<span class='r-in'><span class='co'># phylostratigraphic map that is returned</span></span>
+<span class='r-in'><span class='co'># by a standard phylostratigraphy run, and a expression set </span></span>
+<span class='r-in'><span class='co'># that is the result of expression data analysis </span></span>
+<span class='r-in'><span class='co'># (background correction, normalization, ...)</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='co'># now we can use the MatchMap function to merge both data sets</span></span>
+<span class='r-in'><span class='co'># to obtain a standard PhyloExpressionSet</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='va'>PES</span> <span class='op'>&lt;-</span> <span class='fu'>MatchMap</span><span class='op'>(</span><span class='va'>PhyloMap</span>, <span class='va'>ExpressionMatrixExample</span><span class='op'>)</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='co'># note that the function returns a head() </span></span>
+<span class='r-in'><span class='co'># of the matched gene ids to enable</span></span>
+<span class='r-in'><span class='co'># the user to find potential mis-matches</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'><span class='co'># the entire procedure is analogous to merge() </span></span>
+<span class='r-in'><span class='co'># with two data sets sharing the same gene ids </span></span>
+<span class='r-in'><span class='co'># as column (primary key)</span></span>
+<span class='r-in'><span class='va'>PES_merge</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>PhyloMap</span>, <span class='va'>ExpressionMatrixExample</span><span class='op'>)</span></span>
+<span class='r-in'>        </span>
+<span class='r-in'>        </span>
+<span class='r-in'>        </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,7 +264,7 @@ one expression level for one unique gene.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

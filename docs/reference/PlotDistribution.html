@@ -116,6 +116,9 @@ corresponding phylostratigraphic map or divergence map and can be used to fastly
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -212,21 +215,24 @@ on their evolutionary origins or evolutionary relationships.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># load PhyloExpressionSet</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># plot the phylostratum distribution of a PhyloExpressionSet</span>
-<span class='fu'>PlotDistribution</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotDistribution-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># plot the relative frequency distribution of a PhyloExpressionSet</span>
-<span class='fu'>PlotDistribution</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, as.ratio <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotDistribution-2.png' alt='' width='700' height='433' /></div><div class='input'>
-
-<span class='co'># a example for visualizing the PS distribution for a subset of genes</span>
-<span class='fu'>PlotDistribution</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>20000</span>,<span class='fl'>5000</span><span class='op'>)</span> , <span class='op'>]</span>, as.ratio <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotDistribution-3.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># load PhyloExpressionSet</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># plot the phylostratum distribution of a PhyloExpressionSet</span></span>
+<span class='r-in'><span class='fu'>PlotDistribution</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotDistribution-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># plot the relative frequency distribution of a PhyloExpressionSet</span></span>
+<span class='r-in'><span class='fu'>PlotDistribution</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, as.ratio <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotDistribution-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># a example for visualizing the PS distribution for a subset of genes</span></span>
+<span class='r-in'><span class='fu'>PlotDistribution</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>20000</span>,<span class='fl'>5000</span><span class='op'>)</span> , <span class='op'>]</span>, as.ratio <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotDistribution-3.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -238,7 +244,7 @@ on their evolutionary origins or evolutionary relationships.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

@@ -74,6 +74,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -97,12 +100,12 @@
 
       
 
-      </header><script src="Intermediate_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="Intermediate_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Intermediate Phylotranscriptomics Analyses</h1>
             
-            <h4 class="date">2021-09-07</h4>
+            <h4 class="date">2022-03-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Intermediate.Rmd"><code>vignettes/Intermediate.Rmd</code></a></small>
       <div class="hidden name"><code>Intermediate.Rmd</code></div>
@@ -310,7 +313,7 @@
 <span class="fu"><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest</a></span><span class="op">(</span> ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
                         modules       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>,
                         lillie.test   <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span> </code></pre></div>
-<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code><a href="https://rdrr.io/r/base/apply.html">apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</a></code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
+<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code>apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
 <p>Analogous to the <code>plotHistogram</code> argument that is present in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function also takes an argument <code>plotHistogram</code>. When <code>plotHistogram = TRUE</code>, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function returns a multi-plot showing:</p>
 <ul>
 <li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates which distributions seem plausible to fit the resulting permutation vector <span class="math inline">\(D_{min}\)</span>. Here a normal distribution seems most plausible.</p></li>
@@ -447,7 +450,7 @@ $std.dev
 
 $lillie.test
 [1] TRUE</code></pre>
-<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code><a href="https://rdrr.io/r/base/apply.html">apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</a></code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
+<p>The corresponding output shows the p-value returned by the <strong>Reductive Hourglass Test</strong>, the standard deviation of randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> (<code>apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</code>) and in case the argument <code>lillie.test = TRUE</code>, a logical value representing the goodness of fit statistic returned by the <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov) test</a> for normality. In case <code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419">Lilliefors (Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In case <code>lillie.test</code> is <code>FALSE</code> the corresponding goodness of fit by a normal distribution is not statistically significant.</p>
 <p>Analogous to the <code>plotHistogram</code> argument that is present in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function also takes an argument <code>plotHistogram</code>. When <code>plotHistogram = TRUE</code>, the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function returns a multi-plot showing:</p>
 <ul>
 <li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates which distributions seem plausible to fit the resulting permutation vector <span class="math inline">\(D_{min}\)</span>. Here a normal distribution seems most plausible.</p></li>
@@ -609,7 +612,7 @@ $lillie.test
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

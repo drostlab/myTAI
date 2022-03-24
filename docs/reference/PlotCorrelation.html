@@ -119,6 +119,9 @@ subsequent analyses (Quint et al., 2012)." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -212,19 +215,21 @@ Drost HG et al. (2015) <em>Evidence for Active Maintenance of Phylotranscriptomi
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># read standard phylotranscriptomics data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
- 
-<span class='co'># plot the PS and DS correlation</span>
-<span class='fu'>PlotCorrelation</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, 
-                <span class='va'>DivergenceExpressionSetExample</span>, 
-                method      <span class='op'>=</span> <span class='st'>"pearson"</span>, 
-                linearModel <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using formula 'y ~ s(x, bs = "cs")'</span></div><div class='img'><img src='PlotCorrelation-1.png' alt='' width='700' height='433' /></div><div class='input'>
-
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># read standard phylotranscriptomics data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'> </span>
+<span class='r-in'><span class='co'># plot the PS and DS correlation</span></span>
+<span class='r-in'><span class='fu'>PlotCorrelation</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, </span>
+<span class='r-in'>                <span class='va'>DivergenceExpressionSetExample</span>, </span>
+<span class='r-in'>                method      <span class='op'>=</span> <span class='st'>"pearson"</span>, </span>
+<span class='r-in'>                linearModel <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> `geom_smooth()` using formula 'y ~ s(x, bs = "cs")'</span>
+<span class='r-plt img'><img src='PlotCorrelation-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -236,7 +241,7 @@ Drost HG et al. (2015) <em>Evidence for Active Maintenance of Phylotranscriptomi
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

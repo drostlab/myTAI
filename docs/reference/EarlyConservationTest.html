@@ -119,6 +119,9 @@ indeed follow an early conservation (low-high-high) shape." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -264,64 +267,46 @@ patterns of developmental constraints in vertebrates</em>. PLoS Genet. 9(4): e10
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># perform the early conservation test for a PhyloExpressionSet</span>
-<span class='co'># here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,</span>
-<span class='co'># stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to</span>
-<span class='co'># module 3 = late</span>
-<span class='fu'>EarlyConservationTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,
-                       modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>, 
-                       permutations <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $start.arg
-#&gt; $start.arg$mean
-#&gt; [1] -0.01365784
-#&gt; 
-#&gt; $start.arg$sd
-#&gt; [1] 0.03050271
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; </div><div class='output co'>#&gt; $p.value
-#&gt; [1] 0.9999168
-#&gt; 
-#&gt; $std.dev
-#&gt; [1] 0.05547201 0.05425241 0.05199121 0.05117642 0.05070018 0.05318647 0.05791163
-#&gt; 
-#&gt; $lillie.test
-#&gt; [1] NA
-#&gt; </div><div class='input'>
-
-<span class='co'># use your own permutation matrix based on which p-values (EarlyConservationTest)</span>
-<span class='co'># shall be computed</span>
-<span class='va'>custom_perm_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='fl'>100</span><span class='op'>)</span>
-
-<span class='fu'>EarlyConservationTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,
-                       modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>, 
-                       custom.perm.matrix <span class='op'>=</span> <span class='va'>custom_perm_matrix</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $start.arg
-#&gt; $start.arg$mean
-#&gt; [1] -0.01701384
-#&gt; 
-#&gt; $start.arg$sd
-#&gt; [1] 0.03440646
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; </div><div class='output co'>#&gt; $p.value
-#&gt; [1] 0.9994032
-#&gt; 
-#&gt; $std.dev
-#&gt;     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature 
-#&gt; 0.05953318 0.05925106 0.05587577 0.05336733 0.05550997 0.05758198 0.06123089 
-#&gt; 
-#&gt; $lillie.test
-#&gt; [1] NA
-#&gt; </div><div class='input'>                       
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># perform the early conservation test for a PhyloExpressionSet</span></span>
+<span class='r-in'><span class='co'># here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,</span></span>
+<span class='r-in'><span class='co'># stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to</span></span>
+<span class='r-in'><span class='co'># module 3 = late</span></span>
+<span class='r-in'><span class='fu'>EarlyConservationTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>                       modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>, </span>
+<span class='r-in'>                       permutations <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.999896</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $std.dev</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.05501641 0.05399180 0.05227801 0.05082699 0.04933829 0.05165833 0.05448006</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $lillie.test</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># use your own permutation matrix based on which p-values (EarlyConservationTest)</span></span>
+<span class='r-in'><span class='co'># shall be computed</span></span>
+<span class='r-in'><span class='va'>custom_perm_matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bootMatrix.html'>bootMatrix</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,<span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>EarlyConservationTest</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>,</span>
+<span class='r-in'>                       modules <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>early <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mid <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span>, late <span class='op'>=</span> <span class='fl'>6</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>, </span>
+<span class='r-in'>                       custom.perm.matrix <span class='op'>=</span> <span class='va'>custom_perm_matrix</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $p.value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.9999673</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $std.dev</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.05774599 0.05798849 0.05853098 0.05678427 0.05377584 0.05354774 0.05674971 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $lillie.test</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'>                       </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -333,7 +318,7 @@ patterns of developmental constraints in vertebrates</em>. PLoS Genet. 9(4): e10
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

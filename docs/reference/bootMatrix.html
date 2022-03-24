@@ -119,6 +119,9 @@ can be used for building test statistics based on the TAI or TDI profiles." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -195,19 +198,19 @@ This random <code>TAI</code> or <code>TDI</code> profile matrix can then be used
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># read standard phylotranscriptomics data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># example PhyloExpressionSet using 100 permutations</span>
-<span class='va'>randomTAI.Matrix</span> <span class='op'>&lt;-</span> <span class='fu'>bootMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, permutations <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-
-<span class='co'># example DivergenceExpressionSet using 100 permutations</span>
-<span class='va'>randomTDI.Matrix</span> <span class='op'>&lt;-</span> <span class='fu'>bootMatrix</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span>, permutations <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># read standard phylotranscriptomics data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example PhyloExpressionSet using 100 permutations</span></span>
+<span class='r-in'><span class='va'>randomTAI.Matrix</span> <span class='op'>&lt;-</span> <span class='fu'>bootMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span>, permutations <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example DivergenceExpressionSet using 100 permutations</span></span>
+<span class='r-in'><span class='va'>randomTDI.Matrix</span> <span class='op'>&lt;-</span> <span class='fu'>bootMatrix</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span>, permutations <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -219,7 +222,7 @@ This random <code>TAI</code> or <code>TDI</code> profile matrix can then be used
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

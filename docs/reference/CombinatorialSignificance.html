@@ -117,6 +117,9 @@ the statistical significance of the underlying pattern for all combinations of r
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -234,158 +237,27 @@ whether an critical value \(\alpha\) is exeeded or not (e.g. \(\alpha = 0.05\)).
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># load a standard PhyloExpressionSet</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># we assume that the PhyloExpressionSetExample </span>
-<span class='co'># consists of 3 developmental stages </span>
-<span class='co'># and 2 replicates for stage 1, 3 replicates for stage 2, </span>
-<span class='co'># and 2 replicates for stage 3</span>
-<span class='co'># FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000</span>
-<span class='co'># BUT NOTE THAT THIS TAKES MUCH MORE COMPUTATION TIME</span>
-<span class='va'>p.vector</span> <span class='op'>&lt;-</span> <span class='fu'>CombinatorialSignificance</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
-                                      replicates    <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>2</span><span class='op'>)</span>, 
-                                      TestStatistic <span class='op'>=</span> <span class='st'>"FlatLineTest"</span>, 
-                                      permutations  <span class='op'>=</span> <span class='fl'>10</span>, 
-                                      parallel      <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 1.783946
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 3632.295
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 2.348552
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 4589.037
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 0.6125867
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 885.9213
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 1.31326
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 2995.792
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 3.011779
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 7321.434
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 1.70708
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 5500.355
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 0.33531
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 269.9111
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 0.8690815
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 1264.999
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 4.087229
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 6340.375
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 1.037723
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 944.6843
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 1.469103
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 2133.284
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $start.arg
-#&gt; $start.arg$shape
-#&gt; [1] 2.417091
-#&gt; 
-#&gt; $start.arg$rate
-#&gt; [1] 2188.855
-#&gt; 
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; </div><div class='input'>
-
-
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># load a standard PhyloExpressionSet</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># we assume that the PhyloExpressionSetExample </span></span>
+<span class='r-in'><span class='co'># consists of 3 developmental stages </span></span>
+<span class='r-in'><span class='co'># and 2 replicates for stage 1, 3 replicates for stage 2, </span></span>
+<span class='r-in'><span class='co'># and 2 replicates for stage 3</span></span>
+<span class='r-in'><span class='co'># FOR REAL ANALYSES PLEASE USE: permutations = 1000 or 10000</span></span>
+<span class='r-in'><span class='co'># BUT NOTE THAT THIS TAKES MUCH MORE COMPUTATION TIME</span></span>
+<span class='r-in'><span class='va'>p.vector</span> <span class='op'>&lt;-</span> <span class='fu'>CombinatorialSignificance</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, </span>
+<span class='r-in'>                                      replicates    <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>2</span><span class='op'>)</span>, </span>
+<span class='r-in'>                                      TestStatistic <span class='op'>=</span> <span class='st'>"FlatLineTest"</span>, </span>
+<span class='r-in'>                                      permutations  <span class='op'>=</span> <span class='fl'>10</span>, </span>
+<span class='r-in'>                                      parallel      <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -397,7 +269,7 @@ whether an critical value \(\alpha\) is exeeded or not (e.g. \(\alpha = 0.05\)).
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

@@ -116,6 +116,9 @@ all given phylostrata or divergence-strata within a given PhyloExpressionSet or 
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -185,41 +188,43 @@ and the relative expression levels \(f_js\) of all other stages s range between 
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># read standard phylotranscriptomics data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># example PhyloExpressionSet</span>
-<span class='fu'>REMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature
-#&gt; 1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000
-#&gt; 2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063
-#&gt; 3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000
-#&gt; 4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000
-#&gt; 5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000
-#&gt; 6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000
-#&gt; 7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000
-#&gt; 8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000
-#&gt; 9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000
-#&gt; 10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046
-#&gt; 11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000
-#&gt; 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000</div><div class='input'>
-<span class='co'># example DivergenceExpressionSet</span>
-<span class='fu'>REMatrix</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       Zygote  Quadrant   Globular      Heart    Torpedo      Bent    Mature
-#&gt; 1  0.9669643 0.9755188 1.00000000 0.64894653 0.54294759 0.3860827 0.0000000
-#&gt; 2  0.7888009 0.4949178 0.10397567 0.00000000 0.08758660 0.4549387 1.0000000
-#&gt; 3  0.1733953 0.0000000 0.02704324 0.04893726 0.18054185 0.4309208 1.0000000
-#&gt; 4  0.3772372 0.2955661 0.08201140 0.07895260 0.00000000 0.2074848 1.0000000
-#&gt; 5  0.4543752 0.3987496 0.09292474 0.00000000 0.02050713 0.1912595 1.0000000
-#&gt; 6  0.4403615 0.2605017 0.07713944 0.13021586 0.00000000 0.2307754 1.0000000
-#&gt; 7  0.3264585 0.3200581 0.13864386 0.11077270 0.00000000 0.1420009 1.0000000
-#&gt; 8  0.4934416 0.4366671 0.11457069 0.08697865 0.00000000 0.3076689 1.0000000
-#&gt; 9  0.6236387 0.6561674 0.21851855 0.10163374 0.00000000 0.4161087 1.0000000
-#&gt; 10 0.7794318 1.0000000 0.61482564 0.22487531 0.00000000 0.1192539 0.4259882</div><div class='input'>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># read standard phylotranscriptomics data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example PhyloExpressionSet</span></span>
+<span class='r-in'><span class='fu'>REMatrix</span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Zygote  Quadrant   Globular      Heart    Torpedo       Bent    Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  0.4816246 0.3145330 0.46389184 0.00000000 0.17067495 0.56880234 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  1.0000000 0.9363209 0.63348381 0.40823711 0.14904726 0.00000000 0.2206063</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  0.6083424 0.4109402 0.00000000 0.09521758 0.16284114 0.21213845 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  0.2985050 0.2366309 0.04946941 0.07499453 0.00000000 0.20573325 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  0.2893657 0.2799777 0.00000000 0.01401191 0.01365328 0.45908792 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  0.2323316 0.2786335 0.02706119 0.00000000 0.03592044 0.20084761 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  0.5666979 0.2620602 0.00000000 0.12099252 0.07133814 0.13232551 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  0.4203039 0.3092784 0.09237036 0.05442042 0.00000000 0.45520558 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  0.4586261 0.4668613 0.39738003 0.23205534 0.00000000 0.37067096 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 0.8811321 1.0000000 0.53841500 0.22974016 0.00000000 0.30490542 0.4881046</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 0.4015809 0.4877111 0.04846721 0.05741594 0.00000000 0.07716367 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 0.5052572 0.3359211 0.07100055 0.09489782 0.00000000 0.25811214 1.0000000</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example DivergenceExpressionSet</span></span>
+<span class='r-in'><span class='fu'>REMatrix</span><span class='op'>(</span><span class='va'>DivergenceExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Zygote  Quadrant   Globular      Heart    Torpedo      Bent    Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  0.9669643 0.9755188 1.00000000 0.64894653 0.54294759 0.3860827 0.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  0.7888009 0.4949178 0.10397567 0.00000000 0.08758660 0.4549387 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  0.1733953 0.0000000 0.02704324 0.04893726 0.18054185 0.4309208 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  0.3772372 0.2955661 0.08201140 0.07895260 0.00000000 0.2074848 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  0.4543752 0.3987496 0.09292474 0.00000000 0.02050713 0.1912595 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  0.4403615 0.2605017 0.07713944 0.13021586 0.00000000 0.2307754 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  0.3264585 0.3200581 0.13864386 0.11077270 0.00000000 0.1420009 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  0.4934416 0.4366671 0.11457069 0.08697865 0.00000000 0.3076689 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  0.6236387 0.6561674 0.21851855 0.10163374 0.00000000 0.4161087 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 0.7794318 1.0000000 0.61482564 0.22487531 0.00000000 0.1192539 0.4259882</span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -231,7 +236,7 @@ and the relative expression levels \(f_js\) of all other stages s range between 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

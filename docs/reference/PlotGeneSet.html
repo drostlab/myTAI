@@ -116,6 +116,9 @@ a defined subset of genes stored in the input ExpressionSet." />
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -217,53 +220,56 @@ that are stored in the input <code>ExpressionSet</code>.</p>
     <p>Hajk-Georg Drost</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span>
-
-<span class='co'># the best parameter setting to visualize this plot:</span>
-<span class='co'># png("test_png.png",700,400)</span>
-<span class='fu'>PlotGeneSet</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
-            gene.set      <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>]</span>, 
-            type          <span class='op'>=</span> <span class='st'>"l"</span>, 
-            lty           <span class='op'>=</span> <span class='fl'>1</span>, 
-            lwd           <span class='op'>=</span> <span class='fl'>4</span>,
-            xlab          <span class='op'>=</span> <span class='st'>"Ontogeny"</span>,
-            ylab          <span class='op'>=</span> <span class='st'>"Expression Level"</span><span class='op'>)</span>
-</div><div class='img'><img src='PlotGeneSet-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># dev.off()</span>
-
-<span class='co'># In case you would like to work with the expression levels</span>
-<span class='co'># of selected genes you can specify the 'get.subset' argument:</span>
-
-<span class='fu'>PlotGeneSet</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, 
-            gene.set      <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>]</span>, 
-            get.subset    <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Phylostratum      GeneID    Zygote   Quadrant  Globular      Heart   Torpedo
-#&gt; 1            1 at1g01040.2  2173.635  1911.2001  1152.555  1291.4224  1000.253
-#&gt; 2            1 at1g01050.1  1501.014  1817.3086  1665.309  1564.7612  1496.321
-#&gt; 3            1 at1g01070.1  1212.793  1233.0023   939.200   929.6195   864.218
-#&gt; 4            1 at1g01080.2  1016.920   936.3837  1181.338  1329.4734  1392.643
-#&gt; 5            1 at1g01090.1 11424.567 16778.1685 34366.649 39775.6405 56231.569
-#&gt;         Bent    Mature
-#&gt; 1   962.9772 1696.4274
-#&gt; 2  1114.6435 1071.6555
-#&gt; 3   877.2060  894.8189
-#&gt; 4  1287.9746  861.2605
-#&gt; 5 66980.3673 7772.5617</div><div class='input'>
-
-<span class='co'># get a gene subset using only a phylostratihraphic map</span>
-<span class='va'>ExamplePSMap</span> <span class='op'>&lt;-</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span>
-
-<span class='fu'>PlotGeneSet</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>ExamplePSMap</span>, 
-            gene.set      <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>]</span>, 
-            get.subset    <span class='op'>=</span> <span class='cn'>TRUE</span>,
-            use.only.map  <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Phylostratum      GeneID
-#&gt; 1            1 at1g01040.2
-#&gt; 2            1 at1g01050.1
-#&gt; 3            1 at1g01070.1
-#&gt; 4            1 at1g01080.2
-#&gt; 5            1 at1g01090.1</div><div class='input'>            
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PhyloExpressionSetExample</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># the best parameter setting to visualize this plot:</span></span>
+<span class='r-in'><span class='co'># png("test_png.png",700,400)</span></span>
+<span class='r-in'><span class='fu'>PlotGeneSet</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, </span>
+<span class='r-in'>            gene.set      <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>]</span>, </span>
+<span class='r-in'>            type          <span class='op'>=</span> <span class='st'>"l"</span>, </span>
+<span class='r-in'>            lty           <span class='op'>=</span> <span class='fl'>1</span>, </span>
+<span class='r-in'>            lwd           <span class='op'>=</span> <span class='fl'>4</span>,</span>
+<span class='r-in'>            xlab          <span class='op'>=</span> <span class='st'>"Ontogeny"</span>,</span>
+<span class='r-in'>            ylab          <span class='op'>=</span> <span class='st'>"Expression Level"</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='PlotGeneSet-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># dev.off()</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># In case you would like to work with the expression levels</span></span>
+<span class='r-in'><span class='co'># of selected genes you can specify the 'get.subset' argument:</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>PlotGeneSet</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span>, </span>
+<span class='r-in'>            gene.set      <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>]</span>, </span>
+<span class='r-in'>            get.subset    <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Phylostratum      GeneID    Zygote   Quadrant  Globular      Heart   Torpedo</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1            1 at1g01040.2  2173.635  1911.2001  1152.555  1291.4224  1000.253</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2            1 at1g01050.1  1501.014  1817.3086  1665.309  1564.7612  1496.321</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3            1 at1g01070.1  1212.793  1233.0023   939.200   929.6195   864.218</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4            1 at1g01080.2  1016.920   936.3837  1181.338  1329.4734  1392.643</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5            1 at1g01090.1 11424.567 16778.1685 34366.649 39775.6405 56231.569</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Bent    Mature</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1   962.9772 1696.4274</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  1114.6435 1071.6555</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   877.2060  894.8189</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  1287.9746  861.2605</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 66980.3673 7772.5617</span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get a gene subset using only a phylostratihraphic map</span></span>
+<span class='r-in'><span class='va'>ExamplePSMap</span> <span class='op'>&lt;-</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span> , <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>PlotGeneSet</span><span class='op'>(</span>ExpressionSet <span class='op'>=</span> <span class='va'>ExamplePSMap</span>, </span>
+<span class='r-in'>            gene.set      <span class='op'>=</span> <span class='va'>PhyloExpressionSetExample</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>]</span>, </span>
+<span class='r-in'>            get.subset    <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span class='r-in'>            use.only.map  <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Phylostratum      GeneID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1            1 at1g01040.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2            1 at1g01050.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3            1 at1g01070.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4            1 at1g01080.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5            1 at1g01090.1</span>
+<span class='r-in'>            </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -275,7 +281,7 @@ that are stored in the input <code>ExpressionSet</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">

@@ -74,6 +74,9 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
+    <li>
+      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -97,13 +100,13 @@
 
       
 
-      </header><script src="Expression_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="Expression_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Gene Expression Analysis with <code>myTAI</code>
 </h1>
             
-            <h4 class="date">2021-09-07</h4>
+            <h4 class="date">2022-03-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Expression.Rmd"><code>vignettes/Expression.Rmd</code></a></small>
       <div class="hidden name"><code>Expression.Rmd</code></div>
@@ -232,8 +235,8 @@
 <h3 class="hasAnchor">
 <a href="#example-welch-t-test" class="anchor"></a>Example: Welch t-test</h3>
 <p>Performing <code>Welch t-test</code> with <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> can be done by specifying <code>method = "t.test"</code>. Internally <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> performs a two sided <code>Welch t-test</code>. This means that the <code>Welch t-test</code> quantifies only whether or not a gene is significantly differentially expressed, but not the direction of enrichment (over-expressed or under-expressed).</p>
-<p>The <code>PhyloExpressionSetExample</code> we use in the following example stores absolute expression levels. In case your <code>ExpressionSet</code> also stores absolute expression levels (which is likely due to the <code>ExpressionSet</code> standard for Phylotranscriptomics analyses), you can use the <code><a href="../reference/tf.html">tf()</a></code> function implemented in <code>myTAI</code> to transform absolute expression levels to <code>log2</code> expression levels before performing <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> with a <code>Welch t-test</code>, e.g. <code><a href="../reference/tf.html">tf(PhyloExpressionSetExample[1:5,1:8],log2)</a></code>. In general, using <code>log2</code> transformed expression levels as input <code>ExpressionSet</code> of <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> allows us to (at least) assume that samples (replicate expression levels) used to perform the <code>Welch t-test</code> are log-normal distributed and therefore, somewhat approximate normal distributed.</p>
-<p>Please notice however, that RNA-Seq data can include count values of 0. So when transforming absolute counts to <code>log2</code> counts infinity values of <code>log2(0) = -Inf</code> will be produced and therefore, p-value computations will not be possible. To avoid this case you could either remove RNA-Seq count values of 0 from the input dataset using the <code><a href="../reference/Expressed.html">Expressed()</a></code> function (see section <em>Filter for Expressed Genes</em>), e.g. pass <code><a href="../reference/tf.html">tf(Expressed(PhyloExpressionSetExample[1:5,1:8], cut.off = 1),log2)</a></code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> or shift all count values by a constant value, e.g. pass <code><a href="../reference/tf.html">tf(PhyloExpressionSetExample[1:5,1:8], function(x) log2(x + 1))</a></code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code>.</p>
+<p>The <code>PhyloExpressionSetExample</code> we use in the following example stores absolute expression levels. In case your <code>ExpressionSet</code> also stores absolute expression levels (which is likely due to the <code>ExpressionSet</code> standard for Phylotranscriptomics analyses), you can use the <code><a href="../reference/tf.html">tf()</a></code> function implemented in <code>myTAI</code> to transform absolute expression levels to <code>log2</code> expression levels before performing <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> with a <code>Welch t-test</code>, e.g. <code>tf(PhyloExpressionSetExample[1:5,1:8],log2)</code>. In general, using <code>log2</code> transformed expression levels as input <code>ExpressionSet</code> of <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> allows us to (at least) assume that samples (replicate expression levels) used to perform the <code>Welch t-test</code> are log-normal distributed and therefore, somewhat approximate normal distributed.</p>
+<p>Please notice however, that RNA-Seq data can include count values of 0. So when transforming absolute counts to <code>log2</code> counts infinity values of <code>log2(0) = -Inf</code> will be produced and therefore, p-value computations will not be possible. To avoid this case you could either remove RNA-Seq count values of 0 from the input dataset using the <code><a href="../reference/Expressed.html">Expressed()</a></code> function (see section <em>Filter for Expressed Genes</em>), e.g. pass <code>tf(Expressed(PhyloExpressionSetExample[1:5,1:8], cut.off = 1),log2)</code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> or shift all count values by a constant value, e.g. pass <code>tf(PhyloExpressionSetExample[1:5,1:8], function(x) log2(x + 1))</code> as <code>ExpressionSet</code> argument to <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code>.</p>
 <p>Internally, <code><a href="../reference/DiffGenes.html">DiffGenes()</a></code> will also check for 0 values in input data and will automatically shift all expression levels by <code>+1</code> in case 0 values are included.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span>
@@ -611,7 +614,7 @@
 <p><code><a href="../reference/Expressed.html">Expressed()</a></code> allows users to choose from several gene extraction methods (see <code><a href="../reference/Expressed.html">?Expressed</a></code> for details):</p>
 <ul>
 <li><p><code>const</code>: all genes that have at least one stage that undercuts or exceeds the expression <code>cut.off</code> will be excluded from the <code>ExpressionSet</code>. Hence, for a 7 stage <code>ExpressionSet</code> genes passing the expression level <code>cut.off</code> in 6 stages will be retained in the <code>ExpressionSet</code>.</p></li>
-<li><p><code>min-set</code>: genes passing the expression level <code>cut.off</code> in <code><a href="https://rdrr.io/r/base/Round.html">ceiling(n/2)</a></code> stages will be retained in the <code>ExpressionSet</code>, where <code>n</code> is the number of stages in the <code>ExpressionSet</code>.</p></li>
+<li><p><code>min-set</code>: genes passing the expression level <code>cut.off</code> in <code>ceiling(n/2)</code> stages will be retained in the <code>ExpressionSet</code>, where <code>n</code> is the number of stages in the <code>ExpressionSet</code>.</p></li>
 <li><p><code>n-set</code>: genes passing the expression level <code>cut.off</code> in <code>n</code> stages will be retained in the <code>ExpressionSet</code>. Here, the argument <code>n</code> is defining the number of stages for which the threshold criteria should be fulfilled.</p></li>
 </ul>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
@@ -744,7 +747,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">
