@@ -11,6 +11,7 @@
 
 using namespace Rcpp;
 using namespace std;
+using namespace arma;
 
 /* This whole 'permut' function has been adapted and taken from:
 http://gallery.rcpp.org/articles/stl-random-shuffle/
@@ -226,7 +227,6 @@ NumericMatrix cpp_omitMatrix(const NumericMatrix& ExpressionSet, const NumericVe
 //' rownames(spmat) <- PhyloExpressionSetExample$GeneID
 //' ps <- setNames(PhyloExpressionSetExample$Phylostratum, PhyloExpressionSetExample$GeneID)
 //' rcpp_tei_parallel(spmat, ps)
-// @export rcpp_tei_parallel
 //' @author Kristian K Ullrich
 // [[Rcpp::export]]
 Rcpp::List rcpp_tei_parallel(const arma::sp_mat& expression,
@@ -248,3 +248,184 @@ Rcpp::List rcpp_tei_parallel(const arma::sp_mat& expression,
   return Rcpp::List::create(Rcpp::Named("sumx") = sumx,
                             Rcpp::Named("teisum") = teisum, Rcpp::Named("tei") = tei);
 }
+
+//' @import Rcpp
+//' @import Matrix
+//' @title rcpp_boottei_parallel
+//' @name rcpp_boottei_parallel
+//' @description computes the phylogenetically based
+//' transcriptome evolutionary index (TEI) shuffling the strata for permutation
+//' statistic
+//' @return sparseMatrix
+//' @param expression ExpressionSet as sparseMatrix
+//' @param ps named Phylostratum
+//' @param permutations number of permutations
+//' @param ncores number of cores
+//' @examples
+//' ## load example PhyloExpressionSetExample
+//'
+//' data("PhyloExpressionSetExample", package="myTAI")
+//'
+//' ## convert into sparseMatrix - rownames GeneID
+//'
+//' spmat <- as(data.matrix(PhyloExpressionSetExample[,-c(1,2)]),
+//'     "sparseMatrix")
+//' rownames(spmat) <- PhyloExpressionSetExample$GeneID
+//'
+//' ## create named Phylostratum vector
+//'
+//' ps <- setNames(PhyloExpressionSetExample$Phylostratum,
+//'     PhyloExpressionSetExample$GeneID)
+//'
+//' ## get permutations
+//' rcpp_boottei_parallel(spmat, ps, 100, 1)
+//' @author Kristian K Ullrich
+// [[Rcpp::export]]
+Rcpp::NumericMatrix rcpp_boottei_parallel(const arma::sp_mat& expression,
+                                          Rcpp::NumericVector ps,
+                                          const int& permutations,
+                                          int ncores = 1){
+  std::vector< std::string > psnames =  ps.attr("names");
+  int n_col = expression.n_cols;
+  int n_row = expression.n_rows;
+  Rcpp::NumericMatrix fMatrix(n_row, n_col);
+  Rcpp::NumericVector sampledVector(ps.length());
+  Rcpp::NumericMatrix sampledMatrix(ps.length(), permutations);
+  for (size_t l = 0; l < permutations; l++) {
+    sampledVector = permut(ps);
+    for(size_t m = 0; m < ps.length(); m++) {
+      sampledMatrix(m, l) = sampledVector[m];
+    }
+  }
+  Rcpp::NumericVector sumx(n_col);
+  Rcpp::NumericMatrix bootM(permutations,n_col);
+  RcppThread::ProgressBar bar(n_col, 1);
+  RcppThread::parallelFor(0, n_col, [&] (int j) {
+    for (size_t i = 0; i < n_row; i++) {
+      sumx[j] += expression(i, j);
+    }
+    for (size_t k = 0; k < n_row; k++) {
+      fMatrix(k, j) = expression(k, j) / sumx[j];
+    }
+    for (size_t n = 0; n < permutations; n++) {
+      double teisum = 0;
+      for (size_t o = 0; o < n_row; o++) {
+        teisum += (sampledMatrix(o, n) * fMatrix(o, j));
+      }
+      bootM(n, j) = teisum;
+    }
+  }, ncores);
+  return bootM;
+}
+
+//' @import Rcpp
+//' @import Matrix
+//' @title rcpp_pMatrix_parallel
+//' @name rcpp_pMatrix_parallel
+//' @description computes the partial
+//' transcriptome evolutionary index (TEI) values for each single gene
+//' @return sparseMatrix
+//' @param expression ExpressionSet as sparseMatrix
+//' @param ps named Phylostratum
+//' @param ncores number of cores
+//' @examples
+//' ## load example PhyloExpressionSetExample
+//'
+//' data("PhyloExpressionSetExample", package="myTAI")
+//'
+//' ## convert into sparseMatrix - rownames GeneID
+//'
+//' spmat <- as(data.matrix(PhyloExpressionSetExample[,-c(1,2)]),
+//'     "sparseMatrix")
+//' rownames(spmat) <- PhyloExpressionSetExample$GeneID
+//'
+//' ## create named Phylostratum vector
+//'
+//' ps <- setNames(PhyloExpressionSetExample$Phylostratum,
+//'     PhyloExpressionSetExample$GeneID)
+//'
+//' ## get pMatrix
+//' rcpp_pMatrix_parallel(spmat, ps)
+//' @author Kristian K Ullrich
+// [[Rcpp::export]]
+Rcpp::NumericMatrix rcpp_pMatrix_parallel(const arma::sp_mat& expression,
+                                          Rcpp::NumericVector ps,
+                                          int ncores = 1){
+  std::vector< std::string > psnames =  ps.attr("names");
+  int n_col = expression.n_cols;
+  int n_row = expression.n_rows;
+  Rcpp::NumericMatrix pMatrix(n_row, n_col);
+  Rcpp::NumericVector sumx(n_col);
+  RcppThread::ProgressBar bar(n_col, 1);
+  RcppThread::parallelFor(0, n_col, [&] (int j) {
+    for (size_t i = 0; i < n_row; i++) {
+      sumx[j] += expression(i, j);
+    }
+    for (size_t k = 0; k < n_row; k++) {
+      pMatrix(k, j) = expression(k, j) * ps[k] / sumx[j];
+    }
+  }, ncores);
+  return pMatrix;
+}
+
+
+//' @import Rcpp
+//' @import Matrix
+//' @title rcpp_pStrata_parallel
+//' @name rcpp_pStrata_parallel
+//' @description computes the partial
+//' transcriptome evolutionary index (TEI) values combined into strata
+//' @return sparseMatrix
+//' @param expression ExpressionSet as sparseMatrix
+//' @param ps named Phylostratum
+//' @param psgroup ordered unique Phylostratum
+//' @param ncores number of cores
+//' @examples
+//' ## load example PhyloExpressionSetExample
+//'
+//' data("PhyloExpressionSetExample", package="myTAI")
+//'
+//' ## convert into sparseMatrix - rownames GeneID
+//'
+//' spmat <- as(data.matrix(PhyloExpressionSetExample[,-c(1,2)]),
+//'     "sparseMatrix")
+//' rownames(spmat) <- PhyloExpressionSetExample$GeneID
+//'
+//' ## create named Phylostratum vector
+//'
+//' ps <- setNames(PhyloExpressionSetExample$Phylostratum,
+//'     PhyloExpressionSetExample$GeneID)
+//' psgroup <- sort(unique(ps))
+//'
+//' ## get pStrata
+//' rcpp_pStrata_parallel(spmat, ps, psgroup)
+//' @author Kristian K Ullrich
+// [[Rcpp::export]]
+Rcpp::NumericMatrix rcpp_pStrata_parallel(const arma::sp_mat& expression,
+                                          Rcpp::NumericVector ps,
+                                          Rcpp::NumericVector psgroup,
+                                          int ncores = 1){
+  std::vector< std::string > psnames =  ps.attr("names");
+  int n_col = expression.n_cols;
+  int n_row = expression.n_rows;
+  int n_psgroup = psgroup.length();
+  Rcpp::NumericMatrix sMatrix(n_psgroup, n_col);
+  Rcpp::NumericVector sumx(n_col);
+  std::unordered_map<double, double> index_psgroup;
+  for (size_t p = 0; p < n_psgroup; p++) {
+    index_psgroup[psgroup[p]] = p;
+  }
+  RcppThread::ProgressBar bar(n_col, 1);
+  RcppThread::parallelFor(0, n_col, [&] (int j) {
+    for (size_t i = 0; i < n_row; i++) {
+      sumx[j] += expression(i, j);
+    }
+    for (size_t k = 0; k < n_row; k++) {
+      sMatrix(index_psgroup[ps[k]], j) += expression(k, j) * ps[k] / sumx[j];
+    }
+  }, ncores);
+  return sMatrix;
+}
+
+
+

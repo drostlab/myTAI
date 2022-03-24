@@ -107,3 +107,44 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rcpp_boottei_parallel
+Rcpp::NumericMatrix rcpp_boottei_parallel(const arma::sp_mat& expression, Rcpp::NumericVector ps, const int& permutations, int ncores);
+RcppExport SEXP _myTAI_rcpp_boottei_parallel(SEXP expressionSEXP, SEXP psSEXP, SEXP permutationsSEXP, SEXP ncoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type expression(expressionSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type ps(psSEXP);
+    Rcpp::traits::input_parameter< const int& >::type permutations(permutationsSEXP);
+    Rcpp::traits::input_parameter< int >::type ncores(ncoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_boottei_parallel(expression, ps, permutations, ncores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_pMatrix_parallel
+Rcpp::NumericMatrix rcpp_pMatrix_parallel(const arma::sp_mat& expression, Rcpp::NumericVector ps, int ncores);
+RcppExport SEXP _myTAI_rcpp_pMatrix_parallel(SEXP expressionSEXP, SEXP psSEXP, SEXP ncoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type expression(expressionSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type ps(psSEXP);
+    Rcpp::traits::input_parameter< int >::type ncores(ncoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_pMatrix_parallel(expression, ps, ncores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_pStrata_parallel
+Rcpp::NumericMatrix rcpp_pStrata_parallel(const arma::sp_mat& expression, Rcpp::NumericVector ps, Rcpp::NumericVector psgroup, int ncores);
+RcppExport SEXP _myTAI_rcpp_pStrata_parallel(SEXP expressionSEXP, SEXP psSEXP, SEXP psgroupSEXP, SEXP ncoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type expression(expressionSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type ps(psSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type psgroup(psgroupSEXP);
+    Rcpp::traits::input_parameter< int >::type ncores(ncoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_pStrata_parallel(expression, ps, psgroup, ncores));
+    return rcpp_result_gen;
+END_RCPP
+}
