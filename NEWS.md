@@ -1,8 +1,11 @@
 myTAI 1.0.0.9000
 ===========
 ## New Functions
-- New function `TEI()` computes the Transcriptome Evolutionary Index 
-
+- New function `TEI()`: Compute the Transcriptome Evolutionary Index 
+- New function `pMatrixTEI`: Compute Partial Transcriptome Evolutionary Index (TEI) Values 
+- New function `pStrataTEI`: Compute Partial Transcriptome Evolutionary Index (TEI) Strata Values
+- New function `bootTEI`: Compute a Permutation Matrix of Transcriptome Evolutionary Index (TEI)
+- new internal `rcpp` functions to support parallel C++ computations for `TEI()`, `pMatrixTEI()`, `pStrataTEI()`, `bootTEI()`
 
 ## New Features
 - `CollapseReplicates()` now returns `tibble` objects
