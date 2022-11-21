@@ -5,7 +5,7 @@
 #' The resulting transformed PhloExpressionSet or DivergenceExpressionSet 
 #' object can then be used for subsequent analyses based on transformed expression levels.
 #' @param ExpressionSet a standard PhloExpressionSet or DivergenceExpressionSet object.
-#' @param FUN any valid function that transformes gene expression levels.
+#' @param FUN any valid function that transforms gene expression levels.
 #' @param pseudocount any valid number to the expression matrix prior to transformation.
 #' @details Motivated by the dicussion raised by Piasecka et al., 2013, the influence of
 #' gene expression transformation on the global phylotranscriptomics pattern does not seem negligible.
