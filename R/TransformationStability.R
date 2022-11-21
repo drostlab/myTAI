@@ -1,59 +1,33 @@
-#' @title Perform the Reductive Hourglass Test Under Different Transformations
-#' @description The \emph{Reductive Hourglass Test} aims to statistically evaluate the
-#' existence of a phylotranscriptomic hourglass pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
+#' @title Perform Permutation Tests Under Different Transformations
+#' @description \emph{Transformation Stability} aims to statistically evaluate the
+#' stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
+#' \code{\link{ReverseHourglassTest}}, or \code{\link{EarlyConservationTest}}
+#' (all based on \code{\link{TAI}} or \code{\link{TDI}} computations) against different
+#' data transformations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
-#' does not follow an hourglass like shape. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
-#' indeed follow an hourglass (high-low-high) shape.
+#' does not support the chosen test. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
+#' indeed support the chosen test.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param modules a list storing three elements: early, mid, and late. Each element expects a numeric
 #' vector specifying the developmental stages or experiments that correspond to each module. 
 #' For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) devides a dataset 
 #' storing seven developmental stages into 3 modules.
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \code{ReductiveHourglassTest}.
-#' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed to quantify the goodness of fit.
-#' @param plotHistogram a boolean value specifying whether a \emph{Lillifor's Kolmogorov-Smirnov-Test} 
-#' shall be performed to test the goodness of fit of the approximated distribution, as well as additional plots quantifying the significance
-#' of the observed phylotranscriptomic pattern.
-#' @param runs specify the number of runs to be performed for goodness of fit computations, in case \code{plotHistogram} = \code{TRUE}.
-#' In most cases \code{runs} = 100 is a reasonable choice. Default is \code{runs} = 10 (because it takes less computation time for demonstration purposes).
-#' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
-#' @param gof.warning a logical value indicating whether non significant goodness of fit results should be printed as warning. Default is \code{gof.warning = FALSE}.
-#' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.
+#' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
+#' Possible values can be: 
+#' \itemize{
+#' \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
+#' \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
+#' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
+#' \item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
+#' }#' @param transform a character vector of any valid function that transforms gene expression levels.
+#' @param pseudocount any valid number to the expression matrix prior to transformation.
 #' @details 
+#' An assessment for the stability of a data transforms on the results of the permutation test of choice.
 #' The reductive hourglass test is a permutation test based on the following test statistic. 
+#' For details, please consult \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
+#' \code{\link{ReverseHourglassTest}} or \code{\link{EarlyConservationTest}}
 #'
-#' (1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
-#'
-#' (2) The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the three modules T_early, T_mid, and T_late are computed. 
-#'
-#' (3) The two differences D1 = T_early - T_mid and D2 = T_late - T_mid are calculated.
-#'
-#' (4) The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
-#'
-#'
-#' In order to determine the statistical significance of an observed minimum difference D_min 
-#' the following permutation test was performed. Based on the \code{\link{bootMatrix}} D_min 
-#' is calculated from each of the permuted \code{\link{TAI}} or \code{\link{TDI}} profiles, 
-#' approximated by a Gaussian distribution with method of moments estimated parameters returned by \code{\link[fitdistrplus]{fitdist}}, 
-#' and the corresponding p-value is computed by \code{\link{pnorm}} given the estimated parameters of the Gaussian distribution. 
-#' The \emph{goodness of fit} for the random vector \emph{D_min} is statistically quantified by an Lilliefors (Kolmogorov-Smirnov) test 
-#' for normality.
-#'
-#'
-#' In case the parameter \emph{plotHistogram = TRUE}, a multi-plot is generated showing:
-#'        
-#' (1) A Cullen and Frey skewness-kurtosis plot generated by \code{\link[fitdistrplus]{descdist}}. 
-#' This plot illustrates which distributions seem plausible to fit the resulting permutation vector D_min. 
-#' In the case of the \emph{Reductive Hourglass Test} a normal distribution seemed plausible.
-#'
-#' (2) A histogram of D_min combined with the density plot is plotted. D_min is then fitted by a normal distribution. 
-#' The corresponding parameters are estimated by \emph{moment matching estimation} using the \code{\link[fitdistrplus]{fitdist}} function.
-#'
-#' (3) A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
-#'
-#' (4) A barplot showing the number of cases in which the underlying goodness of fit (returned by Lilliefors (Kolmogorov-Smirnov) test 
-#' for normality) has shown to be significant (\code{TRUE}) or not significant (\code{FALSE}). 
-#' This allows to quantify the permutation bias and their implications on the goodness of fit.
 #' @return a vector object containing the vector elements:
 #' 
 #' \code{p.value} : the p-value quantifying the statistical significance (depending on the chosen test) of the given phylotranscriptomics pattern under the given data transformation(s).
@@ -62,9 +36,10 @@
 #' Lotharukpong JS et al. (2022) bioRxiv
 #'
 #'   
-#' @author Hajk-Georg Drost
+#' @author Jaruwatana Sodai Lotharukpong
 #' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
-#' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{PlotSignature}}
+#' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, 
+#' \code{\link{ReductiveHourglassTest}}, \code{\link{PlotSignature}}, 
 #' @examples
 #' 
 #' data(PhyloExpressionSetExample)
@@ -74,7 +49,7 @@
 #' # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
 #' # module 3 = late
 #' TransformationStability(ExpressionSet = PhyloExpressionSetExample,
-#'                      test = "ReverseHourglassTest",
+#'                      TestStatistic = "ReverseHourglassTest",
 #'                      transforms = c("log1p", "sqrt", "none"),
 #'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #'
@@ -84,7 +59,7 @@
 
 # returns p value only
 TransformationStability <- function(ExpressionSet,
-                                    test               = "FlatLineTest",
+                                    TestStatistic      = "FlatLineTest",
                                     transforms         = c("log1p", "sqrt", "none"),
                                     modules            = NULL,
                                     permutations       = 1000,
@@ -93,30 +68,29 @@ TransformationStability <- function(ExpressionSet,
   
   myTAI::is.ExpressionSet(ExpressionSet)
   
-  if(!test %in% c("FlatLineTest", "ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest"))
+  if(!TestStatistic %in% c("FlatLineTest", "ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest"))
     stop("Please select the availagetble test: 'FlatLineTest', 'ReductiveHourglassTest', 'ReverseHourglassTest' or 'EarlyConservationTest' using the argument test = 'FlatLineTest'", call. = FALSE)
 
-  if(test %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest") & is.null(modules))
+  if(TestStatistic %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest") & is.null(modules))
     stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
+  
+  # if (!(is.element(transforms, c("log1p", "sqrt", "none", "log2", "log", "log10")))){
+  #   stop("Please select the available transformations: 'log1p', 'sqrt', 'log2', 'log', 'log10' or 'none' using the argument 'transforms = c('log1p', 'sqrt', 'none')'.", call. = FALSE)
+  # }
 
-  if(base::grepl(paste(transforms, collapse = ""), paste(c("log1p", "sqrt", "none", "rlog", "vst", "log2"), collapse = "")) == FALSE)
-    stop("Please select the available transformations: 'log1p', 'sqrt', 'rlog', 'vst', 'log2' or 'none' using the argument 'transforms = c('log1p', 'sqrt', 'none')'.", call. = FALSE)
-  
-  # if(transforms %in% c("log1p", "sqrt", "none", "rlog", "vst", "log2(x+1)"))
-  #   stop("Please select the available transformations: 'log1p', 'sqrt', 'rlog', 'vst', 'log2' or 'none' using the argument 'transforms = c('log1p', 'sqrt', 'none')'.", call. = FALSE)
-  
-  
   # create placeholder vector
   vec_res <- NULL
   
   # output transforms in a vector
   for (i in transforms) {
-    if(!i == "none")
-      tfExpressionSet <- tf(ExpressionSet, FUN = i, pseudocount = pseudocount)
-    else if (i == "none")
+    if(i == "none")
       tfExpressionSet <- ExpressionSet
-    test_function <- base::match.fun(test)
-    if(test == "FlatLineTest")
+    else if(i %in% c('log2', 'log', 'log10'))
+      tfExpressionSet <- tf(ExpressionSet, FUN = i, pseudocount = pseudocount)
+    else
+      tfExpressionSet <- tf(ExpressionSet, FUN = i)
+    test_function <- base::match.fun(TestStatistic)
+    if(TestStatistic == "FlatLineTest")
       vec_res[i] <- test_function(tfExpressionSet,
                                   permutations       = permutations)[["p.value"]]
     else
