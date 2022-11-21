@@ -6,6 +6,7 @@
 #' object can then be used for subsequent analyses based on transformed expression levels.
 #' @param ExpressionSet a standard PhloExpressionSet or DivergenceExpressionSet object.
 #' @param FUN any valid function that transformes gene expression levels.
+#' @param pseudocount any valid number to the expression matrix prior to transformation.
 #' @details Motivated by the dicussion raised by Piasecka et al., 2013, the influence of
 #' gene expression transformation on the global phylotranscriptomics pattern does not seem negligible.
 #' Hence, different transformations can result in qualitatively different \code{\link{TAI}} or \code{\link{TDI}}
@@ -84,6 +85,7 @@
 #' head(PES.absolute)
 #' 
 #' 
+#' 
 #' # plotting the TAI using log2 transformed expression levels
 #' # and performing the Flat Line Test to obtain the p-value
 #' PlotPattern(ExpressionSet = tf(PhyloExpressionSetExample, log2), 
@@ -91,16 +93,29 @@
 #'             lwd           = 5, 
 #'             TestStatistic = "FlatLineTest")
 #' 
+#' 
+#' # in case the expression matrix contains 0s, a pseudocount can be added prior
+#' # to certain transformations, e.g. log2(x+1) where 1 is the pseudocount.
+#' 
+#' PhyloExpressionSetExample[4,3] = 0
+#' PES.log2 <- tf(PhyloExpressionSetExample, log2, pseudocount = 0)
+#' # this should return -Inf at PES.log2[4,3]
+#' 
+#' PES.log2 <- tf(PhyloExpressionSetExample, log2, pseudocount = 1)
+#' # log2 transformed expression levels can now be used in downstream analyses.
+#' 
 #' @export
 
-tf <- function(ExpressionSet, FUN){
-        
+tf <- function(ExpressionSet, FUN, pseudocount = 0){
+  if (!is.numeric(pseudocount) | !length(pseudocount) == 1) {
+    stop("pseudocount must be a single numeric value")
+  }
         ExpressionSet <- as.data.frame(ExpressionSet)
         is.ExpressionSet(ExpressionSet)
         
         ncols <- dim(ExpressionSet)[2]
         f <- match.fun(FUN)
-        res <- data.frame(ExpressionSet[ , 1:2] , apply(ExpressionSet[ , 3:ncols] , 2 , f))
+        res <- data.frame(ExpressionSet[ , 1:2] , apply(ExpressionSet[ , 3:ncols] + pseudocount, 2 , f))
         names(res) <- names(ExpressionSet)
         return(res)
 }
