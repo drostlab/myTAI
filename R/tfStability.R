@@ -1,5 +1,5 @@
 #' @title Perform Permutation Tests Under Different Transformations
-#' @description \emph{Transformation Stability} aims to statistically evaluate the
+#' @description \emph{tfStability} aims to statistically evaluate the
 #' stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
 #' \code{\link{ReverseHourglassTest}}, or \code{\link{EarlyConservationTest}}
 #' (all based on \code{\link{TAI}} or \code{\link{TDI}} computations) against different
@@ -48,7 +48,7 @@
 #' # here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,
 #' # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
 #' # module 3 = late
-#' TransformationStability(ExpressionSet = PhyloExpressionSetExample,
+#' tfStability(ExpressionSet = PhyloExpressionSetExample,
 #'                      TestStatistic = "ReverseHourglassTest",
 #'                      transforms = c("log1p", "sqrt", "none"),
 #'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
@@ -58,26 +58,26 @@
 #' @export
 
 # returns p value only
-TransformationStability <- function(ExpressionSet,
-                                    TestStatistic      = "FlatLineTest",
-                                    transforms         = c("log1p", "sqrt", "none"),
-                                    modules            = NULL,
-                                    permutations       = 1000,
-                                    pseudocount        = 0)
+tfStability <- function(ExpressionSet,
+                        TestStatistic      = "FlatLineTest",
+                        transforms         = c("log1p", "sqrt", "none"),
+                        modules            = NULL,
+                        permutations       = 1000,
+                        pseudocount        = 0)
 {
   
   myTAI::is.ExpressionSet(ExpressionSet)
   
   if(!TestStatistic %in% c("FlatLineTest", "ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest"))
     stop("Please select the availagetble test: 'FlatLineTest', 'ReductiveHourglassTest', 'ReverseHourglassTest' or 'EarlyConservationTest' using the argument test = 'FlatLineTest'", call. = FALSE)
-
+  
   if(TestStatistic %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest") & is.null(modules))
     stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
   
   # if (!(is.element(transforms, c("log1p", "sqrt", "none", "log2", "log", "log10")))){
   #   stop("Please select the available transformations: 'log1p', 'sqrt', 'log2', 'log', 'log10' or 'none' using the argument 'transforms = c('log1p', 'sqrt', 'none')'.", call. = FALSE)
   # }
-
+  
   # create placeholder vector
   vec_res <- NULL
   
