@@ -4,12 +4,14 @@
 \alias{tf}
 \title{Transform Gene Expression Levels}
 \usage{
-tf(ExpressionSet, FUN)
+tf(ExpressionSet, FUN, pseudocount = 0)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhloExpressionSet or DivergenceExpressionSet object.}
 
-\item{FUN}{any valid function that transformes gene expression levels.}
+\item{FUN}{any valid function that transforms gene expression levels.}
+
+\item{pseudocount}{any valid number to the expression matrix prior to transformation.}
 }
 \value{
 a standard PhloExpressionSet or DivergenceExpressionSet object storing transformed gene expression levels.
@@ -67,12 +69,24 @@ head(PhyloExpressionSetExample)
 head(PES.absolute)
 
 
+
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
 PlotPattern(ExpressionSet = tf(PhyloExpressionSetExample, log2), 
             type          = "l", 
             lwd           = 5, 
             TestStatistic = "FlatLineTest")
+
+
+# in case the expression matrix contains 0s, a pseudocount can be added prior
+# to certain transformations, e.g. log2(x+1) where 1 is the pseudocount.
+
+PhyloExpressionSetExample[4,3] = 0
+PES.log2 <- tf(PhyloExpressionSetExample, log2, pseudocount = 0)
+# this should return -Inf at PES.log2[4,3]
+
+PES.log2 <- tf(PhyloExpressionSetExample, log2, pseudocount = 1)
+# log2 transformed expression levels can now be used in downstream analyses.
 
 }
 \references{

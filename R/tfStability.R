@@ -54,7 +54,6 @@
 #'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #'
 #'
-#' @import foreachs
 #' @export
 
 # returns p value only
