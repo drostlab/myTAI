@@ -38,6 +38,7 @@ The following quality checks can be performed:
 }
 }
 \examples{
+
 data(PhyloExpressionSetExample)
 
 # visualize log(var(x)) between replicates for each gene and developmental stage 

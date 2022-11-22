@@ -16,14 +16,7 @@ tfStability(
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{TestStatistic}{a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
-Possible values can be: 
-\itemize{
-\item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
-\item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
-\item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
-\item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
-}#' @param transform a character vector of any valid function that transforms gene expression levels.}
+\item{transforms}{a character vector of any valid function that transforms gene expression levels.}
 
 \item{modules}{a list storing three elements: early, mid, and late. Each element expects a numeric
 vector specifying the developmental stages or experiments that correspond to each module. 

@@ -20,7 +20,7 @@
 #' \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
 #' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
 #' \item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
-#' }#' @param transform a character vector of any valid function that transforms gene expression levels.
+#' @param transforms a character vector of any valid function that transforms gene expression levels.
 #' @param pseudocount any valid number to the expression matrix prior to transformation.
 #' @details 
 #' An assessment for the stability of a data transforms on the results of the permutation test of choice.
