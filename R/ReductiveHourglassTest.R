@@ -199,7 +199,7 @@ ReductiveHourglassTest <- function(ExpressionSet,
                 fitdistrplus::descdist(score_vector, boot = permutations)
                 
                 graphics::curve( expr = normDensity,
-                                 xlim = c(min(score_vector),max(score_vector,real_score)),
+                                 xlim = c(min(score_vector,real_score),max(score_vector,real_score)),
                                  col  = "steelblue",
                                  lwd  = 5,
                                  xlab = "Scores",
