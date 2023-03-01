@@ -171,7 +171,7 @@ EarlyConservationTest <- function(ExpressionSet,
                 }
                 
                 graphics::curve( expr = normDensity,
-                       xlim = c(min(score_vector),max(score_vector,real_ecv)),
+                       xlim = c(min(score_vector,real_ecv),max(score_vector,real_ecv)),
                        col  = "steelblue",
                        lwd  = 5,
                        xlab = "Scores",
