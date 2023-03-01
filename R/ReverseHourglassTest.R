@@ -232,7 +232,7 @@ ReverseHourglassTest <- function(ExpressionSet,
                 graphics::curve(
                         expr = normDensity,
                         xlim = c(
-                                min(score_vector),
+                                min(score_vector, real_score),
                                 max(score_vector, real_score)
                         ),
                         col  = "steelblue",
