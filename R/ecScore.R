@@ -10,7 +10,7 @@
 #'
 #' - The two differences D1 = T_mid - T_early and D2 = T_late - T_early are calculated.
 #'
-#' - The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+#' - The minimum D_min of D1 and D2 is computed as final test statistic of the reductive early conservation test.
 #'
 #' This function \emph{ecScore} computes the \emph{D_min} value for a given \code{\link{TAI}} or \code{\link{TDI}}
 #' stored in the \code{age_vals} argument.
