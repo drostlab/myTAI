@@ -21,7 +21,7 @@ EarlyDivergenceTest(
 
 \item{modules}{a list storing three elements: early, mid, and late. Each element expects a numeric
 vector specifying the developmental stages or experiments that correspond to each module. 
-For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) devides a dataset 
+For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) divides a dataset 
 storing seven developmental stages into 3 modules.}
 
 \item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{ReductiveHourglassTest}.}

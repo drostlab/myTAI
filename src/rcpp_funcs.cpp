@@ -228,6 +228,7 @@ NumericMatrix cpp_omitMatrix(const NumericMatrix& ExpressionSet, const NumericVe
 //' ps <- setNames(PhyloExpressionSetExample$Phylostratum, PhyloExpressionSetExample$GeneID)
 //' rcpp_tei_parallel(spmat, ps)
 //' @author Kristian K Ullrich
+//' @export
 // [[Rcpp::export]]
 Rcpp::List rcpp_tei_parallel(const arma::sp_mat& expression,
                              Rcpp::NumericVector ps,
@@ -280,6 +281,7 @@ Rcpp::List rcpp_tei_parallel(const arma::sp_mat& expression,
 //' ## get permutations
 //' rcpp_boottei_parallel(spmat, ps, 100, 1)
 //' @author Kristian K Ullrich
+//' @export
 // [[Rcpp::export]]
 Rcpp::NumericMatrix rcpp_boottei_parallel(const arma::sp_mat& expression,
                                           Rcpp::NumericVector ps,
@@ -347,6 +349,7 @@ Rcpp::NumericMatrix rcpp_boottei_parallel(const arma::sp_mat& expression,
 //' ## get pMatrix
 //' rcpp_pMatrix_parallel(spmat, ps)
 //' @author Kristian K Ullrich
+//' @export
 // [[Rcpp::export]]
 Rcpp::NumericMatrix rcpp_pMatrix_parallel(const arma::sp_mat& expression,
                                           Rcpp::NumericVector ps,
@@ -400,6 +403,7 @@ Rcpp::NumericMatrix rcpp_pMatrix_parallel(const arma::sp_mat& expression,
 //' ## get pStrata
 //' rcpp_pStrata_parallel(spmat, ps, psgroup)
 //' @author Kristian K Ullrich
+//' @export
 // [[Rcpp::export]]
 Rcpp::NumericMatrix rcpp_pStrata_parallel(const arma::sp_mat& expression,
                                           Rcpp::NumericVector ps,

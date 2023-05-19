@@ -113,7 +113,7 @@ pStrataTEI <- function(ExpressionSet,
                                        common_ids, , drop = FALSE]
       ExpressionSet <-
         ExpressionSet[order(rownames(ExpressionSet)), ]
-      ps <- as(
+      ps <- methods::as(
         rcpp_pStrata_parallel(
           ExpressionSet,
           Phylostratum,

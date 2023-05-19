@@ -7,7 +7,7 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param modules a list storing three elements: early, mid, and late. Each element expects a numeric
 #' vector specifying the developmental stages or experiments that correspond to each module. 
-#' For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) devides a dataset 
+#' For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) divides a dataset 
 #' storing seven developmental stages into 3 modules.
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \code{ReductiveHourglassTest}.
 #' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed to quantify the goodness of fit.
