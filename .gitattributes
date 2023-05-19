@@ -1,6 +1,1 @@
-vignettes/** linguist-documentation
-docs/** linguist-documentation
-vignettes/** linguist-vendored
-docs/** linguist-vendored
 *.html linguist-documentation
-*.HTML linguist-documentation
