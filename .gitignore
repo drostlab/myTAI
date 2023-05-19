@@ -8,4 +8,5 @@ src/*.dll
 .Rdata
 .httr-oauth
 .DS_Store
-.html
+vignettes/*.html
+docs/*.html
