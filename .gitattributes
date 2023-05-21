@@ -1,2 +1,2 @@
-vignettes/ linguist-documentation
-tests/ linguist-documentation
+vignettes/** linguist-documentation
+tests/** linguist-documentation
