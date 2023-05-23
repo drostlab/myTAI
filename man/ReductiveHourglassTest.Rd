@@ -150,7 +150,8 @@ http://cran.r-project.org/doc/contrib/Ricci-distributions-en.pdf
 }
 \seealso{
 \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
-\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{PlotSignature}}
+\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{PlotSignature}},
+\code{\link{LateConservationTest}}
 }
 \author{
 Hajk-Georg Drost

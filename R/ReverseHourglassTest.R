@@ -173,8 +173,10 @@ ReverseHourglassTest <- function(ExpressionSet,
                 mid           = modules[[2]],
                 late          = modules[[3]],
                 method        = "min",
-                scoringMethod = "mean-mean"
+                scoringMethod = "mean-mean",
+                profile.warn=T
         )
+        options(warn=1)
         
         ### compute the bootstrap matrix
         if (is.null(custom.perm.matrix)) {

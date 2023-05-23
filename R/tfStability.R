@@ -1,7 +1,8 @@
 #' @title Perform Permutation Tests Under Different Transformations
 #' @description \emph{tfStability} aims to statistically evaluate the
 #' stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
-#' \code{\link{ReverseHourglassTest}}, or \code{\link{EarlyConservationTest}}
+#' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, or 
+#' \code{\link{LateConservationTest}} 
 #' (all based on \code{\link{TAI}} or \code{\link{TDI}} computations) against different
 #' data transformations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
@@ -18,8 +19,9 @@
 #' \itemize{
 #' \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
 #' \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
-#' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
 #' \item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
+#' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a early conservation pattern (low-high-high pattern)
+#' \item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 #' }
 #' @param transforms a character vector of any valid function that transforms gene expression levels.
 #' @param pseudocount any valid number to the expression matrix prior to transformation.
@@ -34,13 +36,13 @@
 #' \code{p.value} : the p-value quantifying the statistical significance (depending on the chosen test) of the given phylotranscriptomics pattern under the given data transformation(s).
 #' @references 
 #' 
-#' Lotharukpong JS et al. (2022) bioRxiv
+#' Lotharukpong JS et al. (2023) bioRxiv
 #'
 #'   
 #' @author Jaruwatana Sodai Lotharukpong
 #' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
 #' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, 
-#' \code{\link{ReductiveHourglassTest}}, \code{\link{PlotSignature}}, 
+#' \code{\link{ReductiveHourglassTest}}, \code{\link{PlotSignature}}, \code{\link{LateConservationTest}}
 #' @examples
 #' 
 #' data(PhyloExpressionSetExample)
@@ -50,7 +52,7 @@
 #' # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
 #' # module 3 = late
 #' tfStability(ExpressionSet = PhyloExpressionSetExample,
-#'                      TestStatistic = "ReverseHourglassTest",
+#'                      TestStatistic = "ReductiveHourglassTest",
 #'                      transforms = c("log1p", "sqrt", "none"),
 #'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #'
@@ -68,8 +70,8 @@ tfStability <- function(ExpressionSet,
   
   myTAI::is.ExpressionSet(ExpressionSet)
   
-  if(!TestStatistic %in% c("FlatLineTest", "ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest"))
-    stop("Please select the availagetble test: 'FlatLineTest', 'ReductiveHourglassTest', 'ReverseHourglassTest' or 'EarlyConservationTest' using the argument test = 'FlatLineTest'", call. = FALSE)
+  if(!TestStatistic %in% c("FlatLineTest", "ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest", "LateConservationTest"))
+    stop("Please select the availagetble test: 'FlatLineTest', 'ReductiveHourglassTest', 'ReverseHourglassTest', 'EarlyConservationTest' or 'LateConservationTest' using the argument test = 'FlatLineTest'", call. = FALSE)
   
   if(TestStatistic %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest") & is.null(modules))
     stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)

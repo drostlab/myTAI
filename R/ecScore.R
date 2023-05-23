@@ -19,6 +19,7 @@
 #' @param early a numeric vector storing the numeric stage values that correspond to the early phase of development.
 #' @param mid a numeric vector storing the numeric stage values that correspond to the middle phase of development.
 #' @param late a numeric vector storing the numeric stage values that correspond to the late phase of development.
+#' @param profile.warn a logical value indicating whether a warning is printed when a low-mid-high pattern isn't followed.
 #' @return a numeric value representing the early conservation score.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{EarlyConservationTest}}, \code{\link{TAI}}, \code{\link{TDI}}
@@ -48,10 +49,12 @@
 #'  # compute ecScore() vector from bootMatrix()
 #'  apply(bootMatrix(PhyloExpressionSetExample,10),1,ecScore,early = 1:2,mid = 3:5,late = 6:7)
 #'  
+#'  # get warning if the expected pattern isn't followed
+#'  ec_score <- ecScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,profile.warn=T)
 #'  
 #' @export
 
-ecScore <- function(age_vals,early,mid,late){
+ecScore <- function(age_vals,early,mid,late,profile.warn=F){
         
         D1 <- vector(mode = "numeric", length = 1)
         D2 <- vector(mode = "numeric", length = 1)
@@ -59,6 +62,15 @@ ecScore <- function(age_vals,early,mid,late){
         
         D1 <- mean(age_vals[mid]) - mean(age_vals[early])
         D2 <- mean(age_vals[late]) - mean(age_vals[early])
+        
+        if(profile.warn){
+          if(D1 > D2){
+            warning("The phylotranscriptomic pattern may not be monotonically increasing (low-mid-high).")
+          }
+          if(sign(D1) == -1 | sign(D2) == -1){
+            warning("The phylotranscriptomic pattern may not follow an early conservation pattern (low-mid-high or low-high-high).")
+          } 
+        }
         
         D_min <- min(D1,D2)
         

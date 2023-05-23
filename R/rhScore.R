@@ -39,6 +39,7 @@
 #' @param late a numeric vector including the numeric stage values that correspond to the late phase of development.
 #' @param method to determine the two value reduction value, resulting in the global score S: "max", or "min", or "mean".
 #' @param scoringMethod method to determine the module accumulation value: "max-min" or "mean-mean".
+#' @param profile.warn a logical value indicating whether a warning is printed when the high-low-high pattern isn't followed.
 #' @details
 #' 
 #' The gpScore is a heuristic score enabling to  construct a test statistic to determine  
@@ -76,10 +77,12 @@
 #'  # using reduction method: mean(mean-mean)
 #'  rh_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
 #'                      method = "mean",scoringMethod = "mean-mean")
-#'  
-#'  
+#'                      
+#'  # get warning if the expected pattern isn't followed
+#'  rh_score <- rhScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
+#'                      method = "mean",scoringMethod = "mean-mean",profile.warn=T) 
 #' @export
-rhScore <- function(age_vals,early,mid,late,method,scoringMethod)
+rhScore <- function(age_vals,early,mid,late,method,scoringMethod,profile.warn=F)
 {
         
         Score.Early <- vector(mode = "numeric", length = 1)
@@ -103,6 +106,12 @@ rhScore <- function(age_vals,early,mid,late,method,scoringMethod)
         if(scoringMethod == "mean-mean"){
                 Score.Early <- mean(age_valsEarly) - mean(age_valsMid)
                 Score.Late <- mean(age_valsLate) - mean(age_valsMid)    
+        }
+        
+        if(profile.warn){
+          if(sign(Score.Early) == -1 | sign(Score.Late) == -1){
+            warning("The phylotranscriptomic pattern may not follow an hourglass pattern (high-low-high).")
+          } 
         }
         
         if(method == "max")

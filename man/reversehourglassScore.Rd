@@ -4,7 +4,15 @@
 \alias{reversehourglassScore}
 \title{Compute the Reverse Hourglass Score for the Reverse Hourglass Test}
 \usage{
-reversehourglassScore(age_vals, early, mid, late, method, scoringMethod)
+reversehourglassScore(
+  age_vals,
+  early,
+  mid,
+  late,
+  method,
+  scoringMethod,
+  profile.warn = F
+)
 }
 \arguments{
 \item{age_vals}{a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.}
@@ -18,6 +26,8 @@ reversehourglassScore(age_vals, early, mid, late, method, scoringMethod)
 \item{method}{to determine the two value reduction value, resulting in the global score S: "max", or "min", or "mean".}
 
 \item{scoringMethod}{method to determine the module accumulation value: "max-min" or "mean-mean".}
+
+\item{profile.warn}{a logical value indicating whether a warning is printed when the low-high-low pattern isn't followed.}
 }
 \value{
 a numeric value representing the hourglass destruction score.
@@ -69,7 +79,7 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
  # compute the TAI profile
  TAIs <- TAI(PhyloExpressionSetExample)
 
- # compute the global hourglass destruction score 
+ # compute the global reverse hourglass destruction score 
  # for the TAIs profile using reduction method: mean(mean-mean)
  reversehourglass_score <- reversehourglassScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
                      method = "mean",scoringMethod = "mean-mean")
@@ -80,11 +90,14 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
  # compute the TDI profile
  TDIs <- TDI(DivergenceExpressionSetExample)
 
- # compute the global hourglass destruction score for the TDIs profile 
+ # compute the global reverse hourglass destruction score for the TDIs profile 
  # using reduction method: mean(mean-mean)
- reversehourglass_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
+ reversehourglass_score <- reversehourglassScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
                      method = "mean",scoringMethod = "mean-mean")
- 
+                     
+ # get warning if the expected pattern isn't followed
+ reversehourglass_score <- reversehourglassScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
+                     method = "mean",scoringMethod = "mean-mean",profile.warn=T)
  
 }
 \references{
