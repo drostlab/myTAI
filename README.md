@@ -220,6 +220,7 @@ In the `myTAI` framework users can find:
 phylotranscriptomics pattern (significant deviation from a frat line = evolutionary signal)
 * `ReductiveHourglassTest()` : Function to perform the __Reductive Hourglass Test__ that statistically evaluates the existence of a phylotranscriptomic hourglass pattern (hourglass model)
 * `EarlyConservationTest()` : Function to perform the __Reductive Early Conservation Test__ that statistically evaluates the existence of a monotonically increasing phylotranscriptomic pattern (early conservation model)
+* `EarlyDivergenceTest()` : Function to perform the __Reductive Early Divergence Test__ that statistically evaluates the existence of a monotonically decreasing phylotranscriptomic pattern (early divergence model)
 * `ReverseHourglassTest`: Function to perform the __Reverse Hourglass Test__ that statistically evaluates the existence of a reverse hourglass pattern (low-high-low)
 * `EnrichmentTest()` : Phylostratum or Divergence Stratum Enrichment of a given Gene Set based on Fisher's Test
 * `bootMatrix()` : Compute a Permutation Matrix for Test Statistics
@@ -246,6 +247,7 @@ All functions also include visual analytics tools to quantify the goodness of te
 * `tf()` : Transform Gene Expression Levels
 * `age.apply()` : Age Category Specific apply Function
 * `ecScore()` : Compute the Hourglass Score for the EarlyConservationTest
+* `edScore()` : Compute the Hourglass Score for the EarlyDivergenceTest
 * `geom.mean()` : Geometric Mean
 * `harm.mean()` : Harmonic Mean
 * `omitMatrix()` : Compute TAI or TDI Profiles Omitting a Given Gene
