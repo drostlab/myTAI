@@ -80,10 +80,10 @@
 #'                      
 #'  # get warning if the expected pattern isn't followed
 #'  reversehourglass_score <- reversehourglassScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
-#'                      method = "mean",scoringMethod = "mean-mean",profile.warn=T)
+#'                      method = "mean",scoringMethod = "mean-mean",profile.warn=TRUE)
 #'  
 #' @export
-reversehourglassScore <- function(age_vals,early,mid,late,method,scoringMethod,profile.warn=F)
+reversehourglassScore <- function(age_vals,early,mid,late,method,scoringMethod,profile.warn=FALSE)
 {
         
         Score.Early <- vector(mode = "numeric", length = 1)
@@ -111,7 +111,7 @@ reversehourglassScore <- function(age_vals,early,mid,late,method,scoringMethod,p
         
         if(profile.warn){
           if(sign(Score.Early) == -1 | sign(Score.Late) == -1){
-            warning("The phylotranscriptomic pattern may not follow a reverse hourglass pattern (low-high-low).")
+            message("The phylotranscriptomic pattern may not follow a reverse hourglass pattern (low-high-low).")
           } 
         }
         

@@ -66,7 +66,7 @@ PES.log2 <- tf(PhyloExpressionSetExample, log2)
 
 PES.absolute <- tf(PES.log2 , function(x) 2^x)
 
-# which should be the same asPhyloExpressionSetExample :
+# which should be the same as PhyloExpressionSetExample :
 head(PhyloExpressionSetExample)
 head(PES.absolute)
 

@@ -48,7 +48,8 @@ Suggests:
     testthat (>= 0.9.1),
     mgcv,
     taxize (>= 0.6.0),
-    Seurat
+    Seurat,
+    DESeq2 (>= 1.29.15)
 LinkingTo: 
     RcppArmadillo,
     Rcpp,

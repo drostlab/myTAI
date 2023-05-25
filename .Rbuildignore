@@ -8,3 +8,5 @@ README.Rmd
 ^\.httr-oauth$
 ^\.travis\.yml$
 docs/
+^doc$
+^Meta$

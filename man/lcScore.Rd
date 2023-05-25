@@ -4,7 +4,7 @@
 \alias{lcScore}
 \title{Compute the Hourglass Score for the LateConservationTest}
 \usage{
-lcScore(age_vals, early, mid, late, profile.warn = F)
+lcScore(age_vals, early, mid, late, profile.warn = FALSE)
 }
 \arguments{
 \item{age_vals}{a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.}
@@ -64,7 +64,7 @@ stored in the \code{age_vals} argument.
  apply(bootMatrix(PhyloExpressionSetExample,10),1,lcScore,early = 1:2,mid = 3:5,late = 6:7)
  
  # get warning if the expected pattern isn't followed
- lc_score <- lcScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,profile.warn=T)
+ lc_score <- lcScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,profile.warn=TRUE)
  
 }
 \seealso{

@@ -4,7 +4,15 @@
 \alias{rhScore}
 \title{Compute the Hourglass Score for the Reductive Hourglass Test}
 \usage{
-rhScore(age_vals, early, mid, late, method, scoringMethod, profile.warn = F)
+rhScore(
+  age_vals,
+  early,
+  mid,
+  late,
+  method,
+  scoringMethod,
+  profile.warn = FALSE
+)
 }
 \arguments{
 \item{age_vals}{a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.}
@@ -89,7 +97,7 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
                      
  # get warning if the expected pattern isn't followed
  rh_score <- rhScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
-                     method = "mean",scoringMethod = "mean-mean",profile.warn=T) 
+                     method = "mean",scoringMethod = "mean-mean",profile.warn=TRUE) 
 }
 \references{
 Drost HG et al. (2015) Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012

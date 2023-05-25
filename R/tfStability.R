@@ -86,7 +86,7 @@ tfStability <- function(ExpressionSet,
   if(TestStatistic %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest", "LateConservationTest") & is.null(modules))
     stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
   
-  print(paste("Proceeding with the", TestStatistic))
+  message(paste("Proceeding with the", TestStatistic))
   
   # if (!(is.element(transforms, c("log1p", "sqrt", "none", "log2", "log", "log10", "rank", "vst", "rlog", "box.cox")))){
   #   stop("Please select the available transformations: 'log1p', 'sqrt', 'log2', 'log', 'log10' or 'none' using the argument 'transforms = c('log1p', 'sqrt', 'none')'.", call. = FALSE)
@@ -111,7 +111,7 @@ tfStability <- function(ExpressionSet,
       tfExpressionSet <- tf(ExpressionSet, FUN = i)
     test_function <- base::match.fun(TestStatistic)
     
-    tfExpressionSet <- tfExpressionSet %>% tidyr::drop_na()
+    tfExpressionSet <- stats::na.omit(tfExpressionSet)
     
     if(TestStatistic == "FlatLineTest")
       vec_res[i] <- test_function(tfExpressionSet,

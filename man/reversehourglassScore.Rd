@@ -11,7 +11,7 @@ reversehourglassScore(
   late,
   method,
   scoringMethod,
-  profile.warn = F
+  profile.warn = FALSE
 )
 }
 \arguments{
@@ -97,7 +97,7 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
                      
  # get warning if the expected pattern isn't followed
  reversehourglass_score <- reversehourglassScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
-                     method = "mean",scoringMethod = "mean-mean",profile.warn=T)
+                     method = "mean",scoringMethod = "mean-mean",profile.warn=TRUE)
  
 }
 \references{

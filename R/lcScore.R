@@ -50,11 +50,11 @@
 #'  apply(bootMatrix(PhyloExpressionSetExample,10),1,lcScore,early = 1:2,mid = 3:5,late = 6:7)
 #'  
 #'  # get warning if the expected pattern isn't followed
-#'  lc_score <- lcScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,profile.warn=T)
+#'  lc_score <- lcScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,profile.warn=TRUE)
 #'  
 #' @export
 
-lcScore <- function(age_vals,early,mid,late,profile.warn=F){
+lcScore <- function(age_vals,early,mid,late,profile.warn=FALSE){
   
         D1 <- vector(mode = "numeric", length = 1)
         D2 <- vector(mode = "numeric", length = 1)
@@ -65,10 +65,10 @@ lcScore <- function(age_vals,early,mid,late,profile.warn=F){
         
         if(profile.warn){
           if(D1 < D2){
-            warning("The phylotranscriptomic pattern may not be monotonically decreasing (high-mid-low).")
+            message("The phylotranscriptomic pattern may not be monotonically decreasing (high-mid-low).")
           }
           if(sign(D1) == -1 | sign(D2) == -1){
-            warning("The phylotranscriptomic pattern may not follow a late conservation pattern (high-mid-low or high-high-low).")
+            message("The phylotranscriptomic pattern may not follow a late conservation pattern (high-mid-low or high-high-low).")
           } 
         }
         

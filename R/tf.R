@@ -143,7 +143,7 @@ tf <- function(ExpressionSet, FUN, pseudocount = 0, integerise = FALSE){
         is.ExpressionSet(ExpressionSet)
         
         ExpressionMatrix <- as.matrix(ExpressionSet[ , -c(1,2)] + pseudocount)
-        rownames(ExpressionMatrix) <- ExpressionSet[,2]
+        # rownames(ExpressionMatrix) <- ExpressionSet[,2]
         
         if(integerise){
           ExpressionMatrix <- round(ExpressionMatrix, digits = 0)
@@ -152,8 +152,9 @@ tf <- function(ExpressionSet, FUN, pseudocount = 0, integerise = FALSE){
         f <- match.fun(FUN)
         res_mat <- f(ExpressionMatrix)
         
-        res <- tibble::rownames_to_column(base::as.data.frame(res_mat), base::colnames(ExpressionSet)[2])
-        res <- ExpressionSet[ , 1:2] %>% dplyr::right_join(res, by = "GeneID") # too slow.
+        # res <- tibble::rownames_to_column(base::as.data.frame(res_mat), base::colnames(ExpressionSet)[2])
+        # res <- ExpressionSet[ , 1:2] %>% dplyr::right_join(res, by = "GeneID") # too slow.
         # res <- base::cbind(ExpressionSet[ , 1], res)
+        res <- base::cbind(ExpressionSet[ , c(1,2)], base::as.data.frame(res_mat))
         return(res)
 }

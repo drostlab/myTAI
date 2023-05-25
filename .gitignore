@@ -9,3 +9,5 @@ src/*.dll
 .httr-oauth
 .DS_Store
 .html
+/doc/
+/Meta/
