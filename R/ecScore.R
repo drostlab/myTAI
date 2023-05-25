@@ -19,7 +19,7 @@
 #' @param early a numeric vector storing the numeric stage values that correspond to the early phase of development.
 #' @param mid a numeric vector storing the numeric stage values that correspond to the middle phase of development.
 #' @param late a numeric vector storing the numeric stage values that correspond to the late phase of development.
-#' @param profile.warn a logical value indicating whether a warning is printed when a low-mid-high pattern isn't followed.
+#' @param profile.warn a boolean value indicating whether a warning is printed when a low-mid-high pattern isn't followed.
 #' @return a numeric value representing the early conservation score.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{EarlyConservationTest}}, \code{\link{TAI}}, \code{\link{TDI}}

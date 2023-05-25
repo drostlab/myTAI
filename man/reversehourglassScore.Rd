@@ -27,7 +27,7 @@ reversehourglassScore(
 
 \item{scoringMethod}{method to determine the module accumulation value: "max-min" or "mean-mean".}
 
-\item{profile.warn}{a logical value indicating whether a warning is printed when the low-high-low pattern isn't followed.}
+\item{profile.warn}{a boolean value indicating whether a warning is printed when the low-high-low pattern isn't followed.}
 }
 \value{
 a numeric value representing the hourglass destruction score.

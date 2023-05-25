@@ -15,7 +15,7 @@ lcScore(age_vals, early, mid, late, profile.warn = F)
 
 \item{late}{a numeric vector storing the numeric stage values that correspond to the late phase of development.}
 
-\item{profile.warn}{a logical value indicating whether a warning is printed when a high-mid-low pattern isn't followed.}
+\item{profile.warn}{a boolean value indicating whether a warning is printed when a high-mid-low pattern isn't followed.}
 }
 \value{
 a numeric value representing the late conservation score.

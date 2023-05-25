@@ -19,7 +19,7 @@ rhScore(age_vals, early, mid, late, method, scoringMethod, profile.warn = F)
 
 \item{scoringMethod}{method to determine the module accumulation value: "max-min" or "mean-mean".}
 
-\item{profile.warn}{a logical value indicating whether a warning is printed when the high-low-high pattern isn't followed.}
+\item{profile.warn}{a bolean value indicating whether a warning is printed when the high-low-high pattern isn't followed.}
 }
 \value{
 a numeric value representing the hourglass destruction score.

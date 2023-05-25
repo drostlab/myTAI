@@ -39,7 +39,7 @@
 #' @param late a numeric vector including the numeric stage values that correspond to the late phase of development.
 #' @param method to determine the two value reduction value, resulting in the global score S: "max", or "min", or "mean".
 #' @param scoringMethod method to determine the module accumulation value: "max-min" or "mean-mean".
-#' @param profile.warn a logical value indicating whether a warning is printed when the high-low-high pattern isn't followed.
+#' @param profile.warn a bolean value indicating whether a warning is printed when the high-low-high pattern isn't followed.
 #' @details
 #' 
 #' The gpScore is a heuristic score enabling to  construct a test statistic to determine  

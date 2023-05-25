@@ -53,7 +53,17 @@
 #' # module 3 = late
 #' tfStability(ExpressionSet = PhyloExpressionSetExample,
 #'                      TestStatistic = "ReductiveHourglassTest",
-#'                      transforms = c("log1p", "sqrt", "none"),
+#'                      transforms = c("log2", "sqrt", "none"),
+#'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
+#'
+#'
+#' # it is also possible to test the phylotranscriptomic pattern using rlog 
+#' # and vst transforms from DESeq2
+#' 
+#' library(DESeq2)
+#' tfStability(ExpressionSet = PhyloExpressionSetExample,
+#'                      TestStatistic = "ReductiveHourglassTest",
+#'                      transforms = c("log2", "sqrt", "none", "vst"),
 #'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #'
 #'
@@ -62,21 +72,23 @@
 # returns p value only
 tfStability <- function(ExpressionSet,
                         TestStatistic      = "FlatLineTest",
-                        transforms         = c("log1p", "sqrt", "none"),
+                        transforms         = c("none", "sqrt", "log2", "rank", "squared"),
                         modules            = NULL,
                         permutations       = 1000,
-                        pseudocount        = 0)
+                        pseudocount        = 1)
 {
   
   myTAI::is.ExpressionSet(ExpressionSet)
   
   if(!TestStatistic %in% c("FlatLineTest", "ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest", "LateConservationTest"))
-    stop("Please select the availagetble test: 'FlatLineTest', 'ReductiveHourglassTest', 'ReverseHourglassTest', 'EarlyConservationTest' or 'LateConservationTest' using the argument test = 'FlatLineTest'", call. = FALSE)
+    stop("Please select the available test: 'FlatLineTest', 'ReductiveHourglassTest', 'ReverseHourglassTest', 'EarlyConservationTest' or 'LateConservationTest' using the argument test = 'FlatLineTest'", call. = FALSE)
   
-  if(TestStatistic %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest") & is.null(modules))
+  if(TestStatistic %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest", "LateConservationTest") & is.null(modules))
     stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
   
-  # if (!(is.element(transforms, c("log1p", "sqrt", "none", "log2", "log", "log10")))){
+  print(paste("Proceeding with the", TestStatistic))
+  
+  # if (!(is.element(transforms, c("log1p", "sqrt", "none", "log2", "log", "log10", "rank", "vst", "rlog", "box.cox")))){
   #   stop("Please select the available transformations: 'log1p', 'sqrt', 'log2', 'log', 'log10' or 'none' using the argument 'transforms = c('log1p', 'sqrt', 'none')'.", call. = FALSE)
   # }
   
@@ -89,9 +101,18 @@ tfStability <- function(ExpressionSet,
       tfExpressionSet <- ExpressionSet
     else if(i %in% c('log2', 'log', 'log10'))
       tfExpressionSet <- tf(ExpressionSet, FUN = i, pseudocount = pseudocount)
+    else if(i == "squared")
+      tfExpressionSet <- tf(ExpressionSet, FUN = function(x) x*x)
+    else if(i %in% c('vst', 'rlog'))
+      tfExpressionSet <- tf(ExpressionSet, FUN = i, integerise = TRUE)
+    else if(i == "rank")
+      tfExpressionSet <- tf(ExpressionSet, FUN = function(x) apply(x, 2, base::rank))
     else
       tfExpressionSet <- tf(ExpressionSet, FUN = i)
     test_function <- base::match.fun(TestStatistic)
+    
+    tfExpressionSet <- tfExpressionSet %>% tidyr::drop_na()
+    
     if(TestStatistic == "FlatLineTest")
       vec_res[i] <- test_function(tfExpressionSet,
                                   permutations       = permutations)[["p.value"]]

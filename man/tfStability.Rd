@@ -7,10 +7,10 @@
 tfStability(
   ExpressionSet,
   TestStatistic = "FlatLineTest",
-  transforms = c("log1p", "sqrt", "none"),
+  transforms = c("none", "sqrt", "log2", "rank", "squared"),
   modules = NULL,
   permutations = 1000,
-  pseudocount = 0
+  pseudocount = 1
 )
 }
 \arguments{
@@ -69,7 +69,17 @@ data(PhyloExpressionSetExample)
 # module 3 = late
 tfStability(ExpressionSet = PhyloExpressionSetExample,
                      TestStatistic = "ReductiveHourglassTest",
-                     transforms = c("log1p", "sqrt", "none"),
+                     transforms = c("log2", "sqrt", "none"),
+                     modules = list(early = 1:2, mid = 3:5, late = 6:7))
+
+
+# it is also possible to test the phylotranscriptomic pattern using rlog 
+# and vst transforms from DESeq2
+
+library(DESeq2)
+tfStability(ExpressionSet = PhyloExpressionSetExample,
+                     TestStatistic = "ReductiveHourglassTest",
+                     transforms = c("log2", "sqrt", "none", "vst"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
 
