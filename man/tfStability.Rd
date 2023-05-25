@@ -7,10 +7,10 @@
 tfStability(
   ExpressionSet,
   TestStatistic = "FlatLineTest",
-  transforms = c("log1p", "sqrt", "none"),
+  transforms = c("none", "sqrt", "log2", "rank", "squared"),
   modules = NULL,
   permutations = 1000,
-  pseudocount = 0
+  pseudocount = 1
 )
 }
 \arguments{
@@ -21,8 +21,9 @@ Possible values can be:
 \itemize{
 \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
 \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
-\item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
 \item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
+\item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a early conservation pattern (low-high-high pattern)
+\item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 }}
 
 \item{transforms}{a character vector of any valid function that transforms gene expression levels.}
@@ -44,7 +45,8 @@ a vector object containing the vector elements:
 \description{
 \emph{tfStability} aims to statistically evaluate the
 stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
-\code{\link{ReverseHourglassTest}}, or \code{\link{EarlyConservationTest}}
+\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, or 
+\code{\link{LateConservationTest}} 
 (all based on \code{\link{TAI}} or \code{\link{TDI}} computations) against different
 data transformations.
 The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
@@ -66,19 +68,29 @@ data(PhyloExpressionSetExample)
 # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
 # module 3 = late
 tfStability(ExpressionSet = PhyloExpressionSetExample,
-                     TestStatistic = "ReverseHourglassTest",
-                     transforms = c("log1p", "sqrt", "none"),
+                     TestStatistic = "ReductiveHourglassTest",
+                     transforms = c("log2", "sqrt", "none"),
+                     modules = list(early = 1:2, mid = 3:5, late = 6:7))
+
+
+# it is also possible to test the phylotranscriptomic pattern using rlog 
+# and vst transforms from DESeq2
+
+library(DESeq2)
+tfStability(ExpressionSet = PhyloExpressionSetExample,
+                     TestStatistic = "ReductiveHourglassTest",
+                     transforms = c("log2", "sqrt", "none", "vst"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
 
 }
 \references{
-Lotharukpong JS et al. (2022) bioRxiv
+Lotharukpong JS et al. (2023) bioRxiv
 }
 \seealso{
 \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
 \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, 
-\code{\link{ReductiveHourglassTest}}, \code{\link{PlotSignature}},
+\code{\link{ReductiveHourglassTest}}, \code{\link{PlotSignature}}, \code{\link{LateConservationTest}}
 }
 \author{
 Jaruwatana Sodai Lotharukpong

@@ -96,7 +96,8 @@
 #'   
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
-#' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{PlotSignature}}
+#' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{PlotSignature}},
+#' \code{\link{LateConservationTest}}
 #' @examples
 #' 
 #' data(PhyloExpressionSetExample)
@@ -160,7 +161,9 @@ ReductiveHourglassTest <- function(ExpressionSet,
                               mid           = modules[[2]],
                               late          = modules[[3]],
                               method        = "min",
-                              scoringMethod = "mean-mean")
+                              scoringMethod = "mean-mean",
+                              profile.warn=T)
+        options(warn=1)
         
         ### compute the bootstrap matrix 
         if (is.null(custom.perm.matrix)){

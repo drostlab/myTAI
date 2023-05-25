@@ -39,6 +39,7 @@
 #' @param late a numeric vector including the numeric stage values that correspond to the late phase of development.
 #' @param method to determine the two value reduction value, resulting in the global score S: "max", or "min", or "mean".
 #' @param scoringMethod method to determine the module accumulation value: "max-min" or "mean-mean".
+#' @param profile.warn a boolean value indicating whether a warning is printed when the low-high-low pattern isn't followed.
 #' @details
 #' 
 #' The gpScore is a heuristic score enabling to  construct a test statistic to determine  
@@ -61,7 +62,7 @@
 #'  # compute the TAI profile
 #'  TAIs <- TAI(PhyloExpressionSetExample)
 #'
-#'  # compute the global hourglass destruction score 
+#'  # compute the global reverse hourglass destruction score 
 #'  # for the TAIs profile using reduction method: mean(mean-mean)
 #'  reversehourglass_score <- reversehourglassScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
 #'                      method = "mean",scoringMethod = "mean-mean")
@@ -72,14 +73,17 @@
 #'  # compute the TDI profile
 #'  TDIs <- TDI(DivergenceExpressionSetExample)
 #'
-#'  # compute the global hourglass destruction score for the TDIs profile 
+#'  # compute the global reverse hourglass destruction score for the TDIs profile 
 #'  # using reduction method: mean(mean-mean)
-#'  reversehourglass_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
+#'  reversehourglass_score <- reversehourglassScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
 #'                      method = "mean",scoringMethod = "mean-mean")
-#'  
+#'                      
+#'  # get warning if the expected pattern isn't followed
+#'  reversehourglass_score <- reversehourglassScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
+#'                      method = "mean",scoringMethod = "mean-mean",profile.warn=TRUE)
 #'  
 #' @export
-reversehourglassScore <- function(age_vals,early,mid,late,method,scoringMethod)
+reversehourglassScore <- function(age_vals,early,mid,late,method,scoringMethod,profile.warn=FALSE)
 {
         
         Score.Early <- vector(mode = "numeric", length = 1)
@@ -103,6 +107,12 @@ reversehourglassScore <- function(age_vals,early,mid,late,method,scoringMethod)
         if(scoringMethod == "mean-mean"){
                 Score.Early <- mean(age_valsMid) - mean(age_valsEarly)
                 Score.Late <- mean(age_valsMid) - mean(age_valsLate)    
+        }
+        
+        if(profile.warn){
+          if(sign(Score.Early) == -1 | sign(Score.Late) == -1){
+            message("The phylotranscriptomic pattern may not follow a reverse hourglass pattern (low-high-low).")
+          } 
         }
         
         if(method == "max")

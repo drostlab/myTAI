@@ -72,7 +72,8 @@
 #' patterns of developmental constraints in vertebrates}. PLoS Genet. 9(4): e1003476.
 #' 
 #' @author Hajk-Georg Drost
-#' @seealso \code{\link{ecScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}}, \code{\link{ReverseHourglassTest}}, \code{\link{PlotSignature}}
+#' @seealso \code{\link{ecScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}}, \code{\link{ReverseHourglassTest}}, 
+#' \code{\link{PlotSignature}}, \code{\link{LateConservationTest}}
 #' @examples
 #' 
 #' data(PhyloExpressionSetExample)
@@ -130,8 +131,9 @@ EarlyConservationTest <- function(ExpressionSet,
         
         # compute the real early conservation of the observed phylotranscriptomics pattern
         # ecScore = early conservation score
-        real_ecv <- ecScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]])
-                
+        real_ecv <- ecScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],profile.warn=T)
+        options(warn=1)
+        
         ### compute the bootstrap matrix 
         if (is.null(custom.perm.matrix)){
                 resMatrix <- cpp_bootMatrix(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),as.vector(unlist(dplyr::select(ExpressionSet, 1))),as.numeric(permutations))
