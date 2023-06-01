@@ -173,8 +173,10 @@ ReverseHourglassTest <- function(ExpressionSet,
                 mid           = modules[[2]],
                 late          = modules[[3]],
                 method        = "min",
-                scoringMethod = "mean-mean"
+                scoringMethod = "mean-mean",
+                profile.warn=T
         )
+        options(warn=1)
         
         ### compute the bootstrap matrix
         if (is.null(custom.perm.matrix)) {
@@ -232,7 +234,7 @@ ReverseHourglassTest <- function(ExpressionSet,
                 graphics::curve(
                         expr = normDensity,
                         xlim = c(
-                                min(score_vector),
+                                min(score_vector, real_score),
                                 max(score_vector, real_score)
                         ),
                         col  = "steelblue",

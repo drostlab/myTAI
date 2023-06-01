@@ -14,7 +14,8 @@
 #' \item Quantification of variability between replicates as density function. 
 #' }
 #' 
-#' @examples 
+#' @examples
+#'
 #' data(PhyloExpressionSetExample)
 #' 
 #' # visualize log(var(x)) between replicates for each gene and developmental stage 
@@ -63,7 +64,7 @@ PlotReplicateQuality <- function(ExpressionSet,
                                                      FUN           = custom.FUN)
         
         col.index <- 1
-        graphics::plot(stats::density(CollapsedExpressionSet[ , 3]), col = stage.cols[1],main = "Distributions of replicate log variances", ...)
+        graphics::plot(stats::density(base::unlist(CollapsedExpressionSet[ , 3])), col = stage.cols[1],main = "Distributions of replicate log variances", ...)
         apply(CollapsedExpressionSet[ , 4:(3 + nStages - 1)], 2 ,function(x) {
                 
                 col.index <<- col.index + 1

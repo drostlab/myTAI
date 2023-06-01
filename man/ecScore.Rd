@@ -4,7 +4,7 @@
 \alias{ecScore}
 \title{Compute the Hourglass Score for the EarlyConservationTest}
 \usage{
-ecScore(age_vals, early, mid, late)
+ecScore(age_vals, early, mid, late, profile.warn = FALSE)
 }
 \arguments{
 \item{age_vals}{a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.}
@@ -14,6 +14,8 @@ ecScore(age_vals, early, mid, late)
 \item{mid}{a numeric vector storing the numeric stage values that correspond to the middle phase of development.}
 
 \item{late}{a numeric vector storing the numeric stage values that correspond to the late phase of development.}
+
+\item{profile.warn}{a boolean value indicating whether a warning is printed when a low-mid-high pattern isn't followed.}
 }
 \value{
 a numeric value representing the early conservation score.
@@ -30,7 +32,7 @@ The reductive early conservation test is a permutation test based on the followi
 
 - The two differences D1 = T_mid - T_early and D2 = T_late - T_early are calculated.
 
-- The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+- The minimum D_min of D1 and D2 is computed as final test statistic of the reductive early conservation test.
 
 This function \emph{ecScore} computes the \emph{D_min} value for a given \code{\link{TAI}} or \code{\link{TDI}}
 stored in the \code{age_vals} argument.
@@ -61,6 +63,8 @@ stored in the \code{age_vals} argument.
  # compute ecScore() vector from bootMatrix()
  apply(bootMatrix(PhyloExpressionSetExample,10),1,ecScore,early = 1:2,mid = 3:5,late = 6:7)
  
+ # get warning if the expected pattern isn't followed
+ ec_score <- ecScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,profile.warn=TRUE)
  
 }
 \seealso{

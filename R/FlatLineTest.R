@@ -151,7 +151,7 @@ FlatLineTest <- function(ExpressionSet,
                 fitdistrplus::descdist(var_values, boot = permutations)
                 # plot the histogram and the fitted curve
                 graphics::curve( expr = gammaDensity,
-                                 xlim = c(min(var_values), max(c(var_values,real.var))),
+                                 xlim = c(min(c(var_values,real.var)), max(c(var_values,real.var))),
                                  col  = "steelblue",
                                  lwd  = 5,
                                  xlab = "Variances",

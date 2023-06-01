@@ -138,7 +138,7 @@ bootTEI <- function(ExpressionSet,
         split_end <- split_end[-length(split_end)]
       }
       if (showprogress) {
-        pb <- txtProgressBar(min = 1,
+        pb <- utils::txtProgressBar(min = 1,
                              max = length(split_start),
                              style = 3)
       }
@@ -151,7 +151,7 @@ bootTEI <- function(ExpressionSet,
                                        permutations, threads)
         colnames(es_bm) <- colnames(es)
         if (showprogress) {
-          setTxtProgressBar(pb, i)
+          utils::setTxtProgressBar(pb, i)
         }
         es <- NULL
         OUT <- cbind(OUT, es_bm)

@@ -47,6 +47,7 @@ cpp_omitMatrix <- function(ExpressionSet, AgeVector) {
 #' ps <- setNames(PhyloExpressionSetExample$Phylostratum, PhyloExpressionSetExample$GeneID)
 #' rcpp_tei_parallel(spmat, ps)
 #' @author Kristian K Ullrich
+#' @export
 rcpp_tei_parallel <- function(expression, ps, ncores = 1L) {
     .Call(`_myTAI_rcpp_tei_parallel`, expression, ps, ncores)
 }
@@ -82,6 +83,7 @@ rcpp_tei_parallel <- function(expression, ps, ncores = 1L) {
 #' ## get permutations
 #' rcpp_boottei_parallel(spmat, ps, 100, 1)
 #' @author Kristian K Ullrich
+#' @export
 rcpp_boottei_parallel <- function(expression, ps, permutations, ncores = 1L) {
     .Call(`_myTAI_rcpp_boottei_parallel`, expression, ps, permutations, ncores)
 }
@@ -115,6 +117,7 @@ rcpp_boottei_parallel <- function(expression, ps, permutations, ncores = 1L) {
 #' ## get pMatrix
 #' rcpp_pMatrix_parallel(spmat, ps)
 #' @author Kristian K Ullrich
+#' @export
 rcpp_pMatrix_parallel <- function(expression, ps, ncores = 1L) {
     .Call(`_myTAI_rcpp_pMatrix_parallel`, expression, ps, ncores)
 }
@@ -150,6 +153,7 @@ rcpp_pMatrix_parallel <- function(expression, ps, ncores = 1L) {
 #' ## get pStrata
 #' rcpp_pStrata_parallel(spmat, ps, psgroup)
 #' @author Kristian K Ullrich
+#' @export
 rcpp_pStrata_parallel <- function(expression, ps, psgroup, ncores = 1L) {
     .Call(`_myTAI_rcpp_pStrata_parallel`, expression, ps, psgroup, ncores)
 }

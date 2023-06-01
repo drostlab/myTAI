@@ -60,7 +60,7 @@ PlotContribution <- function(ExpressionSet,
                 colnames(contrMatrix)[2:3] <- c("stage", "par_value")
                 
                 p <- ggplot2::ggplot(contrMatrix, ggplot2::aes( factor(stage, levels = unique(stage)), par_value, group = PS, fill = factor(PS, levels = paste0("PS",1:nrow(contrMatrix))))) + 
-                        ggplot2::geom_line(ggplot2::aes(color = factor(PS, levels = paste0("PS",1:nrow(contrMatrix)))), size = 3) +
+                        ggplot2::geom_line(ggplot2::aes(color = factor(PS, levels = paste0("PS",1:nrow(contrMatrix)))), linewidth = 3) +
                         ggplot2::labs(x = xlab, y = ylab, title = main, colour = "PS") +
                         ggplot2::theme_minimal() +
                         ggplot2::theme(
@@ -91,7 +91,7 @@ PlotContribution <- function(ExpressionSet,
                 colnames(contrMatrix)[2:3] <- c("stage", "par_value")
                 
                 p <- ggplot2::ggplot(contrMatrix, ggplot2::aes( factor(stage, levels = unique(stage)), par_value, group = DS, fill = factor(DS, levels = paste0("DS",1:nrow(contrMatrix))))) + 
-                        ggplot2::geom_line(ggplot2::aes(color = factor(DS, levels = paste0("DS",1:nrow(contrMatrix)))), size = 3) +
+                        ggplot2::geom_line(ggplot2::aes(color = factor(DS, levels = paste0("DS",1:nrow(contrMatrix)))), linewidth = 3) +
                         ggplot2::labs(x = xlab, y = ylab, title = main, colour = "DS") +
                         ggplot2::theme_minimal() +
                         ggplot2::theme(

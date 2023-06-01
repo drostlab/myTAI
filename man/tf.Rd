@@ -4,12 +4,16 @@
 \alias{tf}
 \title{Transform Gene Expression Levels}
 \usage{
-tf(ExpressionSet, FUN)
+tf(ExpressionSet, FUN, pseudocount = 0, integerise = FALSE)
 }
 \arguments{
 \item{ExpressionSet}{a standard PhloExpressionSet or DivergenceExpressionSet object.}
 
-\item{FUN}{any valid function that transformes gene expression levels.}
+\item{FUN}{any valid function that transforms gene expression levels.}
+
+\item{pseudocount}{a numeric value to be added to the expression matrix prior to transformation.}
+
+\item{integerise}{a boolean specifying whether the expression data should be rounded to the nearest integer.}
 }
 \value{
 a standard PhloExpressionSet or DivergenceExpressionSet object storing transformed gene expression levels.
@@ -62,9 +66,10 @@ PES.log2 <- tf(PhyloExpressionSetExample, log2)
 
 PES.absolute <- tf(PES.log2 , function(x) 2^x)
 
-# which should be the same as  PhyloExpressionSetExample :
+# which should be the same as PhyloExpressionSetExample :
 head(PhyloExpressionSetExample)
 head(PES.absolute)
+
 
 
 # plotting the TAI using log2 transformed expression levels
@@ -73,6 +78,44 @@ PlotPattern(ExpressionSet = tf(PhyloExpressionSetExample, log2),
             type          = "l", 
             lwd           = 5, 
             TestStatistic = "FlatLineTest")
+
+
+
+# for square-transformation (not square-root), we recommend using 
+# function(x) x*x rather than function(x) x^2, due to speed.
+
+PES.absolute <- tf(PES.sqrt , function(x) x*x)
+
+# and the result should be the same as PhyloExpressionSetExample :
+head(PhyloExpressionSetExample)
+head(PES.absolute)
+
+
+
+# in case the expression matrix contains 0s, a pseudocount can be added prior
+# to certain transformations, e.g. log2(x+1) where 1 is the pseudocount.
+
+PhyloExpressionSetExample[4,3] = 0
+PES.log2 <- tf(PhyloExpressionSetExample, log2, pseudocount = 0)
+
+# this should return -Inf at PES.log2[4,3] the issue here is that 
+# -Inf cannot be used to compute the phylotranscriptomic profile.
+
+PES.log2 <- tf(PhyloExpressionSetExample, log2, pseudocount = 1)
+# log2 transformed expression levels can now be used in downstream analyses.
+
+
+# to perform rank transformation
+
+PES.rank <- tf(PhyloExpressionSetExample, FUN = function(x) apply(x, 2, base::rank))
+
+
+# rlog and vst transformations are now also possible by loading the DESeq2 package
+# and transforming the data with the parameter integerise = TRUE.
+library(DESeq2) # make sure the DESeq2 version >= 1.29.15 for rlog
+PES.vst <- tf(PhyloExpressionSetExample, vst, integerise = TRUE)
+
+
 
 }
 \references{
@@ -107,7 +150,8 @@ John B. Burbidge, Lonnie Magee and A. Leslie Robb (1988) Alternative Transformat
 G. E. P. Box and D. R. Cox (1964) An Analysis of Transformations. Journal of the Royal Statistical Society. Series B (Methodological), 26(2): 211-252.
 }
 \seealso{
-\code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}}
+\code{\link{TAI}}, \code{\link{TDI}}, \code{\link{FlatLineTest}}, \code{\link{ReductiveHourglassTest}},
+\code{\link{tfStability}}
 }
 \author{
 Hajk-Georg Drost

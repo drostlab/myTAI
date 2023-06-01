@@ -4,7 +4,15 @@
 \alias{rhScore}
 \title{Compute the Hourglass Score for the Reductive Hourglass Test}
 \usage{
-rhScore(age_vals, early, mid, late, method, scoringMethod)
+rhScore(
+  age_vals,
+  early,
+  mid,
+  late,
+  method,
+  scoringMethod,
+  profile.warn = FALSE
+)
 }
 \arguments{
 \item{age_vals}{a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.}
@@ -18,6 +26,8 @@ rhScore(age_vals, early, mid, late, method, scoringMethod)
 \item{method}{to determine the two value reduction value, resulting in the global score S: "max", or "min", or "mean".}
 
 \item{scoringMethod}{method to determine the module accumulation value: "max-min" or "mean-mean".}
+
+\item{profile.warn}{a bolean value indicating whether a warning is printed when the high-low-high pattern isn't followed.}
 }
 \value{
 a numeric value representing the hourglass destruction score.
@@ -84,8 +94,10 @@ the significance of a present (phylotranscriptomic) hourglass pattern.
  # using reduction method: mean(mean-mean)
  rh_score <- rhScore(age_vals = TDIs,early = 1:2,mid = 3:5,late = 6:7,
                      method = "mean",scoringMethod = "mean-mean")
- 
- 
+                     
+ # get warning if the expected pattern isn't followed
+ rh_score <- rhScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,
+                     method = "mean",scoringMethod = "mean-mean",profile.warn=TRUE) 
 }
 \references{
 Drost HG et al. (2015) Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012

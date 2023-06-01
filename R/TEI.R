@@ -50,7 +50,7 @@ TEI <- function(ExpressionSet,
                 split=100000,
                 showprogress=TRUE,
                 threads=1){
-  if(is(ExpressionSet, "Matrix")){
+  if(methods::is(ExpressionSet, "Matrix")){
     common_ids<-sort(Reduce(intersect, list(rownames(ExpressionSet),
                                             names(Phylostratum))))
     Phylostratum<-Phylostratum[names(Phylostratum) %in% common_ids]
@@ -96,11 +96,11 @@ TEI <- function(ExpressionSet,
       names(tei)<-colnames(ExpressionSet)
     }
   }
-  if(is(ExpressionSet, "data.frame") | is(ExpressionSet, "tibble")){
+  if(methods::is(ExpressionSet, "data.frame") | methods::is(ExpressionSet, "tibble")){
     if(is.ExpressionSet(ExpressionSet)){
-      Phylostratum<-setNames(ExpressionSet$Phylostratum,
+      Phylostratum<-stats::setNames(ExpressionSet$Phylostratum,
                              ExpressionSet$GeneID)
-      ExpressionSet<-as(data.matrix(
+      ExpressionSet<-methods::as(data.matrix(
         ExpressionSet[,3:ncol(ExpressionSet)]), "sparseMatrix")
       rownames(ExpressionSet)<-names(Phylostratum)
     }

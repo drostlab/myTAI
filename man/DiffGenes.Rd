@@ -8,7 +8,6 @@ DiffGenes(
   ExpressionSet,
   nrep,
   method = "foldchange",
-  lib.size = NULL,
   p.adjust.method = NULL,
   comparison = NULL,
   alpha = NULL,

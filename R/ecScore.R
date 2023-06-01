@@ -10,7 +10,7 @@
 #'
 #' - The two differences D1 = T_mid - T_early and D2 = T_late - T_early are calculated.
 #'
-#' - The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
+#' - The minimum D_min of D1 and D2 is computed as final test statistic of the reductive early conservation test.
 #'
 #' This function \emph{ecScore} computes the \emph{D_min} value for a given \code{\link{TAI}} or \code{\link{TDI}}
 #' stored in the \code{age_vals} argument.
@@ -19,6 +19,7 @@
 #' @param early a numeric vector storing the numeric stage values that correspond to the early phase of development.
 #' @param mid a numeric vector storing the numeric stage values that correspond to the middle phase of development.
 #' @param late a numeric vector storing the numeric stage values that correspond to the late phase of development.
+#' @param profile.warn a boolean value indicating whether a warning is printed when a low-mid-high pattern isn't followed.
 #' @return a numeric value representing the early conservation score.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{EarlyConservationTest}}, \code{\link{TAI}}, \code{\link{TDI}}
@@ -48,10 +49,12 @@
 #'  # compute ecScore() vector from bootMatrix()
 #'  apply(bootMatrix(PhyloExpressionSetExample,10),1,ecScore,early = 1:2,mid = 3:5,late = 6:7)
 #'  
+#'  # get warning if the expected pattern isn't followed
+#'  ec_score <- ecScore(age_vals = TAIs,early = 1:2,mid = 3:5,late = 6:7,profile.warn=TRUE)
 #'  
 #' @export
 
-ecScore <- function(age_vals,early,mid,late){
+ecScore <- function(age_vals,early,mid,late,profile.warn=FALSE){
         
         D1 <- vector(mode = "numeric", length = 1)
         D2 <- vector(mode = "numeric", length = 1)
@@ -59,6 +62,15 @@ ecScore <- function(age_vals,early,mid,late){
         
         D1 <- mean(age_vals[mid]) - mean(age_vals[early])
         D2 <- mean(age_vals[late]) - mean(age_vals[early])
+        
+        if(profile.warn){
+          if(D1 > D2){
+            message("The phylotranscriptomic pattern may not be monotonically increasing (low-mid-high).")
+          }
+          if(sign(D1) == -1 | sign(D2) == -1){
+            message("The phylotranscriptomic pattern may not follow an early conservation pattern (low-mid-high or low-high-high).")
+          } 
+        }
         
         D_min <- min(D1,D2)
         
