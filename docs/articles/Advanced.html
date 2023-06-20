@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.0000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,9 +70,6 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
-    <li>
-      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -85,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/drostlab/myTAI/">
+  <a href="https://github.com/drostlab/myTAI/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,182 +93,307 @@
 
       
 
-      </header><script src="Advanced_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced Phylotranscriptomics Analyses</h1>
             
-            <h4 class="date">2022-03-24</h4>
+            <h4 data-toc-skip class="date">2023-06-20</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Advanced.Rmd"><code>vignettes/Advanced.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Advanced.Rmd" class="external-link"><code>vignettes/Advanced.Rmd</code></a></small>
       <div class="hidden name"><code>Advanced.Rmd</code></div>
 
     </div>
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p>In the <a href="Introduction.html">Introduction</a> vignette users learned how to perform the most fundamental computations and visualizations for phylotranscriptomics analyses using the <code>myTAI</code> package. Especially in the <em>Introduction</em> vignette we demonstrated how to perform <code>Phylostratigraphy</code> and <code>Divergence Stratigraphy</code> as well as the construction of <code>PhyloExpressionSets</code> and <code>DivergenceExpressionSets</code> using the <code><a href="../reference/MatchMap.html">MatchMap()</a></code> function.</p>
-<p>In the <a href="Intermediate.html">Intermediate</a> vignette users learned about more detailed analyses and more specialized techniques to investigate the observed phylotranscriptomics patterns (<code>TAI</code>, <code>TDI</code>, <code>RE</code>, etc.).</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>In the <a href="Introduction.html">Introduction</a> vignette users
+learned how to perform the most fundamental computations and
+visualizations for phylotranscriptomics analyses using the
+<code>myTAI</code> package. Especially in the <em>Introduction</em>
+vignette we demonstrated how to perform <code>Phylostratigraphy</code>
+and <code>Divergence Stratigraphy</code> as well as the construction of
+<code>PhyloExpressionSets</code> and
+<code>DivergenceExpressionSets</code> using the <code><a href="../reference/MatchMap.html">MatchMap()</a></code>
+function.</p>
+<p>In the <a href="Intermediate.html">Intermediate</a> vignette users
+learned about more detailed analyses and more specialized techniques to
+investigate the observed phylotranscriptomics patterns
+(<code>TAI</code>, <code>TDI</code>, <code>RE</code>, etc.).</p>
 </div>
-<div id="investigating-age-or-divergence-category-specific-expression-level-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#investigating-age-or-divergence-category-specific-expression-level-distributions" class="anchor"></a>Investigating Age or Divergence Category Specific Expression Level Distributions</h2>
-<p>Gene expression levels are a fundamental aspect of phylotranscriptomics studies. In detail, phylotranscriptomic measures aim to quantify the expression intensity of genes deriving from common age or divergence categories to detect stages of evolutionary constraints. Hence, the gene expression distribution of age or divergence categories as well as their differences within and between stages or categories allow us to investigate the age (PS) or divergence (DS) category specific contribution to the corresponding transcriptome.</p>
-<p>For this purpose, the <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> aims to visualize the expression level distribution of each phylostratum during each time point or experiment as barplot, dot plot, or violin plot enabling users to quantify the age (PS) or divergence (DS) category specific contribution to the corresponding transcriptome.</p>
-<p>This way of visualizing the gene expression distribution of each age (PS) or divergence (DS) category during all developmental stages or experiments allows users to detect specific age or divergence categories contributing significant levels of gene expression to the underlying biological process (transcriptome).</p>
+<div class="section level2">
+<h2 id="investigating-age-or-divergence-category-specific-expression-level-distributions">Investigating Age or Divergence Category Specific Expression Level
+Distributions<a class="anchor" aria-label="anchor" href="#investigating-age-or-divergence-category-specific-expression-level-distributions"></a>
+</h2>
+<p>Gene expression levels are a fundamental aspect of
+phylotranscriptomics studies. In detail, phylotranscriptomic measures
+aim to quantify the expression intensity of genes deriving from common
+age or divergence categories to detect stages of evolutionary
+constraints. Hence, the gene expression distribution of age or
+divergence categories as well as their differences within and between
+stages or categories allow us to investigate the age (PS) or divergence
+(DS) category specific contribution to the corresponding
+transcriptome.</p>
+<p>For this purpose, the <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> aims to
+visualize the expression level distribution of each phylostratum during
+each time point or experiment as barplot, dot plot, or violin plot
+enabling users to quantify the age (PS) or divergence (DS) category
+specific contribution to the corresponding transcriptome.</p>
+<p>This way of visualizing the gene expression distribution of each age
+(PS) or divergence (DS) category during all developmental stages or
+experiments allows users to detect specific age or divergence categories
+contributing significant levels of gene expression to the underlying
+biological process (transcriptome).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># category-centered visualization of PS specific expression level distributions (log-scale)</span>
-<span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
-                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,
-                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,
-                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,
-                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># category-centered visualization of PS specific expression level distributions (log-scale)</span></span>
+<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span>
+<span>                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,</span>
+<span>                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,</span>
+<span>                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
 category-centered "***"  "***"    "***"    "***" "***"   "***" "***"</code></pre>
-<p>The resulting boxplot illustrates the log expression levels of each phylostratum during each developmental stage. Additionally, a Kruskal-Wallis Rank Sum Test as well as a Benjamini &amp; Hochberg p-value adjustment for multiple comparisons is performed (<code>test.stat = TRUE</code>) to statistically quantify the differences between expression levels of different age or divergence categories. This type of analysis allows users to detect stages or experiments that show high diviation between age or divergence category contributions to the overall transcriptome or no significant deviations of age or divergence categories, suggesting equal age or divergence category contributions to the overall transcriptome. The corresponding P-values are printed to the console using the following notation:</p>
+<p>The resulting boxplot illustrates the log expression levels of each
+phylostratum during each developmental stage. Additionally, a
+Kruskal-Wallis Rank Sum Test as well as a Benjamini &amp; Hochberg
+p-value adjustment for multiple comparisons is performed
+(<code>test.stat = TRUE</code>) to statistically quantify the
+differences between expression levels of different age or divergence
+categories. This type of analysis allows users to detect stages or
+experiments that show high diviation between age or divergence category
+contributions to the overall transcriptome or no significant deviations
+of age or divergence categories, suggesting equal age or divergence
+category contributions to the overall transcriptome. The corresponding
+P-values are printed to the console using the following notation:</p>
 <ul>
-<li><p>’*’ = P-Value <span class="math inline">\(\leq\)</span> 0.05</p></li>
-<li><p>’**’ = P-Value <span class="math inline">\(\leq\)</span> 0.005</p></li>
-<li><p>’***’ = P-Value <span class="math inline">\(\leq\)</span> 0.0005</p></li>
+<li><p>’*’ = P-Value <span class="math inline">\(\leq\)</span>
+0.05</p></li>
+<li><p>’**’ = P-Value <span class="math inline">\(\leq\)</span>
+0.005</p></li>
+<li><p>’***’ = P-Value <span class="math inline">\(\leq\)</span>
+0.0005</p></li>
 <li><p>‘n.s.’ = not significant = P-Value &gt; 0.05</p></li>
 </ul>
-<p>In this case all developmental stages show significant differences in phylostratum specific gene expression.</p>
-<p><strong>Please notice that users need to define the <code>legendName</code> argument as <code>PS</code> or <code>DS</code> to specify whether the input <code>ExpressionSet</code> is a <code>PhyloExpressionSet</code> (<code>legendName = 'PS'</code>) or <code>DivergenceExpressionSet</code> (<code>legendName = 'DS'</code>).</strong></p>
-<p>Alternatively, users can investigate the differences of gene expression <strong>between</strong> all stages or experiments for <strong>each</strong> age or divergence category by specifying <code>type = 'stage-centered'</code>.</p>
+<p>In this case all developmental stages show significant differences in
+phylostratum specific gene expression.</p>
+<p><strong>Please notice that users need to define the
+<code>legendName</code> argument as <code>PS</code> or <code>DS</code>
+to specify whether the input <code>ExpressionSet</code> is a
+<code>PhyloExpressionSet</code> (<code>legendName = 'PS'</code>) or
+<code>DivergenceExpressionSet</code>
+(<code>legendName = 'DS'</code>).</strong></p>
+<p>Alternatively, users can investigate the differences of gene
+expression <strong>between</strong> all stages or experiments for
+<strong>each</strong> age or divergence category by specifying
+<code>type = 'stage-centered'</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># stage-centered visualization of PS specific expression level distributions (log-scale)</span>
-<span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
-                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,
-                 type          <span class="op">=</span> <span class="st">"stage-centered"</span>,
-                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,
-                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># stage-centered visualization of PS specific expression level distributions (log-scale)</span></span>
+<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span>
+<span>                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 type          <span class="op">=</span> <span class="st">"stage-centered"</span>,</span>
+<span>                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,</span>
+<span>                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>               PS1   PS2   PS3    PS4 PS5    PS6 PS7    PS8    PS9    PS10  PS11   PS12 
 stage-centered "***" "***" "n.s." "*" "n.s." "*" "n.s." "n.s." "n.s." "***" "n.s." "***"</code></pre>
-<p>Here, the Kruskal-Wallis Rank Sum Test (with Benjamini &amp; Hochberg p-value adjustment) quantifies whether or not the gene expression distribution of a single age or divergence category significantly changes throughout development or experiments. This type of analysis allows users to detect specific age or divergence categories that significantly change their expression levels throughout development or experiments.</p>
-<p>In this case, users will observe that PS3,5,7-9,11 do not show significant differences of gene expression between developmental stages suggesting that their contribution to the overall transcriptome remains constant throughout development.</p>
-<p>Finally, users can choose the following plot types to visualize expression distributions:</p>
+<p>Here, the Kruskal-Wallis Rank Sum Test (with Benjamini &amp; Hochberg
+p-value adjustment) quantifies whether or not the gene expression
+distribution of a single age or divergence category significantly
+changes throughout development or experiments. This type of analysis
+allows users to detect specific age or divergence categories that
+significantly change their expression levels throughout development or
+experiments.</p>
+<p>In this case, users will observe that PS3,5,7-9,11 do not show
+significant differences of gene expression between developmental stages
+suggesting that their contribution to the overall transcriptome remains
+constant throughout development.</p>
+<p>Finally, users can choose the following plot types to visualize
+expression distributions:</p>
 <p>Argument: <code>distr.type</code></p>
 <ul>
-<li><p><code>distr.type = "boxplot"</code> This specification allows users to visualize the expression distribution of all PS or DS as boxplot.</p></li>
-<li><p><code>distr.type = "violin"</code> This specification allows users to visualize the expression distribution of all PS or DS as violin plot.</p></li>
-<li><p><code>distr.type = "dotplot"</code> This specification allows users to visualize the expression distribution of all PS or DS as dot plot.</p></li>
+<li><p><code>distr.type = "boxplot"</code> This specification allows
+users to visualize the expression distribution of all PS or DS as
+boxplot.</p></li>
+<li><p><code>distr.type = "violin"</code> This specification allows
+users to visualize the expression distribution of all PS or DS as violin
+plot.</p></li>
+<li><p><code>distr.type = "dotplot"</code> This specification allows
+users to visualize the expression distribution of all PS or DS as dot
+plot.</p></li>
 </ul>
-<p>Together, studies perfomed with <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> allow users to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome than other genes originating from different PS or DS categories. More specialized analyses such as <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code>, <code><a href="../reference/PlotRE.html">PlotRE()</a></code>, <code><a href="../reference/PlotBarRE.html">PlotBarRE()</a></code>, <code><a href="../reference/TAI.html">TAI()</a></code>, <code><a href="../reference/TDI.html">TDI()</a></code>, etc. will then allow them to study the exact mean expression patterns of these age or divergence categories.</p>
-<p>Users will notice that so far all examples shown above specified <code>log.expr = TRUE</code> illustrating boxplots based on log2 expression levels. This way of visualization allows better visual comparisons between age or divergence categories. However, when specifying <code>log.expr = FALSE</code> absolute expression levels will be visualized in the corresponding boxplot.</p>
-<p>Alternatively, instead of specifying <code>log.expr = TRUE</code> users can directly pass log2 transformed expression levels to <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> via <code>tf(PhyloExpressionSetExample,log2)</code> (when <code>log.expr = FALSE</code>):</p>
+<p>Together, studies perfomed with <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> allow
+users to conclude that genes originating in specific PS or DS contribute
+significantly more to the overall transcriptome than other genes
+originating from different PS or DS categories. More specialized
+analyses such as <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code>, <code><a href="../reference/PlotRE.html">PlotRE()</a></code>,
+<code><a href="../reference/PlotBarRE.html">PlotBarRE()</a></code>, <code><a href="../reference/TAI.html">TAI()</a></code>, <code><a href="../reference/TDI.html">TDI()</a></code>, etc.
+will then allow them to study the exact mean expression patterns of
+these age or divergence categories.</p>
+<p>Users will notice that so far all examples shown above specified
+<code>log.expr = TRUE</code> illustrating boxplots based on log2
+expression levels. This way of visualization allows better visual
+comparisons between age or divergence categories. However, when
+specifying <code>log.expr = FALSE</code> absolute expression levels will
+be visualized in the corresponding boxplot.</p>
+<p>Alternatively, instead of specifying <code>log.expr = TRUE</code>
+users can directly pass log2 transformed expression levels to
+<code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> via
+<code>tf(PhyloExpressionSetExample,log2)</code> (when
+<code>log.expr = FALSE</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># category-centered visualization of PS specific expression level distributions (log-scale)</span>
-<span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>, <span class="va">log2</span><span class="op">)</span>,
-                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,
-                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,
-                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,
-                 log.expr      <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># category-centered visualization of PS specific expression level distributions (log-scale)</span></span>
+<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>, <span class="va">log2</span><span class="op">)</span>,</span>
+<span>                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,</span>
+<span>                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,</span>
+<span>                 log.expr      <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
 category-centered "***"  "***"    "***"    "***" "***"   "***" "***" </code></pre>
-<p>Or any other expression level transformation, e.g. <code>sqrt</code>.</p>
+<p>Or any other expression level transformation,
+e.g. <code>sqrt</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># category-centered visualization of PS specific expression level distributions (sqrt-scale)</span>
-<span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>, <span class="va">sqrt</span><span class="op">)</span>,
-                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,
-                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,
-                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,
-                 log.expr      <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># category-centered visualization of PS specific expression level distributions (sqrt-scale)</span></span>
+<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>, <span class="va">sqrt</span><span class="op">)</span>,</span>
+<span>                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,</span>
+<span>                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,</span>
+<span>                 log.expr      <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
 category-centered "***"  "***"    "***"    "***" "***"   "***" "***" </code></pre>
 </div>
-<div id="gene-subset-age-or-divergence-category-specific-expression-level-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#gene-subset-age-or-divergence-category-specific-expression-level-distributions" class="anchor"></a>Gene Subset Age or Divergence Category Specific Expression Level Distributions</h2>
-<p>In some cases, users wish to visualize the gene expression distributions for a subset of genes in contrast to the entire transcriptome. For this purpose, the <code>gene.set</code> argument allows users to specify the gene ids of a subset of genes that shall be matched in the input <code>ExpressionSet</code> and for which expression level distributions shall be visualized.</p>
+<div class="section level2">
+<h2 id="gene-subset-age-or-divergence-category-specific-expression-level-distributions">Gene Subset Age or Divergence Category Specific Expression Level
+Distributions<a class="anchor" aria-label="anchor" href="#gene-subset-age-or-divergence-category-specific-expression-level-distributions"></a>
+</h2>
+<p>In some cases, users wish to visualize the gene expression
+distributions for a subset of genes in contrast to the entire
+transcriptome. For this purpose, the <code>gene.set</code> argument
+allows users to specify the gene ids of a subset of genes that shall be
+matched in the input <code>ExpressionSet</code> and for which expression
+level distributions shall be visualized.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># define an example gene subset (500 genes) which</span>
-<span class="co"># can be found in the input ExpressionSet</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
-<span class="va">example.gene.set</span> <span class="op">&lt;-</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25260</span>,<span class="fl">500</span><span class="op">)</span> , <span class="fl">2</span><span class="op">]</span>
-<span class="co"># visualize the gene expression distributions for these 500 genes (category-centered)</span>
-<span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
-                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,
-                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,
-                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,
-                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span>,
-                 gene.set      <span class="op">=</span> <span class="va">example.gene.set</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># define an example gene subset (500 genes) which</span></span>
+<span><span class="co"># can be found in the input ExpressionSet</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span></span>
+<span><span class="va">example.gene.set</span> <span class="op">&lt;-</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25260</span>,<span class="fl">500</span><span class="op">)</span> , <span class="fl">2</span><span class="op">]</span></span>
+<span><span class="co"># visualize the gene expression distributions for these 500 genes (category-centered)</span></span>
+<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span>
+<span>                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 type          <span class="op">=</span> <span class="st">"category-centered"</span>,</span>
+<span>                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,</span>
+<span>                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 gene.set      <span class="op">=</span> <span class="va">example.gene.set</span><span class="op">)</span></span></code></pre></div>
 <pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent Mature
 category-centered "*"    "*"      "*"      "*"   "*"     "*"  "n.s."</code></pre>
 <p>Or analogously <code>stage-centered</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># define an example gene subset (500 genes) which</span>
-<span class="co"># can be found in the input ExpressionSet</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span>
-<span class="va">example.gene.set</span> <span class="op">&lt;-</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25260</span>,<span class="fl">500</span><span class="op">)</span> , <span class="fl">2</span><span class="op">]</span>
-<span class="co"># visualize the gene expression distributions for these 500 genes (stage-centered)</span>
-<span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
-                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,
-                 type          <span class="op">=</span> <span class="st">"stage-centered"</span>,
-                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,
-                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span>,
-                 gene.set      <span class="op">=</span> <span class="va">example.gene.set</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># define an example gene subset (500 genes) which</span></span>
+<span><span class="co"># can be found in the input ExpressionSet</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span></span>
+<span><span class="va">example.gene.set</span> <span class="op">&lt;-</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25260</span>,<span class="fl">500</span><span class="op">)</span> , <span class="fl">2</span><span class="op">]</span></span>
+<span><span class="co"># visualize the gene expression distributions for these 500 genes (stage-centered)</span></span>
+<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span>
+<span>                 legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>                 test.stat     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 type          <span class="op">=</span> <span class="st">"stage-centered"</span>,</span>
+<span>                 distr.type    <span class="op">=</span> <span class="st">"boxplot"</span>,</span>
+<span>                 log.expr      <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 gene.set      <span class="op">=</span> <span class="va">example.gene.set</span><span class="op">)</span></span></code></pre></div>
 <pre><code>               PS1    PS2    PS3    PS4    PS5    PS6    PS7    PS8    PS9    PS10   PS11  
 stage-centered "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s." "n.s."
                PS12  
 stage-centered "n.s."</code></pre>
-<p>For example, users interested in the enrichment of PS or DS values in <em>D. rerio</em> brain genes (see <a href="Enrichment.html">Enrichment Vignette</a> for details) could also visualize their gene expression distributions throughout development with <code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> in cases where expression data is available.</p>
+<p>For example, users interested in the enrichment of PS or DS values in
+<em>D. rerio</em> brain genes (see <a href="Enrichment.html">Enrichment
+Vignette</a> for details) could also visualize their gene expression
+distributions throughout development with
+<code><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr()</a></code> in cases where expression data is
+available.</p>
 </div>
-<div id="computing-the-significant-differences-between-gene-expression-distributions-of-ps-or-ds-groups" class="section level2">
-<h2 class="hasAnchor">
-<a href="#computing-the-significant-differences-between-gene-expression-distributions-of-ps-or-ds-groups" class="anchor"></a>Computing the significant differences between gene expression distributions of PS or DS groups</h2>
-<p>As proposed by Quint et al., 2012 in some cases users whish to compare the difference of group specific expression levels using a statsitical test.</p>
-<p>For this purpose, the <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> function performs a test to quantify the statistical significance between the global expression level distributions of groups of PS or DS. It therefore allows users to investigate significant groups of PS or DS that significantly differ in their gene expression level distibution within specific developmental stages or experiments.</p>
-<p>Analogous to the <code><a href="../reference/PlotRE.html">PlotRE()</a></code> or <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code> function (see <a href="Introduction.html">Introduction</a> for details), users need to pass the <code>Groups</code> to <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> specifying the groups that shall be compared.</p>
+<div class="section level2">
+<h2 id="computing-the-significant-differences-between-gene-expression-distributions-of-ps-or-ds-groups">Computing the significant differences between gene expression
+distributions of PS or DS groups<a class="anchor" aria-label="anchor" href="#computing-the-significant-differences-between-gene-expression-distributions-of-ps-or-ds-groups"></a>
+</h2>
+<p>As proposed by Quint et al., 2012 in some cases users whish to
+compare the difference of group specific expression levels using a
+statsitical test.</p>
+<p>For this purpose, the <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> function performs
+a test to quantify the statistical significance between the global
+expression level distributions of groups of PS or DS. It therefore
+allows users to investigate significant groups of PS or DS that
+significantly differ in their gene expression level distibution within
+specific developmental stages or experiments.</p>
+<p>Analogous to the <code><a href="../reference/PlotRE.html">PlotRE()</a></code> or <code><a href="../reference/PlotMeans.html">PlotMeans()</a></code>
+function (see <a href="Introduction.html">Introduction</a> for details),
+users need to pass the <code>Groups</code> to
+<code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> specifying the groups that shall be
+compared.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
-               Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-               legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-               plot.type     <span class="op">=</span> <span class="st">"p-vals"</span>,
-               type          <span class="op">=</span> <span class="st">"b"</span>,
-               lwd           <span class="op">=</span> <span class="fl">6</span>,
-               xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span><span class="op">)</span></code></pre></div>
-<p>In cases where no plot shall be drawn and only the resulting p-value shall be returned users can specify the <code>plot.type = NULL</code> argument to receive only p-values returned by the underlying test statistic.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span>
+<span>               Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>               legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>               plot.type     <span class="op">=</span> <span class="st">"p-vals"</span>,</span>
+<span>               type          <span class="op">=</span> <span class="st">"b"</span>,</span>
+<span>               lwd           <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>               xlab          <span class="op">=</span> <span class="st">"Ontogeny"</span><span class="op">)</span></span></code></pre></div>
+<p>In cases where no plot shall be drawn and only the resulting p-value
+shall be returned users can specify the <code>plot.type = NULL</code>
+argument to receive only p-values returned by the underlying test
+statistic.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># only receive the p-values without the corresponding plot</span>
-<span class="fu"><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,
-               Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-               legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-               plot.type     <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p>Optionally, users can also visualize the difference in expression level distributions of groups of PS/DS during each developmental stage by specifying the <code>plot.type = "boxplot"</code> argument.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># only receive the p-values without the corresponding plot</span></span>
+<span><span class="fu"><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span>
+<span>               Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>               legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>               plot.type     <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p>Optionally, users can also visualize the difference in expression
+level distributions of groups of PS/DS during each developmental stage
+by specifying the <code>plot.type = "boxplot"</code> argument.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI">myTAI</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span>
-<span class="co"># visualize difference as boxplot</span>
-<span class="fu"><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,<span class="va">log2</span><span class="op">)</span>,
-               Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-               legendName    <span class="op">=</span> <span class="st">"PS"</span>,
-               plot.type     <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></code></pre></div>
-<p>Here, we use log2 transformed expression levels for better visualization (<code>tf(PhyloExpressionSetExample,log2)</code>).</p>
-<p>Internally, the <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> function performs a Wilcoxon Rank Sum test to quantify the statistical significance of PS/DS group expression. This quantification allows users to detect developmental stages of significant expression level differences between PS/DS groups. In this example we chose genes originated before the evolution of embryogenesis evolved in plants (Group1 = PS1-3) versus genes originated after the evolution of embryogenesis evolved in plants (Group2 = PS4-12). As a result, we observe that indeed the difference in total gene expression between these groups is significant throughout embryogenesis. In terms of the P-value quantification we observe that the P-value is minimized towards the phylotypic period. Hence, the expression level difference between the studied PS groups is maximized during the phylotypic period.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
+<span><span class="co"># visualize difference as boxplot</span></span>
+<span><span class="fu"><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,<span class="va">log2</span><span class="op">)</span>,</span>
+<span>               Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>               legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
+<span>               plot.type     <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></code></pre></div>
+<p>Here, we use log2 transformed expression levels for better
+visualization (<code>tf(PhyloExpressionSetExample,log2)</code>).</p>
+<p>Internally, the <code><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> function performs a
+Wilcoxon Rank Sum test to quantify the statistical significance of PS/DS
+group expression. This quantification allows users to detect
+developmental stages of significant expression level differences between
+PS/DS groups. In this example we chose genes originated before the
+evolution of embryogenesis evolved in plants (Group1 = PS1-3) versus
+genes originated after the evolution of embryogenesis evolved in plants
+(Group2 = PS4-12). As a result, we observe that indeed the difference in
+total gene expression between these groups is significant throughout
+embryogenesis. In terms of the P-value quantification we observe that
+the P-value is minimized towards the phylotypic period. Hence, the
+expression level difference between the studied PS groups is maximized
+during the phylotypic period.</p>
 </div>
   </div>
 
@@ -290,11 +408,13 @@ stage-centered "n.s."</code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
+  <p></p>
+<p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -302,6 +422,8 @@ stage-centered "n.s."</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

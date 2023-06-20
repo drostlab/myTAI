@@ -1,5 +1,5 @@
-pandoc: 2.14.0.3
-pkgdown: 1.6.1
+pandoc: 2.19.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Advanced: Advanced.html
@@ -9,6 +9,5 @@ articles:
   Introduction: Introduction.html
   Phylostratigraphy: Phylostratigraphy.html
   Taxonomy: Taxonomy.html
-  scRNAseq: scRNAseq.html
-last_built: 2022-03-24T14:33Z
+last_built: 2023-06-20T12:31Z
 
