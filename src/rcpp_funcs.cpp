@@ -24,6 +24,10 @@ int randWrapper(const int& n)
         return floor(unif_rand() * n); 
 }
 
+// Initilizing the random number generator outside of the function
+std::random_device rng;
+std::mt19937 urng(rng());
+
 NumericVector permut(const NumericVector& a)
 {
         
@@ -33,8 +37,6 @@ NumericVector permut(const NumericVector& a)
         // clone a into b to leave a alone
         NumericVector b = clone(a);
         
-        std::random_device rng;
-        std::mt19937 urng(rng());
         std::shuffle(b.begin(), b.end(), urng);
         
         return b;
