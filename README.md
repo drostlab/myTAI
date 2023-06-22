@@ -14,7 +14,7 @@ In the past years, a variety of studies aimed to uncover the molecular basis of 
 
 Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest (molecular phenotype), they rarely capture __how__ these expression patterns emerged in the first place or to __what extent__ they are possibly constrained, thereby neglecting the evolutionary history and developmental constraints of genes contributing to the overall pool of expressed transcripts. 
 
-To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate `gene age` information inferred with [GenEra](https://github.com/josuebarrera/GenEra) into classical gene expression analysis. 
+To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate `gene age` information inferred with [GenEra](https://github.com/josuebarrera/GenEra) into classical gene expression analysis. Furthermore, previously inferred `gene age` information can be found [here](https://github.com/HajkD/published_phylomaps).
 
 Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary and developmental constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.
 
