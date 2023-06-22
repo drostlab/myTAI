@@ -24,4 +24,4 @@ code
 ```
 about the feature request here.
 
-Please also feel free to [refer to the code in the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-code)
+Please also feel free to [refer to the `myTAI` code in the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-code)
