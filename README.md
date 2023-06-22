@@ -18,7 +18,7 @@ To overcome this limitation, the `myTAI` package introduces procedures summarize
 
 Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary and developmental constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.
 
-### Please find detailed documentation documentation [here](https://drostlab.github.io/myTAI/articles/Introduction.html)
+### Detailed documentation provided [here](https://drostlab.github.io/myTAI/articles/Introduction.html)
 
 ## Citation
 Please cite the following paper when using `myTAI` for your own research. This will allow me to continue working on this software tool and will motivate me to extend its functionality and usability in the next years. Many thanks in advance!
