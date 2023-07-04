@@ -220,9 +220,10 @@ FlatLineTest <- function(ExpressionSet,
         }
         
         pval <- stats::pgamma(real.var,shape = shape,rate = rate,lower.tail = FALSE)
-        sd_values <- apply(resMatrix,2,stats::sd)
         
+        sd_values <- apply(resMatrix,2,stats::sd)
+        ks_test <- ks.test(x, "pgamma", shape, rate)
         #cat("\n")
-        return(list(p.value = pval,std.dev = sd_values))
+        return(list(p.value = pval,std.dev = sd_values,ks_test = ks_test))
 }
 
