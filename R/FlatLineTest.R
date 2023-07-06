@@ -35,6 +35,7 @@
 #' \itemize{
 #' \item \code{p.value} the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.
 #' \item \code{std.dev} the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
+#' \item \code{std.dev} the Kolmogorov-Smirnov test satistics for fitting a gamma distribution to the variances of the dataset with permuted phylostrata.
 #' }
 #' @references 
 #' 
@@ -281,6 +282,6 @@ FlatLineTest <- function(ExpressionSet,
         
         sd_values <- apply(resMatrix,2,stats::sd)
         
-        return(list(p.value = pval,std.dev = sd_values,ks_test))
+        return(list(p.value = pval,std.dev = sd_values,ks.test = ks_test))
 }
 
