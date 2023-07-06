@@ -4,7 +4,7 @@
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/myTAI)](https://github.com/r-hub/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/myTAI)](https://github.com/r-hub/cranlogs.app)
 [![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://academic.oup.com/bioinformatics/article/34/9/1589/4772684)  
-
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&label=VISITORS&countColor=%23263759&style=flat)
 
 # Evolutionary Transcriptomics with R
 
@@ -14,12 +14,11 @@ In the past years, a variety of studies aimed to uncover the molecular basis of 
 
 Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest (molecular phenotype), they rarely capture __how__ these expression patterns emerged in the first place or to __what extent__ they are possibly constrained, thereby neglecting the evolutionary history and developmental constraints of genes contributing to the overall pool of expressed transcripts. 
 
-To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate `gene age` information inferred with [GenEra](https://github.com/josuebarrera/GenEra) into classical gene expression analysis. Furthermore, previously inferred `gene age` information can be found [here](https://github.com/HajkD/published_phylomaps).
+To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate `gene age` information inferred with [GenEra](https://github.com/josuebarrera/GenEra) into classical gene expression analysis. Previously inferred `gene age` information can be found [here](https://github.com/HajkD/published_phylomaps), of which recent precomputed `gene age` information can be retrieved via [`phylomapr`](https://github.com/LotharukpongJS/phylomapr).
 
 Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary and developmental constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.
 
-Please find a detailed documentation [here](https://drostlab.github.io/myTAI/articles/Introduction.html).
-
+### Detailed documentation provided [here](https://drostlab.github.io/myTAI/articles/Introduction.html)
 
 ## Citation
 Please cite the following paper when using `myTAI` for your own research. This will allow me to continue working on this software tool and will motivate me to extend its functionality and usability in the next years. Many thanks in advance!
