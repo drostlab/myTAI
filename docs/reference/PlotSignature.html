@@ -117,20 +117,22 @@
 <dd><p>a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
 Possible values can be:</p><ul><li><p><code>TestStatistic</code> = <code>"FlatLineTest"</code> : Statistical test for the deviation from a flat line</p></li>
 <li><p><code>TestStatistic</code> = <code>"ReductiveHourglassTest"</code> : Statistical test for the existence of a hourglass shape (high-low-high pattern)</p></li>
-<li><p><code>TestStatistic</code> = <code>"EarlyConservationTest"</code> : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)</p></li>
+<li><p><code>TestStatistic</code> = <code>"EarlyConservationTest"</code> : Statistical test for the existence of a early conservation pattern (low-high-high pattern)</p></li>
+<li><p><code>TestStatistic</code> = <code>"LateConservationTest"</code> : Statistical test for the existence of a late conservation pattern (high-high-low pattern)</p></li>
 <li><p><code>TestStatistic</code> = <code>"ReverseHourglassTest"</code> : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)</p></li>
 </ul></dd>
 
 
 <dt>modules</dt>
-<dd><p>a list storing three elements for the <code><a href="ReductiveHourglassTest.html">ReductiveHourglassTest</a></code>, <code><a href="EarlyConservationTest.html">EarlyConservationTest</a></code>, or <code><a href="ReverseHourglassTest.html">ReverseHourglassTest</a></code>: early, mid, and late. 
+<dd><p>a list storing three elements for the <code><a href="ReductiveHourglassTest.html">ReductiveHourglassTest</a></code>, <code><a href="EarlyConservationTest.html">EarlyConservationTest</a></code>, <code><a href="LateConservationTest.html">LateConservationTest</a></code>, 
+or <code><a href="ReverseHourglassTest.html">ReverseHourglassTest</a></code>: early, mid, and late. 
 Each element expects a numeric vector specifying the developmental stages 
 or experiments that correspond to each module. For example:</p><ul><li><p><code>module</code> = <code>list(early = 1:2, mid = 3:5, late = 6:7)</code> divides a dataset storing seven developmental stages into 3 modules.</p></li>
 </ul></dd>
 
 
 <dt>permutations</dt>
-<dd><p>a numeric value specifying the number of permutations to be performed for the <code><a href="FlatLineTest.html">FlatLineTest</a></code>, <code><a href="EarlyConservationTest.html">EarlyConservationTest</a></code>, <code><a href="ReductiveHourglassTest.html">ReductiveHourglassTest</a></code> or <code><a href="ReverseHourglassTest.html">ReverseHourglassTest</a></code>.</p></dd>
+<dd><p>a numeric value specifying the number of permutations to be performed for the <code><a href="FlatLineTest.html">FlatLineTest</a></code>, <code><a href="EarlyConservationTest.html">EarlyConservationTest</a></code>, <code><a href="LateConservationTest.html">LateConservationTest</a></code>, <code><a href="ReductiveHourglassTest.html">ReductiveHourglassTest</a></code> or <code><a href="ReverseHourglassTest.html">ReverseHourglassTest</a></code>.</p></dd>
 
 
 <dt>lillie.test</dt>

@@ -130,16 +130,16 @@ Possible values can be:</p><ul><li><p><code>TestStatistic</code> = <code>"FlatLi
 <dt>modules</dt>
 <dd><p>a list storing three elements: early, mid, and late. Each element expects a numeric
 vector specifying the developmental stages or experiments that correspond to each module. 
-For example, <code>module</code> = list(early = 1:2, mid = 3:5, late = 6:7) devides a dataset 
+For example, <code>module</code> = list(early = 1:2, mid = 3:5, late = 6:7) divides a dataset 
 storing seven developmental stages into 3 modules.</p></dd>
 
 
 <dt>permutations</dt>
-<dd><p>a numeric value specifying the number of permutations to be performed for the <code>ReductiveHourglassTest</code>.</p></dd>
+<dd><p>a numeric value specifying the number of permutations to be performed for the <code><a href="FlatLineTest.html">FlatLineTest</a></code>, <code><a href="EarlyConservationTest.html">EarlyConservationTest</a></code>, <code><a href="LateConservationTest.html">LateConservationTest</a></code>, <code><a href="ReductiveHourglassTest.html">ReductiveHourglassTest</a></code> or <code><a href="ReverseHourglassTest.html">ReverseHourglassTest</a></code>.</p></dd>
 
 
 <dt>pseudocount</dt>
-<dd><p>any valid number to the expression matrix prior to transformation.</p></dd>
+<dd><p>any valid number to add to the expression matrix prior to transformation.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -153,10 +153,10 @@ storing seven developmental stages into 3 modules.</p></dd>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>An assessment for the stability of a data transforms on the results of the permutation test of choice.
-The reductive hourglass test is a permutation test based on the following test statistic. 
-For details, please consult <code><a href="ReductiveHourglassTest.html">ReductiveHourglassTest</a></code>, <code><a href="FlatLineTest.html">FlatLineTest</a></code>, 
-<code><a href="ReverseHourglassTest.html">ReverseHourglassTest</a></code> or <code><a href="EarlyConservationTest.html">EarlyConservationTest</a></code></p>
+    <p>An assessment for the stability of data transforms on the permutation test of choice.
+For details, please consult <code><a href="tf.html">tf</a></code>, <code><a href="ReductiveHourglassTest.html">ReductiveHourglassTest</a></code>, 
+<code><a href="FlatLineTest.html">FlatLineTest</a></code>, <code><a href="ReverseHourglassTest.html">ReverseHourglassTest</a></code>,
+<code><a href="LateConservationTest.html">LateConservationTest</a></code> or <code><a href="EarlyConservationTest.html">EarlyConservationTest</a></code></p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -188,7 +188,7 @@ For details, please consult <code><a href="ReductiveHourglassTest.html">Reductiv
 <span class="r-in"><span>                     modules <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Proceeding with the ReductiveHourglassTest</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         log2         sqrt         none </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.001694e-01 8.172005e-08 5.022254e-08 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9.739267e-02 9.041543e-08 1.212291e-08 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># it is also possible to test the phylotranscriptomic pattern using rlog </span></span></span>
@@ -206,7 +206,7 @@ For details, please consult <code><a href="ReductiveHourglassTest.html">Reductiv
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    specify fitType='local' or 'mean' to avoid this message next time.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The phylotranscriptomic pattern may not follow an hourglass pattern (high-low-high).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         log2         sqrt         none          vst </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9.763168e-02 1.467018e-07 3.195307e-09 9.035255e-01 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.131163e-01 2.273740e-07 2.283417e-08 9.020114e-01 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
