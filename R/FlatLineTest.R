@@ -95,12 +95,13 @@
 #' 
 GetGamma <- function(var_values,permutations)
 {
+  step = 0.0005
   sorted_vars = sort(var_values, decreasing = TRUE)
   max_p_fit_v = 0
   max_p_i = 0
   for (i in 0:100) {
     # Filtered variables
-    filtered_vars <- sorted_vars[round(length(var_values)*i*0.0005):length(var_values)]
+    filtered_vars <- sorted_vars[round(length(var_values)*i*step):length(var_values)]
     
     # Estimate parameters using method of moments
     gamma_fit <- fitdistrplus::fitdist(filtered_vars,"gamma", method = "mme")
@@ -124,7 +125,7 @@ GetGamma <- function(var_values,permutations)
   max_p_fit_v = 0
   for (i in -10:10) {
     # Filtered variables
-    filtered_vars <- sorted_vars[round(length(var_values)*(max_p_i*0.0005+i*0.00005)):length(var_values)]
+    filtered_vars <- sorted_vars[round(length(var_values)*(max_p_i*step+i*step/10)):length(var_values)]
     
     # Estimate parameters using method of moments
     gamma_fit <- fitdistrplus::fitdist(filtered_vars,"gamma", method = "mme")
