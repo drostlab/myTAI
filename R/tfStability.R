@@ -11,9 +11,9 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param modules a list storing three elements: early, mid, and late. Each element expects a numeric
 #' vector specifying the developmental stages or experiments that correspond to each module. 
-#' For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) devides a dataset 
+#' For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) divides a dataset 
 #' storing seven developmental stages into 3 modules.
-#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{ReductiveHourglassTest}.
+#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.
 #' @param TestStatistic a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
 #' Possible values can be: 
 #' \itemize{
@@ -24,12 +24,12 @@
 #' \item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 #' }
 #' @param transforms a character vector of any valid function that transforms gene expression levels.
-#' @param pseudocount any valid number to the expression matrix prior to transformation.
+#' @param pseudocount any valid number to add to the expression matrix prior to transformation.
 #' @details 
-#' An assessment for the stability of a data transforms on the results of the permutation test of choice.
-#' The reductive hourglass test is a permutation test based on the following test statistic. 
-#' For details, please consult \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
-#' \code{\link{ReverseHourglassTest}} or \code{\link{EarlyConservationTest}}
+#' An assessment for the stability of data transforms on the permutation test of choice.
+#' For details, please consult \code{\link{tf}}, \code{\link{ReductiveHourglassTest}}, 
+#' \code{\link{FlatLineTest}}, \code{\link{ReverseHourglassTest}},
+#' \code{\link{LateConservationTest}} or \code{\link{EarlyConservationTest}}
 #'
 #' @return a vector object containing the vector elements:
 #' 

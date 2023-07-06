@@ -38,6 +38,7 @@ Imports:
     tibble,
     scales,
     gridExtra,
+    ggpubr,
     Matrix,
     decor,
     RcppThread
