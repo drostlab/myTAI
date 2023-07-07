@@ -148,7 +148,7 @@ FlatLineTest <- function(ExpressionSet,
     gamma = fitdistrplus::fitdist(var_values,"gamma", method = "mme")
     shape = gamma$estimate[1]
     rate = gamma$estimate[2]
-    ks_test <- stats::ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
+    ks_test <- stats::ks.test(var_values, "pgamma", shape = shape, rate = rate)
   }
   if (permutations <= 20000) {
     message("It is recommended to use at least 20000 permutations.")
