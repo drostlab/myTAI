@@ -192,7 +192,7 @@ PlotMedians <- function(ExpressionSet,
                 }
                 p1 <- p1 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
                 p2 <- p2 + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
-                return(gridExtra::grid.arrange(p1, p2, ncol = 2))
+                return(ggpubr::ggarrange(p1, p2, ncol = 2))
         }
 }
 

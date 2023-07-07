@@ -24,7 +24,7 @@
 #' \item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 #' }
 #' @param transforms a character vector of any valid function that transforms gene expression levels.
-#' @param pseudocount any valid number to add to the expression matrix prior to transformation.
+#' @param pseudocount any valid number to add to the expression matrix prior to log transformations.
 #' @details 
 #' An assessment for the stability of data transforms on the permutation test of choice.
 #' For details, please consult \code{\link{tf}}, \code{\link{ReductiveHourglassTest}}, 

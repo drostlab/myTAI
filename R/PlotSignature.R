@@ -25,7 +25,7 @@
 #' } 
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.
 #' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.
-#' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.
+#' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed as a subtitle.
 #' @param shaded.area a boolean value specifying whether a shaded area shall 
 #' be drawn for the developmental stages defined to be the presumptive phylotypic period.
 #' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotSignature}. Default is \code{custom.perm.matrix = NULL}.
@@ -341,11 +341,8 @@ PlotSignature <-
         
         if ((TestStatistic == "FlatLineTest") && p.value){
                 TI.ggplot <-
-                        TI.ggplot + ggplot2::annotate(
-                                "text",
-                                x = 2,
-                                y = max(TI$TI) + (max(TI$TI) / 30),
-                                label = paste0("p_flt = ", pval),
+                        TI.ggplot + ggplot2::labs(
+                                subtitle = paste0("p_flt = ", pval),
                                 size = 6
                         )
                 cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
@@ -356,12 +353,9 @@ PlotSignature <-
                 
                 if (p.value) {
                         TI.ggplot <-
-                                TI.ggplot + ggplot2::annotate(
-                                        "text",
-                                        x = 2,
-                                        y = max(TI$TI) + (max(TI$TI) / 30),
-                                        label = paste0("p_rht = ", pval),
-                                        size = 6
+                                TI.ggplot + ggplot2::labs(
+                                  subtitle =  paste0("p_rht = ", pval),
+                                  size = 6
                                 )  
                 }
                 
@@ -384,12 +378,9 @@ PlotSignature <-
                 
                 if (p.value) {
                         TI.ggplot <-
-                                TI.ggplot + ggplot2::annotate(
-                                        "text",
-                                        x = 2,
-                                        y = max(TI$TI) + (max(TI$TI) / 30),
-                                        label = paste0("p_reverse_hourglass = ", pval),
-                                        size = 6
+                                TI.ggplot + ggplot2::labs(
+                                  subtitle = paste0("p_reverse_hourglass = ", pval),
+                                  size = 6
                                 )  
                 }
                 
@@ -412,12 +403,9 @@ PlotSignature <-
                 
                 if (p.value) {
                         TI.ggplot <-
-                                TI.ggplot + ggplot2::annotate(
-                                        "text",
-                                        x = 2,
-                                        y = max(TI$TI) + (max(TI$TI) / 30),
-                                        label = paste0("p_ect = ", pval),
-                                        size = 6
+                                TI.ggplot + ggplot2::labs(
+                                  subtitle = paste0("p_ect = ", pval),
+                                  size = 6
                                 )  
                 }
                 
@@ -440,11 +428,8 @@ PlotSignature <-
           
                 if (p.value) {
                         TI.ggplot <-
-                          TI.ggplot + ggplot2::annotate(
-                            "text",
-                            x = 2,
-                            y = max(TI$TI) + (max(TI$TI) / 30),
-                            label = paste0("p_lct = ", pval),
+                          TI.ggplot + ggplot2::labs(
+                            subtitle = paste0("p_lct = ", pval),
                             size = 6
                           )  
                 }

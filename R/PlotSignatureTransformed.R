@@ -33,7 +33,7 @@
 #' \item \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} divides a dataset storing seven developmental stages into 3 modules.
 #' } 
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.
-#' @param pseudocount any valid number to add to the expression matrix prior to transformation.
+#' @param pseudocount any valid number to add to the expression matrix prior to log transformations.
 #' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.
 #' @param shaded.area a boolean value specifying whether a shaded area shall 
 #' be drawn for the developmental stages defined to be the presumptive phylotypic period.
@@ -96,7 +96,7 @@ PlotSignatureTransformed <-
            modules            = NULL,
            permutations       = 1000,
            pseudocount        = 1,
-           p.value            = FALSE,
+           p.value            = TRUE,
            shaded.area        = FALSE,
            xlab               = "Ontogeny",
            ylab               = "Transcriptome Index",
@@ -114,23 +114,7 @@ PlotSignatureTransformed <-
     if(TestStatistic %in% c("ReductiveHourglassTest", "ReverseHourglassTest", "EarlyConservationTest", "LateConservationTest") & is.null(modules))
       stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
     
-    # message(paste("Proceeding with the", TestStatistic))
-    
-    # However, this step repeats the permutation test. 
-    # In future releases, I recommend removing it and redirecting the p-value
-    # from the PlotSignature via
-    # ggplot2::ggplot_build(p[[i]])$data[[3]][["label"]]
-    # but the existing annotation cannot be removed post facto.
-    p_value <- 
-      tfStability(
-        ExpressionSet,
-        TestStatistic      = TestStatistic,
-        transforms         = transforms,
-        modules            = modules,
-        permutations       = permutations,
-        pseudocount        = pseudocount)
-    p_value <- 
-      scales::pvalue(p_value, accuracy= 0.0001, add_p = TRUE)
+    message(paste("Proceeding with the", TestStatistic))
     
     # Set the ggplot-space to include x number of plots (from the number of transformations chosen)
     p <- list()
@@ -174,18 +158,6 @@ PlotSignatureTransformed <-
           axis.text.y = ggplot2::element_text(size = 15),
           plot.subtitle = ggplot2::element_text(size=10)
         )
-      p[[i]] <- p[[i]] +
-        ggplot2::labs(
-          subtitle = p_value[[i]]
-        )
-      # I tried to use the precomputed p-values from PlotSignature() and
-      # replace the subtitle with it. However, I cannot remove the annotations.
-      # I have opened an issue in the github.
-      # https://github.com/drostlab/myTAI/issues/16
-      # p[[i]] <- p[[i]] +
-      #   ggplot2::labs(
-      #     subtitle = ggplot2::ggplot_build(p[[i]])$data[[3]][["label"]]
-      #   )
     } 
     
     p_out <- 
