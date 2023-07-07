@@ -35,6 +35,7 @@
 #' \itemize{
 #' \item \code{p.value} the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.
 #' \item \code{std.dev} the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
+#' \item \code{std.dev} the Kolmogorov-Smirnov test satistics for fitting a gamma distribution to the variances of the dataset with permuted phylostrata.
 #' }
 #' @references 
 #' 
@@ -91,6 +92,56 @@
 #' 
 #' @import foreach
 #' @export
+#' 
+GetGamma <- function(var_values,permutations)
+{
+  step = 0.0005
+  sorted_vars = sort(var_values, decreasing = TRUE)
+  max_p_fit_v = 0
+  max_p_i = 0
+  for (i in 2:100) { # to avoid indexing from zero
+    # Filtered variances
+    filtered_vars <- sorted_vars[round(length(var_values)*i*step):length(var_values)]
+    
+    # Estimate parameters using method of moments
+    gamma_fit <- fitdistrplus::fitdist(filtered_vars,"gamma", method = "mme")
+    shape <- gamma_fit$estimate[1]
+    rate <- gamma_fit$estimate[2]
+    # Perform Kolmogorov-Smirnov test
+    ks_result <- ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
+    if (ks_result$p.value > max_p_fit_v){
+      max_p_i = i
+      max_p_fit_v = ks_result$p.value
+    }
+
+  }
+  if (max_p_i == 0){
+    gamma_fit <- fitdistrplus::fitdist(var_values,"gamma", method = "mme")
+    return(list(gamma_fit$estimate[1],gamma_fit$estimate[2]))
+  }
+  b_shape = 0
+  b_rate = 0
+  ks_best = NULL
+  max_p_fit_v = 0
+  for (i in -10:10) {
+    # Filtered variances
+    filtered_vars <- sorted_vars[round(length(var_values)*(max_p_i*step+i*step/10)):length(var_values)]
+    
+    # Estimate parameters using method of moments
+    gamma_fit <- fitdistrplus::fitdist(filtered_vars,"gamma", method = "mme")
+    shape <- gamma_fit$estimate[1]
+    rate <- gamma_fit$estimate[2]
+    # Perform Kolmogorov-Smirnov test
+    ks_result <- ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
+    if (ks_result$p.value > max_p_fit_v){
+      max_p_fit_v = ks_result$p.value
+      b_shape = shape
+      b_rate = rate
+      ks_best = ks_result
+    }
+  }
+  return(list(b_shape,b_rate,ks_best))
+}
 FlatLineTest <- function(ExpressionSet, 
                          permutations       = 1000, 
                          plotHistogram      = FALSE, 
@@ -132,11 +183,22 @@ FlatLineTest <- function(ExpressionSet,
         ### estimate the parameters (shape,rate) 
         ### of the gamma distributed variance values
         ### using: method of moments estimation
-        gamma_MME <- fitdistrplus::fitdist(var_values,"gamma", method = "mme")
+        gamma_MME = GetGamma(var_values,permutations)
         ### estimate shape:
-        shape <- gamma_MME$estimate[1]
+        shape <- gamma_MME[[1]]
         ### estimate the rate:
-        rate <- gamma_MME$estimate[2]
+        rate <- gamma_MME[[2]]
+        ks_test = gamma_MME[[3]] 
+        # in case the fitting fails
+        if (shape == 0 & rate == 0) {
+          gamma = fitdistrplus::fitdist(var_values,"gamma", method = "mme")
+          shape = gamma$estimate[1]
+          rate = gamma$estimate[2]
+          ks_test <- ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
+        }
+        if (permutations <= 20000) {
+          message("It is recommended to use at least 20000 permutations.")
+        }
         
         if (plotHistogram){
                 
@@ -218,11 +280,10 @@ FlatLineTest <- function(ExpressionSet,
                 graphics::abline(h = 0.05, lty = 2, lwd = 3, col = "darkred")
                 
         }
-        
         pval <- stats::pgamma(real.var,shape = shape,rate = rate,lower.tail = FALSE)
+        
         sd_values <- apply(resMatrix,2,stats::sd)
         
-        #cat("\n")
-        return(list(p.value = pval,std.dev = sd_values))
+        return(list(p.value = pval,std.dev = sd_values,ks.test = ks_test))
 }
 
