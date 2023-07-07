@@ -99,8 +99,8 @@ GetGamma <- function(var_values,permutations)
   sorted_vars = sort(var_values, decreasing = TRUE)
   max_p_fit_v = 0
   max_p_i = 0
-  for (i in 0:100) {
-    # Filtered variables
+  for (i in 2:100) { # to avoid indexing from zero
+    # Filtered variances
     filtered_vars <- sorted_vars[round(length(var_values)*i*step):length(var_values)]
     
     # Estimate parameters using method of moments
@@ -124,7 +124,7 @@ GetGamma <- function(var_values,permutations)
   ks_best = NULL
   max_p_fit_v = 0
   for (i in -10:10) {
-    # Filtered variables
+    # Filtered variances
     filtered_vars <- sorted_vars[round(length(var_values)*(max_p_i*step+i*step/10)):length(var_values)]
     
     # Estimate parameters using method of moments
@@ -189,6 +189,7 @@ FlatLineTest <- function(ExpressionSet,
         ### estimate the rate:
         rate <- gamma_MME[[2]]
         ks_test = gamma_MME[[3]] 
+        # in case the fitting fails
         if (shape == 0 & rate == 0) {
           gamma = fitdistrplus::fitdist(var_values,"gamma", method = "mme")
           shape = gamma$estimate[1]
@@ -196,7 +197,7 @@ FlatLineTest <- function(ExpressionSet,
           ks_test <- ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
         }
         if (permutations <= 20000) {
-          print("It is recommended to use at least 20000 permutations.")
+          message("It is recommended to use at least 20000 permutations.")
         }
         
         if (plotHistogram){
