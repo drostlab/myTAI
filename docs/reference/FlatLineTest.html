@@ -123,6 +123,7 @@
 
 <p>a list object containing the list elements:</p><ul><li><p><code>p.value</code> the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.</p></li>
 <li><p><code>std.dev</code> the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.</p></li>
+<li><p><code>std.dev</code> the Kolmogorov-Smirnov test satistics for fitting a gamma distribution to the variances of the dataset with permuted phylostrata.</p></li>
 </ul></div>
     <div id="details">
     <h2>Details</h2>
@@ -187,11 +188,21 @@ is computed from this null distribution.</p>
 <span class="r-in"><span><span class="fu">FlatLineTest</span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>, </span></span>
 <span class="r-in"><span>             permutations  <span class="op">=</span> <span class="fl">1000</span>, </span></span>
 <span class="r-in"><span>             plotHistogram <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> It is recommended to use at least 20000 permutations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.519745e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4.287664e-13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $std.dev</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05289660 0.05192569 0.05119004 0.04934537 0.04933763 0.05113602 0.05949934</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05415535 0.05206932 0.05146760 0.05042332 0.05050064 0.05202778 0.05715052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ks.test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Asymptotic one-sample Kolmogorov-Smirnov test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  filtered_vars</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> D = 0.020965, p-value = 0.7795</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: two-sided</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use your own permutation matrix based on which p-values (FlatLineTest)</span></span></span>
@@ -200,12 +211,22 @@ is computed from this null distribution.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">FlatLineTest</span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,</span></span>
 <span class="r-in"><span>             custom.perm.matrix <span class="op">=</span> <span class="va">custom_perm_matrix</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> It is recommended to use at least 20000 permutations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.761997e-12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.247842e-13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $std.dev</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05256503 0.05019447 0.05379445 0.05046696 0.04950851 0.05038068 0.05157381 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05741984 0.05297045 0.04805266 0.04739334 0.04955536 0.04938004 0.05741312 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ks.test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Exact one-sample Kolmogorov-Smirnov test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  filtered_vars</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> D = 0.069076, p-value = 0.7172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: two-sided</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

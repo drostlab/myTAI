@@ -105,7 +105,7 @@ indeed support the chosen test.</p>
 <span>  modules <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  permutations <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  pseudocount <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  p.value <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  p.value <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  shaded.area <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Ontogeny"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"Transcriptome Index"</span>,</span>
@@ -156,7 +156,7 @@ or experiments that correspond to each module. For example:</p><ul><li><p><code>
 
 
 <dt>pseudocount</dt>
-<dd><p>any valid number to add to the expression matrix prior to transformation.</p></dd>
+<dd><p>any valid number to add to the expression matrix prior to log transformations.</p></dd>
 
 
 <dt>p.value</dt>
@@ -237,8 +237,14 @@ transformations to visualise the stability of the pattern observed with <code><a
 <span class="r-in"><span>                     transforms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2"</span>, <span class="st">"sqrt"</span>, <span class="st">"none"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Proceeding with the FlatLineTest</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Plot signature: ' TAI ' and test statistic: ' FlatLineTest ' running  1000  permutations.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> It is recommended to use at least 20000 permutations.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Significance status of signature:  significant.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Plot signature: ' TAI ' and test statistic: ' FlatLineTest ' running  1000  permutations.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> It is recommended to use at least 20000 permutations.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Significance status of signature:  significant.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Plot signature: ' TAI ' and test statistic: ' FlatLineTest ' running  1000  permutations.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> It is recommended to use at least 20000 permutations.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Significance status of signature:  significant.</span>
 <span class="r-plt img"><img src="PlotSignatureTransformed-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Reductive hourglass test</span></span></span>
@@ -331,11 +337,6 @@ transformations to visualise the stability of the pattern observed with <code><a
 <span class="r-in"><span>                     transforms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2"</span>, <span class="st">"sqrt"</span>, <span class="st">"none"</span>, <span class="st">"vst"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                     modules <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Proceeding with the ReductiveHourglassTest</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> converting counts to integer mode</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -- note: fitType='parametric', but the dispersion trend was not well captured by the</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>    function: y = a/x + b, and a local regression fit was automatically substituted.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>    specify fitType='local' or 'mean' to avoid this message next time.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The phylotranscriptomic pattern may not follow an hourglass pattern (high-low-high).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Plot signature: ' TAI ' and test statistic: ' ReductiveHourglassTest ' running  1000  permutations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Modules: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  early = { Zygote  Quadrant  } </span>

@@ -12,7 +12,7 @@ PlotSignatureTransformed(
   modules = NULL,
   permutations = 1000,
   pseudocount = 1,
-  p.value = FALSE,
+  p.value = TRUE,
   shaded.area = FALSE,
   xlab = "Ontogeny",
   ylab = "Transcriptome Index",
@@ -54,7 +54,7 @@ or experiments that correspond to each module. For example:
 
 \item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.}
 
-\item{pseudocount}{any valid number to add to the expression matrix prior to transformation.}
+\item{pseudocount}{any valid number to add to the expression matrix prior to log transformations.}
 
 \item{p.value}{a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.}
 

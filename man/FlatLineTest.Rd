@@ -31,6 +31,7 @@ a list object containing the list elements:
 \itemize{
 \item \code{p.value} the p-value quantifying the statistical significance (deviation from a flat line) of the given phylotranscriptomics pattern.
 \item \code{std.dev} the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
+\item \code{std.dev} the Kolmogorov-Smirnov test satistics for fitting a gamma distribution to the variances of the dataset with permuted phylostrata.
 }
 }
 \description{

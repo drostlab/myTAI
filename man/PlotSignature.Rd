@@ -54,7 +54,7 @@ or experiments that correspond to each module. For example:
 
 \item{lillie.test}{a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.}
 
-\item{p.value}{a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.}
+\item{p.value}{a boolean value specifying whether the p-value of the test statistic shall be printed as a subtitle.}
 
 \item{shaded.area}{a boolean value specifying whether a shaded area shall 
 be drawn for the developmental stages defined to be the presumptive phylotypic period.}

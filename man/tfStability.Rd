@@ -35,7 +35,7 @@ storing seven developmental stages into 3 modules.}
 
 \item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.}
 
-\item{pseudocount}{any valid number to add to the expression matrix prior to transformation.}
+\item{pseudocount}{any valid number to add to the expression matrix prior to log transformations.}
 }
 \value{
 a vector object containing the vector elements:
