@@ -54,7 +54,7 @@ NumericVector permut(const NumericVector& a)
   // clone a into b to leave a alone
   NumericVector b = clone(a);
   
-  std::shuffle(b.begin(), b.end(), urng);
+  std::shuffle(b.begin(), b.end(), lcg);
   
   return b;
 }
