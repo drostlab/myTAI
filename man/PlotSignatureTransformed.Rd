@@ -8,7 +8,7 @@ PlotSignatureTransformed(
   ExpressionSet,
   measure = "TAI",
   TestStatistic = "FlatLineTest",
-  transforms = c("none", "sqrt", "log2", "rank", "squared"),
+  transforms = c("none", "log2", "sqrt", "vst", "rank", "squared"),
   modules = NULL,
   permutations = 1000,
   pseudocount = 1,
@@ -42,7 +42,18 @@ Possible values can be:
 \item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 }}
 
-\item{transforms}{a character vector of any valid function that transforms gene expression levels.}
+\item{transforms}{a character vector of any valid function that transforms gene expression levels. Aivailable options are:
+ \itemize{
+\item \code{transforms = "none"}: 
+\item \code{transforms = "log2"}:
+\item \code{transforms = "log"}:
+\item \code{transforms = "log10"}:
+\item \code{transforms = "sqrt"}:
+\item \code{transforms = "vst"}: (please make sure that the \pkg{DESeq2} package is installed).
+\item \code{transforms = "rlog"}: (please make sure that the \pkg{DESeq2} package is installed).
+\item \code{transforms = "rank"}:
+\item \code{transforms = "squared"}: 
+}}
 
 \item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}},
 or \code{\link{ReverseHourglassTest}}: early, mid, and late.
@@ -106,19 +117,20 @@ data(PhyloExpressionSetExample)
 
 # Flat line test
 PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
-                     TestStatistic = "FlatLineTest",
-                     transforms = c("log2", "sqrt", "none"))
+                    TestStatistic = "FlatLineTest",
+                    transforms = c("none", "log2", "sqrt", "vst", "rank", "squared"),
+                    modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
 # Reductive hourglass test
 PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
                      TestStatistic = "ReductiveHourglassTest",
-                     transforms = c("log2", "sqrt", "none"),
+                     transforms = c("none", "log2", "sqrt", "rank", "squared"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
 library(DESeq2)
 PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
                      TestStatistic = "ReductiveHourglassTest",
-                     transforms = c("log2", "sqrt", "none", "vst"),
+                     transforms = c("none", "log2", "sqrt", "vst", "rank", "squared"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 }
 
