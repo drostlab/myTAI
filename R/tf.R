@@ -150,6 +150,7 @@ tf <- function(ExpressionSet, FUN, pseudocount = 0, integerise = FALSE){
         }
         
         f <- match.fun(FUN)
+        
         res_mat <- f(ExpressionMatrix)
         
         # res <- tibble::rownames_to_column(base::as.data.frame(res_mat), base::colnames(ExpressionSet)[2])
