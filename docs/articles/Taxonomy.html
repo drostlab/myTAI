@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.0000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,9 +70,6 @@
     <li>
       <a href="../articles/Taxonomy.html">Retrieving Taxonomic Information</a>
     </li>
-    <li>
-      <a href="../articles/scRNAseq.html">Sincgle-Cell Expression Analysis with `myTAI`</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -85,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/drostlab/myTAI/">
+  <a href="https://github.com/drostlab/myTAI/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,42 +93,56 @@
 
       
 
-      </header><script src="Taxonomy_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Retrieving Taxonomic Information</h1>
             
-            <h4 class="date">2022-03-24</h4>
+            <h4 data-toc-skip class="date">2023-07-07</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/master/vignettes/Taxonomy.Rmd"><code>vignettes/Taxonomy.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Taxonomy.Rmd" class="external-link"><code>vignettes/Taxonomy.Rmd</code></a></small>
       <div class="hidden name"><code>Taxonomy.Rmd</code></div>
 
     </div>
 
     
     
-<p>This vignette will introduce users to the retrieval of taxonomic information with <code>myTAI</code>. The <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function implemented in <code>myTAI</code> relies on the powerful package <a href="https://github.com/ropensci/taxize">taxize</a>. Nevertheless, taxonomic information retrieval has been customized for the <code>myTAI</code> standard and for organism specific information retrieval.</p>
-<p>Specifically, the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function implemented in <code>myTAI</code> can be used to classify genomes according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy (see <a href="Introduction.html">Introduction</a> for details).</p>
-<p>For larger taxonomy queries it may be useful to create an NCBI Account and set up an <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">ENTREZ API KEY</a>.</p>
+<p>This vignette will introduce users to the retrieval of taxonomic
+information with <code>myTAI</code>. The <code><a href="../reference/taxonomy.html">taxonomy()</a></code>
+function implemented in <code>myTAI</code> relies on the powerful
+package <a href="https://github.com/ropensci/taxize" class="external-link">taxize</a>.
+Nevertheless, taxonomic information retrieval has been customized for
+the <code>myTAI</code> standard and for organism specific information
+retrieval.</p>
+<p>Specifically, the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function implemented in
+<code>myTAI</code> can be used to classify genomes according to
+phylogenetic classification into Phylostrata (Phylostratigraphy) or to
+retrieve species specific taxonomic information when performing
+Divergence Stratigraphy (see <a href="Introduction.html">Introduction</a> for details).</p>
+<p>For larger taxonomy queries it may be useful to create an NCBI
+Account and set up an <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/" class="external-link">ENTREZ
+API KEY</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages(c("taxize", "usethis"))</span>
-<span class="fu">taxize</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/taxize/reference/key_helpers.html">use_entrez</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co"># Create your key from your (brand-new) account's. </span>
-<span class="co"># After generating your key set it as ENTREZ_KEY in .Renviron.</span>
-<span class="co"># ENTREZ_KEY='youractualkeynotthisstring'</span>
-<span class="co"># For that, use usethis::edit_r_environ()</span>
-<span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/usethis/man/edit.html">edit_r_environ</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="taxonomic-information-retrieval" class="section level2">
-<h2 class="hasAnchor">
-<a href="#taxonomic-information-retrieval" class="anchor"></a>Taxonomic Information Retrieval</h2>
-<p>The <code>myTAI</code> package provides the <code><a href="../reference/taxonomy.html">taxonomy()</a></code> function to retrieve taxonomic information.</p>
-<p>In the following example we will obtain the taxonomic hierarchy of <code>Arabidopsis thaliana</code> from <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a>.</p>
+<code class="sourceCode R"><span><span class="co"># install.packages(c("taxize", "usethis"))</span></span>
+<span><span class="fu">taxize</span><span class="fu">::</span><span class="fu">use_entrez</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Create your key from your (brand-new) account's. </span></span>
+<span><span class="co"># After generating your key set it as ENTREZ_KEY in .Renviron.</span></span>
+<span><span class="co"># ENTREZ_KEY='youractualkeynotthisstring'</span></span>
+<span><span class="co"># For that, use usethis::edit_r_environ()</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">edit_r_environ</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="taxonomic-information-retrieval">Taxonomic Information Retrieval<a class="anchor" aria-label="anchor" href="#taxonomic-information-retrieval"></a>
+</h2>
+<p>The <code>myTAI</code> package provides the <code><a href="../reference/taxonomy.html">taxonomy()</a></code>
+function to retrieve taxonomic information.</p>
+<p>In the following example we will obtain the taxonomic hierarchy of
+<code>Arabidopsis thaliana</code> from <a href="https://www.ncbi.nlm.nih.gov/taxonomy" class="external-link">NCBI Taxonomy</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span>
-<span class="co"># from NCBI Taxonomy</span>
-<span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis thaliana"</span>, 
-          db       <span class="op">=</span> <span class="st">"ncbi"</span>,
-          output   <span class="op">=</span> <span class="st">"classification"</span> <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></span>
+<span><span class="co"># from NCBI Taxonomy</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis thaliana"</span>, </span>
+<span>          db       <span class="op">=</span> <span class="st">"ncbi"</span>,</span>
+<span>          output   <span class="op">=</span> <span class="st">"classification"</span> <span class="op">)</span></span></code></pre></div>
 <pre><code>                   name         rank      id
 1    cellular organisms      no rank  131567
 2             Eukaryota superkingdom    2759
@@ -158,15 +165,29 @@
 19           Camelineae        tribe  980083
 20          Arabidopsis        genus    3701
 21 Arabidopsis thaliana      species    3702</code></pre>
-<p>The <code>organism</code> argument takes the scientific name of a query organism, the <code>db</code> argument specifies that database from which the corresponding taxonomic information shall be retrieved, e.g. <code>ncbi</code> (NCBI Taxonomy) and <code>itis</code> (Integrated Taxonomic Information System) and the <code>output</code> argument specifies the type of taxonomic information that shall be returned for the query organism, e.g. <code>classification</code>, <code>taxid</code>, or <code>children</code>.</p>
-<p>The output of <code>classification</code> is a <code>data.frame</code> storing the taxonomic hierarchy of <code>Arabidopsis thaliana</code> starting with <code>cellular organisms</code> up to <code>Arabidopsis thaliana</code>. The first column stores the taxonomic name, the second column the taxonomic rank, and the third column the NCBI Taxonomy id for corresponding taxa.</p>
-<p>Analogous <code>classification</code> information can be obtained from different databases.</p>
+<p>The <code>organism</code> argument takes the scientific name of a
+query organism, the <code>db</code> argument specifies that database
+from which the corresponding taxonomic information shall be retrieved,
+e.g. <code>ncbi</code> (NCBI Taxonomy) and <code>itis</code> (Integrated
+Taxonomic Information System) and the <code>output</code> argument
+specifies the type of taxonomic information that shall be returned for
+the query organism, e.g. <code>classification</code>,
+<code>taxid</code>, or <code>children</code>.</p>
+<p>The output of <code>classification</code> is a
+<code>data.frame</code> storing the taxonomic hierarchy of
+<code>Arabidopsis thaliana</code> starting with
+<code>cellular organisms</code> up to <code>Arabidopsis thaliana</code>.
+The first column stores the taxonomic name, the second column the
+taxonomic rank, and the third column the NCBI Taxonomy id for
+corresponding taxa.</p>
+<p>Analogous <code>classification</code> information can be obtained
+from different databases.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span>
-<span class="co"># from the Integrated Taxonomic Information System</span>
-<span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis thaliana"</span>, 
-          db       <span class="op">=</span> <span class="st">"itis"</span>,
-          output   <span class="op">=</span> <span class="st">"classification"</span> <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># retrieving the taxonomic hierarchy of "Arabidopsis thaliana"</span></span>
+<span><span class="co"># from the Integrated Taxonomic Information System</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis thaliana"</span>, </span>
+<span>          db       <span class="op">=</span> <span class="st">"itis"</span>,</span>
+<span>          output   <span class="op">=</span> <span class="st">"classification"</span> <span class="op">)</span></span></code></pre></div>
 <pre><code>              name          rank     id
 1          Plantae       Kingdom 202422
 2    Viridiplantae    Subkingdom 954898
@@ -179,38 +200,46 @@
 9      Brassicales         Order 822943
 10    Brassicaceae        Family  22669
 11     Arabidopsis         Genus  23040</code></pre>
-<p>The <code>output</code> argument allows you to directly access taxonomy ids for a query organism or species.</p>
+<p>The <code>output</code> argument allows you to directly access
+taxonomy ids for a query organism or species.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># retrieving the taxonomy id of the query organism from NCBI Taxonomy</span>
-<span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis thaliana"</span>, 
-          db       <span class="op">=</span> <span class="st">"ncbi"</span>, 
-          output   <span class="op">=</span> <span class="st">"taxid"</span> <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># retrieving the taxonomy id of the query organism from NCBI Taxonomy</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis thaliana"</span>, </span>
+<span>          db       <span class="op">=</span> <span class="st">"ncbi"</span>, </span>
+<span>          output   <span class="op">=</span> <span class="st">"taxid"</span> <span class="op">)</span></span></code></pre></div>
 <pre><code>    id
 1 3702</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service</span>
-<span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis"</span>, 
-          db       <span class="op">=</span> <span class="st">"itis"</span>, 
-          output   <span class="op">=</span> <span class="st">"taxid"</span> <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis"</span>, </span>
+<span>          db       <span class="op">=</span> <span class="st">"itis"</span>, </span>
+<span>          output   <span class="op">=</span> <span class="st">"taxid"</span> <span class="op">)</span></span></code></pre></div>
 <pre><code>    id
 1 23040</code></pre>
-<p>So far, the following data bases can be accesses to retrieve taxonomic information:</p>
+<p>So far, the following data bases can be accesses to retrieve
+taxonomic information:</p>
 <ul>
 <li>
-<code>db = "itis"</code> : Integrated Taxonomic Information Service</li>
+<code>db = "itis"</code> : Integrated Taxonomic Information
+Service</li>
 <li>
-<code>db = "ncbi"</code> : National Center for Biotechnology Information</li>
+<code>db = "ncbi"</code> : National Center for Biotechnology
+Information</li>
 </ul>
 </div>
-<div id="retrieve-children-nodes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#retrieve-children-nodes" class="anchor"></a>Retrieve Children Nodes</h2>
-<p>Another <code>output</code> supported by <code><a href="../reference/taxonomy.html">taxonomy()</a></code> is <code>children</code> that returns the immediate children taxa for a query organism. This feature is useful to determine species relationships for quantifying recent evolutionary conservation with Divergence Stratigraphy.</p>
+<div class="section level2">
+<h2 id="retrieve-children-nodes">Retrieve Children Nodes<a class="anchor" aria-label="anchor" href="#retrieve-children-nodes"></a>
+</h2>
+<p>Another <code>output</code> supported by <code><a href="../reference/taxonomy.html">taxonomy()</a></code> is
+<code>children</code> that returns the immediate children taxa for a
+query organism. This feature is useful to determine species
+relationships for quantifying recent evolutionary conservation with
+Divergence Stratigraphy.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span>
-<span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis"</span>, 
-          db       <span class="op">=</span> <span class="st">"ncbi"</span>, 
-          output   <span class="op">=</span> <span class="st">"children"</span> <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis"</span>, </span>
+<span>          db       <span class="op">=</span> <span class="st">"ncbi"</span>, </span>
+<span>          output   <span class="op">=</span> <span class="st">"children"</span> <span class="op">)</span></span></code></pre></div>
 <pre><code>   childtaxa_id                                                     childtaxa_name childtaxa_rank
 1       1547872                                              Arabidopsis umezawana        species
 2       1328956 (Arabidopsis thaliana x Arabidopsis arenosa) x Arabidopsis suecica        species
@@ -230,16 +259,18 @@
 16        38785                                                Arabidopsis arenosa        species
 17         3702                                               Arabidopsis thaliana        species</code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span>
-<span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis"</span>, 
-          db       <span class="op">=</span> <span class="st">"itis"</span>, 
-          output   <span class="op">=</span> <span class="st">"children"</span> <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/taxonomy.html">taxonomy</a></span><span class="op">(</span> organism <span class="op">=</span> <span class="st">"Arabidopsis"</span>, </span>
+<span>          db       <span class="op">=</span> <span class="st">"itis"</span>, </span>
+<span>          output   <span class="op">=</span> <span class="st">"children"</span> <span class="op">)</span></span></code></pre></div>
 <pre><code>   parentname parenttsn rankname             taxonname    tsn
 1 Arabidopsis     23040  Species  Arabidopsis thaliana  23041
 2 Arabidopsis     23040  Species Arabidopsis arenicola 823113
 3 Arabidopsis     23040  Species   Arabidopsis arenosa 823130
 4 Arabidopsis     23040  Species    Arabidopsis lyrata 823171</code></pre>
-<p>These results allow us to choose <code>subject</code> organisms for <a href="https://github.com/drostlab/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd">Divergence Stratigraphy</a>.</p>
+<p>These results allow us to choose <code>subject</code> organisms for
+<a href="https://github.com/drostlab/orthologr/blob/master/vignettes/divergence_stratigraphy.Rmd" class="external-link">Divergence
+Stratigraphy</a>.</p>
 </div>
   </div>
 
@@ -254,11 +285,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
+  <p></p>
+<p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -266,6 +299,8 @@
 
   
 
+
+  
 
   </body>
 </html>

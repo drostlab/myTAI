@@ -12,18 +12,20 @@
 #' \itemize{
 #' \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
 #' \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
-#' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
+#' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a early conservation pattern (low-high-high pattern)
+#' \item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 #' \item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
 #' }
-#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, or \code{\link{ReverseHourglassTest}}: early, mid, and late. 
+#' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, 
+#' or \code{\link{ReverseHourglassTest}}: early, mid, and late. 
 #' Each element expects a numeric vector specifying the developmental stages 
 #' or experiments that correspond to each module. For example:
 #' \itemize{
 #' \item \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} divides a dataset storing seven developmental stages into 3 modules.
 #' } 
-#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.
+#' @param permutations a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.
 #' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.
-#' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.
+#' @param p.value a boolean value specifying whether the p-value of the test statistic shall be printed as a subtitle.
 #' @param shaded.area a boolean value specifying whether a shaded area shall 
 #' be drawn for the developmental stages defined to be the presumptive phylotypic period.
 #' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic visualized by \code{PlotSignature}. Default is \code{custom.perm.matrix = NULL}.
@@ -83,7 +85,7 @@ PlotSignature <-
                         call. = FALSE
                 )
         
-        if (!is.element(TestStatistic, c("FlatLineTest", "ReductiveHourglassTest", "EarlyConservationTest", "ReverseHourglassTest")))
+        if (!is.element(TestStatistic, c("FlatLineTest", "ReductiveHourglassTest", "EarlyConservationTest", "LateConservationTest", "ReverseHourglassTest")))
             stop("Please choose a 'TestStatistic' that is supported by this function. E.g. TestStatistic = 'FlatLineTest', TestStatistic = 'ReductiveHourglassTest', TestStatistic = 'EarlyConservationTest', TestStatistic = 'ReverseHourglassTest'.", call. = FALSE)
             
         cat("Plot signature: '",measure, "' and test statistic: '",TestStatistic,"' running ", permutations, " permutations." )
@@ -260,6 +262,52 @@ PlotSignature <-
                 }
         }
         
+        
+        if (TestStatistic == "LateConservationTest") {
+                     if (lillie.test) {
+                        if (is.null(custom.perm.matrix)) {
+                              resList <- LateConservationTest(
+                                      ExpressionSet = ExpressionSet,
+                                      modules       = modules,
+                                      permutations  = permutations,
+                                      lillie.test   = TRUE
+                          )
+                     }
+            
+                    else if (!is.null(custom.perm.matrix)) {
+                              resList <-
+                                      LateConservationTest(
+                                        ExpressionSet      = ExpressionSet,
+                                        modules            = modules,
+                                        lillie.test        = TRUE,
+                                        custom.perm.matrix = custom.perm.matrix
+                                      )
+                    }
+          }
+          
+          if (!lillie.test) {
+                    if (is.null(custom.perm.matrix)) {
+                            resList <- LateConservationTest(
+                                      ExpressionSet = ExpressionSet,
+                                      modules       = modules,
+                                      permutations  = permutations,
+                                      lillie.test   = FALSE
+                            )
+                    }
+            
+                    else if (!is.null(custom.perm.matrix)) {
+                            resList <-
+                                    LateConservationTest(
+                                      ExpressionSet      = ExpressionSet,
+                                      modules            = modules,
+                                      lillie.test        = FALSE,
+                                      custom.perm.matrix = custom.perm.matrix
+                                    )
+                    }
+            
+          }
+        }
+        
         # get p-value and standard deviation values from the test statistic
         pval <- resList$p.value
         pval <- format(pval,digits = 3)
@@ -293,11 +341,8 @@ PlotSignature <-
         
         if ((TestStatistic == "FlatLineTest") && p.value){
                 TI.ggplot <-
-                        TI.ggplot + ggplot2::annotate(
-                                "text",
-                                x = 2,
-                                y = max(TI$TI) + (max(TI$TI) / 30),
-                                label = paste0("p_flt = ", pval),
+                        TI.ggplot + ggplot2::labs(
+                                subtitle = paste0("p_flt = ", pval),
                                 size = 6
                         )
                 cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
@@ -308,12 +353,9 @@ PlotSignature <-
                 
                 if (p.value) {
                         TI.ggplot <-
-                                TI.ggplot + ggplot2::annotate(
-                                        "text",
-                                        x = 2,
-                                        y = max(TI$TI) + (max(TI$TI) / 30),
-                                        label = paste0("p_rht = ", pval),
-                                        size = 6
+                                TI.ggplot + ggplot2::labs(
+                                  subtitle =  paste0("p_rht = ", pval),
+                                  size = 6
                                 )  
                 }
                 
@@ -336,12 +378,9 @@ PlotSignature <-
                 
                 if (p.value) {
                         TI.ggplot <-
-                                TI.ggplot + ggplot2::annotate(
-                                        "text",
-                                        x = 2,
-                                        y = max(TI$TI) + (max(TI$TI) / 30),
-                                        label = paste0("p_reverse_hourglass = ", pval),
-                                        size = 6
+                                TI.ggplot + ggplot2::labs(
+                                  subtitle = paste0("p_reverse_hourglass = ", pval),
+                                  size = 6
                                 )  
                 }
                 
@@ -364,12 +403,9 @@ PlotSignature <-
                 
                 if (p.value) {
                         TI.ggplot <-
-                                TI.ggplot + ggplot2::annotate(
-                                        "text",
-                                        x = 2,
-                                        y = max(TI$TI) + (max(TI$TI) / 30),
-                                        label = paste0("p_ect = ", pval),
-                                        size = 6
+                                TI.ggplot + ggplot2::labs(
+                                  subtitle = paste0("p_ect = ", pval),
+                                  size = 6
                                 )  
                 }
                 
@@ -380,6 +416,31 @@ PlotSignature <-
                                         xmax = modules[[2]][length(modules[[2]])],
                                         ymin = min(TI) - (min(TI) / 50),
                                         ymax = Inf), fill = "#4d004b", alpha = alpha * 0.5)  
+                }
+                
+                stage.names <- names(ExpressionSet)[3:ncol(ExpressionSet)]
+                cat("Modules: \n early = {",paste0(stage.names[modules[[1]]], " "),"}","\n","mid = {",paste0(stage.names[modules[[2]]], " "),"}","\n","late = {",paste0(stage.names[modules[[3]]], " "),"}")
+                cat("\n")
+                cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
+        }
+        
+        if (TestStatistic == "LateConservationTest"){
+          
+                if (p.value) {
+                        TI.ggplot <-
+                          TI.ggplot + ggplot2::labs(
+                            subtitle = paste0("p_lct = ", pval),
+                            size = 6
+                          )  
+                }
+                
+                if (shaded.area) {
+                        TI.ggplot <-
+                          TI.ggplot + ggplot2::geom_rect(data = TI,ggplot2::aes(
+                            xmin = modules[[2]][1],
+                            xmax = modules[[2]][length(modules[[2]])],
+                            ymin = min(TI) - (min(TI) / 50),
+                            ymax = Inf), fill = "#4d004b", alpha = alpha * 0.5)  
                 }
                 
                 stage.names <- names(ExpressionSet)[3:ncol(ExpressionSet)]

@@ -8,6 +8,5 @@ src/*.dll
 .Rdata
 .httr-oauth
 .DS_Store
-.html
 /doc/
 /Meta/

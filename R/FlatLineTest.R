@@ -93,6 +93,155 @@
 #' @import foreach
 #' @export
 #' 
+#' 
+#' 
+
+FlatLineTest <- function(ExpressionSet, 
+                         permutations       = 1000, 
+                         plotHistogram      = FALSE, 
+                         runs               = 10, 
+                         parallel           = FALSE,
+                         custom.perm.matrix = NULL)
+{
+  
+  is.ExpressionSet(ExpressionSet)
+  
+  if(plotHistogram & is.null(runs))
+    stop("Please specify the number of runs to be performed for the goodness of fit computations.", call. = FALSE)
+  
+  nCols <- dim(ExpressionSet)[2]
+  resMatrix <- matrix(NA_real_, permutations, (nCols - 2))
+  var_values <- vector(mode = "numeric", length = permutations)
+  sd_values <- vector(mode = "numeric", length = nCols - 2)
+  #random_mean_age <- vector(mode = "numeric", length = permutations)
+  age.real <- vector(mode = "numeric",length = nCols - 2)
+  age.real <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))), as.vector(unlist(dplyr::select(ExpressionSet, 1))))
+  ### compute the real variance of TAIs of the observed TAI/TDI-Hourglass pattern
+  real.var <- stats::var(age.real)
+  ### sample only the phylostrata (row-permutations) 
+  
+  if (is.null(custom.perm.matrix)){
+    resMatrix <- cpp_bootMatrix(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),
+                                as.vector(unlist(dplyr::select(ExpressionSet, 1))),
+                                as.numeric(permutations))
+    
+  }
+  
+  else if (!is.null(custom.perm.matrix)){
+    
+    resMatrix <- custom.perm.matrix
+  }
+  
+  var_values <- apply(resMatrix,1,stats::var)
+  #random_mean_age <- apply(resMatrix,2,mean)
+  ### estimate the parameters (shape,rate) 
+  ### of the gamma distributed variance values
+  ### using: method of moments estimation
+  gamma_MME = GetGamma(var_values,permutations)
+  ### estimate shape:
+  shape <- gamma_MME[[1]]
+  ### estimate the rate:
+  rate <- gamma_MME[[2]]
+  ks_test = gamma_MME[[3]] 
+  # in case the fitting fails
+  if (shape == 0 & rate == 0) {
+    gamma = fitdistrplus::fitdist(var_values,"gamma", method = "mme")
+    shape = gamma$estimate[1]
+    rate = gamma$estimate[2]
+    ks_test <- stats::ks.test(var_values, "pgamma", shape = shape, rate = rate)
+  }
+  if (permutations <= 20000) {
+    message("It is recommended to use at least 20000 permutations.")
+  }
+  
+  if (plotHistogram){
+    
+    gammaDensity <- function(x){
+      
+      return(stats::dgamma(x = x,shape = shape,rate = rate))
+      
+    }
+    
+    graphics::par(mfrow = c(1,3))
+    # plot a Cullen and Frey graph
+    fitdistrplus::descdist(var_values, boot = permutations)
+    # plot the histogram and the fitted curve
+    graphics::curve( expr = gammaDensity,
+                     xlim = c(min(c(var_values,real.var)), max(c(var_values,real.var))),
+                     col  = "steelblue",
+                     lwd  = 5,
+                     xlab = "Variances",
+                     ylab = "Frequency", 
+                     main = paste0("permutations = ", permutations) )
+    
+    histogram <- graphics::hist( x      = var_values,
+                                 prob   = TRUE,
+                                 add    = TRUE, 
+                                 breaks = permutations / (0.01 * permutations) )
+    graphics::rug(var_values)
+    
+    graphics::abline(v = real.var, lty = 1, lwd = 4, col = "darkred")
+    
+    p.vals_vec <- vector(mode = "numeric", length = runs)
+    
+    if(parallel){
+      
+      ### Parallellizing the sampling process using the 'doParallel' and 'parallel' package
+      ### register all given cores for parallelization
+      par_cores <- parallel::makeForkCluster(parallel::detectCores())
+      doParallel::registerDoParallel(par_cores)
+      
+      ### Perform the sampling process in parallel
+      p.vals_vec <- as.vector(foreach::foreach(i              = 1:runs,
+                                               .combine       = "c",
+                                               .errorhandling = "stop") %dopar% 
+                                {
+                                  FlatLineTest( ExpressionSet = ExpressionSet,
+                                                permutations = permutations )$p.value
+                                  
+                                }
+      )
+      
+      parallel::stopCluster(par_cores)
+      
+    }
+    
+    if(!parallel){
+      # sequential computations of p-values 
+      # initializing the progress bar
+      #progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
+      
+      
+      for(i in 1:runs){
+        
+        p.vals_vec[i] <- FlatLineTest( ExpressionSet = ExpressionSet,
+                                       permutations = permutations )$p.value
+        
+        # printing out the progress
+        #setTxtProgressBar(progressBar,i)
+      }
+    }
+    
+    graphics::plot( x    = p.vals_vec,
+                    type = "l" , 
+                    lwd  = 6, 
+                    ylim = c(0,1), 
+                    col  = "darkblue", 
+                    xlab = "Runs", 
+                    ylab = "P-value", 
+                    main = paste0("runs = ",runs) )
+    
+    graphics::abline(h = 0.05, lty = 2, lwd = 3, col = "darkred")
+    
+  }
+  pval <- stats::pgamma(real.var,shape = shape,rate = rate,lower.tail = FALSE)
+  
+  sd_values <- apply(resMatrix,2,stats::sd)
+  
+  return(list(p.value = pval,std.dev = sd_values,ks.test = ks_test))
+}
+
+
 GetGamma <- function(var_values,permutations)
 {
   step = 0.0005
@@ -101,14 +250,15 @@ GetGamma <- function(var_values,permutations)
   max_p_i = 0
   for (i in 2:100) { # to avoid indexing from zero
     # Filtered variances
-    filtered_vars <- sorted_vars[round(length(var_values)*i*step):length(var_values)]
+    filtered_vars <- 
+      sorted_vars[round(length(var_values)*i*step):length(var_values)]
     
     # Estimate parameters using method of moments
     gamma_fit <- fitdistrplus::fitdist(filtered_vars,"gamma", method = "mme")
     shape <- gamma_fit$estimate[1]
     rate <- gamma_fit$estimate[2]
     # Perform Kolmogorov-Smirnov test
-    ks_result <- ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
+    ks_result <- stats::ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
     if (ks_result$p.value > max_p_fit_v){
       max_p_i = i
       max_p_fit_v = ks_result$p.value
@@ -132,7 +282,7 @@ GetGamma <- function(var_values,permutations)
     shape <- gamma_fit$estimate[1]
     rate <- gamma_fit$estimate[2]
     # Perform Kolmogorov-Smirnov test
-    ks_result <- ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
+    ks_result <- stats::ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
     if (ks_result$p.value > max_p_fit_v){
       max_p_fit_v = ks_result$p.value
       b_shape = shape
@@ -142,148 +292,3 @@ GetGamma <- function(var_values,permutations)
   }
   return(list(b_shape,b_rate,ks_best))
 }
-FlatLineTest <- function(ExpressionSet, 
-                         permutations       = 1000, 
-                         plotHistogram      = FALSE, 
-                         runs               = 10, 
-                         parallel           = FALSE,
-                         custom.perm.matrix = NULL)
-{
-        
-        is.ExpressionSet(ExpressionSet)
-        
-        if(plotHistogram & is.null(runs))
-                stop("Please specify the number of runs to be performed for the goodness of fit computations.", call. = FALSE)
-        
-        nCols <- dim(ExpressionSet)[2]
-        resMatrix <- matrix(NA_real_, permutations, (nCols - 2))
-        var_values <- vector(mode = "numeric", length = permutations)
-        sd_values <- vector(mode = "numeric", length = nCols - 2)
-        #random_mean_age <- vector(mode = "numeric", length = permutations)
-        age.real <- vector(mode = "numeric",length = nCols - 2)
-        age.real <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))), as.vector(unlist(dplyr::select(ExpressionSet, 1))))
-        ### compute the real variance of TAIs of the observed TAI/TDI-Hourglass pattern
-        real.var <- stats::var(age.real)
-        ### sample only the phylostrata (row-permutations) 
-        
-        if (is.null(custom.perm.matrix)){
-                resMatrix <- cpp_bootMatrix(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),
-                                            as.vector(unlist(dplyr::select(ExpressionSet, 1))),
-                                            as.numeric(permutations))
-                
-        }
-        
-        else if (!is.null(custom.perm.matrix)){
-                
-                resMatrix <- custom.perm.matrix
-        }
-        
-        var_values <- apply(resMatrix,1,stats::var)
-        #random_mean_age <- apply(resMatrix,2,mean)
-        ### estimate the parameters (shape,rate) 
-        ### of the gamma distributed variance values
-        ### using: method of moments estimation
-        gamma_MME = GetGamma(var_values,permutations)
-        ### estimate shape:
-        shape <- gamma_MME[[1]]
-        ### estimate the rate:
-        rate <- gamma_MME[[2]]
-        ks_test = gamma_MME[[3]] 
-        # in case the fitting fails
-        if (shape == 0 & rate == 0) {
-          gamma = fitdistrplus::fitdist(var_values,"gamma", method = "mme")
-          shape = gamma$estimate[1]
-          rate = gamma$estimate[2]
-          ks_test <- ks.test(filtered_vars, "pgamma", shape = shape, rate = rate)
-        }
-        if (permutations <= 20000) {
-          message("It is recommended to use at least 20000 permutations.")
-        }
-        
-        if (plotHistogram){
-                
-                gammaDensity <- function(x){
-                        
-                        return(stats::dgamma(x = x,shape = shape,rate = rate))
-                        
-                }
-                
-                graphics::par(mfrow = c(1,3))
-                # plot a Cullen and Frey graph
-                fitdistrplus::descdist(var_values, boot = permutations)
-                # plot the histogram and the fitted curve
-                graphics::curve( expr = gammaDensity,
-                                 xlim = c(min(c(var_values,real.var)), max(c(var_values,real.var))),
-                                 col  = "steelblue",
-                                 lwd  = 5,
-                                 xlab = "Variances",
-                                 ylab = "Frequency", 
-                                 main = paste0("permutations = ", permutations) )
-                
-                histogram <- graphics::hist( x      = var_values,
-                                             prob   = TRUE,
-                                             add    = TRUE, 
-                                             breaks = permutations / (0.01 * permutations) )
-                graphics::rug(var_values)
-                
-                graphics::abline(v = real.var, lty = 1, lwd = 4, col = "darkred")
-                
-                p.vals_vec <- vector(mode = "numeric", length = runs)
-                
-                if(parallel){
-                        
-                        ### Parallellizing the sampling process using the 'doParallel' and 'parallel' package
-                        ### register all given cores for parallelization
-                        par_cores <- parallel::makeForkCluster(parallel::detectCores())
-                        doParallel::registerDoParallel(par_cores)
-                        
-                        ### Perform the sampling process in parallel
-                        p.vals_vec <- as.vector(foreach::foreach(i              = 1:runs,
-                                                                 .combine       = "c",
-                                                                 .errorhandling = "stop") %dopar% 
-                                                        {
-                                                                FlatLineTest( ExpressionSet = ExpressionSet,
-                                                                              permutations = permutations )$p.value
-                                                        
-                                                        }
-                                                )
-                        
-                        parallel::stopCluster(par_cores)
-                        
-                }
-                
-                if(!parallel){
-                        # sequential computations of p-values 
-                        # initializing the progress bar
-                        #progressBar <- txtProgressBar(min = 1,max = runs,style = 3)
-                                
-                        
-                        for(i in 1:runs){
-                                
-                                p.vals_vec[i] <- FlatLineTest( ExpressionSet = ExpressionSet,
-                                                               permutations = permutations )$p.value
-                                
-                                # printing out the progress
-                                #setTxtProgressBar(progressBar,i)
-                        }
-                }
-                
-                graphics::plot( x    = p.vals_vec,
-                                type = "l" , 
-                                lwd  = 6, 
-                                ylim = c(0,1), 
-                                col  = "darkblue", 
-                                xlab = "Runs", 
-                                ylab = "P-value", 
-                                main = paste0("runs = ",runs) )
-                
-                graphics::abline(h = 0.05, lty = 2, lwd = 3, col = "darkred")
-                
-        }
-        pval <- stats::pgamma(real.var,shape = shape,rate = rate,lower.tail = FALSE)
-        
-        sd_values <- apply(resMatrix,2,stats::sd)
-        
-        return(list(p.value = pval,std.dev = sd_values,ks.test = ks_test))
-}
-

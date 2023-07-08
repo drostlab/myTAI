@@ -37,7 +37,7 @@ Imports:
     readr (>= 0.2.2),
     tibble,
     scales,
-    gridExtra,
+    ggpubr,
     Matrix,
     decor,
     RcppThread

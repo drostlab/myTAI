@@ -37,22 +37,24 @@ Possible values can be:
 \itemize{
 \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
 \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
-\item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a earlyconservation pattern (low-high-high pattern)
+\item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a early conservation pattern (low-high-high pattern)
+\item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 \item \code{TestStatistic} = \code{"ReverseHourglassTest"} : Statistical test for the existence of a reverse hourglass pattern (low-high-low pattern)
 }}
 
-\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, or \code{\link{ReverseHourglassTest}}: early, mid, and late. 
+\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, 
+or \code{\link{ReverseHourglassTest}}: early, mid, and late. 
 Each element expects a numeric vector specifying the developmental stages 
 or experiments that correspond to each module. For example:
 \itemize{
 \item \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} divides a dataset storing seven developmental stages into 3 modules.
 }}
 
-\item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.}
+\item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.}
 
 \item{lillie.test}{a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed.}
 
-\item{p.value}{a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.}
+\item{p.value}{a boolean value specifying whether the p-value of the test statistic shall be printed as a subtitle.}
 
 \item{shaded.area}{a boolean value specifying whether a shaded area shall 
 be drawn for the developmental stages defined to be the presumptive phylotypic period.}
