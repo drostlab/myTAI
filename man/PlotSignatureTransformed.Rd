@@ -25,7 +25,7 @@ PlotSignatureTransformed(
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{measure}{type of transcriptome index that shall be computed. E.g. 
+\item{measure}{type of transcriptome index that shall be computed. E.g.
 \itemize{
 \item \code{measure = "TAI"} (Transcriptome Age Index)
 \item \code{measure = "TDI"} (Transcriptome Divergence Index)
@@ -33,7 +33,7 @@ PlotSignatureTransformed(
 }}
 
 \item{TestStatistic}{a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
-Possible values can be: 
+Possible values can be:
 \itemize{
 \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
 \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
@@ -44,9 +44,9 @@ Possible values can be:
 
 \item{transforms}{a character vector of any valid function that transforms gene expression levels.}
 
-\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, 
-or \code{\link{ReverseHourglassTest}}: early, mid, and late. 
-Each element expects a numeric vector specifying the developmental stages 
+\item{modules}{a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}},
+or \code{\link{ReverseHourglassTest}}: early, mid, and late.
+Each element expects a numeric vector specifying the developmental stages
 or experiments that correspond to each module. For example:
 \itemize{
 \item \code{module} = \code{list(early = 1:2, mid = 3:5, late = 6:7)} divides a dataset storing seven developmental stages into 3 modules.
@@ -58,7 +58,7 @@ or experiments that correspond to each module. For example:
 
 \item{p.value}{a boolean value specifying whether the p-value of the test statistic shall be printed within the plot area.}
 
-\item{shaded.area}{a boolean value specifying whether a shaded area shall 
+\item{shaded.area}{a boolean value specifying whether a shaded area shall
 be drawn for the developmental stages defined to be the presumptive phylotypic period.}
 
 \item{xlab}{label of x-axis.}
@@ -74,33 +74,34 @@ be drawn for the developmental stages defined to be the presumptive phylotypic p
 \item{y.ticks}{number of ticks on the y-axis. Default is \code{ticks = 3}.}
 }
 \value{
-a ggplot object containing the following information 
+a ggplot object containing the following information
 for each visualised transcriptome indices:
 \code{p.value} : the p-value quantifying the statistical significance (depending on the chosen test) of the given phylotranscriptomics pattern.
 }
 \description{
 \emph{PlotSignatureTransformed} aims to statistically evaluate the
-stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
-\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, or 
-\code{\link{LateConservationTest}} 
+stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}},
+\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, or
+\code{\link{LateConservationTest}}
 (all based on \code{\link{TAI}} or \code{\link{TDI}} computations) against different
 data transformations AND plot the resulting TAI profiles using \code{\link{PlotSignature}}.
-The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
+The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern)
 does not support the chosen test. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
 indeed support the chosen test.
 }
 \details{
 Visualisation and assessment for the stability of data transforms on the permutation test of choice.
 For details, please consult the main function \code{\link{PlotSignature}},
-as well as \code{\link{tf}}, \code{\link{ReductiveHourglassTest}}, 
+as well as \code{\link{tf}}, \code{\link{ReductiveHourglassTest}},
 \code{\link{FlatLineTest}}, \code{\link{ReverseHourglassTest}},
 \code{\link{LateConservationTest}} or \code{\link{EarlyConservationTest}}.
 
-In most cases, users can replace \code{\link{PlotSignature}} simply with 
+In most cases, users can replace \code{\link{PlotSignature}} simply with
 \code{PlotSignatureTransformed} to obtain the multi-panel plot with different
 transformations to visualise the stability of the pattern observed with \code{\link{PlotSignature}}.
 }
 \examples{
+\dontrun{
 data(PhyloExpressionSetExample)
 
 # Flat line test
@@ -119,15 +120,16 @@ PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
                      TestStatistic = "ReductiveHourglassTest",
                      transforms = c("log2", "sqrt", "none", "vst"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
-                     
+}
+
 }
 \references{
 Lotharukpong JS et al. (2023) bioRxiv
 }
 \seealso{
-\code{\link{PlotSignature}},\code{\link{tfStability}}, 
-\code{\link{FlatLineTest}}, \code{\link{ReverseHourglassTest}}, 
-\code{\link{EarlyConservationTest}}, \code{\link{ReductiveHourglassTest}}, 
+\code{\link{PlotSignature}},\code{\link{tfStability}},
+\code{\link{FlatLineTest}}, \code{\link{ReverseHourglassTest}},
+\code{\link{EarlyConservationTest}}, \code{\link{ReductiveHourglassTest}},
 \code{\link{LateConservationTest}}
 }
 \author{

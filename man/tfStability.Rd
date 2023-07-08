@@ -17,7 +17,7 @@ tfStability(
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
 \item{TestStatistic}{a string defining the type of test statistics to be used to quantify the statistical significance the present phylotranscriptomics pattern.
-Possible values can be: 
+Possible values can be:
 \itemize{
 \item \code{TestStatistic} = \code{"FlatLineTest"} : Statistical test for the deviation from a flat line
 \item \code{TestStatistic} = \code{"ReductiveHourglassTest"} : Statistical test for the existence of a hourglass shape (high-low-high pattern)
@@ -29,8 +29,8 @@ Possible values can be:
 \item{transforms}{a character vector of any valid function that transforms gene expression levels.}
 
 \item{modules}{a list storing three elements: early, mid, and late. Each element expects a numeric
-vector specifying the developmental stages or experiments that correspond to each module. 
-For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) divides a dataset 
+vector specifying the developmental stages or experiments that correspond to each module.
+For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) divides a dataset
 storing seven developmental stages into 3 modules.}
 
 \item{permutations}{a numeric value specifying the number of permutations to be performed for the \code{\link{FlatLineTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}}, \code{\link{ReductiveHourglassTest}} or \code{\link{ReverseHourglassTest}}.}
@@ -44,18 +44,18 @@ a vector object containing the vector elements:
 }
 \description{
 \emph{tfStability} aims to statistically evaluate the
-stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, 
-\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, or 
-\code{\link{LateConservationTest}} 
+stability of \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}},
+\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, or
+\code{\link{LateConservationTest}}
 (all based on \code{\link{TAI}} or \code{\link{TDI}} computations) against different
 data transformations.
-The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
+The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern)
 does not support the chosen test. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
 indeed support the chosen test.
 }
 \details{
 An assessment for the stability of data transforms on the permutation test of choice.
-For details, please consult \code{\link{tf}}, \code{\link{ReductiveHourglassTest}}, 
+For details, please consult \code{\link{tf}}, \code{\link{ReductiveHourglassTest}},
 \code{\link{FlatLineTest}}, \code{\link{ReverseHourglassTest}},
 \code{\link{LateConservationTest}} or \code{\link{EarlyConservationTest}}
 }
@@ -69,16 +69,18 @@ data(PhyloExpressionSetExample)
 # module 3 = late
 tfStability(ExpressionSet = PhyloExpressionSetExample,
                      TestStatistic = "ReductiveHourglassTest",
+                     permutations       = 100,
                      transforms = c("log2", "sqrt", "none"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
 
-# it is also possible to test the phylotranscriptomic pattern using rlog 
+# it is also possible to test the phylotranscriptomic pattern using rlog
 # and vst transforms from DESeq2
 
 library(DESeq2)
 tfStability(ExpressionSet = PhyloExpressionSetExample,
                      TestStatistic = "ReductiveHourglassTest",
+                     permutations       = 100,
                      transforms = c("log2", "sqrt", "none", "vst"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
@@ -89,7 +91,7 @@ Lotharukpong JS et al. (2023) bioRxiv
 }
 \seealso{
 \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
-\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}}, 
+\code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}},
 \code{\link{ReductiveHourglassTest}}, \code{\link{PlotSignature}}, \code{\link{LateConservationTest}}
 }
 \author{

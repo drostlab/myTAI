@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<meta name="date" content="2023-07-08" />
+
+<title>Advanced Phylotranscriptomics Analyses</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Advanced Phylotranscriptomics Analyses</h1>
+<h4 class="date">2023-07-08</h4>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>In the <a href="Introduction.html">Introduction</a> vignette users
+learned how to perform the most fundamental computations and
+visualizations for phylotranscriptomics analyses using the
+<code>myTAI</code> package. Especially in the <em>Introduction</em>
+vignette we demonstrated how to perform <code>Phylostratigraphy</code>
+and <code>Divergence Stratigraphy</code> as well as the construction of
+<code>PhyloExpressionSets</code> and
+<code>DivergenceExpressionSets</code> using the <code>MatchMap()</code>
+function.</p>
+<p>In the <a href="Intermediate.html">Intermediate</a> vignette users
+learned about more detailed analyses and more specialized techniques to
+investigate the observed phylotranscriptomics patterns
+(<code>TAI</code>, <code>TDI</code>, <code>RE</code>, etc.).</p>
+</div>
+<div id="investigating-age-or-divergence-category-specific-expression-level-distributions" class="section level2">
+<h2>Investigating Age or Divergence Category Specific Expression Level
+Distributions</h2>
+<p>Gene expression levels are a fundamental aspect of
+phylotranscriptomics studies. In detail, phylotranscriptomic measures
+aim to quantify the expression intensity of genes deriving from common
+age or divergence categories to detect stages of evolutionary
+constraints. Hence, the gene expression distribution of age or
+divergence categories as well as their differences within and between
+stages or categories allow us to investigate the age (PS) or divergence
+(DS) category specific contribution to the corresponding
+transcriptome.</p>
+<p>For this purpose, the <code>PlotCategoryExpr()</code> aims to
+visualize the expression level distribution of each phylostratum during
+each time point or experiment as barplot, dot plot, or violin plot
+enabling users to quantify the age (PS) or divergence (DS) category
+specific contribution to the corresponding transcriptome.</p>
+<p>This way of visualizing the gene expression distribution of each age
+(PS) or divergence (DS) category during all developmental stages or
+experiments allows users to detect specific age or divergence categories
+contributing significant levels of gene expression to the underlying
+biological process (transcriptome).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(myTAI)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># category-centered visualization of PS specific expression level distributions (log-scale)</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">PlotCategoryExpr</span>(<span class="at">ExpressionSet =</span> PhyloExpressionSetExample,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>                 <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                 <span class="at">test.stat     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>                 <span class="at">type          =</span> <span class="st">&quot;category-centered&quot;</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>                 <span class="at">distr.type    =</span> <span class="st">&quot;boxplot&quot;</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>                 <span class="at">log.expr      =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
+category-centered &quot;***&quot;  &quot;***&quot;    &quot;***&quot;    &quot;***&quot; &quot;***&quot;   &quot;***&quot; &quot;***&quot;</code></pre>
+<p>The resulting boxplot illustrates the log expression levels of each
+phylostratum during each developmental stage. Additionally, a
+Kruskal-Wallis Rank Sum Test as well as a Benjamini &amp; Hochberg
+p-value adjustment for multiple comparisons is performed
+(<code>test.stat = TRUE</code>) to statistically quantify the
+differences between expression levels of different age or divergence
+categories. This type of analysis allows users to detect stages or
+experiments that show high diviation between age or divergence category
+contributions to the overall transcriptome or no significant deviations
+of age or divergence categories, suggesting equal age or divergence
+category contributions to the overall transcriptome. The corresponding
+P-values are printed to the console using the following notation:</p>
+<ul>
+<li><p>’*’ = P-Value <span class="math inline">\(\leq\)</span>
+0.05</p></li>
+<li><p>’**’ = P-Value <span class="math inline">\(\leq\)</span>
+0.005</p></li>
+<li><p>’***’ = P-Value <span class="math inline">\(\leq\)</span>
+0.0005</p></li>
+<li><p>‘n.s.’ = not significant = P-Value &gt; 0.05</p></li>
+</ul>
+<p>In this case all developmental stages show significant differences in
+phylostratum specific gene expression.</p>
+<p><strong>Please notice that users need to define the
+<code>legendName</code> argument as <code>PS</code> or <code>DS</code>
+to specify whether the input <code>ExpressionSet</code> is a
+<code>PhyloExpressionSet</code> (<code>legendName = &#39;PS&#39;</code>) or
+<code>DivergenceExpressionSet</code>
+(<code>legendName = &#39;DS&#39;</code>).</strong></p>
+<p>Alternatively, users can investigate the differences of gene
+expression <strong>between</strong> all stages or experiments for
+<strong>each</strong> age or divergence category by specifying
+<code>type = &#39;stage-centered&#39;</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(myTAI)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># stage-centered visualization of PS specific expression level distributions (log-scale)</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">PlotCategoryExpr</span>(<span class="at">ExpressionSet =</span> PhyloExpressionSetExample,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>                 <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>                 <span class="at">test.stat     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>                 <span class="at">type          =</span> <span class="st">&quot;stage-centered&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>                 <span class="at">distr.type    =</span> <span class="st">&quot;boxplot&quot;</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>                 <span class="at">log.expr      =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>               PS1   PS2   PS3    PS4 PS5    PS6 PS7    PS8    PS9    PS10  PS11   PS12 
+stage-centered &quot;***&quot; &quot;***&quot; &quot;n.s.&quot; &quot;*&quot; &quot;n.s.&quot; &quot;*&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;***&quot; &quot;n.s.&quot; &quot;***&quot;</code></pre>
+<p>Here, the Kruskal-Wallis Rank Sum Test (with Benjamini &amp; Hochberg
+p-value adjustment) quantifies whether or not the gene expression
+distribution of a single age or divergence category significantly
+changes throughout development or experiments. This type of analysis
+allows users to detect specific age or divergence categories that
+significantly change their expression levels throughout development or
+experiments.</p>
+<p>In this case, users will observe that PS3,5,7-9,11 do not show
+significant differences of gene expression between developmental stages
+suggesting that their contribution to the overall transcriptome remains
+constant throughout development.</p>
+<p>Finally, users can choose the following plot types to visualize
+expression distributions:</p>
+<p>Argument: <code>distr.type</code></p>
+<ul>
+<li><p><code>distr.type = &quot;boxplot&quot;</code> This specification allows
+users to visualize the expression distribution of all PS or DS as
+boxplot.</p></li>
+<li><p><code>distr.type = &quot;violin&quot;</code> This specification allows
+users to visualize the expression distribution of all PS or DS as violin
+plot.</p></li>
+<li><p><code>distr.type = &quot;dotplot&quot;</code> This specification allows
+users to visualize the expression distribution of all PS or DS as dot
+plot.</p></li>
+</ul>
+<p>Together, studies perfomed with <code>PlotCategoryExpr()</code> allow
+users to conclude that genes originating in specific PS or DS contribute
+significantly more to the overall transcriptome than other genes
+originating from different PS or DS categories. More specialized
+analyses such as <code>PlotMeans()</code>, <code>PlotRE()</code>,
+<code>PlotBarRE()</code>, <code>TAI()</code>, <code>TDI()</code>, etc.
+will then allow them to study the exact mean expression patterns of
+these age or divergence categories.</p>
+<p>Users will notice that so far all examples shown above specified
+<code>log.expr = TRUE</code> illustrating boxplots based on log2
+expression levels. This way of visualization allows better visual
+comparisons between age or divergence categories. However, when
+specifying <code>log.expr = FALSE</code> absolute expression levels will
+be visualized in the corresponding boxplot.</p>
+<p>Alternatively, instead of specifying <code>log.expr = TRUE</code>
+users can directly pass log2 transformed expression levels to
+<code>PlotCategoryExpr()</code> via
+<code>tf(PhyloExpressionSetExample,log2)</code> (when
+<code>log.expr = FALSE</code>):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># category-centered visualization of PS specific expression level distributions (log-scale)</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">PlotCategoryExpr</span>(<span class="at">ExpressionSet =</span> <span class="fu">tf</span>(PhyloExpressionSetExample, log2),</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>                 <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>                 <span class="at">test.stat     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>                 <span class="at">type          =</span> <span class="st">&quot;category-centered&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>                 <span class="at">distr.type    =</span> <span class="st">&quot;boxplot&quot;</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>                 <span class="at">log.expr      =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
+category-centered &quot;***&quot;  &quot;***&quot;    &quot;***&quot;    &quot;***&quot; &quot;***&quot;   &quot;***&quot; &quot;***&quot; </code></pre>
+<p>Or any other expression level transformation,
+e.g. <code>sqrt</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co"># category-centered visualization of PS specific expression level distributions (sqrt-scale)</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">PlotCategoryExpr</span>(<span class="at">ExpressionSet =</span> <span class="fu">tf</span>(PhyloExpressionSetExample, sqrt),</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                 <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                 <span class="at">test.stat     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>                 <span class="at">type          =</span> <span class="st">&quot;category-centered&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>                 <span class="at">distr.type    =</span> <span class="st">&quot;boxplot&quot;</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>                 <span class="at">log.expr      =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent  Mature
+category-centered &quot;***&quot;  &quot;***&quot;    &quot;***&quot;    &quot;***&quot; &quot;***&quot;   &quot;***&quot; &quot;***&quot; </code></pre>
+</div>
+<div id="gene-subset-age-or-divergence-category-specific-expression-level-distributions" class="section level2">
+<h2>Gene Subset Age or Divergence Category Specific Expression Level
+Distributions</h2>
+<p>In some cases, users wish to visualize the gene expression
+distributions for a subset of genes in contrast to the entire
+transcriptome. For this purpose, the <code>gene.set</code> argument
+allows users to specify the gene ids of a subset of genes that shall be
+matched in the input <code>ExpressionSet</code> and for which expression
+level distributions shall be visualized.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(myTAI)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># define an example gene subset (500 genes) which</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># can be found in the input ExpressionSet</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>example.gene.set <span class="ot">&lt;-</span> PhyloExpressionSetExample[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25260</span>,<span class="dv">500</span>) , <span class="dv">2</span>]</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># visualize the gene expression distributions for these 500 genes (category-centered)</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">PlotCategoryExpr</span>(<span class="at">ExpressionSet =</span> PhyloExpressionSetExample,</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>                 <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>                 <span class="at">test.stat     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>                 <span class="at">type          =</span> <span class="st">&quot;category-centered&quot;</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>                 <span class="at">distr.type    =</span> <span class="st">&quot;boxplot&quot;</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>                 <span class="at">log.expr      =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>                 <span class="at">gene.set      =</span> example.gene.set)</span></code></pre></div>
+<pre><code>                  Zygote Quadrant Globular Heart Torpedo Bent Mature
+category-centered &quot;*&quot;    &quot;*&quot;      &quot;*&quot;      &quot;*&quot;   &quot;*&quot;     &quot;*&quot;  &quot;n.s.&quot;</code></pre>
+<p>Or analogously <code>stage-centered</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">library</span>(myTAI)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># define an example gene subset (500 genes) which</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># can be found in the input ExpressionSet</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>example.gene.set <span class="ot">&lt;-</span> PhyloExpressionSetExample[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25260</span>,<span class="dv">500</span>) , <span class="dv">2</span>]</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># visualize the gene expression distributions for these 500 genes (stage-centered)</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="fu">PlotCategoryExpr</span>(<span class="at">ExpressionSet =</span> PhyloExpressionSetExample,</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>                 <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>                 <span class="at">test.stat     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>                 <span class="at">type          =</span> <span class="st">&quot;stage-centered&quot;</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>                 <span class="at">distr.type    =</span> <span class="st">&quot;boxplot&quot;</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>                 <span class="at">log.expr      =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>                 <span class="at">gene.set      =</span> example.gene.set)</span></code></pre></div>
+<pre><code>               PS1    PS2    PS3    PS4    PS5    PS6    PS7    PS8    PS9    PS10   PS11  
+stage-centered &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot; &quot;n.s.&quot;
+               PS12  
+stage-centered &quot;n.s.&quot;</code></pre>
+<p>For example, users interested in the enrichment of PS or DS values in
+<em>D. rerio</em> brain genes (see <a href="Enrichment.html">Enrichment
+Vignette</a> for details) could also visualize their gene expression
+distributions throughout development with
+<code>PlotCategoryExpr()</code> in cases where expression data is
+available.</p>
+</div>
+<div id="computing-the-significant-differences-between-gene-expression-distributions-of-ps-or-ds-groups" class="section level2">
+<h2>Computing the significant differences between gene expression
+distributions of PS or DS groups</h2>
+<p>As proposed by Quint et al., 2012 in some cases users whish to
+compare the difference of group specific expression levels using a
+statsitical test.</p>
+<p>For this purpose, the <code>PlotGroupDiffs()</code> function performs
+a test to quantify the statistical significance between the global
+expression level distributions of groups of PS or DS. It therefore
+allows users to investigate significant groups of PS or DS that
+significantly differ in their gene expression level distibution within
+specific developmental stages or experiments.</p>
+<p>Analogous to the <code>PlotRE()</code> or <code>PlotMeans()</code>
+function (see <a href="Introduction.html">Introduction</a> for details),
+users need to pass the <code>Groups</code> to
+<code>PlotGroupDiffs()</code> specifying the groups that shall be
+compared.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">library</span>(myTAI)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="fu">PlotGroupDiffs</span>(<span class="at">ExpressionSet =</span> PhyloExpressionSetExample,</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>               <span class="at">Groups        =</span> <span class="fu">list</span>(<span class="at">group_1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">group_2 =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>               <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>               <span class="at">plot.type     =</span> <span class="st">&quot;p-vals&quot;</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>               <span class="at">type          =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>               <span class="at">lwd           =</span> <span class="dv">6</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>               <span class="at">xlab          =</span> <span class="st">&quot;Ontogeny&quot;</span>)</span></code></pre></div>
+<p>In cases where no plot shall be drawn and only the resulting p-value
+shall be returned users can specify the <code>plot.type = NULL</code>
+argument to receive only p-values returned by the underlying test
+statistic.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">library</span>(myTAI)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># only receive the p-values without the corresponding plot</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="fu">PlotGroupDiffs</span>(<span class="at">ExpressionSet =</span> PhyloExpressionSetExample,</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>               <span class="at">Groups        =</span> <span class="fu">list</span>(<span class="at">group_1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">group_2 =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>               <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>               <span class="at">plot.type     =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<p>Optionally, users can also visualize the difference in expression
+level distributions of groups of PS/DS during each developmental stage
+by specifying the <code>plot.type = &quot;boxplot&quot;</code> argument.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">library</span>(myTAI)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># visualize difference as boxplot</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="fu">PlotGroupDiffs</span>(<span class="at">ExpressionSet =</span> <span class="fu">tf</span>(PhyloExpressionSetExample,log2),</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>               <span class="at">Groups        =</span> <span class="fu">list</span>(<span class="at">group_1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">group_2 =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>               <span class="at">legendName    =</span> <span class="st">&quot;PS&quot;</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>               <span class="at">plot.type     =</span> <span class="st">&quot;boxplot&quot;</span>)</span></code></pre></div>
+<p>Here, we use log2 transformed expression levels for better
+visualization (<code>tf(PhyloExpressionSetExample,log2)</code>).</p>
+<p>Internally, the <code>PlotGroupDiffs()</code> function performs a
+Wilcoxon Rank Sum test to quantify the statistical significance of PS/DS
+group expression. This quantification allows users to detect
+developmental stages of significant expression level differences between
+PS/DS groups. In this example we chose genes originated before the
+evolution of embryogenesis evolved in plants (Group1 = PS1-3) versus
+genes originated after the evolution of embryogenesis evolved in plants
+(Group2 = PS4-12). As a result, we observe that indeed the difference in
+total gene expression between these groups is significant throughout
+embryogenesis. In terms of the P-value quantification we observe that
+the P-value is minimized towards the phylotypic period. Hence, the
+expression level difference between the studied PS groups is maximized
+during the phylotypic period.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
