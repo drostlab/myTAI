@@ -24,7 +24,18 @@
 #' \item \code{TestStatistic} = \code{"EarlyConservationTest"} : Statistical test for the existence of a early conservation pattern (low-high-high pattern)
 #' \item \code{TestStatistic} = \code{"LateConservationTest"} : Statistical test for the existence of a late conservation pattern (high-high-low pattern)
 #' }
-#' @param transforms a character vector of any valid function that transforms gene expression levels.
+#' @param transforms a character vector of any valid function that transforms gene expression levels. Aivailable options are:
+#'  \itemize{
+#' \item \code{transforms = "none"}: 
+#' \item \code{transforms = "log2"}:
+#' \item \code{transforms = "log"}:
+#' \item \code{transforms = "log10"}:
+#' \item \code{transforms = "sqrt"}:
+#' \item \code{transforms = "vst"}: (please make sure that the \pkg{DESeq2} package is installed).
+#' \item \code{transforms = "rlog"}: (please make sure that the \pkg{DESeq2} package is installed).
+#' \item \code{transforms = "rank"}:
+#' \item \code{transforms = "squared"}: 
+#' }
 #' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}},
 #' or \code{\link{ReverseHourglassTest}}: early, mid, and late.
 #' Each element expects a numeric vector specifying the developmental stages
@@ -73,19 +84,20 @@
 #'
 #' # Flat line test
 #' PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
-#'                      TestStatistic = "FlatLineTest",
-#'                      transforms = c("log2", "sqrt", "none"))
+#'                     TestStatistic = "FlatLineTest",
+#'                     transforms = c("none", "log2", "sqrt", "vst", "rank", "squared"),
+#'                     modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #'
 #' # Reductive hourglass test
 #' PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
 #'                      TestStatistic = "ReductiveHourglassTest",
-#'                      transforms = c("log2", "sqrt", "none"),
+#'                      transforms = c("none", "log2", "sqrt", "rank", "squared"),
 #'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #'
 #' library(DESeq2)
 #' PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
 #'                      TestStatistic = "ReductiveHourglassTest",
-#'                      transforms = c("log2", "sqrt", "none", "vst"),
+#'                      transforms = c("none", "log2", "sqrt", "vst", "rank", "squared"),
 #'                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 #'}
 #'
@@ -94,7 +106,7 @@ PlotSignatureTransformed <-
   function(ExpressionSet,
            measure            = "TAI",
            TestStatistic      = "FlatLineTest",
-           transforms         = c("none", "sqrt", "log2", "rank", "squared"),
+           transforms         = c("none", "log2", "sqrt", "vst", "rank", "squared"),
            modules            = NULL,
            permutations       = 1000,
            pseudocount        = 1,
@@ -132,28 +144,44 @@ PlotSignatureTransformed <-
         call. = FALSE
       )
     
+    if (any(transforms %in% c("vst", "rlog"))){
+      if (!require(DESeq2))
+        stop("Please install the DESeq2 package to be able to use either the 'vst' or 'rlog' transformation.", call. = FALSE)
+    }
+    
     message(paste("Proceeding with the", TestStatistic))
     
     # Set the ggplot-space to include x number of plots (from the number of transformations chosen)
     p <- list()
     
     # output transforms in a vector
-    for (i in transforms) {
-      if (i == "none")
+    for (i in seq_along(transforms)) {
+      message("\n")
+      message("Generating PlotSignature() for transformation: ", transforms[i])
+      
+      if (transforms[i] == "none")
         tfExpressionSet <- ExpressionSet
-      else if (i %in% c('log2', 'log', 'log10'))
+      else if (transforms[i] %in% c('log2', 'log', 'log10'))
         tfExpressionSet <-
-          tf(ExpressionSet, FUN = i, pseudocount = pseudocount)
-      else if (i == "squared")
+          tf(ExpressionSet, FUN = transforms[i], pseudocount = pseudocount)
+      else if (transforms[i] == "squared")
         tfExpressionSet <- tf(
           ExpressionSet,
           FUN = function(x)
             x * x
         )
-      else if (i %in% c('vst', 'rlog'))
-        tfExpressionSet <-
-          tf(ExpressionSet, FUN = i, integerise = TRUE)
-      else if (i == "rank")
+      else if (transforms[i] %in% c('vst', 'rlog')) {
+        
+        if (transforms[i] == "vst")
+          tfExpressionSet <-
+          tf(ExpressionSet, FUN = DESeq2::vst, integerise = TRUE)
+        
+        if (transforms[i] == "rlog")
+          tfExpressionSet <-
+            tf(ExpressionSet, FUN = DESeq2::rlogTransformation, integerise = TRUE)
+      }
+        
+      else if (transforms[i] == "rank")
         tfExpressionSet <-
           tf(
             ExpressionSet,
@@ -161,13 +189,13 @@ PlotSignatureTransformed <-
               apply(x, 2, base::rank)
           )
       else
-        tfExpressionSet <- tf(ExpressionSet, FUN = i)
+        tfExpressionSet <- tf(ExpressionSet, FUN = transforms[i])
       
       tfExpressionSet <- stats::na.omit(tfExpressionSet)
       
       # Here we make the plots using PlotSignature
       
-      p[[i]] <-
+      p[[transforms[i]]] <-
         PlotSignature(
           tfExpressionSet,
           measure = measure,
@@ -178,7 +206,7 @@ PlotSignatureTransformed <-
           shaded.area  = shaded.area,
           xlab = NULL,
           ylab = NULL,
-          main = i,
+          main = transforms[i],
           lwd = lwd,
           alpha = alpha,
           y.ticks = y.ticks
