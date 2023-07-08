@@ -224,8 +224,8 @@ FlatLineTest <- function(ExpressionSet,
           .errorhandling = "stop"
         ) %dopar%
           {
-            FlatLineTest(ExpressionSet = ExpressionSet,
-                         permutations = permutations)$p.value
+            suppressMessages(FlatLineTest(ExpressionSet = ExpressionSet,
+                         permutations = permutations)$p.value)
             
           })
       
@@ -240,8 +240,8 @@ FlatLineTest <- function(ExpressionSet,
       
       
       for (i in 1:runs) {
-        p.vals_vec[i] <- FlatLineTest(ExpressionSet = ExpressionSet,
-                                      permutations = permutations)$p.value
+        p.vals_vec[i] <-  suppressMessages(FlatLineTest(ExpressionSet = ExpressionSet,
+                                      permutations = permutations)$p.value)
         
         # printing out the progress
         #setTxtProgressBar(progressBar,i)
