@@ -29,7 +29,7 @@ int randWrapper(const int& n)
 
 // Initilizing the random number generator outside of the function
 std::random_device rng;
-std::mt19937 urng(rng());
+std::mt19937_64 urng(rng());
 std::linear_congruential_engine<unsigned int, 48271, 1, 65536> lcg(rng());
 
 Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
