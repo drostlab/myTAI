@@ -452,7 +452,7 @@ PlotSignature <-
         TI.ggplot <- TI.ggplot + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
         
         if (TestStatistic == "FlatLineTest")
-          cat("Now run 'FlatLineTest(..., permutations  = ", permutations, ", plotHistogram = TRUE)' to analyse the permutation test performace.")
+          cat("Now run 'FlatLineTest(..., permutations  = ", permutations, ", plotHistogram = TRUE)' to analyse the permutation test performance")
         return (TI.ggplot)
 }
 
