@@ -25,7 +25,7 @@ stored in the age_vals argument."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.0000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.9000</span>
       </span>
     </div>
 
@@ -164,9 +164,9 @@ stored in the <code>age_vals</code> argument.</p>
 <span class="r-in"><span> <span class="co"># compute ecScore() vector from bootMatrix()</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="bootMatrix.html">bootMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,<span class="fl">10</span><span class="op">)</span>,<span class="fl">1</span>,<span class="va">ecScore</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            1            2            3            4            5            6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.018310368 -0.009124106 -0.009468124 -0.018831534 -0.003619818 -0.066877718 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.020045025 -0.027581947 -0.004005189  0.007907720 -0.084296602 -0.050258204 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            7            8            9           10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.055455956 -0.016314022  0.008958052  0.024016979 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.039651650 -0.056006236 -0.075864005 -0.092616565 </span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="co"># get warning if the expected pattern isn't followed</span></span></span>
 <span class="r-in"><span> <span class="va">ec_score</span> <span class="op">&lt;-</span> <span class="fu">ecScore</span><span class="op">(</span>age_vals <span class="op">=</span> <span class="va">TAIs</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>,profile.warn<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
