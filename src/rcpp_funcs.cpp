@@ -82,30 +82,12 @@ Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Ei
 
 // @export
 // [[Rcpp::export]]
-NumericMatrix cpp_pMatrix(const NumericMatrix& ExpressionSet,const NumericVector& AgeVector)
+Eigen::MatrixXd cpp_pMatrix(const Eigen::MatrixXd& ExpressionSet,const Eigen::VectorXd& AgeVector)
 {
-        
-        int nRows = ExpressionSet.nrow();
-        int nCols = ExpressionSet.ncol(); 
-        NumericMatrix results(nRows,nCols);
-        NumericVector DivisorVector(nCols);
-        
-        for(int stage = 0; stage < nCols; stage++) {
-                double divisor = 0;
-                for(int gene = 0; gene < nRows; gene++) {
-                        divisor  += ExpressionSet(gene, stage);
-                }
-                
-                DivisorVector[stage] = divisor;
-        }
-        
-        for(int stage = 0; stage < nCols; stage++){
-                for(int gene = 0; gene < nRows; gene++){
-                        results(gene,stage) = (double) AgeVector[gene] * (ExpressionSet(gene, stage)/DivisorVector[stage]);
-                }
-        }
-        return results;
-        
+  Eigen::VectorXd Divisor = ExpressionSet.colwise().sum();
+  Eigen::MatrixXd results = (ExpressionSet.array().rowwise() / Divisor.transpose().array()).colwise() * AgeVector.array();
+  return results;
+  
 }
 
 
@@ -144,36 +126,15 @@ double cpp_harmonic_mean(const NumericVector& x)
 
 // @export
 // [[Rcpp::export]]
-NumericMatrix cpp_omitMatrix(const NumericMatrix& ExpressionSet, const NumericVector& AgeVector){
-        
-        int nRows = ExpressionSet.nrow();
-        int nCols = ExpressionSet.ncol(); 
-        NumericMatrix ResultMatrix(nRows,nCols);
-        NumericVector NumeratorVector(nCols);
-        NumericVector DivisorVector(nCols);
-        
-        
-        for(int stage = 0; stage < nCols; stage++) {
-                double numerator = 0, divisor = 0;
-                for(int gene = 0; gene < nRows; gene++) {
-                        numerator+= (double) AgeVector[gene] * ExpressionSet(gene, stage);
-                        divisor  += ExpressionSet(gene, stage);
-                }
-                
-                NumeratorVector[stage] = numerator;
-                DivisorVector[stage] = divisor;
-        }
-        
-        for(int stage = 0; stage < nCols; stage++){
-                double newNumerator = 0, newDivisor = 0;
-                for(int gene = 0; gene < nRows; gene++){
-                        newNumerator = (double) NumeratorVector[stage] - (AgeVector[gene] * ExpressionSet(gene, stage));
-                        newDivisor = (double) DivisorVector[stage] - ExpressionSet(gene, stage);
-                        ResultMatrix(gene,stage) = newNumerator / newDivisor;
-                }
-        }
-        
-        return ResultMatrix;
+Eigen::MatrixXd cpp_omitMatrix(const Eigen::MatrixXd& ExpressionSet, const Eigen::VectorXd& AgeVector){
+  
+  int nRows = ExpressionSet.rows();
+  Eigen::VectorXd Divisor = ExpressionSet.colwise().sum();
+  Eigen::VectorXd Numerator = AgeVector.transpose() * ExpressionSet;
+  Eigen::MatrixXd AgeWeighted = ExpressionSet.array().colwise() * AgeVector.array();
+  Eigen::MatrixXd Numer = Numerator.transpose().replicate(nRows, 1) - AgeWeighted;
+  Eigen::MatrixXd ResultMatrix = Numer.cwiseQuotient(Divisor.transpose().replicate(nRows, 1) - ExpressionSet);
+  return ResultMatrix;
 }
 
 
