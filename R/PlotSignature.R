@@ -450,7 +450,8 @@ PlotSignature <-
         }
         
         TI.ggplot <- TI.ggplot + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
-        if (TestStatistic == FlatLineTest)
+        
+        if (TestStatistic == "FlatLineTest")
           message("Users can now investigate how good the permutation test performed by specifying the function: 'FlatLineTest(..., permutations  = ", permutations, ", plotHistogram = TRUE)'")
         return (TI.ggplot)
 }
