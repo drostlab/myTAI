@@ -124,17 +124,14 @@ FlatLineTest <- function(ExpressionSet,
   ### sample only the phylostrata (row-permutations)
   
   if (is.null(custom.perm.matrix)) {
-    start_time <- Sys.time()
     resMatrix <-
-      cpp_bootMatrix_old(as.matrix(dplyr::select(
+      cpp_bootMatrix(as.matrix(dplyr::select(
         ExpressionSet, 3:ncol(ExpressionSet)
       )),
       as.vector(unlist(dplyr::select(
         ExpressionSet, 1
       ))),
       as.numeric(permutations))
-    end_time <- Sys.time()
-    print(end_time - start_time)
     
   }
   
@@ -152,7 +149,7 @@ FlatLineTest <- function(ExpressionSet,
   shape <- gamma_MME[[1]]
   ### estimate the rate:
   rate <- gamma_MME[[2]]
-  ks_test = NULL
+  ks_test = gamma_MME[[3]]
   # in case the fitting fails
   if (shape == 0 & rate == 0) {
     gamma = fitdistrplus::fitdist(var_values, "gamma", method = "mme")
@@ -160,9 +157,6 @@ FlatLineTest <- function(ExpressionSet,
     rate = gamma$estimate[2]
     ks_test <-
       stats::ks.test(var_values, "pgamma", shape = shape, rate = rate)
-  }
-  else{
-    ks_test = gamma_MME[[3]]
   }
   if (permutations <= 20000) {
     message(
