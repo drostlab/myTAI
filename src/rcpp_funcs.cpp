@@ -7,6 +7,9 @@
 #include <string.h>
 #include <RcppEigen.h>
 #include <Eigen/Dense>
+#include <Eigen/Core>
+#include <omp.h>
+
 // [[Rcpp::depends(RcppThread)]]
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::depends(RcppEigen)]]
@@ -37,7 +40,7 @@ Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
   Eigen::MatrixXd permutedMat(permutations, a.size());
   Eigen::VectorXd shuffledVec = a;
   
-  
+  #pragma omp parallel for
   for (int i = 0; i < permutations; i++) {
     std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
     permutedMat.row(i) = shuffledVec.transpose();
@@ -77,6 +80,7 @@ Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Ei
         Eigen::MatrixXd fMatrix = ExpressionMatrix.array().rowwise() / Divisor.transpose().array();
         Eigen::MatrixXd permMatrix = permut_mat(AgeVector,permutations);
         Eigen::MatrixXd bootM = permMatrix * fMatrix;
+        std::cout << "Number of Eigen threads: " << Eigen::nbThreads() << std::endl;
         return bootM;
 }
 

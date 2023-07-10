@@ -124,6 +124,7 @@ FlatLineTest <- function(ExpressionSet,
   ### sample only the phylostrata (row-permutations)
   
   if (is.null(custom.perm.matrix)) {
+    start_time = Sys.time()
     resMatrix <-
       cpp_bootMatrix(as.matrix(dplyr::select(
         ExpressionSet, 3:ncol(ExpressionSet)
@@ -132,6 +133,8 @@ FlatLineTest <- function(ExpressionSet,
         ExpressionSet, 1
       ))),
       as.numeric(permutations))
+    end_time = Sys.time()
+    print(end_time - start_time)
     
   }
   
