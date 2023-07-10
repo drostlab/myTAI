@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Evolutionary Transcriptomics • myTAI</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -13,6 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Evolutionary Transcriptomics">
 <meta property="og:description" content="Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2018) &lt;doi:10.1093/bioinformatics/btx835&gt;). This package aims to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest. ">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.0000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.9000</span>
       </span>
     </div>
 
@@ -97,9 +104,9 @@
   <div class="contents col-md-9">
 
 <div class="section level1">
-<div class="page-header"><h1 id="mytai-">myTAI <img src="inst/myTAI.png" align="right" height="174" width="150"><a class="anchor" aria-label="anchor" href="#mytai-"></a>
+<div class="page-header"><h1 id="mytai-">myTAI <img src="reference/figures/logo.png" align="right" height="174" width="150"><a class="anchor" aria-label="anchor" href="#mytai-"></a>
 </h1></div>
-<p><a href="https://travis-ci.org/HajkD/myTAI" class="external-link"><img src="https://travis-ci.org/HajkD/myTAI.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://github.com/r-hub/cranlogs.app" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/myTAI" alt="rstudio mirror downloads"></a> <a href="https://github.com/r-hub/cranlogs.app" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/myTAI" alt="rstudio mirror downloads"></a> <a href="https://academic.oup.com/bioinformatics/article/34/9/1589/4772684" class="external-link"><img src="https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg" alt="Paper link"></a><br><img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&amp;label=VISITORS&amp;countColor=%23263759&amp;style=flat" alt="Visitors"></p>
+<p><a href="https://github.com/r-hub/cranlogs.app" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/myTAI" alt="rstudio mirror downloads"></a> <a href="https://github.com/r-hub/cranlogs.app" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/myTAI" alt="rstudio mirror downloads"></a> <a href="https://academic.oup.com/bioinformatics/article/34/9/1589/4772684" class="external-link"><img src="https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg" alt="Paper link"></a> <a href="https://anaconda.org/bioconda/r-mytai" class="external-link"><img src="https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat" alt="install with bioconda"></a> <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&amp;label=VISITORS&amp;countColor=%23263759&amp;style=flat" alt="Visitors"></p>
 </div>
 <div class="section level1">
 <h1 id="evolutionary-transcriptomics-with-r">Evolutionary Transcriptomics with R<a class="anchor" aria-label="anchor" href="#evolutionary-transcriptomics-with-r"></a>
@@ -109,7 +116,7 @@
 </h3>
 <p>In the past years, a variety of studies aimed to uncover the molecular basis of morphological innovation and variation from the evolutionary developmental perspective. These studies often rely on transcriptomic data to establish the molecular patterns driving the complex biological processes underlying phenotypic plasticity.</p>
 <p>Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest (molecular phenotype), they rarely capture <strong>how</strong> these expression patterns emerged in the first place or to <strong>what extent</strong> they are possibly constrained, thereby neglecting the evolutionary history and developmental constraints of genes contributing to the overall pool of expressed transcripts.</p>
-<p>To overcome this limitation, the <code>myTAI</code> package introduces procedures summarized under the term <code>evolutionary transcriptomics</code> to integrate <code>gene age</code> information inferred with <a href="https://github.com/josuebarrera/GenEra" class="external-link">GenEra</a> into classical gene expression analysis. Previously inferred <code>gene age</code> information can be found <a href="https://github.com/HajkD/published_phylomaps" class="external-link">here</a>, of which recent precomputed <code>gene age</code> information can be retrieved via <a href="https://github.com/LotharukpongJS/phylomapr" class="external-link"><code>phylomapr</code></a>.</p>
+<p>To overcome this limitation, the <code>myTAI</code> package introduces procedures summarized under the term <code>evolutionary transcriptomics</code> to integrate gene age information into classical gene expression analysis. <code>Gene age inference</code> can be performed with <a href="">various existing software</a>, but we recommend using <a href="https://github.com/josuebarrera/GenEra" class="external-link">GenEra</a> or <a href="https://github.com/kullrich/orthomap" class="external-link">orthomap</a>, since they address published shortcomings of <code>gene age inference</code> (<a href="https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html" class="external-link">see detailed discussion here</a>). In addition, users can easily retrieve <a href="https://github.com/HajkD/published_phylomaps" class="external-link">previously precomputed gene age information</a> via our data package <a href="https://github.com/LotharukpongJS/phylomapr" class="external-link">phylomapr</a>.</p>
 <p>Evolutionary transcriptomics studies can serve as a first approach to screen <em>in silico</em> for the potential existence of evolutionary and developmental constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in <code>myTAI</code> provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.</p>
 </div>
 <div class="section level3">
@@ -193,7 +200,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize global Transcriptome Age Index pattern</span></span>
 <span><span class="fu"><a href="reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span><span class="va">ExprExample</span><span class="op">)</span></span></code></pre></div>
-<p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-10-1.png"></p>
+<p><img src="reference/figures/unnamed-chunk-10-1.png"></p>
 </div>
 <div class="section level4">
 <h4 id="quantify-expression-level-distributions-for-each-gene-age-category">Quantify expression level distributions for each gene age category<a class="anchor" aria-label="anchor" href="#quantify-expression-level-distributions-for-each-gene-age-category"></a>
@@ -202,7 +209,7 @@
 <code class="sourceCode R"><span><span class="co"># plot expression level distributions for each age (=PS) category </span></span>
 <span><span class="co"># and each developmental stage </span></span>
 <span><span class="fu"><a href="reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span><span class="va">ExprExample</span>, <span class="st">"PS"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-11-1.png"></p>
+<p><img src="reference/figures/unnamed-chunk-11-1.png"></p>
 </div>
 <div class="section level4">
 <h4 id="quantify-mean-expression-of-individual-gene-age-categories">Quantify mean expression of individual gene age categories<a class="anchor" aria-label="anchor" href="#quantify-mean-expression-of-individual-gene-age-categories"></a>
@@ -211,7 +218,7 @@
 <code class="sourceCode R"><span><span class="co"># plot mean expression of each age category seperated by old (PS1-3)</span></span>
 <span><span class="co"># versus young (PS4-12) genes</span></span>
 <span><span class="fu"><a href="reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-12-1.png"></p>
+<p><img src="reference/figures/unnamed-chunk-12-1.png"></p>
 </div>
 <div class="section level4">
 <h4 id="quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes">Quantify relative mean expression of each age category seperated by old versus young genes<a class="anchor" aria-label="anchor" href="#quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes"></a>
@@ -220,7 +227,7 @@
 <code class="sourceCode R"><span><span class="co"># plot relative mean expression of each age category seperated by old (PS1-3)</span></span>
 <span><span class="co"># versus young (PS4-12) genes</span></span>
 <span><span class="fu"><a href="reference/PlotRE.html">PlotRE</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="docs/articles/Introduction_files/figure-html/unnamed-chunk-13-1.png"></p>
+<p><img src="reference/figures/unnamed-chunk-13-1.png"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the significant differences between gene expression distributions </span></span>
 <span><span class="co"># of old (=group1) versus young (=group2) genes</span></span>
@@ -484,8 +491,10 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/http://orcid.org/0000-0002-1567-306X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1567-306X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Kristian K Ullrich <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0003-4308-9626" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Jaruwatana Sodai Lotharukpong <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-3475-0980" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Nikola Kalábová <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0009-0007-6384-8809" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -497,7 +506,7 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
+<p>Developed by Hajk-Georg Drost, Kristian K Ullrich, Jaruwatana Sodai Lotharukpong, Nikola Kalábová.</p>
 </div>
 
 <div class="pkgdown">

@@ -1,16 +1,27 @@
 myTAI 1.0.1.9000
 ===========
 ## New Functions
+- New function `PlotSignatureTransformed()` : Plot evolutionary signatures across transcriptomes and RNA-seq transformations
+- New function `tfStability()`: Perform Permutation Tests Under Different Transformations (to test the robustness of the p-values of a given test (e.g. `FlatLineTest()`, `ReductiveHourglassTest()`, `ReverseHourglassTest()`, `EarlyConservationTest()` and `LateConservationTest()`) to expression data transformations)
+- New function `LateConservationTest()` : Perform Reductive Late Conservation Test (to test for a high-mid-low (or high-high-low) TAI or TDI pattern)
+- New function `lcScore()` : Compute the Hourglass Score for the LateConservationTest
 
 - internal `rcpp` functions are now using Eigen to automatically enable parallelization
 
 ## New Features
+- `PlotSignature()` updated to be able to perform the `TestStatistic = "LateConservationTest"`.
+- `PlotSignature()` now prints p-value as a subtitle rather than via `ggplot2::annotate()`.
+- `tf()` now has a `pseudocount` parameter, which is useful for performing logarithmic transformations when there are genes with 0 counts.
+- `tf()` now supports `vst` and `rlog` transformations from [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
+- `tf()` now has an `intergerise` parameter, which is needed when applying `vst` or `rlog` transformations.
+- `tf()` updated documentation for performing rank transformation, which assigns ranks to the gene expression values within each stage, based on their relative positions compared to other values.
+- Improvements to existing test functions (`ecScore()`, `rhScore()` and `reversehourglassScore()`) to give a message when the phylotranscriptomic pattern is unlikely to follow the test statistics.
 
 - `FlatLineTest()` newly returns the ks test statistics for the fitting of gamma
 - `FlatLineTest()` - improved fitting
 
 ## Bug and Issue Fixes
-
+- Some changes to remove errors and warnings from `devtools::test()` and `devtools::check()`, when building this package, which has been accumulated from previous updates.
 
 myTAI 1.0.0.9000
 ===========

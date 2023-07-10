@@ -87,7 +87,7 @@ tfStability(ExpressionSet = PhyloExpressionSetExample,
 
 }
 \references{
-Lotharukpong JS et al. (2023) bioRxiv
+Lotharukpong JS et al. (2023) (unpublished)
 }
 \seealso{
 \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},

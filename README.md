@@ -1,5 +1,5 @@
 
-# myTAI <img src="inst/myTAI.png" align="right" height="174" width="150" />
+# myTAI <img src="man/figures/logo.png" align="right" height="174" width="150" />
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/myTAI)](https://github.com/r-hub/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/myTAI)](https://github.com/r-hub/cranlogs.app)
 [![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://academic.oup.com/bioinformatics/article/34/9/1589/4772684)
@@ -102,7 +102,7 @@ ExprExample <- tf(PhyloExpressionSetExample, log2)
 PlotSignature(ExprExample)
 ```
 
-![](docs/articles/Introduction_files/figure-html/unnamed-chunk-10-1.png)
+![](man/figures/unnamed-chunk-10-1.png)
 
 
 #### Quantify expression level distributions for each gene age category
@@ -113,7 +113,7 @@ PlotSignature(ExprExample)
 PlotCategoryExpr(ExprExample, "PS")
 ```
 
-![](docs/articles/Introduction_files/figure-html/unnamed-chunk-11-1.png)
+![](man/figures/unnamed-chunk-11-1.png)
 
 #### Quantify mean expression of individual gene age categories
 
@@ -123,7 +123,7 @@ PlotCategoryExpr(ExprExample, "PS")
 PlotMeans(ExprExample, Groups = list(1:3, 4:12))
 ```
 
-![](docs/articles/Introduction_files/figure-html/unnamed-chunk-12-1.png)
+![](man/figures/unnamed-chunk-12-1.png)
 
 
 #### Quantify relative mean expression of each age category seperated by old versus young genes
@@ -134,7 +134,7 @@ PlotMeans(ExprExample, Groups = list(1:3, 4:12))
 PlotRE(ExprExample, Groups = list(1:3, 4:12))
 ```
 
-![](docs/articles/Introduction_files/figure-html/unnamed-chunk-13-1.png)
+![](man/figures/unnamed-chunk-13-1.png)
 
 ```r
 # plot the significant differences between gene expression distributions 
