@@ -3,6 +3,7 @@
 
 #include <RcppArmadillo.h>
 #include <RcppThread.h>
+#include <RcppEigen.h>
 #include <Rcpp.h>
 
 using namespace Rcpp;
@@ -13,38 +14,38 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // cpp_TAI
-NumericVector cpp_TAI(const NumericMatrix& ExpressionSet, const NumericVector& Phylostratum);
-RcppExport SEXP _myTAI_cpp_TAI(SEXP ExpressionSetSEXP, SEXP PhylostratumSEXP) {
+Eigen::VectorXd cpp_TAI(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& Phylostratum);
+RcppExport SEXP _myTAI_cpp_TAI(SEXP ExpressionMatrixSEXP, SEXP PhylostratumSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const NumericMatrix& >::type ExpressionSet(ExpressionSetSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type Phylostratum(PhylostratumSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_TAI(ExpressionSet, Phylostratum));
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type ExpressionMatrix(ExpressionMatrixSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type Phylostratum(PhylostratumSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_TAI(ExpressionMatrix, Phylostratum));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_bootMatrix
-NumericMatrix cpp_bootMatrix(const NumericMatrix& ExpressionMatrix, const NumericVector& AgeVector, const int& permutations);
+Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& AgeVector, const int& permutations);
 RcppExport SEXP _myTAI_cpp_bootMatrix(SEXP ExpressionMatrixSEXP, SEXP AgeVectorSEXP, SEXP permutationsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const NumericMatrix& >::type ExpressionMatrix(ExpressionMatrixSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type AgeVector(AgeVectorSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type ExpressionMatrix(ExpressionMatrixSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type AgeVector(AgeVectorSEXP);
     Rcpp::traits::input_parameter< const int& >::type permutations(permutationsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_bootMatrix(ExpressionMatrix, AgeVector, permutations));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_pMatrix
-NumericMatrix cpp_pMatrix(const NumericMatrix& ExpressionSet, const NumericVector& AgeVector);
+Eigen::MatrixXd cpp_pMatrix(const Eigen::MatrixXd& ExpressionSet, const Eigen::VectorXd& AgeVector);
 RcppExport SEXP _myTAI_cpp_pMatrix(SEXP ExpressionSetSEXP, SEXP AgeVectorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const NumericMatrix& >::type ExpressionSet(ExpressionSetSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type AgeVector(AgeVectorSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type ExpressionSet(ExpressionSetSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type AgeVector(AgeVectorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_pMatrix(ExpressionSet, AgeVector));
     return rcpp_result_gen;
 END_RCPP
@@ -83,13 +84,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_omitMatrix
-NumericMatrix cpp_omitMatrix(const NumericMatrix& ExpressionSet, const NumericVector& AgeVector);
+Eigen::MatrixXd cpp_omitMatrix(const Eigen::MatrixXd& ExpressionSet, const Eigen::VectorXd& AgeVector);
 RcppExport SEXP _myTAI_cpp_omitMatrix(SEXP ExpressionSetSEXP, SEXP AgeVectorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const NumericMatrix& >::type ExpressionSet(ExpressionSetSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type AgeVector(AgeVectorSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type ExpressionSet(ExpressionSetSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type AgeVector(AgeVectorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_omitMatrix(ExpressionSet, AgeVector));
     return rcpp_result_gen;
 END_RCPP

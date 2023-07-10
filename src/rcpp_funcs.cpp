@@ -5,8 +5,11 @@
 #include <random>
 #include <RcppThread.h>
 #include <string.h>
+#include <RcppEigen.h>
+#include <Eigen/Dense>
 // [[Rcpp::depends(RcppThread)]]
 // [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::depends(RcppEigen)]]
 // [[Rcpp::plugins(cpp11)]]
 
 using namespace Rcpp;
@@ -26,120 +29,65 @@ int randWrapper(const int& n)
 
 // Initilizing the random number generator outside of the function
 std::random_device rng;
-std::mt19937 urng(rng());
+std::mt19937_64 urng(rng());
+std::linear_congruential_engine<unsigned int, 48271, 1, 65536> lcg(rng());
+
+Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
+  // already added by sourceCpp(), but needed standalone
+  Eigen::MatrixXd permutedMat(permutations, a.size());
+  Eigen::VectorXd shuffledVec = a;
+  
+  
+  for (int i = 0; i < permutations; i++) {
+    std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
+    permutedMat.row(i) = shuffledVec.transpose();
+  }
+  return permutedMat;
+}
 
 NumericVector permut(const NumericVector& a)
 {
-        
-        // already added by sourceCpp(), but needed standalone
-        // RNGScope scope;             
-        
-        // clone a into b to leave a alone
-        NumericVector b = clone(a);
-        
-        std::shuffle(b.begin(), b.end(), urng);
-        
-        return b;
-}
-
-
-// @export
-// [[Rcpp::export]]
-NumericVector cpp_TAI(const NumericMatrix& ExpressionSet, const NumericVector& Phylostratum)
-{
-        
-        int nCols = ExpressionSet.ncol();
-        int nRows = ExpressionSet.nrow();
-        NumericVector results(nCols);
-        for(int stage = 0; stage < nCols; stage++) {
-                double numerator = 0, divisor = 0;
-                for(int gene = 0; gene < nRows; gene++) {
-                        numerator+= (double) Phylostratum[gene] * ExpressionSet(gene, stage);
-                        divisor  += ExpressionSet(gene, stage);
-                }
-                
-                results[stage] = numerator/divisor;
-        }
-        
-        return results;
-        
+  
+  // already added by sourceCpp(), but needed standalone
+  // RNGScope scope;             
+  
+  // clone a into b to leave a alone
+  NumericVector b = clone(a);
+  
+  std::shuffle(b.begin(), b.end(), lcg);
+  
+  return b;
 }
 
 // @export
 // [[Rcpp::export]]
-NumericMatrix cpp_bootMatrix(const NumericMatrix& ExpressionMatrix, const NumericVector& AgeVector, const int& permutations)
+Eigen::VectorXd cpp_TAI(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& Phylostratum) {
+  
+  Eigen::VectorXd Divisor = ExpressionMatrix.colwise().sum();
+  Eigen::MatrixXd fMatrix = ExpressionMatrix.array().rowwise() / Divisor.transpose().array();
+  Eigen::VectorXd total = Phylostratum.transpose() * fMatrix;
+  
+  return total;
+}
+// @export
+// [[Rcpp::export]]
+Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& AgeVector, const int& permutations) 
 {
-        
-        int nCols = ExpressionMatrix.ncol();
-        int nRows = ExpressionMatrix.nrow();
-        NumericVector Divisor(nCols);
-        NumericMatrix fMatrix(nRows,nCols);
-        NumericVector sampledVector(AgeVector.size());
-        NumericVector AgeValues(nCols);
-        NumericMatrix bootM(permutations,nCols);
-        
-        for(int j = 0; j < nCols; j++){
-                double div = 0;
-                for(int i = 0; i < nRows; i++){
-                        div += ExpressionMatrix(i,j);    
-                }
-                
-                Divisor[j] = div;
-                
-        }
-        
-        for(int l = 0; l < nCols; l++){
-                for(int k = 0; k < nRows; k++){
-                        fMatrix(k,l) = ExpressionMatrix(k,l)/Divisor[l];    
-                }
-        }
-        
-        
-        for(int n = 0; n < permutations; n++){
-                
-                //sampledVector = Rcpp::RcppArmadillo::sample(AgeVector, AgeVector.size(), FALSE);
-                sampledVector = permut(AgeVector);
-                
-                for(int b = 0; b < nCols; b++){
-                        double total = 0;
-                        for(int a = 0; a < nRows; a++){
-                                total += (sampledVector[a] * fMatrix(a,b));    
-                        }
-                        
-                        bootM(n,b) = total;
-                        
-                }
-        }
-        
+        Eigen::VectorXd Divisor = ExpressionMatrix.colwise().sum();
+        Eigen::MatrixXd fMatrix = ExpressionMatrix.array().rowwise() / Divisor.transpose().array();
+        Eigen::MatrixXd permMatrix = permut_mat(AgeVector,permutations);
+        Eigen::MatrixXd bootM = permMatrix * fMatrix;
         return bootM;
 }
 
 // @export
 // [[Rcpp::export]]
-NumericMatrix cpp_pMatrix(const NumericMatrix& ExpressionSet,const NumericVector& AgeVector)
+Eigen::MatrixXd cpp_pMatrix(const Eigen::MatrixXd& ExpressionSet,const Eigen::VectorXd& AgeVector)
 {
-        
-        int nRows = ExpressionSet.nrow();
-        int nCols = ExpressionSet.ncol(); 
-        NumericMatrix results(nRows,nCols);
-        NumericVector DivisorVector(nCols);
-        
-        for(int stage = 0; stage < nCols; stage++) {
-                double divisor = 0;
-                for(int gene = 0; gene < nRows; gene++) {
-                        divisor  += ExpressionSet(gene, stage);
-                }
-                
-                DivisorVector[stage] = divisor;
-        }
-        
-        for(int stage = 0; stage < nCols; stage++){
-                for(int gene = 0; gene < nRows; gene++){
-                        results(gene,stage) = (double) AgeVector[gene] * (ExpressionSet(gene, stage)/DivisorVector[stage]);
-                }
-        }
-        return results;
-        
+  Eigen::VectorXd Divisor = ExpressionSet.colwise().sum();
+  Eigen::MatrixXd results = (ExpressionSet.array().rowwise() / Divisor.transpose().array()).colwise() * AgeVector.array();
+  return results;
+  
 }
 
 
@@ -178,36 +126,15 @@ double cpp_harmonic_mean(const NumericVector& x)
 
 // @export
 // [[Rcpp::export]]
-NumericMatrix cpp_omitMatrix(const NumericMatrix& ExpressionSet, const NumericVector& AgeVector){
-        
-        int nRows = ExpressionSet.nrow();
-        int nCols = ExpressionSet.ncol(); 
-        NumericMatrix ResultMatrix(nRows,nCols);
-        NumericVector NumeratorVector(nCols);
-        NumericVector DivisorVector(nCols);
-        
-        
-        for(int stage = 0; stage < nCols; stage++) {
-                double numerator = 0, divisor = 0;
-                for(int gene = 0; gene < nRows; gene++) {
-                        numerator+= (double) AgeVector[gene] * ExpressionSet(gene, stage);
-                        divisor  += ExpressionSet(gene, stage);
-                }
-                
-                NumeratorVector[stage] = numerator;
-                DivisorVector[stage] = divisor;
-        }
-        
-        for(int stage = 0; stage < nCols; stage++){
-                double newNumerator = 0, newDivisor = 0;
-                for(int gene = 0; gene < nRows; gene++){
-                        newNumerator = (double) NumeratorVector[stage] - (AgeVector[gene] * ExpressionSet(gene, stage));
-                        newDivisor = (double) DivisorVector[stage] - ExpressionSet(gene, stage);
-                        ResultMatrix(gene,stage) = newNumerator / newDivisor;
-                }
-        }
-        
-        return ResultMatrix;
+Eigen::MatrixXd cpp_omitMatrix(const Eigen::MatrixXd& ExpressionSet, const Eigen::VectorXd& AgeVector){
+  
+  int nRows = ExpressionSet.rows();
+  Eigen::VectorXd Divisor = ExpressionSet.colwise().sum();
+  Eigen::VectorXd Numerator = AgeVector.transpose() * ExpressionSet;
+  Eigen::MatrixXd AgeWeighted = ExpressionSet.array().colwise() * AgeVector.array();
+  Eigen::MatrixXd Numer = Numerator.transpose().replicate(nRows, 1) - AgeWeighted;
+  Eigen::MatrixXd ResultMatrix = Numer.cwiseQuotient(Divisor.transpose().replicate(nRows, 1) - ExpressionSet);
+  return ResultMatrix;
 }
 
 

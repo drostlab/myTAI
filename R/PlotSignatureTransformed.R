@@ -145,7 +145,7 @@ PlotSignatureTransformed <-
       )
     
     if (any(transforms %in% c("vst", "rlog"))){
-      if (!require(DESeq2))
+      if (!requireNamespace("DESeq2"))
         stop("Please install the DESeq2 package to be able to use either the 'vst' or 'rlog' transformation.", call. = FALSE)
     }
     
