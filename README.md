@@ -29,6 +29,12 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 Users can install `myTAI` from [CRAN](https://cran.r-project.org/web/packages/myTAI/index.html):
 
+**MAC**
+
+```bash
+brew install llvm libomp
+```
+
 ```r
 # install myTAI 0.9.3
 install.packages("myTAI", dependencies = TRUE)
