@@ -25,7 +25,7 @@ stored in the age_vals argument."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">myTAI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.0000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.9000</span>
       </span>
     </div>
 
@@ -164,9 +164,9 @@ stored in the <code>age_vals</code> argument.</p>
 <span class="r-in"><span> <span class="co"># compute lcScore() vector from bootMatrix()</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="bootMatrix.html">bootMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,<span class="fl">10</span><span class="op">)</span>,<span class="fl">1</span>,<span class="va">lcScore</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            1            2            3            4            5            6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.019886885  0.035037896 -0.034616324 -0.040611733 -0.076105101 -0.027469809 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.004295245 -0.066211471  0.002614196  0.044585557 -0.011762554  0.072425953 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            7            8            9           10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.013770797 -0.001264511 -0.017180638 -0.005790214 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.011055129 -0.011793386 -0.019983175 -0.075312475 </span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="co"># get warning if the expected pattern isn't followed</span></span></span>
 <span class="r-in"><span> <span class="va">lc_score</span> <span class="op">&lt;-</span> <span class="fu">lcScore</span><span class="op">(</span>age_vals <span class="op">=</span> <span class="va">TAIs</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>,profile.warn<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -182,7 +182,7 @@ stored in the <code>age_vals</code> argument.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
+  <p></p><p>Developed by Hajk-Georg Drost, Kristian K Ullrich, Jaruwatana Sodai Lotharukpong, Nikola Kalábová.</p>
 </div>
 
 <div class="pkgdown">
