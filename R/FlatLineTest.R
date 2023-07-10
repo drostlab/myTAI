@@ -80,7 +80,7 @@
 #'
 #' # example PhyloExpressionSet using 1000 permutations
 #' FlatLineTest(PhyloExpressionSetExample,
-#'              permutations  = 1000,
+#'              permutations  = 10000,
 #'              plotHistogram = FALSE)
 #'
 #' # use your own permutation matrix based on which p-values (FlatLineTest)
@@ -134,7 +134,7 @@ FlatLineTest <- function(ExpressionSet,
       ))),
       as.numeric(permutations))
     end_time = Sys.time()
-    print(paste("Time:", end_time - start_time))
+    message(paste("Time:", end_time - start_time))
     
   }
   
