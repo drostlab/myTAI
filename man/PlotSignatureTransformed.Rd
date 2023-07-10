@@ -136,7 +136,7 @@ PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
 
 }
 \references{
-Lotharukpong JS et al. (2023) bioRxiv
+Lotharukpong JS et al. (2023) (unpublished)
 }
 \seealso{
 \code{\link{PlotSignature}},\code{\link{tfStability}},
