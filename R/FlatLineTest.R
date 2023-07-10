@@ -97,7 +97,7 @@
 #'
 
 FlatLineTest <- function(ExpressionSet,
-                         permutations       = 1000,
+                         permutations       = 10000,
                          plotHistogram      = FALSE,
                          runs               = 10,
                          parallel           = FALSE,
@@ -134,7 +134,7 @@ FlatLineTest <- function(ExpressionSet,
       ))),
       as.numeric(permutations))
     end_time = Sys.time()
-    print(end_time - start_time)
+    print(paste("Time:", end_time - start_time))
     
   }
   
@@ -161,7 +161,7 @@ FlatLineTest <- function(ExpressionSet,
     ks_test <-
       stats::ks.test(var_values, "pgamma", shape = shape, rate = rate)
   }
-  if (permutations <= 20000) {
+  if (permutations < 20000) {
     message(
       "We recommended using at least 20000 permutations to achieve a sufficient permutation test."
     )

@@ -35,16 +35,61 @@ std::random_device rng;
 std::mt19937_64 urng(rng());
 std::linear_congruential_engine<unsigned int, 48271, 1, 65536> lcg(rng());
 
+
+void updateProgressBar(int currentProgress, int totalProgress, int barWidth = 40) {
+  float progressRatio = static_cast<float>(currentProgress) / totalProgress;
+  int completedWidth = static_cast<int>(progressRatio * barWidth);
+  
+  std::string progressBar;
+  progressBar.reserve(barWidth + 6);
+  progressBar += '[';
+  for (int i = 0; i < completedWidth; ++i) {
+    progressBar += '=';
+  }
+  if (completedWidth < barWidth) {
+    progressBar += '>';
+    for (int i = completedWidth + 1; i < barWidth; ++i) {
+      progressBar += ' ';
+    }
+  } else {
+    progressBar += '=';
+  }
+  progressBar += ']';
+  
+  float percentage = progressRatio * 100;
+  std::cout << '\r' << progressBar << " " << percentage << "%   ";
+  std::cout.flush();
+}
+
+
 Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
   // already added by sourceCpp(), but needed standalone
   Eigen::MatrixXd permutedMat(permutations, a.size());
   Eigen::VectorXd shuffledVec = a;
   
-  #pragma omp parallel for
-  for (int i = 0; i < permutations; i++) {
-    std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
-    permutedMat.row(i) = shuffledVec.transpose();
+  std::atomic<int> progress(0);
+  const int updateFrequency = 200;  // Update progress every x iterations
+  
+#pragma omp parallel
+{
+  int localProgress = 0;
+  
+  #pragma omp for
+    for (int i = 0; i < permutations; i++) {
+      std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
+      permutedMat.row(i) = shuffledVec.transpose();
+      localProgress++;
+      
+      if (localProgress % updateFrequency == 0) {
+        progress.fetch_add(updateFrequency, std::memory_order_relaxed);
+        
+        // Display progress
+        int currentProgress = progress.load(std::memory_order_relaxed);
+        updateProgressBar(currentProgress,permutations);
+      }
+    }
   }
+  updateProgressBar(permutations,permutations);
   return permutedMat;
 }
 
@@ -78,7 +123,10 @@ Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Ei
 {
         Eigen::VectorXd Divisor = ExpressionMatrix.colwise().sum();
         Eigen::MatrixXd fMatrix = ExpressionMatrix.array().rowwise() / Divisor.transpose().array();
+        std::cout << "Computing permutations" << std::endl;
         Eigen::MatrixXd permMatrix = permut_mat(AgeVector,permutations);
+        std::cout << std::endl;
+        std::cout << "Computing variances" << std::endl;
         Eigen::MatrixXd bootM = permMatrix * fMatrix;
         std::cout << "Number of Eigen threads: " << Eigen::nbThreads() << std::endl;
         return bootM;
