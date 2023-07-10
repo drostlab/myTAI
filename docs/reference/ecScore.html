@@ -163,10 +163,10 @@ stored in the <code>age_vals</code> argument.</p>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="co"># compute ecScore() vector from bootMatrix()</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="bootMatrix.html">bootMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,<span class="fl">10</span><span class="op">)</span>,<span class="fl">1</span>,<span class="va">ecScore</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            1            2            3            4            5            6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.020045025 -0.027581947 -0.004005189  0.007907720 -0.084296602 -0.050258204 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            7            8            9           10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.039651650 -0.056006236 -0.075864005 -0.092616565 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             1             2             3             4             5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0107547893 -0.0409213836 -0.0047474192 -0.0415562767 -0.0211760251 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             6             7             8             9            10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0008280635  0.0155695490  0.0233947627 -0.0361218378  0.0147539989 </span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="co"># get warning if the expected pattern isn't followed</span></span></span>
 <span class="r-in"><span> <span class="va">ec_score</span> <span class="op">&lt;-</span> <span class="fu">ecScore</span><span class="op">(</span>age_vals <span class="op">=</span> <span class="va">TAIs</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>,profile.warn<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>

@@ -141,14 +141,14 @@ Possible values can be:</p><ul><li><p><code>TestStatistic</code> = <code>"FlatLi
 
 <dt>transforms</dt>
 <dd><p>a character vector of any valid function that transforms gene expression levels. Available options are:</p><ul><li><p><code>transforms = "none"</code> : No transformation (absolute expression)</p></li>
-<li><p><code>transforms = "log2"</code> : Computes binary (i.e., base 2) logarithms, \(log_{2}{x}\).</p></li>
-<li><p><code>transforms = "log"</code> : Computes natural logarithms, \(log_{e}{x}\).</p></li>
-<li><p><code>transforms = "log10"</code> : Computes common logarithms (i.e., base 10), \(log_{10}{x}\).</p></li>
-<li><p><code>transforms = "sqrt"</code> : Computes the (principle) square root, \(\sqrt{x}\).</p></li>
+<li><p><code>transforms = "log2"</code> : Computes binary (i.e., base 2) logarithms, \(log_{2}{X}\).</p></li>
+<li><p><code>transforms = "log"</code> : Computes natural logarithms, \(log_{e}{X}\).</p></li>
+<li><p><code>transforms = "log10"</code> : Computes common logarithms (i.e., base 10), \(log_{10}{X}\).</p></li>
+<li><p><code>transforms = "sqrt"</code> : Computes the (principle) square root, \(\sqrt{X}\).</p></li>
 <li><p><code>transforms = "vst"</code> :  (Quickly) estimates dispersion trend and applies a variance stabilizing transformation (please make sure that the <span class="pkg">DESeq2</span> package is installed).</p></li>
 <li><p><code>transforms = "rlog"</code> : (Robustly) estimates dispersion trend and applies a variance stabilizing transformation (please make sure that the <span class="pkg">DESeq2</span> package is installed).</p></li>
 <li><p><code>transforms = "rank"</code> : Ranks genes from lowest to highest based on their expression levels, at each condition (e.g., developmental stage). The gene's expression value is replaced by its sample rank or average ranks in case of ties.</p></li>
-<li><p><code>transforms = "squared"</code>: Computes the square, \(x^2\).</p></li>
+<li><p><code>transforms = "squared"</code>: Computes the square, \(X^2\).</p></li>
 </ul></dd>
 
 

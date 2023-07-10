@@ -27,14 +27,14 @@
 #' @param transforms a character vector of any valid function that transforms gene expression levels. Available options are:
 #'  \itemize{
 #' \item \code{transforms = "none"} : No transformation (absolute expression)
-#' \item \code{transforms = "log2"} : Computes binary (i.e., base 2) logarithms, \eqn{log_{2}{x}}.
-#' \item \code{transforms = "log"} : Computes natural logarithms, \eqn{log_{e}{x}}.
-#' \item \code{transforms = "log10"} : Computes common logarithms (i.e., base 10), \eqn{log_{10}{x}}.
-#' \item \code{transforms = "sqrt"} : Computes the (principle) square root, \eqn{\sqrt{x}}.
+#' \item \code{transforms = "log2"} : Computes binary (i.e., base 2) logarithms, \eqn{log_{2}{X}}.
+#' \item \code{transforms = "log"} : Computes natural logarithms, \eqn{log_{e}{X}}.
+#' \item \code{transforms = "log10"} : Computes common logarithms (i.e., base 10), \eqn{log_{10}{X}}.
+#' \item \code{transforms = "sqrt"} : Computes the (principle) square root, \eqn{\sqrt{X}}.
 #' \item \code{transforms = "vst"} :  (Quickly) estimates dispersion trend and applies a variance stabilizing transformation (please make sure that the \pkg{DESeq2} package is installed).
 #' \item \code{transforms = "rlog"} : (Robustly) estimates dispersion trend and applies a variance stabilizing transformation (please make sure that the \pkg{DESeq2} package is installed).
 #' \item \code{transforms = "rank"} : Ranks genes from lowest to highest based on their expression levels, at each condition (e.g., developmental stage). The gene's expression value is replaced by its sample rank or average ranks in case of ties.
-#' \item \code{transforms = "squared"}: Computes the square, \eqn{x^2}.
+#' \item \code{transforms = "squared"}: Computes the square, \eqn{X^2}.
 #' }
 #' @param modules a list storing three elements for the \code{\link{ReductiveHourglassTest}}, \code{\link{EarlyConservationTest}}, \code{\link{LateConservationTest}},
 #' or \code{\link{ReverseHourglassTest}}: early, mid, and late.
