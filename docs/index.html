@@ -109,7 +109,7 @@
 </h3>
 <p>In the past years, a variety of studies aimed to uncover the molecular basis of morphological innovation and variation from the evolutionary developmental perspective. These studies often rely on transcriptomic data to establish the molecular patterns driving the complex biological processes underlying phenotypic plasticity.</p>
 <p>Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest (molecular phenotype), they rarely capture <strong>how</strong> these expression patterns emerged in the first place or to <strong>what extent</strong> they are possibly constrained, thereby neglecting the evolutionary history and developmental constraints of genes contributing to the overall pool of expressed transcripts.</p>
-<p>To overcome this limitation, the <code>myTAI</code> package introduces procedures summarized under the term <code>evolutionary transcriptomics</code> to integrate <code>gene age</code> information inferred with <a href="https://github.com/josuebarrera/GenEra" class="external-link">GenEra</a> into classical gene expression analysis. Previously inferred <code>gene age</code> information can be found <a href="https://github.com/HajkD/published_phylomaps" class="external-link">here</a>, of which recent precomputed <code>gene age</code> information can be retrieved via <a href="https://github.com/LotharukpongJS/phylomapr" class="external-link"><code>phylomapr</code></a>.</p>
+<p>To overcome this limitation, the <code>myTAI</code> package introduces procedures summarized under the term <code>evolutionary transcriptomics</code> to integrate gene age information into classical gene expression analysis. <code>Gene age inference</code> can be performed with <a href="">various existing software</a>, but we recommend using <a href="https://github.com/josuebarrera/GenEra" class="external-link">GenEra</a> or <a href="https://github.com/kullrich/orthomap" class="external-link">orthomap</a>, since they address published shortcomings of <code>gene age inference</code> (<a href="https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html" class="external-link">see detailed discussion here</a>). In addition, users can easily retrieve <a href="https://github.com/HajkD/published_phylomaps" class="external-link">previously precomputed gene age information</a> via our data package <a href="https://github.com/LotharukpongJS/phylomapr" class="external-link">phylomapr</a>.</p>
 <p>Evolutionary transcriptomics studies can serve as a first approach to screen <em>in silico</em> for the potential existence of evolutionary and developmental constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in <code>myTAI</code> provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.</p>
 </div>
 <div class="section level3">
@@ -484,8 +484,10 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/http://orcid.org/0000-0002-1567-306X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1567-306X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Kristian K Ullrich <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0003-4308-9626" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Jaruwatana Sodai Lotharukpong <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-3475-0980" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Nikola Kalábová <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0009-0007-6384-8809" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -497,7 +499,7 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Hajk-Georg Drost, Kristian K Ullrich.</p>
+<p>Developed by Hajk-Georg Drost, Kristian K Ullrich, Jaruwatana Sodai Lotharukpong, Nikola Kalábová.</p>
 </div>
 
 <div class="pkgdown">
