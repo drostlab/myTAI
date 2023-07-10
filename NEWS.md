@@ -17,9 +17,10 @@ myTAI 1.0.1.9000
 - `tf()` updated documentation for performing rank transformation, which assigns ranks to the gene expression values within each stage, based on their relative positions compared to other values.
 - Improvements to existing test functions (`ecScore()`, `rhScore()` and `reversehourglassScore()`) to give a message when the phylotranscriptomic pattern is unlikely to follow the test statistics.
 
-- `FlatLineTest()` newly returns the ks test statistics for the fitting of gamma
+- `FlatLineTest()` - newly returns the ks test statistics for the fitting of gamma
 - `FlatLineTest()` - improved fitting
-
+- `FlatLineTest()` - cpp functions are newly parallelized and progress bar is implemented for the computation of permutations
+  
 ## Bug and Issue Fixes
 - Some changes to remove errors and warnings from `devtools::test()` and `devtools::check()`, when building this package, which has been accumulated from previous updates.
 
