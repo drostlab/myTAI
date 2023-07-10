@@ -2,7 +2,12 @@ myTAI 1.0.1.9000
 ===========
 ## New Functions
 
+- internal `rcpp` functions are now using Eigen to automatically enable parallelization
+
 ## New Features
+
+- `FlatLineTest()` newly returns the ks test statistics for the fitting of gamma
+- `FlatLineTest()` - improved fitting
 
 ## Bug and Issue Fixes
 
