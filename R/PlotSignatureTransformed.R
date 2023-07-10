@@ -70,7 +70,7 @@
 #' \code{p.value} : the p-value quantifying the statistical significance (depending on the chosen test) of the given phylotranscriptomics pattern.
 #' @references
 #'
-#' Lotharukpong JS et al. (2023) bioRxiv
+#' Lotharukpong JS et al. (2023) (unpublished)
 #'
 #'
 #' @author Jaruwatana Sodai Lotharukpong
