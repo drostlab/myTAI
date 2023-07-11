@@ -3,13 +3,18 @@
 #include <math.h>
 #include <map>
 #include <random>
+#include <iostream>
 #include <RcppThread.h>
 #include <string.h>
+
+#ifdef _OPENMP
+// OpenMP is available
+// Include multiprocessing libraries and use parallelization
+  #include <omp.h>
+#endif
 #include <RcppEigen.h>
 #include <Eigen/Dense>
 #include <Eigen/Core>
-#include <omp.h>
-
 // [[Rcpp::depends(RcppThread)]]
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::depends(RcppEigen)]]
@@ -18,6 +23,8 @@
 using namespace Rcpp;
 using namespace std;
 using namespace arma;
+
+
 
 /* This whole 'permut' function has been adapted and taken from:
 http://gallery.rcpp.org/articles/stl-random-shuffle/
@@ -66,31 +73,45 @@ Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
   // already added by sourceCpp(), but needed standalone
   Eigen::MatrixXd permutedMat(permutations, a.size());
   Eigen::VectorXd shuffledVec = a;
-  
-  std::atomic<int> progress(0);
+
   const int updateFrequency = 200;  // Update progress every x iterations
+  #ifdef _OPENMP  
+  std::atomic<int> progress(0);
   
-#pragma omp parallel
-{
-  int localProgress = 0;
-  
-  #pragma omp for
+  #pragma omp parallel
+  {
+    int localProgress = 0;
+    #pragma omp for
+      for (int i = 0; i < permutations; i++) {
+        std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
+        permutedMat.row(i) = shuffledVec.transpose();
+        localProgress++;
+        
+        
+        if (localProgress % updateFrequency == 0) {
+          progress.fetch_add(updateFrequency, std::memory_order_relaxed);
+          
+          // Display progress
+          
+          int currentProgress = progress.load(std::memory_order_relaxed);
+          
+          updateProgressBar(currentProgress,permutations);
+          }
+      }
+    }
+    
+  #else
     for (int i = 0; i < permutations; i++) {
       std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
       permutedMat.row(i) = shuffledVec.transpose();
-      localProgress++;
-      
-      if (localProgress % updateFrequency == 0) {
-        progress.fetch_add(updateFrequency, std::memory_order_relaxed);
-        
-        // Display progress
-        int currentProgress = progress.load(std::memory_order_relaxed);
-        updateProgressBar(currentProgress,permutations);
+      if (i % updateFrequency == 0){
+        updateProgressBar(i,permutations);
       }
+        
     }
-  }
-  updateProgressBar(permutations,permutations);
-  return permutedMat;
+  #endif
+    updateProgressBar(permutations,permutations);
+    return permutedMat;
 }
 
 NumericVector permut(const NumericVector& a)
