@@ -80,7 +80,7 @@
 #'
 #' # example PhyloExpressionSet using 1000 permutations
 #' FlatLineTest(PhyloExpressionSetExample,
-#'              permutations  = 1000,
+#'              permutations  = 10000,
 #'              plotHistogram = FALSE)
 #'
 #' # use your own permutation matrix based on which p-values (FlatLineTest)
@@ -97,7 +97,7 @@
 #'
 
 FlatLineTest <- function(ExpressionSet,
-                         permutations       = 1000,
+                         permutations       = 10000,
                          plotHistogram      = FALSE,
                          runs               = 10,
                          parallel           = FALSE,
@@ -124,6 +124,7 @@ FlatLineTest <- function(ExpressionSet,
   ### sample only the phylostrata (row-permutations)
   
   if (is.null(custom.perm.matrix)) {
+    start_time = Sys.time()
     resMatrix <-
       cpp_bootMatrix(as.matrix(dplyr::select(
         ExpressionSet, 3:ncol(ExpressionSet)
@@ -132,6 +133,8 @@ FlatLineTest <- function(ExpressionSet,
         ExpressionSet, 1
       ))),
       as.numeric(permutations))
+    end_time = Sys.time()
+    message(paste("Time:", end_time - start_time))
     
   }
   
@@ -158,7 +161,7 @@ FlatLineTest <- function(ExpressionSet,
     ks_test <-
       stats::ks.test(var_values, "pgamma", shape = shape, rate = rate)
   }
-  if (permutations <= 20000) {
+  if (permutations < 20000) {
     message(
       "We recommended using at least 20000 permutations to achieve a sufficient permutation test."
     )
