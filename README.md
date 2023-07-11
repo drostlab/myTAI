@@ -36,7 +36,7 @@ brew install llvm libomp
 ```
 
 **Linux:**
-1. Check if you have an OpenMP-enabled compiler: Open a terminal and run the command gcc --version or g++ --version to check if you have the GNU Compiler Collection (GCC) installed. OpenMP support is typically included in GCC.
+1. Check if you have an OpenMP-enabled compiler: Open a terminal and run the command `gcc --version` or `g++ --version` to check if you have the GNU Compiler Collection (GCC) installed. OpenMP support is typically included in GCC.
 
     If you don't have GCC installed, you can install it using your distribution's package manager. For example, on Ubuntu, you can use sudo apt-get install build-essential to install GCC.
 
