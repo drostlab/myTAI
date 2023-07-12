@@ -32,7 +32,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 **Mac:**
 ```bash
-brew install llvm libomp lomp
+brew install llvm libomp
 cd /usr/local/lib
 ln -s /usr/local/opt/libomp/lib/libomp.dylib ./libomp.dylib
 ```
