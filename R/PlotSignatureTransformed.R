@@ -85,8 +85,7 @@
 #' # Flat line test
 #' PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
 #'                     TestStatistic = "FlatLineTest",
-#'                     transforms = c("none", "log2", "sqrt", "vst", "rank", "squared"),
-#'                     modules = list(early = 1:2, mid = 3:5, late = 6:7))
+#'                     transforms = c("none", "log2", "sqrt", "rank", "squared"))
 #'
 #' # Reductive hourglass test
 #' PlotSignatureTransformed(ExpressionSet = PhyloExpressionSetExample,
@@ -106,7 +105,7 @@ PlotSignatureTransformed <-
   function(ExpressionSet,
            measure            = "TAI",
            TestStatistic      = "FlatLineTest",
-           transforms         = c("none", "log2", "sqrt", "vst", "rank", "squared"),
+           transforms         = c("none", "sqrt", "log2", "rank", "squared"),
            modules            = NULL,
            permutations       = 1000,
            pseudocount        = 1,
