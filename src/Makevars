@@ -1,6 +1,14 @@
 # Disable long types from C99 or CPP11 extensions
 PKG_CPPFLAGS = -I../src -DRCPP_DEFAULT_INCLUDE_CALL=false -DCOMPILING_MYTAI -DBOOST_NO_INT64_T -DBOOST_NO_INTEGRAL_INT64_T -DBOOST_NO_LONG_LONG -DRCPP_USING_UTF8_ERROR_STRING -DRCPP_USE_UNWIND_PROTECT ${MYTAI_COMPILER_FLAGS}
-PKG_CPPFLAGS += -I/usr/local/opt/libomp/include
-LDFLAGS=-L/usr/local/opt/libomp/lib
-PKG_CXXFLAGS += -Xpreprocessor -fopenmp
-PKG_LIBS += -lomp
+
+OPENMP_SUPPORTED := $(shell $(CC) -fopenmp -dM -E - < /dev/null 2>&1 | grep -c "openmp")
+LIBOMP_SUPPORTED := $(shell [ -d /usr/local/opt/libomp/include ] && echo 1)
+ifeq ($(OPENMP_SUPPORTED),1)
+ ifeq ($(LIBOMP_SUPPORTED),1)
+	PKG_CPPFLAGS += -I/usr/local/opt/libomp/include
+	LDFLAGS=-L/usr/local/opt/libomp/lib
+	PKG_CXXFLAGS += -Xpreprocessor -fopenmp
+	PKG_LIBS += -lomp
+ endif
+endif
+

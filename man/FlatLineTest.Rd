@@ -6,7 +6,7 @@
 \usage{
 FlatLineTest(
   ExpressionSet,
-  permutations = 1000,
+  permutations = 10000,
   plotHistogram = FALSE,
   runs = 10,
   parallel = FALSE,
@@ -77,7 +77,7 @@ data(PhyloExpressionSetExample)
 
 # example PhyloExpressionSet using 1000 permutations
 FlatLineTest(PhyloExpressionSetExample,
-             permutations  = 1000,
+             permutations  = 10000,
              plotHistogram = FALSE)
 
 # use your own permutation matrix based on which p-values (FlatLineTest)
