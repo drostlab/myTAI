@@ -8,7 +8,7 @@ PlotSignatureTransformed(
   ExpressionSet,
   measure = "TAI",
   TestStatistic = "FlatLineTest",
-  transforms = c("none", "log2", "sqrt", "vst", "rank", "squared"),
+  transforms = c("none", "sqrt", "log2", "rank", "squared"),
   modules = NULL,
   permutations = 1000,
   pseudocount = 1,
