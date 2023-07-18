@@ -304,9 +304,15 @@ All functions also include visual analytics tools to quantify the goodness of te
 > - __Gene Expression Does Not Support the Developmental Hourglass Model in Three Animals with Spiralian Development__
 L Wu, KE Ferger, JD Lambert - __Molecular biology and evolution__, 2019
 >
+> - __Transcriptome age of individual cell types in Caenorhabditis elegans__ F Ma, C Zheng - __Proceedings of the National Academy of Sciences__, 2023
+>
 > - __The Transcriptional Landscape of Polyploid Wheats and their Diploid Ancestors during Embryogenesis and Grain Development__
 D Xiang, TD Quilichini, Z Liu, P Gao, Y Pan et al. - __The Plant Cell__, 2019
 >
+> - __Embryo-Like Features in Developing Bacillus subtilis Biofilms__ M Futo, L Opašić, S Koska, N Čorak, T Široki, V Ravikumar, A Thorsell, M Lenuzzi, D Kifer, M Domazet-Lošo, K Vlahoviček, I Mijakovic, T Domazet-Lošo - __Molecular Biology and Evolution__, 2021
+>
+> - __New Genes Interacted With Recent Whole-Genome Duplicates in the Fast Stem Growth of Bamboos__ G Jin, P-F Ma, X Wu, L Gu, M Long, C Zhang, DZ Li - __Molecular Biology and Evolution__, 2021
+> 
 > - __Developmental constraints on genome evolution in four bilaterian model species__
 J Liu, M Robinson-Rechavi - __Genome biology and evolution__, 2018
 >
@@ -336,6 +342,14 @@ Z Arendsee - 2019
 >
 > - __High expression of new genes in trochophore enlightening the ontogeny and evolution of trochozoans__
 F Xu, T Domazet-Lošo, D Fan, TL Dunwell, L Li et al. - __Scientific reports__, 2016
+>
+> - __Oxytocin receptor expression patterns in the human brain across development__ J Rokicki, T Kaufmann, A-MG de Lange, D van der Meer, S Bahrami, AM Sartorius, UK Haukvik, NE Steen, E Schwarz, DJ Stein, T Nærland, OA Andreassen, LT Westlye, DS Quintana - __Neuropsychopharmacol__, 2022
+>
+> - __The Phylotranscriptomic Hourglass Pattern in Fungi: An Updated Model__ Y Xie, HS Kwan, PL Chan, WJ Wu, J Chiou, J Chang __BioRxiv__, 2022
+> 
+> - __An ancient split of germline and somatic stem cell lineages in Hydra__ C Nishimiya-Fujisawa, H Petersen, TC-T Koubková-Yu, C Noda, S Shigenobu, J Bageritz, T Fujisawa, O Simakov, S Kobayashi, TW Holstein - __BioRxiv__, 2023
+>
+
 
 
 ## Discussions and Bug Reports
