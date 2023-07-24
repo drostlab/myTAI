@@ -5,10 +5,10 @@
 #'
 #' In detail, each gene gets a \emph{TEI contribution profile}.
 #'
-#' \deqn{TEI_is = f_is * ps_i}
+#' \deqn{TEI_{is} = f_{is} * ps_i}
 #'
-#' where TEI_is is the partial TEI value of gene i,
-#' \eqn{f_is = e_is / \sum e_is} and \eqn{ps_i} is the phylostratum of gene i.
+#' where \eqn{TEI_{is}} is the partial TEI value of gene i,
+#' \eqn{f_{is} = e_{is} / \sum e_{is}} and \eqn{ps_i} is the phylostratum of gene i.
 #' @param ExpressionSet expression object with rownames as GeneID (dgCMatrix)
 #' or standard PhyloExpressionSet object.
 #' @param Phylostratum a named vector representing phylostratum per GeneID with
