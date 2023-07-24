@@ -4,14 +4,14 @@
 #'
 #' In detail, each gene gets a \emph{TAI contribution profile} or \emph{TDI contribution profile}. 
 #'
-#' \deqn{TAI_is = f_is * ps_i}
+#' \deqn{TAI_{is} = f_{is} * ps_i}
 #'
 #' or
 #'
-#' \deqn{TDI_is = f_is * ps_i}
+#' \deqn{TDI_{is} = f_{is} * ps_i}
 #'
-#' where TAI_is or TDI_is is the partial TAI or TDI value of gene i, 
-#' \eqn{f_is = e_is / \sum e_is} and \eqn{ps_i} is the phylostratum or divergence-stratum of gene i.
+#' where \eqn{TAI_{is}} or \eqn{TDI_{is}} is the partial TAI or TDI value of gene i, 
+#' \eqn{f_{is} = e_{is} / \sum e_{is}} and \eqn{ps_i} is the phylostratum or divergence-stratum of gene i.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @details The partial TAI or TDI matrix can be used to perform different cluster analyses
 #' and also gives an overall impression of the contribution of each gene to the global \code{\link{TAI}} or \code{\link{TDI}} pattern.
