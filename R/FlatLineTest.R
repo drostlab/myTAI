@@ -134,7 +134,8 @@ FlatLineTest <- function(ExpressionSet,
       ))),
       as.numeric(permutations))
     end_time = Sys.time()
-    message(paste("Time:", end_time - start_time))
+    cat("\n")
+    cat(paste("Total runtime of your permutation test:", round(end_time - start_time, 3), " seconds."))
     
   }
   
@@ -158,12 +159,13 @@ FlatLineTest <- function(ExpressionSet,
     gamma = fitdistrplus::fitdist(var_values, "gamma", method = "mme")
     shape = gamma$estimate[1]
     rate = gamma$estimate[2]
-    ks_test <-
-      stats::ks.test(var_values, "pgamma", shape = shape, rate = rate)
+    suppressWarnings(ks_test <-
+      stats::ks.test(var_values, "pgamma", shape = shape, rate = rate))
   }
   if (permutations < 20000) {
+    message("\n")
     message(
-      "We recommended using at least 20000 permutations to achieve a sufficient permutation test."
+      "-> We recommended using at least 20000 permutations to achieve a sufficient permutation test."
     )
   }
   
@@ -304,11 +306,11 @@ GetGamma <- function(var_values, permutations)
     shape <- gamma_fit$estimate[1]
     rate <- gamma_fit$estimate[2]
     # Perform Kolmogorov-Smirnov test
-    ks_result <-
+    suppressWarnings(ks_result <-
       stats::ks.test(filtered_vars,
                      "pgamma",
                      shape = shape,
-                     rate = rate)
+                     rate = rate))
     if (ks_result$p.value > max_p_fit_v) {
       max_p_i = i
       max_p_fit_v = ks_result$p.value
@@ -335,11 +337,11 @@ GetGamma <- function(var_values, permutations)
     shape <- gamma_fit$estimate[1]
     rate <- gamma_fit$estimate[2]
     # Perform Kolmogorov-Smirnov test
-    ks_result <-
+    suppressWarnings(ks_result <-
       stats::ks.test(filtered_vars,
                      "pgamma",
                      shape = shape,
-                     rate = rate)
+                     rate = rate))
     if (ks_result$p.value > max_p_fit_v) {
       max_p_fit_v = ks_result$p.value
       b_shape = shape

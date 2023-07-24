@@ -142,14 +142,17 @@ Eigen::VectorXd cpp_TAI(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::Ve
 // [[Rcpp::export]]
 Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& AgeVector, const int& permutations) 
 {
+        std::cout << std::endl;
+        std::cout << "[ Number of Eigen threads that are employed on your machine: " << Eigen::nbThreads() << " ]" << std::endl;
+        std::cout << std::endl;
         Eigen::VectorXd Divisor = ExpressionMatrix.colwise().sum();
         Eigen::MatrixXd fMatrix = ExpressionMatrix.array().rowwise() / Divisor.transpose().array();
-        std::cout << "Computing permutations" << std::endl;
+        std::cout << "[ Computing age assignment permutations for test statistic ..." << " ]" << std::endl;
         Eigen::MatrixXd permMatrix = permut_mat(AgeVector,permutations);
         std::cout << std::endl;
-        std::cout << "Computing variances" << std::endl;
+        std::cout << "[ Computing variances of permuted transcriptome signatures ..." << " ]" << std::endl;
         Eigen::MatrixXd bootM = permMatrix * fMatrix;
-        std::cout << "Number of Eigen threads: " << Eigen::nbThreads() << std::endl;
+        std::cout << std::endl;
         return bootM;
 }
 
