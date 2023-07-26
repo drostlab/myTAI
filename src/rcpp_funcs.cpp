@@ -63,7 +63,7 @@ void updateProgressBar(int currentProgress, int totalProgress, int barWidth = 40
   }
   progressBar += ']';
   
-  float percentage = progressRatio * 100;
+  float percentage = round(progressRatio * 10000)/100;
   std::cout << '\r' << progressBar << " " << percentage << "%   ";
   std::cout.flush();
 }

@@ -110,11 +110,10 @@ FlatLineTest <- function(ExpressionSet,
       "Please specify the number of runs to be performed for the goodness of fit computations.",
       call. = FALSE
     )
-  
   nCols <- dim(ExpressionSet)[2]
   resMatrix <- matrix(NA_real_, permutations, (nCols - 2))
   var_values <- vector(mode = "numeric", length = permutations)
-  sd_values <- vector(mode = "numeric", length = nCols - 2)
+  sd_values <-vector(mode = "numeric", length = nCols - 2)
   #random_mean_age <- vector(mode = "numeric", length = permutations)
   age.real <- vector(mode = "numeric", length = nCols - 2)
   age.real <-
@@ -315,12 +314,11 @@ GetGamma <- function(var_values, permutations)
       max_p_i = i
       max_p_fit_v = ks_result$p.value
     }
-    
   }
   if (max_p_i == 0) {
     gamma_fit <-
       fitdistrplus::fitdist(var_values, "gamma", method = "mme")
-    return(list(gamma_fit$estimate[1], gamma_fit$estimate[2]))
+    return(list(gamma_fit$estimate[1], gamma_fit$estimate[2],gamma_fit))
   }
   b_shape = 0
   b_rate = 0
@@ -328,8 +326,9 @@ GetGamma <- function(var_values, permutations)
   max_p_fit_v = 0
   for (i in -10:10) {
     # Filtered variances
+    lb = round(length(var_values) * (max_p_i * step + i * step / 10))
     filtered_vars <-
-      sorted_vars[round(length(var_values) * (max_p_i * step + i * step / 10)):length(var_values)]
+      sorted_vars[lb:length(var_values)]
     
     # Estimate parameters using method of moments
     gamma_fit <-
