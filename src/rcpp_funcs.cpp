@@ -41,6 +41,8 @@ int randWrapper(const int& n)
 std::random_device rng;
 std::mt19937_64 urng(rng());
 std::linear_congruential_engine<unsigned int, 48271, 1, 65536> lcg(rng());
+std::default_random_engine gn(rng());
+std::minstd_rand mrgn(42);
 
 
 void updateProgressBar(int currentProgress, int totalProgress, int barWidth = 40) {
