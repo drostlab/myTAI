@@ -75,12 +75,12 @@ In theory, any published or newly generated transcriptome dataset can be used to
 
 ![](Figures/Fig3.png)
 
-<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](https://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratography based gene age inference (see [Domazet-Loso et al., 2007](https://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](https://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](https://www.nature.com/articles/nature11394) and [Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)), or phylogenetic reconciliation (see [Doyon et al, 2011](https://pubmed.ncbi.nlm.nih.gov/21949266/) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary trancriptomics analyses. Here, we exemplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
+<p style="font-size:10px;"> Figure 3: Workflow describing the input and output of the myTAI package. The myTAI package takes phylogenetic information such as phylogenetic trees (see [Dunn, 2013](https://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression) ), genomic phylostratigraphy based gene age inference (see [Domazet-Loso et al., 2007](https://www.sciencedirect.com/science/article/pii/S0168952507002995); [Capra et al., 2013](https://www.sciencedirect.com/science/article/pii/S016895251300111X); [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026) ), by dNdS estimation of orthologous genes (see [Quint, Drost et al., 2012](https://www.nature.com/articles/nature11394) and [Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964)), or phylogenetic reconciliation (see [Doyon et al, 2011](https://pubmed.ncbi.nlm.nih.gov/21949266/) ) and a RNA-Seq or Microarray based transcriptome dataset as input. Internally, myTAI then combines the phylogenetic data and the transcriptome data an provides numerous functions to perform evolutionary transcriptomics analyses. Here, we exemplify the output of the functions `PlotSignature()`, `PlotRE()` and `PlotCategoryExpr()`. </p>
 
 
 ## Retrieval of phylogenetic or taxonomic information
 
-For the comparative genomics part there are different methods and tools to quantify sequence homolgy between genes, miRNAs, lncRNAs etc of a reference species and related species. For example, for phylogenetic or taxonomic information retrieval such as phylogenetic trees, genomic phylostratography based gene age inference, dNdS estimation of orthologous genes or phylogenetic reconciliation can be used. Below users can find the most recent tools and resources for retrieving or computing phylogenetic or taxonomic relationships for an organism of interest.
+For the comparative genomics part there are different methods and tools to quantify sequence homology between genes, miRNAs, lncRNAs etc of a reference species and related species. For example, for phylogenetic or taxonomic information retrieval such as phylogenetic trees, genomic phylostratigraphy based gene age inference, dNdS estimation of orthologous genes or phylogenetic reconciliation can be used. Below users can find the most recent tools and resources for retrieving or computing phylogenetic or taxonomic relationships for an organism of interest.
 
 __Generate or retrieve phylostratigraphic maps:__
 
@@ -312,7 +312,7 @@ To obtain this mean age value, several measures were introduced:
 
 #### Transcriptome Age Index
 
-The first meansure named _Transcriptome Age Index_ (TAI) was introduced by Domazet-Loso and Tautz, 2010 and represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
+The first measure named _Transcriptome Age Index_ (TAI) was introduced by Domazet-Loso and Tautz, 2010 and represents a weighted arithmetic mean of the transcriptome age during a corresponding developmental stage _s_. 
 
 
 $TAI_s = \sum_{i = 1}^n \frac{ps_i * e_{is}}{\sum_{i = 1}^n e_{is}}$
@@ -342,7 +342,7 @@ The interpretation of the TAI values on the y-axis is given by the next figure.
 In this example, a TAI value of 3.5 quantifies that genes that contribute most the transcriptome at a particular stage emerged on average between phylostratum 3 and phylostratum 4. Due to the nature of the arithmetic mean, this value does not represent the true origin of individual genes, and thus the TAI measure is only helpful to screen for stages that express (on average) older or younger genes. Subsequent analyses such as mean expression of age categories, relative expression levels, and gene expression level distributions for each age category will then reveal which exact genes or age categories generate the overall TAI value.
 
 To obtain a more detailed overview of which age categories contribute how much to
-each developmental stage, the gene expression level distributions for each age caterory and each developmental stage can be visualized (using the `PlotCategoryExpr()` function).
+each developmental stage, the gene expression level distributions for each age category and each developmental stage can be visualized (using the `PlotCategoryExpr()` function).
 
 ```{r, fig.width= 9, fig.height= 5,eval=FALSE}
 data(PhyloExpressionSetExample)
@@ -596,9 +596,9 @@ PlotSignature( ExpressionSet = PhyloExpressionSetExample,
 __Note__ that for defining a priori knowledge for the `ReductiveHourglassTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
 which in contrast would start at position 3, ... N + 2.
 
-In a biological context, it is not always clear which stages could define the ealy, mid, and late 
+In a biological context, it is not always clear which stages could define the early, mid, and late 
 modules. For animal embryogenesis, it has been suggested to choose early, mid, and late modules
-according to the morphological conservation of animal embryos (e.g. mid-stage vertebrate embryos seem to be morphologically conserved). For plants, in contrast no morphological conservation has been reported and thus the averge expression of embryo defective genes has been used to define modules (Drost et al. 2015).
+according to the morphological conservation of animal embryos (e.g. mid-stage vertebrate embryos seem to be morphologically conserved). For plants, in contrast no morphological conservation has been reported and thus the average expression of embryo defective genes has been used to define modules (Drost et al. 2015).
 
 ### Reductive Early Conservation Test
 
@@ -701,9 +701,9 @@ PlotSignature( ExpressionSet = PhyloExpressionSetExample,
 __Note__ that for defining a priori knowledge for the `ReverseHourglassTest` using the `modules` argument, modules need to start at stage 1, ..., N and do not correspond to the column position in the _PhyloExpressionSet/DivergenceExpressionSet_
 which in contrast would start at position 3, ... N + 2.
 
-In a biological context, it is not always clear which stages could define the ealy, mid, and late 
+In a biological context, it is not always clear which stages could define the early, mid, and late 
 modules. For animal embryogenesis, it has been suggested to choose early, mid, and late modules
-according to the morphological conservation of animal embryos (e.g. mid-stage vertebrate embryos seem to be morphologically conserved). For plants, in contrast no morphological conservation has been reported and thus the averge expression of embryo defective genes has been used to define modules (Drost et al. 2015).
+according to the morphological conservation of animal embryos (e.g. mid-stage vertebrate embryos seem to be morphologically conserved). For plants, in contrast no morphological conservation has been reported and thus the average expression of embryo defective genes has been used to define modules (Drost et al. 2015).
 
 ## Transcriptome Divergence Index Analyses
 
@@ -853,7 +853,7 @@ of `Phylostratum` 12 (in the `pTAI()` matrix) are equivalent to `TAI(PhyloExpres
 
 ```{r,eval = FALSE}
 # show that the cumulative TAI value of PS 12 is
-# equavalent to the global TAI() values
+# equivalent to the global TAI() values
 pTAI(PhyloExpressionSetExample)[12 , ]
 
 # >  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature 

@@ -28,7 +28,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 ### Dependencies
 
-`myTAI` is using `OpenMP` to run cpp code in parallel, thus you might need to install aditional software. 
+`myTAI` is using `OpenMP` to run cpp code in parallel, thus you might need to install additional software. 
 
 **Mac:**
 ```bash
@@ -102,7 +102,7 @@ functionality of each version of `myTAI` can be found in the [NEWS](https://dros
 
 ## Tutorials
 
-The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome onservation with `myTAI` and how to interpret the results generated with this software tool.
+The following tutorials will provide use cases and detailed explanations of how to quantify transcriptome conservation with `myTAI` and how to interpret the results generated with this software tool.
 
 - [Introduction to the myTAI Package](https://drostlab.github.io/myTAI/articles/Introduction.html)
 - [Intermediate Concepts of Phylotranscriptomics](https://drostlab.github.io/myTAI/articles/Intermediate.html)
@@ -229,7 +229,7 @@ In the `myTAI` framework users can find:
 
 * `PlotSignature()` : Main visualization function to plot evolutionary signatures across transcriptomes
 * `PlotPattern()` : Base graphics function to plot evolutionary signatures across transcriptomes
-* `PlotContribution()` : Plot Cumuative Transcriptome Index
+* `PlotContribution()` : Plot Cumulative Transcriptome Index
 * `PlotCorrelation()` : Function to plot the correlation between phylostratum values and divergence-stratum values
 * `PlotRE()` : Function to plot the relative expression profiles
 * `PlotBarRE()` : Function to plot the mean relative expression levels of phylostratum or divergence-stratum classes as barplot
