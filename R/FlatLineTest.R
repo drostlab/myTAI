@@ -110,6 +110,7 @@ FlatLineTest <- function(ExpressionSet,
       "Please specify the number of runs to be performed for the goodness of fit computations.",
       call. = FALSE
     )
+  
   nCols <- dim(ExpressionSet)[2]
   resMatrix <- matrix(NA_real_, permutations, (nCols - 2))
   var_values <- vector(mode = "numeric", length = permutations)
@@ -135,7 +136,6 @@ FlatLineTest <- function(ExpressionSet,
     end_time = Sys.time()
     cat("\n")
     cat(paste("Total runtime of your permutation test:", round(end_time - start_time, 3), " seconds."))
-    
   }
   
   else if (!is.null(custom.perm.matrix)) {
@@ -143,6 +143,7 @@ FlatLineTest <- function(ExpressionSet,
   }
   
   var_values <- apply(resMatrix, 1, stats::var)
+  #print(sum(var_values > real.var)/length(var_values))
   #random_mean_age <- apply(resMatrix,2,mean)
   ### estimate the parameters (shape,rate)
   ### of the gamma distributed variance values
@@ -158,8 +159,7 @@ FlatLineTest <- function(ExpressionSet,
     gamma = fitdistrplus::fitdist(var_values, "gamma", method = "mme")
     shape = gamma$estimate[1]
     rate = gamma$estimate[2]
-    suppressWarnings(ks_test <-
-      stats::ks.test(var_values, "pgamma", shape = shape, rate = rate))
+    suppressWarnings(ks_test <- stats::ks.test(var_values, "pgamma", shape = shape, rate = rate))
   }
   if (permutations < 20000) {
     message("\n")
@@ -228,8 +228,8 @@ FlatLineTest <- function(ExpressionSet,
           .errorhandling = "stop"
         ) %dopar%
           {
-            suppressMessages(FlatLineTest(ExpressionSet = ExpressionSet,
-                         permutations = permutations)$p.value)
+            FlatLineTest(ExpressionSet = ExpressionSet,
+                         permutations = permutations)$p.value
             
           })
       
@@ -244,8 +244,8 @@ FlatLineTest <- function(ExpressionSet,
       
       
       for (i in 1:runs) {
-        p.vals_vec[i] <-  suppressMessages(FlatLineTest(ExpressionSet = ExpressionSet,
-                                      permutations = permutations)$p.value)
+        p.vals_vec[i] <-  FlatLineTest(ExpressionSet = ExpressionSet,
+                                      permutations = permutations)$p.value
         
         # printing out the progress
         #setTxtProgressBar(progressBar,i)
@@ -278,7 +278,6 @@ FlatLineTest <- function(ExpressionSet,
                   lower.tail = FALSE)
   
   sd_values <- apply(resMatrix, 2, stats::sd)
-  
   return(list(
     p.value = pval,
     std.dev = sd_values,
@@ -289,11 +288,13 @@ FlatLineTest <- function(ExpressionSet,
 
 GetGamma <- function(var_values, permutations)
 {
-  step = 0.0005
+  iterations = 200
+  max_cut = 0.25
+  step = max_cut/iterations 
   sorted_vars = sort(var_values, decreasing = TRUE)
   max_p_fit_v = 0
   max_p_i = 0
-  for (i in 2:100) {
+  for (i in 2:iterations) {
     # to avoid indexing from zero
     # Filtered variances
     filtered_vars <-
@@ -318,7 +319,11 @@ GetGamma <- function(var_values, permutations)
   if (max_p_i == 0) {
     gamma_fit <-
       fitdistrplus::fitdist(var_values, "gamma", method = "mme")
-    return(list(gamma_fit$estimate[1], gamma_fit$estimate[2],gamma_fit))
+    return(list(gamma_fit$estimate[1], gamma_fit$estimate[2],suppressWarnings(ks_result <-
+                  stats::ks.test(var_values,
+                                 "pgamma",
+                                 shape = gamma_fit$estimate[1],
+                                 rate = gamma_fit$estimate[2]))))
   }
   b_shape = 0
   b_rate = 0
