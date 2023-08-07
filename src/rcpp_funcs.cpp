@@ -40,7 +40,6 @@ int randWrapper(const int& n)
 // Initilizing the random number generator outside of the function
 std::random_device rng;
 std::mt19937_64 urng(rng());
-std::linear_congruential_engine<unsigned int, 48271, 1, 65536> lcg(rng());
 std::default_random_engine gn(rng());
 std::minstd_rand mrgn(42);
 
@@ -85,7 +84,8 @@ Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
     int localProgress = 0;
     #pragma omp for
       for (int i = 0; i < permutations; i++) {
-        std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
+        shuffledVec = a;
+        std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), urng);
         permutedMat.row(i) = shuffledVec.transpose();
         localProgress++;
         
@@ -104,7 +104,8 @@ Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
     
   #else
     for (int i = 0; i < permutations; i++) {
-      std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
+      shuffledVec = a;
+      std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), urng);
       permutedMat.row(i) = shuffledVec.transpose();
       if (i % updateFrequency == 0){
         updateProgressBar(i,permutations);
@@ -125,7 +126,7 @@ NumericVector permut(const NumericVector& a)
   // clone a into b to leave a alone
   NumericVector b = clone(a);
   
-  std::shuffle(b.begin(), b.end(), lcg);
+  std::shuffle(b.begin(), b.end(), urng);
   
   return b;
 }
@@ -140,6 +141,20 @@ Eigen::VectorXd cpp_TAI(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::Ve
   
   return total;
 }
+/*
+// @export
+// [[Rcpp::export]]
+Eigen::VectorXd cpp_TAI_par(const Eigen::SparseMatrix<double> & ExpressionMatrix, const Eigen::VectorXd& Phylostratum) {
+  
+  Eigen::VectorXd Divisor = ExpressionMatrix.transpose() * Eigen::VectorXd::Ones(ExpressionMatrix.rows());
+  Eigen::MatrixXd phylExp = Phylostratum.replicate(1, 7);
+  phylExp = phylExp.array().rowwise() / Divisor.transpose().array();
+  Eigen::VectorXd total = phylExp * ExpressionMatrix;
+  
+  return total;
+}
+*/
+
 // @export
 // [[Rcpp::export]]
 Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& AgeVector, const int& permutations) 
