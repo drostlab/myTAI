@@ -132,10 +132,31 @@
 <p>Drost et al. <strong>myTAI: evolutionary transcriptomics with R</strong>. <em>Bioinformatics</em> 2018, 34 (9), 1589-1590. <a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684" class="external-link">doi:10.1093</a></p>
 </blockquote>
 <div class="section level3">
+<h3 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
+</h3>
+<p><code>myTAI</code> is using <code>OpenMP</code> to run cpp code in parallel, thus you might need to install additional software.</p>
+<p><strong>Mac:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install llvm libomp</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /usr/local/lib</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /usr/local/opt/libomp/lib/libomp.dylib ./libomp.dylib</span></code></pre></div>
+<p><strong>Linux:</strong> 1. Check if you have an OpenMP-enabled compiler: Open a terminal and run the command <code>gcc --version</code> or <code>g++ --version</code> to check if you have the GNU Compiler Collection (GCC) installed. OpenMP support is typically included in GCC.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>If you don<span class="st">'t have GCC installed, you can install it using your distribution'</span>s package manager. For example, on Ubuntu, you can use sudo apt<span class="sc">-</span>get install build<span class="sc">-</span>essential to install GCC.</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>
+<p>Install the libomp library: Open a terminal and run the command appropriate for your package manager:</p>
+<p>On Ubuntu or Debian-based systems: <code>sudo apt-get install libomp-dev</code> or <code>sudo apt install libomp-dev</code></p>
+<p>On Fedora or CentOS systems: <code>sudo dnf install libomp-devel</code></p>
+<p>On Arch Linux: <code>sudo pacman -S libomp</code></p>
+</li>
+</ol>
+<p><strong>Windows:</strong></p>
+<p>On Windows, the most common OpenMP implementation is provided by Microsoft Visual C++ (MSVC) compiler, which includes OpenMP support by default. So, if you are using MSVC as your C++ compiler, you should have OpenMP support without any additional installations.</p>
+</div>
+<div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
 <p>Users can install <code>myTAI</code> from <a href="https://cran.r-project.org/web/packages/myTAI/index.html" class="external-link">CRAN</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install myTAI 0.9.3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"myTAI"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -158,7 +179,7 @@
 <h2 id="install-developer-version">Install Developer Version<a class="anchor" aria-label="anchor" href="#install-developer-version"></a>
 </h2>
 <p>Some bug fixes or new functionality will not be available on CRAN yet, but in the developer version here on GitHub. To download and install the most recent version of <code>myTAI</code> run:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install developer version of myTAI</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"drostlab/myTAI"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -170,7 +191,7 @@
 <div class="section level2">
 <h2 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
 </h2>
-<p>The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome onservation with <code>myTAI</code> and how to interpret the results generated with this software tool.</p>
+<p>The following tutorials will provide use cases and detailed explanations of how to quantify transcriptome conservation with <code>myTAI</code> and how to interpret the results generated with this software tool.</p>
 <ul>
 <li><a href="https://drostlab.github.io/myTAI/articles/Introduction.html" class="external-link">Introduction to the myTAI Package</a></li>
 <li><a href="https://drostlab.github.io/myTAI/articles/Intermediate.html" class="external-link">Intermediate Concepts of Phylotranscriptomics</a></li>
@@ -187,7 +208,7 @@
 <div class="section level4">
 <h4 id="load-example-data">Load example data<a class="anchor" aria-label="anchor" href="#load-example-data"></a>
 </h4>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
 <span><span class="co"># example dataset covering 7 stages of A thaliana embryo development</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"PhyloExpressionSetExample"</span><span class="op">)</span></span>
@@ -197,7 +218,7 @@
 <div class="section level4">
 <h4 id="quantify-transcriptome-conservation-using-tai">Quantify transcriptome conservation using TAI<a class="anchor" aria-label="anchor" href="#quantify-transcriptome-conservation-using-tai"></a>
 </h4>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize global Transcriptome Age Index pattern</span></span>
 <span><span class="fu"><a href="reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span><span class="va">ExprExample</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-10-1.png"></p>
@@ -205,7 +226,7 @@
 <div class="section level4">
 <h4 id="quantify-expression-level-distributions-for-each-gene-age-category">Quantify expression level distributions for each gene age category<a class="anchor" aria-label="anchor" href="#quantify-expression-level-distributions-for-each-gene-age-category"></a>
 </h4>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot expression level distributions for each age (=PS) category </span></span>
 <span><span class="co"># and each developmental stage </span></span>
 <span><span class="fu"><a href="reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span><span class="va">ExprExample</span>, <span class="st">"PS"</span><span class="op">)</span></span></code></pre></div>
@@ -214,7 +235,7 @@
 <div class="section level4">
 <h4 id="quantify-mean-expression-of-individual-gene-age-categories">Quantify mean expression of individual gene age categories<a class="anchor" aria-label="anchor" href="#quantify-mean-expression-of-individual-gene-age-categories"></a>
 </h4>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot mean expression of each age category seperated by old (PS1-3)</span></span>
 <span><span class="co"># versus young (PS4-12) genes</span></span>
 <span><span class="fu"><a href="reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -223,12 +244,12 @@
 <div class="section level4">
 <h4 id="quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes">Quantify relative mean expression of each age category seperated by old versus young genes<a class="anchor" aria-label="anchor" href="#quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes"></a>
 </h4>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot relative mean expression of each age category seperated by old (PS1-3)</span></span>
 <span><span class="co"># versus young (PS4-12) genes</span></span>
 <span><span class="fu"><a href="reference/PlotRE.html">PlotRE</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-13-1.png"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the significant differences between gene expression distributions </span></span>
 <span><span class="co"># of old (=group1) versus young (=group2) genes</span></span>
 <span><span class="fu"><a href="reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">ExprExample</span>,</span>
@@ -242,7 +263,7 @@
 <a class="anchor" aria-label="anchor" href="#getting-started-with-mytai"></a>
 </h2>
 <p>Users can also read the tutorials within (<a href="https://rstudio.com/" class="external-link">RStudio</a>) :</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># source the myTAI package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/drostlab/myTAI" class="external-link">myTAI</a></span><span class="op">)</span></span>
 <span></span>
@@ -306,7 +327,7 @@
 <li>
 <code><a href="reference/PlotPattern.html">PlotPattern()</a></code> : Base graphics function to plot evolutionary signatures across transcriptomes</li>
 <li>
-<code><a href="reference/PlotContribution.html">PlotContribution()</a></code> : Plot Cumuative Transcriptome Index</li>
+<code><a href="reference/PlotContribution.html">PlotContribution()</a></code> : Plot Cumulative Transcriptome Index</li>
 <li>
 <code><a href="reference/PlotCorrelation.html">PlotCorrelation()</a></code> : Function to plot the correlation between phylostratum values and divergence-stratum values</li>
 <li>
@@ -422,7 +443,10 @@
 <li><p><strong>A unicellular relative of animals generates a layer of polarized cells by actomyosin-dependent cellularization</strong> O Dudin, A Ondracka, X Grau-Bové, AAB Haraldsen et al. - <strong>eLife</strong>, 2019</p></li>
 <li><p><strong>Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis</strong> HG Drost, A Gabel, I Grosse, M Quint - <strong>Molecular biology and evolution</strong>, 2015</p></li>
 <li><p><strong>Gene Expression Does Not Support the Developmental Hourglass Model in Three Animals with Spiralian Development</strong> L Wu, KE Ferger, JD Lambert - <strong>Molecular biology and evolution</strong>, 2019</p></li>
+<li><p><strong>Transcriptome age of individual cell types in Caenorhabditis elegans</strong> F Ma, C Zheng - <strong>Proceedings of the National Academy of Sciences</strong>, 2023</p></li>
 <li><p><strong>The Transcriptional Landscape of Polyploid Wheats and their Diploid Ancestors during Embryogenesis and Grain Development</strong> D Xiang, TD Quilichini, Z Liu, P Gao, Y Pan et al. - <strong>The Plant Cell</strong>, 2019</p></li>
+<li><p><strong>Embryo-Like Features in Developing Bacillus subtilis Biofilms</strong> M Futo, L Opašić, S Koska, N Čorak, T Široki, V Ravikumar, A Thorsell, M Lenuzzi, D Kifer, M Domazet-Lošo, K Vlahoviček, I Mijakovic, T Domazet-Lošo - <strong>Molecular Biology and Evolution</strong>, 2021</p></li>
+<li><p><strong>New Genes Interacted With Recent Whole-Genome Duplicates in the Fast Stem Growth of Bamboos</strong> G Jin, P-F Ma, X Wu, L Gu, M Long, C Zhang, DZ Li - <strong>Molecular Biology and Evolution</strong>, 2021</p></li>
 <li><p><strong>Developmental constraints on genome evolution in four bilaterian model species</strong> J Liu, M Robinson-Rechavi - <strong>Genome biology and evolution</strong>, 2018</p></li>
 <li><p><strong>Mapping selection within Drosophila melanogaster embryo’s anatomy</strong> I Salvador-Martínez et al. - <strong>Molecular biology and evolution</strong>, 2017</p></li>
 <li><p><strong>Distribution and diversity of enzymes for polysaccharide degradation in fungi</strong> R Berlemont - <strong>Scientific reports</strong>, 2017</p></li>
@@ -433,6 +457,9 @@
 <li><p><strong>Environmental DNA reveals landscape mosaic of wetland plant communities</strong> ME Shackleton, GN Rees, G Watson et al. - <strong>Global Ecology and Conservation</strong>, 2019</p></li>
 <li><p><strong>Algorithms for synteny-based phylostratigraphy and gene origin classification</strong> Z Arendsee - 2019</p></li>
 <li><p><strong>High expression of new genes in trochophore enlightening the ontogeny and evolution of trochozoans</strong> F Xu, T Domazet-Lošo, D Fan, TL Dunwell, L Li et al. - <strong>Scientific reports</strong>, 2016</p></li>
+<li><p><strong>Oxytocin receptor expression patterns in the human brain across development</strong> J Rokicki, T Kaufmann, A-MG de Lange, D van der Meer, S Bahrami, AM Sartorius, UK Haukvik, NE Steen, E Schwarz, DJ Stein, T Nærland, OA Andreassen, LT Westlye, DS Quintana - <strong>Neuropsychopharmacol</strong>, 2022</p></li>
+<li><p><strong>The Phylotranscriptomic Hourglass Pattern in Fungi: An Updated Model</strong> Y Xie, HS Kwan, PL Chan, WJ Wu, J Chiou, J Chang <strong>BioRxiv</strong>, 2022</p></li>
+<li><p><strong>An ancient split of germline and somatic stem cell lineages in Hydra</strong> C Nishimiya-Fujisawa, H Petersen, TC-T Koubková-Yu, C Noda, S Shigenobu, J Bageritz, T Fujisawa, O Simakov, S Kobayashi, TW Holstein - <strong>BioRxiv</strong>, 2023</p></li>
 </ul>
 </blockquote>
 </div>

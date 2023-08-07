@@ -107,7 +107,7 @@
 <code>myTAI</code>
 </h1>
             
-            <h4 data-toc-skip class="date">2023-07-10</h4>
+            <h4 data-toc-skip class="date">2023-08-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Expression.Rmd" class="external-link"><code>vignettes/Expression.Rmd</code></a></small>
       <div class="hidden name"><code>Expression.Rmd</code></div>
@@ -723,7 +723,7 @@ normalization need to be specified (see also
 variability between replicate expression levels fo each stage
 separately.</p>
 <p>The <code><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality()</a></code> is designed to perform
-customized replicate variablity checks for any
+customized replicate variability checks for any
 <code>ExpressionSet</code> object storing replicates.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
@@ -744,10 +744,10 @@ each stage has a different expression level variability between
 replicates.</p>
 <p>The <code>FUN</code> argument implemented in
 <code><a href="../reference/PlotReplicateQuality.html">PlotReplicateQuality()</a></code> allows users to furthermore, specify
-customized criteria quantifying replicate varibility. Please notice that
-the function specified in <code>FUN</code> will be performed separately
-on each gene and stage.</p>
-<p>In the following example the median bbsolute deviation function
+customized criteria quantifying replicate variability. Please notice
+that the function specified in <code>FUN</code> will be performed
+separately on each gene and stage.</p>
+<p>In the following example the median absolute deviation function
 <code><a href="https://rdrr.io/r/stats/mad.html" class="external-link">mad()</a></code> is used to quantify replicate variability.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
@@ -759,7 +759,7 @@ on each gene and stage.</p>
 <span>                     legend.pos    <span class="op">=</span> <span class="st">"topright"</span>,</span>
 <span>                     ylim          <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.015</span><span class="op">)</span>,</span>
 <span>                     lwd           <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
-<p>In general, users are not limited to specific functions implememnted
+<p>In general, users are not limited to specific functions implemented
 in R. By writing customized functions such as
 <code>FUN = function(x) return((x - mean(x))^2)</code> users can define
 their own criteria to quantify replicate variability and can then apply
@@ -783,7 +783,7 @@ function.</p>
 <span><span class="co"># load example data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># genrate an example PhyloExpressionSet with replicates</span></span>
+<span><span class="co"># generate an example PhyloExpressionSet with replicates</span></span>
 <span><span class="va">ExampleReplicateExpressionSet</span> <span class="op">&lt;-</span> <span class="va">PhyloExpressionSetExample</span><span class="op">[</span> ,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># rename stages</span></span>
@@ -827,7 +827,7 @@ control have been performed.</p>
 <span>                                       FUN           <span class="op">=</span> <span class="va">geom.mean</span>,</span>
 <span>                                       stage.names   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"S1"</span>,<span class="st">"S2"</span>,<span class="st">"S3"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># have a look at the collpased PhyloExpressionSet</span></span>
+<span><span class="co"># have a look at the collapsed PhyloExpressionSet</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">CollapssedPhyloExpressionSet</span><span class="op">)</span></span></code></pre></div>
 <pre><code>   Phylostratum      GeneID         S1         S2         S3
 1            1 at1g01040.2  2038.1982  1220.0147   981.4381
