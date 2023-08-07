@@ -408,31 +408,35 @@ and <code>Phylogenetic_Hierarchical_Orthogroups/N0.tsv</code>, which
 have been used for <em>orthogroup</em>-based TAI studies (e.g. <a href="https://www.pnas.org/doi/full/10.1073/pnas.2216351120" class="external-link">Ma &amp;
 Zheng 2023</a>; <a href="https://www.biorxiv.org/content/10.1101/2023.07.04.546637v1.full" class="external-link">Nishimiya-Fujisawa
 et al., 2023</a>). Incorporating these results into <code>myTAI</code>
-can be done using <a href="https://github.com/kullrich/orthomap" class="external-link"><code>orthomap</code></a>.</p>
+can be done using <a href="https://github.com/kullrich/orthomap" class="external-link"><code>orthomap</code></a>
+(see <a href="https://orthomap.readthedocs.io/en/latest/" class="external-link">documentation</a>).</p>
 <p>Methodologically, it should be stressed that while
-<code>Orthogroups.tsv</code> (now <a href="https://github.com/davidemms/OrthoFinder#orthogroups-directory-deprecated" class="external-link">depreciated</a>)
-and <code>Phylogenetic_Hierarchical_Orthogroups/N0.tsv</code> contain
+<code>Orthogroups.tsv</code> and
+<code>Phylogenetic_Hierarchical_Orthogroups/N0.tsv</code> contain
 orthogroups with more than one member (i.e. orthogroups with at least
-one orthologue or paralogue), users should be aware that they do not
-include singletons, which is a signature of a novel or species-specific
-gene. To incorporate singletons, users should include the genes in
-<code>Orthogroups_UnassignedGenes.tsv</code> output or, alternatively,
-singletons in the <code>Orthogroups.txt</code> file, and assign the
-singletons to the species-specific phylostrata in the study.</p>
+one orthologue or paralogue), users should be aware that these output
+files of OrthoFinder do not include singletons, which is a signature of
+a novel or species-specific gene. To incorporate singletons, users
+should include the genes in <code>Orthogroups_UnassignedGenes.tsv</code>
+output or, alternatively, singletons in the <code>Orthogroups.txt</code>
+file, and assign the singletons to the species-specific phylostrata in
+the study.</p>
 <p>The <em>orthogroup</em>-based approach seems to be motivated by an
 assumption that the more restricted set of genes that consists of
 orthologues and in-paralogues (paralogues that arose after the species
-split) tend to have more similar attributes (e.g. conservation in
+split) tends to have more similar attributes (e.g. conservation in
 function and/or expression pattern) than the larger set of genes that
-contains all sequence homologues. It follows that this framework better
-reflects the ‘gene age’. This draws parallels from the heavily debated
-<code>orthologue conjecture</code> (<a href="https://www.nature.com/articles/nrg3456#Sec8" class="external-link">Gabaldón &amp;
-Koonin 2013</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/32657391/" class="external-link">Stamboulian et al.,
-2020</a>; <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1707515115" class="external-link">Dunn et al.,
-2018</a> etc.). Indeed, ‘shifts’ or ‘substitutions’ in the expression
-profile of paralogues that arose before the species split are also
-observed in single-cell studies (<a href="https://elifesciences.org/articles/66747" class="external-link">Tarashansky et al.,
-2021</a>;<a href="https://www.nature.com/articles/s41559-021-01580-3" class="external-link">Shafer et al.,
+contains all sequence homologues. It follows that this framework should
+better reflect the ‘gene age’. This assumption draws parallels to the
+<code>orthologue conjecture</code> (i.e. orthologues tend to have more
+conserved attributes than paralogues), which is heavily debated (<a href="https://www.nature.com/articles/nrg3456#Sec8" class="external-link">Gabaldón &amp;
+Koonin 2013</a>; <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1707515115" class="external-link">Dunn et al.,
+2018</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/32657391/" class="external-link">Stamboulian et al.,
+2020</a>; etc.). In several cases, orthologues do not have more
+conserved attributes than paralogues. Indeed, ‘shifts’ or
+‘substitutions’ in the expression profile of paralogues that arose
+before the species split are observed in single-cell studies (<a href="https://elifesciences.org/articles/66747" class="external-link">Tarashansky et al.,
+2021</a>; <a href="https://www.nature.com/articles/s41559-021-01580-3" class="external-link">Shafer et al.,
 2022</a>). Overall, it remains unclear whether inferring gene age using
 the <em>orthogroup</em>-based approach better captures evolutionary
 information than the classic genomic phylostratigraphy approach
