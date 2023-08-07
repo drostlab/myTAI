@@ -105,7 +105,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Discussing Genomic Phylostratigraphy</h1>
             
-            <h4 data-toc-skip class="date">2023-08-04</h4>
+            <h4 data-toc-skip class="date">2023-08-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Phylostratigraphy.Rmd" class="external-link"><code>vignettes/Phylostratigraphy.Rmd</code></a></small>
       <div class="hidden name"><code>Phylostratigraphy.Rmd</code></div>
@@ -259,20 +259,21 @@ et al., 2018</a> discuss another problem of retrieving the best BLAST
 hits based on <code>E-value</code> thresholds.</p>
 <blockquote>
 <p>Many users assume that BLAST alignment hits with E-values less than
-or equal to the predefined threshold (e.g. 105 via the specification of
-evalue 1e-5) are identified after the search is completed, in a final
-step to rank all alignments by E-value, from the smallest (on the top of
-the list of results) to the largest E-value (at the bottom of the list).
-<strong>However, the E-value filtering step does not occur at the final
-stage of BLAST; it occurs earlier during the scanning phase (Altschul et
-al., 1997; Camacho et al., 2009). During this phase, a gapped alignment
-is generated using less-sensitive heuristic parameters (Camacho et al.,
-2009); alignments with an E-value that satisfies the defined cut-off are
-included in the subsequent phase of the BLAST algorithm (and eventually
-reported). During the final (trace-back) phase, these gapped alignments
-are further adjusted using moresensitive heuristic parameters (Camacho
-et al., 2009), and the E-value for each of these refined alignments is
-then recalculated.</strong> - Gonzalez-Pech et al., 2018</p>
+or equal to the predefined threshold (e.g. 10<sup>-5</sup> via the
+specification of evalue 1e-5) are identified after the search is
+completed, in a final step to rank all alignments by E-value, from the
+smallest (on the top of the list of results) to the largest E-value (at
+the bottom of the list). <strong>However, the E-value filtering step
+does not occur at the final stage of BLAST; it occurs earlier during the
+scanning phase (Altschul et al., 1997; Camacho et al., 2009). During
+this phase, a gapped alignment is generated using less-sensitive
+heuristic parameters (Camacho et al., 2009); alignments with an E-value
+that satisfies the defined cut-off are included in the subsequent phase
+of the BLAST algorithm (and eventually reported). During the final
+(trace-back) phase, these gapped alignments are further adjusted using
+moresensitive heuristic parameters (Camacho et al., 2009), and the
+E-value for each of these refined alignments is then
+recalculated.</strong> - Gonzalez-Pech et al., 2018</p>
 </blockquote>
 <p>This means that if one study mentioned above ran a BLAST search with
 a BLAST parameter configuration of lets say

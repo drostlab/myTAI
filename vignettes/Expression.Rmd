@@ -579,7 +579,7 @@ Deviance.DEGs.adj
 Users can also perform replicate quality checks to quantify the variability between replicate expression levels fo each
 stage separately.
 
-The `PlotReplicateQuality()` is designed to perform customized replicate variablity checks for any `ExpressionSet` object storing 
+The `PlotReplicateQuality()` is designed to perform customized replicate variability checks for any `ExpressionSet` object storing 
 replicates.
 
 ```{r,eval=FALSE}
@@ -599,9 +599,9 @@ Each curve represents the density function for the replicate variation within on
 In this case the variance between replicates of `Stage 1` to `Stage 3` (each including 2 replicates) seem to deviate from each other allowing the conclusion that each stage has a different expression level variability between replicates.
 
 The `FUN` argument implemented in `PlotReplicateQuality()` allows users to furthermore, specify customized criteria quantifying
-replicate varibility. Please notice that the function specified in `FUN` will be performed separately on each gene and stage.
+replicate variability. Please notice that the function specified in `FUN` will be performed separately on each gene and stage.
 
-In the following example the median bbsolute deviation function `mad()` is used to quantify replicate variability.
+In the following example the median absolute deviation function `mad()` is used to quantify replicate variability.
 
 ```{r,eval=FALSE}
 data(PhyloExpressionSetExample)
@@ -616,7 +616,7 @@ PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[ , 1:8],
 
 ```
 
-In general, users are not limited to specific functions implememnted in R. By writing customized functions such as
+In general, users are not limited to specific functions implemented in R. By writing customized functions such as
 `FUN = function(x) return((x - mean(x))^2)` users can define their own criteria to quantify replicate variability and
 can then apply this criteria to `PlotReplicateQuality()` by specifying the `FUN` argument.
 
@@ -634,7 +634,7 @@ library(myTAI)
 # load example data
 data(PhyloExpressionSetExample)
 
-# genrate an example PhyloExpressionSet with replicates
+# generate an example PhyloExpressionSet with replicates
 ExampleReplicateExpressionSet <- PhyloExpressionSetExample[ ,1:8]
 
 # rename stages
@@ -683,7 +683,7 @@ CollapssedPhyloExpressionSet <- CollapseReplicates(
                                        FUN           = geom.mean,
                                        stage.names   = c("S1","S2","S3"))
 
-# have a look at the collpased PhyloExpressionSet
+# have a look at the collapsed PhyloExpressionSet
 head(CollapssedPhyloExpressionSet)
 
 ```

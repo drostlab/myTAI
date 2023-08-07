@@ -56,7 +56,7 @@ category-centered "***"  "***"    "***"    "***" "***"   "***" "***"
 ```
 
 The resulting boxplot illustrates the log expression levels of each phylostratum during each developmental stage.
-Additionally, a Kruskal-Wallis Rank Sum Test as well as a Benjamini & Hochberg p-value adjustment for multiple comparisons is performed (`test.stat = TRUE`) to statistically quantify the differences between expression levels of different age or divergence categories. This type of analysis allows users to detect stages or experiments that show high diviation between age or divergence category contributions to the overall transcriptome or no significant deviations of age or divergence categories, suggesting equal age or divergence category contributions to the overall transcriptome. The corresponding P-values are printed to the console using the following notation:
+Additionally, a Kruskal-Wallis Rank Sum Test as well as a Benjamini & Hochberg p-value adjustment for multiple comparisons is performed (`test.stat = TRUE`) to statistically quantify the differences between expression levels of different age or divergence categories. This type of analysis allows users to detect stages or experiments that show high deviation between age or divergence category contributions to the overall transcriptome or no significant deviations of age or divergence categories, suggesting equal age or divergence category contributions to the overall transcriptome. The corresponding P-values are printed to the console using the following notation:
 
 - '*' = P-Value $\leq$ 0.05
 
@@ -106,7 +106,7 @@ Argument: `distr.type`
 
 - `distr.type = "dotplot"` This specification allows users to visualize the expression distribution of all PS or DS as dot plot.
 
-Together, studies perfomed with `PlotCategoryExpr()` allow users to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome than other genes originating from different PS or DS categories. More specialized analyses such as `PlotMeans()`, `PlotRE()`, `PlotBarRE()`, `TAI()`, `TDI()`, etc. will then allow them to study the exact mean expression patterns of these age or divergence categories.
+Together, studies performed with `PlotCategoryExpr()` allow users to conclude that genes originating in specific PS or DS contribute significantly more to the overall transcriptome than other genes originating from different PS or DS categories. More specialized analyses such as `PlotMeans()`, `PlotRE()`, `PlotBarRE()`, `TAI()`, `TDI()`, etc. will then allow them to study the exact mean expression patterns of these age or divergence categories.
 
 
 Users will notice that so far all examples shown above specified `log.expr = TRUE` illustrating boxplots based
@@ -213,10 +213,10 @@ distributions throughout development with `PlotCategoryExpr()` in cases where ex
 
 ## Computing the significant differences between gene expression distributions of PS or DS groups
 
-As proposed by Quint et al., 2012 in some cases users whish to compare the difference
-of group specific expression levels using a statsitical test.
+As proposed by Quint et al., 2012 in some cases users wish to compare the difference
+of group specific expression levels using a statistical test.
 
-For this purpose, the `PlotGroupDiffs()` function performs a test to quantify the statistical significance between the global expression level distributions of groups of PS or DS. It therefore allows users to investigate significant groups of PS or DS that significantly differ in their gene expression level distibution within specific developmental stages or experiments.
+For this purpose, the `PlotGroupDiffs()` function performs a test to quantify the statistical significance between the global expression level distributions of groups of PS or DS. It therefore allows users to investigate significant groups of PS or DS that significantly differ in their gene expression level distribution within specific developmental stages or experiments.
 
 Analogous to the `PlotRE()` or `PlotMeans()` function (see [Introduction](Introduction.html) for details),
 users need to pass the `Groups` to `PlotGroupDiffs()` specifying the groups that shall be compared.
