@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2023-07-08" />
+<meta name="date" content="2023-08-16" />
 
 <title>Gene Expression Analysis with myTAI</title>
 
@@ -339,7 +339,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Gene Expression Analysis with
 <code>myTAI</code></h1>
-<h4 class="date">2023-07-08</h4>
+<h4 class="date">2023-08-16</h4>
 
 
 
@@ -916,7 +916,7 @@ normalization need to be specified (see also
 variability between replicate expression levels fo each stage
 separately.</p>
 <p>The <code>PlotReplicateQuality()</code> is designed to perform
-customized replicate variablity checks for any
+customized replicate variability checks for any
 <code>ExpressionSet</code> object storing replicates.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
 <span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a></span>
@@ -936,10 +936,10 @@ each stage has a different expression level variability between
 replicates.</p>
 <p>The <code>FUN</code> argument implemented in
 <code>PlotReplicateQuality()</code> allows users to furthermore, specify
-customized criteria quantifying replicate varibility. Please notice that
-the function specified in <code>FUN</code> will be performed separately
-on each gene and stage.</p>
-<p>In the following example the median bbsolute deviation function
+customized criteria quantifying replicate variability. Please notice
+that the function specified in <code>FUN</code> will be performed
+separately on each gene and stage.</p>
+<p>In the following example the median absolute deviation function
 <code>mad()</code> is used to quantify replicate variability.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
 <span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a></span>
@@ -950,7 +950,7 @@ on each gene and stage.</p>
 <span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>                     <span class="at">legend.pos    =</span> <span class="st">&quot;topright&quot;</span>,</span>
 <span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>                     <span class="at">ylim          =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.015</span>),</span>
 <span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a>                     <span class="at">lwd           =</span> <span class="dv">6</span>)</span></code></pre></div>
-<p>In general, users are not limited to specific functions implememnted
+<p>In general, users are not limited to specific functions implemented
 in R. By writing customized functions such as
 <code>FUN = function(x) return((x - mean(x))^2)</code> users can define
 their own criteria to quantify replicate variability and can then apply
@@ -972,7 +972,7 @@ function.</p>
 <span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co"># load example data</span></span>
 <span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
 <span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="co"># genrate an example PhyloExpressionSet with replicates</span></span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="co"># generate an example PhyloExpressionSet with replicates</span></span>
 <span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a>ExampleReplicateExpressionSet <span class="ot">&lt;-</span> PhyloExpressionSetExample[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
 <span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a></span>
 <span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="co"># rename stages</span></span>
@@ -1014,7 +1014,7 @@ control have been performed.</p>
 <span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>                                       <span class="at">FUN           =</span> geom.mean,</span>
 <span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>                                       <span class="at">stage.names   =</span> <span class="fu">c</span>(<span class="st">&quot;S1&quot;</span>,<span class="st">&quot;S2&quot;</span>,<span class="st">&quot;S3&quot;</span>))</span>
 <span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a><span class="co"># have a look at the collpased PhyloExpressionSet</span></span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a><span class="co"># have a look at the collapsed PhyloExpressionSet</span></span>
 <span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a><span class="fu">head</span>(CollapssedPhyloExpressionSet)</span></code></pre></div>
 <pre><code>   Phylostratum      GeneID         S1         S2         S3
 1            1 at1g01040.2  2038.1982  1220.0147   981.4381

@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2023-07-08" />
+<meta name="date" content="2023-08-16" />
 
 <title>Retrieving Taxonomic Information</title>
 
@@ -338,7 +338,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <h1 class="title toc-ignore">Retrieving Taxonomic Information</h1>
-<h4 class="date">2023-07-08</h4>
+<h4 class="date">2023-08-16</h4>
 
 
 
@@ -461,7 +461,7 @@ Information</li>
 query organism. This feature is useful to determine species
 relationships for quantifying recent evolutionary conservation with
 Divergence Stratigraphy.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># retrieve children taxa of the query organism stored in the corresponding database</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>myTAI<span class="sc">::</span><span class="fu">taxonomy</span>( <span class="at">organism =</span> <span class="st">&quot;Arabidopsis&quot;</span>, </span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>          <span class="at">db       =</span> <span class="st">&quot;ncbi&quot;</span>, </span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>          <span class="at">output   =</span> <span class="st">&quot;children&quot;</span> )</span></code></pre></div>
@@ -483,7 +483,7 @@ Divergence Stratigraphy.</p>
 15        45249                                                Arabidopsis suecica        species
 16        38785                                                Arabidopsis arenosa        species
 17         3702                                               Arabidopsis thaliana        species</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># retrieve children taxa of the query organism stored in the correspondning database</span></span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># retrieve children taxa of the query organism stored in the corresponding database</span></span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>myTAI<span class="sc">::</span><span class="fu">taxonomy</span>( <span class="at">organism =</span> <span class="st">&quot;Arabidopsis&quot;</span>, </span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>          <span class="at">db       =</span> <span class="st">&quot;itis&quot;</span>, </span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>          <span class="at">output   =</span> <span class="st">&quot;children&quot;</span> )</span></code></pre></div>
