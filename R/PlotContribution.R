@@ -1,4 +1,4 @@
-#' @title Plot Cumuative Transcriptome Index
+#' @title Plot Cumulative Transcriptome Index
 #' @description This function computes the cumulative contribution of each Phylostratum or Divergence Stratum to the global \code{\link{TAI}} or \code{\link{TDI}} profile.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
 #' @param legendName a character string specifying whether "PS" or "DS" are used to compute relative expression profiles.

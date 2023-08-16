@@ -19,14 +19,14 @@ values for each single gene in a PhyloExpressionSet or DivergenceExpressionSet o
 
 In detail, each gene gets a \emph{TAI contribution profile} or \emph{TDI contribution profile}. 
 
-\deqn{TAI_is = f_is * ps_i}
+\deqn{TAI_{is} = f_{is} * ps_i}
 
 or
 
-\deqn{TDI_is = f_is * ps_i}
+\deqn{TDI_{is} = f_{is} * ps_i}
 
-where TAI_is or TDI_is is the partial TAI or TDI value of gene i, 
-\eqn{f_is = e_is / \sum e_is} and \eqn{ps_i} is the phylostratum or divergence-stratum of gene i.
+where \eqn{TAI_{is}} or \eqn{TDI_{is}} is the partial TAI or TDI value of gene i, 
+\eqn{f_{is} = e_{is} / \sum e_{is}} and \eqn{ps_i} is the phylostratum or divergence-stratum of gene i.
 }
 \details{
 The partial TAI or TDI matrix can be used to perform different cluster analyses

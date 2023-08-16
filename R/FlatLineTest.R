@@ -114,7 +114,7 @@ FlatLineTest <- function(ExpressionSet,
   nCols <- dim(ExpressionSet)[2]
   resMatrix <- matrix(NA_real_, permutations, (nCols - 2))
   var_values <- vector(mode = "numeric", length = permutations)
-  sd_values <- vector(mode = "numeric", length = nCols - 2)
+  sd_values <-vector(mode = "numeric", length = nCols - 2)
   #random_mean_age <- vector(mode = "numeric", length = permutations)
   age.real <- vector(mode = "numeric", length = nCols - 2)
   age.real <-
@@ -134,8 +134,8 @@ FlatLineTest <- function(ExpressionSet,
       ))),
       as.numeric(permutations))
     end_time = Sys.time()
-    message(paste("Time:", end_time - start_time))
-    
+    cat("\n")
+    cat(paste("Total runtime of your permutation test:", round(end_time - start_time, 3), " seconds."))
   }
   
   else if (!is.null(custom.perm.matrix)) {
@@ -143,6 +143,7 @@ FlatLineTest <- function(ExpressionSet,
   }
   
   var_values <- apply(resMatrix, 1, stats::var)
+  #print(sum(var_values > real.var)/length(var_values))
   #random_mean_age <- apply(resMatrix,2,mean)
   ### estimate the parameters (shape,rate)
   ### of the gamma distributed variance values
@@ -158,12 +159,12 @@ FlatLineTest <- function(ExpressionSet,
     gamma = fitdistrplus::fitdist(var_values, "gamma", method = "mme")
     shape = gamma$estimate[1]
     rate = gamma$estimate[2]
-    ks_test <-
-      stats::ks.test(var_values, "pgamma", shape = shape, rate = rate)
+    suppressWarnings(ks_test <- stats::ks.test(var_values, "pgamma", shape = shape, rate = rate))
   }
   if (permutations < 20000) {
+    message("\n")
     message(
-      "We recommended using at least 20000 permutations to achieve a sufficient permutation test."
+      "-> We recommended using at least 20000 permutations to achieve a sufficient permutation test."
     )
   }
   
@@ -227,8 +228,8 @@ FlatLineTest <- function(ExpressionSet,
           .errorhandling = "stop"
         ) %dopar%
           {
-            suppressMessages(FlatLineTest(ExpressionSet = ExpressionSet,
-                         permutations = permutations)$p.value)
+            FlatLineTest(ExpressionSet = ExpressionSet,
+                         permutations = permutations)$p.value
             
           })
       
@@ -243,8 +244,8 @@ FlatLineTest <- function(ExpressionSet,
       
       
       for (i in 1:runs) {
-        p.vals_vec[i] <-  suppressMessages(FlatLineTest(ExpressionSet = ExpressionSet,
-                                      permutations = permutations)$p.value)
+        p.vals_vec[i] <-  FlatLineTest(ExpressionSet = ExpressionSet,
+                                      permutations = permutations)$p.value
         
         # printing out the progress
         #setTxtProgressBar(progressBar,i)
@@ -277,7 +278,6 @@ FlatLineTest <- function(ExpressionSet,
                   lower.tail = FALSE)
   
   sd_values <- apply(resMatrix, 2, stats::sd)
-  
   return(list(
     p.value = pval,
     std.dev = sd_values,
@@ -288,11 +288,13 @@ FlatLineTest <- function(ExpressionSet,
 
 GetGamma <- function(var_values, permutations)
 {
-  step = 0.0005
+  iterations = 200
+  max_cut = 0.25
+  step = max_cut/iterations 
   sorted_vars = sort(var_values, decreasing = TRUE)
   max_p_fit_v = 0
   max_p_i = 0
-  for (i in 2:100) {
+  for (i in 2:iterations) {
     # to avoid indexing from zero
     # Filtered variances
     filtered_vars <-
@@ -304,21 +306,24 @@ GetGamma <- function(var_values, permutations)
     shape <- gamma_fit$estimate[1]
     rate <- gamma_fit$estimate[2]
     # Perform Kolmogorov-Smirnov test
-    ks_result <-
+    suppressWarnings(ks_result <-
       stats::ks.test(filtered_vars,
                      "pgamma",
                      shape = shape,
-                     rate = rate)
+                     rate = rate))
     if (ks_result$p.value > max_p_fit_v) {
       max_p_i = i
       max_p_fit_v = ks_result$p.value
     }
-    
   }
   if (max_p_i == 0) {
     gamma_fit <-
       fitdistrplus::fitdist(var_values, "gamma", method = "mme")
-    return(list(gamma_fit$estimate[1], gamma_fit$estimate[2]))
+    return(list(gamma_fit$estimate[1], gamma_fit$estimate[2],suppressWarnings(ks_result <-
+                  stats::ks.test(var_values,
+                                 "pgamma",
+                                 shape = gamma_fit$estimate[1],
+                                 rate = gamma_fit$estimate[2]))))
   }
   b_shape = 0
   b_rate = 0
@@ -326,8 +331,9 @@ GetGamma <- function(var_values, permutations)
   max_p_fit_v = 0
   for (i in -10:10) {
     # Filtered variances
+    lb = round(length(var_values) * (max_p_i * step + i * step / 10))
     filtered_vars <-
-      sorted_vars[round(length(var_values) * (max_p_i * step + i * step / 10)):length(var_values)]
+      sorted_vars[lb:length(var_values)]
     
     # Estimate parameters using method of moments
     gamma_fit <-
@@ -335,11 +341,11 @@ GetGamma <- function(var_values, permutations)
     shape <- gamma_fit$estimate[1]
     rate <- gamma_fit$estimate[2]
     # Perform Kolmogorov-Smirnov test
-    ks_result <-
+    suppressWarnings(ks_result <-
       stats::ks.test(filtered_vars,
                      "pgamma",
                      shape = shape,
-                     rate = rate)
+                     rate = rate))
     if (ks_result$p.value > max_p_fit_v) {
       max_p_fit_v = ks_result$p.value
       b_shape = shape

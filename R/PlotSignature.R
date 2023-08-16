@@ -90,7 +90,7 @@ PlotSignature <-
             
         cat("Plot signature: '",measure, "' and test statistic: '",TestStatistic,"' running ", permutations, " permutations." )
         cat("\n")
-                
+
         Stage <- NULL        
         # store transcriptome index in tibble
         if (measure == "TAI") {
@@ -345,8 +345,8 @@ PlotSignature <-
                                 subtitle = paste0("p_flt = ", pval),
                                 size = 6
                         )
-                cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
                 cat("\n")
+                cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
         }
                 
         if (TestStatistic == "ReductiveHourglassTest"){
@@ -446,13 +446,15 @@ PlotSignature <-
                 stage.names <- names(ExpressionSet)[3:ncol(ExpressionSet)]
                 cat("Modules: \n early = {",paste0(stage.names[modules[[1]]], " "),"}","\n","mid = {",paste0(stage.names[modules[[2]]], " "),"}","\n","late = {",paste0(stage.names[modules[[3]]], " "),"}")
                 cat("\n")
+                cat("\n")
                 cat("Significance status of signature: ", ifelse(as.numeric(pval) <= 0.05, "significant.","not significant (= no evolutionary signature in the transcriptome)."))
         }
         
         TI.ggplot <- TI.ggplot + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 1,hjust = 1))
         
         if (TestStatistic == "FlatLineTest")
-          cat("Now run 'FlatLineTest(..., permutations  = ", permutations, ", plotHistogram = TRUE)' to analyse the permutation test performance.")
+                message("\n")
+                message("-> Now run 'FlatLineTest(..., permutations  = ", permutations, ", plotHistogram = TRUE)' to analyse the permutation test performance.")
         return (TI.ggplot)
 }
 

@@ -35,12 +35,12 @@ index (TEI) values combined for each strata.
 
 In detail, each gene gets a \emph{TEI contribution profile}.
 
-\deqn{TEI_is = f_is * ps_i}
+\deqn{TEI_{is} = f_{is} * ps_i}
 
-where TEI_is is the partial TEI value of gene i,
-\eqn{f_is = e_is / \sum e_is} and \eqn{ps_i} is the phylostratum of gene i.
+where \eqn{TEI_{is}} is the partial TEI value of gene i,
+\eqn{f_{is} = e_{is} / \sum e_{is}} and \eqn{ps_i} is the phylostratum of gene i.
 
-\eqn{TEI_is} values are combined per \eqn{ps}.
+\eqn{TEI_{is}} values are combined per \eqn{ps}.
 }
 \details{
 The partial TEI values combined per strata give an overall

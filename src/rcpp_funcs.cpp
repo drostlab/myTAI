@@ -40,7 +40,8 @@ int randWrapper(const int& n)
 // Initilizing the random number generator outside of the function
 std::random_device rng;
 std::mt19937_64 urng(rng());
-std::linear_congruential_engine<unsigned int, 48271, 1, 65536> lcg(rng());
+std::default_random_engine gn(rng());
+std::minstd_rand mrgn(42);
 
 
 void updateProgressBar(int currentProgress, int totalProgress, int barWidth = 40) {
@@ -63,7 +64,7 @@ void updateProgressBar(int currentProgress, int totalProgress, int barWidth = 40
   }
   progressBar += ']';
   
-  float percentage = progressRatio * 100;
+  float percentage = round(progressRatio * 10000)/100;
   std::cout << '\r' << progressBar << " " << percentage << "%   ";
   std::cout.flush();
 }
@@ -83,7 +84,8 @@ Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
     int localProgress = 0;
     #pragma omp for
       for (int i = 0; i < permutations; i++) {
-        std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
+        shuffledVec = a;
+        std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), urng);
         permutedMat.row(i) = shuffledVec.transpose();
         localProgress++;
         
@@ -102,7 +104,8 @@ Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
     
   #else
     for (int i = 0; i < permutations; i++) {
-      std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), lcg);
+      shuffledVec = a;
+      std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), urng);
       permutedMat.row(i) = shuffledVec.transpose();
       if (i % updateFrequency == 0){
         updateProgressBar(i,permutations);
@@ -123,7 +126,7 @@ NumericVector permut(const NumericVector& a)
   // clone a into b to leave a alone
   NumericVector b = clone(a);
   
-  std::shuffle(b.begin(), b.end(), lcg);
+  std::shuffle(b.begin(), b.end(), urng);
   
   return b;
 }
@@ -138,18 +141,35 @@ Eigen::VectorXd cpp_TAI(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::Ve
   
   return total;
 }
+/*
+// @export
+// [[Rcpp::export]]
+Eigen::VectorXd cpp_TAI_par(const Eigen::SparseMatrix<double> & ExpressionMatrix, const Eigen::VectorXd& Phylostratum) {
+  
+  Eigen::VectorXd Divisor = ExpressionMatrix.transpose() * Eigen::VectorXd::Ones(ExpressionMatrix.rows());
+  Eigen::MatrixXd phylExp = Phylostratum.replicate(1, 7);
+  phylExp = phylExp.array().rowwise() / Divisor.transpose().array();
+  Eigen::VectorXd total = phylExp * ExpressionMatrix;
+  
+  return total;
+}
+*/
+
 // @export
 // [[Rcpp::export]]
 Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& AgeVector, const int& permutations) 
 {
+        std::cout << std::endl;
+        std::cout << "[ Number of Eigen threads that are employed on your machine: " << Eigen::nbThreads() << " ]" << std::endl;
+        std::cout << std::endl;
         Eigen::VectorXd Divisor = ExpressionMatrix.colwise().sum();
         Eigen::MatrixXd fMatrix = ExpressionMatrix.array().rowwise() / Divisor.transpose().array();
-        std::cout << "Computing permutations" << std::endl;
+        std::cout << "[ Computing age assignment permutations for test statistic ..." << " ]" << std::endl;
         Eigen::MatrixXd permMatrix = permut_mat(AgeVector,permutations);
         std::cout << std::endl;
-        std::cout << "Computing variances" << std::endl;
+        std::cout << "[ Computing variances of permuted transcriptome signatures ..." << " ]" << std::endl;
         Eigen::MatrixXd bootM = permMatrix * fMatrix;
-        std::cout << "Number of Eigen threads: " << Eigen::nbThreads() << std::endl;
+        std::cout << std::endl;
         return bootM;
 }
 
