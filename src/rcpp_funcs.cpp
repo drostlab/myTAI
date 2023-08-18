@@ -39,9 +39,10 @@ int randWrapper(const int& n)
 
 // Initializing the random number generator outside of the function
 std::random_device rng;
-std::mt19937_64 urng(rng());
+
 std::default_random_engine gn(rng());
 std::minstd_rand mrgn(42);
+std::mt19937_64 urng(rng());
 
 
 void updateProgressBar(int currentProgress, int totalProgress, int barWidth = 40) {
@@ -74,47 +75,51 @@ Eigen::MatrixXd permut_mat(const Eigen::VectorXd& a,const int& permutations) {
   // already added by sourceCpp(), but needed standalone
   Eigen::MatrixXd permutedMat(permutations, a.size());
   Eigen::VectorXd shuffledVec = a;
-
+  
   const int updateFrequency = 200;  // Update progress every x iterations
-  #ifdef _OPENMP  
+#ifdef _OPENMP  
   std::atomic<int> progress(0);
   
-  #pragma omp parallel
-  {
-    int localProgress = 0;
-    #pragma omp for
-      for (int i = 0; i < permutations; i++) {
-        shuffledVec = a;
-        std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), urng);
-        permutedMat.row(i) = shuffledVec.transpose();
-        localProgress++;
-        
-        
-        if (localProgress % updateFrequency == 0) {
-          progress.fetch_add(updateFrequency, std::memory_order_relaxed);
-          
-          // Display progress
-          
-          int currentProgress = progress.load(std::memory_order_relaxed);
-          
-          updateProgressBar(currentProgress,permutations);
-          }
-      }
-    }
+#pragma omp parallel
+{
+  int localProgress = 0;
+  std::mt19937_64 urngp(rng());
+  Eigen::VectorXd shuff = a;
+  Eigen::VectorXd shuffl = shuff;
+
+#pragma omp for
+  for (int i = 0; i < permutations; i++) {
+    shuffl = shuff;
+    std::shuffle(shuffl.data(), shuffl.data() + shuffl.size(), urngp);
+    permutedMat.row(i) = shuffl.transpose();
+    localProgress++;
     
-  #else
-    for (int i = 0; i < permutations; i++) {
-      shuffledVec = a;
-      std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), urng);
-      permutedMat.row(i) = shuffledVec.transpose();
-      if (i % updateFrequency == 0){
-        updateProgressBar(i,permutations);
-      }
-        
+    
+    if (localProgress % updateFrequency == 0) {
+      progress.fetch_add(updateFrequency, std::memory_order_relaxed);
+      
+      // Display progress
+      
+      int currentProgress = progress.load(std::memory_order_relaxed);
+      
+      updateProgressBar(currentProgress,permutations);
     }
-  #endif
-    updateProgressBar(permutations,permutations);
-    return permutedMat;
+  }
+}
+
+#else
+for (int i = 0; i < permutations; i++) {
+  shuffledVec = a;
+  std::shuffle(shuffledVec.data(), shuffledVec.data() + shuffledVec.size(), urng);
+  permutedMat.row(i) = shuffledVec.transpose();
+  if (i % updateFrequency == 0){
+    updateProgressBar(i,permutations);
+  }
+  
+}
+#endif
+updateProgressBar(permutations,permutations);
+return permutedMat;
 }
 
 NumericVector permut(const NumericVector& a)
