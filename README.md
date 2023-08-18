@@ -14,7 +14,7 @@ In the past years, a variety of studies aimed to uncover the molecular basis of 
 
 Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest (molecular phenotype), they rarely capture __how__ these expression patterns emerged in the first place or to __what extent__ they are possibly constrained, thereby neglecting the evolutionary history and developmental constraints of genes contributing to the overall pool of expressed transcripts. 
 
-To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate gene age information into classical gene expression analysis. `Gene age inference` can be performed with [various existing software](), but we recommend using [GenEra](https://github.com/josuebarrera/GenEra) or [orthomap](https://github.com/kullrich/orthomap), since they address published shortcomings of `gene age inference` ([see detailed discussion here](https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html)). In addition, users can easily retrieve [previously precomputed gene age information](https://github.com/HajkD/published_phylomaps) via our data package [phylomapr](https://github.com/LotharukpongJS/phylomapr).
+To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate gene age information into classical gene expression analysis. `Gene age inference` can be performed with [various existing software](https://drostlab.github.io/myTAI/articles/Introduction.html#retrieval-of-phylogenetic-or-taxonomic-information), but we recommend using [GenEra](https://github.com/josuebarrera/GenEra) or [orthomap](https://github.com/kullrich/orthomap), since they address published shortcomings of `gene age inference` ([see detailed discussion here](https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html)). In addition, users can easily retrieve [previously precomputed gene age information](https://github.com/HajkD/published_phylomaps) via our data package [phylomapr](https://github.com/LotharukpongJS/phylomapr).
 
 Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary and developmental constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.
 
@@ -28,7 +28,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 ### Dependencies
 
-`myTAI` is using `OpenMP` to run cpp code in parallel, thus you might need to install aditional software. 
+`myTAI` is using `OpenMP` to run cpp code in parallel, thus you might need to install additional software. 
 
 **Mac:**
 ```bash
@@ -102,7 +102,7 @@ functionality of each version of `myTAI` can be found in the [NEWS](https://dros
 
 ## Tutorials
 
-The following tutorials will provide use cases and detailed explainations of how to quantify transcriptome onservation with `myTAI` and how to interpret the results generated with this software tool.
+The following tutorials will provide use cases and detailed explanations of how to quantify transcriptome conservation with `myTAI` and how to interpret the results generated with this software tool.
 
 - [Introduction to the myTAI Package](https://drostlab.github.io/myTAI/articles/Introduction.html)
 - [Intermediate Concepts of Phylotranscriptomics](https://drostlab.github.io/myTAI/articles/Intermediate.html)
@@ -229,7 +229,7 @@ In the `myTAI` framework users can find:
 
 * `PlotSignature()` : Main visualization function to plot evolutionary signatures across transcriptomes
 * `PlotPattern()` : Base graphics function to plot evolutionary signatures across transcriptomes
-* `PlotContribution()` : Plot Cumuative Transcriptome Index
+* `PlotContribution()` : Plot Cumulative Transcriptome Index
 * `PlotCorrelation()` : Function to plot the correlation between phylostratum values and divergence-stratum values
 * `PlotRE()` : Function to plot the relative expression profiles
 * `PlotBarRE()` : Function to plot the mean relative expression levels of phylostratum or divergence-stratum classes as barplot

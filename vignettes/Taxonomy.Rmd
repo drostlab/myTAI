@@ -153,7 +153,7 @@ Another `output` supported by `taxonomy()` is `children` that returns the immedi
 for a query organism. This feature is useful to determine species relationships for quantifying recent evolutionary conservation with Divergence Stratigraphy. 
 
 ```{r, eval=FALSE}
-# retrieve children taxa of the query organism stored in the correspondning database
+# retrieve children taxa of the query organism stored in the corresponding database
 myTAI::taxonomy( organism = "Arabidopsis", 
           db       = "ncbi", 
           output   = "children" )
@@ -181,7 +181,7 @@ myTAI::taxonomy( organism = "Arabidopsis",
 ```
 
 ```{r, eval=FALSE}
-# retrieve children taxa of the query organism stored in the correspondning database
+# retrieve children taxa of the query organism stored in the corresponding database
 myTAI::taxonomy( organism = "Arabidopsis", 
           db       = "itis", 
           output   = "children" )

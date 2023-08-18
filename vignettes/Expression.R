@@ -230,7 +230,7 @@
 #  # load example data
 #  data(PhyloExpressionSetExample)
 #  
-#  # genrate an example PhyloExpressionSet with replicates
+#  # generate an example PhyloExpressionSet with replicates
 #  ExampleReplicateExpressionSet <- PhyloExpressionSetExample[ ,1:8]
 #  
 #  # rename stages
@@ -257,7 +257,7 @@
 #                                         FUN           = geom.mean,
 #                                         stage.names   = c("S1","S2","S3"))
 #  
-#  # have a look at the collpased PhyloExpressionSet
+#  # have a look at the collapsed PhyloExpressionSet
 #  head(CollapssedPhyloExpressionSet)
 #  
 

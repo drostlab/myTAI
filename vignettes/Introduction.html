@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2023-07-08" />
+<meta name="date" content="2023-08-16" />
 
 <title>Introduction to the myTAI package</title>
 
@@ -338,7 +338,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <h1 class="title toc-ignore">Introduction to the myTAI package</h1>
-<h4 class="date">2023-07-08</h4>
+<h4 class="date">2023-08-16</h4>
 
 
 
@@ -468,7 +468,7 @@ transcriptomics analyses.</p>
 Figure 3: Workflow describing the input and output of the myTAI package.
 The myTAI package takes phylogenetic information such as phylogenetic
 trees (see <a href="https://www.academia.edu/27635691/The_Comparative_Biology_of_Gene_Expression">Dunn,
-2013</a> ), genomic phylostratography based gene age inference (see <a href="https://www.sciencedirect.com/science/article/pii/S0168952507002995">Domazet-Loso
+2013</a> ), genomic phylostratigraphy based gene age inference (see <a href="https://www.sciencedirect.com/science/article/pii/S0168952507002995">Domazet-Loso
 et al., 2007</a>; <a href="https://www.sciencedirect.com/science/article/pii/S016895251300111X">Capra
 et al., 2013</a>; <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026">Liebeskind
 et al., 2016</a> ), by dNdS estimation of orthologous genes (see <a href="https://www.nature.com/articles/nature11394">Quint, Drost et al.,
@@ -477,7 +477,7 @@ al., 2015</a>), or phylogenetic reconciliation (see <a href="https://pubmed.ncbi
 and a RNA-Seq or Microarray based transcriptome dataset as input.
 Internally, myTAI then combines the phylogenetic data and the
 transcriptome data an provides numerous functions to perform
-evolutionary trancriptomics analyses. Here, we examplify the output of
+evolutionary transcriptomics analyses. Here, we exemplify the output of
 the functions <code>PlotSignature()</code>, <code>PlotRE()</code> and
 <code>PlotCategoryExpr()</code>.
 </p>
@@ -485,16 +485,31 @@ the functions <code>PlotSignature()</code>, <code>PlotRE()</code> and
 <div id="retrieval-of-phylogenetic-or-taxonomic-information" class="section level2">
 <h2>Retrieval of phylogenetic or taxonomic information</h2>
 <p>For the comparative genomics part there are different methods and
-tools to quantify sequence homolgy between genes, miRNAs, lncRNAs etc of
-a reference species and related species. For example, for phylogenetic
-or taxonomic information retrieval such as phylogenetic trees, genomic
-phylostratography based gene age inference, dNdS estimation of
-orthologous genes or phylogenetic reconciliation can be used. Below
-users can find the most recent tools and resources for retrieving or
-computing phylogenetic or taxonomic relationships for an organism of
-interest.</p>
+tools to quantify sequence homology between genes, miRNAs, lncRNAs etc
+of a reference species and related species. For example, for
+phylogenetic or taxonomic information retrieval such as phylogenetic
+trees, genomic phylostratigraphy based gene age inference, dNdS
+estimation of orthologous genes or phylogenetic reconciliation can be
+used. Below users can find the most recent tools and resources for
+retrieving or computing phylogenetic or taxonomic relationships for an
+organism of interest.</p>
 <p><strong>Generate or retrieve phylostratigraphic maps:</strong></p>
 <ul>
+<li><a href="https://github.com/josuebarrera/GenEra">GenEra</a>: a fast,
+easy-to-use and highly customizable command-line tool that estimates
+<em>gene-family founder events</em>. Please consult the paper for more
+information on <em>homology detection failure</em> and other
+methodological considerations compared to previous approaches (<a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z">Barrera-Redondo
+et al., 2023</a>). Users can also use GenEra for generating
+phylostratigraphic maps based on <em>protein structure</em> similarity,
+using <a href="https://github.com/steineggerlab/foldseek">Foldseek</a>.
+See <a href="https://github.com/josuebarrera/GenEra/wiki/Downstream-analyses">here</a>
+for processing the output for <code>myTAI</code>.</li>
+<li><a href="https://github.com/kullrich/orthomap">orthomap</a>: a
+python package to extract <em>orthologous</em> maps (in other words the
+evolutionary age of a given orthologous group) from <a href="https://github.com/davidemms/OrthoFinder">OrthoFinder</a>/<a href="http://eggnog5.embl.de/#/app/home">eggNOG</a>/<a href="https://bioinformatics.psb.ugent.be/plaza/">PLAZA</a> results. See
+also how one can <a href="https://orthomap.readthedocs.io/en/latest/tutorials/mytai.html">use
+some myTAI function within orthomap in python</a>.</li>
 <li><a href="http://genorigin.chenzxlab.cn/#!/">GenOrigin</a>: GenOrigin
 inferred gene age information of 9,102,113 genes from 565 species</li>
 <li><a href="https://github.com/arendsee/phylostratr">R package:
@@ -521,6 +536,9 @@ a phylostratigraphic map</li>
 <li><code>Protein Historian</code>: generate a gene age map</li>
 <li>download pre-computed and published <a href="https://github.com/HajkD/published_phylomaps">phylostratigraphic
 maps</a></li>
+<li><a href="https://github.com/LotharukpongJS/phylomapr">phylomapR</a>:
+quick retrieval of precomputed gene age maps (phylomaps) in R for easy
+integration with <code>myTAI</code>.</li>
 <li><a href="https://github.com/marcottelab/Gene-Ages">Liebeskind et
 al., 2016</a>: use a gene age consensus approach to estimating gene ages
 for model organisms</li>
@@ -546,7 +564,7 @@ as Divergence Stratigraphy (<a href="https://academic.oup.com/mbe/article/32/5/1
 al., 2015 <em>Mol. Biol. Evol.</em></a>). Analogous to gene age
 inference methods, divergence stratigraphy generates a table storing the
 sequence conservation estimate in the first column and the corresponding
-gene id of the organism of iterest in the second column. This table is
+gene id of the organism of interest in the second column. This table is
 named <em>divergence stratigraphic map</em>.</p>
 <p><strong>Generate or retrieve divergence stratigraphic
 maps:</strong></p>
@@ -775,7 +793,7 @@ of the transcriptome. Hence, we can say that at a particular stage
 <p>To obtain this mean age value, several measures were introduced:</p>
 <div id="transcriptome-age-index" class="section level4">
 <h4>Transcriptome Age Index</h4>
-<p>The first meansure named <em>Transcriptome Age Index</em> (TAI) was
+<p>The first measure named <em>Transcriptome Age Index</em> (TAI) was
 introduced by Domazet-Loso and Tautz, 2010 and represents a weighted
 arithmetic mean of the transcriptome age during a corresponding
 developmental stage <em>s</em>.</p>
@@ -818,7 +836,7 @@ will then reveal which exact genes or age categories generate the
 overall TAI value.</p>
 <p>To obtain a more detailed overview of which age categories contribute
 how much to each developmental stage, the gene expression level
-distributions for each age caterory and each developmental stage can be
+distributions for each age category and each developmental stage can be
 visualized (using the <code>PlotCategoryExpr()</code> function).</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">data</span>(PhyloExpressionSetExample)</span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co"># category-centered visualization of PS </span></span>
@@ -1003,13 +1021,13 @@ to the column position in the
 <em>PhyloExpressionSet/DivergenceExpressionSet</em> which in contrast
 would start at position 3, … N + 2.</p>
 <p>In a biological context, it is not always clear which stages could
-define the ealy, mid, and late modules. For animal embryogenesis, it has
-been suggested to choose early, mid, and late modules according to the
-morphological conservation of animal embryos (e.g. mid-stage vertebrate
-embryos seem to be morphologically conserved). For plants, in contrast
-no morphological conservation has been reported and thus the averge
-expression of embryo defective genes has been used to define modules
-(Drost et al. 2015).</p>
+define the early, mid, and late modules. For animal embryogenesis, it
+has been suggested to choose early, mid, and late modules according to
+the morphological conservation of animal embryos (e.g. mid-stage
+vertebrate embryos seem to be morphologically conserved). For plants, in
+contrast no morphological conservation has been reported and thus the
+average expression of embryo defective genes has been used to define
+modules (Drost et al. 2015).</p>
 </div>
 <div id="reductive-early-conservation-test" class="section level3">
 <h3>Reductive Early Conservation Test</h3>
@@ -1120,13 +1138,13 @@ to the column position in the
 <em>PhyloExpressionSet/DivergenceExpressionSet</em> which in contrast
 would start at position 3, … N + 2.</p>
 <p>In a biological context, it is not always clear which stages could
-define the ealy, mid, and late modules. For animal embryogenesis, it has
-been suggested to choose early, mid, and late modules according to the
-morphological conservation of animal embryos (e.g. mid-stage vertebrate
-embryos seem to be morphologically conserved). For plants, in contrast
-no morphological conservation has been reported and thus the averge
-expression of embryo defective genes has been used to define modules
-(Drost et al. 2015).</p>
+define the early, mid, and late modules. For animal embryogenesis, it
+has been suggested to choose early, mid, and late modules according to
+the morphological conservation of animal embryos (e.g. mid-stage
+vertebrate embryos seem to be morphologically conserved). For plants, in
+contrast no morphological conservation has been reported and thus the
+average expression of embryo defective genes has been used to define
+modules (Drost et al. 2015).</p>
 </div>
 </div>
 <div id="transcriptome-divergence-index-analyses" class="section level2">
@@ -1254,7 +1272,7 @@ cumulative TAI or TDI values for each <code>Phylostratum</code> and
 <code>Phylostratum</code> 12 (in the <code>pTAI()</code> matrix) are
 equivalent to <code>TAI(PhyloExpressionSetExample)</code>.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># show that the cumulative TAI value of PS 12 is</span></span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="co"># equavalent to the global TAI() values</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="co"># equivalent to the global TAI() values</span></span>
 <span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a><span class="fu">pTAI</span>(PhyloExpressionSetExample)[<span class="dv">12</span> , ]</span>
 <span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a></span>
 <span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a><span class="co"># &gt;  Zygote Quadrant Globular    Heart  Torpedo     Bent   Mature </span></span>

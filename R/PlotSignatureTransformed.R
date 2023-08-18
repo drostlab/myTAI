@@ -162,7 +162,7 @@ PlotSignatureTransformed <-
         tfExpressionSet <- ExpressionSet
       else if (transforms[i] %in% c('log2', 'log', 'log10'))
         tfExpressionSet <-
-          tf(ExpressionSet, FUN = transforms[i], pseudocount = pseudocount)
+        tf(ExpressionSet, FUN = transforms[i], pseudocount = pseudocount)
       else if (transforms[i] == "squared")
         tfExpressionSet <- tf(
           ExpressionSet,
@@ -173,20 +173,20 @@ PlotSignatureTransformed <-
         
         if (transforms[i] == "vst")
           tfExpressionSet <-
-          tf(ExpressionSet, FUN = DESeq2::vst, integerise = TRUE)
+            tf(ExpressionSet, FUN = DESeq2::vst, integerise = TRUE)
         
         if (transforms[i] == "rlog")
           tfExpressionSet <-
             tf(ExpressionSet, FUN = DESeq2::rlogTransformation, integerise = TRUE)
       }
-        
+      
       else if (transforms[i] == "rank")
         tfExpressionSet <-
-          tf(
-            ExpressionSet,
-            FUN = function(x)
-              apply(x, 2, base::rank)
-          )
+        tf(
+          ExpressionSet,
+          FUN = function(x)
+            apply(x, 2, base::rank)
+        )
       else
         tfExpressionSet <- tf(ExpressionSet, FUN = transforms[i])
       

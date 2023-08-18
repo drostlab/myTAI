@@ -68,11 +68,11 @@ CollapseReplicates <- function(ExpressionSet, nrep, FUN, stage.names = NULL){
                 if(!is.null(stage.names)) {
                         if ((ncol(FinalDataset) - 2) != length(stage.names))
                                 stop("The number of stage names provided does not match with the number of collapsed stages. Please check what might have gone wrong.", call. = FALSE)
-                        names(FinalDataset) <- c("Phylostratum","GeneID",stage.names)
+                        names(FinalDataset) <- c(names(ExpressionSet)[1],"GeneID",stage.names)
                 }
                         
                 if(is.null(stage.names))
-                        names(FinalDataset) <- c("Phylostratum","GeneID",colnames(FinalDataset)[3:ncol(FinalDataset)])
+                        names(FinalDataset) <- c(colnames(FinalDataset)[1],"GeneID",colnames(FinalDataset)[3:ncol(FinalDataset)])
                 
                 return(tibble::as_tibble(FinalDataset))
         }
@@ -112,11 +112,11 @@ CollapseReplicates <- function(ExpressionSet, nrep, FUN, stage.names = NULL){
                 if(!is.null(stage.names)) {
                         if ((ncol(FinalDataset) - 2) != length(stage.names))
                                 stop("The number of stage names provided does not match with the number of collapsed stages. Please check what might have gone wrong.", call. = FALSE)
-                        names(FinalDataset) <- c("Phylostratum","GeneID",stage.names)
+                        names(FinalDataset) <- c(names(ExpressionSet)[1],"GeneID",stage.names)
                 }
                         
                 if(is.null(stage.names))
-                        names(FinalDataset) <- c("Phylostratum","GeneID",colnames(FinalDataset)[3:ncol(FinalDataset)])
+                        names(FinalDataset) <- c(names(FinalDataset)[1],"GeneID",colnames(FinalDataset)[3:ncol(FinalDataset)])
                 
                 return(tibble::as_tibble(FinalDataset))
         }

@@ -37,7 +37,7 @@ int randWrapper(const int& n)
         return floor(unif_rand() * n); 
 }
 
-// Initilizing the random number generator outside of the function
+// Initializing the random number generator outside of the function
 std::random_device rng;
 
 std::default_random_engine gn(rng());

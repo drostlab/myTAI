@@ -252,7 +252,7 @@ PlotEnrichment(Drerio.PhyloMap,
                legendName   = "PS")
 ```
 
-Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `taxonomy()` funtion (see [Introduction](Introduction.html) and [Taxonomy](Taxonomy.html) for details).
+Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `taxonomy()` function (see [Introduction](Introduction.html) and [Taxonomy](Taxonomy.html) for details).
 
 
 ```{r, eval=FALSE}

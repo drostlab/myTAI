@@ -105,7 +105,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Discussing Genomic Phylostratigraphy</h1>
             
-            <h4 data-toc-skip class="date">2023-07-10</h4>
+            <h4 data-toc-skip class="date">2023-08-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Phylostratigraphy.Rmd" class="external-link"><code>vignettes/Phylostratigraphy.Rmd</code></a></small>
       <div class="hidden name"><code>Phylostratigraphy.Rmd</code></div>
@@ -120,11 +120,16 @@
 <p>Discussed intensely in the past years (<a href="https://www.sciencedirect.com/science/article/pii/S016895251300111X" class="external-link">Capra
 et al., 2013</a>; <a href="https://www.nature.com/articles/nmeth.3830.pdf" class="external-link">Altenhoff et al.,
 2016</a>; <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026" class="external-link">Liebeskind
-et al., 2016</a>), gene age inference is not a trivial task and might be
-biased in some currently existing approaches (<a href="https://academic.oup.com/gbe/article/8/6/1812/2574026" class="external-link">Liebeskind
+et al., 2016</a>; <a href="https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284" class="external-link">Domazet-Loso
+et al., 2017</a>; <a href="https://academic.oup.com/mbe/article/38/1/31/5900268" class="external-link">Futo et al.,
+2021</a>; <a href="https://link.springer.com/article/10.1186/s13059-023-02895-z" class="external-link">Barrera-Redondo
+et al., 2023</a>; etc.), gene age inference is not a trivial task and
+might be biased in some currently existing approaches (<a href="https://academic.oup.com/gbe/article/8/6/1812/2574026" class="external-link">Liebeskind
 et al., 2016</a>; <a href="https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074" class="external-link">Yin
 et al., 2018</a>; <a href="https://academic.oup.com/gbe/article/10/11/2906/5140197" class="external-link">Casola
-2018</a>).</p>
+2018</a>; <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000862" class="external-link">Weisman
+et al., 2020</a>; <a href="https://www.sciencedirect.com/science/article/pii/S0960982222007217" class="external-link">Weisman
+et al., 2022</a>; etc.).</p>
 <p>In particular, Moyers &amp; Zhang argue that <a href="https://www.sciencedirect.com/science/article/pii/S0168952507002995" class="external-link">genomic
 phylostratigraphy</a> (a prominent BLAST based gene age inference
 method)</p>
@@ -145,7 +150,7 @@ inconclusive due to <a href="https://academic.oup.com/mbe/article/33/11/3031/227
 their analyses</a>. Furthermore, <a href="https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284" class="external-link">Domazet-Loso
 et al., 2017</a> provide convincing evidence that there is
 <strong>no</strong> phylostratigraphic bias. As a response, <a href="https://academic.oup.com/gbe/article/9/6/1519/3867914" class="external-link">Moyers
-&amp; Zhang, 2017</a> recently published a counter-study stating that a
+&amp; Zhang, 2017</a> published a counter-study stating that a
 phylostratigraphic trend claimed by <a href="https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284" class="external-link">Domazet-Loso
 et al., 2017</a> to be robust to error disappears when genes likely to
 be error-resistant are analyzed. <a href="https://academic.oup.com/gbe/article/9/6/1519/3867914" class="external-link">Moyers
@@ -156,10 +161,10 @@ simulation, have been shown to be error-prone (see also <a href="https://academi
 &amp; Zhang, 2018</a>).</p>
 <p>In general, an objective benchmarking set representing the tree of
 life is still missing and therefore any procedure aiming to quantify
-gene ages will be biased to some degree. Based on this debate a recent
-study suggested to perform gene age inference by combining several
-common orthology inference algorithms to create gene age datasets and
-then characterize the error around each age-call on a per-gene and
+gene ages will be biased to some degree. Based on this debate <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026" class="external-link">Liebeskind
+et al., 2016</a> suggest inferring gene age by combining several common
+orthology inference algorithms to create gene age datasets and then
+characterize the error around each age-call on a per-gene and
 per-algorithm basis. Using this approach systematic error was found to
 be a large factor in estimating gene age, suggesting that simple
 consensus algorithms are not enough to give a reliable point estimate
@@ -171,15 +176,16 @@ However, by generating a consensus gene age and quantifying the possible
 error in each workflow step, <a href="https://academic.oup.com/gbe/article/8/6/1812/2574026" class="external-link">Liebeskind
 et al., 2016</a> provide a very useful <a href="https://github.com/marcottelab/Gene-Ages" class="external-link">database</a> of
 consensus gene ages for a variety of genomes.</p>
-<p>Alternatively, <a href="https://doi.org/10.1093/bib/bbw034" class="external-link">Stephen
-Smith, 2016</a> argues that <em>de novo</em> gene birth/death and gene
-family expansion/contraction studies should avoid drawing direct
+<p>Alternatively, <a href="https://doi.org/10.1093/bib/bbw034" class="external-link">Smith
+&amp; Pease, 2016</a> argues that <em>de novo</em> gene birth/death and
+gene family expansion/contraction studies should avoid drawing direct
 inferences of evolutionary relatedness from measures of sequence
 similarity alone, and should instead, where possible, use more rigorous
 phylogeny-based methods. For this purpose, I recommend researchers to
 consult the <a href="http://orthology.phylomedb.org/" class="external-link">phylomedb
 database</a> to retrieve phylogeny-based gene orthology relationships
 and use these age estimates in combination with <code>myTAI</code>.
+Similarly, users can also retrieve gene ages from <a href="http://eggnog5.embl.de/#/app/home" class="external-link">EggNOG database</a> using <a href="https://github.com/kullrich/orthomap" class="external-link"><code>orthomap</code></a>.
 Alternatively, users might find the simulation based removal approach
 proposed by <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555" class="external-link">Moyers
 &amp; Zhang, 2018</a> more suitable.</p>
@@ -197,18 +203,21 @@ gene age inference table with <code>myTAI</code>. However, even when
 users rely on established procedures such as phylostratigraphy the gene
 age inference bias will be present as ‘systematic error’ in all
 developmental stages for which TAI or TDI computations are performed.
-Thus, stages of constraint will be detectable in any case. Since TAI or
-TDI computations are indended to enable screening for conserved or
-constrained stages in developmental or biological processes for further
-downstream experimental studies, even simple approaches such as
-phylostratigraphy can give first evidence for the existence of
-transcriptomic contraints within a biological process. If researchers
+Thus, <em>stages of constraint will be detectable in any case.</em>
+Since TAI or TDI computations are intended to enable screening for
+conserved or constrained stages in developmental or biological processes
+for further downstream experimental studies, even simple approaches such
+as phylostratigraphy can give first evidence for the existence of
+transcriptomic constraints within a biological process. If researchers
 then wish to extract the exact candidate genes that might potentially
 cause such transcriptome constraints then I would advise to rely on more
-superior approaches of gene age inference as discussed above.</p>
+superior approaches of gene age inference as discussed here.</p>
+<div class="section level4">
+<h4 id="overlooked-technical-aspects-of-blast-and-blast-like-tools">Overlooked technical aspects of BLAST and BLAST-like tools<a class="anchor" aria-label="anchor" href="#overlooked-technical-aspects-of-blast-and-blast-like-tools"></a>
+</h4>
 <p>In my opinion, what is completely missing in this entire debate is
 the bioinformatics/technical aspect of using BLAST or any other
-BLAST-like tool for gene age inference. Recently, it was intesely
+BLAST-like tool for gene age inference. Recently, it was intensely
 discussed how BLAST hits are biased by the use of the default argument
 <code>max_target_seqs</code> (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty833/5106166" class="external-link">Shah
 et al., 2018</a>). The main issue of how this
@@ -250,20 +259,21 @@ et al., 2018</a> discuss another problem of retrieving the best BLAST
 hits based on <code>E-value</code> thresholds.</p>
 <blockquote>
 <p>Many users assume that BLAST alignment hits with E-values less than
-or equal to the predefined threshold (e.g. 105 via the specification of
-evalue 1e-5) are identified after the search is completed, in a final
-step to rank all alignments by E-value, from the smallest (on the top of
-the list of results) to the largest E-value (at the bottom of the list).
-<strong>However, the E-value filtering step does not occur at the final
-stage of BLAST; it occurs earlier during the scanning phase (Altschul et
-al., 1997; Camacho et al., 2009). During this phase, a gapped alignment
-is generated using less-sensitive heuristic parameters (Camacho et al.,
-2009); alignments with an E-value that satisfies the defined cut-off are
-included in the subsequent phase of the BLAST algorithm (and eventually
-reported). During the final (trace-back) phase, these gapped alignments
-are further adjusted using moresensitive heuristic parameters (Camacho
-et al., 2009), and the E-value for each of these refined alignments is
-then recalculated.</strong> - Gonzalez-Pech et al., 2018</p>
+or equal to the predefined threshold (e.g. 10<sup>-5</sup> via the
+specification of evalue 1e-5) are identified after the search is
+completed, in a final step to rank all alignments by E-value, from the
+smallest (on the top of the list of results) to the largest E-value (at
+the bottom of the list). <strong>However, the E-value filtering step
+does not occur at the final stage of BLAST; it occurs earlier during the
+scanning phase (Altschul et al., 1997; Camacho et al., 2009). During
+this phase, a gapped alignment is generated using less-sensitive
+heuristic parameters (Camacho et al., 2009); alignments with an E-value
+that satisfies the defined cut-off are included in the subsequent phase
+of the BLAST algorithm (and eventually reported). During the final
+(trace-back) phase, these gapped alignments are further adjusted using
+moresensitive heuristic parameters (Camacho et al., 2009), and the
+E-value for each of these refined alignments is then
+recalculated.</strong> - Gonzalez-Pech et al., 2018</p>
 </blockquote>
 <p>This means that if one study mentioned above ran a BLAST search with
 a BLAST parameter configuration of lets say
@@ -283,6 +293,40 @@ whereas another study ran BLAST directly with
 et al., 2018</a> these studies although referring to the same
 <code>E-value</code> threshold for filtering hits will result in
 different sets of filtered BLAST hits.</p>
+</div>
+<div class="section level4">
+<h4 id="homology-detection-failure">Homology detection failure<a class="anchor" aria-label="anchor" href="#homology-detection-failure"></a>
+</h4>
+<p>In addition, small and fast-evolving genes are often wrongly
+annotated as young genes due to <code>homology detection failure</code>.
+This issue and potential solution in the context of genomic
+phylostratigraphy have been discussed by <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000862" class="external-link">Weisman
+et al., 2020</a>.</p>
+<blockquote>
+<p>An alternative explanation for a lineage-specific gene is that
+nothing particularly special has happened in the gene’s evolutionary
+history. The gene has homologs outside of the lineage (no de novo
+origination), and no novel function has emerged (no
+neofunctionalization), but despite this lack of novelty, computational
+similarity searches (e.g., BLAST) have failed to detect the
+out-of-lineage homologs. We refer to such unsuccessful searches as
+<em>homology detection failure</em>. As homologs diverge in sequence
+from one another, the statistical significance of their similarity
+declines. <em>Over evolutionary time, with a constant rate of sequence
+evolution, the degree of similarity may fall below the chosen
+significance threshold, resulting in a failure to detect the
+homolog</em>. - Weisman et al., 2020</p>
+</blockquote>
+<p>Users can run their test, <a href="https://github.com/caraweisman/abSENSE" class="external-link"><code>abSENSE</code></a>
+to detect the <em>probability that a homolog of a given gene would fail
+to be detected by a homology search</em>. We note that a recently
+developed tool <a href="https://github.com/josuebarrera/GenEra" class="external-link"><code>GenEra</code></a>
+can automate <code>abSENSE</code> analysis for every gene in a given
+genome and provide an output compatible with <code>myTAI</code>.</p>
+</div>
+<div class="section level4">
+<h4 id="synteny-based-phylostratigraphy">Synteny-based phylostratigraphy<a class="anchor" aria-label="anchor" href="#synteny-based-phylostratigraphy"></a>
+</h4>
 <p>A recently introduced approach is called
 <code>synteny-based phylostratigraphy</code> (<a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y" class="external-link">Arendsee
 et al., 2019</a>). Here, the authors provide a comparative analysis of
@@ -303,17 +347,118 @@ origin of the focal gene. If no similarity of any sort is found, their
 possible reason. Thus, they detect indels, scrambled synteny, assembly
 issues, and regions of uncertain synteny (<a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y" class="external-link">Arendsee
 et al., 2019</a>).</p>
+</div>
+<div class="section level4">
+<h4 id="accelerated-and-sensitive-sequence-alignment">Accelerated and sensitive sequence alignment<a class="anchor" aria-label="anchor" href="#accelerated-and-sensitive-sequence-alignment"></a>
+</h4>
+<p>While BLASTP is considered the gold-standard tool for sequence
+alignment in many labs, newer approaches (such as <a href="https://github.com/bbuchfink/diamond" class="external-link">DIAMOND v2</a> and <a href="https://github.com/soedinglab/mmseqs2/" class="external-link">MMSeqs2</a>) have been and
+are being developed. They retain the sensitivity of BLAST while being
+thousands to hundred-folds faster. This speed-up is crucial as sequence
+databases increase in size. This is important for genomic
+phylostratigraphy and <a href="https://github.com/bbuchfink/diamond" class="external-link">DIAMOND v2</a> and <a href="https://github.com/soedinglab/mmseqs2/" class="external-link">MMSeqs2</a> have been
+employed in various phylostratigraphic and phylotranscriptomic analyses
+(either explicitly or under-the-hood in tools such as <a href="https://github.com/davidemms/OrthoFinder" class="external-link">OrthoFinder</a>, which
+uses DIAMOND by default) (see <a href="https://www.biorxiv.org/content/10.1101/2022.08.21.504376v1" class="external-link">Domazet-Lošo
+et al., 2022</a>; <a href="https://www.pnas.org/doi/full/10.1073/pnas.2216351120" class="external-link">Ma &amp;
+Zheng 2023</a>; <a href="https://academic.oup.com/g3journal/article/13/6/jkad077/7097621" class="external-link">Manley
+et al., 2023</a>).</p>
+<p>With <code>DIAMOND</code>, users can overcome the overlooked
+technical aspects of BLAST such as the <code>max_target_seqs</code>
+issue by setting <code>--max-target-seqs</code> to <code>0</code> (or
+simply <code>-k0</code>). Furthermore, the
+<code>--ultra-sensitive</code> mode can be employed, which is as
+sensitive as BLAST while being 80x faster (see <a href="https://www.nature.com/articles/s41592-021-01101-x/figures/1" class="external-link">Fig
+1. in the DIAMOND paper</a>).</p>
+<p><a href="https://github.com/josuebarrera/GenEra" class="external-link">GenEra</a>, a
+recently developed gene age inference tool, utilises <a href="https://github.com/bbuchfink/diamond" class="external-link">DIAMOND v2</a> with
+appropriate parameter settings by default. Users can also specify the
+use of <a href="https://github.com/soedinglab/mmseqs2/" class="external-link">MMSeqs2</a> as
+well as the <em>protein structure aligner</em> <a href="https://github.com/steineggerlab/foldseek" class="external-link">Foldseek</a> and other
+tools (<a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z" class="external-link">Barrera-Redondo
+et al., 2023</a>). Potential issues such as <em>homology detection
+failure</em> can be overcome by providing a pair-wise evolutionary
+distance file as an input. Furthermore, users can set thresholds such as
+for <code>taxonomic representativeness</code> to filter evolutionarily
+inconsistent matches to the database, i.e. matches stemming from
+database contamination or horizontal gene transfer.</p>
+</div>
+<div class="section level4">
+<h4 id="inferring-gene-age-using-orthogroups">Inferring gene age using orthogroups<a class="anchor" aria-label="anchor" href="#inferring-gene-age-using-orthogroups"></a>
+</h4>
+<p>The first studies in gene age inference used the framework of genomic
+phylostratigraphy, where each gene of the focal species is compared
+against a sequence database to find the most distantly related homologue
+(<a href="https://www.sciencedirect.com/science/article/pii/S0168952507002995" class="external-link">Domazet-Loso
+et al., 2007</a>). Some more recent studies have instead inferred gene
+age using the node in the phylogeny that contains all members of an
+<code>orthogroup</code>.</p>
+<p>An orthogroup is a <em>group of genes descended from a single gene in
+the last common ancestor of a clade of species</em>. This framework has
+been very useful for phylogenetic inference and comparative
+transcriptomics. Since an orthogroup is a subset of all sequence
+homologues in the given dataset, a gene can hit genes outside of its
+orthogroup (using the same parameters on a pairwise sequence aligner).
+<a href="https://github.com/davidemms/OrthoFinder" class="external-link">OrthoFinder</a> (a
+tool for phylogenetic orthology inference for comparative genomics) is
+commonly used in <em>orthogroup</em>-based gene age inference. The
+result of OrthoFinder includes the files <code>Orthogroups.tsv</code>
+(now <a href="https://github.com/davidemms/OrthoFinder#orthogroups-directory-deprecated" class="external-link">depreciated</a>)
+and <code>Phylogenetic_Hierarchical_Orthogroups/N0.tsv</code>, which
+have been used for <em>orthogroup</em>-based TAI studies (e.g. <a href="https://www.pnas.org/doi/full/10.1073/pnas.2216351120" class="external-link">Ma &amp;
+Zheng 2023</a>; <a href="https://www.biorxiv.org/content/10.1101/2023.07.04.546637v1.full" class="external-link">Nishimiya-Fujisawa
+et al., 2023</a>). Incorporating these results into <code>myTAI</code>
+can be done using <a href="https://github.com/kullrich/orthomap" class="external-link"><code>orthomap</code></a>
+(see <a href="https://orthomap.readthedocs.io/en/latest/" class="external-link">documentation</a>).</p>
+<p>Methodologically, it should be stressed that while
+<code>Orthogroups.tsv</code> and
+<code>Phylogenetic_Hierarchical_Orthogroups/N0.tsv</code> contain
+orthogroups with more than one member (i.e. orthogroups with at least
+one orthologue or paralogue), users should be aware that these output
+files of OrthoFinder do not include singletons, which is a signature of
+a novel or species-specific gene. To incorporate singletons, users
+should include the genes in <code>Orthogroups_UnassignedGenes.tsv</code>
+output or, alternatively, singletons in the <code>Orthogroups.txt</code>
+file, and assign the singletons to the species-specific phylostrata in
+the study.</p>
+<p>The <em>orthogroup</em>-based approach seems to be motivated by an
+assumption that the more restricted set of genes that consists of
+orthologues and in-paralogues (paralogues that arose after the species
+split) tends to have more similar attributes (e.g. conservation in
+function and/or expression pattern) than the larger set of genes that
+contains all sequence homologues. It follows that this framework should
+better reflect the ‘gene age’. This assumption draws parallels to the
+<code>orthologue conjecture</code> (i.e. orthologues tend to have more
+conserved attributes than paralogues), which is heavily debated (<a href="https://www.nature.com/articles/nrg3456#Sec8" class="external-link">Gabaldón &amp;
+Koonin 2013</a>; <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1707515115" class="external-link">Dunn et al.,
+2018</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/32657391/" class="external-link">Stamboulian et al.,
+2020</a>; etc.). In several cases, orthologues do not have more
+conserved attributes than paralogues. Indeed, ‘shifts’ or
+‘substitutions’ in the expression profile of paralogues that arose
+before the species split are observed in single-cell studies (<a href="https://elifesciences.org/articles/66747" class="external-link">Tarashansky et al.,
+2021</a>; <a href="https://www.nature.com/articles/s41559-021-01580-3" class="external-link">Shafer et al.,
+2022</a>). Overall, it remains unclear whether inferring gene age using
+the <em>orthogroup</em>-based approach better captures evolutionary
+information than the classic genomic phylostratigraphy approach
+(all/unrestricted sequence homologues), given that several issues
+pertaining to genomic phylostratigraphy have been addressed (see <a href="https://link.springer.com/article/10.1186/s13059-023-02895-z" class="external-link">Barrera-Redondo
+et al., 2023</a>).</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
+</h3>
 <p>Hence, all of the above mentioned approaches are far from being
 perfect and much more research is needed to systematically compare
 different approaches for gene age inference.</p>
 <p>The overall rational behind gene age inference is to assign each
 protein coding gene of an organism of interest with an evolutionary age
 estimate which aims to quantify its potential origin within the tree of
-life (detectable sequence homolog; orphan gene (see <a href="https://www.nature.com/articles/nrg3053" class="external-link">Tautz &amp; Domazet-Loso,
-2011</a>)). Hence, gene age inference generates a table storing the gene
+life (detectable sequence homologue; orphan gene - see <a href="https://www.nature.com/articles/nrg3053" class="external-link">Tautz &amp; Domazet-Loso,
+2011</a>). Hence, gene age inference generates a table storing the gene
 age in the first column and the corresponding gene id of the organism of
-iterest in the second column. This table is named <em>phylostratigraphic
-map</em>.</p>
+interest in the second column. This table is named
+<em>phylostratigraphic map</em> (or <em>phylomap</em>).</p>
 </div>
   </div>
 

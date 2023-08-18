@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotContribution.R
 \name{PlotContribution}
 \alias{PlotContribution}
-\title{Plot Cumuative Transcriptome Index}
+\title{Plot Cumulative Transcriptome Index}
 \usage{
 PlotContribution(
   ExpressionSet,
