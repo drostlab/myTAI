@@ -25,7 +25,7 @@ Authors@R: c(person("Hajk-Georg", "Drost",
 Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2018) <doi:10.1093/bioinformatics/btx835>). This package aims to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest. 
 VignetteBuilder: knitr
 NeedsCompilation: yes
-License: GPL-3
+License: GPL-2
 Depends:
     R (>= 3.1.1)
 Imports:
