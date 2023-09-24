@@ -83,7 +83,7 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">FlatLineTest</span><span class="op">(</span></span>
 <span>  <span class="va">ExpressionSet</span>,</span>
-<span>  permutations <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  plotHistogram <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  runs <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -186,21 +186,24 @@ is computed from this null distribution.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example PhyloExpressionSet using 1000 permutations</span></span></span>
 <span class="r-in"><span><span class="fu">FlatLineTest</span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,</span></span>
-<span class="r-in"><span>             permutations  <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>             permutations  <span class="op">=</span> <span class="fl">10000</span>,</span></span>
 <span class="r-in"><span>             plotHistogram <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 4.316  seconds.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.030679e-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6.080382e-13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $std.dev</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05759714 0.05535684 0.05372440 0.05276281 0.05187151 0.05272545 0.05556873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05526434 0.05406603 0.05277267 0.05174135 0.05065066 0.05200226 0.05648510</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ks.test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Asymptotic one-sample Kolmogorov-Smirnov test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> data:  filtered_vars</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> D = 0.026521, p-value = 0.5038</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> D = 0.021237, p-value = 0.000307</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: two-sided</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -211,20 +214,21 @@ is computed from this null distribution.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">FlatLineTest</span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,</span></span>
 <span class="r-in"><span>             custom.perm.matrix <span class="op">=</span> <span class="va">custom_perm_matrix</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.552386e-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.072741e-14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $std.dev</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Zygote   Quadrant   Globular      Heart    Torpedo       Bent     Mature </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05815982 0.05688202 0.05360303 0.05327665 0.05098194 0.05719122 0.06029092 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05314826 0.05168601 0.04726247 0.04757653 0.04662605 0.04905891 0.05485164 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ks.test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	Exact one-sample Kolmogorov-Smirnov test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Asymptotic one-sample Kolmogorov-Smirnov test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> data:  filtered_vars</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> D = 0.058227, p-value = 0.8745</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> D = 0.062774, p-value = 0.8256</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: two-sided</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

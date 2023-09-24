@@ -62,6 +62,9 @@ Users can install `myTAI` from [CRAN](https://cran.r-project.org/web/packages/my
 ```r
 # install myTAI 0.9.3
 install.packages("myTAI", dependencies = TRUE)
+
+# install the developer version containing the newest features
+devtools::install_github("drostlab/myTAI")
 ```
 
 ### Short package description
@@ -82,18 +85,6 @@ are evolutionarily conserved ([Drost et al., 2018](https://academic.oup.com/bioi
 
 __Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years,
 please follow my [updated discussion about the gene age inference literature](https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html). With [GenEra](https://github.com/josuebarrera/GenEra), we addressed all previously raised issues and we encourage users to run `GenEra` when aiming to infer gene ages for further `myTAI` analyses.__
-
-
-## Install Developer Version
-
-Some bug fixes or new functionality will not be available on CRAN yet, but in
-the developer version here on GitHub. To download and install the most recent
-version of `myTAI` run:
-
-```r
-# install developer version of myTAI
-devtools::install_github("drostlab/myTAI")
-```
 
 ## NEWS
 
