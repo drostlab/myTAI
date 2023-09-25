@@ -189,21 +189,26 @@ For details, please consult <code><a href="tf.html">tf</a></code>, <code><a href
 <span class="r-in"><span>                     modules <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Proceeding with the ReductiveHourglassTest</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         log2         sqrt         none </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.322351e-01 4.466951e-08 3.231696e-08 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7.868240e-02 2.965384e-09 6.265132e-09 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># it is also possible to test the phylotranscriptomic pattern using rlog</span></span></span>
 <span class="r-in"><span><span class="co"># and vst transforms from DESeq2</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">DESeq2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in library(DESeq2):</span> there is no package called ‘DESeq2’</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikelove/DESeq2" class="external-link">DESeq2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tfStability</span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span></span>
 <span class="r-in"><span>                     TestStatistic <span class="op">=</span> <span class="st">"ReductiveHourglassTest"</span>,</span></span>
 <span class="r-in"><span>                     permutations       <span class="op">=</span> <span class="fl">100</span>,</span></span>
 <span class="r-in"><span>                     transforms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"log2"</span>, <span class="st">"sqrt"</span>, <span class="st">"none"</span>, <span class="st">"vst"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                     modules <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Proceeding with the ReductiveHourglassTest</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get(as.character(FUN), mode = "function", envir = envir):</span> object 'vst' of mode 'function' was not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> converting counts to integer mode</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> -- note: fitType='parametric', but the dispersion trend was not well captured by the</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>    function: y = a/x + b, and a local regression fit was automatically substituted.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>    specify fitType='local' or 'mean' to avoid this message next time.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The phylotranscriptomic pattern may not follow an hourglass pattern (high-low-high).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         log2         sqrt         none          vst </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8.503291e-02 2.728639e-07 9.062941e-10 9.058887e-01 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
