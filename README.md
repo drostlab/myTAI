@@ -60,7 +60,7 @@ Users can install `myTAI` from [CRAN](https://cran.r-project.org/web/packages/my
 
 
 ```r
-# install myTAI 0.9.3
+# install myTAI 0.9.3 from CRAN
 install.packages("myTAI", dependencies = TRUE)
 
 # install the developer version containing the newest features
