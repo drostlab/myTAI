@@ -11,3 +11,5 @@ docs/
 ^doc$
 ^Meta$
 .github
+LICENSE
+pkgdown

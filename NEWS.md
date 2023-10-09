@@ -24,7 +24,7 @@ myTAI 1.0.1.9000
 ## Bug and Issue Fixes
 - Some changes to remove errors and warnings from `devtools::test()` and `devtools::check()`, when building this package, which has been accumulated from previous updates.
 
-myTAI 1.0.0.9000
+myTAI 1.0.0
 ===========
 ## New Functions
 - New function `TEI()`: Compute the Transcriptome Evolutionary Index 

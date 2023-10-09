@@ -69,7 +69,7 @@ test_that("lillie.test is NA..", {
 test_that("lillie.test is computed...", {
   
   skip_on_cran()   
-  LateConservationTest(
+  expect_output(LateConservationTest(
     PhyloExpressionSetExample,
     modules = list(
       early = 1:2,
@@ -78,7 +78,7 @@ test_that("lillie.test is computed...", {
     ),
     permutations = 1000,
     lillie.test = TRUE
-  )$lillie.test
+  )$lillie.test)
   
   
 })

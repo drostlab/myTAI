@@ -78,9 +78,9 @@
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
 #'
-#' # example PhyloExpressionSet using 1000 permutations
+#' # example PhyloExpressionSet using 100 permutations
 #' FlatLineTest(PhyloExpressionSetExample,
-#'              permutations  = 10000,
+#'              permutations  = 100,
 #'              plotHistogram = FALSE)
 #'
 #' # use your own permutation matrix based on which p-values (FlatLineTest)

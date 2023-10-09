@@ -79,26 +79,24 @@
 <h2 class="page-header" data-toc-text="1.0.1.9000" id="mytai-1019000">myTAI 1.0.1.9000<a class="anchor" aria-label="anchor" href="#mytai-1019000"></a></h2>
 <div class="section level3">
 <h3 id="new-functions-1-0-1-9000">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-1-0-1-9000"></a></h3>
-<ul><li>New function <code><a href="../reference/PlotSignatureTransformed.html">PlotSignatureTransformed()</a></code> : Plot evolutionary signatures across transcriptomes and RNA-seq transformations</li>
-<li>New function <code><a href="../reference/tfStability.html">tfStability()</a></code>: Perform Permutation Tests Under Different Transformations (to test the robustness of the p-values of a given test (e.g. <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code>, <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code>, <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code>, <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> and <code><a href="../reference/LateConservationTest.html">LateConservationTest()</a></code>) to expression data transformations)</li>
-<li>New function <code><a href="../reference/LateConservationTest.html">LateConservationTest()</a></code> : Perform Reductive Late Conservation Test (to test for a high-mid-low (or high-high-low) TAI or TDI pattern)</li>
-<li>New function <code><a href="../reference/lcScore.html">lcScore()</a></code> : Compute the Hourglass Score for the LateConservationTest</li>
+<ul><li><p>New function <code><a href="../reference/PlotSignatureTransformed.html">PlotSignatureTransformed()</a></code> : Plot evolutionary signatures across transcriptomes and RNA-seq transformations</p></li>
+<li><p>New function <code><a href="../reference/tfStability.html">tfStability()</a></code>: Perform Permutation Tests Under Different Transformations (to test the robustness of the p-values of a given test (e.g. <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code>, <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code>, <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code>, <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> and <code><a href="../reference/LateConservationTest.html">LateConservationTest()</a></code>) to expression data transformations)</p></li>
+<li><p>New function <code><a href="../reference/LateConservationTest.html">LateConservationTest()</a></code> : Perform Reductive Late Conservation Test (to test for a high-mid-low (or high-high-low) TAI or TDI pattern)</p></li>
+<li><p>New function <code><a href="../reference/lcScore.html">lcScore()</a></code> : Compute the Hourglass Score for the LateConservationTest</p></li>
+<li><p>internal <code>rcpp</code> functions are now using Eigen to automatically enable parallelization</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-1-0-1-9000">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-0-1-9000"></a></h3>
-<ul><li>
-<code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> updated to be able to perform the <code>TestStatistic = "LateConservationTest"</code>.</li>
-<li>
-<code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> now prints p-value as a subtitle rather than via <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">ggplot2::annotate()</a></code>.</li>
-<li>
-<code><a href="../reference/tf.html">tf()</a></code> now has a <code>pseudocount</code> parameter, which is useful for performing logarithmic transformations when there are genes with 0 counts.</li>
-<li>
-<code><a href="../reference/tf.html">tf()</a></code> now supports <code>vst</code> and <code>rlog</code> transformations from <a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html" class="external-link">DESeq2</a>.</li>
-<li>
-<code><a href="../reference/tf.html">tf()</a></code> now has an <code>intergerise</code> parameter, which is needed when applying <code>vst</code> or <code>rlog</code> transformations.</li>
-<li>
-<code><a href="../reference/tf.html">tf()</a></code> updated documentation for performing rank transformation, which assigns ranks to the gene expression values within each stage, based on their relative positions compared to other values.</li>
-<li>Improvements to existing test functions (<code><a href="../reference/ecScore.html">ecScore()</a></code>, <code><a href="../reference/rhScore.html">rhScore()</a></code> and <code><a href="../reference/reversehourglassScore.html">reversehourglassScore()</a></code>) to give a message when the phylotranscriptomic pattern is unlikely to follow the test statistics.</li>
+<ul><li><p><code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> updated to be able to perform the <code>TestStatistic = "LateConservationTest"</code>.</p></li>
+<li><p><code><a href="../reference/PlotSignature.html">PlotSignature()</a></code> now prints p-value as a subtitle rather than via <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">ggplot2::annotate()</a></code>.</p></li>
+<li><p><code><a href="../reference/tf.html">tf()</a></code> now has a <code>pseudocount</code> parameter, which is useful for performing logarithmic transformations when there are genes with 0 counts.</p></li>
+<li><p><code><a href="../reference/tf.html">tf()</a></code> now supports <code>vst</code> and <code>rlog</code> transformations from <a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html" class="external-link">DESeq2</a>.</p></li>
+<li><p><code><a href="../reference/tf.html">tf()</a></code> now has an <code>intergerise</code> parameter, which is needed when applying <code>vst</code> or <code>rlog</code> transformations.</p></li>
+<li><p><code><a href="../reference/tf.html">tf()</a></code> updated documentation for performing rank transformation, which assigns ranks to the gene expression values within each stage, based on their relative positions compared to other values.</p></li>
+<li><p>Improvements to existing test functions (<code><a href="../reference/ecScore.html">ecScore()</a></code>, <code><a href="../reference/rhScore.html">rhScore()</a></code> and <code><a href="../reference/reversehourglassScore.html">reversehourglassScore()</a></code>) to give a message when the phylotranscriptomic pattern is unlikely to follow the test statistics.</p></li>
+<li><p><code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> - newly returns the ks test statistics for the fitting of gamma</p></li>
+<li><p><code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> - improved fitting</p></li>
+<li><p><code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> - cpp functions are newly parallelized and progress bar is implemented for the computation of permutations</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-and-issue-fixes-1-0-1-9000">Bug and Issue Fixes<a class="anchor" aria-label="anchor" href="#bug-and-issue-fixes-1-0-1-9000"></a></h3>
@@ -106,9 +104,9 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.0.0.9000" id="mytai-1009000">myTAI 1.0.0.9000<a class="anchor" aria-label="anchor" href="#mytai-1009000"></a></h2>
+<h2 class="page-header" data-toc-text="1.0.0" id="mytai-100">myTAI 1.0.0<a class="anchor" aria-label="anchor" href="#mytai-100"></a></h2>
 <div class="section level3">
-<h3 id="new-functions-1-0-0-9000">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-1-0-0-9000"></a></h3>
+<h3 id="new-functions-1-0-0">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-1-0-0"></a></h3>
 <ul><li>New function <code><a href="../reference/TEI.html">TEI()</a></code>: Compute the Transcriptome Evolutionary Index</li>
 <li>New function <code>pMatrixTEI</code>: Compute Partial Transcriptome Evolutionary Index (TEI) Values</li>
 <li>New function <code>pStrataTEI</code>: Compute Partial Transcriptome Evolutionary Index (TEI) Strata Values</li>
@@ -117,7 +115,7 @@
 </li>
 </ul></div>
 <div class="section level3">
-<h3 id="new-features-1-0-0-9000">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0-9000"></a></h3>
+<h3 id="new-features-1-0-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
 <ul><li>
 <code><a href="../reference/CollapseReplicates.html">CollapseReplicates()</a></code> now returns <code>tibble</code> objects</li>
 <li>
@@ -125,7 +123,7 @@
 </li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-and-issue-fixes-1-0-0-9000">Bug and Issue Fixes<a class="anchor" aria-label="anchor" href="#bug-and-issue-fixes-1-0-0-9000"></a></h3>
+<h3 id="bug-and-issue-fixes-1-0-0">Bug and Issue Fixes<a class="anchor" aria-label="anchor" href="#bug-and-issue-fixes-1-0-0"></a></h3>
 <ul><li>
 <code>CollapseFromTo()</code> now has an exception when a replicate number <code>1</code> is passed to the function -&gt; previously this would cause an error to occur</li>
 </ul></div>

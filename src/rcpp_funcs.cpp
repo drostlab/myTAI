@@ -66,8 +66,8 @@ void updateProgressBar(int currentProgress, int totalProgress, int barWidth = 40
   progressBar += ']';
   
   float percentage = round(progressRatio * 10000)/100;
-  std::cout << '\r' << progressBar << " " << percentage << "%   ";
-  std::cout.flush();
+  Rcout << '\r' << progressBar << " " << percentage << "%   ";
+  // std::cout.flush();
 }
 
 
@@ -164,17 +164,17 @@ Eigen::VectorXd cpp_TAI_par(const Eigen::SparseMatrix<double> & ExpressionMatrix
 // [[Rcpp::export]]
 Eigen::MatrixXd cpp_bootMatrix(const Eigen::MatrixXd& ExpressionMatrix, const Eigen::VectorXd& AgeVector, const int& permutations) 
 {
-        std::cout << std::endl;
-        std::cout << "[ Number of Eigen threads that are employed on your machine: " << Eigen::nbThreads() << " ]" << std::endl;
-        std::cout << std::endl;
+        Rcout << std::endl;
+        Rcout << "[ Number of Eigen threads that are employed on your machine: " << Eigen::nbThreads() << " ]" << std::endl;
+        Rcout << std::endl;
         Eigen::VectorXd Divisor = ExpressionMatrix.colwise().sum();
         Eigen::MatrixXd fMatrix = ExpressionMatrix.array().rowwise() / Divisor.transpose().array();
-        std::cout << "[ Computing age assignment permutations for test statistic ..." << " ]" << std::endl;
+        Rcout << "[ Computing age assignment permutations for test statistic ..." << " ]" << std::endl;
         Eigen::MatrixXd permMatrix = permut_mat(AgeVector,permutations);
-        std::cout << std::endl;
-        std::cout << "[ Computing variances of permuted transcriptome signatures ..." << " ]" << std::endl;
+        Rcout << std::endl;
+        Rcout << "[ Computing variances of permuted transcriptome signatures ..." << " ]" << std::endl;
         Eigen::MatrixXd bootM = permMatrix * fMatrix;
-        std::cout << std::endl;
+        Rcout << std::endl;
         return bootM;
 }
 

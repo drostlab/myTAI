@@ -105,7 +105,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to the myTAI package</h1>
             
-            <h4 data-toc-skip class="date">2023-08-04</h4>
+            <h4 data-toc-skip class="date">2023-09-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Introduction.Rmd" class="external-link"><code>vignettes/Introduction.Rmd</code></a></small>
       <div class="hidden name"><code>Introduction.Rmd</code></div>
@@ -1199,7 +1199,7 @@ returns the partial TAI or TDI value for each gene.</p>
 12 0.73992167 0.71770319 0.69667019 0.71861745 0.70883635 0.73430205 0.79420194</code></pre>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute partial TAI values for each gene</span></span>
-<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pillar/man/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="fu"><a href="../reference/pMatrix.html">pMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="fu"><a href="../reference/pMatrix.html">pMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Observations: 25260
 Variables:
 $ Zygote   (dbl) 3.597950e-05, 2.484581e-05, 2.007498e-05, 1.683276e-05, 1.891073e-...
@@ -1541,7 +1541,7 @@ users can use the following functions implemented in the R language:
 <span>                   ylab          <span class="op">=</span> <span class="st">"Transcriptome Age Index"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># save ggplot2 based TAI profile to a local machine with save_plot()</span></span>
-<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/save_plot.html" class="external-link">save_plot</a></span><span class="op">(</span><span class="st">"ExampleTAIProfile.pdf"</span>,</span>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/save_plot.html" class="external-link">save_plot</a></span><span class="op">(</span><span class="st">"ExampleTAIProfile.pdf"</span>,</span>
 <span>                   <span class="va">p</span>,</span>
 <span>                   base_height <span class="op">=</span> <span class="fl">8</span>,</span>
 <span>                   base_width <span class="op">=</span> <span class="fl">12</span> <span class="op">)</span></span></code></pre></div>
