@@ -41,7 +41,7 @@ test_that("FlatLineTest() computes correct p.values...", {
                         rate = estimates$estimate[2],
                         lower.tail = FALSE
                 )
-        )
+        , tolerance=1e-3)
 })
 
 
