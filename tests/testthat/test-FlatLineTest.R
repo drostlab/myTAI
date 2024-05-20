@@ -5,7 +5,7 @@ data(PhyloExpressionSetExample)
 nonStandardExpressionSet <- PhyloExpressionSetExample[, 2:9]
 
 test_that(
-        "is.ExpressionSet() throughs error when no ExpressionSet is entered to FlatLineTest()",
+        "is.ExpressionSet() throws error when no ExpressionSet is entered to FlatLineTest()",
         {
                 expect_error(
                         FlatLineTest(nonStandardExpressionSet,

@@ -110,7 +110,7 @@ LateConservationTest <- function(ExpressionSet,
   is.ExpressionSet(ExpressionSet)
   
   if(is.null(modules))
-    stop("Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
+    stop("Please specify the three modules: early, mid, and late using the argument 'modules = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
   
   if(any(table(unlist(modules)) > 1))
     stop("Intersecting modules are not defined for the LateConservationTest.", call. = FALSE)
