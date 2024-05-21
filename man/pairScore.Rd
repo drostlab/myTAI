@@ -25,7 +25,7 @@ Possible values can be:
 a numeric value representing the pair score.
 }
 \description{
-This function computes the PairTest score for a given \code{\link{TAI}}
+This function computes the PairwiseTest score for a given \code{\link{TAI}}
 or \code{\link{TDI}} pattern.
 
 The pair test is a permutation test based on the following test statistic. 
@@ -71,7 +71,7 @@ stored in the \code{age_vals} argument.
  
 }
 \seealso{
-\code{\link{PairTest}}, \code{\link{TAI}}, \code{\link{TDI}}
+\code{\link{PairwiseTest}}, \code{\link{TAI}}, \code{\link{TDI}}
 }
 \author{
 Hajk-Georg Drost and Jaruwatana Sodai Lotharukpong
