@@ -1,14 +1,14 @@
-context("Test: PairTest() ")
+context("Test: PairwiseTest() ")
 
 data(PhyloExpressionSetExample)
 
 nonStandardExpressionSet <- PhyloExpressionSetExample[, 2:9]
 
 test_that(
-  "is.ExpressionSet() throws error when no ExpressionSet is entered to PairTest()",
+  "is.ExpressionSet() throws error when no ExpressionSet is entered to PairwiseTest()",
   {
     expect_error(
-      PairTest(
+      PairwiseTest(
         nonStandardExpressionSet,
         modules = list(
           contrast1 = 1:4,
@@ -24,7 +24,7 @@ test_that(
 
 test_that("p.value is computed..", {
   expect_true(
-    PairTest(
+    PairwiseTest(
       PhyloExpressionSetExample,
       modules = list(
         contrast1 = 1:4,
@@ -39,7 +39,7 @@ test_that("p.value is computed..", {
 
 test_that("std.dev is computed..", {
   expect_true(length(
-    PairTest(
+    PairwiseTest(
       PhyloExpressionSetExample,
       modules = list(
         contrast1 = 1:4,
@@ -54,7 +54,7 @@ test_that("std.dev is computed..", {
 
 test_that("lillie.test is NA..", {
   expect_true(is.na(
-    PairTest(
+    PairwiseTest(
       PhyloExpressionSetExample,
       modules = list(
         contrast1 = 1:4,
@@ -69,7 +69,7 @@ test_that("lillie.test is NA..", {
 test_that("lillie.test is computed...", {
   
   skip_on_cran()   
-  expect_output(PairTest(
+  expect_output(PairwiseTest(
     PhyloExpressionSetExample,
     modules = list(
       contrast1 = 1:2,
@@ -86,7 +86,7 @@ test_that("lillie.test is computed...", {
 test_that("error occurs when module selection does not match number of developmental stages..",
           {
             expect_error(
-              PairTest(
+              PairwiseTest(
                 PhyloExpressionSetExample,
                 modules = list(
                   contrast1 = 1:2,
@@ -102,18 +102,18 @@ test_that("error occurs when module selection does not match number of developme
 
 
 test_that("error occurs when modules aren't specified...", {
-  expect_error(PairTest(PhyloExpressionSetExample,
+  expect_error(PairwiseTest(PhyloExpressionSetExample,
                                     permutations = 1000))
 })
 
 
 
-test_that("PairTest() computes correct std.dev and p.values values...",
+test_that("PairwiseTest() computes correct std.dev and p.values values...",
           {
             skip_on_cran()
             TestBootMatrix <- bootMatrix(PhyloExpressionSetExample, 1000)
             
-            res <- PairTest(
+            res <- PairwiseTest(
               PhyloExpressionSetExample,
               modules = list(
                 contrast1 = 1:2,

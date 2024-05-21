@@ -34,7 +34,7 @@
 #'
 #' (2) The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the two contrasts contrast1 and contrast2 are computed. 
 #'
-#' (3) The pairwise differences D_contrast = contrast1 - contrast2 is calculated as final test statistic of the pair test,
+#' (3) The pairwise differences D_contrast = contrast1 - contrast2 is calculated as final test statistic of the pairwise test,
 #' when \code{altHypothesis} is specified as "greater". When \code{altHypothesis} is specified as "less", sign of D_contrast is reversed.
 #' 
 #' 
@@ -86,28 +86,28 @@
 #' # here the prior biological knowledge is that stages 1-2 correspond to contrast1,
 #' # stages 3-7 correspond to contrast 2.
 #' # We test whether TAI in contrast1 is greater than contrast 2.
-#' PairTest(PhyloExpressionSetExample,
+#' PairwiseTest(PhyloExpressionSetExample,
 #'          modules = list(contrast1 = 1:2, contrast2 = 3:7), 
 #'          altHypothesis = "greater",
 #'          permutations = 1000)
 #'
 #' # We can also test whether TAI in contrast1 is less than contrast 2.
-#' PairTest(PhyloExpressionSetExample,
+#' PairwiseTest(PhyloExpressionSetExample,
 #'          modules = list(contrast1 = 1:2, contrast2 = 3:7), 
 #'          altHypothesis = "less",
 #'          permutations = 1000)
 #' 
 #' # if we only want to test whether TAI in stage 1 (contrast 1) is greater than stage 3 (contrast 2).
-#' PairTest(PhyloExpressionSetExample,
+#' PairwiseTest(PhyloExpressionSetExample,
 #'          modules = list(contrast1 = 1, contrast2 = 2), 
 #'          altHypothesis = "greater",
 #'          permutations = 1000)
 #' 
-#' # use your own permutation matrix based on which p-values (PairTest)
+#' # use your own permutation matrix based on which p-values (PairwiseTest)
 #' # shall be computed
 #' custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
 #' # We test whether TAI in contrast1 is greater than contrast 2.
-#' PairTest(PhyloExpressionSetExample,
+#' PairwiseTest(PhyloExpressionSetExample,
 #'          modules = list(contrast1 = 1:2, contrast2 = 3:7), 
 #'          altHypothesis = "greater",
 #'          custom.perm.matrix = custom_perm_matrix)
@@ -115,7 +115,7 @@
 #' @import foreach
 #' @export
 
-PairTest <- function(ExpressionSet,
+PairwiseTest <- function(ExpressionSet,
                      modules            = NULL,
                      altHypothesis      = NULL,
                      permutations       = 1000, 
@@ -132,15 +132,15 @@ PairTest <- function(ExpressionSet,
     stop("Please specify the two modules: contrast1 and contrast2 using the argument 'modules = list(contrast1 = ..., contrast2 = ...)'.", call. = FALSE)
   
   if(any(table(unlist(modules)) > 1))
-    stop("Intersecting modules are not defined for the PairTest.", call. = FALSE)
+    stop("Intersecting modules are not defined for the PairwiseTest.", call. = FALSE)
   
   if(length(modules) != 2)
-    stop("Please specify two modules: contrast1 and contrast2 to perform the PairTest.", call. = FALSE)
+    stop("Please specify two modules: contrast1 and contrast2 to perform the PairwiseTest.", call. = FALSE)
   
   if(!names(modules)[1] == "contrast1" & !names(modules)[2] == "contrast2")
-    stop("Please specify two modules: contrast1 and contrast2 to perform the PairTest.", call. = FALSE)
+    stop("Please specify two modules: contrast1 and contrast2 to perform the PairwiseTest.", call. = FALSE)
   
-  # Perhaps this requirement in other test can be relaxed for the PairTest
+  # Perhaps this requirement in other test can be relaxed for the PairwiseTest
   # if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
   #   stop("The number of stages classified into the two modules does not match the total number of stages stored in the given ExpressionSet.", call. = FALSE)
   if(length(unlist(modules)) > (dim(ExpressionSet)[2] - 2))
@@ -151,9 +151,10 @@ PairTest <- function(ExpressionSet,
   score_vector <- vector(mode = "numeric",length = permutations)
   resMatrix <- matrix(NA_real_, permutations,(nCols-2))
   real_age <- vector(mode = "numeric",length = nCols-2)
-  real_age <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:nCols)),as.vector(unlist(dplyr::select(ExpressionSet, 1))))
+  real_age <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),
+                      as.vector(unlist(dplyr::select(ExpressionSet, 1))))
   
-  # compute the real pair score of the observed phylotranscriptomics pattern
+  # compute the real pairwise score of the observed phylotranscriptomics pattern
   # pairScore = pairwise difference score
   real_pscore <- pairScore(real_age,contrast1 = modules[[1]],contrast2 = modules[[2]],altHypothesis=altHypothesis)
   options(warn=1)
@@ -234,7 +235,7 @@ PairTest <- function(ExpressionSet,
                                            .errorhandling = "stop") %dopar% {
                                              
                                              
-                                             data.frame(PairTest( ExpressionSet = ExpressionSet,
+                                             data.frame(PairwiseTest( ExpressionSet = ExpressionSet,
                                                                   permutations  = permutations,
                                                                   altHypothesis = altHypothesis,
                                                                   lillie.test   = TRUE,
@@ -265,7 +266,7 @@ PairTest <- function(ExpressionSet,
         
         if(lillie.test){
           
-          pct <- PairTest( ExpressionSet = ExpressionSet,
+          pct <- PairwiseTest( ExpressionSet = ExpressionSet,
                            permutations  = permutations,
                            altHypothesis = altHypothesis,
                            lillie.test   = TRUE, 
@@ -277,7 +278,7 @@ PairTest <- function(ExpressionSet,
         
         if(!lillie.test){
           
-          pct <- PairTest( ExpressionSet = ExpressionSet,
+          pct <- PairwiseTest( ExpressionSet = ExpressionSet,
                            permutations  = permutations,
                            altHypothesis = altHypothesis,
                            lillie.test   = FALSE, 

@@ -1,5 +1,5 @@
 #' @title Compute the Pairwise Difference in TAI Score
-#' @description This function computes the PairTest score for a given \code{\link{TAI}}
+#' @description This function computes the PairwiseTest score for a given \code{\link{TAI}}
 #' or \code{\link{TDI}} pattern.
 #' 
 #' The pair test is a permutation test based on the following test statistic. 
@@ -27,7 +27,7 @@
 #' }
 #' @return a numeric value representing the pair score.
 #' @author Hajk-Georg Drost and Jaruwatana Sodai Lotharukpong
-#' @seealso \code{\link{PairTest}}, \code{\link{TAI}}, \code{\link{TDI}}
+#' @seealso \code{\link{PairwiseTest}}, \code{\link{TAI}}, \code{\link{TDI}}
 #' @examples
 #' 
 #'  # read standard phylotranscriptomics data
