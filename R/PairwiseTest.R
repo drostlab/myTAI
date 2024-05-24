@@ -161,7 +161,7 @@ PairwiseTest <- function(ExpressionSet,
   
   ### compute the bootstrap matrix 
   if (is.null(custom.perm.matrix)){
-    resMatrix <- cpp_bootMatrix(as.matrix(dplyr::select(ExpressionSet, 3:nCols)),as.vector(unlist(dplyr::select(ExpressionSet, 1))),as.numeric(permutations))
+    resMatrix <- cpp_bootMatrix(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),as.vector(unlist(dplyr::select(ExpressionSet, 1))),as.numeric(permutations))
   }
   
   else if (!is.null(custom.perm.matrix)){
