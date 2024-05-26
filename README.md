@@ -241,7 +241,8 @@ phylotranscriptomics pattern (significant deviation from a frat line = evolution
 * `ReductiveHourglassTest()` : Function to perform the __Reductive Hourglass Test__ that statistically evaluates the existence of a phylotranscriptomic hourglass pattern (hourglass model)
 * `EarlyConservationTest()` : Function to perform the __Reductive Early Conservation Test__ that statistically evaluates the existence of a monotonically increasing phylotranscriptomic pattern (early conservation model)
 * `LateConservationTest()` : Function to perform the __Reductive Late Conservation Test__ that statistically evaluates the existence of a monotonically decreasing phylotranscriptomic pattern (early divergence model)
-* `ReverseHourglassTest`: Function to perform the __Reverse Hourglass Test__ that statistically evaluates the existence of a reverse hourglass pattern (low-high-low)
+* `ReverseHourglassTest()`: Function to perform the __Reverse Hourglass Test__ that statistically evaluates the existence of a reverse hourglass pattern (low-high-low)
+* `PairwiseTest()`: Function to perform the __Pairwise Difference Test__ that statistically evaluates the difference in TAI (or TDI) between two constrasts, e.g. male vs female samples.
 * `EnrichmentTest()` : Phylostratum or Divergence Stratum Enrichment of a given Gene Set based on Fisher's Test
 * `bootMatrix()` : Compute a Permutation Matrix for Test Statistics
 
@@ -269,6 +270,7 @@ All functions also include visual analytics tools to quantify the goodness of te
 * `age.apply()` : Age Category Specific apply Function
 * `ecScore()` : Compute the Hourglass Score for the EarlyConservationTest
 * `lcScore()` : Compute the Hourglass Score for the LateConservationTest
+* `pairScore()` : Compute the PairwiseTest Score for the PairwiseTest
 * `geom.mean()` : Geometric Mean
 * `harm.mean()` : Harmonic Mean
 * `omitMatrix()` : Compute TAI or TDI Profiles Omitting a Given Gene
@@ -339,6 +341,8 @@ F Xu, T Domazet-Lošo, D Fan, TL Dunwell, L Li et al. - __Scientific reports__, 
 > - __The Phylotranscriptomic Hourglass Pattern in Fungi: An Updated Model__ Y Xie, HS Kwan, PL Chan, WJ Wu, J Chiou, J Chang __BioRxiv__, 2022
 > 
 > - __An ancient split of germline and somatic stem cell lineages in Hydra__ C Nishimiya-Fujisawa, H Petersen, TC-T Koubková-Yu, C Noda, S Shigenobu, J Bageritz, T Fujisawa, O Simakov, S Kobayashi, TW Holstein - __BioRxiv__, 2023
+>
+> - __A Transcriptomic Hourglass In Brown Algae__ JS Lotharukpong, M Zheng, R Luthringer, H-G Drost, SM Coelho - __BioRxiv__, 2024
 >
 
 

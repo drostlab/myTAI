@@ -1,0 +1,85 @@
+#' @title Compute the Pairwise Difference in TAI Score
+#' @description This function computes the PairwiseTest score for a given \code{\link{TAI}}
+#' or \code{\link{TDI}} pattern.
+#' 
+#' The pair test is a permutation test based on the following test statistic. 
+#'
+#' - A PhyloExpressionSet is partitioned into contrast pairs - contrast1 and contrast2 - based on prior biological knowledge. 
+#' This prior knowledge could include sexual, ecological and genetic backgrounds.
+#'
+#' - The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the two contrasts contrast1 and contrast2 are computed. 
+#'
+#' - The pairwise differences D_constrast = contrast1 - contrast2 is calculated as final test statistic of the pair test,
+#' when the \code{altHypothesis} is specified as "greater". When the \code{altHypothesis} is specified as "less", sign of D_constrast is reversed.
+#'
+#' This function \emph{pairScore} computes the \emph{D_contrast} value for a given \code{\link{TAI}} or \code{\link{TDI}}
+#' stored in the \code{age_vals} argument.
+#'
+#' @param age_vals a numeric vector containing \code{\link{TAI}} or \code{\link{TDI}} values for each developmental stage s.
+#' @param contrast1 a numeric vector storing the numeric stage values that correspond to the query contrast.
+#' @param contrast2 a numeric vector storing the numeric stage values that correspond to the subject contrast.
+#' @param altHypothesis a character string defining the alternative hypothesis 
+#' used to quantify the statistical significance in the present phylotranscriptomics pattern.
+#' Possible values can be:
+#' \itemize{
+#' \item \code{altHypothesis} = \code{"greater"} : contrast1 > contrast2
+#' \item \code{altHypothesis} = \code{"less"} : contrast1 < contrast2
+#' }
+#' @return a numeric value representing the pair score.
+#' @author Hajk-Georg Drost and Jaruwatana Sodai Lotharukpong
+#' @seealso \code{\link{PairwiseTest}}, \code{\link{TAI}}, \code{\link{TDI}}
+#' @examples
+#' 
+#'  # read standard phylotranscriptomics data
+#'  data(PhyloExpressionSetExample)
+#'  data(DivergenceExpressionSetExample)
+#'
+#'  # Example PhyloExpressionSet:
+#'
+#'  # compute the TAI profile
+#'  TAIs <- TAI(PhyloExpressionSetExample)
+#'
+#'  # compute the pair score for the first two stages in the TAI profile
+#'  # we test whether TAI in contrast1 is greater than contrast 2.
+#'  pair_score <- pairScore(age_vals = TAIs,contrast1 = 1,contrast2 = 2,
+#'                          altHypothesis="greater")
+#'
+#'
+#'  # Example DivergenceExpressionSet:
+#'
+#'  # compute the TDI profile
+#'  TDIs <- TDI(DivergenceExpressionSetExample)
+#'
+#'  # compute the pair score for the first two stages in the TDI profile
+#'  # we test whether TDI in contrast1 is greater than contrast 2.
+#'  pair_score <- pairScore(age_vals = TDIs,contrast1 = 1,contrast2 = 2,
+#'                          altHypothesis="greater")
+#'  
+#'  # compute pairScore() vector from bootMatrix()
+#'  apply(bootMatrix(PhyloExpressionSetExample,10),1,
+#'        pairScore,contrast1 = 1,contrast2 = 2, altHypothesis="greater")
+#'  
+#' @export
+
+pairScore <- function(age_vals,contrast1,contrast2,altHypothesis = NULL){
+  
+  if (!altHypothesis %in% c(
+    "greater",
+    "less"
+  ))
+    stop(
+      "Please select the available alternative hypotheses: 'greater' or 'less' using the argument test = 'altHypothesis'",
+      call. = FALSE
+    )
+  
+  D_constrast <- vector(mode = "numeric", length = 1)
+  
+  D_constrast <- mean(age_vals[contrast1]) - mean(age_vals[contrast2]) 
+  
+  # change sign when the altHypothesis = "less"
+  if(altHypothesis == "less"){
+    D_constrast <- -1*D_constrast
+  }
+  
+  return(D_constrast)
+}

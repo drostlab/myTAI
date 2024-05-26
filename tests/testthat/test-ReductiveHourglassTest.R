@@ -5,7 +5,7 @@ data(PhyloExpressionSetExample)
 nonStandardExpressionSet <- PhyloExpressionSetExample[, 2:9]
 
 test_that(
-        "is.ExpressionSet() throughs error when no ExpressionSet is entered to ReductiveHourglassTest()",
+        "is.ExpressionSet() throws error when no ExpressionSet is entered to ReductiveHourglassTest()",
         {
                 expect_error(
                         ReductiveHourglassTest(
