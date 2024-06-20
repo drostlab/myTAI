@@ -11,3 +11,4 @@ src/*.dll
 .DS_Store
 /doc/
 /Meta/
+LICENSE
