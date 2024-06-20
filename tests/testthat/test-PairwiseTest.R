@@ -1,20 +1,20 @@
-context("Test: LateConservationTest() ")
+context("Test: PairwiseTest() ")
 
 data(PhyloExpressionSetExample)
 
 nonStandardExpressionSet <- PhyloExpressionSetExample[, 2:9]
 
 test_that(
-  "is.ExpressionSet() throws error when no ExpressionSet is entered to LateConservationTest()",
+  "is.ExpressionSet() throws error when no ExpressionSet is entered to PairwiseTest()",
   {
     expect_error(
-      LateConservationTest(
+      PairwiseTest(
         nonStandardExpressionSet,
         modules = list(
-          early = 1:2,
-          mid = 3:5,
-          late = 6:7
+          contrast1 = 1:4,
+          contrast2 = 5:7
         ),
+        altHypothesis = "greater",
         permutations = 1000
       )
     )
@@ -24,13 +24,13 @@ test_that(
 
 test_that("p.value is computed..", {
   expect_true(
-    LateConservationTest(
+    PairwiseTest(
       PhyloExpressionSetExample,
       modules = list(
-        early = 1:2,
-        mid = 3:5,
-        late = 6:7
+        contrast1 = 1:4,
+        contrast2 = 5:7
       ),
+      altHypothesis = "greater",
       permutations = 1000
     )$p.value > 0.9
   )
@@ -39,13 +39,13 @@ test_that("p.value is computed..", {
 
 test_that("std.dev is computed..", {
   expect_true(length(
-    LateConservationTest(
+    PairwiseTest(
       PhyloExpressionSetExample,
       modules = list(
-        early = 1:2,
-        mid = 3:5,
-        late = 6:7
+        contrast1 = 1:4,
+        contrast2 = 5:7
       ),
+      altHypothesis = "greater",
       permutations = 1000
     )$std.dev
   ) == 7)
@@ -54,13 +54,13 @@ test_that("std.dev is computed..", {
 
 test_that("lillie.test is NA..", {
   expect_true(is.na(
-    LateConservationTest(
+    PairwiseTest(
       PhyloExpressionSetExample,
       modules = list(
-        early = 1:2,
-        mid = 3:5,
-        late = 6:7
+        contrast1 = 1:4,
+        contrast2 = 5:7
       ),
+      altHypothesis = "greater",
       permutations = 1000
     )$lillie.test
   ))
@@ -69,13 +69,13 @@ test_that("lillie.test is NA..", {
 test_that("lillie.test is computed...", {
   
   skip_on_cran()   
-  expect_output(LateConservationTest(
+  expect_output(PairwiseTest(
     PhyloExpressionSetExample,
     modules = list(
-      early = 1:2,
-      mid = 3:5,
-      late = 6:7
+      contrast1 = 1:2,
+      contrast2 = 3:7
     ),
+    altHypothesis = "greater",
     permutations = 1000,
     lillie.test = TRUE
   )$lillie.test)
@@ -86,39 +86,40 @@ test_that("lillie.test is computed...", {
 test_that("error occurs when module selection does not match number of developmental stages..",
           {
             expect_error(
-              LateConservationTest(
+              PairwiseTest(
                 PhyloExpressionSetExample,
                 modules = list(
-                  early = 1:2,
-                  mid = 3:5,
-                  late = 6:8
+                  contrast1 = 1:2,
+                  contrast2 = 3:8
                 ),
+                altHypothesis = "greater",
                 permutations = 1000
               ),
-              "The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet."
+              "The module selection is outside the range of the given ExpressionSet."
+              #"The number of stages classified into the two modules does not match the total number of stages stored in the given ExpressionSet."
             )
           })
 
 
 test_that("error occurs when modules aren't specified...", {
-  expect_error(LateConservationTest(PhyloExpressionSetExample,
-                                     permutations = 1000))
+  expect_error(PairwiseTest(PhyloExpressionSetExample,
+                                    permutations = 1000))
 })
 
 
 
-test_that("LateConservationTest() computes correct std.dev and p.values values...",
+test_that("PairwiseTest() computes correct std.dev and p.values values...",
           {
             skip_on_cran()
             TestBootMatrix <- bootMatrix(PhyloExpressionSetExample, 1000)
             
-            res <- LateConservationTest(
+            res <- PairwiseTest(
               PhyloExpressionSetExample,
               modules = list(
-                early = 1:2,
-                mid = 3:5,
-                late = 6:7
+                contrast1 = 1:2,
+                contrast2 = 3:7
               ),
+              altHypothesis = "greater",
               custom.perm.matrix = TestBootMatrix
             )
             
@@ -126,14 +127,14 @@ test_that("LateConservationTest() computes correct std.dev and p.values values..
               fitdistrplus::fitdist(apply(
                 TestBootMatrix,
                 1,
-                lcScore,
-                early = 1:2,
-                mid = 3:5,
-                late = 6:7
+                pairScore,
+                contrast1 = 1:2,
+                contrast2 = 3:7,
+                altHypothesis = "greater"
               ),
               distr = "norm")
             
-            real_score <- lcScore(TAI(PhyloExpressionSetExample), 1:2, 3:5, 6:7)
+            real_score <- pairScore(TAI(PhyloExpressionSetExample), 1:2, 3:7, altHypothesis = "greater")
             expect_equal(
               res$p.value,
               pnorm(

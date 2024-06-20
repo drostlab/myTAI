@@ -1,14 +1,22 @@
-#' @title Perform Reductive Late Conservation Test
-#' @description The \emph{Reductive Late Conservation Test} aims to statistically evaluate the
-#' existence of a monotonically decreasing phylotranscriptomic pattern based on \code{\link{TAI}} or \code{\link{TDI}} computations.
+#' @title Perform Pairwise Difference Test
+#' @description The \emph{Pairwise Difference Test} aims to statistically evaluate the pairwise
+#' difference in the phylotranscriptomic pattern between two contrasts based on \code{\link{TAI}} or \code{\link{TDI}} computations.
 #' The corresponding p-value quantifies the probability that a given TAI or TDI pattern (or any phylotranscriptomics pattern) 
-#' does not follow an late conservation like pattern. A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
-#' indeed follow an late conservation (high-high-low) shape.
+#' does not differ from the alternative hypothesis (specifying the direction of difference).
+#' A p-value < 0.05 indicates that the corresponding phylotranscriptomics pattern does
+#' indeed differ.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
-#' @param modules a list storing three elements: early, mid, and late. Each element expects a numeric
+#' @param modules a list storing two elements: contrast1 and contrast2. Each element expects a numeric
 #' vector specifying the developmental stages or experiments that correspond to each module. 
-#' For example, \code{module} = list(early = 1:2, mid = 3:5, late = 6:7) divides a dataset 
-#' storing seven developmental stages into 3 modules.
+#' For example, \code{module} = list(contrast1 = 1:2, contrast2 = 3:7) divides a dataset 
+#' storing seven developmental stages into 2 modules (contrasts).
+#' @param altHypothesis a character string defining the alternative hypothesis (i.e. direction of difference)
+#' used to quantify the statistical significance in the present phylotranscriptomics pattern.
+#' Possible values can be:
+#' \itemize{
+#' \item \code{altHypothesis} = \code{"greater"} : contrast1 > contrast2
+#' \item \code{altHypothesis} = \code{"less"} : contrast1 < contrast2
+#' }
 #' @param permutations a numeric value specifying the number of permutations to be performed for the \code{ReductiveHourglassTest}.
 #' @param lillie.test a boolean value specifying whether the Lilliefors Kolmogorov-Smirnov Test shall be performed to quantify the goodness of fit.
 #' @param plotHistogram a boolean value specifying whether a \emph{Lillifor's Kolmogorov-Smirnov-Test} 
@@ -19,33 +27,33 @@
 #' @param parallel performing \code{runs} in parallel (takes all cores of your multicore machine).
 #' @param gof.warning a logical value indicating whether non significant goodness of fit results should be printed as warning. Default is \code{gof.warning = FALSE}.
 #' @param custom.perm.matrix a custom \code{\link{bootMatrix}} (permutation matrix) to perform the underlying test statistic. Default is \code{custom.perm.matrix = NULL}.
-#' @details The \emph{reductive late conservation test} is a permutation test based on the following test statistic. 
+#' @details The \emph{reductive pairwise difference test} is a permutation test based on the following test statistic. 
 #'
-#' (1) A set of developmental stages is partitioned into three modules - early, mid, and late - based on prior biological knowledge.
+#' (1) A PhyloExpressionSet is partitioned into contrast pairs - contrast1 and contrast2 - based on prior biological knowledge. 
+#' This prior knowledge could include sexual, ecological and genetic backgrounds.
 #'
-#' (2) The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the three modules T_early, T_mid, and T_late are computed. 
+#' (2) The mean \code{\link{TAI}} or \code{\link{TDI}} value for each of the two contrasts contrast1 and contrast2 are computed. 
 #'
-#' (3) The two differences D1 = T_early - T_late and D2 = T_mid - T_late are calculated.
-#'
-#' (4) The minimum D_min of D1 and D2 is computed as final test statistic of the reductive hourglass test.
-#'
-#'
-#' In order to determine the statistical significance of an observed minimum difference D_min 
-#' the following permutation test was performed. Based on the \code{\link{bootMatrix}} D_min 
+#' (3) The pairwise differences D_contrast = contrast1 - contrast2 is calculated as final test statistic of the pairwise test,
+#' when \code{altHypothesis} is specified as "greater". When \code{altHypothesis} is specified as "less", sign of D_contrast is reversed.
+#' 
+#' 
+#' In order to determine the statistical significance of an observed pairwise difference D_contrast 
+#' the following permutation test was performed. Based on the \code{\link{bootMatrix}} D_contrast 
 #' is calculated from each of the permuted \code{\link{TAI}} or \code{\link{TDI}} profiles, 
 #' approximated by a Gaussian distribution with method of moments estimated parameters returned by \code{\link[fitdistrplus]{fitdist}}, 
 #' and the corresponding p-value is computed by \code{\link{pnorm}} given the estimated parameters of the Gaussian distribution. 
-#' The \emph{goodness of fit} for the random vector \emph{D_min} is statistically quantified by an Lilliefors (Kolmogorov-Smirnov) test 
+#' The \emph{goodness of fit} for the random vector \emph{D_contrast} is statistically quantified by an Lilliefors (Kolmogorov-Smirnov) test 
 #' for normality.
 #'
 #'
 #' In case the parameter \emph{plotHistogram = TRUE}, a multi-plot is generated showing:
 #'        
 #' (1) A Cullen and Frey skewness-kurtosis plot generated by \code{\link[fitdistrplus]{descdist}}. 
-#' This plot illustrates which distributions seem plausible to fit the resulting permutation vector D_min. 
-#' In the case of the \emph{reductive late conservation test} a normal distribution seemed plausible.
+#' This plot illustrates which distributions seem plausible to fit the resulting permutation vector D_contrast 
+#' In the case of the \emph{pairwise difference test} a normal distribution seemed plausible.
 #'
-#' (2) A histogram of D_min combined with the density plot is plotted. D_min is then fitted by a normal distribution. 
+#' (2) A histogram of D_contrast combined with the density plot is plotted. D_contrast is then fitted by a normal distribution. 
 #' The corresponding parameters are estimated by \emph{moment matching estimation} using the \code{\link[fitdistrplus]{fitdist}} function.
 #'
 #' (3) A plot showing the p-values for N independent runs to verify that a specific p-value is biased by a specific permutation order.
@@ -55,7 +63,7 @@
 #' This allows to quantify the permutation bias and their implications on the goodness of fit.
 #' @return a list object containing the list elements:
 #' 
-#' \code{p.value} : the p-value quantifying the statistical significance (low-high-high pattern) of the given phylotranscriptomics pattern.
+#' \code{p.value} : the p-value quantifying the statistical significance of the given phylotranscriptomics pattern.
 #'
 #' \code{std.dev} : the standard deviation of the N sampled phylotranscriptomics patterns for each developmental stage S.
 #' 
@@ -66,10 +74,7 @@
 #' 
 #' Drost HG et al. (2015) Mol Biol Evol. 32 (5): 1221-1231 doi:10.1093/molbev/msv012
 #'
-#' Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
-#' 
-#' Piasecka B, Lichocki P, Moretti S, et al. (2013) \emph{The hourglass and the early conservation models co-existing
-#' patterns of developmental constraints in vertebrates}. PLoS Genet. 9(4): e1003476.
+#' Lotharukpong JS et al. (2024) (unpublished)
 #' 
 #' @author Hajk-Georg Drost and Jaruwatana Sodai Lotharukpong
 #' @seealso \code{\link{lcScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},\code{\link{ReductiveHourglassTest}}, \code{\link{ReverseHourglassTest}}, \code{\link{PlotSignature}}
@@ -77,60 +82,81 @@
 #' 
 #' data(PhyloExpressionSetExample)
 #'
-#' # perform the late conservation test for a PhyloExpressionSet
-#' # here the prior biological knowledge is that stages 1-2 correspond to module 1 = early,
-#' # stages 3-5 to module 2 = mid (phylotypic module), and stages 6-7 correspond to
-#' # module 3 = late
-#' LateConservationTest(PhyloExpressionSetExample,
-#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
-#'                        permutations = 1000)
+#' # perform the pairwise difference test for a PhyloExpressionSet
+#' # here the prior biological knowledge is that stages 1-2 correspond to contrast1,
+#' # stages 3-7 correspond to contrast 2.
+#' # We test whether TAI in contrast1 is greater than contrast 2.
+#' PairwiseTest(PhyloExpressionSetExample,
+#'          modules = list(contrast1 = 1:2, contrast2 = 3:7), 
+#'          altHypothesis = "greater",
+#'          permutations = 1000)
 #'
+#' # We can also test whether TAI in contrast1 is less than contrast 2.
+#' PairwiseTest(PhyloExpressionSetExample,
+#'          modules = list(contrast1 = 1:2, contrast2 = 3:7), 
+#'          altHypothesis = "less",
+#'          permutations = 1000)
 #' 
-#' # use your own permutation matrix based on which p-values (LateConservationTest)
+#' # if we only want to test whether TAI in stage 1 (contrast 1) is greater than stage 3 (contrast 2).
+#' PairwiseTest(PhyloExpressionSetExample,
+#'          modules = list(contrast1 = 1, contrast2 = 2), 
+#'          altHypothesis = "greater",
+#'          permutations = 1000)
+#' 
+#' # use your own permutation matrix based on which p-values (PairwiseTest)
 #' # shall be computed
 #' custom_perm_matrix <- bootMatrix(PhyloExpressionSetExample,100)
-#' 
-#' LateConservationTest(PhyloExpressionSetExample,
-#'                        modules = list(early = 1:2, mid = 3:5, late = 6:7), 
-#'                        custom.perm.matrix = custom_perm_matrix)
+#' # We test whether TAI in contrast1 is greater than contrast 2.
+#' PairwiseTest(PhyloExpressionSetExample,
+#'          modules = list(contrast1 = 1:2, contrast2 = 3:7), 
+#'          altHypothesis = "greater",
+#'          custom.perm.matrix = custom_perm_matrix)
 #'                        
 #' @import foreach
 #' @export
 
-LateConservationTest <- function(ExpressionSet,
-                                  modules            = NULL,
-                                  permutations       = 1000, 
-                                  lillie.test        = FALSE, 
-                                  plotHistogram      = FALSE, 
-                                  runs               = 10, 
-                                  parallel           = FALSE,
-                                  gof.warning        = FALSE,
-                                  custom.perm.matrix = NULL){
+PairwiseTest <- function(ExpressionSet,
+                     modules            = NULL,
+                     altHypothesis      = NULL,
+                     permutations       = 1000, 
+                     lillie.test        = FALSE, 
+                     plotHistogram      = FALSE, 
+                     runs               = 10, 
+                     parallel           = FALSE,
+                     gof.warning        = FALSE,
+                     custom.perm.matrix = NULL){
   
   is.ExpressionSet(ExpressionSet)
   
   if(is.null(modules))
-    stop("Please specify the three modules: early, mid, and late using the argument 'modules = list(early = ..., mid = ..., late = ...)'.", call. = FALSE)
+    stop("Please specify the two modules: contrast1 and contrast2 using the argument 'modules = list(contrast1 = ..., contrast2 = ...)'.", call. = FALSE)
   
   if(any(table(unlist(modules)) > 1))
-    stop("Intersecting modules are not defined for the LateConservationTest.", call. = FALSE)
+    stop("Intersecting modules are not defined for the PairwiseTest.", call. = FALSE)
   
-  if(length(modules) != 3)
-    stop("Please specify three modules: early, mid, and late to perform the LateConservationTest.", call. = FALSE)
+  if(length(modules) != 2)
+    stop("Please specify two modules: contrast1 and contrast2 to perform the PairwiseTest.", call. = FALSE)
   
-  if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
-    stop("The number of stages classified into the three modules does not match the total number of stages stored in the given ExpressionSet.", call. = FALSE)
+  if(!names(modules)[1] == "contrast1" & !names(modules)[2] == "contrast2")
+    stop("Please specify two modules: contrast1 and contrast2 to perform the PairwiseTest.", call. = FALSE)
+  
+  # Perhaps this requirement in other test can be relaxed for the PairwiseTest
+  # if(length(unlist(modules)) != (dim(ExpressionSet)[2] - 2))
+  #   stop("The number of stages classified into the two modules does not match the total number of stages stored in the given ExpressionSet.", call. = FALSE)
+  if(length(unlist(modules)) > (dim(ExpressionSet)[2] - 2))
+    stop("The module selection is outside the range of the given ExpressionSet.", call. = FALSE)
   
   
   nCols <- dim(ExpressionSet)[2]
   score_vector <- vector(mode = "numeric",length = permutations)
   resMatrix <- matrix(NA_real_, permutations,(nCols-2))
   real_age <- vector(mode = "numeric",length = nCols-2)
-  real_age <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),as.vector(unlist(dplyr::select(ExpressionSet, 1))))
+  real_age <- cpp_TAI(as.matrix(dplyr::select(ExpressionSet, 3:ncol(ExpressionSet))),
+                      as.vector(unlist(dplyr::select(ExpressionSet, 1))))
   
-  # compute the real late conservation of the observed phylotranscriptomics pattern
-  # lcScore = late conservation score
-  real_ltv <- lcScore(real_age,early = modules[[1]],mid = modules[[2]],late = modules[[3]],profile.warn=T)
+  # compute the real pairwise score of the observed phylotranscriptomics pattern
+  # pairScore = pairwise difference score
+  real_pscore <- pairScore(real_age,contrast1 = modules[[1]],contrast2 = modules[[2]],altHypothesis=altHypothesis)
   options(warn=1)
   
   ### compute the bootstrap matrix 
@@ -143,8 +169,8 @@ LateConservationTest <- function(ExpressionSet,
   }
   
   ### compute the global phylotranscriptomics destruction scores for each sampled age vector
-  score_vector <- apply(resMatrix, 1 ,lcScore,early = modules[[1]],
-                        mid = modules[[2]],late = modules[[3]])
+  score_vector <- apply(resMatrix, 1 ,pairScore,contrast1 = modules[[1]],
+                        contrast2 = modules[[2]],altHypothesis=altHypothesis)
   
   
   # parameter estimators using MASS::fitdistr
@@ -172,7 +198,7 @@ LateConservationTest <- function(ExpressionSet,
     }
     
     graphics::curve( expr = normDensity,
-                     xlim = c(min(score_vector,real_ltv),max(score_vector,real_ltv)),
+                     xlim = c(min(score_vector,real_pscore),max(score_vector,real_pscore)),
                      col  = "steelblue",
                      lwd  = 5,
                      xlab = "Scores",
@@ -186,13 +212,13 @@ LateConservationTest <- function(ExpressionSet,
     graphics::rug(score_vector)
     
     # plot a red line at the position where we can find the real lt value
-    graphics::abline(v = real_ltv, lwd = 5, col = "darkred")
+    graphics::abline(v = real_pscore, lwd = 5, col = "darkred")
     
     #legend("topleft", legend = "A", bty = "n")
     
     p.vals_vec <- vector(mode = "numeric", length = runs)
     lillie_vec <- vector(mode = "logical", length = runs)
-    lct <- vector(mode = "list", length = 3)
+    pct <- vector(mode = "list", length = 3)
     
     #cat("\n")
     
@@ -209,11 +235,12 @@ LateConservationTest <- function(ExpressionSet,
                                            .errorhandling = "stop") %dopar% {
                                              
                                              
-                                             data.frame(LateConservationTest( ExpressionSet = ExpressionSet,
-                                                                               permutations  = permutations,
-                                                                               lillie.test   = TRUE,
-                                                                               plotHistogram = FALSE, 
-                                                                               modules       = modules )[c(1,3)])
+                                             data.frame(PairwiseTest( ExpressionSet = ExpressionSet,
+                                                                  permutations  = permutations,
+                                                                  altHypothesis = altHypothesis,
+                                                                  lillie.test   = TRUE,
+                                                                  plotHistogram = FALSE, 
+                                                                  modules       = modules )[c(1,3)])
                                              
                                            }
       
@@ -239,29 +266,31 @@ LateConservationTest <- function(ExpressionSet,
         
         if(lillie.test){
           
-          lct <- LateConservationTest( ExpressionSet = ExpressionSet,
-                                        permutations  = permutations,
-                                        lillie.test   = TRUE, 
-                                        plotHistogram = FALSE,
-                                        modules       = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),
-                                        runs          = NULL ) 
+          pct <- PairwiseTest( ExpressionSet = ExpressionSet,
+                           permutations  = permutations,
+                           altHypothesis = altHypothesis,
+                           lillie.test   = TRUE, 
+                           plotHistogram = FALSE,
+                           modules       = list(contrast1 = modules[[1]],contrast1 = modules[[2]]),
+                           runs          = NULL ) 
         }
         
         
         if(!lillie.test){
           
-          lct <- LateConservationTest( ExpressionSet = ExpressionSet,
-                                        permutations  = permutations,
-                                        lillie.test   = FALSE, 
-                                        plotHistogram = FALSE,
-                                        modules       = list(early = modules[[1]],mid = modules[[2]],late = modules[[3]]),
-                                        runs          = NULL )
+          pct <- PairwiseTest( ExpressionSet = ExpressionSet,
+                           permutations  = permutations,
+                           altHypothesis = altHypothesis,
+                           lillie.test   = FALSE, 
+                           plotHistogram = FALSE,
+                           modules       = list(contrast1 = modules[[1]],contrast1 = modules[[2]]),
+                           runs          = NULL )
         }
         
-        p.vals_vec[i] <- lct$p.value
+        p.vals_vec[i] <- pct$p.value
         
         if(lillie.test)
-          lillie_vec[i] <- lct$lillie.test
+          lillie_vec[i] <- pct$lillie.test
         
         #                                 if(runs >= 10){
         #                                         # printing out the progress
@@ -292,11 +321,11 @@ LateConservationTest <- function(ExpressionSet,
   }
   
   
-  #if(real_ltv >= 0)
-  pval <- stats::pnorm(real_ltv,mean = mu,sd = sigma,lower.tail = FALSE)
+  #if(real_pscore >= 0)
+  pval <- stats::pnorm(real_pscore,mean = mu,sd = sigma,lower.tail = FALSE)
   
-  #if(real_ltv < 0)
-  #pval <- pnorm(real_ltv,mean=mu,sd=sigma,lower.tail=TRUE)
+  #if(real_pscore < 0)
+  #pval <- pnorm(real_pscore,mean=mu,sd=sigma,lower.tail=TRUE)
   ### computing the standard deviation of the sampled TAI values for each stage separately
   sd_vals <- vector(mode = "numeric",length = nCols-2)
   sd_vals <- apply(resMatrix,2,stats::sd)

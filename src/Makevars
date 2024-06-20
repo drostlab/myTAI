@@ -11,4 +11,3 @@ ifeq ($(OPENMP_SUPPORTED),1)
 	PKG_LIBS += -lomp
  endif
 endif
-

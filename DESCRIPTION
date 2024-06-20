@@ -48,7 +48,8 @@ Imports:
     tibble,
     scales,
     ggpubr,
-    Matrix
+    Matrix,
+    DESeq2 (>= 1.29.15)
 Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
@@ -57,7 +58,6 @@ Suggests:
     mgcv,
     taxize (>= 0.6.0),
     Seurat,
-    DESeq2 (>= 1.29.15),
     decor,
     RcppThread
 LinkingTo: 

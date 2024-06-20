@@ -134,7 +134,7 @@ ReverseHourglassTest <- function(ExpressionSet,
         
         if (is.null(modules))
                 stop(
-                        "Please specify the three modules: early, mid, and late using the argument 'module = list(early = ..., mid = ..., late = ...)'.",
+                        "Please specify the three modules: early, mid, and late using the argument 'modules = list(early = ..., mid = ..., late = ...)'.",
                         call. = FALSE
                 )
         
