@@ -43,5 +43,5 @@ head(tfPES)
 \code{\link{tf}}
 }
 \author{
-Jaruwatana Sodai Lotharukpong
+Jaruwatana Sodai Lotharukpong and Lukas Maischak
 }

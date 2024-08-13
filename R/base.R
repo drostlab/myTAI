@@ -62,6 +62,7 @@ re.colors <- function(n)
 #' 
 #' # get 5 different colors for 5 different bars
 #' barplot_colors <- bar.colors(5)
+#' @keywords internal
 #' @export
 bar.colors <- function(n)
 {

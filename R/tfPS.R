@@ -16,7 +16,7 @@
 #' \code{\link{is.ExpressionSet}}. Note that the input \code{transform} must be an
 #' available function, currently limited to only \code{"qr"} (or \code{"quantilerank"}).
 #' @return a standard PhloExpressionSet object storing transformed Phylostratum levels.
-#' @author Jaruwatana Sodai Lotharukpong
+#' @author Jaruwatana Sodai Lotharukpong and Lukas Maischak
 #' @seealso \code{\link{tf}}
 #' @examples
 #' # source the example dataset
@@ -28,7 +28,7 @@
 #'
 #' @export
 
-tfPS <- function(ExpressionSet, transform){
+tfPS <- function(ExpressionSet,transform){
   ExpressionSet <- as.data.frame(ExpressionSet)
   is.ExpressionSet(ExpressionSet)
   
@@ -36,14 +36,26 @@ tfPS <- function(ExpressionSet, transform){
   
   if(transform %in% c("qr", "quantilerank")){
     ranks <- base::rank(PS_vector, ties.method = "average")
-    
-    # -1 ensures that the ranks are scaled between 0 and 1
-    # (when I checked using `data <- rnorm(100)`)
-    
-    tfPhylostratum <- (ranks - 1) / (length(PS_vector) - 1)
+    # using the tied method
+    tfPhylostratum <- (ranks - 0.5) / length(PS_vector)
   }else{
     stop("Choose the following transformation functions: \"qr\"")
   }
+  
+  # We are only using "tied". 
+  # Below are other methods for quantile rank transform,
+  # from Julia's StatsBase.quantilerank
+  
+  # n <- length(PS_vector)
+  # if (method == "inc") {tfPhylostratum <- (ranks - 1) / (n - 1)} 
+  # else if (method == "exc") {tfPhylostratum <- ranks / (n + 1)}
+  # else if (method == "compete") {tfPhylostratum <- (ranks - 1) / (n - 1)} 
+  # else if (method == "tied") {tfPhylostratum <- (ranks - 0.5) / n}
+  # else if (method == "strict") {tfPhylostratum <- (ranks - 1) / n}
+  # else if (method == "weak") {tfPhylostratum <- ranks / n} 
+  # else {
+  #   stop("method=", method, " is not valid. Pass 'inc', 'exc', 'compete', 'tied', 'strict', or 'weak'.")
+  # }
   
   res <- base::cbind(
     base::as.data.frame(tfPhylostratum), 

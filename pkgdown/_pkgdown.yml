@@ -1,0 +1,56 @@
+url: https://drostlab.github.io/myTAI/
+template:
+  bootstrap: 5
+
+reference:
+- title: Phylotranscriptomics Measures
+  desc: Compute full and partial phylotranscriptomics measures.
+- contents:
+  - TAI
+  - TDI
+  - TPI
+  - TEI
+  - REMatrix
+  - RE
+  - pTAI
+  - pTDI
+  - pMatrix
+  - pMatrixTEI
+  - pStrata
+  - pStrataTEI
+- title: Visualization and Analytics Tools
+  desc:  Visualise phylotranscriptomics patterns
+- contents:
+  - starts_with("Plot")
+- title: A Statistical Framework and Test Statistics
+- contents:
+  - ends_with("Test")
+  - starts_with("boot")
+- title: Differential Gene Expression Analysis
+- contents:
+  - DiffGenes
+  - CollapseReplicates
+  - CombinatorialSignificance
+  - Expressed
+  - SelectGeneSet
+  - PlotReplicateQuality
+  - GroupDiffs
+- title: Taxonomic Information Retrieval
+- contents:
+  - taxonomy
+  - taxid
+- title: Minor Functions for Better Usibility and Additional Analyses
+- contents:
+  - MatchMap
+  - tf
+  - tfStability
+  - tfPS
+  - ends_with("Score")
+  - age.apply
+  - ends_with(".mean")
+  - omitMatrix
+  - starts_with("rcpp_")
+- title: Example Datasets
+- contents:
+  - DivergenceExpressionSetExample
+  - PhyloExpressionSetExample
