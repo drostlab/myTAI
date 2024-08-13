@@ -1,246 +1,85 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Advanced.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Enrichment.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Expression.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Intermediate.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Introduction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Phylostratigraphy.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Taxonomy.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CollapseReplicates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CombinatorialSignificance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/DiffGenes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/DivergenceExpressionSetExample.html</loc>
-  </url>
-  <url>
-    <loc>/reference/EarlyConservationTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/EnrichmentTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Expressed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/FlatLineTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GroupDiffs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/LateConservationTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MatchMap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PairwiseTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PhyloExpressionSetExample.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotBarRE.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotCIRatio.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotCategoryExpr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotContribution.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotCorrelation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotDistribution.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotEnrichment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotGeneSet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotGroupDiffs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotMeans.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotMedians.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotPattern.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotRE.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotReplicateQuality.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotSelectedAgeDistr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotSignature.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotSignatureTransformed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotVars.html</loc>
-  </url>
-  <url>
-    <loc>/reference/RE.html</loc>
-  </url>
-  <url>
-    <loc>/reference/REMatrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ReductiveHourglassTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ReverseHourglassTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SelectGeneSet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TAI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TDI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TEI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TPI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/age.apply.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bar.colors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bootMatrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bootTEI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ecScore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom.mean.html</loc>
-  </url>
-  <url>
-    <loc>/reference/harm.mean.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is.ExpressionSet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lcScore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/omitMatrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pMatrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pMatrixTEI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pStrata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pStrataTEI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pTAI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pTDI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pairScore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rcpp_boottei_parallel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rcpp_pMatrix_parallel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rcpp_pStrata_parallel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rcpp_tei_parallel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reversehourglassScore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rhScore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/taxid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/taxonomy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tfStability.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://drostlab.github.io/myTAI/404.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/LICENSE-text.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/Advanced.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/Enrichment.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/Expression.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/Intermediate.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/Introduction.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/Taxonomy.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/articles/index.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/authors.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/index.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/news/index.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/CollapseReplicates.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/CombinatorialSignificance.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/DiffGenes.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/DivergenceExpressionSetExample.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/EarlyConservationTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/EnrichmentTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/Expressed.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/FlatLineTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/GroupDiffs.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/LateConservationTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/MatchMap.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PairwiseTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PhyloExpressionSetExample.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotBarRE.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotCIRatio.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotCategoryExpr.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotContribution.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotCorrelation.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotDistribution.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotEnrichment.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotGeneSet.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotGroupDiffs.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotMeans.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotMedians.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotPattern.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotRE.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotReplicateQuality.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotSelectedAgeDistr.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotSignature.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotSignatureTransformed.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotVars.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/RE.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/REMatrix.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/ReductiveHourglassTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/ReverseHourglassTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/SelectGeneSet.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/TAI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/TDI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/TEI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/TPI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/age.apply.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/bar.colors.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/bootMatrix.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/bootTEI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/ecScore.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/geom.mean.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/harm.mean.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/index.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/is.ExpressionSet.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/lcScore.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/omitMatrix.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/pMatrix.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/pMatrixTEI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/pStrata.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/pStrataTEI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/pTAI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/pTDI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/pairScore.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/rcpp_boottei_parallel.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/rcpp_pMatrix_parallel.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/rcpp_pStrata_parallel.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/rcpp_tei_parallel.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/reversehourglassScore.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/rhScore.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/taxid.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/taxonomy.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/tf.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/tfPS.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/tfStability.html</loc></url>
 </urlset>
+
