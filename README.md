@@ -266,6 +266,7 @@ All functions also include visual analytics tools to quantify the goodness of te
 
 * `MatchMap()` : Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix
 * `tf()` : Transform Gene Expression Levels
+* `tfPS()` : Transform Phylostratum Levels
 * `tfStability()` : Perform Permutation Tests Under Different Transformations
 * `age.apply()` : Age Category Specific apply Function
 * `ecScore()` : Compute the Hourglass Score for the EarlyConservationTest

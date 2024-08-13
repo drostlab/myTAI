@@ -1,10 +1,10 @@
-#' @title Transform age values
+#' @title Transform Phylostratum Values
 #' @description 
 #' This function performs transformation of phylostratum values.
 #' 
 #' @param ExpressionSet a standard PhyloExpressionSet object.
 #' @param transform a character vector of any valid function that transforms PS values.
-#' #' Possible values can be:
+#' Possible values can be:
 #' \itemize{
 #' \item \code{transform} = \code{"qr"} (or \code{"quantilerank"}) : 
 #' quantile rank transformation analogous to Julia function \code{StatsBase.quantilerank} 
@@ -15,17 +15,19 @@
 #' transformed phylostratum \code{tfPhylostratum} as the first column, satisfying
 #' \code{\link{is.ExpressionSet}}. Note that the input \code{transform} must be an
 #' available function, currently limited to only \code{"qr"} (or \code{"quantilerank"}).
-#' @return A transformed PhyloExpressionSet object with \code{tfPhylostratum} as the first column.
+#' @return a standard PhloExpressionSet object storing transformed Phylostratum levels.
 #' @author Jaruwatana Sodai Lotharukpong
 #' @seealso \code{\link{tf}}
 #' @examples
-#'  # source the example dataset
-#'  data(PhyloExpressionSetExample)
+#' # source the example dataset
+#' data(PhyloExpressionSetExample)
 #'  
-#'  # get the relative expression profiles for each phylostratum
-#'  tfPS(PhyloExpressionSetExample, transform = "qr")
+#' # get the relative expression profiles for each phylostratum
+#' tfPES <- tfPS(PhyloExpressionSetExample, transform = "qr")
+#' head(tfPES)
 #'
 #' @export
+
 tfPS <- function(ExpressionSet, transform){
   ExpressionSet <- as.data.frame(ExpressionSet)
   is.ExpressionSet(ExpressionSet)
@@ -37,8 +39,6 @@ tfPS <- function(ExpressionSet, transform){
     
     # -1 ensures that the ranks are scaled between 0 and 1
     # (when I checked using `data <- rnorm(100)`)
-    
-    message("Performing quantile rank transformation")
     
     tfPhylostratum <- (ranks - 1) / (length(PS_vector) - 1)
   }else{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tfPS.R
 \name{tfPS}
 \alias{tfPS}
-\title{Transform age values}
+\title{Transform Phylostratum Values}
 \usage{
 tfPS(ExpressionSet, transform)
 }
@@ -10,7 +10,7 @@ tfPS(ExpressionSet, transform)
 \item{ExpressionSet}{a standard PhyloExpressionSet object.}
 
 \item{transform}{a character vector of any valid function that transforms PS values.
-#' Possible values can be:
+Possible values can be:
 \itemize{
 \item \code{transform} = \code{"qr"} (or \code{"quantilerank"}) : 
 quantile rank transformation analogous to Julia function \code{StatsBase.quantilerank} 
@@ -18,7 +18,7 @@ using \code{method = :tied}.
 }}
 }
 \value{
-A transformed PhyloExpressionSet object with \code{tfPhylostratum} as the first column.
+a standard PhloExpressionSet object storing transformed Phylostratum levels.
 }
 \description{
 This function performs transformation of phylostratum values.
@@ -31,11 +31,12 @@ transformed phylostratum \code{tfPhylostratum} as the first column, satisfying
 available function, currently limited to only \code{"qr"} (or \code{"quantilerank"}).
 }
 \examples{
- # source the example dataset
- data(PhyloExpressionSetExample)
+# source the example dataset
+data(PhyloExpressionSetExample)
  
- # get the relative expression profiles for each phylostratum
- tfPS(PhyloExpressionSetExample, transform = "qr")
+# get the relative expression profiles for each phylostratum
+tfPES <- tfPS(PhyloExpressionSetExample, transform = "qr")
+head(tfPES)
 
 }
 \seealso{
