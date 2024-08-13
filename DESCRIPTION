@@ -66,7 +66,7 @@ LinkingTo:
     cpp11,
     RcppThread, 
     RcppEigen
-URL: https://github.com/drostlab/myTAI
+URL: https://drostlab.github.io/myTAI/
 BugReports: https://github.com/drostlab/myTAI/issues
 RoxygenNote: 7.3.2
 Encoding: UTF-8
