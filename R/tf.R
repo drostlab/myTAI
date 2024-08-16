@@ -153,9 +153,6 @@ tf <- function(ExpressionSet, FUN, pseudocount = 0, integerise = FALSE){
         
         res_mat <- f(ExpressionMatrix)
         
-        # res <- tibble::rownames_to_column(base::as.data.frame(res_mat), base::colnames(ExpressionSet)[2])
-        # res <- ExpressionSet[ , 1:2] %>% dplyr::right_join(res, by = "GeneID") # too slow.
-        # res <- base::cbind(ExpressionSet[ , 1], res)
         res <- base::cbind(ExpressionSet[ , c(1,2)], base::as.data.frame(res_mat))
         return(res)
 }

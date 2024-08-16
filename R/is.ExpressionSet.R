@@ -8,7 +8,7 @@
 #' data(PhyloExpressionSetExample)
 #' 
 #' is.ExpressionSet(PhyloExpressionSetExample)
-#' 
+#' @keywords internal
 #' @export
 is.ExpressionSet <- function(ExpressionSet){
         

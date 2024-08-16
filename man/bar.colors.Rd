@@ -26,3 +26,4 @@ barplot_colors <- bar.colors(5)
 \author{
 Hajk-Georg Drost
 }
+\keyword{internal}
