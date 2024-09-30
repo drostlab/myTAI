@@ -56,7 +56,6 @@ Suggests:
     devtools (>= 1.6.1),
     testthat (>= 0.9.1),
     mgcv,
-    taxize (>= 0.6.0),
     Seurat,
     decor,
     RcppThread

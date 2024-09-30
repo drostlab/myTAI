@@ -1,3 +1,13 @@
+myTAI 1.0.2.9000
+===========
+## New Functions
+- New function `tfPS()` : Perform transformation of phylostratum values, analogous to `PS()` which transforms expression levels. Currently, `tfPS()` supports quantile rank transformation.
+- New function `PairwiseTest()` : Statistically evaluate the pairwise difference in the phylotranscriptomic pattern between two contrasts based on \code{\link{TAI}} or \code{\link{TDI}} computations.
+- New function `pairScore()` : Compute pairwise difference in TAI (or TDI) score.
+
+## Bug and Issue Fixes
+- Removed `taxonomy()` and references to it due to the deprecation of `taxize()`. This is needed for CRAN submission.
+
 myTAI 1.0.1.9000
 ===========
 ## New Functions

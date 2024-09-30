@@ -37,7 +37,6 @@ reference:
   - GroupDiffs
 - title: Taxonomic Information Retrieval
 - contents:
-  - taxonomy
   - taxid
 - title: Minor Functions for Better Usibility and Additional Analyses
 - contents:
