@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
-Version: 1.0.1.9000
+Version: 1.0.2.9000
 Date: 2023-07-08
 Authors@R: c(person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
@@ -56,7 +56,6 @@ Suggests:
     devtools (>= 1.6.1),
     testthat (>= 0.9.1),
     mgcv,
-    taxize (>= 0.6.0),
     Seurat,
     decor,
     RcppThread
