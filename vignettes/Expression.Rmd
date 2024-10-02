@@ -380,12 +380,12 @@ Wilcox.DEGs.adj
 ## Negative Binomial (Exact Tests)
 
 Exact Tests for Differences between two groups of negative-binomial counts implemented in `DiffGenes()` are based on the
-`edgeR` function `exactTest()`. Please consult the [edgeR Users Guide](http://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf) for mathematical details.
+`edgeR` function `exactTest()`. Please consult the [edgeR Users Guide](https://www.bioconductor.org/packages/release/bioc/html/edgeR.html) for mathematical details.
 
 ### Install edgeR Package
 
 The detection of DEGs using negative binomial models is based on the powerful implementations
-provided by the [edgeR](http://www.bioconductor.org/packages/release/bioc/html/edgeR.html) package. Hence, before using the negative binomial models in `DiffGenes()` users need to install 
+provided by the [edgeR](https://www.bioconductor.org/packages/release/bioc/html/edgeR.html) package. Hence, before using the negative binomial models in `DiffGenes()` users need to install 
 the edgeR package.
 
 ```{r,eval=FALSE}

@@ -343,7 +343,7 @@ The Reductive Hourglass Test is a permutation test based on the following test s
 
 4) The minimum $D_{min}$ of D1 and D2 is computed as final test statistic of the __Reductive Hourglass Test__.
 
-In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a [Lilliefors (Kolmogorov-Smirnov) test](https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419) for normality.
+In order to determine the statistical significance of an observed minimum difference $D_{min}$ the following permutation test was performed. Based on the `bootMatrix()` $D_{min}$ is calculated from each of the permuted TAI or TDI profiles, approximated by a Gaussian distribution with method of moments estimated parameters returned by `fitdistrplus::fitdist()`, and the corresponding p-value is computed by `pnorm` given the estimated parameters of the Gaussian distribution. The goodness of fit for the random vector $D_{min}$ is statistically quantified by a Lilliefors (Kolmogorov-Smirnov) test for normality.
 
 
 
