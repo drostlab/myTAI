@@ -1,0 +1,10 @@
+PKG_CPPFLAGS =  -I/opt/homebrew/opt/libomp/include
+PKG_CXXFLAGS =  @PKG_CXXFLAGS@
+#PKG_CFLAGS = @PKG_CFLAGS@ @openmp_cflags@ @zlib_cflags@
+PKG_LIBS = @PKG_LIBS@ @openmp_cflags@ @zlib_libs@
+all: $(SHLIB)
+#	@echo PKG_CFLAGS = $(SHLIB_OPENMP_CFLAGS) 
+#	@echo PKG_LIBS = $(PKG_LIBS)
+	if [ "$(SHLIB)" != "myTAI$(SHLIB_EXT)" ]; then mv $(SHLIB) myTAI$(SHLIB_EXT); fi
+	if [ "$(OS)" != "Windows_NT" ] && [ `uname -s` = 'Darwin' ]; then install_name_tool -id myTAI$(SHLIB_EXT) myTAI$(SHLIB_EXT); fi
+
