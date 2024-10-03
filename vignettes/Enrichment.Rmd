@@ -252,12 +252,12 @@ PlotEnrichment(Drerio.PhyloMap,
                legendName   = "PS")
 ```
 
-Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `taxonomy()` function (see [Introduction](Introduction.html) and [Taxonomy](Taxonomy.html) for details).
+Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `myTAI::taxonomy()` function (see [Introduction](Introduction.html) and `Taxonomy` for details).
 
 
 ```{r, eval=FALSE}
 # retrieve the taxonomy of D. rerio
-taxonomy(organism = "Danio rerio")
+myTAI::taxonomy(organism = "Danio rerio")
 ```
 
 ```
