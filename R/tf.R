@@ -90,7 +90,8 @@
 #' 
 #' # plotting the TAI using log2 transformed expression levels
 #' # and performing the Flat Line Test to obtain the p-value
-#' PlotPattern(ExpressionSet = tf(PhyloExpressionSetExample, log2), 
+#' PlotSignature(ExpressionSet = tf(PhyloExpressionSetExample, log2),
+#'             permutations = 10, 
 #'             type          = "l", 
 #'             lwd           = 5, 
 #'             TestStatistic = "FlatLineTest")
