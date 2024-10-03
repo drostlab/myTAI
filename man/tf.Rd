@@ -48,7 +48,7 @@ using either the \code{\link{FlatLineTest}} or \code{\link{ReductiveHourglassTes
 to quantify the significance of interest.
 }
 \examples{
-
+\dontrun{
 data(PhyloExpressionSetExample)
 
 # a simple example is to transform the gene expression levels
@@ -58,37 +58,13 @@ PES.sqrt <- tf(PhyloExpressionSetExample, sqrt)
 
 PES.log2 <- tf(PhyloExpressionSetExample, log2)
 
-# in case a given PhyloExpressionSet already stores gene expression levels
-# that are log2 transformed and need to be re-transformed to absolute
-# expression levels, to perform subsequent phylotranscriptomics analyses 
-# (that are defined for absolute expression levels), one can re-transform
-# a PhyloExpressionSet like this:
-
-PES.absolute <- tf(PES.log2 , function(x) 2^x)
-
-# which should be the same as PhyloExpressionSetExample :
-head(PhyloExpressionSetExample)
-head(PES.absolute)
-
-
-
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
-PlotPattern(ExpressionSet = tf(PhyloExpressionSetExample, log2), 
+PlotSignature(ExpressionSet = tf(PhyloExpressionSetExample, log2),
+            permutations = 10, 
             type          = "l", 
             lwd           = 5, 
             TestStatistic = "FlatLineTest")
-
-
-
-# for square-transformation (not square-root), we recommend using 
-# function(x) x*x rather than function(x) x^2, due to speed.
-
-PES.absolute <- tf(PES.sqrt , function(x) x*x)
-
-# and the result should be the same as PhyloExpressionSetExample :
-head(PhyloExpressionSetExample)
-head(PES.absolute)
 
 
 
@@ -114,7 +90,7 @@ PES.rank <- tf(PhyloExpressionSetExample, FUN = function(x) apply(x, 2, base::ra
 # and transforming the data with the parameter integerise = TRUE.
 library(DESeq2) # make sure the DESeq2 version >= 1.29.15 for rlog
 PES.vst <- tf(PhyloExpressionSetExample, vst, integerise = TRUE)
-
+}
 
 
 }
