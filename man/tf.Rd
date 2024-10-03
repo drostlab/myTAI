@@ -61,10 +61,7 @@ PES.log2 <- tf(PhyloExpressionSetExample, log2)
 # plotting the TAI using log2 transformed expression levels
 # and performing the Flat Line Test to obtain the p-value
 PlotSignature(ExpressionSet = tf(PhyloExpressionSetExample, log2),
-            permutations = 10, 
-            type          = "l", 
-            lwd           = 5, 
-            TestStatistic = "FlatLineTest")
+            permutations = 1000)
 
 
 
