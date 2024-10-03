@@ -1,7 +1,7 @@
-PKG_CPPFLAGS =  -I/opt/homebrew/opt/libomp/include
-PKG_CXXFLAGS =  @PKG_CXXFLAGS@
-#PKG_CFLAGS = @PKG_CFLAGS@ @openmp_cflags@ @zlib_cflags@
-PKG_LIBS = @PKG_LIBS@ @openmp_cflags@ @zlib_libs@
+PKG_CPPFLAGS =  -I/usr/local/opt/libomp/include
+PKG_CXXFLAGS =  -Xpreprocessor -fopenmp
+#PKG_CFLAGS =  -Xclang -fopenmp $(SHLIB_OPENMP_CFLAGS) -DNOZLIB
+PKG_LIBS =  -lomp $(SHLIB_OPENMP_CFLAGS) 
 all: $(SHLIB)
 #	@echo PKG_CFLAGS = $(SHLIB_OPENMP_CFLAGS) 
 #	@echo PKG_LIBS = $(PKG_LIBS)

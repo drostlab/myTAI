@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-R_HOME=$(R RHOME)
 # Find R compilers
 CC=`${R_HOME}/bin/R CMD config CC`
 CFLAGS=`${R_HOME}/bin/R CMD config CFLAGS`
@@ -85,7 +84,6 @@ EOF
 
 detect_openmp () {
   export PKG_CXXFLAGS=""
-  export PKG_CPPFLAGS=""
   if [ "$(uname)" = "Linux" ]; then
 
     printf "%s" "* checking if R installation supports OpenMP without any extra hints... "
@@ -111,67 +109,45 @@ detect_openmp () {
 
   if [ "$(uname)" = "Darwin" ]; then
     export openmapp="-fopenmp"
-    if CPPFLAGS="${CPPFLAGS} -Xclang -fopenmp" PKG_LIBS="-lomp" "${R_HOME}/bin/R" CMD SHLIB test-omp.c >> config.log 2>&1; then
+
     # https://mac.r-project.org/openmp
-      printf "%s" "* checking if R installation supports OpenMP with \"-Xclang -fopenmp\" ... "
+    printf "%s" "* checking if R installation supports OpenMP with \"-Xclang -fopenmp\" ... "
 
       echo "yes"
       export PKG_CFLAGS="${PKG_CFLAGS} -Xclang -fopenmp"
       export PKG_LIBS="${PKG_LIBS} -lomp"
       export R_OPENMP_ENABLED=1
-      
       export PKG_CXXFLAGS="-Xpreprocessor -fopenmp"
       return
-    else
-      echo "no"
-    fi
 
-    printf "%s" "* checking if R installation supports OpenMP with \"-fopenmp\"  ... "
-      if CPPFLAGS="${CPPFLAGS} -fopenmp" "${R_HOME}/bin/R" CMD SHLIB test-omp.c >> config.log 2>&1; then
+    printf "%s" "* checking if R installation supports OpenMP with \"-fopenmp\" ... "
+
       echo "yes"
       export PKG_CFLAGS="${PKG_CFLAGS} -fopenmp"
       export R_OPENMP_ENABLED=1
       export PKG_CXXFLAGS="-Xpreprocessor -fopenmp"
       return
-      else
-      echo "no"
+
+    if [ "$(uname -m)" = "arm64" ]; then
+      HOMEBREW_PREFIX=/usr/local
+    else
+      HOMEBREW_PREFIX=/usr/local
     fi
 
-    
-    HOMEBREW_PREFIX=/usr/local
-
     if [ -e "${HOMEBREW_PREFIX}/opt/libomp" ]; then
-      printf "%s" "* checking if libomp installation at ${HOMEBREW_PREFIX}/opt/libomp can be used... "
+      printf "%s" "* checking if libomp installation at ${HOMEBREW_PREFIX}/opt/libomp can be used... 
+"
       LIBOMP_INCLUDE="-I${HOMEBREW_PREFIX}/opt/libomp/include -Xclang -fopenmp"
       LIBOMP_LINK="-L${HOMEBREW_PREFIX}/opt/libomp/lib -lomp"
-      #if ${CC} ${CFLAGS} ${LIBOMP_INCLUDE} ${LIBOMP_LINK} test-omp.c >> config.log 2>&1; then
+      if ${CC} ${CFLAGS} ${LIBOMP_INCLUDE} ${LIBOMP_LINK} test-omp.c >> config.log 2>&1; then
         echo "yes"
-      export PKG_CFLAGS="${PKG_CFLAGS} -Xclang -fopenmp"
-      export PKG_LIBS="${PKG_LIBS} -lomp"
-      export R_OPENMP_ENABLED=1
-      export PKG_CXXFLAGS="-Xpreprocessor -fopenmp"
-      export PKG_CPPFLAGS="-I/usr/local/opt/libomp/include"
-      return
+        export PKG_CFLAGS="${PKG_CFLAGS} ${LIBOMP_INCLUDE}"
+        export PKG_LIBS="${PKG_LIBS} ${LIBOMP_LINK}"
+        export R_OPENMP_ENABLED=1
+        return
       else
         echo "no"
-    fi
-
-    HOMEBREW_PREFIX=/opt/homebrew
-
-    if [ -e "${HOMEBREW_PREFIX}/opt/libomp" ]; then
-      printf "%s" "* checking if libomp installation at ${HOMEBREW_PREFIX}/opt/libomp can be used... "
-      LIBOMP_INCLUDE="-I${HOMEBREW_PREFIX}/opt/libomp/include -Xclang -fopenmp"
-      LIBOMP_LINK="-L${HOMEBREW_PREFIX}/opt/libomp/lib -lomp"
-      #if ${CC} ${CFLAGS} ${LIBOMP_INCLUDE} ${LIBOMP_LINK} test-omp.c >> config.log 2>&1; then
-        echo "yes"
-      export PKG_CFLAGS="${PKG_CFLAGS} -Xclang -fopenmp"
-      export PKG_LIBS="-L/opt/homebrew/opt/libomp/lib -lomp"
-      export R_OPENMP_ENABLED=1
-      export PKG_CXXFLAGS="-I/opt/homebrew/opt/libomp/include -Xpreprocessor -fopenmp"
-      export PKG_CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
-      return
-      else
-        echo "no"
+      fi
     fi
 
   fi # uname=Darwin
@@ -200,7 +176,6 @@ fi
 sed -e "s|@PKG_CFLAGS@|$PKG_CFLAGS|" src/Makevars > src/Makevars.tmp && mv src/Makevars.tmp src/Makevars
 sed -e "s|@PKG_CXXFLAGS@|$PKG_CXXFLAGS|" src/Makevars > src/Makevars.tmp && mv src/Makevars.tmp src/Makevars
 sed -e "s|@PKG_LIBS@|$PKG_LIBS|" src/Makevars > src/Makevars.tmp && mv src/Makevars.tmp src/Makevars
-sed -e "s|@PKG_CPPFLAGS@|$PKG_CPPFLAGS|" src/Makevars > src/Makevars.tmp && mv src/Makevars.tmp src/Makevars
 
 # optional dependency on zlib
 if [ "$NOZLIB" = "1" ]; then
