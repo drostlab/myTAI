@@ -62,7 +62,7 @@
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{expand.grid}}, \code{\link{FlatLineTest}}
 #' @examples
-#' 
+#' \dontrun{
 #' # load a standard PhyloExpressionSet
 #' data(PhyloExpressionSetExample)
 #'
@@ -75,9 +75,9 @@
 #' p.vector <- CombinatorialSignificance(ExpressionSet = PhyloExpressionSetExample, 
 #'                                       replicates    = c(2,3,2), 
 #'                                       TestStatistic = "FlatLineTest", 
-#'                                       permutations  = 5, 
+#'                                       permutations  = 1000, 
 #'                                       parallel      = FALSE)
-#'
+#'}
 #'
 #'
 #'
