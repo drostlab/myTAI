@@ -1,4 +1,4 @@
-pandoc: 3.1.6.2
+pandoc: '3.2'
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
@@ -8,6 +8,8 @@ articles:
   Intermediate: Intermediate.html
   Introduction: Introduction.html
   Phylostratigraphy: Phylostratigraphy.html
-  Taxonomy: Taxonomy.html
-last_built: 2024-05-24T09:34Z
+last_built: 2024-09-30T22:27Z
+urls:
+  reference: https://drostlab.github.io/myTAI/reference
+  article: https://drostlab.github.io/myTAI/articles
 

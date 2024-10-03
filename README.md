@@ -56,7 +56,7 @@ On Windows, the most common OpenMP implementation is provided by Microsoft Visua
 
 ### Installation
 
-Users can install `myTAI` from [CRAN](https://cran.r-project.org/web/packages/myTAI/index.html):
+Users can install `myTAI` from [CRAN](https://CRAN.R-project.org/package=myTAI):
 
 
 ```r
@@ -123,7 +123,7 @@ ExprExample <- tf(PhyloExpressionSetExample, log2)
 PlotSignature(ExprExample)
 ```
 
-![](man/figures/unnamed-chunk-10-1.png)
+![plotSignature](man/figures/unnamed-chunk-10-1.png)
 
 
 #### Quantify expression level distributions for each gene age category
@@ -134,7 +134,7 @@ PlotSignature(ExprExample)
 PlotCategoryExpr(ExprExample, "PS")
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)
+![plotCategoryExpr](man/figures/unnamed-chunk-11-1.png)
 
 #### Quantify mean expression of individual gene age categories
 
@@ -144,7 +144,7 @@ PlotCategoryExpr(ExprExample, "PS")
 PlotMeans(ExprExample, Groups = list(1:3, 4:12))
 ```
 
-![](man/figures/unnamed-chunk-12-1.png)
+![plotMeans](man/figures/unnamed-chunk-12-1.png)
 
 
 #### Quantify relative mean expression of each age category seperated by old versus young genes
@@ -155,7 +155,7 @@ PlotMeans(ExprExample, Groups = list(1:3, 4:12))
 PlotRE(ExprExample, Groups = list(1:3, 4:12))
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)
+![plotRE](man/figures/unnamed-chunk-13-1.png)
 
 ```r
 # plot the significant differences between gene expression distributions 
@@ -168,7 +168,7 @@ PlotGroupDiffs(ExpressionSet = ExprExample,
 
 ## Getting started with `myTAI`
 
-Users can also read the tutorials within ([RStudio](https://rstudio.com/)) :
+Users can also read the tutorials within ([RStudio](https://posit.co/)) :
 
 ```r
 # source the myTAI package
@@ -266,6 +266,7 @@ All functions also include visual analytics tools to quantify the goodness of te
 
 * `MatchMap()` : Match a Phylostratigraphic Map or Divergence Map with a ExpressionMatrix
 * `tf()` : Transform Gene Expression Levels
+* `tfPS()` : Transform Phylostratum Levels
 * `tfStability()` : Perform Permutation Tests Under Different Transformations
 * `age.apply()` : Age Category Specific apply Function
 * `ecScore()` : Compute the Hourglass Score for the EarlyConservationTest

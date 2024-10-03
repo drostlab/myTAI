@@ -1,17 +1,12 @@
 Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
-Version: 1.0.1.9000
-Date: 2023-07-08
+Version: 2.0.0.0
+Date: 2024-09-30
 Authors@R: c(person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hajk-georg.drost@tuebingen.mpg.de",
                 comment = c(ORCID = "0000-0002-1567-306X")),
-              person(given = "Kristian K",
-                family = "Ullrich",
-                role = c("aut", "ctb"),
-                email = "ullrich@evolbio.mpg.de",
-                comment = c(ORCID = "0000-0003-4308-9626")),
               person(given = "Jaruwatana Sodai", 
                 family = "Lotharukpong", 
                 role = c("aut", "ctb"), 
@@ -21,7 +16,12 @@ Authors@R: c(person("Hajk-Georg", "Drost",
                 family = "Kalábová",
                 role = c("aut", "ctb"), 
                 email = "nikola@kalabova.eu", 
-                comment = c(ORCID = "0009-0007-6384-8809")))
+                comment = c(ORCID = "0009-0007-6384-8809")),
+              person(given = "Kristian K",
+                family = "Ullrich",
+                role = c("aut", "ctb"),
+                email = "ullrich@evolbio.mpg.de",
+                comment = c(ORCID = "0000-0003-4308-9626")))
 Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2018) <doi:10.1093/bioinformatics/btx835>). This package aims to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest. 
 VignetteBuilder: knitr
 NeedsCompilation: yes
@@ -56,7 +56,6 @@ Suggests:
     devtools (>= 1.6.1),
     testthat (>= 0.9.1),
     mgcv,
-    taxize (>= 0.6.0),
     Seurat,
     decor,
     RcppThread
@@ -66,8 +65,8 @@ LinkingTo:
     cpp11,
     RcppThread, 
     RcppEigen
-URL: https://github.com/drostlab/myTAI
+URL: https://drostlab.github.io/myTAI/
 BugReports: https://github.com/drostlab/myTAI/issues
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 SystemRequirements: C++

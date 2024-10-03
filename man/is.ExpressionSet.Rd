@@ -18,8 +18,8 @@ This function tests whether a given ExpressionSet follows the pre-defined PhyloE
 data(PhyloExpressionSetExample)
 
 is.ExpressionSet(PhyloExpressionSetExample)
-
 }
 \author{
 Hajk-Georg Drost
 }
+\keyword{internal}
