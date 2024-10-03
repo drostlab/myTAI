@@ -75,7 +75,7 @@
 #' p.vector <- CombinatorialSignificance(ExpressionSet = PhyloExpressionSetExample, 
 #'                                       replicates    = c(2,3,2), 
 #'                                       TestStatistic = "FlatLineTest", 
-#'                                       permutations  = 10, 
+#'                                       permutations  = 5, 
 #'                                       parallel      = FALSE)
 #'
 #'
