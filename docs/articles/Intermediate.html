@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="myTAI">
 <title>Intermediate Phylotranscriptomics Analyses • myTAI</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -15,66 +14,50 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Intermediate Phylotranscriptomics Analyses">
-<meta property="og:description" content="myTAI">
-<meta property="og:image" content="https://drostlab.github.io/myTAI/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Intermediate Phylotranscriptomics Analyses">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Advanced.html">Advanced Phylotranscriptomics Analyses</a>
-    <a class="dropdown-item" href="../articles/Enrichment.html">Enrichment Analyses</a>
-    <a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis with `myTAI`</a>
-    <a class="dropdown-item" href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a>
-    <a class="dropdown-item" href="../articles/Introduction.html">Introduction to the myTAI package</a>
-    <a class="dropdown-item" href="../articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/Advanced.html">Advanced Phylotranscriptomics Analyses</a></li>
+    <li><a class="dropdown-item" href="../articles/Enrichment.html">Enrichment Analyses</a></li>
+    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis with `myTAI`</a></li>
+    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a></li>
+    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction to the myTAI package</a></li>
+    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/drostlab/myTAI/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/drostlab/myTAI/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -85,7 +68,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Intermediate Phylotranscriptomics Analyses</h1>
             
-            <h4 data-toc-skip class="date">2024-09-30</h4>
+            <h4 data-toc-skip class="date">2024-10-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Intermediate.Rmd" class="external-link"><code>vignettes/Intermediate.Rmd</code></a></small>
       <div class="d-none name"><code>Intermediate.Rmd</code></div>
@@ -237,13 +220,13 @@ can be used.</p>
 <code class="sourceCode R"><span><span class="co"># install.packages("fitdistrplus")</span></span>
 <span></span>
 <span><span class="co"># plot a Cullen and Frey graph</span></span>
-<span><span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/descdist.html" class="external-link">descdist</a></span><span class="op">(</span><span class="va">variance_vector</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu"><a href="https://lbbe-software.github.io/fitdistrplus/reference/descdist.html" class="external-link">descdist</a></span><span class="op">(</span><span class="va">variance_vector</span><span class="op">)</span></span></code></pre></div>
 <p>Based on the observation that a gamma distribution is a suitable fit
 for <code>variance_vector</code>, we can now estimate the parameters of
 the gamma distribution that fits the data.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># estimate the parameters: shape and rate using 'moment matching estimation'</span></span>
-<span><span class="va">gamma_MME</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span><span class="va">variance_vector</span>,distr <span class="op">=</span> <span class="st">"gamma"</span>, method <span class="op">=</span> <span class="st">"mme"</span><span class="op">)</span></span>
+<span><span class="va">gamma_MME</span> <span class="op">&lt;-</span> <span class="fu">fitdistrplus</span><span class="fu">::</span><span class="fu"><a href="https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html" class="external-link">fitdist</a></span><span class="op">(</span><span class="va">variance_vector</span>,distr <span class="op">=</span> <span class="st">"gamma"</span>, method <span class="op">=</span> <span class="st">"mme"</span><span class="op">)</span></span>
 <span><span class="co"># estimate shape:</span></span>
 <span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="va">gamma_MME</span><span class="op">$</span><span class="va">estimate</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="co"># estimate the rate:</span></span>
@@ -354,24 +337,41 @@ following test statistic.</p>
 <code>early</code>, <code>mid</code>, and <code>late</code> - based on
 prior biological knowledge (see Drost et al., 2015 for
 details).</p></li>
-<li><p>The mean TAI or TDI value for each of the three modules <span class="math inline">\(T_{early}\)</span>, <span class="math inline">\(T_{mid}\)</span>, and <span class="math inline">\(T_{late}\)</span> are computed.</p></li>
-<li><p>The two differences D1 = <span class="math inline">\(T_{early}\)</span> - <span class="math inline">\(T_{mid}\)</span> and D2 = <span class="math inline">\(T_{late}\)</span> - <span class="math inline">\(T_{mid}\)</span> are calculated.</p></li>
-<li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1
-and D2 is computed as final test statistic of the <strong>Reductive
-Hourglass Test</strong>.</p></li>
+<li><p>The mean TAI or TDI value for each of the three modules
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>e</mi><mi>a</mi><mi>r</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">T_{early}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>l</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow></msub><annotation encoding="application/x-tex">T_{late}</annotation></semantics></math>
+are computed.</p></li>
+<li><p>The two differences D1 =
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>e</mi><mi>a</mi><mi>r</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">T_{early}</annotation></semantics></math>
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>
+and D2 =
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>l</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow></msub><annotation encoding="application/x-tex">T_{late}</annotation></semantics></math>
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>
+are calculated.</p></li>
+<li><p>The minimum
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+of D1 and D2 is computed as final test statistic of the
+<strong>Reductive Hourglass Test</strong>.</p></li>
 </ol>
 <p>In order to determine the statistical significance of an observed
-minimum difference <span class="math inline">\(D_{min}\)</span> the
-following permutation test was performed. Based on the
-<code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span>
+minimum difference
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+the following permutation test was performed. Based on the
+<code><a href="../reference/bootMatrix.html">bootMatrix()</a></code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
 is calculated from each of the permuted TAI or TDI profiles,
 approximated by a Gaussian distribution with method of moments estimated
-parameters returned by <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code>, and the
+parameters returned by <code><a href="https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code>, and the
 corresponding p-value is computed by <code>pnorm</code> given the
 estimated parameters of the Gaussian distribution. The goodness of fit
-for the random vector <span class="math inline">\(D_{min}\)</span> is
-statistically quantified by a Lilliefors (Kolmogorov-Smirnov) test for
-normality.</p>
+for the random vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+is statistically quantified by a Lilliefors (Kolmogorov-Smirnov) test
+for normality.</p>
 <p>To perform the <strong>Reductive Hourglass Test</strong> you can use
 the <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function. Using this function
 you need to divide the given phylotranscriptomic pattern into three
@@ -400,13 +400,13 @@ corresponding developmental process into the three modules:</p>
 randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code>
 (<code>apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</code>) and
 in case the argument <code>lillie.test = TRUE</code>, a logical value
-representing the goodness of fit statistic returned by the <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality. In case
-<code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In
-case <code>lillie.test</code> is <code>FALSE</code> the corresponding
-goodness of fit by a normal distribution is not statistically
-significant.</p>
+representing the goodness of fit statistic returned by the Lilliefors
+(Kolmogorov-Smirnov) test for normality. In case
+<code>lillie.test</code> is <code>TRUE</code> the corresponding
+Lilliefors (Kolmogorov-Smirnov) test passed the goodness of fit
+criterion. In case <code>lillie.test</code> is <code>FALSE</code> the
+corresponding goodness of fit by a normal distribution is not
+statistically significant.</p>
 <p>Analogous to the <code>plotHistogram</code> argument that is present
 in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function, the
 <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function also takes an argument
@@ -416,20 +416,22 @@ showing:</p>
 <ul>
 <li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates
 which distributions seem plausible to fit the resulting permutation
-vector <span class="math inline">\(D_{min}\)</span>. Here a normal
-distribution seems most plausible.</p></li>
-<li><p>A histogram of <span class="math inline">\(D_{min}\)</span>
-combined with the density plot is visualized. <span class="math inline">\(D_{min}\)</span> is then fitted by a normal
-distribution. The corresponding parameters are estimated by moment
-matching estimation.</p></li>
+vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>.
+Here a normal distribution seems most plausible.</p></li>
+<li><p>A histogram of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+combined with the density plot is visualized.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+is then fitted by a normal distribution. The corresponding parameters
+are estimated by moment matching estimation.</p></li>
 <li><p>A plot showing the p-values for N independent runs to verify that
 a specific p-value is biased by a specific permutation order.</p></li>
 <li><p>A bar plot showing the number of cases in which the underlying
-goodness of fit (returned by <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality) has shown to be significant
-(<code>TRUE</code>) or not significant (<code>FALSE</code>). This allows
-to quantify the permutation bias and their implications on the goodness
-of fit.</p></li>
+goodness of fit (returned by Lilliefors (Kolmogorov-Smirnov) test for
+normality) has shown to be significant (<code>TRUE</code>) or not
+significant (<code>FALSE</code>). This allows to quantify the
+permutation bias and their implications on the goodness of fit.</p></li>
 </ul>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># perform the Reductive Hourglass Test and plot the test statistic</span></span>
@@ -439,8 +441,7 @@ of fit.</p></li>
 <span>                        lillie.test   <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span> </span></code></pre></div>
 <p>The corresponding output shows the <code>summary statistics</code> of
 the fitted normal distribution as well as the p-value, standard
-deviation, and <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> result.</p>
+deviation, and Lilliefors (Kolmogorov-Smirnov) test result.</p>
 <p>This example output nicely illustrates that although the Lilliefors
 (Kolmogorov-Smirnov) test for normality is violated for some
 permutations, the Cullen and Frey graph shows that there is no better
@@ -490,24 +491,41 @@ the following test statistic.</p>
 <li><p>A set of developmental stages is partitioned into three modules -
 <code>early</code>, <code>mid</code>, and <code>late</code> - based on
 prior biological knowledge.</p></li>
-<li><p>The mean TAI or TDI value for each of the three modules <span class="math inline">\(T_{early}\)</span>, <span class="math inline">\(T_{mid}\)</span>, and <span class="math inline">\(T_{late}\)</span> are computed.</p></li>
-<li><p>The two differences D1 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{early}\)</span> and D2 = <span class="math inline">\(T_{late}\)</span> - <span class="math inline">\(T_{early}\)</span> are calculated.</p></li>
-<li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1
-and D2 is computed as final test statistic of the <strong>Reductive
-Early Conservation Test</strong>.</p></li>
+<li><p>The mean TAI or TDI value for each of the three modules
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>e</mi><mi>a</mi><mi>r</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">T_{early}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>l</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow></msub><annotation encoding="application/x-tex">T_{late}</annotation></semantics></math>
+are computed.</p></li>
+<li><p>The two differences D1 =
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>e</mi><mi>a</mi><mi>r</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">T_{early}</annotation></semantics></math>
+and D2 =
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>l</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow></msub><annotation encoding="application/x-tex">T_{late}</annotation></semantics></math>
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>e</mi><mi>a</mi><mi>r</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">T_{early}</annotation></semantics></math>
+are calculated.</p></li>
+<li><p>The minimum
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+of D1 and D2 is computed as final test statistic of the
+<strong>Reductive Early Conservation Test</strong>.</p></li>
 </ol>
 <p>In order to determine the statistical significance of an observed
-minimum difference <span class="math inline">\(D_{min}\)</span> the
-following permutation test was performed. Based on the
-<code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span>
+minimum difference
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+the following permutation test was performed. Based on the
+<code><a href="../reference/bootMatrix.html">bootMatrix()</a></code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
 is calculated from each of the permuted TAI or TDI profiles,
 approximated by a Gaussian distribution with method of moments estimated
-parameters returned by <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code>, and the
+parameters returned by <code><a href="https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code>, and the
 corresponding p-value is computed by <code>pnorm</code> given the
 estimated parameters of the Gaussian distribution. The goodness of fit
-for the random vector <span class="math inline">\(D_{min}\)</span> is
-statistically quantified by an <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality.</p>
+for the random vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+is statistically quantified by an Lilliefors (Kolmogorov-Smirnov) test
+for normality.</p>
 <p>To perform the <strong>Reductive Early Conservation Test</strong> you
 can use the <code><a href="../reference/EarlyConservationTest.html">EarlyConservationTest()</a></code> function. Using this
 function you need to divide the given phylotranscriptomics pattern into
@@ -541,20 +559,22 @@ showing:</p>
 <ul>
 <li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates
 which distributions seem plausible to fit the resulting permutation
-vector <span class="math inline">\(D_{min}\)</span>. Again a normal
-distribution seems most appropriate.</p></li>
-<li><p>A histogram of <span class="math inline">\(D_{min}\)</span>
-combined with the density plot is visualized. <span class="math inline">\(D_{min}\)</span> is then fitted by a normal
-distribution. The corresponding parameters are estimated by moment
-matching estimation.</p></li>
+vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>.
+Again a normal distribution seems most appropriate.</p></li>
+<li><p>A histogram of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+combined with the density plot is visualized.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+is then fitted by a normal distribution. The corresponding parameters
+are estimated by moment matching estimation.</p></li>
 <li><p>A plot showing the p-values for N independent runs to verify that
 a specific p-value is biased by a specific permutation order.</p></li>
 <li><p>A bar plot showing the number of cases in which the underlying
-goodness of fit (returned by <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality) has shown to be significant
-(<code>TRUE</code>) or not significant (<code>FALSE</code>). This allows
-to quantify the permutation bias and their implications on the goodness
-of fit.</p></li>
+goodness of fit (returned by Lilliefors (Kolmogorov-Smirnov) test for
+normality) has shown to be significant (<code>TRUE</code>) or not
+significant (<code>FALSE</code>). This allows to quantify the
+permutation bias and their implications on the goodness of fit.</p></li>
 </ul>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># perform the Reductive Early Conservation Test and plot the test statistic</span></span>
@@ -562,8 +582,8 @@ of fit.</p></li>
 <span>                       modules       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>,</span>
 <span>                       plotHistogram <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                       lillie.test   <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span> </span></code></pre></div>
-<p>This example output nicely illustrates that although the <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality is violated, the <a href="https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment" class="external-link">Cullen
+<p>This example output nicely illustrates that although the Lilliefors
+(Kolmogorov-Smirnov) test for normality is violated, the <a href="https://openlibrary.org/works/OL1978341W/Probabilistic_techniques_in_exposure_assessment" class="external-link">Cullen
 and Frey graph</a> shows that there is no better approximation than a
 normal distribution (which is also supported visually by investigating
 the fitted frequency distribution). The corresponding p-value returned
@@ -615,24 +635,41 @@ following test statistic.</p>
 <code>early</code>, <code>mid</code>, and <code>late</code> - based on
 prior biological knowledge (see Drost et al., 2015 for
 details).</p></li>
-<li><p>The mean TAI or TDI value for each of the three modules <span class="math inline">\(T_{early}\)</span>, <span class="math inline">\(T_{mid}\)</span>, and <span class="math inline">\(T_{late}\)</span> are computed.</p></li>
-<li><p>The two differences D1 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{early}\)</span> and D2 = <span class="math inline">\(T_{mid}\)</span> - <span class="math inline">\(T_{late}\)</span> are calculated.</p></li>
-<li><p>The minimum <span class="math inline">\(D_{min}\)</span> of D1
-and D2 is computed as final test statistic of the <strong>Reverse
+<li><p>The mean TAI or TDI value for each of the three modules
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>e</mi><mi>a</mi><mi>r</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">T_{early}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>l</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow></msub><annotation encoding="application/x-tex">T_{late}</annotation></semantics></math>
+are computed.</p></li>
+<li><p>The two differences D1 =
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>e</mi><mi>a</mi><mi>r</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">T_{early}</annotation></semantics></math>
+and D2 =
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">T_{mid}</annotation></semantics></math>
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>l</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow></msub><annotation encoding="application/x-tex">T_{late}</annotation></semantics></math>
+are calculated.</p></li>
+<li><p>The minimum
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+of D1 and D2 is computed as final test statistic of the <strong>Reverse
 Hourglass Test</strong>.</p></li>
 </ol>
 <p>In order to determine the statistical significance of an observed
-minimum difference <span class="math inline">\(D_{min}\)</span> the
-following permutation test was performed. Based on the
-<code><a href="../reference/bootMatrix.html">bootMatrix()</a></code> <span class="math inline">\(D_{min}\)</span>
+minimum difference
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+the following permutation test was performed. Based on the
+<code><a href="../reference/bootMatrix.html">bootMatrix()</a></code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
 is calculated from each of the permuted TAI or TDI profiles,
 approximated by a Gaussian distribution with method of moments estimated
-parameters returned by <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code>, and the
+parameters returned by <code><a href="https://lbbe-software.github.io/fitdistrplus/reference/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code>, and the
 corresponding p-value is computed by <code>pnorm</code> given the
 estimated parameters of the Gaussian distribution. The goodness of fit
-for the random vector <span class="math inline">\(D_{min}\)</span> is
-statistically quantified by a <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality.</p>
+for the random vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+is statistically quantified by a Lilliefors (Kolmogorov-Smirnov) test
+for normality.</p>
 <p>To perform the <strong>Reverse Hourglass Test</strong> you can use
 the <code><a href="../reference/ReverseHourglassTest.html">ReverseHourglassTest()</a></code> function. Using this function
 you need to divide the given phylotranscriptomic pattern into three
@@ -669,13 +706,13 @@ $lillie.test
 randomly permuted TAI profiles returned by <code><a href="../reference/bootMatrix.html">bootMatrix()</a></code>
 (<code>apply(bootMatrix(PhyloExpressionSetExample) , 2 , sd)</code>) and
 in case the argument <code>lillie.test = TRUE</code>, a logical value
-representing the goodness of fit statistic returned by the <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality. In case
-<code>lillie.test</code> is <code>TRUE</code> the corresponding <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov)</a> test passed the goodness of fit criterion. In
-case <code>lillie.test</code> is <code>FALSE</code> the corresponding
-goodness of fit by a normal distribution is not statistically
-significant.</p>
+representing the goodness of fit statistic returned by the Lilliefors
+(Kolmogorov-Smirnov) test for normality. In case
+<code>lillie.test</code> is <code>TRUE</code> the corresponding
+Lilliefors (Kolmogorov-Smirnov) test passed the goodness of fit
+criterion. In case <code>lillie.test</code> is <code>FALSE</code> the
+corresponding goodness of fit by a normal distribution is not
+statistically significant.</p>
 <p>Analogous to the <code>plotHistogram</code> argument that is present
 in the <code><a href="../reference/FlatLineTest.html">FlatLineTest()</a></code> function, the
 <code><a href="../reference/ReductiveHourglassTest.html">ReductiveHourglassTest()</a></code> function also takes an argument
@@ -685,20 +722,22 @@ showing:</p>
 <ul>
 <li><p>A Cullen and Frey skewness-kurtosis plot. This plot illustrates
 which distributions seem plausible to fit the resulting permutation
-vector <span class="math inline">\(D_{min}\)</span>. Here a normal
-distribution seems most plausible.</p></li>
-<li><p>A histogram of <span class="math inline">\(D_{min}\)</span>
-combined with the density plot is visualized. <span class="math inline">\(D_{min}\)</span> is then fitted by a normal
-distribution. The corresponding parameters are estimated by moment
-matching estimation.</p></li>
+vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>.
+Here a normal distribution seems most plausible.</p></li>
+<li><p>A histogram of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+combined with the density plot is visualized.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">D_{min}</annotation></semantics></math>
+is then fitted by a normal distribution. The corresponding parameters
+are estimated by moment matching estimation.</p></li>
 <li><p>A plot showing the p-values for N independent runs to verify that
 a specific p-value is biased by a specific permutation order.</p></li>
 <li><p>A bar plot showing the number of cases in which the underlying
-goodness of fit (returned by <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> for normality) has shown to be significant
-(<code>TRUE</code>) or not significant (<code>FALSE</code>). This allows
-to quantify the permutation bias and their implications on the goodness
-of fit.</p></li>
+goodness of fit (returned by Lilliefors (Kolmogorov-Smirnov) test for
+normality) has shown to be significant (<code>TRUE</code>) or not
+significant (<code>FALSE</code>). This allows to quantify the
+permutation bias and their implications on the goodness of fit.</p></li>
 </ul>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># perform the Reverse Hourglass Test and plot the test statistic</span></span>
@@ -708,8 +747,7 @@ of fit.</p></li>
 <span>                        lillie.test   <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span> </span></code></pre></div>
 <p>The corresponding output shows the <code>summary statistics</code> of
 the fitted normal distribution as well as the p-value, standard
-deviation, and <a href="https://amstat.tandfonline.com/doi/abs/10.1080/00031305.1986.10475419" class="external-link">Lilliefors
-(Kolmogorov-Smirnov) test</a> result.</p>
+deviation, and Lilliefors (Kolmogorov-Smirnov) test result.</p>
 <p>This example output nicely illustrates that although the Lilliefors
 (Kolmogorov-Smirnov) test for normality is violated for some
 permutations, the Cullen and Frey graph shows that there is no better
@@ -908,7 +946,7 @@ and data transformations for gene expression data - Data Transformations
 and the Gaussian mixture assumption</em>. <em>Bioinformatics</em>.
 <strong>17</strong>, 977-987 (2001).</p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -919,15 +957,15 @@ and the Gaussian mixture assumption</em>. <em>Bioinformatics</em>.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

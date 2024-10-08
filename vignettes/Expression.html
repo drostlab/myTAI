@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2023-08-16" />
+<meta name="date" content="2024-10-03" />
 
 <title>Gene Expression Analysis with myTAI</title>
 
@@ -50,7 +50,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -61,7 +61,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -339,7 +339,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Gene Expression Analysis with
 <code>myTAI</code></h1>
-<h4 class="date">2023-08-16</h4>
+<h4 class="date">2024-10-03</h4>
 
 
 
@@ -615,8 +615,7 @@ cut-offs.</p>
 <p>Please consult the documentation of <code>?p.adjust</code> to see
 which p-value adjustment methods are implemented in
 <code>DiffGenes()</code>.</p>
-<p>Please also consult these reviews (<a href="http://www.biostathandbook.com/multiplecomparisons.html">Biostatistics
-Handbook</a>, <a href="http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf">Gelman
+<p>Please also consult these reviews <a href="http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf">Gelman
 et al., 2008</a>, and <a href="http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf">Slides</a>)
 to decide whether or not to apply p-value adjustment to your own
 dataset.</p>
@@ -740,12 +739,12 @@ meet the test assumptions of <em>parametric</em> tests.</p>
 <p>Exact Tests for Differences between two groups of negative-binomial
 counts implemented in <code>DiffGenes()</code> are based on the
 <code>edgeR</code> function <code>exactTest()</code>. Please consult the
-<a href="http://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf">edgeR
+<a href="https://www.bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR
 Users Guide</a> for mathematical details.</p>
 <div id="install-edger-package" class="section level3">
 <h3>Install edgeR Package</h3>
 <p>The detection of DEGs using negative binomial models is based on the
-powerful implementations provided by the <a href="http://www.bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR</a>
+powerful implementations provided by the <a href="https://www.bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR</a>
 package. Hence, before using the negative binomial models in
 <code>DiffGenes()</code> users need to install the edgeR package.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># install edgeR</span></span>

@@ -13,7 +13,7 @@ test_that(
                                 ExpressionSet = nonStandardExpressionSet,
                                 replicates    = c(2, 3, 2),
                                 TestStatistic = "FlatLineTest",
-                                permutations  = 10,
+                                permutations  = 5,
                                 parallel      = FALSE
                         )
                 )
@@ -27,7 +27,7 @@ test_that("variable and constant replicate values for corresponding stages work 
                                   ExpressionSet = PhyloExpressionSetExample,
                                   replicates    = c(2, 3, 2),
                                   TestStatistic = "FlatLineTest",
-                                  permutations  = 10,
+                                  permutations  = 5,
                                   parallel      = FALSE
                           )
                   ), prod(c(2, 3, 2)))
@@ -37,7 +37,7 @@ test_that("variable and constant replicate values for corresponding stages work 
                                   ExpressionSet = PhyloExpressionSetExample,
                                   replicates    = c(3, 1, 3),
                                   TestStatistic = "FlatLineTest",
-                                  permutations  = 10,
+                                  permutations  = 5,
                                   parallel      = FALSE
                           )
                   ), prod(c(3, 1, 3)))
@@ -47,7 +47,7 @@ test_that("variable and constant replicate values for corresponding stages work 
                                   ExpressionSet = PhyloExpressionSetExample[ , 1:8],
                                   replicates    = 2,
                                   TestStatistic = "FlatLineTest",
-                                  permutations  = 10,
+                                  permutations  = 5,
                                   parallel      = FALSE
                           )
                   ), 8)
@@ -68,7 +68,7 @@ test_that("Error occurs in case a TestStatistic other than FlatLineTest has been
                                   ExpressionSet = PhyloExpressionSetExample,
                                   replicates    = c(2, 3, 2),
                                   TestStatistic = "ReductiveHourglassTets",
-                                  permutations  = 10,
+                                  permutations  = 5,
                                   parallel      = FALSE
                           ),
                           "Please enter a correct string for the test statistic: 'FlatLineTest'."

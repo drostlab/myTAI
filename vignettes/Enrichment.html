@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2023-08-16" />
+<meta name="date" content="2024-10-03" />
 
 <title>Enrichment Analyses</title>
 
@@ -50,7 +50,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -61,7 +61,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -338,7 +338,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <h1 class="title toc-ignore">Enrichment Analyses</h1>
-<h4 class="date">2023-08-16</h4>
+<h4 class="date">2024-10-03</h4>
 
 
 
@@ -619,9 +619,11 @@ specific genes.</p>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>               <span class="at">use.only.map =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>               <span class="at">legendName   =</span> <span class="st">&quot;PS&quot;</span>)</span></code></pre></div>
 <p>Again, we retrieve the <em>D. rerio</em> specific taxonomy
-represented by PS1-14 using the <code>taxonomy()</code> function (see <a href="Introduction.html">Introduction</a> and <a href="Taxonomy.html">Taxonomy</a> for details).</p>
+represented by PS1-14 using the <code>myTAI::taxonomy()</code> function
+(see <a href="Introduction.html">Introduction</a> and
+<code>Taxonomy</code> for details).</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># retrieve the taxonomy of D. rerio</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">taxonomy</span>(<span class="at">organism =</span> <span class="st">&quot;Danio rerio&quot;</span>)</span></code></pre></div>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>myTAI<span class="sc">::</span><span class="fu">taxonomy</span>(<span class="at">organism =</span> <span class="st">&quot;Danio rerio&quot;</span>)</span></code></pre></div>
 <pre><code>                    id         name    rank
 1   cellular organisms      no rank  131567
 2            Eukaryota superkingdom    2759
@@ -714,8 +716,7 @@ argument <code>p.adjust.method</code>. Here, all methods implemented in
 <span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>               <span class="at">use.only.map    =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>               <span class="at">legendName      =</span> <span class="st">&quot;PS&quot;</span>,</span>
 <span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>               <span class="at">p.adjust.method =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
-<p>Please consult these reviews (<a href="http://www.biostathandbook.com/multiplecomparisons.html">Biostatistics
-Handbook</a>, <a href="http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf">Gelman
+<p>Please consult these reviews <a href="http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf">Gelman
 et al., 2008</a>, and <a href="http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf">Slides</a>)
 to decide whether or not to apply p-value adjustment to your own
 dataset.</p>

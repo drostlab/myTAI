@@ -1,8 +1,9 @@
 citHeader("To cite myTAI in publications use:")
 
-citEntry(entry = "Article",
+bibentry(entry = "Article",
+  bibtype  = "Manual",
   title        = "myTAI: evolutionary transcriptomics with R",
-  author       = personList(as.person("Drost HG"),
+  author       = c(as.person("Drost HG"),
                    as.person("Gabel A"),
                    as.person("Jiu J"),
                    as.person("Quint M"),

@@ -252,12 +252,12 @@ PlotEnrichment(Drerio.PhyloMap,
                legendName   = "PS")
 ```
 
-Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `taxonomy()` function (see [Introduction](Introduction.html) and [Taxonomy](Taxonomy.html) for details).
+Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `myTAI::taxonomy()` function (see [Introduction](Introduction.html) and `Taxonomy` for details).
 
 
 ```{r, eval=FALSE}
 # retrieve the taxonomy of D. rerio
-taxonomy(organism = "Danio rerio")
+myTAI::taxonomy(organism = "Danio rerio")
 ```
 
 ```
@@ -353,7 +353,7 @@ PlotEnrichment(Drerio.PhyloMap,
 
 ```
 
-Please consult these reviews ([Biostatistics Handbook](http://www.biostathandbook.com/multiplecomparisons.html), [Gelman et al., 2008](http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf), and [Slides](http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf)) to decide whether or not to apply p-value adjustment
+Please consult these reviews [Gelman et al., 2008](http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf), and [Slides](http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf)) to decide whether or not to apply p-value adjustment
 to your own dataset. 
 
 
