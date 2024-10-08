@@ -56,7 +56,7 @@ On Windows, the most common OpenMP implementation is provided by Microsoft Visua
 
 ### Installation
 
-Users can install `myTAI` from [CRAN](https://cran.r-project.org/web/packages/myTAI/index.html):
+Users can install `myTAI` from [CRAN](https://CRAN.R-project.org/package=myTAI):
 
 
 ```r
@@ -168,7 +168,7 @@ PlotGroupDiffs(ExpressionSet = ExprExample,
 
 ## Getting started with `myTAI`
 
-Users can also read the tutorials within ([RStudio](https://rstudio.com/)) :
+Users can also read the tutorials within ([RStudio](https://posit.co/)) :
 
 ```r
 # source the myTAI package
