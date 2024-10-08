@@ -1,6 +1,0 @@
-if echo | ${CC} -fopenmp -dM -E - 2>/dev/null | grep -q "openmp" && [ -d 
-"/usr/local/opt/libomp/include" ]; then
-  echo "Both OpenMP and libomp are supported."
-else
-  echo "Either OpenMP is not supported or libomp is not installed."
-fi
