@@ -85,7 +85,7 @@ EOF
 detect_openmp () {
   export PKG_CXXFLAGS=""
   if [ "$(uname)" = "Linux" ]; then
-    : '
+
     printf "%s" "* checking if R installation supports OpenMP without any extra hints... "
     if "${R_HOME}/bin/R" CMD SHLIB test-omp.c >> config.log 2>&1; then
       echo "yes"
@@ -105,7 +105,7 @@ detect_openmp () {
     else
       echo "no"
     fi
-    '
+    
   fi # uname=Linux
 
   if [ "$(uname)" = "Darwin" ]; then
