@@ -5,6 +5,7 @@ pow <- function(x,power)
 }
 
 
+
 CollapseFromTo <- function(x,from,to,FUN, ...){
         x <- as.data.frame(x)
         f <- match.fun(FUN) 
