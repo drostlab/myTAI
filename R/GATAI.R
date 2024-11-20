@@ -1,7 +1,5 @@
 #' @title Low level interface function with GATAI
-#' @description
-#' This function interfaces with the GATAI software which removes the genes that create the \code{\link{PlotSignature}} pattern.
-#' \code{GATAI} can be found at \url{https://github.com/drostlab/gatai}.
+#' @description This function interfaces with the GATAI software which removes the genes that create the \code{\link{PlotSignature}} pattern.
 #' @param ExpressionSet a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.
 #' @param singlecell_data a logical value indicating whether or not the input \code{ExpressionSet} is a single cell dataset.
 #' @param gatai_results_path where shall GATAI results be stored. Default \code{gatai_results_path = tempdir()}.

@@ -1,4 +1,4 @@
-#'  @title Plot evolutionary signatures across transcriptomes after GATAI gene removal
+#' @title Plot evolutionary signatures across transcriptomes after GATAI gene removal
 #' @description Main function to visualize transcriptome indices after GATAI gene removal  .
 #' @param ExpressionSet a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.
 #' @param measure type of transcriptome index that shall be computed. E.g.

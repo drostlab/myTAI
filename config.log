@@ -1,18 +1,2 @@
 0.29.2
 3
-using C compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
-using SDK: ‘’
-clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c test-omp.c -o test-omp.o
-test-omp.c:1:10: fatal error: 'omp.h' file not found
-#include <omp.h>
-         ^~~~~~~
-1 error generated.
-make: *** [test-omp.o] Error 1
-using C compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
-using SDK: ‘’
-clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c test-omp.c -o test-omp.o
-test-omp.c:1:10: fatal error: 'omp.h' file not found
-#include <omp.h>
-         ^~~~~~~
-1 error generated.
-make: *** [test-omp.o] Error 1

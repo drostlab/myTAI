@@ -1,4 +1,5 @@
 #' @title Test whether GATAI is installed on user machine
+#' @description Helper function to test if the user has set up GATAI correctly in their environment.
 #' @export
 is_installed_gatai <- function() {
   tryCatch({
