@@ -28,11 +28,8 @@ export(PlotRE)
 export(PlotReplicateQuality)
 export(PlotSelectedAgeDistr)
 export(PlotSignature)
-<<<<<<< HEAD
 export(PlotSignatureMultiple)
-=======
 export(PlotSignatureGATAIGeneRemoval)
->>>>>>> origin
 export(PlotSignatureTransformed)
 export(PlotVars)
 export(RE)
