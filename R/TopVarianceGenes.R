@@ -19,6 +19,7 @@
 #' # select genes with highest variance (top 5%)  
 #' genes.top_variance <- TopVarianceGenes(PhyloExpressionSetExample, p=.95)
 #' 
+#' @author Stefan Manolache
 TopVarianceGenes <- function(ExpressionSet, p = .99){
     is.ExpressionSet(ExpressionSet)
     

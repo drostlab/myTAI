@@ -76,6 +76,9 @@ PlotSignature <-
                  alpha = 0.1,
                  y.ticks = 10) {
                 
+        # [WARN] (Stefan) - Since all of TAI, TDI and TPI compute the same thing,
+        # is there even a point of specifying the measure?
+        # the ExpressionSet already specifies what type of index is being used
         
         if (!is.element(measure, c("TAI", "TDI", "TPI")))
                 stop(
@@ -112,6 +115,10 @@ PlotSignature <-
         }
         
         # generate bootMatrix
+        
+        # [WARN] (Stefan) - I think computing the bootMatrix here is redundant
+        # because the test result already includes the stddev values for plotting
+        # the error bars
         bm <- tibble::as_tibble(bootMatrix(ExpressionSet = ExpressionSet, 
                                            permutations  = permutations))
         

@@ -33,4 +33,8 @@ PlotSignature(ExpressionSet = PhyloExpressionSet.top_removed,
                 TestStatistic = "FlatLineTest",
                 xlab          = "Ontogeny", 
                 ylab          = "TAI" )
+
+}
+\author{
+Stefan Manolache
 }

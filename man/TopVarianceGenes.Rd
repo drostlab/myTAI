@@ -25,3 +25,6 @@ data(PhyloExpressionSetExample)
 genes.top_variance <- TopVarianceGenes(PhyloExpressionSetExample, p=.95)
 
 }
+\author{
+Stefan Manolache
+}

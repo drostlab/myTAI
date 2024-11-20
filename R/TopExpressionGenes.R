@@ -23,6 +23,9 @@
 #'                 TestStatistic = "FlatLineTest",
 #'                 xlab          = "Ontogeny", 
 #'                 ylab          = "TAI" )
+#'
+#' @author Stefan Manolache
+#' 
 TopExpressionGenes <- function(ExpressionSet, p = .99){
     is.ExpressionSet(ExpressionSet)
     
