@@ -18,10 +18,12 @@ reference:
   - pMatrixTEI
   - pStrata
   - pStrataTEI
+  - GATAI
 - title: Visualization and Analytics Tools
   desc:  Visualise phylotranscriptomics patterns
 - contents:
   - starts_with("Plot")
+  - SignatureGATAIGeneRemoval
 - title: A Statistical Framework and Test Statistics
 - contents:
   - ends_with("Test")
@@ -49,6 +51,7 @@ reference:
   - ends_with(".mean")
   - omitMatrix
   - starts_with("rcpp_")
+  - is_installed_gatai
 - title: Example Datasets
 - contents:
   - DivergenceExpressionSetExample

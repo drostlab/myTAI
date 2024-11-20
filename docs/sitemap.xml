@@ -20,6 +20,7 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/EnrichmentTest.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/Expressed.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/FlatLineTest.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/GATAI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/GroupDiffs.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/LateConservationTest.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/MatchMap.html</loc></url>
@@ -41,6 +42,7 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotReplicateQuality.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotSelectedAgeDistr.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotSignature.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotSignatureGATAIGeneRemoval.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotSignatureTransformed.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotVars.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/RE.html</loc></url>
@@ -48,6 +50,7 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/ReductiveHourglassTest.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/ReverseHourglassTest.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/SelectGeneSet.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/SignatureGATAIGeneRemoval.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/TAI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/TDI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/TEI.html</loc></url>
@@ -61,6 +64,7 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/harm.mean.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/index.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/is.ExpressionSet.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/is_installed_gatai.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/lcScore.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/omitMatrix.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/pMatrix.html</loc></url>
