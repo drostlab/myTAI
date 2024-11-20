@@ -77,8 +77,6 @@ be drawn for the developmental stages defined to be the presumptive phylotypic p
 \item{alpha}{transparency of the shaded area and error ribbon (between [0,1]). Default is \code{alpha = 0.1}.}
 
 \item{y.ticks}{number of ticks on the y-axis. Default is \code{ticks = 3}.}
-
-\item{legend.title}{legend title.}
 }
 \value{
 a ggplot object visualising the transcriptome index of the
@@ -102,11 +100,13 @@ data(PhyloExpressionSetExample)
 # Flat line test, select top expressed genes
 PlotSignatureGeneQuantiles(ExpressionSet = PhyloExpressionSetExample,
                            quantiles=c(1.0, 0.99, 0.95, 0.90, 0.80),
-                           main="Excluding top level genes by total expression using different thresholds",
+                           main="Excluding top level genes by total 
+                           expression using different thresholds",
                            gene.selection.criterion="mean")
 # Flat line test, select top genes by variance of expression
 PlotSignatureGeneQuantiles(ExpressionSet = PhyloExpressionSetExample,
-                           main="Excluding top level genes by variance of expression using different thresholds",
+                           main="Excluding top level genes by variance of 
+                           expression using different thresholds",
                            quantiles=c(1.0, 0.99, 0.95, 0.90, 0.80),
                            gene.selection.criterion="variance")
 }

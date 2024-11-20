@@ -77,7 +77,7 @@ SignatureGATAIGeneRemoval <- function(ExpressionSet,
                               y.ticks = y.ticks)
   
   # removed genes
-  P2 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !GeneID %in% as.character(removed_gene_list[[1]])),
+  P2 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !ExpressionSet[[2]] %in% as.character(removed_gene_list[[1]])),
                               measure = measure,
                               TestStatistic = TestStatistic,
                               modules = modules,
@@ -105,7 +105,7 @@ SignatureGATAIGeneRemoval <- function(ExpressionSet,
   
   random_removed_genes <- sample(ExpressionSet$GeneID, n_random_genes)
   
-  P3 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !GeneID %in% random_removed_genes),
+  P3 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !ExpressionSet[[2]] %in% random_removed_genes),
                               measure = measure,
                               TestStatistic = TestStatistic,
                               modules = modules,

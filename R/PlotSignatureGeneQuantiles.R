@@ -42,7 +42,6 @@
 #' @param xlab label of x-axis.
 #' @param ylab label of y-axis.
 #' @param main figure title.
-#' @param legend.title legend title.
 #' @param lwd line width.
 #' @param alpha transparency of the shaded area and error ribbon (between [0,1]). Default is \code{alpha = 0.1}.
 #' @param y.ticks number of ticks on the y-axis. Default is \code{ticks = 3}.
@@ -66,11 +65,13 @@
 #' # Flat line test, select top expressed genes
 #' PlotSignatureGeneQuantiles(ExpressionSet = PhyloExpressionSetExample,
 #'                            quantiles=c(1.0, 0.99, 0.95, 0.90, 0.80),
-#'                            main="Excluding top level genes by total expression using different thresholds",
+#'                            main="Excluding top level genes by total 
+#'                            expression using different thresholds",
 #'                            gene.selection.criterion="mean")
 #' # Flat line test, select top genes by variance of expression
 #' PlotSignatureGeneQuantiles(ExpressionSet = PhyloExpressionSetExample,
-#'                            main="Excluding top level genes by variance of expression using different thresholds",
+#'                            main="Excluding top level genes by variance of 
+#'                            expression using different thresholds",
 #'                            quantiles=c(1.0, 0.99, 0.95, 0.90, 0.80),
 #'                            gene.selection.criterion="variance")
 
@@ -101,7 +102,7 @@ PlotSignatureGeneQuantiles <-
         
         expression_sets <- quantiles |>
                            lapply(\(p) TopGenes(ExpressionSet, p=p)) |>
-                           lapply(\(genes) subset(ExpressionSet, !(GeneID %in% genes)))
+                           lapply(\(genes) subset(ExpressionSet, !(ExpressionSet[[2]] %in% genes)))
         
         set_labels <- quantiles
         

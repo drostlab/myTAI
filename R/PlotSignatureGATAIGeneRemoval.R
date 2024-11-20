@@ -56,7 +56,7 @@ PlotSignatureGATAIGeneRemoval <- function(ExpressionSet,
   
   removed_gene_list <- GATAI(ExpressionSet, ...)
  
-  p_final <- myTAI::PlotSignature(dplyr::filter(ExpressionSet, !GeneID %in% as.character(removed_gene_list[[1]])),
+  p_final <- myTAI::PlotSignature(dplyr::filter(ExpressionSet, !ExpressionSet[[2]] %in% as.character(removed_gene_list[[1]])),
                       measure = measure,
                       TestStatistic = TestStatistic,
                       modules = modules,

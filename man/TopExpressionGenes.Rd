@@ -25,7 +25,8 @@ data(PhyloExpressionSetExample)
 genes.top_expression <- TopExpressionGenes(PhyloExpressionSetExample, p=.98)
 
 # remove top genes from the PhyloExpressionSet
-PhyloExpressionSet.top_removed <- subset(PhyloExpressionSetExample, !(GeneID \%in\% genes.top_expression))
+PhyloExpressionSet.top_removed <- subset(PhyloExpressionSetExample, 
+                                         !(GeneID \%in\% genes.top_expression))
 
 # plot TAI of set with removed quantile
 PlotSignature(ExpressionSet = PhyloExpressionSet.top_removed,
