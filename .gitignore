@@ -12,3 +12,4 @@ src/*.dll
 /doc/
 /Meta/
 LICENSE
+config.log
