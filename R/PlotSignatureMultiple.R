@@ -170,7 +170,8 @@ PlotSignatureMultiple <-
         for (i in 1:length(ExpressionSets)) {
             
             p_value <- test_results[[i]]$p.value
-            std_devs <- test_results[[i]]$std.dev
+            std_dev <- test_results[[i]]$std.dev
+            
             
             label <- paste0("<br><span style='font-size:16pt'>**",
                            set.labels[[i]],
@@ -188,6 +189,7 @@ PlotSignatureMultiple <-
             
             TI <- tibble::tibble(Stage = names(TIs[[i]]), 
                                  TI = TIs[[i]], 
+                                 StdDev = std_dev,
                                  Group = label
                                  )
             
@@ -201,14 +203,14 @@ PlotSignatureMultiple <-
                             group = Group,
                             color = Group
                         ), 
-                        lwd = lwd,
+                        lwd = lwd
                     ) +
                     ggplot2::geom_ribbon(
                         data=TI, 
                         ggplot2::aes(
                             x = factor(Stage, levels=unique(Stage)),
-                            ymin = TI - std_devs, 
-                            ymax = TI + std_devs,
+                            ymin = TI - StdDev, 
+                            ymax = TI + StdDev,
                             group=Group,
                             fill=Group
                         ), 
