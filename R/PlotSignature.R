@@ -114,13 +114,6 @@ PlotSignature <-
                                        TI = TPI(ExpressionSet))
         }
         
-        # generate bootMatrix
-        
-        # [WARN] (Stefan) - I think computing the bootMatrix here is redundant
-        # because the test result already includes the stddev values for plotting
-        # the error bars
-        bm <- tibble::as_tibble(bootMatrix(ExpressionSet = ExpressionSet, 
-                                           permutations  = permutations))
         
         
         if (TestStatistic == "FlatLineTest") {
@@ -318,14 +311,15 @@ PlotSignature <-
         # get p-value and standard deviation values from the test statistic
         pval <- resList$p.value
         pval <- format(pval,digits = 3)
+        std_dev <- resList$std.dev
         
         TI.ggplot <- ggplot2::ggplot(TI, ggplot2::aes(
                 x = factor(Stage, levels = unique(Stage)),
                 y = TI,
                 group = 1
         ))  + ggplot2::geom_ribbon(ggplot2::aes(
-                ymin = TI - apply(bm, 2, stats::sd),
-                ymax = TI + apply(bm, 2, stats::sd)
+                ymin = TI - std_dev,
+                ymax = TI + std_dev
         ), alpha = alpha) +
                 ggplot2::geom_line(lwd = lwd) +
                 ggplot2::theme_minimal() +
