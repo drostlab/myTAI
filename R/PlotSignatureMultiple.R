@@ -96,7 +96,7 @@ PlotSignatureMultiple <-
              alpha = 0.1,
              y.ticks = 3) {
         # bind global variables locally: for passing CMD check
-        Group <- Stage <- NULL
+        Group <- Stage <- StdDev <- NULL
         
         ## Parameter validation
         TXI <- switch(
