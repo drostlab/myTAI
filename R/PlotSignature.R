@@ -76,6 +76,9 @@ PlotSignature <-
                  alpha = 0.1,
                  y.ticks = 10) {
                 
+        # [WARN] (Stefan) - Since all of TAI, TDI and TPI compute the same thing,
+        # is there even a point of specifying the measure?
+        # the ExpressionSet already specifies what type of index is being used
         
         if (!is.element(measure, c("TAI", "TDI", "TPI")))
                 stop(
@@ -111,9 +114,6 @@ PlotSignature <-
                                        TI = TPI(ExpressionSet))
         }
         
-        # generate bootMatrix
-        bm <- tibble::as_tibble(bootMatrix(ExpressionSet = ExpressionSet, 
-                                           permutations  = permutations))
         
         
         if (TestStatistic == "FlatLineTest") {
@@ -311,14 +311,15 @@ PlotSignature <-
         # get p-value and standard deviation values from the test statistic
         pval <- resList$p.value
         pval <- format(pval,digits = 3)
+        std_dev <- resList$std.dev
         
         TI.ggplot <- ggplot2::ggplot(TI, ggplot2::aes(
                 x = factor(Stage, levels = unique(Stage)),
                 y = TI,
                 group = 1
         ))  + ggplot2::geom_ribbon(ggplot2::aes(
-                ymin = TI - apply(bm, 2, stats::sd),
-                ymax = TI + apply(bm, 2, stats::sd)
+                ymin = TI - std_dev,
+                ymax = TI + std_dev
         ), alpha = alpha) +
                 ggplot2::geom_line(lwd = lwd) +
                 ggplot2::theme_minimal() +
