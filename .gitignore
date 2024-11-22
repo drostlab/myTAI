@@ -6,6 +6,7 @@
 src/*.o
 src/*.so
 src/*.dll
+src/Makevars
 .Rdata
 .httr-oauth
 .DS_Store
