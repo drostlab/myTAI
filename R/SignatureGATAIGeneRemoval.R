@@ -1,6 +1,11 @@
 #' @title Removed genes after GATAI gene removal and plots of evolutionary signatures across transcriptomes before, after GATAI gene removal and with randomly removed genes
 #' @description Main function to return the removed genes after GATAI gene removal and plots transcriptome indices pattern before, after GATAI gene removal and by removing random genes (by default same number as GATAI removed).
 #' @param ExpressionSet a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.
+#' @param plot_type a string defining specifying the type of visualization for the results. If:
+#'  \itemize{
+#'    \item \code{plot_type = "separate"} individual plots are generated for the original dataset, the dataset with genes removed by GATAI, and the dataset with randomly removed genes.
+#'    \item \code{plot_type = "combined"} all datasets are visualized together in a single combined plot. 
+#'  }
 #' @param measure type of transcriptome index that shall be computed. E.g.
 #' \itemize{
 #' \item \code{measure = "TAI"} (Transcriptome Age Index)
@@ -35,11 +40,11 @@
 #' @param lwd line width.
 #' @param alpha transparency of the shaded area (between [0,1]). Default is \code{alpha = 0.1}.
 #' @param y.ticks number of ticks on the y-axis. Default is \code{ticks = 10}.
-#' @param n_random_removal number of randomly removed genes for the third plot. Default is \code{gatai} (same number of genes removed by GATAI).
-#' @param \dots parameters passed on to \code{\link{GATAI}}.
-#' @author Filipa Martins Costa and Hajk-Georg Drost
+#' @param n_random_removal number of randomly removed genes for the third plot. Default is \code{"gatai"} (same number of genes removed by GATAI).
+#' @author Filipa Martins Costa
 #' @export
-SignatureGATAIGeneRemoval <- function(ExpressionSet, 
+SignatureGATAIGeneRemoval <- function(ExpressionSet,
+                                      plot_type = "separate",
                                       measure = "TAI",
                                       TestStatistic = "FlatLineTest",
                                       modules = NULL,
@@ -53,45 +58,15 @@ SignatureGATAIGeneRemoval <- function(ExpressionSet,
                                       main = "",
                                       lwd = 4,
                                       alpha = 0.1,
-                                      y.ticks = 10, 
+                                      y.ticks = 10,
                                       n_random_removal = "gatai",
                                       ...) {
   
+  if (!plot_type %in% c("separate", "combined")) {
+    stop("Plot type '", plot_type, "' is not available for this function. Please specify a plot type supported by this function.", call. = FALSE)
+  }
+  
   removed_gene_list <- GATAI(ExpressionSet, ...)
-  
-  #  original sample of genes
-  P1 <-  myTAI::PlotSignature(ExpressionSet,
-                              measure = measure,
-                              TestStatistic = TestStatistic,
-                              modules = modules,
-                              permutations = permutations,
-                              lillie.test = lillie.test,
-                              p.value = p.value,
-                              shaded.area = shaded.area,
-                              custom.perm.matrix = custom.perm.matrix,
-                              xlab = xlab,
-                              ylab = ylab,
-                              main = main,
-                              lwd = lwd,
-                              alpha = alpha,
-                              y.ticks = y.ticks)
-  
-  # removed genes
-  P2 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !ExpressionSet[[2]] %in% as.character(removed_gene_list[[1]])),
-                              measure = measure,
-                              TestStatistic = TestStatistic,
-                              modules = modules,
-                              permutations = permutations,
-                              lillie.test = lillie.test,
-                              p.value = p.value,
-                              shaded.area = shaded.area,
-                              custom.perm.matrix = custom.perm.matrix,
-                              xlab = xlab,
-                              ylab = ylab,
-                              main = main,
-                              lwd = lwd,
-                              alpha = alpha,
-                              y.ticks = y.ticks)
   
   if (is.character(n_random_removal) && n_random_removal == "gatai") {
     n_random_genes <- length(removed_gene_list[[1]]) 
@@ -104,56 +79,107 @@ SignatureGATAIGeneRemoval <- function(ExpressionSet,
   }
   
   random_removed_genes <- sample(ExpressionSet$GeneID, n_random_genes)
+
+  if (plot_type == "separate"){
+    #  original sample of genes
+    P1 <-  myTAI::PlotSignature(ExpressionSet,
+                                measure = measure,
+                                TestStatistic = TestStatistic,
+                                modules = modules,
+                                permutations = permutations,
+                                lillie.test = lillie.test,
+                                p.value = p.value,
+                                shaded.area = shaded.area,
+                                custom.perm.matrix = custom.perm.matrix,
+                                xlab = xlab,
+                                ylab = ylab,
+                                main = main,
+                                lwd = lwd,
+                                alpha = alpha,
+                                y.ticks = y.ticks)
+    
+    # removed genes
+    P2 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !GeneID %in% as.character(removed_gene_list[[1]])),
+                                measure = measure,
+                                TestStatistic = TestStatistic,
+                                modules = modules,
+                                permutations = permutations,
+                                lillie.test = lillie.test,
+                                p.value = p.value,
+                                shaded.area = shaded.area,
+                                custom.perm.matrix = custom.perm.matrix,
+                                xlab = xlab,
+                                ylab = ylab,
+                                main = main,
+                                lwd = lwd,
+                                alpha = alpha,
+                                y.ticks = y.ticks)
+    
+    P3 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !GeneID %in% random_removed_genes),
+                                measure = measure,
+                                TestStatistic = TestStatistic,
+                                modules = modules,
+                                permutations = permutations,
+                                lillie.test = lillie.test,
+                                p.value = p.value,
+                                shaded.area = shaded.area,
+                                custom.perm.matrix = custom.perm.matrix,
+                                xlab = xlab,
+                                ylab = ylab,
+                                lwd = lwd,
+                                alpha = alpha,
+                                y.ticks = y.ticks)
+    
+    # save the data from both plots
+    data_p1 <- ggplot2::ggplot_build(P1)$data[[1]]
+    data_p2 <- ggplot2::ggplot_build(P2)$data[[1]]
+    data_p3 <- ggplot2::ggplot_build(P3)$data[[1]]
+    
+    # deciding the y index range by looking at the minimum and maximum values of the line and shade from both plots
+    min_y_p1 <- min(data_p1$y)
+    max_y_p1 <- max(data_p1$y)
+    min_y_p2 <- min(data_p2$y)
+    max_y_p2 <- max(data_p2$y)
+    min_y_p3 <- min(data_p3$y)
+    max_y_p3 <- max(data_p3$y)
+    min_y_p1_shading <- min(data_p1$ymin)
+    max_y_p1_shading <- max(data_p1$ymax)
+    min_y_p2_shading <- min(data_p2$ymin)
+    max_y_p2_shading <- max(data_p2$ymax)
+    min_y_p3_shading <- min(data_p3$ymin)
+    max_y_p3_shading <- max(data_p3$ymax)
+    min_y <- min(min_y_p1, min_y_p2, min_y_p3, min_y_p1_shading, min_y_p2_shading, min_y_p3_shading)
+    max_y <- max(max_y_p1, max_y_p2, max_y_p3, max_y_p1_shading, max_y_p2_shading, max_y_p3_shading)
+    
+    P1 <- P1 + ggplot2::scale_y_continuous(limits = c(min_y-0.05, ymax = max_y+0.05), 
+                                                      breaks = scales::breaks_pretty(n = y.ticks))
+
+    P2 <- P2 + ggplot2::scale_y_continuous(limits = c(min_y-0.05, ymax = max_y+0.05), 
+                                           breaks = scales::breaks_pretty(n = y.ticks))
+    
+    P3 <- P3 + ggplot2::scale_y_continuous(limits = c(min_y-0.05, ymax = max_y+0.05), 
+                                           breaks = scales::breaks_pretty(n = y.ticks))
+    
+    
+    plots <- cowplot::plot_grid(P1, P2, P3, labels = c(paste("Original sample of genes:", nrow(ExpressionSet), "genes"), 
+                                                   paste("GATAI:", nrow(removed_gene_list), "Removed genes"), paste(n_random_genes, "Randomly Removed Genes")))
+    print(plots)
+  }
   
-  P3 <-  myTAI::PlotSignature(dplyr::filter(ExpressionSet, !ExpressionSet[[2]] %in% random_removed_genes),
-                              measure = measure,
-                              TestStatistic = TestStatistic,
-                              modules = modules,
-                              permutations = permutations,
-                              lillie.test = lillie.test,
-                              p.value = p.value,
-                              shaded.area = shaded.area,
-                              custom.perm.matrix = custom.perm.matrix,
-                              xlab = xlab,
-                              ylab = ylab,
-                              lwd = lwd,
-                              alpha = alpha,
-                              y.ticks = y.ticks)
-  
-  # save the data from both plots
-  data_p1 <- ggplot2::ggplot_build(P1)$data[[1]]
-  data_p2 <- ggplot2::ggplot_build(P2)$data[[1]]
-  data_p3 <- ggplot2::ggplot_build(P3)$data[[1]]
-  
-  # deciding the y index range by looking at the minimum and maximum values of the line and shade from both plots
-  min_y_p1 <- min(data_p1$y)
-  max_y_p1 <- max(data_p1$y)
-  min_y_p2 <- min(data_p2$y)
-  max_y_p2 <- max(data_p2$y)
-  min_y_p3 <- min(data_p3$y)
-  max_y_p3 <- max(data_p3$y)
-  min_y_p1_shading <- min(data_p1$ymin)
-  max_y_p1_shading <- max(data_p1$ymax)
-  min_y_p2_shading <- min(data_p2$ymin)
-  max_y_p2_shading <- max(data_p2$ymax)
-  min_y_p3_shading <- min(data_p3$ymin)
-  max_y_p3_shading <- max(data_p3$ymax)
-  min_y <- min(min_y_p1, min_y_p2, min_y_p3, min_y_p1_shading, min_y_p2_shading, min_y_p3_shading)
-  max_y <- max(max_y_p1, max_y_p2, max_y_p3, max_y_p1_shading, max_y_p2_shading, max_y_p3_shading)
-  
-  
-  P1 <- P1 +  ggplot2::scale_y_continuous(limits = c(min_y-0.05, ymax = max_y+0.05), 
-                                                           breaks = scales::breaks_pretty(n = y.ticks))
-  P2 <- P2 + ggplot2::scale_y_continuous(limits = c(min_y-0.05, ymax = max_y+0.05), 
-                                                    breaks = scales::breaks_pretty(n = y.ticks))
-  
-  P3 <- P3 + ggplot2::scale_y_continuous(limits = c(min_y-0.05, ymax = max_y+0.05), 
-                                                    breaks = scales::breaks_pretty(n = y.ticks))
-  
-  
-  plots <- cowplot::plot_grid(P1, P2, P3, labels = c(paste("Original sample of genes:", nrow(ExpressionSet), "genes"), 
-                                                 paste("GATAI:", nrow(removed_gene_list), "Removed genes"), paste(n_random_genes, "Randomly Removed Genes")))
-  print(plots)
+  if(plot_type == "combined"){
+    expression_sets = list(ExpressionSet, dplyr::filter(ExpressionSet, !GeneID %in% as.character(removed_gene_list[[1]])),
+                           dplyr::filter(ExpressionSet, !GeneID %in% random_removed_genes))
+
+    set_labels = c(paste("Original sample of genes:", nrow(ExpressionSet), "genes"), 
+                   paste("GATAI:", nrow(removed_gene_list), "Removed genes"), paste(n_random_genes, "Randomly Removed Genes"))
+    
+    print(myTAI::PlotSignatureMultiple(ExpressionSets = expression_sets,
+                          set.labels = set_labels,
+                          measure = measure,
+                          TestStatistic=TestStatistic,
+                          main = "Comparison of TAI Patterns",
+                          y.tick = y.ticks))
+  }
   
   return(removed_gene_list)
   
