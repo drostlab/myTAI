@@ -1,0 +1,306 @@
+---
+title: "TAI destroyal geometric"
+output: html_document
+---
+
+## Load data
+
+```{r}
+library(myTAI)
+data("PhyloExpressionSetExample")
+
+phylo_expr_set <- PhyloExpressionSetExample
+N <- nrow(phylo_expr_set)
+phylo_expr_set <- phylo_expr_set[sample(N),]
+S <- 7
+
+ps_vec <- phylo_expr_set[, 1]
+gene_ids <- phylo_expr_set[, 2]
+expr_mat.raw <- phylo_expr_set[ , 3:(S+2)]
+```
+
+## Reduce stages to 3 for ease of visualisation
+
+```{r}
+library(knitr)
+modules = list(early=1:2, mid=3:5, late=6:7)
+expr_mat.3D <- data.frame(Early=rowMeans(expr_mat.raw[modules$early]),
+                          Mid=rowMeans(expr_mat.raw[modules$mid]),
+                          Late=rowMeans(expr_mat.raw[modules$late]))
+expr_mat <- expr_mat.3D
+
+# Convert count to log
+expr_mat[] <- lapply(expr_mat, \(x) log2(x+1))
+
+# Normalise the counts
+expr_mat.normalised <- mapply('/', expr_mat, colSums(expr_mat))
+
+kable(expr_mat.normalised[1:5, ], caption="Expression Matrix")
+```
+
+## Set the mean expression level to 0 for each profile (wlog)
+
+```{r}
+library(tibble)
+library(ggplot2)
+library(plotly)
+
+# Plot all the gene profiles
+plot_profiles <- function(expr_mat, title) {
+    df <- as_tibble(expr_mat) |> 
+    add_column(Group = "Gene residuals", 
+               Phylostratum = ps_vec,
+               GeneID = gene_ids) |>
+    tidyr::pivot_longer(cols=c("Early", "Mid", "Late"), names_to="Stage", values_to="Value")
+
+    ggplot(data=df, 
+           aes(x=factor(Stage, levels=unique(Stage)), 
+               y=Value, 
+               colour=Phylostratum, 
+               group=GeneID)) + 
+        geom_line(alpha=0.2) +
+        labs(x="Stage", title=title)
+}
+
+plot_profiles(expr_mat.normalised, "Gene profiles")
+
+# Multiply by gene age
+expr_mat.aged <- expr_mat.normalised * ps_vec
+plot_profiles(expr_mat.aged, "Gene profiles, scaled by PS")
+
+# Centralise ages
+expr_mat.centralised <- expr_mat.aged - rowMeans(expr_mat.aged)
+plot_profiles(expr_mat.centralised, "Gene profiles, scaled by PS, and centralised")
+
+```
+
+### Show TAI
+
+```{r}
+
+
+get_tai <- function(expr_mat) {
+    return(colSums(expr_mat))
+}
+
+TAI <- get_tai(expr_mat.aged)
+TAI_residuals <- get_tai(expr_mat.centralised)
+
+plot_tai <- function(tai) {
+    df <- data.frame(t(tai)) |>
+        tidyr::pivot_longer(cols=c("Early", "Mid", "Late"), names_to="Stage", values_to="TAI")
+    ggplot(data=df,
+           aes(x=factor(Stage, levels=unique(Stage)),
+               y=TAI,
+               group=1)) +
+        geom_line(linewidth=3) +
+        labs(x="Stage", y="TAI", title="TAI")
+}
+# TAI
+plot_tai(TAI)
+
+# TAI, centralised around 0
+plot_tai(TAI_residuals)
+
+```
+
+### Show effect of transformations in 3D
+
+```{r}
+plot_profiles_3D <- function(expr_mat, tai=NULL) {
+    
+    df <- as_tibble(expr_mat) |> 
+        add_column(Group = "Gene residuals", 
+                   Phylostratum = ps_vec,
+                   ID = gene_ids)
+    
+    
+    p <- plot_ly() |>
+        add_markers(data = df, x=~Early, y=~Mid, z=~Late,
+            marker=list(color = ~Phylostratum, 
+                        colorscale='Blues', 
+                        size=1.5, 
+                        alpha=0.5,
+                        colorbar=list(title= "Phylostratum")))
+    if (!is.null(tai)) {
+        df <- data.frame(Early=tai[1], Mid=tai[2], Late=tai[3])
+        p <- add_markers(p, data=df, x=~Early, y=~Mid, z=~Late, marker=list(color="red"))
+    }
+    p
+}
+
+# Normalised gene vectors
+plot_profiles_3D(expr_mat.normalised)
+
+# Gene vectors scaled by PS
+plot_profiles_3D(expr_mat.aged)
+
+# Gene vectors scaled by PS, and centralised around 0
+plot_profiles_3D(expr_mat.centralised)
+
+# also show TAI for reference
+plot_profiles_3D(expr_mat.aged, tai=TAI)
+plot_profiles_3D(expr_mat.centralised, tai=TAI_residuals)
+
+```
+
+## Project on 2D
+
+```{r}
+
+project_residuals <- function(expr_mat, tai) {
+    tai <- unname(tai)
+    proj_mat <- rbind(tai, pracma::cross(c(1,1,1), tai))
+    expr_mat.2D <- expr_mat |>
+        data.matrix() |>
+        t() |>
+        (\(x) proj_mat %*% x)() |>
+        t() |>
+        unname()
+    return(expr_mat.2D)
+}
+
+expr_mat.2D <- project_residuals(expr_mat.centralised, TAI_residuals)
+
+
+plot_2D <- function(expr_mat) {
+    df <- as_tibble(expr_mat) |>
+    add_column(Group = "Gene residuals", 
+               Phylostratum = ps_vec,
+               ID = gene_ids)
+
+    ggplot(df, aes(x=V1, y=V2, colour=Phylostratum)) +
+        geom_point(alpha=0.5, size=0.2)
+}
+plot_2D(expr_mat.2D)
+
+```
+
+## How much does gene removal change these values
+
+```{r}
+randomMask <- function(N, k) {
+    mask <- c(rep(1, N-k), rep(0, k)) |>
+        sample()
+    return(mask)
+}
+
+
+pMatrixResiduals <- function(expr_mat,
+                             transformation = "none",
+                             mask = NULL) {
+    N <- nrow(expr_mat)
+    if(is.null(mask))
+        mask = rep(1, N)
+    
+    # Apply transformation
+    transf = switch(transformation,
+        "none" = identity,
+        "sqrt" = sqrt,
+        "log" = \(x) log2(x+1)
+    )
+    expr_mat[] <- lapply(expr_mat, transf)
+    
+    expr_mat <- expr_mat * mask
+    
+    # Normalise the counts, stage/column wise
+    expr_mat.normalised <- mapply('/', expr_mat, colSums(expr_mat))
+    
+    # Centralise the gene profiles/row wise 
+    expr_mat.centralised <- expr_mat.normalised - rowMeans(expr_mat.normalised)
+    
+    # Multiply by gene age
+    ps_vec <- phylo_expr_set[, 1]
+    expr_mat.aged <- expr_mat.normalised * ps_vec
+    
+    return(expr_mat.aged)
+}
+
+
+
+plot_disturbance <- function(expr_mat1, expr_mat2,  mask) {
+    tai <- get_tai(expr_mat1)
+    tai2 <- get_tai(expr_mat2)
+    
+    df_tai = dplyr::bind_rows(data.frame(t(tai)), data.frame(t(tai2)))
+    projected_tais <- project_residuals(df_tai, tai)
+    tai.delta <- projected_tais[2, ] - projected_tais[1, ]
+    
+    expr_mat1.2D <- project_residuals(expr_mat1, tai)
+    expr_mat2.2D <- project_residuals(expr_mat2, tai)
+    
+    df <- as_tibble(expr_mat1.2D) |>
+        add_column(U1 = expr_mat2.2D[, 1], 
+                   U2 = expr_mat2.2D[, 2],
+                   Phylostratum = ps_vec) |>
+        filter(mask == 1)
+    
+    p <- ggplot(df, aes(x=V1, y=V2, color=Phylostratum)) +
+        geom_segment(aes(xend=U1, yend=U2), arrow=arrow(length=unit(0.1, "cm")), alpha=0.4) +
+        annotate("segment", x=0, y=0, xend=tai.delta[1], yend=tai.delta[2], colour="red", arrow=arrow())
+    p
+}
+
+# remove 20 genes at random
+mask <- randomMask(N, 20)
+expr_mat.disturbed <- pMatrixResiduals(expr_mat.3D, transformation="log", mask=mask)
+plot_disturbance(expr_mat.centralised, expr_mat.disturbed, mask)
+
+# remove 200 genes at random
+mask <- randomMask(N, 200)
+expr_mat.disturbed <- pMatrixResiduals(expr_mat.3D, transformation="log", mask=mask)
+plot_disturbance(expr_mat.centralised, expr_mat.disturbed, mask)
+
+# remove 2000 genes at random
+mask <- randomMask(N, 2000)
+expr_mat.disturbed <- pMatrixResiduals(expr_mat.3D, transformation="log", mask=mask)
+plot_disturbance(expr_mat.centralised, expr_mat.disturbed, mask)
+
+```
+
+## Removing highly variant genes
+
+```{r}
+library(devtools)
+load_all()
+
+normalisingFactor <- function(expr_mat, 
+                              transformation = "none",
+                              mask = NULL) {
+    N <- nrow(expr_mat)
+    if(is.null(mask))
+        mask = rep(1, N)
+    
+    # Apply transformation
+    transf = switch(transformation,
+                    "none" = identity,
+                    "sqrt" = sqrt,
+                    "log" = \(x) log2(x+1)
+    )
+    expr_mat[] <- lapply(expr_mat, transf)
+    expr_mat <- expr_mat * mask
+    
+    return(colSums(expr_mat))
+}
+
+scalingDifference <- function(expr_mat, transformation, mask) {
+    normalisingFactor(expr_mat, transformation = transformation, mask=mask) /
+      normalisingFactor(expr_mat.3D, transformation = transformation, mask=NULL)
+}
+
+genesToMask <- function(all_genes, subset) {
+    as.integer(!(all_genes %in% subset))
+}
+
+genes <- TopVarianceGenes(phylo_expr_set, p=0.99)
+mask <- genesToMask(phylo_expr_set$GeneID, genes)
+
+# This is the 'squishing' factor of the normalisation when removing genes
+scaling <- scalingDifference(expr_mat.3D, transformation = "log", mask=mask)
+print(scaling)
+print(max(scaling) - min(scaling))
+
+expr_mat.disturbed <- pMatrixResiduals(expr_mat.3D, transformation="log", mask=mask)
+plot_disturbance(expr_mat.centralised, expr_mat.disturbed, mask)
+
+```
