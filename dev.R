@@ -1,5 +1,6 @@
 library(devtools)
-
+library(tidyr)
+library(dplyr)
 load_all()
 
 library(readr)
@@ -174,4 +175,43 @@ PlotGeneProfiles <- function(ExpressionSet) {
 
 PlotGeneProfiles(all.set)
 
+PlotAgeDistributions <- function(ExpressionSet) {
+    long_data <- ExpressionSet |>
+        pivot_longer(cols=-(1:2), 
+                     names_to="Stage", 
+                     values_to="Count"
+        )
+    
+    ggplot(long_data, aes(x=factor(Phylostratum), y=Count, fill=factor(Phylostratum))) +
+        geom_bar(stat="identity", position="stack") +
+        facet_wrap(~Stage, nrow=1) +
+        scale_fill_viridis_d(name = "Phylostratum") +
+        theme_minimal() +
+        labs(
+            x = "Phylostratum",
+            y = "Cumulative Expression",
+            title = "Cumulative Expression per Phylostratum Across Stages"
+        ) +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+
+pTAIreal <- function(ExpressionSet) {
+    pTAI <- ExpressionSet |>
+        group_by(Phylostratum) |>
+        summarise(across(-(1:2), sum))
+    return(pTAI)
+}
+
+stage_mean_and_stddev <- function(counts, phylostrata) {
+    probs <- counts / sum(counts)
+    mu <- sum(probs * phylostrata)
+    variance <- sum(probs * (phylostrata - mu)^2)
+    return(list(mean=mu, var=sqrt(variance)))
+}
+
+PlotTAIVariance <- function(ExpressionSet) {
+    pTAI <- pTAIreal(ExpressionSet)
+    res <- apply(as.matrix(pTAI[, -1]), 2, stage_mean_and_stddev, phylostrata=pTAI[[1]])
+    return(res)
+}
 
