@@ -148,7 +148,7 @@ FlatLineTest <- function(ExpressionSet,
   ### estimate the parameters (shape,rate)
   ### of the gamma distributed variance values
   ### using: method of moments estimation
-  gamma_MME = GetGamma(var_values, permutations)
+  gamma_MME = GetGamma(var_values)
   ### estimate shape:
   shape <- gamma_MME[[1]]
   ### estimate the rate:
@@ -286,7 +286,7 @@ FlatLineTest <- function(ExpressionSet,
 }
 
 
-GetGamma <- function(var_values, permutations)
+GetGamma <- function(var_values)
 {
   iterations = 200
   max_cut = 0.25
