@@ -83,9 +83,7 @@
 emergence of a given gene (i.e. <code>gene age inference</code>),
 typically done for all genes in a genome. In practice, one performs
 homology searches against a evolutionarily-informed database.</p>
-<div class="float">
-<img src="Figures%2FBasics_of_phylostratigraphy.png" alt="Image adapted from the GenEra paper."><div class="figcaption">Image adapted from the GenEra paper.</div>
-</div>
+<p><img src="Figures%2FBasics_of_phylostratigraphy.png"></p>
 <p style="font-size:10px;">
 Overview of gene age inference. Here, we are searching two genes from
 the genome of interest against an evolutionarily-informed database. The
@@ -101,6 +99,10 @@ expression data, is used to compute the transcriptome age index
 table storing the gene age in the first column and the corresponding
 gene id of the organism of interest in the second column. This table is
 named <em>phylostratigraphic map</em> (or <em>phylomap</em>).</p>
+<p>For quick users, there are several recent software developed for gene
+age inference such as <a href="https://github.com/josuebarrera/GenEra" class="external-link"><code>GenEra</code></a>
+and <a href="https://github.com/kullrich/oggmap" class="external-link"><code>oggmap</code></a>. But
+we hope you stay for the debate/discussion!</p>
 </div>
 <div class="section level2">
 <h2 id="the-debate">The debate<a class="anchor" aria-label="anchor" href="#the-debate"></a>
@@ -119,20 +121,18 @@ et al., 2020</a>; <a href="https://academic.oup.com/mbe/article/38/1/31/5900268"
 et al., 2022</a>; <a href="https://link.springer.com/article/10.1186/s13059-023-02895-z" class="external-link">Barrera-Redondo
 et al., 2023</a>; etc.).</p>
 <p>The crux of the discussion focuses on the homology search bias,
-though several studis have also noted database bias (e.g., species
-representation and contamination - see <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z" class="external-link">Barrera-Redondo
-et al., 2023</a> for discussion) and evolutionary assumptions (e.g.,
-Dollo parsimony - see <a href="https://academic.oup.com/gbe/article/16/4/evae062/7633882" class="external-link">Gàlvez-Morante
-et al., 2024</a>).</p>
+though several studies have also noted database bias (e.g., species
+representation and contamination) and evolutionary assumptions (e.g.,
+Dollo parsimony).</p>
 <div class="section level3">
 <h3 id="homology-search-bias">Homology search bias<a class="anchor" aria-label="anchor" href="#homology-search-bias"></a>
 </h3>
 <p>The first phylostratigraphy studies used <code>BLASTp</code>, which
 performs pairwise protein sequence alignment, for the homology search
-step. At the time of these study (late-2000s), <code>BLASTp</code> was
-chosen as it balanced the requirements of sensitivity and speed when
-performing sequence homology searches against (at that time) a large
-databases.</p>
+step. At the time of these study (late-2000s/early-2010s),
+<code>BLASTp</code> was chosen as it balanced the requirements of
+sensitivity and speed when performing sequence homology searches against
+(at that time) a large databases.</p>
 <p>The following discussions pertain to the potential biases with
 <code>BLASTp</code> in particular and pairwise sequence aligners in
 general.</p>

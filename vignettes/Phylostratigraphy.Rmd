@@ -16,21 +16,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Genomic phylostratigraphy is a method to date the evolutionary emergence of a given gene (i.e. `gene age inference`), typically done for all genes in a genome. In practice, one performs homology searches against a evolutionarily-informed database.
 
-![Image adapted from the GenEra paper.](Figures/Basics_of_phylostratigraphy.png)
+![](Figures/Basics_of_phylostratigraphy.png)
 
 <p style="font-size:10px;"> Overview of gene age inference. Here, we are searching two genes from the genome of interest against an evolutionarily-informed database. The first gene is assigned as *relative age* 1 since homologues can be found as far as node 1. The second gene is assigned as *relative age* 3 since homologues can be found only up to node 3. Adapted from [Barrera-Redondo et al., 2023](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z). </p>
 
 The output can be fed into `myTAI` and, combined with expression data, is used to compute the transcriptome age index (`TAI`). More specifically, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of interest in the second column. This table is named _phylostratigraphic map_ (or _phylomap_).
 
+For quick users, there are several recent software developed for gene age inference such as [`GenEra`](https://github.com/josuebarrera/GenEra) and [`oggmap`](https://github.com/kullrich/oggmap). But we hope you stay for the debate/discussion!
+
 ## The debate
 
 Despite its simplicity, since the first studies ([Domazet-Loso et al., 2007](https://www.sciencedirect.com/science/article/pii/S0168952507002995)), the method and concept underlying genomic phylostratigraphy has been subject to intense discussions ([Capra et al., 2013](https://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](https://www.nature.com/articles/nmeth.3830.pdf); [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026); [Domazet-Loso et al., 2017](https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284); [Yin et al., 2018](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074); [Casola 2018](https://academic.oup.com/gbe/article/10/11/2906/5140197); [Weisman et al., 2020](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000862); [Futo et al., 2021](https://academic.oup.com/mbe/article/38/1/31/5900268); [Weisman et al., 2022](https://www.sciencedirect.com/science/article/pii/S0960982222007217);  [Barrera-Redondo et al., 2023](https://link.springer.com/article/10.1186/s13059-023-02895-z); etc.).
 
-The crux of the discussion focuses on the homology search bias, though several studis have also noted database bias (e.g., species representation and contamination - see [Barrera-Redondo et al., 2023](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z) for discussion) and evolutionary assumptions (e.g., Dollo parsimony - see [Gàlvez-Morante et al., 2024](https://academic.oup.com/gbe/article/16/4/evae062/7633882)).
+The crux of the discussion focuses on the homology search bias, though several studies have also noted database bias (e.g., species representation and contamination) and evolutionary assumptions (e.g., Dollo parsimony).
 
 ### Homology search bias
 
-The first phylostratigraphy studies used `BLASTp`, which performs pairwise protein sequence alignment, for the homology search step. At the time of these study (late-2000s), `BLASTp` was chosen as it balanced the requirements of sensitivity and speed when performing sequence homology searches against (at that time) a large databases.
+The first phylostratigraphy studies used `BLASTp`, which performs pairwise protein sequence alignment, for the homology search step. At the time of these study (late-2000s/early-2010s), `BLASTp` was chosen as it balanced the requirements of sensitivity and speed when performing sequence homology searches against (at that time) a large databases.
 
 The following discussions pertain to the potential biases with `BLASTp` in particular and pairwise sequence aligners in general.
 
