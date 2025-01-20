@@ -12,7 +12,7 @@ In the past years, a variety of studies aimed to uncover the molecular basis of 
 
 Although transcriptome information is a useful start to study the molecular mechanisms underlying a biological process of interest (molecular phenotype), they rarely capture __how__ these expression patterns emerged in the first place or to __what extent__ they are possibly constrained, thereby neglecting the evolutionary history and developmental constraints of genes contributing to the overall pool of expressed transcripts. 
 
-To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate gene age information into classical gene expression analysis. `Gene age inference` can be performed with [various existing software](https://drostlab.github.io/myTAI/articles/Introduction.html#retrieval-of-phylogenetic-or-taxonomic-information), but we recommend using [GenEra](https://github.com/josuebarrera/GenEra) or [orthomap](https://github.com/kullrich/orthomap), since they address published shortcomings of `gene age inference` ([see detailed discussion here](https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html)). In addition, users can easily retrieve [previously precomputed gene age information](https://github.com/drostlab/published_phylomaps) via our data package [phylomapr](https://github.com/LotharukpongJS/phylomapr).
+To overcome this limitation, the `myTAI` package introduces procedures summarized under the term `evolutionary transcriptomics` to integrate gene age information into classical gene expression analysis. `Gene age inference` can be performed with [various existing software](https://drostlab.github.io/myTAI/articles/Introduction.html#retrieval-of-phylogenetic-or-taxonomic-information), but we recommend using [GenEra](https://github.com/josuebarrera/GenEra), since they address published shortcomings of `gene age inference` ([see detailed discussion here](https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html)). In addition, users can easily retrieve [previously precomputed gene age information](https://github.com/drostlab/published_phylomaps) via our data package [phylomapr](https://github.com/LotharukpongJS/phylomapr).
 
 Evolutionary transcriptomics studies can serve as a first approach to screen _in silico_ for the potential existence of evolutionary and developmental constraints within a biological process of interest. This is achieved by quantifying transcriptome conservation patterns and their underlying gene sets in biological processes. The exploratory analysis functions implemented in `myTAI` provide users with a standardized, automated and statistically sound framework to detect and analyze patterns of evolutionary constraints in any transcriptome dataset of interest.
 
@@ -426,19 +426,5 @@ Quint M, Drost HG, et al. __A transcriptomic hourglass in plant embryogenesis__.
 Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231.
 
 Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan PT, Dekkers BJW, Bentsink L, Hilhorst H, Ligterink W, Wellmer F, Grosse I, and Quint M. __Post-embryonic hourglass patterns mark ontogenetic transitions in plant development__. _Mol. Biol. Evol._ (2016) [doi:10.1093/molbev/msw039](https://academic.oup.com/mbe/article/33/5/1158/2580081) 
-
-
-## Acknowledgement
-
-I would like to thank several individuals for making this project possible.
-
-First I would like to thank Ivo Grosse and Marcel Quint for providing me a place
-and the environment to be able to work on fascinating topics of Evo-Devo research and for the fruitful discussions that led to projects like this one.
-
-Furthermore, I would like to thank Alexander Gabel and Jan Grau for valuable discussions
-on how to improve some methodological concepts of some analyses present in this package.
-
-I would also like to thank my past Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
-who worked intensively with this package and helped me to improve the usability and logic of the package environment.
 
 
