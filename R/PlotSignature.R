@@ -56,7 +56,7 @@
 #'               permutations  = 100,
 #'               TestStatistic = "FlatLineTest",
 #'               ylab = "Transcriptome Age Index")
-#'               
+#'              
 #' @export
 
 PlotSignature <-

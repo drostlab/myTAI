@@ -1,2 +1,2 @@
 CC=clang -arch arm64
-CFLAGS=-falign-functions=64 -Wall -g -O2 -UNDEBUG -Wall -pedantic -g -O0 -fdiagnostics-color=always
+CFLAGS=-falign-functions=64 -Wall -g -O2

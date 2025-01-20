@@ -50,7 +50,7 @@ by using bootstrapping appraoches instead of permutation tests used in <code><a 
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">PlotCIRatio</span><span class="op">(</span><span class="va">ExpressionSet</span>, <span class="va">measure</span>, <span class="va">nbootstraps</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">PlotCIRatio</span><span class="op">(</span><span class="va">ExpressionSet</span>, <span class="va">measure</span>, <span class="va">nbootstraps</span>, plot_type <span class="op">=</span> <span class="st">"ratio_and_CI"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,6 +68,12 @@ by using bootstrapping appraoches instead of permutation tests used in <code><a 
 <dt id="arg-nbootstraps">nbootstraps<a class="anchor" aria-label="anchor" href="#arg-nbootstraps"></a></dt>
 <dd><p>number of independent bootstraps.</p></dd>
 
+
+<dt id="arg-plot-type">plot_type<a class="anchor" aria-label="anchor" href="#arg-plot-type"></a></dt>
+<dd><p>a string defining specifying the type of visualization for the results. If:</p><ul><li><p><code>plot_type = "ratio_and_CI"</code> plots of both CI ratio and the span of the CI are shown.</p></li>
+<li><p><code>plot_type = "only_ratio"</code> only plot of the CI is shown.</p></li>
+</ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -83,7 +89,7 @@ In order to compare the range of confidence intervals in the same scale, we plot
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
-    <p>Jialin Liu</p>
+    <p>Jialin Liu and Filipa Martins Costa</p>
     </div>
 
     <div class="section level2">
@@ -98,7 +104,7 @@ In order to compare the range of confidence intervals in the same scale, we plot
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich, Stefan Manolache.</p>
 </div>
 
 <div class="pkgdown-footer-right">

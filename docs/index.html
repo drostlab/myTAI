@@ -137,7 +137,7 @@
 <h3 id="scientific-background">Scientific background<a class="anchor" aria-label="anchor" href="#scientific-background"></a>
 </h3>
 <p>Today, phenomena such as morphological mutations, diseases or developmental processes are primarily investigated on the molecular level using transcriptomics approaches. Transcriptomes denote the total number of quantifiable transcripts present at a specific stage in a biological process. In disease or developmental (defect) studies, transcriptomes are usually measured over several time points. In treatment studies aiming to quantify differences in the transcriptome due to biotic stimuli, abiotic stimuli, or diseases usually treatment / disease versus non-treatment / non-disease transcriptomes are compared. In either case, comparing changes in transcriptomes over time or between treatments allows us to identify genes and gene regulatory mechanisms that might be involved in governing the biological process of investigation. Although classic transcriptomics studies are based on an established methodology, little is known about the evolution and conservation mechanisms underlying such transcriptomes. Understanding the evolutionary mechanism that change transcriptomes over time, however, might give us a new perspective on how diseases emerge in the first place or how morphological changes are triggered by changes of developmental transcriptomes.</p>
-<p>Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern then enables to detect stages of development or other biological processes that are evolutionarily conserved (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684" class="external-link">Drost et al., 2018</a>). This quantification on the highest level is achieved through transcriptome indices (e.g. <a href="https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index">Transcriptome Age Index or Transcriptome Divergence Index</a>) which aim to quantify the average evolutionary age <a href="https://www.biorxiv.org/content/10.1101/2022.07.07.498977v1" class="external-link">Barrera-Redondo et al., 2022</a> or sequence conservation <a href="https://academic.oup.com/mbe/article/32/5/1221/1125964" class="external-link">Drost et al., 2015</a> of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes at particular developmental stages and to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollo’s law) (<a href="https://www.sciencedirect.com/science/article/pii/S0959437X16302040" class="external-link">Drost et al., 2017</a>).</p>
+<p>Evolutionary transcriptomics aims to capture and quantify the evolutionary conservation of genes that contribute to the transcriptome during a specific stage of the biological process of interest. The resulting temporal conservation pattern then enables to detect stages of development or other biological processes that are evolutionarily conserved (<a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684" class="external-link">Drost et al., 2018</a>). This quantification on the highest level is achieved through transcriptome indices (e.g. <a href="https://drostlab.github.io/myTAI/articles/Introduction.html#transcriptome-age-index">Transcriptome Age Index or Transcriptome Divergence Index</a>) which aim to quantify the average evolutionary age <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z" class="external-link">Barrera-Redondo et al., 2023</a> or sequence conservation <a href="https://academic.oup.com/mbe/article/32/5/1221/1125964" class="external-link">Drost et al., 2015</a> of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes at particular developmental stages and to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollo’s law) (<a href="https://www.sciencedirect.com/science/article/pii/S0959437X16302040" class="external-link">Drost et al., 2017</a>).</p>
 <p><strong>Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years, please follow my <a href="https://drostlab.github.io/myTAI/articles/Phylostratigraphy.html">updated discussion about the gene age inference literature</a>. With <a href="https://github.com/josuebarrera/GenEra" class="external-link">GenEra</a>, we addressed all previously raised issues and we encourage users to run <code>GenEra</code> when aiming to infer gene ages for further <code>myTAI</code> analyses.</strong></p>
 </div>
 </div>
@@ -313,7 +313,7 @@
 <li>
 <code><a href="reference/PlotEnrichment.html">PlotEnrichment()</a></code> : Plot the Phylostratum or Divergence Stratum Enrichment of a given Gene Set</li>
 <li>
-<code><a href="reference/PlotGeneSet.html">PlotGeneSet()</a></code> : Plot the Expression Profiles of a Gene Set</li>
+<code>PlotGeneSet()</code> : Plot the Expression Profiles of a Gene Set</li>
 <li>
 <code><a href="reference/PlotGroupDiffs.html">PlotGroupDiffs()</a></code> : Plot the significant differences between gene expression distributions of PS or DS groups</li>
 <li>
@@ -409,30 +409,49 @@
 </h2>
 <blockquote>
 <ul>
-<li><p><strong>Evolutionary transcriptomics of metazoan biphasic life cycle supports a single intercalation origin of metazoan larvae</strong> J Wang, L Zhang, S Lian, Z Qin, X Zhu, X Dai, Z Huang et al. - <strong>Nature Ecology &amp; Evolution</strong>, 2020</p></li>
-<li><p><strong>Pervasive convergent evolution and extreme phenotypes define chaperone requirements of protein homeostasis</strong> Y Draceni, S Pechmann - <strong>Proceedings of the National Academy of Sciences</strong>, 2019</p></li>
-<li><p><strong>Reconstructing the transcriptional ontogeny of maize and sorghum supports an inverse hourglass model of inflorescence development</strong> S Leiboff, S Hake - <strong>Current Biology</strong>, 2019</p></li>
-<li><p><strong>A unicellular relative of animals generates a layer of polarized cells by actomyosin-dependent cellularization</strong> O Dudin, A Ondracka, X Grau-Bové, AAB Haraldsen et al. - <strong>eLife</strong>, 2019</p></li>
-<li><p><strong>Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis</strong> HG Drost, A Gabel, I Grosse, M Quint - <strong>Molecular biology and evolution</strong>, 2015</p></li>
-<li><p><strong>Gene Expression Does Not Support the Developmental Hourglass Model in Three Animals with Spiralian Development</strong> L Wu, KE Ferger, JD Lambert - <strong>Molecular biology and evolution</strong>, 2019</p></li>
-<li><p><strong>Transcriptome age of individual cell types in Caenorhabditis elegans</strong> F Ma, C Zheng - <strong>Proceedings of the National Academy of Sciences</strong>, 2023</p></li>
-<li><p><strong>The Transcriptional Landscape of Polyploid Wheats and their Diploid Ancestors during Embryogenesis and Grain Development</strong> D Xiang, TD Quilichini, Z Liu, P Gao, Y Pan et al. - <strong>The Plant Cell</strong>, 2019</p></li>
-<li><p><strong>Embryo-Like Features in Developing Bacillus subtilis Biofilms</strong> M Futo, L Opašić, S Koska, N Čorak, T Široki, V Ravikumar, A Thorsell, M Lenuzzi, D Kifer, M Domazet-Lošo, K Vlahoviček, I Mijakovic, T Domazet-Lošo - <strong>Molecular Biology and Evolution</strong>, 2021</p></li>
-<li><p><strong>New Genes Interacted With Recent Whole-Genome Duplicates in the Fast Stem Growth of Bamboos</strong> G Jin, P-F Ma, X Wu, L Gu, M Long, C Zhang, DZ Li - <strong>Molecular Biology and Evolution</strong>, 2021</p></li>
-<li><p><strong>Developmental constraints on genome evolution in four bilaterian model species</strong> J Liu, M Robinson-Rechavi - <strong>Genome biology and evolution</strong>, 2018</p></li>
-<li><p><strong>Mapping selection within Drosophila melanogaster embryo’s anatomy</strong> I Salvador-Martínez et al. - <strong>Molecular biology and evolution</strong>, 2017</p></li>
-<li><p><strong>Distribution and diversity of enzymes for polysaccharide degradation in fungi</strong> R Berlemont - <strong>Scientific reports</strong>, 2017</p></li>
-<li><p><strong>The origins and evolutionary history of human non-coding RNA regulatory networks</strong> M Sherafatian, SJ Mowla - <strong>Journal of bioinformatics and computational biology</strong>, 2017</p></li>
-<li><p><strong>Elucidating the endogenous synovial fluid proteome and peptidome of inflammatory arthritis using label-free mass spectrometry</strong> SM Mahendran, EC Keystone, RJ Krawetz et al. - <strong>Clinical proteomics</strong>, 2019</p></li>
-<li><p><strong>Phylostratr: a framework for phylostratigraphy</strong> Z Arendsee, J Li, U Singh, A Seetharam et al. - <strong>Bioinformatics</strong>, 2019</p></li>
-<li><p><strong>Pervasive convergent evolution and extreme phenotypes define chaperone requirements of protein homeostasis</strong> Y Draceni, S Pechmann - <strong>BioRxiv</strong>, 2019</p></li>
-<li><p><strong>Environmental DNA reveals landscape mosaic of wetland plant communities</strong> ME Shackleton, GN Rees, G Watson et al. - <strong>Global Ecology and Conservation</strong>, 2019</p></li>
-<li><p><strong>Algorithms for synteny-based phylostratigraphy and gene origin classification</strong> Z Arendsee - 2019</p></li>
-<li><p><strong>High expression of new genes in trochophore enlightening the ontogeny and evolution of trochozoans</strong> F Xu, T Domazet-Lošo, D Fan, TL Dunwell, L Li et al. - <strong>Scientific reports</strong>, 2016</p></li>
-<li><p><strong>Oxytocin receptor expression patterns in the human brain across development</strong> J Rokicki, T Kaufmann, A-MG de Lange, D van der Meer, S Bahrami, AM Sartorius, UK Haukvik, NE Steen, E Schwarz, DJ Stein, T Nærland, OA Andreassen, LT Westlye, DS Quintana - <strong>Neuropsychopharmacol</strong>, 2022</p></li>
-<li><p><strong>The Phylotranscriptomic Hourglass Pattern in Fungi: An Updated Model</strong> Y Xie, HS Kwan, PL Chan, WJ Wu, J Chiou, J Chang <strong>BioRxiv</strong>, 2022</p></li>
-<li><p><strong>An ancient split of germline and somatic stem cell lineages in Hydra</strong> C Nishimiya-Fujisawa, H Petersen, TC-T Koubková-Yu, C Noda, S Shigenobu, J Bageritz, T Fujisawa, O Simakov, S Kobayashi, TW Holstein - <strong>BioRxiv</strong>, 2023</p></li>
-<li><p><strong>A Transcriptomic Hourglass In Brown Algae</strong> JS Lotharukpong, M Zheng, R Luthringer, H-G Drost, SM Coelho - <strong>BioRxiv</strong>, 2024</p></li>
+<li><p><em>A transcriptomic hourglass in brown algae</em> JS Lotharukpong, M Zheng, R Luthringer, H-G Drost, SM Coelho - <strong>Nature</strong>, 2024</p></li>
+<li><p><em>Genome assemblies of 11 bamboo species highlight diversification induced by dynamic subgenome dominance</em> PF Ma, YL Liu, C Guo, G Jin, ZH Guo, L Mao, YZ Yang… - <strong>Nature Genetics</strong>, 2024</p></li>
+<li><p><em>Hemichordate cis-regulatory genomics and the gene expression dynamics of deuterostomes</em> A Pérez-Posada, CY Lin, TP Fan, CY Lin, YC Chen… - <strong>Nature Ecology &amp; Evolution</strong>, 2024</p></li>
+<li><p><em>Comparison between 16S rRNA and shotgun sequencing in colorectal cancer, advanced colorectal lesions, and healthy human gut microbiota</em> D Bars-Cortina, E Ramon, B Rius-Sansalvador… - <strong>BMC genomics</strong>, 2024</p></li>
+<li><p><em>Heat stress reprograms herbivory-induced defense responses in potato plants</em> J Zhong, J Zhang, Y Zhang, Y Ge, W He, C Liang… - <strong>BMC Plant Biology</strong>, 2024</p></li>
+<li><p><em>The transcriptomic signature of adaptations associated with perfume collection in orchid bees</em> K Darragh, SR Ramírez - <strong>Journal of Evolutionary Biology</strong>, 2024</p></li>
+<li><p><em>Proteomic dynamics revealed sex‐biased responses to combined heat‐drought stress in Marchantia</em> S Guerrero, V Roces, L García‐Campa, L Valledor… - <strong>Journal of Integrative Plant Biology</strong>, 2024</p></li>
+<li><p><em>Evolution of gene networks underlying adaptation to drought stress in the wild tomato Solanum chilense</em> K Wei, S Sharifova, X Zhao, N Sinha, H Nakayama… - <strong>Molecular Ecology</strong>, 2024</p></li>
+<li><p><em>Conserved and specific gene expression patterns in the embryonic development of tardigrades</em> C Li, Z Yang, X Xu, L Meng, S Liu, D Yang - <strong>Evolution &amp; Development</strong>, 2024</p></li>
+<li><p><em>The functions and factors governing fungal communities and diversity in agricultural waters: insights into the ecosystem services aquatic mycobiota provide</em> P Pham, Y Shi, I Khan, M Sumarah, J Renaud… - <strong>Frontiers in Microbiology</strong>, 2024</p></li>
+<li><p><em>An evolutionary timeline of the oxytocin signaling pathway</em> AM Sartorius, J Rokicki, S Birkeland, F Bettella, C Barth… - <strong>Communications Biology</strong>, 2024</p></li>
+<li><p><em>The Evolution of Foraging Webs is Associated with Young Genes in Araneoidea Spiders</em> A Jia, T Yang, W Hu, S Ma, Z Zhang, Y Wang - <strong>Available at SSRN 4383994</strong></p></li>
+<li><p><em>Multiplexed transcriptomic analyses of the plant embryonic hourglass</em> H Wu, R Zhang, KJ Niklas, MJ Scanlon - <strong>BioRxiv</strong>, 2024</p></li>
+<li><p><em>Somatic embryogenesis of grapevine (Vitis vinifera) expresses a transcriptomic hourglass</em> S Koska, D Leljak-Levanic, N Malenica, K Bigovic Villi… - <strong>BioRxiv</strong>, 2024</p></li>
+<li><p><em>Brachiopod genome unveils the evolution of the BMP–Chordin network in bilaterian body patterning</em> TD Lewin, K Shimizu, IJY Liao, ME Chen, K Endo… - <strong>BioRxiv</strong>, 2024</p></li>
+<li><p><em>The angiosperm seed life cycle follows a developmental reverse hourglass</em> AA Sami, L Bentsink, MAS Artur - <strong>BioRxiv</strong>, 2024</p></li>
+<li><p><em>Evolutionary trends in the emergence of skeletal cell types</em> A Damatac, S Koska, KK Ullrich, T Domazet-Loso… - <strong>BioRxiv</strong>, 2024</p></li>
+<li><p><em>Transcriptome age of individual cell types in Caenorhabditis elegans</em> F Ma, C Zheng - <strong>Proceedings of the National Academy of Sciences</strong>, 2023</p></li>
+<li><p><em>Single-cell atlases of two lophotrochozoan larvae highlight their complex evolutionary histories</em> L Piovani, DJ Leite, LA Yañez Guerra, F Simpson… - <strong>Science Advances</strong>, 2023</p></li>
+<li><p><em>oggmap: a Python package to extract gene ages per orthogroup and link them with single-cell RNA data</em> KK Ullrich, NE Glytnasi - <strong>Bioinformatics</strong>, 2023</p></li>
+<li><p><em>Discovery of putative long non-coding RNAs expressed in the eyes of Astyanax mexicanus (Actinopterygii: Characidae)</em> I Batista da Silva, D Aciole Barbosa, KF Kavalco… - <strong>Scientific Reports</strong>, 2023</p></li>
+<li><p><em>An ancient split of germline and somatic stem cell lineages in Hydra</em> C Nishimiya-Fujisawa, H Petersen, TC-T Koubková-Yu, C Noda, S Shigenobu, J Bageritz, T Fujisawa, O Simakov, S Kobayashi, TW Holstein - <strong>BioRxiv</strong>, 2023</p></li>
+<li><p><em>Oxytocin receptor expression patterns in the human brain across development</em> J Rokicki, T Kaufmann, A-MG de Lange, D van der Meer, S Bahrami, AM Sartorius, UK Haukvik, NE Steen, E Schwarz, DJ Stein, T Nærland, OA Andreassen, LT Westlye, DS Quintana - <strong>Neuropsychopharmacology</strong>, 2022</p></li>
+<li><p><em>The Phylotranscriptomic Hourglass Pattern in Fungi: An Updated Model</em> Y Xie, HS Kwan, PL Chan, WJ Wu, J Chiou, J Chang <strong>BioRxiv</strong>, 2022</p></li>
+<li><p><em>Embryo-Like Features in Developing Bacillus subtilis Biofilms</em> M Futo, L Opašić, S Koska, N Čorak, T Široki, V Ravikumar, A Thorsell, M Lenuzzi, D Kifer, M Domazet-Lošo, K Vlahoviček, I Mijakovic, T Domazet-Lošo - <strong>Molecular Biology and Evolution</strong>, 2021</p></li>
+<li><p><em>New Genes Interacted With Recent Whole-Genome Duplicates in the Fast Stem Growth of Bamboos</em> G Jin, P-F Ma, X Wu, L Gu, M Long, C Zhang, DZ Li - <strong>Molecular Biology and Evolution</strong>, 2021</p></li>
+<li><p><em>Evolutionary transcriptomics of metazoan biphasic life cycle supports a single intercalation origin of metazoan larvae</em> J Wang, L Zhang, S Lian, Z Qin, X Zhu, X Dai, Z Huang et al. - <strong>Nature Ecology &amp; Evolution</strong>, 2020</p></li>
+<li><p><em>Pervasive convergent evolution and extreme phenotypes define chaperone requirements of protein homeostasis</em> Y Draceni, S Pechmann - <strong>Proceedings of the National Academy of Sciences</strong>, 2019</p></li>
+<li><p><em>Reconstructing the transcriptional ontogeny of maize and sorghum supports an inverse hourglass model of inflorescence development</em> S Leiboff, S Hake - <strong>Current Biology</strong>, 2019</p></li>
+<li><p><em>The Transcriptional Landscape of Polyploid Wheats and their Diploid Ancestors during Embryogenesis and Grain Development</em> D Xiang, TD Quilichini, Z Liu, P Gao, Y Pan et al. - <strong>The Plant Cell</strong>, 2019</p></li>
+<li><p><em>Pervasive convergent evolution and extreme phenotypes define chaperone requirements of protein homeostasis</em> Y Draceni, S Pechmann - <strong>Proceedings of the National Academy of Sciences</strong>, 2019</p></li>
+<li><p><em>A unicellular relative of animals generates a layer of polarized cells by actomyosin-dependent cellularization</em> O Dudin, A Ondracka, X Grau-Bové, AAB Haraldsen et al. - <strong>eLife</strong>, 2019</p></li>
+<li><p><em>Gene Expression Does Not Support the Developmental Hourglass Model in Three Animals with Spiralian Development</em> L Wu, KE Ferger, JD Lambert - <strong>Molecular Biology and Evolution</strong>, 2019</p></li>
+<li><p><em>Phylostratr: a framework for phylostratigraphy</em> Z Arendsee, J Li, U Singh, A Seetharam et al. - <strong>Bioinformatics</strong>, 2019</p></li>
+<li><p><em>Algorithms for synteny-based phylostratigraphy and gene origin classification</em> Z Arendsee - 2019</p></li>
+<li><p><em>Elucidating the endogenous synovial fluid proteome and peptidome of inflammatory arthritis using label-free mass spectrometry</em> SM Mahendran, EC Keystone, RJ Krawetz et al. - <strong>Clinical proteomics</strong>, 2019</p></li>
+<li><p><em>Environmental DNA reveals landscape mosaic of wetland plant communities</em> ME Shackleton, GN Rees, G Watson et al. - <strong>Global Ecology and Conservation</strong>, 2019</p></li>
+<li><p><em>Developmental constraints on genome evolution in four bilaterian model species</em> J Liu, M Robinson-Rechavi - <strong>Genome Biology and Evolution</strong>, 2018</p></li>
+<li><p><em>Mapping selection within Drosophila melanogaster embryo’s anatomy</em> I Salvador-Martínez et al. - <strong>Molecular Biology and Evolution</strong>, 2017</p></li>
+<li><p><em>Distribution and diversity of enzymes for polysaccharide degradation in fungi</em> R Berlemont - <strong>Scientific reports</strong>, 2017</p></li>
+<li><p><em>The origins and evolutionary history of human non-coding RNA regulatory networks</em> M Sherafatian, SJ Mowla - <strong>Journal of bioinformatics and computational biology</strong>, 2017</p></li>
+<li><p><em>High expression of new genes in trochophore enlightening the ontogeny and evolution of trochozoans</em> F Xu, T Domazet-Lošo, D Fan, TL Dunwell, L Li et al. - <strong>Scientific reports</strong>, 2016</p></li>
+<li><p><em>Evidence for active maintenance of phylotranscriptomic hourglass patterns in animal and plant embryogenesis</em> HG Drost, A Gabel, I Grosse, M Quint - <strong>Molecular Biology and Evolution</strong>, 2015</p></li>
 </ul>
 </blockquote>
 </div>
@@ -493,6 +512,7 @@
 <li>Nikola Kalábová <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0009-0007-6384-8809" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Filipa Martins Costa <br><small class="roles"> Author, contributor </small>  </li>
 <li>Kristian K Ullrich <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0003-4308-9626" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Stefan Manolache <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0009-0006-3326-985X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -503,7 +523,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich, Stefan Manolache.</p>
 </div>
 
 <div class="pkgdown-footer-right">

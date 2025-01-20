@@ -23,6 +23,7 @@ reference:
   desc:  Visualise phylotranscriptomics patterns
 - contents:
   - starts_with("Plot")
+  - starts_with("plot_")
   - SignatureGATAIGeneRemoval
 - title: A Statistical Framework and Test Statistics
 - contents:
@@ -37,6 +38,8 @@ reference:
   - SelectGeneSet
   - PlotReplicateQuality
   - GroupDiffs
+  - TopExpressionGenes
+  - TopVarianceGenes
 - title: Taxonomic Information Retrieval
 - contents:
   - taxid

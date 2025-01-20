@@ -49,6 +49,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SignatureGATAIGeneRemoval</span><span class="op">(</span></span>
 <span>  <span class="va">ExpressionSet</span>,</span>
+<span>  plot_type <span class="op">=</span> <span class="st">"separate"</span>,</span>
 <span>  measure <span class="op">=</span> <span class="st">"TAI"</span>,</span>
 <span>  TestStatistic <span class="op">=</span> <span class="st">"FlatLineTest"</span>,</span>
 <span>  modules <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -74,6 +75,12 @@
 
 <dl><dt id="arg-expressionset">ExpressionSet<a class="anchor" aria-label="anchor" href="#arg-expressionset"></a></dt>
 <dd><p>a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.</p></dd>
+
+
+<dt id="arg-plot-type">plot_type<a class="anchor" aria-label="anchor" href="#arg-plot-type"></a></dt>
+<dd><p>a string defining specifying the type of visualization for the results. If:</p><ul><li><p><code>plot_type = "separate"</code> individual plots are generated for the original dataset, the dataset with genes removed by GATAI, and the dataset with randomly removed genes.</p></li>
+<li><p><code>plot_type = "combined"</code> all datasets are visualized together in a single combined plot.</p></li>
+</ul></dd>
 
 
 <dt id="arg-measure">measure<a class="anchor" aria-label="anchor" href="#arg-measure"></a></dt>
@@ -147,16 +154,12 @@ be drawn for the developmental stages defined to be the presumptive phylotypic p
 
 
 <dt id="arg-n-random-removal">n_random_removal<a class="anchor" aria-label="anchor" href="#arg-n-random-removal"></a></dt>
-<dd><p>number of randomly removed genes for the third plot. Default is <code>gatai</code> (same number of genes removed by GATAI).</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>parameters passed on to <code><a href="GATAI.html">GATAI</a></code>.</p></dd>
+<dd><p>number of randomly removed genes for the third plot. Default is <code>"gatai"</code> (same number of genes removed by GATAI).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
-    <p>Filipa Martins Costa and Hajk-Georg Drost</p>
+    <p>Filipa Martins Costa</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -164,7 +167,7 @@ be drawn for the developmental stages defined to be the presumptive phylotypic p
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich, Stefan Manolache.</p>
 </div>
 
 <div class="pkgdown-footer-right">

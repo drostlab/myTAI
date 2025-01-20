@@ -96,7 +96,7 @@ PlotSignature(PhyloExpressionSetExample,
               permutations  = 100,
               TestStatistic = "FlatLineTest",
               ylab = "Transcriptome Age Index")
-              
+             
 }
 \author{
 Hajk-Georg Drost

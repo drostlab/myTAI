@@ -43,6 +43,8 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotSelectedAgeDistr.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotSignature.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotSignatureGATAIGeneRemoval.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotSignatureGeneQuantiles.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/PlotSignatureMultiple.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotSignatureTransformed.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/PlotVars.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/RE.html</loc></url>
@@ -55,6 +57,8 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/TDI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/TEI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/TPI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/TopExpressionGenes.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/TopVarianceGenes.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/age.apply.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/bar.colors.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/bootMatrix.html</loc></url>
@@ -74,6 +78,12 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/pTAI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/pTDI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/pairScore.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/plot_distribution_expression.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/plot_distribution_expression_partialTAI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/plot_distribution_partialTAI.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/plot_distribution_partialTAI_qqplot.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/plot_gene_set.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/plot_gene_set_mean.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/rcpp_boottei_parallel.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/rcpp_pMatrix_parallel.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/rcpp_pStrata_parallel.html</loc></url>
