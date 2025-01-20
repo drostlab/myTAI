@@ -12,26 +12,30 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Genomic phylostratography based gene age inference
+## What is genomic phylostratigraphy?
 
-Genomic phylostratigraphy is a method to date the evolutionary emergence of a given gene (i.e. gene age inference), typically done for all genes in a genome. In practice, one performs homology searches against a evolutionarily-informed database.
+Genomic phylostratigraphy is a method to date the evolutionary emergence of a given gene (i.e. `gene age inference`), typically done for all genes in a genome. In practice, one performs homology searches against a evolutionarily-informed database.
+
+![Image adapted from the GenEra paper.](Figures/Basics_of_phylostratigraphy.png)
+
+<p style="font-size:10px;"> Overview of gene age inference. Here, we are searching two genes from the genome of interest against an evolutionarily-informed database. The first gene is assigned as *relative age* 1 since homologues can be found as far as node 1. The second gene is assigned as *relative age* 3 since homologues can be found only up to node 3. Adapted from [Barrera-Redondo et al., 2023](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z). </p>
 
 The output can be fed into `myTAI` and, combined with expression data, is used to compute the transcriptome age index (`TAI`). More specifically, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of interest in the second column. This table is named _phylostratigraphic map_ (or _phylomap_).
 
-### The debate
+## The debate
 
 Despite its simplicity, since the first studies ([Domazet-Loso et al., 2007](https://www.sciencedirect.com/science/article/pii/S0168952507002995)), the method and concept underlying genomic phylostratigraphy has been subject to intense discussions ([Capra et al., 2013](https://www.sciencedirect.com/science/article/pii/S016895251300111X); [Altenhoff et al., 2016](https://www.nature.com/articles/nmeth.3830.pdf); [Liebeskind et al., 2016](https://academic.oup.com/gbe/article/8/6/1812/2574026); [Domazet-Loso et al., 2017](https://academic.oup.com/mbe/article-lookup/doi/10.1093/molbev/msw284); [Yin et al., 2018](https://academic.oup.com/bib/article-lookup/doi/10.1093/bib/bby074); [Casola 2018](https://academic.oup.com/gbe/article/10/11/2906/5140197); [Weisman et al., 2020](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000862); [Futo et al., 2021](https://academic.oup.com/mbe/article/38/1/31/5900268); [Weisman et al., 2022](https://www.sciencedirect.com/science/article/pii/S0960982222007217);  [Barrera-Redondo et al., 2023](https://link.springer.com/article/10.1186/s13059-023-02895-z); etc.).
 
 The crux of the discussion focuses on the homology search bias, though several studis have also noted database bias (e.g., species representation and contamination - see [Barrera-Redondo et al., 2023](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z) for discussion) and evolutionary assumptions (e.g., Dollo parsimony - see [Gàlvez-Morante et al., 2024](https://academic.oup.com/gbe/article/16/4/evae062/7633882)).
 
-#### Homology search bias
+### Homology search bias
 
 The first phylostratigraphy studies used `BLASTp`, which performs pairwise protein sequence alignment, for the homology search step. At the time of these study (late-2000s), `BLASTp` was chosen as it balanced the requirements of sensitivity and speed when performing sequence homology searches against (at that time) a large databases.
 
 The following discussions pertain to the potential biases with `BLASTp` in particular and pairwise sequence aligners in general.
 
 <details>
-  <summary>**Gene age underestimation for genes with certain properties with `BLASTp`**</summary>
+  <summary>**Underestimation of gene age (for certain genes) with `BLASTp`**</summary>
   Moyers & Zhang argue that the use of `BLASTp` genomic phylostratigraphy
   
   1) underestimates gene age for a considerable fraction of genes, 
@@ -85,9 +89,9 @@ BLAST parameter configuration of lets say `-max_target_seqs 250` (default value 
 In more detail, even if one study for example ran `BLASTp` with `evalue 10` (default value in BLAST) and then subsequently filtered for hits that resulted in `evalue < 0.0001` whereas another study ran `BLASTp` directly with `evalue 0.0001`, according to [Gonzalez-Pech et al., 2018](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty1018/5239655) these studies although referring to the same `E-value` threshold for filtering hits will result in different sets of filtered `BLASTp` hits.
 </details> 
 
-#### Alternatives to `BLASTp`
+### Alternatives to `BLASTp`
 
-While BLASTP is considered the gold-standard tool for pairwise protein sequence alignment, newer approaches (such as [DIAMOND v2](https://github.com/bbuchfink/diamond) and [MMSeqs2](https://github.com/soedinglab/mmseqs2/)) have been developed, which can be used for gene age inference with the same sensitivity - just much faster. Redesigned parameters in these software can also overcome overlooked technical aspects of `BLASTp`.
+While BLASTP is considered the gold-standard tool for pairwise protein sequence alignment, newer approaches (such as [DIAMOND v2](https://github.com/bbuchfink/diamond) and [MMSeqs2](https://github.com/soedinglab/mmseqs2/)) have been developed, which can be used for gene age inference with the same sensitivity - just much faster. Redesigned parameters in these software can also overcome overlooked technical aspects of `BLASTp` such as the `-max_target_seqs`.
 
 Beyond pairwise protein sequence aligners, gene ages can also be inferred via structural alignment, using synteny information and using orthogroups.
 
@@ -135,9 +139,9 @@ Methodologically, it should be stressed that while `Orthogroups.tsv` and `Phylog
 The _orthogroup_-based approach seems to be motivated by an assumption that the more restricted set of genes that consists of orthologues and in-paralogues (paralogues that arose after the species split) tends to have more similar attributes (e.g. conservation in function and/or expression pattern) than the larger set of genes that contains all sequence homologues. It follows that this framework should better reflect the 'gene age'. This assumption draws parallels to the `orthologue conjecture` (i.e. orthologues tend to have more conserved attributes than paralogues), which is heavily debated ([Gabaldon & Koonin 2013](https://www.nature.com/articles/nrg3456#Sec8); [Dunn et al., 2018](https://www.pnas.org/doi/abs/10.1073/pnas.1707515115); [Stamboulian et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32657391/); etc.). In several cases, orthologues do not have more conserved attributes than paralogues. Indeed, 'shifts' or 'substitutions' in the expression profile of paralogues that arose before the species split are observed in single-cell studies ([Tarashansky et al., 2021](https://elifesciences.org/articles/66747); [Shafer et al., 2022](https://www.nature.com/articles/s41559-021-01580-3)). Overall, it remains unclear whether inferring gene age using the _orthogroup_-based approach better captures evolutionary information than the classic genomic phylostratigraphy approach (all/unrestricted sequence homologues), given that several issues pertaining to genomic phylostratigraphy have been addressed (see [Barrera-Redondo et al., 2023](https://link.springer.com/article/10.1186/s13059-023-02895-z)).
 </details> 
 
-#### Open questions
+### Open questions
 
-Regardless of the homology search algorithm choice, there remains some open questions with gene age inference.
+Regardless of the homology search algorithm choice, there remains some open issues with gene age inference.
 
 <details>
   <summary>**Homology detection failure**</summary>
@@ -173,7 +177,7 @@ To the best of our knowledge, while several bioinformatic solutions exists for q
 
 </details> 
 
-### Summary
+## Summary
 
 Despite the ongoing debate about how to correctly infer gene age, users of `myTAI` can perform any gene age inference method they find most appropriate for their biological question and pass this gene age inference table as input to `myTAI`. 
 
