@@ -1,5 +1,5 @@
-#' @title Comparing partial TAI distributions across the different developmental stages
-#' @description \emph{plot_distribution_partialTAI} generates 2 plots that help to compare the distribution
+#' @title Comparing partial TAI distributions across stages
+#' @description \code{plot_distribution_partialTAI} generates two plots that help to compare the distribution
 #' of partial TAI through various developmental stages, highlighting each stage with 
 #' distinct colors.
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
@@ -8,9 +8,10 @@
 #' @param xlab label of x-axis.
 #' @param ylab label of y-axis.
 #' @param main figure title.
-#' @param seed defines the colors for the different developmetal stages
-#' @section Recomendation - Apply a square root transformation to enhance the visualization of differences 
-#' in the distributions: plot_distribution_partialTAI(tf(ExpressionSet, sqrt))
+#' @param seed defines the colors for the different developmental stages
+#' @details
+#'  Recommendation - Apply a square root transformation to enhance the visualization of differences 
+#' in the distributions: \code{plot_distribution_partialTAI(tf(ExpressionSet, sqrt))}
 #' @author Filipa Martins Costa
 #' @export
 

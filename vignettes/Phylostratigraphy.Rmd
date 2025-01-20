@@ -162,7 +162,7 @@ Users can run their test, [`abSENSE`](https://github.com/caraweisman/abSENSE) to
 <details>
   <summary>**Dollo parsimony**</summary>
   
-*Dollo parsimony*, which precludes the possibility that an identical character (gene) can be gained more than once, is a major conceptual assumption for gene age inference ([Gàlvez-Morante et al., 2024](https://academic.oup.com/gbe/article/16/4/evae062/7633882)).
+*Dollo parsimony*, which precludes the possibility that an identical character (gene) can be gained more than once, is a major conceptual assumption for gene age inference ([Galvez-Morante et al., 2024](https://academic.oup.com/gbe/article/16/4/evae062/7633882)).
 
 This assumption has been found to overestimate ancestral gene content (i.e., pushing more genes to be evolutionarily older) on simulated data, when compared to a maximum likelihood-based approach that allows a gene family to be gained more than once within a tree (via convergent evolution and horizontal gene transfer).
 
@@ -175,7 +175,7 @@ A suitable method to overcome this limitation is yet to be developed for user-fr
   
 As we amass more and more genomic data across the tree of life, we inevitably accumulate sequences that are taxonomically mislabeled ([Steinegger & Salzberg 2020](https://link.springer.com/article/10.1186/s13059-020-02023-1)). These mislabeled sequences are thought to typically arise from sequencing contamination and biases gene age inference by overestimating the real age of the gene (i.e. as evolutionarily older).
 
-The gene age inference software, `GenEra`, accounts for potential contamination to some extent. Upstream software can be employed to further address potential contamination but these are typically applied to query genomes and not the database (see [Bálint et al., 2024](https://www.nature.com/articles/s41467-024-45024-5) and [Nevers et al., 2025](https://www.nature.com/articles/s41587-024-02147-w)).
+The gene age inference software, `GenEra`, accounts for potential contamination to some extent. Upstream software can be employed to further address potential contamination but these are typically applied to query genomes and not the database (see [Balint et al., 2024](https://www.nature.com/articles/s41467-024-45024-5) and [Nevers et al., 2025](https://www.nature.com/articles/s41587-024-02147-w)).
 
 To the best of our knowledge, while several bioinformatic solutions exists for query genome contamination, database sequence contamination remains a challenge.
 

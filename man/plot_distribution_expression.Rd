@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_distribution_expression.R
 \name{plot_distribution_expression}
 \alias{plot_distribution_expression}
-\title{Comparing expression levels distributions across the different developmental stages}
+\title{Comparing expression levels distributions across stages}
 \usage{
 plot_distribution_expression(
   ExpressionSet,
@@ -25,12 +25,16 @@ corresponds to a stage in the ExpressionSet. Starts in one.}
 
 \item{main}{figure title.}
 
-\item{seed}{defines the colors for the different developmetal stages}
+\item{seed}{defines the colors for the different developmental stages}
 }
 \description{
-\emph{plot_distribution_partialTAI} generates 2 plots that help to compare the distribution
+\emph{plot_distribution_partialTAI} generates two plots that help to compare the distribution
 of expression levels through various developmental stages, highlighting each stage with 
 distinct colors.
+}
+\details{
+Recommendation - Apply a square root transformation to enhance the visualization of differences 
+in the distributions: \code{plot_distribution_partialTAI(tf(ExpressionSet, sqrt))}
 }
 \author{
 Filipa Martins Costa
