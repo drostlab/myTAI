@@ -136,8 +136,8 @@ sensitivity and speed when performing sequence homology searches against
 <p>The following discussions pertain to the potential biases with
 <code>BLASTp</code> in particular and pairwise sequence aligners in
 general.</p>
-<details><summary><strong>Underestimation of gene age (for certain genes) with
-<code>BLASTp</code></strong>
+<details><summary><strong><code>BLASTp</code> underestimates of gene age (for certain
+genes)</strong>
 </summary><p>Moyers &amp; Zhang argue that the use of <code>BLASTp</code> genomic
 phylostratigraphy</p>
 <ol style="list-style-type: decimal">
@@ -196,7 +196,7 @@ Similarly, users can also retrieve gene ages from <a href="http://eggnog5.embl.d
 Alternatively, users might find the simulation based removal approach
 proposed by <a href="https://academic.oup.com/gbe/article/10/8/2037/5061555" class="external-link">Moyers
 &amp; Zhang, 2018</a> more suitable.
-</details><details><summary><strong>Overlooked technical aspects of <code>BLASTp</code></strong>
+</details><details><summary><strong><code>BLASTp</code> parameters are complicated</strong>
 </summary><p>In these extensive debates, one aspect that is often missed and can
 be directly corrected by an interested user is the
 bioinformatics/technical aspect of using <code>BLASTp</code> or any
@@ -353,7 +353,7 @@ will use the syntenic data to infer a possible reason. Thus, they detect
 indels, scrambled synteny, assembly issues, and regions of uncertain
 synteny (<a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y" class="external-link">Arendsee
 et al., 2019</a>).</p>
-</details><details><summary><strong>Inferring gene age using orthogroups</strong>
+</details><details><summary><strong>Orthogroup-based gene age inference</strong>
 </summary><p>The first studies in gene age inference used the framework of genomic
 phylostratigraphy, where each gene of the focal species is compared
 against a sequence database to find the most distantly related homologue
@@ -390,7 +390,7 @@ should include the genes in <code>Orthogroups_UnassignedGenes.tsv</code>
 output or, alternatively, singletons in the <code>Orthogroups.txt</code>
 file, and assign the singletons to the species-specific phylostrata in
 the study.</p>
-The <em>orthogroup</em>-based approach seems to be motivated by an
+<p>The <em>orthogroup</em>-based approach seems to be motivated by an
 assumption that the more restricted set of genes that consists of
 orthologues and in-paralogues (paralogues that arose after the species
 split) tends to have more similar attributes (e.g. conservation in
@@ -406,8 +406,9 @@ conserved attributes than paralogues. Indeed, ‘shifts’ or
 ‘substitutions’ in the expression profile of paralogues that arose
 before the species split are observed in single-cell studies (<a href="https://elifesciences.org/articles/66747" class="external-link">Tarashansky et al.,
 2021</a>; <a href="https://www.nature.com/articles/s41559-021-01580-3" class="external-link">Shafer et al.,
-2022</a>). Overall, it remains unclear whether inferring gene age using
-the <em>orthogroup</em>-based approach better captures evolutionary
+2022</a>).</p>
+Overall, it remains unclear whether inferring gene age using the
+<em>orthogroup</em>-based approach better captures evolutionary
 information than the classic genomic phylostratigraphy approach
 (all/unrestricted sequence homologues), given that several issues
 pertaining to genomic phylostratigraphy have been addressed (see <a href="https://link.springer.com/article/10.1186/s13059-023-02895-z" class="external-link">Barrera-Redondo
@@ -449,8 +450,8 @@ genome and provide an output compatible with <code>myTAI</code>.</p>
 </details><details><summary><strong>Dollo parsimony</strong>
 </summary><p><em>Dollo parsimony</em>, which precludes the possibility that an
 identical character (gene) can be gained more than once, is a major
-conceptual assumption for gene age inference <a href="https://academic.oup.com/gbe/article/16/4/evae062/7633882" class="external-link">Gàlvez-Morante
-et al., 2024</a>.</p>
+conceptual assumption for gene age inference (<a href="https://academic.oup.com/gbe/article/16/4/evae062/7633882" class="external-link">Gàlvez-Morante
+et al., 2024</a>).</p>
 <p>This assumption has been found to overestimate ancestral gene content
 (i.e., pushing more genes to be evolutionarily older) on simulated data,
 when compared to a maximum likelihood-based approach that allows a gene
