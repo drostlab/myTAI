@@ -1,0 +1,56 @@
+
+
+generate_null_txi_sample <- function(phyex_set,
+                                     sample_size=10000) {
+    age_vector <- as.vector(phyex_set[[1]])
+    count_matrix <- as.matrix(phyex_set[3:ncol(phyex_set)])
+    
+    # columns: stages, rows: permuted instances, entries: TAI value
+    permuted_txi_matrix <- cpp_bootMatrix(count_matrix,
+                                          age_vector,
+                                          sample_size)
+    
+    colnames(permuted_txi_matrix) <- colnames(count_matrix)
+    
+    return(permuted_txi_matrix)
+}
+
+plot_null_txi_sample <- function(null_txis, 
+                                 test_txis) {
+    S <- ncol(null_txis)
+    if (unique(sapply(test_txis, length)) != S)
+        stop("The number of stages between the null_txis and the test_txis is inconsistent")
+    
+    null_df <- tibble::as_tibble(null_txis) |>
+        tibble::rowid_to_column("Id") |>
+        tidyr::pivot_longer(cols=-Id, names_to = "Stage", values_to = "TXI") |>
+        tibble::add_column(Group = "Null Hypothesis Sample")
+    
+    test_df <- tibble::tibble(
+        Id = rep(1:length(test_txis), each = S),
+        Group = rep(names(test_txis), each = S),
+        Stage = rep(colnames(null_txis), times=length(test_txis)),
+        TXI = unlist(test_txis)
+    )
+    df <- dplyr::bind_rows(test_df, null_df)
+    
+    p <- ggplot2::ggplot(df,
+                         ggplot2::aes(x=factor(Stage, levels=unique(Stage)), 
+                                      y=TXI, 
+                                      colour=factor(Group, levels=unique(Group)), 
+                                      group = interaction(Group, Id),
+                                      linewidth=Group,
+                                      alpha=Group,
+                                      linetype=Group)) +
+        ggplot2::geom_line() + 
+        ggplot2::labs(x="Ontogeny",
+                      y="TXI",
+                      colour="Sample Type") +
+        ggplot2::scale_linewidth_manual(values=c("Null Hypothesis Sample" = 0.1), na.value=2.0, guide="none") +
+        ggplot2::scale_alpha_manual(values=c("Null Hypothesis Sample" = 0.1), na.value=1.0, guide="none") +
+        ggplot2::scale_linetype_manual(values=c("Null Hypothesis Sample" = "solid"), na.value="91", guide="none") +
+        ggplot2::theme_minimal()
+    
+    return(p)
+    
+}
