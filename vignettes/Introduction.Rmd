@@ -1,10 +1,10 @@
 ---
-title: "Introduction to the myTAI package"
+title: "Introduction"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{Introduction to the myTAI package}
+  %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---

@@ -1,9 +1,9 @@
 ---
-title: "Discussing Genomic Phylostratigraphy"
+title: "Genomic Phylostratigraphy"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Discussing Genomic Phylostratigraphy}
+  %\VignetteIndexEntry{Genomic Phylostratigraphy}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## What is genomic phylostratigraphy?
 
-Genomic phylostratigraphy is a method to date the evolutionary emergence of a given gene (i.e. `gene age inference`), typically done for all genes in a genome. In practice, one performs homology searches against a evolutionarily-informed database.
+Genomic phylostratigraphy is a method to date the evolutionary emergence of a given gene (i.e. `gene age inference`), typically done for all genes in a genome. In practice, one performs homology searches against an evolutionarily-informed database such as the NCBI NR.
 
 ![](Figures/Basics_of_phylostratigraphy.png)
 

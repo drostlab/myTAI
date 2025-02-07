@@ -1,9 +1,9 @@
 ---
-title: "Intermediate Phylotranscriptomics Analyses"
+title: "Intermediate"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Intermediate Phylotranscriptomics Analyses}
+  %\VignetteIndexEntry{Intermediate}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---

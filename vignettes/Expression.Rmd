@@ -1,9 +1,9 @@
 ---
-title: "Gene Expression Analysis with `myTAI`"
+title: "Gene Expression Analysis"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Gene Expression Analysis with `myTAI`}
+  %\VignetteIndexEntry{Gene Expression Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
