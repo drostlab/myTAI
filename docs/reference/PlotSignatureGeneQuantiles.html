@@ -21,15 +21,21 @@ different quantile probability thresholds defining the set of top level genes.">
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/myTAI.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Advanced.html">Advanced Phylotranscriptomics Analyses</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Tutorials</h6></li>
+    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction</a></li>
+    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate</a></li>
+    <li><a class="dropdown-item" href="../articles/Advanced.html">Advanced</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Discussion</h6></li>
+    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Genomic Phylostratigraphy</a></li>
     <li><a class="dropdown-item" href="../articles/Enrichment.html">Enrichment Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis with `myTAI`</a></li>
-    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction to the myTAI package</a></li>
-    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a></li>
+    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/Taxonomy.html">Taxonomic Retrieval</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -182,124 +188,14 @@ is shown.</p>
 <span class="r-in"><span>                           main<span class="op">=</span><span class="st">"Excluding top level genes by total </span></span></span>
 <span class="r-in"><span><span class="st">                           expression using different thresholds"</span>,</span></span>
 <span class="r-in"><span>                           gene.selection.criterion<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.128  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.127  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.122  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.118  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.103  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-plt img"><img src="PlotSignatureGeneQuantiles-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in PlotSignatureGeneQuantiles(ExpressionSet = PhyloExpressionSetExample,     quantiles = c(1, 0.99, 0.95, 0.9, 0.8), main = "Excluding top level genes by total \n                           expression using different thresholds",     gene.selection.criterion = "mean"):</span> could not find function "PlotSignatureGeneQuantiles"</span>
 <span class="r-in"><span><span class="co"># Flat line test, select top genes by variance of expression</span></span></span>
 <span class="r-in"><span><span class="fu">PlotSignatureGeneQuantiles</span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">PhyloExpressionSetExample</span>,</span></span>
 <span class="r-in"><span>                           main<span class="op">=</span><span class="st">"Excluding top level genes by variance of </span></span></span>
 <span class="r-in"><span><span class="st">                           expression using different thresholds"</span>,</span></span>
 <span class="r-in"><span>                           quantiles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">0.99</span>, <span class="fl">0.95</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                           gene.selection.criterion<span class="op">=</span><span class="st">"variance"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.131  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.133  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.127  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.118  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total runtime of your permutation test: 0.095  seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> -&gt; We recommended using at least 20000 permutations to achieve a sufficient permutation test.</span>
-<span class="r-plt img"><img src="PlotSignatureGeneQuantiles-2.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in PlotSignatureGeneQuantiles(ExpressionSet = PhyloExpressionSetExample,     main = "Excluding top level genes by variance of \n                           expression using different thresholds",     quantiles = c(1, 0.99, 0.95, 0.9, 0.8), gene.selection.criterion = "variance"):</span> could not find function "PlotSignatureGeneQuantiles"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -311,7 +207,7 @@ is shown.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

@@ -35,16 +35,22 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/myTAI.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/Advanced.html">Advanced Phylotranscriptomics Analyses</a></li>
+<li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Tutorials</h6></li>
+    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction</a></li>
+    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate</a></li>
+    <li><a class="dropdown-item" href="../articles/Advanced.html">Advanced</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Discussion</h6></li>
+    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Genomic Phylostratigraphy</a></li>
     <li><a class="dropdown-item" href="../articles/Enrichment.html">Enrichment Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis with `myTAI`</a></li>
-    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction to the myTAI package</a></li>
-    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a></li>
+    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/Taxonomy.html">Taxonomic Retrieval</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -68,7 +74,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Enrichment Analyses</h1>
             
-            <h4 data-toc-skip class="date">2025-01-20</h4>
+            <h4 data-toc-skip class="date">2025-02-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/Enrichment.Rmd" class="external-link"><code>vignettes/Enrichment.Rmd</code></a></small>
       <div class="d-none name"><code>Enrichment.Rmd</code></div>
@@ -405,12 +411,12 @@ specific genes.</p>
 <span>               use.only.map <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>               legendName   <span class="op">=</span> <span class="st">"PS"</span><span class="op">)</span></span></code></pre></div>
 <p>Again, we retrieve the <em>D. rerio</em> specific taxonomy
-represented by PS1-14 using the <code>myTAI::taxonomy()</code> function
+represented by PS1-14 using the <code><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html" class="external-link">myTAI::taxonomy()</a></code> function
 (see <a href="Introduction.html">Introduction</a> and
 <code>Taxonomy</code> for details).</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># retrieve the taxonomy of D. rerio</span></span>
-<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu">taxonomy</span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"Danio rerio"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/myTAI/man/taxonomy.html" class="external-link">taxonomy</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"Danio rerio"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>                    id         name    rank
 1   cellular organisms      no rank  131567
 2            Eukaryota superkingdom    2759
@@ -460,7 +466,7 @@ function can be used to trace the evolutionary origin of tissue or
 process specific genes by investigating their age enrichment.</p>
 <p>In case users have an <code>ExpressionSet</code> storing the
 <code>Phylostratigraphic Map</code> of <em>D. rerio</em> as well as an
-expression set, they can furthermore use the <code>PlotGeneSet()</code>
+expression set, they can furthermore use the <code><a href="https://rdrr.io/pkg/myTAI/man/PlotGeneSet.html" class="external-link">PlotGeneSet()</a></code>
 function implemented in <code>myTAI</code> to visualize the expression
 levels of brain specific genes which have been shown to be significantly
 enriched in <code>Metazoa</code> specific phylostrata.</p>
@@ -468,7 +474,7 @@ enriched in <code>Metazoa</code> specific phylostrata.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># the best parameter setting to visualize this plot:</span></span>
 <span><span class="co"># png("DrerioBrainSpecificGeneExpression.png",700,400)</span></span>
-<span><span class="fu">PlotGeneSet</span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">DrerioPhyloExpressionSet</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/myTAI/man/PlotGeneSet.html" class="external-link">PlotGeneSet</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">DrerioPhyloExpressionSet</span>,</span>
 <span>            gene.set      <span class="op">=</span> <span class="va">Drerio.Brain.Genes</span>,</span>
 <span>            plot.legend   <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>            type          <span class="op">=</span> <span class="st">"l"</span>,</span>
@@ -531,7 +537,7 @@ Zebrafish Uncover Chordate Origins of the Vertebrate Brain</strong>.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

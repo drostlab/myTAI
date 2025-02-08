@@ -33,15 +33,21 @@ stored in the age_vals argument.'><meta property="og:image" content="https://dro
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/myTAI.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Advanced.html">Advanced Phylotranscriptomics Analyses</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Tutorials</h6></li>
+    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction</a></li>
+    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate</a></li>
+    <li><a class="dropdown-item" href="../articles/Advanced.html">Advanced</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Discussion</h6></li>
+    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Genomic Phylostratigraphy</a></li>
     <li><a class="dropdown-item" href="../articles/Enrichment.html">Enrichment Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis with `myTAI`</a></li>
-    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction to the myTAI package</a></li>
-    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a></li>
+    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/Taxonomy.html">Taxonomic Retrieval</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -146,16 +152,16 @@ Possible values can be:</p><ul><li><p><code>altHypothesis</code> = <code>"greate
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="bootMatrix.html">bootMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,<span class="fl">10</span><span class="op">)</span>,<span class="fl">1</span>,</span></span>
 <span class="r-in"><span>       <span class="va">pairScore</span>,contrast1 <span class="op">=</span> <span class="fl">1</span>,contrast2 <span class="op">=</span> <span class="fl">2</span>, altHypothesis<span class="op">=</span><span class="st">"greater"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 8 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             1             2             3             4             5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0237214874 -0.0281554391  0.0006196699  0.0090773874 -0.0004267093 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0047419602 -0.0274790824  0.0068410902  0.0158651939 -0.0067424228 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             6             7             8             9            10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0165292706  0.0239857315 -0.0256583552 -0.0037186294 -0.0317803956 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0211844230  0.0237710843 -0.0006017613  0.0174884740 -0.0168067021 </span>
 <span class="r-in"><span> </span></span>
 </code></pre></div>
     </div>
@@ -168,7 +174,7 @@ Possible values can be:</p><ul><li><p><code>altHypothesis</code> = <code>"greate
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

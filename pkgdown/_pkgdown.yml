@@ -1,7 +1,20 @@
 url: https://drostlab.github.io/myTAI/
 template:
   bootstrap: 5
-
+articles:
+- title: Tutorials
+  navbar: Tutorials
+  contents:
+  - Introduction
+  - Intermediate
+  - Advanced
+- title: Discussion
+  navbar: Discussion
+  contents:
+  - Phylostratigraphy
+  - Enrichment
+  - Expression
+  - Taxonomy
 reference:
 - title: Phylotranscriptomics Measures
   desc: Compute full and partial phylotranscriptomics measures.

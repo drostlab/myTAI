@@ -31,15 +31,21 @@ stored in the age_vals argument."><meta property="og:image" content="https://dro
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/myTAI.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/Advanced.html">Advanced Phylotranscriptomics Analyses</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Tutorials</h6></li>
+    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction</a></li>
+    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate</a></li>
+    <li><a class="dropdown-item" href="../articles/Advanced.html">Advanced</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Discussion</h6></li>
+    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Genomic Phylostratigraphy</a></li>
     <li><a class="dropdown-item" href="../articles/Enrichment.html">Enrichment Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis with `myTAI`</a></li>
-    <li><a class="dropdown-item" href="../articles/Intermediate.html">Intermediate Phylotranscriptomics Analyses</a></li>
-    <li><a class="dropdown-item" href="../articles/Introduction.html">Introduction to the myTAI package</a></li>
-    <li><a class="dropdown-item" href="../articles/Phylostratigraphy.html">Discussing Genomic Phylostratigraphy</a></li>
+    <li><a class="dropdown-item" href="../articles/Expression.html">Gene Expression Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/Taxonomy.html">Taxonomic Retrieval</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -138,16 +144,16 @@ stored in the <code>age_vals</code> argument.</p>
 <span class="r-in"><span> <span class="co"># compute lcScore() vector from bootMatrix()</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="bootMatrix.html">bootMatrix</a></span><span class="op">(</span><span class="va">PhyloExpressionSetExample</span>,<span class="fl">10</span><span class="op">)</span>,<span class="fl">1</span>,<span class="va">lcScore</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 12 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ Number of Eigen threads that are employed on your machine: 8 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing age assignment permutations for test statistic ... ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [=========================================] 100%   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ Computing variances of permuted transcriptome signatures ... ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             1             2             3             4             5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0268561818  0.0604160452 -0.0406048808 -0.0113102563 -0.0081945429 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             6             7             8             9            10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0025675169 -0.0108139957 -0.0041583932 -0.0058902623 -0.0002959635 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            1            2            3            4            5            6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.067772167  0.026993271  0.043154784 -0.011439005 -0.024637609  0.002725512 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            7            8            9           10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.012969151  0.037203517  0.029091927 -0.019639457 </span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="co"># get warning if the expected pattern isn't followed</span></span></span>
 <span class="r-in"><span> <span class="va">lc_score</span> <span class="op">&lt;-</span> <span class="fu">lcScore</span><span class="op">(</span>age_vals <span class="op">=</span> <span class="va">TAIs</span>,early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,mid <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>,late <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span>,profile.warn<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -164,7 +170,7 @@ stored in the <code>age_vals</code> argument.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
