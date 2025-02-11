@@ -74,7 +74,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Getting started with myTAI</h1>
             
-            <h4 data-toc-skip class="date">2025-02-07</h4>
+            <h4 data-toc-skip class="date">2025-02-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/drostlab/myTAI/blob/HEAD/vignettes/myTAI.Rmd" class="external-link"><code>vignettes/myTAI.Rmd</code></a></small>
       <div class="d-none name"><code>myTAI.Rmd</code></div>
@@ -194,51 +194,72 @@ OpenMP support without any additional installations.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize global Transcriptome Age Index pattern</span></span>
 <span><span class="fu"><a href="../reference/PlotSignature.html">PlotSignature</a></span><span class="op">(</span><span class="va">ExprExample</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/unnamed-chunk-10-1.png" alt="plotSignature"><div class="figcaption">plotSignature</div>
-</div>
+<pre><code><span><span class="co">#&gt; Plot signature: ' TAI ' and test statistic: ' FlatLineTest ' running  1000  permutations.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [ Number of Eigen threads that are employed on your machine: 8 ]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [ Computing age assignment permutations for test statistic ... ]</span></span>
+<span><span class="co">#&gt; [=========================================] 100%   </span></span>
+<span><span class="co">#&gt; [ Computing variances of permuted transcriptome signatures ... ]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [ Number of Eigen threads that are employed on your machine: 8 ]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [ Computing age assignment permutations for test statistic ... ]</span></span>
+<span><span class="co">#&gt; [=========================================] 100%   </span></span>
+<span><span class="co">#&gt; [ Computing variances of permuted transcriptome signatures ... ]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Total runtime of your permutation test: 0.46  seconds.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Significance status of signature:  significant.</span></span></code></pre>
+<p><img src="myTAI_files/figure-html/unnamed-chunk-3-1.png" alt="plot signature" width="700"></p>
+<!-- ![plotSignature](Figures/unnamed-chunk-10-1.png) -->
 </div>
 <div class="section level4">
 <h4 id="quantify-expression-level-distributions-for-each-gene-age-category">Quantify expression level distributions for each gene age
 category<a class="anchor" aria-label="anchor" href="#quantify-expression-level-distributions-for-each-gene-age-category"></a>
 </h4>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot expression level distributions for each age (=PS) category </span></span>
 <span><span class="co"># and each developmental stage </span></span>
 <span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span><span class="va">ExprExample</span>, <span class="st">"PS"</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/unnamed-chunk-11-1.png" alt="plotCategoryExpr"><div class="figcaption">plotCategoryExpr</div>
-</div>
+<pre><code><span><span class="co">#&gt;                   Zygote Quadrant Globular Heart Torpedo Bent  Mature</span></span>
+<span><span class="co">#&gt; category-centered "***"  "***"    "***"    "***" "***"   "***" "***"</span></span></code></pre>
+<p><img src="myTAI_files/figure-html/unnamed-chunk-4-1.png" alt="plot expression by PS" width="700"></p>
+<!-- ![plotCategoryExpr](Figures/unnamed-chunk-11-1.png) -->
 </div>
 <div class="section level4">
 <h4 id="quantify-mean-expression-of-individual-gene-age-categories">Quantify mean expression of individual gene age categories<a class="anchor" aria-label="anchor" href="#quantify-mean-expression-of-individual-gene-age-categories"></a>
 </h4>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot mean expression of each age category seperated by old (PS1-3)</span></span>
 <span><span class="co"># versus young (PS4-12) genes</span></span>
 <span><span class="fu"><a href="../reference/PlotMeans.html">PlotMeans</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/unnamed-chunk-12-1.png" alt="plotMeans"><div class="figcaption">plotMeans</div>
-</div>
+<p><img src="myTAI_files/figure-html/unnamed-chunk-5-1.png" alt="plot mean expression" width="700"></p>
+<!-- ![plotMeans](Figures/unnamed-chunk-12-1.png) -->
 </div>
 <div class="section level4">
 <h4 id="quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes">Quantify relative mean expression of each age category seperated by
 old versus young genes<a class="anchor" aria-label="anchor" href="#quantify-relative-mean-expression-of-each-age-category-seperated-by-old-versus-young-genes"></a>
 </h4>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot relative mean expression of each age category seperated by old (PS1-3)</span></span>
 <span><span class="co"># versus young (PS4-12) genes</span></span>
 <span><span class="fu"><a href="../reference/PlotRE.html">PlotRE</a></span><span class="op">(</span><span class="va">ExprExample</span>, Groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/unnamed-chunk-13-1.png" alt="plotRE"><div class="figcaption">plotRE</div>
-</div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p><img src="myTAI_files/figure-html/unnamed-chunk-6-1.png" alt="plot relative expression" width="700"></p>
+<!-- ![plotRE](Figures/unnamed-chunk-13-1.png) -->
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the significant differences between gene expression distributions </span></span>
 <span><span class="co"># of old (=group1) versus young (=group2) genes</span></span>
 <span><span class="fu"><a href="../reference/PlotGroupDiffs.html">PlotGroupDiffs</a></span><span class="op">(</span>ExpressionSet <span class="op">=</span> <span class="va">ExprExample</span>,</span>
 <span>               Groups        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>group_1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, group_2 <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>               legendName    <span class="op">=</span> <span class="st">"PS"</span>,</span>
 <span>               plot.type     <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;                               Zygote     Quadrant     Globular        Heart      Torpedo         Bent       Mature</span></span>
+<span><span class="co">#&gt; p.value ( wilcox.test ) 3.362424e-34 3.017793e-42 1.987181e-71 1.546567e-66 1.174961e-85 9.975191e-90 1.007102e-74</span></span></code></pre>
+<p><img src="myTAI_files/figure-html/unnamed-chunk-7-1.png" alt="plot group diffs" width="700"></p>
+<!-- ![plotGroupDiffs](Figures/myTAI_plotgroupdiffs.svg) -->
 <p>If you successfully ran these myTAI functions, congrats! Please check
 out the more detailed tutorials and discussions under the
 <code>Articles</code> tab. For the list of functions, click on the
