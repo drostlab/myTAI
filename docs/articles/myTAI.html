@@ -210,7 +210,7 @@ OpenMP support without any additional installations.</p>
 <span><span class="co">#&gt; [ Computing variances of permuted transcriptome signatures ... ]</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Total runtime of your permutation test: 0.437  seconds.</span></span></code></pre>
+<span><span class="co">#&gt; Total runtime of your permutation test: 0.604  seconds.</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Significance status of signature:  significant.</span></span></code></pre>
 <p><img src="myTAI_files/figure-html/unnamed-chunk-3-1.png" alt="plot signature" width="700"></p>
@@ -222,7 +222,7 @@ category<a class="anchor" aria-label="anchor" href="#quantify-expression-level-d
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot expression level distributions for each age (=PS) category </span></span>
 <span><span class="co"># and each developmental stage </span></span>
-<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span><span class="va">ExprExample</span>, <span class="st">"PS"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/PlotCategoryExpr.html">PlotCategoryExpr</a></span><span class="op">(</span><span class="va">ExprExample</span>, <span class="st">"PS"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"log2(expression level)"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;                   Zygote Quadrant Globular Heart Torpedo Bent  Mature</span></span>
 <span><span class="co">#&gt; category-centered "***"  "***"    "***"    "***" "***"   "***" "***"</span></span></code></pre>
 <p><img src="myTAI_files/figure-html/unnamed-chunk-4-1.png" alt="plot expression by PS" width="700"></p>
