@@ -98,14 +98,14 @@ ExprExample <- tf(PhyloExpressionSetExample, log2)
 
 #### Quantify transcriptome conservation using TAI
 
-```{r message=FALSE, warning=FALSE, fig.alt="plot signature"}
+```{r message=FALSE, warning=FALSE, results='hide',fig.keep='all', fig.alt="plot signature"}
 # visualize global Transcriptome Age Index pattern
 PlotSignature(ExprExample)
 ```
 
 #### Quantify expression level distributions for each gene age category
 
-```{r message=FALSE, warning=FALSE, fig.alt="plot expression by PS"}
+```{r message=FALSE, warning=FALSE, results='hide',fig.keep='all', fig.alt="plot expression by PS"}
 # plot expression level distributions for each age (=PS) category 
 # and each developmental stage 
 PlotCategoryExpr(ExprExample, "PS") + ggplot2::labs(y = "log2(expression level)")
@@ -113,7 +113,8 @@ PlotCategoryExpr(ExprExample, "PS") + ggplot2::labs(y = "log2(expression level)"
 
 #### Quantify mean expression of individual gene age categories
 
-```{r message=FALSE, warning=FALSE, fig.alt="plot mean expression"}
+```{r message=FALSE, warning=FALSE, results='hide',fig.keep='all', fig.alt="plot mean expression"}
+
 # plot mean expression of each age category seperated by old (PS1-3)
 # versus young (PS4-12) genes
 PlotMeans(ExprExample, Groups = list(1:3, 4:12))
@@ -127,7 +128,7 @@ PlotMeans(ExprExample, Groups = list(1:3, 4:12))
 PlotRE(ExprExample, Groups = list(1:3, 4:12))
 ```
 
-```{r message=FALSE, warning=FALSE, fig.height=5, fig.alt="plot group diffs"}
+```{r message=FALSE, warning=FALSE, fig.height=5, results='hide',fig.keep='all', fig.alt="plot group diffs"}
 # plot the significant differences between gene expression distributions 
 # of old (=group1) versus young (=group2) genes
 PlotGroupDiffs(ExpressionSet = ExprExample,

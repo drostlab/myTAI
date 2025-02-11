@@ -63,7 +63,7 @@ data("PhyloExpressionSetExample")
 ExprExample <- tf(PhyloExpressionSetExample, log2)
 ```
 
-```{r message=FALSE, warning=FALSE, echo=FALSE, fig.alt="plot expression by PS"}
+```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide',fig.keep='all', fig.alt="plot expression by PS"}
 # plot expression level distributions for each age (=PS) category 
 # and each developmental stage 
 PlotCategoryExpr(ExprExample, "PS") + ggplot2::labs(y = "log2(expression level)")
