@@ -27,6 +27,10 @@ The `PlotEnrichment()` function implemented in `myTAI` computes and visualizes t
 Before using the `PlotEnrichment()` function, we need to download the example data set from 
 Sestak and Domazet-Loso, 2015. 
 
+
+<details>
+  <summary>**Retrieve dataset and obtain `Drerio.PhyloMap`**</summary>
+
 Download the `Phylostratigraphic Map` of _D. rerio_:
 
 ```r
@@ -35,6 +39,10 @@ Download the `Phylostratigraphic Map` of _D. rerio_:
 download.file( url      = "http://mbe.oxfordjournals.org/content/suppl/2014/11/17/msu319.DC1/TableS3-2.xlsx", 
                destfile = "MBE_2015a_Drerio_PhyloMap.xlsx" )
                
+# note: if link doesn't work, please download manually at
+# https://academic.oup.com/mbe/article/32/2/299/1058654#supplementary-data
+# and enter the path to the 'TableS3-2.xlsx'
+# into the following read_excel function.
 ```
 
 Read the `*.xlsx` file storing the `Phylostratigraphic Map` of _D. rerio_ and format it for the use with `myTAI`:
@@ -68,6 +76,8 @@ head(Drerio.PhyloMap)
 
 Now, `Drerio.PhyloMap` stores the `Phylostratigraphic Map` of _D. rerio_ which is used
 as background set to perform enrichment analyses with `PlotEnrichment()`.
+
+</details>
 
 ### Enrichment Analyses
 
@@ -108,6 +118,8 @@ To visualize the odds or log-odds of over- or underrepresented genes within the 
 
 The result is the __fold-change value__ (odds; `measure = "foldchange"`) denoted as $C_2 = g_{i2} / f_{i.}$ which is visualized above and below zero or the __log fold-change__ value (log-odds; `measure = "log-foldchange"`), where $log_2$(C) = $log_2$($g_{i2}$) - $log_2$($f_{i.}$) which is visualized symmetrically above and below zero by `PlotEnrichment()`. Analogously, $C_1 = g_{i1} / f_{i.}$ but is not visualized by this function.
 
+<details>
+  <summary>**More details for the `PlotEnrichment()` function**</summary>
 
 Internally, `PlotEnrichment()` performs a Fisher's exact test for each `Phylostratum` or `Divergence Stratum` separately, to quantify the significance of over- or under-representation of corresponding `Phylostrata` or `Divergence Strata` within the `test.set` when compared with the entire `ExpressionSet`. `PlotEnrichment()` visualizes significantly enriched (over- or underrepresented) `Phylostrata` or `Divergence Strata` with asterisks '*'.
 
@@ -204,6 +216,8 @@ PS13  0.101449988 -0.984621732
 PS14  0.098211044 -0.938724783
 ```
 
+</details>
+
 ### Defining the Background Set
 
 The Fisher test which is performed inside `PlotEnrichment()` assumes
@@ -253,7 +267,6 @@ PlotEnrichment(Drerio.PhyloMap,
 ```
 
 Again, we retrieve the _D. rerio_ specific taxonomy represented by PS1-14 using the `myTAI::taxonomy()` function (see [Introduction](Introduction.html) and `Taxonomy` for details).
-
 
 ```{r, eval=FALSE}
 # retrieve the taxonomy of D. rerio
@@ -335,7 +348,8 @@ Brain.PhyloExpressionSet <- SelectGeneSet( ExpressionSet = DrerioPhyloExpression
 head(Brain.PhyloExpressionSet)
 ```
 
-### Adjust P-values for Multiple Comparisons
+<details>
+  <summary>**Adjust P-values for Multiple Comparisons**</summary>
 
 In case a large number of Phylostrata or Divergence Strata is included in the input `ExpressionSet`, p-values returned by `PlotEnrichment()` should be adjusted for multiple comparisons. For this purpose `PlotEnrichment()` includes the argument `p.adjust.method`. 
 Here, all methods implemented in `?p.adjust` can be specified:
@@ -356,7 +370,7 @@ PlotEnrichment(Drerio.PhyloMap,
 Please consult these reviews [Gelman et al., 2008](http://www.stat.columbia.edu/~gelman/research/published/multiple2f.pdf), and [Slides](http://www.gs.washington.edu/academics/courses/akey/56008/lecture/lecture10.pdf)) to decide whether or not to apply p-value adjustment
 to your own dataset. 
 
-
+</details>
 
 ## References
 
