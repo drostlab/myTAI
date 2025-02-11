@@ -56,7 +56,20 @@ Using embryo development of the plant _Arabidopsis thaliana_ as an example, we a
 The objective of performing evolutionary transcriptomics studies is to classify a transcriptome into different categories of genes sharing similar evolutionary origins (detectable homologs) or genes that share similar phylogenetic relationships (orthologous genes) and to study the overall expression patterns of these classified genes throughout the biological process of interest. Thus, by introducing a phylogenetic or taxonomic variable to a transcriptome dataset, we can determine stages or time points that are under stronger constraints than others, indicating switches between biological programs or functions.
 
 
-![](Figures/Fig2.png)
+```{r, echo=FALSE, message=FALSE}
+# example dataset covering 7 stages of A thaliana embryo development
+data("PhyloExpressionSetExample")
+# transform absolute expression levels to log2 expression levels
+ExprExample <- tf(PhyloExpressionSetExample, log2)
+```
+
+```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide',fig.keep='all', fig.alt="plot expression by PS"}
+# plot expression level distributions for each age (=PS) category 
+# and each developmental stage 
+PlotCategoryExpr(ExprExample, "PS") + ggplot2::labs(y = "log2(expression level)")
+```
+
+<!-- ![](Figures/Fig2.png) -->
 
 <p style="font-size:10px;"> Figure 2: Gene expression distributions (= developmental transcriptome) throughout seven stages of _A. thaliana_ embryo development classified into distinctive age categories. Each box represents the developmental stage during _A. thaliana_ embryogenesis, the y-axis denotes the log2 expression levels of genes that fall into the corresponding age category shown on the x-axis. Hence, each boxplot represents the gene expression distribution of genes that are classified into the corresponding age class during a specific developmental stage. The gene age distribution of _A. thaliana_ genes range from PS1 to PS12 where PS1 represents the evolutionarily most distant age category (cellular org.) and PS12 the evolutionary most recent age category (_A. thaliana_ specific). Yellow dots in the boxplots denote the mean expression level of the corresponding expression distribution. This visualization illustrates that although the global gene expression distributions do not change visually between developmental stages (Fig. 1), the global gene expression distributions of age categories differ between stages of _A. thaliana_ embryo development, and thus, allow studying the effect of transcriptome evolution and conservation on embryo development. Adapted from [Drost, 2016](https://digital.bibliothek.uni-halle.de/urn/urn:nbn:de:gbv:3:4-18221). </p>
 
