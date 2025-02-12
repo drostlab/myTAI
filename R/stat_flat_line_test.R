@@ -74,8 +74,8 @@ plot_flt_null_dist <- function(null_sample,
     
     # Plot gamma distribution
     p <- ggplot2::ggplot(data.frame(x = null_sample), ggplot2::aes(x=x)) +
-        ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::after_stat(density)), bins=50, alpha=0.7) +
-        ggplot2::stat_function(fun = dgamma, args = null_dist_params) +
+        ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::after_stat(density)), bins=50, alpha=0.7, fill="gray67", colour="gray66") +
+        ggplot2::stat_function(fun = dgamma, args = null_dist_params, colour="gray40") +
         ggplot2::labs(x = "Variance", y = "Density") +
         ggplot2::theme_minimal()
     

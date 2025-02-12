@@ -32,23 +32,30 @@ plot_null_txi_sample <- function(null_txis,
         Stage = rep(colnames(null_txis), times=length(test_txis)),
         TXI = unlist(test_txis)
     )
-    df <- dplyr::bind_rows(test_df, null_df)
     
-    p <- ggplot2::ggplot(df,
+    avg <- mean(null_txis)
+    
+    colour_values <- setNames(RColorBrewer::brewer.pal(length(unique(test_df$Group)), "Set2"), unique(test_df$Group))
+    colour_values["Null Hypothesis Sample"] <- "paleturquoise3"
+    
+    p <- ggplot2::ggplot(test_df,
                          ggplot2::aes(x=factor(Stage, levels=unique(Stage)), 
                                       y=TXI, 
                                       colour=factor(Group, levels=unique(Group)), 
-                                      group = interaction(Group, Id),
-                                      linewidth=Group,
-                                      alpha=Group,
-                                      linetype=Group)) +
-        ggplot2::geom_line() + 
+                                      group=interaction(Group, Id))) +
+        ggplot2::geom_line(linewidth=1.6) + 
+        ggplot2::geom_line(data=null_df,
+                           ggplot2::aes(x=factor(Stage, levels=unique(Stage)), 
+                                        y=TXI,  
+                                        group=interaction(Group, Id),
+                                        colour=factor(Group, levels=unique(Group))),
+                           linewidth=0.1, alpha=0.1) + 
+        ggplot2::geom_hline(yintercept=avg, colour="paleturquoise4", linewidth=0.7) +
+        ggplot2::scale_colour_manual(values=colour_values) +
         ggplot2::labs(x="Ontogeny",
-                      y="TXI",
-                      colour="Sample Type") +
-        ggplot2::scale_linewidth_manual(values=c("Null Hypothesis Sample" = 0.1), na.value=2.0, guide="none") +
-        ggplot2::scale_alpha_manual(values=c("Null Hypothesis Sample" = 0.1), na.value=1.0, guide="none") +
-        ggplot2::scale_linetype_manual(values=c("Null Hypothesis Sample" = "solid"), na.value="91", guide="none") +
+                      y="TAI",
+                      colour="Sample Type") + 
+        ggplot2::scale_x_discrete(expand=c(0, 0)) +
         ggplot2::theme_minimal()
     
     return(p)
