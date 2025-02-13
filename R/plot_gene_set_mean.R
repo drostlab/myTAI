@@ -29,90 +29,66 @@
 #' @author Filipa Martins Costa
 #' @export
 
-plot_gene_set_mean <- function(ExpressionSet,
-                               gene_set,
+plot_gene_set_mean <- function(ExpressionSet, 
                                y_ticks = 6,
                                digits = 2,
                                color = "#009999",
                                line_width  = 2,
                                point_size = 3,
-                               add_expression_values = T,
+                               add_values = T,
                                xlab = "Ontogeny",
                                ylab = "Mean Expression Level",
                                add_sd = F,
                                yaxis_range = 4,
                                shadow_color = "grey"){
-    
-    is.ExpressionSet(ExpressionSet)
-    
-    if (!is.vector(gene_set))
-        stop("Please provide a valid character vector as input gene_ids.", call. = FALSE)
-    
-    GeneSubSet_indixes <- stats::na.omit(
-        match(
-            tolower(gene_set),
-            dplyr::pull(
-                dplyr::filter(
-                    dplyr::mutate(ExpressionSet, GeneID = tolower(GeneID)),
-                    GeneID %in% tolower(gene_set)
-                ),
-                GeneID
-            )
-        )
+  
+  ExpressionSet <- as.data.frame(ExpressionSet)
+  is.ExpressionSet(ExpressionSet)
+  
+  GeneStats <- ExpressionSet[, 2:ncol(ExpressionSet)] |>
+    dplyr::select(-GeneID) |>
+    tidyr::gather(key = "Stage", value = "Expression") |>
+    dplyr::group_by(Stage) |>
+    dplyr::summarize(
+      MeanExpression = mean(Expression, na.rm = TRUE), 
+      SDExpression = sd(Expression, na.rm = TRUE)
+    ) |>
+    dplyr::ungroup()
+  
+  GeneStats$Stage <- factor(GeneStats$Stage, levels = colnames(ExpressionSet)[3:ncol(ExpressionSet)])
+  
+  yaxis_min = min(GeneStats$MeanExpression - GeneStats$SDExpression)
+  yaxis_max = max(GeneStats$MeanExpression + GeneStats$SDExpression)
+  
+  p <- ggplot2::ggplot(GeneStats, ggplot2::aes(x = Stage, y = MeanExpression), group = 1)
+  
+  if (add_sd){
+    p <- p + ggplot2::geom_ribbon(
+      ggplot2::aes(ymin = MeanExpression - SDExpression, ymax = MeanExpression + SDExpression),
+      fill = shadow_color, group = 1
     )
-    
-    if (length(GeneSubSet_indixes) == 0)
-        stop ("None of your input gene ids could be found in the ExpressionSet.", call. = FALSE)
-    
-    if (length(GeneSubSet_indixes) != length(gene_set))
-        warning ("Only ",length(GeneSubSet_indixes), " out of your ", length(gene_set), " gene ids could be found in the ExpressionSet.", call. = FALSE)
-    
-    GeneStats <- ExpressionSet[ExpressionSet$GeneID %in% gene_set,2:ncol(ExpressionSet)] |>
-        dplyr::select(-GeneID) |>
-        tidyr::gather(key = "Stage", value = "Expression") |>
-        dplyr::group_by(Stage) |>
-        dplyr::summarize(
-            MeanExpression = mean(Expression, na.rm = TRUE), 
-            SDExpression = sd(Expression, na.rm = TRUE)
-        ) |>
-        dplyr::ungroup()
-    
-    GeneStats$Stage <- factor(GeneStats$Stage, levels = colnames(ExpressionSet)[3:ncol(ExpressionSet)])
-    
-    yaxis_min = min(GeneStats$MeanExpression - GeneStats$SDExpression)
-    yaxis_max = max(GeneStats$MeanExpression + GeneStats$SDExpression)
-    
-    p <- ggplot2::ggplot(GeneStats, ggplot2::aes(x = Stage, y = MeanExpression), group = 1)
-    
-    if (add_sd){
-        p <- p + ggplot2::geom_ribbon(
-            ggplot2::aes(ymin = MeanExpression - SDExpression, ymax = MeanExpression + SDExpression),
-            fill = shadow_color, group = 1
-        )
-    }
-    
-    p <- p + ggplot2::geom_line(ggplot2::aes(group = 1), color = color, linewidth = line_width) +   
-        ggplot2::geom_point(size = point_size, color = color) +                              
-        ggplot2::labs(x = xlab, y = ylab) + 
-        ggplot2::theme_minimal() +
-        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y_ticks))
-    
-    if (add_sd){
-        p <- p + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y_ticks), 
-                                             limits = c(yaxis_min-yaxis_range, yaxis_max+yaxis_range))
-    }
-    
-    if (add_expression_values) {
-        p <- p + ggplot2::geom_text( 
-            ggplot2::aes(label = round(MeanExpression, digits = digits)),  
-            size = 3, 
-            vjust = -0.5, 
-            hjust = 0.5,   
-            nudge_y = 0.05
-        )
-    }
-    
-    print(p)
-}
+  }
+ 
+ p <- p + ggplot2::geom_line(ggplot2::aes(group = 1), color = color, linewidth = line_width) +   
+          ggplot2::geom_point(size = point_size, color = color) +                              
+          ggplot2::labs(x = xlab, y = ylab) + 
+          ggplot2::theme_minimal() +
+          ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y_ticks))
+  
+ if (add_sd){
+   p <- p + ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y_ticks), 
+                                        limits = c(yaxis_min-yaxis_range, yaxis_max+yaxis_range))
+ }
+ 
+  if (add_values) {
+    p <- p + ggplot2::geom_text( 
+      ggplot2::aes(label = round(MeanExpression, digits = digits)),  
+      size = 3, 
+      vjust = -0.5, 
+      hjust = 0.5,   
+      nudge_y = 0.05
+    )
+  }
 
+  print(p)
+}
