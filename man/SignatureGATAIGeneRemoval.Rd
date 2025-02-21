@@ -6,6 +6,7 @@
 \usage{
 SignatureGATAIGeneRemoval(
   ExpressionSet,
+  plot_type = "separate",
   measure = "TAI",
   TestStatistic = "FlatLineTest",
   modules = NULL,
@@ -26,6 +27,12 @@ SignatureGATAIGeneRemoval(
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.}
+
+\item{plot_type}{a string defining specifying the type of visualization for the results. If:
+\itemize{
+  \item \code{plot_type = "separate"} individual plots are generated for the original dataset, the dataset with genes removed by GATAI, and the dataset with randomly removed genes.
+  \item \code{plot_type = "combined"} all datasets are visualized together in a single combined plot. 
+}}
 
 \item{measure}{type of transcriptome index that shall be computed. E.g.
 \itemize{
@@ -75,13 +82,11 @@ be drawn for the developmental stages defined to be the presumptive phylotypic p
 
 \item{y.ticks}{number of ticks on the y-axis. Default is \code{ticks = 10}.}
 
-\item{n_random_removal}{number of randomly removed genes for the third plot. Default is \code{gatai} (same number of genes removed by GATAI).}
-
-\item{\dots}{parameters passed on to \code{\link{GATAI}}.}
+\item{n_random_removal}{number of randomly removed genes for the third plot. Default is \code{"gatai"} (same number of genes removed by GATAI).}
 }
 \description{
 Main function to return the removed genes after GATAI gene removal and plots transcriptome indices pattern before, after GATAI gene removal and by removing random genes (by default same number as GATAI removed).
 }
 \author{
-Filipa Martins Costa and Hajk-Georg Drost
+Filipa Martins Costa
 }

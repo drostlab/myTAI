@@ -1,5 +1,11 @@
 
-
+late_conservation_test <- function(phyex_set, modules) {
+    return(generic_conservation_test(phyex_set, 
+                                     test_name="Late Conservation Test",
+                                     scoring_function=\(x) lc_score(x, modules),
+                                     fitting_dist="normal",
+                                     alternative="greater"))
+}
 
 lc_score <- function(txi, 
                      modules) {

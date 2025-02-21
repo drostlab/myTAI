@@ -1,19 +1,7 @@
 
 
-generate_null_txi_sample <- function(phyex_set,
-                                     sample_size=10000) {
-    age_vector <- as.vector(phyex_set[[1]])
-    count_matrix <- as.matrix(phyex_set[3:ncol(phyex_set)])
-    
-    # columns: stages, rows: permuted instances, entries: TAI value
-    permuted_txi_matrix <- cpp_bootMatrix(count_matrix,
-                                          age_vector,
-                                          sample_size)
-    
-    colnames(permuted_txi_matrix) <- colnames(count_matrix)
-    
-    return(permuted_txi_matrix)
-}
+
+
 
 plot_null_txi_sample <- function(null_txis, 
                                  test_txis) {

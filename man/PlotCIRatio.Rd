@@ -4,7 +4,7 @@
 \alias{PlotCIRatio}
 \title{Plot Transcriptome Index using bootstrapping and confidence intervals}
 \usage{
-PlotCIRatio(ExpressionSet, measure, nbootstraps)
+PlotCIRatio(ExpressionSet, measure, nbootstraps, plot_type = "ratio_and_CI")
 }
 \arguments{
 \item{ExpressionSet}{a standard PhyloExpressionSet, DivergenceExpressionSet or PolymorphismsExpressionSet object.}
@@ -12,6 +12,12 @@ PlotCIRatio(ExpressionSet, measure, nbootstraps)
 \item{measure}{type of transcriptome index that shall be computed. E.g. measure = "TAI" (Transcriptome Age Index), measure = "TDI" (Transcriptome Divergence Index), measure = "TPI" (Transcriptome Polymorphism Index).}
 
 \item{nbootstraps}{number of independent bootstraps.}
+
+\item{plot_type}{a string defining specifying the type of visualization for the results. If:
+\itemize{
+  \item \code{plot_type = "ratio_and_CI"} plots of both CI ratio and the span of the CI are shown.
+  \item \code{plot_type = "only_ratio"} only plot of the CI is shown. 
+}}
 }
 \description{
 Function to plot and compare the confidence intervals of Transcriptome Index between transformed and non-transformed expression data 
@@ -32,5 +38,5 @@ PlotCIRatio(PhyloExpressionSetExample,"TAI",5)
 \code{\link{PlotSignature}}
 }
 \author{
-Jialin Liu
+Jialin Liu and Filipa Martins Costa
 }

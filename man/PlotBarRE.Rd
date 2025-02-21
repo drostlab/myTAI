@@ -44,7 +44,9 @@ Significant stages are marked by '*' referring to statistically significant diff
 
 (2) '**'  = P-Value <= 0.005  
 
-(3) '***' = P-Value <= 0.0005
+(3) '***' = P-Value <= 0.0005  
+
+(4) 'NS' = P-value > 0.05
 }
 \description{
 This function takes a PhyloExpressionSet or DivergenceExpressionSet object as input and computes
@@ -99,5 +101,5 @@ Myles Hollander and Douglas A. Wolfe (1973), Nonparametric Statistical Methods. 
 \code{\link{RE}}, \code{\link{REMatrix}},\code{\link{PlotRE}}, \code{\link{kruskal.test}}
 }
 \author{
-Hajk-Georg Drost
+Hajk-Georg Drost and Filipa Martins Costa
 }

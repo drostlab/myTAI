@@ -4,7 +4,7 @@
 \alias{TAI}
 \title{Compute the Transcriptome Age Index (TAI)}
 \usage{
-TAI(PhyloExpressionSet)
+TAI(phyex_set)
 }
 \arguments{
 \item{PhyloExpressionSet}{a standard PhyloExpressionSet object.}

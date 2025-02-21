@@ -4,7 +4,7 @@
 \alias{TDI}
 \title{Compute the Transcriptome Divergence Index (TDI)}
 \usage{
-TDI(DivergenceExpressionSet)
+TDI(phyex_set)
 }
 \arguments{
 \item{DivergenceExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
