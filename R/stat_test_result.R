@@ -79,9 +79,11 @@ S7::method(plot, TestResult) <- function(test_result) {
     return(p)
 }
 
-# S7::method(print, TestResult) <- function(test_result) {
-# 
+# S7::S4_register(TestResult)
+# S7::method(print, TestResult) <- function(x) {
+#     return("a")
 # }
+
 
 plot_cullen_frey <- function(test_result) {
     return(fitdistrplus::descdist(test_result@null_sample))

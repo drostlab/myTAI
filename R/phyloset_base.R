@@ -25,17 +25,9 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             options = names(TI_map),
             default = "TXI"
             ),
-        stages_label = new_property(
+        conditions_label = new_property(
             class = class_character,
             default = "Ontogeny"
-            ),
-        strata_transform = new_property(
-            class = class_function,
-            default = quantile_rank
-            ),
-        count_transform = new_property(
-            class = class_function,
-            default = sqrt
             ),
         bootstrap_sample_size = new_property(
             class = class_numeric,
@@ -50,11 +42,10 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_character,
             getter <- \(self) TI_map[[self@index_type]]
             ),
-        strata_vector = new_cached_property(
+        strata_vector = new_property(
             class = class_double,
             getter = function(self) { 
-                x <- self@data[[1]] |>
-                    self@strata_transform() # apply strata transformation
+                x <- self@data[[1]]
                 return(x)
             }
             ),
@@ -62,19 +53,18 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_factor,
             getter = \(self) self@data[[2]]
             ),
-        count_matrix = new_cached_property(
+        count_matrix = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
                 m <- self@data[3:ncol(self@data)] |>
-                    as.matrix() |>
-                    self@count_transform() # apply transformations
+                    as.matrix()
                 rownames(m) <- self@gene_ids
                 
                 return(m)
             },
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)]."
             ),
-        stages = new_property(
+        conditions = new_property(
             class = class_factor,
             getter = \(self) factor(colnames(self@count_matrix), 
                                     levels=unique(colnames(self@count_matrix),
@@ -84,16 +74,16 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_integer,
             getter = \(self) nrow(self@count_matrix)
             ),
-        num_stages = new_property(
+        num_conditions = new_property(
             class = class_integer,
             getter = \(self) ncol(self@count_matrix)
             ),
         pTXI = new_cached_property(
-            class = class_double,
+            #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
                 m <- cpp_pMatrix(self@count_matrix, self@strata_vector)
                 rownames(m) <- self@gene_ids
-                colnames(m) <- self@stages
+                colnames(m) <- self@conditions
                 return(m)
             }
             ),
@@ -103,7 +93,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             ),
         bootstrapped_txis = new_cached_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
-            getter = \(self) .generate_bootstrapped_txis(self@pTXI, self@bootstrap_sample_size)
+            getter = .generate_bootstrapped_txis
             ),
         null_conservation_txis = new_cached_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
@@ -113,63 +103,15 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
     
     )
 
-# PLOTTING TAI
+# S7::method(print, PhyloExpressionSet) <- function(x) {
+#     return(print(x@TXI))
+# }
+
 
 TXI_conf_int <- function(phyex_set, 
                          probs=c(.025, .975)) {
     CIs <- apply(phyex_set@bootstrapped_txis, 2, quantile, probs=probs)
     return (CIs)
-}
-
-.generate_bootstrapped_txis <- function(pTXI,
-                                      num_bootstraps=2000) {
-    num_genes <- nrow(pTXI)
-    freq_matrix <- replicate(num_bootstraps, sample(num_genes, replace = TRUE)) |> # sample genes with replacement
-        apply(2, \(col) tabulate(col, nbins=num_genes)) # convert matrix to frequency matrix
-        
-    bootstrap_matrix <- t(pTXI) %*% freq_matrix |> 
-        t() # columns: stages. rows: bootstraps
-    colnames(bootstrap_matrix) <- colnames(pTXI)
-    
-    return(bootstrap_matrix)
-}
-
-#' @import ggplot2 tibble
-plot_bootstrap_sample <- function(phyex_set) {
-    df_sample <- as_tibble(phyex_set@bootstrapped_txis) |>
-        rowid_to_column("Id") |>
-        tidyr::pivot_longer(cols=phyex_set@stages, names_to="Stage", values_to = "Value")
-    df_true <- tibble::tibble(Stage = phyex_set@stages,
-                              TXI = phyex_set@TXI
-                              )
-    
-    p <- ggplot(data=df_sample) +
-        geom_line(
-            aes(
-                x=factor(Stage, levels=unique(Stage)),
-                y=Value,
-                group=Id
-            ),
-            alpha=0.2,
-            colour="gray70"
-        ) +
-        geom_line(
-            data=df_true,
-            aes(
-                x=Stage,
-                y=TXI,
-                group=0),
-            lwd=2,
-            alpha=1.0,
-            colour="black"
-        ) +
-        labs(
-            x=phyex_set@stages_label,
-            y=phyex_set@index_full_name
-        ) +
-        theme_minimal()
-    
-    return(p)
 }
 
 sTXI <- function(phyex_set,
@@ -185,6 +127,28 @@ sTXI <- function(phyex_set,
     return(mat)
 }
 
+.generate_bootstrapped_txis <- function(phyex_set,
+                                        sample_size=NULL) {
+    if (is.null(sample_size))
+        sample_size <- phyex_set@null_conservation_sample_size
+    
+    N <- phyex_set@num_genes
+    
+    sampled_indices <- matrix(sample(N, size=N*sample_size, replace=TRUE), 
+                              nrow=N, ncol=sample_size)
+    selection_matrix <- Matrix::sparseMatrix(i = as.vector(sampled_indices),
+                                             j = rep(1:sample_size, each = N),
+                                             x = 1,
+                                             dims= c(N, sample_size))
+    
+    bootstrap_matrix <- t(phyex_set@pTXI) %*% selection_matrix |> 
+        t() # columns: conditions. rows: bootstraps
+    
+    colnames(bootstrap_matrix) <- phyex_set@conditions
+    
+    return(bootstrap_matrix)
+}
+
 .generate_conservation_txis <- function(phyex_set, sample_size=NULL) {
     if (is.null(sample_size))
         sample_size <- phyex_set@null_conservation_sample_size
@@ -192,27 +156,27 @@ sTXI <- function(phyex_set,
                                           phyex_set@strata_vector,
                                           sample_size)
     
-    colnames(permuted_txi_matrix) <- phyex_set@stages
+    colnames(permuted_txi_matrix) <- phyex_set@conditions
     return(permuted_txi_matrix)
 }
 
 
-#' @import S7
-PerturbedPhyloExpressionSet <- new_class("PerturbedPhyloExpressionSet",
-    parent = PhyloExpressionSet,
-    properties = list(
-        removed_genes = new_property(
-            class = class_character,
-            default = character(0)
-            ),
-        genes_bitvector = new_property(
-            class = class_logical,
-            getter = \(self) ! self@gene_ids %in% self@removed_genes
-            ),
-        TXI = new_property(
-            class = class_double,
-            getter = \(self) matrixStats::colSums2(self@pTXI, rows = which(self@genes_bitvector)) # using colSums2 avoids unnecessary copying
-            )
-        )
-    )
+#' #' @import S7
+#' PerturbedPhyloExpressionSet <- new_class("PerturbedPhyloExpressionSet",
+#'     parent = PhyloExpressionSet,
+#'     properties = list(
+#'         removed_genes = new_property(
+#'             class = class_character,
+#'             default = character(0)
+#'             ),
+#'         genes_bitvector = new_property(
+#'             class = class_logical,
+#'             getter = \(self) ! self@gene_ids %in% self@removed_genes
+#'             ),
+#'         TXI = new_property(
+#'             class = class_double,
+#'             getter = \(self) matrixStats::colSums2(self@pTXI, rows = which(self@genes_bitvector)) # using colSums2 avoids unnecessary copying
+#'             )
+#'         )
+#'     )
 
