@@ -1,10 +1,13 @@
 
-reductive_hourglass_test <- function(phyex_set, modules) {
-    return(generic_conservation_test(phyex_set, 
-                                     test_name="Reductive Hourglass Test",
-                                     scoring_function=\(x) reductive_hourglass_score(x, modules),
-                                     fitting_dist="normal",
-                                     alternative="greater"))
+reductive_hourglass_test <- function(phyex_set, modules, ...) {
+    t <- generic_conservation_test(phyex_set, 
+                                   test_name="Reductive Hourglass Test",
+                                   scoring_function=\(x) reductive_hourglass_score(x, modules),
+                                   fitting_dist=distributions$normal,
+                                   alternative="greater",
+                                   ...)
+    t@modules <- modules
+    return(t)
 }
 
 reductive_hourglass_score <- function(txi, 

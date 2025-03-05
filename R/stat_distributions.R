@@ -1,44 +1,35 @@
+#' @import S7
+Distribution <- new_class("Distribution",
+      properties = list(
+          name = new_required_property(
+              class=class_character,
+              name="name"
+          ),
+          pdf = new_required_property(
+              class=class_function,
+              name="pdf"
+          ),
+          cdf = new_required_property(
+              class=class_function,
+              name="cdf"
+          ),
+          quantile_function = new_required_property(
+              class=class_function,
+              name="quantile_function"
+          ),
+          fitting_function = new_required_property(
+              class=class_function,
+              name="fitting_function"
+          ),
+          param_names = new_required_property(
+              class=class_character,
+              name="param_names"
+          )
+          
+      )
+)
 
 
-#' @import ggplot2
-#' TODO plot confidence interval limits?
-#' TODO plot from htest object
-plot_null_dist <- function(null_sample,
-                           pdf,
-                           params) {
-    
-    p <- ggplot(data.frame(x = null_sample), 
-                aes(x=x)) +
-        geom_histogram(
-            aes(y = ggplot2::after_stat(density)), 
-            bins=50, 
-            alpha=0.7, 
-            fill="gray67", 
-            colour="gray66") +
-        stat_function(fun = pdf, args = params, colour="gray40") +
-        labs(x = "Score", y = "Density") +
-        theme_minimal()
-    
-    return(p)
-}
-
-get_p_value <- function(cdf, 
-                        test_stat, 
-                        params = list(), 
-                        alternative = c("two-sided", "less", "greater")) {
-    alternative <- match.arg(alternative)
-    
-    cdf_value_low <- do.call(cdf, c(list(test_stat, lower.tail=TRUE), params))
-    cdf_value_high <- do.call(cdf, c(list(test_stat, lower.tail=FALSE), params))
-    
-    pval <- switch(
-        alternative,
-        "greater" = cdf_value_high,
-        "less" = cdf_value_low,
-        "two-sided" = 2 * min(cdf_value_low, cdf_value_high),
-    )
-    return(pval)
-}
 
 .fit_normal <- function(x) {
     params <- fitdistrplus::fitdist(x, "norm", method = "mme")
@@ -109,3 +100,18 @@ get_p_value <- function(cdf,
     }
     return(list(shape=b_shape, rate=b_rate))
 }
+
+
+distributions <- list(normal = Distribution(name="normal",
+                                            pdf=stats::dnorm,
+                                            cdf=stats::pnorm,
+                                            quantile_function=stats::qnorm,
+                                            fitting_function=.fit_normal,
+                                            param_names=c("mean", "sd")),
+                      gamma  = Distribution(name="gamma",
+                                            pdf=stats::dgamma,
+                                            cdf=stats::pgamma,
+                                            quantile_function=stats::qgamma,
+                                            fitting_function=.fit_gamma,
+                                            param_names=c("shape", "rate"))
+)

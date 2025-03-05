@@ -1,11 +1,15 @@
 
 reverse_hourglass_test <- function(phyex_set, 
-                                   modules) {
-    return(generic_conservation_test(phyex_set, 
-                                     test_name="Reverse Hourglass Test",
-                                     scoring_function=\(x) reverse_hourglass_score(x, modules),
-                                     fitting_dist="normal",
-                                     alternative="greater"))
+                                   modules,
+                                   ...) {
+    t <- generic_conservation_test(phyex_set, 
+                                   test_name="Reverse Hourglass Test",
+                                   scoring_function=\(x) reverse_hourglass_score(x, modules),
+                                   fitting_dist=distributions$normal,
+                                   alternative="greater",
+                                   ...)
+    t@modules <- modules
+    return(t)
 }
 
 reverse_hourglass_score <- function(txi, 

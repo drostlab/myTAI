@@ -1,30 +1,20 @@
-
-
-
-diagnose_test_robustness <- function(phyex_set, test) {
-    num_runs = 10
-    sample_sizes = c(1000, 10000)
-    
-    f <- function(size) {
-        return(test(phyex_set, null_sample_size=size))
-    }
-    # make parallel
-    res_vec <- purrr::map(rep(sample_sizes, each=10), f) |>
-        purrr::map("p.value")
-    
-    return(res_vec)
-}
-
-#TODO return null samples and pdf used
 generic_conservation_test <- function(phyex_set,
                                       test_name,
                                       scoring_function,
                                       fitting_dist,
-                                      alternative) {
-    
+                                      alternative = c("two-sided", "greater", "less"),
+                                      custom_null_txis = NULL
+                                      ) {
+    # check arguments
+    S7::check_is_S7(phyex_set, PhyloExpressionSet)
+    stopifnot(is.function(scoring_function))
+    alternative <- match.arg(alternative)
     
     # 1. Simulate the TXI distribution under null hypothesis, via permutation
-    null_txis <- phyex_set@null_conservation_TXIs
+    if (!is.null(custom_null_txis))
+        null_txis <- custom_null_txis
+    else
+        null_txis <- phyex_set@null_conservation_txis
     
     # 2. Compute the null distribution, using the appropriate scoring function
     null_sample <- apply(null_txis, 1, scoring_function)
@@ -33,39 +23,49 @@ generic_conservation_test <- function(phyex_set,
     test_stat <- scoring_function(phyex_set@TXI)
     
     # 4. Estimate null distribution parameters
-    if (fitting_dist == "gamma") {
-        params <- .fit_gamma(null_sample)
-        mu <- params$shape / params$rate
-        cdf <- stats::pgamma
-        pdf <- stats::dgamma
+    params <- fitting_dist@fitting_function(null_sample)
+    
+    res <- ConservationTestResult(method_name=test_name,
+                                  test_stat=test_stat,
+                                  fitting_dist=fitting_dist,
+                                  params=params,
+                                  alternative=alternative,
+                                  null_sample=null_sample,
+                                  data_name=deparse(substitute(phylo_set)),
+                                  null_txis=null_txis,
+                                  test_txi=phyex_set@TXI
+                                  )
+    
+   return(res)
+}
+
+#' @import ggplot2
+diagnose_test_robustness <- function(test, 
+                                     phyex_set,
+                                     sample_sizes=c(500, 1000, 5000, 10000),
+                                     num_reps=5,
+                                     ...) {
+
+    f <- function(size) {
+        null_txis <- .generate_conservation_txis(phyex_set, sample_size=size)
+        return(test(phyex_set, custom_null_txis=null_txis, ...))
     }
-    else if (fitting_dist == "normal") {
-        params <- .fit_normal(null_sample)
-        mu <- params$mean
-        cdf <- stats::pnorm
-        pdf <- stats::dnorm
-    }
-    else 
-        stop("Currently supported fitting distributions are 'gamma' and 'normal'")
     
-    # 5. Compute p value of the test
-    pval <- get_p_value(cdf=cdf,
-                        test_stat=test_stat,
-                        params=params,
-                        alternative=alternative)
+    res_vec <- purrr::map(rep(sample_sizes, each=num_reps), f) |>
+        purrr::map_dbl(~ .x@p_value)
     
-    # Format the output to conform with the R stats hypothesis testing object `htest`
-    # See https://github.com/SurajGupta/r-source/blob/master/src/library/stats/R/t.test.R
-    # for an example
-    names(mu) <- "mean score"
-    names(test_stat) <- "score"
-    rval <- list(statistic = test_stat, parameters = params, p.value = pval,
-                 method = test_name, alternative=alternative, null.value = mu,
-                 data.name=deparse(substitute(phylo_set)))
+    df <- data.frame(pval=res_vec, sample_size=rep(sample_sizes, each=num_reps))
     
-    #TODO: compute confidence interval for test
+    p <- ggplot(df, aes(x=factor(sample_size), y=pval, color="Independent run")) +
+        geom_jitter(height=0, width=0.01) +
+        scale_x_discrete(breaks=sample_sizes) +
+        scale_y_continuous(transform='log10') +
+        labs(x="Null sample size", 
+             y="p value",
+             color="Legend",
+             title="Robustness of test p-values against different null distribution sample sizes") +
+        scale_color_manual(values="black") +
+        theme_minimal()
     
-    class(rval) <- "htest"
-    
-    return(rval)
+    return(p)
 }

@@ -1,10 +1,13 @@
 
-early_conservation_test <- function(phyex_set, modules) {
-    return(generic_conservation_test(phyex_set, 
-                                     test_name="Early Conservation Test",
-                                     scoring_function=\(x) ec_score(x, modules),
-                                     fitting_dist="normal",
-                                     alternative="greater"))
+early_conservation_test <- function(phyex_set, modules, ...) {
+    t <- generic_conservation_test(phyex_set, 
+                                   test_name="Early Conservation Test",
+                                   scoring_function=\(x) ec_score(x, modules),
+                                   fitting_dist=distributions$normal,
+                                   alternative="greater",
+                                   ...)
+    t@modules <- modules
+    return(t)
 }
 
 ec_score <- function(txi, 
