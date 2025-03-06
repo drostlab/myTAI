@@ -70,6 +70,7 @@ plot_gene_set <- function(ExpressionSet,
                           line_width = 1,
                           point_size = 2,
                           add_expression_values = FALSE,
+                          show_gene_labels = TRUE,
                           n_genes_for_distance = 1,... ){
   
   ExpressionSet <- as.data.frame(ExpressionSet)
@@ -134,25 +135,28 @@ plot_gene_set <- function(ExpressionSet,
   p <- ggplot2::ggplot(GeneSubSet_long, ggplot2::aes(x = Stage, y = Expression, color = GeneID)) + 
     ggplot2::geom_line(ggplot2::aes(group = GeneID), linewidth = line_width) +        
     ggplot2::geom_point(size = point_size) +                              
-    ggrepel::geom_text_repel( 
-      data = optimal_points, 
-      ggplot2::aes(label = GeneID),                        
-      size = 3,                                   
-      max.overlaps = 50,                          
-      box.padding = 0.5,                          
-      point.padding = 0.5,                        
-      force = 2,                                  
-      nudge_y = 0.3,                              
-      direction = "both",                         
-      segment.size = 0.2,                         
-      segment.color = "grey50",                   
-      show.legend = FALSE                         
-    ) +            
     ggplot2::scale_color_manual(values = colors) +               
     ggplot2::labs(x = "Ontogeny", y = "Expression Level", color = "Genes") + 
     ggplot2::theme_minimal()+
     ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y_ticks)) +
     ggplot2::scale_y_continuous(labels = scales::number_format(accuracy = 10^(-digits_ylab))) 
+  
+  if(show_gene_labels)
+      p <- p + ggrepel::geom_text_repel( 
+          data = optimal_points, 
+          ggplot2::aes(label = GeneID),                        
+          size = 3,                                   
+          max.overlaps = 50,                          
+          box.padding = 0.5,                          
+          point.padding = 0.5,                        
+          force = 2,                                  
+          nudge_y = 0.3,                              
+          direction = "both",                         
+          segment.size = 0.2,                         
+          segment.color = "grey50",                   
+          show.legend = FALSE                         
+      )  
+  
   
   # add legands on the side
   if (plot_legend) {
