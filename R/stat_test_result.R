@@ -105,7 +105,6 @@ ConservationTestResult <- new_class("ConservationTestResult",
         ),
         modules = new_property(
             class = class_list
-            #validator = \(value) if(!is.null(value) && !setequal(c("early", "mid", "late"), names(value))) 'must have the structure `list(early = ..., mid = ..., late = ...)`'
         )
     )
     )
