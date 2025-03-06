@@ -3,10 +3,20 @@
 PhyloExpressionSetReplicates <- new_class("PhyloExpressionSetReplicates",
     parent = PhyloExpressionSet,
     properties = list(
+        ## CONSTRUCTOR PARAMETERS
         groups = new_required_property(
             class = class_character,
             name="groups"
         ),
+        # is_log = new_property(
+        #     class=class_logical,
+        #     default=FALSE
+        # ),
+        ## FIELDS & PROPERTIES
+        # collapse_function = new_property(
+        #     class = class_function,
+        #     getter = \(self) if(! self@is_log) mean else geom.mean
+        # ),
         count_matrix_reps = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
@@ -21,6 +31,7 @@ PhyloExpressionSetReplicates <- new_class("PhyloExpressionSetReplicates",
         count_matrix = new_cached_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
+                # handle different ways of collapsing replicates: e.g. log data
                 m <- sapply(unique(self@groups), \(g) rowMeans(self@count_matrix_reps[, self@groups == g]))
                 return(m)
             },

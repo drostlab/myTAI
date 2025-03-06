@@ -4,16 +4,16 @@
 \alias{age.apply}
 \title{Age Category Specific apply Function}
 \usage{
-age.apply(ExpressionSet, FUN, ..., as.list = FALSE)
+age.apply(phyex_set, FUN, ..., as.list = FALSE)
 }
 \arguments{
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
-
 \item{FUN}{a function to be performed on the corresponding expression matrix of each phylostratum or divergence-stratum.}
 
 \item{...}{additional arguments of FUN.}
 
 \item{as.list}{a boolean value specifying whether the output format shall be a matrix or a list object.}
+
+\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 }
 \value{
 Either a numeric matrix storing the return values of the applied function for each age class

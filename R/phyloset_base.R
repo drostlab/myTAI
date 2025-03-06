@@ -47,11 +47,23 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             getter = function(self) { 
                 x <- self@data[[1]]
                 return(x)
+            },
+            setter = function(self, value) {
+                if (!length(value))
+                    return(self)
+                self@data[[1]] <- value
+                self
             }
             ),
         gene_ids = new_property(
             class = class_factor,
-            getter = \(self) self@data[[2]]
+            getter = \(self) self@data[[2]],
+            setter = function(self, value) {
+                if (!length(value))
+                    return(self)
+                self@data[[2]] <- value
+                self
+            }
             ),
         count_matrix = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
@@ -61,6 +73,12 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
                 rownames(m) <- self@gene_ids
                 
                 return(m)
+            },
+            setter = function(self, value) {
+                if (!length(value))
+                    return(self)
+                self@data[3:ncol(self@data)] <- value
+                self
             },
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)]."
             ),
@@ -106,6 +124,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
 # S7::method(print, PhyloExpressionSet) <- function(x) {
 #     return(print(x@TXI))
 # }
+
 
 
 TXI_conf_int <- function(phyex_set, 

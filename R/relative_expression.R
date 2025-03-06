@@ -29,17 +29,12 @@
 #'
 #' 
 #' @export
-
-RE <- function(ExpressionMatrix)
-{
-        mDimensions <- dim(ExpressionMatrix)
-        cMeans <- vector(mode = "numeric",length=mDimensions[2])
-        cMeans <- colMeans(ExpressionMatrix)
-        
-        f_max <- max(cMeans)
-        f_min <- min(cMeans)
-        RE <- (cMeans - f_min) / (f_max - f_min)
-        return(RE)
+relative_expression <- function(count_matrix) {
+    col_means <- colMeans(count_matrix)
+    f_max <- max(col_means)
+    f_min <- min(col_means)
+    RE <- (col_means - f_min) / (f_max - f_min)
+    return(RE)
 }
 
 #' @title Compute a Relative Expression Matrix
@@ -77,13 +72,9 @@ RE <- function(ExpressionMatrix)
 #' 
 #' 
 #' @export
-
-REMatrix <- function(ExpressionSet)
-{
-        if(ncol(ExpressionSet) < 4)
-                stop("You need at least 2 stages (= expression columns in your data.frame) to comptute relative expression levels...")
-        is.ExpressionSet(ExpressionSet)
-        return(age.apply(ExpressionSet = ExpressionSet, RE))
-        
+rel_exp_matrix <- function(phyex_set) {
+    if(phyex_set@num_conditions < 2)
+        stop("You need at least 2 stages (= expression columns in your data.frame) to compute relative expression levels...")
+    return(age.apply(phyex_set, relative_expression))
 }
 

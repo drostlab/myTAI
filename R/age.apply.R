@@ -47,25 +47,19 @@
 #' age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list = TRUE)
 #' 
 #' @export
-age.apply <- function(ExpressionSet,FUN, ... ,as.list = FALSE)
-{
-        ExpressionSet <- as.data.frame(ExpressionSet)
-        is.ExpressionSet(ExpressionSet)
+age.apply <- function(phyex_set, FUN, ..., as.list = FALSE) {
+    f <- match.fun(FUN)
+    
+    res <- lapply(phyex_set@strata_vector, \(x) f(phyex_set@count_matrix, ...))
+    
+    if (!as.list) {
+        res <- t(as.data.frame(res))
+        rownames(res) <- phyex_set@strata_vector
+    }
+    else {
+        names(res) <- phyex_set@strata_vector
+    }
         
-        f <- match.fun(FUN)
-        ncols <- ncol(ExpressionSet)
-        s <- split(ExpressionSet, ExpressionSet[ , 1])
-        
-        if (!as.list) {
-                res <- t(as.data.frame(lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))))
-                rownames(res) <- levels(as.factor(ExpressionSet[ , 1]))
-        }
-        
-        if (as.list) {
-                res <- lapply(s , function(x) f(as.matrix(x[ , 3:ncols]) , ...))
-                names(res) <- levels(as.factor(ExpressionSet[ , 1]))
-        }
-        
-        return(res)
+    return(res)
 }
 
