@@ -58,7 +58,6 @@ Imports:
     tibble,
     scales,
     ggpubr,
-    Matrix,
     DESeq2 (>= 1.29.15)
 Suggests:
     knitr (>= 1.6),

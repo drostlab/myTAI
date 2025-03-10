@@ -1,0 +1,54 @@
+
+
+#' @import S7
+PhyloExpressionSetMasked <- new_class("PhyloExpressionSetMasked",
+    parent=PhyloExpressionSet,
+    properties = list(
+        ## CONSTRUCTOR PARAMETERS
+        full_set = new_required_property( # the full phyex set 
+            class = PhyloExpressionSet,
+            name = "full_set",
+        ),
+        removed_genes = new_property(
+            class = class_character,
+            default = character(0)
+        ),
+        ## FIELDS & PROPERTIES
+        genes_bitvector = new_property(
+            class = class_logical,
+            getter = \(self) ! self@gene_ids %in% self@removed_genes
+        ),
+        # reuse from full set
+        bootstrapped_txis = new_property(
+            #class = class_matrix, # S7 doesn't support class_matrix yet
+            getter = \(self) self@full_set@bootstrapped_txis
+        ),
+        null_conservation_txis = new_cached_property(
+            #class = class_matrix, # S7 doesn't support class_matrix yet
+            getter = \(self) self@full_set@null_conservation_txis
+        )
+        
+    ),
+    constructor = function (full_set,
+                            removed_genes) {
+        
+        new_object(PhyloExpressionSet(data=.remove_genes(full_set@data, removed_genes),
+                                      index_type = full_set@index_type,
+                                      conditions_label = full_set@conditions_label,
+                                      bootstrap_sample_size = full_set@bootstrap_sample_size,
+                                      null_conservation_sample_size = full_set@null_conservation_sample_size),
+                   full_set = full_set, removed_genes = removed_genes)
+    }
+)
+
+.remove_genes <- function(data,
+                          genes) {
+    dplyr::filter(data, !data[[2]] %in% genes)
+}
+
+S7::method(print, PhyloExpressionSetMasked) <- function(x, ...) {
+    cat("\n", "Phylo Expression Set (masked)", "\n", sep="")
+    cat(x@conditions_label, ":  ", paste(as.character(x@conditions), collapse = ", "), "\n", sep="")
+    cat("Number of genes: ", x@full_set@num_genes, ", out of which ", length(x@removed_genes), " removed\n" ,sep="")
+    cat("Removed genes: ", paste(x@removed_genes, collapse = ", "), "\n", sep="")
+}

@@ -5,8 +5,8 @@
 \title{Comparing expression levels distributions across the different developmental stages}
 \usage{
 plot_distribution_expression(
-  ExpressionSet,
-  stages = 1:(ncol(ExpressionSet) - 2),
+  phyex_set,
+  conditions = phyex_set@conditions,
   xlab = "Expression",
   ylab = "Density",
   main = "Density Distribution of Expression by Developmental Stage",
@@ -14,11 +14,6 @@ plot_distribution_expression(
 )
 }
 \arguments{
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
-
-\item{stages}{a numeric vector specifying the indices of the stages to compare. Each index 
-corresponds to a stage in the ExpressionSet. Starts in one.}
-
 \item{xlab}{label of x-axis.}
 
 \item{ylab}{label of y-axis.}
@@ -26,6 +21,11 @@ corresponds to a stage in the ExpressionSet. Starts in one.}
 \item{main}{figure title.}
 
 \item{seed}{defines the colors for the different developmetal stages}
+
+\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+
+\item{stages}{a numeric vector specifying the indices of the stages to compare. Each index 
+corresponds to a stage in the ExpressionSet. Starts in one.}
 }
 \description{
 \emph{plot_distribution_partialTAI} generates 2 plots that help to compare the distribution

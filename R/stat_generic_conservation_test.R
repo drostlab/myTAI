@@ -3,7 +3,8 @@ generic_conservation_test <- function(phyex_set,
                                       scoring_function,
                                       fitting_dist,
                                       alternative = c("two-sided", "greater", "less"),
-                                      custom_null_txis = NULL
+                                      custom_null_txis = NULL,
+                                      plot_result=TRUE
                                       ) {
     # check arguments
     S7::check_is_S7(phyex_set, PhyloExpressionSet)
@@ -35,6 +36,8 @@ generic_conservation_test <- function(phyex_set,
                                   null_txis=null_txis,
                                   test_txi=phyex_set@TXI
                                   )
+    if (plot_result)
+        print(plot(res))
     
    return(res)
 }
@@ -47,8 +50,10 @@ diagnose_test_robustness <- function(test,
                                      ...) {
 
     f <- function(size) {
-        null_txis <- .generate_conservation_txis(phyex_set, sample_size=size)
-        return(test(phyex_set, custom_null_txis=null_txis, ...))
+        null_txis <- .generate_conservation_txis(phyex_set@count_matrix, 
+                                                 phyex_set@strata_vector, 
+                                                 sample_size=size)
+        return(test(phyex_set, custom_null_txis=null_txis, ..., plot_result=FALSE))
     }
     
     res_vec <- purrr::map(rep(sample_sizes, each=num_reps), f) |>
@@ -57,7 +62,7 @@ diagnose_test_robustness <- function(test,
     df <- data.frame(pval=res_vec, sample_size=rep(sample_sizes, each=num_reps))
     
     p <- ggplot(df, aes(x=factor(sample_size), y=pval, color="Independent run")) +
-        geom_jitter(height=0, width=0.01) +
+        geom_jitter(height=0, width=0.02) +
         scale_x_discrete(breaks=sample_sizes) +
         scale_y_continuous(transform='log10') +
         labs(x="Null sample size", 

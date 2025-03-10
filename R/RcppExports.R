@@ -32,7 +32,6 @@ cpp_omitMatrix <- function(ExpressionSet, AgeVector) {
 #' @title rcpp_tei_parallel
 #' @name rcpp_tei_parallel
 #' @import Rcpp
-#' @import Matrix
 #' @description computes the phylogenetically based
 #' transcriptome evolutionary index (TEI)
 #' @return list
@@ -53,7 +52,6 @@ rcpp_tei_parallel <- function(expression, ps, ncores = 1L) {
 }
 
 #' @import Rcpp
-#' @import Matrix
 #' @title rcpp_boottei_parallel
 #' @name rcpp_boottei_parallel
 #' @description computes the phylogenetically based
@@ -89,7 +87,6 @@ rcpp_boottei_parallel <- function(expression, ps, permutations, ncores = 1L) {
 }
 
 #' @import Rcpp
-#' @import Matrix
 #' @title rcpp_pMatrix_parallel
 #' @name rcpp_pMatrix_parallel
 #' @description computes the partial
@@ -123,7 +120,6 @@ rcpp_pMatrix_parallel <- function(expression, ps, ncores = 1L) {
 }
 
 #' @import Rcpp
-#' @import Matrix
 #' @title rcpp_pStrata_parallel
 #' @name rcpp_pStrata_parallel
 #' @description computes the partial

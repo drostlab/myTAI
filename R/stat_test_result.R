@@ -59,6 +59,8 @@ goodness_of_fit <- function(test_result) {
     return(res)
 }
 
+#TODO display p value here
+
 #' @import ggplot2
 S7::method(plot, TestResult) <- function(test_result) {
     p <- ggplot(data.frame(x = test_result@null_sample), 
@@ -109,6 +111,8 @@ ConservationTestResult <- new_class("ConservationTestResult",
     )
     )
 
+#TODO display p value here
+
 # plot samples against true txi.
 #' @import ggplot2 tibble
 plot_null_txi_sample <- function(test_result) {
@@ -135,12 +139,7 @@ plot_null_txi_sample <- function(test_result) {
     colour_values <- setNames(RColorBrewer::brewer.pal(length(unique(test_df$Group)), "Set2"), unique(test_df$Group))
     colour_values["Null Hypothesis Sample"] <- "paleturquoise3"
     
-    p <- ggplot(test_df,
-                aes(x=factor(Stage, levels=unique(Stage)), 
-                    y=TXI, 
-                    colour=factor(Group, levels=unique(Group)), 
-                    group=interaction(Group, Id))) +
-        geom_line(linewidth=1.6) + 
+    p <- ggplot() +
         geom_line(data=null_df,
                   aes(x=factor(Stage, levels=unique(Stage)), 
                       y=TXI,  
@@ -148,6 +147,12 @@ plot_null_txi_sample <- function(test_result) {
                       colour=factor(Group, levels=unique(Group))),
                   linewidth=0.1, alpha=0.1) + 
         geom_hline(yintercept=avg, colour="paleturquoise4", linewidth=0.7) +
+        geom_line(data=test_df,
+                  aes(x=factor(Stage, levels=unique(Stage)), 
+                      y=TXI, 
+                      colour=factor(Group, levels=unique(Group)), 
+                      group=interaction(Group, Id)),
+                  linewidth=1.6) +
         scale_colour_manual(values=colour_values) +
         labs(x="Ontogeny",
              y="TAI",

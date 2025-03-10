@@ -2,6 +2,7 @@
 
 plot_signature <- S7::new_generic("plot_signature", "phyex_set")
 
+#TODO display p value as label
 #' @import ggplot2
 S7::method(plot_signature, PhyloExpressionSet) <- function(phyex_set,
                                                            show_CI=TRUE,
@@ -57,6 +58,21 @@ S7::method(plot_signature, PhyloExpressionSetReplicates) <- function(phyex_set,
         p <- p + geom_point(data=df,
                             aes(x=Condition, y=TXI))
     }
+    return(p)
+}
+
+#' @import ggplot2
+S7::method(plot_signature, PhyloExpressionSetMasked) <- function(phyex_set,
+                                                                     ...) {
+    
+    # Plot the original pattern
+    p <- plot_signature(phyex_set@full_set, ...)
+    
+    # Plot the perturbed pattern
+    df <- tibble::tibble(Condition = phyex_set@conditions,
+                         TXI = phyex_set@TXI)
+    p <- p + geom_line(data=df, aes(x=Condition, y=TXI, group=0), lwd=1, colour="red")
+    
     return(p)
 }
 
