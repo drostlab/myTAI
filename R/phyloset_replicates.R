@@ -42,24 +42,30 @@ PhyloExpressionSetReplicates <- new_class("PhyloExpressionSetReplicates",
         ),
         bootstrapped_txis = new_cached_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
-            getter = \(self) .generate_bootstrapped_txis_reps(self@pTXI_reps, 
-                                                              self@count_matrix_reps,
-                                                              self@groups, 
-                                                              self@conditions, 
-                                                              self@bootstrap_sample_size)
+            getter = \(self) memo_generate_bootstrapped_txis_reps(self@pTXI_reps, 
+                                                                  self@count_matrix_reps,
+                                                                  self@groups, 
+                                                                  self@conditions, 
+                                                                  self@bootstrap_sample_size)
         )
     ),
     constructor = function(data, 
                            groups,
+                           name = deparse(substitute(data)),
                            index_type = "TXI", 
                            conditions_label = "Ontogeny", 
+                           is_time_series = TRUE,
                            bootstrap_sample_size = 5000L, 
                            null_conservation_sample_size = 5000L) {
         count_matrix_reps <- as.matrix(data[3:ncol(data)])
         count_matrix <- .collapse_replicates(count_matrix_reps, groups)
-        new_object(PhyloExpressionSet(data = data.frame(data[1:2], count_matrix),
+        new_object(PhyloExpressionSet(strata_vector = as.numeric(data[[1]]),
+                                      gene_ids = as.character(data[[2]]),
+                                      count_matrix = count_matrix,
+                                      name = name,
                                       index_type = index_type, 
-                                      conditions_label = conditions_label, 
+                                      conditions_label = conditions_label,
+                                      is_time_series=is_time_series,
                                       bootstrap_sample_size = bootstrap_sample_size, 
                                       null_conservation_sample_size = null_conservation_sample_size), 
                    groups = groups, count_matrix_reps=count_matrix_reps)
@@ -73,51 +79,32 @@ S7::method(print, PhyloExpressionSetReplicates) <- function(x, ...) {
     cat("Number of genes: ", x@num_genes, "\n", sep="")
 }
 
+collapse <- function(phyex_set) {
+   S7::convert(phyex_set, PhyloExpressionSet)
+}
+
 .collapse_replicates <- function(count_matrix, groups) {
     sapply(unique(groups), \(g) rowMeans(count_matrix[, groups == g]))
 }
 
-.generate_bootstrapped_txis_reps <- function(pTXI_reps,
-                                             count_matrix_reps,
-                                             groups,
-                                             conditions,
-                                             sample_size) {
-    N <- nrow(pTXI_reps)
-    
-    sampled_indices <- matrix(sample(N, size=N*sample_size, replace=TRUE), 
-                              nrow=N, ncol=sample_size)
-    selection_matrix <- Matrix::sparseMatrix(i = as.vector(sampled_indices),
-                                             j = rep(1:sample_size, each = N),
-                                             x = 1,
-                                             dims= c(N, sample_size))
-    
-    # this is necessary to renormalise the counts so as to get the average right
-    # it's a bit contrived, might be better to just rewrite this in rcpp...
-    total_counts_per_bootstrap <- t(count_matrix_reps) %*% selection_matrix |>
-        as.matrix() |>
-        t()
-    total_counts <- colSums(count_matrix_reps)
-    
-    bootstrap_matrix_reps <- t(pTXI_reps) %*% selection_matrix |> 
-        as.matrix() |>
-        t() |> # columns: samples. rows: bootstraps
-        sweep(2, total_counts, "*")
-    
-    bootstrap_matrix_reps <- bootstrap_matrix_reps / total_counts_per_bootstrap
-    
-    random_rep <- function(groups) {
-        v <- sapply(unique(groups), \(g) sample(which(groups == g), 1))
-        v <- as.integer(1:length(groups) %in% unlist(v))
-        return(v)
-    }
-    rep_mask <- t(replicate(sample_size, random_rep(groups)))
-
-    bootstrap_matrix <- (rep_mask * bootstrap_matrix_reps) |> # different replicates sampled per bootstrap
-        (\(m) sapply(unique(groups), \(g) rowSums(m[, groups == g])))() # collapse replicates => columns: conditions. rows: bootstraps
-
-    colnames(bootstrap_matrix) <- conditions
-    
-    
-
-    return(bootstrap_matrix)
+S7::method(transform_counts, PhyloExpressionSetReplicates) <- function(phyex_set, 
+                                                                       FUN,
+                                                                       FUN_name=deparse(substitute(FUN)),
+                                                                       new_name=paste(phyex_set@name, "transformed by", FUN_name)) {
+    f <- match.fun(FUN)
+    phyex_set@count_matrix_reps <- f(phyex_set@count_matrix_reps)
+    phyex_set@name <- new_name
+    return(phyex_set)
 }
+
+S7::method(select_genes, PhyloExpressionSetReplicates) <- function(phyex_set, 
+                                                                   genes) {
+    indices <- (phyex_set@gene_ids %in% genes)
+    
+    phyex_set@strata_vector <- phyex_set@strata_vector[indices]
+    phyex_set@gene_ids <- phyex_set@gene_ids[indices]
+    phyex_set@count_matrix_reps <- phyex_set@count_matrix_reps[indices, ]
+    
+    return(phyex_set)
+}
+

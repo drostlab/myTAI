@@ -1,34 +1,21 @@
 
 # expressed genes
 
-TopVarianceGenes <- function(ExpressionSet, p = .99){
-    is.ExpressionSet(ExpressionSet)
+top_variance_genes <- function(phyex_set, p = .99){
+    avg_counts <- rowVars(phyex_set@count_matrix)
+    names(avg_counts) <- phyex_set@gene_ids
     
-    # For each gene, get the expression variance across the process
-    ExprProfile <- ExpressionSet[ , -1]
-    ExprProfile$AvgExpression <- .RowVars(ExprProfile[, -1])
+    top_genes <- names(avg_counts)[avg_counts >= stats::quantile(avg_counts, p)]
     
-    
-    # Select genes which are above the specified probability
-    ExprProfile.top <- ExprProfile[stats::quantile(ExprProfile$AvgExpression, 
-                                                   probs=c(p)) < ExprProfile$AvgExpression, ]
-    
-    return(ExprProfile.top$GeneID)
-    
+    return(top_genes)
 }
 
-TopExpressionGenes <- function(ExpressionSet, p = .99){
-    is.ExpressionSet(ExpressionSet)
-    
-    # For each gene, get the average expression level across the process
-    ExprProfile <- ExpressionSet[ , -1]
-    ExprProfile$AvgExpression <- rowMeans(ExprProfile[, -1])
+top_expression_genes <- function(phyex_set, p = .99){
+    avg_counts <- rowMeans(phyex_set@count_matrix)
+    names(avg_counts) <- phyex_set@gene_ids
     
     
-    # Select genes which are above the specified probability
-    ExprProfile.top <- ExprProfile[stats::quantile(ExprProfile$AvgExpression, 
-                                                   probs=c(p)) < ExprProfile$AvgExpression, ]
-    
-    return(ExprProfile.top$GeneID)
-    
+    top_genes <- names(avg_counts)[avg_counts >= stats::quantile(avg_counts, p)]
+
+    return(top_genes)
 }

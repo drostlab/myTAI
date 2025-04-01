@@ -59,7 +59,7 @@
 #'             )
 #' @export
 
-plot_gene_set <- function(ExpressionSet, 
+plot_gene_set_old <- function(ExpressionSet, 
                           gene_set, 
                           get_subset   = FALSE,
                           use_only_map = FALSE,

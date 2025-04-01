@@ -19,20 +19,26 @@ PhyloExpressionSetMasked <- new_class("PhyloExpressionSetMasked",
             getter = \(self) ! self@gene_ids %in% self@removed_genes
         ),
         # reuse from full set
-        bootstrapped_txis = new_property(
-            #class = class_matrix, # S7 doesn't support class_matrix yet
-            getter = \(self) self@full_set@bootstrapped_txis
-        ),
+        # bootstrapped_txis = new_property(
+        #     #class = class_matrix, # S7 doesn't support class_matrix yet
+        #     getter = \(self) self@full_set@bootstrapped_txis
+        # ),
         null_conservation_txis = new_cached_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = \(self) self@full_set@null_conservation_txis
         )
         
     ),
+    validator = function(self) {
+        if (any(! self@removed_genes %in% self@full_set@gene_ids))
+            "@removed_genes must be a subset of @full_set@gene_ids"
+    },
     constructor = function (full_set,
-                            removed_genes) {
-        
+                            removed_genes,
+                            name=paste(full_set@name, "masked")) {
+        check_is_S7(full_set, PhyloExpressionSet)
         new_object(PhyloExpressionSet(data=.remove_genes(full_set@data, removed_genes),
+                                      name=name,
                                       index_type = full_set@index_type,
                                       conditions_label = full_set@conditions_label,
                                       bootstrap_sample_size = full_set@bootstrap_sample_size,

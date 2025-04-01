@@ -32,7 +32,7 @@ generic_conservation_test <- function(phyex_set,
                                   params=params,
                                   alternative=alternative,
                                   null_sample=null_sample,
-                                  data_name=deparse(substitute(phylo_set)),
+                                  data_name=phyex_set@name,
                                   null_txis=null_txis,
                                   test_txi=phyex_set@TXI
                                   )
@@ -50,9 +50,8 @@ diagnose_test_robustness <- function(test,
                                      ...) {
 
     f <- function(size) {
-        null_txis <- .generate_conservation_txis(phyex_set@count_matrix, 
-                                                 phyex_set@strata_vector, 
-                                                 sample_size=size)
+        null_txis <- generate_conservation_txis(phyex_set,
+                                                sample_size=size)
         return(test(phyex_set, custom_null_txis=null_txis, ..., plot_result=FALSE))
     }
     

@@ -22,14 +22,13 @@
 #' 
 #' 
 #' @export
-omit_matrix <- function(phyex_set)
-{
+omit_matrix <- function(phyex_set) {
+
+    oMatrix <- cpp_omitMatrix(phyex_set@count_matrix, phyex_set@strata_vector)
     
-        oMatrix <- cpp_omitMatrix(phyex_set@count_matrix, phyex_set@strata_vector)
-        
-        colnames(oMatrix) <- phyex_set@conditions
-        rownames(oMatrix) <- paste0("(-) ",phyex_set@gene_ids)
-        
-        return(oMatrix)
+    colnames(oMatrix) <- phyex_set@conditions
+    rownames(oMatrix) <- paste0("(-) ",phyex_set@gene_ids)
+    
+    return(oMatrix)
         
 }

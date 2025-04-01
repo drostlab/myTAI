@@ -32,6 +32,10 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)].",
             name = "count_matrix"
         ),
+        name = new_property(
+            class = class_character,
+            default = "Phylo Expression Set"
+        ),
         index_type = new_options_property( # the type of transcriptomic index
             class = class_character,
             options = names(TI_map),
@@ -40,6 +44,10 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         conditions_label = new_property(
             class = class_character,
             default = "Ontogeny"
+            ),
+        is_time_series = new_property(
+            class = class_logical,
+            default = TRUE
             ),
         bootstrap_sample_size = new_property(
             class = class_numeric,
@@ -87,27 +95,38 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_double,
             getter = \(self) colSums(self@pTXI)
             ),
-        bootstrapped_txis = new_cached_property(
+        bootstrapped_txis = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
-            getter = \(self) .generate_bootstrapped_txis(self@pTXI, self@count_matrix, self@bootstrap_sample_size)
+            getter = \(self) memo_generate_bootstrapped_txis(self@pTXI,
+                                                             self@count_matrix,
+                                                             self@bootstrap_sample_size)
             ),
-        null_conservation_txis = new_cached_property(
+        null_conservation_txis = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
-            getter = \(self) .generate_conservation_txis(self@count_matrix, self@strata_vector, self@null_conservation_sample_size)
+            getter = \(self) memo_generate_conservation_txis(self@strata_vector,
+                                                             self@count_matrix,
+                                                             self@null_conservation_sample_size)
         )
         ),
-    constructor = function (data, index_type = "TXI", 
-                            conditions_label = "Ontogeny", bootstrap_sample_size = 5000L, 
+    constructor = function (data = NULL, 
+                            strata_vector = as.numeric(data[[1]]),
+                            gene_ids = as.character(data[[2]]),
+                            count_matrix = as.matrix(data[3:ncol(data)]),
+                            name = deparse(substitute(data)),
+                            index_type = "TXI", 
+                            conditions_label = "Ontogeny", 
+                            is_time_series = TRUE,
+                            bootstrap_sample_size = 5000L, 
                             null_conservation_sample_size = 5000L) {
-        strata_vector <- as.numeric(data[[1]])
-        gene_ids <- as.character(data[[2]])
-        count_matrix <- as.matrix(data[3:ncol(data)])
+
         new_object(S7_object(), 
                    strata_vector = strata_vector,
                    gene_ids = gene_ids,
                    count_matrix = count_matrix,
+                   name = name,
                    index_type = index_type, 
                    conditions_label = conditions_label, 
+                   is_time_series = is_time_series,
                    bootstrap_sample_size = bootstrap_sample_size, 
                    null_conservation_sample_size = null_conservation_sample_size)
         }
@@ -142,46 +161,37 @@ sTXI <- function(phyex_set,
     return(mat)
 }
 
-.generate_bootstrapped_txis <- function(pTXI,
-                                        count_matrix,
-                                        sample_size) {
-    
-    N <- nrow(pTXI)
-    sampled_indices <- matrix(sample(N, size=N*sample_size, replace=TRUE), 
-                              nrow=N, ncol=sample_size)
-    selection_matrix <- Matrix::sparseMatrix(i = as.vector(sampled_indices),
-                                             j = rep(1:sample_size, each = N),
-                                             x = 1,
-                                             dims= c(N, sample_size))
-    
-    # this is necessary to renormalise the counts so as to get the average right
-    # it's a bit contrived, might be better to just rewrite this in rcpp...
-    total_counts_per_bootstrap <- t(count_matrix) %*% selection_matrix |>
-        as.matrix() |>
-        t()
-    total_counts <- colSums(count_matrix)
-    
-    bootstrap_matrix <- t(pTXI) %*% selection_matrix |> 
-        as.matrix() |>
-        t() |> # columns: conditions. rows: bootstraps 
-        sweep(2, total_counts, "*")
-    
-    bootstrap_matrix <- bootstrap_matrix / total_counts_per_bootstrap
-    
-    colnames(bootstrap_matrix) <- colnames(pTXI)
-    
-    return(bootstrap_matrix)
+transform_counts <- S7::new_generic("transform_counts", "phyex_set")
+S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
+                                                             FUN,
+                                                             FUN_name=deparse(substitute(FUN)),
+                                                             new_name=paste(phyex_set@name, "transformed by", FUN_name)) {
+    f <- match.fun(FUN)
+    phyex_set@count_matrix <- f(phyex_set@count_matrix)
+    phyex_set@name <- new_name
+    return(phyex_set)
 }
 
-.generate_conservation_txis <- function(count_matrix, strata_vector, sample_size) {
+select_genes <- S7::new_generic("select_genes", "phyex_set")
+S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set, 
+                                                         genes) {
+    indices <- (phyex_set@gene_ids %in% genes)
     
-    permuted_txi_matrix <- cpp_bootMatrix(count_matrix,
-                                          strata_vector,
-                                          sample_size)
-    
-    colnames(permuted_txi_matrix) <- colnames(count_matrix)
-    return(permuted_txi_matrix)
+    phyex_set@strata_vector <- phyex_set@strata_vector[indices]
+    phyex_set@gene_ids <- phyex_set@gene_ids[indices]
+    phyex_set@count_matrix <- phyex_set@count_matrix[indices, ]
+
+    return(phyex_set)
 }
+
+remove_genes <- function(phyex_set, genes) {
+    selected_genes <- setdiff(phyex_set@gene_ids, genes)
+    select_genes(phyex_set, selected_genes)
+}
+
+
+
+
 
 
 
