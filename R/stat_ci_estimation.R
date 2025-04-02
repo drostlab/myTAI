@@ -69,7 +69,7 @@ generate_bootstrapped_txis_reps <- function(pTXI_reps,
     rep_mask <- t(replicate(sample_size, random_rep(groups)))
     
     bootstrap_matrix <- (rep_mask * bootstrap_matrix_reps) |> # different replicates sampled per bootstrap
-        (\(m) sapply(unique(groups), \(g) rowSums(m[, groups == g])))() # collapse replicates => columns: conditions. rows: bootstraps
+        (\(m) sapply(unique(groups), \(g) rowSums(m[, groups == g, drop=FALSE])))() # collapse replicates => columns: conditions. rows: bootstraps
     
     colnames(bootstrap_matrix) <- conditions
     

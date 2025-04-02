@@ -39,18 +39,10 @@ PhyloExpressionSetReplicates <- new_class("PhyloExpressionSetReplicates",
         TXI_reps = new_property(
             class = class_double,
             getter = \(self) colSums(self@pTXI_reps)
-        ),
-        bootstrapped_txis = new_cached_property(
-            #class = class_matrix, # S7 doesn't support class_matrix yet
-            getter = \(self) memo_generate_bootstrapped_txis_reps(self@pTXI_reps, 
-                                                                  self@count_matrix_reps,
-                                                                  self@groups, 
-                                                                  self@conditions, 
-                                                                  self@bootstrap_sample_size)
         )
     ),
     constructor = function(data, 
-                           groups,
+                           groups = NULL,
                            name = deparse(substitute(data)),
                            index_type = "TXI", 
                            conditions_label = "Ontogeny", 
@@ -58,7 +50,15 @@ PhyloExpressionSetReplicates <- new_class("PhyloExpressionSetReplicates",
                            bootstrap_sample_size = 5000L, 
                            null_conservation_sample_size = 5000L) {
         count_matrix_reps <- as.matrix(data[3:ncol(data)])
+        
+        
+        if (is.null(groups))
+            groups <- colnames(count_matrix_reps)
+        
+        print(groups)
+                
         count_matrix <- .collapse_replicates(count_matrix_reps, groups)
+        
         new_object(PhyloExpressionSet(strata_vector = as.numeric(data[[1]]),
                                       gene_ids = as.character(data[[2]]),
                                       count_matrix = count_matrix,
@@ -84,7 +84,7 @@ collapse <- function(phyex_set) {
 }
 
 .collapse_replicates <- function(count_matrix, groups) {
-    sapply(unique(groups), \(g) rowMeans(count_matrix[, groups == g]))
+    sapply(unique(groups), \(g) rowMeans(count_matrix[, groups == g, drop = FALSE]))
 }
 
 S7::method(transform_counts, PhyloExpressionSetReplicates) <- function(phyex_set, 
