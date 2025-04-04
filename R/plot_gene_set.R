@@ -69,122 +69,122 @@ plot_gene_set <- function(ExpressionSet,
                           digits_ylab  = 1,
                           line_width = 1,
                           point_size = 2,
-                          add_expression_values = FALSE,
                           show_gene_labels = TRUE,
+                          add_expression_values = FALSE,
                           n_genes_for_distance = 1,... ){
-  
-  ExpressionSet <- as.data.frame(ExpressionSet)
-  
-  if (length(gene_set) > 25) {
-    warning("For visualization reasons, the maximum number of genes allowed at once is 25. The gene set has been truncated.", call. = FALSE)
-    gene_set <- gene_set[1:25]  # trim gene set to the first 25 genes
-  }
-  
-  if (!use_only_map)
-    is.ExpressionSet(ExpressionSet)
-  
-  GeneSubSet_indixes <- stats::na.omit(match(tolower(gene_set), tolower(ExpressionSet[ , 2])))
-  
-  if (length(GeneSubSet_indixes) == 0)
-    stop ("None of your input gene ids could be found in the ExpressionSet.", call. = FALSE)
-  
-  if (length(GeneSubSet_indixes) != length(gene_set))
-    warning ("Only ",length(GeneSubSet_indixes), " out of your ", length(gene_set), " gene ids could be found in the ExpressionSet.", call. = FALSE)
-  
-  GeneSubSet <- ExpressionSet[GeneSubSet_indixes , ]
-  ncols <- ncol(GeneSubSet)
-  
-  if(!is.null(colors)){
-    if (length(colors) != length(gene_set))
-      stop ("The number of colors and the number of genes do not match.", call. = FALSE)
-  }
-  
-  # http://www.compbiome.com/2010/12/r-using-rcolorbrewer-to-colour-your.html
-  if (is.null(colors))
-    colors <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(8,"Dark2"))(length(GeneSubSet_indixes))                   
-
-  GeneSubSet_long <- reshape2::melt(GeneSubSet, 
+    
+    ExpressionSet <- as.data.frame(ExpressionSet)
+    
+    if (length(gene_set) > 25) {
+        warning("For visualization reasons, the maximum number of genes allowed at once is 25. The gene set has been truncated.", call. = FALSE)
+        gene_set <- gene_set[1:25]  # trim gene set to the first 25 genes
+    }
+    
+    if (!use_only_map)
+        is.ExpressionSet(ExpressionSet)
+    
+    GeneSubSet_indixes <- stats::na.omit(match(tolower(gene_set), tolower(as.vector(ExpressionSet[[2]]))))
+    
+    if (length(GeneSubSet_indixes) == 0)
+        stop ("None of your input gene ids could be found in the ExpressionSet.", call. = FALSE)
+    
+    if (length(GeneSubSet_indixes) != length(gene_set))
+        warning ("Only ",length(GeneSubSet_indixes), " out of your ", length(gene_set), " gene ids could be found in the ExpressionSet.", call. = FALSE)
+    
+    GeneSubSet <- ExpressionSet[GeneSubSet_indixes , ]
+    ncols <- ncol(GeneSubSet)
+    
+    if(!is.null(colors)){
+        if (length(colors) != length(gene_set))
+            stop ("The number of colors and the number of genes do not match.", call. = FALSE)
+    }
+    
+    # http://www.compbiome.com/2010/12/r-using-rcolorbrewer-to-colour-your.html
+    if (is.null(colors))
+        colors <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(8,"Dark2"))(length(GeneSubSet_indixes))                   
+    
+    GeneSubSet_long <- reshape2::melt(GeneSubSet, 
                                       id.vars = names(GeneSubSet)[1:2], 
                                       measure.vars = colnames(GeneSubSet)[3:ncol(GeneSubSet)],
                                       variable.name = "Stage",                    
                                       value.name = "Expression"                   
     )
-  
-  # Function to calculate Euclidean distance between each point and all other points
-  calculate_euclidean_distance_across_genes <- function(df) {
-    # calculates pairwise Euclidean distances between all points, not just within GeneID
-    df <- df |>
-      dplyr::mutate(id = dplyr::row_number()) |>
-      dplyr::mutate(
-        distance_sum = purrr::map_dbl(id, function(i) {
-          sum(sqrt((Expression[i] - Expression)^2 + (as.numeric(Stage[i]) - as.numeric(Stage))^2))
-        })
-      ) |>
-      dplyr::select(-id)
-  }
-  
-  # apply the Euclidean distance calculation across all GeneIDs
-  GeneSubSet_long_with_density <- calculate_euclidean_distance_across_genes(GeneSubSet_long)
-  
-  # selecting the optimal point (least crowded across GeneIDs)
-  optimal_points <- dplyr::ungroup(dplyr::slice_max(dplyr::group_by(GeneSubSet_long_with_density, GeneID), order_by = distance_sum, n = 1))
-  print(optimal_points)
-  
-  GeneSubSet_long$Stage <- factor(GeneSubSet_long$Stage, levels =  colnames(GeneSubSet)[3:ncol(GeneSubSet)])
-
-  p <- ggplot2::ggplot(GeneSubSet_long, ggplot2::aes(x = Stage, y = Expression, color = GeneID)) + 
-    ggplot2::geom_line(ggplot2::aes(group = GeneID), linewidth = line_width) +        
-    ggplot2::geom_point(size = point_size) +                              
-    ggplot2::scale_color_manual(values = colors) +               
-    ggplot2::labs(x = "Ontogeny", y = "Expression Level", color = "Genes") + 
-    ggplot2::theme_minimal()+
-    ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y_ticks)) +
-    ggplot2::scale_y_continuous(labels = scales::number_format(accuracy = 10^(-digits_ylab))) 
-  
-  if(show_gene_labels)
-      p <- p + ggrepel::geom_text_repel( 
-          data = optimal_points, 
-          ggplot2::aes(label = GeneID),                        
-          size = 3,                                   
-          max.overlaps = 50,                          
-          box.padding = 0.5,                          
-          point.padding = 0.5,                        
-          force = 2,                                  
-          nudge_y = 0.3,                              
-          direction = "both",                         
-          segment.size = 0.2,                         
-          segment.color = "grey50",                   
-          show.legend = FALSE                         
-      )  
-  
-  
-  # add legands on the side
-  if (plot_legend) {
-    p <- p + ggplot2::guides(color = ggplot2::guide_legend(title = "Gene ID"))
-  } else {
-    p <- p + ggplot2::theme(legend.position = "none")
-  }
-  
-  # add expression values 
-  if (add_expression_values) {
-    top_N_genes <- optimal_points |>
-      dplyr::arrange(dplyr::desc(distance_sum)) |>
-      dplyr::slice_head(n = n_genes_for_distance)
     
-    selected_gene_data <- dplyr::filter(GeneSubSet_long, is.element(GeneID, top_N_genes$GeneID))
+    # Function to calculate Euclidean distance between each point and all other points
+    calculate_euclidean_distance_across_genes <- function(df) {
+        # calculates pairwise Euclidean distances between all points, not just within GeneID
+        df <- df |>
+            dplyr::mutate(id = dplyr::row_number()) |>
+            dplyr::mutate(
+                distance_sum = purrr::map_dbl(id, function(i) {
+                    sum(sqrt((Expression[i] - Expression)^2 + (as.numeric(Stage[i]) - as.numeric(Stage))^2))
+                })
+            ) |>
+            dplyr::select(-id)
+    }
     
-    p <- p + ggplot2::geom_text(
-      data = selected_gene_data, 
-      ggplot2::aes(label = round(Expression, 2)), 
-      vjust = 1.5, 
-      size = 3,  
-      show.legend = FALSE
-    )
-  }
-  
-  print(p)
-  
-  if (get_subset)
-    return(GeneSubSet)
-
+    # apply the Euclidean distance calculation across all GeneIDs
+    GeneSubSet_long_with_density <- calculate_euclidean_distance_across_genes(GeneSubSet_long)
+    
+    # selecting the optimal point (least crowded across GeneIDs)
+    optimal_points <- dplyr::ungroup(dplyr::slice_max(dplyr::group_by(GeneSubSet_long_with_density, GeneID), order_by = distance_sum, n = 1))
+    print(optimal_points)
+    
+    GeneSubSet_long$Stage <- factor(GeneSubSet_long$Stage, levels =  colnames(GeneSubSet)[3:ncol(GeneSubSet)])
+    
+    p <- ggplot2::ggplot(GeneSubSet_long, ggplot2::aes(x = Stage, y = Expression, color = GeneID)) + 
+        ggplot2::geom_line(ggplot2::aes(group = GeneID), linewidth = line_width) +        
+        ggplot2::geom_point(size = point_size) +                              
+        ggplot2::scale_color_manual(values = colors) +               
+        ggplot2::labs(x = "Ontogeny", y = "Expression Level", color = "Genes") + 
+        ggplot2::theme_minimal()+
+        ggplot2::scale_y_continuous(breaks = scales::pretty_breaks(n = y_ticks)) +
+        ggplot2::scale_y_continuous(labels = scales::number_format(accuracy = 10^(-digits_ylab))) 
+    
+    if(show_gene_labels)
+        p <- p + ggrepel::geom_text_repel( 
+            data = optimal_points, 
+            ggplot2::aes(label = GeneID),                        
+            size = 3,                                   
+            max.overlaps = 50,                          
+            box.padding = 0.5,                          
+            point.padding = 0.5,                        
+            force = 2,                                  
+            nudge_y = 0.3,                              
+            direction = "both",                         
+            segment.size = 0.2,                         
+            segment.color = "grey50",                   
+            show.legend = FALSE                         
+        )  
+    
+    # add legands on the side
+    if (plot_legend) {
+        p <- p + ggplot2::guides(color = ggplot2::guide_legend(title = "Gene ID"))
+    } else {
+        p <- p + ggplot2::theme(legend.position = "none")
+    }
+    
+    # add expression values 
+    if (add_expression_values) {
+        top_N_genes <- optimal_points |>
+            dplyr::arrange(dplyr::desc(distance_sum)) |>
+            dplyr::slice_head(n = n_genes_for_distance)
+        
+        selected_gene_data <- dplyr::filter(GeneSubSet_long, is.element(GeneID, top_N_genes$GeneID))
+        
+        p <- p + ggplot2::geom_text(
+            data = selected_gene_data, 
+            ggplot2::aes(label = round(Expression, 2)), 
+            vjust = 1.5, 
+            size = 3,  
+            show.legend = FALSE
+        )
+    }
+    
+    print(p)
+    
+    if (get_subset)
+        return(GeneSubSet)
+    
 }
+
