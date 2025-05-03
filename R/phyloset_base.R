@@ -18,7 +18,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         ## PARAMETERS
         # REQUIRED
         strata_vector = new_required_property(
-            class = class_numeric,
+            class = class_factor,
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[1].",
             name = "strata_vector"
         ),
@@ -74,7 +74,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         ),
         data = new_property(
             class = class_data.frame,
-            getter <- \(self) tibble::tibble(Phylostratum=self@strata_vector, 
+            getter <- \(self) tibble::tibble(Stratum=self@strata_vector, 
                                              GeneID=self@gene_ids, 
                                              tibble::as_tibble(self@count_matrix_reps))
         ),
@@ -96,6 +96,10 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_integer,
             getter = \(self) ncol(self@count_matrix)
             ),
+        num_strata = new_property(
+            class = class_integer,
+            getter = \(self) length(unique(self@strata_vector))
+        ),
         pTXI = new_cached_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
@@ -150,7 +154,7 @@ as_PhyloExpressionSet <- function(data,
                                   name = deparse(substitute(data)),
                                   ...) {
     gene_ids = as.character(data[[2]])
-    strata_vector = as.numeric(data[[1]])
+    strata_vector = factor(as.numeric(data[[1]]), levels=sort(unique(as.numeric(data[[1]]))))
     names(strata_vector) = gene_ids
     
     count_matrix_reps = as.matrix(data[3:ncol(data)])
