@@ -4,10 +4,13 @@
 #' @import ggplot2 purrr
 plot_signature_multiple <- function(phyex_sets,
                                     legend_title="Phylo Expression Set",
+                                    show_p_val=F,
+                                    conservation_test=flatline_test,
+                                    colours=NULL,
                                     ...) {
     
     layers <- phyex_sets |>
-        map(plot_signature, ...) |>
+        map(plot_signature, show_p_val=F, ...) |>
         map(~ .x$layers) |>
         unlist(c()) |>
         .sort_layers()
@@ -21,6 +24,23 @@ plot_signature_multiple <- function(phyex_sets,
             fill=legend_title
         ) +
         theme_minimal()
+
+    labels <- phyex_sets |> map(\(s) s@name)
+    
+    # add p values to legend
+    if (show_p_val) {
+        test_res <- phyex_sets |> map(conservation_test, plot_result=FALSE)
+        p_vals <- test_res |> map(\(t) t@p_value) |>
+            map(\(pval) signif(pval, digits=3)) |> as.character()
+        p_label <- test_res[[1]]@p_label
+        labels <- map2(labels, p_vals, \(l, pval) paste0(l, "<br><br>**", p_label, "**: ", pval, "<br>"))
+        p <- p + theme(legend.text=ggtext::element_markdown())
+    }
+    
+    if (!is.null(colours))
+        p <- p + scale_color_manual(labels=labels, values=colours) + scale_fill_manual(labels=labels, values=colours)
+    else
+        p <- p + scale_color_hue(labels=labels) + scale_fill_hue(labels=labels)
         
     return(p)
 }

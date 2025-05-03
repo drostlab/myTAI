@@ -5,6 +5,7 @@ late_conservation_test <- function(phyex_set, modules, ...) {
                                    scoring_function=\(x) lc_score(x, modules),
                                    fitting_dist=distributions$normal,
                                    alternative="greater",
+                                   p_label="p_lct",
                                    ...)
     t@modules <- modules
     return(t)

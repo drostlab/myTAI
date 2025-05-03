@@ -16,7 +16,7 @@ TI_map <- list(TXI = "Transcriptomic Index",
 PhyloExpressionSet <- new_class("PhyloExpressionSet",
     properties = list(
         ## PARAMETERS
-        #TODO add species and process/ title of data
+        # REQUIRED
         strata_vector = new_required_property(
             class = class_numeric,
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[1].",
@@ -27,14 +27,23 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[2].",
             name = "gene_ids"
         ),
-        count_matrix = new_required_property(
+        count_matrix_reps = new_required_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)].",
             name = "count_matrix"
         ),
+        rep_groups = new_required_property(
+            class = class_character,
+            name = "rep_groups"
+        ),
+        # OPTIONAL
         name = new_property(
             class = class_character,
             default = "Phylo Expression Set"
+        ),
+        species = new_property(
+            class = class_character,
+            default = NULL
         ),
         index_type = new_options_property( # the type of transcriptomic index
             class = class_character,
@@ -58,11 +67,16 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             default = 5000L
             ),
         ## FIELDS & PROPERTIES
+        count_matrix = new_cached_property(
+            #class = class_matrix, # S7 doesn't support class_matrix yet
+            getter = \(self) .collapse_replicates(self@count_matrix_reps, self@rep_groups),
+            validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)].",
+        ),
         data = new_property(
             class = class_data.frame,
-            getter <- \(self) tibble::tibble(Stratum=self@strata_vector, 
+            getter <- \(self) tibble::tibble(Phylostratum=self@strata_vector, 
                                              GeneID=self@gene_ids, 
-                                             tibble::as_tibble(self@count_matrix))
+                                             tibble::as_tibble(self@count_matrix_reps))
         ),
         index_full_name = new_property(
             class = class_character,
@@ -106,47 +120,105 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             getter = \(self) memo_generate_conservation_txis(self@strata_vector,
                                                              self@count_matrix,
                                                              self@null_conservation_sample_size)
-        )
         ),
-    constructor = function (data = NULL, 
-                            strata_vector = as.numeric(data[[1]]),
-                            gene_ids = as.character(data[[2]]),
-                            count_matrix = as.matrix(data[3:ncol(data)]),
-                            name = deparse(substitute(data)),
-                            index_type = "TXI", 
-                            conditions_label = "Ontogeny", 
-                            is_time_series = TRUE,
-                            bootstrap_sample_size = 5000L, 
-                            null_conservation_sample_size = 5000L) {
-
-        new_object(S7_object(), 
-                   strata_vector = strata_vector,
-                   gene_ids = gene_ids,
-                   count_matrix = count_matrix,
-                   name = name,
-                   index_type = index_type, 
-                   conditions_label = conditions_label, 
-                   is_time_series = is_time_series,
-                   bootstrap_sample_size = bootstrap_sample_size, 
-                   null_conservation_sample_size = null_conservation_sample_size)
-        }
-    
+        sample_names = new_property(
+            class = class_character,
+            getter = function(self) colnames(self@count_matrix_reps)
+        ),
+        replicate_map = new_property(
+            class = class_list,
+            getter = function(self) split(self@sample_names, self@rep_groups)
+        ),
+        pTXI_reps = new_property(
+            #class = class_matrix, # S7 doesn't support class_matrix yet
+            getter = function(self) {
+                m <- cpp_pMatrix(self@count_matrix_reps, self@strata_vector)
+                rownames(m) <- self@gene_ids
+                colnames(m) <- colnames(self@count_matrix_reps)
+                return(m)
+            }
+        ),
+        TXI_reps = new_property(
+            class = class_double,
+            getter = \(self) colSums(self@pTXI_reps)
+        )
+        )
     )
+
+as_PhyloExpressionSet <- function(data, 
+                                  rep_groups = colnames(data[,3:ncol(data)]),
+                                  name = deparse(substitute(data)),
+                                  ...) {
+    gene_ids = as.character(data[[2]])
+    strata_vector = as.numeric(data[[1]])
+    names(strata_vector) = gene_ids
+    
+    count_matrix_reps = as.matrix(data[3:ncol(data)])
+    rownames(count_matrix_reps) = gene_ids
+    
+    return(PhyloExpressionSet(
+        strata_vector = strata_vector,
+        gene_ids = gene_ids,
+        count_matrix_reps = count_matrix_reps,
+        rep_groups = rep_groups,
+        name = name,
+    ))
+}
+
 
 
 S7::method(print, PhyloExpressionSet) <- function(x, ...) {
     cat("\n", "Phylo Expression Set", "\n", sep="")
+    cat("\n", x@name, "\n", sep="")
     cat(x@conditions_label, ":  ", paste(as.character(x@conditions), collapse = ", "), "\n", sep="")
+    #cat("Replicates: ", paste(as.character(x@sample_names), collapse = ", "), "\n", sep="")
     cat("Number of genes: ", x@num_genes, "\n", sep="")
 }
 
 
-
-TXI_conf_int <- function(phyex_set, 
-                         probs=c(.025, .975)) {
-    CIs <- apply(phyex_set@bootstrapped_txis, 2, quantile, probs=probs)
-    return (CIs)
+.collapse_replicates <- function(count_matrix, groups) {
+    sapply(unique(groups), \(g) rowMeans(count_matrix[, groups == g, drop = FALSE]))
 }
+
+transform_counts <- S7::new_generic("transform_counts", "phyex_set")
+S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
+                                                             FUN,
+                                                             FUN_name=deparse(substitute(FUN)),
+                                                             new_name=paste(phyex_set@name, "transformed by", FUN_name)) {
+    f <- match.fun(FUN)
+    phyex_set@count_matrix_reps <- f(phyex_set@count_matrix_reps)
+    phyex_set@name <- new_name
+    return(phyex_set)
+}
+
+select_genes <- S7::new_generic("select_genes", "phyex_set")
+S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set, 
+                                                         genes) {
+    indices <- (phyex_set@gene_ids %in% genes)
+    
+    phyex_set@strata_vector <- phyex_set@strata_vector[indices]
+    phyex_set@gene_ids <- phyex_set@gene_ids[indices]
+    phyex_set@count_matrix_reps <- phyex_set@count_matrix_reps[indices, ]
+    
+    return(phyex_set)
+}
+
+#' @import purrr
+TXI_conf_int <- function(phyex_set, 
+                         low_q=.025,
+                         high_q=.975) {
+    CIs <- apply(phyex_set@bootstrapped_txis, 2, quantile, probs=c(low_q, high_q))
+    # xlist <- map(phyex_set@replicate_map, \(reps) phyex_set@TXI_reps[reps])
+    # stderr <- map_dbl(xlist, \(x) sd(x) / sqrt(length(x)))
+    # mean <- map_dbl(xlist, \(x) unname(mean(x)))
+    # dfs <- map_dbl(xlist, \(x) length(x) - 1)
+    # low <- mean - map2_dbl(stderr, dfs, \(s, d) qt(1 - low_q, df=d) * s)
+    # high <- mean + map2_dbl(stderr, dfs, \(s, d) qt(high_q, df=d) * s)
+    return(list(low=CIs[1, ], high=CIs[2, ]))
+}
+
+
+
 
 sTXI <- function(phyex_set,
                  option="identity") {
@@ -159,29 +231,6 @@ sTXI <- function(phyex_set,
              call. = FALSE
         )
     return(mat)
-}
-
-transform_counts <- S7::new_generic("transform_counts", "phyex_set")
-S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
-                                                             FUN,
-                                                             FUN_name=deparse(substitute(FUN)),
-                                                             new_name=paste(phyex_set@name, "transformed by", FUN_name)) {
-    f <- match.fun(FUN)
-    phyex_set@count_matrix <- f(phyex_set@count_matrix)
-    phyex_set@name <- new_name
-    return(phyex_set)
-}
-
-select_genes <- S7::new_generic("select_genes", "phyex_set")
-S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set, 
-                                                         genes) {
-    indices <- (phyex_set@gene_ids %in% genes)
-    
-    phyex_set@strata_vector <- phyex_set@strata_vector[indices]
-    phyex_set@gene_ids <- phyex_set@gene_ids[indices]
-    phyex_set@count_matrix <- phyex_set@count_matrix[indices, ]
-
-    return(phyex_set)
 }
 
 remove_genes <- function(phyex_set, genes) {

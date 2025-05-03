@@ -3,6 +3,7 @@ generic_conservation_test <- function(phyex_set,
                                       scoring_function,
                                       fitting_dist,
                                       alternative = c("two-sided", "greater", "less"),
+                                      p_label=p_label,
                                       custom_null_txis = NULL,
                                       plot_result=TRUE
                                       ) {
@@ -34,7 +35,8 @@ generic_conservation_test <- function(phyex_set,
                                   null_sample=null_sample,
                                   data_name=phyex_set@name,
                                   null_txis=null_txis,
-                                  test_txi=phyex_set@TXI
+                                  test_txi=phyex_set@TXI,
+                                  p_label=p_label
                                   )
     if (plot_result)
         print(plot(res))

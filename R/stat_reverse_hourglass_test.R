@@ -7,6 +7,7 @@ reverse_hourglass_test <- function(phyex_set,
                                    scoring_function=\(x) reverse_hourglass_score(x, modules),
                                    fitting_dist=distributions$normal,
                                    alternative="greater",
+                                   p_label="p_rht",
                                    ...)
     t@modules <- modules
     return(t)

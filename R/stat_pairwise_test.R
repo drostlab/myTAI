@@ -10,6 +10,7 @@ pairwise_test <- function(phyex_set,
                                    scoring_function=\(x) pair_score(x, modules, alternative),
                                    fitting_dist=distributions$normal,
                                    alternative=alternative,
+                                   p_label="p_pair",
                                    ...)
     t@modules <- modules
     return(t)
