@@ -5,5 +5,6 @@ flatline_test <- function(phyex_set, ...) {
                                      scoring_function=stats::var,
                                      fitting_dist=distributions$gamma,
                                      alternative="greater",
+                                     p_label="p_flt",
                                      ...))
 }

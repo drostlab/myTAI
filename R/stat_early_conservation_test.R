@@ -5,6 +5,7 @@ early_conservation_test <- function(phyex_set, modules, ...) {
                                    scoring_function=\(x) ec_score(x, modules),
                                    fitting_dist=distributions$normal,
                                    alternative="greater",
+                                   p_label = "p_ect",
                                    ...)
     t@modules <- modules
     return(t)

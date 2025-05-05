@@ -5,6 +5,7 @@ reductive_hourglass_test <- function(phyex_set, modules, ...) {
                                    scoring_function=\(x) reductive_hourglass_score(x, modules),
                                    fitting_dist=distributions$normal,
                                    alternative="greater",
+                                   p_label="p_red",
                                    ...)
     t@modules <- modules
     return(t)

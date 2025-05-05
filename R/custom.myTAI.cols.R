@@ -5,5 +5,11 @@ custom.myTAI.cols <- function(n) {
                   "#8A7C64", "#599861")
         return(cols[1:n])
 }
+
+PS_colours <- function(n) {
+    cols <- c("#171E15FF","#5E5752FF", "#9F9994FF", "#CCC2B5FF", "#E8CFABFF", "#F5BC5CFF", "#E2853AFF", "#CC4C24FF", "#3F1606FF",
+              "#693829FF", "#894B33FF", "#A56A3EFF", "#CFB267FF", "#D9C5B6FF", "#9CA9BAFF", "#5480B5FF", "#3D619DFF", "#405A95FF", "#345084FF")
+    return(cols[1:n])
+}
         
         

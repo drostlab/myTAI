@@ -29,6 +29,10 @@ TestResult <- new_class("TestResult",
         data_name = new_property(
             class=class_character
         ),
+        p_label = new_property(
+            class=class_character,
+            default="p_val"
+        ),
         ## FIELDS & PROPERTIES
         p_value = new_cached_property(
             class=class_double,
