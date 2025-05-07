@@ -19,17 +19,26 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         # REQUIRED
         strata_vector = new_required_property(
             class = class_factor,
-            validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[1].",
+            validator = function(value) {
+                if (any(is.na(value))) "cannot contain NA values. Check data[1]."
+                if (length(value) == 0) "cannot be empty. Check data[1]"
+                },
             name = "strata_vector"
         ),
         gene_ids = new_required_property(
             class = class_character,
-            validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[2].",
+            validator = function(value) {
+                if (any(is.na(value))) "cannot contain NA values. Check data[2]."
+                if (length(value) == 0) "cannot be empty. Check data[2]"
+            },
             name = "gene_ids"
         ),
         count_matrix_reps = new_required_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
-            validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)].",
+            validator = function(value) {
+                if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)]."
+                if (length(value) == 0) "cannot be empty. Check data[3:ncol(data)]"
+            },
             name = "count_matrix"
         ),
         rep_groups = new_required_property(
@@ -170,7 +179,6 @@ as_PhyloExpressionSet <- function(data,
 }
 
 
-
 S7::method(print, PhyloExpressionSet) <- function(x, ...) {
     cat("\n", "Phylo Expression Set", "\n", sep="")
     cat("\n", x@name, "\n", sep="")
@@ -181,7 +189,16 @@ S7::method(print, PhyloExpressionSet) <- function(x, ...) {
 
 
 .collapse_replicates <- function(count_matrix, groups) {
-    sapply(unique(groups), \(g) rowMeans(count_matrix[, groups == g, drop = FALSE]))
+    m <- do.call(cbind, lapply(unique(groups), \(g) rowMeans(count_matrix[, groups == g, drop = FALSE])))
+    colnames(m) <- unique(groups)
+    return(m)
+}
+
+collapse <- function(phyex_set) {
+    data <- tibble::tibble(Stratum=phyex_set@strata_vector, 
+                           GeneID=phyex_set@gene_ids, 
+                           tibble::as_tibble(phyex_set@count_matrix))
+    as_PhyloExpressionSet(data)
 }
 
 transform_counts <- S7::new_generic("transform_counts", "phyex_set")
@@ -191,7 +208,7 @@ S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set,
                                                              new_name=paste(phyex_set@name, "transformed by", FUN_name)) {
     f <- match.fun(FUN)
     phyex_set@count_matrix_reps <- f(phyex_set@count_matrix_reps)
-    phyex_set@name <- new_name
+    #phyex_set@name <- new_name
     return(phyex_set)
 }
 
@@ -202,7 +219,8 @@ S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set,
     
     phyex_set@strata_vector <- phyex_set@strata_vector[indices]
     phyex_set@gene_ids <- phyex_set@gene_ids[indices]
-    phyex_set@count_matrix_reps <- phyex_set@count_matrix_reps[indices, ]
+    phyex_set@count_matrix_reps <- phyex_set@count_matrix_reps[indices, ,drop=F]
+    
     
     return(phyex_set)
 }
@@ -237,9 +255,11 @@ sTXI <- function(phyex_set,
     return(mat)
 }
 
-remove_genes <- function(phyex_set, genes) {
+remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed")) {
     selected_genes <- setdiff(phyex_set@gene_ids, genes)
-    select_genes(phyex_set, selected_genes)
+    s <- select_genes(phyex_set, selected_genes)
+    s@name <- new_name
+    return(s)
 }
 
 

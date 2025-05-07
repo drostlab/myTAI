@@ -6,16 +6,15 @@ plot_strata_distribution <- function(strata_vector,
                                      ) {
     df <- data.frame(Stratum=strata_vector, GeneID=names(strata_vector))
     df_selected <- df |> filter(GeneID %in% selected_gene_ids)
-    levels = sort(unique(strata_vector))
     if (!as_log_obs_exp) {
-        ggplot(df_selected, aes(factor(Stratum,levels=levels), fill=factor(Stratum,levels=levels))) + 
-            geom_bar() + 
+        ggplot(df_selected, aes(Stratum, fill=Stratum)) + 
+            geom_bar(stat="count", position = "dodge", show.legend = TRUE) + 
             labs(fill="Stratum") +
             xlab("Stratum") + 
             ylab("Gene Count") +
-            scale_x_discrete(drop = FALSE) +
-            scale_fill_manual(values = PS_colours(length(levels))) +
-            guides(fill="none") + 
+            scale_x_discrete(labels=labels(df_selected$Stratum), drop = FALSE) +
+            scale_fill_manual(values = PS_colours(length(levels(strata_vector))), labels=levels(df_selected$Stratum), drop=FALSE) +
+            guides(fill=guide_legend(override.aes = list(size = 1.0), keyheight = 0.5, keywidth = 0.5)) +
             theme_minimal()
     }
     else {
@@ -24,20 +23,31 @@ plot_strata_distribution <- function(strata_vector,
         log_ratio <- full_join(counts_all, counts_sel, by= "Stratum") |>
             mutate(log_obs_exp = log2((p_sel + 1e-6)/ (p_all + 1e-6)))
         
-        ggplot(log_ratio, aes(factor(Stratum, levels=levels), 
+        ggplot(log_ratio, aes(Stratum, 
                               y=log_obs_exp,
                               fill= log_obs_exp)
                               ) +
-            geom_bar(stat = "identity") +
+            geom_bar(stat = "identity", size=0.1) +
             labs(fill="Stratum") +
             xlab("Stratum") +
             ylab("Log(Obs/Exp)") +
-            scale_x_discrete(drop = FALSE) +
+            scale_x_discrete(labels=labels(df_selected$Stratum), drop = FALSE) +
             scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
-            guides(fill="none", colour="none") + 
+            guides(fill="none") + 
             theme_minimal()
     
         
     }
     # TODO: integrate PlotEnrichment here
+}
+
+strata_enrichment <- function(strata_vector, selected_gene_ids) {
+    df <- data.frame(Stratum=strata_vector, GeneID=names(strata_vector))
+    df_selected <- df |> filter(GeneID %in% selected_gene_ids)
+    counts_all <- df |> count(Stratum, .drop=F) |> mutate(p_all = n / sum(n))
+    counts_sel <- df_selected |> count(Stratum, .drop=F) |> mutate(p_sel = n / sum(n))
+    log_ratio <- full_join(counts_all, counts_sel, by= "Stratum") |>
+        mutate(log_obs_exp = log2((p_sel)/ (p_all))) |>
+        select(Stratum, log_obs_exp)
+    return(log_ratio)
 }
