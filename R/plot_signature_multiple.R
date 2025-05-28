@@ -6,9 +6,13 @@ plot_signature_multiple <- function(phyex_sets,
                                     legend_title="Phylo Expression Set",
                                     show_p_val=F,
                                     conservation_test=flatline_test,
+                                    transformation = NULL,
                                     colours=NULL,
                                     ...) {
     
+    if (!is.null(transformation))
+        phyex_sets <- phyex_sets |>
+            map(tf, FUN=transformation)
     layers <- phyex_sets |>
         map(plot_signature, show_p_val=F, ...) |>
         map(~ .x$layers) |>
@@ -33,7 +37,7 @@ plot_signature_multiple <- function(phyex_sets,
         p_vals <- test_res |> map(\(t) t@p_value) |>
             map(\(pval) signif(pval, digits=3)) |> as.character()
         p_label <- test_res[[1]]@p_label
-        labels <- map2(labels, p_vals, \(l, pval) paste0(l, "<br><br>**", p_label, "**: ", pval, "<br>"))
+        labels <- map2(labels, p_vals, \(l, pval) paste0(l, "<br>**", p_label, "**: ", pval, "<br>"))
         p <- p + theme(legend.text=ggtext::element_markdown())
     }
     

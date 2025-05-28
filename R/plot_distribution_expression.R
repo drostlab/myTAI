@@ -12,22 +12,18 @@
 #' @section Recomendation - Apply a square root transformation to enhance the visualization of differences 
 #' in the distributions: plot_distribution_partialTAI(tf(ExpressionSet, sqrt))
 #' @author Filipa Martins Costa
-#' @import ggplot2 tibble
+#' @import ggplot2 tibble patchwork
 #' @export
 
-plot_distribution_expression <- function(phyex_set,
-                                         conditions = phyex_set@conditions,
-                                         xlab = "Expression",
-                                         ylab = "Density",
-                                         main = "Density Distribution of Expression by Developmental Stage",
-                                         seed = 123){
-  if(!all(conditions %in% phyex_set@conditions))
-      stop("Some elements in `conditions` do not occur in the `phyex_set`")
+plot_distribution_expression <- function(phyex_set, 
+                                         show_conditions=T,
+                                         show_strata=F,
+                                         seed=123){
   
-  expression_long <- tidyr::pivot_longer(
-    tibble(GeneID=phyex_set@strata_vector, as_tibble(phyex_set@count_matrix)),
-    cols = -GeneID,
-    names_to = "Stage",
+  df <- tidyr::pivot_longer(
+    phyex_set@data_collapsed,
+    cols = -c(Stratum,GeneID),
+    names_to = "Condition",
     values_to = "Expression"
   )
   
@@ -36,29 +32,38 @@ plot_distribution_expression <- function(phyex_set,
   set.seed(seed)
   colors <- sample(col_vector, ncol(phyex_set@data)-1)
   
-  P1 <- ggplot(expression_long, 
-               aes(x = Expression, fill = Stage)) +
-      geom_density(alpha = 0.7, color = "black") +
+  p <- ggplot(df, 
+               aes(x = Expression)) +
+      geom_density(alpha = 0.7, color = "black", fill="darkgray") +
       labs(
-          x = xlab,
-          y = ylab) +
-    theme_minimal() +
-    theme(
-        plot.title = element_text(hjust = 0.5, size = 14),
-        axis.title = element_text(size = 12)) +
-    scale_fill_manual(values = colors)
+          x = "Density",
+          y = "Expression") +
+    theme_minimal()
   
-  P2 <- ggplot(expression_long, 
-               aes(x = Expression, y = Stage, fill = Stage)) +
-      ggridges::geom_density_ridges(alpha = 0.7, color = "black", scale = 1) + 
-      labs(
-          x = xlab,
-          y = ylab) +
-      theme_minimal() +
-      theme(
-          plot.title = element_text(hjust = 0.5, size = 14),
-          axis.title = element_text(size = 12)) +
-    scale_fill_manual(values = colors)
-  
-  cowplot::plot_grid(P1, P2, labels = main)
+  if (show_conditions) {
+      p_cond <- ggplot(df, 
+                   aes(x = Expression, y = factor(Condition, levels=unique(Condition)), fill = factor(Condition, levels=unique(Condition)))) +
+          ggridges::geom_density_ridges(alpha = 0.7, color = "black", scale = 1) + 
+          labs(
+              x = "Density",
+              y = "Expression",
+              fill = phyex_set@conditions_label) +
+          theme_minimal() +
+          scale_fill_manual(values = colors)
+      
+      p <- p + p_cond
+  }
+  if (show_strata) {
+      p_strata <- ggplot(df, 
+                       aes(x = Expression, y = Stratum, fill = Stratum)) +
+          ggridges::geom_density_ridges(alpha = 0.7, color = "black", scale = 1) + 
+          labs(
+              x = "Density",
+              y = "Expression") +
+          theme_minimal() +
+          scale_fill_manual(values = PS_colours(phyex_set@num_strata))
+      
+      p <- p + p_strata
+  }
+  p + plot_layout(nrow=1)
 }

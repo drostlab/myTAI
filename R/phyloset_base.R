@@ -67,6 +67,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_logical,
             default = TRUE
             ),
+
         bootstrap_sample_size = new_property(
             class = class_numeric,
             default = 5000L
@@ -86,6 +87,12 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             getter <- \(self) tibble::tibble(Stratum=self@strata_vector, 
                                              GeneID=self@gene_ids, 
                                              tibble::as_tibble(self@count_matrix_reps))
+        ),
+        data_collapsed = new_property(
+            class = class_data.frame,
+            getter <- \(self) tibble::tibble(Stratum=self@strata_vector, 
+                                             GeneID=self@gene_ids, 
+                                             tibble::as_tibble(self@count_matrix))
         ),
         index_full_name = new_property(
             class = class_character,
@@ -128,11 +135,20 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
                                                              self@count_matrix,
                                                              self@bootstrap_sample_size)
             ),
+        precomputed_null_conservation_txis = new_property(
+            #class = class_matrix, # S7 doesn't support class_matrix yet
+            default = NULL
+        ),
         null_conservation_txis = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
-            getter = \(self) memo_generate_conservation_txis(self@strata_vector,
-                                                             self@count_matrix,
-                                                             self@null_conservation_sample_size)
+            getter = function(self) {
+                if(is.null(self@precomputed_null_conservation_txis))
+                   memo_generate_conservation_txis(self@strata_vector,
+                                                   self@count_matrix,
+                                                   self@null_conservation_sample_size)
+                else
+                   self@precomputed_null_conservation_txis
+            }
         ),
         sample_names = new_property(
             class = class_character,
@@ -175,6 +191,7 @@ as_PhyloExpressionSet <- function(data,
         count_matrix_reps = count_matrix_reps,
         rep_groups = rep_groups,
         name = name,
+        ...
     ))
 }
 
@@ -201,6 +218,11 @@ collapse <- function(phyex_set) {
     as_PhyloExpressionSet(data)
 }
 
+normalise_stage_expression <- function(phyex_set, total=1e6) {
+    phyex_set@count_matrix_reps <- sweep(phyex_set@count_matrix_reps, 2, colSums(phyex_set@count_matrix_reps), FUN="/") * total
+    phyex_set
+}
+
 transform_counts <- S7::new_generic("transform_counts", "phyex_set")
 S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
                                                              FUN,
@@ -211,6 +233,8 @@ S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set,
     #phyex_set@name <- new_name
     return(phyex_set)
 }
+tf <- transform_counts
+
 
 select_genes <- S7::new_generic("select_genes", "phyex_set")
 S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set, 
@@ -255,12 +279,15 @@ sTXI <- function(phyex_set,
     return(mat)
 }
 
+
 remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed")) {
     selected_genes <- setdiff(phyex_set@gene_ids, genes)
     s <- select_genes(phyex_set, selected_genes)
     s@name <- new_name
+    s@precomputed_null_conservation_txis <- phyex_set@null_conservation_txis
     return(s)
 }
+
 
 
 

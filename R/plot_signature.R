@@ -1,19 +1,15 @@
 
-
-plot_signature <- S7::new_generic("plot_signature", "phyex_set")
-
-#TODO display p value as label
 #' @import ggplot2
-S7::method(plot_signature, PhyloExpressionSet) <- function(phyex_set,
-                                                           show_CI=TRUE,
-                                                           show_bootstraps=FALSE,
-                                                           CI_low=.025,
-                                                           CI_high=.975,
-                                                           show_replicates=TRUE,
-                                                           show_p_val=FALSE,
-                                                           conservation_test=flatline_test,
-                                                           colour = NULL,
-                                                           ...) {
+plot_signature <- function(phyex_set,
+                           show_CI=TRUE,
+                           show_bootstraps=FALSE,
+                           CI_low=.025,
+                           CI_high=.975,
+                           show_reps=TRUE,
+                           show_p_val=FALSE,
+                           conservation_test=flatline_test,
+                           colour = NULL,
+                           ...) {
     p <- ggplot()
     
     # Plot CI (unless showing bootstraps)
@@ -82,7 +78,7 @@ S7::method(plot_signature, PhyloExpressionSet) <- function(phyex_set,
         theme_minimal()
     
     # Plot replicates
-    if (show_replicates) {
+    if (show_reps) {
         df <- tibble::tibble(Condition = factor(phyex_set@rep_groups, levels=unique(phyex_set@rep_groups)),
                              TXI = phyex_set@TXI_reps)
         p <- p + geom_jitter(data=df,
@@ -111,21 +107,6 @@ S7::method(plot_signature, PhyloExpressionSet) <- function(phyex_set,
 }
 
 
-#' 
-#' 
-#' #' @import ggplot2
-#' S7::method(plot_signature, PhyloExpressionSetMasked) <- function(phyex_set, show_full_set = TRUE, ...) {
-#'     full_set <- phyex_set@full_set
-#'     masked_set <- S7::convert(phyex_set, PhyloExpressionSet)
-#'     # Plot the original pattern
-#'     if (show_full_set)
-#'         p <- plot_signature_multiple(c(full_set, masked_set))
-#'     
-#'     else
-#'         p <- plot_signature(masked_set)
-#'     
-#'     return(p)
-#' }
 
 
 
