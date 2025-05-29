@@ -66,7 +66,7 @@ SignatureGATAIGeneRemoval <- function(ExpressionSet,
     stop("Plot type '", plot_type, "' is not available for this function. Please specify a plot type supported by this function.", call. = FALSE)
   }
   
-  removed_gene_list <- GATAI(ExpressionSet, ...)
+  #removed_gene_list <- GATAI(ExpressionSet, ...)
   
   if (is.character(n_random_removal) && n_random_removal == "gatai") {
     n_random_genes <- length(removed_gene_list[[1]]) 

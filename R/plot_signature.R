@@ -1,7 +1,7 @@
 
 #' @import ggplot2
 plot_signature <- function(phyex_set,
-                           show_CI=TRUE,
+                           show_CI=FALSE,
                            show_bootstraps=FALSE,
                            CI_low=.025,
                            CI_high=.975,

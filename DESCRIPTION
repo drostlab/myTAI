@@ -39,6 +39,7 @@ Depends:
     R (>= 3.1.1)
 Imports:
     Rcpp,
+    RcppParallel,
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.1-5),
     parallel (>= 3.1.1),
@@ -66,16 +67,13 @@ Suggests:
     testthat (>= 0.9.1),
     mgcv,
     Seurat,
-    decor,
-    RcppThread
+    decor
 LinkingTo: 
-    RcppArmadillo,
+    RcppParallel,
     Rcpp,
-    cpp11,
-    RcppThread, 
     RcppEigen
 URL: https://drostlab.github.io/myTAI/
 BugReports: https://github.com/drostlab/myTAI/issues
 RoxygenNote: 7.3.2
 Encoding: UTF-8
-SystemRequirements: C++
+SystemRequirements: C++11

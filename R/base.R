@@ -28,15 +28,6 @@ quant <- function(ExpressionMatrix,quantile = 0.9)
         return (threshold)
 }
 
-std.error <- function(x)
-{
-        if(is.numeric(x)){
-                return(cpp_std_error(as.vector(x)))
-        }
-        else{
-                stop("Please enter a numeric vector.")
-        }
-}
 
 
 re.colors <- function(n)

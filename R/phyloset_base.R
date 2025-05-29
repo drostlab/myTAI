@@ -119,7 +119,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         pTXI = new_cached_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
-                m <- cpp_pMatrix(self@count_matrix, self@strata_vector)
+                m <- pTXI(self@count_matrix, self@strata_vector)
                 rownames(m) <- self@gene_ids
                 colnames(m) <- self@conditions
                 return(m)
@@ -161,7 +161,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         pTXI_reps = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
-                m <- cpp_pMatrix(self@count_matrix_reps, self@strata_vector)
+                m <- pTXI(self@count_matrix_reps, self@strata_vector)
                 rownames(m) <- self@gene_ids
                 colnames(m) <- colnames(self@count_matrix_reps)
                 return(m)
@@ -264,6 +264,9 @@ TXI_conf_int <- function(phyex_set,
 }
 
 
+pTXI <- function(count_matrix, strata_vector) {
+    sweep(count_matrix, 2, colSums(count_matrix), "/") * as.numeric(strata_vector)
+}
 
 
 sTXI <- function(phyex_set,

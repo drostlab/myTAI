@@ -7,7 +7,7 @@
 plot_distribution_expression(
   phyex_set,
   show_conditions = T,
-  show_strata = T,
+  show_strata = F,
   seed = 123
 )
 }
