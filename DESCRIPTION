@@ -39,7 +39,6 @@ Depends:
     R (>= 3.1.1)
 Imports:
     Rcpp,
-    RcppParallel,
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.1-5),
     parallel (>= 3.1.1),
@@ -69,9 +68,9 @@ Suggests:
     Seurat,
     decor
 LinkingTo: 
-    RcppParallel,
-    Rcpp,
-    RcppEigen
+    RcppArmadillo,
+    RcppThread,
+    Rcpp
 URL: https://drostlab.github.io/myTAI/
 BugReports: https://github.com/drostlab/myTAI/issues
 RoxygenNote: 7.3.2
