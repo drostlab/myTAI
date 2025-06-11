@@ -10,7 +10,7 @@ plot_gene_profiles <- function(phyex_set,
     
     df <- phyex_set@data_collapsed |>
         tidyr::pivot_longer(-c(Stratum, GeneID), names_to="Sample", values_to="Expression") |>
-        left_join(data.frame(Condition=factor(phyex_set@rep_groups, levels=unique(phyex_set@rep_groups)), Sample=phyex_set@sample_names), by="Sample") |>
+        left_join(data.frame(Condition=phyex_set@groups, Sample=phyex_set@sample_names), by="Sample") |>
         group_by(Stratum, GeneID, Condition) |>
         summarise(min=min(Expression), max=max(Expression), Expression=mean(Expression), .groups="drop")
     

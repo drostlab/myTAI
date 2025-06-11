@@ -42,7 +42,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             name = "counts"
         ),
         groups = new_required_property(
-            class = class_character,
+            class = class_factor,
             name = "groups"
         ),
         # OPTIONAL
@@ -180,6 +180,8 @@ as_PhyloExpressionSet <- function(data,
     gene_ids = as.character(data[[2]])
     stratas = factor(as.numeric(data[[1]]), levels=sort(unique(as.numeric(data[[1]]))))
     names(stratas) = gene_ids
+    
+    groups = factor(groups, levels=unique(groups))
     
     counts = as.matrix(data[3:ncol(data)])
     rownames(counts) = gene_ids
