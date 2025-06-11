@@ -32,12 +32,15 @@ Authors@R: c(person("Hajk-Georg", "Drost",
                 email = "2648894@dundee.ac.uk",
                 comment = c(ORCID = "0009-0006-3326-985X")))
 Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2018) <doi:10.1093/bioinformatics/btx835>). This package aims to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest. 
-VignetteBuilder: knitr
 NeedsCompilation: yes
 License: GPL-2
 Depends:
     R (>= 3.1.1)
 Imports:
+    S7,
+    patchwork,
+    purrr,
+    tidyr,
     Rcpp,
     nortest (>= 1.0-2),
     fitdistrplus (>= 1.1-5),
@@ -57,8 +60,7 @@ Imports:
     readr (>= 0.2.2),
     tibble,
     scales,
-    ggpubr,
-    DESeq2 (>= 1.29.15)
+    ggpubr
 Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),

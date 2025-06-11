@@ -79,7 +79,7 @@ plot_signature <- function(phyex_set,
     
     # Plot replicates
     if (show_reps) {
-        df <- tibble::tibble(Condition = factor(phyex_set@rep_groups, levels=unique(phyex_set@rep_groups)),
+        df <- tibble::tibble(Condition = factor(phyex_set@groups, levels=unique(phyex_set@groups)),
                              TXI = phyex_set@TXI_reps)
         p <- p + geom_jitter(data=df,
                              aes(x=Condition, 

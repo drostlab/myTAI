@@ -6,7 +6,7 @@ plot_strata_expression <- function(phyex_set,
     agg_name <- deparse(substitute(aggregate_FUN))
     aggregate_FUN <- match.fun(aggregate_FUN)
     df <- phyex_set@data |>
-        mutate(Expression = apply(phyex_set@count_matrix, 1, aggregate_FUN))
+        mutate(Expression = apply(phyex_set@counts_collapsed, 1, aggregate_FUN))
     
     p <- ggplot(df, aes(x=Stratum, y=Expression, colour=Stratum)) +
         geom_jitter() + 
@@ -25,7 +25,7 @@ plot_strata_expression_rank <- function(phyex_set,
     agg_name <- deparse(substitute(aggregate_FUN))
     aggregate_FUN <- match.fun(aggregate_FUN)
     df <- phyex_set@data |>
-        mutate(Expression = apply(phyex_set@count_matrix, 1, aggregate_FUN)) |>
+        mutate(Expression = apply(phyex_set@counts_collapsed, 1, aggregate_FUN)) |>
         arrange(Expression) |>
         mutate(Rank = row_number()) |>
         mutate(PS_num = as.numeric(Stratum)) |>

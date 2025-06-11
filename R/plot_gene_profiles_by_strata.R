@@ -4,9 +4,9 @@ plot_gene_profiles_by_strata <- function(phyex_set,
                                          show_mean=FALSE,
                                          facet_grid=FALSE) {
     
-    df <- phyex_set@data |>
+    df <- phyex_set@data_collapsed |>
         tidyr::pivot_longer(-c(Stratum, GeneID), names_to="Sample", values_to="Expression") |>
-        left_join(data.frame(Condition=factor(phyex_set@rep_groups, levels=unique(phyex_set@rep_groups)), Sample=phyex_set@sample_names), by="Sample") |>
+        left_join(data.frame(Condition=factor(phyex_set@groups, levels=unique(phyex_set@groups)), Sample=phyex_set@sample_names), by="Sample") |>
         group_by(Stratum, GeneID, Condition) |>
         summarise(min=min(Expression), Expression=mean(Expression), max=max(Expression), .groups="drop")
     
@@ -31,11 +31,11 @@ plot_gene_profiles_by_strata <- function(phyex_set,
     }
     
     
-    if (group_by_strata)
-        p <- p + 
-        facet_grid(. ~ Stratum) +
-        labs(x=paste(phyex_set@conditions_label, "by Stratum")) +
-        guides(x = "none", colour="none", fill="none")
+    # if (group_by_strata)
+    #     p <- p + 
+    #     facet_grid(. ~ Stratum) +
+    #     labs(x=paste(phyex_set@conditions_label, "by Stratum")) +
+    #     guides(x = "none", colour="none", fill="none")
     
     return(p)
 }

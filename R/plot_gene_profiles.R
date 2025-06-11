@@ -8,7 +8,7 @@ plot_gene_profiles <- function(phyex_set,
     if (is.null(colours))
         colours = rep("black", phyex_set@num_genes)
     
-    df <- phyex_set@data |>
+    df <- phyex_set@data_collapsed |>
         tidyr::pivot_longer(-c(Stratum, GeneID), names_to="Sample", values_to="Expression") |>
         left_join(data.frame(Condition=factor(phyex_set@rep_groups, levels=unique(phyex_set@rep_groups)), Sample=phyex_set@sample_names), by="Sample") |>
         group_by(Stratum, GeneID, Condition) |>
