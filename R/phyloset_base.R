@@ -196,6 +196,23 @@ as_PhyloExpressionSet <- function(data,
     ))
 }
 
+#' @import dplyr
+match_map <- function(data, 
+                      phylomap,
+                      groups = colnames(data[,3:ncol(data)]),
+                      name = deparse(substitute(data)),
+                      ...) {
+    colnames(phylomap) <- c("Stratum", "GeneID")
+    
+    data <- data |>
+        inner_join(phylomap, by="GeneID") |>
+        relocate(Stratum, .before = 1)
+    
+    return(as_PhyloExpressionSet(data, groups, name, ...))
+}
+
+
+
 
 S7::method(print, PhyloExpressionSet) <- function(x, ...) {
     cat("\n", "Phylo Expression Set", "\n", sep="")
@@ -268,6 +285,7 @@ TXI_conf_int <- function(phyex_set,
 
 
 pTXI <- function(counts, stratas) {
+    
     sweep(counts, 2, colSums(counts), "/") * as.numeric(stratas)
 }
 
