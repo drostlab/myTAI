@@ -39,7 +39,7 @@ plot_gene_space <- function(phyex_set, top_p=0.2) {
         geom_vline(xintercept = 0, linetype = "dashed", color = "grey")
 }
 
-plot_gene_profiles_sorted <- function(phyex_set, top_p=0.05, std=FALSE, reps=FALSE) {
+plot_gene_profiles_sorted <- function(phyex_set, top_p=0.05, std=FALSE, reps=FALSE, highlighted_gene=NULL) {
     if (reps)
         e <- phyex_set@counts
     else
@@ -58,11 +58,20 @@ plot_gene_profiles_sorted <- function(phyex_set, top_p=0.05, std=FALSE, reps=FAL
     df <- data.frame(Gene = rownames(e), Angle = -get_angles(se))
     df_long <- merge(df_long, df, by = "Gene")
     
-    ggplot(df_long, aes(Sample, Expression, group = Gene, colour = Angle)) +
+    p <- ggplot(df_long, aes(Sample, Expression, group = Gene, colour = Angle)) +
         geom_line(alpha = 1 - sqrt(top_p)) +
         labs(x=phyex_set@conditions_label) +
         scale_color_viridis_c() +
         theme_minimal()
+    
+    if (!is.null(highlighted_gene) && highlighted_gene %in% df_long$Gene) {
+        df_highlight <- df_long[df_long$Gene == highlighted_gene, ]
+        print(df_highlight) 
+        p <- p + geom_line(data = df_highlight, aes(Sample, Expression, group = Gene),
+                           colour = "red", linewidth = 1.2)
+    }
+    
+    p
 }
 
 plot_gene_heatmap <- function(phyex_set, top_p=0.2, std=FALSE, reps=FALSE) {
@@ -121,7 +130,11 @@ filter_dyn_expr <- function(e, thr=0.9) {
 
 # standardise expression of genes
 to_std_expr <- function(e) {
-    t(scale(t(e), center = TRUE, scale = TRUE))
+    row_sd <- apply(e, 1, sd, na.rm = TRUE)
+    valid <- row_sd > 0 & is.finite(row_sd)
+    e[valid, ] <- t(scale(t(e[valid, , drop = FALSE]), center = TRUE, scale = TRUE))
+    e[!valid, ] <- 0
+    e
 }
 
 get_angles <- function(e) {

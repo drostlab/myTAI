@@ -2,7 +2,6 @@
 
 export(CombinatorialSignificance)
 export(Expressed)
-export(MatchMap)
 export(PlotBarRE)
 export(PlotCategoryExpr)
 export(PlotCorrelation)
@@ -39,4 +38,5 @@ import(purrr)
 import(tibble)
 import(tidyr)
 importFrom(Rcpp,sourceCpp)
+importFrom(ggrepel,geom_text_repel)
 useDynLib(myTAI, .registration = TRUE)

@@ -85,13 +85,13 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_data.frame,
             getter <- \(self) tibble::tibble(Stratum=self@stratas, 
                                              GeneID=self@gene_ids, 
-                                             tibble::as_tibble(self@counts_collapsed))
+                                             tibble::as_tibble(self@counts))
         ),
         data_collapsed = new_property(
             class = class_data.frame,
             getter <- \(self) tibble::tibble(Stratum=self@stratas, 
                                              GeneID=self@gene_ids, 
-                                             tibble::as_tibble(self@counts))
+                                             tibble::as_tibble(self@counts_collapsed))
         ),
         index_full_name = new_property(
             class = class_character,
@@ -199,16 +199,17 @@ as_PhyloExpressionSet <- function(data,
 #' @import dplyr
 match_map <- function(data, 
                       phylomap,
-                      groups = colnames(data[,3:ncol(data)]),
-                      name = deparse(substitute(data)),
+                      groups = colnames(data[,2:ncol(data)]),
+                      name = NULL,
                       ...) {
+    if (is.null(name)) name <- deparse(substitute(data))
     colnames(phylomap) <- c("Stratum", "GeneID")
     
     data <- data |>
         inner_join(phylomap, by="GeneID") |>
         relocate(Stratum, .before = 1)
     
-    return(as_PhyloExpressionSet(data, groups, name, ...))
+    return(as_PhyloExpressionSet(data, groups=groups, name=name, ...))
 }
 
 
