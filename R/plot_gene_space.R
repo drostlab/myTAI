@@ -1,8 +1,13 @@
 
-plot_gene_space <- function(phyex_set, top_p=0.2) {
+plot_gene_space <- function(phyex_set, 
+                            top_p=0.2,
+                            genes=NULL,
+                            colour_by=c("stage", "strata")) {
+    colour_by <- match.arg(colour_by)
+    
     e <- phyex_set@counts_collapsed |>
         log1p() |>
-        filter_dyn_expr(thr=1-top_p) |>
+        filter_dyn_expr(thr = 1 - top_p) |>
         to_std_expr()
         
         
@@ -23,20 +28,37 @@ plot_gene_space <- function(phyex_set, top_p=0.2) {
     
     df$angle <- mod_pi(df$angle - df["rev_mid", "angle"] + pi)
     
-    
     if (df["early", "angle"] < df["late", "angle"])
         df$angle <- mod_pi(-df$angle)
     
-    ggplot(df[1:N, ], aes(PC1, PC2, color = angle)) +
-        geom_point(alpha = 0.7) +
-        scale_color_viridis_c() +
+    df$highlight <- if (is.null(genes)) TRUE else df$label %in% genes
+    
+    strata_map <- setNames(phyex_set@stratas, phyex_set@gene_ids)
+    df$strata <- strata_map[df$label]
+    
+    
+    
+    
+    p <- ggplot(df[1:N, ], aes(PC1, PC2, color = if (colour_by == "stage") angle else strata)) +
+        geom_point(aes(alpha=highlight)) +
+        scale_alpha_manual(values = c(`TRUE` = 0.7, `FALSE` = 0.1), guide = "none")
+    
+    if (colour_by == "angle") {
+        p <- p + scale_color_viridis_c()
+    } else {
+        p <- p + scale_color_manual(values = PS_colours(length(unique(df$strata))), na.value = "grey50")
+    }
+        
+    p <- p +
         geom_label(data = df[df$label %in% rownames(ideal_genes), ],
-                   aes(label=label), vjust=-1, color="red") +
+                   aes(label = label), vjust = -1, color = "red") +
         coord_fixed() +
         theme_minimal() +
         ggtitle("Gene space PCA") +
         geom_hline(yintercept = 0, linetype = "dashed", color = "grey") +
-        geom_vline(xintercept = 0, linetype = "dashed", color = "grey")
+        geom_vline(xintercept = 0, linetype = "dashed", color = "grey")     
+        
+    p
 }
 
 plot_gene_profiles_sorted <- function(phyex_set, top_p=0.05, std=FALSE, reps=FALSE, highlighted_gene=NULL) {

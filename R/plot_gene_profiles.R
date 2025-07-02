@@ -4,14 +4,13 @@
 #' @importFrom ggrepel geom_text_repel
 plot_gene_profiles <- function(phyex_set,
                                genes = NULL,
-                               show_bg = FALSE,
                                show_set_mean=FALSE,
                                show_reps = FALSE,
                                transformation=c("log", "std_log", "none"),
                                colour_by=c("stage", "strata", "manual"),
                                colours = NULL,
-                               top_p = 1.0,
-                               max_bg_genes = 500,
+                               show_bg = TRUE,
+                               bg_top_p = 0.02,
                                show_labels=TRUE,
                                show_legend=TRUE) {
     
@@ -25,15 +24,11 @@ plot_gene_profiles <- function(phyex_set,
                      std_log = to_std_expr(log1p(counts)),
                      none = counts)
     
-    if (is.null(genes)) {
-        filtered <- filter_dyn_expr(counts, thr = 1 - top_p)
-        genes <- rownames(filtered)
-    }
-    
     all_genes <- phyex_set@gene_ids
-    is_highlighted <- all_genes %in% genes
+    bg_genes <- filter_dyn_expr(counts, thr = 1 - bg_top_p) |> rownames()
+    
     # show the gene if it is highlighted and the backgrounds if specified
-    show_gene <- is_highlighted | show_bg
+    show_gene <- all_genes %in% genes | all_genes %in% bg_genes
     counts <- counts[show_gene, , drop=FALSE]
     
     df_long <- reshape2::melt(counts)
@@ -52,25 +47,19 @@ plot_gene_profiles <- function(phyex_set,
         left_join(data.frame(GeneID = phyex_set@gene_ids,
                              Stratum = phyex_set@stratas,
                              Angle = -get_angles(phyex_set@counts |> log1p() |> to_std_expr())),
-                  by = "GeneID") |>
-        mutate(Colour = switch(colour_by,
+                  by = "GeneID") |> 
+        mutate(
+            ColourVar = switch(colour_by,
                                stage = Angle,
                                strata = Stratum,
                                manual = GeneID))
     
-    # show only a subset of the bg genes
-    bg_genes <- df_long |> filter(Highlight == "FALSE") |> distinct(GeneID) |> pull(GeneID)
-    set.seed(123)
-    sampled_bg_genes <- sample(bg_genes, size = min(max_bg_genes, length(bg_genes)))
     
     p <- ggplot(df_long, aes(x = Condition,
                              y = Expression,
                              group = GeneID,
-                             colour = Colour,
-                             alpha = Highlight,
-                             linewidth = Highlight)) +
-        geom_line(data = df_long |> filter(GeneID %in% sampled_bg_genes)) +
-        geom_line(data = df_long |> filter(Highlight == "TRUE")) +
+                             colour = ColourVar))  +
+        geom_line(aes(alpha = Highlight, linewidth = Highlight)) +
         scale_alpha_manual(values = c("TRUE" = 1, "FALSE" = 0.1), guide = "none") +
         scale_linewidth_manual(values = c("TRUE" = 0.8, "FALSE" = 0.2), guide = "none")
         labs(x = phyex_set@conditions_label, y = "Expression") +
@@ -79,8 +68,10 @@ plot_gene_profiles <- function(phyex_set,
     # show ribbon of replicates for each highlighted gene
     if (show_reps)
         p <- p + geom_ribbon(data = df_long |> filter(Highlight == 'TRUE'),
-                        aes(x = Condition, ymin = min, ymax = max, fill = Colour, group = GeneID),
-                        alpha=0.4, inherit.aes = FALSE)
+                        aes(x = Condition, ymin = min, ymax = max, 
+                            fill = ColourVar, 
+                            group = GeneID),
+                        alpha=0.25, inherit.aes = FALSE)
     
     
     if (show_set_mean && length(genes) > 0) {
@@ -89,6 +80,7 @@ plot_gene_profiles <- function(phyex_set,
         p <- p + geom_line(data = df_mean, aes(x = Condition, y = Expression),
                            inherit.aes = FALSE,
                            colour = "red",
+                           group=1,
                            linewidth = 1.2)
     }
     
@@ -104,15 +96,17 @@ plot_gene_profiles <- function(phyex_set,
                                           segment.size = 0.2, segment.colour = "grey50")
     }
     
+    
     # handle colouring
     if (colour_by == "stage") {
-        p <- p + scale_colour_viridis_c(name = "Angle", option = "C")
+        p <- p + scale_colour_viridis_c(name = "Angle")
         if (show_reps)
-            p <- p + scale_fill_viridis_c(name = "Angle", option = "C", guide = "none")
+            p <- p + scale_fill_viridis_c(name = "Angle", guide = "none")
     } else if (colour_by == "strata") {
-        p <- p + scale_colour_viridis_d(name = "Stratum")
+        levels <- levels(phyex_set@stratas)
+        p <- p + scale_color_manual(name = "Strata", values = PS_colours(phyex_set@num_stratas), na.value = "grey50", limits=levels, drop=FALSE)
         if (show_reps)
-            p <- p + scale_fill_viridis_d(name = "Stratum", guide = "none")
+            p <- p + scale_fill_manual(name = "Strata", values = PS_colours(phyex_set@num_stratas), na.value = "grey50", limits=levels, drop=FALSE)
     } else if (colour_by == "manual") {
         gene_levels <- intersect(genes, df_long$GeneID)
         if (is.null(colours)) {
@@ -146,49 +140,3 @@ plot_gene_profiles <- function(phyex_set,
 
 
 
-
-
-
-
-#' @import ggplot2
-plot_gene_profilesa <- function(phyex_set,
-                               show_CI=T,
-                               show_mean=TRUE,
-                               colours=NULL) {
-    
-    if (is.null(colours))
-        colours = rep("black", phyex_set@num_genes)
-    
-    df <- phyex_set@data_collapsed |>
-        tidyr::pivot_longer(-c(Stratum, GeneID), names_to="Sample", values_to="Expression") |>
-        left_join(data.frame(Condition=phyex_set@groups, Sample=phyex_set@sample_names), by="Sample") |>
-        group_by(Stratum, GeneID, Condition) |>
-        summarise(min=min(Expression), max=max(Expression), Expression=mean(Expression), .groups="drop")
-    
-    
-    
-    
-    
-    p <- ggplot(df, aes(x=factor(Condition, unique(Condition)),
-                        group=GeneID,
-                        colour=GeneID)) +
-        geom_line(aes(y=Expression), alpha=0.5) +
-        scale_color_manual(values=colours) +
-        labs(x=phyex_set@conditions_label,
-             y="Expression") +
-        scale_x_discrete(labels = ~ stringr::str_wrap(., 10)) +
-        theme_minimal()
-    if (show_CI)
-        p <- p + 
-            geom_ribbon(aes(ymin=min, ymax=max), fill="gray", alpha=0.05)
-    
-    if (show_mean) {
-        df_mean <- df |> group_by(Condition) |> summarise(Expression=mean(Expression), .groups="drop")
-        p <- p + 
-            geom_line(data = df_mean,
-                      aes(y=Expression), colour="red", size=2, group=0)
-    }
-    
-    
-    return(p)
-}
