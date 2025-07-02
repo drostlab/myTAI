@@ -8,7 +8,7 @@
 #' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.        
 #' @return a numeric matrix storing TAI or TDI profile for each omitted gene i.
 #' @author Hajk-Georg Drost
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)

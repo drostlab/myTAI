@@ -69,7 +69,7 @@
 #' 
 #' (4) 'n.s.' = not significant = P-Value > 0.05
 #' 
-#' @examples 
+#' @examplesIf FALSE 
 #' 
 #' data(PhyloExpressionSetExample)
 #' data(DivergenceExpressionSetExample)

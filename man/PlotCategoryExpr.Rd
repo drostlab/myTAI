@@ -96,6 +96,7 @@ Finally, users can specify a \code{gene.set} (a subset of genes included in the 
 for which expression levels should be visualized as boxplot, dotplot, or violinplot.
 }
 \examples{
+\dontshow{if (FALSE ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
@@ -155,6 +156,7 @@ PlotCategoryExpr(ExpressionSet = PhyloExpressionSetExample,
                  gene.set      = example.gene.set)
                  
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{age.apply}},

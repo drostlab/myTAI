@@ -49,6 +49,7 @@ This function visualizes the mean gene expression profiles for the stages define
 It can also display the standard deviation as a shaded area around the mean, add labels with the expression values at each stage, and customize various plot parameters.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 #In case you want the expression values show together with the standard deviation
 plot_gene_set_mean(ExpressionSet = PhyloExpressionSetExample,
@@ -57,7 +58,7 @@ plot_gene_set_mean(ExpressionSet = PhyloExpressionSetExample,
 #In case you would like for the expression values and the standard deviation don't show up
 plot_gene_set_mean(ExpressionSet = PhyloExpressionSetExample,
                   add_values = FALSE)
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Filipa Martins Costa

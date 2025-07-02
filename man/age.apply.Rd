@@ -34,6 +34,7 @@ In case you use an anonymous function you could use \code{function(x) apply(x , 
 developmental stage s.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
  
  # source the example dataset
  data(PhyloExpressionSetExample)
@@ -58,7 +59,7 @@ age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , var))
 # and each developmental stage, hence one should use the argument 'as.list = TRUE'
 # to make sure that the results are returned properly 
 age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list = TRUE)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}, \code{\link{RE}}, \code{\link{REMatrix}}

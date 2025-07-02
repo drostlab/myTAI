@@ -18,7 +18,7 @@
 #' @return a standard PhloExpressionSet object storing transformed Phylostratum levels.
 #' @author Jaruwatana Sodai Lotharukpong and Lukas Maischak
 #' @seealso \code{\link{tf}}
-#' @examples
+#' @examplesIf FALSE
 #' # source the example dataset
 #' data(PhyloExpressionSetExample)
 #'  

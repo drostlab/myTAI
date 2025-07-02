@@ -21,6 +21,7 @@ For each gene i, exclude the corresponding gene i from the global
  This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI profile for each omitted gene i.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
@@ -32,7 +33,7 @@ omMatrix_ps <- omitMatrix(PhyloExpressionSetExample)
 # example DivergenceExpressionSet
 omMatrix_ds <- omitMatrix(DivergenceExpressionSetExample)
 
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Hajk-Georg Drost

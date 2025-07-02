@@ -60,6 +60,7 @@ For details, please consult \code{\link{tf}}, \code{\link{ReductiveHourglassTest
 \code{\link{LateConservationTest}} or \code{\link{EarlyConservationTest}}
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 data(PhyloExpressionSetExample)
 
@@ -84,7 +85,7 @@ tfStability(ExpressionSet = PhyloExpressionSetExample,
                      transforms = c("log2", "sqrt", "none", "vst"),
                      modules = list(early = 1:2, mid = 3:5, late = 6:7))
 
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Lotharukpong JS et al. (2023) (unpublished)

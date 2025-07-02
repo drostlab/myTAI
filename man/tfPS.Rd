@@ -31,13 +31,14 @@ transformed phylostratum \code{tfPhylostratum} as the first column, satisfying
 available function, currently limited to only \code{"qr"} (or \code{"quantilerank"}).
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # source the example dataset
 data(PhyloExpressionSetExample)
  
 # get the relative expression profiles for each phylostratum
 tfPES <- tfPS(PhyloExpressionSetExample, transform = "qr")
 head(tfPES)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{tf}}

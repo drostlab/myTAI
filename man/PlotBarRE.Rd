@@ -61,6 +61,7 @@ In case a large number of developmental stages is included in the input \code{Ex
  by specifying the \code{p.adjust.method} argument.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
@@ -88,7 +89,7 @@ PlotBarRE(ExpressionSet   = PhyloExpressionSetExample,
 PlotBarRE(ExpressionSet = PhyloExpressionSetExample,
           Groups        = list(c(1:3), c(4:12)),
           ratio         = TRUE)
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.

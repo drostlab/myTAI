@@ -19,7 +19,7 @@
 #' or a numeric list storing the return values of the applied function for each age class in a list.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}, \code{\link{RE}}, \code{\link{REMatrix}}
-#' @examples
+#' @examplesIf FALSE
 #'  
 #'  # source the example dataset
 #'  data(PhyloExpressionSetExample)

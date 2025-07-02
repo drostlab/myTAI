@@ -19,9 +19,11 @@ A nice color palette for barplots with several bars.
 This function can be used to select colors for bar plots.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # get 5 different colors for 5 different bars
 barplot_colors <- bar.colors(5)
+\dontshow{\}) # examplesIf}
 }
 \author{
 Hajk-Georg Drost

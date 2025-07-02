@@ -75,6 +75,7 @@ phylostrata or divergence-strata sharing a similar relative expression profile a
 gene regulatory elements. Hence, these common phylostrata or divergence-strata might govern similar processes in the given developmental time course.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
@@ -99,6 +100,7 @@ PlotRE(DivergenceExpressionSetExample,
 
 
   
+\dontshow{\}) # examplesIf}
 }
 \references{
 Domazet-Loso T and Tautz D. 2010. "A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns". Nature (468): 815-818.

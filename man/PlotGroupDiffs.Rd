@@ -53,6 +53,7 @@ In particular, this function divides (for each developmental stage separately) t
 Group2 = genes deriving from selected PS/DS in group 2. Within each stage the expression level distributions between group 1 and group 2 are statistically quantified using a \code{\link{wilcox.test}}.
 }
 \examples{
+\dontshow{if (FALSE ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 data(PhyloExpressionSetExample)
 
@@ -92,7 +93,7 @@ PlotGroupDiffs(ExpressionSet = tf(PhyloExpressionSetExample,log2),
                legendName    = "PS",
                plot.type     = "boxplot")
 
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{PlotMeans}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}, \code{\link{PlotCategoryExpr}}, \code{\link{GroupDiffs}}

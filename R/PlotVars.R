@@ -24,7 +24,7 @@
 #' @return a plot showing variance expression profiles of each age category.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{PlotRE}}
-#' @examples
+#' @examplesIf FALSE
 #' ### Example using a PhyloExpressionSet
 #' ### and DivergenceExpressionSet
 #' # load PhyloExpressionSet

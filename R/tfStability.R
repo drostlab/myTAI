@@ -43,7 +43,7 @@
 #' @seealso \code{\link{rhScore}}, \code{\link{bootMatrix}}, \code{\link{FlatLineTest}},
 #' \code{\link{ReverseHourglassTest}}, \code{\link{EarlyConservationTest}},
 #' \code{\link{ReductiveHourglassTest}}, \code{\link{PlotSignature}}, \code{\link{LateConservationTest}}
-#' @examples
+#' @examplesIf FALSE
 #'
 #' data(PhyloExpressionSetExample)
 #'

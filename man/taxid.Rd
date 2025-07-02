@@ -23,6 +23,7 @@ This function retrieves category information
 from NCBI Taxonomy and is able to filter kingdom specific taxids.
 }
 \examples{
+\dontshow{if (FALSE ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 # download categories.dmp file to current working directory 
 # and filter for 'Archea' taxids
@@ -33,7 +34,7 @@ Archea.taxids <- taxid(db.path = getwd(), filter = "Archea", download = TRUE)
 # e.g. filter for Virus taxids
 Virus.taxids <- taxid(db.path = getwd(), filter = "Viruses")
 }
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Hajk-Georg Drost

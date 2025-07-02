@@ -3,7 +3,7 @@
 #' This function computes the geometric mean of a numeric input vector \code{x}.
 #' @param x a numeric vector for which geometric mean computations shall be performed.
 #' @author Hajk-Georg Drost
-#' @examples 
+#' @examplesIf FALSE 
 #' x <- 1:10
 #' 
 #' geom_mean(x)

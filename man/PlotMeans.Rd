@@ -65,6 +65,7 @@ This plot can help to identify the phylostratum or divergence-stratum classes
 that contributes most to the overall transcriptome of the given developmental process.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ### Example using a PhyloExpressionSet
 ### and DivergenceExpressionSet
 # load PhyloExpressionSet
@@ -94,7 +95,7 @@ PlotMeans(DivergenceExpressionSetExample,
           Groups = list(c(1:5), c(6:10)), 
           legendName = "DS",
           adjust.range = TRUE)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}, \code{\link{PlotRE}}

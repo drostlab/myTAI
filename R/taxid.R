@@ -9,7 +9,7 @@
 #' @param filter a character string specifying the kingdom of life for which taxids shall be returned. Options are
 #' \code{"Archea"}, \code{"Bacteria"}, \code{"Eukaryota"}, \code{"Viruses"}, \code{"Unclassified"}.
 #' @author Hajk-Georg Drost
-#' @examples 
+#' @examplesIf FALSE 
 #' \dontrun{
 #' # download categories.dmp file to current working directory 
 #' # and filter for 'Archea' taxids

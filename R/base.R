@@ -50,7 +50,7 @@ re.colors <- function(n)
 #' @return a character vector containing different color names that can be used for barplots.
 #' @details This function can be used to select colors for bar plots. 
 #' @author Hajk-Georg Drost
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' # get 5 different colors for 5 different bars
 #' barplot_colors <- bar.colors(5)

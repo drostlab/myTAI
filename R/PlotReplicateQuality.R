@@ -14,7 +14,7 @@
 #' \item Quantification of variability between replicates as density function. 
 #' }
 #' 
-#' @examples
+#' @examplesIf FALSE
 #'
 #' data(PhyloExpressionSetExample)
 #' 

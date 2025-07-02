@@ -26,6 +26,7 @@ the relative expression level \eqn{f_js} of the developmental stage s with maxim
 and the relative expression levels \eqn{f_js} of all other stages s range between 0 and 1, accordingly.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
@@ -37,7 +38,7 @@ REMatrix(PhyloExpressionSetExample)
 # example DivergenceExpressionSet
 REMatrix(DivergenceExpressionSetExample)
 
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Domazet-Loso T and Tautz D. (2010). \emph{A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns}. Nature (468): 815-818.

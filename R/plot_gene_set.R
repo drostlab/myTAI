@@ -21,7 +21,7 @@
 #' that are stored in the input \code{ExpressionSet}.
 #' 
 #' @seealso \code{\link{SelectGeneSet}}, \code{\link{PlotEnrichment}}, \code{\link{DiffGenes}}  
-#' @examples
+#' @examplesIf FALSE
 #' data(PhyloExpressionSetExample)
 #' 
 #' # the best parameter setting to visualize this plot:

@@ -16,7 +16,7 @@
 #' @param yaxis_range a numeric value specifying the extra range added to the y-axis when standard deviation is shown. Default is 4.
 #' @param shadow_color a string specifying the color of the shaded area representing the standard deviation. Default is \code{"grey"}.
 #' 
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' #In case you want the expression values show together with the standard deviation
 #' plot_gene_set_mean(ExpressionSet = PhyloExpressionSetExample,

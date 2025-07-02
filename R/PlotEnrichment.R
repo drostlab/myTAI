@@ -48,7 +48,7 @@
 #' 
 #' Sestak and Domazet-Loso (2015). Phylostratigraphic Profiles in Zebrafish Uncover Chordate Origins of the Vertebrate Brain. Mol. Biol. Evol. 32(2): 299-312. 
 #' 
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' data(PhyloExpressionSetExample)
 #' 

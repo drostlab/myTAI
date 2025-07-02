@@ -1,5 +1,6 @@
 
 # adapted from https://github.com/RConsortium/S7/issues/418
+#' @import memoise cachem
 new_cached_property <- function(class = S7::class_any, 
                                 getter,
                                 setter = NULL,

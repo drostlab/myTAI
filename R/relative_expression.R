@@ -19,7 +19,7 @@
 #' Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{REMatrix}}, \code{\link{PlotRE}}
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)
@@ -58,7 +58,7 @@ relative_expression <- function(count_matrix) {
 #' Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.
 #' 
 #' @seealso \code{\link{RE}}, \code{\link{PlotRE}}, \code{\link{PlotBarRE}}
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)

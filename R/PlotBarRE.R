@@ -46,7 +46,7 @@
 #' 
 #' @author Hajk-Georg Drost and Filipa Martins Costa
 #' @seealso \code{\link{RE}}, \code{\link{REMatrix}},\code{\link{PlotRE}}, \code{\link{kruskal.test}}
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)

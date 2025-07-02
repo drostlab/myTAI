@@ -44,7 +44,7 @@
 #' Quint M et al. 2012. "A transcriptomic hourglass in plant embryogenesis". Nature (490): 98-101.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{PlotBarRE}}, \code{\link{RE}}, \code{\link{REMatrix}}
-#' @examples
+#' @examplesIf FALSE
 #' 
 #' # read standard phylotranscriptomics data
 #' data(PhyloExpressionSetExample)

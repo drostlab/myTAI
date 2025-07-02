@@ -27,6 +27,7 @@ developmental stage s with maximum \eqn{e_s} is 1, and the relative expression
 levels \eqn{f_s} of all other stages s range between 0 and 1, accordingly.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
@@ -34,7 +35,7 @@ data(PhyloExpressionSetExample)
 # relative expression profile of PS1 genes
 RE(PhyloExpressionSetExample[ which(PhyloExpressionSetExample[ , 1] == 1), 3:9 ])
 
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Domazet-Loso T and Tautz D. (2010). \emph{A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns}. Nature (468): 815-818.

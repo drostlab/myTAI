@@ -39,6 +39,7 @@ linear correlated so that the independence of PS and DS can be assumed for
 subsequent analyses (Quint et al., 2012).
 }
 \examples{
+\dontshow{if (FALSE ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # read standard phylotranscriptomics data
 data(PhyloExpressionSetExample)
 data(DivergenceExpressionSetExample)
@@ -50,7 +51,7 @@ PlotCorrelation(PhyloExpressionSetExample,
                 linearModel = TRUE)
 
 
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Quint M et al. (2012). \emph{A transcriptomic hourglass in plant embryogenesis}. Nature (490): 98-101.

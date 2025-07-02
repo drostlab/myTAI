@@ -53,6 +53,7 @@ This function simply visualizes or subsets the gene expression levels of a set o
 that are stored in the input \code{ExpressionSet}.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 data(PhyloExpressionSetExample)
 
 # the best parameter setting to visualize this plot:
@@ -88,6 +89,7 @@ plot_gene_set(ExpressionSet = PhyloExpressionSetExample,
             add_expression_values =T,
             n_genes_for_distance = 2
             )
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{SelectGeneSet}}, \code{\link{PlotEnrichment}}, \code{\link{DiffGenes}}

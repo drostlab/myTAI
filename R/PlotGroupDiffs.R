@@ -25,7 +25,7 @@
 #' 
 #' In particular, this function divides (for each developmental stage separately) the gene expression levels into two groups: Group1 = genes deriving from selected PS/DS in group 1 and 
 #' Group2 = genes deriving from selected PS/DS in group 2. Within each stage the expression level distributions between group 1 and group 2 are statistically quantified using a \code{\link{wilcox.test}}.
-#' @examples 
+#' @examplesIf FALSE 
 #' 
 #' data(PhyloExpressionSetExample)
 #' 

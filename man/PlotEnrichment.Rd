@@ -82,6 +82,7 @@ To visualize the odds or log-odds of over or underrepresented genes within the \
  multiple comparisons which can be done by specifying the \code{p.adjust.method} argument.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 data(PhyloExpressionSetExample)
 
@@ -126,6 +127,7 @@ PlotEnrichment(ExpressionSet = PhyloExpressionSetExample,
                legendName    = "PS", 
                measure       = "foldchange")     
                
+\dontshow{\}) # examplesIf}
 }
 \references{
 Sestak and Domazet-Loso (2015). Phylostratigraphic Profiles in Zebrafish Uncover Chordate Origins of the Vertebrate Brain. Mol. Biol. Evol. 32(2): 299-312.

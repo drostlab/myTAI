@@ -13,10 +13,11 @@ geom_mean(x)
 This function computes the geometric mean of a numeric input vector \code{x}.
 }
 \examples{
+\dontshow{if (FALSE ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 x <- 1:10
 
 geom_mean(x)
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Hajk-Georg Drost

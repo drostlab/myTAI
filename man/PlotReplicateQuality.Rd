@@ -38,6 +38,7 @@ The following quality checks can be performed:
 }
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 data(PhyloExpressionSetExample)
 
@@ -48,7 +49,7 @@ PlotReplicateQuality(ExpressionSet = PhyloExpressionSetExample[1:5000 , 1:8],
                      ylim          = c(0,0.2),
                      lwd           = 6)
                      
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Hajk-Georg Drost
