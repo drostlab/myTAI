@@ -6,9 +6,15 @@ plot_gene_space <- function(phyex_set,
     colour_by <- match.arg(colour_by)
     
     e <- phyex_set@counts_collapsed |>
-        log1p() |>
-        filter_dyn_expr(thr = 1 - top_p) |>
-        to_std_expr()
+        log1p()
+    
+    if (!is.null(genes) && length(genes) > 0) {
+        e <- e[rownames(e) %in% genes, , drop=FALSE]
+    } else {
+        e <- e |> filter_dyn_expr(thr = 1 - top_p)
+    }
+    
+    e <- to_std_expr(e)
         
         
     N = nrow(e)
@@ -181,3 +187,4 @@ get_angles <- function(e) {
     
     df[1:N, "angle"]
 }
+
