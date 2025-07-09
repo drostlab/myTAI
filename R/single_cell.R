@@ -5,6 +5,7 @@ get_sc_TAI <- function(seurat, phylomap, slot = "data") {
     if (!requireNamespace("Seurat", quietly = TRUE)) {
         stop("Package 'Seurat' must be installed to use this function.")
     }
+    colnames(phylomap) <- c("Stratum", "GeneID")
     counts <- GetAssayData(seurat, slot = slot) 
     gene_ids <- rownames(counts)
     phylo_map_sorted <- phylomap[match(gene_ids, phylomap$GeneID), ]
