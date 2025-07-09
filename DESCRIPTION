@@ -70,7 +70,8 @@ Suggests:
     testthat (>= 0.9.1),
     mgcv,
     Seurat,
-    decor
+    decor,
+    gataiR
 LinkingTo: 
     RcppArmadillo,
     RcppThread,

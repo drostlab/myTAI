@@ -35,7 +35,7 @@ TestResult <- new_class("TestResult",
             default="p_val"
         ),
         ## FIELDS & PROPERTIES
-        p_value = new_cached_property(
+        p_value = new_property(
             class=class_double,
             getter= \(self) .get_p_value(cdf=self@fitting_dist@cdf,
                                         params=self@params,

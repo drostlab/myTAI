@@ -77,7 +77,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             default = 5000L
             ),
         ## FIELDS & PROPERTIES
-        counts_collapsed = new_cached_property(
+        counts_collapsed = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = \(self) .collapse_replicates(self@counts, self@groups),
             validator = \(value) if (any(is.na(value))) "cannot contain NA values. Check data[3:ncol(data)].",
@@ -116,7 +116,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_integer,
             getter = \(self) length(unique(self@stratas))
         ),
-        pTXI = new_cached_property(
+        pTXI = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
                 m <- pTXI(self@counts_collapsed, self@stratas)
