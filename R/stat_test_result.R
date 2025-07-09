@@ -1,4 +1,5 @@
 #' @import S7
+#' @export
 TestResult <- new_class("TestResult",
     properties = list(
         ## CONSTRUCTOR PARAMETERS
@@ -91,6 +92,7 @@ S7::method(plot, TestResult) <- function(test_result) {
 # }
 
 
+#' @export
 plot_cullen_frey <- function(test_result) {
     return(fitdistrplus::descdist(test_result@null_sample))
 }
@@ -119,6 +121,7 @@ ConservationTestResult <- new_class("ConservationTestResult",
 
 # plot samples against true txi.
 #' @import ggplot2 tibble
+#' @export
 plot_null_txi_sample <- function(test_result) {
     null_txis <- test_result@null_txis
     test_txis <- list("Test TXI" = test_result@test_txi)

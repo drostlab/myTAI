@@ -1,5 +1,5 @@
 
-
+#' @export
 plot_sample_space <- function(phyex_set, method=c("PCA", "UMAP")) {
     method = match.arg(method)
     

@@ -1,4 +1,5 @@
 
+#' @export
 early_conservation_test <- function(phyex_set, modules, ...) {
     t <- generic_conservation_test(phyex_set, 
                                    test_name="Early Conservation Test",

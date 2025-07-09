@@ -8,6 +8,7 @@ COUNT_TRANSFORMS <- list(
     "rank" = \(x) apply(x, 2, base::rank)
 )
 
+#' @export
 plot_signature_transformed <- function(phyex_set,
                                        transformations=COUNT_TRANSFORMS,
                                        ...) {

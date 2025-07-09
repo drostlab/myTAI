@@ -1,4 +1,5 @@
 #' @import ggplot2
+#' @export
 plot_gene_profiles_by_strata <- function(phyex_set,
                                          show_CI=FALSE,
                                          show_mean=FALSE,

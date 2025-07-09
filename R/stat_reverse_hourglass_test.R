@@ -1,4 +1,5 @@
 
+#' @export
 reverse_hourglass_test <- function(phyex_set, 
                                    modules,
                                    ...) {

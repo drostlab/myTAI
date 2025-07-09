@@ -58,7 +58,6 @@
 #'             n_genes_for_distance = 2
 #'             )
 #' @export
-
 plot_gene_set_old <- function(ExpressionSet, 
                           gene_set, 
                           get_subset   = FALSE,

@@ -35,7 +35,7 @@ Description: Investigate the evolution of biological processes by capturing evol
 NeedsCompilation: yes
 License: GPL-2
 Depends:
-    R (>= 3.1.1)
+    R (>= 3.5)
 Imports:
     S7,
     patchwork,
@@ -80,3 +80,4 @@ BugReports: https://github.com/drostlab/myTAI/issues
 RoxygenNote: 7.3.2
 Encoding: UTF-8
 SystemRequirements: C++11
+LazyData: true

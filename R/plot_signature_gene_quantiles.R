@@ -1,5 +1,6 @@
 
 #' @import purrr
+#' @export
 plot_signature_gene_quantiles <- function(phyex_set,
                                           quantiles=c(1.0, 0.99, 0.95, 0.90, 0.80),
                                           selection_FUN=top_expression_genes,

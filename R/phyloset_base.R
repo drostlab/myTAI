@@ -13,6 +13,7 @@ TI_map <- list(TXI = "Transcriptomic Index",
 
 
 #' @import S7
+#' @export
 PhyloExpressionSet <- new_class("PhyloExpressionSet",
     properties = list(
         ## PARAMETERS
@@ -173,6 +174,8 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         )
     )
 
+
+#' @export
 as_PhyloExpressionSet <- function(data, 
                                   groups = colnames(data[,3:ncol(data)]),
                                   name = deparse(substitute(data)),
@@ -197,6 +200,7 @@ as_PhyloExpressionSet <- function(data,
 }
 
 #' @import dplyr
+#' @export
 match_map <- function(data, 
                       phylomap,
                       groups = colnames(data[,2:ncol(data)]),
@@ -230,6 +234,7 @@ S7::method(print, PhyloExpressionSet) <- function(x, ...) {
     return(m)
 }
 
+#' @export
 collapse <- function(phyex_set) {
     data <- tibble::tibble(Stratum=phyex_set@stratas, 
                            GeneID=phyex_set@gene_ids, 
@@ -242,6 +247,7 @@ normalise_stage_expression <- function(phyex_set, total=1e6) {
     phyex_set
 }
 
+#' @export
 transform_counts <- S7::new_generic("transform_counts", "phyex_set")
 S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
                                                              FUN,
@@ -256,7 +262,7 @@ S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set,
 #' @export
 tf <- transform_counts
 
-
+#' @export
 select_genes <- S7::new_generic("select_genes", "phyex_set")
 S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set, 
                                                          genes) {
@@ -284,13 +290,13 @@ TXI_conf_int <- function(phyex_set,
     return(list(low=CIs[1, ], high=CIs[2, ]))
 }
 
-
+#' @export
 pTXI <- function(counts, stratas) {
     
     sweep(counts, 2, colSums(counts), "/") * as.numeric(stratas)
 }
 
-
+#' @export
 sTXI <- function(phyex_set,
                  option="identity") {
     mat <- rowsum(phyex_set@pTXI, phyex_set@stratas)
@@ -304,7 +310,7 @@ sTXI <- function(phyex_set,
     return(mat)
 }
 
-
+#' @export
 remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed")) {
     selected_genes <- setdiff(phyex_set@gene_ids, genes)
     s <- select_genes(phyex_set, selected_genes)

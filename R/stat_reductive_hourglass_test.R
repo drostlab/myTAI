@@ -1,4 +1,5 @@
 
+#' @export
 reductive_hourglass_test <- function(phyex_set, modules, ...) {
     t <- generic_conservation_test(phyex_set, 
                                    test_name="Reductive Hourglass Test",

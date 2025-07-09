@@ -1,4 +1,4 @@
-
+#' @export
 pairwise_test <- function(phyex_set,
                           modules,
                           alternative = c("greater", "less"),

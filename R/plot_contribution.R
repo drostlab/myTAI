@@ -1,5 +1,6 @@
 
 #' @import dplyr ggplot2
+#' @export
 plot_contribution <- function(phyex_set) {
     contribution <- sTXI(phyex_set, option="identity")
     df <- data.frame(contribution) |>

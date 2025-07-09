@@ -1,5 +1,6 @@
 
 #' @import ggplot2 
+#' @export
 plot_strata_expression <- function(phyex_set,
                                    aggregate_FUN = mean) {
 
@@ -18,7 +19,8 @@ plot_strata_expression <- function(phyex_set,
     return(p)
 }
 
-#' @import ggplot2 
+#' @import ggplot2
+#' @export 
 plot_strata_expression_rank <- function(phyex_set,
                                    aggregate_FUN = mean) {
     

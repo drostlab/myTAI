@@ -2,6 +2,7 @@
 
 
 #' @import ggplot2 purrr
+#' @export
 plot_signature_multiple <- function(phyex_sets,
                                     legend_title="Phylo Expression Set",
                                     show_p_val=F,

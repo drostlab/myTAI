@@ -1,5 +1,6 @@
 
 #' @import ggplot2
+#' @export
 plot_signature <- function(phyex_set,
                            show_CI=FALSE,
                            show_bootstraps=FALSE,

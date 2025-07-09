@@ -2,6 +2,7 @@
 
 #' @import ggplot2 dplyr tidyr
 #' @importFrom ggrepel geom_text_repel
+#' @export
 plot_gene_profiles <- function(phyex_set,
                                genes = NULL,
                                show_set_mean=FALSE,

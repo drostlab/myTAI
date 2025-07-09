@@ -1,5 +1,5 @@
 
-
+#' @export
 plot_mean_var <- function(phyex_set) {
     df <- phyex_set@data_collapsed |>
         mutate(mean = rowMeans(phyex_set@counts_collapsed)) |>

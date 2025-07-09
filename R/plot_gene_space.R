@@ -1,4 +1,5 @@
 
+#' @export
 plot_gene_space <- function(phyex_set, 
                             top_p=0.2,
                             genes=NULL,

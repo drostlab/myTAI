@@ -1,5 +1,6 @@
 
 #' @import ggplot2 dplyr tidyr
+#' @export
 plot_distribution_strata <- function(stratas,
                                      selected_gene_ids = names(stratas),
                                      as_log_obs_exp = FALSE
