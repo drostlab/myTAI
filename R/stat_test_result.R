@@ -232,6 +232,7 @@ plot_cullen_frey <- function(test_result) {
 #' # result <- ConservationTestResult(method_name = "Test", test_txi = c(1,2,3), ...)
 #' 
 #' @import S7
+#' @export
 ConservationTestResult <- new_class("ConservationTestResult",
     parent = TestResult,
     properties = list(

@@ -455,6 +455,9 @@ S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set,
 TXI_conf_int <- function(phyex_set, 
                          low_q = .025,
                          high_q = .975) {
+    bootstraps <- generate_bootstrapped_txis(phyex_set@pTXI, 
+                                             phyex_set@counts_collapsed, 
+                                             phyex_set@null_conservation_sample_size)
     CIs <- apply(phyex_set@bootstrapped_txis, 2, stats::quantile, probs=c(low_q, high_q))
     return(list(low=CIs[1, ], high=CIs[2, ]))
 }

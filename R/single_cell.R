@@ -19,10 +19,7 @@
 #' 
 #' @examples
 #' # Calculate TAI for single cells
-#' # tai_values <- get_sc_TAI(seurat_obj, phylo_map)
-#' 
-#' # Using counts slot instead of data
-#' # tai_values <- get_sc_TAI(seurat_obj, phylo_map, slot = "counts")
+#' # seurat_obj$TAI <- get_sc_TAI(seurat_obj, phylo_map)
 #' 
 #' @import dplyr
 #' @export
@@ -31,7 +28,32 @@ get_sc_TAI <- function(seurat, phylomap, slot = "data") {
         stop("Package 'Seurat' must be installed to use this function.")
     }
     colnames(phylomap) <- c("Stratum", "GeneID")
-    counts <- Seurat::GetAssayData(seurat, slot = slot) 
+    
+    # Handle both old and new Seurat API
+    counts <- tryCatch({
+        # Try new API first (layer parameter)
+        if (slot == "data") {
+            # Try to get data layer, fall back to counts if empty
+            tryCatch({
+                result <- Seurat::GetAssayData(seurat, layer = "data")
+                if (nrow(result) == 0 || ncol(result) == 0) {
+                    # Fall back to counts if data layer is empty
+                    Seurat::GetAssayData(seurat, layer = "counts")
+                } else {
+                    result
+                }
+            }, error = function(e) {
+                # If data layer doesn't exist, use counts
+                Seurat::GetAssayData(seurat, layer = "counts")
+            })
+        } else {
+            Seurat::GetAssayData(seurat, layer = slot)
+        }
+    }, error = function(e) {
+        # Fall back to old API
+        Seurat::GetAssayData(seurat, slot = slot)
+    })
+    
     gene_ids <- rownames(counts)
     phylo_map_sorted <- phylomap[match(gene_ids, phylomap$GeneID), ]
     ps_vec <- phylo_map_sorted |> pull(Stratum)
