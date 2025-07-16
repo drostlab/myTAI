@@ -19,15 +19,13 @@
 #'
 #' # example DivergenceExpressionSet
 #' omMatrix_ds <- omitMatrix(DivergenceExpressionSetExample)
-#' 
-#' 
 #' @export
 omit_matrix <- function(phyex_set) {
 
     oMatrix <- .omit_matrix(phyex_set@count_matrix, phyex_set@strata_vector)
     
     colnames(oMatrix) <- phyex_set@conditions
-    rownames(oMatrix) <- paste0("(-) ",phyex_set@gene_ids)
+    rownames(oMatrix) <- paste0("(-) ", phyex_set@gene_ids)
     
     return(oMatrix)
         
@@ -36,8 +34,8 @@ omit_matrix <- function(phyex_set) {
 .omit_matrix <- function(count_matrix, strata_vector) {
     n <- nrow(count_matrix)
     m <- ncol(count_matrix)
-    numerator <- matrix(t(strata_vector) %*% count_matrix, n, m, byrow=T) - count_matrix * strata_vector
-    denominator <- matrix(colSums(count_matrix), n, m, byrow=T) - count_matrix
+    numerator <- matrix(t(strata_vector) %*% count_matrix, n, m, byrow = TRUE) - count_matrix * strata_vector
+    denominator <- matrix(colSums(count_matrix), n, m, byrow = TRUE) - count_matrix
     
     return(numerator / denominator)
 }
