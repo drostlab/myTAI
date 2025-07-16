@@ -23,5 +23,3 @@ geom_mean <- function(x) {
 rowVars <- function(x, ...) {
     return(rowSums((x - rowMeans(x, ...))^2, ...)/(dim(x)[2]-1))
 }
-
-

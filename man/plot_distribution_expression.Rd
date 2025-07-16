@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_distribution_expression.R
 \name{plot_distribution_expression}
 \alias{plot_distribution_expression}
-\title{Comparing expression levels distributions across the different developmental stages}
+\title{Comparing expression levels distributions across developmental stages}
 \usage{
 plot_distribution_expression(
   phyex_set,
@@ -12,24 +12,25 @@ plot_distribution_expression(
 )
 }
 \arguments{
-\item{seed}{defines the colors for the different developmetal stages}
+\item{phyex_set}{A PhyloExpressionSet object.}
 
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+\item{show_conditions}{Logical, whether to show condition-specific distributions.}
 
-\item{stages}{a numeric vector specifying the indices of the stages to compare. Each index
-corresponds to a stage in the ExpressionSet. Starts in one.}
+\item{show_strata}{Logical, whether to show stratum-specific distributions.}
 
-\item{xlab}{label of x-axis.}
-
-\item{ylab}{label of y-axis.}
-
-\item{main}{figure title.}
+\item{seed}{Seed for reproducible color selection.}
 }
 \description{
-\emph{plot_distribution_partialTAI} generates 2 plots that help to compare the distribution
+\code{plot_distribution_expression} generates plots that help to compare the distribution
 of expression levels through various developmental stages, highlighting each stage with
 distinct colors.
 }
+\section{Recommendation}{
+ 
+Apply a square root transformation to enhance the visualization of differences
+in the distributions: \code{plot_distribution_expression(transform_counts(phyex_set, sqrt))}
+}
+
 \author{
 Filipa Martins Costa
 }

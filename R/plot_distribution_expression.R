@@ -1,18 +1,19 @@
-#' @title Comparing expression levels distributions across the different developmental stages
-#' @description \emph{plot_distribution_partialTAI} generates 2 plots that help to compare the distribution
+#' @title Comparing expression levels distributions across developmental stages
+#' @description \code{plot_distribution_expression} generates plots that help to compare the distribution
 #' of expression levels through various developmental stages, highlighting each stage with
 #' distinct colors.
-#' @param ExpressionSet a standard PhyloExpressionSet or DivergenceExpressionSet object.
-#' @param stages a numeric vector specifying the indices of the stages to compare. Each index
-#' corresponds to a stage in the ExpressionSet. Starts in one.
-#' @param xlab label of x-axis.
-#' @param ylab label of y-axis.
-#' @param main figure title.
-#' @param seed defines the colors for the different developmetal stages
-#' @section Recomendation - Apply a square root transformation to enhance the visualization of differences
-#' in the distributions: plot_distribution_partialTAI(tf(ExpressionSet, sqrt))
+#' @param phyex_set A PhyloExpressionSet object.
+#' @param show_conditions Logical, whether to show condition-specific distributions.
+#' @param show_strata Logical, whether to show stratum-specific distributions.
+#' @param seed Seed for reproducible color selection.
+#' @section Recommendation: 
+#' Apply a square root transformation to enhance the visualization of differences
+#' in the distributions: \code{plot_distribution_expression(transform_counts(phyex_set, sqrt))}
 #' @author Filipa Martins Costa
 #' @import ggplot2 tibble patchwork
+#' @importFrom tidyr pivot_longer
+#' @importFrom ggridges geom_density_ridges
+#' @importFrom RColorBrewer brewer.pal brewer.pal.info
 #' @export
 
 plot_distribution_expression <- function(phyex_set,

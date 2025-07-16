@@ -1,4 +1,13 @@
 
+PS_colours <- function(n) {
+    vals <- 1:n |>
+        log() |>
+        scales::rescale()
+   
+    pal <- colorRampPalette(c("black", "#AD6F3B", "lightgreen"))
+   
+    pal(100)[floor(vals * 99) +1]
+}   
 
 quantile_rank <- function(x) {
     ranks <- base::rank(x, ties.method = "average")

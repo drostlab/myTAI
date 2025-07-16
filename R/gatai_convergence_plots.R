@@ -1,12 +1,5 @@
 
 
-remove_genes <- function(phyex_set,
-                         genes) {
-    genes <- as.character(genes)
-    filtered_set <- dplyr::filter(phyex_set, !GeneID %in% genes)
-    return(filtered_set)
-}
-
 consensus <- function(x, p=0.5) {
     all <- Reduce(union, x)
     k <- length(x)
@@ -110,14 +103,14 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
     count_matrix <- outer(1:num_runs, ps, running_count)
     colnames(count_matrix) <- labels
     
-    # Generate running p value matrix
-    
-    flt_null_dist <- flt_null_dist(phyex_set)
-    
+    # Generate running p value matrix using cached null distribution
     running_pval <- function(i, p) {
         genes <- consensus(runs[1:i], p)
         filtered_phyex <- remove_genes(phyex_set, genes)
-        pval <- flt_p_val(filtered_phyex, flt_null_dist)
+        
+        # Use flatline test which has cached null distribution
+        test_result <- flatline_test(filtered_phyex, plot_result = FALSE)
+        pval <- test_result@p_value
         
         return(log10(pval))
     }
@@ -146,7 +139,9 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
                             ) +
             ggplot2::geom_line(linewidth=1.3) +
             ggplot2::geom_hline(yintercept = 0) +
-            ggplot2::scale_y_continuous(limits=ylims)
+            ggplot2::scale_y_continuous(limits=ylims) +
+            ggplot2::theme_minimal() +
+            ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
         return(p)
     }
     
@@ -165,11 +160,14 @@ threshold_comparison_plots <- function(phyex_set, runs) {
     counts <- 1:num_runs |>
         sapply(\(i) length(consensus(runs, p=i/num_runs-0.00001)))
     
-    flt_null_dist <- flt_null_dist(phyex_set)
+    # P-values using cached null distribution
     pval <- function(i) {
         genes <- consensus(runs, p=i/num_runs-0.00001)
         filtered_phyex <- remove_genes(phyex_set, genes)
-        pval <- flt_p_val(filtered_phyex, flt_null_dist)
+        
+        # Use flatline test which has cached null distribution
+        test_result <- flatline_test(filtered_phyex, plot_result = FALSE)
+        pval <- test_result@p_value
         
         return(log10(pval))
     }
@@ -187,7 +185,9 @@ threshold_comparison_plots <- function(phyex_set, runs) {
             ggplot2::geom_line(linewidth=1.3) +
             ggplot2::labs(x="Threshold (gene in at least x runs)",y=y_label) +
             ggplot2::geom_hline(yintercept = 0) + 
-            ggplot2::scale_y_continuous(limits=ylims)
+            ggplot2::scale_y_continuous(limits=ylims) +
+            ggplot2::theme_minimal() +
+            ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
         return(p)
     }
     

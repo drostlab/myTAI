@@ -6,33 +6,24 @@
 \usage{
 tf_stability(
   phyex_set,
-  TestStatistic,
-  transforms = c("none", "sqrt", "log2", "rank", "squared"),
-  modules = NULL,
-  permutations = 1000,
-  pseudocount = 1
+  conservation_test = flatline_test,
+  transforms = COUNT_TRANSFORMS
 )
 }
 \arguments{
-\item{phyex_set}{a \code{PhyloExpressionSet} S7 object.}
+\item{phyex_set}{a \code{PhyloExpressionSet}.}
 
-\item{TestStatistic}{a conservation test function}
+\item{conservation_test}{a conservation test function (e.g. \code{flatline_test}, \code{reductive_hourglass_test}, etc.)}
 
-\item{transforms}{character vector of transformation names (e.g., "log2", "sqrt", "none", "rank", "squared").}
-
-\item{modules}{a list with three elements: early, mid, and late. Each is a numeric vector specifying developmental stages or experiments for each module.}
-
-\item{permutations}{number of permutations for the test.}
-
-\item{pseudocount}{numeric, value to add before log transforms.}
+\item{transforms}{named list of transformation functions (default: \code{COUNT_TRANSFORMS})}
 }
 \value{
 Named numeric vector of p-values for each transformation.
 }
 \description{
-\emph{tfStability} statistically evaluates the
+\emph{tf_stability} statistically evaluates the
 stability of phylotranscriptomics permutation tests (e.g., \code{ReductiveHourglassTest}, \code{FlatLineTest}, etc.)
-under different data transformations using a \code{PhyloExpressionSet} S7 object.
+under different data transformations using a \code{PhyloExpressionSet}.
 }
 \details{
 Assesses the stability of data transforms on the permutation test of choice.

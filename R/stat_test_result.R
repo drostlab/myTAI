@@ -146,7 +146,7 @@ plot_null_txi_sample <- function(test_result) {
         add_column(Group = "Null Hypothesis Sample")
     
     test_df <- tibble(
-        Id = rep(1:length(test_txis), each = S),
+        Id = rep(seq_along(test_txis), each = S),
         Group = rep(names(test_txis), each = S),
         Stage = rep(colnames(null_txis), times=length(test_txis)),
         TXI = unlist(test_txis)

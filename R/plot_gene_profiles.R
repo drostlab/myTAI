@@ -1,5 +1,3 @@
-
-
 #' @import ggplot2 dplyr tidyr
 #' @importFrom ggrepel geom_text_repel
 #' @export
@@ -8,12 +6,12 @@ plot_gene_profiles <- function(phyex_set,
                                show_set_mean=FALSE,
                                show_reps = FALSE,
                                transformation=c("log", "std_log", "none"),
-                               colour_by=c("stage", "strata", "manual"),
+                               colour_by=c("strata", "stage", "manual"),
                                colours = NULL,
-                               show_bg = TRUE,
-                               bg_top_p = 0.02,
+                               max_genes = 100,
                                show_labels=TRUE,
-                               show_legend=TRUE) {
+                               show_legend=TRUE,
+                               facet_by_strata = FALSE) {
     
     transformation <- match.arg(transformation)
     colour_by <- match.arg(colour_by)
@@ -27,13 +25,18 @@ plot_gene_profiles <- function(phyex_set,
     
     all_genes <- phyex_set@gene_ids
     
-    if (show_bg)
-        bg_genes <- filter_dyn_expr(counts, thr = 1 - bg_top_p) |> rownames()
-    else
-        bg_genes <- c()
+    # Select genes to plot
+    if (is.null(genes)) {
+        # If no specific genes provided, select top expressing genes
+        gene_means <- rowMeans(counts)
+        genes_to_plot <- names(sort(gene_means, decreasing = TRUE))[1:min(max_genes, length(gene_means))]
+    } else {
+        # Use only the provided genes
+        genes_to_plot <- genes
+    }
     
-    # show the gene if it is highlighted and the backgrounds if specified
-    show_gene <- all_genes %in% genes | all_genes %in% bg_genes
+    # Filter to genes to plot
+    show_gene <- all_genes %in% genes_to_plot
     counts <- counts[show_gene, , drop=FALSE]
     
     df_long <- reshape2::melt(counts)
@@ -48,7 +51,6 @@ plot_gene_profiles <- function(phyex_set,
                   max = max(Expression),
                   Expression = mean(Expression),
                   .groups = "drop") |>
-        mutate(Highlight = factor(GeneID %in% genes, levels = c(FALSE, TRUE))) |>
         left_join(data.frame(GeneID = phyex_set@gene_ids,
                              Stratum = phyex_set@strata,
                              Angle = -get_angles(phyex_set@counts |> log1p() |> to_std_expr())),
@@ -64,23 +66,20 @@ plot_gene_profiles <- function(phyex_set,
                              y = Expression,
                              group = GeneID,
                              colour = ColourVar))  +
-        geom_line(aes(alpha = Highlight, linewidth = Highlight)) +
-        scale_alpha_manual(values = c("TRUE" = 1, "FALSE" = 0.1), guide = "none") +
-        scale_linewidth_manual(values = c("TRUE" = 0.8, "FALSE" = 0.2), guide = "none")
+        geom_line() +
         labs(x = phyex_set@conditions_label, y = "Expression") +
         theme_minimal()
     
-    # show ribbon of replicates for each highlighted gene
+    # show ribbon of replicates
     if (show_reps)
-        p <- p + geom_ribbon(data = df_long |> filter(Highlight == 'TRUE'),
-                        aes(x = Condition, ymin = min, ymax = max, 
-                            fill = ColourVar, 
-                            group = GeneID),
-                        alpha=0.25, inherit.aes = FALSE)
+        p <- p + geom_ribbon(aes(x = Condition, ymin = min, ymax = max, 
+                                fill = ColourVar, 
+                                group = GeneID),
+                            alpha=0.25, inherit.aes = FALSE)
     
     
-    if (show_set_mean && length(genes) > 0) {
-        df_mean <- df_long |> filter(Highlight == 'TRUE') |> group_by(Condition) |>
+    if (show_set_mean && length(genes_to_plot) > 0) {
+        df_mean <- df_long |> group_by(Condition) |>
             summarise(Expression = mean(Expression), .groups="drop")
         p <- p + geom_line(data = df_mean, aes(x = Condition, y = Expression),
                            inherit.aes = FALSE,
@@ -89,9 +88,22 @@ plot_gene_profiles <- function(phyex_set,
                            linewidth = 1.2)
     }
     
-    if (show_labels && length(genes) > 0) {
-        df_labels <- df_long |> filter(Highlight == 'TRUE') |> group_by(GeneID) |>
-            slice_max(Expression, n=1, with_ties = FALSE) 
+    if (show_labels && length(genes_to_plot) > 0) {
+        if (facet_by_strata) {
+            # When faceting, choose top labels within each stratum
+            df_labels <- df_long |> group_by(GeneID) |>
+                slice_max(Expression, n=1, with_ties = FALSE) |>
+                ungroup() |>
+                group_by(Stratum) |>
+                slice_max(Expression, n=5, with_ties = FALSE) |>
+                ungroup()
+        } else {
+            # Choose top labels globally
+            df_labels <- df_long |> group_by(GeneID) |>
+                slice_max(Expression, n=1, with_ties = FALSE) |>
+                ungroup() |>
+                slice_max(Expression, n=10, with_ties = FALSE)
+        }
         
         p <- p + ggrepel::geom_text_repel(data = df_labels,
                                           aes(x = Condition, y = Expression, label = GeneID),
@@ -113,7 +125,7 @@ plot_gene_profiles <- function(phyex_set,
         if (show_reps)
             p <- p + scale_fill_manual(name = "Strata", values = PS_colours(phyex_set@num_strata), na.value = "grey50", limits=levels, drop=FALSE)
     } else if (colour_by == "manual") {
-        gene_levels <- intersect(genes, df_long$GeneID)
+        gene_levels <- intersect(genes_to_plot, df_long$GeneID)
         if (is.null(colours)) {
             n <- length(gene_levels)
             base_palette <- RColorBrewer::brewer.pal(min(n, 9), "Set1")
@@ -124,9 +136,23 @@ plot_gene_profiles <- function(phyex_set,
             p <- p + scale_fill_manual(values = colours, name = "GeneID", guide = "none")
     }
     
+    # Add faceting if requested
+    if (facet_by_strata) {
+        p <- p + 
+            facet_wrap(~ Stratum, scales = "free_y") +
+            labs(x = paste(phyex_set@conditions_label, "by Stratum"))
+        
+        if (colour_by == "strata") {
+            p <- p + guides(colour = "none", fill = "none")
+        }
+    }
+    
+    # Add slanted x-axis labels
+    p <- p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
     if (!show_legend)
         p <- p + theme(legend.position = "none")
     
     p
     
-} 
+}
