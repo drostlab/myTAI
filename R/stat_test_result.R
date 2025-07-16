@@ -1,3 +1,24 @@
+#' @title Test Result S7 Class
+#' @description S7 class for storing and manipulating statistical test results
+#' from phylotranscriptomic conservation tests.
+#' 
+#' @slot method_name Character string identifying the test method
+#' @slot test_stat Numeric test statistic value
+#' @slot fitting_dist Distribution object used for null hypothesis testing
+#' @slot params List of fitted distribution parameters
+#' @slot alternative Character string specifying alternative hypothesis ("two-sided", "less", "greater")
+#' @slot null_sample Numeric vector of null distribution samples
+#' @slot data_name Character string naming the dataset (optional)
+#' @slot p_label Character string for p-value label (default: "p_val")
+#' 
+#' @details
+#' The TestResult class provides computed properties including:
+#' - `p_value`: Computed p-value based on test statistic and fitted distribution
+#' 
+#' @examples
+#' # Create a test result (typically done internally by conservation tests)
+#' # result <- TestResult(method_name = "Test", test_stat = 1.5, ...)
+#' 
 #' @import S7
 #' @export
 TestResult <- new_class("TestResult",
@@ -51,11 +72,42 @@ TestResult <- new_class("TestResult",
     }
     )
 
+#' @title Calculate Confidence Intervals for Test Result
+#' @description Calculate confidence intervals for the null distribution of a test result.
+#' 
+#' @param test_result A TestResult object
+#' @param probs Numeric vector of probabilities for quantiles (default: c(0.025, 0.975))
+#' 
+#' @return Numeric vector of quantiles from the null distribution
+#' 
+#' @examples
+#' # Calculate 95% confidence intervals
+#' # ci <- conf_int(test_result, probs = c(0.025, 0.975))
+#' 
+#' @importFrom stats quantile
+#' @keywords internal
 conf_int <- function(test_result, 
                      probs=c(.025, .975)) {
-    return(quantile(test_result@null_sample, probs=probs))
+    return(stats::quantile(test_result@null_sample, probs=probs))
 }
 
+#' @title Goodness of Fit Test
+#' @description Perform a Kolmogorov-Smirnov test to assess goodness of fit
+#' between the null sample and fitted distribution.
+#' 
+#' @param test_result A TestResult object
+#' 
+#' @return A ks.test result object
+#' 
+#' @details
+#' This function tests whether the null sample follows the fitted distribution
+#' using the Kolmogorov-Smirnov test. A significant result indicates poor fit.
+#' 
+#' @examples
+#' # Test goodness of fit
+#' # gof_result <- goodness_of_fit(test_result)
+#' 
+#' @keywords internal
 goodness_of_fit <- function(test_result) {
     res <- do.call(ks.test,
                    c(list(x=test_result@null_sample,
@@ -65,6 +117,18 @@ goodness_of_fit <- function(test_result) {
 }
 
 
+#' @title Format P-Value for Scientific Notation
+#' @description Format p-values in scientific notation for plot annotations.
+#' 
+#' @param p Numeric p-value
+#' 
+#' @return Expression object for use in plot annotations
+#' 
+#' @examples
+#' # Format p-value for plotting
+#' # expr <- exp_p(0.001)
+#' 
+#' @keywords internal
 exp_p <- function(p) {
     parts <- strsplit(formatC(p, format = "e", digits = 2), "e")[[1]]
     bquote(italic(p) == .(as.numeric(parts[1])) %*% 10^.(as.integer(parts[2])))
@@ -97,12 +161,52 @@ S7::method(plot, TestResult) <- function(test_result) {
     return(p)
 }
 
-# S7::S4_register(TestResult)
-# S7::method(print, TestResult) <- function(x) {
-#     return("a")
-# }
+#' @title Print Method for TestResult
+#' @description Print method for TestResult objects showing test summary information.
+#' 
+#' @param x A TestResult object
+#' @param ... Additional arguments (ignored)
+#' 
+#' @return Invisibly returns the TestResult object
+#' 
+#' @examples
+#' # Print a test result
+#' # print(test_result)
+#' 
+#' @name print.TestResult
+#' @keywords internal
+S7::method(print, TestResult) <- function(x, ...) {
+    cat("\n")
+    cat("Statistical Test Result\n")
+    cat("=======================\n")
+    cat("Method:", x@method_name, "\n")
+    cat("Test statistic:", x@test_stat, "\n")
+    cat("P-value:", x@p_value, "\n")
+    cat("Alternative hypothesis:", x@alternative, "\n")
+    if (!is.null(x@data_name)) {
+        cat("Data:", x@data_name, "\n")
+    }
+    cat("\n")
+    invisible(x)
+}
 
 
+#' @title Plot Cullen-Frey Diagram for Distribution Assessment
+#' @description Create a Cullen-Frey diagram to assess which distribution family
+#' best fits the null sample data.
+#' 
+#' @param test_result A TestResult object
+#' 
+#' @return A Cullen-Frey plot from the fitdistrplus package
+#' 
+#' @details
+#' The Cullen-Frey diagram plots skewness vs. kurtosis to help identify
+#' appropriate distribution families for the null sample data.
+#' 
+#' @examples
+#' # Create Cullen-Frey diagram
+#' # cf_plot <- plot_cullen_frey(test_result)
+#' 
 #' @export
 plot_cullen_frey <- function(test_result) {
     return(fitdistrplus::descdist(test_result@null_sample))
@@ -110,6 +214,23 @@ plot_cullen_frey <- function(test_result) {
 
 
 
+#' @title Conservation Test Result S7 Class
+#' @description S7 class extending TestResult for conservation-specific test results,
+#' including TXI profiles and null distributions.
+#' 
+#' @slot test_txi Numeric vector of observed TXI values
+#' @slot null_txis Matrix of null TXI distributions from permutations
+#' @slot modules Optional list of developmental modules used in the test
+#' 
+#' @details
+#' ConservationTestResult extends TestResult with phylotranscriptomic-specific
+#' information including the observed TXI profile and null TXI distributions
+#' generated by permutation testing.
+#' 
+#' @examples
+#' # Create a conservation test result (typically done internally)
+#' # result <- ConservationTestResult(method_name = "Test", test_txi = c(1,2,3), ...)
+#' 
 #' @import S7
 ConservationTestResult <- new_class("ConservationTestResult",
     parent = TestResult,
@@ -128,10 +249,30 @@ ConservationTestResult <- new_class("ConservationTestResult",
     )
     )
 
-#TODO display p value here
-
-# plot samples against true txi.
-#' @import ggplot2 tibble
+#' @title Plot Null TXI Sample Distribution
+#' @description Create a plot showing the null TXI distribution sample compared 
+#' to the observed test TXI values across developmental stages.
+#' 
+#' @param test_result A ConservationTestResult object containing null TXI distributions
+#' 
+#' @return A ggplot2 object showing null samples as gray lines and test TXI as colored line
+#' 
+#' @details
+#' This function creates a visualization of the null hypothesis testing by plotting:
+#' - Gray lines representing individual null TXI samples from permutations
+#' - A horizontal line showing the mean of null distributions
+#' - A colored line showing the observed test TXI values
+#' 
+#' The plot helps visualize how the observed TXI pattern compares to what would
+#' be expected under the null hypothesis of no conservation signal.
+#' 
+#' @examples
+#' # Plot null TXI sample distribution
+#' # null_plot <- plot_null_txi_sample(conservation_test_result)
+#' 
+#' @import ggplot2 tibble tidyr dplyr RColorBrewer
+#' @importFrom stats setNames
+#' @importFrom tibble rowid_to_column
 #' @export
 plot_null_txi_sample <- function(test_result) {
     null_txis <- test_result@null_txis
@@ -154,7 +295,7 @@ plot_null_txi_sample <- function(test_result) {
     
     avg <- mean(null_txis)
     
-    colour_values <- setNames(RColorBrewer::brewer.pal(length(unique(test_df$Group)), "Set2"), unique(test_df$Group))
+    colour_values <- stats::setNames(RColorBrewer::brewer.pal(length(unique(test_df$Group)), "Set2"), unique(test_df$Group))
     colour_values[1] <- "red"
     colour_values["Null Hypothesis Sample"] <- "gray67"
     
@@ -191,6 +332,29 @@ plot_null_txi_sample <- function(test_result) {
 }
 
 
+#' @title Calculate P-Value from Distribution
+#' @description Internal function to calculate p-values from cumulative distribution functions
+#' based on test statistics and alternative hypothesis specifications.
+#' 
+#' @param cdf Cumulative distribution function
+#' @param test_stat Numeric test statistic value
+#' @param params List of distribution parameters
+#' @param alternative Character string specifying alternative hypothesis 
+#'   ("two-sided", "less", "greater")
+#' 
+#' @return Numeric p-value
+#' 
+#' @details
+#' This function calculates p-values using the appropriate tail(s) of the distribution:
+#' - "greater": Uses upper tail (1 - CDF)
+#' - "less": Uses lower tail (CDF)  
+#' - "two-sided": Uses 2 * minimum of both tails
+#' 
+#' @examples
+#' # Calculate p-value (internal use)
+#' # pval <- .get_p_value(pnorm, 1.96, list(mean=0, sd=1), "two-sided")
+#' 
+#' @keywords internal
 .get_p_value <- function(cdf, 
                          test_stat, 
                          params, 

@@ -23,7 +23,7 @@
 #' data(PhyloExpressionSetExample)
 #'
 #' # get the relative expression profiles for each phylostratum
-#' tfPES <- tfPS(PhyloExpressionSetExample, transform = "qr")
+#' tfPES <- tf_PS(phyex_set, transform = "qr")
 #' head(tfPES)
 #'
 #' @export

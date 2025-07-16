@@ -1,4 +1,31 @@
 
+#' @title Plot Distribution of Genes Across Phylostrata
+#' @description Create a bar plot showing the distribution of genes across phylostrata,
+#' with options for showing observed vs. expected ratios.
+#' 
+#' @param strata Named factor vector of phylostratum assignments (names are gene IDs)
+#' @param selected_gene_ids Character vector of gene IDs to include in the plot
+#' (default: all genes in strata)
+#' @param as_log_obs_exp Logical indicating whether to show log2(observed/expected) ratios
+#' instead of raw counts (default: FALSE)
+#' 
+#' @return A ggplot2 object showing the phylostratum distribution
+#' 
+#' @details
+#' This function visualizes how genes are distributed across different phylostrata.
+#' When as_log_obs_exp=FALSE, it shows raw gene counts per stratum. When TRUE, it
+#' shows log2 ratios of observed vs. expected gene counts, useful for identifying
+#' enrichment or depletion of specific strata in gene sets.
+#' 
+#' @examples
+#' # Plot raw gene counts by strata
+#' # p1 <- plot_distribution_strata(phyex_set@strata)
+#' 
+#' # Plot observed vs expected ratios for selected genes
+#' # p2 <- plot_distribution_strata(phyex_set@strata, 
+#' #                                selected_gene_ids = my_genes,
+#' #                                as_log_obs_exp = TRUE)
+#' 
 #' @import ggplot2 dplyr tidyr
 #' @export
 plot_distribution_strata <- function(strata,

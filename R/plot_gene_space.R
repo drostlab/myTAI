@@ -1,4 +1,29 @@
 
+#' @title Plot Gene Space Using PCA
+#' @description Create a PCA plot showing genes in expression space with ideal expression
+#' patterns overlaid as reference points.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param top_p Proportion of most dynamic genes to include when genes=NULL (default: 0.2)
+#' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
+#' @param colour_by Character string specifying coloring scheme:
+#' "stage" (by peak expression stage) or "strata" (by phylostratum) (default: "stage")
+#' 
+#' @return A ggplot2 object showing the gene space PCA plot
+#' 
+#' @details
+#' This function creates a PCA visualization of genes in expression space, with ideal
+#' expression patterns (early, mid, late, reverse mid) overlaid as reference points.
+#' The analysis uses log-transformed and standardized expression values. Genes are
+#' colored either by their phylostratum or by their peak expression stage.
+#' 
+#' @examples
+#' # Plot gene space colored by stage
+#' # p1 <- plot_gene_space(phyex_set, colour_by = "stage")
+#' 
+#' # Plot specific genes colored by strata
+#' # p2 <- plot_gene_space(phyex_set, genes = c("gene1", "gene2"), colour_by = "strata")
+#' 
 #' @export
 plot_gene_space <- function(phyex_set, 
                             top_p=0.2,
@@ -25,7 +50,7 @@ plot_gene_space <- function(phyex_set,
     rownames(ideal_genes) <- c("early", "mid", "late", "rev_mid")
     e_aug <- rbind(e, ideal_genes)
     
-    pca <- prcomp(e_aug, scale. = FALSE)
+    pca <- stats::prcomp(e_aug, scale. = FALSE)
     coords <- pca$x[, 1:2]
     
     df <- data.frame(PC1 = coords[,1], PC2 = coords[,2])
@@ -40,7 +65,7 @@ plot_gene_space <- function(phyex_set,
     
     df$highlight <- if (is.null(genes)) TRUE else df$label %in% genes
     
-    strata_map <- setNames(phyex_set@strata, phyex_set@gene_ids)
+    strata_map <- stats::setNames(phyex_set@strata, phyex_set@gene_ids)
     df$strata <- strata_map[df$label]
     
     
@@ -120,72 +145,7 @@ plot_gene_heatmap <- function(phyex_set, top_p=0.2, std=FALSE, reps=FALSE) {
     ordered_expr <- e[gene_order, ]
     pheatmap::pheatmap(ordered_expr, cluster_rows = FALSE, cluster_cols = FALSE,
                        show_rownames = FALSE,
-                       color = colorRampPalette(c("#0055A4", "#FFFFFF", "#EF4135"))(99),
+                       color = grDevices::colorRampPalette(c("#0055A4", "#FFFFFF", "#EF4135"))(99),
                        main="Gene expression")
-}
-
-early_gene <- function(S) {
-    c(rep(-1, length.out=S%/%4),
-      seq(from=-1, to=1, length.out=S-2*(S%/%4)),
-      rep(1, length.out=S%/%4))
-}
-
-mid_gene <- function(S) {
-    c(rep(-1, length.out=S%/%6),
-      seq(from=-1, to=1, length.out=S%/%4),
-      rep(1, length.out=S-2*(S%/%6)-2*(S%/%4)),
-      seq(from=1, to=-1, length.out=S%/%4),
-      rep(-1, length.out=S%/%6))
-}
-
-late_gene <- function(S) {
-    -early_gene(S)
-}
-
-rev_mid_gene <- function(S) {
-    -mid_gene(S)
-}
-
-mod_pi <- function(x) {
-    (x + pi) %% (2*pi) - pi
-}
-
-# pick top variance genes from quantile
-filter_dyn_expr <- function(e, thr=0.9) {
-    var_genes <- apply(e, 1, var)
-    cutoff <- quantile(var_genes, thr)
-    e[var_genes > cutoff, ]
-}
-
-# standardise expression of genes
-to_std_expr <- function(e) {
-    row_sd <- apply(e, 1, sd, na.rm = TRUE)
-    valid <- row_sd > 0 & is.finite(row_sd)
-    e[valid, ] <- t(scale(t(e[valid, , drop = FALSE]), center = TRUE, scale = TRUE))
-    e[!valid, ] <- 0
-    e
-}
-
-get_angles <- function(e) {
-    N = nrow(e)
-    S = ncol(e)
-    ideal_genes <- rbind(early_gene(S), mid_gene(S), 
-                         late_gene(S), rev_mid_gene(S))
-    rownames(ideal_genes) <- c("early", "mid", "late", "rev_mid")
-    e_aug <- rbind(e, ideal_genes)
-    
-    pca <- prcomp(e_aug, scale. = FALSE)
-    coords <- pca$x[, 1:2]
-    
-    df <- data.frame(PC1 = coords[,1], PC2 = coords[,2])
-    
-    df$angle <- atan2(df$PC2, df$PC1)
-    
-    df$angle <- mod_pi(df$angle - df["rev_mid", "angle"] + pi)
-    
-    if (df["early", "angle"] < df["late", "angle"])
-        df$angle <- mod_pi(-df$angle)
-    
-    df[1:N, "angle"]
 }
 

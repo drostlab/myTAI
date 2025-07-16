@@ -1,6 +1,35 @@
 
 
 
+#' @title Plot Multiple Transcriptomic Signatures
+#' @description Create a plot comparing multiple transcriptomic signatures on the same axes,
+#' with options for statistical testing and transformations.
+#' 
+#' @param phyex_sets A list of PhyloExpressionSet objects to compare
+#' @param legend_title Title for the legend (default: "Phylo Expression Set")
+#' @param show_p_val Logical indicating whether to show p-values (default: FALSE)
+#' @param conservation_test Function to use for conservation testing (default: flatline_test)
+#' @param transformation Optional transformation function to apply to all datasets (default: NULL)
+#' @param colours Optional vector of colors for each dataset (default: NULL)
+#' @param ... Additional arguments passed to plot_signature
+#' 
+#' @return A ggplot2 object showing multiple transcriptomic signatures
+#' 
+#' @details
+#' This function allows comparison of multiple transcriptomic signatures by overlaying
+#' them on the same plot. Each signature is colored differently and can be tested
+#' for conservation patterns. If a transformation is provided, it's applied to all
+#' datasets before plotting.
+#' 
+#' @examples
+#' # Compare multiple datasets
+#' # phyex_list <- list(dataset1 = phyex_set1, dataset2 = phyex_set2)
+#' # p <- plot_signature_multiple(phyex_list, legend_title = "Dataset")
+#' 
+#' # With transformation
+#' # p2 <- plot_signature_multiple(phyex_list, transformation = log1p)
+#' 
+#'
 #' @import ggplot2 purrr
 #' @export
 plot_signature_multiple <- function(phyex_sets,

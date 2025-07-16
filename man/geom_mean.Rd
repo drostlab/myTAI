@@ -22,3 +22,4 @@ geom_mean(x)
 \author{
 Hajk-Georg Drost
 }
+\keyword{internal}

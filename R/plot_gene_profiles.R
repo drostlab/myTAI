@@ -1,3 +1,37 @@
+#' @title Plot Individual Gene Expression Profiles
+#' @description Create a plot showing expression profiles for individual genes across
+#' developmental stages, with various visualization options.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param genes Character vector of gene IDs to plot. If NULL, top expressing genes are selected
+#' @param show_set_mean Logical indicating whether to show the mean expression across all genes (default: FALSE)
+#' @param show_reps Logical indicating whether to show individual replicates (default: FALSE)
+#' @param transformation Character string specifying expression transformation:
+#' "log" (log1p), "std_log" (standardized log1p), or "none" (default: "log")
+#' @param colour_by Character string specifying coloring scheme:
+#' "strata" (by phylostratum), "stage" (by developmental stage), or "manual" (default: "strata")
+#' @param colours Optional vector of colors for manual coloring (default: NULL)
+#' @param max_genes Maximum number of genes to plot when genes=NULL (default: 100)
+#' @param show_labels Logical indicating whether to show gene labels (default: TRUE)
+#' @param show_legend Logical indicating whether to show legend (default: TRUE)
+#' @param facet_by_strata Logical indicating whether to facet by phylostratum (default: FALSE)
+#' 
+#' @return A ggplot2 object showing gene expression profiles
+#' 
+#' @details
+#' This function creates detailed visualizations of individual gene expression patterns
+#' across development. Genes can be colored by phylostratum or developmental stage,
+#' and various transformations can be applied to highlight different aspects of the data.
+#' 
+#' @examples
+#' # Plot specific genes
+#' # p1 <- plot_gene_profiles(phyex_set, genes = c("gene1", "gene2", "gene3"))
+#' 
+#' # Plot with faceting by strata
+#' # p2 <- plot_gene_profiles(phyex_set, facet_by_strata = TRUE)
+#' 
+#' @author Filipa Martins Costa, Stefan Manolache, Hajk-Georg Drost
+#' 
 #' @import ggplot2 dplyr tidyr
 #' @importFrom ggrepel geom_text_repel
 #' @export
@@ -129,7 +163,7 @@ plot_gene_profiles <- function(phyex_set,
         if (is.null(colours)) {
             n <- length(gene_levels)
             base_palette <- RColorBrewer::brewer.pal(min(n, 9), "Set1")
-            colours <- setNames(colorRampPalette(base_palette)(n), gene_levels)
+            colours <- stats::setNames(grDevices::colorRampPalette(base_palette)(n), gene_levels)
         }
         p <- p + scale_colour_manual(values = colours, name = "GeneID")
         if (show_reps)

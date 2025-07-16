@@ -1,13 +1,13 @@
 #' @title Perform Permutation Tests Under Different Transformations
 #' @description \emph{tf_stability} statistically evaluates the
-#' stability of phylotranscriptomics permutation tests (e.g., \code{ReductiveHourglassTest}, \code{FlatLineTest}, etc.)
+#' stability of phylotranscriptomics permutation tests (e.g., \code{flatline_test}, \code{reductive_hourglass_test}, etc.)
 #' under different data transformations using a \code{PhyloExpressionSet}.
 #' @param phyex_set a \code{PhyloExpressionSet}.
 #' @param conservation_test a conservation test function (e.g. \code{flatline_test}, \code{reductive_hourglass_test}, etc.)
 #' @param transforms named list of transformation functions (default: \code{COUNT_TRANSFORMS})
 #' @details
 #' Assesses the stability of data transforms on the permutation test of choice.
-#' See \code{\link{tf}}, \code{\link{ReductiveHourglassTest}}, \code{\link{FlatLineTest}}, etc.
+#' See \code{\link{tf}}, \code{\link{flatline_test}}, \code{\link{reductive_hourglass_test}}, etc.
 #' @return Named numeric vector of p-values for each transformation.
 #' @references
 #' Lotharukpong JS et al. (2023) (unpublished)

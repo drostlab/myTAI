@@ -2,37 +2,32 @@
 % Please edit documentation in R/omit_matrix.R
 \name{omit_matrix}
 \alias{omit_matrix}
-\title{Compute TAI or TDI Profiles Omitting a Given Gene}
+\title{Compute TXI Profiles Omitting Each Gene}
 \usage{
 omit_matrix(phyex_set)
 }
 \arguments{
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
+\item{phyex_set}{A PhyloExpressionSet object}
 }
 \value{
-a numeric matrix storing TAI or TDI profile for each omitted gene i.
+A numeric matrix storing TXI profiles for each omitted gene i
 }
 \description{
-For each gene i, exclude the corresponding gene i from the global
- PhyloExpressionSet or DivergenceExpressionSet and compute the \code{\link{TAI}} or \code{\link{TDI}} 
- profile for the corresponding global PhyloExpressionSet or DivergenceExpressionSet
- with excluded gene i. 
+For each gene i, exclude the corresponding gene i from the
+PhyloExpressionSet and compute the TXI profile for the dataset with gene i excluded.
  
- This procedure results in a TAI or TDI profile Matrix storing the TAI or TDI profile for each omitted gene i.
+This procedure results in a TXI profile matrix storing the TXI profile for each omitted gene i.
+}
+\details{
+This function systematically removes each gene and recalculates the transcriptomic
+index profile to assess the contribution of individual genes to the overall pattern.
+This is useful for identifying genes that have a large influence on the
+phylotranscriptomic signature.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Compute omit matrix for a PhyloExpressionSet
+# omit_mat <- omit_matrix(phyex_set)
 
-# read standard phylotranscriptomics data
-data(PhyloExpressionSetExample)
-data(DivergenceExpressionSetExample)
-
-# example PhyloExpressionSet
-omMatrix_ps <- omitMatrix(PhyloExpressionSetExample)
-
-# example DivergenceExpressionSet
-omMatrix_ds <- omitMatrix(DivergenceExpressionSetExample)
-\dontshow{\}) # examplesIf}
 }
 \author{
 Hajk-Georg Drost

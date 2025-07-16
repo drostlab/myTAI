@@ -9,6 +9,8 @@ transform_counts(phyex_set, ...)
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
+\item{...}{Additional arguments passed to the transformation function}
+
 \item{FUN}{Function to apply to the counts matrix}
 
 \item{FUN_name}{Character string naming the transformation function (default: derived from FUN)}

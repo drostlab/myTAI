@@ -7,20 +7,20 @@
 age.apply(phyex_set, FUN, ..., as.list = FALSE)
 }
 \arguments{
+\item{phyex_set}{a standard PhyloExpressionSet object.}
+
 \item{FUN}{a function to be performed on the corresponding expression matrix of each phylostratum or divergence-stratum.}
 
 \item{...}{additional arguments of FUN.}
 
 \item{as.list}{a boolean value specifying whether the output format shall be a matrix or a list object.}
-
-\item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 }
 \value{
 Either a numeric matrix storing the return values of the applied function for each age class
 or a numeric list storing the return values of the applied function for each age class in a list.
 }
 \description{
-This function performs the split-apply-combine methodology on Phylostrata or Divergence Strata stored within the input ExpressionSet.
+This function performs the split-apply-combine methodology on Phylostrata or Divergence Strata stored within the input PhyloExpressionSet.
 
 This function is very useful to perform any phylostratum or divergence-stratum specific analysis.
 }
@@ -29,7 +29,7 @@ This function uses the \code{\link{split}} function to subset the expression mat
 phylostratum specific sub-matrices. Internally using \code{\link{lapply}}, any function can
 be performed to the sub-matrices. The return value of this function is a numeric matrix storing
 the return values by \code{FUN} for each phylostratum and each developmental stage s. 
-Note that the input \code{FUN} must be an function that can be applied to a matrix (e.g., \code{\link{colMeans}} or \code{\link{RE}}). 
+Note that the input \code{FUN} must be an function that can be applied to a matrix (e.g., \code{\link{colMeans}}). 
 In case you use an anonymous function you could use \code{function(x) apply(x , 2 , var)} as an example to compute the variance of each phylostratum and each
 developmental stage s.
 }
@@ -62,7 +62,7 @@ age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list =
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}, \code{\link{RE}}, \code{\link{REMatrix}}
+\code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}
 }
 \author{
 Hajk-Georg Drost

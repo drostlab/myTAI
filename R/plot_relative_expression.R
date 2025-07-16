@@ -167,7 +167,7 @@ plot_relative_expression_bar <- function(
         idx <- which(rownames(rel_exp_mat) %in% as.character(groups[[i]]))
         vals <- rel_exp_mat[idx, , drop = FALSE]
         mean_mat[i, ] <- colMeans(vals, na.rm = TRUE)
-        se_mat[i, ] <- apply(vals, 2, function(x) sd(x, na.rm = TRUE) / sqrt(length(x)))
+        se_mat[i, ] <- apply(vals, 2, function(x) stats::sd(x, na.rm = TRUE) / sqrt(length(x)))
     }
     
     # Kruskal-Wallis test per condition
@@ -182,7 +182,7 @@ plot_relative_expression_bar <- function(
         }
     }, numeric(1))
     
-    if (!is.null(p_adjust_method)) pvals <- p.adjust(pvals, method = p_adjust_method)
+    if (!is.null(p_adjust_method)) pvals <- stats::p.adjust(pvals, method = p_adjust_method)
     
     # Convert p-values to significance stars
     pval_stars <- case_when(

@@ -1,15 +1,54 @@
-
-
+#' @title Calculate Consensus Gene Set
+#' @description Calculate consensus genes from multiple GATAI runs based on
+#' frequency threshold.
+#' 
+#' @param x List of gene sets from different GATAI runs
+#' @param p Frequency threshold (default: 0.5)
+#' 
+#' @return Character vector of consensus genes
+#' 
+#' @details
+#' This function identifies genes that appear in at least p proportion of
+#' the input gene sets, providing a consensus set of genes across multiple
+#' GATAI runs.
+#' 
+#' @examples
+#' # Calculate consensus from multiple runs
+#' # consensus_genes <- consensus(gatai_runs, p = 0.5)
+#' 
+#' @keywords internal
 consensus <- function(x, p=0.5) {
     all <- Reduce(union, x)
     k <- length(x)
-    counts <- all |>
-        purrr::map_int(\(i) sum(purrr::map_lgl(x, \(v) i %in% v)))
-    majority <- all[counts > k*p]
+    counts <- sapply(all, function(gene) {
+        sum(sapply(x, function(gene_set) gene %in% gene_set))
+    })
+    majority <- all[counts >= k*p]
     
     return(majority)
 }
 
+#' @title Create Full GATAI Convergence Plot
+#' @description Create a comprehensive plot showing GATAI convergence across multiple
+#' runs and thresholds.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param runs List of GATAI run results
+#' @param p Consensus threshold for petal plot (default: 0.5)
+#' @param ps Vector of consensus thresholds for convergence plots (default: c(0.25, 0.5, 0.75))
+#' 
+#' @return A cowplot grid showing convergence analysis
+#' 
+#' @details
+#' This function creates a comprehensive visualization of GATAI convergence
+#' including consensus set sizes, p-values, threshold comparisons, and
+#' gene removal patterns across multiple runs.
+#' 
+#' @examples
+#' # Create full convergence plot
+#' # conv_plot <- full_gatai_convergence_plot(phyex_set, gatai_runs)
+#' 
+#' @keywords internal
 full_gatai_convergence_plot <- function(phyex_set, 
                                         runs,
                                         p=0.5,
@@ -45,6 +84,25 @@ full_gatai_convergence_plot <- function(phyex_set,
     return(p)
 }
 
+#' @title Create Petal Plot for Gene Removal Analysis
+#' @description Create a petal plot showing how many genes are removed per run
+#' relative to the consensus set.
+#' 
+#' @param sets List of gene sets from GATAI runs
+#' @param p Consensus threshold (default: 0.5)
+#' 
+#' @return A ggplot2 petal plot
+#' 
+#' @details
+#' This function creates a petal plot visualization showing the relationship
+#' between individual GATAI runs and the consensus gene set, highlighting
+#' how many genes are unique to each run.
+#' 
+#' @examples
+#' # Create petal plot
+#' # petal <- petal_plot(gatai_runs, p = 0.5)
+#' 
+#' @keywords internal
 petal_plot <- function(sets, p=0.5) {
     ref_set <- consensus(sets, p=p)
     num_sets <- length(sets)
@@ -85,6 +143,31 @@ petal_plot <- function(sets, p=0.5) {
     return(p)
 }
 
+#' @title Create Convergence Plots for GATAI Analysis
+#' @description Create plots showing how consensus gene set sizes and p-values
+#' converge across GATAI runs for different threshold values.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param runs List of GATAI run results
+#' @param ps Vector of consensus thresholds to analyze (default: c(0.5))
+#' 
+#' @return A list with two ggplot objects:
+#' \describe{
+#'   \item{counts}{Plot showing convergence of consensus set sizes}
+#'   \item{pval}{Plot showing convergence of p-values}
+#' }
+#' 
+#' @details
+#' This function analyzes how consensus gene sets and their statistical
+#' significance change as more GATAI runs are included in the analysis.
+#' It uses cached null distributions for efficient p-value calculation.
+#' 
+#' @examples
+#' # Create convergence plots
+#' # conv_plots <- convergence_plots(phyex_set, gatai_runs, ps = c(0.25, 0.5, 0.75))
+#' 
+#' @import ggplot2 tidyr
+#' @keywords internal
 convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
     num_runs <- length(runs)
     
@@ -98,9 +181,11 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
     running_count <- function(i, p) {
         return(length(consensus(runs[1:i], p)))
     }
-    running_count <- Vectorize(running_count, vectorize.args = c("i", "p"))
+    running_count <- Vectorize(running_count, vectorize.args = c("i"))
     
-    count_matrix <- outer(1:num_runs, ps, running_count)
+    count_matrix <- sapply(ps, function(p) {
+        sapply(1:num_runs, function(i) running_count(i, p))
+    })
     colnames(count_matrix) <- labels
     
     # Generate running p value matrix using cached null distribution
@@ -114,9 +199,11 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
         
         return(log10(pval))
     }
-    running_pval <- Vectorize(running_pval, vectorize.args = c("i", "p"))
+    running_pval <- Vectorize(running_pval, vectorize.args = c("i"))
     
-    pval_matrix <- outer(1:num_runs, ps, running_pval)
+    pval_matrix <- sapply(ps, function(p) {
+        sapply(1:num_runs, function(i) running_pval(i, p))
+    })
     colnames(pval_matrix) <- labels
     
     # Generate the 2 plots
@@ -153,6 +240,31 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
     return(list(counts=counts_plot, pval=pval_plot))
 }
 
+#' @title Create Threshold Comparison Plots
+#' @description Create plots comparing how different consensus thresholds
+#' affect gene set sizes and p-values in GATAI analysis.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param runs List of GATAI run results
+#' 
+#' @return A list with two ggplot objects:
+#' \describe{
+#'   \item{counts}{Plot showing gene counts across thresholds}
+#'   \item{pval}{Plot showing p-values across thresholds}
+#' }
+#' 
+#' @details
+#' This function analyzes how the choice of consensus threshold (minimum
+#' number of runs a gene must appear in) affects the final gene set size
+#' and statistical significance. Uses cached null distributions for
+#' efficient p-value calculation.
+#' 
+#' @examples
+#' # Create threshold comparison plots
+#' # thresh_plots <- threshold_comparison_plots(phyex_set, gatai_runs)
+#' 
+#' @import ggplot2
+#' @keywords internal
 threshold_comparison_plots <- function(phyex_set, runs) {
     num_runs <- length(runs)
     

@@ -1,4 +1,3 @@
-
 #' @title Generate Phylostratum Colors
 #' @description Generate a color palette for phylostrata visualization using a log-scaled transformation.
 #' @param n number of colors to generate
@@ -6,13 +5,14 @@
 #' @examples
 #' # Generate colors for 5 phylostrata
 #' colors <- PS_colours(5)
+#' @importFrom grDevices colorRampPalette
 #' @export
 PS_colours <- function(n) {
     vals <- 1:n |>
         log() |>
         scales::rescale()
    
-    pal <- colorRampPalette(c("black", "#AD6F3B", "lightgreen"))
+    pal <- grDevices::colorRampPalette(c("black", "#AD6F3B", "lightgreen"))
    
     pal(100)[floor(vals * 99) +1]
 }   
@@ -369,6 +369,7 @@ normalise_stage_expression <- function(phyex_set, total=1e6) {
 #' @param FUN Function to apply to the counts matrix
 #' @param FUN_name Character string naming the transformation function (default: derived from FUN)
 #' @param new_name Character string for the new dataset name (default: auto-generated)
+#' @param ... Additional arguments passed to the transformation function
 #' 
 #' @return A PhyloExpressionSet object with transformed expression data
 #' 
@@ -378,12 +379,15 @@ normalise_stage_expression <- function(phyex_set, total=1e6) {
 #' 
 #' @export
 transform_counts <- S7::new_generic("transform_counts", "phyex_set")
+
+#' @export
 S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
                                                              FUN,
                                                              FUN_name=deparse(substitute(FUN)),
-                                                             new_name=paste(phyex_set@name, "transformed by", FUN_name)) {
+                                                             new_name=paste(phyex_set@name, "transformed by", FUN_name),
+                                                             ...) {
     f <- match.fun(FUN)
-    phyex_set@counts <- f(phyex_set@counts)
+    phyex_set@counts <- f(phyex_set@counts, ...)
     phyex_set@name <- new_name
     return(phyex_set)
 }
@@ -408,6 +412,7 @@ tf <- transform_counts
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' @param genes Character vector of gene IDs to select
+#' @param ... Additional arguments (currently unused)
 #' 
 #' @return A PhyloExpressionSet object containing only the selected genes
 #' 
@@ -417,8 +422,10 @@ tf <- transform_counts
 #' 
 #' @export
 select_genes <- S7::new_generic("select_genes", "phyex_set")
+
+#' @export
 S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set, 
-                                                         genes) {
+                                                         genes, ...) {
     indices <- (phyex_set@gene_ids %in% genes)
     
     phyex_set@strata <- phyex_set@strata[indices]
@@ -444,10 +451,11 @@ S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set,
 #' # ci <- TXI_conf_int(phyex_set, low_q = 0.025, high_q = 0.975)
 #' 
 #' @import purrr
+#' @importFrom stats quantile
 TXI_conf_int <- function(phyex_set, 
                          low_q = .025,
                          high_q = .975) {
-    CIs <- apply(phyex_set@bootstrapped_txis, 2, quantile, probs=c(low_q, high_q))
+    CIs <- apply(phyex_set@bootstrapped_txis, 2, stats::quantile, probs=c(low_q, high_q))
     return(list(low=CIs[1, ], high=CIs[2, ]))
 }
 
@@ -527,3 +535,4 @@ remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "per
     s@precomputed_null_conservation_txis <- phyex_set@null_conservation_txis
     return(s)
 }
+

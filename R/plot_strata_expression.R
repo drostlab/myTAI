@@ -1,4 +1,25 @@
 
+#' @title Plot Expression Levels by Phylostratum
+#' @description Create a boxplot showing the distribution of expression levels
+#' for each phylostratum.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param aggregate_FUN Function to aggregate expression across conditions (default: mean)
+#' 
+#' @return A ggplot2 object showing expression distributions by phylostratum
+#' 
+#' @details
+#' This function creates a boxplot visualization showing how expression levels
+#' vary across different phylostrata. Each point represents a gene, and the
+#' boxes show the distribution of expression levels within each phylostratum.
+#' 
+#' @examples
+#' # Plot expression by strata using mean aggregation
+#' # p1 <- plot_strata_expression(phyex_set, aggregate_FUN = mean)
+#' 
+#' # Plot using median aggregation
+#' # p2 <- plot_strata_expression(phyex_set, aggregate_FUN = median)
+#' 
 #' @import ggplot2 
 #' @export
 plot_strata_expression <- function(phyex_set,
@@ -22,6 +43,24 @@ plot_strata_expression <- function(phyex_set,
     return(p)
 }
 
+#' @title Plot Expression Rank by Phylostratum
+#' @description Create a boxplot showing the distribution of expression ranks
+#' for each phylostratum.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param aggregate_FUN Function to aggregate expression across conditions (default: mean)
+#' 
+#' @return A ggplot2 object showing expression rank distributions by phylostratum
+#' 
+#' @details
+#' This function creates a boxplot visualization showing how expression ranks
+#' vary across different phylostrata. Expression values are first aggregated
+#' and then ranked, providing a normalized view of expression patterns.
+#' 
+#' @examples
+#' # Plot expression ranks by strata
+#' # p <- plot_strata_expression_rank(phyex_set)
+#' 
 #' @import ggplot2
 #' @export 
 plot_strata_expression_rank <- function(phyex_set,

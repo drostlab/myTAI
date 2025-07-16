@@ -64,7 +64,8 @@ Imports:
     tibble,
     scales,
     ggpubr,
-    ggrepel
+    ggrepel,
+    uwot
 Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),

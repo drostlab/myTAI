@@ -1,3 +1,29 @@
+#' @title Pairwise Conservation Test
+#' @description Test for significant differences in transcriptomic index values
+#' between two groups of developmental stages.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param modules A named list with elements 'contrast1' and 'contrast2' containing
+#' stage indices for each contrast group
+#' @param alternative Character string specifying the alternative hypothesis:
+#' "greater" (contrast1 > contrast2) or "less" (contrast1 < contrast2)
+#' @param ... Additional arguments passed to generic_conservation_test
+#' 
+#' @return A ConservationTestResult object with pairwise test results
+#' 
+#' @details
+#' The pairwise test compares the mean transcriptomic index values between two
+#' groups of developmental stages. This is useful for testing specific hypotheses
+#' about differences in gene age composition between developmental periods.
+#' 
+#' @author Jaruwatana Sodai Lotharukpong
+#' 
+#' @examples
+#' # Define contrast groups
+#' # modules <- list(contrast1 = 1:3, contrast2 = 7:9)
+#' # result <- pairwise_test(phyex_set, modules, alternative = "greater")
+#' 
+#' @seealso \code{\link{generic_conservation_test}}
 #' @export
 pairwise_test <- function(phyex_set,
                           modules,
@@ -16,6 +42,27 @@ pairwise_test <- function(phyex_set,
     return(t)
 }
 
+#' @title Pairwise Score Function
+#' @description Compute the pairwise contrast score between two groups of developmental stages.
+#' 
+#' @param txi Numeric vector of transcriptomic index values
+#' @param modules A named list with elements 'contrast1' and 'contrast2' containing
+#' stage indices for each contrast group
+#' @param alternative Character string specifying the alternative hypothesis:
+#' "greater" or "less"
+#' 
+#' @return A numeric value representing the pairwise contrast score
+#' 
+#' @details
+#' The score is computed as mean(contrast1) - mean(contrast2).
+#' For alternative = "less", the score is negated.
+#' 
+#' @examples
+#' # Compute pairwise score
+#' # modules <- list(contrast1 = 1:3, contrast2 = 7:9)
+#' # score <- pair_score(txi_values, modules, "greater")
+#' 
+#' @keywords internal
 pair_score <- function(txi,
                        modules,
                        alternative = c("greater", "less")) {

@@ -9,6 +9,8 @@ select_genes(phyex_set, ...)
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
+\item{...}{Additional arguments (currently unused)}
+
 \item{genes}{Character vector of gene IDs to select}
 }
 \value{

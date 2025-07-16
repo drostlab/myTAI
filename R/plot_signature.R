@@ -1,3 +1,32 @@
+#' @title Plot Transcriptomic Signature
+#' @description Create a plot of the transcriptomic index signature across developmental stages,
+#' with options for confidence intervals, replicates, and statistical testing.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param show_CI Logical indicating whether to show confidence intervals (default: FALSE)
+#' @param show_bootstraps Logical indicating whether to show bootstrap samples (default: FALSE)
+#' @param CI_low Lower quantile for confidence intervals (default: 0.025)
+#' @param CI_high Upper quantile for confidence intervals (default: 0.975)
+#' @param show_reps Logical indicating whether to show individual replicates (default: TRUE)
+#' @param show_p_val Logical indicating whether to show p-value from conservation test (default: FALSE)
+#' @param conservation_test Function to use for conservation testing (default: flatline_test)
+#' @param colour Optional color for the signature line (default: NULL)
+#' @param ... Additional arguments passed to the conservation test
+#' 
+#' @return A ggplot2 object showing the transcriptomic signature
+#' 
+#' @details
+#' This function creates a comprehensive visualization of the transcriptomic signature
+#' with optional statistical testing and confidence intervals. The plot can show
+#' individual replicates, confidence bands, and p-values from conservation tests.
+#' 
+#' @examples
+#' # Basic signature plot
+#' # p1 <- plot_signature(phyex_set)
+#' 
+#' # With confidence intervals and p-value
+#' # p2 <- plot_signature(phyex_set, show_CI = TRUE, show_p_val = TRUE)
+#' 
 #' @import ggplot2
 #' @export
 plot_signature <- function(phyex_set,

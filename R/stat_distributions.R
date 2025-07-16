@@ -1,3 +1,24 @@
+#' @title Distribution S7 Class
+#' @description S7 class for representing probability distributions used in
+#' statistical testing, including PDF, CDF, quantile functions, and fitting procedures.
+#' 
+#' @slot name Character string identifying the distribution
+#' @slot pdf Function for probability density function
+#' @slot cdf Function for cumulative distribution function
+#' @slot quantile_function Function for quantile calculations
+#' @slot fitting_function Function to fit distribution parameters from data
+#' @slot param_names Character vector of parameter names
+#' 
+#' @details
+#' The Distribution class provides a unified interface for different probability
+#' distributions used in phylotranscriptomic testing. Each distribution includes
+#' the necessary functions for statistical inference.
+#' 
+#' @examples
+#' # Access predefined distributions
+#' # normal_dist <- distributions$normal
+#' # gamma_dist <- distributions$gamma
+#' 
 #' @import S7
 Distribution <- new_class("Distribution",
     properties = list(
@@ -30,11 +51,41 @@ Distribution <- new_class("Distribution",
 
 
 
+#' @title Fit Normal Distribution Parameters
+#' @description Fit normal distribution parameters using method of moments.
+#' 
+#' @param x Numeric vector of data values
+#' 
+#' @return List with mean and sd parameters
+#' 
+#' @examples
+#' # Fit normal distribution
+#' # params <- .fit_normal(data_vector)
+#' 
+#' @keywords internal
 .fit_normal <- function(x) {
     params <- fitdistrplus::fitdist(x, "norm", method = "mme")
     return(list(mean = params$estimate[1], sd = params$estimate[2]))
 }
 
+#' @title Fit Gamma Distribution Parameters
+#' @description Fit gamma distribution parameters using a robust method that
+#' filters outliers iteratively to find the best fit.
+#' 
+#' @param x Numeric vector of data values
+#' 
+#' @return List with shape and rate parameters
+#' 
+#' @details
+#' This function uses an iterative approach to filter outliers and find
+#' the gamma distribution parameters that best fit the data, improving
+#' robustness compared to standard fitting methods.
+#' 
+#' @examples
+#' # Fit gamma distribution
+#' # params <- .fit_gamma(data_vector)
+#' 
+#' @keywords internal
 .fit_gamma <- function(x) {
     iterations <- 200
     max_cut <- 0.25
@@ -105,6 +156,26 @@ Distribution <- new_class("Distribution",
 }
 
 
+#' @title Predefined Distribution Objects
+#' @description List of predefined Distribution objects for use in statistical testing.
+#' 
+#' @format A named list containing Distribution objects:
+#' \describe{
+#'   \item{normal}{Normal distribution with mean and sd parameters}
+#'   \item{gamma}{Gamma distribution with shape and rate parameters}
+#' }
+#' 
+#' @details
+#' This list provides ready-to-use Distribution objects for common statistical
+#' tests. Each distribution includes appropriate fitting functions and statistical
+#' functions for hypothesis testing.
+#' 
+#' @examples
+#' # Use normal distribution for testing
+#' # test_result <- generic_conservation_test(phyex_set, 
+#' #                                         fitting_dist = distributions$normal)
+#' 
+#' @export
 distributions <- list(
     normal = Distribution(
         name = "normal",
