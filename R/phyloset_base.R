@@ -17,18 +17,7 @@ PS_colours <- function(n) {
     pal(100)[floor(vals * 99) +1]
 }   
 
-#' @title Calculate Quantile Ranks
-#' @description Calculate quantile ranks for a numeric vector, handling ties using average method.
-#' @param x numeric vector for which to calculate quantile ranks
-#' @return A numeric vector of quantile ranks between 0 and 1
-#' @examples
-#' # Calculate quantile ranks for a vector
-#' ranks <- quantile_rank(c(1, 2, 3, 4, 5))
-#' @export
-quantile_rank <- function(x) {
-    ranks <- base::rank(x, ties.method = "average")
-    (ranks - 0.5) / length(x)
-}
+
 
 #' @title Transcriptomic Index Name Mapping
 #' @description Named list mapping transcriptomic index abbreviations to full names.

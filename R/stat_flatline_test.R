@@ -1,3 +1,22 @@
+#' @title Flat Line Test for Conservation Pattern
+#' @description Perform a flat line test to assess whether the transcriptomic index 
+#' profile shows a flat (non-varying) pattern across developmental stages.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @param ... Additional arguments passed to generic_conservation_test
+#' 
+#' @return A test result object containing p-value and test statistics
+#' 
+#' @details
+#' The flat line test evaluates whether the TXI profile remains constant across
+#' developmental stages by testing the variance of the profile against a null
+#' distribution. A significant result indicates rejection of the flat line pattern.
+#' 
+#' @examples
+#' # Perform flat line test
+#' # result <- flatline_test(phyex_set)
+#' 
+#' @seealso \code{\link{generic_conservation_test}}
 #' @export
 flatline_test <- function(phyex_set, ...) {
     return(generic_conservation_test(phyex_set, 

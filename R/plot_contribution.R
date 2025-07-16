@@ -1,4 +1,22 @@
 
+#' @title Plot Phylostratum Contribution to Transcriptomic Index
+#' @description Create a stacked area plot showing the contribution of each phylostratum
+#' to the overall transcriptomic index across developmental stages.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return A ggplot2 object showing phylostratum contributions as a stacked area plot
+#' 
+#' @details
+#' This function visualizes how different phylostrata contribute to the overall
+#' transcriptomic index pattern across developmental stages. Each area represents
+#' the contribution of a specific phylostratum, with older strata typically shown
+#' in darker colors and younger strata in lighter colors.
+#' 
+#' @examples
+#' # Create contribution plot
+#' # contrib_plot <- plot_contribution(phyex_set)
+#' 
 #' @import dplyr ggplot2
 #' @export
 plot_contribution <- function(phyex_set) {

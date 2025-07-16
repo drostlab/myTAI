@@ -8,7 +8,7 @@
 #' 
 #' geom_mean(x)
 #' 
-#' @export
+#' @keywords internal
 geom_mean <- function(x) {
     if (any(x < 0))
         NaN
@@ -20,6 +20,37 @@ geom_mean <- function(x) {
 
 
 
+#' @title Row-wise Variance Calculation
+#' @description Calculate the variance for each row of a matrix or data frame.
+#' 
+#' @param x A numeric matrix or data frame
+#' @param ... Additional arguments passed to rowSums and rowMeans
+#' 
+#' @return A numeric vector containing the variance for each row
+#' 
+#' @details
+#' This function computes the sample variance for each row using the formula:
+#' var = sum((x - mean(x))^2) / (n - 1)
+#' 
+#' @examples
+#' # Calculate row variances for a matrix
+#' # mat <- matrix(1:12, nrow = 3)
+#' # row_vars <- rowVars(mat)
+#' 
+#' @keywords internal
 rowVars <- function(x, ...) {
     return(rowSums((x - rowMeans(x, ...))^2, ...)/(dim(x)[2]-1))
+}
+
+#' @title Calculate Quantile Ranks
+#' @description Calculate quantile ranks for a numeric vector, handling ties using average method.
+#' @param x numeric vector for which to calculate quantile ranks
+#' @return A numeric vector of quantile ranks between 0 and 1
+#' @examples
+#' # Calculate quantile ranks for a vector
+#' ranks <- quantile_rank(c(1, 2, 3, 4, 5))
+#' @export
+quantile_rank <- function(x) {
+    ranks <- base::rank(x, ties.method = "average")
+    (ranks - 0.5) / length(x)
 }
