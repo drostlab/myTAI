@@ -50,7 +50,7 @@ plot_gene_profiles <- function(phyex_set,
                   .groups = "drop") |>
         mutate(Highlight = factor(GeneID %in% genes, levels = c(FALSE, TRUE))) |>
         left_join(data.frame(GeneID = phyex_set@gene_ids,
-                             Stratum = phyex_set@stratas,
+                             Stratum = phyex_set@strata,
                              Angle = -get_angles(phyex_set@counts |> log1p() |> to_std_expr())),
                   by = "GeneID") |> 
         mutate(
@@ -108,10 +108,10 @@ plot_gene_profiles <- function(phyex_set,
         if (show_reps)
             p <- p + scale_fill_viridis_c(name = "Angle", guide = "none")
     } else if (colour_by == "strata") {
-        levels <- levels(phyex_set@stratas)
-        p <- p + scale_color_manual(name = "Strata", values = PS_colours(phyex_set@num_stratas), na.value = "grey50", limits=levels, drop=FALSE)
+        levels <- levels(phyex_set@strata)
+        p <- p + scale_color_manual(name = "Strata", values = PS_colours(phyex_set@num_strata), na.value = "grey50", limits=levels, drop=FALSE)
         if (show_reps)
-            p <- p + scale_fill_manual(name = "Strata", values = PS_colours(phyex_set@num_stratas), na.value = "grey50", limits=levels, drop=FALSE)
+            p <- p + scale_fill_manual(name = "Strata", values = PS_colours(phyex_set@num_strata), na.value = "grey50", limits=levels, drop=FALSE)
     } else if (colour_by == "manual") {
         gene_levels <- intersect(genes, df_long$GeneID)
         if (is.null(colours)) {
@@ -130,18 +130,3 @@ plot_gene_profiles <- function(phyex_set,
     p
     
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

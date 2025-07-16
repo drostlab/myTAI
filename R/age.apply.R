@@ -50,16 +50,15 @@
 age.apply <- function(phyex_set, FUN, ..., as.list = FALSE) {
     f <- match.fun(FUN)
     
-    res <- lapply(phyex_set@strata_vector, \(x) f(phyex_set@count_matrix, ...))
+    res <- lapply(phyex_set@strata, \(x) f(phyex_set@count_matrix, ...))
     
     if (!as.list) {
         res <- t(as.data.frame(res))
-        rownames(res) <- phyex_set@strata_vector
+        rownames(res) <- phyex_set@strata
     }
     else {
-        names(res) <- phyex_set@strata_vector
+        names(res) <- phyex_set@strata
     }
         
     return(res)
 }
-

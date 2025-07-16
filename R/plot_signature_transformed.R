@@ -4,7 +4,7 @@ COUNT_TRANSFORMS <- list(
     "sqrt" = sqrt,
     "log2" = \(x) log2(x+1),
     "vst" = \(x) DESeq2::vst(round(x, digits=0)),
-    "rlog" = \ (x) DESeq2::rlogTransformation(round(x, digits=0)),
+    "rlog" = \(x) DESeq2::rlogTransformation(round(x, digits=0)),
     "rank" = \(x) apply(x, 2, base::rank)
 )
 

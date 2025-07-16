@@ -1,11 +1,10 @@
 
 #' @import ggplot2 dplyr tidyr
 #' @export
-plot_distribution_strata <- function(stratas,
-                                     selected_gene_ids = names(stratas),
-                                     as_log_obs_exp = FALSE
-                                     ) {
-    df <- data.frame(Stratum=stratas, GeneID=names(stratas))
+plot_distribution_strata <- function(strata,
+                                     selected_gene_ids = names(strata),
+                                     as_log_obs_exp = FALSE) {
+    df <- data.frame(Stratum=strata, GeneID=names(strata))
     df_selected <- df |> filter(GeneID %in% selected_gene_ids)
     if (!as_log_obs_exp) {
         ggplot(df_selected, aes(Stratum, fill=Stratum)) + 
@@ -14,7 +13,7 @@ plot_distribution_strata <- function(stratas,
             xlab("Stratum") + 
             ylab("Gene Count") +
             scale_x_discrete(labels=labels(df$Stratum), drop = FALSE) +
-            scale_fill_manual(values = PS_colours(length(levels(stratas))), labels=levels(df_selected$Stratum), drop=FALSE) +
+            scale_fill_manual(values = PS_colours(length(levels(strata))), labels=levels(df_selected$Stratum), drop=FALSE) +
             guides(fill=guide_legend(override.aes = list(size = 1.0), keyheight = 0.5, keywidth = 0.5)) +
             theme_minimal() +
             theme(axis.text.y = element_blank(), axis.ticks.y = element_blank()) +
@@ -44,8 +43,8 @@ plot_distribution_strata <- function(stratas,
     # TODO: integrate PlotEnrichment here
 }
 
-strata_enrichment <- function(stratas, selected_gene_ids) {
-    df <- data.frame(Stratum=stratas, GeneID=names(stratas))
+strata_enrichment <- function(strata, selected_gene_ids) {
+    df <- data.frame(Stratum=strata, GeneID=names(strata))
     df_selected <- df |> filter(GeneID %in% selected_gene_ids)
     counts_all <- df |> count(Stratum, .drop=F) |> mutate(p_all = n / sum(n))
     counts_sel <- df_selected |> count(Stratum, .drop=F) |> mutate(p_sel = n / sum(n))

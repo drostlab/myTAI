@@ -22,7 +22,7 @@ plot_gene_profiles_by_strata <- function(phyex_set,
         theme_minimal()
     if (show_CI)
         p <- p + 
-        geom_ribbon(aes(ymin=min, ymax=max, fill=Stratum), alpha=0.05)
+            geom_ribbon(aes(ymin=min, ymax=max, fill=Stratum), alpha=0.05)
     
     if (show_mean) {
         df_mean <- df |> group_by(Condition) |> summarise(Expression=mean(Expression), .groups="drop")

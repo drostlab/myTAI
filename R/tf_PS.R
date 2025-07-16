@@ -1,0 +1,44 @@
+#' @title Transform Phylostratum Values
+#' @description
+#' This function performs transformation of phylostratum values.
+#'
+#' @param phyex_set a \code{PhyloExpressionSet} S7 object.
+#' @param transform a character vector of any valid function that transforms PS values.
+#' Possible values can be:
+#' \itemize{
+#' \item \code{transform} = \code{"qr"} (or \code{"quantilerank"}) :
+#' quantile rank transformation analogous to Julia function \code{StatsBase.quantilerank}
+#' using \code{method = :tied}.
+#' }
+#' @details This function transforms the phylostratum assignment.
+#' The return value of this function is a PhyloExpressionSet object with
+#' transformed phylostratum \code{tfPhylostratum} as the first column, satisfying
+#' \code{\link{PhyloExpressionSet}}. Note that the input \code{transform} must be an
+#' available function, currently limited to only \code{"qr"} (or \code{"quantilerank"}).
+#' @return a \code{PhyloExpressionSet} object storing transformed Phylostratum levels.
+#' @author Jaruwatana Sodai Lotharukpong and Lukas Maischak
+#' @seealso \code{\link{tf}}
+#' @examplesIf FALSE
+#' # source the example dataset
+#' data(PhyloExpressionSetExample)
+#'
+#' # get the relative expression profiles for each phylostratum
+#' tfPES <- tfPS(PhyloExpressionSetExample, transform = "qr")
+#' head(tfPES)
+#'
+#' @export
+
+tfPS <- function(phyex_set, transform="qr") {
+    if (!S7::is_instance(phyex_set, "PhyloExpressionSet")) {
+        stop("Input must be a PhyloExpressionSet S7 object.", call. = FALSE)
+    }
+    ps_vec <- as.numeric(phyex_set@strata)
+    if (transform %in% c("qr", "quantilerank")) {
+        ranks <- base::rank(ps_vec, ties.method = "average")
+        tfPhylostratum <- (ranks - 0.5) / length(ps_vec)
+    } else {
+        stop("Choose the following transformation functions: \"qr\"")
+    }
+    phyex_set@strata <- tfPhylostratum
+    return(phyex_set)
+}

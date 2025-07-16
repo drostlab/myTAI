@@ -40,20 +40,20 @@ plot_gene_space <- function(phyex_set,
     
     df$highlight <- if (is.null(genes)) TRUE else df$label %in% genes
     
-    strata_map <- setNames(phyex_set@stratas, phyex_set@gene_ids)
+    strata_map <- setNames(phyex_set@strata, phyex_set@gene_ids)
     df$strata <- strata_map[df$label]
-    
     
     
     
     p <- ggplot(df[1:N, ], aes(PC1, PC2, color = if (colour_by == "stage") angle else strata)) +
         geom_point(aes(alpha=highlight)) +
         scale_alpha_manual(values = c(`TRUE` = 0.7, `FALSE` = 0.1), guide = "none")
-    
-    if (colour_by == "angle") {
-        p <- p + scale_color_viridis_c()
+    if (colour_by == "stage") {
+        p <- p + 
+            scale_color_viridis_c(name = "Stage")
     } else {
-        p <- p + scale_color_manual(values = PS_colours(length(unique(df$strata))), na.value = "grey50")
+        p <- p + 
+            scale_color_manual(values = PS_colours(length(unique(df$strata))), na.value = "grey50", name = "Stratum")
     }
         
     p <- p +

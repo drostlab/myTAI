@@ -1,35 +1,4 @@
 
-pow <- function(x,power)
-{
-  return(x^power)
-}
-
-
-
-CollapseFromTo <- function(x,from,to,FUN, ...){
-        x <- as.data.frame(x)
-        f <- match.fun(FUN) 
-        if (from == to){
-          return(x[ , from])
-        } else {
-          return(apply(x[ , from:to], 1 , f, ...))
-        }
-  }
-
-
-quant <- function(ExpressionMatrix,quantile = 0.9)
-{
-        nCols <- dim(ExpressionMatrix)[2]
-        threshold <- vector(mode = "numeric",length = nCols)
-        
-        for(i in 1:nCols){
-                threshold[i] <- as.numeric(stats::quantile(ExpressionMatrix[ , i],probs = quantile))
-        }
-        return (threshold)
-}
-
-
-
 re.colors <- function(n)
 {
         
@@ -44,61 +13,13 @@ re.colors <- function(n)
 }
 
 
-#' @title Color palette for barplots
-#' @description A nice color palette for barplots with several bars.
-#' @param n the number of colors to be in the palette. 
-#' @return a character vector containing different color names that can be used for barplots.
-#' @details This function can be used to select colors for bar plots. 
-#' @author Hajk-Georg Drost
-#' @examplesIf FALSE
-#' 
-#' # get 5 different colors for 5 different bars
-#' barplot_colors <- bar.colors(5)
-#' @keywords internal
-#' @export
-bar.colors <- function(n)
-{
-        
-        colos <- c("black","gray76","gray43","navy","lightskyblue3","palegreen4","seagreen1","lavenderblush1")
-        return(colos[1:n])
-        
-}
 
-
-get.contingency.tbl <- function(x, index){
-        
-        contig.tbl <- matrix(NA_real_,ncol = 2, nrow = 2)
-        contig.tbl <- rbind(c(x[index, 1],x[index, 2]),
-                 c(sum(x[-index, 1]),sum(x[-index, 2])))
-        colnames(contig.tbl) <- c("BG","TestSet")
-        rownames(contig.tbl) <- c(paste0("PS",index),paste0("-PS",index))
-        return(contig.tbl)
-
-}
-
-
-# Function to determine the row indices
-# GetColumnIndexFromTo(nrep = c(2,3,2))
-# nrep is a variable number of columns (replicates per stage)
-GetColumnIndexFromTo <- function(nrep){
-        
-        IndexOne <- vector("numeric")
-        IndexTwo <- vector("numeric")
-        
-        IndexOne[1] <- 1
-        IndexTwo[1] <- nrep[1]
-        
-        for (i in 2:length(nrep)){
-                
-                IndexOne[i] <-  IndexTwo[i - 1] + 1
-                IndexTwo[i] <- IndexOne[i] - 1 + nrep[i]
-        }
-        
-        res <- cbind(IndexOne,IndexTwo)
-        colnames(res) <- c("From","To")
-        rownames(res) <- paste0("CollapsedStage",1:length(nrep))
-        return(res)
-}
-
-
-
+PS_colours <- function(n) {
+    vals <- 1:n |>
+        log() |>
+        scales::rescale()
+   
+    pal <- colorRampPalette(c("black", "#AD6F3B", "lightgreen"))
+   
+    pal(100)[floor(vals * 99) +1]
+}   

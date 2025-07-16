@@ -1,9 +1,12 @@
 
 #' @export
 plot_sample_space <- function(phyex_set, method=c("PCA", "UMAP")) {
-    method = match.arg(method)
+    method <- match.arg(method)
     
     expr <- log1p(phyex_set@counts)
+    # Remove genes with zero variance
+    nonzero_var_genes <- apply(expr, 1, function(x) var(x) != 0)
+    expr <- expr[nonzero_var_genes, , drop = FALSE]
     
     if (method == "PCA") {
         coords <- prcomp(t(expr), scale. = TRUE)$x[, 1:2]

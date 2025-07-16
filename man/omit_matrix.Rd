@@ -32,7 +32,6 @@ omMatrix_ps <- omitMatrix(PhyloExpressionSetExample)
 
 # example DivergenceExpressionSet
 omMatrix_ds <- omitMatrix(DivergenceExpressionSetExample)
-
 \dontshow{\}) # examplesIf}
 }
 \author{

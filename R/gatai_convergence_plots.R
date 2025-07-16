@@ -197,24 +197,3 @@ threshold_comparison_plots <- function(phyex_set, runs) {
     
     return(list(counts=counts_plot, pval=pval_plot))
 }
-
-
-# 
-# #organs <- c("brain", "cerebellum", "heart", "kidney", "liver", "ovary", "testis")
-# organs <- c("brain")
-# 
-# for (o in organs) {
-#     runs <- list()
-#     num_runs <- 20
-#     for (i in 1:num_runs) {
-#         runs[[i]] <- readr::read_delim(sprintf("data/%s/extracted_genes_%s.txt", o, i), delim="\n", col_names=c("GeneID"))$GeneID
-#     }
-#     phylo_set <- read.csv(sprintf("data/%s/phylo_set.tsv", o), sep="\t")
-#     convergence_plot(phylo_set, runs, ps=c(0.25, 0.5, 0.75))
-#     ggsave(filename=sprintf("plots/%s convergence plot.png", o))
-#     threshold=0.5
-#     petal_plot(runs, p=threshold) + labs(title=sprintf("%s GATAI petal plot, threshold %s", o, threshold))
-#     ggsave(filename=sprintf("plots/%s petal plot.png", o))
-# }
-
-

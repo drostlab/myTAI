@@ -28,7 +28,8 @@ plot_signature_multiple <- function(phyex_sets,
             colour=legend_title,
             fill=legend_title
         ) +
-        theme_minimal()
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
     labels <- phyex_sets |> map_chr(\(s) s@name)
     

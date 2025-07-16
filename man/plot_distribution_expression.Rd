@@ -6,8 +6,8 @@
 \usage{
 plot_distribution_expression(
   phyex_set,
-  show_conditions = T,
-  show_strata = F,
+  show_conditions = TRUE,
+  show_strata = FALSE,
   seed = 123
 )
 }
@@ -16,7 +16,7 @@ plot_distribution_expression(
 
 \item{ExpressionSet}{a standard PhyloExpressionSet or DivergenceExpressionSet object.}
 
-\item{stages}{a numeric vector specifying the indices of the stages to compare. Each index 
+\item{stages}{a numeric vector specifying the indices of the stages to compare. Each index
 corresponds to a stage in the ExpressionSet. Starts in one.}
 
 \item{xlab}{label of x-axis.}
@@ -27,7 +27,7 @@ corresponds to a stage in the ExpressionSet. Starts in one.}
 }
 \description{
 \emph{plot_distribution_partialTAI} generates 2 plots that help to compare the distribution
-of expression levels through various developmental stages, highlighting each stage with 
+of expression levels through various developmental stages, highlighting each stage with
 distinct colors.
 }
 \author{

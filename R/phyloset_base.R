@@ -18,13 +18,13 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
     properties = list(
         ## PARAMETERS
         # REQUIRED
-        stratas = new_required_property(
+        strata = new_required_property(
             class = class_factor,
             validator = function(value) {
                 if (any(is.na(value))) "cannot contain NA values. Check data[1]."
                 if (length(value) == 0) "cannot be empty. Check data[1]"
             },
-            name = "stratas"
+            name = "strata"
         ),
         gene_ids = new_required_property(
             class = class_character,
@@ -78,13 +78,13 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         ),
         data = new_property(
             class = class_data.frame,
-            getter <- \(self) tibble::tibble(Stratum=self@stratas, 
+            getter <- \(self) tibble::tibble(Stratum=self@strata, 
                                              GeneID=self@gene_ids, 
                                              tibble::as_tibble(self@counts))
         ),
         data_collapsed = new_property(
             class = class_data.frame,
-            getter <- \(self) tibble::tibble(Stratum=self@stratas, 
+            getter <- \(self) tibble::tibble(Stratum=self@strata, 
                                              GeneID=self@gene_ids, 
                                              tibble::as_tibble(self@counts_collapsed))
         ),
@@ -106,14 +106,14 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             class = class_integer,
             getter = \(self) length(self@conditions)
         ),
-        num_stratas = new_property(
+        num_strata = new_property(
             class = class_integer,
-            getter = \(self) length(unique(self@stratas))
+            getter = \(self) length(unique(self@strata))
         ),
         pTXI = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
-                m <- pTXI(self@counts_collapsed, self@stratas)
+                m <- pTXI(self@counts_collapsed, self@strata)
                 rownames(m) <- self@gene_ids
                 colnames(m) <- self@conditions
                 return(m)
@@ -131,7 +131,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
                 if (is.null(self@precomputed_null_conservation_txis))
-                    memo_generate_conservation_txis(self@stratas,
+                    memo_generate_conservation_txis(self@strata,
                                                    self@counts_collapsed,
                                                    self@null_conservation_sample_size)
                 else
@@ -149,7 +149,7 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
         pTXI_reps = new_property(
             #class = class_matrix, # S7 doesn't support class_matrix yet
             getter = function(self) {
-                m <- pTXI(self@counts, self@stratas)
+                m <- pTXI(self@counts, self@strata)
                 rownames(m) <- self@gene_ids
                 colnames(m) <- self@sample_names
                 return(m)
@@ -172,8 +172,8 @@ as_PhyloExpressionSet <- function(data,
     gene_ids <- as.character(data[[2]])
     if (is.null(strata_labels))
         strata_labels <- sort(unique(as.numeric(data[[1]])))
-    stratas <- factor(as.numeric(data[[1]]), levels=sort(unique(as.numeric(data[[1]]))), labels=strata_labels)
-    names(stratas) <- gene_ids
+    strata <- factor(as.numeric(data[[1]]), levels=sort(unique(as.numeric(data[[1]]))), labels=strata_labels)
+    names(strata) <- gene_ids
 
     groups <- factor(groups, levels=unique(groups))
     
@@ -181,7 +181,7 @@ as_PhyloExpressionSet <- function(data,
     rownames(counts) <- gene_ids
     
     return(PhyloExpressionSet(
-        stratas = stratas,
+        strata = strata,
         gene_ids = gene_ids,
         counts = counts,
         groups = groups,
@@ -226,7 +226,7 @@ S7::method(print, PhyloExpressionSet) <- function(x, ...) {
 
 #' @export
 collapse <- function(phyex_set) {
-    data <- tibble::tibble(Stratum=phyex_set@stratas, 
+    data <- tibble::tibble(Stratum=phyex_set@strata, 
                            GeneID=phyex_set@gene_ids, 
                            tibble::as_tibble(phyex_set@counts_collapsed))
     as_PhyloExpressionSet(data)
@@ -258,7 +258,7 @@ S7::method(select_genes, PhyloExpressionSet) <- function(phyex_set,
                                                          genes) {
     indices <- (phyex_set@gene_ids %in% genes)
     
-    phyex_set@stratas <- phyex_set@stratas[indices]
+    phyex_set@strata <- phyex_set@strata[indices]
     phyex_set@gene_ids <- phyex_set@gene_ids[indices]
     phyex_set@counts <- phyex_set@counts[indices, ,drop=F]
     
@@ -275,15 +275,15 @@ TXI_conf_int <- function(phyex_set,
 }
 
 #' @export
-pTXI <- function(counts, stratas) {
+pTXI <- function(counts, strata) {
     
-    sweep(counts, 2, colSums(counts), "/") * as.numeric(stratas)
+    sweep(counts, 2, colSums(counts), "/") * as.numeric(strata)
 }
 
 #' @export
 sTXI <- function(phyex_set,
                  option = "identity") {
-    mat <- rowsum(phyex_set@pTXI, phyex_set@stratas)
+    mat <- rowsum(phyex_set@pTXI, phyex_set@strata)
     if (option == "add") {
         mat <- apply(mat,2,cumsum)
     }
