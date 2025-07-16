@@ -26,7 +26,11 @@ plot_gene_profiles <- function(phyex_set,
                      none = counts)
     
     all_genes <- phyex_set@gene_ids
-    bg_genes <- filter_dyn_expr(counts, thr = 1 - bg_top_p) |> rownames()
+    
+    if (show_bg)
+        bg_genes <- filter_dyn_expr(counts, thr = 1 - bg_top_p) |> rownames()
+    else
+        bg_genes <- c()
     
     # show the gene if it is highlighted and the backgrounds if specified
     show_gene <- all_genes %in% genes | all_genes %in% bg_genes

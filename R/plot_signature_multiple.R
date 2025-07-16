@@ -30,7 +30,7 @@ plot_signature_multiple <- function(phyex_sets,
         ) +
         theme_minimal()
 
-    labels <- phyex_sets |> map(\(s) s@name)
+    labels <- phyex_sets |> map_chr(\(s) s@name)
     
     # add p values to legend
     if (show_p_val) {

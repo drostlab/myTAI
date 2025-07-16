@@ -179,9 +179,12 @@ PhyloExpressionSet <- new_class("PhyloExpressionSet",
 as_PhyloExpressionSet <- function(data, 
                                   groups = colnames(data[,3:ncol(data)]),
                                   name = deparse(substitute(data)),
+                                  strata_labels = NULL,
                                   ...) {
     gene_ids = as.character(data[[2]])
-    stratas = factor(as.numeric(data[[1]]), levels=sort(unique(as.numeric(data[[1]]))))
+    if (is.null(strata_labels))
+        strata_labels = sort(unique(as.numeric(data[[1]])))
+    stratas = factor(as.numeric(data[[1]]), levels=sort(unique(as.numeric(data[[1]]))), labels=strata_labels)
     names(stratas) = gene_ids
     
     groups = factor(groups, levels=unique(groups))
@@ -255,7 +258,7 @@ S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set,
                                                              new_name=paste(phyex_set@name, "transformed by", FUN_name)) {
     f <- match.fun(FUN)
     phyex_set@counts <- f(phyex_set@counts)
-    #phyex_set@name <- new_name
+    phyex_set@name <- new_name
     return(phyex_set)
 }
 

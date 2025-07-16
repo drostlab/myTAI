@@ -64,23 +64,34 @@ goodness_of_fit <- function(test_result) {
     return(res)
 }
 
-#TODO display p value here
+
+exp_p <- function(p) {
+    parts <- strsplit(formatC(p, format = "e", digits = 2), "e")[[1]]
+    bquote(italic(p) == .(as.numeric(parts[1])) %*% 10^.(as.integer(parts[2])))
+}
 
 #' @import ggplot2
 S7::method(plot, TestResult) <- function(test_result) {
     p <- ggplot(data.frame(x = test_result@null_sample), 
-                aes(x=x)) +
+                aes(x = x)) +
         geom_histogram(
-            aes(y = after_stat(density)), 
-            bins=100, 
-            alpha=0.7, 
-            fill="gray67", 
-            colour="gray66") +
+            aes(y = after_stat(density), fill = "Null Sample"), 
+            bins = 100, 
+            alpha = 0.7, 
+            colour = "gray66") +
         geom_vline(
-            xintercept=test_result@test_stat,
-            colour="red") +
-        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, colour="gray40") +
+            aes(xintercept = test_result@test_stat, colour = "Test Statistic"), 
+            linewidth = 1) +
+        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, aes(colour = "Fitted Null")) +
+        scale_fill_manual(name = NULL, values = c("Null Sample" = "gray67")) +
+        scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
         labs(x = "Score", y = "Density") +
+        annotate("text",
+                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
+                   y = max(density(test_result@null_sample)$y) * 0.9,
+                   label = exp_p(test_result@p_value),
+                   hjust = 1,
+                   size = 3.5) +
         theme_minimal()
     
     return(p)
@@ -144,7 +155,8 @@ plot_null_txi_sample <- function(test_result) {
     avg <- mean(null_txis)
     
     colour_values <- setNames(RColorBrewer::brewer.pal(length(unique(test_df$Group)), "Set2"), unique(test_df$Group))
-    colour_values["Null Hypothesis Sample"] <- "paleturquoise3"
+    colour_values[1] <- "red"
+    colour_values["Null Hypothesis Sample"] <- "gray67"
     
     p <- ggplot() +
         geom_line(data=null_df,
@@ -153,13 +165,20 @@ plot_null_txi_sample <- function(test_result) {
                       group=interaction(Group, Id),
                       colour=factor(Group, levels=unique(Group))),
                   linewidth=0.1, alpha=0.1) + 
-        geom_hline(yintercept=avg, colour="paleturquoise4", linewidth=0.7) +
+        geom_hline(yintercept=avg, colour="gray58", linewidth=0.7) +
         geom_line(data=test_df,
                   aes(x=factor(Stage, levels=unique(Stage)), 
                       y=TXI, 
                       colour=factor(Group, levels=unique(Group)), 
                       group=interaction(Group, Id)),
                   linewidth=1.6) +
+        geom_line(data = null_df |> filter(Id == 1),
+                  aes(x = factor(Stage, levels = unique(Stage)),
+                      y = TXI,
+                      colour = factor(Group, levels = unique(Group))),
+                  linewidth = 0.5,
+                  alpha = 0.7,
+                  show.legend = TRUE) +
         scale_colour_manual(values=colour_values) +
         labs(x="Ontogeny",
              y="TAI",

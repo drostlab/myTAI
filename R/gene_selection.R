@@ -21,3 +21,14 @@ top_expression_genes <- function(phyex_set, p = .99){
 
     return(top_genes)
 }
+
+#' @export
+lowly_expressed_genes <- function(phyex_set, threshold = 1) {
+    avg_counts <- rowMeans(phyex_set@counts)
+    names(avg_counts) <- phyex_set@gene_ids
+    
+    
+    genes <- names(avg_counts)[avg_counts <= threshold]
+    
+    return(genes)
+}
