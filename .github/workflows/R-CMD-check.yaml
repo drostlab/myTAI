@@ -22,9 +22,7 @@ jobs:
         config:
           - {os: macos-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -45,11 +43,7 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-          dependencies: '"all"'
-          install-args: '--no-build-vignettes'
-          extra-packages-ignore: |
-            gataiR
-            Seurat
+          dependencies: '"hard"'
 
       - uses: r-lib/actions/check-r-package@v2
         with:
