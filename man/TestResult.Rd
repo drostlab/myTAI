@@ -15,6 +15,23 @@ TestResult(
   p_label = "p_val"
 )
 }
+\arguments{
+\item{method_name}{Character string identifying the test method}
+
+\item{test_stat}{Numeric test statistic value}
+
+\item{fitting_dist}{Distribution object used for null hypothesis testing}
+
+\item{params}{List of fitted distribution parameters}
+
+\item{alternative}{Character string specifying alternative hypothesis ("two-sided", "less", "greater")}
+
+\item{null_sample}{Numeric vector of null distribution samples}
+
+\item{data_name}{Character string naming the dataset (optional)}
+
+\item{p_label}{Character string for p-value label (default: "p_val")}
+}
 \description{
 S7 class for storing and manipulating statistical test results
 from phylotranscriptomic conservation tests.
@@ -23,26 +40,6 @@ from phylotranscriptomic conservation tests.
 The TestResult class provides computed properties including:
 - `p_value`: Computed p-value based on test statistic and fitted distribution
 }
-\section{Slots}{
-
-\describe{
-\item{\code{method_name}}{Character string identifying the test method}
-
-\item{\code{test_stat}}{Numeric test statistic value}
-
-\item{\code{fitting_dist}}{Distribution object used for null hypothesis testing}
-
-\item{\code{params}}{List of fitted distribution parameters}
-
-\item{\code{alternative}}{Character string specifying alternative hypothesis ("two-sided", "less", "greater")}
-
-\item{\code{null_sample}}{Numeric vector of null distribution samples}
-
-\item{\code{data_name}}{Character string naming the dataset (optional)}
-
-\item{\code{p_label}}{Character string for p-value label (default: "p_val")}
-}}
-
 \examples{
 # Create a test result (typically done internally by conservation tests)
 # result <- TestResult(method_name = "Test", test_stat = 1.5, ...)

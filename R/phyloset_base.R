@@ -41,16 +41,17 @@ TI_map <- list(TXI = "Transcriptomic Index",
 #' This class integrates phylostratum information with gene expression data across 
 #' developmental stages or conditions.
 #' 
-#' @slot strata Factor vector of phylostratum assignments for each gene
-#' @slot gene_ids Character vector of gene identifiers
-#' @slot counts Matrix of expression counts with genes as rows and samples as columns
-#' @slot groups Factor vector indicating which group each sample belongs to
-#' @slot name Character string naming the dataset (default: "Phylo Expression Set")
-#' @slot species Character string indicating the species (default: NULL)
-#' @slot index_type Character string indicating the type of transcriptomic index (default: "TXI")
-#' @slot conditions_label Character string labeling the conditions (default: "Ontogeny")
-#' @slot is_time_series Logical indicating if data represents a time series (default: TRUE)
-#' @slot null_conservation_sample_size Numeric sample size for null conservation tests (default: 5000)
+#' @param strata Factor vector of phylostratum assignments for each gene
+#' @param gene_ids Character vector of gene identifiers
+#' @param counts Matrix of expression counts with genes as rows and samples as columns
+#' @param groups Factor vector indicating which group each sample belongs to
+#' @param name Character string naming the dataset (default: "Phylo Expression Set")
+#' @param species Character string indicating the species (default: NULL)
+#' @param index_type Character string indicating the type of transcriptomic index (default: "TXI")
+#' @param conditions_label Character string labeling the conditions (default: "Ontogeny")
+#' @param is_time_series Logical indicating if data represents a time series (default: TRUE)
+#' @param null_conservation_sample_size Numeric sample size for null conservation tests (default: 5000)
+#' @param precomputed_null_conservation_txis Precomputed null conservation TXIs (default: NULL)
 #' 
 #' @details
 #' The PhyloExpressionSet class provides computed properties including:
@@ -366,10 +367,7 @@ normalise_stage_expression <- function(phyex_set, total=1e6) {
 #' @description Apply a transformation function to the expression counts in a PhyloExpressionSet.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
-#' @param FUN Function to apply to the counts matrix
-#' @param FUN_name Character string naming the transformation function (default: derived from FUN)
-#' @param new_name Character string for the new dataset name (default: auto-generated)
-#' @param ... Additional arguments passed to the transformation function
+#' @param ... Additional arguments. For the PhyloExpressionSet method, arguments are FUN (function to apply), FUN_name (character string naming the transformation function), new_name (character string for the new dataset name), and additional arguments passed to the transformation function
 #' 
 #' @return A PhyloExpressionSet object with transformed expression data
 #' 
@@ -411,8 +409,7 @@ tf <- transform_counts
 #' @description Extract a subset of genes from a PhyloExpressionSet object.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
-#' @param genes Character vector of gene IDs to select
-#' @param ... Additional arguments (currently unused)
+#' @param ... Additional arguments. For the PhyloExpressionSet method, the second argument should be genes (character vector of gene IDs to select)
 #' 
 #' @return A PhyloExpressionSet object containing only the selected genes
 #' 

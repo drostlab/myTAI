@@ -2,12 +2,12 @@
 #' @description S7 class for representing probability distributions used in
 #' statistical testing, including PDF, CDF, quantile functions, and fitting procedures.
 #' 
-#' @slot name Character string identifying the distribution
-#' @slot pdf Function for probability density function
-#' @slot cdf Function for cumulative distribution function
-#' @slot quantile_function Function for quantile calculations
-#' @slot fitting_function Function to fit distribution parameters from data
-#' @slot param_names Character vector of parameter names
+#' @param name Character string identifying the distribution
+#' @param pdf Function for probability density function
+#' @param cdf Function for cumulative distribution function
+#' @param quantile_function Function for quantile calculations
+#' @param fitting_function Function to fit distribution parameters from data
+#' @param param_names Character vector of parameter names
 #' 
 #' @details
 #' The Distribution class provides a unified interface for different probability

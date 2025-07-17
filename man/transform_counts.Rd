@@ -9,13 +9,7 @@ transform_counts(phyex_set, ...)
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
-\item{...}{Additional arguments passed to the transformation function}
-
-\item{FUN}{Function to apply to the counts matrix}
-
-\item{FUN_name}{Character string naming the transformation function (default: derived from FUN)}
-
-\item{new_name}{Character string for the new dataset name (default: auto-generated)}
+\item{...}{Additional arguments. For the PhyloExpressionSet method, arguments are FUN (function to apply), FUN_name (character string naming the transformation function), new_name (character string for the new dataset name), and additional arguments passed to the transformation function}
 }
 \value{
 A PhyloExpressionSet object with transformed expression data

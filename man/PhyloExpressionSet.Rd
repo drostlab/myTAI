@@ -18,6 +18,29 @@ PhyloExpressionSet(
   precomputed_null_conservation_txis = NULL
 )
 }
+\arguments{
+\item{strata}{Factor vector of phylostratum assignments for each gene}
+
+\item{gene_ids}{Character vector of gene identifiers}
+
+\item{counts}{Matrix of expression counts with genes as rows and samples as columns}
+
+\item{groups}{Factor vector indicating which group each sample belongs to}
+
+\item{name}{Character string naming the dataset (default: "Phylo Expression Set")}
+
+\item{species}{Character string indicating the species (default: NULL)}
+
+\item{index_type}{Character string indicating the type of transcriptomic index (default: "TXI")}
+
+\item{conditions_label}{Character string labeling the conditions (default: "Ontogeny")}
+
+\item{is_time_series}{Logical indicating if data represents a time series (default: TRUE)}
+
+\item{null_conservation_sample_size}{Numeric sample size for null conservation tests (default: 5000)}
+
+\item{precomputed_null_conservation_txis}{Precomputed null conservation TXIs (default: NULL)}
+}
 \description{
 S7 class for storing and manipulating phylotranscriptomic expression data.
 This class integrates phylostratum information with gene expression data across 
@@ -32,30 +55,6 @@ The PhyloExpressionSet class provides computed properties including:
 - `conditions`: Factor of condition names
 - `num_genes`, `num_conditions`, `num_strata`: Counts of dataset dimensions
 }
-\section{Slots}{
-
-\describe{
-\item{\code{strata}}{Factor vector of phylostratum assignments for each gene}
-
-\item{\code{gene_ids}}{Character vector of gene identifiers}
-
-\item{\code{counts}}{Matrix of expression counts with genes as rows and samples as columns}
-
-\item{\code{groups}}{Factor vector indicating which group each sample belongs to}
-
-\item{\code{name}}{Character string naming the dataset (default: "Phylo Expression Set")}
-
-\item{\code{species}}{Character string indicating the species (default: NULL)}
-
-\item{\code{index_type}}{Character string indicating the type of transcriptomic index (default: "TXI")}
-
-\item{\code{conditions_label}}{Character string labeling the conditions (default: "Ontogeny")}
-
-\item{\code{is_time_series}}{Logical indicating if data represents a time series (default: TRUE)}
-
-\item{\code{null_conservation_sample_size}}{Numeric sample size for null conservation tests (default: 5000)}
-}}
-
 \examples{
 # Create a PhyloExpressionSet from data
 # phyex_set <- as_PhyloExpressionSet(my_data)

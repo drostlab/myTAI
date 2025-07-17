@@ -3,6 +3,8 @@ Type: Package
 Title: Evolutionary Transcriptomics
 Version: 2.0.0
 Date: 2024-10-02
+Author: Hajk-Georg Drost [aut, cre], Jaruwatana Sodai Lotharukpong [aut, ctb], Nikola Kalábová [aut, ctb], Filipa Martins Costa [aut, ctb], Kristian K Ullrich [aut, ctb], Stefan Manolache [aut, ctb]
+Maintainer: Hajk-Georg Drost <hajk-georg.drost@tuebingen.mpg.de>
 Authors@R: c(person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
                 email = "hajk-georg.drost@tuebingen.mpg.de",
@@ -34,6 +36,7 @@ Authors@R: c(person("Hajk-Georg", "Drost",
 Description: Investigate the evolution of biological processes by capturing evolutionary signatures in transcriptomes (Drost et al. (2018) <doi:10.1093/bioinformatics/btx835>). This package aims to provide a transcriptome analysis environment to quantify the average evolutionary age of genes contributing to a transcriptome of interest. 
 NeedsCompilation: yes
 License: GPL-2
+License_file: LICENSE
 Depends:
     R (>= 3.5)
 Imports:
@@ -42,16 +45,10 @@ Imports:
     purrr,
     tidyr,
     Rcpp,
-    cachem,
     memoise,
-    nortest (>= 1.0-2),
     fitdistrplus (>= 1.1-5),
-    parallel (>= 3.1.1),
-    doParallel (>= 1.0.8),
     dplyr (>= 0.3.0),
     RColorBrewer (>= 1.1-2),
-    methods (>= 3.1.1),
-    graphics (>= 3.1.1),
     stats (>= 3.1.1),
     grDevices (>= 3.1.1),
     utils (>= 3.1.1),
@@ -63,9 +60,10 @@ Imports:
     readr (>= 0.2.2),
     tibble,
     scales,
-    ggpubr,
     ggrepel,
-    uwot
+    uwot,
+    Matrix,
+    pheatmap
 Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
@@ -82,5 +80,4 @@ URL: https://drostlab.github.io/myTAI/
 BugReports: https://github.com/drostlab/myTAI/issues
 RoxygenNote: 7.3.2
 Encoding: UTF-8
-SystemRequirements: C++11
 LazyData: true

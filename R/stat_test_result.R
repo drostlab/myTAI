@@ -2,14 +2,14 @@
 #' @description S7 class for storing and manipulating statistical test results
 #' from phylotranscriptomic conservation tests.
 #' 
-#' @slot method_name Character string identifying the test method
-#' @slot test_stat Numeric test statistic value
-#' @slot fitting_dist Distribution object used for null hypothesis testing
-#' @slot params List of fitted distribution parameters
-#' @slot alternative Character string specifying alternative hypothesis ("two-sided", "less", "greater")
-#' @slot null_sample Numeric vector of null distribution samples
-#' @slot data_name Character string naming the dataset (optional)
-#' @slot p_label Character string for p-value label (default: "p_val")
+#' @param method_name Character string identifying the test method
+#' @param test_stat Numeric test statistic value
+#' @param fitting_dist Distribution object used for null hypothesis testing
+#' @param params List of fitted distribution parameters
+#' @param alternative Character string specifying alternative hypothesis ("two-sided", "less", "greater")
+#' @param null_sample Numeric vector of null distribution samples
+#' @param data_name Character string naming the dataset (optional)
+#' @param p_label Character string for p-value label (default: "p_val")
 #' 
 #' @details
 #' The TestResult class provides computed properties including:
@@ -218,9 +218,18 @@ plot_cullen_frey <- function(test_result) {
 #' @description S7 class extending TestResult for conservation-specific test results,
 #' including TXI profiles and null distributions.
 #' 
-#' @slot test_txi Numeric vector of observed TXI values
-#' @slot null_txis Matrix of null TXI distributions from permutations
-#' @slot modules Optional list of developmental modules used in the test
+#' @param method_name Character string specifying the statistical test method
+#' @param test_stat Numeric value of the test statistic
+#' @param fitting_dist Character string specifying the fitted distribution
+#' @param params Named list of distribution parameters
+#' @param alternative Character string specifying the alternative hypothesis
+#' @param null_sample Numeric vector of null distribution values
+#' @param data_name Character string describing the data
+#' @param p_label Character string for p-value label
+#' @param test_txi Numeric vector of observed TXI values
+#' @param null_txis Matrix of null TXI distributions from permutations
+#' @param modules Optional list of developmental modules used in the test
+#' 
 #' 
 #' @details
 #' ConservationTestResult extends TestResult with phylotranscriptomic-specific
