@@ -13,3 +13,4 @@ docs/
 .github
 LICENSE
 pkgdown
+^\.github$
