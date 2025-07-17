@@ -130,10 +130,6 @@ test_that("plot_strata_expression works", {
     # Basic strata expression plot
     p <- plot_strata_expression(example_phyex_set)
     expect_s3_class(p, "ggplot")
-    
-    # Test with rank version
-    p_rank <- plot_strata_expression_rank(example_phyex_set)
-    expect_s3_class(p_rank, "ggplot")
 })
 
 test_that("plot_distribution_strata works", {

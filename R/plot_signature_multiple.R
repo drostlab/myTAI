@@ -46,7 +46,7 @@ plot_signature_multiple <- function(phyex_sets,
     layers <- phyex_sets |>
         map(plot_signature, show_p_val=F, ...) |>
         map(~ .x$layers) |>
-        unlist(c()) |>
+        unlist(..., recursive = TRUE) |>
         .sort_layers()
     
     p <- ggplot() +

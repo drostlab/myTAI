@@ -30,9 +30,6 @@ Genes without phylostratum information are assigned a value of 0.
 }
 \examples{
 # Calculate TAI for single cells
-# tai_values <- get_sc_TAI(seurat_obj, phylo_map)
-
-# Using counts slot instead of data
-# tai_values <- get_sc_TAI(seurat_obj, phylo_map, slot = "counts")
+# seurat_obj$TAI <- get_sc_TAI(seurat_obj, phylo_map)
 
 }

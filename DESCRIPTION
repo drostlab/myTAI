@@ -69,7 +69,6 @@ Imports:
 Suggests:
     knitr (>= 1.6),
     rmarkdown (>= 0.3.3),
-    devtools (>= 1.6.1),
     testthat (>= 0.9.1),
     mgcv,
     Seurat,
