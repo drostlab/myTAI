@@ -1,2 +1,0 @@
-View(mtcars)
-plot(mtcars)
