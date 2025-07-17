@@ -3,6 +3,7 @@
 [![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://academic.oup.com/bioinformatics/article/34/9/1589/4772684)
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://bioconda.github.io/)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&label=VISITORS&countColor=%23263759&style=flat)
+![R-CMD-check](https://github.com/youruser/yourrepo/actions/workflows/R-CMD-check.yaml/badge.svg)
 
 # Evolutionary Transcriptomics with R
    

@@ -1,0 +1,10 @@
+linters: linters_with_defaults(
+    indentation_linter(indent = 4L),
+    object_name_linter = NULL,
+    line_length_linter = line_length_linter(150),
+    trailing_whitespace_linter = NULL,
+    return_linter=NULL,
+    object_usage_linter=NULL,
+    infix_spaces_linter=NULL,
+    brace_linter=NULL,
+    seq_linter=NULL)
