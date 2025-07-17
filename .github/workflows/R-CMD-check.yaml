@@ -45,6 +45,11 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          dependencies: '"all"'
+          install-args: '--no-build-vignettes'
+          extra-packages-ignore: |
+            gataiR
+            Seurat
 
       - uses: r-lib/actions/check-r-package@v2
         with:
