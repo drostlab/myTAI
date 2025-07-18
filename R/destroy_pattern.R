@@ -43,7 +43,14 @@ destroy_pattern <- function(phyex_set,
                          ...)
     res <- list(removed_genes=res$common_removed_genes, runs=res$genes_list)
     
-
+    # If analysis_dir is provided, save results to PDF
+    if (!is.null(analysis_dir)) {
+        save_gatai_results_pdf(analysis_dir = analysis_dir,
+                               phyex_set = phyex_set,
+                               gatai_result = res,
+                               runs_threshold = runs_threshold,
+                               ...)
+    }
     
     return(res)
 }
