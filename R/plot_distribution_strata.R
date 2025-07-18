@@ -54,8 +54,7 @@ plot_distribution_strata <- function(strata,
         
         ggplot(log_ratio, aes(Stratum, 
                               y=log_obs_exp,
-                              fill= log_obs_exp)
-                              ) +
+                              fill= log_obs_exp)) +
             geom_bar(stat = "identity", size=0.1) +
             labs(fill="Stratum") +
             xlab("Stratum") +
@@ -67,7 +66,6 @@ plot_distribution_strata <- function(strata,
     
         
     }
-    # TODO: integrate PlotEnrichment here
 }
 
 strata_enrichment <- function(strata, selected_gene_ids) {

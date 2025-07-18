@@ -23,11 +23,11 @@ destroy_pattern(
 
 \item{analysis_dir}{Directory to store GATAI analysis results (default: NULL)}
 
+\item{max_generations}{Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).}
+
 \item{seed}{Random seed for reproducibility (default: 1234)}
 
 \item{...}{Additional arguments passed to gataiR::gatai}
-
-\item{max_generations:}{Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).}
 }
 \value{
 A list containing GATAI results including identified genes that contribute to the pattern

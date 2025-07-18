@@ -60,27 +60,40 @@ full_gatai_convergence_plot <- function(phyex_set,
     
     legend <- cowplot::get_legend(c[[1]])
     
-    p <- cowplot::plot_grid(cowplot::plot_grid(c[[1]] + ggplot2::theme(legend.position = "none") +
-                                                   ggplot2::labs(title="Convergence of GATAI consensus set sizes for different thresholds"), 
-                                               c[[2]] + ggplot2::theme(legend.position = "none") + 
-                                                   ggplot2::labs(title="Convergence of GATAI consensus set p values for different thresholds"),
-                                               ncol=1),
-                            legend,
-                            cowplot::plot_grid(t[[1]] + ggplot2::labs(title="How the threshold of GATAI consensus influences set size"),
-                                               t[[2]] + ggplot2::labs(title="How the threshold of GATAI consensus influences set p value"),
-                                               ncol=1),
-                            ncol=3,
-                            rel_widths = c(2.2, 1, 2.4)
-                            )
-    p <- cowplot::plot_grid(p, 
-                            cowplot::plot_grid(NULL,
-                                               petal + ggplot2::labs(title="How many genes get lost per run."),
-                                               NULL,
-                                               rel_widths=c(0.3,0.4,0.3), 
-                                               ncol=3), 
-                            ncol=1, 
-                            rel_heights = c(0.75,0.2)
-                            )
+    p <- cowplot::plot_grid(
+        cowplot::plot_grid(
+            c[[1]] + ggplot2::theme(legend.position = "none") +
+                ggplot2::labs(title="Convergence of GATAI consensus set sizes for different thresholds") +
+                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
+            c[[2]] + ggplot2::theme(legend.position = "none") + 
+                ggplot2::labs(title="Convergence of GATAI consensus set p values for different thresholds") +
+                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
+            ncol=1
+        ),
+        legend,
+        cowplot::plot_grid(
+            t[[1]] + ggplot2::labs(title="How the threshold of GATAI consensus influences set size") +
+                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
+            t[[2]] + ggplot2::labs(title="How the threshold of GATAI consensus influences set p value") +
+                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
+            ncol=1
+        ),
+        ncol=3,
+        rel_widths = c(2.2, 1, 2.4)
+    )
+    p <- cowplot::plot_grid(
+        p, 
+        cowplot::plot_grid(
+            NULL,
+            petal + ggplot2::labs(title="How many genes get lost per run.") +
+                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
+            NULL,
+            rel_widths=c(0.3,0.4,0.3), 
+            ncol=3
+        ), 
+        ncol=1, 
+        rel_heights = c(0.75,0.2)
+    )
     return(p)
 }
 

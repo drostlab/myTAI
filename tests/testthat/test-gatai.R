@@ -22,7 +22,7 @@ test_that("destroy_pattern works with gataiR", {
     test_dir <- file.path(temp_dir, "gatai_test")
     
     # Save PDF
-    pdf_path <- save_gatai_results_pdf(test_dir, example_phyex_set_old, gatai_result, 
+    pdf_path <- save_gatai_results_pdf(example_phyex_set_old, gatai_result, test_dir,
                                        prefix = "test_gatai")
     
     # Check that the PDF was created

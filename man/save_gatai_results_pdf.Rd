@@ -5,19 +5,19 @@
 \title{Save GATAI Analysis Results to PDF}
 \usage{
 save_gatai_results_pdf(
-  analysis_dir = "gatai_analysis",
   phyex_set,
   gatai_result,
+  analysis_dir = "gatai_analysis",
   prefix = "GATAI_analysis",
   ...
 )
 }
 \arguments{
-\item{analysis_dir}{Directory to save the PDF file.}
-
 \item{phyex_set}{A PhyloExpressionSet object containing the original gene expression data.}
 
 \item{gatai_result}{Result list from \code{destroy_pattern()}, containing GATAI analysis output.}
+
+\item{analysis_dir}{Directory to save the PDF file.}
 
 \item{prefix}{Optional prefix for the PDF filename (default: "GATAI_analysis").}
 

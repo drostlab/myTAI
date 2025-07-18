@@ -4,6 +4,7 @@
 #' 
 #' @param phyex_set A PhyloExpressionSet object containing gene expression data.
 #' @param highlight_genes Optional character vector of gene IDs to highlight and label on the plot.
+#' @param colour_by Character string specifying coloring scheme: "none" (default), "strata" colors by phylostratum
 #' 
 #' @return A ggplot2 object showing the mean-variance relationship.
 #' 
@@ -21,7 +22,8 @@
 #' @import ggplot2
 #' @import dplyr
 #' @export
-plot_mean_var <- function(phyex_set, highlight_genes = NULL) {
+plot_mean_var <- function(phyex_set, highlight_genes = NULL, colour_by = c("none", "strata")) {
+    colour_by <- match.arg(colour_by)
     df <- phyex_set@data_collapsed |>
         mutate(
             mean = rowMeans(phyex_set@counts_collapsed),
@@ -39,12 +41,20 @@ plot_mean_var <- function(phyex_set, highlight_genes = NULL) {
         FALSE
     }
 
-    p <- ggplot(df, aes(x = mean, y = var)) +
-        geom_point(aes(colour = Stratum), alpha = 0.7, size = 0.2) +
-        scale_color_manual(values = PS_colours(length(unique(df$Stratum))), na.value = "grey50", name = "Stratum") +
-        scale_x_log10() +
-        scale_y_log10() +
-        theme_minimal()
+    if (colour_by == "strata") {
+        p <- ggplot(df, aes(x = mean, y = var)) +
+            geom_point(aes(colour = Stratum), alpha = 0.7, size = 0.2) +
+            scale_color_manual(values = PS_colours(length(unique(df$Stratum))), na.value = "grey50", name = "Stratum") +
+            scale_x_log10() +
+            scale_y_log10() +
+            theme_minimal()
+    } else {
+        p <- ggplot(df, aes(x = mean, y = var)) +
+            geom_point(colour = "black", alpha = 0.7, size = 0.2) +
+            scale_x_log10() +
+            scale_y_log10() +
+            theme_minimal()
+    }
 
     # Add highlighted genes in red and label them
     if (any(df$highlight)) {

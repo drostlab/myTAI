@@ -4,12 +4,18 @@
 \alias{plot_mean_var}
 \title{Plot Mean-Variance Relationship}
 \usage{
-plot_mean_var(phyex_set, highlight_genes = NULL)
+plot_mean_var(
+  phyex_set,
+  highlight_genes = NULL,
+  colour_by = c("none", "strata")
+)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object containing gene expression data.}
 
 \item{highlight_genes}{Optional character vector of gene IDs to highlight and label on the plot.}
+
+\item{colour_by}{Character string specifying coloring scheme: "none" (default), "strata" colors by phylostratum}
 }
 \value{
 A ggplot2 object showing the mean-variance relationship.

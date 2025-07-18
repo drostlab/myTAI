@@ -1,4 +1,3 @@
-
 #' @title Destroy Phylotranscriptomic Pattern Using GATAI
 #' @description Apply the GATAI algorithm
 #' to identify and remove genes that contribute to phylotranscriptomic patterns.
@@ -7,7 +6,7 @@
 #' @param num_runs Number of GATAI runs to perform (default: 20)
 #' @param runs_threshold Threshold for gene removal consistency across runs (default: 0.5)
 #' @param analysis_dir Directory to store GATAI analysis results (default: NULL)
-#' @param max_generations: Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).
+#' @param max_generations Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).
 #' @param seed Random seed for reproducibility (default: 1234)
 #' @param ... Additional arguments passed to gataiR::gatai
 #' 
@@ -43,11 +42,18 @@ destroy_pattern <- function(phyex_set,
                          ...)
     res <- list(removed_genes=res$common_removed_genes, runs=res$genes_list)
     
-    # If analysis_dir is provided, save results to PDF
+    # If analysis_dir is provided, save results to PDF and genes.txt
     if (!is.null(analysis_dir)) {
-        save_gatai_results_pdf(analysis_dir = analysis_dir,
-                               phyex_set = phyex_set,
+        # Save genes.txt
+        if (!dir.exists(analysis_dir)) {
+            dir.create(analysis_dir, recursive = TRUE)
+        }
+        genes_path <- file.path(analysis_dir, "genes.txt")
+        writeLines(res$removed_genes, genes_path)
+        
+        save_gatai_results_pdf(phyex_set = phyex_set,
                                gatai_result = res,
+                               analysis_dir = analysis_dir,
                                runs_threshold = runs_threshold,
                                ...)
     }
@@ -133,7 +139,7 @@ plot_gatai_results <- function(phyex_set,
     heatmap_plot <- plot_gene_heatmap(phyex_set, genes=removed_genes, cluster_rows=TRUE, show_gene_ids=TRUE) +
         ggtitle(paste("Expression Heatmap: GATAI-removed genes (", length(removed_genes), "genes)"))
     profiles_plot <- plot_gene_profiles(phyex_set, genes=removed_genes, max_genes=200, transformation="none") +
-        ggtitle(paste("Gene Expression Profiles: GATAI-removed genes (max 200 shown)"))
+        ggtitle(paste("Gene Expression Profiles: GATAI-removed genes"))
     profiles_plot_facet <- plot_gene_profiles(phyex_set, genes=removed_genes, max_genes=1000, facet_by_strata = TRUE, transformation="none") +
         ggtitle(paste("Gene Expression Profiles by Phylostrata: GATAI-removed genes")) +
         theme(strip.text = element_text(size = 6))
@@ -144,12 +150,17 @@ plot_gatai_results <- function(phyex_set,
     # 3. Mean-variance plot highlighting GATAI-removed genes
     mean_var_plot <- plot_mean_var(phyex_set, highlight_genes = removed_genes) +
         ggtitle(paste("Mean-Variance Plot with GATAI-removed genes highlighted (", length(removed_genes), "genes)"))
-    
-    # 4. Distribution of gatai genes by age with log obs/exp ratios
-    strata_plot <- plot_distribution_strata(phyex_set@strata,
-                                            selected_gene_ids = removed_genes,
-                                            as_log_obs_exp = TRUE) +
+    # 4. Distribution of all genes by age (raw counts) and GATAI-removed genes (log obs/exp)
+    strata_plot_all <- plot_distribution_strata(phyex_set@strata,
+                                                as_log_obs_exp = FALSE) +
+        ggtitle("Phylostrata Distribution: All Genes")
+
+    strata_plot_removed <- plot_distribution_strata(phyex_set@strata,
+                                                    selected_gene_ids = removed_genes,
+                                                    as_log_obs_exp = TRUE) +
         ggtitle("Phylostrata Distribution: GATAI-removed genes (Log Obs/Exp)")
+
+    strata_plot <- cowplot::plot_grid(strata_plot_all, strata_plot_removed, ncol = 1, align = "v", rel_heights = c(1, 1.2))
     
     # 5. Compare p values
     original_test <- conservation_test(phyex_set, plot_result = FALSE)
@@ -183,23 +194,19 @@ plot_gatai_results <- function(phyex_set,
     
 
     # 6. Convergence plots
-    convergence_plots <- full_gatai_convergence_plot(phyex_set, gatai_result$runs, p=runs_threshold) +
-        ggtitle(paste("GATAI Convergence Analysis (threshold:", runs_threshold, ")")) +
-        theme(aspect.ratio = 12/8,
-              text = element_text(size = 7),
-              axis.text = element_text(size = 6),
-              plot.title = element_text(size = 9),
-              legend.text = element_text(size = 6),
-              legend.title = element_text(size = 7))
+    convergence_plots <- full_gatai_convergence_plot(phyex_set, gatai_result$runs, p=runs_threshold) + 
+        theme_minimal(base_size = 2) + 
+        theme(plot.title = element_text(size = 6),
+              strip.text = element_text(size = 4))
 
     result_list <- list(
         signature_plots = signature_plots,
+        strata_plot = strata_plot,
         heatmap_plot = heatmap_plot,
         profiles_plot = profiles_plot,
         profiles_plot_facet = profiles_plot_facet,
         gene_space_plot = gene_space_plot,
         mean_var_plot = mean_var_plot,
-        strata_plot = strata_plot,
         null_dist_plot = null_dist_plot,
         convergence_plots = convergence_plots
     )
@@ -209,9 +216,9 @@ plot_gatai_results <- function(phyex_set,
 #' @title Save GATAI Analysis Results to PDF
 #' @description Save removed gene IDs and all GATAI analysis plots to a PDF file.
 #'
-#' @param analysis_dir Directory to save the PDF file.
 #' @param phyex_set A PhyloExpressionSet object containing the original gene expression data.
 #' @param gatai_result Result list from \code{destroy_pattern()}, containing GATAI analysis output.
+#' @param analysis_dir Directory to save the PDF file.
 #' @param prefix Optional prefix for the PDF filename (default: "GATAI_analysis").
 #' @param ... Additional arguments passed to \code{plot_gatai_results()}.
 #'
@@ -221,10 +228,12 @@ plot_gatai_results <- function(phyex_set,
 #' # Save results after running destroy_pattern
 #' # save_gatai_results_pdf("results/", phyex_set, gatai_result)
 #'
+#' @importFrom stats density
+#' @importFrom graphics plot.new title text
 #' @export
-save_gatai_results_pdf <- function(analysis_dir = "gatai_analysis",
-                                   phyex_set,
+save_gatai_results_pdf <- function(phyex_set,
                                    gatai_result,
+                                   analysis_dir = "gatai_analysis",
                                    prefix = "GATAI_analysis",
                                    ...) {
     if (!dir.exists(analysis_dir)) {

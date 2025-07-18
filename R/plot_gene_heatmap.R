@@ -3,6 +3,7 @@
 #' with optional dendrograms and gene age annotation.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
+#' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
 #' @param top_p Proportion of most dynamic genes to include (default: 0.2)
 #' @param std Logical indicating whether to use standardized expression values (default: TRUE)
 #' @param reps Logical indicating whether to show individual replicates or collapsed conditions (default: FALSE)
@@ -10,7 +11,6 @@
 #' @param cluster_cols Logical indicating whether to cluster conditions/columns (default: FALSE)
 #' @param show_gene_age Logical indicating whether to show gene age as row annotation (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene names (default: FALSE)
-#' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
 #' @param ... Additional arguments passed to pheatmap::pheatmap
 #' 
 #' @return A ggplot object (converted from pheatmap) showing the gene expression heatmap
