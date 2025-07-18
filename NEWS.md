@@ -1,3 +1,133 @@
+myTAI 2.0.0
+===========
+
+## Major Changes
+
+### New S7 Class System
+- Migrated from traditional R data structures to modern S7 classes
+- New `PhyloExpressionSet` S7 class replaces the old data.frame-based format
+- New `TestResult` S7 class for standardized storage of statistical test results
+- Computed properties automatically calculate derived values like TXI, pTXI, conditions, etc.
+- Built-in data validation and type checking through S7 properties
+- Improved replicate data handling with automatic collapsing
+
+### Function Name Modernization
+Function names have been updated to use snake_case convention:
+
+#### Statistical Tests (old → new)
+- `FlatLineTest()` → `flatline_test()`
+- `ReductiveHourglassTest()` → `reductive_hourglass_test()`
+- `EarlyConservationTest()` → `early_conservation_test()`
+- `LateConservationTest()` → `late_conservation_test()`
+- `ReverseHourglassTest()` → `reverse_hourglass_test()`
+- `PairwiseTest()` → `pairwise_test()`
+
+#### Visualization Functions (old → new)
+- `PlotSignature()` → `plot_signature()`
+- `PlotPattern()` → `plot_signature()`
+- `PlotContribution()` → `plot_contribution()`
+- `PlotDistribution()` → `plot_distribution_strata()`
+- `PlotCategoryExpr()` → `plot_strata_expression()`
+- `PlotRE()` → `plot_relative_expression_line()`
+- `PlotBarRE()` → `plot_relative_expression_bar()`
+- `PlotGeneSet()` → `plot_gene_profiles()`
+- `PlotMeans`, `PlotVars`, `PlotMedians` → `plot_strata_expression(aggregate_FUN="mean"/"var"/"median")
+- `PlotSignatureMultiple()` → `plot_signature_multiple()`
+- `PlotSignatureTransformed()` → `plot_signature_transformed()`
+- `PlotSignatureGeneQuantiles()` → `plot_signature_gene_quantiles()`
+
+#### Utility Functions (old → new)
+- `TAI()` → Computed property of PhyloExpressionSet (still accessible via `TAI()`)
+- `TDI()` → Computed property of PhyloExpressionSet (still accessible via `TDI()`)
+- `TEI()` → Computed property of PhyloExpressionSet (still accessible via `TEI()`)
+- `TPI()` → Computed property of PhyloExpressionSet (still accessible via `TPI()`)
+- `pTAI()`, `pTDI` → `sTXI()` (generalized for all transcriptomic indices)
+- `pMatrix()` → `pTXI()`
+- `CollapseReplicates()` → `collapse`, Built into PhyloExpressionSet constructor
+- `Expressed()` → `lowly_expressed_genes()`
+- `MatchMap()` → `match_map()`
+- `SelectGeneSet()` → `select_genes()`
+- `TopExpressionGenes()` → `top_expression_genes()`
+- `TopVarianceGenes()` → `top_variance_genes()`
+- `REMatrix()` → `rel_exp_matrix()`
+- `RE()` → `relative_expression()`
+- `omitMatrix()` → `omit_matrix()`
+- `is.ExpressionSet()` → Built into S7 validation
+- `age.apply()` → `age.apply()` (unchanged)
+- `tf()` → `tf()` or `transform_counts()`
+- `tfPS()` → `tfPS()` (unchanged)
+- `tfStability()` → `tf_stability()`
+- `taxid()` → `taxid()` (unchanged)
+
+### New Functions
+- `destroy_pattern()`: Apply GATAI algorithm to identify pattern-contributing genes
+- `plot_signature_multiple()`: Plot multiple signatures on the same plot
+- `plot_signature_gene_quantiles()`: Plot signature with gene expression quantiles
+- `plot_signature_transformed()`: Plot signatures with different transformations
+- `plot_sample_space()`: Visualize sample relationships using PCA or UMAP
+- `plot_mean_var()`: Mean-variance relationship plots
+- `plot_gene_profiles()`: Individual gene expression profiles
+- `plot_distribution_expression()`: Expression distribution plots
+- `plot_distribution_pTAI()`: Partial TXI distribution plots
+- `plot_distribution_pTAI_qqplot()`: Q-Q plots for pTXI distributions
+- `plot_distribution_strata()`: Phylostrata distribution plots
+- `plot_gene_heatmap()`: Gene expression heatmaps
+- `plot_gene_space()`: Gene space visualization
+- `plot_cullen_frey()`: Cullen-Frey plots for distribution assessment
+- `plot_null_txi_sample()`: Null TXI sample plots
+- `as_PhyloExpressionSet()`: Convert data to PhyloExpressionSet S7 object
+- `get_sc_TAI()`: Single-cell TAI computation for Seurat objects=
+- `diagnose_test_robustness()`: Diagnose statistical test robustness
+- `remove_genes()`: Remove genes from PhyloExpressionSet
+- `PS_colours()`: Generate phylostratum color palettes
+- `ConservationTestResult()`: S7 class for conservation test results
+- `TestResult()`: S7 class for statistical test results
+
+### Enhanced Features
+- Improved performance with parallelized C++ functions using RcppArmadillo
+- All plots now use ggplot2 with consistent styling
+- Comprehensive unit tests
+- Updated to use modern R packages (ggplot2, dplyr, etc.)
+
+### Breaking Changes
+- Function names have been updated to snake_case convention
+- PhyloExpressionSet is now an S7 object instead of a data.frame
+- Function signatures have been updated for consistency
+- Some deprecated functions have been removed
+- New package dependencies: S7, RcppArmadillo
+
+### Migration Guide
+To migrate from myTAI 1.x to 2.0:
+
+1. **Convert data format**:
+   ```r
+   # Old format (data.frame)
+   old_phyex <- PhyloExpressionSetExample
+   
+   # New format (S7 object)
+   new_phyex <- as_PhyloExpressionSet(old_phyex)
+   ```
+
+2. **Update function calls**:
+   ```r
+   # Old syntax
+   PlotSignature(phyex_set, TestStatistic = "FlatLineTest")
+   
+   # New syntax
+   plot_signature(phyex_set, conservation_test = flatline_test)
+   ```
+
+3. **Access computed properties**:
+   ```r
+   # Old syntax
+   tai_values <- TAI(phyex_set)
+   
+   # New syntax
+   tai_values <- phyex_set@TXI
+   # or
+   tai_values <- TAI(phyex_set)
+   ```
+
 myTAI 1.0.2.9000
 ===========
 ## New Functions

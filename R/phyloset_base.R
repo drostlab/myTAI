@@ -536,3 +536,88 @@ remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "per
     return(s)
 }
 
+#' @title Calculate Transcriptomic Index (TXI)
+#' @description Calculate the transcriptomic index values for a PhyloExpressionSet.
+#' This function provides backward compatibility with the old TXI() function.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return Numeric vector of TXI values for each condition
+#' 
+#' @examples
+#' # Calculate TXI values
+#' # txi_values <- TXI(phyex_set)
+#' 
+#' @export
+TXI <- function(phyex_set) {
+    return(phyex_set@TXI)
+}
+
+#' @title Calculate Transcriptomic Age Index (TAI)
+#' @description Calculate the transcriptomic age index values for a PhyloExpressionSet.
+#' This function provides backward compatibility with the old TAI() function.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return Numeric vector of TAI values for each condition
+#' 
+#' @examples
+#' # Calculate TAI values
+#' # tai_values <- TAI(phyex_set)
+#' 
+#' @export
+TAI <- function(phyex_set) {
+    return(phyex_set@TXI)
+}
+
+#' @title Calculate Transcriptomic Divergence Index (TDI)
+#' @description Calculate the transcriptomic divergence index values for a PhyloExpressionSet.
+#' This function provides backward compatibility with the old TDI() function.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return Numeric vector of TDI values for each condition
+#' 
+#' @examples
+#' # Calculate TDI values
+#' # tdi_values <- TDI(phyex_set)
+#' 
+#' @export
+TDI <- function(phyex_set) {
+    return(phyex_set@TXI)
+}
+
+#' @title Calculate Transcriptomic Evolutionary Index (TEI)
+#' @description Calculate the transcriptomic evolutionary index values for a PhyloExpressionSet.
+#' This function provides backward compatibility with the old TEI() function.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return Numeric vector of TEI values for each condition
+#' 
+#' @examples
+#' # Calculate TEI values
+#' # tei_values <- TEI(phyex_set)
+#' 
+#' @export
+TEI <- function(phyex_set) {
+    return(phyex_set@TXI)
+}
+
+#' @title Calculate Transcriptomic Polymorphism Index (TPI)
+#' @description Calculate the transcriptomic polymorphism index values for a PhyloExpressionSet.
+#' This function provides backward compatibility with the old TPI() function.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return Numeric vector of TPI values for each condition
+#' 
+#' @examples
+#' # Calculate TPI values
+#' # tpi_values <- TPI(phyex_set)
+#' 
+#' @export
+TPI <- function(phyex_set) {
+    return(phyex_set@TXI)
+}
+
