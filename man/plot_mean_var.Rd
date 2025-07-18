@@ -4,25 +4,29 @@
 \alias{plot_mean_var}
 \title{Plot Mean-Variance Relationship}
 \usage{
-plot_mean_var(phyex_set)
+plot_mean_var(phyex_set, highlight_genes = NULL)
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object containing gene expression data.}
+
+\item{highlight_genes}{Optional character vector of gene IDs to highlight and label on the plot.}
 }
 \value{
-A ggplot2 object showing the mean-variance relationship
+A ggplot2 object showing the mean-variance relationship.
 }
 \description{
 Create a scatter plot showing the relationship between mean expression
-and variance for genes, colored by phylostratum.
+and variance for genes, colored by phylostratum, with optional highlighting and labeling of specific genes.
 }
 \details{
 This function plots the mean expression versus variance for each gene,
-with points colored by phylostratum. This visualization helps identify
-expression patterns and heteroscedasticity in the data.
+with points colored by phylostratum. Optionally, specific genes can be highlighted and labeled.
+This visualization helps identify expression patterns and heteroscedasticity in the data.
 }
 \examples{
 # Create mean-variance plot
 # mv_plot <- plot_mean_var(phyex_set)
+# Highlight and label specific genes
+# mv_plot <- plot_mean_var(phyex_set, highlight_genes = c("GeneA", "GeneB"))
 
 }

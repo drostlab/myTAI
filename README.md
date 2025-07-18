@@ -4,8 +4,15 @@
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://bioconda.github.io/)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&label=VISITORS&countColor=%23263759&style=flat)
 [![R-CMD-check](https://github.com/drostlab/myTAI/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/drostlab/myTAI/actions/workflows/R-CMD-check.yaml)
+[![GitHub release](https://img.shields.io/github/v/release/drostlab/myTAI?label=Latest%20Release)](https://github.com/drostlab/myTAI/releases)
 
 # Evolutionary Transcriptomics with R
+
+This is myTAI v2, still a work in progress. We are currently working on updating the vignettes. To install the previous version of myTAI, and access the old vignettes, do:
+
+```r
+devtools::install_github("drostlab/myTAI@v1.0")
+```
    
 ### Motivation
 

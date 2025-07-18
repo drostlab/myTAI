@@ -9,7 +9,9 @@ destroy_pattern(
   num_runs = 20,
   runs_threshold = 0.5,
   analysis_dir = NULL,
-  seed = 1234
+  max_generations = 10000,
+  seed = 1234,
+  ...
 )
 }
 \arguments{
@@ -22,6 +24,10 @@ destroy_pattern(
 \item{analysis_dir}{Directory to store GATAI analysis results (default: NULL)}
 
 \item{seed}{Random seed for reproducibility (default: 1234)}
+
+\item{...}{Additional arguments passed to gataiR::gatai}
+
+\item{max_generations:}{Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).}
 }
 \value{
 A list containing GATAI results including identified genes that contribute to the pattern

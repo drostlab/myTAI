@@ -81,16 +81,7 @@ test_that("Pairwise test works", {
     expect_equal(result@method_name, "Pairwise Test")
 })
 
-test_that("Generic conservation test works", {
-    # Test with custom scoring function
-    custom_score <- function(txi, ...) {
-        # Simple variance-based score
-        stats::var(txi)
-    }
-    
-    # Skip this test for now as the function has parameter issues
-    skip("Generic conservation test has parameter conflicts")
-})
+
 
 test_that("Test result helper functions work", {
     result <- flatline_test(example_phyex_set, plot_result = FALSE)

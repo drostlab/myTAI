@@ -7,7 +7,7 @@
 plot_signature_multiple(
   phyex_sets,
   legend_title = "Phylo Expression Set",
-  show_p_val = F,
+  show_p_val = FALSE,
   conservation_test = flatline_test,
   transformation = NULL,
   colours = NULL,
@@ -15,7 +15,7 @@ plot_signature_multiple(
 )
 }
 \arguments{
-\item{phyex_sets}{A list of PhyloExpressionSet objects to compare}
+\item{phyex_sets}{A vector of PhyloExpressionSet objects to compare}
 
 \item{legend_title}{Title for the legend (default: "Phylo Expression Set")}
 
@@ -44,7 +44,7 @@ datasets before plotting.
 }
 \examples{
 # Compare multiple datasets
-# phyex_list <- list(dataset1 = phyex_set1, dataset2 = phyex_set2)
+# phyex_list <- c(phyex_set1, phyex_set2)
 # p <- plot_signature_multiple(phyex_list, legend_title = "Dataset")
 
 # With transformation

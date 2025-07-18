@@ -28,41 +28,39 @@ test_that("plot_gene_space works", {
 })
 
 test_that("plot_gene_heatmap works", {
-    # Skip if pheatmap is not available
-    skip_if_not_installed("pheatmap")
     
     # Basic heatmap
     p <- plot_gene_heatmap(example_phyex_set)
-    expect_s3_class(p, "pheatmap")
+    expect_s3_class(p, "ggplot")
     
     # Test with specific genes
     selected_genes <- example_phyex_set@gene_ids[1:10]
     p_genes <- plot_gene_heatmap(example_phyex_set, genes = selected_genes)
-    expect_s3_class(p_genes, "pheatmap")
+    expect_s3_class(p_genes, "ggplot")
     
     # Test without standardized values
     p_no_std <- plot_gene_heatmap(example_phyex_set, std = FALSE)
-    expect_s3_class(p_no_std, "pheatmap")
+    expect_s3_class(p_no_std, "ggplot")
     
     # Test with replicates
     p_reps <- plot_gene_heatmap(example_phyex_set, reps = TRUE)
-    expect_s3_class(p_reps, "pheatmap")
+    expect_s3_class(p_reps, "ggplot")
     
     # Test with clustering
     p_cluster <- plot_gene_heatmap(example_phyex_set, cluster_rows = TRUE, cluster_cols = TRUE)
-    expect_s3_class(p_cluster, "pheatmap")
+    expect_s3_class(p_cluster, "ggplot")
     
     # Test without gene age annotation
     p_no_age <- plot_gene_heatmap(example_phyex_set, show_gene_age = FALSE)
-    expect_s3_class(p_no_age, "pheatmap")
+    expect_s3_class(p_no_age, "ggplot")
     
     # Test with gene IDs shown
     p_ids <- plot_gene_heatmap(example_phyex_set, show_gene_ids = TRUE)
-    expect_s3_class(p_ids, "pheatmap")
+    expect_s3_class(p_ids, "ggplot")
     
     # Test with different top_p
     p_top_p <- plot_gene_heatmap(example_phyex_set, top_p = 0.1)
-    expect_s3_class(p_top_p, "pheatmap")
+    expect_s3_class(p_top_p, "ggplot")
 })
 
 test_that("plot_gene_profiles works", {

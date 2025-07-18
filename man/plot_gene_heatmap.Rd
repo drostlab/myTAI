@@ -6,6 +6,7 @@
 \usage{
 plot_gene_heatmap(
   phyex_set,
+  genes = NULL,
   top_p = 0.2,
   std = TRUE,
   reps = FALSE,
@@ -13,12 +14,13 @@ plot_gene_heatmap(
   cluster_cols = FALSE,
   show_gene_age = TRUE,
   show_gene_ids = FALSE,
-  genes = NULL,
   ...
 )
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
+
+\item{genes}{Character vector of specific genes to plot. If NULL, uses top dynamic genes}
 
 \item{top_p}{Proportion of most dynamic genes to include (default: 0.2)}
 
@@ -34,12 +36,10 @@ plot_gene_heatmap(
 
 \item{show_gene_ids}{Logical indicating whether to show gene names (default: FALSE)}
 
-\item{genes}{Character vector of specific genes to plot. If NULL, uses top dynamic genes}
-
 \item{...}{Additional arguments passed to pheatmap::pheatmap}
 }
 \value{
-A pheatmap object showing the gene expression heatmap
+A ggplot object (converted from pheatmap) showing the gene expression heatmap
 }
 \description{
 Create a heatmap showing gene expression patterns across conditions

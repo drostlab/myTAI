@@ -13,7 +13,7 @@
 #' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
 #' @param ... Additional arguments passed to pheatmap::pheatmap
 #' 
-#' @return A pheatmap object showing the gene expression heatmap
+#' @return A ggplot object (converted from pheatmap) showing the gene expression heatmap
 #' 
 #' @details
 #' This function creates a comprehensive heatmap visualization of gene expression patterns.
@@ -36,6 +36,7 @@
 #' 
 #' @export
 plot_gene_heatmap <- function(phyex_set, 
+                              genes = NULL,
                               top_p = 0.2, 
                               std = TRUE, 
                               reps = FALSE,
@@ -43,7 +44,6 @@ plot_gene_heatmap <- function(phyex_set,
                               cluster_cols = FALSE,
                               show_gene_age = TRUE,
                               show_gene_ids = FALSE,
-                              genes = NULL,
                               ...) {
 
     
@@ -112,8 +112,7 @@ plot_gene_heatmap <- function(phyex_set,
         )
     }
     
-    # Create the heatmap
-    pheatmap::pheatmap(
+    p <- pheatmap::pheatmap(
         e,
         cluster_rows = cluster_rows,
         cluster_cols = cluster_cols,
@@ -123,6 +122,11 @@ plot_gene_heatmap <- function(phyex_set,
         annotation_row = annotation_row,
         annotation_colors = annotation_colors,
         fontsize_row = 5,
+        silent = TRUE,
         ...
-    )
+    ) |>
+        ggplotify::as.ggplot()
+    
+    # Convert to ggplot
+    return(p)
 }

@@ -60,6 +60,7 @@ Imports:
     readr (>= 0.2.2),
     tibble,
     scales,
+    ggplotify,
     ggrepel,
     uwot,
     Matrix,

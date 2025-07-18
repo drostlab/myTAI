@@ -173,7 +173,7 @@ plot_gene_profiles <- function(phyex_set,
     # Add faceting if requested
     if (facet_by_strata) {
         p <- p + 
-            facet_wrap(~ Stratum, scales = "free_y") +
+            facet_wrap(~ Stratum, scales = "fixed") +
             labs(x = paste(phyex_set@conditions_label, "by Stratum"))
         
         if (colour_by == "strata") {
