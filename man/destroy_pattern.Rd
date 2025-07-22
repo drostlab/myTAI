@@ -9,6 +9,7 @@ destroy_pattern(
   num_runs = 20,
   runs_threshold = 0.5,
   analysis_dir = NULL,
+  plot_results = TRUE,
   max_generations = 10000,
   seed = 1234,
   ...
@@ -22,6 +23,8 @@ destroy_pattern(
 \item{runs_threshold}{Threshold for gene removal consistency across runs (default: 0.5)}
 
 \item{analysis_dir}{Directory to store GATAI analysis results (default: NULL)}
+
+\item{plot_results}{Whether to plot the results. If analysis dir is given, this will be ignored.}
 
 \item{max_generations}{Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).}
 
