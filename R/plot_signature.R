@@ -3,15 +3,7 @@
 #' with options for confidence intervals, replicates, and statistical testing.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
-#' @param show_CI Logical indicating whether to show confidence intervals (default: FALSE)
-#' @param show_bootstraps Logical indicating whether to show bootstrap samples (default: FALSE)
-#' @param CI_low Lower quantile for confidence intervals (default: 0.025)
-#' @param CI_high Upper quantile for confidence intervals (default: 0.975)
-#' @param show_reps Logical indicating whether to show individual replicates (default: TRUE)
-#' @param show_p_val Logical indicating whether to show p-value from conservation test (default: FALSE)
-#' @param conservation_test Function to use for conservation testing (default: flatline_test)
-#' @param colour Optional color for the signature line (default: NULL)
-#' @param ... Additional arguments passed to the conservation test
+#' @param ... Additional arguments passed to specific methods
 #' 
 #' @return A ggplot2 object showing the transcriptomic signature
 #' 
@@ -29,7 +21,10 @@
 #' 
 #' @import ggplot2
 #' @export
-plot_signature <- function(phyex_set,
+plot_signature <- S7::new_generic("plot_signature", "phyex_set")
+
+#' @export
+S7::method(plot_signature, PhyloExpressionSet) <- function(phyex_set,
                            show_CI = FALSE,
                            show_bootstraps = FALSE,
                            CI_low = .025,
@@ -164,5 +159,50 @@ plot_signature <- function(phyex_set,
             scale_fill_manual(values = c(colour))
     }
 
+    return(p)
+}
+
+#' @export
+S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set, 
+                                                           violin = TRUE,
+                                                           points = FALSE,
+                                                           point_size = 0.1,
+                                                           alpha = 0.7,
+                                                           ...) {
+    
+    # Prepare data for plotting
+    cell_meta <- phyex_set@cell_metadata
+    cell_meta$TAI <- phyex_set@TXI_reps[match(cell_meta$cell_id, names(phyex_set@TXI_reps))]
+    cell_meta$CellType <- cell_meta[[phyex_set@cell_identity]]
+    
+    # Filter out cells with NA cell type
+    cell_meta <- cell_meta[!is.na(cell_meta$CellType), ]
+    
+    # Create base plot
+    p <- ggplot(cell_meta, aes(x = CellType, y = TAI, fill = CellType))
+    
+    if (violin) {
+        p <- p + geom_violin(alpha = alpha, scale = "width")
+    } else {
+        p <- p + geom_boxplot(alpha = alpha)
+    }
+    
+    if (points) {
+        p <- p + geom_jitter(width = 0.2, size = point_size, alpha = 0.5)
+    }
+    
+    p <- p +
+        labs(
+            title = paste("TAI Distribution Across Cell Types -", phyex_set@name),
+            x = "Cell Type",
+            y = "Transcriptomic Age Index (TAI)"
+        ) +
+        theme_minimal() +
+        theme(
+            axis.text.x = element_text(angle = 45, hjust = 1),
+            legend.position = "none"
+        ) +
+        scale_fill_viridis_d()
+    
     return(p)
 }

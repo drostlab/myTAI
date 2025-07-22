@@ -346,64 +346,7 @@ collapse <- function(phyex_set) {
     as_PhyloExpressionSet(data)
 }
 
-#' @title Normalize Stage Expression Data
-#' @description Normalize expression data to a specified total expression level per sample.
-#' 
-#' @param phyex_set A PhyloExpressionSet object
-#' @param total Numeric value to normalize each sample to (default: 1e6)
-#' 
-#' @return A PhyloExpressionSet object with normalized expression data
-#' 
-#' @examples
-#' # Normalize to 1 million total expression per sample
-#' # normalized_set <- normalise_stage_expression(phyex_set, total = 1e6)
-#' 
-normalise_stage_expression <- function(phyex_set, total=1e6) {
-    phyex_set@counts <- sweep(phyex_set@counts, 2, colSums(phyex_set@counts), FUN="/") * total
-    phyex_set
-}
 
-#' @title Transform Expression Counts in PhyloExpressionSet
-#' @description Apply a transformation function to the expression counts in a PhyloExpressionSet.
-#' 
-#' @param phyex_set A PhyloExpressionSet object
-#' @param ... Additional arguments. For the PhyloExpressionSet method, arguments are FUN (function to apply), FUN_name (character string naming the transformation function), new_name (character string for the new dataset name), and additional arguments passed to the transformation function
-#' 
-#' @return A PhyloExpressionSet object with transformed expression data
-#' 
-#' @examples
-#' # Apply log transformation
-#' # log_set <- transform_counts(phyex_set, log1p, "log1p")
-#' 
-#' @export
-transform_counts <- S7::new_generic("transform_counts", "phyex_set")
-
-#' @export
-S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
-                                                             FUN,
-                                                             FUN_name=deparse(substitute(FUN)),
-                                                             new_name=paste(phyex_set@name, "transformed by", FUN_name),
-                                                             ...) {
-    f <- match.fun(FUN)
-    phyex_set@counts <- f(phyex_set@counts, ...)
-    phyex_set@name <- new_name
-    return(phyex_set)
-}
-
-#' @title Short Alias for Transform Counts
-#' @description Convenience alias for transform_counts function.
-#' 
-#' @param phyex_set A PhyloExpressionSet object
-#' @param ... Arguments passed to transform_counts
-#' 
-#' @return A PhyloExpressionSet object with transformed expression data
-#' 
-#' @examples
-#' # Short alias for transformation
-#' # log_set <- tf(phyex_set, log1p)
-#' 
-#' @export
-tf <- transform_counts
 
 #' @title Select Genes from PhyloExpressionSet
 #' @description Extract a subset of genes from a PhyloExpressionSet object.

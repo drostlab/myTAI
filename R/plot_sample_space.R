@@ -6,26 +6,37 @@
 #' @param phyex_set A PhyloExpressionSet object
 #' @param method Character string specifying the dimensionality reduction method: 
 #' "PCA" or "UMAP" (default: "PCA")
+#' @param colour_by Character string specifying what to colour by: "condition" (default), 
+#' "TAI", or for single-cell data: "celltype"
+#' @param ... Additional arguments passed to specific methods
 #' 
-#' @return A ggplot2 object showing the sample space visualization
+#' @return A ggplot2 object showing the sample space visualisation
 #' 
 #' @details
 #' This function performs log1p transformation on expression data, removes genes with
 #' zero variance, and applies the specified dimensionality reduction method. Samples
-#' are colored by their group assignments.
+#' are coloured by their group assignments or TAI values.
 #' 
 #' @examples
-#' # Create PCA plot
-#' # pca_plot <- plot_sample_space(phyex_set, method = "PCA")
+#' # Create PCA plot coloured by condition
+#' # pca_plot <- plot_sample_space(phyex_set, method = "PCA", colour_by = "condition")
 #' 
-#' # Create UMAP plot
-#' # umap_plot <- plot_sample_space(phyex_set, method = "UMAP")
+#' # Create UMAP plot coloured by TAI
+#' # umap_plot <- plot_sample_space(phyex_set, method = "UMAP", colour_by = "TAI")
 #' 
 #' @import ggplot2
 #' @importFrom uwot umap
 #' @export
-plot_sample_space <- function(phyex_set, method=c("PCA", "UMAP")) {
+plot_sample_space <- S7::new_generic("plot_sample_space", 
+                                    dispatch_args = "phyex_set",
+                                    fun = function(phyex_set, method = c("PCA", "UMAP"), colour_by = "condition", ...) {
+                                        S7::S7_dispatch()
+                                    })
+
+#' @export
+S7::method(plot_sample_space, PhyloExpressionSet) <- function(phyex_set, method = c("PCA", "UMAP"), colour_by = c("condition", "TAI"), ...) {
     method <- match.arg(method)
+    colour_by <- match.arg(colour_by)
     
     expr <- log1p(phyex_set@counts)
     # Remove genes with zero variance
@@ -41,11 +52,158 @@ plot_sample_space <- function(phyex_set, method=c("PCA", "UMAP")) {
     
     df <- as.data.frame(coords)
     colnames(df) <- c("V1", "V2")
-    df$Group <- phyex_set@groups
     
-    ggplot(df, aes(V1, V2, colour=Group)) +
-        geom_point(size=3) +
-        ggtitle(paste("Sample", method)) + 
-        scale_colour_viridis_d() +
+    # Set up colouring
+    if (colour_by == "condition") {
+        df$Colour_Variable <- phyex_set@groups
+        colour_label <- "Group"
+        use_discrete <- TRUE
+    } else if (colour_by == "TAI") {
+        df$Colour_Variable <- phyex_set@TXI_reps
+        colour_label <- "TAI"
+        use_discrete <- FALSE
+    }
+    
+    p <- ggplot(df, aes(V1, V2, colour = Colour_Variable)) +
+        geom_point(size = 3) +
+        labs(
+            title = paste(method, "Plot -", phyex_set@name),
+            x = paste(method, "1"),
+            y = paste(method, "2"),
+            colour = colour_label
+        ) +
         theme_minimal()
+    
+    # Apply appropriate colour scale
+    if (use_discrete) {
+        p <- p + scale_colour_viridis_d()
+    } else {
+        p <- p + scale_colour_viridis_c()
+    }
+    
+    return(p)
+}
+
+#' @export
+S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set, method = c("PCA", "UMAP"), colour_by = c("celltype", "TAI"), ...) {
+    method <- match.arg(method)
+    colour_by <- match.arg(colour_by)
+    
+    if (method == "UMAP" && "umap" %in% names(phyex_set@seurat@reductions)) {
+        # Use existing UMAP from Seurat object if available
+        coords <- Seurat::Embeddings(phyex_set@seurat, reduction = "umap")[, 1:2]
+        
+        # Prepare plotting data
+        plot_data <- data.frame(
+            V1 = coords[, 1],
+            V2 = coords[, 2],
+            cell_id = rownames(coords)
+        )
+        
+        # Add metadata for colouring
+        cell_meta <- phyex_set@seurat@meta.data
+        cell_meta$cell_id <- rownames(cell_meta)
+        cell_meta$TAI <- phyex_set@TXI_reps[match(cell_meta$cell_id, names(phyex_set@TXI_reps))]
+        
+        # Set up colouring
+        if (colour_by == "celltype") {
+            plot_data$Colour_Variable <- cell_meta[[phyex_set@cell_identity]][match(plot_data$cell_id, cell_meta$cell_id)]
+            colour_label <- "Cell Type"
+            use_discrete <- TRUE
+        } else if (colour_by == "TAI") {
+            plot_data$Colour_Variable <- cell_meta$TAI[match(plot_data$cell_id, cell_meta$cell_id)]
+            colour_label <- "TAI"
+            use_discrete <- FALSE
+        }
+        
+        # Filter out cells with NA values
+        plot_data <- plot_data[!is.na(plot_data$Colour_Variable), ]
+        
+        p <- ggplot(plot_data, aes(V1, V2, colour = Colour_Variable)) +
+            geom_point(size = 0.5, alpha = 0.8) +
+            labs(
+                title = paste("UMAP Plot -", phyex_set@name),
+                x = "UMAP 1",
+                y = "UMAP 2",
+                colour = colour_label
+            ) +
+            theme_minimal() +
+            theme(
+                legend.position = "right",
+                panel.grid = element_blank()
+            )
+            
+        # Apply appropriate colour scale
+        if (use_discrete) {
+            p <- p + scale_colour_viridis_d()
+        } else {
+            p <- p + scale_colour_viridis_c()
+        }
+        
+        return(p)
+            
+    } else if (method == "PCA" && "pca" %in% names(phyex_set@seurat@reductions)) {
+        # Use existing PCA from Seurat object if available
+        coords <- Seurat::Embeddings(phyex_set@seurat, reduction = "pca")[, 1:2]
+        
+        plot_data <- data.frame(
+            V1 = coords[, 1],
+            V2 = coords[, 2],
+            cell_id = rownames(coords)
+        )
+        
+        # Add metadata for colouring
+        cell_meta <- phyex_set@seurat@meta.data
+        cell_meta$cell_id <- rownames(cell_meta)
+        cell_meta$TAI <- phyex_set@TXI_reps[match(cell_meta$cell_id, names(phyex_set@TXI_reps))]
+        
+        # Set up colouring
+        if (colour_by == "celltype") {
+            plot_data$Colour_Variable <- cell_meta[[phyex_set@cell_identity]][match(plot_data$cell_id, cell_meta$cell_id)]
+            colour_label <- "Cell Type"
+            use_discrete <- TRUE
+        } else if (colour_by == "TAI") {
+            plot_data$Colour_Variable <- cell_meta$TAI[match(plot_data$cell_id, cell_meta$cell_id)]
+            colour_label <- "TAI"
+            use_discrete <- FALSE
+        }
+        
+        # Filter out cells with NA values
+        plot_data <- plot_data[!is.na(plot_data$Colour_Variable), ]
+        
+        p <- ggplot(plot_data, aes(V1, V2, colour = Colour_Variable)) +
+            geom_point(size = 0.5, alpha = 0.8) +
+            labs(
+                title = paste("PCA Plot -", phyex_set@name),
+                x = "PC 1",
+                y = "PC 2", 
+                colour = colour_label
+            ) +
+            theme_minimal() +
+            theme(
+                legend.position = "right",
+                panel.grid = element_blank()
+            )
+            
+        # Apply appropriate colour scale
+        if (use_discrete) {
+            p <- p + scale_colour_viridis_d()
+        } else {
+            p <- p + scale_colour_viridis_c()
+        }
+        
+        return(p)
+            
+    } else {
+        # Throw error if reduction is not available
+        available_reductions <- names(phyex_set@seurat@reductions)
+        if (length(available_reductions) == 0) {
+            stop(paste("No dimensional reductions found in Seurat object.", 
+                      "Please compute", method, "using Seurat::RunPCA() or Seurat::RunUMAP()"))
+        } else {
+            stop(paste(method, "reduction not found in Seurat object.",
+                      "Available reductions:", paste(available_reductions, collapse = ", "),
+                      "\nPlease compute", method, "using Seurat::Run", method, "()"))
+        }
+    }
 }
