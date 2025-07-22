@@ -6,6 +6,7 @@
 #' @param num_runs Number of GATAI runs to perform (default: 20)
 #' @param runs_threshold Threshold for gene removal consistency across runs (default: 0.5)
 #' @param analysis_dir Directory to store GATAI analysis results (default: NULL)
+#' @param plot_results Whether to plot the results. If analysis dir is given, this will be ignored.
 #' @param max_generations Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).
 #' @param seed Random seed for reproducibility (default: 1234)
 #' @param ... Additional arguments passed to gataiR::gatai
@@ -27,6 +28,7 @@ destroy_pattern <- function(phyex_set,
                             num_runs = 20,
                             runs_threshold = 0.5,
                             analysis_dir = NULL,
+                            plot_results = TRUE,
                             max_generations = 10000,
                             seed = 1234,
                             ...) {
@@ -41,6 +43,11 @@ destroy_pattern <- function(phyex_set,
                          seed = seed,
                          ...)
     res <- list(removed_genes=res$common_removed_genes, runs=res$genes_list)
+
+    if (length(res$removed_genes) == 0) {
+        warning("GATAI has failed to detect any genes. Try to increase the number of generations.")
+        return(res)
+    }
     
     # If analysis_dir is provided, save results to PDF and genes.txt
     if (!is.null(analysis_dir)) {
@@ -56,6 +63,10 @@ destroy_pattern <- function(phyex_set,
                                analysis_dir = analysis_dir,
                                runs_threshold = runs_threshold,
                                ...)
+    }
+    else {
+        if (plot_results)
+            res$plots <- plot_gatai_results(phyex_set, res, runs_threshold=runs_threshold)
     }
     
     return(res)
@@ -219,7 +230,7 @@ plot_gatai_results <- function(phyex_set,
 #' @param phyex_set A PhyloExpressionSet object containing the original gene expression data.
 #' @param gatai_result Result list from \code{destroy_pattern()}, containing GATAI analysis output.
 #' @param analysis_dir Directory to save the PDF file.
-#' @param prefix Optional prefix for the PDF filename (default: "GATAI_analysis").
+#' @param prefix Optional prefix for the PDF filename (default: "report").
 #' @param ... Additional arguments passed to \code{plot_gatai_results()}.
 #'
 #' @return Invisibly returns the path to the saved PDF.
@@ -234,7 +245,7 @@ plot_gatai_results <- function(phyex_set,
 save_gatai_results_pdf <- function(phyex_set,
                                    gatai_result,
                                    analysis_dir = "gatai_analysis",
-                                   prefix = "GATAI_analysis",
+                                   prefix = "report",
                                    ...) {
     if (!dir.exists(analysis_dir)) {
         dir.create(analysis_dir, recursive = TRUE)

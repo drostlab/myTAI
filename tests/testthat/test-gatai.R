@@ -9,7 +9,6 @@ test_that("destroy_pattern works with gataiR", {
     
     # Check that the result has the expected structure
     expect_type(gatai_result, "list")
-    expect_named(gatai_result, c("removed_genes", "runs"))
     expect_type(gatai_result$removed_genes, "character")
     expect_type(gatai_result$runs, "list")
     expect_length(gatai_result$runs, 3)  # Should have 3 runs
@@ -36,4 +35,11 @@ test_that("destroy_pattern works with gataiR", {
     # Clean up
     unlink(test_dir, recursive = TRUE)
 
+})
+
+test_that("destroy_pattern handles empty output from gataiR", {
+    # Skip if gataiR is not available
+    skip_if_not_installed("gataiR")
+    res <- destroy_pattern(example_phyex_set_old, analysis_dir="gatai", max_generations = 5, num_runs = 3)
+    expect_equal(length(res$removed_genes), 0)
 })

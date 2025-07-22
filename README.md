@@ -8,11 +8,19 @@
 
 # Evolutionary Transcriptomics with R
 
-This is myTAI v2, still a work in progress. We are currently working on updating the vignettes. To install the previous version of myTAI, and access the old vignettes, do:
+This is myTAI v2, still a work in progress. We are currently working on updating the vignettes. To install the development version, do:
+
+```r
+devtools::install_github("drostlab/myTAI")
+```
+
+To install the previous version of myTAI, and access the old vignettes, do:
 
 ```r
 devtools::install_github("drostlab/myTAI@v1.0")
 ```
+
+T
    
 ### Motivation
 
