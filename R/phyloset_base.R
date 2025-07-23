@@ -64,6 +64,10 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             class = class_character,
             default = "Identities"
         ),
+        groups = new_property(
+            class = class_factor,
+            getter = function(self) stop("groups property must be implemented by subclass")
+        ),
         expression_collapsed = new_property(
             getter = function(self) stop("expression_collapsed property must be implemented by subclass")
         ),

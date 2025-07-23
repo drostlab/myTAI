@@ -117,23 +117,6 @@ goodness_of_fit <- function(test_result) {
 }
 
 
-#' @title Format P-Value for Scientific Notation
-#' @description Format p-values in scientific notation for plot annotations.
-#' 
-#' @param p Numeric p-value
-#' 
-#' @return Expression object for use in plot annotations
-#' 
-#' @examples
-#' # Format p-value for plotting
-#' # expr <- exp_p(0.001)
-#' 
-#' @keywords internal
-exp_p <- function(p) {
-    parts <- strsplit(formatC(p, format = "e", digits = 2), "e")[[1]]
-    bquote(italic(p) == .(as.numeric(parts[1])) %*% 10^.(as.integer(parts[2])))
-}
-
 #' @import ggplot2
 S7::method(plot, TestResult) <- function(test_result) {
     p <- ggplot(data.frame(x = test_result@null_sample), 

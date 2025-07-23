@@ -55,6 +55,7 @@ Imports:
     reshape2 (>= 1.4.1),
     ggplot2 (>= 1.0.1),
     cowplot,
+    ggforce,
     ggridges,
     ggtext,
     readr (>= 0.2.2),

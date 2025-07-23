@@ -1,158 +1,112 @@
 #' @title Plot Transcriptomic Signature
-#' @description Create a plot of the transcriptomic index signature across developmental stages,
-#' with options for confidence intervals, replicates, and statistical testing.
+#' @description Create a plot of the transcriptomic index signature across developmental stages
+#' or cell types, with options for showing individual samples/cells and statistical testing.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
+#' @param show_reps Logical, whether to show individual replicates (bulk) or cells (single-cell)
+#' @param show_p_val Logical, whether to show conservation test p-value (bulk only)
+#' @param conservation_test Function, conservation test to use for p-value calculation (bulk only)
+#' @param colour Character, custom color for the plot elements
 #' @param ... Additional arguments passed to specific methods
 #' 
 #' @return A ggplot2 object showing the transcriptomic signature
 #' 
 #' @details
-#' This function creates a comprehensive visualization of the transcriptomic signature
-#' with optional statistical testing and confidence intervals. The plot can show
-#' individual replicates, confidence bands, and p-values from conservation tests.
+#' This function creates visualizations appropriate for the data type:
+#' 
+#' **Bulk data (BulkPhyloExpressionSet):**
+#' - Line plots showing TXI trends across developmental stages
+#' - Optional individual biological replicates as jittered points
+#' - Optional conservation test p-values
+#' 
+#' **Single-cell data (ScPhyloExpressionSet):**
+#' - Violin plots showing TXI distributions across cell types
+#' - Mean TXI values overlaid as points
+#' - Optional individual cells using geom_sina for better visualization
 #' 
 #' @examples
-#' # Basic signature plot
-#' # p1 <- plot_signature(phyex_set)
+#' # Basic signature plot for bulk data
+#' # p1 <- plot_signature(bulk_phyex_set)
 #' 
-#' # With confidence intervals and p-value
-#' # p2 <- plot_signature(phyex_set, show_CI = TRUE, show_p_val = TRUE)
+#' # Bulk plot with replicates and p-value
+#' # p2 <- plot_signature(bulk_phyex_set, show_reps = TRUE, show_p_val = TRUE)
+#' 
+#' # Single-cell plot with individual cells
+#' # p3 <- plot_signature(sc_phyex_set, show_reps = TRUE)
 #' 
 #' @import ggplot2
 #' @export
-plot_signature <- S7::new_generic("plot_signature", "phyex_set")
+plot_signature <- S7::new_generic("plot_signature", "phyex_set",
+    function(phyex_set,
+             show_reps = TRUE,
+             show_p_val = FALSE,
+             conservation_test = flatline_test,
+             colour = NULL,
+             ...) {
+        S7::S7_dispatch()
+    }
+)
 
 #' @export
-S7::method(plot_signature, PhyloExpressionSet) <- function(phyex_set,
-                           show_CI = FALSE,
-                           show_bootstraps = FALSE,
-                           CI_low = .025,
-                           CI_high = .975,
-                           show_reps = TRUE,
-                           show_p_val = FALSE,
-                           conservation_test = flatline_test,
-                           colour = NULL,
-                           ...) {
-    p <- ggplot()
-
-    # Plot CI (unless showing bootstraps)
-    if (show_CI && !show_bootstraps) {
-        CI <- TXI_conf_int(phyex_set, low_q = CI_low, high_q = CI_high)
-        geom <- if (phyex_set@is_time_series) geom_ribbon else geom_linerange
-        p <- p + geom(
-            data = tibble::tibble(
-                Condition = phyex_set@conditions,
-                CI_low = CI$low,
-                CI_high = CI$high
-            ),
-            aes(
-                x = Condition,
-                ymin = CI_low,
-                ymax = CI_high,
-                group = 0,
-                fill = phyex_set@name
-            ),
-            alpha = 0.3
-        )
-    }
-
-    # Plot bootstraps
-    if (show_bootstraps) {
-        df_sample <- as_tibble(phyex_set@bootstrapped_txis) |>
-            rowid_to_column("Id") |>
-            tidyr::pivot_longer(cols = phyex_set@conditions, names_to = "Condition", values_to = "TXI")
-        geom <- if (phyex_set@is_time_series) geom_line else purrr::partial(geom_jitter, width = 0.05)
-        p <- p + geom(
-            data = df_sample,
-            aes(
-                x = Condition,
-                y = TXI,
-                group = Id,
-                colour = phyex_set@name
-            ),
-            alpha = 0.04
-        )
-    }
-
-    # Plot TXI
-    df <- tibble::tibble(
-        Condition = phyex_set@conditions,
+S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
+                                                               show_reps = TRUE,
+                                                               show_p_val = FALSE,
+                                                               conservation_test = flatline_test,
+                                                               colour = NULL,
+                                                               ...) {
+    
+    # Create main TXI line
+    df_main <- tibble::tibble(
+        Identity = phyex_set@identities,
         TXI = phyex_set@TXI
     )
-    if (phyex_set@is_time_series) {
-        p <- p +
-            geom_line(
-                data = df,
-                aes(
-                    x = Condition,
-                    y = TXI,
-                    group = 0
-                ),
-                colour = "black",
-                lwd = 2.3,
-                lineend = "round"
-            ) +
-            geom_line(
-                data = df,
-                aes(
-                    x = Condition,
-                    y = TXI,
-                    group = 0,
-                    colour = phyex_set@name
-                ),
-                lwd = 1.5,
-                lineend = "round"
-            )
-    } else {
-        p <- p + geom_point(
-            data = df,
-            aes(
-                x = Condition,
-                y = TXI,
-                fill = phyex_set@name
-            ),
-            shape = 21, colour = "black", size = 2, stroke = 0.8
+    
+    # Start with line plot
+    p <- ggplot(df_main, aes(x = Identity, y = TXI, group = 1)) +
+        geom_line(colour = "black", lwd = 2.3, lineend = "round") +
+        geom_line(aes(colour = phyex_set@name), lwd = 1.5, lineend = "round")
+
+    # Add replicate dots if requested
+    if (show_reps) {
+        df_samples <- tibble::tibble(
+            Identity = factor(phyex_set@groups, levels = levels(phyex_set@identities)),
+            TXI = phyex_set@TXI_sample
+        )
+        
+        # Filter out samples with NA identity
+        df_samples <- df_samples[!is.na(df_samples$Identity), ]
+        
+        p <- p + geom_jitter(
+            data = df_samples,
+            aes(x = Identity, y = TXI, fill = phyex_set@name),
+            shape = 21, colour = "black", size = 1.5, stroke = 0.5, 
+            width = 0.05, alpha = 0.7
         )
     }
 
+    # Add labels and theme
     p <- p +
         labs(
-            x = phyex_set@conditions_label,
+            x = phyex_set@identities_label,
             y = phyex_set@index_full_name
         ) +
         guides(colour = "none", fill = "none") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-    # Plot replicates
-    if (show_reps) {
-        df <- tibble::tibble(
-            Condition = factor(phyex_set@groups, levels = unique(phyex_set@groups)),
-            TXI = phyex_set@TXI_reps
-        )
-        p <- p + geom_jitter(
-            data = df,
-            aes(
-                x = Condition,
-                y = TXI,
-                fill = phyex_set@name
-            ),
-            shape = 21, colour = "black", size = 2, stroke = 0.8, width = 0.05
-        )
-    }
-
-    # Show p value
+    # Show p value for conservation tests
     if (show_p_val) {
         t <- conservation_test(phyex_set, plot_result = FALSE)
-        label <- paste(t@p_label, "=", signif(t@p_value, 3))
+        label <- paste(t@p_label, "=", exp_p(t@p_value))
         p <- p +
             annotate("label",
                 label = label, fill = "white",
-                x = phyex_set@num_conditions * 0.7, y = mean(phyex_set@TXI_reps) + 0.1
+                x = phyex_set@num_identities * 0.7, 
+                y = mean(phyex_set@TXI_sample) + 0.1
             )
     }
 
+    # Apply custom colour if specified
     if (!is.null(colour)) {
         p <- p +
             scale_color_manual(values = c(colour)) +
@@ -164,45 +118,62 @@ S7::method(plot_signature, PhyloExpressionSet) <- function(phyex_set,
 
 #' @export
 S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set, 
-                                                           violin = TRUE,
-                                                           points = FALSE,
-                                                           point_size = 0.1,
-                                                           alpha = 0.7,
+                                                           show_reps = TRUE,
+                                                           colour = NULL,
                                                            ...) {
     
     # Prepare data for plotting
-    cell_meta <- phyex_set@cell_metadata
-    cell_meta$TAI <- phyex_set@TXI_reps[match(cell_meta$cell_id, names(phyex_set@TXI_reps))]
-    cell_meta$CellType <- cell_meta[[phyex_set@cell_identity]]
+    df_samples <- tibble::tibble(
+        Identity = factor(phyex_set@groups, levels = levels(phyex_set@identities)),
+        TXI = phyex_set@TXI_sample
+    )
     
-    # Filter out cells with NA cell type
-    cell_meta <- cell_meta[!is.na(cell_meta$CellType), ]
+    # Filter out cells with NA identity
+    df_samples <- df_samples[!is.na(df_samples$Identity), ]
     
-    # Create base plot
-    p <- ggplot(cell_meta, aes(x = CellType, y = TAI, fill = CellType))
+    # Calculate means for overlaying
+    df_main <- df_samples |>
+        dplyr::group_by(Identity) |>
+        dplyr::summarise(TXI = mean(TXI, na.rm = TRUE), .groups = "drop")
     
-    if (violin) {
-        p <- p + geom_violin(alpha = alpha, scale = "width")
-    } else {
-        p <- p + geom_boxplot(alpha = alpha)
-    }
+    # Create base plot with violin plots
+    p <- ggplot(df_samples, aes(x = Identity, y = TXI, fill = Identity)) +
+        geom_violin(alpha = 0.7, scale = "width")
     
-    if (points) {
-        p <- p + geom_jitter(width = 0.2, size = point_size, alpha = 0.5)
+    # Add mean points
+    p <- p + geom_point(
+        data = df_main,
+        aes(x = Identity, y = TXI),
+        shape = 21, colour = "black", size = 2, stroke = 0.8,
+        fill = "white", inherit.aes = FALSE
+    )
+    
+    # Add individual cells if requested
+    if (show_reps) {
+        p <- p + ggforce::geom_sina(
+            size = 0.1, alpha = 0.5,
+            colour = "black"
+        )
     }
     
     p <- p +
         labs(
-            title = paste("TAI Distribution Across Cell Types -", phyex_set@name),
-            x = "Cell Type",
-            y = "Transcriptomic Age Index (TAI)"
+            x = phyex_set@identities_label,
+            y = phyex_set@index_full_name
         ) +
         theme_minimal() +
         theme(
             axis.text.x = element_text(angle = 45, hjust = 1),
             legend.position = "none"
-        ) +
-        scale_fill_viridis_d()
+        )
+    
+    # Apply colour scheme
+    if (!is.null(colour)) {
+        p <- p +
+            scale_fill_manual(values = rep(colour, phyex_set@num_identities))
+    } else {
+        p <- p + scale_fill_viridis_d()
+    }
     
     return(p)
 }

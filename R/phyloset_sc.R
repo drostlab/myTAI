@@ -59,7 +59,7 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
             class = class_character,
             getter = function(self) colnames(.get_expression_matrix(self@seurat, self@slot))
         ),
-        cell_groups = new_property(
+        groups = new_property(
             class = class_factor,
             getter = function(self) .map_cells_to_groups(self@seurat, self@cell_identity, self@identities)
         ),
