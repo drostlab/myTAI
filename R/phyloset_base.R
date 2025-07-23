@@ -18,6 +18,15 @@ TI_map <- list(TXI = "Transcriptomic Index",
 #' @description Abstract S7 base class for storing and manipulating phylotranscriptomic expression data.
 #' This class provides the common interface for both bulk and single-cell phylotranscriptomic data.
 #' 
+#' @param strata Factor vector of phylostratum assignments for each gene
+#' @param gene_ids Character vector of gene identifiers
+#' @param name Character string naming the dataset (default: "Phylo Expression Set")
+#' @param species Character string specifying the species (default: NULL)
+#' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
+#' @param identities_label Character string labeling the identities (default: "Identities")
+#' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
+#' @param precomputed_null_conservation_txis Precomputed null conservation TXI values (default: NULL)
+#' 
 #' @import S7
 #' @export
 PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
@@ -64,10 +73,6 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             class = class_character,
             default = "Identities"
         ),
-        groups = new_property(
-            class = class_factor,
-            getter = function(self) stop("groups property must be implemented by subclass")
-        ),
         expression_collapsed = new_property(
             getter = function(self) stop("expression_collapsed property must be implemented by subclass")
         ),
@@ -111,9 +116,9 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             getter = function(self) {
                 if (is.null(self@precomputed_null_conservation_txis)) {
                     # Compute and cache the result using expression_collapsed
-                    computed_txis <- stat_generate_conservation_txis(self@strata,
-                                                                     self@expression_collapsed,
-                                                                     self@null_conservation_sample_size)
+                    computed_txis <- .memo_generate_conservation_txis(self@strata,
+                                                                      self@expression_collapsed,
+                                                                      self@null_conservation_sample_size)
                     self@precomputed_null_conservation_txis <- computed_txis
                     return(computed_txis)
                 } else {
@@ -168,6 +173,7 @@ S7::method(print, PhyloExpressionSetBase) <- function(x, ...) {
 #' that dispatches based on the input type.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
+#' @param ... Additional arguments passed to methods
 #' @return Matrix of pTXI values
 #' 
 #' @export
@@ -194,6 +200,7 @@ S7::method(pTXI, PhyloExpressionSetBase) <- function(phyex_set) {
 #' @description Convert a PhyloExpressionSet with replicates to one with collapsed expression data.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
+#' @param ... Additional arguments passed to methods
 #' 
 #' @return A new PhyloExpressionSet object with collapsed expression data
 #' 
@@ -208,7 +215,7 @@ collapse <- S7::new_generic("collapse", "phyex_set")
 #' @description Extract a subset of genes from a PhyloExpressionSet object.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
-#' @param genes Character vector of gene IDs to select
+#' @param ... Additional arguments passed to methods (typically includes 'genes' parameter)
 #' 
 #' @return A PhyloExpressionSet object containing only the selected genes
 #' 
@@ -256,6 +263,7 @@ sTXI <- function(phyex_set,
 #' @param phyex_set A PhyloExpressionSet object
 #' @param genes Character vector of gene IDs to remove
 #' @param new_name Character string for the new dataset name (default: auto-generated)
+#' @param reuse_null_txis Logical indicating whether to reuse precomputed null conservation TXIs (default: TRUE)
 #' 
 #' @return A PhyloExpressionSet object with the specified genes removed
 #' 
@@ -364,3 +372,5 @@ TEI <- function(phyex_set) {
 TPI <- function(phyex_set) {
     return(phyex_set@TXI)
 }
+
+PhyloExpressionSet <- PhyloExpressionSetBase

@@ -97,10 +97,10 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
     # Show p value for conservation tests
     if (show_p_val) {
         t <- conservation_test(phyex_set, plot_result = FALSE)
-        label <- paste(t@p_label, "=", exp_p(t@p_value))
+        label <- exp_p(t@p_value)
         p <- p +
-            annotate("label",
-                label = label, fill = "white",
+            annotate("text",
+                label = label, parse = TRUE,
                 x = phyex_set@num_identities * 0.7, 
                 y = mean(phyex_set@TXI_sample) + 0.1
             )
@@ -172,10 +172,10 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
     # Show p value for conservation tests
     if (show_p_val) {
         t <- conservation_test(phyex_set, plot_result = FALSE)
-        label <- paste(t@p_label, "=", exp_p(t@p_value))
+        label <- exp_p(t@p_value)
         p <- p +
-            annotate("label",
-                label = label, fill = "white",
+            annotate("text",
+                label = label, parse = TRUE,
                 x = phyex_set@num_identities * 0.7, 
                 y = max(df_samples$TXI, na.rm = TRUE) * 0.9
             )

@@ -30,3 +30,14 @@ stat_generate_conservation_txis <- function(strata_vector,
     colnames(permuted_txi_matrix) <- colnames(count_matrix)
     return(permuted_txi_matrix)
 }
+
+#' @title Memoized Null Conservation TXI Generation
+#' @description Memoized version of generate_conservation_txis for improved performance
+#' with repeated calls using the same parameters.
+#' 
+#' @details
+#' This function caches results to avoid recomputing expensive permutations
+#' when the same parameters are used multiple times.
+#' 
+#' @keywords internal
+.memo_generate_conservation_txis <- memoise::memoise(stat_generate_conservation_txis)

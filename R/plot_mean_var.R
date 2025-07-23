@@ -39,7 +39,7 @@ plot_mean_var <- function(phyex_set, highlight_genes = NULL, colour_by = c("none
         GeneID = phyex_set@gene_ids,
         Stratum = phyex_set@strata,
         mean = rowMeans(expression_data),
-        var = matrixStats::rowVars(as.matrix(expression_data))
+        var = rowVars(as.matrix(expression_data))
     ) |>
         mutate(
             mean = mean + 1e-6,

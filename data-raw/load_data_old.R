@@ -3,7 +3,9 @@ data <- read.csv("data-raw/ath_embryogenesis_2011.csv", sep="\t")
 legend <- read.csv("data-raw/strata_legend.tsv", sep="\t")
 
 example_phyex_set_old <- as_PhyloExpressionSet(data, 
-                                           name="example phyex set old",
-                                           strata_labels=legend$Name)
+                                               name="Embryogenesis 2011",
+                                               species="Arabidopsis thaliana",
+                                               index_type="TAI",
+                                               strata_labels=legend$Name)
 
 usethis::use_data(example_phyex_set_old, overwrite = TRUE)

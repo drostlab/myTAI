@@ -8,6 +8,7 @@ plot_sample_space(
   phyex_set,
   method = c("PCA", "UMAP"),
   colour_by = c("identity", "TXI"),
+  seed = 42,
   ...
 )
 }
@@ -19,6 +20,8 @@ plot_sample_space(
 
 \item{colour_by}{Character string specifying what to colour by: "identity" (default), 
 "TXI"}
+
+\item{seed}{Integer seed for reproducible UMAP results (default: 42)}
 
 \item{...}{Additional arguments passed to specific methods}
 }

@@ -17,6 +17,8 @@ remove_genes(
 \item{genes}{Character vector of gene IDs to remove}
 
 \item{new_name}{Character string for the new dataset name (default: auto-generated)}
+
+\item{reuse_null_txis}{Logical indicating whether to reuse precomputed null conservation TXIs (default: TRUE)}
 }
 \value{
 A PhyloExpressionSet object with the specified genes removed

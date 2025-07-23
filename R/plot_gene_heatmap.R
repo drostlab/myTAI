@@ -3,6 +3,14 @@
 #' with optional dendrograms and gene age annotation.
 #' 
 #' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
+#' @param genes Character vector of specific gene IDs to include (default: NULL for auto-selection)
+#' @param top_p Numeric value specifying the top proportion of genes to include (default: 0.2)
+#' @param std Logical indicating whether to standardize expression values (default: TRUE)
+#' @param reps Logical indicating whether to show replicates or collapsed data (default: FALSE)
+#' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
+#' @param cluster_cols Logical indicating whether to cluster conditions/columns (default: FALSE)
+#' @param show_gene_age Logical indicating whether to show gene age annotation (default: TRUE)
+#' @param show_gene_ids Logical indicating whether to show gene identifiers (default: FALSE)
 #' @param ... Additional arguments passed to specific methods
 #' 
 #' @return A ggplot object (converted from pheatmap) showing the gene expression heatmap

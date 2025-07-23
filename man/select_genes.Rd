@@ -9,7 +9,7 @@ select_genes(phyex_set, ...)
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
-\item{genes}{Character vector of gene IDs to select}
+\item{...}{Additional arguments passed to methods (typically includes 'genes' parameter)}
 }
 \value{
 A PhyloExpressionSet object containing only the selected genes

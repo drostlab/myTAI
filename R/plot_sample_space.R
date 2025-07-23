@@ -8,6 +8,7 @@
 #' "PCA" or "UMAP" (default: "PCA")
 #' @param colour_by Character string specifying what to colour by: "identity" (default), 
 #' "TXI"
+#' @param seed Integer seed for reproducible UMAP results (default: 42)
 #' @param ... Additional arguments passed to specific methods
 #' 
 #' @return A ggplot2 object showing the sample space visualisation
@@ -31,6 +32,7 @@ plot_sample_space <- S7::new_generic("plot_sample_space", "phyex_set",
     function(phyex_set, 
              method = c("PCA", "UMAP"), 
              colour_by = c("identity", "TXI"), 
+             seed = 42,
              ...) {
         S7::S7_dispatch()
     }
@@ -40,6 +42,7 @@ plot_sample_space <- S7::new_generic("plot_sample_space", "phyex_set",
 S7::method(plot_sample_space, BulkPhyloExpressionSet) <- function(phyex_set, 
                                                                 method = c("PCA", "UMAP"), 
                                                                 colour_by = c("identity", "TXI"), 
+                                                                seed = 42,
                                                                 ...) {
     method <- match.arg(method)
     colour_by <- match.arg(colour_by)
@@ -53,6 +56,7 @@ S7::method(plot_sample_space, BulkPhyloExpressionSet) <- function(phyex_set,
         coords <- stats::prcomp(t(expr), scale. = TRUE)$x[, 1:2]
     }
     else if (method == "UMAP"){
+        set.seed(seed)
         coords <- uwot::umap(t(expr), scale = TRUE)
     }
     
@@ -84,7 +88,8 @@ S7::method(plot_sample_space, BulkPhyloExpressionSet) <- function(phyex_set,
     if (use_discrete) {
         p <- p + scale_colour_viridis_d()
     } else {
-        p <- p + scale_colour_viridis_c()
+        p <- p + scale_colour_gradient2(low = "blue", mid = "white", high = "red", 
+                                       midpoint = median(df$Colour_Variable, na.rm = TRUE))
     }
     
     return(p)
@@ -94,6 +99,7 @@ S7::method(plot_sample_space, BulkPhyloExpressionSet) <- function(phyex_set,
 S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set, 
                                                                method = c("PCA", "UMAP"), 
                                                                colour_by = c("identity", "TXI"), 
+                                                               seed = 42,
                                                                ...) {
     method <- match.arg(method)
     colour_by <- match.arg(colour_by)
@@ -146,7 +152,8 @@ S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set,
         if (use_discrete) {
             p <- p + scale_colour_viridis_d()
         } else {
-            p <- p + scale_colour_viridis_c()
+            p <- p + scale_colour_gradient2(low = "blue", mid = "white", high = "red", 
+                                            midpoint = median(plot_data$Colour_Variable, na.rm = TRUE))
         }
         
         return(p)
@@ -198,7 +205,8 @@ S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set,
         if (use_discrete) {
             p <- p + scale_colour_viridis_d()
         } else {
-            p <- p + scale_colour_viridis_c()
+            p <- p + scale_colour_gradient2(low = "blue", mid = "white", high = "red", 
+                                           midpoint = median(plot_data$Colour_Variable, na.rm = TRUE))
         }
         
         return(p)

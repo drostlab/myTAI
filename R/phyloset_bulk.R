@@ -2,8 +2,15 @@
 #' @description S7 class for bulk RNA-seq phylotranscriptomic expression data.
 #' This class handles expression data with biological replicates.
 #' 
+#' @param strata Factor vector of phylostratum assignments for each gene
+#' @param gene_ids Character vector of gene identifiers
 #' @param expression Matrix of expression counts with genes as rows and samples as columns
-#' @param groups Factor vector indicating which group/condition each sample belongs to
+#' @param name Character string naming the dataset (default: "Phylo Expression Set")
+#' @param species Character string specifying the species (default: NULL)
+#' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
+#' @param identities_label Character string labeling the identities (default: "Identities")
+#' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
+#' @param precomputed_null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' 
 #' @import S7
 #' @export
@@ -43,7 +50,11 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
         ## BULK-SPECIFIC TXI
         TXI_sample = new_property(
             class = class_double,
-            getter = function(self) colSums(.pTXI_raw(self@expression, self@strata))
+            getter = function(self) {
+                txi_values <- colSums(.pTXI_raw(self@expression, self@strata))
+                names(txi_values) <- colnames(self@expression)
+                return(txi_values)
+            }
         ),
         
         ## ADDITIONAL BULK PROPERTIES
@@ -82,10 +93,10 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
 #' 
 #' @export
 as_BulkPhyloExpressionSet <- function(data, 
-                                     groups = colnames(data[,3:ncol(data)]),
-                                     name = deparse(substitute(data)),
-                                     strata_labels = NULL,
-                                     ...) {
+                                      groups = colnames(data[,3:ncol(data)]),
+                                      name = deparse(substitute(data)),
+                                      strata_labels = NULL,
+                                      ...) {
     gene_ids <- as.character(data[[2]])
     if (is.null(strata_labels))
         strata_labels <- sort(unique(as.numeric(data[[1]])))
@@ -97,14 +108,17 @@ as_BulkPhyloExpressionSet <- function(data,
     expression <- as.matrix(data[3:ncol(data)])
     rownames(expression) <- gene_ids
     
-    return(BulkPhyloExpressionSet(
+    obj <- BulkPhyloExpressionSet(
         strata = strata,
         gene_ids = gene_ids,
         expression = expression,
         groups = groups,
         name = name,
         ...
-    ))
+    )
+
+
+    return(obj)
 }
 
 #' @title Match Gene Expression Data with Phylostratum Map
@@ -208,12 +222,22 @@ S7::method(select_genes, BulkPhyloExpressionSet) <- function(phyex_set, genes) {
 
 #' @export
 S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
-    # Call parent print method
-    S7::method(print, PhyloExpressionSetBase)(x, ...)
+    # Print base information (inline parent method)
+    cat("PhyloExpressionSet object\n")
+    cat("Class:", class(x)[[1]], "\n")
+    cat("Name:", x@name, "\n")
+    cat("Species:", ifelse(is.null(x@species), "Not specified", x@species), "\n")
+    cat("Index type:", x@index_type, "\n")
+    cat(x@identities_label, ":", paste(as.character(x@identities), collapse = ", "), "\n")
+    cat("Number of genes:", x@num_genes, "\n")
+    cat("Number of", tolower(x@identities_label), ":", x@num_identities, "\n")
+    cat("Number of phylostrata:", x@num_strata, "\n")
+    
+    # Print bulk-specific information
     cat("Number of samples:", length(x@sample_names), "\n")
     cat("Samples per condition:", table(x@groups), "\n")
 }
 
 # Aliases
 as_PhyloExpressionSet <- as_BulkPhyloExpressionSet
-PhyloExpressionSet <- BulkPhyloExpressionSet
+

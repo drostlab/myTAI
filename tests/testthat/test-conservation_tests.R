@@ -1,6 +1,6 @@
 test_that("Flatline test works", {
     # Basic flatline test
-    result <- flatline_test(example_phyex_set, plot_result = FALSE)
+    result <- stat_flatline_test(example_phyex_set, plot_result = FALSE)
     expect_s7_class(result, myTAI::ConservationTestResult)
     expect_true(is.numeric(result@p_value))
     expect_true(result@p_value >= 0 && result@p_value <= 1)
@@ -16,7 +16,7 @@ test_that("Reductive hourglass test works", {
         late = c(5, 6)
     )
     
-    result <- reductive_hourglass_test(example_phyex_set, modules, plot_result = FALSE)
+    result <- stat_reductive_hourglass_test(example_phyex_set, modules, plot_result = FALSE)
     expect_s7_class(result, myTAI::ConservationTestResult)
     expect_true(is.numeric(result@p_value))
     expect_true(result@p_value >= 0 && result@p_value <= 1)
@@ -32,7 +32,7 @@ test_that("Reverse hourglass test works", {
         late = c(5, 6)
     )
     
-    result <- reverse_hourglass_test(example_phyex_set, modules, plot_result = FALSE)
+    result <- stat_reverse_hourglass_test(example_phyex_set, modules, plot_result = FALSE)
     expect_s7_class(result, myTAI::ConservationTestResult)
     expect_true(is.numeric(result@p_value))
     expect_true(result@p_value >= 0 && result@p_value <= 1)
@@ -46,7 +46,7 @@ test_that("Early conservation test works", {
         late = c(6)
     )
     
-    result <- early_conservation_test(example_phyex_set, modules, plot_result = FALSE)
+    result <- stat_early_conservation_test(example_phyex_set, modules, plot_result = FALSE)
     expect_s7_class(result, myTAI::ConservationTestResult)
     expect_true(is.numeric(result@p_value))
     expect_true(result@p_value >= 0 && result@p_value <= 1)
@@ -60,7 +60,7 @@ test_that("Late conservation test works", {
         late = c(5, 6)
     )
     
-    result <- late_conservation_test(example_phyex_set, modules, plot_result = FALSE)
+    result <- stat_late_conservation_test(example_phyex_set, modules, plot_result = FALSE)
     expect_s7_class(result, myTAI::ConservationTestResult)
     expect_true(is.numeric(result@p_value))
     expect_true(result@p_value >= 0 && result@p_value <= 1)
@@ -74,7 +74,7 @@ test_that("Pairwise test works", {
         contrast2 = c(4, 5, 6)
     )
     
-    result <- pairwise_test(example_phyex_set, stage_pairs, plot_result = FALSE)
+    result <- stat_pairwise_test(example_phyex_set, stage_pairs, plot_result = FALSE)
     expect_s7_class(result, myTAI::ConservationTestResult)
     expect_true(is.numeric(result@p_value))
     expect_true(result@p_value >= 0 && result@p_value <= 1)
@@ -84,7 +84,7 @@ test_that("Pairwise test works", {
 
 
 test_that("Test result helper functions work", {
-    result <- flatline_test(example_phyex_set, plot_result = FALSE)
+    result <- stat_flatline_test(example_phyex_set, plot_result = FALSE)
     
     # Test confidence intervals (internal function)
     ci <- myTAI:::conf_int(result)

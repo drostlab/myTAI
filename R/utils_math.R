@@ -76,5 +76,5 @@ quantile_rank <- function(x) {
 #' @export
 exp_p <- function(p) {
     parts <- strsplit(formatC(p, format = "e", digits = 2), "e")[[1]]
-    bquote(italic(p) == .(as.numeric(parts[1])) %*% 10^.(as.integer(parts[2])))
+    paste0("italic(p) == ", as.numeric(parts[1]), " %*% 10^", as.integer(parts[2]))
 }

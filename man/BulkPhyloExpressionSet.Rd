@@ -13,13 +13,28 @@ BulkPhyloExpressionSet(
   identities_label = "Identities",
   null_conservation_sample_size = 5000L,
   precomputed_null_conservation_txis = NULL,
-  expression = stop("@expression is required")
+  expression = stop("@expression is required"),
+  groups = stop("@groups is required")
 )
 }
 \arguments{
-\item{expression}{Matrix of expression counts with genes as rows and samples as columns}
+\item{strata}{Factor vector of phylostratum assignments for each gene}
 
-\item{groups}{Factor vector indicating which group/condition each sample belongs to}
+\item{gene_ids}{Character vector of gene identifiers}
+
+\item{name}{Character string naming the dataset (default: "Phylo Expression Set")}
+
+\item{species}{Character string specifying the species (default: NULL)}
+
+\item{index_type}{Character string specifying the transcriptomic index type (default: "TXI")}
+
+\item{identities_label}{Character string labeling the identities (default: "Identities")}
+
+\item{null_conservation_sample_size}{Numeric value for null conservation sample size (default: 5000)}
+
+\item{precomputed_null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
+
+\item{expression}{Matrix of expression counts with genes as rows and samples as columns}
 }
 \description{
 S7 class for bulk RNA-seq phylotranscriptomic expression data.

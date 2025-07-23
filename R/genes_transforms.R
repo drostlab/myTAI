@@ -2,8 +2,6 @@
 #' @description Collection of functions for transforming gene expression data
 #' in PhyloExpressionSet objects.
 #' 
-#' @importFrom matrixStats rowVars
-
 #' @title Transform Expression Counts in PhyloExpressionSet
 #' @description Apply a transformation function to the expression counts in a PhyloExpressionSet.
 #' 

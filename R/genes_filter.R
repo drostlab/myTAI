@@ -2,7 +2,6 @@
 #' @description Collection of functions for filtering genes based on expression patterns
 #' in PhyloExpressionSet objects.
 #' 
-#' @importFrom matrixStats rowVars
 
 #' @title Select Top Genes by Expression Metric
 #' @description Generic function to select genes with the highest values for a given expression metric.

@@ -20,6 +20,22 @@ plot_gene_heatmap(
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
+\item{genes}{Character vector of specific gene IDs to include (default: NULL for auto-selection)}
+
+\item{top_p}{Numeric value specifying the top proportion of genes to include (default: 0.2)}
+
+\item{std}{Logical indicating whether to standardize expression values (default: TRUE)}
+
+\item{reps}{Logical indicating whether to show replicates or collapsed data (default: FALSE)}
+
+\item{cluster_rows}{Logical indicating whether to cluster genes/rows (default: FALSE)}
+
+\item{cluster_cols}{Logical indicating whether to cluster conditions/columns (default: FALSE)}
+
+\item{show_gene_age}{Logical indicating whether to show gene age annotation (default: TRUE)}
+
+\item{show_gene_ids}{Logical indicating whether to show gene identifiers (default: FALSE)}
+
 \item{...}{Additional arguments passed to specific methods}
 }
 \value{

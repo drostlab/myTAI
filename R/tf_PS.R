@@ -13,14 +13,12 @@
 #' @details This function transforms the phylostratum assignment.
 #' The return value of this function is a PhyloExpressionSet object with
 #' transformed phylostratum \code{tfPhylostratum} as the first column, satisfying
-#' \code{\link{PhyloExpressionSet}}. Note that the input \code{transform} must be an
+#' \code{\link{PhyloExpressionSetBase}}. Note that the input \code{transform} must be an
 #' available function, currently limited to only \code{"qr"} (or \code{"quantilerank"}).
 #' @return a \code{PhyloExpressionSet} object storing transformed Phylostratum levels.
 #' @author Jaruwatana Sodai Lotharukpong and Lukas Maischak
 #' @seealso \code{\link{tf}}
 #' @examplesIf FALSE
-#' # source the example dataset
-#' data(PhyloExpressionSetExample)
 #'
 #' # get the relative expression profiles for each phylostratum
 #' tfPES <- tf_PS(phyex_set, transform = "qr")
@@ -29,7 +27,7 @@
 #' @export
 
 tfPS <- function(phyex_set, transform="qr") {
-    if (!S7::S7_inherits(phyex_set, PhyloExpressionSet)) {
+    if (!S7::S7_inherits(phyex_set, PhyloExpressionSetBase)) {
         stop("Input must be a PhyloExpressionSet S7 object.", call. = FALSE)
     }
     ps_vec <- as.numeric(phyex_set@strata)

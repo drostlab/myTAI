@@ -24,7 +24,7 @@
 #' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_late_conservation_test}}
 #' @export
 stat_early_conservation_test <- function(phyex_set, modules, ...) {
-    stat_generic_conservation_test(phyex_set, modules, test = "early", ...)
+    stat_generic_conservation_test(phyex_set, modules, test_name = "early", ...)
 }
 
 

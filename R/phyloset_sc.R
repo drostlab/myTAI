@@ -2,6 +2,14 @@
 #' @description S7 class for single-cell phylotranscriptomic expression data.
 #' This class handles Seurat objects and provides pseudobulking functionality.
 #' 
+#' @param strata Factor vector of phylostratum assignments for each gene
+#' @param gene_ids Character vector of gene identifiers
+#' @param name Character string naming the dataset (default: "Phylo Expression Set")
+#' @param species Character string specifying the species (default: NULL)
+#' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
+#' @param identities_label Character string labeling the identities (default: "Cell Types")
+#' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
+#' @param precomputed_null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' @param seurat A Seurat object containing single-cell expression data
 #' @param cell_identity Character string specifying which cell identity to use from Seurat metadata
 #' @param slot Character string specifying which slot to use from the Seurat object (default: "data")
@@ -29,6 +37,11 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
             default = 10
         ),
         
+        ## RAW EXPRESSION DATA
+        expression = new_property(
+            getter = function(self) .get_expression_matrix(self@seurat, self@slot)
+        ),
+        
         ## IMPLEMENTED ABSTRACT PROPERTIES
         identities = new_property(
             class = class_factor,
@@ -50,7 +63,9 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 counts <- .get_expression_matrix(self@seurat, self@slot)
                 strata_numeric <- as.numeric(self@strata)
                 TAI <- (Matrix::t(counts) %*% strata_numeric) / Matrix::colSums(counts)
-                return(as.vector(TAI))
+                txi_vector <- as.vector(TAI)
+                names(txi_vector) <- colnames(counts)
+                return(txi_vector)
             }
         ),
         
@@ -384,8 +399,18 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
 
 #' @export
 S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
-    # Call parent print method
-    S7::method(print, PhyloExpressionSetBase)(x, ...)
+    # Print base information (inline parent method)
+    cat("PhyloExpressionSet object\n")
+    cat("Class:", class(x)[[1]], "\n")
+    cat("Name:", x@name, "\n")
+    cat("Species:", ifelse(is.null(x@species), "Not specified", x@species), "\n")
+    cat("Index type:", x@index_type, "\n")
+    cat(x@identities_label, ":", paste(as.character(x@identities), collapse = ", "), "\n")
+    cat("Number of genes:", x@num_genes, "\n")
+    cat("Number of", tolower(x@identities_label), ":", x@num_identities, "\n")
+    cat("Number of phylostrata:", x@num_strata, "\n")
+    
+    # Print single-cell specific information
     cat("Cell identity used:", x@cell_identity, "\n")
     cat("Expression slot used:", x@slot, "\n")
     cat("Min cells per type:", x@min_cells_per_identity, "\n")

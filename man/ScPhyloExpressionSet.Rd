@@ -20,6 +20,22 @@ ScPhyloExpressionSet(
 )
 }
 \arguments{
+\item{strata}{Factor vector of phylostratum assignments for each gene}
+
+\item{gene_ids}{Character vector of gene identifiers}
+
+\item{name}{Character string naming the dataset (default: "Phylo Expression Set")}
+
+\item{species}{Character string specifying the species (default: NULL)}
+
+\item{index_type}{Character string specifying the transcriptomic index type (default: "TXI")}
+
+\item{identities_label}{Character string labeling the identities (default: "Cell Types")}
+
+\item{null_conservation_sample_size}{Numeric value for null conservation sample size (default: 5000)}
+
+\item{precomputed_null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
+
 \item{seurat}{A Seurat object containing single-cell expression data}
 
 \item{cell_identity}{Character string specifying which cell identity to use from Seurat metadata}

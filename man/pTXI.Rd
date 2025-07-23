@@ -8,6 +8,8 @@ pTXI(phyex_set, ...)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
+
+\item{...}{Additional arguments passed to methods}
 }
 \value{
 Matrix of pTXI values
