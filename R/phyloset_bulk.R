@@ -5,6 +5,7 @@
 #' @param strata Factor vector of phylostratum assignments for each gene
 #' @param gene_ids Character vector of gene identifiers
 #' @param expression Matrix of expression counts with genes as rows and samples as columns
+#' @param groups Factor vector indicating which identity each sample belongs to
 #' @param name Character string naming the dataset (default: "Phylo Expression Set")
 #' @param species Character string specifying the species (default: NULL)
 #' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
@@ -184,6 +185,37 @@ match_map <- function(data,
 
 ## METHOD IMPLEMENTATIONS
 
+#' @title Convert BulkPhyloExpressionSet to Data Frame
+#' @description Convert a BulkPhyloExpressionSet object back to the original data frame format
+#' with phylostratum, gene ID, and expression data as columns.
+#' 
+#' @param phyex_set A BulkPhyloExpressionSet object
+#' @param use_collapsed Logical indicating whether to use collapsed expression data (default: FALSE)
+#' 
+#' @return A data frame where column 1 contains phylostratum information, 
+#' column 2 contains gene IDs, and columns 3+ contain expression data
+#' 
+#' @examples
+#' # Convert BulkPhyloExpressionSet back to data frame
+#' # df <- as_data_frame(bulk_phyex_set)
+#' # df_collapsed <- as_data_frame(bulk_phyex_set, use_collapsed = TRUE)
+#' 
+#' @export
+as_data_frame <- function(phyex_set, use_collapsed = FALSE) {
+    if (use_collapsed) {
+        expr_data <- phyex_set@expression_collapsed
+    } else {
+        expr_data <- phyex_set@expression
+    }
+    
+    data.frame(
+        Stratum = as.numeric(phyex_set@strata),
+        GeneID = phyex_set@gene_ids,
+        expr_data,
+        check.names = FALSE
+    )
+}
+
 #' @export
 S7::method(collapse, BulkPhyloExpressionSet) <- function(phyex_set) {
     data <- tibble::tibble(Stratum=as.numeric(phyex_set@strata), 
@@ -240,4 +272,3 @@ S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
 
 # Aliases
 as_PhyloExpressionSet <- as_BulkPhyloExpressionSet
-

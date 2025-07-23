@@ -52,7 +52,7 @@ plot_gene_profiles <- function(phyex_set,
     colour_by <- match.arg(colour_by)
     
     
-    counts <- phyex_set@counts
+    counts <- phyex_set@expression
     counts <- switch(transformation,
                      log = log1p(counts),
                      std_log = to_std_expr(log1p(counts)),
@@ -74,13 +74,31 @@ plot_gene_profiles <- function(phyex_set,
     show_gene <- all_genes %in% genes_to_plot
     counts <- counts[show_gene, , drop=FALSE]
     
+    # For single-cell data, ensure counts matrix matches sample_names
+    if (inherits(phyex_set, "ScPhyloExpressionSet")) {
+        # Filter counts to only include valid cells in sample_names
+        valid_cells <- intersect(colnames(counts), phyex_set@sample_names)
+        counts <- counts[, valid_cells, drop=FALSE]
+    }
+    
     df_long <- reshape2::melt(counts)
     colnames(df_long) <- c("GeneID", "Sample", "Expression")
     
+    # Remove rows with NA Sample values
+    df_long <- df_long[!is.na(df_long$Sample), ]
+    
+    # Create sample metadata frame with unique entries
+    sample_metadata <- data.frame(
+        Sample = phyex_set@sample_names,
+        Identity = phyex_set@groups,
+        stringsAsFactors = FALSE
+    )
+    
+    # Remove any duplicates and NA entries
+    sample_metadata <- sample_metadata[!duplicated(sample_metadata$Sample) & !is.na(sample_metadata$Sample), ]
+    
     df_long <- df_long |>
-        left_join(data.frame(Sample = phyex_set@sample_names,
-                             Identity = phyex_set@groups),
-                  by = "Sample") |>
+        left_join(sample_metadata, by = "Sample") |>
         group_by(GeneID, Identity) |>
         summarise(min = min(Expression),
                   max = max(Expression),

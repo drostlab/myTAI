@@ -82,7 +82,7 @@ S7::method(transform_counts, ScPhyloExpressionSet) <- function(phyex_set,
         cell_identity = phyex_set@cell_identity,
         slot = phyex_set@slot,
         name = new_name,
-        min_cells_per_type = phyex_set@min_cells_per_type,
+        min_cells_per_identity = phyex_set@min_cells_per_identity,
         species = phyex_set@species,
         index_type = phyex_set@index_type
     ))

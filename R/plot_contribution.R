@@ -39,7 +39,7 @@ plot_contribution <- function(phyex_set) {
                     y = TXI, 
                     fill = Stratum, 
                     group = Stratum)) +
-        geom_area(position = "stack", colour="black", size=0.2) +
+        geom_area(position = "stack", colour="black", linewidth=0.2) +
         labs(x=phyex_set@identities_label, y=phyex_set@index_full_name) +
         scale_fill_manual(values = rev(PS_colours(phyex_set@num_strata))) +
         guides(fill=guide_legend(override.aes = list(size = 1.0), keyheight = 0.5, keywidth = 0.5)) +

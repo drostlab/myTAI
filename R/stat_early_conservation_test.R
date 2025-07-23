@@ -24,7 +24,15 @@
 #' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_late_conservation_test}}
 #' @export
 stat_early_conservation_test <- function(phyex_set, modules, ...) {
-    stat_generic_conservation_test(phyex_set, modules, test_name = "early", ...)
+    t <- stat_generic_conservation_test(phyex_set, 
+                                        test_name="Early Conservation Test",
+                                        scoring_function=\(x) ec_score(x, modules),
+                                        fitting_dist=distributions$normal,
+                                        alternative="greater",
+                                        p_label="p_ect",
+                                        ...)
+    t@modules <- modules
+    return(t)
 }
 
 

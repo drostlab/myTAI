@@ -14,5 +14,5 @@ utils::globalVariables(c(
     
     # Functions commonly used without explicit namespace
     "var", "sd", "quantile", "prcomp", "colorRampPalette", "setNames", "p.adjust",
-    "flatline_test"
+    "stat_flatline_test"
 ))

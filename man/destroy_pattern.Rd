@@ -16,7 +16,7 @@ destroy_pattern(
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (bulk or single cell, the latter which will get pseudo-bulked)}
 
 \item{num_runs}{Number of GATAI runs to perform (default: 20)}
 

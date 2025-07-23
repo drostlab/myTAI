@@ -42,17 +42,17 @@ test_that("age.apply works", {
     expect_true(is.matrix(result_var))
 })
 
-test_that("filter_dyn_expr works", {
-    # Test basic filtering (internal function)
+test_that("genes_filter_dynamic works", {
+    # Test basic filtering
     expr_matrix <- log1p(example_phyex_set@expression_collapsed)
-    filtered <- myTAI:::filter_dyn_expr(expr_matrix, thr = 0.8)
+    filtered <- genes_filter_dynamic(expr_matrix, thr = 0.8)
     expect_true(is.matrix(filtered))
     expect_true(nrow(filtered) <= nrow(expr_matrix))
     expect_equal(ncol(filtered), ncol(expr_matrix))
     
     # Test with different thresholds
-    filtered_90 <- myTAI:::filter_dyn_expr(expr_matrix, thr = 0.9)
-    filtered_50 <- myTAI:::filter_dyn_expr(expr_matrix, thr = 0.5)
+    filtered_90 <- genes_filter_dynamic(expr_matrix, thr = 0.9)
+    filtered_50 <- genes_filter_dynamic(expr_matrix, thr = 0.5)
     expect_true(nrow(filtered_90) <= nrow(filtered_50))
 })
 
@@ -138,6 +138,6 @@ test_that("Data conversion functions work", {
     )
     
     matched_set <- match_map(expr_data, phylomap)
-    expect_s7_class(matched_set, myTAI::PhyloExpressionSet)
+    expect_s7_class(matched_set, myTAI::BulkPhyloExpressionSet)
     expect_equal(nrow(matched_set@expression), 100)
 })

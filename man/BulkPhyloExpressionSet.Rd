@@ -35,6 +35,8 @@ BulkPhyloExpressionSet(
 \item{precomputed_null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
 
 \item{expression}{Matrix of expression counts with genes as rows and samples as columns}
+
+\item{groups}{Factor vector indicating which identity each sample belongs to}
 }
 \description{
 S7 class for bulk RNA-seq phylotranscriptomic expression data.

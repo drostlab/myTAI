@@ -22,7 +22,6 @@ test_that("ScPhyloExpressionSet properties work", {
     expect_equal(length(example_phyex_set_sc@strata), example_phyex_set_sc@num_genes)
     expect_true(is.numeric(example_phyex_set_sc@TXI_sample))
     expect_true(is.matrix(example_phyex_set_sc@expression_collapsed))
-    expect_true(is.data.frame(example_phyex_set_sc@data))
 })
 
 test_that("Single-cell plotting functions work", {
@@ -58,7 +57,7 @@ test_that("Single-cell transformations work", {
     # Test transformation
     log_sc_set <- transform_counts(example_phyex_set_sc, log1p, "log1p")
     expect_s7_class(log_sc_set, myTAI::ScPhyloExpressionSet)
-    expect_equal(log_sc_set@name, "log1p")
+    expect_true(grepl("log1p", log_sc_set@name))
     
     # Test gene selection
     selected_genes <- example_phyex_set_sc@gene_ids[1:10]

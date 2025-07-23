@@ -2,7 +2,7 @@
 #' @description Apply the GATAI algorithm
 #' to identify and remove genes that contribute to phylotranscriptomic patterns.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
+#' @param phyex_set A PhyloExpressionSet object (bulk or single cell, the latter which will get pseudo-bulked)
 #' @param num_runs Number of GATAI runs to perform (default: 20)
 #' @param runs_threshold Threshold for gene removal consistency across runs (default: 0.5)
 #' @param analysis_dir Directory to store GATAI analysis results (default: NULL)
@@ -36,7 +36,7 @@ destroy_pattern <- function(phyex_set,
         stop("Package 'gataiR' must be installed to use this function.")
     }
     
-    res <- gataiR::gatai(phyex_set@data, 
+    res <- gataiR::gatai(as_data_frame(collapse(phyex_set)), 
                          num_runs = num_runs,
                          runs_threshold = runs_threshold, 
                          max_generations = max_generations,

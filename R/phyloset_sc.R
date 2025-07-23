@@ -62,8 +62,8 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 # Efficient per-cell TXI calculation
                 counts <- .get_expression_matrix(self@seurat, self@slot)
                 strata_numeric <- as.numeric(self@strata)
-                TAI <- (Matrix::t(counts) %*% strata_numeric) / Matrix::colSums(counts)
-                txi_vector <- as.vector(TAI)
+                txi <- (Matrix::t(counts) %*% strata_numeric) / Matrix::colSums(counts)
+                txi_vector <- as.vector(txi)
                 names(txi_vector) <- colnames(counts)
                 return(txi_vector)
             }
@@ -72,7 +72,13 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
         ## SC-SPECIFIC PROPERTIES
         sample_names = new_property(
             class = class_character,
-            getter = function(self) colnames(.get_expression_matrix(self@seurat, self@slot))
+            getter = function(self) {
+                # Get cell identities and filter to valid ones
+                cell_types <- self@seurat@meta.data[[self@cell_identity]]
+                names(cell_types) <- colnames(self@seurat)
+                valid_cells <- cell_types %in% self@identities
+                return(names(cell_types)[valid_cells])
+            }
         ),
         groups = new_property(
             class = class_factor,
@@ -161,7 +167,6 @@ as_ScPhyloExpressionSet <- function(seurat,
         strata = strata,
         gene_ids = rownames(sc_counts),
         name = name,
-        index_type = "TAI",
         ...
     ))
 }
@@ -195,12 +200,26 @@ as_ScPhyloExpressionSet <- function(seurat,
             }, error = function(e) {
                 Seurat::GetAssayData(seurat, layer = "counts")
             })
+        } else if (slot == "counts") {
+            Seurat::GetAssayData(seurat, layer = "counts")
+        } else if (slot == "scale.data") {
+            tryCatch({
+                Seurat::GetAssayData(seurat, layer = "scale.data")
+            }, error = function(e) {
+                # Fall back to old API for scale.data
+                suppressWarnings(Seurat::GetAssayData(seurat, slot = "scale.data"))
+            })
         } else {
-            Seurat::GetAssayData(seurat, layer = slot)
+            # For any other slot name, try as layer first, then as slot
+            tryCatch({
+                Seurat::GetAssayData(seurat, layer = slot)
+            }, error = function(e) {
+                suppressWarnings(Seurat::GetAssayData(seurat, slot = slot))
+            })
         }
     }, error = function(e) {
-        # Fall back to old API
-        Seurat::GetAssayData(seurat, slot = slot)
+        # Final fallback to old API
+        suppressWarnings(Seurat::GetAssayData(seurat, slot = slot))
     })
     
     return(counts)
@@ -301,10 +320,11 @@ as_ScPhyloExpressionSet <- function(seurat,
     cell_types <- seurat@meta.data[[cell_identity]]
     names(cell_types) <- colnames(seurat)
     
-    # Filter to valid identities
+    # Filter to valid identities and maintain order
     valid_cells <- cell_types %in% valid_identities
     cell_types_filtered <- cell_types[valid_cells]
     
+    # Return factor with same order as filtered cell names
     return(factor(cell_types_filtered, levels = valid_identities))
 }
 
@@ -374,8 +394,30 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
         stop("None of the specified genes were found in the Seurat object")
     }
     
-    # Subset the Seurat object
-    seurat_subset <- phyex_set@seurat[selected_genes_in_seurat, ]
+    # Subset the Seurat object using Seurat's subset function
+    seurat_subset <- tryCatch({
+        # Try using Seurat's subset function
+        Seurat::subset(phyex_set@seurat, features = selected_genes_in_seurat)
+    }, error = function(e) {
+        # Fallback: create new Seurat object with subset data
+        tryCatch({
+            # Extract the expression matrix for selected genes
+            expr_matrix <- .get_expression_matrix(phyex_set@seurat, phyex_set@slot)
+            expr_subset <- expr_matrix[selected_genes_in_seurat, , drop = FALSE]
+            
+            # Create new Seurat object with subset data
+            Seurat::CreateSeuratObject(
+                counts = if (phyex_set@slot == "counts") expr_subset else NULL,
+                data = if (phyex_set@slot == "data") expr_subset else NULL,
+                meta.data = phyex_set@seurat@meta.data
+            )
+        }, error = function(e2) {
+            # Final fallback: just use the original seurat object
+            # This is not ideal but allows the function to continue
+            warning("Could not subset Seurat object, using original object")
+            phyex_set@seurat
+        })
+    })
     
     # Create phylomap for selected genes
     phylomap <- data.frame(

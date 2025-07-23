@@ -127,6 +127,8 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             }
         ),
         
+
+        
         ## ABSTRACT SAMPLE NAMES
         sample_names = new_property(
             getter = function(self) stop("sample_names property must be implemented by subclass")
