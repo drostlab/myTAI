@@ -62,7 +62,7 @@ plot_gene_heatmap <- function(phyex_set,
         e <- e[rownames(e) %in% genes, , drop = FALSE]
     } else {
         # Filter for dynamic genes
-        e <- e |> filter_dyn_expr(thr = 1 - top_p)
+        e <- e |> genes_filter_dynamic(thr = 1 - top_p)
     }
     
     # Calculate standardized expression for ordering

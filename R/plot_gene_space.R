@@ -37,7 +37,7 @@ plot_gene_space <- function(phyex_set,
     if (!is.null(genes) && length(genes) > 0) {
         e <- e[rownames(e) %in% genes, , drop=FALSE]
     } else {
-        e <- e |> filter_dyn_expr(thr = 1 - top_p)
+        e <- e |> genes_filter_dynamic(thr = 1 - top_p)
     }
     
     e <- to_std_expr(e)
@@ -92,4 +92,3 @@ plot_gene_space <- function(phyex_set,
         
     p
 }
-

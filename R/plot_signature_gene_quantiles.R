@@ -5,7 +5,7 @@
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' @param quantiles Numeric vector of quantiles to test (default: c(1.0, 0.99, 0.95, 0.90, 0.80))
-#' @param selection_FUN Function to select genes for removal (default: top_expression_genes)
+#' @param selection_FUN Function to select genes for removal (default: genes_top_mean)
 #' @param ... Additional arguments passed to plot_signature_multiple
 #' 
 #' @return A ggplot2 object showing signatures across different quantiles
@@ -27,7 +27,7 @@
 #' @export
 plot_signature_gene_quantiles <- function(phyex_set,
                                           quantiles=c(1.0, 0.99, 0.95, 0.90, 0.80),
-                                          selection_FUN=top_expression_genes,
+                                          selection_FUN=genes_top_mean,
                                           ...) {
     phyex_sets <- quantiles |>
         map(\(p) selection_FUN(phyex_set, p=p)) |>
