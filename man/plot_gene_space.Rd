@@ -8,18 +8,18 @@ plot_gene_space(
   phyex_set,
   top_p = 0.2,
   genes = NULL,
-  colour_by = c("stage", "strata")
+  colour_by = c("identity", "strata")
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
 \item{top_p}{Proportion of most dynamic genes to include when genes=NULL (default: 0.2)}
 
 \item{genes}{Character vector of specific genes to plot. If NULL, uses top dynamic genes}
 
 \item{colour_by}{Character string specifying coloring scheme:
-"stage" (by peak expression stage) or "strata" (by phylostratum) (default: "stage")}
+"identity" (by peak expression stage/identity) or "strata" (by phylostratum) (default: "identity")}
 }
 \value{
 A ggplot2 object showing the gene space PCA plot
@@ -35,8 +35,8 @@ The analysis uses log-transformed and standardized expression values. Genes are
 colored either by their phylostratum or by their peak expression stage.
 }
 \examples{
-# Plot gene space colored by stage
-# p1 <- plot_gene_space(phyex_set, colour_by = "stage")
+# Plot gene space colored by identity
+# p1 <- plot_gene_space(phyex_set, colour_by = "identity")
 
 # Plot specific genes colored by strata
 # p2 <- plot_gene_space(phyex_set, genes = c("gene1", "gene2"), colour_by = "strata")

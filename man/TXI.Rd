@@ -10,7 +10,7 @@ TXI(phyex_set)
 \item{phyex_set}{A PhyloExpressionSet object}
 }
 \value{
-Numeric vector of TXI values for each condition
+Numeric vector of TXI values for each identity
 }
 \description{
 Calculate the transcriptomic index values for a PhyloExpressionSet.

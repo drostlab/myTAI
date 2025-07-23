@@ -3,11 +3,11 @@
 #' @description Create a dimensional reduction plot to visualize sample relationships
 #' in gene expression space using PCA or UMAP.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
 #' @param method Character string specifying the dimensionality reduction method: 
 #' "PCA" or "UMAP" (default: "PCA")
-#' @param colour_by Character string specifying what to colour by: "condition" (default), 
-#' "TAI", or for single-cell data: "celltype"
+#' @param colour_by Character string specifying what to colour by: "identity" (default), 
+#' "TXI"
 #' @param ... Additional arguments passed to specific methods
 #' 
 #' @return A ggplot2 object showing the sample space visualisation
@@ -18,27 +18,33 @@
 #' are coloured by their group assignments or TAI values.
 #' 
 #' @examples
-#' # Create PCA plot coloured by condition
-#' # pca_plot <- plot_sample_space(phyex_set, method = "PCA", colour_by = "condition")
+#' # Create PCA plot coloured by identity
+#' # pca_plot <- plot_sample_space(phyex_set, method = "PCA", colour_by = "identity")
 #' 
-#' # Create UMAP plot coloured by TAI
-#' # umap_plot <- plot_sample_space(phyex_set, method = "UMAP", colour_by = "TAI")
+#' # Create UMAP plot coloured by TXI
+#' # umap_plot <- plot_sample_space(phyex_set, method = "UMAP", colour_by = "TXI")
 #' 
 #' @import ggplot2
 #' @importFrom uwot umap
 #' @export
-plot_sample_space <- S7::new_generic("plot_sample_space", 
-                                    dispatch_args = "phyex_set",
-                                    fun = function(phyex_set, method = c("PCA", "UMAP"), colour_by = "condition", ...) {
-                                        S7::S7_dispatch()
-                                    })
+plot_sample_space <- S7::new_generic("plot_sample_space", "phyex_set",
+    function(phyex_set, 
+             method = c("PCA", "UMAP"), 
+             colour_by = c("identity", "TXI"), 
+             ...) {
+        S7::S7_dispatch()
+    }
+)
 
 #' @export
-S7::method(plot_sample_space, PhyloExpressionSet) <- function(phyex_set, method = c("PCA", "UMAP"), colour_by = c("condition", "TAI"), ...) {
+S7::method(plot_sample_space, BulkPhyloExpressionSet) <- function(phyex_set, 
+                                                                method = c("PCA", "UMAP"), 
+                                                                colour_by = c("identity", "TXI"), 
+                                                                ...) {
     method <- match.arg(method)
     colour_by <- match.arg(colour_by)
     
-    expr <- log1p(phyex_set@counts)
+    expr <- log1p(phyex_set@expression)
     # Remove genes with zero variance
     nonzero_var_genes <- apply(expr, 1, function(x) stats::var(x) != 0)
     expr <- expr[nonzero_var_genes, , drop = FALSE]
@@ -54,13 +60,13 @@ S7::method(plot_sample_space, PhyloExpressionSet) <- function(phyex_set, method 
     colnames(df) <- c("V1", "V2")
     
     # Set up colouring
-    if (colour_by == "condition") {
+    if (colour_by == "identity") {
         df$Colour_Variable <- phyex_set@groups
-        colour_label <- "Group"
+        colour_label <- phyex_set@identities_label
         use_discrete <- TRUE
-    } else if (colour_by == "TAI") {
-        df$Colour_Variable <- phyex_set@TXI_reps
-        colour_label <- "TAI"
+    } else if (colour_by == "TXI") {
+        df$Colour_Variable <- phyex_set@TXI_sample
+        colour_label <- phyex_set@index_full_name
         use_discrete <- FALSE
     }
     
@@ -85,7 +91,10 @@ S7::method(plot_sample_space, PhyloExpressionSet) <- function(phyex_set, method 
 }
 
 #' @export
-S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set, method = c("PCA", "UMAP"), colour_by = c("celltype", "TAI"), ...) {
+S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set, 
+                                                               method = c("PCA", "UMAP"), 
+                                                               colour_by = c("identity", "TXI"), 
+                                                               ...) {
     method <- match.arg(method)
     colour_by <- match.arg(colour_by)
     
@@ -103,16 +112,16 @@ S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set, metho
         # Add metadata for colouring
         cell_meta <- phyex_set@seurat@meta.data
         cell_meta$cell_id <- rownames(cell_meta)
-        cell_meta$TAI <- phyex_set@TXI_reps[match(cell_meta$cell_id, names(phyex_set@TXI_reps))]
+        cell_meta$TXI <- phyex_set@TXI_sample[match(cell_meta$cell_id, names(phyex_set@TXI_sample))]
         
         # Set up colouring
-        if (colour_by == "celltype") {
+        if (colour_by == "identity") {
             plot_data$Colour_Variable <- cell_meta[[phyex_set@cell_identity]][match(plot_data$cell_id, cell_meta$cell_id)]
-            colour_label <- "Cell Type"
+            colour_label <- phyex_set@identities_label
             use_discrete <- TRUE
-        } else if (colour_by == "TAI") {
-            plot_data$Colour_Variable <- cell_meta$TAI[match(plot_data$cell_id, cell_meta$cell_id)]
-            colour_label <- "TAI"
+        } else if (colour_by == "TXI") {
+            plot_data$Colour_Variable <- cell_meta$TXI[match(plot_data$cell_id, cell_meta$cell_id)]
+            colour_label <- phyex_set@index_full_name
             use_discrete <- FALSE
         }
         
@@ -155,16 +164,16 @@ S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set, metho
         # Add metadata for colouring
         cell_meta <- phyex_set@seurat@meta.data
         cell_meta$cell_id <- rownames(cell_meta)
-        cell_meta$TAI <- phyex_set@TXI_reps[match(cell_meta$cell_id, names(phyex_set@TXI_reps))]
+        cell_meta$TXI <- phyex_set@TXI_sample[match(cell_meta$cell_id, names(phyex_set@TXI_sample))]
         
         # Set up colouring
-        if (colour_by == "celltype") {
+        if (colour_by == "identity") {
             plot_data$Colour_Variable <- cell_meta[[phyex_set@cell_identity]][match(plot_data$cell_id, cell_meta$cell_id)]
-            colour_label <- "Cell Type"
+            colour_label <- phyex_set@identities_label
             use_discrete <- TRUE
-        } else if (colour_by == "TAI") {
-            plot_data$Colour_Variable <- cell_meta$TAI[match(plot_data$cell_id, cell_meta$cell_id)]
-            colour_label <- "TAI"
+        } else if (colour_by == "TXI") {
+            plot_data$Colour_Variable <- cell_meta$TXI[match(plot_data$cell_id, cell_meta$cell_id)]
+            colour_label <- phyex_set@index_full_name
             use_discrete <- FALSE
         }
         

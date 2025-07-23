@@ -6,15 +6,15 @@
 \usage{
 plot_distribution_expression(
   phyex_set,
-  show_conditions = TRUE,
+  show_identities = TRUE,
   show_strata = FALSE,
   seed = 123
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object.}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).}
 
-\item{show_conditions}{Logical, whether to show condition-specific distributions.}
+\item{show_identities}{Logical, whether to show identity-specific distributions.}
 
 \item{show_strata}{Logical, whether to show stratum-specific distributions.}
 
@@ -22,7 +22,7 @@ plot_distribution_expression(
 }
 \description{
 \code{plot_distribution_expression} generates plots that help to compare the distribution
-of expression levels through various developmental stages, highlighting each stage with
+of expression levels through various developmental stages or cell types, highlighting each stage with
 distinct colors.
 }
 \section{Recommendation}{

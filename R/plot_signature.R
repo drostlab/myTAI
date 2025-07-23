@@ -40,7 +40,7 @@ plot_signature <- S7::new_generic("plot_signature", "phyex_set",
     function(phyex_set,
              show_reps = TRUE,
              show_p_val = FALSE,
-             conservation_test = flatline_test,
+             conservation_test = stat_flatline_test,
              colour = NULL,
              ...) {
         S7::S7_dispatch()
@@ -51,7 +51,7 @@ plot_signature <- S7::new_generic("plot_signature", "phyex_set",
 S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                show_reps = TRUE,
                                                                show_p_val = FALSE,
-                                                               conservation_test = flatline_test,
+                                                               conservation_test = stat_flatline_test,
                                                                colour = NULL,
                                                                ...) {
     
@@ -120,6 +120,8 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
 S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set, 
                                                            show_reps = TRUE,
                                                            colour = NULL,
+                                                           show_p_val = FALSE,
+                                                           conservation_test = stat_flatline_test,
                                                            ...) {
     
     # Prepare data for plotting
@@ -166,6 +168,18 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
             axis.text.x = element_text(angle = 45, hjust = 1),
             legend.position = "none"
         )
+    
+    # Show p value for conservation tests
+    if (show_p_val) {
+        t <- conservation_test(phyex_set, plot_result = FALSE)
+        label <- paste(t@p_label, "=", exp_p(t@p_value))
+        p <- p +
+            annotate("label",
+                label = label, fill = "white",
+                x = phyex_set@num_identities * 0.7, 
+                y = max(df_samples$TXI, na.rm = TRUE) * 0.9
+            )
+    }
     
     # Apply colour scheme
     if (!is.null(colour)) {

@@ -36,7 +36,7 @@ destroy_pattern <- function(phyex_set,
         stop("Package 'gataiR' must be installed to use this function.")
     }
     
-    res <- gataiR::gatai(phyex_set@data_collapsed, 
+    res <- gataiR::gatai(phyex_set@data, 
                          num_runs = num_runs,
                          runs_threshold = runs_threshold, 
                          max_generations = max_generations,
@@ -78,7 +78,7 @@ destroy_pattern <- function(phyex_set,
 #'
 #' @param phyex_set A PhyloExpressionSet object containing the original gene expression data.
 #' @param gatai_result Result list from \code{destroy_pattern()}, containing GATAI analysis output.
-#' @param conservation_test Function for conservation test (default: \code{flatline_test}).
+#' @param conservation_test Function for conservation test (default: \code{stat_flatline_test}).
 #' @param runs_threshold Threshold for gene removal consistency across runs (default: 0.5).
 #' @param signature_plot_type Type of signature plot: "separate" for individual plots, "combined" for overlay (default: both options).
 #' @param n_random_genes Number of random genes to remove for comparison (default: same as GATAI removed).
@@ -111,7 +111,7 @@ destroy_pattern <- function(phyex_set,
 #' @export
 plot_gatai_results <- function(phyex_set,
                                gatai_result,
-                               conservation_test = flatline_test,
+                               conservation_test = stat_flatline_test,
                                runs_threshold = 0.5,
                                signature_plot_type = c("separate", "combined"),
                                n_random_genes = length(gatai_result$removed_genes)) {

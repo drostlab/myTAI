@@ -10,7 +10,7 @@ TAI(phyex_set)
 \item{phyex_set}{A PhyloExpressionSet object}
 }
 \value{
-Numeric vector of TAI values for each condition
+Numeric vector of TAI values for each identity
 }
 \description{
 Calculate the transcriptomic age index values for a PhyloExpressionSet.

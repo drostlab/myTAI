@@ -10,7 +10,7 @@ TPI(phyex_set)
 \item{phyex_set}{A PhyloExpressionSet object}
 }
 \value{
-Numeric vector of TPI values for each condition
+Numeric vector of TPI values for each identity
 }
 \description{
 Calculate the transcriptomic polymorphism index values for a PhyloExpressionSet.

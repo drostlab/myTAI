@@ -7,7 +7,7 @@
 plot_signature_transformed(phyex_set, transformations = COUNT_TRANSFORMS, ...)
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
 \item{transformations}{Named list of transformation functions (default: COUNT_TRANSFORMS)}
 
@@ -25,13 +25,17 @@ This function applies different transformations to the same dataset and
 compares the resulting transcriptomic signatures. This is useful for assessing
 whether phylotranscriptomic patterns are robust to different data processing
 approaches or are artifacts of specific transformations.
+
+The analysis works with both bulk and single-cell data, helping to determine
+whether phylotranscriptomic patterns are consistent across different
+normalization and transformation methods.
 }
 \examples{
-# Compare signatures under all default transformations
-# p <- plot_signature_transformed(phyex_set)
+# Compare signatures under all default transformations for bulk data
+# p <- plot_signature_transformed(bulk_phyex_set)
 
-# Custom transformations
+# Single-cell data with custom transformations
 # custom_transforms <- list(raw = identity, log = log1p)
-# p2 <- plot_signature_transformed(phyex_set, transformations = custom_transforms)
+# p2 <- plot_signature_transformed(sc_phyex_set, transformations = custom_transforms)
 
 }

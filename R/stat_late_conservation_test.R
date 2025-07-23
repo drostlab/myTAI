@@ -6,7 +6,7 @@
 #' @param phyex_set A PhyloExpressionSet object
 #' @param modules A named list with elements 'early', 'mid', and 'late' containing
 #' stage indices for each developmental module
-#' @param ... Additional arguments passed to generic_conservation_test
+#' @param ... Additional arguments passed to stat_generic_conservation_test
 #' 
 #' @return A ConservationTestResult object with late conservation test results
 #' 
@@ -21,16 +21,16 @@
 #' # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 #' # result <- late_conservation_test(phyex_set, modules)
 #' 
-#' @seealso \code{\link{generic_conservation_test}}, \code{\link{early_conservation_test}}
+#' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_early_conservation_test}}
 #' @export
-late_conservation_test <- function(phyex_set, modules, ...) {
-    t <- generic_conservation_test(phyex_set, 
-                                   test_name="Late Conservation Test",
-                                   scoring_function=\(x) lc_score(x, modules),
-                                   fitting_dist=distributions$normal,
-                                   alternative="greater",
-                                   p_label="p_lct",
-                                   ...)
+stat_late_conservation_test <- function(phyex_set, modules, ...) {
+    t <- stat_generic_conservation_test(phyex_set, 
+                                        test_name="Late Conservation Test",
+                                        scoring_function=\(x) lc_score(x, modules),
+                                        fitting_dist=distributions$normal,
+                                        alternative="greater",
+                                        p_label="p_lct",
+                                        ...)
     t@modules <- modules
     return(t)
 }

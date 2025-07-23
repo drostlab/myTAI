@@ -25,7 +25,7 @@ COUNT_TRANSFORMS <- list(
 #' @description Compare transcriptomic signatures under various data transformations
 #' to assess the robustness of phylotranscriptomic patterns.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
 #' @param transformations Named list of transformation functions (default: COUNT_TRANSFORMS)
 #' @param ... Additional arguments passed to plot_signature_multiple
 #' 
@@ -37,13 +37,17 @@ COUNT_TRANSFORMS <- list(
 #' whether phylotranscriptomic patterns are robust to different data processing
 #' approaches or are artifacts of specific transformations.
 #' 
-#' @examples
-#' # Compare signatures under all default transformations
-#' # p <- plot_signature_transformed(phyex_set)
+#' The analysis works with both bulk and single-cell data, helping to determine
+#' whether phylotranscriptomic patterns are consistent across different
+#' normalization and transformation methods.
 #' 
-#' # Custom transformations
+#' @examples
+#' # Compare signatures under all default transformations for bulk data
+#' # p <- plot_signature_transformed(bulk_phyex_set)
+#' 
+#' # Single-cell data with custom transformations
 #' # custom_transforms <- list(raw = identity, log = log1p)
-#' # p2 <- plot_signature_transformed(phyex_set, transformations = custom_transforms)
+#' # p2 <- plot_signature_transformed(sc_phyex_set, transformations = custom_transforms)
 #' 
 #' @export
 plot_signature_transformed <- function(phyex_set,

@@ -20,13 +20,13 @@
 transform_counts <- S7::new_generic("transform_counts", "phyex_set")
 
 #' @export
-S7::method(transform_counts, PhyloExpressionSet) <- function(phyex_set, 
-                                                             FUN,
-                                                             FUN_name=deparse(substitute(FUN)),
-                                                             new_name=paste(phyex_set@name, "transformed by", FUN_name),
-                                                             ...) {
+S7::method(transform_counts, BulkPhyloExpressionSet) <- function(phyex_set, 
+                                                                 FUN,
+                                                                 FUN_name=deparse(substitute(FUN)),
+                                                                 new_name=paste(phyex_set@name, "transformed by", FUN_name),
+                                                                 ...) {
     f <- match.fun(FUN)
-    phyex_set@counts <- f(phyex_set@counts, ...)
+    phyex_set@expression <- f(phyex_set@expression, ...)
     phyex_set@name <- new_name
     return(phyex_set)
 }
@@ -119,7 +119,7 @@ tf <- transform_counts
 #' 
 #' @export
 normalise_stage_expression <- function(phyex_set, total=1e6) {
-    phyex_set@counts <- sweep(phyex_set@counts, 2, colSums(phyex_set@counts), FUN="/") * total
+    phyex_set@expression <- sweep(phyex_set@expression, 2, colSums(phyex_set@expression), FUN="/") * total
     phyex_set
 }
 

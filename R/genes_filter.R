@@ -32,7 +32,7 @@
 #' 
 #' @export
 genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
-    metric_values <- FUN(phyex_set@counts, ...)
+    metric_values <- FUN(phyex_set@expression, ...)
     names(metric_values) <- phyex_set@gene_ids
     
     top_genes <- names(metric_values)[metric_values >= stats::quantile(metric_values, p, na.rm = TRUE)]
@@ -100,7 +100,7 @@ genes_top_mean <- function(phyex_set, p = .99) {
 #' 
 #' @export
 genes_lowly_expressed <- function(phyex_set, threshold = 1) {
-    avg_counts <- rowMeans(phyex_set@counts)
+    avg_counts <- rowMeans(phyex_set@expression)
     names(avg_counts) <- phyex_set@gene_ids
     
     genes <- names(avg_counts)[avg_counts <= threshold]

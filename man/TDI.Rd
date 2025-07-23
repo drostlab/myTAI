@@ -10,7 +10,7 @@ TDI(phyex_set)
 \item{phyex_set}{A PhyloExpressionSet object}
 }
 \value{
-Numeric vector of TDI values for each condition
+Numeric vector of TDI values for each identity
 }
 \description{
 Calculate the transcriptomic divergence index values for a PhyloExpressionSet.

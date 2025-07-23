@@ -2,60 +2,80 @@
 #' @description Create a heatmap showing gene expression patterns across conditions
 #' with optional dendrograms and gene age annotation.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
-#' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
-#' @param top_p Proportion of most dynamic genes to include (default: 0.2)
-#' @param std Logical indicating whether to use standardized expression values (default: TRUE)
-#' @param reps Logical indicating whether to show individual replicates or collapsed conditions (default: FALSE)
-#' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
-#' @param cluster_cols Logical indicating whether to cluster conditions/columns (default: FALSE)
-#' @param show_gene_age Logical indicating whether to show gene age as row annotation (default: TRUE)
-#' @param show_gene_ids Logical indicating whether to show gene names (default: FALSE)
-#' @param ... Additional arguments passed to pheatmap::pheatmap
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
+#' @param ... Additional arguments passed to specific methods
 #' 
 #' @return A ggplot object (converted from pheatmap) showing the gene expression heatmap
 #' 
 #' @details
 #' This function creates a comprehensive heatmap visualization of gene expression patterns.
 #' By default, genes are ordered by their expression angle (developmental trajectory).
-#' The function supports clustering of both genes and conditions, and can optionally
+#' The function supports clustering of both genes and identities, and can optionally
 #' display gene age (phylostratum) as a colored annotation bar.
+#' 
+#' For bulk data, the heatmap shows expression across developmental conditions.
+#' For single-cell data, the heatmap shows expression across cell types.
 #' 
 #' The gene age annotation uses the PS_colours function to create a consistent
 #' color scheme across different myTAI visualizations.
 #' 
 #' @examples
 #' # Basic heatmap with gene age annotation
-#' # p1 <- plot_gene_heatmap(phyex_set, show_gene_age = TRUE)
+#' # p1 <- plot_gene_heatmap(bulk_phyex_set, show_gene_age = TRUE)
 #' 
-#' # Clustered heatmap with standardized values
-#' # p2 <- plot_gene_heatmap(phyex_set, std = TRUE, cluster_rows = TRUE, cluster_cols = TRUE)
-#' 
-#' # Heatmap of specific genes with replicates
-#' # p3 <- plot_gene_heatmap(phyex_set, genes = c("gene1", "gene2"), reps = TRUE)
+#' # Single-cell heatmap with subset of cells
+#' # p2 <- plot_gene_heatmap(sc_phyex_set, reps = TRUE, max_cells_per_type = 3)
 #' 
 #' @export
-plot_gene_heatmap <- function(phyex_set, 
-                              genes = NULL,
-                              top_p = 0.2, 
-                              std = TRUE, 
-                              reps = FALSE,
-                              cluster_rows = FALSE,
-                              cluster_cols = FALSE,
-                              show_gene_age = TRUE,
-                              show_gene_ids = FALSE,
-                              ...) {
-
-    
-    # Select expression data
-    if (reps) {
-        e <- phyex_set@counts
-    } else {
-        e <- phyex_set@counts_collapsed
+plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
+    function(phyex_set,
+             genes = NULL,
+             top_p = 0.2,
+             std = TRUE,
+             reps = FALSE,
+             cluster_rows = FALSE,
+             cluster_cols = FALSE,
+             show_gene_age = TRUE,
+             show_gene_ids = FALSE,
+             ...) {
+        S7::S7_dispatch()
     }
+)
+
+#' @title Shared Gene Heatmap Implementation
+#' @description Internal helper function that contains the shared logic for creating gene heatmaps.
+#' 
+#' @param expression_matrix Matrix of expression values (genes x samples)
+#' @param strata Factor vector of gene phylostrata
+#' @param gene_ids Character vector of gene IDs
+#' @param num_strata Integer number of phylostrata
+#' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
+#' @param top_p Proportion of most dynamic genes to include (default: 0.2)
+#' @param std Logical indicating whether to use standardized expression values (default: TRUE)
+#' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
+#' @param cluster_cols Logical indicating whether to cluster identities/columns (default: FALSE)
+#' @param show_gene_age Logical indicating whether to show gene age as row annotation (default: TRUE)
+#' @param show_gene_ids Logical indicating whether to show gene names (default: FALSE)
+#' @param ... Additional arguments passed to pheatmap::pheatmap
+#' 
+#' @return A ggplot object showing the gene expression heatmap
+#' 
+#' @keywords internal
+.plot_gene_heatmap_impl <- function(expression_matrix, 
+                                   strata, 
+                                   gene_ids, 
+                                   num_strata,
+                                   genes = NULL,
+                                   top_p = 0.2, 
+                                   std = TRUE, 
+                                   cluster_rows = FALSE,
+                                   cluster_cols = FALSE,
+                                   show_gene_age = TRUE,
+                                   show_gene_ids = FALSE,
+                                   ...) {
     
     # Apply log transformation
-    e <- e |> log1p()
+    e <- expression_matrix |> log1p()
     
     # Filter genes if specific genes are provided
     if (!is.null(genes) && length(genes) > 0) {
@@ -79,9 +99,7 @@ plot_gene_heatmap <- function(phyex_set,
         e <- e[gene_order, ]
     }
     
-    
     color_palette <- grDevices::colorRampPalette(c("#0055A4", "#FFFFFF", "#EF4135"))(99)
-        
     
     # Prepare annotations
     annotation_row <- NULL
@@ -90,7 +108,7 @@ plot_gene_heatmap <- function(phyex_set,
     if (show_gene_age) {
         # Create gene age annotation
         gene_names <- rownames(e)
-        strata_map <- stats::setNames(phyex_set@strata, phyex_set@gene_ids)
+        strata_map <- stats::setNames(strata, gene_ids)
         gene_strata <- strata_map[gene_names]
         
         # Remove genes not found in the mapping
@@ -103,8 +121,8 @@ plot_gene_heatmap <- function(phyex_set,
         )
         
         # Create color mapping for phylostrata using all strata levels
-        all_strata_levels <- levels(phyex_set@strata)
-        ps_colors <- PS_colours(phyex_set@num_strata)
+        all_strata_levels <- levels(strata)
+        ps_colors <- PS_colours(num_strata)
         names(ps_colors) <- all_strata_levels
         
         annotation_colors <- list(
@@ -127,6 +145,104 @@ plot_gene_heatmap <- function(phyex_set,
     ) |>
         ggplotify::as.ggplot()
     
-    # Convert to ggplot
     return(p)
+}
+
+#' @export
+S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
+                                                                 genes = NULL,
+                                                                 top_p = 0.2, 
+                                                                 std = TRUE, 
+                                                                 reps = FALSE,
+                                                                 cluster_rows = FALSE,
+                                                                 cluster_cols = FALSE,
+                                                                 show_gene_age = TRUE,
+                                                                 show_gene_ids = FALSE,
+                                                                 ...) {
+    
+    # Select expression data
+    if (reps) {
+        expression_matrix <- phyex_set@expression
+    } else {
+        expression_matrix <- phyex_set@expression_collapsed
+    }
+    
+    # Call shared implementation
+    .plot_gene_heatmap_impl(
+        expression_matrix = expression_matrix,
+        strata = phyex_set@strata,
+        gene_ids = phyex_set@gene_ids,
+        num_strata = phyex_set@num_strata,
+        genes = genes,
+        top_p = top_p,
+        std = std,
+        cluster_rows = cluster_rows,
+        cluster_cols = cluster_cols,
+        show_gene_age = show_gene_age,
+        show_gene_ids = show_gene_ids,
+        ...
+    )
+}
+
+#' @export
+S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
+                                                               genes = NULL,
+                                                               top_p = 0.2, 
+                                                               std = TRUE, 
+                                                               reps = FALSE,
+                                                               max_cells_per_type = 5,
+                                                               cluster_rows = FALSE,
+                                                               cluster_cols = FALSE,
+                                                               show_gene_age = TRUE,
+                                                               show_gene_ids = FALSE,
+                                                               ...) {
+    
+    # Select expression data
+    if (reps) {
+        # For single-cell: select subset of cells per cell type
+        expr_matrix <- .get_expression_matrix(phyex_set@seurat, phyex_set@slot)
+        cell_groups <- phyex_set@groups
+        
+        # Sample cells per cell type
+        selected_cells <- c()
+        total_cells <- length(cell_groups)
+        for (cell_type in levels(phyex_set@identities)) {
+            cells_of_type <- names(cell_groups)[cell_groups == cell_type]
+            if (length(cells_of_type) > max_cells_per_type) {
+                # Randomly sample subset
+                sampled_cells <- sample(cells_of_type, max_cells_per_type)
+                selected_cells <- c(selected_cells, sampled_cells)
+            } else {
+                selected_cells <- c(selected_cells, cells_of_type)
+            }
+        }
+        
+        # Get expression data for selected cells
+        expression_matrix <- as.matrix(expr_matrix[phyex_set@gene_ids, selected_cells])
+        
+        # Warn about subsampling
+        n_selected <- length(selected_cells)
+        if (n_selected < total_cells) {
+            warning(paste("Showing", n_selected, "out of", total_cells, "cells.",
+                         "Use max_cells_per_type to control the number of cells per type."))
+        }
+    } else {
+        expression_matrix <- phyex_set@expression_collapsed
+    }
+    
+    # Call shared implementation
+    .plot_gene_heatmap_impl(
+        expression_matrix = expression_matrix,
+        strata = phyex_set@strata,
+        gene_ids = phyex_set@gene_ids,
+        num_strata = phyex_set@num_strata,
+        genes = genes,
+        top_p = top_p,
+        std = std,
+        cluster_rows = cluster_rows,
+        cluster_cols = cluster_cols,
+        show_gene_age = show_gene_age,
+        show_gene_ids = show_gene_ids,
+        ...
+    )
 }

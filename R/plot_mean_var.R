@@ -2,7 +2,7 @@
 #' @description Create a scatter plot showing the relationship between mean expression
 #' and variance for genes, colored by phylostratum, with optional highlighting and labeling of specific genes.
 #' 
-#' @param phyex_set A PhyloExpressionSet object containing gene expression data.
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet) containing gene expression data.
 #' @param highlight_genes Optional character vector of gene IDs to highlight and label on the plot.
 #' @param colour_by Character string specifying coloring scheme: "none" (default), "strata" colors by phylostratum
 #' 
@@ -13,22 +13,34 @@
 #' with points colored by phylostratum. Optionally, specific genes can be highlighted and labeled.
 #' This visualization helps identify expression patterns and heteroscedasticity in the data.
 #' 
+#' The function uses collapsed expression data (averaged across replicates for bulk data,
+#' or averaged across cells per cell type for single-cell data).
+#' 
 #' @examples
-#' # Create mean-variance plot
-#' # mv_plot <- plot_mean_var(phyex_set)
-#' # Highlight and label specific genes
-#' # mv_plot <- plot_mean_var(phyex_set, highlight_genes = c("GeneA", "GeneB"))
+#' # Create mean-variance plot for bulk data
+#' # mv_plot <- plot_mean_var(bulk_phyex_set)
+#' 
+#' # Highlight and label specific genes in single-cell data
+#' # mv_plot_sc <- plot_mean_var(sc_phyex_set, highlight_genes = c("GeneA", "GeneB"))
+#' 
+#' # Color by phylostratum
+#' # mv_plot_colored <- plot_mean_var(phyex_set, colour_by = "strata")
 #' 
 #' @import ggplot2
 #' @import dplyr
 #' @export
 plot_mean_var <- function(phyex_set, highlight_genes = NULL, colour_by = c("none", "strata")) {
     colour_by <- match.arg(colour_by)
-    df <- phyex_set@data_collapsed |>
-        mutate(
-            mean = rowMeans(phyex_set@counts_collapsed),
-            var = rowVars(phyex_set@counts_collapsed)
-        ) |>
+    
+    # Create data frame with gene info and mean/variance calculations
+    expression_data <- phyex_set@expression_collapsed
+    
+    df <- data.frame(
+        GeneID = phyex_set@gene_ids,
+        Stratum = phyex_set@strata,
+        mean = rowMeans(expression_data),
+        var = matrixStats::rowVars(as.matrix(expression_data))
+    ) |>
         mutate(
             mean = mean + 1e-6,
             var = var + 1e-6

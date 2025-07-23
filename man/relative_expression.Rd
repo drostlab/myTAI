@@ -7,7 +7,7 @@
 relative_expression(count_matrix)
 }
 \arguments{
-\item{count_matrix}{A numeric matrix where columns represent developmental stages and rows represent genes.}
+\item{count_matrix}{A numeric matrix where columns represent developmental stages/cell types and rows represent genes.}
 }
 \value{
 A numeric vector of relative expression values for each stage (column) in the input matrix.

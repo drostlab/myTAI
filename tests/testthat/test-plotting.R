@@ -1,15 +1,19 @@
-test_that("plot_signature works", {
+test_that("plot_signature works for bulk data", {
     # Basic signature plot
     p <- plot_signature(example_phyex_set)
     expect_s3_class(p, "ggplot")
     
-    # Test with confidence intervals
-    p_ci <- plot_signature(example_phyex_set, show_ci = TRUE)
-    expect_s3_class(p_ci, "ggplot")
+    # Test with replicates shown
+    p_reps <- plot_signature(example_phyex_set, show_reps = TRUE)
+    expect_s3_class(p_reps, "ggplot")
     
-    # Test with different index type
-    p_tai <- plot_signature(example_phyex_set, index_type = "TAI")
-    expect_s3_class(p_tai, "ggplot")
+    # Test with p-value (bulk data only)
+    p_pval <- plot_signature(example_phyex_set, show_p_val = TRUE)
+    expect_s3_class(p_pval, "ggplot")
+    
+    # Test with custom color
+    p_color <- plot_signature(example_phyex_set, colour = "red")
+    expect_s3_class(p_color, "ggplot")
 })
 
 test_that("plot_gene_space works", {
@@ -18,8 +22,8 @@ test_that("plot_gene_space works", {
     expect_s3_class(p, "ggplot")
     
     # Test with different coloring
-    p_strata <- plot_gene_space(example_phyex_set, colour_by = "strata")
-    expect_s3_class(p_strata, "ggplot")
+    p_identity <- plot_gene_space(example_phyex_set, colour_by = "identity")
+    expect_s3_class(p_identity, "ggplot")
     
     # Test with specific genes
     selected_genes <- example_phyex_set@gene_ids[1:20]
@@ -189,8 +193,8 @@ test_that("plot_distribution_expression works", {
     p_strata <- plot_distribution_expression(example_phyex_set, show_strata = TRUE)
     expect_s3_class(p_strata, "ggplot")
     
-    p_no_conditions <- plot_distribution_expression(example_phyex_set, show_conditions = FALSE)
-    expect_s3_class(p_no_conditions, "ggplot")
+    p_no_identities <- plot_distribution_expression(example_phyex_set, show_identities = FALSE)
+    expect_s3_class(p_no_identities, "ggplot")
 })
 
 test_that("Plotting functions handle edge cases", {

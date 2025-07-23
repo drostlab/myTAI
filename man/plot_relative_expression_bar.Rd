@@ -7,7 +7,7 @@
 plot_relative_expression_bar(phyex_set, groups, p_adjust_method = NULL, ...)
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object.}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).}
 
 \item{groups}{A list of integer vectors specifying age categories (e.g., phylostrata) for each group (2+ groups).}
 

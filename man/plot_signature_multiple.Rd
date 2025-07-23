@@ -8,20 +8,20 @@ plot_signature_multiple(
   phyex_sets,
   legend_title = "Phylo Expression Set",
   show_p_val = FALSE,
-  conservation_test = flatline_test,
+  conservation_test = stat_flatline_test,
   transformation = NULL,
   colours = NULL,
   ...
 )
 }
 \arguments{
-\item{phyex_sets}{A vector of PhyloExpressionSet objects to compare}
+\item{phyex_sets}{A vector of PhyloExpressionSet objects to compare (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
 \item{legend_title}{Title for the legend (default: "Phylo Expression Set")}
 
-\item{show_p_val}{Logical indicating whether to show p-values (default: FALSE)}
+\item{show_p_val}{Logical indicating whether to show p-values (default: FALSE, bulk data only)}
 
-\item{conservation_test}{Function to use for conservation testing (default: flatline_test)}
+\item{conservation_test}{Function to use for conservation testing (default: stat_flatline_test, bulk data only)}
 
 \item{transformation}{Optional transformation function to apply to all datasets (default: NULL)}
 
@@ -39,16 +39,26 @@ with options for statistical testing and transformations.
 \details{
 This function allows comparison of multiple transcriptomic signatures by overlaying
 them on the same plot. Each signature is colored differently and can be tested
-for conservation patterns. If a transformation is provided, it's applied to all
+for conservation patterns (bulk data only). If a transformation is provided, it's applied to all
 datasets before plotting.
+
+The function automatically adapts to the data type:
+- **Bulk data**: Line plots with optional statistical testing
+- **Single-cell data**: Violin plots showing distributions
+
+All datasets must use the same axis labels (developmental stages or cell types).
 }
 \examples{
-# Compare multiple datasets
-# phyex_list <- c(phyex_set1, phyex_set2)
-# p <- plot_signature_multiple(phyex_list, legend_title = "Dataset")
+# Compare multiple bulk datasets
+# bulk_list <- c(bulk_phyex_set1, bulk_phyex_set2)
+# p <- plot_signature_multiple(bulk_list, legend_title = "Dataset")
+
+# Compare single-cell datasets
+# sc_list <- c(sc_phyex_set1, sc_phyex_set2)
+# p2 <- plot_signature_multiple(sc_list, legend_title = "Cell Type")
 
 # With transformation
-# p2 <- plot_signature_multiple(phyex_list, transformation = log1p)
+# p3 <- plot_signature_multiple(bulk_list, transformation = log1p)
 
 
 }

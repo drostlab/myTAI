@@ -21,9 +21,9 @@
 #' @export
 omit_matrix <- function(phyex_set) {
 
-    oMatrix <- .omit_matrix(phyex_set@counts_collapsed, as.numeric(phyex_set@strata))
+    oMatrix <- .omit_matrix(phyex_set@expression_collapsed, as.numeric(phyex_set@strata))
     
-    colnames(oMatrix) <- phyex_set@conditions
+    colnames(oMatrix) <- phyex_set@identities
     rownames(oMatrix) <- paste0("(-) ", phyex_set@gene_ids)
     
     return(oMatrix)

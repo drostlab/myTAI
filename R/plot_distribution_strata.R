@@ -68,6 +68,33 @@ plot_distribution_strata <- function(strata,
     }
 }
 
+#' @title Calculate Phylostratum Enrichment
+#' @description Calculate log2(observed/expected) enrichment ratios for phylostrata
+#' in a selected gene set compared to the background distribution.
+#' 
+#' @param strata Named factor vector of phylostratum assignments (names are gene IDs)
+#' @param selected_gene_ids Character vector of gene IDs to test for enrichment
+#' 
+#' @return A data frame with columns:
+#' \describe{
+#'   \item{Stratum}{Phylostratum factor levels}
+#'   \item{log_obs_exp}{Log2 ratio of observed vs expected proportions}
+#' }
+#' 
+#' @details
+#' This function calculates enrichment or depletion of phylostrata in a gene set
+#' by comparing the observed proportion of each stratum in the selected genes
+#' to the expected proportion based on the background distribution in all genes.
+#' 
+#' Positive values indicate enrichment (more genes than expected), while negative 
+#' values indicate depletion (fewer genes than expected).
+#' 
+#' @examples
+#' # Calculate enrichment for a gene set
+#' # enrichment <- strata_enrichment(phyex_set@strata, my_gene_set)
+#' # print(enrichment)
+#' 
+#' @export
 strata_enrichment <- function(strata, selected_gene_ids) {
     df <- data.frame(Stratum=strata, GeneID=names(strata))
     df_selected <- df |> filter(GeneID %in% selected_gene_ids)

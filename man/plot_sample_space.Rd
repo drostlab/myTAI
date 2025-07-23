@@ -4,16 +4,26 @@
 \alias{plot_sample_space}
 \title{Plot Sample Space Visualization}
 \usage{
-plot_sample_space(phyex_set, method = c("PCA", "UMAP"))
+plot_sample_space(
+  phyex_set,
+  method = c("PCA", "UMAP"),
+  colour_by = c("identity", "TXI"),
+  ...
+)
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
 \item{method}{Character string specifying the dimensionality reduction method: 
 "PCA" or "UMAP" (default: "PCA")}
+
+\item{colour_by}{Character string specifying what to colour by: "identity" (default), 
+"TXI"}
+
+\item{...}{Additional arguments passed to specific methods}
 }
 \value{
-A ggplot2 object showing the sample space visualization
+A ggplot2 object showing the sample space visualisation
 }
 \description{
 Create a dimensional reduction plot to visualize sample relationships
@@ -22,13 +32,13 @@ in gene expression space using PCA or UMAP.
 \details{
 This function performs log1p transformation on expression data, removes genes with
 zero variance, and applies the specified dimensionality reduction method. Samples
-are colored by their group assignments.
+are coloured by their group assignments or TAI values.
 }
 \examples{
-# Create PCA plot
-# pca_plot <- plot_sample_space(phyex_set, method = "PCA")
+# Create PCA plot coloured by identity
+# pca_plot <- plot_sample_space(phyex_set, method = "PCA", colour_by = "identity")
 
-# Create UMAP plot
-# umap_plot <- plot_sample_space(phyex_set, method = "UMAP")
+# Create UMAP plot coloured by TXI
+# umap_plot <- plot_sample_space(phyex_set, method = "UMAP", colour_by = "TXI")
 
 }

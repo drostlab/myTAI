@@ -51,11 +51,11 @@ age.apply <- function(phyex_set, FUN, ..., as.list = FALSE) {
     f <- match.fun(FUN)
     
     # Split the expression matrix by strata
-    strata_list <- split(seq_len(nrow(phyex_set@counts_collapsed)), phyex_set@strata)
+    strata_list <- split(seq_len(nrow(phyex_set@expression_collapsed)), phyex_set@strata)
     
     # Apply function to each stratum's subset
     res <- lapply(strata_list, function(idx) {
-        f(phyex_set@counts_collapsed[idx, , drop = FALSE], ...)
+        f(phyex_set@expression_collapsed[idx, , drop = FALSE], ...)
     })
     
     if (!as.list) {

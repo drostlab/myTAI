@@ -3,11 +3,11 @@
 #' @description Create a PCA plot showing genes in expression space with ideal expression
 #' patterns overlaid as reference points.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
 #' @param top_p Proportion of most dynamic genes to include when genes=NULL (default: 0.2)
 #' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
 #' @param colour_by Character string specifying coloring scheme:
-#' "stage" (by peak expression stage) or "strata" (by phylostratum) (default: "stage")
+#' "identity" (by peak expression stage/identity) or "strata" (by phylostratum) (default: "identity")
 #' 
 #' @return A ggplot2 object showing the gene space PCA plot
 #' 
@@ -18,8 +18,8 @@
 #' colored either by their phylostratum or by their peak expression stage.
 #' 
 #' @examples
-#' # Plot gene space colored by stage
-#' # p1 <- plot_gene_space(phyex_set, colour_by = "stage")
+#' # Plot gene space colored by identity
+#' # p1 <- plot_gene_space(phyex_set, colour_by = "identity")
 #' 
 #' # Plot specific genes colored by strata
 #' # p2 <- plot_gene_space(phyex_set, genes = c("gene1", "gene2"), colour_by = "strata")
@@ -28,10 +28,10 @@
 plot_gene_space <- function(phyex_set, 
                             top_p=0.2,
                             genes=NULL,
-                            colour_by=c("stage", "strata")) {
+                            colour_by=c("identity", "strata")) {
     colour_by <- match.arg(colour_by)
     
-    e <- phyex_set@counts_collapsed |>
+    e <- phyex_set@expression_collapsed |>
         log1p()
     
     if (!is.null(genes) && length(genes) > 0) {
@@ -70,12 +70,12 @@ plot_gene_space <- function(phyex_set,
     
     
     
-    p <- ggplot(df[1:N, ], aes(PC1, PC2, color = if (colour_by == "stage") angle else strata)) +
+    p <- ggplot(df[1:N, ], aes(PC1, PC2, color = if (colour_by == "identity") angle else strata)) +
         geom_point(aes(alpha=highlight)) +
         scale_alpha_manual(values = c(`TRUE` = 0.7, `FALSE` = 0.1), guide = "none")
-    if (colour_by == "stage") {
+    if (colour_by == "identity") {
         p <- p + 
-            scale_color_viridis_c(name = "Stage")
+            scale_color_viridis_c(name = phyex_set@identities_label)
     } else {
         p <- p + 
             scale_color_manual(values = PS_colours(length(unique(df$strata))), na.value = "grey50", name = "Stratum")

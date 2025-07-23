@@ -18,7 +18,7 @@ test_that("omit_matrix works", {
     omit_mat <- omit_matrix(example_phyex_set)
     expect_true(is.matrix(omit_mat))
     expect_equal(nrow(omit_mat), length(example_phyex_set@gene_ids))
-    expect_equal(ncol(omit_mat), example_phyex_set@num_conditions)
+    expect_equal(ncol(omit_mat), example_phyex_set@num_identities)
     expect_true(all(is.finite(omit_mat)))
     
     # Check row names
@@ -30,7 +30,7 @@ test_that("age.apply works", {
     result_means <- age.apply(example_phyex_set, colMeans)
     expect_true(is.matrix(result_means))
     expect_equal(nrow(result_means), example_phyex_set@num_strata)
-    expect_equal(ncol(result_means), example_phyex_set@num_conditions)
+    expect_equal(ncol(result_means), example_phyex_set@num_identities)
     
     # Test with as.list = TRUE
     result_list <- age.apply(example_phyex_set, colMeans, as.list = TRUE)
@@ -44,7 +44,7 @@ test_that("age.apply works", {
 
 test_that("filter_dyn_expr works", {
     # Test basic filtering (internal function)
-    expr_matrix <- log1p(example_phyex_set@counts_collapsed)
+    expr_matrix <- log1p(example_phyex_set@expression_collapsed)
     filtered <- myTAI:::filter_dyn_expr(expr_matrix, thr = 0.8)
     expect_true(is.matrix(filtered))
     expect_true(nrow(filtered) <= nrow(expr_matrix))
@@ -58,7 +58,7 @@ test_that("filter_dyn_expr works", {
 
 test_that("to_std_expr works", {
     # Test standardization (internal function)
-    expr_matrix <- log1p(example_phyex_set@counts_collapsed)
+    expr_matrix <- log1p(example_phyex_set@expression_collapsed)
     std_expr <- myTAI:::to_std_expr(expr_matrix)
     expect_true(is.matrix(std_expr))
     expect_equal(dim(std_expr), dim(expr_matrix))
@@ -75,7 +75,7 @@ test_that("to_std_expr works", {
 
 test_that("get_angles works", {
     # Test angle calculation (internal function)
-    expr_matrix <- log1p(example_phyex_set@counts_collapsed)
+    expr_matrix <- log1p(example_phyex_set@expression_collapsed)
     std_expr <- myTAI:::to_std_expr(expr_matrix)
     angles <- myTAI:::get_angles(std_expr)
     
@@ -134,10 +134,10 @@ test_that("Data conversion functions work", {
     # Create dummy expression data
     expr_data <- data.frame(
         GeneID = example_phyex_set@gene_ids[1:100],
-        example_phyex_set@counts_collapsed[1:100, ]
+        example_phyex_set@expression_collapsed[1:100, ]
     )
     
     matched_set <- match_map(expr_data, phylomap)
     expect_s7_class(matched_set, myTAI::PhyloExpressionSet)
-    expect_equal(nrow(matched_set@counts), 100)
+    expect_equal(nrow(matched_set@expression), 100)
 })

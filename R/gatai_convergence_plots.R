@@ -207,7 +207,7 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
         filtered_phyex <- remove_genes(phyex_set, genes)
         
         # Use flatline test which has cached null distribution
-        test_result <- flatline_test(filtered_phyex, plot_result = FALSE)
+        test_result <- stat_flatline_test(filtered_phyex, plot_result = FALSE)
         pval <- test_result@p_value
         
         return(log10(pval))

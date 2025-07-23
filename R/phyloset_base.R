@@ -111,9 +111,9 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             getter = function(self) {
                 if (is.null(self@precomputed_null_conservation_txis)) {
                     # Compute and cache the result using expression_collapsed
-                    computed_txis <- generate_conservation_txis(self@strata,
-                                                              self@expression_collapsed,
-                                                              self@null_conservation_sample_size)
+                    computed_txis <- stat_generate_conservation_txis(self@strata,
+                                                                     self@expression_collapsed,
+                                                                     self@null_conservation_sample_size)
                     self@precomputed_null_conservation_txis <- computed_txis
                     return(computed_txis)
                 } else {
@@ -229,7 +229,7 @@ select_genes <- S7::new_generic("select_genes", "phyex_set")
 #'   - "identity": Sum pTXI values within each stratum
 #'   - "add": Cumulative sum across strata
 #' 
-#' @return Matrix of sTXI values with strata as rows and conditions as columns
+#' @return Matrix of sTXI values with strata as rows and identities as columns
 #' 
 #' @examples
 #' # Calculate sTXI values
@@ -286,7 +286,7 @@ remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "per
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' 
-#' @return Numeric vector of TXI values for each condition
+#' @return Numeric vector of TXI values for each identity
 #' 
 #' @examples
 #' # Calculate TXI values
@@ -303,7 +303,7 @@ TXI <- function(phyex_set) {
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' 
-#' @return Numeric vector of TAI values for each condition
+#' @return Numeric vector of TAI values for each identity
 #' 
 #' @examples
 #' # Calculate TAI values
@@ -320,7 +320,7 @@ TAI <- function(phyex_set) {
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' 
-#' @return Numeric vector of TDI values for each condition
+#' @return Numeric vector of TDI values for each identity
 #' 
 #' @examples
 #' # Calculate TDI values
@@ -337,7 +337,7 @@ TDI <- function(phyex_set) {
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' 
-#' @return Numeric vector of TEI values for each condition
+#' @return Numeric vector of TEI values for each identity
 #' 
 #' @examples
 #' # Calculate TEI values
@@ -354,7 +354,7 @@ TEI <- function(phyex_set) {
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' 
-#' @return Numeric vector of TPI values for each condition
+#' @return Numeric vector of TPI values for each identity
 #' 
 #' @examples
 #' # Calculate TPI values
