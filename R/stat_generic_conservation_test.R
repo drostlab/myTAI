@@ -39,7 +39,7 @@ generic_conservation_test <- function(phyex_set,
                                       plot_result=TRUE
                                       ) {
     # check arguments
-    S7::check_is_S7(phyex_set, PhyloExpressionSet)
+    S7::check_is_S7(phyex_set, PhyloExpressionSetBase)
     stopifnot(is.function(scoring_function))
     alternative <- match.arg(alternative)
     

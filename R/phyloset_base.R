@@ -95,6 +95,29 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             getter = function(self) stop("TXI_sample property must be implemented by subclass")
         ),
         
+        ## NULL CONSERVATION PROPERTIES
+        null_conservation_sample_size = new_property(
+            class = class_numeric,
+            default = 5000L
+        ),
+        precomputed_null_conservation_txis = new_property(
+            default = NULL
+        ),
+        null_conservation_txis = new_property(
+            getter = function(self) {
+                if (is.null(self@precomputed_null_conservation_txis)) {
+                    # Compute and cache the result using expression_collapsed
+                    computed_txis <- generate_conservation_txis(self@strata,
+                                                              self@expression_collapsed,
+                                                              self@null_conservation_sample_size)
+                    self@precomputed_null_conservation_txis <- computed_txis
+                    return(computed_txis)
+                } else {
+                    return(self@precomputed_null_conservation_txis)
+                }
+            }
+        ),
+        
         ## ABSTRACT SAMPLE NAMES
         sample_names = new_property(
             getter = function(self) stop("sample_names property must be implemented by subclass")
@@ -238,10 +261,16 @@ sTXI <- function(phyex_set,
 #' #                             new_name = "Filtered Dataset")
 #' 
 #' @export
-remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed")) {
+remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed"), reuse_null_txis = TRUE) {
     selected_genes <- setdiff(phyex_set@gene_ids, genes)
     s <- select_genes(phyex_set, selected_genes)
     s@name <- new_name
+    
+    if (reuse_null_txis)
+        s@precomputed_null_conservation_txis <- phyex_set@null_conservation_txis
+    else
+        s@precomputed_null_conservation_txis <- NULL
+    
     return(s)
 }
 
