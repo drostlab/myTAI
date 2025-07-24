@@ -6,6 +6,7 @@ example_phyex_set_old <- as_PhyloExpressionSet(data,
                                                name="Embryogenesis 2011",
                                                species="Arabidopsis thaliana",
                                                index_type="TAI",
-                                               strata_labels=legend$Name)
+                                               strata_labels=legend$Name,
+                                               identities_label="Stages")
 
 usethis::use_data(example_phyex_set_old, overwrite = TRUE)

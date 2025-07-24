@@ -7,12 +7,12 @@ set.seed(1234)
 if (requireNamespace("Seurat", quietly = TRUE)) {
     library(Seurat)
     # Create a synthetic Seurat object for testing
-    n_genes <- 100
-    n_cells <- 200
+    n_genes <- 1000
+    n_cells <- 1000
     
     # Create synthetic expression data with some realistic patterns
     counts <- matrix(
-        rpois(n_genes * n_cells, lambda = 5),
+        rnbinom(n_genes * n_cells, size = 5, mu = 100),
         nrow = n_genes,
         ncol = n_cells
     )
@@ -21,7 +21,7 @@ if (requireNamespace("Seurat", quietly = TRUE)) {
     
     # Create synthetic metadata
     metadata <- data.frame(
-        groups = factor(sample(c("TypeA", "TypeB", "TypeC"), n_cells, replace = TRUE)),
+        groups = factor(sample(c("TypeA", "TypeB", "TypeC"), n_cells, replace = TRUE), levels=c("TypeA", "TypeB", "TypeC"), ordered = TRUE),
         nCount_RNA = colSums(counts),
         nFeature_RNA = colSums(counts > 0),
         row.names = colnames(counts)
@@ -33,6 +33,8 @@ if (requireNamespace("Seurat", quietly = TRUE)) {
         meta.data = metadata,
         project = "ExampleSC"
     )
+
+    Idents(example_seurat) <- "groups"
     
     # Process the data: normalize, find variable features, scale, PCA, and UMAP
     suppressWarnings({
@@ -52,7 +54,7 @@ if (requireNamespace("Seurat", quietly = TRUE)) {
     example_phyex_set_sc <- as_ScPhyloExpressionSet(
         seurat = example_seurat,
         phylomap = phylomap_example,
-        cell_identity = "groups",
+        layer = "counts",
         name = "Single Cell Example"
     )
 }

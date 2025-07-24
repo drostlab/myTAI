@@ -4,12 +4,10 @@
 \alias{pTXI}
 \title{Calculate Phylostratum-Specific Transcriptomic Index}
 \usage{
-pTXI(phyex_set, ...)
+pTXI(phyex_set, reps = FALSE)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
-
-\item{...}{Additional arguments passed to methods}
 }
 \value{
 Matrix of pTXI values

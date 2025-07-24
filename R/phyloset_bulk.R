@@ -4,8 +4,8 @@
 #' 
 #' @param strata Factor vector of phylostratum assignments for each gene
 #' @param gene_ids Character vector of gene identifiers
-#' @param expression Matrix of expression counts with genes as rows and samples as columns
-#' @param groups Factor vector indicating which identity each sample belongs to
+#' @param .expression Matrix of expression counts with genes as rows and samples as columns
+#' @param .groups Factor vector indicating which identity each sample belongs to
 #' @param name Character string naming the dataset (default: "Phylo Expression Set")
 #' @param species Character string specifying the species (default: NULL)
 #' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
@@ -19,57 +19,31 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
     parent = PhyloExpressionSetBase,
     properties = list(
         ## BULK-SPECIFIC REQUIRED PROPERTIES
-        expression = new_required_property(
+        .expression = new_required_property(
             validator = function(value) {
                 if (any(is.na(value))) "cannot contain NA values. Check expression data."
                 if (length(value) == 0) "cannot be empty. Check expression data."
             },
-            name = "expression"
+            name = ".expression"
         ),
-        groups = new_required_property(
+        .groups = new_required_property(
             class = class_factor,
             validator = function(value) {
                 if (any(is.na(value))) "cannot contain NA values. Check groups."
                 if (length(value) == 0) "cannot be empty. Check groups."
             },
-            name = "groups"
+            name = ".groups"
         ),
         
         ## IMPLEMENTED ABSTRACT PROPERTIES
-        identities = new_property(
-            class = class_factor,
-            getter = function(self) factor(unique(self@groups), levels = unique(self@groups), ordered = TRUE)
-        ),
-        identities_label = new_property(
-            class = class_character,
-            default = "Conditions"
+        expression = new_property(
+            getter = function(self) self@.expression
         ),
         expression_collapsed = new_property(
-            getter = function(self) .collapse_replicates(self@expression, self@groups)
+            getter = function(self) .collapse_replicates(self@.expression, self@.groups)
         ),
-        
-        ## BULK-SPECIFIC TXI
-        TXI_sample = new_property(
-            class = class_double,
-            getter = function(self) {
-                txi_values <- colSums(.pTXI_raw(self@expression, self@strata))
-                names(txi_values) <- colnames(self@expression)
-                return(txi_values)
-            }
-        ),
-        
-        ## ADDITIONAL BULK PROPERTIES
-        sample_names = new_property(
-            class = class_character,
-            getter = function(self) colnames(self@expression)
-        ),
-        num_samples = new_property(
-            class = class_integer,
-            getter = function(self) ncol(self@expression)
-        ),
-        group_map = new_property(
-            class = class_list,
-            getter = function(self) split(self@sample_names, self@groups)
+        groups = new_property(
+            getter = function(self) self@.groups
         )
     )
 )
@@ -116,8 +90,8 @@ as_BulkPhyloExpressionSet <- function(data,
     obj <- BulkPhyloExpressionSet(
         strata = strata,
         gene_ids = gene_ids,
-        expression = expression,
-        groups = groups,
+        .expression = expression,
+        .groups = groups,
         name = name,
         ...
     )
@@ -235,6 +209,9 @@ S7::method(select_genes, BulkPhyloExpressionSet) <- function(phyex_set, genes) {
     
     # Remove any NA indices (genes not found)
     valid_indices <- gene_indices[!is.na(gene_indices)]
+
+    if (length(valid_indices) < length(gene_indices))
+        warning("Some of the specified genes were not found in the dataset")
     
     if (length(valid_indices) == 0) {
         stop("None of the specified genes were found in the dataset")

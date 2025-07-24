@@ -13,8 +13,8 @@ BulkPhyloExpressionSet(
   identities_label = "Identities",
   null_conservation_sample_size = 5000L,
   precomputed_null_conservation_txis = NULL,
-  expression = stop("@expression is required"),
-  groups = stop("@groups is required")
+  .expression = stop("@.expression is required"),
+  .groups = stop("@.groups is required")
 )
 }
 \arguments{
@@ -34,9 +34,9 @@ BulkPhyloExpressionSet(
 
 \item{precomputed_null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
 
-\item{expression}{Matrix of expression counts with genes as rows and samples as columns}
+\item{.expression}{Matrix of expression counts with genes as rows and samples as columns}
 
-\item{groups}{Factor vector indicating which identity each sample belongs to}
+\item{.groups}{Factor vector indicating which identity each sample belongs to}
 }
 \description{
 S7 class for bulk RNA-seq phylotranscriptomic expression data.

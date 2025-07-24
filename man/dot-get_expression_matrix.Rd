@@ -4,12 +4,12 @@
 \alias{.get_expression_matrix}
 \title{Get Expression Matrix from Seurat Object}
 \usage{
-.get_expression_matrix(seurat, slot)
+.get_expression_matrix(seurat, layer)
 }
 \arguments{
 \item{seurat}{A Seurat object}
 
-\item{slot}{Character string specifying which slot to use}
+\item{layer}{Character string specifying which layer to use}
 }
 \value{
 Expression matrix (sparse or dense)

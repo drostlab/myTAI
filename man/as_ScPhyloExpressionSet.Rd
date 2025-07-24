@@ -7,10 +7,8 @@
 as_ScPhyloExpressionSet(
   seurat,
   phylomap,
-  cell_identity,
-  slot = "data",
+  layer = "counts",
   name = "Single-Cell Phylo Expression Set",
-  min_cells_per_identity = 10,
   strata_labels = NULL,
   ...
 )
@@ -20,13 +18,9 @@ as_ScPhyloExpressionSet(
 
 \item{phylomap}{A data frame with two columns: phylostratum assignments and gene IDs}
 
-\item{cell_identity}{Character string specifying which cell identity to use from Seurat metadata}
-
-\item{slot}{Character string specifying which slot to use from the Seurat object (default: "data")}
+\item{layer}{Character string specifying which layer to use from the Seurat object (default: "counts")}
 
 \item{name}{A character string naming the dataset (default: "Single-Cell Phylo Expression Set")}
-
-\item{min_cells_per_identity}{Minimum number of cells required per cell type (default: 10)}
 
 \item{strata_labels}{Optional character vector of labels for phylostrata}
 

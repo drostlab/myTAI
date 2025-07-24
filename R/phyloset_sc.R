@@ -7,12 +7,11 @@
 #' @param name Character string naming the dataset (default: "Phylo Expression Set")
 #' @param species Character string specifying the species (default: NULL)
 #' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
-#' @param identities_label Character string labeling the identities (default: "Cell Types")
+#' @param identities_label Character string labeling the identities (default: "Cell Type")
 #' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
 #' @param precomputed_null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' @param seurat A Seurat object containing single-cell expression data
-#' @param cell_identity Character string specifying which cell identity to use from Seurat metadata
-#' @param slot Character string specifying which slot to use from the Seurat object (default: "data")
+#' @param layer Character string specifying which layer to use from the Seurat object (default: "data")
 #' 
 #' @import S7
 #' @export
@@ -23,68 +22,36 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
         seurat = new_required_property(
             name = "seurat"
         ),
-        cell_identity = new_required_property(
+        layer = new_property(
             class = class_character,
-            name = "cell_identity"
-        ),
-        slot = new_property(
-            class = class_character,
-            default = "data"
+            default = "counts"
         ),
         
-        ## RAW EXPRESSION DATA
-        expression = new_property(
-            getter = function(self) .get_expression_matrix(self@seurat, self@slot)
+        identities_label = new_property(
+            class = class_character,
+            default = "Cell Type"
         ),
         
         ## IMPLEMENTED ABSTRACT PROPERTIES
-        identities = new_property(
-            class = class_factor,
-            getter = function(self) .get_valid_cell_types(self@seurat, self@cell_identity, self@min_cells_per_identity)
+        expression = new_property(
+            getter = function(self) .get_expression_matrix(self@seurat, self@layer)
         ),
-        identities_label = new_property(
-            class = class_character,
-            default = "Cell Types"
-        ),
+        
         expression_collapsed = new_property(
-            getter = function(self) .pseudobulk_expression(self@seurat, self@cell_identity, self@slot, self@min_cells_per_identity)
+            getter = function(self) .pseudobulk_expression(self@seurat, self@layer)
+        ),
+        groups = new_property(
+            class = class_factor,
+            getter = function(self) Seurat::Idents(self@seurat)
         ),
         
         ## SC-SPECIFIC TXI
         TXI_sample = new_property(
             class = class_double,
-            getter = function(self) {
-                # Efficient per-cell TXI calculation
-                counts <- .get_expression_matrix(self@seurat, self@slot)
-                strata_numeric <- as.numeric(self@strata)
-                txi <- (Matrix::t(counts) %*% strata_numeric) / Matrix::colSums(counts)
-                txi_vector <- as.vector(txi)
-                names(txi_vector) <- colnames(counts)
-                return(txi_vector)
-            }
-        ),
-        
-        ## SC-SPECIFIC PROPERTIES
-        sample_names = new_property(
-            class = class_character,
-            getter = function(self) {
-                # Get cell identities and filter to valid ones
-                cell_types <- self@seurat@meta.data[[self@cell_identity]]
-                names(cell_types) <- colnames(self@seurat)
-                valid_cells <- cell_types %in% self@identities
-                return(names(cell_types)[valid_cells])
-            }
-        ),
-        num_samples = new_property(
-            class = class_integer,
-            getter = function(self) length(self@sample_names)
-        ),
-        groups = new_property(
-            class = class_factor,
-            getter = function(self) .map_cells_to_groups(self@seurat, self@cell_identity, self@identities)
+            getter = function(self) .TXI_sc(self@expression, self@strata)
         ),
         cell_metadata = new_property(
-            getter = function(self) .get_cell_metadata(self@seurat, self@cell_identity)
+            getter = function(self) self@seurat@meta.data
         )
     )
 )
@@ -97,10 +64,8 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
 #' 
 #' @param seurat A Seurat object containing single-cell expression data
 #' @param phylomap A data frame with two columns: phylostratum assignments and gene IDs
-#' @param cell_identity Character string specifying which cell identity to use from Seurat metadata
-#' @param slot Character string specifying which slot to use from the Seurat object (default: "data")
+#' @param layer Character string specifying which layer to use from the Seurat object (default: "counts")
 #' @param name A character string naming the dataset (default: "Single-Cell Phylo Expression Set")
-#' @param min_cells_per_identity Minimum number of cells required per cell type (default: 10)
 #' @param strata_labels Optional character vector of labels for phylostrata
 #' @param ... Additional arguments passed to ScPhyloExpressionSet constructor
 #' 
@@ -114,25 +79,18 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
 #' @importFrom dplyr inner_join
 #' @export
 as_ScPhyloExpressionSet <- function(seurat, 
-                                   phylomap,
-                                   cell_identity,
-                                   slot = "data",
-                                   name = "Single-Cell Phylo Expression Set",
-                                   min_cells_per_identity = 10,
-                                   strata_labels = NULL,
-                                   ...) {
+                                    phylomap,
+                                    layer = "counts",
+                                    name = "Single-Cell Phylo Expression Set",
+                                    strata_labels = NULL,
+                                    ...) {
     
     if (!requireNamespace("Seurat", quietly = TRUE)) {
         stop("Package 'Seurat' must be installed to use this function.")
     }
-    
-    # Validate inputs
-    if (!cell_identity %in% colnames(seurat@meta.data)) {
-        stop(paste("Cell identity", cell_identity, "not found in Seurat metadata"))
-    }
-    
+
     # Get raw single-cell expression data
-    sc_counts <- .get_expression_matrix(seurat, slot)
+    sc_counts <- .get_expression_matrix(seurat, layer)
     
     # Match with phylomap
     colnames(phylomap) <- c("Stratum", "GeneID")
@@ -154,15 +112,13 @@ as_ScPhyloExpressionSet <- function(seurat,
         strata_labels <- sort(unique(as.numeric(phylomap_ordered$Stratum)))
     }
     strata <- factor(as.numeric(phylomap_ordered$Stratum), 
-                    levels = sort(unique(as.numeric(phylomap_ordered$Stratum))), 
-                    labels = strata_labels)
+                     levels = sort(unique(as.numeric(phylomap_ordered$Stratum))), 
+                     labels = strata_labels)
     names(strata) <- rownames(sc_counts)
     
     return(ScPhyloExpressionSet(
         seurat = seurat,
-        cell_identity = cell_identity,
-        slot = slot,
-        min_cells_per_identity = min_cells_per_identity,
+        layer = layer,
         strata = strata,
         gene_ids = rownames(sc_counts),
         name = name,
@@ -176,117 +132,43 @@ as_ScPhyloExpressionSet <- function(seurat,
 #' @description Extract expression matrix from Seurat object, preserving sparse format when possible.
 #' 
 #' @param seurat A Seurat object
-#' @param slot Character string specifying which slot to use
+#' @param layer Character string specifying which layer to use
 #' @return Expression matrix (sparse or dense)
 #' 
 #' @keywords internal
-.get_expression_matrix <- function(seurat, slot) {
+.get_expression_matrix <- function(seurat, layer) {
     if (!requireNamespace("Seurat", quietly = TRUE)) {
         stop("Package 'Seurat' must be installed to use this function.")
     }
-    
-    counts <- tryCatch({
-        # Try new API first (layer parameter)
-        if (slot == "data") {
-            # Try to get data layer, fall back to counts if empty
-            tryCatch({
-                result <- Seurat::GetAssayData(seurat, layer = "data")
-                if (nrow(result) == 0 || ncol(result) == 0) {
-                    Seurat::GetAssayData(seurat, layer = "counts")
-                } else {
-                    result
-                }
-            }, error = function(e) {
-                Seurat::GetAssayData(seurat, layer = "counts")
-            })
-        } else if (slot == "counts") {
-            Seurat::GetAssayData(seurat, layer = "counts")
-        } else if (slot == "scale.data") {
-            tryCatch({
-                Seurat::GetAssayData(seurat, layer = "scale.data")
-            }, error = function(e) {
-                # Fall back to old API for scale.data
-                suppressWarnings(Seurat::GetAssayData(seurat, slot = "scale.data"))
-            })
-        } else {
-            # For any other slot name, try as layer first, then as slot
-            tryCatch({
-                Seurat::GetAssayData(seurat, layer = slot)
-            }, error = function(e) {
-                suppressWarnings(Seurat::GetAssayData(seurat, slot = slot))
-            })
-        }
-    }, error = function(e) {
-        # Final fallback to old API
-        suppressWarnings(Seurat::GetAssayData(seurat, slot = slot))
-    })
-    
-    return(counts)
-}
+    if (!requireNamespace("SeuratObject", quietly = TRUE)) {
+        stop("Package 'SeuratObject' must be installed to use this function.")
+    }
 
-#' @title Get Valid Cell Types
-#' @description Get cell types that meet minimum cell count requirements.
-#' 
-#' @param seurat A Seurat object
-#' @param cell_identity Column name in metadata
-#' @param min_cells Minimum number of cells per type
-#' @return Factor of valid cell types
-#' 
-#' @keywords internal
-.get_valid_cell_types <- function(seurat, cell_identity, min_cells) {
-    if (!requireNamespace("Seurat", quietly = TRUE)) {
-        stop("Package 'Seurat' must be installed to use this function.")
-    }
+    expr <- SeuratObject::LayerData(seurat, layer = layer)
     
-    cell_types <- seurat@meta.data[[cell_identity]]
-    cell_type_counts <- table(cell_types)
-    valid_types <- names(cell_type_counts)[cell_type_counts >= min_cells]
-    
-    if (length(valid_types) == 0) {
-        stop(paste("No cell types have at least", min_cells, "cells"))
-    }
-    
-    return(factor(valid_types, levels = valid_types, ordered = TRUE))
+    return(expr)
 }
 
 #' @title Create Pseudobulk Expression Data
-#' @description Aggregate single-cell data by cell type to create pseudobulk expression.
+#' @description Aggregate single-cell data by cell identity (using Seurat Idents) to create pseudobulk expression.
 #' 
 #' @param seurat A Seurat object
-#' @param cell_identity Column name in metadata
-#' @param slot Expression slot to use
-#' @param min_cells Minimum cells per type
+#' @param layer Expression layer to use
 #' @return Matrix of pseudobulked expression
 #' 
 #' @keywords internal
-.pseudobulk_expression <- function(seurat, cell_identity, slot, min_cells) {
+.pseudobulk_expression <- function(seurat, layer) {
     # Get expression data
-    counts <- .get_expression_matrix(seurat, slot)
+    counts <- .get_expression_matrix(seurat, layer)
     
-    # Get cell identities
-    cell_types <- seurat@meta.data[[cell_identity]]
-    names(cell_types) <- colnames(seurat)
+    # Get cell identities from Seurat Idents (factor: names = cell names, values = cell types)
+    cell_types <- Seurat::Idents(seurat)
     
-    # Filter to valid cells and types
-    valid_cells <- !is.na(cell_types) & names(cell_types) %in% colnames(counts)
-    counts <- counts[, names(cell_types)[valid_cells], drop = FALSE]
-    cell_types <- cell_types[valid_cells]
-    
-    # Get valid cell types
-    cell_type_counts <- table(cell_types)
-    valid_cell_types <- names(cell_type_counts)[cell_type_counts >= min_cells]
-    
-    if (length(valid_cell_types) == 0) {
-        stop(paste("No cell types have at least", min_cells, "cells"))
-    }
-    
-    # Keep only cells from valid types
-    valid_cells_final <- cell_types %in% valid_cell_types
-    counts <- counts[, valid_cells_final, drop = FALSE]
-    cell_types <- cell_types[valid_cells_final]
+    # Use all unique identities present (levels of the factor)
+    unique_cell_types <- levels(cell_types)
     
     # Pseudobulk by summing within each cell type
-    pseudobulk_list <- lapply(valid_cell_types, function(ct) {
+    pseudobulk_list <- lapply(unique_cell_types, function(ct) {
         ct_cells <- names(cell_types)[cell_types == ct]
         if (length(ct_cells) == 1) {
             counts[, ct_cells, drop = FALSE]
@@ -299,54 +181,27 @@ as_ScPhyloExpressionSet <- function(seurat,
         }
     })
     
+    # If only one cell per type, ensure output is a matrix
     result <- do.call(cbind, pseudobulk_list)
-    colnames(result) <- valid_cell_types
+    colnames(result) <- unique_cell_types
     
     # Convert to regular matrix for consistency with base class
     return(as.matrix(result))
 }
 
-#' @title Map Cells to Groups
-#' @description Create factor mapping each cell to its group/identity.
+#' @title Calculate TXI for single cell expression sparse matrix.
+#' @description Internal function to calculate TXI for expression data.
 #' 
-#' @param seurat A Seurat object
-#' @param cell_identity Column name in metadata
-#' @param valid_identities Valid identity levels
-#' @return Factor mapping cells to groups
-#' 
-#' @keywords internal
-.map_cells_to_groups <- function(seurat, cell_identity, valid_identities) {
-    cell_types <- seurat@meta.data[[cell_identity]]
-    names(cell_types) <- colnames(seurat)
-    
-    # Filter to valid identities and maintain order
-    valid_cells <- cell_types %in% valid_identities
-    cell_types_filtered <- cell_types[valid_cells]
-    
-    # Return factor with same order as filtered cell names
-    return(factor(cell_types_filtered, levels = valid_identities))
-}
-
-#' @title Get Cell Metadata
-#' @description Extract relevant cell metadata from Seurat object.
-#' 
-#' @param seurat A Seurat object
-#' @param cell_identity Column name for cell identity
-#' @return Data frame of cell metadata
+#' @param expression_matrix Matrix of expression values, dgmatrix
+#' @param strata Vector of phylostratum assignments
+#' @return Vector of TXI values
 #' 
 #' @keywords internal
-.get_cell_metadata <- function(seurat, cell_identity) {
-    if (!requireNamespace("Seurat", quietly = TRUE)) {
-        stop("Package 'Seurat' must be installed to use this function.")
-    }
-    
-    meta <- seurat@meta.data
-    meta$cell_id <- rownames(meta)
-    
-    # Filter cells that have the required identity
-    meta <- meta[!is.na(meta[[cell_identity]]), ]
-    
-    return(meta)
+.TXI_sc <- function(expression, strata) {
+    txi <- (Matrix::t(expression) %*% strata) / Matrix::colSums(expression) |>
+        as.vector()
+    names(txi) <- colnames(expression)
+    return(txi)
 }
 
 ## METHOD IMPLEMENTATIONS
@@ -401,13 +256,13 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
         # Fallback: create new Seurat object with subset data
         tryCatch({
             # Extract the expression matrix for selected genes
-            expr_matrix <- .get_expression_matrix(phyex_set@seurat, phyex_set@slot)
+            expr_matrix <- .get_expression_matrix(phyex_set@seurat, phyex_set@layer)
             expr_subset <- expr_matrix[selected_genes_in_seurat, , drop = FALSE]
             
             # Create new Seurat object with subset data
             Seurat::CreateSeuratObject(
-                counts = if (phyex_set@slot == "counts") expr_subset else NULL,
-                data = if (phyex_set@slot == "data") expr_subset else NULL,
+                counts = if (phyex_set@layer == "counts") expr_subset else NULL,
+                data = if (phyex_set@layer == "data") expr_subset else NULL,
                 meta.data = phyex_set@seurat@meta.data
             )
         }, error = function(e2) {
@@ -428,7 +283,7 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
         seurat = seurat_subset,
         phylomap = phylomap,
         cell_identity = phyex_set@cell_identity,
-        slot = phyex_set@slot,
+        layer = phyex_set@layer,
         min_cells_per_identity = phyex_set@min_cells_per_identity,
         name = phyex_set@name,
         species = phyex_set@species,
@@ -452,11 +307,9 @@ S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
     cat("Number of phylostrata:", x@num_strata, "\n")
     
     # Print single-cell specific information
-    cat("Cell identity used:", x@cell_identity, "\n")
-    cat("Expression slot used:", x@slot, "\n")
-    cat("Min cells per type:", x@min_cells_per_identity, "\n")
+    cat("Expression layer used:", x@layer, "\n")
     cat("Total cells:", ncol(x@seurat), "\n")
     cat("Valid cells:", x@num_samples, "\n")
     cat("Cells per type:\n")
-    print(table(x@cell_metadata[[x@cell_identity]]))
+    print(table(x@groups))
 }

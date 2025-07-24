@@ -4,21 +4,17 @@
 \alias{.pseudobulk_expression}
 \title{Create Pseudobulk Expression Data}
 \usage{
-.pseudobulk_expression(seurat, cell_identity, slot, min_cells)
+.pseudobulk_expression(seurat, layer)
 }
 \arguments{
 \item{seurat}{A Seurat object}
 
-\item{cell_identity}{Column name in metadata}
-
-\item{slot}{Expression slot to use}
-
-\item{min_cells}{Minimum cells per type}
+\item{layer}{Expression layer to use}
 }
 \value{
 Matrix of pseudobulked expression
 }
 \description{
-Aggregate single-cell data by cell type to create pseudobulk expression.
+Aggregate single-cell data by cell identity (using Seurat Idents) to create pseudobulk expression.
 }
 \keyword{internal}

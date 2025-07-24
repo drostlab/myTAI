@@ -14,9 +14,7 @@ ScPhyloExpressionSet(
   null_conservation_sample_size = 5000L,
   precomputed_null_conservation_txis = NULL,
   seurat = stop("@seurat is required"),
-  cell_identity = stop("@cell_identity is required"),
-  slot = "data",
-  min_cells_per_identity = 10
+  layer = "counts"
 )
 }
 \arguments{
@@ -30,7 +28,7 @@ ScPhyloExpressionSet(
 
 \item{index_type}{Character string specifying the transcriptomic index type (default: "TXI")}
 
-\item{identities_label}{Character string labeling the identities (default: "Cell Types")}
+\item{identities_label}{Character string labeling the identities (default: "Cell Type")}
 
 \item{null_conservation_sample_size}{Numeric value for null conservation sample size (default: 5000)}
 
@@ -38,11 +36,7 @@ ScPhyloExpressionSet(
 
 \item{seurat}{A Seurat object containing single-cell expression data}
 
-\item{cell_identity}{Character string specifying which cell identity to use from Seurat metadata}
-
-\item{slot}{Character string specifying which slot to use from the Seurat object (default: "data")}
-
-\item{min_cells_per_identity}{Minimum number of cells required per cell type (default: 10)}
+\item{layer}{Character string specifying which layer to use from the Seurat object (default: "data")}
 }
 \description{
 S7 class for single-cell phylotranscriptomic expression data.

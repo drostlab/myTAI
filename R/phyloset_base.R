@@ -63,45 +63,64 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             options = names(TI_map),
             default = "TXI"
         ),
-        
-        ## ABSTRACT PROPERTIES (must be implemented by subclasses)
-        identities = new_property(
-            class = class_factor,
-            getter = function(self) stop("identities property must be implemented by subclass")
-        ),
         identities_label = new_property(
             class = class_character,
             default = "Identities"
         ),
+
+        ## ABSTRACT PROPERTIES (must be implemented by subclasses)
+        expression = new_property(
+            getter = function(self) stop("expression property must be implemented by subclass")
+        ),
         expression_collapsed = new_property(
             getter = function(self) stop("expression_collapsed property must be implemented by subclass")
         ),
+        groups = new_property(
+            getter = function(self) stop("groups property must be implemented by subclass")
+        ),
+        
         
         ## SHARED COMPUTED PROPERTIES
-        num_genes = new_property(
-            class = class_integer,
-            getter = function(self) as.integer(length(self@gene_ids))
+        identities = new_property(
+            class = class_factor,
+            getter = function(self) colnames(self@expression_collapsed)
+        ),
+        sample_names = new_property(
+            class = class_factor,
+            getter = function(self) colnames(self@expression)
         ),
         num_identities = new_property(
             class = class_integer,
-            getter = function(self) as.integer(length(self@identities))
+            getter = function(self) length(self@identities)
+        ),
+        num_samples = new_property(
+            class = class_integer,
+            getter = function(self) length(self@sample_names)
+        ),
+        num_genes = new_property(
+            class = class_integer,
+            getter = function(self) length(self@gene_ids)
         ),
         num_strata = new_property(
             class = class_integer,
-            getter = function(self) as.integer(length(unique(self@strata)))
+            getter = function(self) length(unique(self@strata))
         ),
         index_full_name = new_property(
             class = class_character,
             getter = function(self) TI_map[[self@index_type]]
         ),
+        group_map = new_property(
+            class = class_list,
+            getter = function(self) split(self@sample_names, self@groups)
+        ),
         
         ## TXI PROPERTIES
         TXI = new_property(
             class = class_double,
-            getter = function(self) colSums(pTXI(self))
+            getter = function(self) .TXI(self@expression_collapsed, self@strata)
         ),
         TXI_sample = new_property(
-            getter = function(self) stop("TXI_sample property must be implemented by subclass")
+            getter = function(self) .TXI(self@expression, self@strata)
         ),
         
         ## NULL CONSERVATION PROPERTIES
@@ -125,32 +144,42 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
                     return(self@precomputed_null_conservation_txis)
                 }
             }
-        ),
-        
-
-        
-        ## ABSTRACT SAMPLE NAMES
-        sample_names = new_property(
-            getter = function(self) stop("sample_names property must be implemented by subclass")
         )
     )
 )
 
+
+
+
 ## SHARED FUNCTIONS
 
 #' @title Calculate pTXI for Raw Expression Data
-#' @description Internal function to calculate pTXI for raw (non-collapsed) expression data.
-#' Used for TXI_sample calculations.
+#' @description Internal function to calculate pTXI for expression data.
 #' 
 #' @param expression_matrix Matrix of expression values
 #' @param strata Vector of phylostratum assignments
 #' @return Matrix of pTXI values
 #' 
 #' @keywords internal
-.pTXI_raw <- function(expression_matrix, strata) {
+.pTXI <- function(expression_matrix, strata) {
     strata_numeric <- as.numeric(strata)
     relative_expr <- sweep(expression_matrix, 2, colSums(expression_matrix), "/")
-    return(relative_expr * strata_numeric)
+    res <- relative_expr * strata_numeric
+    colnames(res) <- colnames(expression_matrix)
+    rownames(res) <- rownames(expression_matrix)
+    return(res)
+}
+
+#' @title Calculate TXI for Raw Expression Data
+#' @description Internal function to calculate TXI for expression data.
+#' 
+#' @param expression_matrix Matrix of expression values
+#' @param strata Vector of phylostratum assignments
+#' @return Vector of TXI values
+#' 
+#' @keywords internal
+.TXI <- function(expression_matrix, strata) {
+    return(colSums(.pTXI(expression_matrix, strata)))
 }
 
 ## PRINT METHODS
@@ -169,34 +198,6 @@ S7::method(print, PhyloExpressionSetBase) <- function(x, ...) {
 }
 
 ## GENERIC FUNCTIONS
-
-#' @title Calculate Phylostratum-Specific Transcriptomic Index
-#' @description Calculate pTXI values for expression data. This is a generic function
-#' that dispatches based on the input type.
-#' 
-#' @param phyex_set A PhyloExpressionSet object
-#' @param ... Additional arguments passed to methods
-#' @return Matrix of pTXI values
-#' 
-#' @export
-pTXI <- S7::new_generic("pTXI", dispatch_args = "phyex_set")
-
-#' @export
-S7::method(pTXI, PhyloExpressionSetBase) <- function(phyex_set) {
-    # Use collapsed expression data for pTXI calculation
-    counts <- phyex_set@expression_collapsed
-    strata_numeric <- as.numeric(phyex_set@strata)
-    
-    # Calculate relative expression and multiply by phylostratum
-    relative_expr <- sweep(counts, 2, colSums(counts), "/")
-    ptxi_matrix <- relative_expr * strata_numeric
-    
-    # Add proper row and column names
-    rownames(ptxi_matrix) <- phyex_set@gene_ids
-    colnames(ptxi_matrix) <- as.character(phyex_set@identities)
-    
-    return(ptxi_matrix)
-}
 
 #' @title Collapse PhyloExpressionSet Replicates
 #' @description Convert a PhyloExpressionSet with replicates to one with collapsed expression data.
@@ -257,6 +258,22 @@ sTXI <- function(phyex_set,
              call. = FALSE
         )
     return(mat)
+}
+
+#' @title Calculate Phylostratum-Specific Transcriptomic Index
+#' @description Calculate pTXI values for expression data. This is a generic function
+#' that dispatches based on the input type.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' @return Matrix of pTXI values
+#' 
+#' @export
+pTXI <- function(phyex_set, reps=FALSE) {
+    if (reps)
+        e <- phyex_set@expression
+    else
+        e <- phyex_set@expression_collapsed
+    return(.pTXI(e, phyex_set@strata))
 }
 
 #' @title Remove Genes from PhyloExpressionSet
