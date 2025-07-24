@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
-Version: 2.0.0
+Version: 2.1.0.9000
 Date: 2024-10-02
 Author: Hajk-Georg Drost [aut, cre], Jaruwatana Sodai Lotharukpong [aut, ctb], Nikola Kalábová [aut, ctb], Filipa Martins Costa [aut, ctb], Kristian K Ullrich [aut, ctb], Stefan Manolache [aut, ctb]
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@tuebingen.mpg.de>
