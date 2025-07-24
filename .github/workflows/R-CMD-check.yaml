@@ -44,8 +44,6 @@ jobs:
           extra-packages: |
             any::testthat
             any::rcmdcheck
-            any::Seurat
-            any::SeuratObject
           needs: check
           dependencies: '"hard"'
 

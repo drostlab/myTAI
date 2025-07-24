@@ -38,7 +38,7 @@ NeedsCompilation: yes
 License: GPL-2
 License_file: LICENSE
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     S7,
     patchwork,
