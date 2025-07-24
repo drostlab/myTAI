@@ -8,6 +8,8 @@ pTXI(phyex_set, reps = FALSE)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
+
+\item{reps}{Whether to return pTXI for each sample instead for each group}
 }
 \value{
 Matrix of pTXI values

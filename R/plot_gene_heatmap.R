@@ -94,7 +94,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
     }
     
     # Calculate standardized expression for ordering
-    se <- e |> to_std_expr()
+    se <- e |> .to_std_expr()
     
     # Use standardized values if requested
     if (std) {

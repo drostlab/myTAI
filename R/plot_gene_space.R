@@ -40,7 +40,7 @@ plot_gene_space <- function(phyex_set,
         e <- e |> genes_filter_dynamic(thr = 1 - top_p)
     }
     
-    e <- to_std_expr(e)
+    e <- .to_std_expr(e)
         
         
     N = nrow(e)

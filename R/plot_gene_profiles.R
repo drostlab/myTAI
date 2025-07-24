@@ -55,7 +55,7 @@ plot_gene_profiles <- function(phyex_set,
     counts <- phyex_set@expression
     counts <- switch(transformation,
                      log = log1p(counts),
-                     std_log = to_std_expr(log1p(counts)),
+                     std_log = .to_std_expr(log1p(counts)),
                      none = counts)
     
     all_genes <- phyex_set@gene_ids
@@ -106,7 +106,7 @@ plot_gene_profiles <- function(phyex_set,
                   .groups = "drop") |>
         left_join(data.frame(GeneID = phyex_set@gene_ids,
                              Stratum = phyex_set@strata,
-                             Angle = -get_angles(phyex_set@expression |> log1p() |> to_std_expr())),
+                             Angle = -get_angles(phyex_set@expression |> log1p() |> .to_std_expr())),
                   by = "GeneID") |> 
         mutate(
             ColourVar = switch(colour_by,

@@ -2,26 +2,30 @@
 % Please edit documentation in R/genes_transforms.R
 \name{transform_counts}
 \alias{transform_counts}
-\title{Gene Expression Transformation Functions}
+\title{Transform Expression Counts in PhyloExpressionSet}
 \usage{
-transform_counts(phyex_set, ...)
+transform_counts(
+  phyex_set,
+  FUN,
+  FUN_name = deparse(substitute(FUN)),
+  new_name = NULL,
+  ...
+)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
-\item{...}{Additional arguments. For the PhyloExpressionSet method, arguments are FUN (function to apply), FUN_name (character string naming the transformation function), new_name (character string for the new dataset name), and additional arguments passed to the transformation function}
+\item{FUN}{Function to apply}
+
+\item{FUN_name}{Name of the transformation function (optional)}
+
+\item{new_name}{Name for the new dataset (optional)}
+
+\item{...}{Additional arguments passed to FUN}
 }
 \value{
 A PhyloExpressionSet object with transformed expression data
 }
 \description{
-Collection of functions for transforming gene expression data
-in PhyloExpressionSet objects.
-
 Apply a transformation function to the expression counts in a PhyloExpressionSet.
-}
-\examples{
-# Apply log transformation
-# log_set <- transform_counts(phyex_set, log1p, "log1p")
-
 }

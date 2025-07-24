@@ -4,21 +4,8 @@
 \alias{tf}
 \title{Short Alias for Transform Counts}
 \usage{
-tf(phyex_set, ...)
-}
-\arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
-
-\item{...}{Arguments passed to transform_counts}
-}
-\value{
-A PhyloExpressionSet object with transformed expression data
+tf(phyex_set, FUN, FUN_name = deparse(substitute(FUN)), new_name = NULL, ...)
 }
 \description{
 Convenience alias for transform_counts function.
-}
-\examples{
-# Short alias for transformation
-# log_set <- tf(phyex_set, log1p)
-
 }

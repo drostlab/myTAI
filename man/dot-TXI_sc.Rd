@@ -7,9 +7,9 @@
 .TXI_sc(expression, strata)
 }
 \arguments{
-\item{strata}{Vector of phylostratum assignments}
+\item{expression}{Matrix of expression values, dgmatrix}
 
-\item{expression_matrix}{Matrix of expression values, dgmatrix}
+\item{strata}{Vector of phylostratum assignments}
 }
 \value{
 Vector of TXI values

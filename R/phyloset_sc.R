@@ -192,7 +192,7 @@ as_ScPhyloExpressionSet <- function(seurat,
 #' @title Calculate TXI for single cell expression sparse matrix.
 #' @description Internal function to calculate TXI for expression data.
 #' 
-#' @param expression_matrix Matrix of expression values, dgmatrix
+#' @param expression Matrix of expression values, dgmatrix
 #' @param strata Vector of phylostratum assignments
 #' @return Vector of TXI values
 #' 
@@ -236,42 +236,17 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
     
     # Remove any NA indices (genes not found)
     valid_indices <- gene_indices[!is.na(gene_indices)]
+
+    if (length(valid_indices) < length(gene_indices))
+        warning("Some of the specified genes were not found in the dataset")
     
     if (length(valid_indices) == 0) {
         stop("None of the specified genes were found in the dataset")
     }
-    
-    # Create new seurat object with selected genes
-    selected_genes_in_seurat <- intersect(genes, rownames(phyex_set@seurat))
-    
-    if (length(selected_genes_in_seurat) == 0) {
-        stop("None of the specified genes were found in the Seurat object")
-    }
-    
-    # Subset the Seurat object using Seurat's subset function
-    seurat_subset <- tryCatch({
-        # Try using Seurat's subset function
-        Seurat::subset(phyex_set@seurat, features = selected_genes_in_seurat)
-    }, error = function(e) {
-        # Fallback: create new Seurat object with subset data
-        tryCatch({
-            # Extract the expression matrix for selected genes
-            expr_matrix <- .get_expression_matrix(phyex_set@seurat, phyex_set@layer)
-            expr_subset <- expr_matrix[selected_genes_in_seurat, , drop = FALSE]
-            
-            # Create new Seurat object with subset data
-            Seurat::CreateSeuratObject(
-                counts = if (phyex_set@layer == "counts") expr_subset else NULL,
-                data = if (phyex_set@layer == "data") expr_subset else NULL,
-                meta.data = phyex_set@seurat@meta.data
-            )
-        }, error = function(e2) {
-            # Final fallback: just use the original seurat object
-            # This is not ideal but allows the function to continue
-            warning("Could not subset Seurat object, using original object")
-            phyex_set@seurat
-        })
-    })
+
+    genes <- phyex_set@gene_ids[valid_indices]
+
+    seurat_subset <- Seurat::subset(seurat, features = genes)
     
     # Create phylomap for selected genes
     phylomap <- data.frame(
@@ -282,9 +257,7 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
     as_ScPhyloExpressionSet(
         seurat = seurat_subset,
         phylomap = phylomap,
-        cell_identity = phyex_set@cell_identity,
         layer = phyex_set@layer,
-        min_cells_per_identity = phyex_set@min_cells_per_identity,
         name = phyex_set@name,
         species = phyex_set@species,
         index_type = phyex_set@index_type

@@ -56,10 +56,10 @@ test_that("genes_filter_dynamic works", {
     expect_true(nrow(filtered_90) <= nrow(filtered_50))
 })
 
-test_that("to_std_expr works", {
+test_that(".to_std_expr works", {
     # Test standardization (internal function)
     expr_matrix <- log1p(example_phyex_set@expression_collapsed)
-    std_expr <- myTAI:::to_std_expr(expr_matrix)
+    std_expr <- myTAI:::.to_std_expr(expr_matrix)
     expect_true(is.matrix(std_expr))
     expect_equal(dim(std_expr), dim(expr_matrix))
     
@@ -76,7 +76,7 @@ test_that("to_std_expr works", {
 test_that("get_angles works", {
     # Test angle calculation (internal function)
     expr_matrix <- log1p(example_phyex_set@expression_collapsed)
-    std_expr <- myTAI:::to_std_expr(expr_matrix)
+    std_expr <- myTAI:::.to_std_expr(expr_matrix)
     angles <- myTAI:::get_angles(std_expr)
     
     expect_true(is.numeric(angles))

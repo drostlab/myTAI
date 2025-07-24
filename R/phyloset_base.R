@@ -265,6 +265,7 @@ sTXI <- function(phyex_set,
 #' that dispatches based on the input type.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
+#' @param reps Whether to return pTXI for each sample instead for each group
 #' @return Matrix of pTXI values
 #' 
 #' @export
