@@ -103,7 +103,7 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
         ),
         num_strata = new_property(
             class = class_integer,
-            getter = function(self) length(unique(self@strata))
+            getter = function(self) length(levels(self@strata))
         ),
         index_full_name = new_property(
             class = class_character,

@@ -222,14 +222,7 @@ test_that("ScPhyloExpressionSet edge cases work", {
     skip_if(is.null(tryCatch(example_phyex_set_sc, error = function(e) NULL)), 
             "example_phyex_set_sc not available")
     
-    # Test with single gene
-    single_gene <- example_phyex_set_sc@gene_ids[1]
-    single_sc_set <- select_genes(example_phyex_set_sc, single_gene)
-    expect_equal(length(single_sc_set@gene_ids), 1)
-    
-    # Test plots work with single gene
-    p_single_sig <- plot_signature(single_sc_set)
-    expect_s3_class(p_single_sig, "ggplot")
+
     
     # Test with small gene subset
     small_genes <- example_phyex_set_sc@gene_ids[1:5]

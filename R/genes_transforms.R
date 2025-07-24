@@ -3,14 +3,23 @@
 #' in PhyloExpressionSet objects.
 #' 
 
+## Set Expression Matrix in PhyloExpressionSet
 #' @title Set Expression Matrix in PhyloExpressionSet
 #' @description Generic function to set the expression matrix in a PhyloExpressionSet object.
 #' @param phyex_set A PhyloExpressionSet object
 #' @param new_expression Matrix to set as the new expression
+#' @param new_name Optional new name for the dataset
 #' @param ... Additional arguments
 #' @return A PhyloExpressionSet object with updated expression
 #' @export
-set_expression <- S7::new_generic("set_expression", "phyex_set")
+set_expression <- S7::new_generic("set_expression", "phyex_set", 
+    function(phyex_set,
+             new_expression, 
+             new_name = NULL,
+             ...) {
+        S7::S7_dispatch()
+    }
+)
 
 #' @export
 S7::method(set_expression, BulkPhyloExpressionSet) <- function(phyex_set, new_expression, new_name = NULL, ...) {
@@ -28,16 +37,12 @@ S7::method(set_expression, ScPhyloExpressionSet) <- function(phyex_set, new_expr
     stopifnot(all(dim(new_expression) == dim(phyex_set@expression)))
     new_seurat <- phyex_set@seurat
     SeuratObject::LayerData(new_seurat, layer = phyex_set@layer) <- new_expression
-    phylomap <- data.frame(
-        Stratum = as.numeric(phyex_set@strata),
-        GeneID = phyex_set@gene_ids
-    )
+
     res <- as_ScPhyloExpressionSet(
         seurat = new_seurat,
-        phylomap = phylomap,
+        strata = phyex_set@strata,
         layer = phyex_set@layer,
         name = if (!is.null(new_name)) new_name else phyex_set@name,
-        min_cells_per_identity = phyex_set@min_cells_per_identity,
         species = phyex_set@species,
         index_type = phyex_set@index_type
     )
@@ -62,6 +67,13 @@ transform_counts <- function(phyex_set, FUN, FUN_name = deparse(substitute(FUN))
 
 #' @title Short Alias for Transform Counts
 #' @description Convenience alias for transform_counts function.
+#' @param phyex_set A PhyloExpressionSet object
+#' @param FUN Function to apply
+#' @param FUN_name Name of the transformation function (optional)
+#' @param new_name Name for the new dataset (optional)
+#' @param ... Additional arguments passed to FUN
+#' @return A PhyloExpressionSet object with transformed expression data
+#' @seealso transform_counts
 #' @export
 tf <- transform_counts
 

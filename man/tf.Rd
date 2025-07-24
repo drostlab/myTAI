@@ -6,6 +6,23 @@
 \usage{
 tf(phyex_set, FUN, FUN_name = deparse(substitute(FUN)), new_name = NULL, ...)
 }
+\arguments{
+\item{phyex_set}{A PhyloExpressionSet object}
+
+\item{FUN}{Function to apply}
+
+\item{FUN_name}{Name of the transformation function (optional)}
+
+\item{new_name}{Name for the new dataset (optional)}
+
+\item{...}{Additional arguments passed to FUN}
+}
+\value{
+A PhyloExpressionSet object with transformed expression data
+}
 \description{
 Convenience alias for transform_counts function.
+}
+\seealso{
+transform_counts
 }

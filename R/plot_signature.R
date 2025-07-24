@@ -69,12 +69,9 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
     # Add replicate dots if requested
     if (show_reps) {
         df_samples <- tibble::tibble(
-            Identity = factor(phyex_set@groups, levels = levels(phyex_set@identities)),
+            Identity = phyex_set@groups,
             TXI = phyex_set@TXI_sample
         )
-        
-        # Filter out samples with NA identity
-        df_samples <- df_samples[!is.na(df_samples$Identity), ]
         
         p <- p + geom_jitter(
             data = df_samples,
@@ -118,44 +115,59 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
 
 #' @export
 S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set, 
-                                                           show_reps = TRUE,
-                                                           colour = NULL,
-                                                           show_p_val = FALSE,
-                                                           conservation_test = stat_flatline_test,
-                                                           ...) {
+                                                             show_reps = TRUE,
+                                                             colour = NULL,
+                                                             show_p_val = FALSE,
+                                                             conservation_test = stat_flatline_test,
+                                                             ...) {
     
     # Prepare data for plotting
     df_samples <- tibble::tibble(
-        Identity = factor(phyex_set@groups, levels = levels(phyex_set@identities)),
+        Identity = phyex_set@groups,
         TXI = phyex_set@TXI_sample
     )
     
-    # Filter out cells with NA identity
-    df_samples <- df_samples[!is.na(df_samples$Identity), ]
-    
-    # Calculate means for overlaying
-    df_main <- df_samples |>
-        dplyr::group_by(Identity) |>
-        dplyr::summarise(TXI = mean(TXI, na.rm = TRUE), .groups = "drop")
-    
-    # Create base plot with violin plots
-    p <- ggplot(df_samples, aes(x = Identity, y = TXI, fill = Identity)) +
-        geom_violin(alpha = 0.7, scale = "width")
-    
-    # Add mean points
-    p <- p + geom_point(
-        data = df_main,
-        aes(x = Identity, y = TXI),
-        shape = 21, colour = "black", size = 2, stroke = 0.8,
-        fill = "white", inherit.aes = FALSE
+    # Use the proper TXI values (aggregated values per identity)
+    df_main <- tibble::tibble(
+        Identity = phyex_set@identities,
+        TXI = phyex_set@TXI
     )
     
-    # Add individual cells if requested
+    # Create base plot
     if (show_reps) {
-        p <- p + ggforce::geom_sina(
-            size = 0.1, alpha = 0.5,
-            colour = "black"
+        # Show violin plots with individual cells as reps
+        p <- ggplot(df_samples, aes(x = Identity, y = TXI, fill = Identity)) +
+            geom_violin(alpha = 0.7, scale = "width") +
+            ggforce::geom_sina(
+                size = 0.1, alpha = 0.5,
+                colour = "black"
+            )
+        
+        # Add TXI line plot on top
+        p <- p + geom_line(
+            data = df_main,
+            aes(x = Identity, y = TXI, group = 1),
+            colour = "black", lwd = 2.3, lineend = "round", inherit.aes = FALSE
+        ) +
+        geom_line(
+            data = df_main,
+            aes(x = Identity, y = TXI, group = 1, colour = phyex_set@name),
+            lwd = 1.5, lineend = "round", inherit.aes = FALSE
         )
+        
+        # Add mean points (proper TXI values) on top
+        p <- p + geom_point(
+            data = df_main,
+            aes(x = Identity, y = TXI),
+            shape = 21, colour = "black", size = 2, stroke = 0.8,
+            fill = "white", inherit.aes = FALSE
+        )
+    } else {
+        # Simple plot showing only aggregated TXI values with line
+        p <- ggplot(df_main, aes(x = Identity, y = TXI, fill = Identity, group = 1)) +
+            geom_line(colour = "black", lwd = 2.3, lineend = "round") +
+            geom_line(aes(colour = phyex_set@name), lwd = 1.5, lineend = "round") +
+            geom_point(size = 3, shape = 21, colour = "black", stroke = 0.8)
     }
     
     p <- p +

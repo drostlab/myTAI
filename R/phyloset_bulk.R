@@ -219,7 +219,7 @@ S7::method(select_genes, BulkPhyloExpressionSet) <- function(phyex_set, genes) {
     
     # Create new data with selected genes
     data <- tibble::tibble(
-        Stratum = as.numeric(phyex_set@strata[valid_indices]),
+        Stratum = phyex_set@strata[valid_indices],
         GeneID = phyex_set@gene_ids[valid_indices],
         tibble::as_tibble(phyex_set@expression[valid_indices, , drop = FALSE])
     )

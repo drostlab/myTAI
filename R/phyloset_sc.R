@@ -63,10 +63,9 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
 #' ScPhyloExpressionSet object for single-cell phylotranscriptomic analysis.
 #' 
 #' @param seurat A Seurat object containing single-cell expression data
-#' @param phylomap A data frame with two columns: phylostratum assignments and gene IDs
+#' @param strata Factor vector of phylostratum assignments for each gene
 #' @param layer Character string specifying which layer to use from the Seurat object (default: "counts")
 #' @param name A character string naming the dataset (default: "Single-Cell Phylo Expression Set")
-#' @param strata_labels Optional character vector of labels for phylostrata
 #' @param ... Additional arguments passed to ScPhyloExpressionSet constructor
 #' 
 #' @return A ScPhyloExpressionSet object
@@ -79,10 +78,9 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
 #' @importFrom dplyr inner_join
 #' @export
 as_ScPhyloExpressionSet <- function(seurat, 
-                                    phylomap,
+                                    strata,
                                     layer = "counts",
                                     name = "Single-Cell Phylo Expression Set",
-                                    strata_labels = NULL,
                                     ...) {
     
     if (!requireNamespace("Seurat", quietly = TRUE)) {
@@ -91,9 +89,47 @@ as_ScPhyloExpressionSet <- function(seurat,
 
     # Get raw single-cell expression data
     sc_counts <- .get_expression_matrix(seurat, layer)
+
+    names(strata) <- rownames(sc_counts)
     
+    
+    
+    return(ScPhyloExpressionSet(
+        seurat = seurat,
+        layer = layer,
+        strata = strata,
+        gene_ids = rownames(sc_counts),
+        name = name,
+        ...
+    ))
+}
+
+#' @title Match Single-Cell Expression Data with Phylostratum Map
+#' @description Join single-cell gene expression data (from a Seurat object) with a phylostratum mapping to create 
+#' a ScPhyloExpressionSet object.
+#' 
+#' @param seurat A Seurat object containing single-cell expression data
+#' @param phylomap A data frame with two columns: phylostratum assignments and gene IDs
+#' @param layer Character string specifying which layer to use from the Seurat object (default: "counts")
+#' @param ... Additional arguments passed to as_ScPhyloExpressionSet
+#' 
+#' @return A ScPhyloExpressionSet object
+#' 
+#' @examples
+#' # Match Seurat object with phylostratum map
+#' # sc_set <- match_map_sc(seurat_obj, phylo_map, layer = "counts", name = "SC Matched Dataset")
+#' 
+#' @importFrom dplyr inner_join relocate
+#' @export
+match_map_sc <- function(seurat, 
+                         phylomap,
+                         layer = "counts",
+                         ...) {
+
     # Match with phylomap
     colnames(phylomap) <- c("Stratum", "GeneID")
+
+    sc_counts <- .get_expression_matrix(seurat, layer)
     gene_ids <- rownames(sc_counts)
     
     # Filter phylomap to genes present in data
@@ -108,22 +144,13 @@ as_ScPhyloExpressionSet <- function(seurat,
     phylomap_ordered <- phylomap_filtered[match(rownames(sc_counts), phylomap_filtered$GeneID), ]
     
     # Create strata factor
-    if (is.null(strata_labels)) {
-        strata_labels <- sort(unique(as.numeric(phylomap_ordered$Stratum)))
-    }
+    strata_labels <- sort(unique(as.numeric(phylomap_ordered$Stratum)))
     strata <- factor(as.numeric(phylomap_ordered$Stratum), 
                      levels = sort(unique(as.numeric(phylomap_ordered$Stratum))), 
                      labels = strata_labels)
     names(strata) <- rownames(sc_counts)
-    
-    return(ScPhyloExpressionSet(
-        seurat = seurat,
-        layer = layer,
-        strata = strata,
-        gene_ids = rownames(sc_counts),
-        name = name,
-        ...
-    ))
+
+    return(as_ScPhyloExpressionSet(seurat=seurat, strata = strata, layer = layer, ...))
 }
 
 ## HELPER FUNCTIONS
@@ -143,9 +170,33 @@ as_ScPhyloExpressionSet <- function(seurat,
     if (!requireNamespace("SeuratObject", quietly = TRUE)) {
         stop("Package 'SeuratObject' must be installed to use this function.")
     }
-
     expr <- SeuratObject::LayerData(seurat, layer = layer)
-    
+    # Always return a 2D sparse matrix, even for single gene/cell
+    if (is.null(dim(expr)) || length(dim(expr)) == 1) {
+        if (!requireNamespace("Matrix", quietly = TRUE)) {
+            stop("Package 'Matrix' must be installed to use this function.")
+        }
+        # Try to infer if this is a single gene (row) or single cell (column)
+        if (!is.null(names(expr))) {
+            # If names match rownames, it's a single cell; if names match colnames, it's a single gene
+            if (!is.null(rownames(seurat)) && all(names(expr) %in% rownames(seurat))) {
+                # Single cell, multiple genes
+                expr <- Matrix::Matrix(expr, nrow = length(expr), ncol = 1, sparse = TRUE,
+                                       dimnames = list(names(expr), colnames(seurat)))
+            } else if (!is.null(colnames(seurat)) && all(names(expr) %in% colnames(seurat))) {
+                # Single gene, multiple cells
+                expr <- Matrix::Matrix(expr, nrow = 1, ncol = length(expr), sparse = TRUE,
+                                       dimnames = list(rownames(seurat), names(expr)))
+            } else {
+                # Fallback: treat as column vector
+                expr <- Matrix::Matrix(expr, nrow = length(expr), ncol = 1, sparse = TRUE)
+            }
+        } else {
+            # Single value
+            expr <- Matrix::Matrix(expr, nrow = 1, ncol = 1, sparse = TRUE,
+                                   dimnames = list(rownames(seurat), colnames(seurat)))
+        }
+    }
     return(expr)
 }
 
@@ -198,8 +249,35 @@ as_ScPhyloExpressionSet <- function(seurat,
 #' 
 #' @keywords internal
 .TXI_sc <- function(expression, strata) {
-    txi <- (Matrix::t(expression) %*% strata) / Matrix::colSums(expression) |>
-        as.vector()
+    # Convert strata to numeric if it's a factor
+    if (is.factor(strata)) {
+        strata_numeric <- as.numeric(strata)
+    } else {
+        strata_numeric <- strata
+    }
+    
+    # Calculate column sums
+    col_sums <- Matrix::colSums(expression)
+    
+    # Handle zero column sums (cells with no expression)
+    zero_cols <- col_sums == 0
+    
+    if (all(zero_cols)) {
+        # If all cells have zero expression, return vector of NAs
+        txi <- rep(NA_real_, ncol(expression))
+    } else {
+        # Calculate TXI only for non-zero columns
+        txi <- rep(NA_real_, ncol(expression))
+        
+        if (any(!zero_cols)) {
+            non_zero_expr <- expression[, !zero_cols, drop = FALSE]
+            non_zero_sums <- col_sums[!zero_cols]
+            
+            txi_non_zero <- as.numeric((Matrix::t(non_zero_expr) %*% strata_numeric) / non_zero_sums)
+            txi[!zero_cols] <- txi_non_zero
+        }
+    }
+    
     names(txi) <- colnames(expression)
     return(txi)
 }
@@ -239,24 +317,21 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
 
     if (length(valid_indices) < length(gene_indices))
         warning("Some of the specified genes were not found in the dataset")
-    
+
     if (length(valid_indices) == 0) {
         stop("None of the specified genes were found in the dataset")
     }
 
+    if (length(valid_indices) < 2) {
+        stop("Please provide at least 2 genes for select_genes() on a ScPhyloExpressionSet. Single-gene selection is not supported.")
+    }
+
     genes <- phyex_set@gene_ids[valid_indices]
 
-    seurat_subset <- Seurat::subset(seurat, features = genes)
-    
-    # Create phylomap for selected genes
-    phylomap <- data.frame(
-        Stratum = as.numeric(phyex_set@strata[valid_indices]),
-        GeneID = phyex_set@gene_ids[valid_indices]
-    )
-    
+    seurat_subset <- subset(phyex_set@seurat, features = genes)
     as_ScPhyloExpressionSet(
         seurat = seurat_subset,
-        phylomap = phylomap,
+        strata = phyex_set@strata[valid_indices], 
         layer = phyex_set@layer,
         name = phyex_set@name,
         species = phyex_set@species,
@@ -285,4 +360,23 @@ S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
     cat("Valid cells:", x@num_samples, "\n")
     cat("Cells per type:\n")
     print(table(x@groups))
+}
+
+
+#' @title Downsample Expression Matrix
+#' @description Downsample the cells in a ScPhyloExpressionSet and return the expression matrix as a dense matrix.
+#' @param phyex_set A ScPhyloExpressionSet object
+#' @param downsample Integer, number of cells to keep per identity (default: 10)
+#' @return A dense expression matrix (genes x downsampled cells)
+#' @details
+#' This function randomly downsamples the cells in the Seurat object of a ScPhyloExpressionSet
+#' and returns the resulting expression matrix as a regular R matrix (not sparse).
+#' Useful for quick plotting or prototyping with large single-cell datasets.
+#' @examples
+#' # Downsample to 20 cells per identity and get the matrix
+#' # mat <- downsample_expression(sc_phyex_set, downsample = 20)
+#' @export
+downsample_expression <- function(phyex_set, downsample = 10) {
+    seurat <- subset(phyex_set@seurat, downsample = downsample)
+    as.matrix(.get_expression_matrix(seurat, phyex_set@layer))
 }

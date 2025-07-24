@@ -45,7 +45,7 @@ destroy_pattern <- function(phyex_set,
     res <- list(removed_genes=res$common_removed_genes, runs=res$genes_list)
 
     if (length(res$removed_genes) == 0) {
-        warning("GATAI has failed to detect any genes. Try to increase the number of generations.")
+        message("GATAI has failed to detect any genes. Try to increase the number of generations.")
         return(res)
     }
     

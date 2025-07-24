@@ -51,7 +51,7 @@ if (requireNamespace("Seurat", quietly = TRUE)) {
         GeneID = rownames(example_seurat)
     )
     
-    example_phyex_set_sc <- as_ScPhyloExpressionSet(
+    example_phyex_set_sc <- match_map_sc(
         seurat = example_seurat,
         phylomap = phylomap_example,
         layer = "counts",

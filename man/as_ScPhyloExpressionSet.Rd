@@ -6,23 +6,20 @@
 \usage{
 as_ScPhyloExpressionSet(
   seurat,
-  phylomap,
+  strata,
   layer = "counts",
   name = "Single-Cell Phylo Expression Set",
-  strata_labels = NULL,
   ...
 )
 }
 \arguments{
 \item{seurat}{A Seurat object containing single-cell expression data}
 
-\item{phylomap}{A data frame with two columns: phylostratum assignments and gene IDs}
+\item{strata}{Factor vector of phylostratum assignments for each gene}
 
 \item{layer}{Character string specifying which layer to use from the Seurat object (default: "counts")}
 
 \item{name}{A character string naming the dataset (default: "Single-Cell Phylo Expression Set")}
-
-\item{strata_labels}{Optional character vector of labels for phylostrata}
 
 \item{...}{Additional arguments passed to ScPhyloExpressionSet constructor}
 }

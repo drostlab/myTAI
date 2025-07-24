@@ -9,7 +9,7 @@ plot_gene_heatmap(
   genes = NULL,
   top_p = 0.2,
   std = TRUE,
-  reps = FALSE,
+  show_reps = FALSE,
   cluster_rows = FALSE,
   cluster_cols = FALSE,
   show_gene_age = TRUE,
@@ -26,7 +26,7 @@ plot_gene_heatmap(
 
 \item{std}{Logical indicating whether to standardize expression values (default: TRUE)}
 
-\item{reps}{Logical indicating whether to show replicates or collapsed data (default: FALSE)}
+\item{show_reps}{Logical indicating whether to show replicates or collapsed data (default: FALSE)}
 
 \item{cluster_rows}{Logical indicating whether to cluster genes/rows (default: FALSE)}
 
@@ -62,6 +62,6 @@ color scheme across different myTAI visualizations.
 # p1 <- plot_gene_heatmap(bulk_phyex_set, show_gene_age = TRUE)
 
 # Single-cell heatmap with subset of cells
-# p2 <- plot_gene_heatmap(sc_phyex_set, reps = TRUE, max_cells_per_type = 3)
+# p2 <- plot_gene_heatmap(sc_phyex_set, show_reps = TRUE, max_cells_per_type = 3)
 
 }

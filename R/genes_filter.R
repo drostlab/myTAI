@@ -126,7 +126,13 @@ genes_lowly_expressed <- function(phyex_set, threshold = 1) {
 #' 
 #' @keywords internal
 genes_filter_dynamic <- function(e, thr=0.9) {
-    var_genes <- apply(e, 1, stats::var)
-    cutoff <- stats::quantile(var_genes, thr)
-    e[var_genes > cutoff, ]
+    var_genes <- apply(e, 1, stats::var, na.rm = TRUE)
+    var_genes <- var_genes[!is.na(var_genes) & !is.nan(var_genes)]
+    if (length(var_genes) == 0) {
+        return(e[FALSE, , drop = FALSE])  # Return empty matrix with same structure
+    }
+    cutoff <- stats::quantile(var_genes, thr, na.rm = TRUE)
+    all_var_genes <- apply(e, 1, stats::var, na.rm = TRUE)
+    valid_genes <- !is.na(all_var_genes) & !is.nan(all_var_genes) & all_var_genes > cutoff
+    e[valid_genes, , drop = FALSE]
 }

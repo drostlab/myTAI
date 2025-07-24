@@ -116,13 +116,13 @@ S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set,
         )
         
         # Add metadata for colouring
-        cell_meta <- phyex_set@seurat@meta.data
+        cell_meta <- phyex_set@cell_metadata
         cell_meta$cell_id <- rownames(cell_meta)
         cell_meta$TXI <- phyex_set@TXI_sample[match(cell_meta$cell_id, names(phyex_set@TXI_sample))]
         
         # Set up colouring
         if (colour_by == "identity") {
-            plot_data$Colour_Variable <- cell_meta[[phyex_set@cell_identity]][match(plot_data$cell_id, cell_meta$cell_id)]
+            plot_data$Colour_Variable <- phyex_set@groups[match(plot_data$cell_id, names(phyex_set@groups))]
             colour_label <- phyex_set@identities_label
             use_discrete <- TRUE
         } else if (colour_by == "TXI") {
@@ -169,13 +169,13 @@ S7::method(plot_sample_space, ScPhyloExpressionSet) <- function(phyex_set,
         )
         
         # Add metadata for colouring
-        cell_meta <- phyex_set@seurat@meta.data
+        cell_meta <- phyex_set@cell_metadata
         cell_meta$cell_id <- rownames(cell_meta)
         cell_meta$TXI <- phyex_set@TXI_sample[match(cell_meta$cell_id, names(phyex_set@TXI_sample))]
         
         # Set up colouring
         if (colour_by == "identity") {
-            plot_data$Colour_Variable <- cell_meta[[phyex_set@cell_identity]][match(plot_data$cell_id, cell_meta$cell_id)]
+            plot_data$Colour_Variable <- phyex_set@groups[match(plot_data$cell_id, names(phyex_set@groups))]
             colour_label <- phyex_set@identities_label
             use_discrete <- TRUE
         } else if (colour_by == "TXI") {

@@ -4,14 +4,16 @@
 \alias{set_expression}
 \title{Gene Expression Transformation Functions}
 \usage{
-set_expression(phyex_set, ...)
+set_expression(phyex_set, new_expression, new_name = NULL, ...)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
-\item{...}{Additional arguments}
-
 \item{new_expression}{Matrix to set as the new expression}
+
+\item{new_name}{Optional new name for the dataset}
+
+\item{...}{Additional arguments}
 }
 \value{
 A PhyloExpressionSet object with updated expression

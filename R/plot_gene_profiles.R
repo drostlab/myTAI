@@ -51,14 +51,23 @@ plot_gene_profiles <- function(phyex_set,
     transformation <- match.arg(transformation)
     colour_by <- match.arg(colour_by)
     
+    if (!S7::S7_inherits(phyex_set, PhyloExpressionSetBase)) {
+        stop("Input must be a PhyloExpressionSet S7 object.", call. = FALSE)
+    }
     
-    counts <- phyex_set@expression
+    if (S7::S7_inherits(phyex_set, ScPhyloExpressionSet)) 
+        # Downsample to 50 cells for efficiency
+        expr <- downsample_expression(phyex_set, downsample = 50)
+    else 
+        expr <- phyex_set@expression
+
     counts <- switch(transformation,
-                     log = log1p(counts),
-                     std_log = .to_std_expr(log1p(counts)),
-                     none = counts)
+                     log = log1p(expr),
+                     std_log = .to_std_expr(log1p(expr)),
+                     none = expr)
     
     all_genes <- phyex_set@gene_ids
+
     
     # Select genes to plot
     if (is.null(genes)) {
@@ -73,13 +82,6 @@ plot_gene_profiles <- function(phyex_set,
     # Filter to genes to plot
     show_gene <- all_genes %in% genes_to_plot
     counts <- counts[show_gene, , drop=FALSE]
-    
-    # For single-cell data, ensure counts matrix matches sample_names
-    if (inherits(phyex_set, "ScPhyloExpressionSet")) {
-        # Filter counts to only include valid cells in sample_names
-        valid_cells <- intersect(colnames(counts), phyex_set@sample_names)
-        counts <- counts[, valid_cells, drop=FALSE]
-    }
     
     df_long <- reshape2::melt(counts)
     colnames(df_long) <- c("GeneID", "Sample", "Expression")
@@ -106,7 +108,7 @@ plot_gene_profiles <- function(phyex_set,
                   .groups = "drop") |>
         left_join(data.frame(GeneID = phyex_set@gene_ids,
                              Stratum = phyex_set@strata,
-                             Angle = -get_angles(phyex_set@expression |> log1p() |> .to_std_expr())),
+                             Angle = -get_angles(expr |> log1p() |> .to_std_expr())),
                   by = "GeneID") |> 
         mutate(
             ColourVar = switch(colour_by,
