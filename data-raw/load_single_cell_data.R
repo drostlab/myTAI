@@ -1,7 +1,6 @@
 # Create example single-cell PhyloExpressionSet for testing
 
 # Load required libraries
-library(Seurat)
 
 set.seed(1234)
 

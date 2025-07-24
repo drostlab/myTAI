@@ -13,7 +13,6 @@
 #' @param seurat A Seurat object containing single-cell expression data
 #' @param cell_identity Character string specifying which cell identity to use from Seurat metadata
 #' @param slot Character string specifying which slot to use from the Seurat object (default: "data")
-#' @param min_cells_per_identity Minimum number of cells required per cell type (default: 10)
 #' 
 #' @import S7
 #' @export
@@ -31,10 +30,6 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
         slot = new_property(
             class = class_character,
             default = "data"
-        ),
-        min_cells_per_identity = new_property(
-            class = class_numeric,
-            default = 10
         ),
         
         ## RAW EXPRESSION DATA
@@ -79,6 +74,10 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 valid_cells <- cell_types %in% self@identities
                 return(names(cell_types)[valid_cells])
             }
+        ),
+        num_samples = new_property(
+            class = class_integer,
+            getter = function(self) length(self@sample_names)
         ),
         groups = new_property(
             class = class_factor,
@@ -457,6 +456,7 @@ S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
     cat("Expression slot used:", x@slot, "\n")
     cat("Min cells per type:", x@min_cells_per_identity, "\n")
     cat("Total cells:", ncol(x@seurat), "\n")
+    cat("Valid cells:", x@num_samples, "\n")
     cat("Cells per type:\n")
     print(table(x@cell_metadata[[x@cell_identity]]))
 }

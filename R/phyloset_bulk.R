@@ -63,6 +63,10 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
             class = class_character,
             getter = function(self) colnames(self@expression)
         ),
+        num_samples = new_property(
+            class = class_integer,
+            getter = function(self) ncol(self@expression)
+        ),
         group_map = new_property(
             class = class_list,
             getter = function(self) split(self@sample_names, self@groups)
@@ -266,7 +270,7 @@ S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
     cat("Number of phylostrata:", x@num_strata, "\n")
     
     # Print bulk-specific information
-    cat("Number of samples:", length(x@sample_names), "\n")
+    cat("Number of samples:", x@num_samples, "\n")
     cat("Samples per condition:", table(x@groups), "\n")
 }
 
