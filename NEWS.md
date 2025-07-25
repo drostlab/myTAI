@@ -1,6 +1,36 @@
-myTAI 2.0.0
+# NEWS
+
+myTAI 2.1.0.9000
 ===========
 
+## Major Refactoring and New Features
+- **Single-cell support:** New `ScPhyloExpressionSet` S7 class for single-cell data, alongside `BulkPhyloExpressionSet` for bulk data.
+- **Property renaming:** `conditions` → `identities` (and `conditions_label` → `identities_label`), `counts`/`counts_collapsed` → `expression`/`expression_collapsed`.
+- **All core logic and plotting now robust to both bulk and single-cell objects.**
+
+## Function Renaming and Prefixes
+- **Statistical tests:** All core test functions now use the `stat_` prefix:
+    - `flatline_test()` → `stat_flatline_test()`
+    - `early_conservation_test()` → `stat_early_conservation_test()`
+    - `late_conservation_test()` → `stat_late_conservation_test()`
+    - `reductive_hourglass_test()` → `stat_reductive_hourglass_test()`
+    - `reverse_hourglass_test()` → `stat_reverse_hourglass_test()`
+    - `pairwise_test()` → `stat_pairwise_test()`
+    - `generic_conservation_test()` → `stat_generic_conservation_test()`
+    - `generate_conservation_txis()` → `stat_generate_conservation_txis()`
+- **Gene selection/filtering:** All gene selection/filtering functions now use the `genes_` prefix:
+    - `top_expression_genes()` → `genes_top_mean()`
+    - `top_variance_genes()` → `genes_top_variance()`
+    - `lowly_expressed_genes()` → `genes_lowly_expressed()`
+    - `filter_dyn_expr()` → `genes_filter_dynamic()`
+
+## Other Changes
+- Many internal and Rd files renamed for consistency (e.g., `gene_patterns.R` → `genes_patterns.R`, `S7_utils.R` → `utils_S7.R`).
+- Deprecated/legacy files removed: `expression_utils.R`, `single_cell.R`.
+- All documentation and examples updated to use new function/property names.
+
+myTAI 2.0.0.9000
+===========
 ## Major Changes
 
 ### New S7 Class System

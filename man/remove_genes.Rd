@@ -4,7 +4,12 @@
 \alias{remove_genes}
 \title{Remove Genes from PhyloExpressionSet}
 \usage{
-remove_genes(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed"))
+remove_genes(
+  phyex_set,
+  genes,
+  new_name = paste(phyex_set@name, "perturbed"),
+  reuse_null_txis = TRUE
+)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
@@ -12,15 +17,14 @@ remove_genes(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed"))
 \item{genes}{Character vector of gene IDs to remove}
 
 \item{new_name}{Character string for the new dataset name (default: auto-generated)}
+
+\item{reuse_null_txis}{Logical indicating whether to reuse precomputed null conservation TXIs (default: TRUE)}
 }
 \value{
 A PhyloExpressionSet object with the specified genes removed
 }
 \description{
 Remove specified genes from a PhyloExpressionSet object.
-}
-\details{
-The returned object shares the same null TXI distribution as the base phyex_set
 }
 \examples{
 # Remove specific genes

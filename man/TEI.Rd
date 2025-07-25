@@ -10,7 +10,7 @@ TEI(phyex_set)
 \item{phyex_set}{A PhyloExpressionSet object}
 }
 \value{
-Numeric vector of TEI values for each condition
+Numeric vector of TEI values for each identity
 }
 \description{
 Calculate the transcriptomic evolutionary index values for a PhyloExpressionSet.

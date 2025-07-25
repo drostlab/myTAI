@@ -8,7 +8,7 @@ save_gatai_results_pdf(
   phyex_set,
   gatai_result,
   analysis_dir = "gatai_analysis",
-  prefix = "GATAI_analysis",
+  prefix = "report",
   ...
 )
 }
@@ -19,7 +19,7 @@ save_gatai_results_pdf(
 
 \item{analysis_dir}{Directory to save the PDF file.}
 
-\item{prefix}{Optional prefix for the PDF filename (default: "GATAI_analysis").}
+\item{prefix}{Optional prefix for the PDF filename (default: "report").}
 
 \item{...}{Additional arguments passed to \code{plot_gatai_results()}.}
 }

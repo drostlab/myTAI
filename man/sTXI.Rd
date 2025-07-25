@@ -14,7 +14,7 @@ sTXI(phyex_set, option = "identity")
 - "add": Cumulative sum across strata}
 }
 \value{
-Matrix of sTXI values with strata as rows and conditions as columns
+Matrix of sTXI values with strata as rows and identities as columns
 }
 \description{
 Calculate the stratum-specific transcriptomic index (sTXI) by summing pTXI values within each phylostratum.

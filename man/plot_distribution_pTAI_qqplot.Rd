@@ -15,7 +15,7 @@ plot_distribution_pTAI_qqplot(
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object.}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).}
 
 \item{reference_stage_index}{An integer specifying the index of the reference developmental stage. 
 The partial TAI distribution of this stage will be used as the reference 

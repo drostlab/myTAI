@@ -23,23 +23,23 @@
 #' 
 #' @examples
 #' # Perform a custom conservation test
-#' # result <- generic_conservation_test(phyex_set, 
+#' # result <- stat_generic_conservation_test(phyex_set, 
 #' #                                    test_name = "Custom Test",
 #' #                                    scoring_function = var,
 #' #                                    fitting_dist = distributions$gamma)
 #' 
-#' @seealso \code{\link{flatline_test}}, \code{\link{early_conservation_test}}
-generic_conservation_test <- function(phyex_set,
-                                      test_name,
-                                      scoring_function,
-                                      fitting_dist,
-                                      alternative = c("two-sided", "greater", "less"),
-                                      p_label=p_label,
-                                      custom_null_txis = NULL,
-                                      plot_result=TRUE
-                                      ) {
+#' @seealso \code{\link{stat_flatline_test}}, \code{\link{stat_early_conservation_test}}
+stat_generic_conservation_test <- function(phyex_set,
+                                           test_name,
+                                           scoring_function,
+                                           fitting_dist,
+                                           alternative = c("two-sided", "greater", "less"),
+                                           p_label=p_label,
+                                           custom_null_txis = NULL,
+                                           plot_result=TRUE
+                                           ) {
     # check arguments
-    S7::check_is_S7(phyex_set, PhyloExpressionSet)
+    S7::check_is_S7(phyex_set, PhyloExpressionSetBase)
     stopifnot(is.function(scoring_function))
     alternative <- match.arg(alternative)
     
@@ -95,7 +95,7 @@ generic_conservation_test <- function(phyex_set,
 #' 
 #' @examples
 #' # Diagnose flatline test robustness
-#' # robustness <- diagnose_test_robustness(flatline_test, phyex_set)
+#' # robustness <- diagnose_test_robustness(stat_flatline_test, phyex_set)
 #' 
 #' @import ggplot2
 #' 
@@ -108,8 +108,8 @@ diagnose_test_robustness <- function(test,
                                      ...) {
 
     f <- function(size) {
-        null_txis <- generate_conservation_txis(phyex_set,
-                                                sample_size=size)
+        null_txis <- stat_generate_conservation_txis(phyex_set,
+                                                     sample_size=size)
         return(test(phyex_set, custom_null_txis=null_txis, ..., plot_result=FALSE))
     }
     

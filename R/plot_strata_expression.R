@@ -3,8 +3,8 @@
 #' @description Create a boxplot showing the distribution of expression levels
 #' for each phylostratum.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
-#' @param aggregate_FUN Function to aggregate expression across conditions (default: mean)
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
+#' @param aggregate_FUN Function to aggregate expression across identities (default: mean)
 #' 
 #' @return A ggplot2 object showing expression distributions by phylostratum
 #' 
@@ -13,12 +13,15 @@
 #' vary across different phylostrata. Each point represents a gene, and the
 #' boxes show the distribution of expression levels within each phylostratum.
 #' 
-#' @examples
-#' # Plot expression by strata using mean aggregation
-#' # p1 <- plot_strata_expression(phyex_set, aggregate_FUN = mean)
+#' For bulk data, expression is aggregated across developmental stages.
+#' For single-cell data, expression is aggregated across cell types.
 #' 
-#' # Plot using median aggregation
-#' # p2 <- plot_strata_expression(phyex_set, aggregate_FUN = median)
+#' @examples
+#' # Plot expression by strata using mean aggregation for bulk data
+#' # p1 <- plot_strata_expression(bulk_phyex_set, aggregate_FUN = mean)
+#' 
+#' # Plot using median aggregation for single-cell data
+#' # p2 <- plot_strata_expression(sc_phyex_set, aggregate_FUN = median)
 #' 
 #' @import ggplot2 
 #' @export
@@ -27,8 +30,13 @@ plot_strata_expression <- function(phyex_set,
 
     agg_name <- deparse(substitute(aggregate_FUN))
     aggregate_FUN <- match.fun(aggregate_FUN)
-    df <- phyex_set@data |>
-        mutate(Expression = apply(phyex_set@counts_collapsed, 1, aggregate_FUN))
+    
+    # Create data frame with gene info and aggregated expression
+    df <- data.frame(
+        GeneID = phyex_set@gene_ids,
+        Stratum = phyex_set@strata,
+        Expression = apply(phyex_set@expression_collapsed, 1, aggregate_FUN)
+    )
     p <- ggplot(df, aes(x=Stratum, y=Expression, colour=Stratum, fill=Stratum)) +
         geom_jitter(size=0.2, width=0.2, alpha=0.3) +
         geom_boxplot(width=0.5, outlier.shape=NA, alpha=0.3, size=0.1, colour="black") +

@@ -172,8 +172,8 @@ Distribution <- new_class("Distribution",
 #' 
 #' @examples
 #' # Use normal distribution for testing
-#' # test_result <- generic_conservation_test(phyex_set, 
-#' #                                         fitting_dist = distributions$normal)
+#' # test_result <- stat_generic_conservation_test(phyex_set, 
+#' #                                               fitting_dist = distributions$normal)
 #' 
 #' @export
 distributions <- list(

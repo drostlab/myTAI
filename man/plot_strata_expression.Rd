@@ -7,9 +7,9 @@
 plot_strata_expression(phyex_set, aggregate_FUN = mean)
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
-\item{aggregate_FUN}{Function to aggregate expression across conditions (default: mean)}
+\item{aggregate_FUN}{Function to aggregate expression across identities (default: mean)}
 }
 \value{
 A ggplot2 object showing expression distributions by phylostratum
@@ -22,12 +22,15 @@ for each phylostratum.
 This function creates a boxplot visualization showing how expression levels
 vary across different phylostrata. Each point represents a gene, and the
 boxes show the distribution of expression levels within each phylostratum.
+
+For bulk data, expression is aggregated across developmental stages.
+For single-cell data, expression is aggregated across cell types.
 }
 \examples{
-# Plot expression by strata using mean aggregation
-# p1 <- plot_strata_expression(phyex_set, aggregate_FUN = mean)
+# Plot expression by strata using mean aggregation for bulk data
+# p1 <- plot_strata_expression(bulk_phyex_set, aggregate_FUN = mean)
 
-# Plot using median aggregation
-# p2 <- plot_strata_expression(phyex_set, aggregate_FUN = median)
+# Plot using median aggregation for single-cell data
+# p2 <- plot_strata_expression(sc_phyex_set, aggregate_FUN = median)
 
 }

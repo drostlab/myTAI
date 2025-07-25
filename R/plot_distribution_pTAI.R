@@ -11,10 +11,10 @@
 #' @importFrom stats ks.test qqplot
 
 #' @title Comparing expression/partial TAI distributions across developmental stages
-#' @description \emph{plot_distribution_expression_partialTAI} generates 2 plots that help to compare the distribution
-#' of the quotient of expression by partial TAI through various developmental stages, highlighting each stage with 
+#' @description \emph{plot_distribution_pTAI} generates 2 plots that help to compare the distribution
+#' of the quotient of expression by partial TAI through various developmental stages or cell types, highlighting each stage with 
 #' distinct colors.
-#' @param phyex_set A PhyloExpressionSet object.
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
 #' @param stages A numeric vector specifying the indices of the stages to compare. Each index 
 #' corresponds to a stage in the PhyloExpressionSet. If NULL, all stages are used.
 #' @param xlab Label of x-axis.
@@ -23,25 +23,25 @@
 #' @author Filipa Martins Costa
 #' @export
 plot_distribution_pTAI <- function(phyex_set,
-                                                    stages = NULL,
-                                                    xlab = "Expression / Partial TAI",
-                                                    ylab = "Density",
-                                                    main = "Density Distribution of Expression / Partial TAI by Developmental Stage") {
+                                   stages = NULL,
+                                   xlab = "Expression / Partial TAI",
+                                   ylab = "Density",
+                                   main = "Density Distribution of Expression / Partial TAI by Developmental Stage") {
     
     # Use all stages if none specified
     if (is.null(stages)) {
-        stages <- 1:phyex_set@num_conditions
+        stages <- 1:phyex_set@num_identities
     }
     
-    if (any(stages > phyex_set@num_conditions)) {
-        stop("Some indices in 'stages' exceed the number of conditions in the PhyloExpressionSet.")
+    if (any(stages > phyex_set@num_identities)) {
+        stop("Some indices in 'stages' exceed the number of identities in the PhyloExpressionSet.")
     }
     
     # Get partial TAI matrix
     partial_TAI_matrix <- phyex_set@pTXI[, stages, drop = FALSE]
     
     # Get expression data for selected stages
-    expression_matrix <- phyex_set@counts_collapsed[, stages, drop = FALSE]
+    expression_matrix <- phyex_set@expression_collapsed[, stages, drop = FALSE]
     
     # Convert to long format
     partial_TAI_df <- tibble::rownames_to_column(as.data.frame(partial_TAI_matrix), var = "GeneID")
@@ -93,7 +93,7 @@ plot_distribution_pTAI <- function(phyex_set,
         ggridges::geom_density_ridges(alpha = 0.7, color = "black", scale = 1) + 
         ggplot2::labs(
             x = xlab,
-            y = phyex_set@conditions_label,
+            y = phyex_set@identities_label,
             title = phyex_set@name
         ) +
         ggplot2::theme_minimal() +
@@ -112,7 +112,7 @@ plot_distribution_pTAI <- function(phyex_set,
 #' It visualizes quantile differences between the reference and other stages,
 #' highlights each stage with distinct colors, and annotates the plot with the p-values
 #' from the nonparametric \code{\link{ks.test}} to indicate the significance of distribution differences.
-#' @param phyex_set A PhyloExpressionSet object.
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
 #' @param reference_stage_index An integer specifying the index of the reference developmental stage. 
 #' The partial TAI distribution of this stage will be used as the reference 
 #' for comparisons with other stages (default: stage index 1).
@@ -133,8 +133,8 @@ plot_distribution_pTAI_qqplot <- function(phyex_set,
     
     partial_TAI_matrix <- phyex_set@pTXI
     
-    if (reference_stage_index > phyex_set@num_conditions) {
-        stop("The specified reference stage index exceeds the number of conditions in the PhyloExpressionSet. Please provide a valid index.")
+        if (reference_stage_index > phyex_set@num_identities) {
+        stop("The specified reference stage index exceeds the number of identities in the PhyloExpressionSet. Please provide a valid index.")
     }
     
     # Define the reference stage
@@ -155,17 +155,17 @@ plot_distribution_pTAI_qqplot <- function(phyex_set,
             qq_data = data.frame(
                 reference = qq$x,  # quantiles of the reference stage
                 stage_quantiles = qq$y,  # quantiles of the current stage
-                stage = as.character(phyex_set@conditions)[stage_index]  # stage name
+                stage = as.character(phyex_set@identities)[stage_index]  # stage name
             ),
             ks_result = data.frame(
-                stage = as.character(phyex_set@conditions)[stage_index],
+                stage = as.character(phyex_set@identities)[stage_index],
                 p_value = ks_p_value
             )
         )
     }
     
     # Apply the function to all stages except the reference
-    results <- purrr::map(setdiff(1:phyex_set@num_conditions, reference_stage_index), compute_qq_ks)
+        results <- purrr::map(setdiff(1:phyex_set@num_identities, reference_stage_index), compute_qq_ks)
     
     # Combine QQ plot data
     qq_data <- dplyr::bind_rows(purrr::map(results, "qq_data"))
@@ -197,7 +197,7 @@ plot_distribution_pTAI_qqplot <- function(phyex_set,
             title = paste(phyex_set@name, "-", main),
             x = xlab,
             y = ylab,
-            color = paste(phyex_set@conditions_label, "(p-value)")
+            color = paste(phyex_set@identities_label, "(p-value)")
         ) +
         ggplot2::theme_minimal() +
         ggplot2::theme(legend.position = "top") +

@@ -7,23 +7,29 @@
 plot_contribution(phyex_set)
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 }
 \value{
 A ggplot2 object showing phylostratum contributions as a stacked area plot
 }
 \description{
 Create a stacked area plot showing the contribution of each phylostratum
-to the overall transcriptomic index across developmental stages.
+to the overall transcriptomic index across developmental stages or cell types.
 }
 \details{
 This function visualizes how different phylostrata contribute to the overall
-transcriptomic index pattern across developmental stages. Each area represents
-the contribution of a specific phylostratum, with older strata typically shown
-in darker colors and younger strata in lighter colors.
+transcriptomic index pattern across developmental stages (bulk data) or cell types
+(single-cell data). Each area represents the contribution of a specific phylostratum, 
+with older strata typically shown in darker colors and younger strata in lighter colors.
+
+The plot uses the PS_colours function to create a consistent color scheme that
+matches other myTAI visualizations.
 }
 \examples{
-# Create contribution plot
-# contrib_plot <- plot_contribution(phyex_set)
+# Create contribution plot for bulk data
+# contrib_plot <- plot_contribution(bulk_phyex_set)
+
+# Create contribution plot for single-cell data
+# contrib_plot_sc <- plot_contribution(sc_phyex_set)
 
 }

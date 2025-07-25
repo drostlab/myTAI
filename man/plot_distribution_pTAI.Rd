@@ -13,7 +13,7 @@ plot_distribution_pTAI(
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object.}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).}
 
 \item{stages}{A numeric vector specifying the indices of the stages to compare. Each index 
 corresponds to a stage in the PhyloExpressionSet. If NULL, all stages are used.}
@@ -27,8 +27,8 @@ corresponds to a stage in the PhyloExpressionSet. If NULL, all stages are used.}
 \description{
 Functions for plotting and comparing partial TAI distributions using PhyloExpressionSet S7 objects.
 
-\emph{plot_distribution_expression_partialTAI} generates 2 plots that help to compare the distribution
-of the quotient of expression by partial TAI through various developmental stages, highlighting each stage with 
+\emph{plot_distribution_pTAI} generates 2 plots that help to compare the distribution
+of the quotient of expression by partial TAI through various developmental stages or cell types, highlighting each stage with 
 distinct colors.
 }
 \author{

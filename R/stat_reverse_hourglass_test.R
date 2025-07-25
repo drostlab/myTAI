@@ -6,7 +6,7 @@
 #' @param phyex_set A PhyloExpressionSet object
 #' @param modules A named list with elements 'early', 'mid', and 'late' containing
 #' stage indices for each developmental module
-#' @param ... Additional arguments passed to generic_conservation_test
+#' @param ... Additional arguments passed to stat_generic_conservation_test
 #' 
 #' @return A ConservationTestResult object with reverse hourglass test results
 #' 
@@ -22,18 +22,18 @@
 #' # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 #' # result <- reverse_hourglass_test(phyex_set, modules)
 #' 
-#' @seealso \code{\link{generic_conservation_test}}, \code{\link{reductive_hourglass_test}}
+#' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_reductive_hourglass_test}}
 #' @export
-reverse_hourglass_test <- function(phyex_set, 
-                                   modules,
-                                   ...) {
-    t <- generic_conservation_test(phyex_set, 
-                                   test_name="Reverse Hourglass Test",
-                                   scoring_function=\(x) reverse_hourglass_score(x, modules),
-                                   fitting_dist=distributions$normal,
-                                   alternative="greater",
-                                   p_label="p_rht",
-                                   ...)
+stat_reverse_hourglass_test <- function(phyex_set, 
+                                        modules,
+                                        ...) {
+    t <- stat_generic_conservation_test(phyex_set, 
+                                        test_name="Reverse Hourglass Test",
+                                        scoring_function=\(x) reverse_hourglass_score(x, modules),
+                                        fitting_dist=distributions$normal,
+                                        alternative="greater",
+                                        p_label="p_rht",
+                                        ...)
     t@modules <- modules
     return(t)
 }

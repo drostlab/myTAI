@@ -16,12 +16,12 @@
 #' 
 #' @examples
 #' # Generate null TXI distribution
-#' # null_txis <- generate_conservation_txis(strata_vec, expr_matrix, 1000)
+#' # null_txis <- stat_generate_conservation_txis(strata_vec, expr_matrix, 1000)
 #' 
 #' @keywords internal
-generate_conservation_txis <- function(strata_vector,
-                                       count_matrix,
-                                       sample_size) {
+stat_generate_conservation_txis <- function(strata_vector,
+                                            count_matrix,
+                                            sample_size) {
     
     permuted_txi_matrix <- cpp_nullTXIs(count_matrix,
                                         strata_vector,
@@ -40,4 +40,4 @@ generate_conservation_txis <- function(strata_vector,
 #' when the same parameters are used multiple times.
 #' 
 #' @keywords internal
-memo_generate_conservation_txis <- memoise::memoise(generate_conservation_txis)
+.memo_generate_conservation_txis <- memoise::memoise(stat_generate_conservation_txis)

@@ -4,25 +4,17 @@
 \alias{pTXI}
 \title{Calculate Phylostratum-Specific Transcriptomic Index}
 \usage{
-pTXI(counts, strata)
+pTXI(phyex_set, reps = FALSE)
 }
 \arguments{
-\item{counts}{Matrix of expression counts with genes as rows and samples as columns}
+\item{phyex_set}{A PhyloExpressionSet object}
 
-\item{strata}{Numeric or factor vector of phylostratum assignments for each gene}
+\item{reps}{Whether to return pTXI for each sample instead for each group}
 }
 \value{
-Matrix of pTXI values with same dimensions as counts
+Matrix of pTXI values
 }
 \description{
-Calculate the phylostratum-specific transcriptomic index (pTXI) for each gene.
-}
-\details{
-The pTXI is calculated as the relative expression of each gene multiplied by its phylostratum age.
-Formula: pTXI = (expression / total_expression_per_sample) * phylostratum_age
-}
-\examples{
-# Calculate pTXI values
-# ptxi_values <- pTXI(expression_matrix, phylostratum_vector)
-
+Calculate pTXI values for expression data. This is a generic function
+that dispatches based on the input type.
 }

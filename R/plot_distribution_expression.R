@@ -1,9 +1,9 @@
 #' @title Comparing expression levels distributions across developmental stages
 #' @description \code{plot_distribution_expression} generates plots that help to compare the distribution
-#' of expression levels through various developmental stages, highlighting each stage with
+#' of expression levels through various developmental stages or cell types, highlighting each stage with
 #' distinct colors.
-#' @param phyex_set A PhyloExpressionSet object.
-#' @param show_conditions Logical, whether to show condition-specific distributions.
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
+#' @param show_identities Logical, whether to show identity-specific distributions.
 #' @param show_strata Logical, whether to show stratum-specific distributions.
 #' @param seed Seed for reproducible color selection.
 #' @section Recommendation: 
@@ -17,20 +17,27 @@
 #' @export
 
 plot_distribution_expression <- function(phyex_set,
-                                         show_conditions = TRUE,
+                                         show_identities = TRUE,
                                          show_strata = FALSE,
                                          seed = 123) {
+    # Create data frame with gene info and expression data
+    expr_df <- data.frame(
+        GeneID = phyex_set@gene_ids,
+        Stratum = phyex_set@strata,
+        phyex_set@expression_collapsed
+    )
+    
     df <- tidyr::pivot_longer(
-        phyex_set@data_collapsed,
+        expr_df,
         cols = -c(Stratum, GeneID),
-        names_to = "Condition",
+        names_to = "Identity",
         values_to = "Expression"
     )
 
     qual_col_pals <- RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == "qual", ]
     col_vector <- unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
     set.seed(seed)
-    colors <- sample(col_vector, ncol(phyex_set@data) - 1)
+    colors <- sample(col_vector, ncol(phyex_set@expression_collapsed))
 
     p <- ggplot(
         df,
@@ -43,16 +50,16 @@ plot_distribution_expression <- function(phyex_set,
         ) +
         theme_minimal()
 
-    if (show_conditions) {
+    if (show_identities) {
         p_cond <- ggplot(
             df,
-            aes(x = Expression, y = factor(Condition, levels = unique(Condition)), fill = factor(Condition, levels = unique(Condition)))
+            aes(x = Expression, y = factor(Identity, levels = unique(Identity)), fill = factor(Identity, levels = unique(Identity)))
         ) +
             ggridges::geom_density_ridges(alpha = 0.7, color = "black", scale = 1) +
             labs(
                 x = "Density",
                 y = "Expression",
-                fill = phyex_set@conditions_label
+                fill = phyex_set@identities_label
             ) +
             theme_minimal() +
             scale_fill_manual(values = colors)

@@ -9,7 +9,7 @@ plot_gene_heatmap(
   genes = NULL,
   top_p = 0.2,
   std = TRUE,
-  reps = FALSE,
+  show_reps = FALSE,
   cluster_rows = FALSE,
   cluster_cols = FALSE,
   show_gene_age = TRUE,
@@ -18,25 +18,25 @@ plot_gene_heatmap(
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
-\item{genes}{Character vector of specific genes to plot. If NULL, uses top dynamic genes}
+\item{genes}{Character vector of specific gene IDs to include (default: NULL for auto-selection)}
 
-\item{top_p}{Proportion of most dynamic genes to include (default: 0.2)}
+\item{top_p}{Numeric value specifying the top proportion of genes to include (default: 0.2)}
 
-\item{std}{Logical indicating whether to use standardized expression values (default: TRUE)}
+\item{std}{Logical indicating whether to standardize expression values (default: TRUE)}
 
-\item{reps}{Logical indicating whether to show individual replicates or collapsed conditions (default: FALSE)}
+\item{show_reps}{Logical indicating whether to show replicates or collapsed data (default: FALSE)}
 
 \item{cluster_rows}{Logical indicating whether to cluster genes/rows (default: FALSE)}
 
 \item{cluster_cols}{Logical indicating whether to cluster conditions/columns (default: FALSE)}
 
-\item{show_gene_age}{Logical indicating whether to show gene age as row annotation (default: TRUE)}
+\item{show_gene_age}{Logical indicating whether to show gene age annotation (default: TRUE)}
 
-\item{show_gene_ids}{Logical indicating whether to show gene names (default: FALSE)}
+\item{show_gene_ids}{Logical indicating whether to show gene identifiers (default: FALSE)}
 
-\item{...}{Additional arguments passed to pheatmap::pheatmap}
+\item{...}{Additional arguments passed to specific methods}
 }
 \value{
 A ggplot object (converted from pheatmap) showing the gene expression heatmap
@@ -48,20 +48,20 @@ with optional dendrograms and gene age annotation.
 \details{
 This function creates a comprehensive heatmap visualization of gene expression patterns.
 By default, genes are ordered by their expression angle (developmental trajectory).
-The function supports clustering of both genes and conditions, and can optionally
+The function supports clustering of both genes and identities, and can optionally
 display gene age (phylostratum) as a colored annotation bar.
+
+For bulk data, the heatmap shows expression across developmental conditions.
+For single-cell data, the heatmap shows expression across cell types.
 
 The gene age annotation uses the PS_colours function to create a consistent
 color scheme across different myTAI visualizations.
 }
 \examples{
 # Basic heatmap with gene age annotation
-# p1 <- plot_gene_heatmap(phyex_set, show_gene_age = TRUE)
+# p1 <- plot_gene_heatmap(bulk_phyex_set, show_gene_age = TRUE)
 
-# Clustered heatmap with standardized values
-# p2 <- plot_gene_heatmap(phyex_set, std = TRUE, cluster_rows = TRUE, cluster_cols = TRUE)
-
-# Heatmap of specific genes with replicates
-# p3 <- plot_gene_heatmap(phyex_set, genes = c("gene1", "gene2"), reps = TRUE)
+# Single-cell heatmap with subset of cells
+# p2 <- plot_gene_heatmap(sc_phyex_set, show_reps = TRUE, max_cells_per_type = 3)
 
 }

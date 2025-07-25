@@ -7,7 +7,7 @@
 #' stage indices for each contrast group
 #' @param alternative Character string specifying the alternative hypothesis:
 #' "greater" (contrast1 > contrast2) or "less" (contrast1 < contrast2)
-#' @param ... Additional arguments passed to generic_conservation_test
+#' @param ... Additional arguments passed to stat_generic_conservation_test
 #' 
 #' @return A ConservationTestResult object with pairwise test results
 #' 
@@ -23,21 +23,21 @@
 #' # modules <- list(contrast1 = 1:3, contrast2 = 7:9)
 #' # result <- pairwise_test(phyex_set, modules, alternative = "greater")
 #' 
-#' @seealso \code{\link{generic_conservation_test}}
+#' @seealso \code{\link{stat_generic_conservation_test}}
 #' @export
-pairwise_test <- function(phyex_set,
+stat_pairwise_test <- function(phyex_set,
                           modules,
                           alternative = c("greater", "less"),
                           ...
 ) {
     alternative <- match.arg(alternative)
-    t <- generic_conservation_test(phyex_set, 
-                                   test_name="Pairwise Test",
-                                   scoring_function=\(x) pair_score(x, modules, alternative),
-                                   fitting_dist=distributions$normal,
-                                   alternative=alternative,
-                                   p_label="p_pair",
-                                   ...)
+    t <- stat_generic_conservation_test(phyex_set, 
+                                        test_name="Pairwise Test",
+                                        scoring_function=\(x) pair_score(x, modules, alternative),
+                                        fitting_dist=distributions$normal,
+                                        alternative=alternative,
+                                        p_label="p_pair",
+                                        ...)
     t@modules <- modules
     return(t)
 }

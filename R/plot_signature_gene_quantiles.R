@@ -3,9 +3,9 @@
 #' @description Create a plot showing how the transcriptomic signature changes when
 #' genes are progressively removed based on expression quantiles.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
 #' @param quantiles Numeric vector of quantiles to test (default: c(1.0, 0.99, 0.95, 0.90, 0.80))
-#' @param selection_FUN Function to select genes for removal (default: top_expression_genes)
+#' @param selection_FUN Function to select genes for removal (default: genes_top_mean)
 #' @param ... Additional arguments passed to plot_signature_multiple
 #' 
 #' @return A ggplot2 object showing signatures across different quantiles
@@ -16,18 +16,22 @@
 #' the contribution of highly expressed genes to the overall pattern and for
 #' assessing the robustness of phylotranscriptomic patterns.
 #' 
-#' @examples
-#' # Plot signature across expression quantiles
-#' # p <- plot_signature_gene_quantiles(phyex_set)
+#' The analysis works with both bulk and single-cell data, helping to determine
+#' whether phylotranscriptomic patterns are driven by a few highly expressed genes
+#' or represent broad transcriptomic trends.
 #' 
-#' # Custom quantiles
-#' # p2 <- plot_signature_gene_quantiles(phyex_set, quantiles = c(1.0, 0.95, 0.90))
+#' @examples
+#' # Plot signature across expression quantiles for bulk data
+#' # p <- plot_signature_gene_quantiles(bulk_phyex_set)
+#' 
+#' # Single-cell data with custom quantiles
+#' # p2 <- plot_signature_gene_quantiles(sc_phyex_set, quantiles = c(1.0, 0.95, 0.90))
 #' 
 #' @import purrr
 #' @export
 plot_signature_gene_quantiles <- function(phyex_set,
                                           quantiles=c(1.0, 0.99, 0.95, 0.90, 0.80),
-                                          selection_FUN=top_expression_genes,
+                                          selection_FUN=genes_top_mean,
                                           ...) {
     phyex_sets <- quantiles |>
         map(\(p) selection_FUN(phyex_set, p=p)) |>

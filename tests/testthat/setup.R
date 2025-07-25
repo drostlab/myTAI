@@ -1,4 +1,8 @@
 data("example_phyex_set")
 data("example_phyex_set_old")
 
-set.seed(1234)
+# Load single-cell example data if available
+example_phyex_set_sc <- NULL
+if (requireNamespace("Seurat", quietly = TRUE)) {
+    example_phyex_set_sc <- load_example_phyex_set_sc()
+}

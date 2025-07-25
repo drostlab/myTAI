@@ -4,10 +4,12 @@
 \alias{collapse}
 \title{Collapse PhyloExpressionSet Replicates}
 \usage{
-collapse(phyex_set)
+collapse(phyex_set, ...)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
+
+\item{...}{Additional arguments passed to methods}
 }
 \value{
 A new PhyloExpressionSet object with collapsed expression data

@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
-Version: 2.0.0
+Version: 2.1.0.9000
 Date: 2024-10-02
 Author: Hajk-Georg Drost [aut, cre], Jaruwatana Sodai Lotharukpong [aut, ctb], Nikola Kalábová [aut, ctb], Filipa Martins Costa [aut, ctb], Kristian K Ullrich [aut, ctb], Stefan Manolache [aut, ctb]
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@tuebingen.mpg.de>
@@ -38,7 +38,7 @@ NeedsCompilation: yes
 License: GPL-2
 License_file: LICENSE
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     S7,
     patchwork,
@@ -55,6 +55,7 @@ Imports:
     reshape2 (>= 1.4.1),
     ggplot2 (>= 1.0.1),
     cowplot,
+    ggforce,
     ggridges,
     ggtext,
     readr (>= 0.2.2),
@@ -71,6 +72,7 @@ Suggests:
     testthat (>= 0.9.1),
     mgcv,
     Seurat,
+    SeuratObject,
     decor,
     gataiR
 LinkingTo: 
@@ -83,3 +85,50 @@ RoxygenNote: 7.3.2
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
+Collate:
+    'globals.R'
+    'utils_S7.R'
+    'utils_math.R'
+    'phyloset_base.R'
+    'phyloset_bulk.R'
+    'phyloset_sc.R'
+    'stat_distributions.R'
+    'stat_test_result.R'
+    'RcppExports.R'
+    'age.apply.R'
+    'datasets.R'
+    'destroy_pattern.R'
+    'gatai_convergence_plots.R'
+    'genes_filter.R'
+    'genes_patterns.R'
+    'genes_transforms.R'
+    'myTAI-package.R'
+    'omit_matrix.R'
+    'plot_contribution.R'
+    'plot_distribution_expression.R'
+    'plot_distribution_pTAI.R'
+    'plot_distribution_strata.R'
+    'plot_gene_heatmap.R'
+    'plot_gene_profiles.R'
+    'plot_gene_space.R'
+    'plot_mean_var.R'
+    'plot_relative_expression.R'
+    'plot_sample_space.R'
+    'plot_signature.R'
+    'plot_signature_gene_quantiles.R'
+    'plot_signature_multiple.R'
+    'plot_signature_transformed.R'
+    'plot_strata_expression.R'
+    'plot_utils.R'
+    'stat_ci_estimation.R'
+    'stat_early_conservation_test.R'
+    'stat_flatline_test.R'
+    'stat_generic_conservation_test.R'
+    'stat_late_conservation_test.R'
+    'stat_null_conservation_txis.R'
+    'stat_pairwise_test.R'
+    'stat_reductive_hourglass_test.R'
+    'stat_reverse_hourglass_test.R'
+    'taxid.R'
+    'tf_PS.R'
+    'tf_stability.R'

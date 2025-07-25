@@ -7,16 +7,16 @@
 plot_signature_gene_quantiles(
   phyex_set,
   quantiles = c(1, 0.99, 0.95, 0.9, 0.8),
-  selection_FUN = top_expression_genes,
+  selection_FUN = genes_top_mean,
   ...
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
 \item{quantiles}{Numeric vector of quantiles to test (default: c(1.0, 0.99, 0.95, 0.90, 0.80))}
 
-\item{selection_FUN}{Function to select genes for removal (default: top_expression_genes)}
+\item{selection_FUN}{Function to select genes for removal (default: genes_top_mean)}
 
 \item{...}{Additional arguments passed to plot_signature_multiple}
 }
@@ -32,12 +32,16 @@ This function systematically removes genes based on expression quantiles and
 shows how the transcriptomic signature changes. This is useful for understanding
 the contribution of highly expressed genes to the overall pattern and for
 assessing the robustness of phylotranscriptomic patterns.
+
+The analysis works with both bulk and single-cell data, helping to determine
+whether phylotranscriptomic patterns are driven by a few highly expressed genes
+or represent broad transcriptomic trends.
 }
 \examples{
-# Plot signature across expression quantiles
-# p <- plot_signature_gene_quantiles(phyex_set)
+# Plot signature across expression quantiles for bulk data
+# p <- plot_signature_gene_quantiles(bulk_phyex_set)
 
-# Custom quantiles
-# p2 <- plot_signature_gene_quantiles(phyex_set, quantiles = c(1.0, 0.95, 0.90))
+# Single-cell data with custom quantiles
+# p2 <- plot_signature_gene_quantiles(sc_phyex_set, quantiles = c(1.0, 0.95, 0.90))
 
 }

@@ -14,7 +14,7 @@ plot_relative_expression_line(
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object.}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).}
 
 \item{groups}{A list of integer vectors specifying age categories (e.g., phylostrata) for each group (1 or 2 groups).}
 

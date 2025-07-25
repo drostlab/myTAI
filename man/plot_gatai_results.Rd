@@ -7,7 +7,7 @@
 plot_gatai_results(
   phyex_set,
   gatai_result,
-  conservation_test = flatline_test,
+  conservation_test = stat_flatline_test,
   runs_threshold = 0.5,
   signature_plot_type = c("separate", "combined"),
   n_random_genes = length(gatai_result$removed_genes)
@@ -18,7 +18,7 @@ plot_gatai_results(
 
 \item{gatai_result}{Result list from \code{destroy_pattern()}, containing GATAI analysis output.}
 
-\item{conservation_test}{Function for conservation test (default: \code{flatline_test}).}
+\item{conservation_test}{Function for conservation test (default: \code{stat_flatline_test}).}
 
 \item{runs_threshold}{Threshold for gene removal consistency across runs (default: 0.5).}
 

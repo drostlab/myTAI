@@ -54,3 +54,27 @@ quantile_rank <- function(x) {
     ranks <- base::rank(x, ties.method = "average")
     (ranks - 0.5) / length(x)
 }
+
+#' @title Format P-Value for Scientific Notation
+#' @description Format p-values in scientific notation for plot annotations.
+#' 
+#' @param p Numeric p-value
+#' 
+#' @return Expression object for use in plot annotations
+#' 
+#' @details
+#' This function formats p-values in scientific notation using the format
+#' "p = a × 10^b" which is suitable for ggplot2 annotations and maintains
+#' proper mathematical formatting.
+#' 
+#' @examples
+#' # Format p-value for plotting
+#' expr <- exp_p(0.001)
+#' # Use in ggplot annotation:
+#' # annotate("text", x = 1, y = 1, label = expr, parse = TRUE)
+#' 
+#' @export
+exp_p <- function(p) {
+    parts <- strsplit(formatC(p, format = "e", digits = 2), "e")[[1]]
+    paste0("italic(p) == ", as.numeric(parts[1]), " %*% 10^", as.integer(parts[2]))
+}

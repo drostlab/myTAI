@@ -5,7 +5,7 @@
 \alias{example_phyex_set_old}
 \title{Example phyex set old}
 \format{
-A PhyloExpressionObject with 7 developmental stages (1 rep each) and 25096 genes
+A BulkPhyloExpressionObject with 7 developmental stages (1 rep each) and 25096 genes
 }
 \source{
 phyexSets::Athaliana.embryogenesis_2011 matched with the Arabidopsis thaliana phylomap from phylomapr

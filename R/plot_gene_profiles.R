@@ -1,15 +1,15 @@
 #' @title Plot Individual Gene Expression Profiles
 #' @description Create a plot showing expression profiles for individual genes across
-#' developmental stages, with various visualization options.
+#' developmental stages or cell types, with various visualization options.
 #' 
-#' @param phyex_set A PhyloExpressionSet object
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
 #' @param genes Character vector of gene IDs to plot. If NULL, top expressing genes are selected
 #' @param show_set_mean Logical indicating whether to show the mean expression across all genes (default: FALSE)
-#' @param show_reps Logical indicating whether to show individual replicates (default: FALSE)
+#' @param show_reps Logical indicating whether to show individual replicates (bulk) or cells (single-cell) (default: FALSE)
 #' @param transformation Character string specifying expression transformation:
 #' "log" (log1p), "std_log" (standardized log1p), or "none" (default: "log")
 #' @param colour_by Character string specifying coloring scheme:
-#' "strata" (by phylostratum), "stage" (by developmental stage), or "manual" (default: "strata")
+#' "strata" (by phylostratum), "stage" (by developmental stage/cell type), or "manual" (default: "strata")
 #' @param colours Optional vector of colors for manual coloring (default: NULL)
 #' @param max_genes Maximum number of genes to plot when genes=NULL (default: 100)
 #' @param show_labels Logical indicating whether to show gene labels (default: TRUE)
@@ -20,14 +20,15 @@
 #' 
 #' @details
 #' This function creates detailed visualizations of individual gene expression patterns
-#' across development. Genes can be colored by phylostratum or developmental stage,
+#' across development (bulk data) or cell types (single-cell data). Genes can be colored by phylostratum or developmental stage,
 #' and various transformations can be applied to highlight different aspects of the data.
 #' 
 #' @examples
-#' # Plot specific genes
-#' # p1 <- plot_gene_profiles(phyex_set, genes = c("gene1", "gene2", "gene3"))
+#' # Plot specific genes for bulk data
+#' # p1 <- plot_gene_profiles(bulk_phyex_set, genes = c("gene1", "gene2", "gene3"))
 #' 
-#' # Plot with faceting by strata
+#' # Plot for single-cell data with faceting by strata
+#' # p2 <- plot_gene_profiles(sc_phyex_set, facet_by_strata = TRUE)
 #' # p2 <- plot_gene_profiles(phyex_set, facet_by_strata = TRUE)
 #' 
 #' @author Filipa Martins Costa, Stefan Manolache, Hajk-Georg Drost
@@ -50,14 +51,23 @@ plot_gene_profiles <- function(phyex_set,
     transformation <- match.arg(transformation)
     colour_by <- match.arg(colour_by)
     
+    if (!S7::S7_inherits(phyex_set, PhyloExpressionSetBase)) {
+        stop("Input must be a PhyloExpressionSet S7 object.", call. = FALSE)
+    }
     
-    counts <- phyex_set@counts
+    if (S7::S7_inherits(phyex_set, ScPhyloExpressionSet)) 
+        # Downsample to 50 cells for efficiency
+        expr <- downsample_expression(phyex_set, downsample = 50)
+    else 
+        expr <- phyex_set@expression
+
     counts <- switch(transformation,
-                     log = log1p(counts),
-                     std_log = to_std_expr(log1p(counts)),
-                     none = counts)
+                     log = log1p(expr),
+                     std_log = .to_std_expr(log1p(expr)),
+                     none = expr)
     
     all_genes <- phyex_set@gene_ids
+
     
     # Select genes to plot
     if (is.null(genes)) {
@@ -76,18 +86,29 @@ plot_gene_profiles <- function(phyex_set,
     df_long <- reshape2::melt(counts)
     colnames(df_long) <- c("GeneID", "Sample", "Expression")
     
+    # Remove rows with NA Sample values
+    df_long <- df_long[!is.na(df_long$Sample), ]
+    
+    # Create sample metadata frame with unique entries
+    sample_metadata <- data.frame(
+        Sample = phyex_set@sample_names,
+        Identity = phyex_set@groups,
+        stringsAsFactors = FALSE
+    )
+    
+    # Remove any duplicates and NA entries
+    sample_metadata <- sample_metadata[!duplicated(sample_metadata$Sample) & !is.na(sample_metadata$Sample), ]
+    
     df_long <- df_long |>
-        left_join(data.frame(Sample = phyex_set@sample_names,
-                             Condition = phyex_set@groups),
-                  by = "Sample") |>
-        group_by(GeneID, Condition) |>
+        left_join(sample_metadata, by = "Sample") |>
+        group_by(GeneID, Identity) |>
         summarise(min = min(Expression),
                   max = max(Expression),
                   Expression = mean(Expression),
                   .groups = "drop") |>
         left_join(data.frame(GeneID = phyex_set@gene_ids,
                              Stratum = phyex_set@strata,
-                             Angle = -get_angles(phyex_set@counts |> log1p() |> to_std_expr())),
+                             Angle = -get_angles(expr |> log1p() |> .to_std_expr())),
                   by = "GeneID") |> 
         mutate(
             ColourVar = switch(colour_by,
@@ -96,26 +117,26 @@ plot_gene_profiles <- function(phyex_set,
                                manual = GeneID))
     
     
-    p <- ggplot(df_long, aes(x = Condition,
+    p <- ggplot(df_long, aes(x = Identity,
                              y = Expression,
                              group = GeneID,
                              colour = ColourVar))  +
         geom_line() +
-        labs(x = phyex_set@conditions_label, y = "Expression") +
+        labs(x = phyex_set@identities_label, y = "Expression") +
         theme_minimal()
     
     # show ribbon of replicates
     if (show_reps)
-        p <- p + geom_ribbon(aes(x = Condition, ymin = min, ymax = max, 
+        p <- p + geom_ribbon(aes(x = Identity, ymin = min, ymax = max, 
                                 fill = ColourVar, 
                                 group = GeneID),
                             alpha=0.25, inherit.aes = FALSE)
     
     
     if (show_set_mean && length(genes_to_plot) > 0) {
-        df_mean <- df_long |> group_by(Condition) |>
+        df_mean <- df_long |> group_by(Identity) |>
             summarise(Expression = mean(Expression), .groups="drop")
-        p <- p + geom_line(data = df_mean, aes(x = Condition, y = Expression),
+        p <- p + geom_line(data = df_mean, aes(x = Identity, y = Expression),
                            inherit.aes = FALSE,
                            colour = "red",
                            group=1,
@@ -140,7 +161,7 @@ plot_gene_profiles <- function(phyex_set,
         }
         
         p <- p + ggrepel::geom_text_repel(data = df_labels,
-                                          aes(x = Condition, y = Expression, label = GeneID),
+                                          aes(x = Identity, y = Expression, label = GeneID),
                                           inherit.aes = FALSE,
                                           size = 1.8, max.overlaps=20, 
                                           box.padding = 0.5, point.padding = 0.5,
@@ -174,7 +195,7 @@ plot_gene_profiles <- function(phyex_set,
     if (facet_by_strata) {
         p <- p + 
             facet_wrap(~ Stratum, scales = "fixed") +
-            labs(x = paste(phyex_set@conditions_label, "by Stratum"))
+            labs(x = paste(phyex_set@identities_label, "by Stratum"))
         
         if (colour_by == "strata") {
             p <- p + guides(colour = "none", fill = "none")

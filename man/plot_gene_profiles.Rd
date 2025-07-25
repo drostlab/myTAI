@@ -19,19 +19,19 @@ plot_gene_profiles(
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
 \item{genes}{Character vector of gene IDs to plot. If NULL, top expressing genes are selected}
 
 \item{show_set_mean}{Logical indicating whether to show the mean expression across all genes (default: FALSE)}
 
-\item{show_reps}{Logical indicating whether to show individual replicates (default: FALSE)}
+\item{show_reps}{Logical indicating whether to show individual replicates (bulk) or cells (single-cell) (default: FALSE)}
 
 \item{transformation}{Character string specifying expression transformation:
 "log" (log1p), "std_log" (standardized log1p), or "none" (default: "log")}
 
 \item{colour_by}{Character string specifying coloring scheme:
-"strata" (by phylostratum), "stage" (by developmental stage), or "manual" (default: "strata")}
+"strata" (by phylostratum), "stage" (by developmental stage/cell type), or "manual" (default: "strata")}
 
 \item{colours}{Optional vector of colors for manual coloring (default: NULL)}
 
@@ -48,18 +48,19 @@ A ggplot2 object showing gene expression profiles
 }
 \description{
 Create a plot showing expression profiles for individual genes across
-developmental stages, with various visualization options.
+developmental stages or cell types, with various visualization options.
 }
 \details{
 This function creates detailed visualizations of individual gene expression patterns
-across development. Genes can be colored by phylostratum or developmental stage,
+across development (bulk data) or cell types (single-cell data). Genes can be colored by phylostratum or developmental stage,
 and various transformations can be applied to highlight different aspects of the data.
 }
 \examples{
-# Plot specific genes
-# p1 <- plot_gene_profiles(phyex_set, genes = c("gene1", "gene2", "gene3"))
+# Plot specific genes for bulk data
+# p1 <- plot_gene_profiles(bulk_phyex_set, genes = c("gene1", "gene2", "gene3"))
 
-# Plot with faceting by strata
+# Plot for single-cell data with faceting by strata
+# p2 <- plot_gene_profiles(sc_phyex_set, facet_by_strata = TRUE)
 # p2 <- plot_gene_profiles(phyex_set, facet_by_strata = TRUE)
 
 }

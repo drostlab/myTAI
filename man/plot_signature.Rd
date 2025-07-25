@@ -6,55 +6,54 @@
 \usage{
 plot_signature(
   phyex_set,
-  show_CI = FALSE,
-  show_bootstraps = FALSE,
-  CI_low = 0.025,
-  CI_high = 0.975,
   show_reps = TRUE,
   show_p_val = FALSE,
-  conservation_test = flatline_test,
+  conservation_test = stat_flatline_test,
   colour = NULL,
   ...
 )
 }
 \arguments{
-\item{phyex_set}{A PhyloExpressionSet object}
+\item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
-\item{show_CI}{Logical indicating whether to show confidence intervals (default: FALSE)}
+\item{show_reps}{Logical, whether to show individual replicates (bulk) or cells (single-cell)}
 
-\item{show_bootstraps}{Logical indicating whether to show bootstrap samples (default: FALSE)}
+\item{show_p_val}{Logical, whether to show conservation test p-value (bulk only)}
 
-\item{CI_low}{Lower quantile for confidence intervals (default: 0.025)}
+\item{conservation_test}{Function, conservation test to use for p-value calculation (bulk only)}
 
-\item{CI_high}{Upper quantile for confidence intervals (default: 0.975)}
+\item{colour}{Character, custom color for the plot elements}
 
-\item{show_reps}{Logical indicating whether to show individual replicates (default: TRUE)}
-
-\item{show_p_val}{Logical indicating whether to show p-value from conservation test (default: FALSE)}
-
-\item{conservation_test}{Function to use for conservation testing (default: flatline_test)}
-
-\item{colour}{Optional color for the signature line (default: NULL)}
-
-\item{...}{Additional arguments passed to the conservation test}
+\item{...}{Additional arguments passed to specific methods}
 }
 \value{
 A ggplot2 object showing the transcriptomic signature
 }
 \description{
-Create a plot of the transcriptomic index signature across developmental stages,
-with options for confidence intervals, replicates, and statistical testing.
+Create a plot of the transcriptomic index signature across developmental stages
+or cell types, with options for showing individual samples/cells and statistical testing.
 }
 \details{
-This function creates a comprehensive visualization of the transcriptomic signature
-with optional statistical testing and confidence intervals. The plot can show
-individual replicates, confidence bands, and p-values from conservation tests.
+This function creates visualizations appropriate for the data type:
+
+**Bulk data (BulkPhyloExpressionSet):**
+- Line plots showing TXI trends across developmental stages
+- Optional individual biological replicates as jittered points
+- Optional conservation test p-values
+
+**Single-cell data (ScPhyloExpressionSet):**
+- Violin plots showing TXI distributions across cell types
+- Mean TXI values overlaid as points
+- Optional individual cells using geom_sina for better visualization
 }
 \examples{
-# Basic signature plot
-# p1 <- plot_signature(phyex_set)
+# Basic signature plot for bulk data
+# p1 <- plot_signature(bulk_phyex_set)
 
-# With confidence intervals and p-value
-# p2 <- plot_signature(phyex_set, show_CI = TRUE, show_p_val = TRUE)
+# Bulk plot with replicates and p-value
+# p2 <- plot_signature(bulk_phyex_set, show_reps = TRUE, show_p_val = TRUE)
+
+# Single-cell plot with individual cells
+# p3 <- plot_signature(sc_phyex_set, show_reps = TRUE)
 
 }

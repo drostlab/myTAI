@@ -6,7 +6,7 @@
 #' @param phyex_set A PhyloExpressionSet object
 #' @param modules A named list with elements 'early', 'mid', and 'late' containing
 #' stage indices for each developmental module
-#' @param ... Additional arguments passed to generic_conservation_test
+#' @param ... Additional arguments passed to stat_generic_conservation_test
 #' 
 #' @return A ConservationTestResult object with early conservation test results
 #' 
@@ -21,19 +21,20 @@
 #' # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 #' # result <- early_conservation_test(phyex_set, modules)
 #' 
-#' @seealso \code{\link{generic_conservation_test}}, \code{\link{late_conservation_test}}
+#' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_late_conservation_test}}
 #' @export
-early_conservation_test <- function(phyex_set, modules, ...) {
-    t <- generic_conservation_test(phyex_set, 
-                                   test_name="Early Conservation Test",
-                                   scoring_function=\(x) ec_score(x, modules),
-                                   fitting_dist=distributions$normal,
-                                   alternative="greater",
-                                   p_label = "p_ect",
-                                   ...)
+stat_early_conservation_test <- function(phyex_set, modules, ...) {
+    t <- stat_generic_conservation_test(phyex_set, 
+                                        test_name="Early Conservation Test",
+                                        scoring_function=\(x) ec_score(x, modules),
+                                        fitting_dist=distributions$normal,
+                                        alternative="greater",
+                                        p_label="p_ect",
+                                        ...)
     t@modules <- modules
     return(t)
 }
+
 
 #' @title Early Conservation Score Function
 #' @description Compute the early conservation score by comparing mid and late

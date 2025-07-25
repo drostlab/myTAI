@@ -12,7 +12,7 @@
 #' @title Transform to Relative Expression Levels
 #' @description Computes the relative expression profile for a given gene expression matrix. 
 #' The relative expression is calculated by normalizing the column means of the matrix to a [0, 1] scale.
-#' @param count_matrix A numeric matrix where columns represent developmental stages and rows represent genes.
+#' @param count_matrix A numeric matrix where columns represent developmental stages/cell types and rows represent genes.
 #' @return A numeric vector of relative expression values for each stage (column) in the input matrix.
 #' @export
 relative_expression <- function(count_matrix) {
@@ -25,14 +25,14 @@ relative_expression <- function(count_matrix) {
 
 #' @title Compute Relative Expression Matrix for PhyloExpressionSet
 #' @description Computes relative expression profiles for all age categories in a PhyloExpressionSet.
-#' @param phyex_set A PhyloExpressionSet object.
-#' @return A matrix with age categories as rows and conditions as columns, containing relative expression values.
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
+#' @return A matrix with age categories as rows and identities as columns, containing relative expression values.
 #' @export
 rel_exp_matrix <- function(phyex_set) {
-    if (phyex_set@num_conditions < 2) stop("You need at least 2 conditions to compute relative expression levels.")
+    if (phyex_set@num_identities < 2) stop("You need at least 2 identities to compute relative expression levels.")
     
     age_vec <- as.integer(phyex_set@strata)
-    counts <- phyex_set@counts_collapsed
+    counts <- phyex_set@expression_collapsed
     
     # Compute relative expression for each age category
     rel_exp_mat <- t(sapply(sort(unique(age_vec)), function(a) {
@@ -42,7 +42,7 @@ rel_exp_matrix <- function(phyex_set) {
     }))
     
     rownames(rel_exp_mat) <- sort(unique(age_vec))
-    colnames(rel_exp_mat) <- as.character(phyex_set@conditions)
+    colnames(rel_exp_mat) <- as.character(phyex_set@identities)
     return(rel_exp_mat)
 }
 
@@ -50,7 +50,7 @@ rel_exp_matrix <- function(phyex_set) {
 
 #' @title Plot Relative Expression Profiles (Line Plot)
 #' @description Plots relative expression profiles for age categories using a PhyloExpressionSet S7 object.
-#' @param phyex_set A PhyloExpressionSet object.
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
 #' @param groups A list of integer vectors specifying age categories (e.g., phylostrata) for each group (1 or 2 groups).
 #' @param modules Optional list for shading modules: list(early=..., mid=..., late=...).
 #' @param adjust_range Logical, adjust y-axis range for both panels (if 2 groups).
@@ -79,7 +79,7 @@ plot_relative_expression_line <- function(
         stage = rep(colnames(rel_exp_mat), each = nrow(rel_exp_mat)),
         expr = as.vector(rel_exp_mat)
     )
-    rel_exp_df$stage <- factor(rel_exp_df$stage, levels = as.character(phyex_set@conditions))
+    rel_exp_df$stage <- factor(rel_exp_df$stage, levels = as.character(phyex_set@identities))
 
     pal <- PS_colours(phyex_set@num_strata)
 
@@ -90,7 +90,7 @@ plot_relative_expression_line <- function(
         
         p <- ggplot(df, aes(x = stage, y = expr, group = factor(age), color = factor(age))) +
             geom_line(linewidth = 1.2, ...) +
-            labs(x = phyex_set@conditions_label, y = "Relative Expression Level", color = "Age") +
+            labs(x = phyex_set@identities_label, y = "Relative Expression Level", color = "Age") +
             theme_minimal() +
             scale_color_manual(values = pal[groups[[1]]], name = "Age") +
             theme(axis.text.x = element_text(angle = 45, hjust = 1))
@@ -114,7 +114,7 @@ plot_relative_expression_line <- function(
     create_plot <- function(df, group_idx, group_name) {
         ggplot(df, aes(x = stage, y = expr, group = factor(age), color = factor(age))) +
             geom_line(linewidth = 1.2, ...) +
-            labs(x = phyex_set@conditions_label, y = "Relative Expression Level",
+            labs(x = phyex_set@identities_label, y = "Relative Expression Level",
                  title = paste(phyex_set@name, group_name), color = "Age") +
             theme_minimal() +
             scale_color_manual(values = pal[groups[[group_idx]]], name = "Age") +
@@ -138,7 +138,7 @@ plot_relative_expression_line <- function(
 
 #' @title Plot Mean Relative Expression Levels as Barplot
 #' @description Plots mean relative expression levels for age category groups using a PhyloExpressionSet S7 object, with statistical testing.
-#' @param phyex_set A PhyloExpressionSet object.
+#' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
 #' @param groups A list of integer vectors specifying age categories (e.g., phylostrata) for each group (2+ groups).
 #' @param p_adjust_method P-value adjustment for multiple testing.
 #' @param ... Further arguments passed to ggplot2 geoms.
@@ -196,10 +196,10 @@ plot_relative_expression_bar <- function(
     
     # Prepare data for plotting
     df_bar <- data.frame(
-        stage = rep(as.character(phyex_set@conditions), each = n_groups),
+        stage = rep(as.character(phyex_set@identities), each = n_groups),
         mean = as.vector(mean_mat),
         se = as.vector(se_mat),
-        group = factor(rep(seq_along(groups), times = phyex_set@num_conditions))
+        group = factor(rep(seq_along(groups), times = phyex_set@num_identities))
     )
     
     # Use PS_colours for consistent palette
@@ -211,7 +211,7 @@ plot_relative_expression_bar <- function(
                  color = "black", width = 0.7, ...) +
         geom_errorbar(aes(ymin = mean - se, ymax = mean + se), 
                      width = 0.25, position = position_dodge(width = 0.7)) +
-        labs(x = phyex_set@conditions_label, y = "Mean Relative Expression", 
+        labs(x = phyex_set@identities_label, y = "Mean Relative Expression", 
              title = phyex_set@name, fill = "Age Group") +
         scale_fill_manual(values = pal[seq_len(n_groups)], 
                          labels = sapply(groups, function(g) paste0(min(g), "-", max(g)))) +
@@ -225,7 +225,7 @@ plot_relative_expression_bar <- function(
     if (any(pval_stars != "")) {
         p <- p + geom_text(
             data = data.frame(
-                stage = as.character(phyex_set@conditions), 
+                stage = as.character(phyex_set@identities), 
                 y = apply(mean_mat + se_mat, 2, max, na.rm = TRUE) + 0.02,
                 label = pval_stars
             ),
