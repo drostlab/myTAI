@@ -62,9 +62,12 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
     )
     
     # Start with line plot
-    p <- ggplot(df_main, aes(x = Identity, y = TXI, group = 1)) +
-        geom_line(colour = "black", lwd = 2.3, lineend = "round") +
-        geom_line(aes(colour = phyex_set@name), lwd = 1.5, lineend = "round")
+    p <- ggplot() +
+        geom_line(data=df_main, aes(x = Identity, y = TXI, group = 1),
+                  colour = "black", lwd = 2.3, lineend = "round") +
+        geom_line(data=df_main, 
+                  aes(x = Identity, y = TXI, group = 1, colour = phyex_set@name), 
+                  lwd = 1.5, lineend = "round")
 
     # Add replicate dots if requested
     if (show_reps) {
