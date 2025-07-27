@@ -12,6 +12,7 @@ destroy_pattern(
   plot_results = TRUE,
   max_generations = 10000,
   seed = 1234,
+  extended_analysis = FALSE,
   ...
 )
 }
@@ -29,6 +30,8 @@ destroy_pattern(
 \item{max_generations}{Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).}
 
 \item{seed}{Random seed for reproducibility (default: 1234)}
+
+\item{extended_analysis}{Whether to show the multiple runs and convergence plots (default: FALSE)}
 
 \item{...}{Additional arguments passed to gataiR::gatai}
 }
