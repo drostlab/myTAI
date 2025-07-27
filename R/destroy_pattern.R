@@ -9,6 +9,7 @@
 #' @param plot_results Whether to plot the results. If analysis dir is given, this will be ignored.
 #' @param max_generations Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).
 #' @param seed Random seed for reproducibility (default: 1234)
+#' @param extended_analysis Whether to show the multiple runs and convergence plots (default: FALSE)
 #' @param ... Additional arguments passed to gataiR::gatai
 #' 
 #' @return A list containing GATAI results including identified genes that contribute to the pattern
@@ -31,6 +32,7 @@ destroy_pattern <- function(phyex_set,
                             plot_results = TRUE,
                             max_generations = 10000,
                             seed = 1234,
+                            extended_analysis = FALSE,
                             ...) {
     if (!requireNamespace("gataiR", quietly = TRUE)) {
         stop("Package 'gataiR' must be installed to use this function.")
@@ -42,7 +44,9 @@ destroy_pattern <- function(phyex_set,
                          max_generations = max_generations,
                          seed = seed,
                          ...)
-    res <- list(removed_genes=res$common_removed_genes, runs=res$genes_list)
+    res <- list(removed_genes=res$common_removed_genes)
+    if (extended_analysis)
+        res$runs <- res$genes_list
 
     if (length(res$removed_genes) == 0) {
         message("GATAI has failed to detect any genes. Try to increase the number of generations.")
@@ -202,14 +206,6 @@ plot_gatai_results <- function(phyex_set,
                  size = 3.5) +
         theme_minimal()
 
-    
-
-    # 6. Convergence plots
-    convergence_plots <- full_gatai_convergence_plot(phyex_set, gatai_result$runs, p=runs_threshold) + 
-        theme_minimal(base_size = 2) + 
-        theme(plot.title = element_text(size = 6),
-              strip.text = element_text(size = 4))
-
     result_list <- list(
         signature_plots = signature_plots,
         strata_plot = strata_plot,
@@ -218,9 +214,21 @@ plot_gatai_results <- function(phyex_set,
         profiles_plot_facet = profiles_plot_facet,
         gene_space_plot = gene_space_plot,
         mean_var_plot = mean_var_plot,
-        null_dist_plot = null_dist_plot,
-        convergence_plots = convergence_plots
+        null_dist_plot = null_dist_plot
     )
+
+    # 6. (optional) Convergence plots
+
+    # check if runs is included in the result
+    if ("runs" %in% names(gatai_result)) {
+        message("Computing GATAI result convergence plots. This may take a while...")
+        result_list$convergence_plots <- full_gatai_convergence_plot(phyex_set, gatai_result$runs, p=runs_threshold) + 
+            theme_minimal(base_size = 2) + 
+            theme(plot.title = element_text(size = 6),
+                  strip.text = element_text(size = 4))
+    }
+
+    
     return(result_list)
 }
 
