@@ -33,6 +33,13 @@
 genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
     metric_values <- FUN(phyex_set@expression, ...)
     names(metric_values) <- phyex_set@gene_ids
+
+    if (p >= 1) {
+        return(character(0)) # Return no genes if p = 1
+    }
+    if (p <= 0) {
+        return(names(metric_values)) # Return all genes if p = 0
+    }
     
     top_genes <- names(metric_values)[metric_values > stats::quantile(metric_values, p, na.rm = TRUE)]
     
