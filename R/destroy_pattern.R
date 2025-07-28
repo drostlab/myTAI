@@ -65,8 +65,7 @@ destroy_pattern <- function(phyex_set,
         save_gatai_results_pdf(phyex_set = phyex_set,
                                gatai_result = res,
                                analysis_dir = analysis_dir,
-                               runs_threshold = runs_threshold,
-                               ...)
+                               runs_threshold = runs_threshold)
     }
     else {
         if (plot_results)
