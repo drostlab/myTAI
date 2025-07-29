@@ -111,6 +111,8 @@ as_ScPhyloExpressionSet <- function(seurat,
 #' @param seurat A Seurat object containing single-cell expression data
 #' @param phylomap A data frame with two columns: phylostratum assignments and gene IDs
 #' @param layer Character string specifying which layer to use from the Seurat object (default: "counts")
+#' @param strata_labels Optional character vector of labels for phylostrata. 
+#' If NULL, uses sorted unique values from column 1
 #' @param ... Additional arguments passed to as_ScPhyloExpressionSet
 #' 
 #' @return A ScPhyloExpressionSet object
@@ -124,6 +126,7 @@ as_ScPhyloExpressionSet <- function(seurat,
 match_map_sc <- function(seurat, 
                          phylomap,
                          layer = "counts",
+                         strata_labels = NULL,
                          ...) {
 
     # Match with phylomap
@@ -144,7 +147,8 @@ match_map_sc <- function(seurat,
     phylomap_ordered <- phylomap_filtered[match(rownames(sc_counts), phylomap_filtered$GeneID), ]
     
     # Create strata factor
-    strata_labels <- sort(unique(as.numeric(phylomap_ordered$Stratum)))
+    if (is.null(strata_labels))
+        strata_labels <- sort(unique(as.numeric(phylomap_ordered$Stratum)))
     strata <- factor(as.numeric(phylomap_ordered$Stratum), 
                      levels = sort(unique(as.numeric(phylomap_ordered$Stratum))), 
                      labels = strata_labels)
