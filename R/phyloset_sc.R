@@ -134,24 +134,29 @@ match_map_sc <- function(seurat,
 
     sc_counts <- .get_expression_matrix(seurat, layer)
     gene_ids <- rownames(sc_counts)
-    
-    # Filter phylomap to genes present in data
+
+    # Filter phylomap to genes present in data and remove duplicates
     phylomap_filtered <- phylomap[phylomap$GeneID %in% gene_ids, ]
-    
+    phylomap_filtered <- phylomap_filtered[!duplicated(phylomap_filtered$GeneID), ]
+
     # Filter expression data to genes with phylostratum info
     common_genes <- intersect(gene_ids, phylomap_filtered$GeneID)
+
+    # Subset sc_counts and Seurat object to common genes
     sc_counts <- sc_counts[common_genes, , drop = FALSE]
-    phylomap_filtered <- phylomap_filtered[phylomap_filtered$GeneID %in% common_genes, ]
-    
+    seurat <- subset(seurat, features = common_genes)
+
     # Order phylomap to match gene order in expression data
-    phylomap_ordered <- phylomap_filtered[match(rownames(sc_counts), phylomap_filtered$GeneID), ]
-    
-    # Create strata factor
+    matched_idx <- match(rownames(sc_counts), phylomap_filtered$GeneID)
+    phylomap_ordered <- phylomap_filtered[matched_idx, ]
+
+    # Now create strata
     if (is.null(strata_labels))
         strata_labels <- sort(unique(as.numeric(phylomap_ordered$Stratum)))
     strata <- factor(as.numeric(phylomap_ordered$Stratum), 
-                     levels = sort(unique(as.numeric(phylomap_ordered$Stratum))), 
-                     labels = strata_labels)
+                    levels = sort(unique(as.numeric(phylomap_ordered$Stratum))), 
+                    labels = strata_labels)
+
     names(strata) <- rownames(sc_counts)
 
     return(as_ScPhyloExpressionSet(seurat=seurat, strata = strata, layer = layer, ...))
