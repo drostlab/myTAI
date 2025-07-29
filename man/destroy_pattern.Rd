@@ -13,6 +13,8 @@ destroy_pattern(
   max_generations = 10000,
   seed = 1234,
   extended_analysis = FALSE,
+  min_pval = 0.05,
+  always_return_genes = FALSE,
   ...
 )
 }
@@ -32,6 +34,10 @@ destroy_pattern(
 \item{seed}{Random seed for reproducibility (default: 1234)}
 
 \item{extended_analysis}{Whether to show the multiple runs and convergence plots (default: FALSE)}
+
+\item{min_pval}{Minimum p-value for which the pattern is considered destroyed (default: 0.05).}
+
+\item{always_return_genes}{Whether to return genes even when the pattern is not destroyed (default: FALSE).}
 
 \item{...}{Additional arguments passed to gataiR::gatai}
 }

@@ -10,6 +10,8 @@
 #' @param max_generations Integer. Maximum number of generations (iterations) for the genetic algorithm (default 10000).
 #' @param seed Random seed for reproducibility (default: 1234)
 #' @param extended_analysis Whether to show the multiple runs and convergence plots (default: FALSE)
+#' @param min_pval Minimum p-value for which the pattern is considered destroyed (default: 0.05).
+#' @param always_return_genes Whether to return genes even when the pattern is not destroyed (default: FALSE).
 #' @param ... Additional arguments passed to gataiR::gatai
 #' 
 #' @return A list containing GATAI results including identified genes that contribute to the pattern
@@ -33,25 +35,43 @@ destroy_pattern <- function(phyex_set,
                             max_generations = 10000,
                             seed = 1234,
                             extended_analysis = FALSE,
+                            min_pval = 0.05,
+                            always_return_genes = FALSE,
                             ...) {
     if (!requireNamespace("gataiR", quietly = TRUE)) {
         stop("Package 'gataiR' must be installed to use this function.")
     }
     
-    res <- gataiR::gatai(as_data_frame(collapse(phyex_set)), 
+    gatai_res <- gataiR::gatai(as_data_frame(collapse(phyex_set)), 
                          num_runs = num_runs,
                          runs_threshold = runs_threshold, 
                          max_generations = max_generations,
                          seed = seed,
                          ...)
-    res <- list(removed_genes=res$common_removed_genes)
+    res <- list(removed_genes=gatai_res$common_removed_genes)
     if (extended_analysis)
-        res$runs <- res$genes_list
+        res$runs <- gatai_res$genes_list
 
     if (length(res$removed_genes) == 0) {
         message("GATAI has failed to detect any genes. Try to increase the number of generations.")
         return(res)
     }
+
+    
+    # compute p value of destroyed set
+    pval <- phyex_set |> remove_genes(res$removed_genes) |> stat_flatline_test(plot_result=FALSE) |> (\(t) t@p_value)()
+    if (pval < min_pval) {
+        message("GATAI has failed to destroy the pattern. Try to provide a `frac_init_removed` value.")
+        if (!always_return_genes) {
+            res$removed_genes <- character(0)
+            return(res)
+        }
+        else {
+            message("Returning the genes anyway...")
+        }
+    }
+    
+
     
     # If analysis_dir is provided, save results to PDF and genes.txt
     if (!is.null(analysis_dir)) {

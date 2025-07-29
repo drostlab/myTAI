@@ -6,7 +6,9 @@ test_that("destroy_pattern works with gataiR", {
     gatai_result <- destroy_pattern(example_phyex_set_old, 
                                     num_runs = 3, 
                                     max_generations = 100,
-                                    extended_analysis = TRUE)
+                                    extended_analysis = TRUE,
+                                    min_pval = 0.0,
+                                    always_return_genes = TRUE)
     
     # Check that the result has the expected structure
     expect_type(gatai_result, "list")
