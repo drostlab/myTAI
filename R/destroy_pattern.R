@@ -104,7 +104,6 @@ destroy_pattern <- function(phyex_set,
 #' @param conservation_test Function for conservation test (default: \code{stat_flatline_test}).
 #' @param runs_threshold Threshold for gene removal consistency across runs (default: 0.5).
 #' @param signature_plot_type Type of signature plot: "separate" for individual plots, "combined" for overlay (default: both options).
-#' @param n_top_genes Number of top variance genes to remove for comparison (default: same as GATAI removed).
 #'
 #' @return A named list of ggplot/cowplot objects and results:
 #'   \item{signature_plots}{Signature plots before/after GATAI and top variance removal}
@@ -136,16 +135,22 @@ plot_gatai_results <- function(phyex_set,
                                gatai_result,
                                conservation_test = stat_flatline_test,
                                runs_threshold = 0.5,
-                               signature_plot_type = c("separate", "combined"),
-                               n_top_genes = length(gatai_result$removed_genes)) {
+                               signature_plot_type = c("separate", "combined")) {
     plot_type <- match.arg(signature_plot_type)
     removed_genes <- gatai_result$removed_genes   
+    n_top_genes <- length(removed_genes)
 
     # 1. Plot TAI signature before/after GATAI
     gatai_set <- remove_genes(phyex_set, removed_genes, new_name = paste(phyex_set@name, "- GATAI removed"))
     q <- 1.0 - n_top_genes/phyex_set@num_genes
     top_var_genes <- genes_top_variance(phyex_set, p = q)
     top_set <- remove_genes(phyex_set, top_var_genes, new_name = paste(phyex_set@name, "- Top variance removed"))
+
+    set.seed(1234)
+    all_genes <- phyex_set@gene_ids
+    random_genes <- sample(setdiff(all_genes, removed_genes), n_top_genes)
+    random_set <- remove_genes(phyex_set, random_genes, new_name = paste(phyex_set@name, "- Random genes removed"))
+
 
     if (plot_type == "separate") {
         P1 <- plot_signature(phyex_set, show_p_val = TRUE, conservation_test = conservation_test, colour="blue") +
@@ -154,28 +159,38 @@ plot_gatai_results <- function(phyex_set,
         P2 <- plot_signature(gatai_set, show_p_val = TRUE, conservation_test = conservation_test, colour="red") +
             ggtitle(paste("GATAI removed:", length(removed_genes), "genes"))
         
-        P3 <- plot_signature(top_set, show_p_val = TRUE, conservation_test = conservation_test, colour="darkgray") +
+        P3 <- plot_signature(top_set, show_p_val = TRUE, conservation_test = conservation_test, colour="purple") +
             ggtitle(paste("Top variance removed:", length(top_var_genes), "genes"))
+
+        P4 <- plot_signature(random_set, show_p_val = TRUE, conservation_test = conservation_test, colour="darkgray") +
+            ggtitle(paste("Random genes removed:", length(random_genes), "genes"))
         # Align y-axis scales and combine plots
-        y_limits <- range(c(phyex_set@TXI, gatai_set@TXI, top_set@TXI)) + c(-0.05, 0.05)
-        plots <- list(P1, P2, P3)
+        y_limits <- range(c(phyex_set@TXI, gatai_set@TXI, top_set@TXI, random_set@TXI)) + c(-0.05, 0.05)
+        plots <- list(P1, P2, P3, P4)
         plots <- lapply(plots, \(p) p + ylim(y_limits))
-        signature_plots <- cowplot::plot_grid(plotlist = plots, ncol = 3)
+        signature_plots <- cowplot::plot_grid(plotlist = plots, ncol = 2)
     }
     else {
-        signature_plots <- plot_signature_multiple(c(phyex_set, gatai_set, top_set), 
-                                                   show_p_val = TRUE, conservation_test = conservation_test, colours=c("blue", "red", "darkgray")) +
-            ggtitle(paste("Signature Comparison: Original vs GATAI-removed (", 
-                          length(removed_genes), "genes) vs Top-variance-removed (", n_top_genes, "genes)"))
+        signature_plots <- plot_signature_multiple(c(phyex_set, gatai_set, top_set, random_set), 
+                                                   show_p_val = TRUE, 
+                                                   conservation_test = conservation_test, 
+                                                   colours=c("blue", "red", "purple", "darkgray")) +
+            ggtitle(paste(
+                "Signature Comparison: Original vs GATAI-removed (", 
+                length(removed_genes), "genes) vs Top-variance-removed (", 
+                n_top_genes, "genes) vs Random-removed (", 
+                length(random_genes), "genes)"
+            ))
     }
 
 
     # 2. Plot removed gene profiles and heatmap
     heatmap_plot <- plot_gene_heatmap(phyex_set, genes=removed_genes, cluster_rows=TRUE, show_gene_ids=TRUE) +
         ggtitle(paste("Expression Heatmap: GATAI-removed genes (", length(removed_genes), "genes)"))
-    profiles_plot <- plot_gene_profiles(phyex_set, genes=removed_genes, max_genes=200, transformation="none") +
+    profiles_plot <- plot_gene_profiles(phyex_set, genes=removed_genes, max_genes=200, transformation="none", colour_by="strata") +
         ggtitle(paste("Gene Expression Profiles: GATAI-removed genes"))
-    profiles_plot_facet <- plot_gene_profiles(phyex_set, genes=removed_genes, max_genes=1000, facet_by_strata = TRUE, transformation="none") +
+    profiles_plot_facet <- plot_gene_profiles(phyex_set, genes=removed_genes, max_genes=1000, 
+                                              facet_by_strata = TRUE, transformation="none", colour_by="strata") +
         ggtitle(paste("Gene Expression Profiles by Phylostrata: GATAI-removed genes")) +
         theme(strip.text = element_text(size = 6))
 

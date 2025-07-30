@@ -9,8 +9,7 @@ plot_gatai_results(
   gatai_result,
   conservation_test = stat_flatline_test,
   runs_threshold = 0.5,
-  signature_plot_type = c("separate", "combined"),
-  n_top_genes = length(gatai_result$removed_genes)
+  signature_plot_type = c("separate", "combined")
 )
 }
 \arguments{
@@ -23,8 +22,6 @@ plot_gatai_results(
 \item{runs_threshold}{Threshold for gene removal consistency across runs (default: 0.5).}
 
 \item{signature_plot_type}{Type of signature plot: "separate" for individual plots, "combined" for overlay (default: both options).}
-
-\item{n_top_genes}{Number of top variance genes to remove for comparison (default: same as GATAI removed).}
 }
 \value{
 A named list of ggplot/cowplot objects and results:
