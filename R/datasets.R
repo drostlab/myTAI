@@ -32,7 +32,7 @@ load_example_phyex_set_sc <- function() {
     n_cells <- 1000
 
     counts <- matrix(
-        rnbinom(n_genes * n_cells, size = 5, mu = 100),
+        stats::rnbinom(n_genes * n_cells, size = 5, mu = 100),
         nrow = n_genes,
         ncol = n_cells
     )

@@ -111,7 +111,7 @@ as_ScPhyloExpressionSet <- function(seurat,
 #' @param seurat A Seurat object containing single-cell expression data
 #' @param phylomap A data frame with two columns: phylostratum assignments and gene IDs
 #' @param layer Character string specifying which layer to use from the Seurat object (default: "counts")
-#' @param strata_labels Optional character vector of labels for phylostrata. 
+#' @param strata_legend A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, no labels will be added (default: NULL)
 #' If NULL, uses sorted unique values from column 1
 #' @param ... Additional arguments passed to as_ScPhyloExpressionSet
 #' 
@@ -126,7 +126,7 @@ as_ScPhyloExpressionSet <- function(seurat,
 match_map_sc <- function(seurat, 
                          phylomap,
                          layer = "counts",
-                         strata_labels = NULL,
+                         strata_legend = NULL,
                          ...) {
 
     # Match with phylomap
@@ -151,11 +151,18 @@ match_map_sc <- function(seurat,
     phylomap_ordered <- phylomap_filtered[matched_idx, ]
 
     # Now create strata
-    if (is.null(strata_labels))
-        strata_labels <- sort(unique(as.numeric(phylomap_ordered$Stratum)))
+    
+    if (is.null(strata_legend)) {
+        levels <- sort(unique(as.numeric(phylomap$Stratum)))
+        labels <- levels
+    }
+    else {
+        levels <- strata_legend[[1]]
+        labels <- strata_legend[[2]]
+    }
     strata <- factor(as.numeric(phylomap_ordered$Stratum), 
-                    levels = sort(unique(as.numeric(phylomap_ordered$Stratum))), 
-                    labels = strata_labels)
+                     levels = levels, 
+                     labels = labels)
 
     names(strata) <- rownames(sc_counts)
 
@@ -388,4 +395,54 @@ S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
 downsample_expression <- function(phyex_set, downsample = 10) {
     seurat <- subset(phyex_set@seurat, downsample = downsample)
     as.matrix(.get_expression_matrix(seurat, phyex_set@layer))
+}
+
+#' @title Get available identities
+#' @description Return the available metadata columns that can be used as identities in the Seurat object.
+#' @param phyex_set A ScPhyloExpressionSet object
+#' @return Character vector of available identity columns
+#' @export
+available_identities <- function(phyex_set) {
+    colnames(phyex_set@seurat@meta.data)
+}
+
+#' @title Set Identities for ScPhyloExpressionSet
+#' @description Change the Seurat identities to a different metadata column.
+#' @param phyex_set A ScPhyloExpressionSet object
+#' @param identity_name Character, name of the metadata column to use as new identities
+#' @return ScPhyloExpressionSet object with updated identities
+#' @export
+set_identities <- function(phyex_set, identity_name) {
+    available <- available_identities(phyex_set)
+    if (!(identity_name %in% available)) {
+        stop(
+            sprintf(
+                "Column '%s' not found in Seurat metadata. Available options are: %s",
+                identity_name, paste(available, collapse = ", ")
+            )
+        )
+    }
+    Idents(phyex_set@seurat) <- identity_name
+    phyex_set@identities_label <- identity_name
+    phyex_set
+}
+
+#' @title Set Identity Order for ScPhyloExpressionSet
+#' @description Change the order of the identities (factor levels) in the Seurat object.
+#' @param phyex_set A ScPhyloExpressionSet object
+#' @param new_order Character vector specifying the new order of identities
+#' @return ScPhyloExpressionSet object with updated identity order
+#' @export
+reorder_identities <- function(phyex_set, new_order) {
+    current_idents <- Seurat::Idents(phyex_set@seurat)
+    if (!all(new_order %in% levels(current_idents))) {
+        stop(
+            sprintf(
+                "Some values in new_order are not current identities. Current identities are: %s",
+                paste(levels(current_idents), collapse = ", ")
+            )
+        )
+    }
+    Seurat::Idents(phyex_set@seurat) <- factor(current_idents, levels = new_order)
+    phyex_set
 }

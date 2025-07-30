@@ -10,10 +10,11 @@ plot_gene_profiles(
   show_set_mean = FALSE,
   show_reps = FALSE,
   transformation = c("log", "std_log", "none"),
-  colour_by = c("strata", "stage", "manual"),
+  colour_by = c("manual", "strata", "stage"),
   colours = NULL,
   max_genes = 100,
   show_labels = TRUE,
+  label_size = 1.75,
   show_legend = TRUE,
   facet_by_strata = FALSE
 )
@@ -31,13 +32,15 @@ plot_gene_profiles(
 "log" (log1p), "std_log" (standardized log1p), or "none" (default: "log")}
 
 \item{colour_by}{Character string specifying coloring scheme:
-"strata" (by phylostratum), "stage" (by developmental stage/cell type), or "manual" (default: "strata")}
+"strata" (by phylostratum), "stage" (by developmental stage/cell type), or "manual" (default: "manual")}
 
 \item{colours}{Optional vector of colors for manual coloring (default: NULL)}
 
 \item{max_genes}{Maximum number of genes to plot when genes=NULL (default: 100)}
 
 \item{show_labels}{Logical indicating whether to show gene labels (default: TRUE)}
+
+\item{label_size}{Font size of gene id labels if shown (default: 0.5).}
 
 \item{show_legend}{Logical indicating whether to show legend (default: TRUE)}
 

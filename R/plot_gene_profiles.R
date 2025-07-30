@@ -9,10 +9,11 @@
 #' @param transformation Character string specifying expression transformation:
 #' "log" (log1p), "std_log" (standardized log1p), or "none" (default: "log")
 #' @param colour_by Character string specifying coloring scheme:
-#' "strata" (by phylostratum), "stage" (by developmental stage/cell type), or "manual" (default: "strata")
+#' "strata" (by phylostratum), "stage" (by developmental stage/cell type), or "manual" (default: "manual")
 #' @param colours Optional vector of colors for manual coloring (default: NULL)
 #' @param max_genes Maximum number of genes to plot when genes=NULL (default: 100)
 #' @param show_labels Logical indicating whether to show gene labels (default: TRUE)
+#' @param label_size Font size of gene id labels if shown (default: 0.5).
 #' @param show_legend Logical indicating whether to show legend (default: TRUE)
 #' @param facet_by_strata Logical indicating whether to facet by phylostratum (default: FALSE)
 #' 
@@ -41,13 +42,13 @@ plot_gene_profiles <- function(phyex_set,
                                show_set_mean=FALSE,
                                show_reps = FALSE,
                                transformation=c("log", "std_log", "none"),
-                               colour_by=c("strata", "stage", "manual"),
+                               colour_by=c("manual", "strata", "stage"),
                                colours = NULL,
                                max_genes = 100,
                                show_labels=TRUE,
+                               label_size = 1.75,
                                show_legend=TRUE,
                                facet_by_strata = FALSE) {
-    
     transformation <- match.arg(transformation)
     colour_by <- match.arg(colour_by)
     
@@ -96,27 +97,33 @@ plot_gene_profiles <- function(phyex_set,
         stringsAsFactors = FALSE
     )
     
+
     # Remove any duplicates and NA entries
     sample_metadata <- sample_metadata[!duplicated(sample_metadata$Sample) & !is.na(sample_metadata$Sample), ]
-    
-    df_long <- df_long |>
+
+    # Prepare long data for points (replicates/cells)
+    df_points <- reshape2::melt(counts)
+    colnames(df_points) <- c("GeneID", "Sample", "Expression")
+    df_points <- df_points[!is.na(df_points$Sample), ]
+    df_points <- df_points |>
         left_join(sample_metadata, by = "Sample") |>
-        group_by(GeneID, Identity) |>
+        left_join(data.frame(GeneID = phyex_set@gene_ids,
+                            Stratum = phyex_set@strata,
+                            Angle = -get_angles(expr |> log1p() |> .to_std_expr())),
+                by = "GeneID") |>
+        mutate(ColourVar = switch(colour_by,
+                                stage = Angle,
+                                strata = Stratum,
+                                manual = GeneID))
+
+    # Summarise for lines/statistics
+    df_long <- df_points |>
+        group_by(GeneID, Identity, ColourVar, Stratum, Angle) |>
         summarise(min = min(Expression),
                   max = max(Expression),
                   Expression = mean(Expression),
-                  .groups = "drop") |>
-        left_join(data.frame(GeneID = phyex_set@gene_ids,
-                             Stratum = phyex_set@strata,
-                             Angle = -get_angles(expr |> log1p() |> .to_std_expr())),
-                  by = "GeneID") |> 
-        mutate(
-            ColourVar = switch(colour_by,
-                               stage = Angle,
-                               strata = Stratum,
-                               manual = GeneID))
-    
-    
+                  .groups = "drop")
+
     p <- ggplot(df_long, aes(x = Identity,
                              y = Expression,
                              group = GeneID,
@@ -124,13 +131,24 @@ plot_gene_profiles <- function(phyex_set,
         geom_line() +
         labs(x = phyex_set@identities_label, y = "Expression") +
         theme_minimal()
-    
-    # show ribbon of replicates
-    if (show_reps)
-        p <- p + geom_ribbon(aes(x = Identity, ymin = min, ymax = max, 
-                                fill = ColourVar, 
-                                group = GeneID),
-                            alpha=0.25, inherit.aes = FALSE)
+
+    # Only show dots if show_reps is TRUE
+    if (show_reps) {
+        p <- p + 
+            geom_violin(
+                data = df_points,
+                aes(x = Identity, y = Expression, fill = ColourVar, group = interaction(Identity, GeneID)),
+                alpha = 0.2, width = 0.8, colour = NA, inherit.aes = FALSE,
+                position = position_dodge(width = 0.7)
+            ) +
+            geom_jitter(
+                data = df_points,
+                aes(x = Identity, y = Expression, colour = ColourVar, group = interaction(Identity, GeneID), fill = ColourVar),
+                size = 0.7, alpha = 0.5, inherit.aes = FALSE,
+                position = position_jitterdodge(jitter.width = 0.7, dodge.width = 0.7)
+            )
+    }
+
     
     
     if (show_set_mean && length(genes_to_plot) > 0) {
@@ -161,11 +179,12 @@ plot_gene_profiles <- function(phyex_set,
         }
         
         p <- p + ggrepel::geom_text_repel(data = df_labels,
-                                          aes(x = Identity, y = Expression, label = GeneID),
+                                          aes(x = Identity, y = Expression, label = GeneID, colour = GeneID),
                                           inherit.aes = FALSE,
-                                          size = 1.8, max.overlaps=20, 
+                                          size = label_size, max.overlaps=20, 
                                           box.padding = 0.5, point.padding = 0.5,
-                                          segment.size = 0.2, segment.colour = "grey50")
+                                          segment.size = 0.2, segment.colour = "grey50",
+                                          bg.color = "white", bg.r = 0.15)
     }
     
     

@@ -58,7 +58,7 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
 #' @param groups A factor or character vector indicating which group each sample belongs to.
 #' Default uses column names from expression data
 #' @param name A character string naming the dataset. Default uses the variable name
-#' @param strata_labels Optional character vector of labels for phylostrata. 
+#' @param strata_legend A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, no labels will be added (default: NULL)
 #' If NULL, uses sorted unique values from column 1
 #' @param ... Additional arguments passed to BulkPhyloExpressionSet constructor
 #' 
@@ -72,14 +72,22 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
 #' 
 #' @export
 as_BulkPhyloExpressionSet <- function(data, 
-                                      groups = colnames(data[,3:ncol(data)]),
+                                      groups = colnames(data[, 3:ncol(data)]),
                                       name = deparse(substitute(data)),
-                                      strata_labels = NULL,
+                                      strata_legend = NULL,
                                       ...) {
     gene_ids <- as.character(data[[2]])
-    if (is.null(strata_labels))
-        strata_labels <- sort(unique(as.numeric(data[[1]])))
-    strata <- factor(as.numeric(data[[1]]), levels=sort(unique(as.numeric(data[[1]]))), labels=strata_labels)
+
+    if (is.null(strata_legend)) {
+        levels <- sort(unique(as.numeric(data[[1]])))
+        labels <- levels
+    }
+    else {
+        levels <- strata_legend[[1]]
+        labels <- strata_legend[[2]]
+    }
+    strata <- factor(as.numeric(data[[1]]), levels=levels, labels=labels)
+
     names(strata) <- gene_ids
 
     groups <- factor(groups, levels=unique(groups))

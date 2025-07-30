@@ -4,7 +4,7 @@
 \alias{match_map_sc}
 \title{Match Single-Cell Expression Data with Phylostratum Map}
 \usage{
-match_map_sc(seurat, phylomap, layer = "counts", strata_labels = NULL, ...)
+match_map_sc(seurat, phylomap, layer = "counts", strata_legend = NULL, ...)
 }
 \arguments{
 \item{seurat}{A Seurat object containing single-cell expression data}
@@ -13,7 +13,7 @@ match_map_sc(seurat, phylomap, layer = "counts", strata_labels = NULL, ...)
 
 \item{layer}{Character string specifying which layer to use from the Seurat object (default: "counts")}
 
-\item{strata_labels}{Optional character vector of labels for phylostrata. 
+\item{strata_legend}{A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, no labels will be added (default: NULL)
 If NULL, uses sorted unique values from column 1}
 
 \item{...}{Additional arguments passed to as_ScPhyloExpressionSet}

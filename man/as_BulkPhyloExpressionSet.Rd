@@ -8,7 +8,7 @@ as_BulkPhyloExpressionSet(
   data,
   groups = colnames(data[, 3:ncol(data)]),
   name = deparse(substitute(data)),
-  strata_labels = NULL,
+  strata_legend = NULL,
   ...
 )
 }
@@ -21,7 +21,7 @@ Default uses column names from expression data}
 
 \item{name}{A character string naming the dataset. Default uses the variable name}
 
-\item{strata_labels}{Optional character vector of labels for phylostrata. 
+\item{strata_legend}{A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, no labels will be added (default: NULL)
 If NULL, uses sorted unique values from column 1}
 
 \item{...}{Additional arguments passed to BulkPhyloExpressionSet constructor}
