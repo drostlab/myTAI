@@ -1,0 +1,72 @@
+body {
+  font-family: "Fira Mono", monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Fira Sans", sans-serif;
+}
+
+code, pre {
+  font-family: "Fira Code", monospace;
+}
+
+.important {
+  border-left: 4px solid #f39c12;
+  background: #fff3cd;
+  padding: 1em;
+}
+
+.note {
+  border-left: 4px solid #0073e6;
+  background: #e7f3ff;
+  padding: 1em;
+}
+
+.tip {
+  border-left: 4px solid #28a745;
+  background: #e8f8f0;
+  padding: 1em;
+}
+
+.warning {
+  border-left: 4px solid #f0ad4e;
+  background: #fff3cd;
+  padding: 1em;
+}
+
+.caution {
+  border-left: 4px solid #dc3545;
+  background: #f8d7da;
+  padding: 1em;
+}
+
+.note::before      { content: "ℹ️ "; }
+.tip::before       { content: "💡 "; }
+.warning::before   { content: "⚠️ "; }
+.caution::before   { content: "❗ "; }
+.important::before { content: "⭐ "; }
+.error::before     { content: "🚫 "; }
+
+details {
+  margin: 1em 0;
+  padding: 0.5em;
+  border: 0px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+details summary {
+  cursor: pointer;
+}
+
+.r-output {
+  background: #fff;
+  padding: 0.5em;
+  border-radius: 4px;
+}
+
+/* Apply only on the homepage (index.html) */
+/* body.template-home p {
+/*   font-size: 2rem;
+/*   margin-bottom: 6em;
+/* }
