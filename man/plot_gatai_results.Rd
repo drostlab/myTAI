@@ -10,7 +10,7 @@ plot_gatai_results(
   conservation_test = stat_flatline_test,
   runs_threshold = 0.5,
   signature_plot_type = c("separate", "combined"),
-  n_random_genes = length(gatai_result$removed_genes)
+  n_top_genes = length(gatai_result$removed_genes)
 )
 }
 \arguments{
@@ -24,11 +24,11 @@ plot_gatai_results(
 
 \item{signature_plot_type}{Type of signature plot: "separate" for individual plots, "combined" for overlay (default: both options).}
 
-\item{n_random_genes}{Number of random genes to remove for comparison (default: same as GATAI removed).}
+\item{n_top_genes}{Number of top variance genes to remove for comparison (default: same as GATAI removed).}
 }
 \value{
 A named list of ggplot/cowplot objects and results:
-  \item{signature_plots}{Signature plots before/after GATAI and random removal}
+  \item{signature_plots}{Signature plots before/after GATAI and top variance removal}
   \item{heatmap_plot}{Heatmap of GATAI-removed genes}
   \item{profiles_plot}{Gene expression profiles of GATAI-removed genes}
   \item{profiles_plot_facet}{Faceted gene profiles by strata}
