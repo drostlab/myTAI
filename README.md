@@ -19,7 +19,6 @@ To install the previous version of myTAI, and access the old vignettes, do:
 ```r
 devtools::install_github("drostlab/myTAI@v1.0")
 ```
-
    
 ### Motivation
 
