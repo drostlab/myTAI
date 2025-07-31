@@ -7,7 +7,7 @@
 plot_signature_multiple(
   phyex_sets,
   legend_title = "Phylo Expression Set",
-  show_p_val = FALSE,
+  show_p_val = TRUE,
   conservation_test = stat_flatline_test,
   transformation = NULL,
   colours = NULL,
@@ -19,9 +19,9 @@ plot_signature_multiple(
 
 \item{legend_title}{Title for the legend (default: "Phylo Expression Set")}
 
-\item{show_p_val}{Logical indicating whether to show p-values (default: FALSE, bulk data only)}
+\item{show_p_val}{Logical indicating whether to show p-values (default: TRUE)}
 
-\item{conservation_test}{Function to use for conservation testing (default: stat_flatline_test, bulk data only)}
+\item{conservation_test}{Function to use for conservation testing (default: stat_flatline_test)}
 
 \item{transformation}{Optional transformation function to apply to all datasets (default: NULL)}
 

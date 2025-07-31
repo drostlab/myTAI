@@ -394,3 +394,15 @@ TPI <- function(phyex_set) {
 }
 
 PhyloExpressionSet <- PhyloExpressionSetBase
+
+#' @title Check if object is a PhyloExpressionSet
+#' @description Checks if the input is a PhyloExpressionSet S7 object and throws an error if not.
+#' @param phyex_set An object to check
+#' @return Invisibly returns TRUE if check passes, otherwise throws an error
+#' @export
+check_PhyloExpressionSet <- function(phyex_set) {
+    if (!S7::S7_inherits(phyex_set, PhyloExpressionSetBase)) {
+        stop("Input must be a PhyloExpressionSet S7 object.", call. = FALSE)
+    }
+    invisible(TRUE)
+}

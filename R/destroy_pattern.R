@@ -41,6 +41,7 @@ destroy_pattern <- function(phyex_set,
     if (!requireNamespace("gataiR", quietly = TRUE)) {
         stop("Package 'gataiR' must be installed to use this function.")
     }
+    check_PhyloExpressionSet(phyex_set)
     
     gatai_res <- gataiR::gatai(as_data_frame(collapse(phyex_set)), 
                          num_runs = num_runs,
@@ -75,6 +76,7 @@ destroy_pattern <- function(phyex_set,
     
     # If analysis_dir is provided, save results to PDF and genes.txt
     if (!is.null(analysis_dir)) {
+        message(sprintf("Saving results to %s", analysis_dir))
         # Save genes.txt
         if (!dir.exists(analysis_dir)) {
             dir.create(analysis_dir, recursive = TRUE)
@@ -88,6 +90,7 @@ destroy_pattern <- function(phyex_set,
                                runs_threshold = runs_threshold)
     }
     else {
+        message("No analysis directory name was provided. To save the results to file, pass `analysis_dir`")
         if (plot_results)
             res$plots <- plot_gatai_results(phyex_set, res, runs_threshold=runs_threshold)
     }
@@ -136,6 +139,7 @@ plot_gatai_results <- function(phyex_set,
                                conservation_test = stat_flatline_test,
                                runs_threshold = 0.5,
                                signature_plot_type = c("separate", "combined")) {
+    check_PhyloExpressionSet(phyex_set)
     plot_type <- match.arg(signature_plot_type)
     removed_genes <- gatai_result$removed_genes   
     n_top_genes <- length(removed_genes)
@@ -217,28 +221,40 @@ plot_gatai_results <- function(phyex_set,
     gatai_test <- conservation_test(gatai_set, plot_result = FALSE)
     
     null_sample <- original_test@null_sample
+
+    # Add top variance and random gene set conservation tests
+    top_test <- conservation_test(top_set, plot_result = FALSE)
+    random_test <- conservation_test(random_set, plot_result = FALSE)
+
     test_stats <- data.frame(
-        label = c("Original", "GATAI removed"),
-        stat = c(original_test@test_stat, gatai_test@test_stat),
-        p_value = c(original_test@p_value, gatai_test@p_value),
-        color = c("blue", "red")
+        label = c("Original", "GATAI removed", "Top variance removed", "Random genes removed"),
+        stat = c(original_test@test_stat, gatai_test@test_stat, top_test@test_stat, random_test@test_stat),
+        p_value = c(original_test@p_value, gatai_test@p_value, top_test@p_value, random_test@p_value),
+        color = c("blue", "red", "purple", "darkgray")
     )
 
     null_dist_plot <- ggplot(data.frame(x = null_sample), aes(x = x)) +
         geom_histogram(aes(y = after_stat(density)), bins = 100, fill = "gray67", alpha = 0.7, colour = "gray66") +
         stat_function(fun = original_test@fitting_dist@pdf, args = original_test@params, colour = "gray40") +
         geom_vline(data = test_stats, aes(xintercept = stat, colour = label), linewidth = 1) +
-        scale_colour_manual(name = NULL, values = c("Original" = "blue", "GATAI removed" = "red")) +
+        scale_colour_manual(name = NULL, values = c(
+            "Original" = "blue",
+            "GATAI removed" = "red",
+            "Top variance removed" = "purple",
+            "Random genes removed" = "darkgray"
+        )) +
         labs(x = "Score", y = "Density",
              title = "Conservation Test Comparison",
              subtitle = paste("Test:", original_test@method_name)) +
-        annotate("text",
-                 x = test_stats$stat - 0.05 * diff(range(null_sample)),
-                 y = max(density(null_sample)$y) * c(0.9, 0.8),
-                 label = sapply(test_stats$p_value, function(p) formatC(p, format = "e", digits = 2)),
-                 colour = test_stats$color,
-                 hjust = 1,
-                 size = 3.5) +
+        annotate(
+            "text",
+            x = test_stats$stat - 0.05 * diff(range(null_sample)),
+            y = max(density(null_sample)$y) * c(0.9, 0.8, 0.7, 0.6),
+            label = sapply(test_stats$p_value, function(p) formatC(p, format = "e", digits = 2)),
+            colour = test_stats$color,
+            hjust = 1,
+            size = 3.5
+        ) +
         theme_minimal()
 
     result_list <- list(

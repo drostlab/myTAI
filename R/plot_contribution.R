@@ -26,6 +26,7 @@
 #' @import dplyr ggplot2
 #' @export
 plot_contribution <- function(phyex_set) {
+    check_PhyloExpressionSet(phyex_set)
     contribution <- sTXI(phyex_set, option="identity")
     strata_labels <- levels(phyex_set@strata)
     df <- data.frame(contribution) |>

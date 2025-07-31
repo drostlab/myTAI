@@ -446,3 +446,15 @@ reorder_identities <- function(phyex_set, new_order) {
     Seurat::Idents(phyex_set@seurat) <- factor(current_idents, levels = new_order)
     phyex_set
 }
+
+#' @title Check if object is a ScPhyloExpressionSet
+#' @description Checks if the input is a PhyloExpressionSet S7 object and throws an error if not.
+#' @param phyex_set An object to check
+#' @return Invisibly returns TRUE if check passes, otherwise throws an error
+#' @export
+check_ScPhyloExpressionSet <- function(phyex_set) {
+    if (!S7::S7_inherits(phyex_set, ScPhyloExpressionSet)) {
+        stop("Input must be a ScPhyloExpressionSet S7 object.", call. = FALSE)
+    }
+    invisible(TRUE)
+}

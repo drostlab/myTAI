@@ -14,7 +14,8 @@ BulkPhyloExpressionSet(
   null_conservation_sample_size = 5000L,
   precomputed_null_conservation_txis = NULL,
   .expression = stop("@.expression is required"),
-  .groups = stop("@.groups is required")
+  .groups = stop("@.groups is required"),
+  precomputed_bootstrapped_txis = NULL
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ BulkPhyloExpressionSet(
 \item{.expression}{Matrix of expression counts with genes as rows and samples as columns}
 
 \item{.groups}{Factor vector indicating which identity each sample belongs to}
+
+\item{precomputed_bootstrapped_txis}{Precomputed bootstrapped TXI values (default: NULL)}
 }
 \description{
 S7 class for bulk RNA-seq phylotranscriptomic expression data.

@@ -30,6 +30,7 @@
 #' @import dplyr
 #' @export
 plot_mean_var <- function(phyex_set, highlight_genes = NULL, colour_by = c("none", "strata")) {
+    check_PhyloExpressionSet(phyex_set)
     colour_by <- match.arg(colour_by)
     
     # Create data frame with gene info and mean/variance calculations

@@ -101,10 +101,17 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
         e <- se
     }
     
+
+    # If only one gene, disable clustering
+    n_genes <- nrow(e)
+    cluster_rows <- cluster_rows
+    if (n_genes == 1) {
+        cluster_rows <- FALSE
+    }
     # Order genes by expression angle if not clustering
     if (!cluster_rows) {
         gene_order <- order(get_angles(se))
-        e <- e[gene_order, ]
+        e <- e[gene_order, , drop = FALSE]
     }
     
     color_palette <- grDevices::colorRampPalette(c("#0055A4", "#FFFFFF", "#EF4135"))(99)
@@ -134,6 +141,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
         )
     }
     
+
     p <- pheatmap::pheatmap(
         e,
         cluster_rows = cluster_rows,

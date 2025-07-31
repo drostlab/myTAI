@@ -3,9 +3,9 @@
 #' or cell types, with options for showing individual samples/cells and statistical testing.
 #' 
 #' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
-#' @param show_reps Logical, whether to show individual replicates (bulk) or cells (single-cell)
-#' @param show_p_val Logical, whether to show conservation test p-value (bulk only)
-#' @param conservation_test Function, conservation test to use for p-value calculation (bulk only)
+#' @param show_reps Logical, whether to show individual replicates
+#' @param show_p_val Logical, whether to show conservation test p-value
+#' @param conservation_test Function, conservation test to use for p-value calculation
 #' @param colour Character, custom color for the plot elements
 #' @param ... Additional arguments passed to specific methods
 #' 
@@ -21,7 +21,7 @@
 #' 
 #' **Single-cell data (ScPhyloExpressionSet):**
 #' - Violin plots showing TXI distributions across cell types
-#' - Mean TXI values overlaid as points
+#' - Mean TXI values overlaid as line
 #' - Optional individual cells using geom_sina for better visualization
 #' 
 #' @examples
@@ -39,7 +39,7 @@
 plot_signature <- S7::new_generic("plot_signature", "phyex_set",
     function(phyex_set,
              show_reps = TRUE,
-             show_p_val = FALSE,
+             show_p_val = TRUE,
              conservation_test = stat_flatline_test,
              colour = NULL,
              ...) {
@@ -50,9 +50,10 @@ plot_signature <- S7::new_generic("plot_signature", "phyex_set",
 #' @export
 S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                show_reps = TRUE,
-                                                               show_p_val = FALSE,
+                                                               show_p_val = TRUE,
                                                                conservation_test = stat_flatline_test,
                                                                colour = NULL,
+                                                               show_bootstraps = FALSE,
                                                                ...) {
     
     # Create main TXI line
@@ -62,26 +63,54 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
     )
     
     # Start with line plot
-    p <- ggplot() +
+    p <- ggplot()
+
+    # Optionally plot bootstrapped TXI lines
+    if (show_bootstraps) {
+        df_b <- as_tibble(phyex_set@bootstrapped_txis) |>
+            rowid_to_column("Id") |>
+            tidyr::pivot_longer(cols=phyex_set@identities, names_to="Identity", values_to = "TXI")
+        p <- p + geom_line(data=df_b,
+                           aes(x=Identity, y=TXI, group=Id, colour=phyex_set@name),
+                           alpha=0.01)
+    }
+
+    p <- p +
         geom_line(data=df_main, aes(x = Identity, y = TXI, group = 1),
                   colour = "black", lwd = 2.3, lineend = "round") +
         geom_line(data=df_main, 
                   aes(x = Identity, y = TXI, group = 1, colour = phyex_set@name), 
                   lwd = 1.5, lineend = "round")
 
-    # Add replicate dots if requested
+
+    # Add replicate dots and CI ribbon if requested
     if (show_reps) {
         df_samples <- tibble::tibble(
             Identity = phyex_set@groups,
             TXI = phyex_set@TXI_sample
         )
-        
-        p <- p + geom_jitter(
-            data = df_samples,
-            aes(x = Identity, y = TXI, fill = phyex_set@name),
-            shape = 21, colour = "black", size = 1.5, stroke = 0.5, 
-            width = 0.05, alpha = 0.7
+
+        # Compute mean and SD for each identity using bootstrapped TXI values
+        std_dev <- TXI_std_dev(phyex_set)
+
+        # Build a tibble for ribbon: mean ± 1 SD
+        df_sd <- tibble::tibble(
+            Identity = factor(phyex_set@identities, levels = unique(as.character(phyex_set@identities))),
+            lb = phyex_set@TXI - std_dev,
+            ub = phyex_set@TXI + std_dev
         )
+
+        p <- p +
+            geom_ribbon(
+                data = df_sd,
+                aes(x = Identity, ymin = lb, ymax = ub, fill = phyex_set@name, group=1), alpha = 0.3, inherit.aes = FALSE
+            ) +
+            geom_jitter(
+                data = df_samples,
+                aes(x = Identity, y = TXI, fill = phyex_set@name),
+                shape = 21, colour = "black", size = 1.5, stroke = 0.5, 
+                width = 0.05, alpha = 0.7
+            )
     }
 
     # Add labels and theme
@@ -102,7 +131,8 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
             annotate("text",
                 label = label, parse = TRUE,
                 x = phyex_set@num_identities * 0.7, 
-                y = mean(phyex_set@TXI_sample) + 0.1
+                y = mean(phyex_set@TXI_sample) + 0.1,
+                size = 6 # Increased text size
             )
     }
 
@@ -120,7 +150,7 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
 S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set, 
                                                              show_reps = TRUE,
                                                              colour = NULL,
-                                                             show_p_val = FALSE,
+                                                             show_p_val = TRUE,
                                                              conservation_test = stat_flatline_test,
                                                              ...) {
     
@@ -152,11 +182,11 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
             aes(x = Identity, y = TXI, group = 1),
             colour = "black", lwd = 2.3, lineend = "round", inherit.aes = FALSE
         ) +
-        geom_line(
-            data = df_main,
-            aes(x = Identity, y = TXI, group = 1, colour = phyex_set@name),
-            lwd = 1.5, lineend = "round", inherit.aes = FALSE
-        )
+            geom_line(
+                data = df_main,
+                aes(x = Identity, y = TXI, group = 1, colour = phyex_set@name),
+                lwd = 1.5, lineend = "round", inherit.aes = FALSE
+            )
         
         # Add mean points (proper TXI values) on top
         p <- p + geom_point(

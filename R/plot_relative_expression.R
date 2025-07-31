@@ -29,6 +29,7 @@ relative_expression <- function(count_matrix) {
 #' @return A matrix with age categories as rows and identities as columns, containing relative expression values.
 #' @export
 rel_exp_matrix <- function(phyex_set) {
+    check_PhyloExpressionSet(phyex_set)
     if (phyex_set@num_identities < 2) stop("You need at least 2 identities to compute relative expression levels.")
     
     age_vec <- as.integer(phyex_set@strata)
@@ -65,6 +66,7 @@ plot_relative_expression_line <- function(
     adjust_range = TRUE,
     alpha = 0.1,
     ...) {
+    check_PhyloExpressionSet(phyex_set)
     if (is.null(groups) || !is.list(groups) || length(groups) < 1) stop("groups must be a non-empty list.")
     if (length(groups) > 2) stop("For line plot, specify at most 2 groups.")
 

@@ -12,6 +12,7 @@
 #' @param identities_label Character string labeling the identities (default: "Identities")
 #' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
 #' @param precomputed_null_conservation_txis Precomputed null conservation TXI values (default: NULL)
+#' @param precomputed_bootstrapped_txis Precomputed bootstrapped TXI values (default: NULL)
 #' 
 #' @import S7
 #' @export
@@ -44,6 +45,26 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
         ),
         groups = new_property(
             getter = function(self) self@.groups
+        ),
+        precomputed_bootstrapped_txis = new_property(
+            default = NULL
+        ),
+        bootstrapped_txis = new_property(
+            getter = function(self) {
+                if (is.null(self@precomputed_bootstrapped_txis)) {
+                    # Compute and cache the result using expression_collapsed
+                    ptxi <- .pTXI(self@expression_collapsed, self@strata)
+                    computed_boot <- memo_generate_bootstrapped_txis(
+                        ptxi,
+                        self@expression_collapsed,
+                        self@null_conservation_sample_size
+                    )
+                    self@precomputed_bootstrapped_txis <- computed_boot
+                    return(computed_boot)
+                } else {
+                    return(self@precomputed_bootstrapped_txis)
+                }
+            }
         )
     )
 )
@@ -261,3 +282,47 @@ S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
 
 # Aliases
 as_PhyloExpressionSet <- as_BulkPhyloExpressionSet
+
+#' @title Check if object is a BulkPhyloExpressionSet
+#' @description Checks if the input is a PhyloExpressionSet S7 object and throws an error if not.
+#' @param phyex_set An object to check
+#' @return Invisibly returns TRUE if check passes, otherwise throws an error
+#' @export
+check_BulkPhyloExpressionSet <- function(phyex_set) {
+    if (!S7::S7_inherits(phyex_set, BulkPhyloExpressionSet)) {
+        stop("Input must be a BulkPhyloExpressionSet S7 object.", call. = FALSE)
+    }
+    invisible(TRUE)
+}
+
+#' @title Confidence Intervals for Transcriptomic Index (TXI)
+#' @description Compute confidence intervals for the TXI using bootstrapped TXI values.
+#' @param phyex_set A BulkPhyloExpressionSet object
+#' @param probs Numeric vector of probabilities for the confidence interval (default: c(0.025, 0.975))
+#' @return A tibble with first column Identity names, second column lower bound, third column upper bound
+#' @details
+#' This function returns confidence intervals for the TXI for each identity (sample or group),
+#' based on the bootstrapped TXI values stored in the PhyloExpressionSet object.
+#' @export
+TXI_conf_int <- function(phyex_set, 
+                         probs=c(.025, .975)) {
+    check_BulkPhyloExpressionSet(phyex_set)
+    CIs <- apply(phyex_set@bootstrapped_txis, 2, quantile, probs=probs)
+    tibble::tibble(
+        Identity = factor(phyex_set@identities, levels = unique(as.character(phyex_set@identities))),
+        lb = as.numeric(CIs[1,]),
+        ub = as.numeric(CIs[2,])
+    )
+}
+
+#' @title Standard Deviation for TXI
+#' @description Return a named vector of standard deviations for the TXI for each identity.
+#' @param phyex_set A BulkPhyloExpressionSet object
+#' @return Named numeric vector of standard deviations, names are identities
+#' @export
+TXI_std_dev <- function(phyex_set) {
+    check_BulkPhyloExpressionSet(phyex_set)
+    std_dev <- apply(phyex_set@bootstrapped_txis, 2, sd)
+    names(std_dev) <- as.character(phyex_set@identities)
+    std_dev
+}

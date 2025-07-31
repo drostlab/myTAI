@@ -27,6 +27,7 @@
 #' @export
 plot_strata_expression <- function(phyex_set,
                                    aggregate_FUN = mean) {
+    check_PhyloExpressionSet(phyex_set)
 
     agg_name <- deparse(substitute(aggregate_FUN))
     aggregate_FUN <- match.fun(aggregate_FUN)

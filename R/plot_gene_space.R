@@ -29,6 +29,7 @@ plot_gene_space <- function(phyex_set,
                             top_p=0.2,
                             genes=NULL,
                             colour_by=c("identity", "strata")) {
+    check_PhyloExpressionSet(phyex_set)
     colour_by <- match.arg(colour_by)
     
     e <- phyex_set@expression_collapsed |>

@@ -7,7 +7,7 @@
 plot_signature(
   phyex_set,
   show_reps = TRUE,
-  show_p_val = FALSE,
+  show_p_val = TRUE,
   conservation_test = stat_flatline_test,
   colour = NULL,
   ...
@@ -16,11 +16,11 @@ plot_signature(
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
-\item{show_reps}{Logical, whether to show individual replicates (bulk) or cells (single-cell)}
+\item{show_reps}{Logical, whether to show individual replicates}
 
-\item{show_p_val}{Logical, whether to show conservation test p-value (bulk only)}
+\item{show_p_val}{Logical, whether to show conservation test p-value}
 
-\item{conservation_test}{Function, conservation test to use for p-value calculation (bulk only)}
+\item{conservation_test}{Function, conservation test to use for p-value calculation}
 
 \item{colour}{Character, custom color for the plot elements}
 
@@ -43,7 +43,7 @@ This function creates visualizations appropriate for the data type:
 
 **Single-cell data (ScPhyloExpressionSet):**
 - Violin plots showing TXI distributions across cell types
-- Mean TXI values overlaid as points
+- Mean TXI values overlaid as line
 - Optional individual cells using geom_sina for better visualization
 }
 \examples{

@@ -67,6 +67,12 @@ test_that("plot_gene_heatmap works", {
     expect_s3_class(p_top_p, "ggplot")
 })
 
+test_that("plot_gene_heatmap works with a single gene", {
+    single_gene <- example_phyex_set@gene_ids[1]
+    p_single <- plot_gene_heatmap(example_phyex_set, genes = single_gene)
+    expect_s3_class(p_single, "ggplot")
+})
+
 test_that("plot_gene_profiles works", {
     # Basic gene profiles plot
     selected_genes <- example_phyex_set@gene_ids[1:5]

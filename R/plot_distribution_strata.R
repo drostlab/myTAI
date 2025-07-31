@@ -31,6 +31,11 @@
 plot_distribution_strata <- function(strata,
                                      selected_gene_ids = names(strata),
                                      as_log_obs_exp = FALSE) {
+
+    if (!is.factor(strata)) {
+        stop("'strata' must be a factor vector.", call. = FALSE)
+    }
+
     df <- data.frame(Stratum=strata, GeneID=names(strata))
     df_selected <- df |> filter(GeneID %in% selected_gene_ids)
     if (!as_log_obs_exp) {

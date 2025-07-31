@@ -19,6 +19,7 @@
 #' @seealso \code{\link{stat_generic_conservation_test}}
 #' @export
 stat_flatline_test <- function(phyex_set, ...) {
+    check_PhyloExpressionSet(phyex_set)
     return(stat_generic_conservation_test(phyex_set, 
                                      test_name="Flat Line Test",
                                      scoring_function=stats::var,

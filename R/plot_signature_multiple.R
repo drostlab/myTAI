@@ -7,8 +7,8 @@
 #' 
 #' @param phyex_sets A vector of PhyloExpressionSet objects to compare (BulkPhyloExpressionSet or ScPhyloExpressionSet)
 #' @param legend_title Title for the legend (default: "Phylo Expression Set")
-#' @param show_p_val Logical indicating whether to show p-values (default: FALSE, bulk data only)
-#' @param conservation_test Function to use for conservation testing (default: stat_flatline_test, bulk data only)
+#' @param show_p_val Logical indicating whether to show p-values (default: TRUE)
+#' @param conservation_test Function to use for conservation testing (default: stat_flatline_test)
 #' @param transformation Optional transformation function to apply to all datasets (default: NULL)
 #' @param colours Optional vector of colors for each dataset (default: NULL)
 #' @param ... Additional arguments passed to plot_signature
@@ -44,7 +44,7 @@
 #' @export
 plot_signature_multiple <- function(phyex_sets,
                                     legend_title="Phylo Expression Set",
-                                    show_p_val=FALSE,
+                                    show_p_val=TRUE,
                                     conservation_test=stat_flatline_test,
                                     transformation = NULL,
                                     colours=NULL,
