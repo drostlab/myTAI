@@ -19,6 +19,7 @@ TI_map <- list(TXI = "Transcriptomic Index",
 #' This class provides the common interface for both bulk and single-cell phylotranscriptomic data.
 #' 
 #' @param strata Factor vector of phylostratum assignments for each gene
+#' @param strata_values Numeric vector of phylostratum values used in TXI calculations
 #' @param gene_ids Character vector of gene identifiers
 #' @param name Character string naming the dataset (default: "Phylo Expression Set")
 #' @param species Character string specifying the species (default: NULL)
@@ -39,6 +40,14 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
                 if (length(value) == 0) "cannot be empty. Check phylostratum assignments."
             },
             name = "strata"
+        ),
+        strata_values = new_required_property(
+            class = class_numeric,
+            validator = function(value) {
+                if (any(is.na(value))) "cannot contain NA values. Check phylostratum values."
+                if (length(value) == 0) "cannot be empty. Check phylostratum values."
+            },
+            name = "strata_values"
         ),
         gene_ids = new_required_property(
             class = class_character,
@@ -117,10 +126,10 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
         ## TXI PROPERTIES
         TXI = new_property(
             class = class_double,
-            getter = function(self) .TXI(self@expression_collapsed, self@strata)
+            getter = function(self) .TXI(self@expression_collapsed, self@strata_values)
         ),
         TXI_sample = new_property(
-            getter = function(self) .TXI(self@expression, self@strata)
+            getter = function(self) .TXI(self@expression, self@strata_values)
         ),
         
         ## NULL CONSERVATION PROPERTIES
@@ -157,14 +166,13 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
 #' @description Internal function to calculate pTXI for expression data.
 #' 
 #' @param expression_matrix Matrix of expression values
-#' @param strata Vector of phylostratum assignments
+#' @param strata_values Numeric vector of phylostratum values
 #' @return Matrix of pTXI values
 #' 
 #' @keywords internal
-.pTXI <- function(expression_matrix, strata) {
-    strata_numeric <- as.numeric(strata)
+.pTXI <- function(expression_matrix, strata_values) {
     relative_expr <- sweep(expression_matrix, 2, colSums(expression_matrix), "/")
-    res <- relative_expr * strata_numeric
+    res <- relative_expr * strata_values
     colnames(res) <- colnames(expression_matrix)
     rownames(res) <- rownames(expression_matrix)
     return(res)
@@ -174,12 +182,12 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
 #' @description Internal function to calculate TXI for expression data.
 #' 
 #' @param expression_matrix Matrix of expression values
-#' @param strata Vector of phylostratum assignments
+#' @param strata_values Numeric vector of phylostratum values
 #' @return Vector of TXI values
 #' 
 #' @keywords internal
-.TXI <- function(expression_matrix, strata) {
-    return(colSums(.pTXI(expression_matrix, strata)))
+.TXI <- function(expression_matrix, strata_values) {
+    return(colSums(.pTXI(expression_matrix, strata_values)))
 }
 
 ## PRINT METHODS
@@ -274,7 +282,7 @@ pTXI <- function(phyex_set, reps=FALSE) {
         e <- phyex_set@expression
     else
         e <- phyex_set@expression_collapsed
-    return(.pTXI(e, phyex_set@strata))
+    return(.pTXI(e, phyex_set@strata_values))
 }
 
 #' @title Remove Genes from PhyloExpressionSet
@@ -405,4 +413,16 @@ check_PhyloExpressionSet <- function(phyex_set) {
         stop("Input must be a PhyloExpressionSet S7 object.", call. = FALSE)
     }
     invisible(TRUE)
+}
+
+#' @title Rename a PhyloExpressionSet
+#' @description Returns a copy of the PhyloExpressionSet with a new name.
+#' @param phyex_set A PhyloExpressionSet object
+#' @param new_name Character string for the new dataset name
+#' @return The PhyloExpressionSet object with the updated name
+#' @export
+rename_phyex_set <- function(phyex_set, new_name) {
+    check_PhyloExpressionSet(phyex_set)
+    phyex_set@name <- new_name
+    phyex_set
 }

@@ -54,7 +54,10 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                conservation_test = stat_flatline_test,
                                                                colour = NULL,
                                                                show_bootstraps = FALSE,
+                                                               show_stddev = TRUE,
                                                                ...) {
+                                                               
+                                                               args <- list(...)
     
     # Create main TXI line
     df_main <- tibble::tibble(
@@ -100,11 +103,14 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
             ub = phyex_set@TXI + std_dev
         )
 
+        if (show_stddev)
+            p <- p +
+                geom_ribbon(
+                    data = df_sd,
+                    aes(x = Identity, ymin = lb, ymax = ub, fill = phyex_set@name, group=1), alpha = 0.3, inherit.aes = FALSE
+                )
+            
         p <- p +
-            geom_ribbon(
-                data = df_sd,
-                aes(x = Identity, ymin = lb, ymax = ub, fill = phyex_set@name, group=1), alpha = 0.3, inherit.aes = FALSE
-            ) +
             geom_jitter(
                 data = df_samples,
                 aes(x = Identity, y = TXI, fill = phyex_set@name),
@@ -125,7 +131,10 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
 
     # Show p value for conservation tests
     if (show_p_val) {
-        t <- conservation_test(phyex_set, plot_result = FALSE)
+        if ("modules" %in% names(args))
+            t <- conservation_test(phyex_set, plot_result = FALSE, modules=args$modules)
+        else
+            t <- conservation_test(phyex_set, plot_result = FALSE)
         label <- exp_p(t@p_value)
         p <- p +
             annotate("text",

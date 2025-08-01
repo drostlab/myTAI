@@ -8,6 +8,7 @@ plot_distribution_expression(
   phyex_set,
   show_identities = TRUE,
   show_strata = FALSE,
+  log_transform = TRUE,
   seed = 123
 )
 }
@@ -18,12 +19,14 @@ plot_distribution_expression(
 
 \item{show_strata}{Logical, whether to show stratum-specific distributions.}
 
+\item{log_transform}{Logical, whether to apply log transformation to expression values (default: TRUE).}
+
 \item{seed}{Seed for reproducible color selection.}
 }
 \description{
 \code{plot_distribution_expression} generates plots that help to compare the distribution
 of expression levels through various developmental stages or cell types, highlighting each stage with
-distinct colors.
+distinct colors. By default, a log transformation is applied to the expression values.
 }
 \section{Recommendation}{
  

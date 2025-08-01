@@ -32,7 +32,7 @@ rel_exp_matrix <- function(phyex_set) {
     check_PhyloExpressionSet(phyex_set)
     if (phyex_set@num_identities < 2) stop("You need at least 2 identities to compute relative expression levels.")
     
-    age_vec <- as.integer(phyex_set@strata)
+    age_vec <- phyex_set@strata_values
     counts <- phyex_set@expression_collapsed
     
     # Compute relative expression for each age category
@@ -70,7 +70,7 @@ plot_relative_expression_line <- function(
     if (is.null(groups) || !is.list(groups) || length(groups) < 1) stop("groups must be a non-empty list.")
     if (length(groups) > 2) stop("For line plot, specify at most 2 groups.")
 
-    age_vec <- as.integer(phyex_set@strata)
+    age_vec <- phyex_set@strata_values
     if (!all(unlist(groups) %in% age_vec)) stop("Some group elements are not present in the strata.")
 
     rel_exp_mat <- rel_exp_matrix(phyex_set)
@@ -154,7 +154,7 @@ plot_relative_expression_bar <- function(
     
     if (is.null(groups) || !is.list(groups) || length(groups) < 2) stop("groups must be a list of at least 2 groups.")
     
-    age_vec <- as.integer((phyex_set@strata))
+    age_vec <- phyex_set@strata_values
     if (!all(unlist(groups) %in% age_vec)) stop("Some group elements are not present in the strata.")
     
     # Get relative expression matrix

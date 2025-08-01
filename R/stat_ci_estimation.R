@@ -2,8 +2,7 @@
 generate_bootstrapped_txis <- function(pTXI,
                                        count_matrix,
                                        sample_size) {
-    
-    message("generating bootstrapped txis")
+
     N <- nrow(pTXI)
     sampled_indices <- matrix(sample(N, size=N*sample_size, replace=TRUE), 
                               nrow=N, ncol=sample_size)

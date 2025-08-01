@@ -6,6 +6,7 @@
 \usage{
 PhyloExpressionSetBase(
   strata = stop("@strata is required"),
+  strata_values = stop("@strata_values is required"),
   gene_ids = stop("@gene_ids is required"),
   name = "Phylo Expression Set",
   species = character(0),
@@ -17,6 +18,8 @@ PhyloExpressionSetBase(
 }
 \arguments{
 \item{strata}{Factor vector of phylostratum assignments for each gene}
+
+\item{strata_values}{Numeric vector of phylostratum values used in TXI calculations}
 
 \item{gene_ids}{Character vector of gene identifiers}
 

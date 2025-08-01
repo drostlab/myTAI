@@ -53,11 +53,23 @@ plot_signature_multiple <- function(phyex_sets,
     if (!is.null(transformation))
         phyex_sets <- phyex_sets |>
             map(tf, FUN=transformation)
-    layers <- phyex_sets |>
-        map(plot_signature, show_p_val=F, ...) |>
-        map(~ .x$layers) |>
-        unlist(..., recursive = TRUE) |>
-        .sort_layers()
+    layers <- map2(phyex_sets, seq_along(phyex_sets), function(phyex_set, idx) {
+    plot_obj <- plot_signature(phyex_set, show_p_val=F, ...)
+    layers <- plot_obj$layers
+    
+    # Remap colors for each layer to use the correct index
+    map(layers, function(layer) {
+        if (!is.null(layer$mapping$colour)) {
+            layer$mapping$colour <- quo(factor(!!idx))
+        }
+        if (!is.null(layer$mapping$fill)) {
+            layer$mapping$fill <- quo(factor(!!idx))
+        }
+        layer
+    })
+}) |>
+    unlist(recursive = FALSE) |>
+    .sort_layers()
     
     p <- ggplot() +
         layers +

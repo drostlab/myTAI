@@ -4,12 +4,12 @@
 \alias{.TXI}
 \title{Calculate TXI for Raw Expression Data}
 \usage{
-.TXI(expression_matrix, strata)
+.TXI(expression_matrix, strata_values)
 }
 \arguments{
 \item{expression_matrix}{Matrix of expression values}
 
-\item{strata}{Vector of phylostratum assignments}
+\item{strata_values}{Numeric vector of phylostratum values}
 }
 \value{
 Vector of TXI values

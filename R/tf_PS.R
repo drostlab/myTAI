@@ -26,11 +26,11 @@
 #'
 #' @export
 
-tfPS <- function(phyex_set, transform="qr") {
+tf_PS <- function(phyex_set, transform="qr") {
     if (!S7::S7_inherits(phyex_set, PhyloExpressionSetBase)) {
         stop("Input must be a PhyloExpressionSet S7 object.", call. = FALSE)
     }
-    ps_vec <- as.numeric(phyex_set@strata)
+    ps_vec <- phyex_set@strata_values
     if (transform %in% c("qr", "quantilerank")) {
         ranks <- base::rank(ps_vec, ties.method = "average")
         tfPhylostratum <- (ranks - 0.5) / length(ps_vec)
@@ -38,28 +38,45 @@ tfPS <- function(phyex_set, transform="qr") {
         stop("Choose the following transformation functions: \"qr\"")
     }
     
-    # Get the original level names
-    original_levels <- levels(phyex_set@strata)
+    # Get the original strata information
+    original_strata <- phyex_set@strata
+    original_strata_values <- phyex_set@strata_values
+    original_levels <- levels(original_strata)
     
     # Calculate the average transformed value for each unique phylostratum level
-    unique_original_numeric <- sort(unique(ps_vec))
-    level_transforms <- sapply(unique_original_numeric, function(level) {
-        mean(tfPhylostratum[ps_vec == level])
+    unique_original_values <- sort(unique(original_strata_values))
+    level_transforms <- sapply(unique_original_values, function(level) {
+        mean(tfPhylostratum[original_strata_values == level])
     })
     
-    # Create a mapping from original level names to transformed values
-    level_mapping <- setNames(level_transforms, original_levels[unique_original_numeric])
+    # Create a new factor with transformed values as levels but original labels preserved
+    # The key insight: we need to map each gene's transformed value to the appropriate label
     
-    # Apply the transformation to each gene
-    transformed_values <- level_mapping[as.character(phyex_set@strata)]
+    # For each gene, get its transformed value
+    gene_transformed_values <- sapply(original_strata_values, function(val) {
+        level_transforms[which(unique_original_values == val)]
+    })
     
-    # Create new factor with transformed values as levels and original names as labels
-    unique_transformed <- sort(unique(transformed_values))
-    original_names_sorted <- names(level_mapping)[order(level_mapping)]
+    # Create mapping from unique original values to their labels
+    # Since levels are in order 1, 2, 3, ..., we can map directly
+    value_to_label <- setNames(original_levels, seq_len(length(original_levels)))
     
-    phyex_set@strata <- factor(transformed_values, 
-                              levels = unique_transformed, 
-                              labels = original_names_sorted)
+    # Get the label for each gene based on its original strata value
+    gene_labels <- value_to_label[as.character(original_strata_values)]
+    
+    # Create sorted unique transformed values and corresponding labels
+    sorted_indices <- order(unique_original_values)
+    unique_transformed_sorted <- level_transforms[sorted_indices]
+    labels_sorted <- original_levels[unique_original_values[sorted_indices]]
+    
+    # Create the new factor
+    phyex_set@strata <- factor(gene_transformed_values, 
+                              levels = unique_transformed_sorted, 
+                              labels = labels_sorted)
+    
+    # Set the transformed values directly for each gene
+    phyex_set@strata_values <- tfPhylostratum
+    names(phyex_set@strata_values) <- phyex_set@gene_ids
     
     return(phyex_set)
 }

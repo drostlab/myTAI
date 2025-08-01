@@ -4,12 +4,12 @@
 \alias{.pTXI}
 \title{Calculate pTXI for Raw Expression Data}
 \usage{
-.pTXI(expression_matrix, strata)
+.pTXI(expression_matrix, strata_values)
 }
 \arguments{
 \item{expression_matrix}{Matrix of expression values}
 
-\item{strata}{Vector of phylostratum assignments}
+\item{strata_values}{Numeric vector of phylostratum values}
 }
 \value{
 Matrix of pTXI values

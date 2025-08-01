@@ -4,12 +4,12 @@
 \alias{.TXI_sc}
 \title{Calculate TXI for single cell expression sparse matrix.}
 \usage{
-.TXI_sc(expression, strata)
+.TXI_sc(expression, strata_values)
 }
 \arguments{
 \item{expression}{Matrix of expression values, dgmatrix}
 
-\item{strata}{Vector of phylostratum assignments}
+\item{strata_values}{Numeric vector of phylostratum values}
 }
 \value{
 Vector of TXI values

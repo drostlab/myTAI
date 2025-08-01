@@ -110,7 +110,7 @@ test_that("Gene pattern functions work", {
 
 test_that("tfPS works", {
     # Test phylostratum transformation
-    tf_set <- tfPS(example_phyex_set, transform = "qr")
+    tf_set <- tf_PS(example_phyex_set, transform = "qr")
     expect_s7_class(tf_set, PhyloExpressionSet)
     expect_equal(length(tf_set@strata), length(example_phyex_set@strata))
     # Check that the strata are factors with the same level names
@@ -118,7 +118,7 @@ test_that("tfPS works", {
     expect_true(all(levels(tf_set@strata) %in% levels(example_phyex_set@strata)))
     
     # Test with quantilerank
-    tf_set_qr <- tfPS(example_phyex_set, transform = "quantilerank")
+    tf_set_qr <- tf_PS(example_phyex_set, transform = "quantilerank")
     expect_s7_class(tf_set_qr, PhyloExpressionSet)
     expect_equal(tf_set@strata, tf_set_qr@strata)
 })

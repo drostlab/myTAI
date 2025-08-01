@@ -1,10 +1,11 @@
 #' @title Comparing expression levels distributions across developmental stages
 #' @description \code{plot_distribution_expression} generates plots that help to compare the distribution
 #' of expression levels through various developmental stages or cell types, highlighting each stage with
-#' distinct colors.
+#' distinct colors. By default, a log transformation is applied to the expression values.
 #' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
 #' @param show_identities Logical, whether to show identity-specific distributions.
 #' @param show_strata Logical, whether to show stratum-specific distributions.
+#' @param log_transform Logical, whether to apply log transformation to expression values (default: TRUE).
 #' @param seed Seed for reproducible color selection.
 #' @section Recommendation: 
 #' Apply a square root transformation to enhance the visualization of differences
@@ -19,6 +20,7 @@
 plot_distribution_expression <- function(phyex_set,
                                          show_identities = TRUE,
                                          show_strata = FALSE,
+                                         log_transform = TRUE,
                                          seed = 123) {
     # Create data frame with gene info and expression data
     expr_df <- data.frame(
@@ -33,6 +35,11 @@ plot_distribution_expression <- function(phyex_set,
         names_to = "Identity",
         values_to = "Expression"
     )
+    
+    # Apply log transformation if requested
+    if (log_transform) {
+        df$Expression <- log1p(df$Expression)  # log1p for log(1+x) to handle zeros
+    }
 
     qual_col_pals <- RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == "qual", ]
     col_vector <- unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
@@ -45,8 +52,8 @@ plot_distribution_expression <- function(phyex_set,
     ) +
         geom_density(alpha = 0.7, color = "black", fill = "darkgray") +
         labs(
-            x = "Density",
-            y = "Expression"
+            x = "Expression",
+            y = "Density"
         ) +
         theme_minimal()
 
@@ -57,8 +64,8 @@ plot_distribution_expression <- function(phyex_set,
         ) +
             ggridges::geom_density_ridges(alpha = 0.7, color = "black", scale = 1) +
             labs(
-                x = "Density",
-                y = "Expression",
+                x = "Expression",
+                y = "Density",
                 fill = phyex_set@identities_label
             ) +
             theme_minimal() +
@@ -73,8 +80,8 @@ plot_distribution_expression <- function(phyex_set,
         ) +
             ggridges::geom_density_ridges(alpha = 0.7, color = "black", scale = 1) +
             labs(
-                x = "Density",
-                y = "Expression"
+                x = "Expression",
+                y = "Stratum"
             ) +
             theme_minimal() +
             scale_fill_manual(values = PS_colours(phyex_set@num_strata))

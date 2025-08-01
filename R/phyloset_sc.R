@@ -3,6 +3,7 @@
 #' This class handles Seurat objects and provides pseudobulking functionality.
 #' 
 #' @param strata Factor vector of phylostratum assignments for each gene
+#' @param strata_values Numeric vector of phylostratum values used in TXI calculations
 #' @param gene_ids Character vector of gene identifiers
 #' @param name Character string naming the dataset (default: "Phylo Expression Set")
 #' @param species Character string specifying the species (default: NULL)
@@ -48,7 +49,7 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
         ## SC-SPECIFIC TXI
         TXI_sample = new_property(
             class = class_double,
-            getter = function(self) .TXI_sc(self@expression, self@strata)
+            getter = function(self) .TXI_sc(self@expression, self@strata_values)
         ),
         cell_metadata = new_property(
             getter = function(self) self@seurat@meta.data
@@ -91,6 +92,8 @@ as_ScPhyloExpressionSet <- function(seurat,
     sc_counts <- .get_expression_matrix(seurat, layer)
 
     names(strata) <- rownames(sc_counts)
+    strata_values <- as.numeric(strata)
+    names(strata_values) <- rownames(sc_counts)
     
     
     
@@ -98,6 +101,7 @@ as_ScPhyloExpressionSet <- function(seurat,
         seurat = seurat,
         layer = layer,
         strata = strata,
+        strata_values = strata_values,
         gene_ids = rownames(sc_counts),
         name = name,
         ...
@@ -260,18 +264,11 @@ match_map_sc <- function(seurat,
 #' @description Internal function to calculate TXI for expression data.
 #' 
 #' @param expression Matrix of expression values, dgmatrix
-#' @param strata Vector of phylostratum assignments
+#' @param strata_values Numeric vector of phylostratum values
 #' @return Vector of TXI values
 #' 
 #' @keywords internal
-.TXI_sc <- function(expression, strata) {
-    # Convert strata to numeric if it's a factor
-    if (is.factor(strata)) {
-        strata_numeric <- as.numeric(strata)
-    } else {
-        strata_numeric <- strata
-    }
-    
+.TXI_sc <- function(expression, strata_values) {
     # Calculate column sums
     col_sums <- Matrix::colSums(expression)
     
@@ -289,7 +286,7 @@ match_map_sc <- function(seurat,
             non_zero_expr <- expression[, !zero_cols, drop = FALSE]
             non_zero_sums <- col_sums[!zero_cols]
             
-            txi_non_zero <- as.numeric((Matrix::t(non_zero_expr) %*% strata_numeric) / non_zero_sums)
+            txi_non_zero <- as.numeric((Matrix::t(non_zero_expr) %*% strata_values) / non_zero_sums)
             txi[!zero_cols] <- txi_non_zero
         }
     }
@@ -305,7 +302,7 @@ S7::method(collapse, ScPhyloExpressionSet) <- function(phyex_set) {
     # For single-cell data, collapse returns pseudobulked data
     # So we create a regular BulkPhyloExpressionSet from the pseudobulked data
     phylomap <- data.frame(
-        Stratum = as.numeric(phyex_set@strata),
+        Stratum = phyex_set@strata_values,
         GeneID = phyex_set@gene_ids
     )
     

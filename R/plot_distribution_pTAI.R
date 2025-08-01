@@ -38,7 +38,7 @@ plot_distribution_pTAI <- function(phyex_set,
     }
     
     # Get partial TAI matrix
-    partial_TAI_matrix <- phyex_set@pTXI[, stages, drop = FALSE]
+    partial_TAI_matrix <- pTXI(p)[, stages, drop = FALSE]
     
     # Get expression data for selected stages
     expression_matrix <- phyex_set@expression_collapsed[, stages, drop = FALSE]
@@ -131,7 +131,7 @@ plot_distribution_pTAI_qqplot <- function(phyex_set,
                                                alpha = 0.7,
                                                size = 1.2) {
     
-    partial_TAI_matrix <- phyex_set@pTXI
+    partial_TAI_matrix <- pTXI(phyex_set)
     
         if (reference_stage_index > phyex_set@num_identities) {
         stop("The specified reference stage index exceeds the number of identities in the PhyloExpressionSet. Please provide a valid index.")

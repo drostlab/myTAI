@@ -3,6 +3,7 @@
 #' This class handles expression data with biological replicates.
 #' 
 #' @param strata Factor vector of phylostratum assignments for each gene
+#' @param strata_values Numeric vector of phylostratum values used in TXI calculations
 #' @param gene_ids Character vector of gene identifiers
 #' @param .expression Matrix of expression counts with genes as rows and samples as columns
 #' @param .groups Factor vector indicating which identity each sample belongs to
@@ -53,11 +54,11 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
             getter = function(self) {
                 if (is.null(self@precomputed_bootstrapped_txis)) {
                     # Compute and cache the result using expression_collapsed
-                    ptxi <- .pTXI(self@expression_collapsed, self@strata)
+                    ptxi <- .pTXI(self@expression_collapsed, self@strata_values)
                     computed_boot <- memo_generate_bootstrapped_txis(
                         ptxi,
                         self@expression_collapsed,
-                        self@null_conservation_sample_size
+                        500
                     )
                     self@precomputed_bootstrapped_txis <- computed_boot
                     return(computed_boot)
@@ -108,8 +109,10 @@ as_BulkPhyloExpressionSet <- function(data,
         labels <- strata_legend[[2]]
     }
     strata <- factor(as.numeric(data[[1]]), levels=levels, labels=labels)
+    strata_values <- as.numeric(data[[1]])
 
     names(strata) <- gene_ids
+    names(strata_values) <- gene_ids
 
     groups <- factor(groups, levels=unique(groups))
     
@@ -118,6 +121,7 @@ as_BulkPhyloExpressionSet <- function(data,
     
     obj <- BulkPhyloExpressionSet(
         strata = strata,
+        strata_values = strata_values,
         gene_ids = gene_ids,
         .expression = expression,
         .groups = groups,
@@ -216,7 +220,7 @@ as_data_frame <- function(phyex_set, use_collapsed = FALSE) {
     }
     
     data.frame(
-        Stratum = as.numeric(phyex_set@strata),
+        Stratum = phyex_set@strata_values,
         GeneID = phyex_set@gene_ids,
         expr_data,
         check.names = FALSE
@@ -225,7 +229,7 @@ as_data_frame <- function(phyex_set, use_collapsed = FALSE) {
 
 #' @export
 S7::method(collapse, BulkPhyloExpressionSet) <- function(phyex_set) {
-    data <- tibble::tibble(Stratum=as.numeric(phyex_set@strata), 
+    data <- tibble::tibble(Stratum=phyex_set@strata_values, 
                            GeneID=phyex_set@gene_ids, 
                            tibble::as_tibble(phyex_set@expression_collapsed))
     as_BulkPhyloExpressionSet(data)
@@ -248,7 +252,7 @@ S7::method(select_genes, BulkPhyloExpressionSet) <- function(phyex_set, genes) {
     
     # Create new data with selected genes
     data <- tibble::tibble(
-        Stratum = phyex_set@strata[valid_indices],
+        Stratum = phyex_set@strata_values[valid_indices],
         GeneID = phyex_set@gene_ids[valid_indices],
         tibble::as_tibble(phyex_set@expression[valid_indices, , drop = FALSE])
     )
