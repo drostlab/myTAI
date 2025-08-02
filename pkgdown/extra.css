@@ -12,32 +12,42 @@ code, pre {
 
 .important {
   border-left: 4px solid #f39c12;
-  background: #fff3cd;
-  padding: 1em;
+  background: rgba(255, 243, 205, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .note {
   border-left: 4px solid #0073e6;
-  background: #e7f3ff;
-  padding: 1em;
+  background: rgba(231, 243, 255, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .tip {
   border-left: 4px solid #28a745;
-  background: #e8f8f0;
-  padding: 1em;
+  background: rgba(232, 248, 240, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .warning {
   border-left: 4px solid #f0ad4e;
-  background: #fff3cd;
-  padding: 1em;
+  background: rgba(255, 243, 205, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .caution {
   border-left: 4px solid #dc3545;
-  background: #f8d7da;
-  padding: 1em;
+  background: rgba(248, 215, 218, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .note::before      { content: "ℹ️ "; }
@@ -48,11 +58,11 @@ code, pre {
 .error::before     { content: "🚫 "; }
 
 details {
-  margin: 1em 0;
+  border-left: 4px solid #ddd;
+  background: rgba(249, 249, 249, 0.2); /* 20% transparent */
   padding: 0.5em;
-  border: 0px solid #ddd;
-  border-radius: 6px;
-  background: #f9f9f9;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 details summary {
