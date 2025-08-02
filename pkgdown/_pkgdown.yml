@@ -76,13 +76,16 @@ reference:
       - as_BulkPhyloExpressionSet
       - as_ScPhyloExpressionSet
       - as_data_frame
+      - check_PhyloExpressionSet
+      - check_BulkPhyloExpressionSet
+      - check_ScPhyloExpressionSet
       
-  - title: Taxonomic Information Retrieval
+  - title: Taxonomic information retrieval
     desc: Functions to compute transcriptome indices.
     contents:
       - taxid
       
-  - title: Index calculation
+  - title: Transcriptomic index calculation
     desc: Compute full and partial evolutionary transcriptomics measures.
     contents:
       - TAI
@@ -93,7 +96,7 @@ reference:
       - sTXI
       - pTXI
 
-  - title: Expression data-related
+  - title: Expression or index data-related
     desc: Functions to transform, normalise, and manipulate expression datasets.
     contents:
       - age.apply
@@ -123,7 +126,7 @@ reference:
       - strata_enrichment
       - transform_counts
       - tf
-      - tfPS
+      - tf_PS
       - tf_stability
 
   - title: Utilities/Metadata
@@ -134,7 +137,10 @@ reference:
       - PS_colours
       - save_gatai_results_pdf
       - print.TestResult
+      - rename_phyex_set
       - TI_map
+      - TXI_conf_int
+      - TXI_std_dev
 
   - title: Example datasets
     desc: Example datasets for demonstrating and testing package functions.
