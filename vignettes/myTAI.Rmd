@@ -46,7 +46,7 @@ packageVersion("myTAI")
 # 2. Run **myTAI**
 </p>
 
-```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature_output", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output", dev.args = list(bg = 'transparent'), fig.align='center'}
 library(myTAI)
 # obtain an example phylo-expression object
 data("example_phyex_set")
@@ -83,12 +83,12 @@ Want to use myTAI on your data?
 ---
 
 <p style="font-family: 'Fira Mono', monospace; font-size: 1.5rem;">
-[📊](articles/phylo-expression-object.html) Bring your datasets into myTAI.  
-📈 Statistical analyses → learn about our permutation tests.  
-🛡️ Check the robustness of your patterns.  
-🔨 Destroy the hourglass! → `gaTAI` functions to extract the genes that drive your evolutionary transcriptomic patterns.  
-📚 Read about gene age inference and evolutionary transcriptomics.  
-🌄 Check out our gallery of example plots + functions.    
+[📊](phylo-expression-object.html) Bring your datasets into myTAI.  
+[📈](tai-stats.html) Statistical analyses → learn about our permutation tests.  
+[🛡️](tai-transform.html) Check the robustness of your patterns.  
+[🔨](tai-breaker.html) Destroy the hourglass! → `gaTAI` functions to extract the genes that drive your evolutionary transcriptomic patterns.  
+[📚](phylostratigraphy.html) Read about gene age inference (phylostratigraphy) and transcriptome age index.   
+[🌄](tai-gallery.html) Check out our gallery of example plots + functions.    
 </p>
 
 ---
