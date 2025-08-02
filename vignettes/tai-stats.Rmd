@@ -14,9 +14,9 @@ Let's say you have your transcriptome age index ([TAI](phylostratigraphy.html#ge
 library(myTAI); library(S7)
 ```
 
-```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output", dev.args = list(bg = 'transparent'), fig.align='center'}
 data("example_phyex_set_old")
-myTAI::plot_signature(example_phyex_set_old)
+myTAI::plot_signature(example_phyex_set_old, show_p_val = FALSE)
 ```
 
 ```{r echo=FALSE}
@@ -141,6 +141,7 @@ myTAI::plot_null_txi_sample(res_flt)
 ```
 
 The null variance distribution is produced from the grey lines, while the red line is the observed TAI profile. The distance between the red and grey lines indicate that older genes are generally higher expressed than younger genes (as they contribute more to the TAI), and the observed TAI profile is more variable than the null distribution.
+
 </details>
 
 ## Reductive hourglass test and other time-course tests
@@ -186,6 +187,7 @@ myTAI::plot_cullen_frey(res_flt)
 ```
 
 Indeed it is!
+
 </details>
 
 ### Reverse hourglass test

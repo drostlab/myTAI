@@ -143,7 +143,7 @@ For a more sophisticated workflow to extract genes that drive the TAI profile, c
 
 ## Transforming gene age information for myTAI
 
-Another aspect of the `myTAI` package is the ability to transform gene age information itself using the `myTAI::tfPS()` function. This function is still under development and will be documented in due time.
+Another aspect of the `myTAI` package is the ability to transform gene age information itself using the `myTAI::tf_PS()` function. This workflow is still being tested and will be documented in due time.
 
 ## Conclusion
 

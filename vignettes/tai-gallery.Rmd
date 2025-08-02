@@ -36,14 +36,14 @@ myTAI::plot_signature(example_phyex_set,
 ```
 
 
-<!-- ```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output with stat_reductive_hourglass_test", dev.args = list(bg = 'transparent'), fig.align='center'} -->
-<!-- module_info <- list(early = 1:3, mid = 4:6, late = 7:8) -->
-<!-- myTAI::plot_signature(example_phyex_set, -->
-<!--                       show_p_val = TRUE, -->
-<!--                       conservation_test = stat_reductive_hourglass_test, -->
-<!--                       modules = module_info, -->
-<!--                       colour = "lavender") -->
-<!-- ``` -->
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output with stat_reductive_hourglass_test", dev.args = list(bg = 'transparent'), fig.align='center'}
+module_info <- list(early = 1:3, mid = 4:6, late = 7:8)
+myTAI::plot_signature(example_phyex_set,
+                      show_p_val = TRUE,
+                      conservation_test = stat_reductive_hourglass_test,
+                      modules = module_info,
+                      colour = "lavender")
+```
 
 #### Transformation and robustness checks
 
@@ -123,7 +123,7 @@ myTAI::stat_flatline_test(
 res_flt <- myTAI::stat_flatline_test(example_phyex_set, plot_result = FALSE)
 ```
 
-```{r message = FALSE, warning = FALSE, fig.height=3, fig.width=5, fig.alt="plot_cullen_frey function output for stat_flatline_test", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, warning = FALSE, fig.height=5, fig.width=5, fig.alt="plot_cullen_frey function output for stat_flatline_test", dev.args = list(bg = 'transparent'), fig.align='center'}
 myTAI::plot_cullen_frey(res_flt)
 ```
 
@@ -164,6 +164,7 @@ p2 <- example_phyex_set |> myTAI::tf(log1p) |> myTAI::plot_strata_expression()
 p1+p2
 ```
 
+As you can see, both plots are identical. This example demonstrates that there are multiple ways to achieve the same result through piping (`|>`) operator in R. `|>` is basically the same as `%>%`.
 
 #### Contribution to the overall TAI by phylostratum
 
@@ -179,6 +180,23 @@ For other analogous methods to assign evolutionary or expression information to 
 
 ```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=8, fig.alt="plot_distribution_expression function output", dev.args = list(bg = 'transparent'), fig.align='center'}
 myTAI::plot_distribution_expression(example_phyex_set)
+```
+
+
+#### Contribution to the overall TAI by partial TAI (pTAI)
+
+`pTAI`, or
+
+$$
+\mathrm{pTAI}_i = \frac{\mathrm{ps}_i \cdot e_{is}}{\sum_{i=1}^{n} e_{is}}
+$$
+
+where \( e_{is} \) denotes the expression level of a given gene \() i \) in sample \( s \), \( {ps}_i \) is its gene age assignment, and \( n \) is the total number of genes, is the per-gene contribution to the overall `TAI`. (Summing `pTAI` across all genes gives in a given sample  \( s \) gives the overall \( {TAI}_s \) )
+
+`pTAI` QQ plot compares the partial TAI distributions of various developmental stages against a reference stage (default is stage 1).
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=6, fig.width=9, fig.alt="plot_distribution_pTAI_qqplot function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_distribution_pTAI_qqplot(example_phyex_set)
 ```
 
 #### Phylostratum distribution
