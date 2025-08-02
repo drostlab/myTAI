@@ -46,7 +46,7 @@ packageVersion("myTAI")
 # 2. Run **myTAI**
 </p>
 
-```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output", dev.args = list(bg = 'transparent'), fig.align='center'}
 library(myTAI)
 # obtain an example phylo-expression object
 data("example_phyex_set")
