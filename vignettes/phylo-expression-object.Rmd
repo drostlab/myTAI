@@ -10,7 +10,7 @@ vignette: >
 
 Starting from `myTAIv2`, we moved on from the traditional `data.frame` to the new [`S7 OOP system`](https://rconsortium.github.io/S7/) to facilitate fast and flexible computation for evolutionary transcriptomics analyses.
 
-To illustrate this, we will use the example data `example_phyex_set`. The `BulkPhyloExpressionSet` and `ScPhyloExpressionSet` objects are designed to store gene expression data along with associated metadata such as gene ages, phylostratum information, and other relevant properties.
+To illustrate this, we will use the example data `example_phyex_set`. The `BulkPhyloExpressionSet` and `ScPhyloExpressionSet` objects are designed to store gene expression data along with associated metadata such as gene age information (or [`phylorank`](phylostratigraphy.html)), experiment type and other relevant properties.
 
 We will first focus on the `BulkPhyloExpressionSet` object, which is for bulk RNA-seq data.
 
@@ -19,14 +19,63 @@ library(myTAI)
 data("example_phyex_set")
 ```
 
+```{r echo=FALSE}
+#### IMPORTANT & potentially TEMPORARY
+#### I have to add this or else print and plot doesn't interact with the S7 object well.
+S7::method(plot, TestResult) <- function(test_result) {
+    library(ggplot2)
+    p <- ggplot(data.frame(x = test_result@null_sample),
+                aes(x = x)) +
+        geom_histogram(
+            aes(y = after_stat(density), fill = "Null Sample"),
+            bins = 100,
+            alpha = 0.7,
+            colour = "gray66") +
+        geom_vline(
+            aes(xintercept = test_result@test_stat, colour = "Test Statistic"),
+            linewidth = 1) +
+        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, aes(colour = "Fitted Null")) +
+        scale_fill_manual(name = NULL, values = c("Null Sample" = "gray67")) +
+        scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
+        labs(x = "Score", y = "Density") +
+        annotate("text",
+                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
+                   y = max(density(test_result@null_sample)$y) * 0.9,
+                   label = exp_p(test_result@p_value),
+                   parse=TRUE,
+                   hjust = 1,
+                   size = 3.5) +
+        theme_minimal()
+
+    return(p)
+}
+
+S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
+    # Print base information (inline parent method)
+    cat("PhyloExpressionSet object\n")
+    cat("Class:", class(x)[[1]], "\n")
+    cat("Name:", x@name, "\n")
+    cat("Species:", ifelse(is.null(x@species), "Not specified", x@species), "\n")
+    cat("Index type:", x@index_type, "\n")
+    cat(x@identities_label, ":", paste(as.character(x@identities), collapse = ", "), "\n")
+    cat("Number of genes:", x@num_genes, "\n")
+    cat("Number of", tolower(x@identities_label), ":", x@num_identities, "\n")
+    cat("Number of phylostrata:", x@num_strata, "\n")
+    
+    # Print bulk-specific information
+    cat("Number of samples:", x@num_samples, "\n")
+    cat("Samples per condition:", table(x@groups), "\n")
+}
+```
+
 ```{r message = FALSE, eval=FALSE}
 # inspect the object
-class(example_phyex_set)
+example_phyex_set
 ```
 
 <details> <summary>Show output</summary>
 ```{r message = FALSE, echo=FALSE}
-class(example_phyex_set)
+print(example_phyex_set)
 ```
 </details>
 
@@ -49,22 +98,26 @@ example_phyex_set@.expression[1:4,1:5]
 
 See how rich this `BulkPhyloExpressionSet` object is!
 
-The `BulkPhyloExpressionSet` is designed to ensure efficient interaction with `myTAIv2` functions. For example, if you try the `myTAI::flatline_test` function twice, i.e.
+The `BulkPhyloExpressionSet` is designed to ensure efficient interaction with `myTAIv2` functions. For example, if you try the `myTAI::stat_flatline_test()` function twice, i.e.
 
 ```{r message = FALSE, eval = FALSE}
-myTAI::flatline_test(example_phyex_set)
-myTAI::flatline_test(example_phyex_set)
+myTAI::stat_flatline_test(example_phyex_set)
+myTAI::stat_flatline_test(example_phyex_set)
 ``` 
 
-you will notice that the permutations are already pre-computed for the second run so that you don't need to wait a couple of seconds again.
+you will notice that the permutations are already pre-computed for the second run so that you don't need to wait a couple of seconds again. Note, we will get to the `stat_flatline_test` function in the [statistical testing vignette](tai-stats.html).
 
 But how do you get your `.tsv` and `.csv` files and convert your `data.frame` and `tibble` to a S7 `BulkPhyloExpressionSet` object?
+
+:::{.note}
+We will mention the transcriptome age index (TAI) a lot. See [📚](phylostratigraphy.html#gene-age-information-in-tai) for more details on the `TAI` and its formula: \( TAI_s = \frac{\sum_{i=1}^{n} ps_i \cdot e_{is}}{\sum_{i=1}^{n} e_{is}} \), where \( e_{is} \) is the expression level of gene \( i \) at a given sample \( s \) (e.g. a biological replicate for a developmental stage), and \( ps_i \) is the evolutionary age of gene \( i \).
+:::
 
 ## Constructing BulkPhyloExpressionSet and ScPhyloExpressionSet
 
 The necessary and sufficient information needed for creating a `BulkPhyloExpressionSet` (as well as a `ScPhyloExpressionSet`) object is:  
 (1) A matrix or data frame of gene expression values (genes x samples).  
-(2) A numerical value or factored string associated with each gene, typically gene age ranks or [`phylorank`](articles/phylostratigraphy.html) for `TAI` (but also [`deciled dNdS values`](articles/other_strata.html) for `TDI` or [`deciled tau values`](articles/other_strata.html) for `TSI` etc.).
+(2) A numerical value or factored string associated with each gene, typically gene age ranks or [`phylorank`](phylostratigraphy.html) for `TAI` (but also [`deciled dNdS values`](other_strata.html) for `TDI` or [`deciled tau values`](other_strata.html) for `TSI` etc.).
 
 ### Loading raw data
 
@@ -122,7 +175,7 @@ example_phyex_set.df |> str()
 </details>
 
 ::: {.important}
-**These are the requirements for the `as_BulkPhyloExpressionSet()` function:**
+**Requirements for the input `data.frame` to the `as_BulkPhyloExpressionSet()` function:**  
 column 1 contains the phylorank information, which can be either numeric or factors.  
 column 2 contains the gene identifier (here called `GeneID`).  
 column 3 onwards contain the expression data with the column titles being the developmental stages or the experimental conditions.
@@ -146,23 +199,12 @@ example_phyex_set.remake <-
 There you have it, a `BulkPhyloExpressionSet` object!
 
 ```{r message = FALSE, eval=FALSE}
-# inspect the object
-class(example_phyex_set.remake)
+example_phyex_set.remake
 ```
 
 <details> <summary>Show output</summary>
 ```{r message = FALSE, echo=FALSE}
-class(example_phyex_set.remake)
-```
-</details>
-
-```{r message = FALSE, eval=FALSE}
-S7::prop_names(example_phyex_set.remake)
-```
-
-<details> <summary>Show output</summary>
-```{r message = FALSE, echo=FALSE}
-S7::prop_names(example_phyex_set.remake)
+print(example_phyex_set.remake)
 ```
 </details>
 
@@ -170,7 +212,7 @@ You can further explore the properties of the `BulkPhyloExpressionSet` object us
 
 ... and plot your transcriptome age index!
 
-```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature_output", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot signature function output for bulk RNAseq", dev.args = list(bg = 'transparent'), fig.align='center'}
 example_phyex_set.remake |> 
     myTAI::plot_signature()
 ```
@@ -229,7 +271,7 @@ example_phyex_set.remake <-
 Done!
 
 ::: {.tip}
-Along with the `groups` parameter, you can also specify the `name`, `strata_labels` and other parameters to provide a more descriptions for your `BulkPhyloExpressionSet` object. This is useful for plotting and visualisation purposes. Check this using `?` before the function (i.e. `?myTAI::as_BulkPhyloExpressionSet()`.
+Along with the `groups` parameter, you can also specify the `name`, `strata_labels` and other parameters to provide more descriptions for your `BulkPhyloExpressionSet` object. This is useful for plotting and visualisation purposes. Check this using `?` before the function (i.e. `?myTAI::as_BulkPhyloExpressionSet()`.
 :::
 
 ### Mock single-cell dataset for ScPhyloExpressionSet
@@ -315,14 +357,48 @@ example_phyex_set_sc.cluster <-
         strata = example_phylorank_sc)
 ```
 
-Now we have the `ScPhyloExpressionSet` object, which you can now plot!
+Now we have the `ScPhyloExpressionSet` object, 
 
-```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature_output", dev.args = list(bg = 'transparent'), fig.align='center'}
-plot_signature(example_phyex_set_sc.cluster)
+```{r message = FALSE, eval = FALSE}
+example_phyex_set_sc.cluster
+```
+<details> <summary>Show output</summary>
+```{r echo=FALSE}
+#### IMPORTANT & potentially TEMPORARY
+#### I have to add this or else print and plot doesn't interact with the S7 object well.
+S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
+    # Print base information (inline parent method)
+    cat("PhyloExpressionSet object\n")
+    cat("Class:", class(x)[[1]], "\n")
+    cat("Name:", x@name, "\n")
+    cat("Species:", ifelse(is.null(x@species), "Not specified", x@species), "\n")
+    cat("Index type:", x@index_type, "\n")
+    cat(x@identities_label, ":", paste(as.character(x@identities), collapse = ", "), "\n")
+    cat("Number of genes:", x@num_genes, "\n")
+    cat("Number of", tolower(x@identities_label), ":", x@num_identities, "\n")
+    cat("Number of phylostrata:", x@num_strata, "\n")
+    
+    # Print single-cell specific information
+    cat("Expression layer used:", x@layer, "\n")
+    cat("Total cells:", ncol(x@seurat), "\n")
+    cat("Valid cells:", x@num_samples, "\n")
+    cat("Cells per type:\n")
+    print(table(x@groups))
+}
+```
+```{r message = FALSE, echo=FALSE}
+print(example_phyex_set_sc.cluster)
+```
+</details>
+
+... which you can now plot!
+
+```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot signature function output for single cell", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_signature(example_phyex_set_sc.cluster)
 ```
 
 ::: {.important}
-This example used an example Seurat object with a mock phylorank dataset (random gene age assignment) and an example workflow. In practice, you will have to follow the best standards for single cell RNA-seq data analysis, including quality control, normalisation, and clustering steps. And assign real phylorank information to the genes in your dataset (to do this, see the [phylostratigraphy vignette](articles/phylostratigraphy.html)).
+This example used an example Seurat object with a mock phylorank dataset (random gene age assignment) and an example workflow. In practice, you will have to follow the best standards for single cell RNA-seq data analysis, including quality control, normalisation, and clustering steps. And assign real phylorank information to the genes in your dataset (to do this, see the [phylostratigraphy vignette](phylostratigraphy.html)).
 :::
 </details>
 
