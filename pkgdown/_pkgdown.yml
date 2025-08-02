@@ -14,59 +14,131 @@ template:
     code_font: {google: "Fira Code"}
   assets:
     - pkgdown/extra.css
+    
+articles:
+- title: "Main"
+  navbar: ~
+  contents:
+  - phylo-expression-object
+  - tai-stats
+  - tai-transform
+  - tai-breaker
+  - tai-gallery
+- title: "Advanced"
+  contents:
+  - phylostratigraphy
+  - other-strata
   
-# 
-# reference:
-# - title: Phylotranscriptomics Measures
-#   desc: Compute full and partial phylotranscriptomics measures.
-# - contents:
-#   - TAI
-#   - TDI
-#   - TPI
-#   - TEI
-#   - REMatrix
-#   - RE
-#   - pTAI
-#   - pTDI
-#   - pMatrix
-#   - pMatrixTEI
-#   - pStrata
-#   - pStrataTEI
-#   - GATAI
-# - title: Visualization and Analytics Tools
-#   desc:  Visualise phylotranscriptomics patterns
-# - contents:
-#   - starts_with("Plot")
-#   - SignatureGATAIGeneRemoval
-# - title: A Statistical Framework and Test Statistics
-# - contents:
-#   - ends_with("Test")
-#   - starts_with("boot")
-# - title: Differential Gene Expression Analysis
-# - contents:
-#   - DiffGenes
-#   - CollapseReplicates
-#   - CombinatorialSignificance
-#   - Expressed
-#   - SelectGeneSet
-#   - PlotReplicateQuality
-#   - GroupDiffs
-# - title: Taxonomic Information Retrieval
-# - contents:
-#   - taxid
-# - title: Minor Functions for Better Usibility and Additional Analyses
-# - contents:
-#   - MatchMap
-#   - tf
-#   - tfStability
-#   - tfPS
-#   - ends_with("Score")
-#   - age.apply
-#   - ends_with(".mean")
-#   - omitMatrix
-#   - starts_with("rcpp_")
-#   - is_installed_gatai
-# - title: Example Datasets
-# - contents:
-#   - DivergenceExpressionSetExample
-#   - PhyloExpressionSetExample
+navbar:
+ components:
+   articles:
+    text: Articles
+    menu:
+    - text: Bring your datasets into myTAI
+      href: articles/phylo-expression-object.html
+    - text: Statistical testing with myTAI
+      href: articles/tai-stats.html
+    - text: Transforming dataset for myTAI
+      href: articles/tai-transform.html
+    - text: Break TAI patterns using gaTAI
+      href: articles/tai-breaker.html
+    - text: Beautiful plots made via myTAI
+      href: articles/tai-gallery.html
+    - text: ... and view more!
+      href: articles/index.html
+
+
+reference:
+  - title: Visualisation
+    desc: Visualise and visually inspect evolutionary transcriptomics patterns as well as summary statistics.
+    contents:
+      - starts_with("plot_signature")
+      - starts_with("plot_")
+  
+  - title: Statistical tests
+    desc: Functions for statistical testing of evolutionary transcriptomics patterns (with visualisation).
+    contents:
+      - starts_with("stat_")
+  
+  - title: Data structures
+    desc: Core S7 data classes used for evolutionary transcriptomics analysis.
+    contents:
+      - BulkPhyloExpressionSet
+      - ConservationTestResult
+      - PhyloExpressionSetBase
+      - ScPhyloExpressionSet
+      - TestResult
+      - Distribution
+  -
+  - title: Data structures-related
+    desc: Functions to convert between dataframe and `BulkPhyloExpressionSet` or `ScPhyloExpressionSet`.
+    contents:
+      - as_BulkPhyloExpressionSet
+      - as_ScPhyloExpressionSet
+      - as_data_frame
+      
+  - title: Taxonomic Information Retrieval
+    desc: Functions to compute transcriptome indices.
+    contents:
+      - taxid
+      
+  - title: Index calculation
+    desc: Compute full and partial evolutionary transcriptomics measures.
+    contents:
+      - TAI
+      - TDI
+      - TEI
+      - TPI
+      - TXI
+      - sTXI
+      - pTXI
+
+  - title: Expression data-related
+    desc: Functions to transform, normalise, and manipulate expression datasets.
+    contents:
+      - age.apply
+      - collapse
+      - destroy_pattern
+      - diagnose_test_robustness
+      - distributions
+      - downsample_expression
+      - exp_p
+      - genes_lowly_expressed
+      - genes_top_expr
+      - genes_top_mean
+      - genes_top_variance
+      - load_example_phyex_set_sc
+      - match_map
+      - match_map_sc
+      - normalise_stage_expression
+      - omit_matrix
+      - quantile_rank
+      - rel_exp_matrix
+      - relative_expression
+      - remove_genes
+      - reorder_identities
+      - select_genes
+      - set_expression
+      - set_identities
+      - strata_enrichment
+      - transform_counts
+      - tf
+      - tfPS
+      - tf_stability
+
+  - title: Utilities/Metadata
+    desc: Helper functions and metadata constants.
+    contents:
+      - available_identities
+      - COUNT_TRANSFORMS
+      - PS_colours
+      - save_gatai_results_pdf
+      - print.TestResult
+      - TI_map
+
+  - title: Example datasets
+    desc: Example datasets for demonstrating and testing package functions.
+    contents:
+      - example_phyex_set
+      - example_phyex_set_old
+
