@@ -2,7 +2,7 @@
 title: "Gene age inference"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{phylostratigraphy}
+  %\VignetteIndexEntry{Gene age inference}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 

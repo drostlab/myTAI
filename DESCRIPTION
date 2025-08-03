@@ -74,7 +74,8 @@ Suggests:
     Seurat,
     SeuratObject,
     decor,
-    gataiR
+    gataiR,
+    DESeq2
 LinkingTo: 
     RcppArmadillo,
     RcppThread,

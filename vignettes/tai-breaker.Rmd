@@ -2,7 +2,7 @@
 title: "Break TAI patterns using gaTAI"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tai-breaker}
+  %\VignetteIndexEntry{Break TAI patterns using gaTAI}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 

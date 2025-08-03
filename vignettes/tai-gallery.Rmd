@@ -2,7 +2,7 @@
 title: "Beautiful plots made via myTAI"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tai-gallery}
+  %\VignetteIndexEntry{Beautiful plots made via myTAI}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 

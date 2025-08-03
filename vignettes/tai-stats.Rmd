@@ -2,7 +2,7 @@
 title: "Statistical testing with myTAI"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tai-stats}
+  %\VignetteIndexEntry{Statistical testing with myTAI}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 

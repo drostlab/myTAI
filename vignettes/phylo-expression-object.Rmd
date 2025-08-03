@@ -2,7 +2,7 @@
 title: "Bring your datasets into myTAI"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{phylo-expression-object}
+  %\VignetteIndexEntry{Bring your datasets into myTAI}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
@@ -280,7 +280,7 @@ If you are interested in single cell RNA-seq data, the process is similar, but y
 
 You can then use the `as_ScPhyloExpressionSet()` function with adjustments to the relevant metadata.
 
-```{r message = FALSE, warning=FALSE}
+```{r message = FALSE, warning=FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 # Load the relevant packages
 library(dplyr)
 library(Seurat)
@@ -293,29 +293,19 @@ pbmc_raw <- read.table(
 
 The input file for `Seurat::CreateSeuratObject()` is a tab-separated file with the first column as gene identifiers and the rest of the columns as expression values for each cell. The `pbmc_raw` object is a data frame with gene expression data.
 
-```{r message = FALSE, eval = FALSE}
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 head(pbmc_raw)
 ```
-<details> <summary>Show output</summary>
-```{r message = FALSE, echo=FALSE}
-head(pbmc_raw)
-```
-</details>
 
 Now, we create a Seurat object. i.e.
 
-```{r message = FALSE, eval = FALSE}
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 pbmc_small <- CreateSeuratObject(counts = pbmc_raw)
 ```
 
-```{r message = FALSE, eval = FALSE}
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 is(pbmc_small)
 ```
-<details> <summary>Show output</summary>
-```{r message = FALSE, echo=FALSE}
-is(pbmc_small)
-```
-</details>
 
 Now, we can convert this Seurat object to a `ScPhyloExpressionSet` object using the `as_ScPhyloExpressionSet()` function.
 
@@ -323,14 +313,14 @@ The next part is a bit tricky, as you need to provide the phylorank information 
 
 We will generate **random** phyloranks for each gene as integers.
 
-```{r message = FALSE}
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 gene_names <- pbmc_small |> rownames()
 example_phylorank_sc <- 
     setNames(sample(1:10, length(gene_names), replace = TRUE), gene_names) |>
     as.factor()
 ```
 
-```{r message = FALSE}
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 example_phyex_set_sc <- 
     myTAI::as_ScPhyloExpressionSet(
         pbmc_small,
@@ -340,7 +330,7 @@ example_phyex_set_sc <-
 <details> <summary>Example of a downstream analysis</summary>
 Here, we will go a bit deeper and cluster the `pbmc_small` object before integrating this to the `myTAIv2` workflow.
 
-```{r message = FALSE, warning=FALSE}
+```{r message = FALSE, warning=FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 # example workflow to cluster the single cell data
 pbmc_small <- Seurat::NormalizeData(pbmc_small)
 pbmc_small <- Seurat::FindVariableFeatures(pbmc_small, selection.method = "vst", nfeatures = 20)
@@ -350,7 +340,7 @@ pbmc_small <- Seurat::FindNeighbors(pbmc_small, dims = 1:10)
 pbmc_small.cluster <- Seurat::FindClusters(pbmc_small, resolution = 0.8)
 ```
 
-```{r message = FALSE}
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 example_phyex_set_sc.cluster <- 
     myTAI::as_ScPhyloExpressionSet(
         pbmc_small.cluster,
@@ -393,7 +383,7 @@ print(example_phyex_set_sc.cluster)
 
 ... which you can now plot!
 
-```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot signature function output for single cell", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot signature function output for single cell", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
 myTAI::plot_signature(example_phyex_set_sc.cluster)
 ```
 

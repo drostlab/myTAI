@@ -2,7 +2,7 @@
 title: "Other evolutionary and expression indices"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{other-strata}
+  %\VignetteIndexEntry{Other evolutionary and expression indices}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 

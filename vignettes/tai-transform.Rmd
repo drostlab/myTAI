@@ -2,7 +2,7 @@
 title: "Transforming dataset for myTAI"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tai-transform}
+  %\VignetteIndexEntry{Transforming dataset for myTAI}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
@@ -58,7 +58,7 @@ Here, we can see that the p-values for the flat line test are all below 0.05 for
 Indeed, within the `myTAI::plot_signature_transformed()` function, we can also set the `conservation_test` parameter (e.g. `conservation_test = stat_flatline_test`) alongside the display for the p-values (`show_p_val = TRUE`), to get an all-in-one plot!
 
 :::{.tip}
-If you are curious about the exact nature of the transformations used by `myTAI::plot_signature_transformed()` and `myTAI::tf_stability()` you can check the list of functions that were applied via `print(myTAI::COUNT_TRANSFORMS)`.
+If you are curious about the exact nature of the transformations used by `myTAI::plot_signature_transformed()` and `myTAI::tf_stability()` you can check the list of functions that were applied via `print(myTAI::COUNT_TRANSFORMS)`. Note that DESeq2-based transforms ('vst', 'rlog') are only available if DESeq2 is installed.
 
 <details> <summary>Removing or adding transformations</summary>
 To remove transformations, e.g. "rlog", "rank", "vst" from the list, e.g.
