@@ -37,35 +37,6 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 > Drost et al. __myTAI: evolutionary transcriptomics with R__. _Bioinformatics_ 2018, 34 (9), 1589-1590. [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
 
-
-### Dependencies
-
-`myTAI` is using `OpenMP` to run cpp code in parallel, thus you might need to install additional software. 
-
-**Mac:**
-```bash
-brew install llvm libomp
-cd /usr/local/lib
-ln -s /usr/local/opt/libomp/lib/libomp.dylib ./libomp.dylib
-```
-
-**Linux:**
-1. Check if you have an OpenMP-enabled compiler: Open a terminal and run the command `gcc --version` or `g++ --version` to check if you have the GNU Compiler Collection (GCC) installed. OpenMP support is typically included in GCC.
-
-    If you don't have GCC installed, you can install it using your distribution's package manager. For example, on Ubuntu, you can use sudo apt-get install build-essential to install GCC.
-
-2. Install the libomp library: Open a terminal and run the command appropriate for your package manager:
-
-    On Ubuntu or Debian-based systems: ```sudo apt-get install libomp-dev``` or ```sudo apt install libomp-dev```
-   
-    On Fedora or CentOS systems: ```sudo dnf install libomp-devel```
-   
-    On Arch Linux: ```sudo pacman -S libomp```
-
-**Windows:**
-
-On Windows, the most common OpenMP implementation is provided by Microsoft Visual C++ (MSVC) compiler, which includes OpenMP support by default. So, if you are using MSVC as your C++ compiler, you should have OpenMP support without any additional installations.
-
 ### Installation
 
 Users can install `myTAI` from [CRAN](https://CRAN.R-project.org/package=myTAI):
