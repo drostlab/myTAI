@@ -32,9 +32,9 @@ myTAI::plot_gene_space(example_phyex_set)
   </tr>
 </table>
 
-*Curious about `myTAIv2`? Checkout the website! → https://drostlab.github.io/myTAI/*
+### Detailed documentation provided [here](https://drostlab.github.io/myTAI)
 
-## Short summary
+## Package summary
 
 Using `myTAI`, any existing or newly generated transcriptome dataset can be combined with evolutionary information (find [details here](https://drostlab.github.io/myTAI/articles/phylostratigraphy.html)) to retrieve novel insights about the evolutionary conservation of the transcriptome at hand. 
 
@@ -122,10 +122,8 @@ Soon, users will be able to install `myTAI` from [CRAN](https://CRAN.R-project.o
 install.packages("myTAI", dependencies = TRUE)
 ```
 
-### Detailed documentation provided [here](https://drostlab.github.io/myTAI)
-
 ## Citation
-Please cite the following paper when using `myTAI` for your own research. This will allow me to continue working on this software tool and will motivate me to extend its functionality and usability in the next years. Many thanks in advance!
+Please cite the following paper when using `myTAI` for your own research. This will allow us to continue working on this software tool and will motivate us to extend its functionality and usability in the next years. Many thanks in advance!
 
 > Drost et al. __myTAI: evolutionary transcriptomics with R__. _Bioinformatics_ 2018, 34 (9), 1589-1590. [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
 
@@ -308,11 +306,11 @@ browseVignettes("myTAI")
 
 ## Discussions and Bug Reports
 
-I would be very happy to learn more about potential improvements of the concepts and functions
+We would be very happy to learn more about potential improvements of the concepts and functions
 provided in this package.
 
 Furthermore, in case you find some bugs or need additional (more flexible) functionality of parts
-of this package, please let me know:
+of this package, please let us know:
 
 https://github.com/drostlab/myTAI/issues
 
