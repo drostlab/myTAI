@@ -44,6 +44,8 @@ jobs:
           extra-packages: |
             any::testthat
             any::rcmdcheck
+            any::knitr
+            any::rmarkdown
           needs: check
           dependencies: '"hard"'
 
