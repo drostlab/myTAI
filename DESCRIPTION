@@ -85,6 +85,7 @@ RoxygenNote: 7.3.2
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
+VignetteBuilder: knitr
 Collate:
     'globals.R'
     'utils_S7.R'
