@@ -1,4 +1,4 @@
-pandoc: '3.4'
+pandoc: 3.7.0.2
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
@@ -10,7 +10,7 @@ articles:
   tai-gallery: tai-gallery.html
   tai-stats: tai-stats.html
   tai-transform: tai-transform.html
-last_built: 2025-08-02T21:07Z
+last_built: 2025-08-03T17:21Z
 urls:
   reference: https://drostlab.github.io/myTAI/reference
   article: https://drostlab.github.io/myTAI/articles

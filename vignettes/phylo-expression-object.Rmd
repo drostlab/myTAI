@@ -376,7 +376,7 @@ S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
     print(table(x@groups))
 }
 ```
-```{r message = FALSE, echo=FALSE}
+```{r message = FALSE, echo=FALSE, eval=requireNamespace("Seurat", quietly = TRUE)}
 print(example_phyex_set_sc.cluster)
 ```
 </details>

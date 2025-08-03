@@ -13,11 +13,11 @@
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/Fira_Code-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/Fira_Sans-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Fira_Sans-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Beautiful plots made via myTAI">
 </head>
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.3.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,7 @@
 vignette here:<br>
 → <a href="phylo-expression-object.html">📊</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://drostlab.github.io/myTAI/">myTAI</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rconsortium.github.io/S7/" class="external-link">S7</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://drostlab.github.io/myTAI/">myTAI</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rconsortium.github.io/S7/" class="external-link">S7</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="mytai-plots-can-be-modified-as-a-ggplot2-object-">myTAI plots can be modified as a ggplot2 object.<a class="anchor" aria-label="anchor" href="#mytai-plots-can-be-modified-as-a-ggplot2-object-"></a>
@@ -124,11 +124,11 @@ vignette here:<br>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature_transformed.html">plot_signature_transformed</a></span><span class="op">(</span></span>
 <span>  <span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [==                                      ] 5%  (~20s remaining)       Computing: [=======                                 ] 17%  (~9s remaining)       Computing: [==========                              ] 24%  (~9s remaining)       Computing: [================                        ] 39%  (~6s remaining)       Computing: [======================                  ] 55%  (~4s remaining)       Computing: [==========================              ] 64%  (~3s remaining)       Computing: [==============================          ] 75%  (~2s remaining)       Computing: [===================================     ] 86%  (~1s remaining)       Computing: [========================================] 98%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========                                ] 18%  (~4s remaining)       Computing: [===============                         ] 37%  (~3s remaining)       Computing: [======================                  ] 54%  (~2s remaining)       Computing: [=============================           ] 71%  (~1s remaining)       Computing: [====================================    ] 88%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========                                ] 18%  (~4s remaining)       Computing: [==============                          ] 35%  (~3s remaining)       Computing: [=====================                   ] 52%  (~2s remaining)       Computing: [===========================             ] 68%  (~1s remaining)       Computing: [==================================      ] 83%  (~1s remaining)       Computing: [======================================= ] 97%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [=======                                 ] 17%  (~4s remaining)       Computing: [==============                          ] 33%  (~4s remaining)       Computing: [====================                    ] 48%  (~3s remaining)       Computing: [==========================              ] 63%  (~2s remaining)       Computing: [================================        ] 78%  (~1s remaining)       Computing: [=====================================   ] 92%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========                                ] 18%  (~4s remaining)       Computing: [==============                          ] 35%  (~3s remaining)       Computing: [=====================                   ] 51%  (~2s remaining)       Computing: [===========================             ] 66%  (~2s remaining)       Computing: [=================================       ] 81%  (~1s remaining)       Computing: [======================================  ] 95%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [====================                    ] 49%  (~1s remaining)       Computing: [======================================= ] 97%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [====================                    ] 49%  (~1s remaining)       Computing: [======================================= ] 97%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [====================                    ] 48%  (~1s remaining)       Computing: [======================================  ] 94%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [====================                    ] 48%  (~1s remaining)       Computing: [=====================================   ] 92%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [==================                      ] 43%  (~1s remaining)       Computing: [====================================    ] 88%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="tai-gallery_files/figure-html/unnamed-chunk-4-1.png" alt="plot_signature_transformed function output" width="768" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature_gene_quantiles.html">plot_signature_gene_quantiles</a></span><span class="op">(</span></span>
@@ -149,7 +149,7 @@ vignette here:<br>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Flat Line Test </span></span>
 <span><span class="co">## Test statistic: 0.164405 </span></span>
-<span><span class="co">## P-value: 0.491067 </span></span>
+<span><span class="co">## P-value: 0.4755228 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2019</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -159,12 +159,12 @@ vignette here:<br>
 <p><img src="tai-gallery_files/figure-html/unnamed-chunk-9-1.png" alt="plot_cullen_frey function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## summary statistics</span></span>
 <span><span class="co">## ------</span></span>
-<span><span class="co">## min:  0.002035207   max:  4.510529 </span></span>
-<span><span class="co">## median:  0.1614069 </span></span>
-<span><span class="co">## mean:  0.2595543 </span></span>
-<span><span class="co">## estimated sd:  0.3225894 </span></span>
-<span><span class="co">## estimated skewness:  3.723599 </span></span>
-<span><span class="co">## estimated kurtosis:  25.01004</span></span></code></pre>
+<span><span class="co">## min:  0.002580694   max:  3.953036 </span></span>
+<span><span class="co">## median:  0.1555222 </span></span>
+<span><span class="co">## mean:  0.2509132 </span></span>
+<span><span class="co">## estimated sd:  0.299606 </span></span>
+<span><span class="co">## estimated skewness:  3.27823 </span></span>
+<span><span class="co">## estimated kurtosis:  20.12338</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_null_txi_sample.html">plot_null_txi_sample</a></span><span class="op">(</span><span class="va">res_flt</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>x <span class="op">=</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_axis.html" class="external-link">guide_axis</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -180,7 +180,7 @@ vignette here:<br>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Reductive Hourglass Test </span></span>
 <span><span class="co">## Test statistic: 0.3747398 </span></span>
-<span><span class="co">## P-value: 0.03835337 </span></span>
+<span><span class="co">## P-value: 0.03720072 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2019</span></span></code></pre>
 </div>
@@ -261,7 +261,12 @@ various developmental stages against a reference stage (default is stage
 <h4 id="phylostratum-distribution">Phylostratum distribution<a class="anchor" aria-label="anchor" href="#phylostratum-distribution"></a>
 </h4>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_distribution_strata.html">plot_distribution_strata</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_distribution_strata.html">plot_distribution_strata</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span><span class="op">)</span> <span class="op">/</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_distribution_strata.html">plot_distribution_strata</a></span><span class="op">(</span></span>
+<span>  <span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span>,</span>
+<span>  selected_gene_ids <span class="op">=</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/genes_top_variance.html">genes_top_variance</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, p <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span>,</span>
+<span>  as_log_obs_exp <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of gene ages (top), Observed vs Expected plot of top 5% variance genes (bottom)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tai-gallery_files/figure-html/unnamed-chunk-18-1.png" alt="plot_distribution_strata function output" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
@@ -269,7 +274,13 @@ various developmental stages against a reference stage (default is stage
 </h4>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-19-1.png" alt="plot_gene_heatmap function output" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-19-1.png" alt="plot_gene_heatmap function output default" width="1152" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>, show_reps<span class="op">=</span><span class="cn">TRUE</span>, show_gene_ids<span class="op">=</span><span class="cn">TRUE</span>, top_p<span class="op">=</span><span class="fl">0.005</span><span class="op">)</span></span></code></pre></div>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-20-1.png" alt="plot_gene_heatmap function output clustered" width="1152" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>, show_reps<span class="op">=</span><span class="cn">TRUE</span>, top_p<span class="op">=</span><span class="fl">0.005</span>, std<span class="op">=</span><span class="cn">FALSE</span>, show_gene_ids<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-21-1.png" alt="plot_gene_heatmap function output nonstd" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="dimension-reduction">Dimension reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
@@ -277,40 +288,65 @@ various developmental stages against a reference stage (default is stage
 <div class="section level5">
 <h5 id="at-the-gene-level">At the gene level<a class="anchor" aria-label="anchor" href="#at-the-gene-level"></a>
 </h5>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_space.html">plot_gene_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-20-1.png" alt="plot_gene_space function output" width="576" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_gene_space function output" width="576" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_space.html">plot_gene_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span>,colour_by <span class="op">=</span> <span class="st">"strata"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-21-1.png" alt="plot_gene_space function output by strata" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-23-1.png" alt="plot_gene_space function output by strata" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level5">
 <h5 id="at-the-sample-level">At the sample level<a class="anchor" aria-label="anchor" href="#at-the-sample-level"></a>
 </h5>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_sample_space function output by TXI" width="576" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, colour_by <span class="op">=</span> <span class="st">"TXI"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-22-2.png" alt="plot_sample_space function output by TXI" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span> <span class="op">|</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, colour_by <span class="op">=</span> <span class="st">"TXI"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-24-1.png" alt="plot_sample_space function output by TXI" width="1152" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can even do a UMAP</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, method <span class="op">=</span> <span class="st">"UMAP"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-23-1.png" alt="plot_sample_space function output by TXI" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-25-1.png" alt="plot_sample_space function output by TXI" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level4">
 <h4 id="inspecting-mean-variance-relationship">Inspecting mean-variance relationship<a class="anchor" aria-label="anchor" href="#inspecting-mean-variance-relationship"></a>
 </h4>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_mean_var.html">plot_mean_var</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-24-1.png" alt="plot_mean_var function output by strata" width="288" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># highlighting top variance genes</span></span>
+<span><span class="va">top_var_genes</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/genes_top_variance.html">genes_top_variance</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, p <span class="op">=</span> <span class="fl">0.9995</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_mean_var.html">plot_mean_var</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_mean_var.html">plot_mean_var</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, </span>
+<span>                     highlight_genes <span class="op">=</span> <span class="va">top_var_genes</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Mean-variance: simple vs. highlighted top variance genes"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-26-1.png" alt="plot_mean_var function output simple vs highlighted" width="768" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># with log transform and colouring by phylostratum</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_mean_var.html">plot_mean_var</a></span><span class="op">(</span><span class="va">example_phyex_set</span> <span class="op">|&gt;</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">log1p</span><span class="op">)</span>, </span>
 <span>                     colour_by <span class="op">=</span> <span class="st">"strata"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-25-1.png" alt="plot_gene_space function output log transform coloured by strata" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-27-1.png" alt="plot_gene_space function output log transform coloured by strata" width="576" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level4">
+<h4 id="individual-gene-expression-profiles">Individual gene expression profiles<a class="anchor" aria-label="anchor" href="#individual-gene-expression-profiles"></a>
+</h4>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># side by side: manual coloring vs strata coloring</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_profiles.html">plot_gene_profiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, max_genes <span class="op">=</span> <span class="fl">10</span>, colour_by <span class="op">=</span> <span class="st">"manual"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_profiles.html">plot_gene_profiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, max_genes <span class="op">=</span> <span class="fl">10</span>, colour_by <span class="op">=</span> <span class="st">"strata"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Gene profiles: manual vs. strata coloring"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-28-1.png" alt="plot_gene_profiles function output manual vs strata coloring" width="1152" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># stage colouring with standardized log transformation</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_profiles.html">plot_gene_profiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, max_genes <span class="op">=</span> <span class="fl">10</span>, </span>
+<span>                          transformation <span class="op">=</span> <span class="st">"std_log"</span>, colour_by <span class="op">=</span> <span class="st">"stage"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-29-1.png" alt="plot_gene_profiles function output stage std_log transformation" width="576" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># faceted by phylostratum</span></span>
+<span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_profiles.html">plot_gene_profiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, max_genes <span class="op">=</span> <span class="fl">1000</span>, </span>
+<span>                          colour_by <span class="op">=</span> <span class="st">"strata"</span>, facet_by_strata <span class="op">=</span> <span class="cn">TRUE</span>, show_set_mean <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                          show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-30-1.png" alt="plot_gene_profiles function output faceted by strata" width="1152" style="display: block; margin: auto;"></p>
 <div class="tip">
 <p>These plots are examples of plots that <code>myTAIv2</code> can
 generate. To check out the functions, use <code>?</code> before the
@@ -335,7 +371,7 @@ object.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Ștefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">

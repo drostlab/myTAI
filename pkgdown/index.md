@@ -21,11 +21,7 @@ signals hidden in the gene expression data (transcriptome)
     # plot away!
     myTAI::plot_signature(example_phyex_set)  
 
-<img src="man/figures/unnamed-chunk-2-1.png" alt="plot_signature function output" style="display: block; margin: auto;" />
-
-<!-- ![plot_signature function output](../vignettes/Figures/plot_signature_out.png) -->
-<!-- ![plot_signature function output2](../man/figures/plot_signature_out.png) -->
-<!-- ![plot_signature function output3](index_files/figure-markdown_strict/unnamed-chunk-1-1.png) -->
+<img src="man/figures/plot_signature.svg" alt="plot_signature" style="display: block; margin: auto;" />
 
 <br/><br/>
 

@@ -20,7 +20,7 @@ To learn more about bringing your dataset into myTAI, follow this vignette here:
 → [📊](phylo-expression-object.html)
 
 ```{r message = FALSE, warning = FALSE}
-library(myTAI); library(S7); library(ggplot2)
+library(myTAI); library(S7); library(ggplot2); library(patchwork)
 data("example_phyex_set")
 ```
 
@@ -202,13 +202,27 @@ myTAI::plot_distribution_pTAI_qqplot(example_phyex_set)
 #### Phylostratum distribution
 
 ```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_distribution_strata function output", dev.args = list(bg = 'transparent'), fig.align='center'}
-myTAI::plot_distribution_strata(example_phyex_set@strata)
+myTAI::plot_distribution_strata(example_phyex_set@strata) /
+myTAI::plot_distribution_strata(
+  example_phyex_set@strata,
+  selected_gene_ids = myTAI::genes_top_variance(example_phyex_set, p = 0.95),
+  as_log_obs_exp = TRUE
+) + plot_annotation(title = "Distribution of gene ages (top), Observed vs Expected plot of top 5% variance genes (bottom)")
 ```
+
 
 #### Expression heatmap
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_gene_heatmap function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=12, fig.width=12, fig.alt="plot_gene_heatmap function output default", dev.args = list(bg = 'transparent'), fig.align='center'}
 myTAI::plot_gene_heatmap(example_phyex_set)
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=12, fig.width=12, fig.alt="plot_gene_heatmap function output clustered", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_gene_heatmap(example_phyex_set, cluster_rows = TRUE, show_reps=TRUE, show_gene_ids=TRUE, top_p=0.005)
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=12, fig.width=10, fig.alt="plot_gene_heatmap function output nonstd", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_gene_heatmap(example_phyex_set, cluster_rows = TRUE, show_reps=TRUE, top_p=0.005, std=FALSE, show_gene_ids=TRUE)
 ```
 
 #### Dimension reduction
@@ -225,9 +239,8 @@ myTAI::plot_gene_space(example_phyex_set,colour_by = "strata")
 
 ##### At the sample level
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_sample_space function output by TXI", dev.args = list(bg = 'transparent'), fig.align='center'}
-myTAI::plot_sample_space(example_phyex_set)
-myTAI::plot_sample_space(example_phyex_set, colour_by = "TXI")
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=12, fig.alt="plot_sample_space function output by TXI", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_sample_space(example_phyex_set) | myTAI::plot_sample_space(example_phyex_set, colour_by = "TXI")
 ```
 
 ```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_sample_space function output by TXI", dev.args = list(bg = 'transparent'), fig.align='center'}
@@ -237,8 +250,15 @@ myTAI::plot_sample_space(example_phyex_set, method = "UMAP")
 
 #### Inspecting mean-variance relationship
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=3, fig.width=3, fig.alt="plot_mean_var function output by strata", dev.args = list(bg = 'transparent'), fig.align='center'}
-myTAI::plot_mean_var(example_phyex_set)
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=3, fig.width=8, fig.alt="plot_mean_var function output simple vs highlighted", dev.args = list(bg = 'transparent'), fig.align='center'}
+
+# highlighting top variance genes
+top_var_genes <- myTAI::genes_top_variance(example_phyex_set, p = 0.9995)
+p1 <- myTAI::plot_mean_var(example_phyex_set)
+p2 <- myTAI::plot_mean_var(example_phyex_set, 
+                     highlight_genes = top_var_genes)
+
+p1 + p2 + plot_annotation(title = "Mean-variance: simple vs. highlighted top variance genes")
 ```
 
 ```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=3, fig.width=6, fig.alt="plot_gene_space function output log transform coloured by strata", dev.args = list(bg = 'transparent'), fig.align='center'}
@@ -246,6 +266,29 @@ myTAI::plot_mean_var(example_phyex_set)
 myTAI::plot_mean_var(example_phyex_set |> myTAI::tf(log1p), 
                      colour_by = "strata") +
   ggplot2::guides(colour = guide_legend(ncol=2))
+```
+
+#### Individual gene expression profiles
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=12, fig.alt="plot_gene_profiles function output manual vs strata coloring", dev.args = list(bg = 'transparent'), fig.align='center'}
+# side by side: manual coloring vs strata coloring
+p1 <- myTAI::plot_gene_profiles(example_phyex_set, max_genes = 10, colour_by = "manual")
+p2 <- myTAI::plot_gene_profiles(example_phyex_set, max_genes = 10, colour_by = "strata")
+
+p1 + p2 + plot_annotation(title = "Gene profiles: manual vs. strata coloring")
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_gene_profiles function output stage std_log transformation", dev.args = list(bg = 'transparent'), fig.align='center'}
+# stage colouring with standardized log transformation
+myTAI::plot_gene_profiles(example_phyex_set, max_genes = 10, 
+                          transformation = "std_log", colour_by = "stage")
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=12, fig.alt="plot_gene_profiles function output faceted by strata", dev.args = list(bg = 'transparent'), fig.align='center'}
+# faceted by phylostratum
+myTAI::plot_gene_profiles(example_phyex_set, max_genes = 1000, 
+                          colour_by = "strata", facet_by_strata = TRUE, show_set_mean = TRUE,
+                          show_labels = FALSE)
 ```
 
 ::: {.tip}

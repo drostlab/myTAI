@@ -13,11 +13,11 @@
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/Fira_Code-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/Fira_Sans-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Fira_Sans-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Transforming dataset for myTAI">
 </head>
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.3.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,12 +115,12 @@ due to RNA-seq transformations.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set"</span><span class="op">)</span></span>
 <span><span class="co"># no transformation</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [=======                                 ] 16%  (~5s remaining)       Computing: [==============                          ] 34%  (~3s remaining)       Computing: [=====================                   ] 52%  (~2s remaining)       Computing: [============================            ] 70%  (~1s remaining)       Computing: [===================================     ] 86%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [====================                    ] 49%  (~1s remaining)       Computing: [======================================= ] 96%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="tai-transform_files/figure-html/unnamed-chunk-2-1.png" alt="plot_signature function output no transform" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># rank transformation</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set</span> <span class="op">|&gt;</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span>FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [=======                                 ] 16%  (~5s remaining)       Computing: [==============                          ] 33%  (~3s remaining)       Computing: [====================                    ] 50%  (~2s remaining)       Computing: [===========================             ] 67%  (~1s remaining)       Computing: [==================================      ] 83%  (~1s remaining)       Computing: [========================================] 98%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [===================                     ] 46%  (~1s remaining)       Computing: [======================================  ] 93%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="tai-transform_files/figure-html/unnamed-chunk-3-1.png" alt="plot_signature function output rank transform" width="576" style="display: block; margin: auto;"></p>
 <p>Indeed, <code>myTAIv2</code> is fitted with a single plotting
 function (<code><a href="../reference/plot_signature_transformed.html">myTAI::plot_signature_transformed()</a></code>) to evaluate
@@ -128,10 +128,10 @@ the robustness of the patterns against multiple transformations,
 i.e.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature_transformed.html">plot_signature_transformed</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [========                                ] 18%  (~4s remaining)       Computing: [==============                          ] 34%  (~3s remaining)       Computing: [======================                  ] 53%  (~2s remaining)       Computing: [=============================           ] 71%  (~1s remaining)       Computing: [====================================    ] 89%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [=======                                 ] 17%  (~5s remaining)       Computing: [=============                           ] 32%  (~4s remaining)       Computing: [====================                    ] 48%  (~3s remaining)       Computing: [==========================              ] 64%  (~2s remaining)       Computing: [================================        ] 80%  (~1s remaining)       Computing: [======================================  ] 94%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========                                ] 18%  (~4s remaining)       Computing: [==============                          ] 35%  (~3s remaining)       Computing: [=====================                   ] 51%  (~2s remaining)       Computing: [===========================             ] 67%  (~1s remaining)       Computing: [=================================       ] 82%  (~1s remaining)       Computing: [========================================] 98%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========                                ] 18%  (~4s remaining)       Computing: [==============                          ] 35%  (~3s remaining)       Computing: [=====================                   ] 52%  (~2s remaining)       Computing: [==========================              ] 65%  (~2s remaining)       Computing: [================================        ] 78%  (~1s remaining)       Computing: [======================================  ] 94%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [====================                    ] 49%  (~1s remaining)       Computing: [========================================] 98%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [====================                    ] 49%  (~1s remaining)       Computing: [======================================= ] 97%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [====================                    ] 49%  (~1s remaining)       Computing: [======================================= ] 96%  (~0s remaining)       Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [=================                       ] 42%  (~1s remaining)       Computing: [==================================      ] 84%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="tai-transform_files/figure-html/unnamed-chunk-4-1.png" alt="plot_signature_transformed function output transform all" width="768" style="display: block; margin: auto;"></p>
 <p>See how different some of the transformations are! In general,
 though, the earlier stages are younger compared to the mid-stage. Across
@@ -148,8 +148,8 @@ e.g. <code>conservation_test = stat_flatline_test</code>,
 <code class="sourceCode R"><span><span class="va">tf_stability_res</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/tf_stability.html">tf_stability</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf_stability_res</span></span></code></pre></div>
-<pre><code><span><span class="co">##         none         sqrt         log2          vst         rlog         rank </span></span>
-<span><span class="co">## 4.755815e-01 7.382143e-06 5.736171e-34 2.617020e-35 2.181162e-30 2.059908e-74</span></span></code></pre>
+<pre><code><span><span class="co">##         none         sqrt         log2         rank          vst         rlog </span></span>
+<span><span class="co">## 4.882605e-01 7.333446e-06 1.441248e-36 1.799337e-67 4.203084e-34 1.056360e-28</span></span></code></pre>
 <p>Here, we can see that the p-values for the flat line test are all
 below 0.05 for all transformations. This is reassuring as to the
 stability of the TAI profile across transformations.</p>
@@ -162,7 +162,9 @@ all-in-one plot!</p>
 <p>If you are curious about the exact nature of the transformations used
 by <code><a href="../reference/plot_signature_transformed.html">myTAI::plot_signature_transformed()</a></code> and
 <code><a href="../reference/tf_stability.html">myTAI::tf_stability()</a></code> you can check the list of functions
-that were applied via <code>print(myTAI::COUNT_TRANSFORMS)</code>.</p>
+that were applied via <code>print(myTAI::COUNT_TRANSFORMS)</code>. Note
+that DESeq2-based transforms (‘vst’, ‘rlog’) are only available if
+DESeq2 is installed.</p>
 <details><summary>
 Removing or adding transformations
 </summary><p>To remove transformations, e.g. “rlog”, “rank”, “vst” from the list,
@@ -284,7 +286,7 @@ processing.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Ștefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">
