@@ -42,7 +42,7 @@ For the purpose of performing large scale evolutionary transcriptomics studies, 
 
 We hope that `myTAI` will become the community standard tool to perform evolutionary transcriptomics studies and we are happy to add required functionality upon request.
 
-<details> <summary>**Detailed background**</summary>
+<details> <summary> <b> Detailed background </b> </summary>
 
 In the past years, a variety of studies aimed to uncover the molecular basis of 
 morphological innovation and variation from the evolutionary developmental perspective. 
@@ -72,7 +72,7 @@ patterns of evolutionary constraints in any transcriptome dataset of interest.
 
 </details>
 
-<details> <summary>**Scientific background**</summary>
+<details> <summary> <b> Scientific background </b> </summary>
 
 Today, phenomena such as morphological mutations, diseases or developmental processes 
 are primarily investigated on the molecular level using transcriptomics approaches. 
@@ -128,7 +128,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 > Drost et al. __myTAI: evolutionary transcriptomics with R__. _Bioinformatics_ 2018, 34 (9), 1589-1590. [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
 
 
-<details> <summary>**Studies that successfully used `myTAI` to quantify transcriptome novelty and conservation**</summary>
+<details> <summary> <b> Studies that successfully used `myTAI` to quantify transcriptome novelty and conservation </b> </summary>
 >
 > - _Evolutionary trends in the emergence of skeletal cell types_ 
 A Damatac, II , S Koska , K K Ullrich , T Domazet-Lošo , A Klimovich , M Kaucká… - __Evolution Letters__, 2025
@@ -327,15 +327,15 @@ Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan
 
 ## Acknowledgement
 
-I would like to thank several individuals for making this project possible.
+We would like to thank several individuals for making this project possible.
 
-First I would like to thank Ivo Grosse and Marcel Quint for providing me a place
+We thank Ivo Grosse and Marcel Quint for providing @HajkD a place
 and the environment to be able to work on fascinating topics of Evo-Devo research and for the fruitful discussions that led to projects like this one.
 
-Furthermore, I would like to thank Alexander Gabel and Jan Grau for valuable discussions
+Furthermore, we would like to thank Alexander Gabel and Jan Grau for valuable discussions
 on how to improve some methodological concepts of some analyses present in this package.
 
-I would also like to thank my past Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
-who worked intensively with this package and helped me to improve the usability and logic of the package environment.
+We would also like to thank @HajkD's past Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
+who worked intensively with this package and helped improve its usability and logic.
 
 
