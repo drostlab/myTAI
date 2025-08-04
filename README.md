@@ -1,5 +1,5 @@
 
-# myTAI <img src="man/figures/logo.png" align="right" height="174" width="150" />
+# myTAI <a href="https://drostlab.github.io/myTAI">  <img src="man/figures/logo.png" align="right" height="174" width="150" /> </a>
 [![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://academic.oup.com/bioinformatics/article/34/9/1589/4772684)
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://bioconda.github.io/)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&label=VISITORS&countColor=%23263759&style=flat)
@@ -21,13 +21,19 @@ myTAI::plot_gene_space(example_phyex_set)
 <table>
   <tr>
     <td align="center">
-      <img src="docs/reference/figures/plot_signature.svg" alt="plot_signature function output" width="300">
+      <a href="https://drostlab.github.io/myTAI/articles/myTAI.html">
+        <img src="docs/reference/figures/plot_signature.svg" alt="plot_signature function output" width="300">
+      </a>
     </td>
     <td align="center">
-      <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-15-1.png" alt="plot_contribution function output" width="300">
+      <a href="https://drostlab.github.io/myTAI/articles/tai-gallery.html#contribution-to-the-overall-tai-by-phylostratum">
+        <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-15-1.png" alt="plot_contribution function output" width="300">
+      </a>
     </td>
     <td align="center">
-      <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_gene_space function output" width="300">
+      <a href="https://drostlab.github.io/myTAI/articles/tai-gallery.html#dimension-reduction">
+        <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_gene_space function output" width="300">
+      </a>
     </td>
   </tr>
 </table>
@@ -129,6 +135,7 @@ Please cite the following paper when using `myTAI` for your own research. This w
 
 
 <details> <summary> <b> Studies that successfully used `myTAI` to quantify transcriptome novelty and conservation </b> </summary>
+
 >
 > - _Evolutionary trends in the emergence of skeletal cell types_ 
 A Damatac, II , S Koska , K K Ullrich , T Domazet-Lošo , A Klimovich , M Kaucká… - __Evolution Letters__, 2025
