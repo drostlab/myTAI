@@ -1,0 +1,305 @@
+---
+title: "Beautiful plots made via myTAI"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Beautiful plots made via myTAI}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+## Gallery of different plots available with myTAI
+
+Here are example outputs of plotting functions from `myTAIv2`.
+
+We hope these plots can inspire your analysis!
+
+### Bulk RNA-seq data
+
+`example_phyex_set` is an example `BulkPhyloExpressionSet` object.
+
+To learn more about bringing your dataset into myTAI, follow this vignette here:  
+→ [📊](phylo-expression-object.html)
+
+```{r message = FALSE, warning = FALSE}
+library(myTAI); library(S7); library(ggplot2); library(patchwork)
+data("example_phyex_set")
+```
+
+#### myTAI plots can be modified as a ggplot2 object.
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output with stat_flatline_test", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_signature(example_phyex_set, 
+                      show_p_val = TRUE, 
+                      conservation_test = stat_flatline_test,
+                      colour = "lavender") +
+  # as the plots are ggplot2 objects, we can simply modify them using ggplot2
+  ggplot2::labs(title = "Developmental stages of A. thaliana")
+```
+
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output with stat_reductive_hourglass_test", dev.args = list(bg = 'transparent'), fig.align='center'}
+module_info <- list(early = 1:3, mid = 4:6, late = 7:8)
+myTAI::plot_signature(example_phyex_set,
+                      show_p_val = TRUE,
+                      conservation_test = stat_reductive_hourglass_test,
+                      modules = module_info,
+                      colour = "lavender")
+```
+
+#### Transformation and robustness checks
+
+See more here:   
+→ [🛡️](tai-transform.html)
+
+```{r message = FALSE, fig.height=5, fig.width=8, fig.alt="plot_signature_transformed function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_signature_transformed(
+  example_phyex_set)
+```
+
+```{r message = FALSE, fig.height=5, fig.width=8, fig.alt="plot_signature_gene_quantiles function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_signature_gene_quantiles(
+  example_phyex_set)
+```
+
+
+#### Statistical tests and plotting results
+
+See more here:   
+→ [📈](tai-stats.html)
+
+```{r echo=FALSE}
+#### IMPORTANT & potentially TEMPORARY
+#### I have to add this or else print and plot doesn't interact with the S7 object well.
+S7::method(plot, TestResult) <- function(test_result) {
+    library(ggplot2)
+    p <- ggplot(data.frame(x = test_result@null_sample),
+                aes(x = x)) +
+        geom_histogram(
+            aes(y = after_stat(density), fill = "Null Sample"),
+            bins = 100,
+            alpha = 0.7,
+            colour = "gray66") +
+        geom_vline(
+            aes(xintercept = test_result@test_stat, colour = "Test Statistic"),
+            linewidth = 1) +
+        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, aes(colour = "Fitted Null")) +
+        scale_fill_manual(name = NULL, values = c("Null Sample" = "gray67")) +
+        scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
+        labs(x = "Score", y = "Density") +
+        annotate("text",
+                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
+                   y = max(density(test_result@null_sample)$y) * 0.9,
+                   label = exp_p(test_result@p_value),
+                   parse=TRUE,
+                   hjust = 1,
+                   size = 3.5) +
+        theme_minimal()
+
+    return(p)
+}
+
+S7::method(print, TestResult) <- function(x, ...) {
+    cat("\n")
+    cat("Statistical Test Result\n")
+    cat("=======================\n")
+    cat("Method:", x@method_name, "\n")
+    cat("Test statistic:", x@test_stat, "\n")
+    cat("P-value:", x@p_value, "\n")
+    cat("Alternative hypothesis:", x@alternative, "\n")
+    if (!is.null(x@data_name)) {
+        cat("Data:", x@data_name, "\n")
+    }
+    cat("\n")
+    invisible(x)
+}
+```
+
+```{r message = FALSE, warning = FALSE, fig.height=3, fig.width=5, fig.alt="stat_flatline_test function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::stat_flatline_test(
+  example_phyex_set, plot_result = TRUE)
+```
+
+
+```{r message = FALSE, warning = FALSE}
+res_flt <- myTAI::stat_flatline_test(example_phyex_set, plot_result = FALSE)
+```
+
+```{r message = FALSE, warning = FALSE, fig.height=5, fig.width=5, fig.alt="plot_cullen_frey function output for stat_flatline_test", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_cullen_frey(res_flt)
+```
+
+```{r message = FALSE, warning = FALSE, fig.height=5, fig.width=5, fig.alt="plot_null_txi_sample function output for stat_flatline_test", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_null_txi_sample(res_flt) +
+  ggplot2::guides(x =  guide_axis(angle = 90))
+```
+
+```{r message = FALSE, warning = FALSE, fig.height=3, fig.width=5, fig.alt="stat_reductive_hourglass_test function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+module_info <- list(early = 1:3, mid = 4:6, late = 7:8)
+myTAI::stat_reductive_hourglass_test(
+  example_phyex_set, plot_result = TRUE,
+  modules = module_info)
+```
+
+#### Average gene expression level by phylostratum
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_strata_expression function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_strata_expression(example_phyex_set)
+```
+
+
+`plot_strata_expression` with scaled y axis
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_strata_expression function output ggplot2", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_strata_expression(example_phyex_set) +
+  ggplot2::scale_y_log10() +
+  ggplot2::labs(x = "Expression aggregated by mean (log-scaled)")
+```
+
+`plot_strata_expression` with explicit transformation
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=8, fig.alt="plot_strata_expression function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+library(patchwork)
+p1 <- myTAI::plot_strata_expression(example_phyex_set |> myTAI::tf(log1p))
+
+# equivalent to 
+p2 <- example_phyex_set |> myTAI::tf(log1p) |> myTAI::plot_strata_expression() 
+
+p1+p2
+```
+
+As you can see, both plots are identical. This example demonstrates that there are multiple ways to achieve the same result through piping (`|>`) operator in R. `|>` is basically the same as `%>%`.
+
+#### Contribution to the overall TAI by phylostratum
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_contribution function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_contribution(example_phyex_set)
+```
+
+Curious about methods to obtain gene age information? See more here:   
+→ [📚](phylostratigraphy.html) 
+
+For other analogous methods to assign evolutionary or expression information to each gene for TDI, TSI etc., see here:  
+→ [🧬](other-strata.html) 
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=8, fig.alt="plot_distribution_expression function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_distribution_expression(example_phyex_set)
+```
+
+
+#### Contribution to the overall TAI by partial TAI (pTAI)
+
+`pTAI`, or
+
+$$
+\mathrm{pTAI}_i = \frac{\mathrm{ps}_i \cdot e_{is}}{\sum_{i=1}^{n} e_{is}}
+$$
+
+where \( e_{is} \) denotes the expression level of a given gene \() i \) in sample \( s \), \( {ps}_i \) is its gene age assignment, and \( n \) is the total number of genes, is the per-gene contribution to the overall `TAI`. (Summing `pTAI` across all genes gives in a given sample  \( s \) gives the overall \( {TAI}_s \) )
+
+`pTAI` QQ plot compares the partial TAI distributions of various developmental stages against a reference stage (default is stage 1).
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=6, fig.width=9, fig.alt="plot_distribution_pTAI_qqplot function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_distribution_pTAI_qqplot(example_phyex_set)
+```
+
+#### Phylostratum distribution
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_distribution_strata function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_distribution_strata(example_phyex_set@strata) /
+myTAI::plot_distribution_strata(
+  example_phyex_set@strata,
+  selected_gene_ids = myTAI::genes_top_variance(example_phyex_set, p = 0.95),
+  as_log_obs_exp = TRUE
+) + plot_annotation(title = "Distribution of gene ages (top), Observed vs Expected plot of top 5% variance genes (bottom)")
+```
+
+
+#### Expression heatmap
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=12, fig.width=12, fig.alt="plot_gene_heatmap function output default", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_gene_heatmap(example_phyex_set)
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=12, fig.width=12, fig.alt="plot_gene_heatmap function output clustered", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_gene_heatmap(example_phyex_set, cluster_rows = TRUE, show_reps=TRUE, show_gene_ids=TRUE, top_p=0.005)
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=12, fig.width=10, fig.alt="plot_gene_heatmap function output nonstd", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_gene_heatmap(example_phyex_set, cluster_rows = TRUE, show_reps=TRUE, top_p=0.005, std=FALSE, show_gene_ids=TRUE)
+```
+
+#### Dimension reduction
+
+##### At the gene level
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_gene_space function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_gene_space(example_phyex_set)
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_gene_space function output by strata", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_gene_space(example_phyex_set,colour_by = "strata")
+```
+
+##### At the sample level
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=12, fig.alt="plot_sample_space function output by TXI", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_sample_space(example_phyex_set) | myTAI::plot_sample_space(example_phyex_set, colour_by = "TXI")
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_sample_space function output by TXI", dev.args = list(bg = 'transparent'), fig.align='center'}
+# we can even do a UMAP
+myTAI::plot_sample_space(example_phyex_set, method = "UMAP")
+```
+
+#### Inspecting mean-variance relationship
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=3, fig.width=8, fig.alt="plot_mean_var function output simple vs highlighted", dev.args = list(bg = 'transparent'), fig.align='center'}
+
+# highlighting top variance genes
+top_var_genes <- myTAI::genes_top_variance(example_phyex_set, p = 0.9995)
+p1 <- myTAI::plot_mean_var(example_phyex_set)
+p2 <- myTAI::plot_mean_var(example_phyex_set, 
+                     highlight_genes = top_var_genes)
+
+p1 + p2 + plot_annotation(title = "Mean-variance: simple vs. highlighted top variance genes")
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=3, fig.width=6, fig.alt="plot_gene_space function output log transform coloured by strata", dev.args = list(bg = 'transparent'), fig.align='center'}
+# with log transform and colouring by phylostratum
+myTAI::plot_mean_var(example_phyex_set |> myTAI::tf(log1p), 
+                     colour_by = "strata") +
+  ggplot2::guides(colour = guide_legend(ncol=2))
+```
+
+#### Individual gene expression profiles
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=12, fig.alt="plot_gene_profiles function output manual vs strata coloring", dev.args = list(bg = 'transparent'), fig.align='center'}
+# side by side: manual coloring vs strata coloring
+p1 <- myTAI::plot_gene_profiles(example_phyex_set, max_genes = 10, colour_by = "manual")
+p2 <- myTAI::plot_gene_profiles(example_phyex_set, max_genes = 10, colour_by = "strata")
+
+p1 + p2 + plot_annotation(title = "Gene profiles: manual vs. strata coloring")
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_gene_profiles function output stage std_log transformation", dev.args = list(bg = 'transparent'), fig.align='center'}
+# stage colouring with standardized log transformation
+myTAI::plot_gene_profiles(example_phyex_set, max_genes = 10, 
+                          transformation = "std_log", colour_by = "stage")
+```
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=12, fig.alt="plot_gene_profiles function output faceted by strata", dev.args = list(bg = 'transparent'), fig.align='center'}
+# faceted by phylostratum
+myTAI::plot_gene_profiles(example_phyex_set, max_genes = 1000, 
+                          colour_by = "strata", facet_by_strata = TRUE, show_set_mean = TRUE,
+                          show_labels = FALSE)
+```
+
+::: {.tip}
+These plots are examples of plots that `myTAIv2` can generate. To check out the functions, use `?` before the function (i.e. `?myTAI::plot_mean_var()`.
+
+You can also find a list of plotting functions in [`Reference`](../reference/index.html).
+:::
+
+### Single cell RNA-seq data
+
+Most of the plotting functions shown above also apply for single cell RNA-seq data, as long as it is a `ScPhyloExpressionSet` object.
+
+Plot away!
+

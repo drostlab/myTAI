@@ -1,0 +1,111 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+<br/><br/>
+
+<br/><br/>
+
+<br/><br/>
+
+<p style="font-family: 'Fira Mono', monospace; font-size: 2.5rem;">
+# 1. Install **myTAI**
+</p>
+
+```{r, echo = FALSE, message = FALSE}
+library(myTAI)
+options(width = 750)
+knitr::opts_chunk$set(
+  comment = "#>",
+  error = FALSE,
+  tidy = FALSE)
+```
+
+```R
+# from CRAN
+install.packages("myTAI", dependencies = TRUE)
+
+# or, the developer version containing the newest features
+devtools::install_github("drostlab/myTAI")
+
+# make sure myTAI version is > 2.0.0
+packageVersion("myTAI")
+```
+
+<br/><br/>
+
+<br/><br/>
+
+<br/><br/>
+
+<p style="font-family: 'Fira Mono', monospace; font-size: 2.5rem;">
+# 2. Run **myTAI**
+</p>
+
+```{r message = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+library(myTAI)
+# obtain an example phylo-expression object
+data("example_phyex_set")
+# plot away!
+myTAI::plot_signature(example_phyex_set)  
+```
+
+<br/><br/>
+
+<br/><br/>
+
+<br/><br/>
+
+<p style="font-family: 'Fira Mono', monospace; font-size: 2.5rem;">
+# 3. Enjoy 🍹
+</p>
+<p style="font-family: 'Fira Mono', monospace; font-size: 1.5rem;">
+(and don't forget to [cite](https://academic.oup.com/bioinformatics/article/34/9/1589/4772684))
+</p>
+
+<br/><br/>
+
+<br/><br/>
+
+<br/><br/>
+
+<br/><br/>
+
+<p style="font-family: 'Fira Mono', monospace; font-size: 1.5rem;">
+Want to use myTAI on your data?   
+→ click on the icons 🧚 below.
+</p>
+
+---
+
+<p style="font-family: 'Fira Mono', monospace; font-size: 1.5rem;">
+[📊](phylo-expression-object.html) Bring your datasets into myTAI.  
+[📈](tai-stats.html) Statistical analyses → learn about our permutation tests.  
+[🛡️](tai-transform.html) Check the robustness of your patterns.  
+[🔨](tai-breaker.html) Destroy the hourglass! → `gaTAI` functions to extract the genes that drive your evolutionary transcriptomic patterns.  
+[📚](phylostratigraphy.html) Read about gene age inference (phylostratigraphy) and transcriptome age index.   
+[🌄](tai-gallery.html) Check out our gallery of example plots + functions.    
+</p>
+
+---
+
+<br/><br/>
+
+<br/><br/>
+
+<br/><br/>
+
+<p style="font-family: 'Fira Mono', monospace; font-size: 1.5rem;">
+Want to learn even more?   
+→ check out our vignettes under the [`Articles`](index.html) tab or the [`Reference`](../reference/index.html) tab for a list of functions and their documentation.
+</p>
+
+<br/><br/>
+
+<br/><br/>
+
+<br/><br/>

@@ -134,7 +134,7 @@ S7::method(plot, TestResult) <- function(test_result) {
         scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
         labs(x = "Score", y = "Density") +
         annotate("text",
-                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
+                   x = test_result@test_stat + 0.05 * diff(range(test_result@null_sample)),
                    y = max(density(test_result@null_sample)$y) * 0.9,
                    label = exp_p(test_result@p_value),
                    parse=TRUE,

@@ -179,7 +179,7 @@ plot_gene_profiles <- function(phyex_set,
         }
         
         p <- p + ggrepel::geom_text_repel(data = df_labels,
-                                          aes(x = Identity, y = Expression, label = GeneID, colour = GeneID),
+                                          aes(x = Identity, y = Expression, label = GeneID, colour = ColourVar),
                                           inherit.aes = FALSE,
                                           size = label_size, max.overlaps=20, 
                                           box.padding = 0.5, point.padding = 0.5,

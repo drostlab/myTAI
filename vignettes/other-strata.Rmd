@@ -1,0 +1,202 @@
+---
+title: "Other evolutionary and expression indices"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Other evolutionary and expression indices}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+## Motivation for non-TAI approaches
+
+So far, most of the vignettes have focused on workflows and discussions centred around the transcriptome age index (TAI). However, we can also assign other information for each gene (analogous to gene age in TAI). Examples include [`TDI`](https://www.nature.com/articles/nature11394), [`TSI`](https://www.nature.com/articles/s41586-024-08059-8), [`TPI`](https://academic.oup.com/mbe/article/33/7/1669/2578492) and so on (though the names of these indices can differ between studies and are thus not standardised).
+
+In the sections below, we describe the workflow for the transcriptome divergence index (TDI) and transcriptome specificity index (TSI). These and other index-based methods use the same framework as TAI, aside from the method to give a factor or numeric value to each gene (e.g. gene age for TAI).
+
+:::{.note}
+The good news is that `myTAIv2` is rather flexible; both `BulkPhyloExpressionSet` and `ScPhyloExpressionSet` objects can accommodate other indices, along with most of the `myTAIv2` functions.
+
+Users can simply follow the workflow outlined in [statistical tests](tai-stats.html), [transformations](tai-transform.html) along with most of the [plotting functionalities](tai-gallery.html), using non-TAI data.
+:::
+
+```{r echo=FALSE}
+library(myTAI); library(S7)
+#### IMPORTANT & potentially TEMPORARY
+#### I have to add this or else print and plot doesn't interact with the S7 object well.
+S7::method(plot, TestResult) <- function(test_result) {
+    library(ggplot2)
+    p <- ggplot(data.frame(x = test_result@null_sample),
+                aes(x = x)) +
+        geom_histogram(
+            aes(y = after_stat(density), fill = "Null Sample"),
+            bins = 100,
+            alpha = 0.7,
+            colour = "gray66") +
+        geom_vline(
+            aes(xintercept = test_result@test_stat, colour = "Test Statistic"),
+            linewidth = 1) +
+        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, aes(colour = "Fitted Null")) +
+        scale_fill_manual(name = NULL, values = c("Null Sample" = "gray67")) +
+        scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
+        labs(x = "Score", y = "Density") +
+        annotate("text",
+                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
+                   y = max(density(test_result@null_sample)$y) * 0.9,
+                   label = exp_p(test_result@p_value),
+                   parse=TRUE,
+                   hjust = 1,
+                   size = 3.5) +
+        theme_minimal()
+
+    return(p)
+}
+
+S7::method(print, TestResult) <- function(x, ...) {
+    cat("\n")
+    cat("Statistical Test Result\n")
+    cat("=======================\n")
+    cat("Method:", x@method_name, "\n")
+    cat("Test statistic:", x@test_stat, "\n")
+    cat("P-value:", x@p_value, "\n")
+    cat("Alternative hypothesis:", x@alternative, "\n")
+    if (!is.null(x@data_name)) {
+        cat("Data:", x@data_name, "\n")
+    }
+    cat("\n")
+    invisible(x)
+}
+```
+
+## Transcriptome divergence index (TDI)
+
+The `TDI` ([Quint et al., 2012](https://www.nature.com/articles/nature11394)) uses deciled dNdS values for each gene and summarises this information across all genes at a given stage (analogous to TAI) to quantify the overall transcriptome 'divergence'.
+
+:::{.note}
+For the vast majority of genes, the dNdS values are below 1 (i.e. purifying selection). Therefore, while TDI is called transcriptome *divergence* index, TDI can be thought to capture the degree of purifying selection ([Lotharukpong et al. 2024](https://www.nature.com/articles/s41586-024-08059-8)). 
+:::
+
+R packages such as [`orthologr`](https://github.com/drostlab/orthologr) can facilitate dNdS estimation and [divergence-stratigraphy](https://drostlab.github.io/orthologr/articles/divergence_stratigraphy.html) computation used in the TDI approach.
+
+<details> <summary>Example TDI workflow using mock data</summary>
+
+Assuming that we have the [divergence strata](https://drostlab.github.io/orthologr/articles/divergence_stratigraphy.html), similar to `TAI`, `TDI` is calculated as:
+
+$$
+{TDI}_s = \frac{\sum_{i=1}^{n} {ds}_i \cdot e_{is}}{\sum_{i=1}^{n} e_{is}}
+$$
+
+where \( e_{is} \) is the expression level of gene \( i \) at a given sample \( s \) (e.g. a biological replicate for a developmental stage), and \( {ds}_i \) is the evolutionary age of gene \( i \).  
+
+Like TAI, for developmental time-course data, \( {TDI}_s \) can be grouped for each stage (if replicate data exists) and compared across developmental stages to obtain the overall TDI profile.  
+For pairwise comparisons (see [📈](tai-stats.html)), \( {TDI}_s \) can be grouped as one of the conditions to be compared.  
+For single cell data, (see [📊](phylo-expression-object.html)), \( {TDI}_s \) is the TDI for a given cell or cell type (if pseudo-bulked).  
+
+### Mock bulk RNA-seq dataset for TDI
+
+```{r message = FALSE}
+library(myTAI); library(S7)
+data("example_phyex_set_old")
+```
+
+Now we create the mock dataset, where we assign a value between 1 and 10 for all genes. This is the same distribution of values as the `divergence strata`.
+
+```{r message = FALSE}
+# this is a mock divergence strata dataset
+# we assign a value between 1 and 10 for all genes
+gene_names <- example_phyex_set_old@gene_ids
+example_divergence_strata <- 
+    setNames(sample(1:10, length(gene_names), replace = TRUE), gene_names) |>
+    as.factor()
+# mock expression data taken from example_phyex_set_old@.expression
+example_expression <- 
+    example_phyex_set_old@.expression |> 
+    as.data.frame() |> 
+    tibble::rownames_to_column(var = "GeneID")
+```
+
+Now we construct the input data.frame for `as_BulkPhyloExpressionSet()`
+
+```{r message = FALSE}
+example_phyex_set_tdi.df <-
+    data.frame(phylorank = example_divergence_strata) |>
+    tibble::rownames_to_column(var = "GeneID") |>
+    dplyr::select(phylorank, GeneID) |>
+    dplyr::left_join(example_expression, by = "GeneID")
+```
+
+Create the `BulkPhyloExpressionSet`.
+
+```{r message = FALSE}
+example_phyex_set_tdi <- 
+    myTAI::as_BulkPhyloExpressionSet(
+        example_phyex_set_tdi.df,
+        name = "Example TDI data",
+        index_type = "TDI")
+```
+
+plot away!
+
+```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot signature function output for mock TDI data", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::plot_signature(example_phyex_set_tdi)
+```
+
+Looks interesting right?
+
+... although as you can expect from the `myTAI::stat_flatline_test()`, because we assigned random values, the overall pattern doesn't deviate from a flat line.
+
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=3, fig.width=5, fig.alt="stat_flatline_test function output", dev.args = list(bg = 'transparent'), fig.align='center'}
+myTAI::stat_flatline_test(example_phyex_set_tdi)
+```
+
+</details>
+
+:::{.note}
+The dNdS values are not without issues. For example, it is important to choose an appropriate evolutionary distance to pairwise align and compare nucleotide sequences. Too close results in no meaningful substitution and too distant results in saturation. To overcome this, similar measures to the dNdS can be computed from MSAs.
+:::
+
+## Transcriptome specificity index (TSI)
+
+The `TSI` ([Lotharukpong et al., 2024](https://www.nature.com/articles/s41586-024-08059-8)) uses expression breadth/specificity information that can be obtained for each gene and summarises this information across all genes at a given stage (analogous to TAI) to quantify the overall transcriptome 'specificity'.
+
+Similar to `TAI`, `TSI` is calculated as:
+
+$$
+{TSI}_s = \frac{\sum_{i=1}^{n} {ts}_i \cdot e_{is}}{\sum_{i=1}^{n} e_{is}}
+$$
+
+where \( e_{is} \) is the expression level of gene \( i \) at a given sample \( s \) (e.g. a biological replicate for a developmental stage), and \( {ts}_i \) is the evolutionary age of gene \( i \).  
+
+Like TAI, for developmental time-course data, \( {TSI}_s \) can be grouped for each stage (if replicate data exists) and compared across developmental stages to obtain the overall TSI profile.  
+For pairwise comparisons (see [📈](tai-stats.html)), \( {TSI}_s \) can be grouped as one of the conditions to be compared.  
+For single cell data, (see [📊](phylo-expression-object.html)), \( {TSI}_s \) is the TSI for a given cell or cell type (if pseudo-bulked).  
+
+Thus, TSI represents the expression-weighted mean gene expression specificity.
+
+:::{.tip}
+You can re-use the same workflow as for TDI that we have shown above. The only differences are that (1) you need to give each gene the expression specificity score and not divergence strata, and (2) you will be using real data not the mock dataset!
+:::
+
+For TSI, accurate inference of expression specificity is key.
+
+According to [Kryuchkova-Mostacci & Robinson-Rechavi, 2017](https://academic.oup.com/bib/article/18/2/205/2562739):
+
+> Tau appears consistently to be the most robust method in our analyses.
+
+Thus, we recommend the *tau* (or \tau) score as introduced by [Yanai et al. 2005](https://academic.oup.com/bioinformatics/article/21/5/650/220059) as a measure of expression specificity, though other measures exist (e.g. those based on information entropy). You can also decile the *tau* values (similar to deciled dNdS for divergence-strata) to enable analogous comparisons to TAI.
+
+:::{.important}
+Regardless of the measures chosen for expression specificity/breadth, the estimates improve with data quality (i.e. number of RNA-seq samples) and quantity (i.e. diversity of the sampling such as multiple tissues and stages, and low or no technical noise).
+:::
+
+## Transcriptome {insert your idea} index
+
+Using two examples (TDI and TSI), we went through different (non-TAI) evolutionary and expression indices that can be used for evolutionary transcriptomics studies. As long as the computation follows the form \( {TxI}_s = \frac{\sum_{i=1}^{n} {x}_i \cdot e_{is}}{\sum_{i=1}^{n} e_{is}} \), where \( x \) is a value (factor or numeric) assigned to each gene, you can even invent new 'indices'.
+
+Looking forward to seeing what can be done!
+
+## Summary
+
+You might wonder - why so many transcriptome indices? TAI, TDI, TSI, TPI and other such indices provide **complementary** views on the transcriptome evolution patterns. For more details on their biological interpretation, please check these studies for [`TAI`](https://www.nature.com/articles/nature09632), [`TDI`](https://www.nature.com/articles/nature11394), [`TSI`](https://www.nature.com/articles/s41586-024-08059-8), [`TPI`](https://academic.oup.com/mbe/article/33/7/1669/2578492), etc.
+
+:::{.tip}
+If you are using different indices, it is important to check that the gene-level values assigned (e.g. age, divergence-stratum) are not strongly correlated. High correlation means that the resulting indices do **not provide complementary** information (i.e. not reflect different biological aspects).
+:::

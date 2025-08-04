@@ -12,14 +12,19 @@
 #'   \item{rank}{Rank transformation within each sample}
 #' }
 #' @export
-COUNT_TRANSFORMS <- list(
-    "none" = identity,
-    "sqrt" = sqrt,
-    "log2" = \(x) log2(x+1),
-    "vst" = \(x) DESeq2::vst(round(x, digits=0)),
-    "rlog" = \(x) DESeq2::rlogTransformation(round(x, digits=0)),
-    "rank" = \(x) apply(x, 2, base::rank)
-)
+COUNT_TRANSFORMS <- {
+    ct <- list(
+        "none" = identity,
+        "sqrt" = sqrt,
+        "log2" = \(x) log2(x+1),
+        "rank" = \(x) apply(x, 2, base::rank)
+    )
+    if (requireNamespace("DESeq2", quietly = TRUE)) {
+        ct[["vst"]] <- \(x) DESeq2::vst(round(x, digits=0))
+        ct[["rlog"]] <- \(x) DESeq2::rlogTransformation(round(x, digits=0))
+    }
+    ct
+}
 
 #' @title Plot Signature Under Different Transformations
 #' @description Compare transcriptomic signatures under various data transformations
