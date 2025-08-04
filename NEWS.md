@@ -1,5 +1,19 @@
 # NEWS
 
+myTAI 2.2.0.9006
+===========
+
+Most importantly, new vignettes were added and the website has been updated. Many thanks to @LotharukpongJS
+
+Functionality wise:
+
+- added more input validation across functions
+- improved plotting in `destroy_pattern`
+- renamed `tfPS` to `tf_PS` and fixed bug which prevented strata transformations from happening (PhyloExpressionSet now has an extra field @strata_values which keeps track of the phylostratum values)
+- added back standard deviation ribbon to plot_signature
+- finer control over cell identity selection in the sc object
+- fixed bugs in some of the plotting functions, such as plot_signature_multiple showing the colours in reverse, plot_genes_heatmap not working when given just one gene etc.
+
 myTAI 2.1.0.9000
 ===========
 
