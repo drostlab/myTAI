@@ -64,6 +64,8 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
 #' @param cluster_cols Logical indicating whether to cluster identities/columns (default: FALSE)
 #' @param show_gene_age Logical indicating whether to show gene age as row annotation (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene names (default: FALSE)
+#' @param annotation_col Data frame with column annotations (default: NULL)
+#' @param annotation_col_colors List of colors for column annotations (default: NULL)
 #' @param ... Additional arguments passed to pheatmap::pheatmap
 #' 
 #' @return A ggplot object showing the gene expression heatmap
@@ -80,6 +82,8 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
                                    cluster_cols = FALSE,
                                    show_gene_age = TRUE,
                                    show_gene_ids = FALSE,
+                                   annotation_col = NULL,
+                                   annotation_col_colors = NULL,
                                    ...) {
     
     # Apply log transformation
@@ -150,7 +154,8 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
         show_colnames = TRUE,
         color = color_palette,
         annotation_row = annotation_row,
-        annotation_colors = annotation_colors,
+        annotation_col = annotation_col,
+        annotation_colors = c(annotation_colors, annotation_col_colors),
         fontsize_row = 5,
         silent = TRUE,
         ...
@@ -210,9 +215,29 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
                                                                ...) {
     
     # Select expression data
+    cell_type_annotation <- NULL
     if (show_reps) {
         # Use downsample_expression to get a dense matrix of sampled cells
-        expression_matrix <- downsample_expression(phyex_set, downsample = max_cells_per_type)
+        # First downsample the Seurat object to get cell information
+        seurat_downsampled <- subset(phyex_set@seurat, downsample = max_cells_per_type)
+        expression_matrix <- as.matrix(.get_expression_matrix(seurat_downsampled, phyex_set@layer))
+        
+        # Extract cell type information for column annotations
+        cell_types <- as.character(Seurat::Idents(seurat_downsampled))
+        names(cell_types) <- colnames(seurat_downsampled)
+        
+        # Use the current identities label as the column name
+        annotation_col_name <- phyex_set@identities_label
+        cell_type_annotation <- data.frame(
+            row.names = colnames(expression_matrix)
+        )
+        cell_type_annotation[[annotation_col_name]] <- cell_types[colnames(expression_matrix)]
+        
+        # Sort expression matrix columns by cell type to group cells together
+        cell_type_order <- order(cell_type_annotation[[annotation_col_name]])
+        expression_matrix <- expression_matrix[, cell_type_order, drop = FALSE]
+        cell_type_annotation <- cell_type_annotation[cell_type_order, , drop = FALSE]
+        
         # Warn about subsampling
         total_cells <- length(phyex_set@groups)
         n_selected <- ncol(expression_matrix)
@@ -222,6 +247,28 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
         }
     } else {
         expression_matrix <- phyex_set@expression_collapsed
+    }
+
+    # Create column annotation colors if we have cell type annotations
+    annotation_col_colors <- NULL
+    if (!is.null(cell_type_annotation)) {
+        # Get the annotation column name (should match identities_label)
+        annotation_col_name <- names(cell_type_annotation)[1]
+        
+        # Get or create colors for cell types
+        cell_type_levels <- unique(cell_type_annotation[[annotation_col_name]])
+        if (!is.null(phyex_set@identity_colours) && phyex_set@identities_label %in% names(phyex_set@identity_colours)) {
+            # Use existing colors if available
+            cell_type_colors <- phyex_set@identity_colours[[phyex_set@identities_label]]
+        } else {
+            # Generate default colors
+            cell_type_colors <- scales::hue_pal()(length(cell_type_levels))
+            names(cell_type_colors) <- cell_type_levels
+        }
+        
+        # Create the annotation colors list with the dynamic column name
+        annotation_col_colors <- list()
+        annotation_col_colors[[annotation_col_name]] <- cell_type_colors
     }
 
     # Call shared implementation
@@ -237,6 +284,8 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
         cluster_cols = cluster_cols,
         show_gene_age = show_gene_age,
         show_gene_ids = show_gene_ids,
+        annotation_col = cell_type_annotation,
+        annotation_col_colors = annotation_col_colors,
         ...
     )
 }

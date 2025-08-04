@@ -13,6 +13,7 @@
 #' @param precomputed_null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' @param seurat A Seurat object containing single-cell expression data
 #' @param layer Character string specifying which layer to use from the Seurat object (default: "data")
+#' @param identity_colours A list of named character vectors, each corresponding to a particular cell identity/metadata column (default: empty list)
 #' 
 #' @import S7
 #' @export
@@ -53,6 +54,12 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
         ),
         cell_metadata = new_property(
             getter = function(self) self@seurat@meta.data
+        ),
+        
+        ## CUSTOM COLORS FOR IDENTITIES
+        identity_colours = new_property(
+            class = class_list,
+            default = list()
         )
     )
 )
@@ -419,7 +426,7 @@ set_identities <- function(phyex_set, identity_name) {
             )
         )
     }
-    Idents(phyex_set@seurat) <- identity_name
+    Seurat::Idents(phyex_set@seurat) <- identity_name
     phyex_set@identities_label <- identity_name
     phyex_set
 }
@@ -441,6 +448,53 @@ reorder_identities <- function(phyex_set, new_order) {
         )
     }
     Seurat::Idents(phyex_set@seurat) <- factor(current_idents, levels = new_order)
+    phyex_set
+}
+
+#' @title Set Identity Colours for ScPhyloExpressionSet
+#' @description Set custom colours for one or more identity columns in the ScPhyloExpressionSet object.
+#' @param phyex_set A ScPhyloExpressionSet object
+#' @param identity_name Character, name of the metadata column to set colours for
+#' @param colours Named character vector of colours where names correspond to identity values
+#' @return ScPhyloExpressionSet object with updated identity colours
+#' @examples
+#' # Set colours for specific identity
+#' # colours <- c("TypeA" = "red", "TypeB" = "blue", "TypeC" = "green")
+#' # sc_set <- set_identity_colours(sc_set, "groups", colours)
+#' @export
+set_identity_colours <- function(phyex_set, identity_name, colours) {
+    check_ScPhyloExpressionSet(phyex_set)
+    
+    # Validate identity_name exists
+    available <- available_identities(phyex_set)
+    if (!(identity_name %in% available)) {
+        stop(
+            sprintf(
+                "Identity '%s' not found in metadata. Available options are: %s",
+                identity_name, paste(available, collapse = ", ")
+            )
+        )
+    }
+    
+    # Validate colours is a named character vector
+    if (!is.character(colours) || is.null(names(colours))) {
+        stop("Colours must be a named character vector")
+    }
+    
+    # Get current identity values to check if all are covered
+    identity_values <- unique(phyex_set@cell_metadata[[identity_name]])
+    missing_colours <- setdiff(identity_values, names(colours))
+    if (length(missing_colours) > 0) {
+        warning(
+            sprintf(
+                "Colours not provided for identity values: %s. These will use default colours.",
+                paste(missing_colours, collapse = ", ")
+            )
+        )
+    }
+    
+    # Set the colours
+    phyex_set@identity_colours[[identity_name]] <- colours
     phyex_set
 }
 

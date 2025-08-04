@@ -15,7 +15,8 @@ ScPhyloExpressionSet(
   null_conservation_sample_size = 5000L,
   precomputed_null_conservation_txis = NULL,
   seurat = stop("@seurat is required"),
-  layer = "counts"
+  layer = "counts",
+  identity_colours = list()
 )
 }
 \arguments{

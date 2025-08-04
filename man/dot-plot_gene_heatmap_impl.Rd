@@ -16,6 +16,8 @@
   cluster_cols = FALSE,
   show_gene_age = TRUE,
   show_gene_ids = FALSE,
+  annotation_col = NULL,
+  annotation_col_colors = NULL,
   ...
 )
 }
@@ -41,6 +43,10 @@
 \item{show_gene_age}{Logical indicating whether to show gene age as row annotation (default: TRUE)}
 
 \item{show_gene_ids}{Logical indicating whether to show gene names (default: FALSE)}
+
+\item{annotation_col}{Data frame with column annotations (default: NULL)}
+
+\item{annotation_col_colors}{List of colors for column annotations (default: NULL)}
 
 \item{...}{Additional arguments passed to pheatmap::pheatmap}
 }

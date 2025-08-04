@@ -42,6 +42,11 @@ load_example_phyex_set_sc <- function() {
     metadata <- data.frame(
         groups = factor(sample(c("TypeA", "TypeB", "TypeC"), n_cells, replace = TRUE), 
                         levels = c("TypeA", "TypeB", "TypeC"), ordered = TRUE),
+        day = factor(sample(c("Day1", "Day3", "Day5", "Day7"), n_cells, replace = TRUE),
+                     levels = c("Day1", "Day3", "Day5", "Day7"), ordered = TRUE),
+        condition = factor(sample(c("Control", "Treatment"), n_cells, replace = TRUE),
+                          levels = c("Control", "Treatment")),
+        batch = factor(sample(c("Batch1", "Batch2", "Batch3"), n_cells, replace = TRUE)),
         nCount_RNA = colSums(counts),
         nFeature_RNA = colSums(counts > 0),
         row.names = colnames(counts)
@@ -73,6 +78,9 @@ load_example_phyex_set_sc <- function() {
         layer = "counts",
         name = "Single Cell Example"
     )
+    
+    # Set the correct identities label to match what we actually set in Seurat
+    example_phyex_set_sc@identities_label <- "groups"
 
     return(example_phyex_set_sc)
 }

@@ -231,3 +231,129 @@ test_that("ScPhyloExpressionSet edge cases work", {
     p_small_heat <- plot_gene_heatmap(small_sc_set, genes = small_genes)
     expect_s3_class(p_small_heat, "ggplot")
 })
+
+test_that("plot_signature with flexible identities works", {
+    skip_if_not_installed("Seurat")
+    skip_if(is.null(tryCatch(example_phyex_set_sc, error = function(e) NULL)), 
+            "example_phyex_set_sc not available")
+    
+    # Test basic plot with default identity
+    p1 <- plot_signature(example_phyex_set_sc)
+    expect_s3_class(p1, "ggplot")
+    
+    # Test with primary identity specified
+    p2 <- plot_signature(example_phyex_set_sc, primary_identity = "day")
+    expect_s3_class(p2, "ggplot")
+    
+    # Test with both primary and secondary identity (coloring)
+    p3 <- plot_signature(example_phyex_set_sc, 
+                        primary_identity = "day", 
+                        secondary_identity = "condition")
+    expect_s3_class(p3, "ggplot")
+    
+    # Test with faceting by secondary identity
+    p4 <- plot_signature(example_phyex_set_sc, 
+                        primary_identity = "day", 
+                        secondary_identity = "condition",
+                        facet_by_secondary = TRUE)
+    expect_s3_class(p4, "ggplot")
+    
+    # Test with show_reps = FALSE
+    p5 <- plot_signature(example_phyex_set_sc, 
+                        primary_identity = "batch",
+                        show_reps = FALSE)
+    expect_s3_class(p5, "ggplot")
+})
+
+test_that("plot_signature identity validation works", {
+    skip_if_not_installed("Seurat")
+    skip_if_not_installed("ggforce")
+    skip_if(is.null(tryCatch(example_phyex_set_sc, error = function(e) NULL)), 
+            "example_phyex_set_sc not available")
+    
+    # Test error for invalid primary identity
+    expect_error(
+        plot_signature(example_phyex_set_sc, primary_identity = "nonexistent"),
+        "Primary identity 'nonexistent' not found in metadata"
+    )
+    
+    # Test error for invalid secondary identity
+    expect_error(
+        plot_signature(example_phyex_set_sc, 
+                      primary_identity = "day",
+                      secondary_identity = "nonexistent"),
+        "Secondary identity 'nonexistent' not found in metadata"
+    )
+})
+
+test_that("available_identities function works", {
+    skip_if_not_installed("Seurat")
+    skip_if(is.null(tryCatch(example_phyex_set_sc, error = function(e) NULL)), 
+            "example_phyex_set_sc not available")
+    
+    identities <- available_identities(example_phyex_set_sc)
+    expect_type(identities, "character")
+    expect_true(length(identities) > 0)
+    expect_true("groups" %in% identities)
+    expect_true("day" %in% identities)
+    expect_true("condition" %in% identities)
+    expect_true("batch" %in% identities)
+})
+
+test_that("set_identity_colours function works", {
+    skip_if_not_installed("Seurat")
+    skip_if(is.null(tryCatch(example_phyex_set_sc, error = function(e) NULL)), 
+            "example_phyex_set_sc not available")
+    
+    # Test setting colours for groups identity
+    colours <- c("TypeA" = "red", "TypeB" = "blue", "TypeC" = "green")
+    sc_set_coloured <- set_identity_colours(example_phyex_set_sc, "groups", colours)
+    
+    expect_s7_class(sc_set_coloured, myTAI::ScPhyloExpressionSet)
+    expect_true(length(sc_set_coloured@identity_colours) > 0)
+    expect_equal(sc_set_coloured@identity_colours[["groups"]], colours)
+    
+    # Test setting colours for day identity
+    day_colours <- c("Day1" = "lightblue", "Day3" = "blue", "Day5" = "darkblue", "Day7" = "navy")
+    sc_set_day_coloured <- set_identity_colours(example_phyex_set_sc, "day", day_colours)
+    
+    expect_s7_class(sc_set_day_coloured, myTAI::ScPhyloExpressionSet)
+    expect_equal(sc_set_day_coloured@identity_colours[["day"]], day_colours)
+    
+    # Test error for invalid identity
+    expect_error(
+        set_identity_colours(example_phyex_set_sc, "nonexistent", colours),
+        "Identity 'nonexistent' not found in metadata"
+    )
+    
+    # Test error for invalid colours format
+    expect_error(
+        set_identity_colours(example_phyex_set_sc, "groups", c("red", "blue", "green")),
+        "Colours must be a named character vector"
+    )
+})
+
+test_that("plot_signature shows color message when using defaults", {
+    skip_if_not_installed("Seurat")
+    skip_if_not_installed("ggforce")
+    skip_if(is.null(tryCatch(example_phyex_set_sc, error = function(e) NULL)), 
+            "example_phyex_set_sc not available")
+    
+    # Test that message is shown when using default colors
+    expect_message(
+        plot_signature(example_phyex_set_sc, primary_identity = "day"),
+        "Using default colors for identity 'day'"
+    )
+    
+    # Test that no message is shown when using custom color parameter
+    expect_silent(
+        plot_signature(example_phyex_set_sc, primary_identity = "day", colour = "red")
+    )
+    
+    # Test that no message is shown when using custom colors from object
+    colors <- c("Day1" = "red", "Day3" = "blue", "Day5" = "green", "Day7" = "purple")
+    sc_set_colored <- set_identity_colours(example_phyex_set_sc, "day", colors)
+    expect_silent(
+        plot_signature(sc_set_colored, primary_identity = "day")
+    )
+})
