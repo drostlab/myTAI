@@ -230,8 +230,7 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
                            color = "black", alpha = 0.4, size = 0.8, 
                            aes(group = 1), show.legend = FALSE) +
                 # Add prominent mean lines for each identity with matching colors
-                stat_summary(fun = mean, geom = "crossbar", aes(color = Secondary),
-                           size = 1.2, width = 0.4, show.legend = FALSE)
+                geom_boxplot(width=0.5, outlier.shape=NA, color="black",  fill="white", alpha=0.5)
         } else {
             # Standard plot - color by primary identity
             p <- ggplot(df_samples, aes(x = Primary, y = TXI, color = Primary)) +
@@ -242,8 +241,7 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
                            color = "black", alpha = 0.4, size = 0.8, 
                            aes(group = 1), show.legend = FALSE) +
                 # Add prominent mean lines for each identity with matching colors
-                stat_summary(fun = mean, geom = "crossbar", aes(color = Primary),
-                           size = 1.2, width = 0.4, show.legend = FALSE)
+                geom_boxplot(width=0.5, outlier.shape=NA, color="black",  fill="white", alpha=0.5)
         }
     } else {
         # Simple plot showing only aggregated TXI values with line

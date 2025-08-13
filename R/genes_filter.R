@@ -33,7 +33,7 @@
 genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
     check_PhyloExpressionSet(phyex_set)
     FUN <- match.fun(FUN)
-    metric_values <- FUN(phyex_set@expression, ...)
+    metric_values <- FUN(phyex_set@expression_collapsed, ...)
     names(metric_values) <- phyex_set@gene_ids
 
     if (p >= 1) {
