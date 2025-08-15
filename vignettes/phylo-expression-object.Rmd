@@ -227,9 +227,9 @@ example_phyex_set.remake |>
 
 #### What if the dataset contains replicates?
 
-<img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;" />
-
 This is exactly the case for the new `example_phyex_set` dataset (not like `example_phyex_set_old`), which contains replicates for each developmental stage. The `as_BulkPhyloExpressionSet()` function can handle this as well, as long as we use the `groups` parameter to specify the grouping of replicates, i.e.
+
+<img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;" />
 
 ```{r message = FALSE}
 data("example_phyex_set") # not data("example_phyex_set_old")

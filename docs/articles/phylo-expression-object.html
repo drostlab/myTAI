@@ -325,19 +325,19 @@ operator, for example:
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [===================                     ] 47%  (~1s remaining)       Computing: [======================================= ] 96%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [=================                       ] 42%  (~1s remaining)       Computing: [====================================    ] 89%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-18-1.png" alt="plot signature function output for bulk RNAseq" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="what-if-the-dataset-contains-replicates">What if the dataset contains replicates?<a class="anchor" aria-label="anchor" href="#what-if-the-dataset-contains-replicates"></a>
 </h4>
-<p><img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <p>This is exactly the case for the new <code>example_phyex_set</code>
 dataset (not like <code>example_phyex_set_old</code>), which contains
 replicates for each developmental stage. The
 <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code> function can handle this as
 well, as long as we use the <code>groups</code> parameter to specify the
 grouping of replicates, i.e.</p>
+<p><img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set"</span><span class="op">)</span> <span class="co"># not data("example_phyex_set_old")</span></span>
 <span><span class="va">example_expression</span> <span class="op">&lt;-</span> </span>
