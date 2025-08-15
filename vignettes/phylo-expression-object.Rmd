@@ -12,6 +12,8 @@ Starting from `myTAIv2`, we moved on from the traditional `data.frame` to the ne
 
 To illustrate this, we will use the example data `example_phyex_set`. The `BulkPhyloExpressionSet` and `ScPhyloExpressionSet` objects are designed to store gene expression data along with associated metadata such as gene age information (or [`phylorank`](phylostratigraphy.html)), experiment type and other relevant properties.
 
+<img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
+
 We will first focus on the `BulkPhyloExpressionSet` object, which is for bulk RNA-seq data.
 
 ```{r message = FALSE}
@@ -280,6 +282,8 @@ If you are interested in single cell RNA-seq data, the process is similar, but y
 
 You can then use the `as_ScPhyloExpressionSet()` function with adjustments to the relevant metadata.
 
+<img src="Figures/myTAI_scphyex.png" alt="scPhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
+
 ```{r message = FALSE, warning=FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 # Load the relevant packages
 library(dplyr)
@@ -293,13 +297,19 @@ pbmc_raw <- read.table(
 
 The input file for `Seurat::CreateSeuratObject()` is a tab-separated file with the first column as gene identifiers and the rest of the columns as expression values for each cell. The `pbmc_raw` object is a data frame with gene expression data.
 
-```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, eval=FALSE}
 head(pbmc_raw)
 ```
+<details> <summary>Show output</summary>
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE), echo=FALSE}
+head(pbmc_raw)
+```
+</details>
+
 
 Now, we create a Seurat object. i.e.
 
-```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 pbmc_small <- CreateSeuratObject(counts = pbmc_raw)
 ```
 
