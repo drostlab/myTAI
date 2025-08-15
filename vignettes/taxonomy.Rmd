@@ -252,11 +252,12 @@ So far, the following data bases can be accesses to retrieve taxonomic informati
 * `db = "itis"` : Integrated Taxonomic Information Service
 * `db = "ncbi"` : National Center for Biotechnology Information
 
-:::{.note}
-**How does the `taxonomy(db = "ncbi")` output differ from `GenEra`?**
+<details>
+  <summary>**How does the `taxonomy(db = "ncbi")` output differ from `GenEra`?**</summary>
 
-The taxonomic classifications should be the same between `taxonomy(..., db = "ncbi")` and `GenEra` output (since it uses NCBI taxdump as input). But it should be noted that the recent updates to NCBI taxonomy has meant that the highest order ranks (cellular root, domain, kingdom etc.) may differ.
-:::
+The taxonomic classifications should be the same between `taxonomy(..., db = "ncbi")` and the taxonomic classifications in the `GenEra` output (since it uses NCBI taxdump as input). But it should be noted that the recent updates to NCBI taxonomy has meant that the highest order ranks (cellular root, domain, kingdom etc.) may differ.
+
+</details>
 
 ## Retrieve Children Nodes
 

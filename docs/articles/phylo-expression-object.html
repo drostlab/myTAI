@@ -113,7 +113,10 @@ Show output
 <span><span class="co">## Number of phylostrata: 19 </span></span>
 <span><span class="co">## Number of samples: 24 </span></span>
 <span><span class="co">## Samples per condition: 3 3 3 3 3 3 3 3</span></span></code></pre>
-</details><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+</details><details><summary>
+More on <code>S7</code> and the <code>BulkPhyloExpressionSet</code>
+object
+</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">S7</span><span class="fu">::</span><span class="fu"><a href="https://rconsortium.github.io/S7/reference/prop_names.html" class="external-link">prop_names</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
@@ -149,7 +152,7 @@ i.e.</p>
 the second run so that you don’t need to wait a couple of seconds again.
 Note, we will get to the <code>stat_flatline_test</code> function in the
 <a href="tai-stats.html">statistical testing vignette</a>.</p>
-<p>But how do you get your <code>.tsv</code> and <code>.csv</code> files
+</details><p>But how do you get your <code>.tsv</code> and <code>.csv</code> files
 and convert your <code>data.frame</code> and <code>tibble</code> to a S7
 <code>BulkPhyloExpressionSet</code> object?</p>
 <div class="note">
@@ -229,10 +232,10 @@ Show output
 <span><span class="co">## 4  861.2605</span></span>
 <span><span class="co">## 5 7772.5617</span></span>
 <span><span class="co">## 6  792.7542</span></span></code></pre>
-As you can see, there is one column as the gene identifier and the rest
-of the columns are the expression values for each developmental stage.
-Instead of developmental stage, one can also use experimental
-conditions, e.g. <code>control</code>, <code>treatment</code>, etc.
+<p>As you can see, there is one column as the gene identifier and the
+rest of the columns are the expression values for each developmental
+stage. Instead of developmental stage, one can also use experimental
+conditions, e.g. <code>control</code>, <code>treatment</code>, etc.</p>
 </details><p>Now we construct the input data.frame for
 <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -322,12 +325,13 @@ operator, for example:
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [====================                    ] 50%  (~1s remaining)       Computing: [========================================] 100%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [===================                     ] 47%  (~1s remaining)       Computing: [======================================= ] 96%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-18-1.png" alt="plot signature function output for bulk RNAseq" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="what-if-the-dataset-contains-replicates">What if the dataset contains replicates?<a class="anchor" aria-label="anchor" href="#what-if-the-dataset-contains-replicates"></a>
 </h4>
+<p><img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <p>This is exactly the case for the new <code>example_phyex_set</code>
 dataset (not like <code>example_phyex_set_old</code>), which contains
 replicates for each developmental stage. The

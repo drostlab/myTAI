@@ -79,6 +79,8 @@ print(example_phyex_set)
 ```
 </details>
 
+<details> <summary>More on `S7` and the `BulkPhyloExpressionSet` object</summary>
+
 ```{r message = FALSE, eval=FALSE}
 S7::prop_names(example_phyex_set)
 ```
@@ -106,6 +108,8 @@ myTAI::stat_flatline_test(example_phyex_set)
 ``` 
 
 you will notice that the permutations are already pre-computed for the second run so that you don't need to wait a couple of seconds again. Note, we will get to the `stat_flatline_test` function in the [statistical testing vignette](tai-stats.html).
+
+</details>
 
 But how do you get your `.tsv` and `.csv` files and convert your `data.frame` and `tibble` to a S7 `BulkPhyloExpressionSet` object?
 
@@ -152,6 +156,7 @@ example_expression |> head()
 example_expression |> head()
 ```
 As you can see, there is one column as the gene identifier and the rest of the columns are the expression values for each developmental stage. Instead of developmental stage, one can also use experimental conditions, e.g. `control`, `treatment`, etc.
+
 </details>
  
 Now we construct the input data.frame for `as_BulkPhyloExpressionSet()`
@@ -221,6 +226,8 @@ example_phyex_set.remake |>
 
 
 #### What if the dataset contains replicates?
+
+<img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;" />
 
 This is exactly the case for the new `example_phyex_set` dataset (not like `example_phyex_set_old`), which contains replicates for each developmental stage. The `as_BulkPhyloExpressionSet()` function can handle this as well, as long as we use the `groups` parameter to specify the grouping of replicates, i.e.
 
