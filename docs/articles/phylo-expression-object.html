@@ -92,7 +92,6 @@ and <code>ScPhyloExpressionSet</code> objects are designed to store gene
 expression data along with associated metadata such as gene age
 information (or <a href="phylostratigraphy.html"><code>phylorank</code></a>), experiment
 type and other relevant properties.</p>
-<p><img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <p>We will first focus on the <code>BulkPhyloExpressionSet</code>
 object, which is for bulk RNA-seq data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -182,6 +181,7 @@ typically gene age ranks or <a href="phylostratigraphy.html"><code>phylorank</co
 <code>TAI</code> (but also <a href="other_strata.html"><code>deciled dNdS values</code></a> for
 <code>TDI</code> or <a href="other_strata.html"><code>deciled tau values</code></a> for
 <code>TSI</code> etc.).</p>
+<p><img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <div class="section level3">
 <h3 id="loading-raw-data">Loading raw data<a class="anchor" aria-label="anchor" href="#loading-raw-data"></a>
 </h3>
@@ -322,7 +322,7 @@ operator, for example:
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [====================                    ] 49%  (~1s remaining)       Computing: [========================================] 99%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [====================                    ] 50%  (~1s remaining)       Computing: [========================================] 100%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-18-1.png" alt="plot signature function output for bulk RNAseq" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
@@ -627,8 +627,7 @@ Show output
 </details><p>… which you can now plot!</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc.cluster</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-35-1.png" alt="plot signature function output for single cell" width="576" style="display: block; margin: auto;"></p>
 <div class="important">
 <p>This example used an example Seurat object with a mock phylorank

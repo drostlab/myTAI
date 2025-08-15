@@ -12,8 +12,6 @@ Starting from `myTAIv2`, we moved on from the traditional `data.frame` to the ne
 
 To illustrate this, we will use the example data `example_phyex_set`. The `BulkPhyloExpressionSet` and `ScPhyloExpressionSet` objects are designed to store gene expression data along with associated metadata such as gene age information (or [`phylorank`](phylostratigraphy.html)), experiment type and other relevant properties.
 
-<img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
-
 We will first focus on the `BulkPhyloExpressionSet` object, which is for bulk RNA-seq data.
 
 ```{r message = FALSE}
@@ -120,6 +118,8 @@ We will mention the transcriptome age index (TAI) a lot. See [📚](phylostratig
 The necessary and sufficient information needed for creating a `BulkPhyloExpressionSet` (as well as a `ScPhyloExpressionSet`) object is:  
 (1) A matrix or data frame of gene expression values (genes x samples).  
 (2) A numerical value or factored string associated with each gene, typically gene age ranks or [`phylorank`](phylostratigraphy.html) for `TAI` (but also [`deciled dNdS values`](other_strata.html) for `TDI` or [`deciled tau values`](other_strata.html) for `TSI` etc.).
+
+<img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
 
 ### Loading raw data
 
