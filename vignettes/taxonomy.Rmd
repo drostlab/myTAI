@@ -163,7 +163,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 
 <details> <summary>Show output</summary>
-```{r message = FALSE, warning = FALSE, echo = FALSE}
+```{r message = FALSE, warning = FALSE, echo = FALSE, eval = requireNamespace("taxize", quietly = TRUE)}
 taxonomy( organism = "Arabidopsis thaliana", 
           db       = "ncbi",
           output   = "classification" )
@@ -192,7 +192,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 
 <details> <summary>Show output</summary>
-```{r message = FALSE, warning = FALSE, echo = FALSE}
+```{r message = FALSE, warning = FALSE, echo = FALSE, eval = requireNamespace("taxize", quietly = TRUE)}
 taxonomy( organism = "Arabidopsis thaliana", 
           db       = "itis",
           output   = "classification" )
@@ -215,7 +215,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 
 <details> <summary>Show output</summary>
-```{r message = FALSE, warning = FALSE, echo = FALSE}
+```{r message = FALSE, warning = FALSE, echo = FALSE, eval = requireNamespace("taxize", quietly = TRUE)}
 taxonomy( organism = "Arabidopsis thaliana", 
           db       = "ncbi", 
           output   = "taxid" )
@@ -237,7 +237,7 @@ taxonomy( organism = "Arabidopsis",
 ```
 
 <details> <summary>Show output</summary>
-```{r message = FALSE, warning = FALSE, echo = FALSE}
+```{r message = FALSE, warning = FALSE, echo = FALSE, eval = requireNamespace("taxize", quietly = TRUE)}
 taxonomy( organism = "Arabidopsis", 
           db       = "itis", 
           output   = "taxid" )
@@ -276,7 +276,7 @@ taxonomy( organism = "Arabidopsis",
 
 
 <details> <summary>Show output</summary>
-```{r message = FALSE, warning = FALSE, echo = FALSE}
+```{r message = FALSE, warning = FALSE, echo = FALSE, eval = requireNamespace("taxize", quietly = TRUE)}
 taxonomy( organism = "Arabidopsis", 
           db       = "ncbi", 
           output   = "children" )
@@ -297,7 +297,7 @@ taxonomy( organism = "Arabidopsis",
 ```
 
 <details> <summary>Show output</summary>
-```{r message = FALSE, warning = FALSE, echo = FALSE}
+```{r message = FALSE, warning = FALSE, echo = FALSE, eval = requireNamespace("taxize", quietly = TRUE)}
 taxonomy( organism = "Arabidopsis", 
           db       = "itis", 
           output   = "children" )
