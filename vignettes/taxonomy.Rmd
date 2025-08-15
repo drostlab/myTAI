@@ -1,0 +1,309 @@
+---
+title: "Obtaining taxonomy information"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{taxonomy}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+The `taxonomy()` function (formerly) implemented in `myTAI` relies on the powerful package [taxize](https://github.com/ropensci/taxize).
+More specifically, the taxonomic information retrieval has been customized for the `myTAI` standard and for organism specific information retrieval.
+
+:::{.important}
+While the previous `taxonomy()` function has been **deprecated** since `taxize` was pulled from CRAN, users can nevertheless follow the taxonomy pipeline by installing the `taxize` package and **copy** the old taxonomy function.
+:::
+
+```r
+# install taxize from CRAN
+install.packages("taxize")
+
+# if taxize is not available again
+install.packages("remotes")
+remotes::install_github("ropensci/taxize")
+```
+
+**Copy** the taxonomy function:
+
+<details>
+  <summary>**open for the taxonomy function**</summary>
+  
+  Click on the copy icon to copy the function.
+  
+```{r message=FALSE, warning=FALSE, results='hide'}
+#' @title Retrieving Taxonomic Information of a Query Organism
+#' @description This function takes the scientific name of a query organism
+#' and returns selected output formats of taxonomic information for the corresponding organism.
+#' @param organism a character string specifying the scientific name of a query organism.
+#' @param db a character string specifying the database to query, e.g. \code{db} = \code{"itis"} or \code{"ncbi"}.
+#' @param output a character string specifying the taxonomic information that shall be returned. 
+#' Implemented are: \code{output} = \code{"classification"}, \code{"taxid"}, or \code{"children"}.
+#' @details This function is based on the powerful package \pkg{taxize} and implements
+#' the customized retrieval of taxonomic information for a query organism. 
+#' 
+#' The following data bases can be selected to retrieve taxonomic information:
+#' 
+#' \itemize{
+#' \item \code{db = "itis"} : Integrated Taxonomic Information Service
+#' \item \code{db = "ncbi"} : National Center for Biotechnology Information
+#' }
+#' 
+#' 
+#' 
+#' @author Hajk-Georg Drost
+#' @examples
+#' \dontrun{
+#' # retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
+#' # from NCBI Taxonomy
+#' taxonomy("Arabidopsis thaliana",db = "ncbi")
+#' 
+#' # the same can be applied to database : "itis"
+#'  taxonomy("Arabidopsis thaliana",db = "itis")
+#' 
+#' # retrieving the taxonomic hierarchy of "Arabidopsis"
+#'  taxonomy("Arabidopsis",db = "ncbi") # analogous : db = "ncbi" or "itis"
+#' 
+#' # or just "Arabidopsis"
+#'  taxonomy("Arabidopsis",db = "ncbi")
+#' 
+#' # retrieving the taxonomy id of the query organism and in the correspondning database
+#' # taxonomy("Arabidopsis thaliana",db = "ncbi", output = "taxid")
+#' 
+#' # the same can be applied to databases : "ncbi" and "itis"
+#'  taxonomy("Arabidopsis thaliana",db = "ncbi", output = "taxid")
+#'  taxonomy("Arabidopsis thaliana",db = "itis", output = "taxid")
+#' 
+#' 
+#' # retrieve children taxa of the query organism stored in the correspondning database
+#'  taxonomy("Arabidopsis",db = "ncbi", output = "children")
+#' 
+#' # the same can be applied to databases : "ncbi" and "itis"
+#'  taxonomy("Arabidopsis thaliana",db = "ncbi", output = "children")
+#'  taxonomy("Arabidopsis thaliana",db = "itis", output = "children")
+#'  
+#' }
+#' @references
+#' 
+#' Scott Chamberlain and Eduard Szocs (2013). taxize - taxonomic search and retrieval in R. F1000Research,
+#' 2:191. URL: http://f1000research.com/articles/2-191/v2.
+#' 
+#' Scott Chamberlain, Eduard Szocs, Carl Boettiger, Karthik Ram, Ignasi Bartomeus, and John Baumgartner
+#' (2014) taxize: Taxonomic information from around the web. R package version 0.3.0.
+#' https://github.com/ropensci/taxize
+#' @export
+
+taxonomy <- function(organism, db = "ncbi", output = "classification"){
+        
+        if (!is.element(output,c("classification","taxid","children")))
+                stop ("The output '",output,"' is not supported by this function.")
+        
+        if (!is.element(db,c("ncbi","itis")))
+                stop ("Database '",db,"' is not supported by this function.")
+        
+        name <- id <- NULL
+
+        if (db == "ncbi")
+                tax_hierarchy <- as.data.frame(taxize::classification(taxize::get_uid(organism), db = "ncbi")[[1]])
+        
+        else if (db == "itis")    
+                tax_hierarchy <- as.data.frame(taxize::classification(taxize::get_tsn(organism), db = "itis")[[1]])
+        
+        # tryCatch({colnames(tax_hierarchy) <- c("name","rank","id")},stop("The connection to ",db," did not work properly. Please check your internet connection or maybe the API did change.", call. = FALSE))
+        
+        if(output == "classification"){
+                
+                return(tax_hierarchy)
+        }
+        
+        if(output == "taxid"){
+                
+                        return(dplyr::select(dplyr::filter(tax_hierarchy, name == organism),id))
+        }
+        
+        if(output == "children"){
+                
+                return(as.data.frame(taxize::children(organism, db = db)[[1]]))
+        } 
+}
+```
+
+</details>
+
+The `taxonomy()` function can be used to classify genomes
+according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy (see [Introduction](Introduction.html) for details).
+
+For larger taxonomy queries it may be useful to create an NCBI Account and
+set up an [ENTREZ API KEY](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/).
+
+```r
+# install.packages(c("taxize", "usethis"))
+taxize::use_entrez()
+# Create your key from your (brand-new) account's. 
+# After generating your key set it as ENTREZ_KEY in .Renviron.
+# ENTREZ_KEY='youractualkeynotthisstring'
+# For that, use usethis::edit_r_environ()
+usethis::edit_r_environ()
+```
+
+## Taxonomic Information Retrieval
+
+The `taxonomy()` function to retrieve taxonomic information.
+
+<details>
+  <summary>**retrieve taxonomy hierarchy**</summary>
+
+In the following example we will obtain the taxonomic hierarchy of `Arabidopsis thaliana` from [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy).
+
+
+```{r, eval=FALSE}
+# retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
+# from NCBI Taxonomy
+taxonomy( organism = "Arabidopsis thaliana", 
+          db       = "ncbi",
+          output   = "classification" )
+```
+
+<details> <summary>Show output</summary>
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+taxonomy( organism = "Arabidopsis thaliana", 
+          db       = "ncbi",
+          output   = "classification" )
+```
+
+</details>
+
+The `organism` argument takes the scientific name of a query organism, the `db` argument
+specifies that database from which the corresponding taxonomic information shall be retrieved,
+e.g. `ncbi` (NCBI Taxonomy) and `itis` (Integrated Taxonomic Information System) and the `output` argument specifies the type of taxonomic information
+that shall be returned for the query organism, e.g. `classification`, `taxid`, or `children`.
+
+The output of `classification` is a `data.frame` storing the taxonomic hierarchy of `Arabidopsis thaliana`
+starting with `cellular organisms` up to `Arabidopsis thaliana`. The first column stores the taxonomic name,
+the second column the taxonomic rank, and the third column the NCBI Taxonomy id for corresponding taxa.
+
+Analogous `classification` information can be obtained from different databases.
+
+
+```{r, eval=FALSE}
+# retrieving the taxonomic hierarchy of "Arabidopsis thaliana"
+# from the Integrated Taxonomic Information System
+taxonomy( organism = "Arabidopsis thaliana", 
+          db       = "itis",
+          output   = "classification" )
+```
+
+<details> <summary>Show output</summary>
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+taxonomy( organism = "Arabidopsis thaliana", 
+          db       = "itis",
+          output   = "classification" )
+```
+
+The `output` argument allows you to directly access taxonomy ids for a query organism or species.
+
+</details>
+
+</details>
+
+<details>
+  <summary>**retrieve taxonomy ID from `ncbi`**</summary>
+
+```{r, eval=FALSE}
+# retrieving the taxonomy id of the query organism from NCBI Taxonomy
+taxonomy( organism = "Arabidopsis thaliana", 
+          db       = "ncbi", 
+          output   = "taxid" )
+```
+
+<details> <summary>Show output</summary>
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+taxonomy( organism = "Arabidopsis thaliana", 
+          db       = "ncbi", 
+          output   = "taxid" )
+```
+
+</details>
+
+
+</details>
+
+<details>
+  <summary>**retrieve taxonomy ID from `itis`**</summary>
+  
+```{r, eval=FALSE}
+# retrieving the taxonomy id of the query organism from Integrated Taxonomic Information Service
+taxonomy( organism = "Arabidopsis", 
+          db       = "itis", 
+          output   = "taxid" )
+```
+
+<details> <summary>Show output</summary>
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+taxonomy( organism = "Arabidopsis", 
+          db       = "itis", 
+          output   = "taxid" )
+```
+
+</details>
+
+</details>
+
+So far, the following data bases can be accesses to retrieve taxonomic information:
+
+* `db = "itis"` : Integrated Taxonomic Information Service
+* `db = "ncbi"` : National Center for Biotechnology Information
+
+:::{.note}
+**How does the `taxonomy(db = "ncbi")` output differ from `GenEra`?**
+
+The taxonomic classifications should be the same between `taxonomy(..., db = "ncbi")` and `GenEra` output (since it uses NCBI taxdump as input). But it should be noted that the recent updates to NCBI taxonomy has meant that the highest order ranks (cellular root, domain, kingdom etc.) may differ.
+:::
+
+## Retrieve Children Nodes
+
+Another `output` supported by `taxonomy()` is `children` that returns the immediate children taxa
+for a query organism. This feature is useful to determine species relationships for quantifying recent evolutionary conservation with Divergence Stratigraphy. 
+
+<details>
+  <summary>**retrieve children nodes from `ncbi`**</summary>
+  
+```{r, eval=FALSE}
+# retrieve children taxa of the query organism stored in the correspondning database
+taxonomy( organism = "Arabidopsis", 
+          db       = "ncbi", 
+          output   = "children" )
+```
+
+
+<details> <summary>Show output</summary>
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+taxonomy( organism = "Arabidopsis", 
+          db       = "ncbi", 
+          output   = "children" )
+```
+
+</details>
+
+</details>
+
+<details>
+  <summary>**retrieve children nodes from `itis`**</summary>
+
+```{r, eval=FALSE}
+# retrieve children taxa of the query organism stored in the correspondning database
+taxonomy( organism = "Arabidopsis", 
+          db       = "itis", 
+          output   = "children" )
+```
+
+<details> <summary>Show output</summary>
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+taxonomy( organism = "Arabidopsis", 
+          db       = "itis", 
+          output   = "children" )
+```
+
+</details>
+
+</details>
+
+These results allow us to choose `subject` organisms for [Divergence Stratigraphy](other-strata.html).
