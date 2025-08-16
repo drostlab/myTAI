@@ -311,6 +311,28 @@ library(myTAI)
 browseVignettes("myTAI")
 ```
 
+## Object classes in `myTAI`
+
+Workflow to load your own dataset:
+
+#### bulk
+
+<a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#mock-bulk-dataset-for-bulkphyloexpressionset">
+    <img src="docs/articles/Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 500px;" />
+</a>
+
+#### bulk with replicates
+
+<a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#what-if-the-dataset-contains-replicates">
+    <img src="docs/articles/Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 500px;" />
+</a>
+
+#### single cell
+
+<a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#mock-single-cell-dataset-for-scphyloexpressionset">
+    <img src="docs/articles/Figures/myTAI_scphyex.png" alt="scPhyEx overview" align="center" style="max-height: 500px; max-width: 500px;" />
+</a>
+
 ## Discussions and Bug Reports
 
 We would be very happy to learn more about potential improvements of the concepts and functions

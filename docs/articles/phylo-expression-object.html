@@ -113,7 +113,10 @@ Show output
 <span><span class="co">## Number of phylostrata: 19 </span></span>
 <span><span class="co">## Number of samples: 24 </span></span>
 <span><span class="co">## Samples per condition: 3 3 3 3 3 3 3 3</span></span></code></pre>
-</details><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+</details><details><summary>
+More on <code>S7</code> and the <code>BulkPhyloExpressionSet</code>
+object
+</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">S7</span><span class="fu">::</span><span class="fu"><a href="https://rconsortium.github.io/S7/reference/prop_names.html" class="external-link">prop_names</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
@@ -149,7 +152,7 @@ i.e.</p>
 the second run so that you don’t need to wait a couple of seconds again.
 Note, we will get to the <code>stat_flatline_test</code> function in the
 <a href="tai-stats.html">statistical testing vignette</a>.</p>
-<p>But how do you get your <code>.tsv</code> and <code>.csv</code> files
+</details><p>But how do you get your <code>.tsv</code> and <code>.csv</code> files
 and convert your <code>data.frame</code> and <code>tibble</code> to a S7
 <code>BulkPhyloExpressionSet</code> object?</p>
 <div class="note">
@@ -181,6 +184,7 @@ typically gene age ranks or <a href="phylostratigraphy.html"><code>phylorank</co
 <code>TAI</code> (but also <a href="other_strata.html"><code>deciled dNdS values</code></a> for
 <code>TDI</code> or <a href="other_strata.html"><code>deciled tau values</code></a> for
 <code>TSI</code> etc.).</p>
+<p><img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <div class="section level3">
 <h3 id="loading-raw-data">Loading raw data<a class="anchor" aria-label="anchor" href="#loading-raw-data"></a>
 </h3>
@@ -228,10 +232,10 @@ Show output
 <span><span class="co">## 4  861.2605</span></span>
 <span><span class="co">## 5 7772.5617</span></span>
 <span><span class="co">## 6  792.7542</span></span></code></pre>
-As you can see, there is one column as the gene identifier and the rest
-of the columns are the expression values for each developmental stage.
-Instead of developmental stage, one can also use experimental
-conditions, e.g. <code>control</code>, <code>treatment</code>, etc.
+<p>As you can see, there is one column as the gene identifier and the
+rest of the columns are the expression values for each developmental
+stage. Instead of developmental stage, one can also use experimental
+conditions, e.g. <code>control</code>, <code>treatment</code>, etc.</p>
 </details><p>Now we construct the input data.frame for
 <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -321,7 +325,7 @@ operator, for example:
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [========================                ] 58%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [==================                      ] 44%  (~1s remaining)       Computing: [===================================     ] 87%  (~0s remaining)       Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-18-1.png" alt="plot signature function output for bulk RNAseq" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
@@ -333,6 +337,7 @@ replicates for each developmental stage. The
 <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code> function can handle this as
 well, as long as we use the <code>groups</code> parameter to specify the
 grouping of replicates, i.e.</p>
+<p><img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set"</span><span class="op">)</span> <span class="co"># not data("example_phyex_set_old")</span></span>
 <span><span class="va">example_expression</span> <span class="op">&lt;-</span> </span>
@@ -393,6 +398,7 @@ similar, but you will need to ensure that your data is structured
 correctly for single cell analysis, i.e. as a <a href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html" class="external-link"><code>seurat object</code></a>.</p>
 <p>You can then use the <code><a href="../reference/as_ScPhyloExpressionSet.html">as_ScPhyloExpressionSet()</a></code> function
 with adjustments to the relevant metadata.</p>
+<p><img src="Figures/myTAI_scphyex.png" alt="scPhyEx overview" align="center" style="max-height: 500px; max-width: 800px;"></p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the relevant packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -409,7 +415,9 @@ rest of the columns as expression values for each cell. The
 data.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pbmc_raw</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##          ATGCCAGAACGACT CATGGCCTGTGCAT GAACCTGATGAACC TGACTGGATTCTCA</span></span>
+<details><summary>
+Show output
+</summary><pre><code><span><span class="co">##          ATGCCAGAACGACT CATGGCCTGTGCAT GAACCTGATGAACC TGACTGGATTCTCA</span></span>
 <span><span class="co">## MS4A1                 0              0              0              0</span></span>
 <span><span class="co">## CD79B                 1              0              0              0</span></span>
 <span><span class="co">## CD79A                 0              0              0              0</span></span>
@@ -549,11 +557,10 @@ data.</p>
 <span><span class="co">## HLA-DRA               1              0              2              7</span></span>
 <span><span class="co">## TCL1A                 0              0              0              0</span></span>
 <span><span class="co">## HLA-DQB1              0              0              0              1</span></span></code></pre>
-<p>Now, we create a Seurat object. i.e.</p>
+</details><p>Now, we create a Seurat object. i.e.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pbmc_small</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.github.io/seurat-object/reference/CreateSeuratObject.html" class="external-link">CreateSeuratObject</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">pbmc_raw</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Data is of class data.frame. Coercing to dgCMatrix.</span></span></code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/methods/is.html" class="external-link">is</a></span><span class="op">(</span><span class="va">pbmc_small</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Seurat"</span></span></code></pre>
 <p>Now, we can convert this Seurat object to a
@@ -564,12 +571,12 @@ information in a specific format with the same gene identifiers as that
 of <code>pbmc_small</code>.</p>
 <p>We will generate <strong>random</strong> phyloranks for each gene as
 integers.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_names</span> <span class="op">&lt;-</span> <span class="va">pbmc_small</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">example_phylorank_sc</span> <span class="op">&lt;-</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">gene_names</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="va">gene_names</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set_sc</span> <span class="op">&lt;-</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/as_ScPhyloExpressionSet.html">as_ScPhyloExpressionSet</a></span><span class="op">(</span></span>
 <span>        <span class="va">pbmc_small</span>,</span>
@@ -578,7 +585,7 @@ integers.</p>
 Example of a downstream analysis
 </summary><p>Here, we will go a bit deeper and cluster the <code>pbmc_small</code>
 object before integrating this to the <code>myTAIv2</code> workflow.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># example workflow to cluster the single cell data</span></span>
 <span><span class="va">pbmc_small</span> <span class="op">&lt;-</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/NormalizeData.html" class="external-link">NormalizeData</a></span><span class="op">(</span><span class="va">pbmc_small</span><span class="op">)</span></span>
 <span><span class="va">pbmc_small</span> <span class="op">&lt;-</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/FindVariableFeatures.html" class="external-link">FindVariableFeatures</a></span><span class="op">(</span><span class="va">pbmc_small</span>, selection.method <span class="op">=</span> <span class="st">"vst"</span>, nfeatures <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
@@ -595,13 +602,13 @@ object before integrating this to the <code>myTAIv2</code> workflow.</p>
 <span><span class="co">## Maximum modularity in 10 random starts: 0.4014</span></span>
 <span><span class="co">## Number of communities: 2</span></span>
 <span><span class="co">## Elapsed time: 0 seconds</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set_sc.cluster</span> <span class="op">&lt;-</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/as_ScPhyloExpressionSet.html">as_ScPhyloExpressionSet</a></span><span class="op">(</span></span>
 <span>        <span class="va">pbmc_small.cluster</span>,</span>
 <span>        strata <span class="op">=</span> <span class="va">example_phylorank_sc</span><span class="op">)</span></span></code></pre></div>
 <p>Now we have the <code>ScPhyloExpressionSet</code> object,</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set_sc.cluster</span></span></code></pre></div>
 <details><summary>
 Show output
@@ -622,10 +629,10 @@ Show output
 <span><span class="co">##  0  1 </span></span>
 <span><span class="co">## 44 36</span></span></code></pre>
 </details><p>… which you can now plot!</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc.cluster</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
-<p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-34-1.png" alt="plot signature function output for single cell" width="576" style="display: block; margin: auto;"></p>
+<p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-35-1.png" alt="plot signature function output for single cell" width="576" style="display: block; margin: auto;"></p>
 <div class="important">
 <p>This example used an example Seurat object with a mock phylorank
 dataset (random gene age assignment) and an example workflow. In
