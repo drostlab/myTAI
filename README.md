@@ -343,28 +343,4 @@ of this package, please let us know:
 
 https://github.com/drostlab/myTAI/issues
 
-## References
-
-Domazet-Lošo T. and Tautz D. __A phylogenetically based transcriptome age index mirrors ontogenetic divergence patterns__. _Nature_ (2010) 468: 815-8.
-
-Quint M, Drost HG, et al. __A transcriptomic hourglass in plant embryogenesis__. _Nature_ (2012) 490: 98-101.
-
-Drost HG, Gabel A, Grosse I, Quint M. __Evidence for Active Maintenance of Phylotranscriptomic Hourglass Patterns in Animal and Plant Embryogenesis__. _Mol. Biol. Evol._ (2015) 32 (5): 1221-1231.
-
-Drost HG, Bellstädt J, Ó'Maoiléidigh DS, Silva AT, Gabel A, Weinholdt C, Ryan PT, Dekkers BJW, Bentsink L, Hilhorst H, Ligterink W, Wellmer F, Grosse I, and Quint M. __Post-embryonic hourglass patterns mark ontogenetic transitions in plant development__. _Mol. Biol. Evol._ (2016) [doi:10.1093/molbev/msw039](https://academic.oup.com/mbe/article/33/5/1158/2580081) 
-
-
-## Acknowledgement
-
-We would like to thank several individuals for making this project possible.
-
-We thank Ivo Grosse and Marcel Quint for providing @HajkD a place
-and the environment to be able to work on fascinating topics of Evo-Devo research and for the fruitful discussions that led to projects like this one.
-
-Furthermore, we would like to thank Alexander Gabel and Jan Grau for valuable discussions
-on how to improve some methodological concepts of some analyses present in this package.
-
-We would also like to thank @HajkD's past Master Students: Sarah Scharfenberg, Anne Hoffmann, and Sebastian Wussow
-who worked intensively with this package and helped improve its usability and logic.
-
 
