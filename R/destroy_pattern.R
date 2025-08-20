@@ -259,12 +259,12 @@ plot_gatai_results <- function(phyex_set,
 
     result_list <- list(
         signature_plots = signature_plots,
+        mean_var_plot = mean_var_plot,
         strata_plot = strata_plot,
         heatmap_plot = heatmap_plot,
         profiles_plot = profiles_plot,
         profiles_plot_facet = profiles_plot_facet,
         gene_space_plot = gene_space_plot,
-        mean_var_plot = mean_var_plot,
         null_dist_plot = null_dist_plot
     )
 

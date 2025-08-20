@@ -1,3 +1,12 @@
+test_that("BulkPhyloExpressionSet throws error on NA in strata_values", {
+    data <- matrix(1:6, nrow = 2)
+    groups <- c("A", "B", "A")
+    legend <- data.frame(stratum = 1:2, label = c("S1", "S2"))
+    obj <- as_PhyloExpressionSet(data, groups = groups, name = "Test", species = "Testus", index_type = "TAI", strata_legend = legend)
+    expect_error({
+        obj@strata_values <- c(NA, 1)
+    }, "cannot contain NA values")
+})
 test_that("PhyloExpressionSet loads correctly", {
     expect_s7_class(example_phyex_set, myTAI::BulkPhyloExpressionSet)
     expect_true(length(example_phyex_set@gene_ids) > 0)

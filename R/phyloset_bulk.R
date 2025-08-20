@@ -23,16 +23,16 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
         ## BULK-SPECIFIC REQUIRED PROPERTIES
         .expression = new_required_property(
             validator = function(value) {
-                if (any(is.na(value))) "cannot contain NA values. Check expression data."
-                if (length(value) == 0) "cannot be empty. Check expression data."
+                if (any(is.na(value))) return("cannot contain NA values. Check expression data.")
+                if (length(value) == 0) return("cannot be empty. Check expression data.")
             },
             name = ".expression"
         ),
         .groups = new_required_property(
             class = class_factor,
             validator = function(value) {
-                if (any(is.na(value))) "cannot contain NA values. Check groups."
-                if (length(value) == 0) "cannot be empty. Check groups."
+                if (any(is.na(value))) return("cannot contain NA values. Check groups.")
+                if (length(value) == 0) return("cannot be empty. Check groups.")
             },
             name = ".groups"
         ),

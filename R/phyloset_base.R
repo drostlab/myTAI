@@ -36,24 +36,24 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
         strata = new_required_property(
             class = class_factor,
             validator = function(value) {
-                if (any(is.na(value))) "cannot contain NA values. Check phylostratum assignments."
-                if (length(value) == 0) "cannot be empty. Check phylostratum assignments."
+                if (any(is.na(value))) return("cannot contain NA values. Check phylostratum assignments.")
+                if (length(value) == 0) return("cannot be empty. Check phylostratum assignments.")
             },
             name = "strata"
         ),
         strata_values = new_required_property(
             class = class_numeric,
             validator = function(value) {
-                if (any(is.na(value))) "cannot contain NA values. Check phylostratum values."
-                if (length(value) == 0) "cannot be empty. Check phylostratum values."
+                if (any(is.na(value))) return("cannot contain NA values. Check phylostratum values.")
+                if (length(value) == 0) return("cannot be empty. Check phylostratum values.")
             },
             name = "strata_values"
         ),
         gene_ids = new_required_property(
             class = class_character,
             validator = function(value) {
-                if (any(is.na(value))) "cannot contain NA values. Check gene IDs."
-                if (length(value) == 0) "cannot be empty. Check gene IDs."
+                if (any(is.na(value))) return("cannot contain NA values. Check gene IDs.")
+                if (length(value) == 0) return("cannot be empty. Check gene IDs.")
             },
             name = "gene_ids"
         ),
