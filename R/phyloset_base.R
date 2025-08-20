@@ -154,7 +154,14 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
                 }
             }
         )
-    )
+    ),
+    validator = function(self) {
+        if (length(self@gene_ids) != length(self@strata)) {
+            "@gene_ids and @strata must have the same length"
+        } else if (length(self@strata) != length(self@strata_values)) {
+            "@strata and @strata_values must have the same length"
+        }
+    }
 )
 
 
