@@ -74,7 +74,15 @@ quantile_rank <- function(x) {
 #' # annotate("text", x = 1, y = 1, label = expr, parse = TRUE)
 #' 
 #' @export
-exp_p <- function(p) {
-    parts <- strsplit(formatC(p, format = "e", digits = 2), "e")[[1]]
-    paste0("italic(p) == ", as.numeric(parts[1]), " %*% 10^", as.integer(parts[2]))
+exp_p <- function(p, sci_thresh = 4) {
+    if (!is.finite(p)) return("italic(p) == NA")
+    if (p == 0) return("italic(p) == 0")
+    parts <- strsplit(formatC(p, format = "e", digits = 3), "e")[[1]]
+    base <- as.numeric(parts[1])
+    expn <- as.integer(parts[2])
+    if (abs(expn) >= sci_thresh) {
+        paste0("italic(p) == ", base, " %*% 10^", expn)
+    } else {
+        paste0("italic(p) == ", signif(p, 3))
+    }
 }

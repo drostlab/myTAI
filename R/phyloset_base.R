@@ -433,3 +433,23 @@ rename_phyex_set <- function(phyex_set, new_name) {
     phyex_set@name <- new_name
     phyex_set
 }
+
+
+#' @title Permute Strata in PhyloExpressionSet
+#' @description Returns a copy of the PhyloExpressionSet with permuted strata and corresponding strata values.
+#' @param phyex_set A PhyloExpressionSet object
+#' @return A new PhyloExpressionSet object with permuted strata and strata_values
+#' @export
+permute_PS <- function(phyex_set) {
+    check_PhyloExpressionSet(phyex_set)
+    # Permute the strata assignments
+    perm_idx <- sample(length(phyex_set@strata))
+    new_strata <- phyex_set@strata[perm_idx]
+    # Permute the strata_values in the same way
+    new_strata_values <- phyex_set@strata_values[perm_idx]
+    # Create a copy and assign new strata and strata_values
+    new_obj <- phyex_set
+    new_obj@strata <- new_strata
+    new_obj@strata_values <- new_strata_values
+    new_obj
+}
