@@ -22,21 +22,34 @@ myTAI::plot_gene_space(example_phyex_set)
   <tr>
     <td align="center">
       <a href="https://drostlab.github.io/myTAI/articles/myTAI.html">
-        <img src="docs/reference/figures/plot_signature.svg" alt="plot_signature function output" width="300">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="docs/reference/figures/plot_signature-darkmode.svg">
+          <source media="(prefers-color-scheme: light)" srcset="docs/reference/figures/plot_signature.svg">
+          <img src="docs/reference/figures/plot_signature.svg" alt="plot_signature function output" width="300">
+        </picture>
       </a>
     </td>
     <td align="center">
       <a href="https://drostlab.github.io/myTAI/articles/tai-gallery.html#contribution-to-the-overall-tai-by-phylostratum">
-        <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-15-1.png" alt="plot_contribution function output" width="300">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="docs/reference/figures/unnamed-chunk-15-1-darkmode.png">
+          <source media="(prefers-color-scheme: light)" srcset="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-15-1.png">
+          <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-15-1.png" alt="plot_contribution function output" width="300">
+        </picture>
       </a>
     </td>
     <td align="center">
       <a href="https://drostlab.github.io/myTAI/articles/tai-gallery.html#dimension-reduction">
-        <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_gene_space function output" width="300">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="docs/reference/figures/unnamed-chunk-22-1-darkmode.png">
+          <source media="(prefers-color-scheme: light)" srcset="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-22-1.png">
+          <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_gene_space function output" width="300">
+        </picture>
       </a>
     </td>
   </tr>
 </table>
+
 
 ### Detailed documentation provided [here](https://drostlab.github.io/myTAI)
 
@@ -318,19 +331,31 @@ Workflow to load your own dataset:
 #### bulk
 
 <a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#mock-bulk-dataset-for-bulkphyloexpressionset">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_phyex-darkmode.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/articles/Figures/myTAI_phyex.png">
     <img src="docs/articles/Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 500px;" />
+  </picture>
 </a>
 
 #### bulk with replicates
 
 <a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#what-if-the-dataset-contains-replicates">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_phyex_group-darkmode.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/articles/Figures/myTAI_phyex_group.png">
     <img src="docs/articles/Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 500px;" />
+  </picture>
 </a>
 
 #### single cell
 
 <a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#mock-single-cell-dataset-for-scphyloexpressionset">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_scphyex-darkmode.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/articles/Figures/myTAI_scphyex.png">
     <img src="docs/articles/Figures/myTAI_scphyex.png" alt="scPhyEx overview" align="center" style="max-height: 500px; max-width: 500px;" />
+  </picture>
 </a>
 
 ## Discussions and Bug Reports
