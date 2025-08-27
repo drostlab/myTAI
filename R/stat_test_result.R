@@ -118,7 +118,7 @@ goodness_of_fit <- function(test_result) {
 
 
 #' @import ggplot2
-S7::method(plot, TestResult) <- function(x) {
+S7::method(plot, TestResult) <- function(x, ...) {
     test_result <- x
     p <- ggplot(data.frame(x = test_result@null_sample), 
                 aes(x = x)) +
