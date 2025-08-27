@@ -56,7 +56,9 @@ myTAI::plot_signature(example_phyex_set)
 or with [your `BulkPhyloExpressionSet` dataset](phylo-expression-object.html).
 </p>
 
-<img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
+<img src="Figures/myTAI_phyex.png" 
+     alt="PhyEx overview" 
+     class="img-fluid d-block mx-auto" />
 
 <br/><br/>
 
