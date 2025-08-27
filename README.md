@@ -23,7 +23,7 @@ myTAI::plot_gene_space(example_phyex_set)
     <td align="center">
       <a href="https://drostlab.github.io/myTAI/articles/myTAI.html">
         <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="docs/reference/figures/plot_signature-darkmode.svg">
+          <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/plot_signature-darkmode.svg">
           <source media="(prefers-color-scheme: light)" srcset="docs/reference/figures/plot_signature.svg">
           <img src="docs/reference/figures/plot_signature.svg" alt="plot_signature function output" width="300">
         </picture>
@@ -32,7 +32,7 @@ myTAI::plot_gene_space(example_phyex_set)
     <td align="center">
       <a href="https://drostlab.github.io/myTAI/articles/tai-gallery.html#contribution-to-the-overall-tai-by-phylostratum">
         <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="docs/reference/figures/unnamed-chunk-15-1-darkmode.png">
+          <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/unnamed-chunk-15-1-darkmode.png">
           <source media="(prefers-color-scheme: light)" srcset="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-15-1.png">
           <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-15-1.png" alt="plot_contribution function output" width="300">
         </picture>
@@ -41,7 +41,7 @@ myTAI::plot_gene_space(example_phyex_set)
     <td align="center">
       <a href="https://drostlab.github.io/myTAI/articles/tai-gallery.html#dimension-reduction">
         <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="docs/reference/figures/unnamed-chunk-22-1-darkmode.png">
+          <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/unnamed-chunk-22-1-darkmode.png">
           <source media="(prefers-color-scheme: light)" srcset="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-22-1.png">
           <img src="docs/articles/tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_gene_space function output" width="300">
         </picture>
