@@ -1,3 +1,4 @@
+library(myTAI)
 
 data <- read.csv("data-raw/ath_embryogenesis_2019.csv")
 legend <- read.csv("data-raw/strata_legend.tsv", sep="\t")
@@ -11,6 +12,9 @@ example_phyex_set <- as_PhyloExpressionSet(data,
                                            species="Arabidopsis thaliana",
                                            index_type="TAI",
                                            strata_legend=legend,
-                                           identities_label="Stages")
+                                           identities_label="Stages") |>
+                                           remove_genes(c("AT2G01021"), 
+                                           new_name="Embryogenesis 2019",
+                                           reuse_null_txis=FALSE)
 
 usethis::use_data(example_phyex_set, overwrite = TRUE)
