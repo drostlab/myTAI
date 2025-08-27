@@ -266,7 +266,6 @@ S7::method(select_genes, BulkPhyloExpressionSet) <- function(phyex_set, genes) {
     )
 }
 
-#' @export
 S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
     # Print base information (inline parent method)
     cat("PhyloExpressionSet object\n")
