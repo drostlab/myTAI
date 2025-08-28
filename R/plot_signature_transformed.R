@@ -2,6 +2,12 @@
 #' @title Count Transformation Functions
 #' @description Predefined list of transformation functions for count data normalization.
 #' 
+#' @details
+#' This object provides a list of predefined transformation functions for gene expression matrix.
+#' For `rlog()` and `vst()` transformations (from `DESeq2`), the expression matrix is multiplied 
+#' by 2 prior to rounding. 
+#' This is done to preserve more information for the lower expression values (especially for TPM).
+#' 
 #' @format A named list of transformation functions:
 #' \describe{
 #'   \item{none}{Identity transformation (no change)}
@@ -20,8 +26,8 @@ COUNT_TRANSFORMS <- {
         "rank" = \(x) apply(x, 2, base::rank)
     )
     if (requireNamespace("DESeq2", quietly = TRUE)) {
-        ct[["vst"]] <- \(x) DESeq2::vst(round(x, digits=0))
-        ct[["rlog"]] <- \(x) DESeq2::rlogTransformation(round(x, digits=0))
+        ct[["vst"]] <- \(x) DESeq2::vst(round(x*2, digits=0))
+        ct[["rlog"]] <- \(x) DESeq2::rlogTransformation(round(x*2, digits=0))
     }
     ct
 }
