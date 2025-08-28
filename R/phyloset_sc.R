@@ -361,7 +361,6 @@ S7::method(select_genes, ScPhyloExpressionSet) <- function(phyex_set, genes) {
 
 ## PRINT METHODS
 
-#' @export
 S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
     # Print base information (inline parent method)
     cat("PhyloExpressionSet object\n")

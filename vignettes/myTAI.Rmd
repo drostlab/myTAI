@@ -40,8 +40,6 @@ packageVersion("myTAI")
 
 <br/><br/>
 
-<br/><br/>
-
 <p style="font-family: 'Fira Mono', monospace; font-size: 2.5rem;">
 # 2. Run **myTAI**
 </p>
@@ -53,6 +51,12 @@ data("example_phyex_set")
 # plot away!
 myTAI::plot_signature(example_phyex_set)  
 ```
+
+<p style="font-family: 'Fira Mono', monospace; font-size: 1.5rem;">
+or with [your `BulkPhyloExpressionSet` dataset](phylo-expression-object.html).
+</p>
+
+<img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
 
 <br/><br/>
 

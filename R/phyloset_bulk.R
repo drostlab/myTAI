@@ -249,24 +249,19 @@ S7::method(select_genes, BulkPhyloExpressionSet) <- function(phyex_set, genes) {
     if (length(valid_indices) == 0) {
         stop("None of the specified genes were found in the dataset")
     }
+
+    obj <- S7::valid_eventually(phyex_set, function(x) {
+        x@strata <- phyex_set@strata[valid_indices]
+        x@strata_values <- phyex_set@strata_values[valid_indices]
+        x@gene_ids <- phyex_set@gene_ids[valid_indices]
+        x@.expression <- phyex_set@expression[valid_indices, , drop = FALSE]
+
+        x
+    })
     
-    # Create new data with selected genes
-    data <- tibble::tibble(
-        Stratum = phyex_set@strata_values[valid_indices],
-        GeneID = phyex_set@gene_ids[valid_indices],
-        tibble::as_tibble(phyex_set@expression[valid_indices, , drop = FALSE])
-    )
-    
-    as_BulkPhyloExpressionSet(
-        data = data,
-        groups = phyex_set@groups,
-        name = phyex_set@name,
-        species = phyex_set@species,
-        index_type = phyex_set@index_type
-    )
+    obj
 }
 
-#' @export
 S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
     # Print base information (inline parent method)
     cat("PhyloExpressionSet object\n")

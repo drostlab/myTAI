@@ -38,7 +38,7 @@ plot_distribution_pTAI <- function(phyex_set,
     }
     
     # Get partial TAI matrix
-    partial_TAI_matrix <- pTXI(p)[, stages, drop = FALSE]
+    partial_TAI_matrix <- pTXI(phyex_set)[, stages, drop = FALSE]
     
     # Get expression data for selected stages
     expression_matrix <- phyex_set@expression_collapsed[, stages, drop = FALSE]

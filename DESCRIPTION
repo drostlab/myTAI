@@ -75,7 +75,8 @@ Suggests:
     SeuratObject,
     decor,
     gataiR,
-    DESeq2
+    DESeq2,
+    taxize
 LinkingTo: 
     RcppArmadillo,
     RcppThread,
@@ -134,3 +135,4 @@ Collate:
     'taxid.R'
     'tf_PS.R'
     'tf_stability.R'
+    'zzz.R'

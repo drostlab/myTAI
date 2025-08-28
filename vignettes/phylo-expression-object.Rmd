@@ -79,6 +79,8 @@ print(example_phyex_set)
 ```
 </details>
 
+<details> <summary>More on `S7` and the `BulkPhyloExpressionSet` object</summary>
+
 ```{r message = FALSE, eval=FALSE}
 S7::prop_names(example_phyex_set)
 ```
@@ -107,6 +109,8 @@ myTAI::stat_flatline_test(example_phyex_set)
 
 you will notice that the permutations are already pre-computed for the second run so that you don't need to wait a couple of seconds again. Note, we will get to the `stat_flatline_test` function in the [statistical testing vignette](tai-stats.html).
 
+</details>
+
 But how do you get your `.tsv` and `.csv` files and convert your `data.frame` and `tibble` to a S7 `BulkPhyloExpressionSet` object?
 
 :::{.note}
@@ -118,6 +122,8 @@ We will mention the transcriptome age index (TAI) a lot. See [📚](phylostratig
 The necessary and sufficient information needed for creating a `BulkPhyloExpressionSet` (as well as a `ScPhyloExpressionSet`) object is:  
 (1) A matrix or data frame of gene expression values (genes x samples).  
 (2) A numerical value or factored string associated with each gene, typically gene age ranks or [`phylorank`](phylostratigraphy.html) for `TAI` (but also [`deciled dNdS values`](other_strata.html) for `TDI` or [`deciled tau values`](other_strata.html) for `TSI` etc.).
+
+<img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
 
 ### Loading raw data
 
@@ -150,6 +156,7 @@ example_expression |> head()
 example_expression |> head()
 ```
 As you can see, there is one column as the gene identifier and the rest of the columns are the expression values for each developmental stage. Instead of developmental stage, one can also use experimental conditions, e.g. `control`, `treatment`, etc.
+
 </details>
  
 Now we construct the input data.frame for `as_BulkPhyloExpressionSet()`
@@ -222,6 +229,8 @@ example_phyex_set.remake |>
 
 This is exactly the case for the new `example_phyex_set` dataset (not like `example_phyex_set_old`), which contains replicates for each developmental stage. The `as_BulkPhyloExpressionSet()` function can handle this as well, as long as we use the `groups` parameter to specify the grouping of replicates, i.e.
 
+<img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;" />
+
 ```{r message = FALSE}
 data("example_phyex_set") # not data("example_phyex_set_old")
 example_expression <- 
@@ -280,6 +289,8 @@ If you are interested in single cell RNA-seq data, the process is similar, but y
 
 You can then use the `as_ScPhyloExpressionSet()` function with adjustments to the relevant metadata.
 
+<img src="Figures/myTAI_scphyex.png" alt="scPhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
+
 ```{r message = FALSE, warning=FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 # Load the relevant packages
 library(dplyr)
@@ -293,13 +304,19 @@ pbmc_raw <- read.table(
 
 The input file for `Seurat::CreateSeuratObject()` is a tab-separated file with the first column as gene identifiers and the rest of the columns as expression values for each cell. The `pbmc_raw` object is a data frame with gene expression data.
 
-```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, eval=FALSE}
 head(pbmc_raw)
 ```
+<details> <summary>Show output</summary>
+```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE), echo=FALSE}
+head(pbmc_raw)
+```
+</details>
+
 
 Now, we create a Seurat object. i.e.
 
-```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 pbmc_small <- CreateSeuratObject(counts = pbmc_raw)
 ```
 
