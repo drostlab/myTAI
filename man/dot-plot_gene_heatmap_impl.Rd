@@ -16,6 +16,8 @@
   cluster_cols = FALSE,
   show_gene_age = TRUE,
   show_gene_ids = FALSE,
+  gene_annotation = NULL,
+  gene_annotation_colors = NULL,
   annotation_col = NULL,
   annotation_col_colors = NULL,
   ...
@@ -26,7 +28,7 @@
 
 \item{strata}{Factor vector of gene phylostrata}
 
-\item{gene_ids}{Character vector of gene IDs}
+\item{gene_ids}{Character vector of all gene IDs in the dataset (used for phylostratum mapping)}
 
 \item{num_strata}{Integer number of phylostrata}
 
@@ -43,6 +45,10 @@
 \item{show_gene_age}{Logical indicating whether to show gene age as row annotation (default: TRUE)}
 
 \item{show_gene_ids}{Logical indicating whether to show gene names (default: FALSE)}
+
+\item{gene_annotation}{Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)}
+
+\item{gene_annotation_colors}{Named list of color vectors for custom gene annotations (default: NULL)}
 
 \item{annotation_col}{Data frame with column annotations (default: NULL)}
 

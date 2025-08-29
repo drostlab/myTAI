@@ -4,10 +4,12 @@
 \alias{plot_contribution}
 \title{Plot Phylostratum Contribution to Transcriptomic Index}
 \usage{
-plot_contribution(phyex_set)
+plot_contribution(phyex_set, type = c("stacked", "line"))
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
+
+\item{type}{One of "stacked" or "line". If stacked, will show the lines stacked in a cumulative area plot, otherwise they will not be stacked.}
 }
 \value{
 A ggplot2 object showing phylostratum contributions as a stacked area plot

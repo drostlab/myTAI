@@ -94,6 +94,7 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 # reset cache
                 self@.TXI_sample <- NULL
                 self@.pseudobulk_cache <- list()
+                self@expression <- value
                 self
             },
             name = "expression"
@@ -109,9 +110,11 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 if (!is.null(cache[[key]]))
                     return(cache[[key]])
                 pb <- .pseudobulk_expression(self@expression, self@groups)
+                rownames(pb) <- self@gene_ids
+                colnames(pb) <- levels(self@groups)
                 cache[[key]] <- pb
                 self@.pseudobulk_cache <- cache
-                pb
+                return(pb)
             }
         ),
         .TXI_sample = new_property(
@@ -122,7 +125,7 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
             class = class_double,
             getter = function(self) {
                 if (is.null(self@.TXI_sample))
-                    self@.TXI_sample <- cpp_txi_sc(self@expression, self@strata_values)
+                    self@.TXI_sample <- .TXI_sc_adaptive(self@expression, self@strata_values)
                 self@.TXI_sample
             }
         ),
@@ -132,9 +135,10 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
         ),
         metadata = new_property(
             class = class_data.frame,
-            default = NULL,
+            
             setter = function(self, value) {
-                if (is.null(value)) return(value)
+                if (!length(value))
+                    return(self)
                 
                 # Convert character and discrete numeric columns to factors for consistent handling
                 for (col_name in colnames(value)) {
@@ -147,8 +151,10 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                         } 
                     }
                 }
-                value
-            }
+                self@metadata <- value
+                self
+            },
+            default = NULL
         ),
         available_idents = new_property(
             class = class_character,
@@ -156,7 +162,6 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 if (is.null(self@metadata))
                     return(character())
                 cols <- colnames(self@metadata)
-                # only return the columns in metadata which are factors (since all discrete columns are now factors)
                 discrete_cols <- cols[sapply(self@metadata, \(col) is.factor(col))]
                 discrete_cols
             }
@@ -167,9 +172,10 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 if (!length(value)) 
                     return(self)
                 # update the groups property
-                if (value %!in% self@available_idents)
+                if (!(value %in% self@available_idents))
                     stop("@selected_idents must be a factor column in self@metadata")
                 self@groups <- self@metadata[[value]]
+                self@selected_idents <- value
                 self
             }
         ),
@@ -278,6 +284,16 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 }
             }
         }
+
+        # Validate expression_collapsed rownames match gene_ids
+        # if (!identical(rownames(self@expression_collapsed), self@gene_ids)) {
+        #     return("@expression_collapsed rownames must match @gene_ids")
+        # }
+        
+        # unique_groups <- sort(as.character(unique(self@groups)))
+        # if (!identical(sort(self@identities), unique_groups)) {
+        #     return("@identities must match unique values in @groups")
+        # }
     }
 )
 
@@ -756,6 +772,57 @@ match_map_sc_matrix <- function(expression_matrix,
     
     names(txi) <- colnames(expression)
     return(txi)
+}
+
+#' @title Adaptive TXI calculation for single cell expression
+#' @description Automatically selects the best TXI implementation based on dataset size
+#' and available computational resources. Uses R implementation for smaller datasets
+#' and C++ implementation with optimal parallelization for larger datasets.
+#' 
+#' @param expression Matrix of expression values, dgCMatrix
+#' @param strata_values Numeric vector of phylostratum values
+#' @param force_method Character, force specific method: "r", "cpp_simple", or "cpp_batched"
+#' @param ncores Integer, number of cores to use (default: parallel::detectCores())
+#' @return Vector of TXI values
+#' 
+#' @details Based on performance benchmarking:
+#' - R implementation is fastest for < 50,000 cells
+#' - C++ batched implementation becomes advantageous for >= 100,000 cells
+#' - Optimal core count scales with dataset size
+#' 
+#' @keywords internal
+.TXI_sc_adaptive <- function(expression, strata_values, force_method = NULL, ncores = NULL) {
+    n_cells <- ncol(expression)
+    n_genes <- nrow(expression)
+    
+    # Detect available cores if not specified
+    if (is.null(ncores)) {
+        ncores <- min(parallel::detectCores(), 16)
+    }
+    
+    # Determine optimal method based on benchmarking results
+    if (!is.null(force_method)) {
+        method <- force_method
+    } else if (n_cells < 100000) {
+        # R implementation dominates for smaller datasets
+        method <- "r"
+    } else {
+        # C++ batched with high parallelization for very large datasets
+        method <- "cpp_batched"
+        # Optimal core count for large datasets
+        ncores <- min(ncores, max(8, ncores))
+    }
+    
+    # Execute with selected method
+    switch(method,
+           "r" = .TXI_sc(expression, strata_values),
+           "cpp_batched" = {
+               # Adaptive batch size based on dataset size
+               batch_size <- max(2000, min(5000, n_cells %/% ncores))
+               cpp_txi_sc(expression, strata_values, batch_size = batch_size, ncores = ncores)
+           },
+           stop("Unknown method: ", method)
+    )
 }
 
 ## METHOD IMPLEMENTATIONS

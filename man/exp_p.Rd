@@ -4,7 +4,7 @@
 \alias{exp_p}
 \title{Format P-Value for Scientific Notation}
 \usage{
-exp_p(p)
+exp_p(p, sci_thresh = 4)
 }
 \arguments{
 \item{p}{Numeric p-value}

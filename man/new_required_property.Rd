@@ -4,7 +4,13 @@
 \alias{new_required_property}
 \title{Create S7 Required Property}
 \usage{
-new_required_property(class = S7::class_any, name, validator = NULL)
+new_required_property(
+  class = S7::class_any,
+  name,
+  validator = NULL,
+  getter = NULL,
+  setter = NULL
+)
 }
 \arguments{
 \item{class}{The S7 class for the property (default: S7::class_any)}
@@ -12,6 +18,10 @@ new_required_property(class = S7::class_any, name, validator = NULL)
 \item{name}{Name of the property (used in error messages)}
 
 \item{validator}{Optional validation function for the property}
+
+\item{getter}{Optional getter function for the property}
+
+\item{setter}{Optional setter function for the property}
 }
 \value{
 An S7 property object that is required

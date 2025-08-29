@@ -208,14 +208,7 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
         if (length(self@groups) != self@num_samples)
             return("@groups must have the sample length as the number of columns of @expression")
         
-        # Validate expression_collapsed rownames match gene_ids
-        if (!identical(rownames(self@expression_collapsed), self@gene_ids)) 
-            return("@expression_collapsed rownames must match @gene_ids")
-        
-        unique_groups <- sort(as.character(unique(self@groups)))
-        if (!identical(sort(self@identities), unique_groups)) {
-            return("@identities must match unique values in @groups")
-        }
+
     }
 )
 

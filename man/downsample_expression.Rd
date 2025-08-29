@@ -2,27 +2,32 @@
 % Please edit documentation in R/phyloset_sc.R
 \name{downsample_expression}
 \alias{downsample_expression}
-\title{Downsample Expression Matrix}
+\title{Downsample Expression Matrix by Groups}
 \usage{
-downsample_expression(phyex_set, downsample = 10)
+downsample_expression(expression_matrix, groups, downsample = 10)
 }
 \arguments{
-\item{phyex_set}{A ScPhyloExpressionSet object}
+\item{expression_matrix}{Expression matrix with genes as rows and samples as columns}
 
-\item{downsample}{Integer, number of cells to keep per identity (default: 10)}
+\item{groups}{Factor vector indicating which group each sample belongs to}
+
+\item{downsample}{Integer, number of samples to keep per group (default: 10)}
 }
 \value{
-A dense expression matrix (genes x downsampled cells)
+A dense expression matrix (genes x downsampled samples)
 }
 \description{
-Downsample the cells in a ScPhyloExpressionSet and return the expression matrix as a dense matrix.
+Downsample an expression matrix by randomly selecting a specified number of samples from each group.
 }
 \details{
-This function randomly downsamples the cells in the Seurat object of a ScPhyloExpressionSet
-and returns the resulting expression matrix as a regular R matrix (not sparse).
-Useful for quick plotting or prototyping with large single-cell datasets.
+This function randomly samples up to \code{downsample} samples from each group level.
+The returned expression matrix is converted to dense format and maintains column names
+from the original matrix. Useful for creating balanced subsets for visualization or
+when memory is limited.
 }
 \examples{
-# Downsample to 20 cells per identity and get the matrix
-# mat <- downsample_expression(sc_phyex_set, downsample = 20)
+\dontrun{
+# Downsample expression matrix to 5 samples per group
+downsampled <- downsample_expression(expr_matrix, groups, downsample = 5)
+}
 }

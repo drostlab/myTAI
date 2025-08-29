@@ -45,8 +45,8 @@ This function creates visualizations appropriate for the data type:
 - Sina plots showing TXI distributions across cell types or other identities
 - Mean TXI values overlaid as line
 - Optional individual cells using geom_sina for better visualization
-- Flexible identity selection from Seurat metadata via additional parameters:
-  - `primary_identity`: Character, name of metadata column for x-axis (default: current Seurat identities)
+- Flexible identity selection from metadata via additional parameters:
+  - `primary_identity`: Character, name of metadata column for x-axis (default: current selected identities)
   - `secondary_identity`: Character, name of metadata column for coloring/faceting
   - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)
 }

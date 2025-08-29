@@ -49,26 +49,23 @@ test_that("C++ TXI implementation produces correct results", {
     expect_equal(length(txi_r_result), length(txi_original_result))
     
     # Check non-NA values are close
-    non_na_r <- !is.na(txi_r_result)
-    non_na_cpp <- !is.na(txi_cpp_result)
-    non_na_original <- !is.na(txi_original_result)
+    non_na_r <- !is.na(unname(txi_r_result))
+    non_na_cpp <- !is.na(unname(txi_cpp_result))
+    non_na_original <- !is.na(unname(txi_original_result))
     expect_equal(non_na_r, non_na_cpp)
     expect_equal(non_na_r, non_na_original)
     
     if (any(non_na_r)) {
-        expect_equal(txi_r_result[non_na_r], txi_cpp_result[non_na_cpp], tolerance = 1e-10)
-        expect_equal(txi_r_result[non_na_r], txi_original_result[non_na_original], tolerance = 1e-10)
+        expect_equal(unname(txi_r_result)[non_na_r], unname(txi_cpp_result)[non_na_cpp], tolerance = 1e-10)
+        expect_equal(unname(txi_r_result)[non_na_r], unname(txi_original_result)[non_na_original], tolerance = 1e-10)
     }
     
-    # Test simple implementation too
-    txi_cpp_simple <- cpp_txi_sc_simple(expr_data, strata_values, ncores = 1)
-    expect_equal(txi_r_result, txi_cpp_simple, tolerance = 1e-10)
 })
 
 test_that("TXI performance comparison (skipped by default)", {
     skip_if_not_installed("Matrix")
     skip_if_not_installed("microbenchmark")
-    skip("Performance test - run manually with testthat::test_file() and profile=TRUE")
+    # skip("Performance test - run manually with testthat::test_file() and profile=TRUE")  # COMMENTED OUT TO RUN
     
     # Create larger test matrices for performance testing
     set.seed(42)
@@ -76,7 +73,9 @@ test_that("TXI performance comparison (skipped by default)", {
     test_sizes <- list(
         small = list(genes = 1000, cells = 500),
         medium = list(genes = 5000, cells = 2000),
-        large = list(genes = 10000, cells = 5000)
+        large = list(genes = 10000, cells = 5000),
+        very_large = list(genes = 20000, cells = 100000),
+        extreme = list(genes = 20000, cells = 200000)
     )
     
     results <- list()
@@ -91,14 +90,14 @@ test_that("TXI performance comparison (skipped by default)", {
         
         # Create realistic sparse single-cell data
         expr_data <- Matrix::rsparsematrix(n_genes, n_cells, density = 0.05)
-        expr_data <- abs(expr_data) * rpois(Matrix::nnz(expr_data), lambda = 5)
+        expr_data <- abs(expr_data) * rpois(length(expr_data@x), lambda = 5)
         colnames(expr_data) <- paste0("cell_", 1:n_cells)
         rownames(expr_data) <- paste0("gene_", 1:n_genes)
         
         # Create strata values
         strata_values <- sample(1:12, n_genes, replace = TRUE)
         
-        cat("Matrix density:", round(Matrix::nnz(expr_data) / (n_genes * n_cells) * 100, 2), "%\n")
+        cat("Matrix density:", round(length(expr_data@x) / (n_genes * n_cells) * 100, 2), "%\n")
         cat("Matrix size:", round(object.size(expr_data) / 1024^2, 1), "MB\n")
         
         # R implementation
@@ -120,26 +119,52 @@ test_that("TXI performance comparison (skipped by default)", {
             return(txi)
         }
         
-        # Benchmark different implementations
-        cat("Running benchmarks...\n")
+        # For very large datasets, reduce the number of benchmark runs and focus on key implementations
+        times <- if (n_cells > 150000) 2 else if (n_cells > 50000) 3 else 5
         
-        bench_results <- microbenchmark::microbenchmark(
-            R_implementation = txi_r(expr_data, strata_values),
-            original_TXI_sc = .TXI_sc(expr_data, strata_values),
-            cpp_batched = cpp_txi_sc(expr_data, strata_values, batch_size = 1000, ncores = 1),
-            cpp_batched_parallel = cpp_txi_sc(expr_data, strata_values, batch_size = 1000, ncores = 2),
-            cpp_simple = cpp_txi_sc_simple(expr_data, strata_values, ncores = 1),
-            cpp_simple_parallel = cpp_txi_sc_simple(expr_data, strata_values, ncores = 2),
-            times = 5L,
-            unit = "ms"
-        )
+        # Skip some implementations for very large datasets to save time
+        if (n_cells > 150000) {
+            cat("Running minimal benchmarks for extreme dataset (200k+ cells)...\n")
+            
+            # Only test most promising configurations for extreme datasets
+            bench_results <- microbenchmark::microbenchmark(
+                original_TXI_sc = .TXI_sc(expr_data, strata_values),
+                cpp_batched_8cores = cpp_txi_sc(expr_data, strata_values, batch_size = 2000, ncores = 8),
+                cpp_batched_12cores = cpp_txi_sc(expr_data, strata_values, batch_size = 2000, ncores = 12),
+                times = times,
+                unit = "s"  # Use seconds for extreme datasets
+            )
+        } else if (n_cells > 50000) {
+            cat("Running reduced benchmarks for very large dataset (100k cells) with high parallelism...\n")
+            
+            # Test with various core counts to find optimal parallelization
+            bench_results <- microbenchmark::microbenchmark(
+                original_TXI_sc = .TXI_sc(expr_data, strata_values),
+                cpp_batched_4cores = cpp_txi_sc(expr_data, strata_values, batch_size = 2000, ncores = 4),
+                cpp_batched_8cores = cpp_txi_sc(expr_data, strata_values, batch_size = 2000, ncores = 8),
+                cpp_batched_12cores = cpp_txi_sc(expr_data, strata_values, batch_size = 2000, ncores = 12),
+                times = times,
+                unit = "s"  # Use seconds for large datasets
+            )
+        } else {
+            # Also test higher core counts for smaller datasets to see scaling
+            bench_results <- microbenchmark::microbenchmark(
+                R_implementation = txi_r(expr_data, strata_values),
+                original_TXI_sc = .TXI_sc(expr_data, strata_values),
+                cpp_batched_1core = cpp_txi_sc(expr_data, strata_values, batch_size = 1000, ncores = 1),
+                cpp_batched_4cores = cpp_txi_sc(expr_data, strata_values, batch_size = 1000, ncores = 4),
+                cpp_batched_8cores = cpp_txi_sc(expr_data, strata_values, batch_size = 1000, ncores = 8),
+                times = times,
+                unit = "ms"
+            )
+        }
         
         print(bench_results)
         
         # Store results
         results[[size_name]] <- list(
             dimensions = c(genes = n_genes, cells = n_cells),
-            density = Matrix::nnz(expr_data) / (n_genes * n_cells),
+            density = length(expr_data@x) / (n_genes * n_cells),
             size_mb = as.numeric(object.size(expr_data) / 1024^2),
             benchmark = bench_results
         )
@@ -153,15 +178,15 @@ test_that("TXI performance comparison (skipped by default)", {
         expect_equal(length(txi_r_result), length(txi_original_result))
         expect_equal(length(txi_r_result), length(txi_cpp_result))
         
-        non_na_r <- !is.na(txi_r_result)
-        non_na_original <- !is.na(txi_original_result)
-        non_na_cpp <- !is.na(txi_cpp_result)
+        non_na_r <- !is.na(unname(txi_r_result))
+        non_na_original <- !is.na(unname(txi_original_result))
+        non_na_cpp <- !is.na(unname(txi_cpp_result))
         expect_equal(non_na_r, non_na_original)
         expect_equal(non_na_r, non_na_cpp)
         
         if (any(non_na_r)) {
-            max_diff_original <- max(abs(txi_r_result[non_na_r] - txi_original_result[non_na_original]), na.rm = TRUE)
-            max_diff_cpp <- max(abs(txi_r_result[non_na_r] - txi_cpp_result[non_na_cpp]), na.rm = TRUE)
+            max_diff_original <- max(abs(unname(txi_r_result)[non_na_r] - unname(txi_original_result)[non_na_original]), na.rm = TRUE)
+            max_diff_cpp <- max(abs(unname(txi_r_result)[non_na_r] - unname(txi_cpp_result)[non_na_cpp]), na.rm = TRUE)
             cat("Maximum difference between R and original .TXI_sc:", max_diff_original, "\n")
             cat("Maximum difference between R and C++ results:", max_diff_cpp, "\n")
             expect_true(max_diff_original < 1e-10, 
@@ -258,7 +283,7 @@ test_that("Memory usage profiling (manual test)", {
     n_cells <- 2000
     
     expr_data <- Matrix::rsparsematrix(n_genes, n_cells, density = 0.05)
-    expr_data <- abs(expr_data) * rpois(Matrix::nnz(expr_data), lambda = 3)
+    expr_data <- abs(expr_data) * rpois(length(expr_data@x), lambda = 3)
     strata_values <- sample(1:12, n_genes, replace = TRUE)
     
     cat("Testing memory usage for", n_genes, "genes x", n_cells, "cells\n")

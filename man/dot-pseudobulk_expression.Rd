@@ -4,17 +4,17 @@
 \alias{.pseudobulk_expression}
 \title{Create Pseudobulk Expression Data}
 \usage{
-.pseudobulk_expression(seurat, layer)
+.pseudobulk_expression(expression, groups)
 }
 \arguments{
-\item{seurat}{A Seurat object}
+\item{expression}{Expression matrix with genes as rows and cells as columns}
 
-\item{layer}{Expression layer to use}
+\item{groups}{Factor vector indicating which group each cell belongs to}
 }
 \value{
 Matrix of pseudobulked expression
 }
 \description{
-Aggregate single-cell data by cell identity (using Seurat Idents) to create pseudobulk expression.
+Aggregate single-cell data by cell identity to create pseudobulk expression.
 }
 \keyword{internal}

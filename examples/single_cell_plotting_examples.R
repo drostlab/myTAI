@@ -9,8 +9,7 @@
 library(myTAI)
 
 # Load the example single-cell dataset
-example_phyex_set_sc <- load_example_phyex_set_sc()
-example_phyex_set_sc
+data("example_phyex_set_sc")
 
 
 # Check dataset structure

@@ -5,3 +5,67 @@ cpp_nullTXIs <- function(count_matrix, strata_vector, num_permutations) {
     .Call(`_myTAI_cpp_nullTXIs`, count_matrix, strata_vector, num_permutations)
 }
 
+#' @title Create Pseudobulk Expression Matrix (C++ Implementation)
+#' @description Efficiently aggregate single-cell expression data by cell groups
+#' to create pseudobulk expression profiles using optimized sparse matrix operations.
+#' 
+#' @param expression Sparse expression matrix (genes x cells) - dgCMatrix format
+#' @param groups Integer vector indicating group membership for each cell (0-based indexing)
+#' @param n_groups Integer, total number of unique groups
+#' @param ncores Integer, number of cores to use for parallel processing (default: 10)
+#' @return Dense matrix of pseudobulked expression (genes x groups)
+#' 
+#' @details
+#' This function efficiently aggregates single-cell data by summing expression values
+#' within each group. It processes genes in parallel and uses sparse matrix optimizations
+#' to skip zero entries. The output is a dense matrix for consistency with downstream
+#' analysis functions.
+#' 
+#' @keywords internal
+cpp_pseudobulk <- function(expression, groups, n_groups, ncores = 10L) {
+    .Call(`_myTAI_cpp_pseudobulk`, expression, groups, n_groups, ncores)
+}
+
+#' @title Create Pseudobulk Expression Matrix (Memory-Optimized Implementation)
+#' @description Memory-optimized version that processes the pseudobulking in batches
+#' for very large datasets to avoid memory issues.
+#' 
+#' @param expression Sparse expression matrix (genes x cells) - dgCMatrix format
+#' @param groups Integer vector indicating group membership for each cell (0-based indexing)
+#' @param n_groups Integer, total number of unique groups
+#' @param batch_size Integer, number of genes to process per batch (default: 1000)
+#' @param ncores Integer, number of cores to use for parallel processing (default: 10)
+#' @return Dense matrix of pseudobulked expression (genes x groups)
+#' 
+#' @details
+#' This function processes genes in batches to manage memory usage for very large
+#' single-cell datasets. It's particularly useful when dealing with hundreds of
+#' thousands of cells and tens of thousands of genes.
+#' 
+#' @keywords internal
+cpp_pseudobulk_batched <- function(expression, groups, n_groups, batch_size = 1000L, ncores = 10L) {
+    .Call(`_myTAI_cpp_pseudobulk_batched`, expression, groups, n_groups, batch_size, ncores)
+}
+
+#' @title Calculate TXI for Single-Cell Expression Data (C++ Implementation)
+#' @description Efficiently calculate TXI values for sparse single-cell expression matrices
+#' using batch processing and parallel computation.
+#' 
+#' @param expression Sparse expression matrix (genes x cells) - dgCMatrix format
+#' @param strata_values Numeric vector of phylostratum values for each gene
+#' @param batch_size Integer, number of cells to process per batch (default: 2000)
+#' @param ncores Integer, number of cores to use for parallel processing (default: 10, automatically capped at available cores)
+#' @return Numeric vector of TXI values for each cell
+#' 
+#' @details
+#' This function processes large sparse single-cell expression matrices efficiently by:
+#' - Splitting cells into batches to manage memory usage
+#' - Using parallel processing across batches
+#' - Leveraging sparse matrix operations to skip zero entries
+#' - Handling cells with zero expression by returning NA
+#' 
+#' @keywords internal
+cpp_txi_sc <- function(expression, strata_values, batch_size = 2000L, ncores = 10L) {
+    .Call(`_myTAI_cpp_txi_sc`, expression, strata_values, batch_size, ncores)
+}
+

@@ -2,7 +2,7 @@
 data <- read.csv("data-raw/ath_embryogenesis_2011.csv", sep="\t")
 legend <- read.csv("data-raw/strata_legend.tsv", sep="\t")
 
-example_phyex_set_old <- PhyloExpressionSet_from_df(data, 
+example_phyex_set_old <- BulkPhyloExpressionSet_from_df(data, 
                                                     name="Embryogenesis 2011",
                                                     species="Arabidopsis thaliana",
                                                     index_type="TAI",
