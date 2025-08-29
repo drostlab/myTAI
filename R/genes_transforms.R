@@ -23,30 +23,19 @@ set_expression <- S7::new_generic("set_expression", "phyex_set",
 
 #' @export
 S7::method(set_expression, BulkPhyloExpressionSet) <- function(phyex_set, new_expression, new_name = NULL, ...) {
-    stopifnot(all(dim(new_expression) == dim(phyex_set@.expression)))
-    phyex_set@.expression <- new_expression
+    stopifnot(all(dim(new_expression) == dim(phyex_set@expression)))
+    phyex_set@expression <- new_expression
     if (!is.null(new_name)) phyex_set@name <- new_name
     return(phyex_set)
 }
 
 #' @export
 S7::method(set_expression, ScPhyloExpressionSet) <- function(phyex_set, new_expression, new_name = NULL, ...) {
-    if (!requireNamespace("SeuratObject", quietly = TRUE)) {
-        stop("Package 'SeuratObject' must be installed to use this function.")
-    }
     stopifnot(all(dim(new_expression) == dim(phyex_set@expression)))
-    new_seurat <- phyex_set@seurat
-    SeuratObject::LayerData(new_seurat, layer = phyex_set@layer) <- new_expression
-
-    res <- as_ScPhyloExpressionSet(
-        seurat = new_seurat,
-        strata = phyex_set@strata,
-        layer = phyex_set@layer,
-        name = if (!is.null(new_name)) new_name else phyex_set@name,
-        species = phyex_set@species,
-        index_type = phyex_set@index_type
-    )
-    return(res)
+    phyex_set@expression <- new_expression
+    if (!is.null(new_name)) phyex_set@name <- new_name
+    
+    return(phyex_set)
 }
 
 #' @title Transform Expression Counts in PhyloExpressionSet

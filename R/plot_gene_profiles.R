@@ -58,7 +58,7 @@ plot_gene_profiles <- function(phyex_set,
     
     if (S7::S7_inherits(phyex_set, ScPhyloExpressionSet)) 
         # Downsample to 50 cells for efficiency
-        expr <- downsample_expression(phyex_set, downsample = 50)
+        expr <- downsample_expression(phyex_set@expression, groups = phyex_set@groups, downsample = 50)
     else 
         expr <- phyex_set@expression
 

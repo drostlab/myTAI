@@ -17,20 +17,16 @@
 #' Load Example Single-Cell PhyloExpressionSet
 #'
 #' Creates and returns an example ScPhyloExpressionSet object for testing and examples.
-#' Only works if Seurat is installed.
+#' No external dependencies required.
 #'
-#' @return A ScPhyloExpressionSet object, or NULL if Seurat is not available.
+#' @return A ScPhyloExpressionSet object.
 #' @export
 load_example_phyex_set_sc <- function() {
-    if (!requireNamespace("Seurat", quietly = TRUE)) {
-        warning("Seurat package is not installed. Returning NULL.")
-        return(NULL)
-    }
-
     set.seed(1234)
     n_genes <- 1000
     n_cells <- 1000
 
+    # Create count matrix
     counts <- matrix(
         stats::rnbinom(n_genes * n_cells, size = 5, mu = 100),
         nrow = n_genes,
@@ -39,6 +35,7 @@ load_example_phyex_set_sc <- function() {
     rownames(counts) <- paste0("Gene-", 1:n_genes)
     colnames(counts) <- paste0("Cell-", 1:n_cells)
 
+    # Create metadata
     metadata <- data.frame(
         groups = factor(sample(c("TypeA", "TypeB", "TypeC"), n_cells, replace = TRUE), 
                         levels = c("TypeA", "TypeB", "TypeC"), ordered = TRUE),
@@ -52,35 +49,20 @@ load_example_phyex_set_sc <- function() {
         row.names = colnames(counts)
     )
 
-    example_seurat <- Seurat::CreateSeuratObject(
-        counts = counts,
-        meta.data = metadata,
-        project = "ExampleSC"
-    )
-    Seurat::Idents(example_seurat) <- "groups"
-
-    suppressWarnings({
-        example_seurat <- Seurat::NormalizeData(example_seurat, verbose = FALSE)
-        example_seurat <- Seurat::FindVariableFeatures(example_seurat, nfeatures = 50, verbose = FALSE)
-        example_seurat <- Seurat::ScaleData(example_seurat, verbose = FALSE)
-        example_seurat <- Seurat::RunPCA(example_seurat, npcs = 10, verbose = FALSE)
-        example_seurat <- Seurat::RunUMAP(example_seurat, dims = 1:10, verbose = FALSE)
-    })
-
+    # Create phylomap
     phylomap_example <- data.frame(
-        Stratum = sample(1:10, nrow(example_seurat), replace = TRUE),
-        GeneID = rownames(example_seurat)
+        Stratum = sample(1:10, n_genes, replace = TRUE),
+        GeneID = rownames(counts)
     )
 
-    example_phyex_set_sc <- match_map_sc(
-        seurat = example_seurat,
-        phylomap = phylomap_example,
-        layer = "counts",
+    # Create ScPhyloExpressionSet using the matrix constructor
+    example_phyex_set_sc <- ScPhyloExpressionSet_from_matrix(
+        expression_matrix = Matrix::Matrix(counts, sparse = TRUE),
+        strata = phylomap_example$Stratum[match(rownames(counts), phylomap_example$GeneID)],
+        metadata = metadata,
+        groups_column = "groups",
         name = "Single Cell Example"
     )
-    
-    # Set the correct identities label to match what we actually set in Seurat
-    example_phyex_set_sc@identities_label <- "groups"
 
     return(example_phyex_set_sc)
 }

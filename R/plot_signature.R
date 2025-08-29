@@ -23,8 +23,8 @@
 #' - Sina plots showing TXI distributions across cell types or other identities
 #' - Mean TXI values overlaid as line
 #' - Optional individual cells using geom_sina for better visualization
-#' - Flexible identity selection from Seurat metadata via additional parameters:
-#'   - `primary_identity`: Character, name of metadata column for x-axis (default: current Seurat identities)
+#' - Flexible identity selection from metadata via additional parameters:
+#'   - `primary_identity`: Character, name of metadata column for x-axis (default: current selected identities)
 #'   - `secondary_identity`: Character, name of metadata column for coloring/faceting
 #'   - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)
 #' 
@@ -195,10 +195,11 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
     if (is.null(color_by_identity)) color_by_identity <- phyex_set@identities_label
     
     # Check for custom colors and show message if using defaults
-    has_custom_colors <- !is.null(phyex_set@identity_colours[[color_by_identity]])
+    has_custom_colors <- !is.null(phyex_set@idents_colours) && 
+                         !is.null(phyex_set@idents_colours[[color_by_identity]])
     if (!has_custom_colors && is.null(colour)) {
         message(sprintf(
-            "Using default colors for identity '%s'. To set custom colors, use:\n  set_identity_colours(phyex_set, \"%s\", c(\"value1\" = \"color1\", \"value2\" = \"color2\", ...))",
+            "Using default colors for identity '%s'. To set custom colors, assign to phyex_set@idents_colours[['%s']] <- c(value1 = 'color1', value2 = 'color2', ...)",
             color_by_identity, color_by_identity
         ))
     }
@@ -311,7 +312,7 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
         }
     } else if (has_custom_colors) {
         # Use custom colors from the object - ensure they match the data levels
-        custom_colors <- phyex_set@identity_colours[[color_by_identity]]
+        custom_colors <- phyex_set@idents_colours[[color_by_identity]]
         
         if (!is.null(secondary_identity) && !facet_by_secondary) {
             actual_levels <- levels(factor(df_samples$Secondary))
@@ -349,11 +350,11 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
 #' @keywords internal
 .prepare_sc_plot_data <- function(phyex_set, primary_identity = NULL, secondary_identity = NULL) {
     # Get metadata
-    metadata <- phyex_set@cell_metadata
+    metadata <- phyex_set@metadata
     
     # Determine primary identity
     if (is.null(primary_identity)) {
-        # Use current Seurat identities
+        # Use current selected identities via groups
         primary_values <- phyex_set@groups
         primary_label <- phyex_set@identities_label
     } else {

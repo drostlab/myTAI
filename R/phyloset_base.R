@@ -20,13 +20,43 @@ TI_map <- list(TXI = "Transcriptomic Index",
 #' 
 #' @param strata Factor vector of phylostratum assignments for each gene
 #' @param strata_values Numeric vector of phylostratum values used in TXI calculations
-#' @param gene_ids Character vector of gene identifiers
+#' @param expression Matrix of expression counts with genes as rows and samples as columns
+#' @param groups Factor vector indicating which identity each sample belongs to
 #' @param name Character string naming the dataset (default: "Phylo Expression Set")
 #' @param species Character string specifying the species (default: NULL)
 #' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
 #' @param identities_label Character string labeling the identities (default: "Identities")
 #' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
-#' @param precomputed_null_conservation_txis Precomputed null conservation TXI values (default: NULL)
+#' @param .null_conservation_txis Precomputed null conservation TXI values (default: NULL)
+#' 
+#' @details
+#' The PhyloExpressionSetBase class serves as the foundation for phylotranscriptomic analysis,
+#' providing shared functionality for both bulk and single-cell data types.
+#' 
+#' \strong{Abstract Properties:}
+#' Subclasses must implement the \code{expression_collapsed} property to define how expression
+#' data should be collapsed across replicates or cells.
+#' 
+#' \strong{Computed Properties:}
+#' Several properties are computed automatically when accessed:
+#' \itemize{
+#'   \item \code{gene_ids} - Character vector of gene identifiers (rownames of expression matrix)
+#'   \item \code{identities} - Character vector of identity labels (colnames of collapsed expression)
+#'   \item \code{sample_names} - Character vector of sample names (colnames of expression matrix)
+#'   \item \code{num_identities} - Integer count of unique identities
+#'   \item \code{num_samples} - Integer count of total samples
+#'   \item \code{num_genes} - Integer count of genes
+#'   \item \code{num_strata} - Integer count of phylostrata
+#'   \item \code{index_full_name} - Full name of the transcriptomic index type
+#'   \item \code{group_map} - List mapping identity names to sample names
+#'   \item \code{TXI} - Numeric vector of TXI values for each identity (computed from collapsed expression)
+#'   \item \code{TXI_sample} - Numeric vector of TXI values for each sample (computed from raw expression)
+#'   \item \code{null_conservation_txis} - Matrix of null conservation TXI values for statistical testing
+#' }
+#' 
+#' \strong{Validation:}
+#' The class ensures consistency between expression data, phylostratum assignments, and groupings.
+#' All gene-level vectors must have matching lengths, and sample groupings must be consistent.
 #' 
 #' @import S7
 #' @export
@@ -49,14 +79,22 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             },
             name = "strata_values"
         ),
-        gene_ids = new_required_property(
-            class = class_character,
+        expression = new_required_property(
+            # class = class_matrix (S7 doesn't have a class matrix yet)
             validator = function(value) {
-                if (any(is.na(value))) return("cannot contain NA values. Check gene IDs.")
-                if (length(value) == 0) return("cannot be empty. Check gene IDs.")
+                if (any(is.na(value))) return("cannot contain NA values. Check expression matrix.")
+                if (length(value) == 0) return("cannot be empty. Check expresison matrix.")
             },
-            name = "gene_ids"
-        ),
+            name = "expression"
+        ),  
+        groups = new_required_property(
+            class = class_factor,
+            validator = function(value) {
+                if (any(is.na(value))) return("cannot contain NA values. Check groups.")
+                if (length(value) == 0) return("cannot be empty. Check groups.")
+            },
+            name = "groups"
+        ),      
         
         ## OPTIONAL PROPERTIES
         name = new_property(
@@ -78,24 +116,28 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
         ),
 
         ## ABSTRACT PROPERTIES (must be implemented by subclasses)
-        expression = new_property(
-            getter = function(self) stop("expression property must be implemented by subclass")
-        ),
         expression_collapsed = new_property(
             getter = function(self) stop("expression_collapsed property must be implemented by subclass")
-        ),
-        groups = new_property(
-            getter = function(self) stop("groups property must be implemented by subclass")
         ),
         
         
         ## SHARED COMPUTED PROPERTIES
+        gene_ids = new_property(
+            class = class_character,
+            getter = function(self) rownames(self@expression),
+            validator = function(value) {
+                if (any(is.na(value))) return("cannot contain NA values. Check gene IDs.")
+                if (length(value) == 0) return("cannot be empty. Check gene IDs.")
+                if (length(value) == 1) return("must have at least 2 genes. Check gene IDs.")
+            },
+            name = "gene_ids"
+        ),
         identities = new_property(
-            class = class_factor,
+            class = class_character,
             getter = function(self) colnames(self@expression_collapsed)
         ),
         sample_names = new_property(
-            class = class_factor,
+            class = class_character,
             getter = function(self) colnames(self@expression)
         ),
         num_identities = new_property(
@@ -129,6 +171,7 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             getter = function(self) .TXI(self@expression_collapsed, self@strata_values)
         ),
         TXI_sample = new_property(
+            class = class_double,
             getter = function(self) .TXI(self@expression, self@strata_values)
         ),
         
@@ -137,29 +180,41 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             class = class_numeric,
             default = 5000L
         ),
-        precomputed_null_conservation_txis = new_property(
+        .null_conservation_txis = new_property(
             default = NULL
         ),
         null_conservation_txis = new_property(
             getter = function(self) {
-                if (is.null(self@precomputed_null_conservation_txis)) {
+                if (is.null(self@.null_conservation_txis)) {
                     # Compute and cache the result using expression_collapsed
                     computed_txis <- .memo_generate_conservation_txis(self@strata,
                                                                       self@expression_collapsed,
                                                                       self@null_conservation_sample_size)
-                    self@precomputed_null_conservation_txis <- computed_txis
+                    self@.null_conservation_txis <- computed_txis
                     return(computed_txis)
                 } else {
-                    return(self@precomputed_null_conservation_txis)
+                    return(self@.null_conservation_txis)
                 }
             }
         )
     ),
     validator = function(self) {
-        if (length(self@gene_ids) != length(self@strata)) {
-            "@gene_ids and @strata must have the same length"
-        } else if (length(self@strata) != length(self@strata_values)) {
-            "@strata and @strata_values must have the same length"
+        if (self@num_genes != length(self@strata)) 
+            return("@gene_ids and @strata must have the same length")
+        if (length(self@strata) != length(self@strata_values)) 
+            return("@strata and @strata_values must have the same length")
+        
+        # (the above also implicitly checks that the expression matrix and the strata lengths match)
+        if (length(self@groups) != self@num_samples)
+            return("@groups must have the sample length as the number of columns of @expression")
+        
+        # Validate expression_collapsed rownames match gene_ids
+        if (!identical(rownames(self@expression_collapsed), self@gene_ids)) 
+            return("@expression_collapsed rownames must match @gene_ids")
+        
+        unique_groups <- sort(as.character(unique(self@groups)))
+        if (!identical(sort(self@identities), unique_groups)) {
+            return("@identities must match unique values in @groups")
         }
     }
 )
@@ -314,9 +369,9 @@ remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "per
     s@name <- new_name
     
     if (reuse_null_txis)
-        s@precomputed_null_conservation_txis <- phyex_set@null_conservation_txis
+        s@.null_conservation_txis <- phyex_set@null_conservation_txis
     else
-        s@precomputed_null_conservation_txis <- NULL
+        s@.null_conservation_txis <- NULL
     
     return(s)
 }

@@ -106,9 +106,9 @@ gene_names <- example_phyex_set_old@gene_ids
 example_divergence_strata <- 
     setNames(sample(1:10, length(gene_names), replace = TRUE), gene_names) |>
     as.factor()
-# mock expression data taken from example_phyex_set_old@.expression
+# mock expression data taken from example_phyex_set_old@expression
 example_expression <- 
-    example_phyex_set_old@.expression |> 
+    example_phyex_set_old@expression |> 
     as.data.frame() |> 
     tibble::rownames_to_column(var = "GeneID")
 ```
