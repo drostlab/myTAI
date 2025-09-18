@@ -12,6 +12,17 @@ as_BulkPhyloExpressionSet(
   ...
 )
 }
+\arguments{
+\item{data}{A data frame with phylostratum assignments and gene expression data}
+
+\item{groups}{Vector of group labels for the samples/replicates}
+
+\item{name}{Character string to name the dataset}
+
+\item{strata_legend}{Optional data frame mapping phylostratum numbers to labels}
+
+\item{...}{Additional arguments passed to BulkPhyloExpressionSet_from_df}
+}
 \description{
 This function is an alias for \code{BulkPhyloExpressionSet_from_df}. 
 Please refer to the documentation for \code{BulkPhyloExpressionSet_from_df} for usage details, arguments, and examples.

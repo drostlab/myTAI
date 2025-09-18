@@ -66,52 +66,6 @@ myTAI::plot_signature_gene_quantiles(
 See more here:   
 → [📈](tai-stats.html)
 
-```{r echo=FALSE}
-#### IMPORTANT & potentially TEMPORARY
-#### I have to add this or else print and plot doesn't interact with the S7 object well.
-S7::method(plot, TestResult) <- function(test_result) {
-    library(ggplot2)
-    p <- ggplot(data.frame(x = test_result@null_sample),
-                aes(x = x)) +
-        geom_histogram(
-            aes(y = after_stat(density), fill = "Null Sample"),
-            bins = 100,
-            alpha = 0.7,
-            colour = "gray66") +
-        geom_vline(
-            aes(xintercept = test_result@test_stat, colour = "Test Statistic"),
-            linewidth = 1) +
-        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, aes(colour = "Fitted Null")) +
-        scale_fill_manual(name = NULL, values = c("Null Sample" = "gray67")) +
-        scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
-        labs(x = "Score", y = "Density") +
-        annotate("text",
-                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
-                   y = max(density(test_result@null_sample)$y) * 0.9,
-                   label = exp_p(test_result@p_value),
-                   parse=TRUE,
-                   hjust = 1,
-                   size = 3.5) +
-        theme_minimal()
-
-    return(p)
-}
-
-S7::method(print, TestResult) <- function(x, ...) {
-    cat("\n")
-    cat("Statistical Test Result\n")
-    cat("=======================\n")
-    cat("Method:", x@method_name, "\n")
-    cat("Test statistic:", x@test_stat, "\n")
-    cat("P-value:", x@p_value, "\n")
-    cat("Alternative hypothesis:", x@alternative, "\n")
-    if (!is.null(x@data_name)) {
-        cat("Data:", x@data_name, "\n")
-    }
-    cat("\n")
-    invisible(x)
-}
-```
 
 ```{r message = FALSE, warning = FALSE, fig.height=3, fig.width=5, fig.alt="stat_flatline_test function output", dev.args = list(bg = 'transparent'), fig.align='center'}
 myTAI::stat_flatline_test(
@@ -303,67 +257,67 @@ Most of the plotting functions shown above also apply for single cell RNA-seq da
 
 Let's create an example single-cell dataset and explore the plotting capabilities:
 
-```{r message = FALSE, warning = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE}
 # Load example single-cell data
-example_sc <- myTAI::load_example_phyex_set_sc()
+data(example_phyex_set_sc)
 ```
 
-```{r message = FALSE, warning = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
-print(example_sc)
+```{r message = FALSE, warning = FALSE}
+example_phyex_set_sc
 ```
 
-```{r message = FALSE, warning = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE}
 # Check available identities
 cat("Available identities for plotting:\n")
-print(myTAI::available_identities(example_sc))
+print(example_phyex_set_sc@available_idents)
 ```
 
-```{r message = FALSE, warning = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE}
 # Set up custom color schemes for better visualization
 day_colors <- c("Day1" = "#3498db", "Day3" = "#2980b9", "Day5" = "#1f4e79", "Day7" = "#0d2a42")
 condition_colors <- c("Control" = "#27ae60", "Treatment" = "#e74c3c")
 group_colors <- c("TypeA" = "#e74c3c", "TypeB" = "#f39c12", "TypeC" = "#9b59b6")
 
-example_sc <- myTAI::set_identity_colours(example_sc, "day", day_colors)
-example_sc <- myTAI::set_identity_colours(example_sc, "condition", condition_colors)
-example_sc <- myTAI::set_identity_colours(example_sc, "groups", group_colors)
+example_phyex_set_sc@idents_colours[["day"]] <- day_colors
+example_phyex_set_sc@idents_colours[["condition"]] <- condition_colors
+example_phyex_set_sc@idents_colours[["groups"]] <- group_colors
 ```
 
 #### Single-cell signature plots
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell basic", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell basic", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Basic signature plot showing TXI distribution across cell types
-myTAI::plot_signature(example_sc)
+myTAI::plot_signature(example_phyex_set_sc)
 ```
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell without individual cells", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell without individual cells", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Plot without showing individual cells (just means)
-myTAI::plot_signature(example_sc, show_reps = FALSE)
+myTAI::plot_signature(example_phyex_set_sc, show_reps = FALSE)
 ```
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell by day", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell by day", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Plot TXI distribution by developmental day instead of cell type
-myTAI::plot_signature(example_sc, primary_identity = "day", show_p_val = FALSE)
+myTAI::plot_signature(example_phyex_set_sc, primary_identity = "day", show_p_val = FALSE)
 ```
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell by condition", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature single-cell by condition", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Plot TXI distribution by experimental condition
-myTAI::plot_signature(example_sc, primary_identity = "condition", show_p_val=FALSE)
+myTAI::plot_signature(example_phyex_set_sc, primary_identity = "condition", show_p_val=FALSE)
 ```
 
 You can use a secondary identity for either coloring or faceting to create more informative plots:
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=8, fig.alt="plot_signature single-cell with secondary coloring", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=8, fig.alt="plot_signature single-cell with secondary coloring", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Plot by day, colored by condition
-myTAI::plot_signature(example_sc, 
+myTAI::plot_signature(example_phyex_set_sc, 
                      primary_identity = "day", 
                      secondary_identity = "condition",
                      show_p_val=FALSE)
 ```
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=6, fig.width=10, fig.alt="plot_signature single-cell with faceting", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=6, fig.width=10, fig.alt="plot_signature single-cell with faceting", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Plot by day, faceted by condition
-myTAI::plot_signature(example_sc, 
+myTAI::plot_signature(example_phyex_set_sc, 
                      primary_identity = "day", 
                      secondary_identity = "batch",
                      facet_by_secondary = TRUE,
@@ -374,19 +328,20 @@ myTAI::plot_signature(example_sc,
 
 The gene heatmap function also works with single-cell data and can show individual cells or be aggregated:
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=10, fig.alt="plot_gene_heatmap single-cell", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=10, fig.alt="plot_gene_heatmap single-cell", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Gene heatmap for single-cell data (aggregated by cell type)
-myTAI::plot_gene_heatmap(example_sc, top_p = 0.1, cluster_rows=TRUE)
+myTAI::plot_gene_heatmap(example_phyex_set_sc, top_p = 0.1, cluster_rows=TRUE)
 ```
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=12, fig.alt="plot_gene_heatmap single-cell with individual cells", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=12, fig.alt="plot_gene_heatmap single-cell with individual cells", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Gene heatmap showing individual cells (subsampled)
-myTAI::plot_gene_heatmap(example_sc, show_reps = TRUE, max_cells_per_type = 10, top_p = 0.05, cluster_rows=TRUE)
+myTAI::plot_gene_heatmap(example_phyex_set_sc, show_reps = TRUE, max_cells_per_type = 10, top_p = 0.05, cluster_rows=TRUE)
 ```
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=12, fig.alt="plot_gene_heatmap single-cell grouped by day", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("Seurat", quietly = TRUE)}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=8, fig.width=12, fig.alt="plot_gene_heatmap single-cell grouped by day", dev.args = list(bg = 'transparent'), fig.align='center'}
 # Change identity to "day" and plot heatmap grouped by developmental time
-example_sc_by_day <- myTAI::set_identities(example_sc, "day")
+example_sc_by_day <- example_phyex_set_sc
+example_sc_by_day@selected_idents <- "day"
 myTAI::plot_gene_heatmap(example_sc_by_day, show_reps = TRUE, max_cells_per_type = 8, top_p = 0.05, cluster_rows=TRUE, show_gene_ids=TRUE, std=FALSE)
 ```
 

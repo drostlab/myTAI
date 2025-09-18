@@ -22,10 +22,6 @@ match_map_sc_matrix(
 \item{strata_legend}{A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, numeric labels will be used (default: NULL)}
 
 \item{...}{Additional arguments passed to ScPhyloExpressionSet_from_matrix}
-
-\item{groups_column}{Character string specifying which metadata column to use for initial grouping (default: first factor column found)}
-
-\item{name}{Character string naming the dataset (default: derived from function)}
 }
 \value{
 A ScPhyloExpressionSet object
@@ -43,10 +39,6 @@ will be retained. All discrete metadata columns are converted to factors automat
 \dontrun{
 # Match expression matrix with phylostratum map
 sc_set <- match_map_sc_matrix(expr_matrix, metadata, phylo_map)
-
-# With specific grouping column
-sc_set <- match_map_sc_matrix(expr_matrix, metadata, phylo_map,
-                             groups_column = "cell_type")
 }
 
 }

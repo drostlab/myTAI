@@ -8,6 +8,8 @@ exp_p(p, sci_thresh = 4)
 }
 \arguments{
 \item{p}{Numeric p-value}
+
+\item{sci_thresh}{Numeric threshold for using scientific notation (number of decimal places)}
 }
 \value{
 Expression object for use in plot annotations

@@ -29,4 +29,7 @@ This function processes large sparse single-cell expression matrices efficiently
 - Leveraging sparse matrix operations to skip zero entries
 - Handling cells with zero expression by returning NA
 }
+\author{
+Kristian K Ullrich
+}
 \keyword{internal}

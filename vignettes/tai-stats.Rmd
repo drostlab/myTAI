@@ -11,59 +11,12 @@ vignette: >
 Let's say you have your transcriptome age index ([TAI](phylostratigraphy.html#gene-age-information-in-tai)) pattern, e.g.
 
 ```{r message = FALSE, warning = FALSE}
-library(myTAI); library(S7)
+library(myTAI)
 ```
 
 ```{r message = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output", dev.args = list(bg = 'transparent'), fig.align='center'}
 data("example_phyex_set_old")
 myTAI::plot_signature(example_phyex_set_old, show_p_val = FALSE)
-```
-
-```{r echo=FALSE}
-#### IMPORTANT & potentially TEMPORARY
-#### I have to add this or else print and plot doesn't interact with the S7 object well.
-S7::method(plot, TestResult) <- function(test_result) {
-    library(ggplot2)
-    p <- ggplot(data.frame(x = test_result@null_sample),
-                aes(x = x)) +
-        geom_histogram(
-            aes(y = after_stat(density), fill = "Null Sample"),
-            bins = 100,
-            alpha = 0.7,
-            colour = "gray66") +
-        geom_vline(
-            aes(xintercept = test_result@test_stat, colour = "Test Statistic"),
-            linewidth = 1) +
-        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, aes(colour = "Fitted Null")) +
-        scale_fill_manual(name = NULL, values = c("Null Sample" = "gray67")) +
-        scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
-        labs(x = "Score", y = "Density") +
-        annotate("text",
-                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
-                   y = max(density(test_result@null_sample)$y) * 0.9,
-                   label = exp_p(test_result@p_value),
-                   parse=TRUE,
-                   hjust = 1,
-                   size = 3.5) +
-        theme_minimal()
-
-    return(p)
-}
-
-S7::method(print, TestResult) <- function(x, ...) {
-    cat("\n")
-    cat("Statistical Test Result\n")
-    cat("=======================\n")
-    cat("Method:", x@method_name, "\n")
-    cat("Test statistic:", x@test_stat, "\n")
-    cat("P-value:", x@p_value, "\n")
-    cat("Alternative hypothesis:", x@alternative, "\n")
-    if (!is.null(x@data_name)) {
-        cat("Data:", x@data_name, "\n")
-    }
-    cat("\n")
-    invisible(x)
-}
 ```
 
 But how can you test if this pattern is significant?

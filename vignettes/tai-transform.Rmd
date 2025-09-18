@@ -21,7 +21,7 @@ The `myTAI` package provides a function `myTAI::tf()` that allows you to apply a
 Here is a more extreme example of changes to the overall TAI pattern due to RNA-seq transformations.
 
 ```{r message = FALSE, warning = FALSE}
-library(myTAI); library(S7)
+library(myTAI)
 ```
 
 ```{r message = FALSE, fig.height=4, fig.width=6, fig.alt="plot_signature function output no transform", dev.args = list(bg = 'transparent'), fig.align='center'}

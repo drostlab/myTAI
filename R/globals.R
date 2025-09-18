@@ -11,7 +11,7 @@ utils::globalVariables(c(
     "highlight", "label", "p_value", "stage_label", "reference", "stage_quantiles",
     "p_sel", "p_all", "log_obs_exp", "PS_num", "Rank", "AvgPS", "V1", "V2", 
     "group", "se", "y", "age", "sample_size", "pval", "Identity", "x", "lb", "ub",
-    
+    "Primary", "Secondary",
     # Functions commonly used without explicit namespace
     "var", "sd", "quantile", "prcomp", "colorRampPalette", "setNames", "p.adjust",
     "stat_flatline_test"

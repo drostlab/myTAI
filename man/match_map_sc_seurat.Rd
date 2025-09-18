@@ -22,10 +22,6 @@ match_map_sc_seurat(
 \item{strata_legend}{A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, numeric labels will be used (default: NULL)}
 
 \item{...}{Additional arguments passed to ScPhyloExpressionSet_from_seurat}
-
-\item{selected_idents}{Character string specifying which metadata column to use for initial grouping (default: NULL, uses active idents)}
-
-\item{seed}{Integer seed for reproducible UMAP computation when reductions need to be computed (default: 42)}
 }
 \value{
 A ScPhyloExpressionSet object
@@ -43,10 +39,6 @@ extracts all metadata and dimensional reductions from the Seurat object.
 \dontrun{
 # Match Seurat object with phylostratum map
 sc_set <- match_map_sc_seurat(seurat_obj, phylo_map, layer = "counts")
-
-# With custom grouping column
-sc_set <- match_map_sc_seurat(seurat_obj, phylo_map, 
-                             selected_idents = "development_stage")
 }
 
 }

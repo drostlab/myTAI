@@ -136,8 +136,6 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
             default = "Cell Type"
         ),
         metadata = new_property(
-            class = class_data.frame,
-            
             setter = function(self, value) {
                 if (!length(value))
                     return(self)
@@ -155,8 +153,7 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 }
                 self@metadata <- value
                 self
-            },
-            default = NULL
+            }
         ),
         available_idents = new_property(
             class = class_character,
@@ -492,8 +489,6 @@ ScPhyloExpressionSet_from_matrix <- function(expression_matrix,
 #' @param phylomap A data frame with two columns: phylostratum assignments and gene IDs
 #' @param layer Character string specifying which layer to use from the Seurat object (default: "counts")
 #' @param strata_legend A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, numeric labels will be used (default: NULL)
-#' @param selected_idents Character string specifying which metadata column to use for initial grouping (default: NULL, uses active idents)
-#' @param seed Integer seed for reproducible UMAP computation when reductions need to be computed (default: 42)
 #' @param ... Additional arguments passed to ScPhyloExpressionSet_from_seurat
 #' 
 #' @details
@@ -507,10 +502,6 @@ ScPhyloExpressionSet_from_matrix <- function(expression_matrix,
 #' \dontrun{
 #' # Match Seurat object with phylostratum map
 #' sc_set <- match_map_sc_seurat(seurat_obj, phylo_map, layer = "counts")
-#' 
-#' # With custom grouping column
-#' sc_set <- match_map_sc_seurat(seurat_obj, phylo_map, 
-#'                              selected_idents = "development_stage")
 #' }
 #' 
 #' @export
@@ -568,8 +559,6 @@ match_map_sc_seurat <- function(seurat,
 #' @param metadata Data frame with cell metadata, rownames should match colnames of expression_matrix
 #' @param phylomap A data frame with two columns: phylostratum assignments and gene IDs
 #' @param strata_legend A data frame with two columns: phylostratum assignments and name of each stratum. If NULL, numeric labels will be used (default: NULL)
-#' @param groups_column Character string specifying which metadata column to use for initial grouping (default: first factor column found)
-#' @param name Character string naming the dataset (default: derived from function)
 #' @param ... Additional arguments passed to ScPhyloExpressionSet_from_matrix
 #' 
 #' @details
@@ -583,10 +572,6 @@ match_map_sc_seurat <- function(seurat,
 #' \dontrun{
 #' # Match expression matrix with phylostratum map
 #' sc_set <- match_map_sc_matrix(expr_matrix, metadata, phylo_map)
-#' 
-#' # With specific grouping column
-#' sc_set <- match_map_sc_matrix(expr_matrix, metadata, phylo_map,
-#'                              groups_column = "cell_type")
 #' }
 #' 
 #' @export

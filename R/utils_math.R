@@ -59,6 +59,7 @@ quantile_rank <- function(x) {
 #' @description Format p-values in scientific notation for plot annotations.
 #' 
 #' @param p Numeric p-value
+#' @param sci_thresh Numeric threshold for using scientific notation (number of decimal places)
 #' 
 #' @return Expression object for use in plot annotations
 #' 

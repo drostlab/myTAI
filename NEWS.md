@@ -1,5 +1,25 @@
 # NEWS
 
+myTAI 2.3.0.9006
+===========
+
+This update has focused on improving the single-cell phyloset functionality.
+
+The single-cell phylo expression object no longer depends on Seurat. You can construct the ScPhyloExpressionSet either from a count matrix (sparse or dense), using `ScPhyloExpressionSet_from_matrix`, or from a Seurat object, using `ScPhyloExpressionSet_from_seurat`. For consistency, one can use `BulkPhyloExpressionSet_from_df` instead of `as_BulkPhyloExpressionSet`.
+
+One key functionality of the single-cell object is the ability to switch between different identities when plotting (equivalent to the `Seurat::Idents` functionality). This is done by setting the `::identities_label` property of the object. The `::available_idents` property can be used to see what options the user has in setting the current identity. By setting `::idents_colours[[]]`, the user can choose a colour pallette for the different identities when plotting, which are saved across different plotting calls. 
+
+The computation of TAI values for single cell is now cached. Moreover, we have readded the C++ accelerated code for the computation of TAI, which upon profiling shows to be faster than the R version when handling more than 100000 cells (an adaptive function chooses the appropriate implementation for the object size). 
+
+Some of the plotting functionality had been improved and more options were added for plotting (e.g. plot_gene_heatmap now allows for passing a custom colour mapping for the rows (genes), instead of colouring them by their strata; plot_signature for single cell should be more readable).
+
+Bug fixes:
+- validation of S7 objects now works properly
+- printing of object information now works properly (instead of dumping all the properties information)
+
+
+
+
 myTAI 2.2.0.9006
 ===========
 
