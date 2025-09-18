@@ -80,7 +80,9 @@ reference:
     desc: Functions to convert between dataframe and `BulkPhyloExpressionSet` or `ScPhyloExpressionSet`.
     contents:
       - as_BulkPhyloExpressionSet
-      - as_ScPhyloExpressionSet
+      - BulkPhyloExpressionSet_from_df
+      - ScPhyloExpressionSet_from_matrix
+      - ScPhyloExpressionSet_from_seurat
       - as_data_frame
       - check_PhyloExpressionSet
       - check_BulkPhyloExpressionSet
@@ -89,13 +91,10 @@ reference:
   - title: Single-cell specific functions
     desc: Functions specifically designed for single-cell RNA-seq data analysis.
     contents:
-      - available_identities
       - downsample_expression
-      - load_example_phyex_set_sc
-      - match_map_sc
-      - set_identities
-      - set_identity_colours
-      - reorder_identities
+      - downsample
+      - match_map_sc_matrix
+      - match_map_sc_seurat
       
   - title: Taxonomic information retrieval
     desc: Functions to compute transcriptome indices.
@@ -129,6 +128,7 @@ reference:
       - match_map
       - normalise_stage_expression
       - omit_matrix
+      - permute_PS
       - quantile_rank
       - rel_exp_matrix
       - relative_expression
@@ -158,4 +158,5 @@ reference:
     contents:
       - example_phyex_set
       - example_phyex_set_old
+      - example_phyex_set_sc
 
