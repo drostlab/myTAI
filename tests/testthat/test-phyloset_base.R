@@ -1,6 +1,13 @@
 test_that("BulkPhyloExpressionSet throws error on NA in strata_values", {
-    data <- matrix(1:6, nrow = 2)
-    groups <- c("A", "B", "A")
+    # Create proper data structure: gene_id, strata, expression1, expression2, expression3
+    data <- data.frame(
+        strata = c(1, 2),
+        gene_id = c("Gene1", "Gene2"),
+        expr1 = c(1, 4),
+        expr2 = c(2, 5),
+        expr3 = c(3, 6)
+    )
+    groups <- c("A", "B", "A")  # 3 groups for 3 expression columns
     legend <- data.frame(stratum = 1:2, label = c("S1", "S2"))
     obj <- as_PhyloExpressionSet(data, groups = groups, name = "Test", species = "Testus", index_type = "TAI", strata_legend = legend)
     expect_error({

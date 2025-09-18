@@ -21,6 +21,7 @@
 //' - Leveraging sparse matrix operations to skip zero entries
 //' - Handling cells with zero expression by returning NA
 //' 
+//' @author Kristian K Ullrich
 //' @keywords internal
 // [[Rcpp::export]]
 Rcpp::NumericVector cpp_txi_sc(const arma::sp_mat& expression, 

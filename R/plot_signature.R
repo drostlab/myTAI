@@ -74,7 +74,7 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                show_stddev = TRUE,
                                                                ...) {
                                                                
-                                                               args <- list(...)
+    args <- list(...)
     
     # Create main TXI line
     df_main <- tibble::tibble(

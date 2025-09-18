@@ -25,35 +25,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_pseudobulk
-arma::mat cpp_pseudobulk(const arma::sp_mat& expression, const arma::uvec& groups, int n_groups, int ncores);
-RcppExport SEXP _myTAI_cpp_pseudobulk(SEXP expressionSEXP, SEXP groupsSEXP, SEXP n_groupsSEXP, SEXP ncoresSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::sp_mat& >::type expression(expressionSEXP);
-    Rcpp::traits::input_parameter< const arma::uvec& >::type groups(groupsSEXP);
-    Rcpp::traits::input_parameter< int >::type n_groups(n_groupsSEXP);
-    Rcpp::traits::input_parameter< int >::type ncores(ncoresSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_pseudobulk(expression, groups, n_groups, ncores));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cpp_pseudobulk_batched
-arma::mat cpp_pseudobulk_batched(const arma::sp_mat& expression, const arma::uvec& groups, int n_groups, int batch_size, int ncores);
-RcppExport SEXP _myTAI_cpp_pseudobulk_batched(SEXP expressionSEXP, SEXP groupsSEXP, SEXP n_groupsSEXP, SEXP batch_sizeSEXP, SEXP ncoresSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::sp_mat& >::type expression(expressionSEXP);
-    Rcpp::traits::input_parameter< const arma::uvec& >::type groups(groupsSEXP);
-    Rcpp::traits::input_parameter< int >::type n_groups(n_groupsSEXP);
-    Rcpp::traits::input_parameter< int >::type batch_size(batch_sizeSEXP);
-    Rcpp::traits::input_parameter< int >::type ncores(ncoresSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_pseudobulk_batched(expression, groups, n_groups, batch_size, ncores));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_txi_sc
 Rcpp::NumericVector cpp_txi_sc(const arma::sp_mat& expression, const arma::vec& strata_values, int batch_size, int ncores);
 RcppExport SEXP _myTAI_cpp_txi_sc(SEXP expressionSEXP, SEXP strata_valuesSEXP, SEXP batch_sizeSEXP, SEXP ncoresSEXP) {
@@ -71,8 +42,6 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_myTAI_cpp_nullTXIs", (DL_FUNC) &_myTAI_cpp_nullTXIs, 3},
-    {"_myTAI_cpp_pseudobulk", (DL_FUNC) &_myTAI_cpp_pseudobulk, 4},
-    {"_myTAI_cpp_pseudobulk_batched", (DL_FUNC) &_myTAI_cpp_pseudobulk_batched, 5},
     {"_myTAI_cpp_txi_sc", (DL_FUNC) &_myTAI_cpp_txi_sc, 4},
     {NULL, NULL, 0}
 };

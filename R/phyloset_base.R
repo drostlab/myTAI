@@ -205,9 +205,9 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
             return("@strata and @strata_values must have the same length")
         
         # (the above also implicitly checks that the expression matrix and the strata lengths match)
-        if (length(self@groups) != self@num_samples)
-            return("@groups must have the sample length as the number of columns of @expression")
-        
+        if (length(self@groups) != self@num_samples) {
+            return("@groups must have the same length as the number of columns of @expression")
+        }
 
     }
 )

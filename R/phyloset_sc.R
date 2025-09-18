@@ -86,13 +86,13 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
             # class = class_matrix (S7 doesn't have a class matrix yet)
             validator = function(value) {
                 if (any(is.na(value))) return("cannot contain NA values. Check expression matrix.")
-                if (length(value) == 0) return("cannot be empty. Check expresison matrix.")
+                if (length(value) == 0) return("cannot be empty. Check expression matrix.")
             },
             setter = function(self, value) {
-                if (!length(value)) 
+                if (!length(value))
                     return(self)
-                # reset cache
-                self@.TXI_sample <- NULL
+                # recompute TXI sample
+                self@.TXI_sample <- .TXI_sc_adaptive(value, self@strata_values)
                 self@.pseudobulk_cache <- list()
                 self@expression <- value
                 self
@@ -123,11 +123,11 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
         ),
         TXI_sample = new_property(
             class = class_double,
-            getter = function(self) {
-                if (is.null(self@.TXI_sample))
-                    self@.TXI_sample <- .TXI_sc_adaptive(self@expression, self@strata_values)
-                self@.TXI_sample
-            }
+            validator = function(value) {
+                if (any(is.na(value))) return("cannot contain NA values. Check expression matrix.")
+                if (length(value) == 0) return("cannot be empty. Check expression matrix.")
+            },
+            getter = \(self) self@.TXI_sample
         ),
         identities_label = new_property(
             class = class_character,
@@ -197,6 +197,7 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 }
             }
         ),
+        # dimensionality reductions
         reductions = new_property(
             class = class_list,
             default = list(),
@@ -284,6 +285,11 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 }
             }
         }
+
+        # Validate metadata
+        if (!is.null(self@metadata))
+            if (nrow(self@metadata) != self@num_samples)
+                return("@metadata must have the same number of rows as the number of samples")
 
         # Validate expression_collapsed rownames match gene_ids
         # if (!identical(rownames(self@expression_collapsed), self@gene_ids)) {
@@ -386,6 +392,7 @@ ScPhyloExpressionSet_from_seurat <- function(seurat,
         groups = groups,
         name = name,
         metadata = metadata,
+        .TXI_sample = .TXI_sc_adaptive(sc_counts, strata_values),
         selected_idents = selected_idents,
         reductions = reductions,
         ...
@@ -460,6 +467,7 @@ ScPhyloExpressionSet_from_matrix <- function(expression_matrix,
     
     groups <- metadata[[groups_column]]
     selected_idents <- groups_column
+
     
     return(ScPhyloExpressionSet(
         strata = strata,
@@ -468,6 +476,7 @@ ScPhyloExpressionSet_from_matrix <- function(expression_matrix,
         groups = groups,
         name = name,
         metadata = metadata,
+        .TXI_sample = .TXI_sc_adaptive(expression_matrix, strata_values),
         selected_idents = selected_idents,
         ...
     ))

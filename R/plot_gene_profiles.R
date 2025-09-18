@@ -202,7 +202,7 @@ plot_gene_profiles <- function(phyex_set,
         gene_levels <- intersect(genes_to_plot, df_long$GeneID)
         if (is.null(colours)) {
             n <- length(gene_levels)
-            base_palette <- RColorBrewer::brewer.pal(min(n, 9), "Set1")
+            base_palette <- RColorBrewer::brewer.pal(max(min(n, 9), 3), "Set1")
             colours <- stats::setNames(grDevices::colorRampPalette(base_palette)(n), gene_levels)
         }
         p <- p + scale_colour_manual(values = colours, name = "GeneID")

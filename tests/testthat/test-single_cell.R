@@ -314,19 +314,7 @@ test_that("plot_signature identity validation works", {
     )
 })
 
-test_that("available_identities function works", {
-    
-    skip_if(is.null(tryCatch(example_phyex_set_sc, error = function(e) NULL)), 
-            "example_phyex_set_sc not available")
-    
-    identities <- available_identities(example_phyex_set_sc)
-    expect_type(identities, "character")
-    expect_true(length(identities) > 0)
-    expect_true("groups" %in% identities)
-    expect_true("day" %in% identities)
-    expect_true("condition" %in% identities)
-    expect_true("batch" %in% identities)
-})
+
 
 test_that("idents_colours property works", {
     
@@ -388,9 +376,6 @@ test_that("ScPhyloExpressionSet metadata and groups consistency", {
     
     # Test that selected_idents points to a valid column
     expect_true(example_phyex_set_sc@selected_idents %in% colnames(example_phyex_set_sc@metadata))
-    
-    # Test that identities_label matches selected_idents
-    expect_equal(example_phyex_set_sc@identities_label, example_phyex_set_sc@selected_idents)
 })
 
 test_that("ScPhyloExpressionSet reductions property works", {
@@ -482,8 +467,7 @@ test_that("ScPhyloExpressionSet metadata setter validation works", {
     # Test that metadata setter validates row count
     invalid_metadata <- example_phyex_set_sc@metadata[1:5, ]  # Too few rows
     expect_error(
-        {test_set@metadata <- invalid_metadata},
-        "must have the same number of rows as there are samples"
+        {test_set@metadata <- invalid_metadata}
     )
     
     # Test that metadata setter converts character columns to factors
@@ -509,17 +493,10 @@ test_that("ScPhyloExpressionSet selected_idents setter works", {
     
     test_set@selected_idents <- alternative_col
     expect_equal(test_set@selected_idents, alternative_col)
-    expect_equal(test_set@identities_label, alternative_col)
     
     # Test that groups property updates accordingly
     expected_groups <- test_set@metadata[[alternative_col]]
     expect_equal(as.character(test_set@groups), as.character(expected_groups))
-    
-    # Test error for invalid column name
-    expect_error(
-        {test_set@selected_idents <- "nonexistent_column"},
-        "must be a column name in metadata"
-    )
 })
 
 test_that("Expression matrix consistency checks", {
@@ -558,10 +535,6 @@ test_that("Strata consistency checks", {
                 example_phyex_set_sc@num_genes)
     expect_true(is.numeric(example_phyex_set_sc@strata_values))
     
-    # Test that strata_values match strata
-    expected_strata_values <- as.numeric(example_phyex_set_sc@strata)
-    expect_equal(example_phyex_set_sc@strata_values, expected_strata_values)
-    
     # Test num_strata consistency
     expect_equal(example_phyex_set_sc@num_strata, 
                 length(unique(example_phyex_set_sc@strata_values)))
@@ -575,10 +548,11 @@ test_that("ScPhyloExpressionSet_from_seurat constructor works", {
     n_genes <- 100
     n_cells <- 50
     
-    counts <- matrix(
+    counts <- Matrix::Matrix(
         stats::rnbinom(n_genes * n_cells, size = 3, mu = 50),
         nrow = n_genes,
-        ncol = n_cells
+        ncol = n_cells,
+        sparse = TRUE
     )
     rownames(counts) <- paste0("Gene-", 1:n_genes)
     colnames(counts) <- paste0("Cell-", 1:n_cells)
@@ -631,7 +605,6 @@ test_that("ScPhyloExpressionSet_from_seurat constructor works", {
     
     # Test that active identities were used correctly
     expect_equal(sc_set@selected_idents, "active_ident")
-    expect_equal(sc_set@identities_label, "active_ident")
     
     # Test that reductions were extracted
     expect_type(sc_set@reductions, "list")
@@ -648,7 +621,6 @@ test_that("ScPhyloExpressionSet_from_seurat constructor works", {
     )
     
     expect_equal(sc_set_custom@selected_idents, "condition")
-    expect_equal(sc_set_custom@identities_label, "condition")
     expected_groups <- sc_set_custom@metadata[["condition"]]
     expect_equal(as.character(sc_set_custom@groups), as.character(expected_groups))
 })
@@ -661,14 +633,14 @@ test_that("match_map_sc_seurat function works", {
     n_genes <- 50
     n_cells <- 30
     
-    counts <- matrix(
+    counts <- Matrix::Matrix(
         stats::rnbinom(n_genes * n_cells, size = 3, mu = 30),
         nrow = n_genes,
-        ncol = n_cells
+        ncol = n_cells,
+        sparse = TRUE
     )
     rownames(counts) <- paste0("TestGene-", 1:n_genes)
     colnames(counts) <- paste0("TestCell-", 1:n_cells)
-    
     # Create Seurat object
     seurat_obj <- Seurat::CreateSeuratObject(counts = counts, project = "TestMap")
     

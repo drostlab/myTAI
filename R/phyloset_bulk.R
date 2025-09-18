@@ -89,7 +89,7 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
     validator = function(self) {
         # This validation should/could be done in PhyloExpressionSetBase, but doesn't work because of a bug: 
         # https://github.com/RConsortium/S7/issues/539
-        
+
         # Validate expression_collapsed rownames match gene_ids
         if (!identical(rownames(self@expression_collapsed), self@gene_ids)) 
             return("@expression_collapsed rownames must match @gene_ids")
@@ -194,17 +194,16 @@ as_BulkPhyloExpressionSet <- BulkPhyloExpressionSet_from_df
 #' @export
 match_map <- function(data, 
                       phylomap,
-                      groups = colnames(data[,2:ncol(data)]),
+                      groups = colnames(data[, 2:ncol(data)]),
                       name = NULL,
                       ...) {
     if (is.null(name)) name <- deparse(substitute(data))
     colnames(phylomap) <- c("Stratum", "GeneID")
     
-    data <- data |>
+    full_data <- data |>
         inner_join(phylomap, by="GeneID") |>
         relocate(Stratum, .before = 1)
-    
-    return(as_BulkPhyloExpressionSet(data, groups = groups, name = name, ...))
+    return(as_BulkPhyloExpressionSet(full_data, groups = groups, name = name, ...))
 }
 
 
@@ -268,8 +267,10 @@ as_data_frame <- function(phyex_set, use_collapsed = FALSE) {
 #' @export
 S7::method(collapse, BulkPhyloExpressionSet) <- function(phyex_set) {
     obj <- S7::valid_eventually(phyex_set, function(x) {
-        x@expression <- x@expression_collapsed
-        x@groups <- factor(colnames(x@expression_collapsed), levels=levels(x@groups))
+        ec <- x@expression_collapsed
+        x@groups <- factor(colnames(ec), 
+                           levels=colnames(ec))
+        x@expression <- ec
         x
     })
     obj
