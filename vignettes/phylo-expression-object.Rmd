@@ -123,7 +123,9 @@ The necessary and sufficient information needed for creating a `BulkPhyloExpress
 (1) A matrix or data frame of gene expression values (genes x samples).  
 (2) A numerical value or factored string associated with each gene, typically gene age ranks or [`phylorank`](phylostratigraphy.html) for `TAI` (but also [`deciled dNdS values`](other_strata.html) for `TDI` or [`deciled tau values`](other_strata.html) for `TSI` etc.).
 
-<img src="Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
+<img src="Figures/myTAI_phyex.png" 
+     alt="PhyEx overview" 
+     class="img-fluid d-block mx-auto" />
 
 ### Loading raw data
 
@@ -229,7 +231,9 @@ example_phyex_set.remake |>
 
 This is exactly the case for the new `example_phyex_set` dataset (not like `example_phyex_set_old`), which contains replicates for each developmental stage. The `as_BulkPhyloExpressionSet()` function can handle this as well, as long as we use the `groups` parameter to specify the grouping of replicates, i.e.
 
-<img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 800px;" />
+<img src="Figures/myTAI_phyex_group.png" 
+     alt="PhyEx replicates overview" 
+     class="img-fluid d-block mx-auto" />
 
 ```{r message = FALSE}
 data("example_phyex_set") # not data("example_phyex_set_old")
@@ -289,7 +293,9 @@ If you are interested in single cell RNA-seq data, the process is similar, but y
 
 You can then use the `as_ScPhyloExpressionSet()` function with adjustments to the relevant metadata.
 
-<img src="Figures/myTAI_scphyex.png" alt="scPhyEx overview" align="center" style="max-height: 500px; max-width: 800px;" />
+<img src="Figures/myTAI_scphyex.png" 
+     alt="scPhyEx overview" 
+     class="img-fluid d-block mx-auto" />
 
 ```{r message = FALSE, warning=FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 # Load the relevant packages
