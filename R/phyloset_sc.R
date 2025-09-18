@@ -113,7 +113,9 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
                 rownames(pb) <- self@gene_ids
                 colnames(pb) <- levels(self@groups)
                 cache[[key]] <- pb
-                self@.pseudobulk_cache <- cache
+                # this doesn't work, need to find alternative way to handle caching
+                # for now the user may manually update the pseudobulk cache if they want to save time.
+                #self@.pseudobulk_cache <- cache
                 return(pb)
             }
         ),

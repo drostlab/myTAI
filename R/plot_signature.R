@@ -90,9 +90,9 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
         df_b <- as_tibble(phyex_set@bootstrapped_txis) |>
             rowid_to_column("Id") |>
             tidyr::pivot_longer(cols=phyex_set@identities, names_to="Identity", values_to = "TXI")
-        p <- p + geom_line(data=df_b,
-                           aes(x=Identity, y=TXI, group=Id, colour=phyex_set@name),
-                           alpha=0.01)
+        p <- p + ggforce::geom_sina(data=df_b,
+                           aes(x=Identity, y=TXI, colour=phyex_set@name),
+                           alpha=0.3)
     }
 
     p <- p +
@@ -148,17 +148,25 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
 
     # Show p value for conservation tests
     if (show_p_val) {
-        if ("modules" %in% names(args))
+        if ("modules" %in% names(args)) {
             t <- conservation_test(phyex_set, plot_result = FALSE, modules=args$modules)
+        }
         else
             t <- conservation_test(phyex_set, plot_result = FALSE)
+        message(paste("Ran", t@method_name))
+        if ("modules" %in% names(args)) {
+            modules <- args$modules
+            message("Modules: \n early = {",paste0(phyex_set@sample_names[modules[[1]]], " "),"}","\n","mid = {",paste0(phyex_set@sample_names[modules[[2]]], " "),"}","\n","late = {",paste0(phyex_set@sample_names[modules[[3]]], " "),"}")
+        }
+        message("Significance status of signature: ", 
+            ifelse(as.numeric(t@p_value) <= 0.05, "significant.", "not significant (= no evolutionary signature in the transcriptome)."))
         label <- exp_p(t@p_value)
         p <- p +
             annotate("text",
                 label = label, parse = TRUE,
                 x = phyex_set@num_identities * 0.7, 
                 y = mean(phyex_set@TXI_sample) + 0.1,
-                size = 6 # Increased text size
+                size = 6 
             )
     }
 
