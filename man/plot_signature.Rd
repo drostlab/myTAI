@@ -42,9 +42,13 @@ This function creates visualizations appropriate for the data type:
 - Optional conservation test p-values
 
 **Single-cell data (ScPhyloExpressionSet):**
-- Violin plots showing TXI distributions across cell types
+- Sina plots showing TXI distributions across cell types or other identities
 - Mean TXI values overlaid as line
 - Optional individual cells using geom_sina for better visualization
+- Flexible identity selection from metadata via additional parameters:
+  - `primary_identity`: Character, name of metadata column for x-axis (default: current selected identities)
+  - `secondary_identity`: Character, name of metadata column for coloring/faceting
+  - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)
 }
 \examples{
 # Basic signature plot for bulk data
@@ -56,4 +60,13 @@ This function creates visualizations appropriate for the data type:
 # Single-cell plot with individual cells
 # p3 <- plot_signature(sc_phyex_set, show_reps = TRUE)
 
+# Single-cell plot with custom primary identity
+# p4 <- plot_signature(sc_phyex_set, primary_identity = "day")
+
+# Single-cell plot with primary and secondary identities (colored)
+# p5 <- plot_signature(sc_phyex_set, primary_identity = "day", secondary_identity = "condition")
+
+# Single-cell plot with faceting by secondary identity
+# p6 <- plot_signature(sc_phyex_set, primary_identity = "day", 
+#                      secondary_identity = "condition", facet_by_secondary = TRUE)
 }

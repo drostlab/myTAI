@@ -7,13 +7,14 @@
 PhyloExpressionSetBase(
   strata = stop("@strata is required"),
   strata_values = stop("@strata_values is required"),
-  gene_ids = stop("@gene_ids is required"),
+  expression = stop("@expression is required"),
+  groups = stop("@groups is required"),
   name = "Phylo Expression Set",
   species = character(0),
   index_type = "TXI",
   identities_label = "Identities",
   null_conservation_sample_size = 5000L,
-  precomputed_null_conservation_txis = NULL
+  .null_conservation_txis = NULL
 )
 }
 \arguments{
@@ -21,7 +22,9 @@ PhyloExpressionSetBase(
 
 \item{strata_values}{Numeric vector of phylostratum values used in TXI calculations}
 
-\item{gene_ids}{Character vector of gene identifiers}
+\item{expression}{Matrix of expression counts with genes as rows and samples as columns}
+
+\item{groups}{Factor vector indicating which identity each sample belongs to}
 
 \item{name}{Character string naming the dataset (default: "Phylo Expression Set")}
 
@@ -33,9 +36,38 @@ PhyloExpressionSetBase(
 
 \item{null_conservation_sample_size}{Numeric value for null conservation sample size (default: 5000)}
 
-\item{precomputed_null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
+\item{.null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
 }
 \description{
 Abstract S7 base class for storing and manipulating phylotranscriptomic expression data.
 This class provides the common interface for both bulk and single-cell phylotranscriptomic data.
+}
+\details{
+The PhyloExpressionSetBase class serves as the foundation for phylotranscriptomic analysis,
+providing shared functionality for both bulk and single-cell data types.
+
+\strong{Abstract Properties:}
+Subclasses must implement the \code{expression_collapsed} property to define how expression
+data should be collapsed across replicates or cells.
+
+\strong{Computed Properties:}
+Several properties are computed automatically when accessed:
+\itemize{
+  \item \code{gene_ids} - Character vector of gene identifiers (rownames of expression matrix)
+  \item \code{identities} - Character vector of identity labels (colnames of collapsed expression)
+  \item \code{sample_names} - Character vector of sample names (colnames of expression matrix)
+  \item \code{num_identities} - Integer count of unique identities
+  \item \code{num_samples} - Integer count of total samples
+  \item \code{num_genes} - Integer count of genes
+  \item \code{num_strata} - Integer count of phylostrata
+  \item \code{index_full_name} - Full name of the transcriptomic index type
+  \item \code{group_map} - List mapping identity names to sample names
+  \item \code{TXI} - Numeric vector of TXI values for each identity (computed from collapsed expression)
+  \item \code{TXI_sample} - Numeric vector of TXI values for each sample (computed from raw expression)
+  \item \code{null_conservation_txis} - Matrix of null conservation TXI values for statistical testing
+}
+
+\strong{Validation:}
+The class ensures consistency between expression data, phylostratum assignments, and groupings.
+All gene-level vectors must have matching lengths, and sample groupings must be consistent.
 }

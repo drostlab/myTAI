@@ -20,9 +20,13 @@
 #' - Optional conservation test p-values
 #' 
 #' **Single-cell data (ScPhyloExpressionSet):**
-#' - Violin plots showing TXI distributions across cell types
+#' - Sina plots showing TXI distributions across cell types or other identities
 #' - Mean TXI values overlaid as line
 #' - Optional individual cells using geom_sina for better visualization
+#' - Flexible identity selection from metadata via additional parameters:
+#'   - `primary_identity`: Character, name of metadata column for x-axis (default: current selected identities)
+#'   - `secondary_identity`: Character, name of metadata column for coloring/faceting
+#'   - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)
 #' 
 #' @examples
 #' # Basic signature plot for bulk data
@@ -34,7 +38,20 @@
 #' # Single-cell plot with individual cells
 #' # p3 <- plot_signature(sc_phyex_set, show_reps = TRUE)
 #' 
+#' # Single-cell plot with custom primary identity
+#' # p4 <- plot_signature(sc_phyex_set, primary_identity = "day")
+#' 
+#' # Single-cell plot with primary and secondary identities (colored)
+#' # p5 <- plot_signature(sc_phyex_set, primary_identity = "day", secondary_identity = "condition")
+#' 
+#' # Single-cell plot with faceting by secondary identity
+#' # p6 <- plot_signature(sc_phyex_set, primary_identity = "day", 
+#' #                      secondary_identity = "condition", facet_by_secondary = TRUE)
+
 #' @import ggplot2
+#' @importFrom dplyr group_by summarise mutate
+#' @importFrom tibble tibble
+#' @importFrom ggforce geom_sina
 #' @export
 plot_signature <- S7::new_generic("plot_signature", "phyex_set",
     function(phyex_set,
@@ -57,7 +74,7 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                show_stddev = TRUE,
                                                                ...) {
                                                                
-                                                               args <- list(...)
+    args <- list(...)
     
     # Create main TXI line
     df_main <- tibble::tibble(
@@ -73,9 +90,9 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
         df_b <- as_tibble(phyex_set@bootstrapped_txis) |>
             rowid_to_column("Id") |>
             tidyr::pivot_longer(cols=phyex_set@identities, names_to="Identity", values_to = "TXI")
-        p <- p + geom_line(data=df_b,
-                           aes(x=Identity, y=TXI, group=Id, colour=phyex_set@name),
-                           alpha=0.01)
+        p <- p + ggforce::geom_sina(data=df_b,
+                           aes(x=Identity, y=TXI, colour=phyex_set@name),
+                           alpha=0.3)
     }
 
     p <- p +
@@ -131,17 +148,25 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
 
     # Show p value for conservation tests
     if (show_p_val) {
-        if ("modules" %in% names(args))
+        if ("modules" %in% names(args)) {
             t <- conservation_test(phyex_set, plot_result = FALSE, modules=args$modules)
+        }
         else
             t <- conservation_test(phyex_set, plot_result = FALSE)
+        message(paste("Ran", t@method_name))
+        if ("modules" %in% names(args)) {
+            modules <- args$modules
+            message("Modules: \n early = {",paste0(phyex_set@sample_names[modules[[1]]], " "),"}","\n","mid = {",paste0(phyex_set@sample_names[modules[[2]]], " "),"}","\n","late = {",paste0(phyex_set@sample_names[modules[[3]]], " "),"}")
+        }
+        message("Significance status of signature: ", 
+            ifelse(as.numeric(t@p_value) <= 0.05, "significant.", "not significant (= no evolutionary signature in the transcriptome)."))
         label <- exp_p(t@p_value)
         p <- p +
             annotate("text",
                 label = label, parse = TRUE,
                 x = phyex_set@num_identities * 0.7, 
                 y = mean(phyex_set@TXI_sample) + 0.1,
-                size = 6 # Increased text size
+                size = 6 
             )
     }
 
@@ -161,87 +186,232 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
                                                              colour = NULL,
                                                              show_p_val = TRUE,
                                                              conservation_test = stat_flatline_test,
+                                                             primary_identity = NULL,
+                                                             secondary_identity = NULL,
+                                                             facet_by_secondary = FALSE,
                                                              ...) {
     
-    # Prepare data for plotting
-    df_samples <- tibble::tibble(
-        Identity = phyex_set@groups,
-        TXI = phyex_set@TXI_sample
-    )
+    # Prepare data using helper function
+    plot_data <- .prepare_sc_plot_data(phyex_set, primary_identity, secondary_identity)
+    df_samples <- plot_data$samples
+    df_main <- plot_data$main
+    primary_label <- plot_data$primary_label
+    secondary_label <- plot_data$secondary_label
     
-    # Use the proper TXI values (aggregated values per identity)
-    df_main <- tibble::tibble(
-        Identity = phyex_set@identities,
-        TXI = phyex_set@TXI
-    )
+    # Determine which identity to use for coloring
+    color_by_identity <- if (!is.null(secondary_identity)) secondary_identity else primary_identity
+    if (is.null(color_by_identity)) color_by_identity <- phyex_set@identities_label
+    
+    # Check for custom colors and show message if using defaults
+    has_custom_colors <- !is.null(phyex_set@idents_colours) && 
+                         !is.null(phyex_set@idents_colours[[color_by_identity]])
+    if (!has_custom_colors && is.null(colour)) {
+        message(sprintf(
+            "Using default colors for identity '%s'. To set custom colors, assign to phyex_set@idents_colours[['%s']] <- c(value1 = 'color1', value2 = 'color2', ...)",
+            color_by_identity, color_by_identity
+        ))
+    }
+    
+    # Handle mixed x-axis for secondary identity without faceting
+    if (!is.null(secondary_identity) && !facet_by_secondary) {
+        # Create compound x-axis labels: Primary_Secondary
+        df_samples <- df_samples |>
+            dplyr::mutate(
+                Mixed_X = paste(Primary, Secondary, sep = "_"),
+                Mixed_X = factor(Mixed_X, levels = unique(Mixed_X[order(Primary, Secondary)]))
+            )
+        
+        # Update main data for line plot (average within each Mixed_X group)
+        df_main <- df_samples |>
+            dplyr::group_by(Mixed_X, Primary, Secondary) |>
+            dplyr::summarise(TXI = mean(TXI, na.rm = TRUE), .groups = "drop")
+    }
     
     # Create base plot
     if (show_reps) {
-        # Show violin plots with individual cells as reps
-        p <- ggplot(df_samples, aes(x = Identity, y = TXI, fill = Identity)) +
-            geom_violin(alpha = 0.7, scale = "width") +
-            ggforce::geom_sina(
-                size = 0.1, alpha = 0.5,
-                colour = "black"
-            )
-        
-        # Add TXI line plot on top
-        p <- p + geom_line(
-            data = df_main,
-            aes(x = Identity, y = TXI, group = 1),
-            colour = "black", lwd = 2.3, lineend = "round", inherit.aes = FALSE
-        ) +
-            geom_line(
-                data = df_main,
-                aes(x = Identity, y = TXI, group = 1, colour = phyex_set@name),
-                lwd = 1.5, lineend = "round", inherit.aes = FALSE
-            )
-        
-        # Add mean points (proper TXI values) on top
-        p <- p + geom_point(
-            data = df_main,
-            aes(x = Identity, y = TXI),
-            shape = 21, colour = "black", size = 2, stroke = 0.8,
-            fill = "white", inherit.aes = FALSE
-        )
+        if (!is.null(secondary_identity) && !facet_by_secondary) {
+            # Mixed x-axis with coloring by secondary identity
+            p <- ggplot(df_samples, aes(x = Mixed_X, y = TXI, color = Secondary)) +
+                # Add individual points with sina
+                ggforce::geom_sina(size = 0.8, alpha = 0.7) +
+                # Add faint black line connecting means
+                stat_summary(fun = mean, geom = "line", 
+                           color = "black", alpha = 0.4, size = 0.8, 
+                           aes(group = 1), show.legend = FALSE) +
+                # Add prominent mean lines for each identity with matching colors
+                geom_boxplot(width=0.5, outlier.shape=NA, color="black",  fill="white", alpha=0.5)
+        } else {
+            # Standard plot - color by primary identity
+            p <- ggplot(df_samples, aes(x = Primary, y = TXI, color = Primary)) +
+                # Add individual points with sina
+                ggforce::geom_sina(size = 0.8, alpha = 0.7) +
+                # Add faint black line connecting means
+                stat_summary(fun = mean, geom = "line", 
+                           color = "black", alpha = 0.4, size = 0.8, 
+                           aes(group = 1), show.legend = FALSE) +
+                # Add prominent mean lines for each identity with matching colors
+                geom_boxplot(width=0.5, outlier.shape=NA, color="black",  fill="white", alpha=0.5)
+        }
     } else {
         # Simple plot showing only aggregated TXI values with line
-        p <- ggplot(df_main, aes(x = Identity, y = TXI, fill = Identity, group = 1)) +
-            geom_line(colour = "black", lwd = 2.3, lineend = "round") +
-            geom_line(aes(colour = phyex_set@name), lwd = 1.5, lineend = "round") +
-            geom_point(size = 3, shape = 21, colour = "black", stroke = 0.8)
+        if (!is.null(secondary_identity) && !facet_by_secondary) {
+            p <- ggplot(df_main, aes(x = Mixed_X, y = TXI, group = 1)) +
+                geom_line(colour = "black", lwd = 2.3, lineend = "round") +
+                geom_line(aes(colour = phyex_set@name), lwd = 1.5, lineend = "round") +
+                geom_point(size = 3, shape = 21, colour = "black", stroke = 0.8, fill = "white")
+        } else {
+            p <- ggplot(df_main, aes(x = Primary, y = TXI, group = 1)) +
+                geom_line(colour = "black", lwd = 2.3, lineend = "round") +
+                geom_line(aes(colour = phyex_set@name), lwd = 1.5, lineend = "round") +
+                geom_point(size = 3, shape = 21, colour = "black", stroke = 0.8, fill = "white")
+        }
+    }
+    
+    # Add faceting if requested
+    if (!is.null(secondary_identity) && facet_by_secondary) {
+        p <- p + facet_wrap(~ Secondary, scales = "free_y")
+    }
+    
+    # Add labels and theme
+    x_label <- if (!is.null(secondary_identity) && !facet_by_secondary) {
+        paste(primary_label, secondary_label, sep = " / ")
+    } else {
+        primary_label
     }
     
     p <- p +
         labs(
-            x = phyex_set@identities_label,
+            x = x_label,
             y = phyex_set@index_full_name
         ) +
         theme_minimal() +
         theme(
             axis.text.x = element_text(angle = 45, hjust = 1),
-            legend.position = "none"
+            legend.position = if(!is.null(secondary_identity) && !facet_by_secondary) "right" else "none"
         )
     
-    # Show p value for conservation tests
-    if (show_p_val) {
+    # Hide legend for the dataset name when show_reps = FALSE (consistent with bulk)
+    if (!show_reps) {
+        p <- p + guides(colour = "none", fill = "none")
+    }
+    
+    # Show p value for conservation tests (only if using default identities)
+    if (show_p_val && is.null(primary_identity)) {
         t <- conservation_test(phyex_set, plot_result = FALSE)
         label <- exp_p(t@p_value)
         p <- p +
             annotate("text",
                 label = label, parse = TRUE,
-                x = phyex_set@num_identities * 0.7, 
-                y = max(df_samples$TXI, na.rm = TRUE) * 0.9
+                x = length(unique(df_samples$Primary)) * 0.7, 
+                y = mean(df_samples$TXI, na.rm = TRUE) + 0.05,
+                size = 4
             )
     }
     
     # Apply colour scheme
     if (!is.null(colour)) {
-        p <- p +
-            scale_fill_manual(values = rep(colour, phyex_set@num_identities))
+        # Manual color override
+        if (!is.null(secondary_identity) && !facet_by_secondary) {
+            n_secondary <- length(unique(df_samples$Secondary))
+            p <- p + scale_color_manual(values = rep(colour, n_secondary))
+        } else {
+            n_primary <- length(unique(df_samples$Primary))
+            p <- p + scale_color_manual(values = rep(colour, n_primary))
+        }
+    } else if (has_custom_colors) {
+        # Use custom colors from the object - ensure they match the data levels
+        custom_colors <- phyex_set@idents_colours[[color_by_identity]]
+        
+        if (!is.null(secondary_identity) && !facet_by_secondary) {
+            actual_levels <- levels(factor(df_samples$Secondary))
+            if (all(actual_levels %in% names(custom_colors))) {
+                p <- p + scale_color_manual(values = custom_colors[actual_levels], name = color_by_identity)
+            } else {
+                # Fallback to viridis if mismatch
+                p <- p + scale_color_viridis_d(name = color_by_identity)
+            }
+        } else {
+            actual_levels <- levels(factor(df_samples$Primary))
+            if (all(actual_levels %in% names(custom_colors))) {
+                p <- p + scale_color_manual(values = custom_colors[actual_levels], name = color_by_identity)
+            } else {
+                # Fallback to viridis if mismatch
+                p <- p + scale_color_viridis_d(name = color_by_identity)
+            }
+        }
     } else {
-        p <- p + scale_fill_viridis_d()
+        # Use default viridis colors
+        p <- p + scale_color_viridis_d(name = color_by_identity)
     }
     
     return(p)
+}
+
+## HELPER FUNCTIONS
+
+#' @title Prepare Single-Cell Plot Data
+#' @description Prepare data frame for single-cell plotting with flexible identities
+#' @param phyex_set A ScPhyloExpressionSet object
+#' @param primary_identity Primary identity column name
+#' @param secondary_identity Secondary identity column name (optional)
+#' @return List with sample data and aggregated data
+#' @keywords internal
+.prepare_sc_plot_data <- function(phyex_set, primary_identity = NULL, secondary_identity = NULL) {
+    # Get metadata
+    metadata <- phyex_set@metadata
+    
+    # Determine primary identity
+    if (is.null(primary_identity)) {
+        # Use current selected identities via groups
+        primary_values <- phyex_set@groups
+        primary_label <- phyex_set@identities_label
+    } else {
+        # Use specified column from metadata
+        if (!primary_identity %in% colnames(metadata)) {
+            stop(sprintf("Primary identity '%s' not found in metadata. Available columns: %s",
+                        primary_identity, paste(colnames(metadata), collapse = ", ")))
+        }
+        primary_values <- metadata[[primary_identity]]
+        primary_label <- primary_identity
+    }
+    
+    # Create base data frame with TXI values
+    df_samples <- tibble::tibble(
+        Primary = primary_values,
+        TXI = phyex_set@TXI_sample
+    )
+    
+    # Add secondary identity if specified
+    if (!is.null(secondary_identity)) {
+        if (!secondary_identity %in% colnames(metadata)) {
+            stop(sprintf("Secondary identity '%s' not found in metadata. Available columns: %s",
+                        secondary_identity, paste(colnames(metadata), collapse = ", ")))
+        }
+        df_samples$Secondary <- metadata[[secondary_identity]]
+        secondary_label <- secondary_identity
+    } else {
+        secondary_label <- NULL
+    }
+    
+    # Calculate aggregated TXI values for line plot
+    if (is.null(secondary_identity)) {
+        # Simple aggregation by primary identity only
+        df_main <- df_samples |>
+            dplyr::group_by(Primary) |>
+            dplyr::summarise(TXI = mean(TXI, na.rm = TRUE), .groups = "drop")
+    } else {
+        # Aggregate by both primary and secondary, then average over secondary for line
+        df_main <- df_samples |>
+            dplyr::group_by(Primary, Secondary) |>
+            dplyr::summarise(TXI = mean(TXI, na.rm = TRUE), .groups = "drop") |>
+            dplyr::group_by(Primary) |>
+            dplyr::summarise(TXI = mean(TXI, na.rm = TRUE), .groups = "drop")
+    }
+    
+    return(list(
+        samples = df_samples,
+        main = df_main,
+        primary_label = primary_label,
+        secondary_label = secondary_label
+    ))
 }

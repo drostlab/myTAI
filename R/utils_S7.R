@@ -31,6 +31,8 @@ new_options_property <- function(class = S7::class_any,
 #' @param class The S7 class for the property (default: S7::class_any)
 #' @param name Name of the property (used in error messages)
 #' @param validator Optional validation function for the property
+#' @param getter Optional getter function for the property
+#' @param setter Optional setter function for the property
 #' 
 #' @return An S7 property object that is required
 #' 
@@ -41,12 +43,16 @@ new_options_property <- function(class = S7::class_any,
 #' @keywords internal
 new_required_property <- function(class = S7::class_any,
                                   name,
-                                  validator = NULL) {
+                                  validator = NULL,
+                                  getter = NULL,
+                                  setter = NULL) {
     msg <- sprintf("@%s is required", name)
     return(S7::new_property(
         class = class,
         default = substitute(stop(msg), list(msg = msg)),
         validator = validator,
-        name = name
+        name = name,
+        getter = getter,
+        setter = setter
     ))
 }

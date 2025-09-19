@@ -101,9 +101,13 @@ or cell types, with options for showing individual samples/cells and statistical
 - Optional individual biological replicates as jittered points
 - Optional conservation test p-values</p>
 <p>**Single-cell data (ScPhyloExpressionSet):**
-- Violin plots showing TXI distributions across cell types
+- Sina plots showing TXI distributions across cell types or other identities
 - Mean TXI values overlaid as line
-- Optional individual cells using geom_sina for better visualization</p>
+- Optional individual cells using geom_sina for better visualization
+- Flexible identity selection from Seurat metadata via additional parameters:
+  - `primary_identity`: Character, name of metadata column for x-axis (default: current Seurat identities)
+  - `secondary_identity`: Character, name of metadata column for coloring/faceting
+  - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)</p>
     </div>
 
     <div class="section level2">
@@ -117,6 +121,15 @@ or cell types, with options for showing individual samples/cells and statistical
 <span class="r-in"><span><span class="co"># Single-cell plot with individual cells</span></span></span>
 <span class="r-in"><span><span class="co"># p3 &lt;- plot_signature(sc_phyex_set, show_reps = TRUE)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Single-cell plot with custom primary identity</span></span></span>
+<span class="r-in"><span><span class="co"># p4 &lt;- plot_signature(sc_phyex_set, primary_identity = "day")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Single-cell plot with primary and secondary identities (colored)</span></span></span>
+<span class="r-in"><span><span class="co"># p5 &lt;- plot_signature(sc_phyex_set, primary_identity = "day", secondary_identity = "condition")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Single-cell plot with faceting by secondary identity</span></span></span>
+<span class="r-in"><span><span class="co"># p6 &lt;- plot_signature(sc_phyex_set, primary_identity = "day", </span></span></span>
+<span class="r-in"><span><span class="co">#                      secondary_identity = "condition", facet_by_secondary = TRUE)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

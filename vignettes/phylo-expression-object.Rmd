@@ -19,65 +19,10 @@ library(myTAI)
 data("example_phyex_set")
 ```
 
-```{r echo=FALSE}
-#### IMPORTANT & potentially TEMPORARY
-#### I have to add this or else print and plot doesn't interact with the S7 object well.
-S7::method(plot, TestResult) <- function(test_result) {
-    library(ggplot2)
-    p <- ggplot(data.frame(x = test_result@null_sample),
-                aes(x = x)) +
-        geom_histogram(
-            aes(y = after_stat(density), fill = "Null Sample"),
-            bins = 100,
-            alpha = 0.7,
-            colour = "gray66") +
-        geom_vline(
-            aes(xintercept = test_result@test_stat, colour = "Test Statistic"),
-            linewidth = 1) +
-        stat_function(fun = test_result@fitting_dist@pdf, args = test_result@params, aes(colour = "Fitted Null")) +
-        scale_fill_manual(name = NULL, values = c("Null Sample" = "gray67")) +
-        scale_colour_manual(name = NULL, values = c("Test Statistic" = "red", "Fitted Null" = "gray40")) +
-        labs(x = "Score", y = "Density") +
-        annotate("text",
-                   x = test_result@test_stat - 0.05 * diff(range(test_result@null_sample)),
-                   y = max(density(test_result@null_sample)$y) * 0.9,
-                   label = exp_p(test_result@p_value),
-                   parse=TRUE,
-                   hjust = 1,
-                   size = 3.5) +
-        theme_minimal()
-
-    return(p)
-}
-
-S7::method(print, BulkPhyloExpressionSet) <- function(x, ...) {
-    # Print base information (inline parent method)
-    cat("PhyloExpressionSet object\n")
-    cat("Class:", class(x)[[1]], "\n")
-    cat("Name:", x@name, "\n")
-    cat("Species:", ifelse(is.null(x@species), "Not specified", x@species), "\n")
-    cat("Index type:", x@index_type, "\n")
-    cat(x@identities_label, ":", paste(as.character(x@identities), collapse = ", "), "\n")
-    cat("Number of genes:", x@num_genes, "\n")
-    cat("Number of", tolower(x@identities_label), ":", x@num_identities, "\n")
-    cat("Number of phylostrata:", x@num_strata, "\n")
-    
-    # Print bulk-specific information
-    cat("Number of samples:", x@num_samples, "\n")
-    cat("Samples per condition:", table(x@groups), "\n")
-}
-```
-
 ```{r message = FALSE, eval=FALSE}
 # inspect the object
 example_phyex_set
 ```
-
-<details> <summary>Show output</summary>
-```{r message = FALSE, echo=FALSE}
-print(example_phyex_set)
-```
-</details>
 
 <details> <summary>More on `S7` and the `BulkPhyloExpressionSet` object</summary>
 
@@ -95,7 +40,7 @@ S7::prop_names(example_phyex_set)
 # for example:
 example_phyex_set@strata |> head()
 example_phyex_set@gene_ids |> head()
-example_phyex_set@.expression[1:4,1:5]
+example_phyex_set@expression[1:4,1:5]
 ```
 
 See how rich this `BulkPhyloExpressionSet` object is!
@@ -140,7 +85,7 @@ In this example, we are using a dataset with only one entry per stage (no replic
 ```{r message = FALSE}
 data("example_phyex_set_old")
 example_expression <- 
-    example_phyex_set_old@.expression |> 
+    example_phyex_set_old@expression |> 
     as.data.frame() |> 
     tibble::rownames_to_column(var = "GeneID")
 example_phylorank <-
@@ -238,7 +183,7 @@ This is exactly the case for the new `example_phyex_set` dataset (not like `exam
 ```{r message = FALSE}
 data("example_phyex_set") # not data("example_phyex_set_old")
 example_expression <- 
-    example_phyex_set@.expression |> 
+    example_phyex_set@expression |> 
     as.data.frame() |> 
     tibble::rownames_to_column(var = "GeneID")
 example_phylorank <-
@@ -345,7 +290,7 @@ example_phylorank_sc <-
 
 ```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 example_phyex_set_sc <- 
-    myTAI::as_ScPhyloExpressionSet(
+    myTAI::ScPhyloExpressionSet_from_seurat(
         pbmc_small,
         strata = example_phylorank_sc)
 ```
@@ -365,8 +310,8 @@ pbmc_small.cluster <- Seurat::FindClusters(pbmc_small, resolution = 0.8)
 
 ```{r message = FALSE, eval = requireNamespace("Seurat", quietly = TRUE)}
 example_phyex_set_sc.cluster <- 
-    myTAI::as_ScPhyloExpressionSet(
-        pbmc_small.cluster,
+    myTAI::ScPhyloExpressionSet_from_seurat(
+        seurat = pbmc_small.cluster,
         strata = example_phylorank_sc)
 ```
 
@@ -375,34 +320,6 @@ Now we have the `ScPhyloExpressionSet` object,
 ```{r message = FALSE, eval = FALSE}
 example_phyex_set_sc.cluster
 ```
-<details> <summary>Show output</summary>
-```{r echo=FALSE}
-#### IMPORTANT & potentially TEMPORARY
-#### I have to add this or else print and plot doesn't interact with the S7 object well.
-S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
-    # Print base information (inline parent method)
-    cat("PhyloExpressionSet object\n")
-    cat("Class:", class(x)[[1]], "\n")
-    cat("Name:", x@name, "\n")
-    cat("Species:", ifelse(is.null(x@species), "Not specified", x@species), "\n")
-    cat("Index type:", x@index_type, "\n")
-    cat(x@identities_label, ":", paste(as.character(x@identities), collapse = ", "), "\n")
-    cat("Number of genes:", x@num_genes, "\n")
-    cat("Number of", tolower(x@identities_label), ":", x@num_identities, "\n")
-    cat("Number of phylostrata:", x@num_strata, "\n")
-    
-    # Print single-cell specific information
-    cat("Expression layer used:", x@layer, "\n")
-    cat("Total cells:", ncol(x@seurat), "\n")
-    cat("Valid cells:", x@num_samples, "\n")
-    cat("Cells per type:\n")
-    print(table(x@groups))
-}
-```
-```{r message = FALSE, echo=FALSE, eval=requireNamespace("Seurat", quietly = TRUE)}
-print(example_phyex_set_sc.cluster)
-```
-</details>
 
 ... which you can now plot!
 

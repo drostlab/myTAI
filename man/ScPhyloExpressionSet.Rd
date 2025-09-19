@@ -7,15 +7,20 @@
 ScPhyloExpressionSet(
   strata = stop("@strata is required"),
   strata_values = stop("@strata_values is required"),
-  gene_ids = stop("@gene_ids is required"),
+  expression = stop("@expression is required"),
+  groups = stop("@groups is required"),
   name = "Phylo Expression Set",
   species = character(0),
   index_type = "TXI",
   identities_label = "Identities",
   null_conservation_sample_size = 5000L,
-  precomputed_null_conservation_txis = NULL,
-  seurat = stop("@seurat is required"),
-  layer = "counts"
+  .null_conservation_txis = NULL,
+  .pseudobulk_cache = list(),
+  .TXI_sample = numeric(0),
+  metadata = NULL,
+  selected_idents = character(0),
+  idents_colours = list(),
+  reductions = list()
 )
 }
 \arguments{
@@ -23,7 +28,9 @@ ScPhyloExpressionSet(
 
 \item{strata_values}{Numeric vector of phylostratum values used in TXI calculations}
 
-\item{gene_ids}{Character vector of gene identifiers}
+\item{expression}{Sparse or dense matrix of expression counts with genes as rows and cells as columns}
+
+\item{groups}{Factor vector indicating which identity each cell belongs to (derived from selected_idents column in metadata)}
 
 \item{name}{Character string naming the dataset (default: "Phylo Expression Set")}
 
@@ -35,13 +42,80 @@ ScPhyloExpressionSet(
 
 \item{null_conservation_sample_size}{Numeric value for null conservation sample size (default: 5000)}
 
-\item{precomputed_null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
+\item{.null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
 
-\item{seurat}{A Seurat object containing single-cell expression data}
+\item{.pseudobulk_cache}{Internal cache for pseudobulked expression matrices by different groupings}
 
-\item{layer}{Character string specifying which layer to use from the Seurat object (default: "data")}
+\item{.TXI_sample}{Internal storage for computed TXI values}
+
+\item{metadata}{Data frame with cell metadata, where rownames correspond to cell IDs and columns contain cell attributes}
+
+\item{selected_idents}{Character string specifying which metadata column is currently used for grouping cells}
+
+\item{idents_colours}{List of named character vectors specifying colors for each identity level, organized by metadata column name}
+
+\item{reductions}{List of dimensional reduction matrices (PCA, UMAP, etc.) with cells as rows and dimensions as columns}
 }
 \description{
 S7 class for single-cell phylotranscriptomic expression data.
-This class handles Seurat objects and provides pseudobulking functionality.
+This class stores expression matrices and metadata, with support for dimensional
+reductions and pseudobulking functionality.
+}
+\details{
+The ScPhyloExpressionSet class provides a comprehensive framework for single-cell 
+phylotranscriptomic analysis. Key features include:
+
+\strong{Identity Management:}
+The \code{selected_idents} property determines which metadata column is used for grouping cells.
+When changed, it automatically updates the \code{groups} property and invalidates cached
+pseudobulk data to ensure consistency.
+
+\strong{Dimensional Reductions:}
+The \code{reductions} property stores pre-computed dimensional reductions (PCA, UMAP, etc.).
+If not provided during construction from Seurat objects, basic PCA and UMAP are computed
+automatically.
+
+\strong{Color Management:}
+\code{idents_colours} allows custom color schemes for different metadata columns, ensuring
+consistent visualization across plots.
+
+\strong{Computed Properties:}
+Several properties are computed automatically when accessed:
+\itemize{
+  \item \code{available_idents} - Character vector of factor columns in metadata that can be used for grouping (automatically detected from metadata)
+  \item \code{expression_collapsed} - Matrix of pseudobulked expression data (genes x identities), created by summing expression within each identity group
+  \item \code{TXI_sample} - Named numeric vector of TXI (Transcriptomic Age Index) values for each cell, computed using efficient C++ implementation
+}
+
+Inherited computed properties from PhyloExpressionSetBase include:
+\itemize{
+  \item \code{gene_ids} - Character vector of gene identifiers
+  \item \code{identities} - Character vector of identity labels  
+  \item \code{sample_names} - Character vector of sample names (cell IDs)
+  \item \code{num_identities} - Integer count of unique cell types/identities
+  \item \code{num_samples} - Integer count of total cells
+  \item \code{num_genes} - Integer count of genes
+  \item \code{num_strata} - Integer count of phylostrata
+  \item \code{index_full_name} - Full name of the transcriptomic index type
+  \item \code{group_map} - List mapping identity names to cell IDs
+  \item \code{TXI} - Numeric vector of TXI values for each identity (computed from pseudobulked expression)
+  \item \code{null_conservation_txis} - Matrix of null conservation TXI values for statistical testing
+}
+These properties use lazy evaluation and caching for optimal performance.
+}
+\examples{
+\dontrun{
+# Create from Seurat object
+sc_set <- ScPhyloExpressionSet_from_seurat(seurat_obj, strata)
+
+# Switch to different cell grouping
+sc_set@selected_idents <- "development_stage"
+
+# Access pseudobulked data (computed automatically)
+pseudobulk <- sc_set@expression_collapsed
+
+# Access TXI values for each cell
+txi_values <- sc_set@TXI_sample
+}
+
 }

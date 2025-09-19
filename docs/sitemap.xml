@@ -54,6 +54,7 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/dot-memo_generate_conservation_txis.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/dot-pTXI.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/dot-plot_gene_heatmap_impl.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/dot-prepare_sc_plot_data.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/dot-pseudobulk_expression.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/dot-to_std_expr.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/downsample_expression.html</loc></url>
@@ -122,6 +123,7 @@
 <url><loc>https://drostlab.github.io/myTAI/reference/select_genes.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/set_expression.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/set_identities.html</loc></url>
+<url><loc>https://drostlab.github.io/myTAI/reference/set_identity_colours.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/stat_early_conservation_test.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/stat_flatline_test.html</loc></url>
 <url><loc>https://drostlab.github.io/myTAI/reference/stat_generate_conservation_txis.html</loc></url>

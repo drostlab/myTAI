@@ -7,16 +7,15 @@
 BulkPhyloExpressionSet(
   strata = stop("@strata is required"),
   strata_values = stop("@strata_values is required"),
-  gene_ids = stop("@gene_ids is required"),
+  expression = stop("@expression is required"),
+  groups = stop("@groups is required"),
   name = "Phylo Expression Set",
   species = character(0),
   index_type = "TXI",
   identities_label = "Identities",
   null_conservation_sample_size = 5000L,
-  precomputed_null_conservation_txis = NULL,
-  .expression = stop("@.expression is required"),
-  .groups = stop("@.groups is required"),
-  precomputed_bootstrapped_txis = NULL
+  .null_conservation_txis = NULL,
+  .bootstrapped_txis = NULL
 )
 }
 \arguments{
@@ -24,7 +23,9 @@ BulkPhyloExpressionSet(
 
 \item{strata_values}{Numeric vector of phylostratum values used in TXI calculations}
 
-\item{gene_ids}{Character vector of gene identifiers}
+\item{expression}{Matrix of expression counts with genes as rows and samples as columns}
+
+\item{groups}{Factor vector indicating which identity each sample belongs to}
 
 \item{name}{Character string naming the dataset (default: "Phylo Expression Set")}
 
@@ -32,19 +33,52 @@ BulkPhyloExpressionSet(
 
 \item{index_type}{Character string specifying the transcriptomic index type (default: "TXI")}
 
-\item{identities_label}{Character string labeling the identities (default: "Identities")}
+\item{identities_label}{Character string labeling the identities (default: "Stages")}
 
 \item{null_conservation_sample_size}{Numeric value for null conservation sample size (default: 5000)}
 
-\item{precomputed_null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
+\item{.null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
 
-\item{.expression}{Matrix of expression counts with genes as rows and samples as columns}
-
-\item{.groups}{Factor vector indicating which identity each sample belongs to}
-
-\item{precomputed_bootstrapped_txis}{Precomputed bootstrapped TXI values (default: NULL)}
+\item{.bootstrapped_txis}{Precomputed bootstrapped TXI values (default: NULL)}
 }
 \description{
 S7 class for bulk RNA-seq phylotranscriptomic expression data.
-This class handles expression data with biological replicates.
+This class handles expression data with biological replicates and provides
+bootstrapping functionality for statistical analysis.
+}
+\details{
+The BulkPhyloExpressionSet class is designed for bulk RNA-seq data with biological replicates.
+It extends the base PhyloExpressionSetBase class with bulk-specific functionality.
+
+\strong{Replicate Handling:}
+Expression data across biological replicates is collapsed by taking row means within each
+experimental condition or developmental stage.
+
+\strong{Computed Properties:}
+In addition to inherited computed properties from the base class, this class provides:
+\itemize{
+  \item \code{expression_collapsed} - Matrix of expression data collapsed across replicates (genes x identities)
+  \item \code{bootstrapped_txis} - Matrix of bootstrapped TXI values for statistical inference (500 bootstrap samples x identities)
+}
+
+Inherited computed properties from PhyloExpressionSetBase include:
+\itemize{
+  \item \code{gene_ids} - Character vector of gene identifiers
+  \item \code{identities} - Character vector of identity labels  
+  \item \code{sample_names} - Character vector of sample names
+  \item \code{num_identities} - Integer count of unique identities
+  \item \code{num_samples} - Integer count of total samples
+  \item \code{num_genes} - Integer count of genes
+  \item \code{num_strata} - Integer count of phylostrata
+  \item \code{index_full_name} - Full name of the transcriptomic index type
+  \item \code{group_map} - List mapping identity names to sample names
+  \item \code{TXI} - Numeric vector of TXI values for each identity
+  \item \code{TXI_sample} - Numeric vector of TXI values for each sample
+  \item \code{null_conservation_txis} - Matrix of null conservation TXI values for statistical testing
+}
+
+\strong{Statistical Analysis:}
+The class supports confidence interval estimation and standard deviation calculation
+through bootstrapped TXI values, enabling robust statistical analysis of developmental
+or experimental patterns.
 }

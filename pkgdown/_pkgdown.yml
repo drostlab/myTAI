@@ -14,7 +14,12 @@ template:
     code_font: {google: "Fira Code"}
   assets:
     - pkgdown/extra.css
-    
+
+# Ensure suggested packages are available for vignette building
+development:
+  mode: auto
+  
+# Configure vignette building
 articles:
 - title: "Main"
   navbar: ~
@@ -75,11 +80,21 @@ reference:
     desc: Functions to convert between dataframe and `BulkPhyloExpressionSet` or `ScPhyloExpressionSet`.
     contents:
       - as_BulkPhyloExpressionSet
-      - as_ScPhyloExpressionSet
+      - BulkPhyloExpressionSet_from_df
+      - ScPhyloExpressionSet_from_matrix
+      - ScPhyloExpressionSet_from_seurat
       - as_data_frame
       - check_PhyloExpressionSet
       - check_BulkPhyloExpressionSet
       - check_ScPhyloExpressionSet
+
+  - title: Single-cell specific functions
+    desc: Functions specifically designed for single-cell RNA-seq data analysis.
+    contents:
+      - downsample_expression
+      - downsample
+      - match_map_sc_matrix
+      - match_map_sc_seurat
       
   - title: Taxonomic information retrieval
     desc: Functions to compute transcriptome indices.
@@ -105,25 +120,21 @@ reference:
       - destroy_pattern
       - diagnose_test_robustness
       - distributions
-      - downsample_expression
       - exp_p
       - genes_lowly_expressed
       - genes_top_expr
       - genes_top_mean
       - genes_top_variance
-      - load_example_phyex_set_sc
       - match_map
-      - match_map_sc
       - normalise_stage_expression
       - omit_matrix
+      - permute_PS
       - quantile_rank
       - rel_exp_matrix
       - relative_expression
       - remove_genes
-      - reorder_identities
       - select_genes
       - set_expression
-      - set_identities
       - strata_enrichment
       - transform_counts
       - tf
@@ -133,7 +144,6 @@ reference:
   - title: Utilities/Metadata
     desc: Helper functions and metadata constants.
     contents:
-      - available_identities
       - COUNT_TRANSFORMS
       - PS_colours
       - save_gatai_results_pdf
@@ -148,4 +158,5 @@ reference:
     contents:
       - example_phyex_set
       - example_phyex_set_old
+      - example_phyex_set_sc
 

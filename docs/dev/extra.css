@@ -1,0 +1,82 @@
+body {
+  font-family: "Fira Mono", monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Fira Sans", sans-serif;
+}
+
+code, pre {
+  font-family: "Fira Code", monospace;
+}
+
+.important {
+  border-left: 4px solid #f39c12;
+  background: rgba(255, 243, 205, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.note {
+  border-left: 4px solid #0073e6;
+  background: rgba(231, 243, 255, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tip {
+  border-left: 4px solid #28a745;
+  background: rgba(232, 248, 240, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.warning {
+  border-left: 4px solid #f0ad4e;
+  background: rgba(255, 243, 205, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.caution {
+  border-left: 4px solid #dc3545;
+  background: rgba(248, 215, 218, 0.2);
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.note::before      { content: "ℹ️ "; }
+.tip::before       { content: "💡 "; }
+.warning::before   { content: "⚠️ "; }
+.caution::before   { content: "❗ "; }
+.important::before { content: "⭐ "; }
+.error::before     { content: "🚫 "; }
+
+details {
+  border-left: 4px solid #ddd;
+  background: rgba(249, 249, 249, 0.2); /* 20% transparent */
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+details summary {
+  cursor: pointer;
+}
+
+.r-output {
+  background: #fff;
+  padding: 0.5em;
+  border-radius: 4px;
+}
+
+/* Apply only on the homepage (index.html) */
+/* body.template-home p {
+/*   font-size: 2rem;
+/*   margin-bottom: 6em;
+/* }

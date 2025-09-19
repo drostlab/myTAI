@@ -14,13 +14,15 @@ plot_gene_heatmap(
   cluster_cols = FALSE,
   show_gene_age = TRUE,
   show_gene_ids = FALSE,
+  gene_annotation = NULL,
+  gene_annotation_colors = NULL,
   ...
 )
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)}
 
-\item{genes}{Character vector of specific gene IDs to include (default: NULL for auto-selection)}
+\item{genes}{Character vector of specific gene IDs to include in the heatmap (default: NULL for auto-selection of dynamic genes)}
 
 \item{top_p}{Numeric value specifying the top proportion of genes to include (default: 0.2)}
 
@@ -35,6 +37,10 @@ plot_gene_heatmap(
 \item{show_gene_age}{Logical indicating whether to show gene age annotation (default: TRUE)}
 
 \item{show_gene_ids}{Logical indicating whether to show gene identifiers (default: FALSE)}
+
+\item{gene_annotation}{Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)}
+
+\item{gene_annotation_colors}{Named list of color vectors for custom gene annotations (default: NULL)}
 
 \item{...}{Additional arguments passed to specific methods}
 }
@@ -56,6 +62,11 @@ For single-cell data, the heatmap shows expression across cell types.
 
 The gene age annotation uses the PS_colours function to create a consistent
 color scheme across different myTAI visualizations.
+
+Custom gene annotations can be provided via the \code{gene_annotation} parameter,
+which should be a data frame with gene IDs as rownames and annotation categories
+as columns. Corresponding colors should be provided via \code{gene_annotation_colors}
+as a named list where names match the annotation column names.
 }
 \examples{
 # Basic heatmap with gene age annotation
@@ -63,5 +74,14 @@ color scheme across different myTAI visualizations.
 
 # Single-cell heatmap with subset of cells
 # p2 <- plot_gene_heatmap(sc_phyex_set, show_reps = TRUE, max_cells_per_type = 3)
+
+# Custom gene annotation example
+# gene_annot <- data.frame(
+#   Category = c("High", "Medium", "Low"),
+#   row.names = c("Gene1", "Gene2", "Gene3")
+# )
+# colors <- list(Category = c("High" = "red", "Medium" = "yellow", "Low" = "blue"))
+# p3 <- plot_gene_heatmap(phyex_set, gene_annotation = gene_annot, 
+#                        gene_annotation_colors = colors, show_gene_age = FALSE)
 
 }

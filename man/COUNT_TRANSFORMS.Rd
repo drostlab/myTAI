@@ -21,4 +21,10 @@ COUNT_TRANSFORMS
 \description{
 Predefined list of transformation functions for count data normalization.
 }
+\details{
+This object provides a list of predefined transformation functions for gene expression matrix.
+For `rlog()` and `vst()` transformations (from `DESeq2`), the expression matrix is multiplied 
+by 2 prior to rounding. 
+This is done to preserve more information for the lower expression values (especially for TPM).
+}
 \keyword{datasets}
