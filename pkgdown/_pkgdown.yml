@@ -14,10 +14,6 @@ template:
     code_font: {google: "Fira Code"}
   assets:
     - pkgdown/extra.css
-
-# Ensure suggested packages are available for vignette building
-development:
-  mode: auto
   
 # Configure vignette building
 articles:
