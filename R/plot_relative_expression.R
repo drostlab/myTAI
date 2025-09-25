@@ -2,10 +2,8 @@
 #' @description Functions for computing and plotting relative expression profiles using PhyloExpressionSet S7 objects.
 #' @import ggplot2
 #' @importFrom dplyr filter case_when
-#' @importFrom reshape2 melt
 #' @importFrom stats kruskal.test
 #' @importFrom RColorBrewer brewer.pal
-#' @importFrom scales pretty_breaks
 
 # Helper Functions --------------------------------------------------------
 

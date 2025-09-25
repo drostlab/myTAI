@@ -183,7 +183,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
                     } else {
                         # For categorical annotations, use distinct colors
                         n_colors <- length(unique_vals)
-                        colors <- scales::hue_pal()(n_colors)
+                        colors <- grDevices::colorRampPalette(c("red","blue","green","orange"))(n_colors)
                         names(colors) <- unique_vals
                         annotation_colors[[col_name]] <- colors
                     }
@@ -336,7 +336,7 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
             cell_type_colors <- phyex_set@idents_colours[[phyex_set@identities_label]]
         } else {
             # Generate default colors
-            cell_type_colors <- scales::hue_pal()(length(cell_type_levels))
+            cell_type_colors <- grDevices::colorRampPalette(c("red","blue","green","orange"))(length(cell_type_levels))
             names(cell_type_colors) <- cell_type_levels
         }
         

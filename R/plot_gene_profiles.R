@@ -84,10 +84,14 @@ plot_gene_profiles <- function(phyex_set,
     show_gene <- all_genes %in% genes_to_plot
     counts <- counts[show_gene, , drop=FALSE]
     
-    df_long <- reshape2::melt(counts)
-    colnames(df_long) <- c("GeneID", "Sample", "Expression")
-    
-    # Remove rows with NA Sample values
+
+    df <- as.data.frame(counts)
+    df$GeneID <- rownames(counts)
+
+    df_long <- tidyr::pivot_longer(df,
+                                cols = -GeneID,
+                                names_to = "Sample",
+                                values_to = "Expression")
     df_long <- df_long[!is.na(df_long$Sample), ]
     
     # Create sample metadata frame with unique entries
@@ -102,8 +106,14 @@ plot_gene_profiles <- function(phyex_set,
     sample_metadata <- sample_metadata[!duplicated(sample_metadata$Sample) & !is.na(sample_metadata$Sample), ]
 
     # Prepare long data for points (replicates/cells)
-    df_points <- reshape2::melt(counts)
-    colnames(df_points) <- c("GeneID", "Sample", "Expression")
+    df <- as.data.frame(counts)
+    df$GeneID <- rownames(counts)
+
+    df_points <- tidyr::pivot_longer(df,
+                                cols = -GeneID,
+                                names_to = "Sample",
+                                values_to = "Expression")
+
     df_points <- df_points[!is.na(df_points$Sample), ]
     df_points <- df_points |>
         left_join(sample_metadata, by = "Sample") |>

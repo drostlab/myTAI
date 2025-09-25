@@ -69,14 +69,14 @@ rev_mid_gene <- function(S) {
 }
 
 #' @title Modulo Pi Function
-#' @description Wrap angles to the range (-π, π].
+#' @description Wrap angles to the range (-pi, pi].
 #' 
 #' @param x Numeric vector of angles
 #' 
 #' @return Numeric vector of wrapped angles
 #' 
 #' @details
-#' Ensures angles are in the standard range (-π, π] by wrapping around 2π.
+#' Ensures angles are in the standard range (-pi, pi] by wrapping around 2pi.
 #' 
 #' @keywords internal
 mod_pi <- function(x) {

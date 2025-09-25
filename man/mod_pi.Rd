@@ -13,9 +13,9 @@ mod_pi(x)
 Numeric vector of wrapped angles
 }
 \description{
-Wrap angles to the range (-π, π].
+Wrap angles to the range (-pi, pi].
 }
 \details{
-Ensures angles are in the standard range (-π, π] by wrapping around 2π.
+Ensures angles are in the standard range (-pi, pi] by wrapping around 2pi.
 }
 \keyword{internal}

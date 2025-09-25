@@ -3,7 +3,7 @@ Type: Package
 Title: Evolutionary Transcriptomics
 Version: 2.3.0.9006
 Date: 2025-07-27
-Author: Hajk-Georg Drost [aut, cre], Jaruwatana Sodai Lotharukpong [aut, ctb], Nikola Kalábová [aut, ctb], Filipa Martins Costa [aut, ctb], Kristian K Ullrich [aut, ctb], Stefan Manolache [aut, ctb]
+Author: Hajk-Georg Drost [aut, cre], Jaruwatana Sodai Lotharukpong [aut, ctb], Stefan Manolache [aut, ctb], Nikola Kalábová [aut, ctb], Filipa Martins Costa [aut, ctb], Kristian K Ullrich [aut, ctb] 
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@tuebingen.mpg.de>
 Authors@R: c(person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
@@ -14,7 +14,7 @@ Authors@R: c(person("Hajk-Georg", "Drost",
                 role = c("aut", "ctb"), 
                 email = "jaruwatana.lotharukpong@tuebingen.mpg.de", 
                 comment = c(ORCID = "0000-0002-3475-0980")),
-              person(given = "Ștefan",
+              person(given = "Stefan",
                 family = "Manolache",
                 role = c("aut", "ctb"),
                 email = "2648894@dundee.ac.uk",
@@ -49,10 +49,6 @@ Imports:
     fitdistrplus (>= 1.1-5),
     dplyr (>= 0.3.0),
     RColorBrewer (>= 1.1-2),
-    stats (>= 3.1.1),
-    grDevices (>= 3.1.1),
-    utils (>= 3.1.1),
-    reshape2 (>= 1.4.1),
     ggplot2 (>= 1.0.1),
     cowplot,
     ggforce,
@@ -60,10 +56,8 @@ Imports:
     ggtext,
     readr (>= 0.2.2),
     tibble,
-    scales,
     ggplotify,
     ggrepel,
-    uwot,
     Matrix,
     pheatmap
 Suggests:
@@ -73,6 +67,7 @@ Suggests:
     mgcv,
     Seurat,
     SeuratObject,
+    uwot,
     decor,
     gataiR,
     DESeq2,

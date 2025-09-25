@@ -8,11 +8,9 @@
 #' @importFrom grDevices colorRampPalette
 #' @export
 PS_colours <- function(n) {
-    vals <- 1:n |>
-        log() |>
-        scales::rescale()
-   
-    pal <- grDevices::colorRampPalette(c("black", "#AD6F3B", "lightgreen"))
-   
-    pal(100)[floor(vals * 99) +1]
+  vals <- log(1:n)
+  vals <- (vals - min(vals)) / (max(vals) - min(vals))
+  
+  pal <- grDevices::colorRampPalette(c("black", "#AD6F3B", "lightgreen"))
+  pal(100)[floor(vals * 99) + 1]
 }

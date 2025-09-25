@@ -40,4 +40,5 @@ stat_generate_conservation_txis <- function(strata_vector,
 #' when the same parameters are used multiple times.
 #' 
 #' @keywords internal
+#' @importFrom memoise memoise
 .memo_generate_conservation_txis <- memoise::memoise(stat_generate_conservation_txis)

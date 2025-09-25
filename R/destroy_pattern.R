@@ -25,6 +25,7 @@
 #' # Apply GATAI to identify pattern-contributing genes
 #' # gatai_result <- destroy_pattern(phyex_set, num_runs = 10, runs_threshold = 0.6)
 #' 
+#' @import patchwork
 #' @author Filipa Martins Costa
 #' @export
 destroy_pattern <- function(phyex_set, 
@@ -172,7 +173,7 @@ plot_gatai_results <- function(phyex_set,
         y_limits <- range(c(phyex_set@TXI, gatai_set@TXI, top_set@TXI, random_set@TXI)) + c(-0.05, 0.05)
         plots <- list(P1, P2, P3, P4)
         plots <- lapply(plots, \(p) p + ylim(y_limits))
-        signature_plots <- cowplot::plot_grid(plotlist = plots, ncol = 2)
+        signature_plots <- (plots[[1]] | plots[[2]]) / (plots[[3]] | plots[[4]])
     }
     else {
         signature_plots <- plot_signature_multiple(c(phyex_set, gatai_set, top_set, random_set), 
@@ -214,7 +215,7 @@ plot_gatai_results <- function(phyex_set,
                                                     as_log_obs_exp = TRUE) +
         ggtitle("Phylostrata Distribution: GATAI-removed genes (Log Obs/Exp)")
 
-    strata_plot <- cowplot::plot_grid(strata_plot_all, strata_plot_removed, ncol = 1, align = "v", rel_heights = c(1, 1.2))
+    strata_plot <- strata_plot_all / strata_plot_removed
     
     # 5. Compare p values
     original_test <- conservation_test(phyex_set, plot_result = FALSE)

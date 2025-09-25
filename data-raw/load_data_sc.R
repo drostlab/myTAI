@@ -55,4 +55,7 @@ load_example_phyex_set_sc <- function() {
 
 example_phyex_set_sc <- load_example_phyex_set_sc()
 
+top_genes <- example_phyex_set_sc |> genes_top_mean(p=0.9)
+example_phyex_set_sc <- example_phyex_set_sc |> select_genes(top_genes)
+
 usethis::use_data(example_phyex_set_sc, overwrite = TRUE)

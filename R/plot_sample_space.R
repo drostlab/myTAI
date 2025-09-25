@@ -26,8 +26,6 @@
 #' # umap_plot <- plot_sample_space(phyex_set, method = "UMAP", colour_by = "TXI")
 #' 
 #' @import ggplot2
-#' @importFrom uwot umap
-#' @importFrom stats prcomp
 #' @export
 plot_sample_space <- S7::new_generic("plot_sample_space", "phyex_set",
     function(phyex_set, 
@@ -57,6 +55,9 @@ S7::method(plot_sample_space, BulkPhyloExpressionSet) <- function(phyex_set,
         coords <- stats::prcomp(t(expr), scale. = TRUE)$x[, 1:2]
     }
     else if (method == "UMAP"){
+        if (!requireNamespace("uwot", quietly = TRUE)) {
+            stop("Package 'uwot' must be installed to compute UMAP.")
+        }
         set.seed(seed)
         coords <- uwot::umap(t(expr), scale = TRUE)
     }
