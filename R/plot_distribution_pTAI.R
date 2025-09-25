@@ -6,7 +6,7 @@
 #' @importFrom tibble rownames_to_column
 #' @importFrom RColorBrewer brewer.pal brewer.pal.info
 #' @importFrom ggridges geom_density_ridges
-#' @importFrom cowplot plot_grid
+#' @import patchwork
 #' @importFrom purrr map
 #' @importFrom stats ks.test qqplot
 
@@ -103,7 +103,7 @@ plot_distribution_pTAI <- function(phyex_set,
         ) +
         ggplot2::scale_fill_manual(values = colors)
     
-    cowplot::plot_grid(P1, P2, labels = main)
+    (P1 / P2) + patchwork::plot_annotation(title = main)
 }
 
 #' @title QQ plot comparing partial TAI distributions across developmental stages against a reference stage

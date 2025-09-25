@@ -37,7 +37,7 @@ consensus <- function(x, p=0.5) {
 #' @param p Consensus threshold for petal plot (default: 0.5)
 #' @param ps Vector of consensus thresholds for convergence plots (default: c(0.25, 0.5, 0.75))
 #' 
-#' @return A cowplot grid showing convergence analysis
+#' @return A patchwork composition showing convergence analysis
 #' 
 #' @details
 #' This function creates a comprehensive visualization of GATAI convergence
@@ -48,6 +48,7 @@ consensus <- function(x, p=0.5) {
 #' # Create full convergence plot
 #' # conv_plot <- full_gatai_convergence_plot(phyex_set, gatai_runs)
 #' 
+#' @import patchwork
 #' @keywords internal
 full_gatai_convergence_plot <- function(phyex_set, 
                                         runs,
@@ -58,42 +59,38 @@ full_gatai_convergence_plot <- function(phyex_set,
     t <- threshold_comparison_plots(phyex_set, runs)
     petal <- petal_plot(runs, p=p)
     
-    legend <- cowplot::get_legend(c[[1]])
+    # Create plots with titles
+    c1_titled <- c[[1]] + 
+        ggplot2::labs(title="Convergence of GATAI consensus set sizes for different thresholds") +
+        ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
     
-    p <- cowplot::plot_grid(
-        cowplot::plot_grid(
-            c[[1]] + ggplot2::theme(legend.position = "none") +
-                ggplot2::labs(title="Convergence of GATAI consensus set sizes for different thresholds") +
-                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
-            c[[2]] + ggplot2::theme(legend.position = "none") + 
-                ggplot2::labs(title="Convergence of GATAI consensus set p values for different thresholds") +
-                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
-            ncol=1
-        ),
-        legend,
-        cowplot::plot_grid(
-            t[[1]] + ggplot2::labs(title="How the threshold of GATAI consensus influences set size") +
-                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
-            t[[2]] + ggplot2::labs(title="How the threshold of GATAI consensus influences set p value") +
-                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
-            ncol=1
-        ),
-        ncol=3,
-        rel_widths = c(2.2, 1, 2.4)
-    )
-    p <- cowplot::plot_grid(
-        p, 
-        cowplot::plot_grid(
-            NULL,
-            petal + ggplot2::labs(title="How many genes get lost per run.") +
-                ggplot2::theme(plot.title = ggplot2::element_text(size = 8)),
-            NULL,
-            rel_widths=c(0.3,0.4,0.3), 
-            ncol=3
-        ), 
-        ncol=1, 
-        rel_heights = c(0.75,0.2)
-    )
+    c2_titled <- c[[2]] + 
+        ggplot2::labs(title="Convergence of GATAI consensus set p values for different thresholds") +
+        ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
+    
+    t1_titled <- t[[1]] + 
+        ggplot2::labs(title="How the threshold of GATAI consensus influences set size") +
+        ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
+    
+    t2_titled <- t[[2]] + 
+        ggplot2::labs(title="How the threshold of GATAI consensus influences set p value") +
+        ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
+    
+    petal_titled <- petal + 
+        ggplot2::labs(title="How many genes get lost per run.") +
+        ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
+    
+    # Create layout using patchwork
+    # Top row with three columns: convergence plots, threshold plots
+    top_left <- c1_titled / c2_titled
+    top_right <- t1_titled / t2_titled
+    
+    # Combine top row with desired widths
+    top_row <- top_left | top_right
+    top_row <- top_row + patchwork::plot_layout(widths = c(2.2, 2.4))
+    
+    # Full layout: top row over bottom centered plot
+    p <- top_row / petal_titled + patchwork::plot_layout(heights = c(0.75, 0.2))
     return(p)
 }
 
@@ -179,7 +176,7 @@ petal_plot <- function(sets, p=0.5) {
 #' # Create convergence plots
 #' # conv_plots <- convergence_plots(phyex_set, gatai_runs, ps = c(0.25, 0.5, 0.75))
 #' 
-#' @import ggplot2 tidyr
+#' @import ggplot2 tidyr patchwork
 #' @keywords internal
 convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
     num_runs <- length(runs)
@@ -276,7 +273,7 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
 #' # Create threshold comparison plots
 #' # thresh_plots <- threshold_comparison_plots(phyex_set, gatai_runs)
 #' 
-#' @import ggplot2
+#' @import ggplot2 patchwork
 #' @keywords internal
 threshold_comparison_plots <- function(phyex_set, runs) {
     num_runs <- length(runs)

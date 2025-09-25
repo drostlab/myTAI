@@ -8,7 +8,7 @@ vignette: >
 
 ## Motivation for non-TAI approaches
 
-So far, most of the vignettes have focused on workflows and discussions centred around the transcriptome age index (TAI). However, we can also assign other information for each gene (analogous to gene age in TAI). Examples include [`TDI`](https://www.nature.com/articles/nature11394), [`TSI`](https://www.nature.com/articles/s41586-024-08059-8), [`TPI`](https://academic.oup.com/mbe/article/33/7/1669/2578492) and so on (though the names of these indices can differ between studies and are thus not standardised).
+So far, most of the vignettes have focused on workflows and discussions centred around the transcriptome age index (TAI). However, we can also assign other information for each gene (analogous to gene age in TAI). Examples include [`TDI`](https://www.nature.com/articles/nature11394), [`TSI`](https://www.nature.com/articles/s41586-024-08059-8), [`TPI`](https://doi.org/10.1093/molbev/msw044) and so on (though the names of these indices can differ between studies and are thus not standardised).
 
 In the sections below, we describe the workflow for the transcriptome divergence index (TDI) and transcriptome specificity index (TSI). These and other index-based methods use the same framework as TAI, aside from the method to give a factor or numeric value to each gene (e.g. gene age for TAI).
 
@@ -130,11 +130,11 @@ You can re-use the same workflow as for TDI that we have shown above. The only d
 
 For TSI, accurate inference of expression specificity is key.
 
-According to [Kryuchkova-Mostacci & Robinson-Rechavi, 2017](https://academic.oup.com/bib/article/18/2/205/2562739):
+According to [Kryuchkova-Mostacci & Robinson-Rechavi, 2017](https://doi.org/10.1093/bib/bbw008):
 
 > Tau appears consistently to be the most robust method in our analyses.
 
-Thus, we recommend the *tau* (or \tau) score as introduced by [Yanai et al. 2005](https://academic.oup.com/bioinformatics/article/21/5/650/220059) as a measure of expression specificity, though other measures exist (e.g. those based on information entropy). You can also decile the *tau* values (similar to deciled dNdS for divergence-strata) to enable analogous comparisons to TAI.
+Thus, we recommend the *tau* (or \tau) score as introduced by [Yanai et al. 2005](https://doi.org/10.1093/bioinformatics/bti042) as a measure of expression specificity, though other measures exist (e.g. those based on information entropy). You can also decile the *tau* values (similar to deciled dNdS for divergence-strata) to enable analogous comparisons to TAI.
 
 :::{.important}
 Regardless of the measures chosen for expression specificity/breadth, the estimates improve with data quality (i.e. number of RNA-seq samples) and quantity (i.e. diversity of the sampling such as multiple tissues and stages, and low or no technical noise).
@@ -148,7 +148,7 @@ Looking forward to seeing what can be done!
 
 ## Summary
 
-You might wonder - why so many transcriptome indices? TAI, TDI, TSI, TPI and other such indices provide **complementary** views on the transcriptome evolution patterns. For more details on their biological interpretation, please check these studies for [`TAI`](https://www.nature.com/articles/nature09632), [`TDI`](https://www.nature.com/articles/nature11394), [`TSI`](https://www.nature.com/articles/s41586-024-08059-8), [`TPI`](https://academic.oup.com/mbe/article/33/7/1669/2578492), etc.
+You might wonder - why so many transcriptome indices? TAI, TDI, TSI, TPI and other such indices provide **complementary** views on the transcriptome evolution patterns. For more details on their biological interpretation, please check these studies for [`TAI`](https://www.nature.com/articles/nature09632), [`TDI`](https://www.nature.com/articles/nature11394), [`TSI`](https://www.nature.com/articles/s41586-024-08059-8), [`TPI`](https://doi.org/10.1093/molbev/msw044), etc.
 
 :::{.tip}
 If you are using different indices, it is important to check that the gene-level values assigned (e.g. age, divergence-stratum) are not strongly correlated. High correlation means that the resulting indices do **not provide complementary** information (i.e. not reflect different biological aspects).

@@ -85,7 +85,7 @@ Cite myTAI for your own research.
 
 > Drost et al. **myTAI: evolutionary transcriptomics with R**.
 > *Bioinformatics* 2018, 34 (9), 1589-1590.
-> [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
+> [doi:10.1093](https://doi.org/10.1093/bioinformatics/btx835)
 
 </p>
 <p style="font-family: &#39;Fira Mono&#39;, monospace; font-size: 1.5rem;">

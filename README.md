@@ -1,6 +1,6 @@
 
-# myTAI <a href="https://drostlab.github.io/myTAI">  <img src="man/figures/logo.png" align="right" height="174" width="150" /> </a>
-[![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://academic.oup.com/bioinformatics/article/34/9/1589/4772684)
+# myTAI <a href="https://drostlab.github.io/myTAI/">  <img src="man/figures/logo.png" align="right" height="174" width="150" /> </a>
+[![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://doi.org/10.1093/bioinformatics/btx835)
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://bioconda.github.io/)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&label=VISITORS&countColor=%23263759&style=flat)
 [![R-CMD-check](https://github.com/drostlab/myTAI/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/drostlab/myTAI/actions/workflows/R-CMD-check.yaml)
@@ -113,7 +113,7 @@ Evolutionary transcriptomics aims to capture and quantify the evolutionary conse
 of genes that contribute to the transcriptome during a specific stage of the biological 
 process of interest. The resulting temporal conservation pattern
 then enables to detect stages of development or other biological processes that
-are evolutionarily conserved ([Drost et al., 2018](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)). This quantification on the highest level is achieved through transcriptome indices (e.g. [Transcriptome Age Index](https://drostlab.github.io/myTAI/articles/phylostratigraphy.html) or [Transcriptome Divergence Index](https://drostlab.github.io/myTAI/articles/other-strata.html)) which aim to quantify the average evolutionary age [Barrera-Redondo et al., 2023](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z) or sequence conservation [Drost et al., 2015](https://academic.oup.com/mbe/article/32/5/1221/1125964) of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes at particular developmental stages and to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollo's law) ([Drost et al., 2017](https://www.sciencedirect.com/science/article/pii/S0959437X16302040)).
+are evolutionarily conserved ([Drost et al., 2018](https://doi.org/10.1093/bioinformatics/btx835)). This quantification on the highest level is achieved through transcriptome indices (e.g. [Transcriptome Age Index](https://drostlab.github.io/myTAI/articles/phylostratigraphy.html) or [Transcriptome Divergence Index](https://drostlab.github.io/myTAI/articles/other-strata.html)) which aim to quantify the average evolutionary age [Barrera-Redondo et al., 2023](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z) or sequence conservation [Drost et al., 2015](https://doi.org/10.1093/molbev/msv012) of genes that contribute to the transcriptome at a particular stage. In general, evolutionary transcriptomics can be used as a method to quantify the evolutionary conservation of transcriptomes at particular developmental stages and to investigate how transcriptomes underlying biological processes are constrained or channeled due to events in evolutionary history (Dollo's law) ([Drost et al., 2017](https://doi.org/10.1016/j.gde.2017.03.003)).
 
 __Please note, since myTAI relies on gene age inference and there has been an extensive debate about the best approaches for gene age inference in the last years,
 please follow my [updated discussion about the gene age inference literature](https://drostlab.github.io/myTAI/articles/phylostratigraphy.html). With [GenEra](https://github.com/josuebarrera/GenEra), we addressed all previously raised issues and we encourage users to run `GenEra` when aiming to infer gene ages for further `myTAI` analyses.__
@@ -144,7 +144,7 @@ install.packages("myTAI", dependencies = TRUE)
 ## Citation
 Please cite the following paper when using `myTAI` for your own research. This will allow us to continue working on this software tool and will motivate us to extend its functionality and usability in the next years. Many thanks in advance!
 
-> Drost et al. __myTAI: evolutionary transcriptomics with R__. _Bioinformatics_ 2018, 34 (9), 1589-1590. [doi:10.1093](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btx835/4772684)
+> Drost et al. __myTAI: evolutionary transcriptomics with R__. _Bioinformatics_ 2018, 34 (9), 1589-1590. [doi:10.1093](https://doi.org/10.1093/bioinformatics/btx835)
 
 
 <details> <summary> <b> Studies that successfully used `myTAI` to quantify transcriptome novelty and conservation </b> </summary>

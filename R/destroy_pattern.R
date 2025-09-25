@@ -109,7 +109,7 @@ destroy_pattern <- function(phyex_set,
 #' @param runs_threshold Threshold for gene removal consistency across runs (default: 0.5).
 #' @param signature_plot_type Type of signature plot: "separate" for individual plots, "combined" for overlay (default: both options).
 #'
-#' @return A named list of ggplot/cowplot objects and results:
+#' @return A named list of ggplot/patchwork objects and results:
 #'   \item{signature_plots}{Signature plots before/after GATAI and top variance removal}
 #'   \item{heatmap_plot}{Heatmap of GATAI-removed genes}
 #'   \item{profiles_plot}{Gene expression profiles of GATAI-removed genes}

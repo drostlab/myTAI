@@ -16,7 +16,7 @@ full_gatai_convergence_plot(phyex_set, runs, p = 0.5, ps = c(0.25, 0.5, 0.75))
 \item{ps}{Vector of consensus thresholds for convergence plots (default: c(0.25, 0.5, 0.75))}
 }
 \value{
-A cowplot grid showing convergence analysis
+A patchwork composition showing convergence analysis
 }
 \description{
 Create a comprehensive plot showing GATAI convergence across multiple

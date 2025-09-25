@@ -319,7 +319,7 @@ myTAI 0.6.0
 
 ### Updates
 
-- `is.ExpressionSet()` now prints out more detailed error messages when [ExpressionSet format](https://github.com/drostlab/myTAI/blob/master/vignettes/Introduction.Rmd) is violated
+- `is.ExpressionSet()` now prints out more detailed error messages when ExpressionSet is violated
 
 - adapt `PlotContribution()` to new version of `dplyr` where `summarise_each()` is deprecated.
 
