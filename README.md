@@ -51,7 +51,7 @@ myTAI::plot_gene_space(example_phyex_set)
 </table>
 
 
-### Detailed documentation provided [here](https://drostlab.github.io/myTAI)
+### Detailed documentation provided [here](https://drostlab.github.io/myTAI/)
 
 ## Package summary
 

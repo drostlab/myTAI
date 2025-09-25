@@ -215,7 +215,7 @@ As expected again, we do not see support for the late conservation pattern, as t
 
 Finally, we can also test whether the TAI profiles of two groups of samples are significantly different from each other. This can be achieved with the function `myTAI::stat_pairwise_test()`.
 
-For example, let's say we have an experiment where we disrupt an organisms' development at a given stage using a certain perturbation (e.g. drug treatment). We can compare the TAI profiles of the control and treatment groups to see if the perturbation has an effect on the TAI profile. This could be interesting if the perturbed pathway is thought to recruit orphan genes, i.e. genes that are not conserved across species. An example can be found [here](https://www.biorxiv.org/content/10.1101/2024.05.28.596352v1.abstract).
+For example, let's say we have an experiment where we disrupt an organisms' development at a given stage using a certain perturbation (e.g. drug treatment). We can compare the TAI profiles of the control and treatment groups to see if the perturbation has an effect on the TAI profile. This could be interesting if the perturbed pathway is thought to recruit orphan genes, i.e. genes that are not conserved across species. An example can be found [here](https://doi.org/10.1101/2024.05.28.596352 ).
 
 With `myTAIv2`, we can facilitate such test. Since we do not have the data, we will use the example data set `example_phyex_set_old` and create two groups of samples: `control` and `treatment`. We can then compare the TAI profiles of these two groups using the `myTAI::stat_pairwise_test()` function.
 
