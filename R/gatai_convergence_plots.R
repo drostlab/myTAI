@@ -66,7 +66,7 @@ full_gatai_convergence_plot <- function(phyex_set,
     
     c2_titled <- c[[2]] + 
         ggplot2::labs(title="Convergence of GATAI consensus set p values for different thresholds") +
-        ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
+        ggplot2::theme(plot.title = ggplot2::element_text(size = 8), legend.position="none")
     
     t1_titled <- t[[1]] + 
         ggplot2::labs(title="How the threshold of GATAI consensus influences set size") +
@@ -77,8 +77,11 @@ full_gatai_convergence_plot <- function(phyex_set,
         ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
     
     petal_titled <- petal + 
-        ggplot2::labs(title="How many genes get lost per run.") +
-        ggplot2::theme(plot.title = ggplot2::element_text(size = 8))
+    ggplot2::labs(title = "How many genes get lost per run.") +
+    ggplot2::theme(
+        plot.title = ggplot2::element_text(size = 8),
+        aspect.ratio = 0.6  # Makes plot taller relative to width
+    )
     
     # Create layout using patchwork
     # Top row with three columns: convergence plots, threshold plots
@@ -89,8 +92,18 @@ full_gatai_convergence_plot <- function(phyex_set,
     top_row <- top_left | top_right
     top_row <- top_row + patchwork::plot_layout(widths = c(2.2, 2.4))
     
-    # Full layout: top row over bottom centered plot
-    p <- top_row / petal_titled + patchwork::plot_layout(heights = c(0.75, 0.2))
+    # Create empty spacer plots for whitespace and centering
+    spacer_vertical <- ggplot2::ggplot() + ggplot2::theme_void()
+    spacer_left <- ggplot2::ggplot() + ggplot2::theme_void()
+    spacer_right <- ggplot2::ggplot() + ggplot2::theme_void()
+    
+    # Create centered petal plot row with spacers on sides
+    petal_row <- spacer_left | petal_titled | spacer_right
+    petal_row <- petal_row + patchwork::plot_layout(widths = c(1, 2, 1))  # Center with 2:1:2 ratio
+    
+    # Full layout: top row, vertical spacer, then centered petal plot
+    p <- top_row / spacer_vertical / petal_row + 
+        patchwork::plot_layout(heights = c(0.6, 0.1, 0.3))
     return(p)
 }
 
