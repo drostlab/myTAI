@@ -1,1 +1,1 @@
-PKG_LIBS += -latomic
+PKG_LIBS = $(PKG_LIBS) -latomic
