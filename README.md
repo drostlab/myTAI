@@ -332,7 +332,7 @@ Workflow to load your own dataset:
 
 > <a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#mock-bulk-dataset-for-bulkphyloexpressionset">
 >   <picture>
->     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_phyex.png">
+>     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_phyex.png-darkmode">
 >     <source media="(prefers-color-scheme: light)" srcset="docs/articles/Figures/myTAI_phyex.png">
 >     <img src="docs/articles/Figures/myTAI_phyex.png" alt="PhyEx overview" align="center" style="max-height: 500px; max-width: 500px;" />
 >   </picture>
@@ -342,7 +342,7 @@ Workflow to load your own dataset:
 
 > <a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#what-if-the-dataset-contains-replicates">
 >   <picture>
->     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_phyex_group.png">
+>     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_phyex_group-darkmode.png">
 >     <source media="(prefers-color-scheme: light)" srcset="docs/articles/Figures/myTAI_phyex_group.png">
 >     <img src="docs/articles/Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" align="center" style="max-height: 500px; max-width: 500px;" />
 >   </picture>
@@ -354,7 +354,7 @@ From expression matrix
 
 > <a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#mock-single-cell-dataset-for-scphyloexpressionset">
 >   <picture>
->     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_scphyex_matrix.png">
+>     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_scphyex_matrix-darkmode.png">
 >     <source media="(prefers-color-scheme: light)" srcset="docs/articles/Figures/myTAI_scphyex_matrix.png">
 >     <img src="docs/articles/Figures/myTAI_scphyex.png" alt="scPhyEx overview" align="center" style="max-height: 500px; max-width: 500px;" />
 >   </picture>
@@ -364,7 +364,7 @@ Or directly from a seurat object:
 
 > <a href="https://drostlab.github.io/myTAI/articles/phylo-expression-object.html#mock-single-cell-dataset-for-scphyloexpressionset">
 >   <picture>
->     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_scphyex_seurat.png">
+>     <source media="(prefers-color-scheme: dark)" srcset="docs/articles/Figures/myTAI_scphyex_seurat-darkmode.png">
 >     <source media="(prefers-color-scheme: light)" srcset="docs/articles/Figures/myTAI_scphyex_seurat.png">
 >     <img src="docs/articles/Figures/myTAI_scphyex_seurat.png" alt="scPhyEx overview (seurat)" align="center" style="max-height: 500px; max-width: 500px;" />
 >   </picture>
