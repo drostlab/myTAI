@@ -66,7 +66,7 @@ We will mention the transcriptome age index (TAI) a lot. See [📚](phylostratig
 
 The necessary and sufficient information needed for creating a `BulkPhyloExpressionSet` (as well as a `ScPhyloExpressionSet`) object is:  
 (1) A matrix or data frame of gene expression values (genes x samples).  
-(2) A numerical value or factored string associated with each gene, typically gene age ranks or [`phylorank`](phylostratigraphy.html) for `TAI` (but also [`deciled dNdS values`](other_strata.html) for `TDI` or [`deciled tau values`](other_strata.html) for `TSI` etc.).
+(2) A numerical value or factored string associated with each gene, typically gene age ranks or [`phylorank`](phylostratigraphy.html) for `TAI` (but also [`deciled dNdS values`](other-strata.html) for `TDI` or [`deciled tau values`](other-strata.html) for `TSI` etc.).
 
 <img src="Figures/myTAI_phyex.png" 
      alt="PhyEx overview" 
@@ -138,14 +138,14 @@ column 3 onwards contain the expression data with the column titles being the de
 The example `example_phyex_set.df` is now formatted to meet the requirements for the `as_BulkPhyloExpressionSet()` function.
 
 ::: {.tip}
-The `as_BulkPhyloExpressionSet()` function will automatically detect the first column as the phylorank and the second column as the gene identifier. If your data is structured differently, you can reassign the columns accordingly using `dplyr::relocate()`.
+The `BulkPhyloExpressionSet_from_df()` function will automatically detect the first column as the phylorank and the second column as the gene identifier. If your data is structured differently, you can reassign the columns accordingly using `dplyr::relocate()`.
 :::
 
-Now, we can use the `as_BulkPhyloExpressionSet()` function to convert the correctly formatted input `data.frame` to a `BulkPhyloExpressionSet` object.
+Now, we can use the `BulkPhyloExpressionSet_from_df()` function to convert the correctly formatted input `data.frame` to a `BulkPhyloExpressionSet` object.
 
 ```{r warning=FALSE, message=FALSE}
 example_phyex_set.remake <- 
-    myTAI::as_BulkPhyloExpressionSet(
+    myTAI::BulkPhyloExpressionSet_from_df(
         example_phyex_set.df,
         name = "reconstituted phyex_set_old")
 ```
@@ -220,7 +220,7 @@ groups_example_phyex_set.df <- c(
 
 # we can add the group information using groups
 example_phyex_set.remake <- 
-    myTAI::as_BulkPhyloExpressionSet(
+    myTAI::BulkPhyloExpressionSet_from_df(
         example_phyex_set.df,
         groups = groups_example_phyex_set.df, # adding group information here
         name = "reconstituted phyex_set")
@@ -229,16 +229,19 @@ example_phyex_set.remake <-
 Done!
 
 ::: {.tip}
-Along with the `groups` parameter, you can also specify the `name`, `strata_labels` and other parameters to provide more descriptions for your `BulkPhyloExpressionSet` object. This is useful for plotting and visualisation purposes. Check this using `?` before the function (i.e. `?myTAI::as_BulkPhyloExpressionSet()`.
+Along with the `groups` parameter, you can also specify the `name`, `strata_labels` and other parameters to provide more descriptions for your `BulkPhyloExpressionSet` object. This is useful for plotting and visualisation purposes. Check this using `?` before the function (i.e. `?myTAI::as_BulkPhyloExpressionSet()`).
 :::
 
 ### Mock single-cell dataset for ScPhyloExpressionSet
 
 If you are interested in single cell RNA-seq data, the process is similar, but you will need to ensure that your data is structured correctly for single cell analysis, i.e. as a [`seurat object`](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html). 
 
-You can then use the `as_ScPhyloExpressionSet()` function with adjustments to the relevant metadata.
+You can then use the `ScPhyloExpressionSet_from_seurat()` or `ScPhyloExpressionSet_from_matrix` function with adjustments to the relevant metadata.
 
-<img src="Figures/myTAI_scphyex.png" 
+<img src="Figures/myTAI_scphyex_seurat.png" 
+     alt="scPhyEx overview" 
+     class="img-fluid d-block mx-auto" />
+<img src="Figures/myTAI_scphyex_matrix.png" 
      alt="scPhyEx overview" 
      class="img-fluid d-block mx-auto" />
 
@@ -275,7 +278,7 @@ pbmc_small <- CreateSeuratObject(counts = pbmc_raw)
 is(pbmc_small)
 ```
 
-Now, we can convert this Seurat object to a `ScPhyloExpressionSet` object using the `as_ScPhyloExpressionSet()` function.
+Now, we can convert this Seurat object to a `ScPhyloExpressionSet` object using the `ScPhyloExpressionSet_from_seurat()` function.
 
 The next part is a bit tricky, as you need to provide the phylorank information in a specific format with the same gene identifiers as that of `pbmc_small`.
 

@@ -87,8 +87,8 @@ RNA-seq data transformation (e.g. log2 transformation) can affect the
 results of the tests and the overall TAI (as well as TDI, TSI and
 analogous) profile. There has been a lively debate around this topic
 (see <a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1003476" class="external-link">Piasecka
-et al. (2013)</a> and <a href="https://academic.oup.com/gbe/article/10/9/2266/5076813" class="external-link">Liu &amp;
-Robinson-Rechavi (2018)</a> for more information).</p>
+et al. (2013)</a> and <a href="https://doi.org/10.1093/gbe/evy177" class="external-link">Liu
+&amp; Robinson-Rechavi (2018)</a> for more information).</p>
 <p>How can we use this to our advantage?</p>
 <p>The <code>myTAI</code> package provides a flexible framework to apply
 different transformations to the expression data in a
@@ -149,7 +149,7 @@ e.g. <code>conservation_test = stat_flatline_test</code>,
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf_stability_res</span></span></code></pre></div>
 <pre><code><span><span class="co">##         none         sqrt         log2         rank          vst         rlog </span></span>
-<span><span class="co">## 4.574457e-01 4.213330e-04 6.833749e-08 4.864634e-11 5.185768e-06 1.781328e-13</span></span></code></pre>
+<span><span class="co">## 4.498476e-01 4.963752e-04 8.768404e-08 1.950506e-11 5.770083e-06 3.274874e-12</span></span></code></pre>
 <p>Here, we can see that the p-values for the flat line test are all
 below 0.05 for all transformations. This is reassuring as to the
 stability of the TAI profile across transformations.</p>

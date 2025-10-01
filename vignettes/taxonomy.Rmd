@@ -129,7 +129,7 @@ taxonomy <- function(organism, db = "ncbi", output = "classification"){
 </details>
 
 The `taxonomy()` function can be used to classify genomes
-according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy (see [Introduction](Introduction.html) for details).
+according to phylogenetic classification into Phylostrata (Phylostratigraphy) or to retrieve species specific taxonomic information when performing Divergence Stratigraphy.
 
 For larger taxonomy queries it may be useful to create an NCBI Account and
 set up an [ENTREZ API KEY](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/).

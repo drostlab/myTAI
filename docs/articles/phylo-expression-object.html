@@ -167,8 +167,8 @@ is the evolutionary age of gene
 samples).<br>
 (2) A numerical value or factored string associated with each gene,
 typically gene age ranks or <a href="phylostratigraphy.html"><code>phylorank</code></a> for
-<code>TAI</code> (but also <a href="other_strata.html"><code>deciled dNdS values</code></a> for
-<code>TDI</code> or <a href="other_strata.html"><code>deciled tau values</code></a> for
+<code>TAI</code> (but also <a href="other-strata.html"><code>deciled dNdS values</code></a> for
+<code>TDI</code> or <a href="other-strata.html"><code>deciled tau values</code></a> for
 <code>TSI</code> etc.).</p>
 <p><img src="Figures/myTAI_phyex.png" alt="PhyEx overview" class="img-fluid d-block mx-auto"></p>
 <div class="section level3">
@@ -273,18 +273,19 @@ being the developmental stages or the experimental conditions.</p>
 meet the requirements for the <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code>
 function.</p>
 <div class="tip">
-<p>The <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code> function will
+<p>The <code><a href="../reference/BulkPhyloExpressionSet_from_df.html">BulkPhyloExpressionSet_from_df()</a></code> function will
 automatically detect the first column as the phylorank and the second
 column as the gene identifier. If your data is structured differently,
 you can reassign the columns accordingly using
 <code><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">dplyr::relocate()</a></code>.</p>
 </div>
-<p>Now, we can use the <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code> function
-to convert the correctly formatted input <code>data.frame</code> to a
-<code>BulkPhyloExpressionSet</code> object.</p>
+<p>Now, we can use the <code><a href="../reference/BulkPhyloExpressionSet_from_df.html">BulkPhyloExpressionSet_from_df()</a></code>
+function to convert the correctly formatted input
+<code>data.frame</code> to a <code>BulkPhyloExpressionSet</code>
+object.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet</a></span><span class="op">(</span></span>
+<span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/BulkPhyloExpressionSet_from_df.html">BulkPhyloExpressionSet_from_df</a></span><span class="op">(</span></span>
 <span>        <span class="va">example_phyex_set.df</span>,</span>
 <span>        name <span class="op">=</span> <span class="st">"reconstituted phyex_set_old"</span><span class="op">)</span></span></code></pre></div>
 <p>There you have it, a <code>BulkPhyloExpressionSet</code> object!</p>
@@ -361,7 +362,7 @@ Show output
 <span></span>
 <span><span class="co"># we can add the group information using groups</span></span>
 <span><span class="va">example_phyex_set.remake</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet</a></span><span class="op">(</span></span>
+<span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/BulkPhyloExpressionSet_from_df.html">BulkPhyloExpressionSet_from_df</a></span><span class="op">(</span></span>
 <span>        <span class="va">example_phyex_set.df</span>,</span>
 <span>        groups <span class="op">=</span> <span class="va">groups_example_phyex_set.df</span>, <span class="co"># adding group information here</span></span>
 <span>        name <span class="op">=</span> <span class="st">"reconstituted phyex_set"</span><span class="op">)</span></span></code></pre></div>
@@ -372,7 +373,7 @@ the <code>name</code>, <code>strata_labels</code> and other parameters
 to provide more descriptions for your
 <code>BulkPhyloExpressionSet</code> object. This is useful for plotting
 and visualisation purposes. Check this using <code>?</code> before the
-function (i.e. <code>?myTAI::as_BulkPhyloExpressionSet()</code>.</p>
+function (i.e. <code>?myTAI::as_BulkPhyloExpressionSet()</code>).</p>
 </div>
 </div>
 </div>
@@ -382,9 +383,10 @@ function (i.e. <code>?myTAI::as_BulkPhyloExpressionSet()</code>.</p>
 <p>If you are interested in single cell RNA-seq data, the process is
 similar, but you will need to ensure that your data is structured
 correctly for single cell analysis, i.e. as a <a href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html" class="external-link"><code>seurat object</code></a>.</p>
-<p>You can then use the <code>as_ScPhyloExpressionSet()</code> function
-with adjustments to the relevant metadata.</p>
-<p><img src="Figures/myTAI_scphyex.png" alt="scPhyEx overview" class="img-fluid d-block mx-auto"></p>
+<p>You can then use the <code><a href="../reference/ScPhyloExpressionSet_from_seurat.html">ScPhyloExpressionSet_from_seurat()</a></code>
+or <code>ScPhyloExpressionSet_from_matrix</code> function with
+adjustments to the relevant metadata.</p>
+<p><img src="Figures/myTAI_scphyex_seurat.png" alt="scPhyEx overview" class="img-fluid d-block mx-auto"><img src="Figures/myTAI_scphyex_matrix.png" alt="scPhyEx overview" class="img-fluid d-block mx-auto"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the relevant packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -551,7 +553,7 @@ Show output
 <pre><code><span><span class="co">## [1] "Seurat"</span></span></code></pre>
 <p>Now, we can convert this Seurat object to a
 <code>ScPhyloExpressionSet</code> object using the
-<code>as_ScPhyloExpressionSet()</code> function.</p>
+<code><a href="../reference/ScPhyloExpressionSet_from_seurat.html">ScPhyloExpressionSet_from_seurat()</a></code> function.</p>
 <p>The next part is a bit tricky, as you need to provide the phylorank
 information in a specific format with the same gene identifiers as that
 of <code>pbmc_small</code>.</p>
@@ -606,8 +608,7 @@ object before integrating this to the <code>myTAIv2</code> workflow.</p>
 <span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
 <span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
-<pre><code><span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="phylo-expression-object_files/figure-html/unnamed-chunk-31-1.png" alt="plot signature function output for single cell" width="576" style="display: block; margin: auto;"></p>
 <div class="important">
 <p>This example used an example Seurat object with a mock phylorank

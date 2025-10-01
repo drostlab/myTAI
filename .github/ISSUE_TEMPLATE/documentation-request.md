@@ -14,7 +14,7 @@ A clear and concise description of what the problem is. E.g. I'm always frustrat
 A clear and concise description of what you want to happen.
 
 **Where would you like the documentation to be updated (if applicable)? Please indicate**
-[ ] [Articles](https://drostlab.github.io/myTAI/articles/Introduction.html)
+[ ] [Articles](https://drostlab.github.io/myTAI/articles/myTAI.html)
 [ ] [Function](https://drostlab.github.io/myTAI/reference/index.html)
 [ ] Function (in R)
 
