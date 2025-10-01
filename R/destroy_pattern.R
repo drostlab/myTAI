@@ -85,6 +85,20 @@ destroy_pattern <- function(phyex_set,
         genes_path <- file.path(analysis_dir, "genes.txt")
         writeLines(res$removed_genes, genes_path)
         
+        # If extended_analysis is TRUE and runs are available, save individual run gene files
+        if (extended_analysis && "runs" %in% names(res)) {
+            runs_dir <- file.path(analysis_dir, "individual_runs")
+            if (!dir.exists(runs_dir)) {
+                dir.create(runs_dir, recursive = TRUE)
+            }
+            
+            for (i in seq_along(res$runs)) {
+                run_genes_path <- file.path(runs_dir, paste0("run_", i, "_genes.txt"))
+                writeLines(res$runs[[i]], run_genes_path)
+            }
+            message(sprintf("Saved individual run gene files to %s", runs_dir))
+        }
+        
         save_gatai_results_pdf(phyex_set = phyex_set,
                                gatai_result = res,
                                analysis_dir = analysis_dir,
@@ -324,6 +338,34 @@ plot_gatai_results <- function(phyex_set,
             theme_minimal(base_size = 2) + 
             theme(plot.title = element_text(size = 6),
                   strip.text = element_text(size = 4))
+        
+        # 8. Individual runs signature comparison plot
+        message("Creating individual runs signature comparison plot...")
+        
+        # Create sets for each individual run
+        run_sets <- lapply(seq_along(gatai_result$runs), function(i) {
+            run_genes <- gatai_result$runs[[i]]
+            remove_genes(phyex_set, run_genes, new_name = paste("Run", i, "removed"))
+        })
+        
+        # Combine original, GATAI consensus, and individual runs
+        all_sets <- c(list(phyex_set, gatai_set), run_sets)
+        
+        # Create colour palette: blue for original, red for GATAI, light colours for runs
+        n_runs <- length(gatai_result$runs)
+        run_colours <- rep("lightgray", n_runs)
+        all_colours <- c("blue", "red", run_colours)
+        
+        result_list$individual_runs_signature <- plot_signature_multiple(
+            all_sets,
+            show_p_val = FALSE,  # Too many p-values would clutter the plot
+            conservation_test = conservation_test,
+            colours = all_colours
+        ) +
+            ggtitle(paste("Signature Comparison: Original vs GATAI Consensus vs Individual Runs (", 
+                         n_runs, "runs)")) +
+            theme(legend.position = "bottom") +
+            guides(colour = guide_legend(nrow = 2))
     }
 
     
@@ -360,6 +402,7 @@ save_gatai_results_pdf <- function(phyex_set,
     # Generate plots using plot_gatai_results
     plots <- plot_gatai_results(phyex_set, gatai_result, ...)
     removed_genes <- gatai_result$removed_genes
+    
     grDevices::pdf(pdf_path, width = 10, height = 8)
     
     # Page 1: Removed gene IDs - handle long gene lists better
