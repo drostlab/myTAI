@@ -164,8 +164,10 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
         p <- p +
             annotate("text",
                 label = label, parse = TRUE,
-                x = phyex_set@num_identities * 0.7, 
-                y = mean(phyex_set@TXI_sample) + 0.1,
+                x = 1, 
+                y = Inf,
+                hjust = 0,
+                vjust = 1,
                 size = 6 
             )
     }
@@ -302,9 +304,10 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
         p <- p +
             annotate("text",
                 label = label, parse = TRUE,
-                x = length(unique(df_samples$Primary)) * 0.7, 
-                y = mean(df_samples$TXI, na.rm = TRUE) + 0.05,
-                size = 4
+                x = 1, 
+                y = Inf,
+                hjust = 0, vjust = 1,
+                size = 6
             )
     }
     

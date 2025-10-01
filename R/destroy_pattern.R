@@ -145,7 +145,7 @@ plot_gatai_results <- function(phyex_set,
     removed_genes <- gatai_result$removed_genes   
     n_top_genes <- length(removed_genes)
 
-    # 1. Plot TAI signature before/after GATAI
+    # 1.1 Plot TAI signature before/after GATAI
     gatai_set <- remove_genes(phyex_set, removed_genes, new_name = paste(phyex_set@name, "- GATAI removed"))
     q <- 1.0 - n_top_genes/phyex_set@num_genes
     top_var_genes <- genes_top_variance(phyex_set, p = q)
@@ -188,6 +188,13 @@ plot_gatai_results <- function(phyex_set,
             ))
     }
 
+    # 1.2 Combined signature plot (always include as additional plot)
+    signature_combined <- plot_signature_multiple(c(phyex_set, gatai_set), 
+                                                 show_p_val = TRUE, 
+                                                 conservation_test = conservation_test, 
+                                                 colours = c("blue", "red")) +
+        ggtitle(paste("Original vs GATAI-removed (", length(removed_genes), "genes)"))
+
 
     # 2. Plot removed gene profiles and heatmap
     heatmap_plot <- plot_gene_heatmap(phyex_set, genes=removed_genes, cluster_rows=TRUE, show_gene_ids=TRUE) +
@@ -205,7 +212,18 @@ plot_gatai_results <- function(phyex_set,
     # 3. Mean-variance plot highlighting GATAI-removed genes
     mean_var_plot <- plot_mean_var(phyex_set, highlight_genes = removed_genes) +
         ggtitle(paste("Mean-Variance Plot with GATAI-removed genes highlighted (", length(removed_genes), "genes)"))
-    # 4. Distribution of all genes by age (raw counts) and GATAI-removed genes (log obs/exp)
+    
+    # 4. Plot contribution for original and GATAI sets side by side
+    contrib_original <- plot_contribution(phyex_set) +
+        ggtitle("Gene Contribution: Original Set") +
+        theme(legend.position = "none")
+
+    contrib_gatai <- plot_contribution(gatai_set) +
+        ggtitle("Gene Contribution: GATAI Set")
+
+    contribution_plots <- contrib_original | contrib_gatai
+
+    # 5. Distribution of all genes by age (raw counts) and GATAI-removed genes (log obs/exp)
     strata_plot_all <- plot_distribution_strata(phyex_set@strata,
                                                 as_log_obs_exp = FALSE) +
         ggtitle("Phylostrata Distribution: All Genes")
@@ -217,7 +235,7 @@ plot_gatai_results <- function(phyex_set,
 
     strata_plot <- strata_plot_all / strata_plot_removed
     
-    # 5. Compare p values
+    # 6. Compare p values (with individual runs if available)
     original_test <- conservation_test(phyex_set, plot_result = FALSE)
     gatai_test <- conservation_test(gatai_set, plot_result = FALSE)
     
@@ -234,15 +252,41 @@ plot_gatai_results <- function(phyex_set,
         color = c("blue", "red", "purple", "darkgray")
     )
 
+    # Add individual runs if available
+    if ("runs" %in% names(gatai_result)) {
+        run_tests <- lapply(gatai_result$runs, function(run_genes) {
+            run_set <- remove_genes(phyex_set, run_genes)
+            conservation_test(run_set, plot_result = FALSE)
+        })
+        
+        run_stats <- data.frame(
+            stat = sapply(run_tests, function(t) t@test_stat),
+            p_value = sapply(run_tests, function(t) t@p_value)
+        )
+        
+        # Add run statistics to test_stats for visualization
+        run_labels <- paste("Run", seq_len(nrow(run_stats)))
+        additional_stats <- data.frame(
+            label = run_labels,
+            stat = run_stats$stat,
+            p_value = run_stats$p_value,
+            color = rep("lightgray", nrow(run_stats))
+        )
+        
+        test_stats <- rbind(test_stats, additional_stats)
+    }
+
     null_dist_plot <- ggplot(data.frame(x = null_sample), aes(x = x)) +
         geom_histogram(aes(y = after_stat(density)), bins = 100, fill = "gray67", alpha = 0.7, colour = "gray66") +
         stat_function(fun = original_test@fitting_dist@pdf, args = original_test@params, colour = "gray40") +
         geom_vline(data = test_stats, aes(xintercept = stat, colour = label), linewidth = 1) +
         scale_colour_manual(name = NULL, values = c(
             "Original" = "blue",
-            "GATAI removed" = "red",
+            "GATAI removed" = "red", 
             "Top variance removed" = "purple",
-            "Random genes removed" = "darkgray"
+            "Random genes removed" = "darkgray",
+            setNames(rep("lightgray", sum(grepl("^Run", test_stats$label))), 
+                     test_stats$label[grepl("^Run", test_stats$label)])
         )) +
         labs(x = "Score", y = "Density",
              title = "Conservation Test Comparison",
@@ -250,7 +294,7 @@ plot_gatai_results <- function(phyex_set,
         annotate(
             "text",
             x = test_stats$stat - 0.05 * diff(range(null_sample)),
-            y = max(density(null_sample)$y) * c(0.9, 0.8, 0.7, 0.6),
+            y = max(density(null_sample)$y) * seq(0.9, 0.1, length.out = nrow(test_stats)),
             label = sapply(test_stats$p_value, function(p) formatC(p, format = "e", digits = 2)),
             colour = test_stats$color,
             hjust = 1,
@@ -260,7 +304,9 @@ plot_gatai_results <- function(phyex_set,
 
     result_list <- list(
         signature_plots = signature_plots,
+        signature_combined = signature_combined,
         mean_var_plot = mean_var_plot,
+        contribution_plots = contribution_plots,
         strata_plot = strata_plot,
         heatmap_plot = heatmap_plot,
         profiles_plot = profiles_plot,
@@ -269,7 +315,7 @@ plot_gatai_results <- function(phyex_set,
         null_dist_plot = null_dist_plot
     )
 
-    # 6. (optional) Convergence plots
+    # 7. (optional) Convergence plots
 
     # check if runs is included in the result
     if ("runs" %in% names(gatai_result)) {
