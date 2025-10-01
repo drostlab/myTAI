@@ -1,1 +1,1 @@
-PKG_LIBS = $(PKG_LIBS) -latomic
+PKG_LIBS = -latomic $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
