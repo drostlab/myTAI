@@ -49,6 +49,7 @@ destroy_pattern <- function(phyex_set,
                          runs_threshold = runs_threshold, 
                          max_generations = max_generations,
                          seed = seed,
+                         objective = "variance",
                          ...)
     res <- list(removed_genes=gatai_res$common_removed_genes)
     if (extended_analysis)
