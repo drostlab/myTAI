@@ -2,7 +2,7 @@
 
 UNAME=$(uname -s)
 
-PKG_LIBS="$(R CMD config LAPACK_LIBS) $(R CMD config BLAS_LIBS) $(R CMD config FLIBS) -pthread"
+PKG_LIBS="$(R CMD config LAPACK_LIBS) $(R CMD config BLAS_LIBS) -pthread"
 
 if [ "$UNAME" = "Linux" ]; then
   PKG_LIBS="$PKG_LIBS -latomic"
