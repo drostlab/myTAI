@@ -39,12 +39,13 @@ destroy_pattern <- function(phyex_set,
                             min_pval = 0.05,
                             always_return_genes = FALSE,
                             ...) {
-    if (!requireNamespace("gataiR", quietly = TRUE)) {
+    pkg <- "gataiR"
+    if (!requireNamespace(pkg, quietly = TRUE)) {
         stop("Package 'gataiR' must be installed to use this function.")
     }
     check_PhyloExpressionSet(phyex_set)
-    
-    gatai_res <- gataiR::gatai(as_data_frame(collapse(phyex_set)), 
+    gatai <- getExportedValue("gataiR", "gatai")
+    gatai_res <- gatai(as_data_frame(collapse(phyex_set)), 
                          num_runs = num_runs,
                          runs_threshold = runs_threshold, 
                          max_generations = max_generations,
