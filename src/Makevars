@@ -1,1 +1,7 @@
-PKG_LIBS = -latomic $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+PKG_CXXFLAGS = -pthread
+PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -pthread
+
+UNAME := $(shell uname -s)
+ifeq ($(UNAME),Linux)
+  PKG_LIBS += -latomic
+endif
