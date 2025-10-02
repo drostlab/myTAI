@@ -1,0 +1,14 @@
+#!/bin/sh
+
+UNAME=$(uname -s)
+
+PKG_LIBS="$(R CMD config LAPACK_LIBS) $(R CMD config BLAS_LIBS) $(R CMD config FLIBS) -pthread"
+
+if [ "$UNAME" = "Linux" ]; then
+  PKG_LIBS="$PKG_LIBS -latomic"
+fi
+
+cat <<EOF > src/Makevars
+PKG_CXXFLAGS = -pthread
+PKG_LIBS = $PKG_LIBS
+EOF
