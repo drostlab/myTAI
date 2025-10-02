@@ -1,14 +1,15 @@
 #!/bin/sh
+# Minimal configure: add -latomic only on Linux
 
 UNAME=$(uname -s)
 
-PKG_LIBS="$(R CMD config LAPACK_LIBS) $(R CMD config BLAS_LIBS) -pthread"
+PKG_LIBS=""
 
 if [ "$UNAME" = "Linux" ]; then
-  PKG_LIBS="$PKG_LIBS -latomic"
+    PKG_LIBS="-latomic"
 fi
 
+mkdir -p src
 cat <<EOF > src/Makevars
-PKG_CXXFLAGS = -pthread
 PKG_LIBS = $PKG_LIBS
 EOF
