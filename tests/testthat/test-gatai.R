@@ -46,3 +46,20 @@ test_that("destroy_pattern handles empty output from gataiR", {
     res <- destroy_pattern(example_phyex_set_old, analysis_dir="gatai", max_generations = 5, num_runs = 3)
     expect_equal(length(res$removed_genes), 0)
 })
+
+test_that("gatai_animate_destruction creates animation", {
+    # Skip if required packages are not available
+    skip_if_not_installed("gataiR")
+    skip_if_not_installed("gganimate")
+    
+    # Test basic animation creation (without saving)
+    anim <- gatai_animate_destruction(example_phyex_set_old, 
+                                      max_generations = 50,
+                                      population_size = 20)
+    
+    # Check that an animation object is returned
+    expect_s3_class(anim, "gganim")
+    
+    # Check animation properties
+    expect_type(anim, "list")
+})

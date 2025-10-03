@@ -67,6 +67,7 @@ Suggests:
     uwot,
     decor,
     DESeq2,
+    gganimate,
     taxize
 LinkingTo: 
     RcppArmadillo,

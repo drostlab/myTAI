@@ -457,3 +457,228 @@ save_gatai_results_pdf <- function(phyex_set,
     message("Saved GATAI analysis PDF to: ", pdf_path)
     invisible(pdf_path)
 }
+
+#' @title Animate GATAI Destruction Process
+#' @description Create an animation showing how the transcriptomic signature changes
+#' during the GATAI gene removal process across generations.
+#'
+#' @param phyex_set A PhyloExpressionSet object containing the original gene expression data.
+#' @param save_file Optional file path to save the animation (default: NULL, returns animation object).
+#' @param fps Frames per second for the animation (default: 20).
+#' @param width Width of the animation in pixels (default: 1000).
+#' @param height Height of the animation in pixels (default: 800).
+#' @param ... Additional arguments passed to \code{gataiR::gatai}.
+#'
+#' @return If save_file is NULL, returns a gganimate animation object. 
+#'         If save_file is specified, saves the animation and returns the file path invisibly.
+#'
+#' @details
+#' This function runs GATAI for a single run while saving intermediate TAI values at each generation.
+#' It then creates an animated plot showing how the transcriptomic signature evolves as genes are
+#' progressively removed. The animation shows:
+#' - The original signature (generation 0)
+#' - Progressive changes through each generation
+#' - Final signature after convergence
+#'
+#' The intermediate file format contains generation numbers in the first column and TAI values
+#' for each developmental stage in subsequent columns.
+#'
+#' @examples
+#' # Create animation and return object
+#' # anim <- gatai_animate_destruction(phyex_set)
+#' # anim  # Display animation
+#' 
+#' # Save animation to file
+#' # gatai_animate_destruction(phyex_set, save_file = "gatai_destruction.gif")
+#'
+#' @import ggplot2
+#' @importFrom utils read.table
+#' @export
+gatai_animate_destruction <- function(phyex_set,
+                                      save_file = NULL,
+                                      fps = 10,
+                                      width = 1000,
+                                      height = 800,
+                                      ...) {
+    
+    # Check required packages
+    if (!requireNamespace("gganimate", quietly = TRUE)) {
+        stop("Package 'gganimate' must be installed to use this function. Install with: install.packages('gganimate')")
+    }
+    
+    pkg <- "gataiR"
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+        stop("Package 'gataiR' must be installed to use this function.")
+    }
+    
+    check_PhyloExpressionSet(phyex_set)
+    
+    # Run GATAI with intermediate TAI saving
+    message("Running GATAI with intermediate TAI tracking...")
+    gatai <- getExportedValue("gataiR", "gatai")
+    intermediate_file <- "gatai_intermediate_tmp"
+    gatai_res <- gatai(
+        as_data_frame(collapse(phyex_set)),
+        num_runs = 1,
+        save_intermediate_TAI = intermediate_file,
+        objective = "variance",
+        ...
+    )
+    
+    # Read the intermediate TAI file
+    tai_file <- paste0(intermediate_file, ".tsv")
+    if (!file.exists(tai_file)) {
+        stop(sprintf("Intermediate TAI file '%s' was not created. Check gataiR::gatai parameters.", tai_file))
+    }
+    
+    message(sprintf("Reading intermediate TAI values from '%s'...", tai_file))
+    tai_data <- utils::read.table(tai_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+    
+    # Clean up intermediate file
+    unlink(tai_file)
+    
+    # Prepare data for animation
+    # Expected columns: Generation, Genes_Removed, Log_Pvalue, Variance, stage_names...
+    generation_col <- names(tai_data)[1]  # First column is generation
+    genes_removed_col <- names(tai_data)[2]  # Second column is genes removed
+    log_pvalue_col <- names(tai_data)[3]  # Third column is log p-value
+    stage_cols <- names(tai_data)[5:ncol(tai_data)]  # Stage columns start from column 5
+    
+    # Reshape data for plotting
+    plot_data <- tai_data |>
+        tidyr::pivot_longer(
+            cols = all_of(stage_cols),
+            names_to = phyex_set@identities_label,
+            values_to = "TAI"
+        ) |>
+        dplyr::mutate(
+            Generation = .data[[generation_col]],
+            Genes_Removed = .data[[genes_removed_col]],
+            Log_Pvalue = .data[[log_pvalue_col]],
+            P_Value = exp(.data[[log_pvalue_col]]),  # Convert natural log p-value back to p-value
+            !!phyex_set@identities_label := factor(.data[[phyex_set@identities_label]], levels = stage_cols)
+        )
+    
+    # Create combined dataset where original data is repeated for each generation
+    original_data <- plot_data |>
+        dplyr::filter(Generation == 0)
+    
+    # Get original p-value (from generation 0)
+    original_p_value <- unique(original_data$P_Value)[1]
+    
+    # Get all generations from GATAI data (excluding 0)
+    gatai_generations <- unique(plot_data$Generation[plot_data$Generation > 0])
+    
+    # Repeat original data for each GATAI generation to keep it static
+    static_original <- do.call(rbind, lapply(gatai_generations, function(gen) {
+        original_data |>
+            dplyr::mutate(
+                Generation = gen,
+                Data_Type = "Original"
+            )
+    }))
+    
+    # Add data type to GATAI data
+    gatai_data <- plot_data |>
+        dplyr::filter(Generation > 0) |>
+        dplyr::mutate(Data_Type = "GATAI")
+    
+    # Combine for animation
+    combined_data <- rbind(static_original, gatai_data)
+    
+    # Create label data for each generation (for clean text rendering)
+    gatai_labels <- gatai_data |>
+        dplyr::group_by(Generation) |>
+        dplyr::summarise(
+            Genes_Removed = first(Genes_Removed),
+            P_Value = first(P_Value),
+            .groups = "drop"
+        ) |>
+        dplyr::mutate(
+            label_text = paste0("GATAI: p = ", formatC(P_Value, format = 'g', digits = 3), 
+                               " (genes removed = ", Genes_Removed, ")")
+        )
+    
+    # Get original TAI range for consistent y-axis
+    y_range <- range(plot_data$TAI, na.rm = TRUE)
+    y_buffer <- diff(y_range) * 0.1
+    y_limits <- c(y_range[1] - y_buffer, y_range[2] + y_buffer)
+    
+    # Create the animated plot
+    message("Creating animation...")
+    
+    p <- ggplot(combined_data, aes(x = .data[[phyex_set@identities_label]], y = TAI)) +
+        # Blue (original) layers first - with alpha and black outline
+        geom_line(data = subset(combined_data, Data_Type == "Original"),
+                  aes(group = Data_Type), colour = "black", lwd = 4, lineend = "round", alpha = 0.7) +
+        geom_line(data = subset(combined_data, Data_Type == "Original"),
+                  aes(group = Data_Type), colour = "blue", lwd = 2.5, lineend = "round", alpha = 0.7) +
+        geom_point(data = subset(combined_data, Data_Type == "Original"),
+                   size = 3, shape = 21, colour = "black", stroke = 0.8, fill = "lightblue", alpha = 0.7) +
+        
+        # Red (GATAI) layers on top - full opacity
+        geom_line(data = subset(combined_data, Data_Type == "GATAI"),
+                  aes(group = Data_Type), colour = "black", lwd = 4, lineend = "round") +
+        geom_line(data = subset(combined_data, Data_Type == "GATAI"),
+                  aes(group = Data_Type), colour = "red", lwd = 2.5, lineend = "round") +
+        geom_point(data = subset(combined_data, Data_Type == "GATAI"),
+                   size = 3, shape = 21, colour = "black", stroke = 0.8, fill = "white") +
+        
+        # Add original p-value annotation (static)
+        annotate("text", x = 1, y = y_limits[2] - y_buffer * 0.3, 
+                 label = paste0("Original: p = ", formatC(original_p_value, format = 'g', digits = 3)),
+                 colour = "blue", size = 10, hjust = 0, alpha = 0.9) +
+        
+        # Add dynamic GATAI information using annotate for crisp text
+        geom_text(data = gatai_labels,
+                  aes(x = 1, y = y_limits[2] - y_buffer * 1.5, label = label_text),
+                  colour = "red", size = 10, hjust = 0, alpha = 0.9,
+                  family = "sans", fontface = "plain") +
+        
+        ylim(y_limits) +
+        labs(
+            x = phyex_set@identities_label,
+            y = phyex_set@index_full_name,
+            title = paste("GATAI Destruction Process:", phyex_set@name),
+            subtitle = "Generation: {closest_state}",
+            caption = "Blue: Original | Red: GATAI"
+        ) +
+        theme_minimal() +
+        theme(
+            axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 18),
+            axis.text.y = element_text(size = 18),
+            axis.title.x = element_text(size = 20),
+            axis.title.y = element_text(size = 20),
+            plot.title = element_text(size = 22, face = "bold"),
+            plot.subtitle = element_text(size = 20),
+            plot.caption = element_text(size = 20, hjust = 0.5)
+        ) +
+        gganimate::transition_states(
+            Generation,
+            transition_length = 1,
+            state_length = 2
+        ) +
+        gganimate::ease_aes("linear")
+    
+    # Render animation
+    message("Rendering animation...")
+    anim <- gganimate::animate(
+        p,
+        nframes = length(unique(combined_data$Generation)),
+        fps = fps,
+        width = width,
+        height = height,
+        renderer = gganimate::gifski_renderer(loop = TRUE)
+    )
+    
+    # Save or return animation
+    if (!is.null(save_file)) {
+        message(sprintf("Saving animation to '%s'...", save_file))
+        gganimate::anim_save(save_file, anim)
+        message("Animation saved successfully!")
+        invisible(save_file)
+    } else {
+        message("Animation created. Use print() or display the returned object to view.")
+        return(anim)
+    }
+}
