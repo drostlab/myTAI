@@ -595,13 +595,13 @@ gatai_animate_destruction <- function(phyex_set,
             .groups = "drop"
         ) |>
         dplyr::mutate(
-            label_text = paste0("GATAI: p = ", formatC(P_Value, format = 'g', digits = 3), 
-                               " (genes removed = ", Genes_Removed, ")")
+            label_text = paste0("GATAI~", sapply(P_Value, exp_p), 
+                               "~(genes~removed:", Genes_Removed, ")")
         )
     
     # Get original TAI range for consistent y-axis
     y_range <- range(plot_data$TAI, na.rm = TRUE)
-    y_buffer <- diff(y_range) * 0.1
+    y_buffer <- diff(y_range) * 0.7
     y_limits <- c(y_range[1] - y_buffer, y_range[2] + y_buffer)
     
     # Create the animated plot
@@ -626,14 +626,14 @@ gatai_animate_destruction <- function(phyex_set,
         
         # Add original p-value annotation (static)
         annotate("text", x = 1, y = y_limits[2] - y_buffer * 0.3, 
-                 label = paste0("Original: p = ", formatC(original_p_value, format = 'g', digits = 3)),
+                 label = paste0("Original~", exp_p(original_p_value)), parse = TRUE,
                  colour = "blue", size = 10, hjust = 0, alpha = 0.9) +
         
         # Add dynamic GATAI information using annotate for crisp text
         geom_text(data = gatai_labels,
-                  aes(x = 1, y = y_limits[2] - y_buffer * 1.5, label = label_text),
+                  aes(x = 1, y = y_limits[2] - y_buffer * 0.6, label = label_text),
                   colour = "red", size = 10, hjust = 0, alpha = 0.9,
-                  family = "sans", fontface = "plain") +
+                  family = "sans", fontface = "plain", parse = TRUE) +
         
         ylim(y_limits) +
         labs(
