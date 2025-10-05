@@ -23,7 +23,7 @@ This function retrieves category information
 from NCBI Taxonomy and is able to filter kingdom specific taxids.
 }
 \examples{
-\dontshow{if (FALSE ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE ) withAutoprint(\{ # examplesIf}
 \dontrun{
 # download categories.dmp file to current working directory 
 # and filter for 'Archea' taxids

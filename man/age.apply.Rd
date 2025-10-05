@@ -34,7 +34,7 @@ In case you use an anonymous function you could use \code{function(x) apply(x , 
 developmental stage s.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
  
  # source the example dataset
  data(PhyloExpressionSetExample)
