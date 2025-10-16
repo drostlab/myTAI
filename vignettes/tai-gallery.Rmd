@@ -197,7 +197,7 @@ myTAI::plot_gene_space(example_phyex_set,colour_by = "strata")
 myTAI::plot_sample_space(example_phyex_set) | myTAI::plot_sample_space(example_phyex_set, colour_by = "TXI")
 ```
 
-```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_sample_space function output by TXI", dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=4, fig.width=6, fig.alt="plot_sample_space function output by TXI", dev.args = list(bg = 'transparent'), fig.align='center', eval = requireNamespace("uwot", quietly = TRUE)}
 # we can even do a UMAP
 myTAI::plot_sample_space(example_phyex_set, method = "UMAP")
 ```
