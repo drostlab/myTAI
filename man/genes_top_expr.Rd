@@ -32,12 +32,12 @@ or custom functions for other metrics.
 }
 \examples{
 # Select top 1\% most expressed genes by mean
-# high_expr_genes <- genes_top_expr(phyex_set, rowMeans, p = 0.99)
+high_expr_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), p = 0.99)
 
 # Select top 5\% most variable genes
-# high_var_genes <- genes_top_expr(phyex_set, rowVars, p = 0.95)
+high_var_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, var), p = 0.95)
 
 # Select top genes by median expression
-# high_median_genes <- genes_top_expr(phyex_set, function(x) apply(x, 1, median), p = 0.9)
+high_median_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, median), p = 0.9)
 
 }

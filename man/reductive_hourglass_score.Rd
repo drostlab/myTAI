@@ -26,11 +26,8 @@ The score is computed as the minimum of:
 
 Higher scores indicate stronger reductive hourglass patterns (mid stages
 dominated by older genes).
-}
-\examples{
 # Compute reductive hourglass score
 # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 # score <- reductive_hourglass_score(txi_values, modules)
-
 }
 \keyword{internal}

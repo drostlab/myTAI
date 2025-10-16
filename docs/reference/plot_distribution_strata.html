@@ -9,7 +9,7 @@ with options for showing observed vs. expected ratios."><meta property="og:image
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,12 +91,13 @@ enrichment or depletion of specific strata in gene sets.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Plot raw gene counts by strata</span></span></span>
-<span class="r-in"><span><span class="co"># p1 &lt;- plot_distribution_strata(phyex_set@strata)</span></span></span>
+<span class="r-in"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">plot_distribution_strata</span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot observed vs expected ratios for selected genes</span></span></span>
-<span class="r-in"><span><span class="co"># p2 &lt;- plot_distribution_strata(phyex_set@strata, </span></span></span>
-<span class="r-in"><span><span class="co">#                                selected_gene_ids = my_genes,</span></span></span>
-<span class="r-in"><span><span class="co">#                                as_log_obs_exp = TRUE)</span></span></span>
+<span class="r-in"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">plot_distribution_strata</span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span>, </span></span>
+<span class="r-in"><span>                               selected_gene_ids <span class="op">=</span> <span class="va">example_phyex_set</span><span class="op">@</span><span class="va">gene_ids</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>                               as_log_obs_exp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Ignoring unknown parameters: `size`</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -105,7 +106,7 @@ enrichment or depletion of specific strata in gene sets.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Stefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">

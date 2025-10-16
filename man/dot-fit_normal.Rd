@@ -15,9 +15,8 @@ List with mean and sd parameters
 \description{
 Fit normal distribution parameters using method of moments.
 }
-\examples{
+\details{
 # Fit normal distribution
 # params <- .fit_normal(data_vector)
-
 }
 \keyword{internal}

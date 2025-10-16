@@ -38,6 +38,9 @@ PhyloExpressionSetBase(
 
 \item{.null_conservation_txis}{Precomputed null conservation TXI values (default: NULL)}
 }
+\value{
+A PhyloExpressionSetBase object
+}
 \description{
 Abstract S7 base class for storing and manipulating phylotranscriptomic expression data.
 This class provides the common interface for both bulk and single-cell phylotranscriptomic data.

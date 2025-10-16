@@ -23,6 +23,9 @@ plot_distribution_expression(
 
 \item{seed}{Seed for reproducible color selection.}
 }
+\value{
+A ggplot2 object showing expression levels distributions across identities
+}
 \description{
 \code{plot_distribution_expression} generates plots that help to compare the distribution
 of expression levels through various developmental stages or cell types, highlighting each stage with

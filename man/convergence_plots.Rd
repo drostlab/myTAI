@@ -28,10 +28,7 @@ converge across GATAI runs for different threshold values.
 This function analyzes how consensus gene sets and their statistical
 significance change as more GATAI runs are included in the analysis.
 It uses cached null distributions for efficient p-value calculation.
-}
-\examples{
 # Create convergence plots
 # conv_plots <- convergence_plots(phyex_set, gatai_runs, ps = c(0.25, 0.5, 0.75))
-
 }
 \keyword{internal}

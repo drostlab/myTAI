@@ -33,10 +33,3 @@ A BulkPhyloExpressionSet object
 Convert a data frame with phylostratum, gene ID, and expression data 
 into a BulkPhyloExpressionSet object.
 }
-\examples{
-# Convert data frame to BulkPhyloExpressionSet
-# bulk_set <- BulkPhyloExpressionSet_from_df(my_data, 
-#                                            groups = c("A, "A", "B", "B"),
-#                                            name = "Development Dataset")
-
-}

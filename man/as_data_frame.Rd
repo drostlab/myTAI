@@ -21,7 +21,7 @@ with phylostratum, gene ID, and expression data as columns.
 }
 \examples{
 # Convert BulkPhyloExpressionSet back to data frame
-# df <- as_data_frame(bulk_phyex_set)
-# df_collapsed <- as_data_frame(bulk_phyex_set, use_collapsed = TRUE)
+df <- as_data_frame(example_phyex_set)
+df_collapsed <- as_data_frame(example_phyex_set, use_collapsed = TRUE)
 
 }

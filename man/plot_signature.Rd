@@ -51,22 +51,20 @@ This function creates visualizations appropriate for the data type:
   - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)
 }
 \examples{
+phyex_set <- example_phyex_set |>
+    select_genes(example_phyex_set@gene_ids[1:100])
+phyex_set@null_conservation_sample_size <- 500
+
 # Basic signature plot for bulk data
-# p1 <- plot_signature(bulk_phyex_set)
+p1 <- plot_signature(example_phyex_set)
 
-# Bulk plot with replicates and p-value
-# p2 <- plot_signature(bulk_phyex_set, show_reps = TRUE, show_p_val = TRUE)
-
-# Single-cell plot with individual cells
-# p3 <- plot_signature(sc_phyex_set, show_reps = TRUE)
-
-# Single-cell plot with custom primary identity
-# p4 <- plot_signature(sc_phyex_set, primary_identity = "day")
-
-# Single-cell plot with primary and secondary identities (colored)
-# p5 <- plot_signature(sc_phyex_set, primary_identity = "day", secondary_identity = "condition")
+phyex_set_sc <- example_phyex_set_sc |>
+     select_genes(example_phyex_set_sc@gene_ids[1:100])
+phyex_set_sc@null_conservation_sample_size <- 500
 
 # Single-cell plot with faceting by secondary identity
-# p6 <- plot_signature(sc_phyex_set, primary_identity = "day", 
-#                      secondary_identity = "condition", facet_by_secondary = TRUE)
+p2 <- plot_signature(phyex_set_sc, 
+                     primary_identity = "day", 
+                     secondary_identity = "condition", 
+                     facet_by_secondary = TRUE)
 }

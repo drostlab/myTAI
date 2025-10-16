@@ -31,8 +31,8 @@ about differences in gene age composition between developmental periods.
 }
 \examples{
 # Define contrast groups
-# modules <- list(contrast1 = 1:3, contrast2 = 7:9)
-# result <- pairwise_test(phyex_set, modules, alternative = "greater")
+modules <- list(contrast1 = 1:3, contrast2 = 4:7)
+result <- stat_pairwise_test(example_phyex_set, modules, alternative = "greater")
 
 }
 \seealso{

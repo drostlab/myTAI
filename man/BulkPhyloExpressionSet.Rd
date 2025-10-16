@@ -41,6 +41,9 @@ BulkPhyloExpressionSet(
 
 \item{.bootstrapped_txis}{Precomputed bootstrapped TXI values (default: NULL)}
 }
+\value{
+A BulkPhyloExpressionSet object
+}
 \description{
 S7 class for bulk RNA-seq phylotranscriptomic expression data.
 This class handles expression data with biological replicates and provides

@@ -35,10 +35,3 @@ This function combines phylostratum mapping with expression matrix and metadata 
 a ScPhyloExpressionSet. Only genes present in both the expression matrix and phylomap
 will be retained. All discrete metadata columns are converted to factors automatically.
 }
-\examples{
-\dontrun{
-# Match expression matrix with phylostratum map
-sc_set <- match_map_sc_matrix(expr_matrix, metadata, phylo_map)
-}
-
-}

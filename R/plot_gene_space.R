@@ -19,10 +19,12 @@
 #' 
 #' @examples
 #' # Plot gene space colored by identity
-#' # p1 <- plot_gene_space(phyex_set, colour_by = "identity")
+#' p1 <- plot_gene_space(example_phyex_set, colour_by = "identity")
 #' 
 #' # Plot specific genes colored by strata
-#' # p2 <- plot_gene_space(phyex_set, genes = c("gene1", "gene2"), colour_by = "strata")
+#' p2 <- plot_gene_space(example_phyex_set, 
+#'                       genes = example_phyex_set@gene_ids[1:5], 
+#'                       colour_by = "strata")
 #' 
 #' @export
 plot_gene_space <- function(phyex_set, 

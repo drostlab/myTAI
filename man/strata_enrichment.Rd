@@ -32,7 +32,7 @@ values indicate depletion (fewer genes than expected).
 }
 \examples{
 # Calculate enrichment for a gene set
-# enrichment <- strata_enrichment(phyex_set@strata, my_gene_set)
-# print(enrichment)
+enrichment <- strata_enrichment(example_phyex_set@strata, example_phyex_set@gene_ids[1:30])
+print(enrichment)
 
 }

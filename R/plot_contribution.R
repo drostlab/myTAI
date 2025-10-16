@@ -19,10 +19,10 @@
 #' 
 #' @examples
 #' # Create contribution plot for bulk data
-#' # contrib_plot <- plot_contribution(bulk_phyex_set)
+#' contrib_plot <- plot_contribution(example_phyex_set)
 #' 
 #' # Create contribution plot for single-cell data
-#' # contrib_plot_sc <- plot_contribution(sc_phyex_set)
+#' contrib_plot_sc <- plot_contribution(example_phyex_set_sc)
 #' 
 #' @import dplyr ggplot2
 #' @export

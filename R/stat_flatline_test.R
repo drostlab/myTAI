@@ -14,7 +14,7 @@
 #' 
 #' @examples
 #' # Perform flat line test
-#' # result <- stat_flatline_test(phyex_set)
+#' result <- stat_flatline_test(example_phyex_set)
 #' 
 #' @seealso \code{\link{stat_generic_conservation_test}}
 #' @export

@@ -37,7 +37,7 @@ the necessary functions for statistical inference.
 }
 \examples{
 # Access predefined distributions
-# normal_dist <- distributions$normal
-# gamma_dist <- distributions$gamma
+normal_dist <- distributions$normal
+gamma_dist <- distributions$gamma
 
 }

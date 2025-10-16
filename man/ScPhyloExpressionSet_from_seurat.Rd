@@ -38,9 +38,3 @@ ScPhyloExpressionSet object for single-cell phylotranscriptomic analysis.
 Automatically extracts dimensional reductions if present, or computes basic
 PCA and UMAP if none are available.
 }
-\examples{
-# Convert Seurat object to ScPhyloExpressionSet
-# sc_set <- ScPhyloExpressionSet_from_seurat(seurat_obj, strata,
-#                                           name = "Brain Development SC Dataset")
-
-}

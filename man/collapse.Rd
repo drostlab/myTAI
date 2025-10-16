@@ -19,6 +19,6 @@ Convert a PhyloExpressionSet with replicates to one with collapsed expression da
 }
 \examples{
 # Collapse replicates in a PhyloExpressionSet
-# collapsed_set <- collapse(phyex_set)
+collapsed_set <- collapse(example_phyex_set)
 
 }

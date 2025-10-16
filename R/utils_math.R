@@ -3,7 +3,7 @@
 #' This function computes the geometric mean of a numeric input vector \code{x}.
 #' @param x a numeric vector for which geometric mean computations shall be performed.
 #' @author Hajk-Georg Drost
-#' @examplesIf FALSE 
+#' @details
 #' x <- 1:10
 #' 
 #' geom_mean(x)
@@ -31,8 +31,6 @@ geom_mean <- function(x) {
 #' @details
 #' This function computes the sample variance for each row using the formula:
 #' var = sum((x - mean(x))^2) / (n - 1)
-#' 
-#' @examples
 #' # Calculate row variances for a matrix
 #' # mat <- matrix(1:12, nrow = 3)
 #' # row_vars <- rowVars(mat)
@@ -71,8 +69,6 @@ quantile_rank <- function(x) {
 #' @examples
 #' # Format p-value for plotting
 #' expr <- exp_p(0.001)
-#' # Use in ggplot annotation:
-#' # annotate("text", x = 1, y = 1, label = expr, parse = TRUE)
 #' 
 #' @export
 exp_p <- function(p, sci_thresh = 4) {

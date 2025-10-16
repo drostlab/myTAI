@@ -9,7 +9,7 @@ with optional dendrograms and gene age annotation."><meta property="og:image" co
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,19 +142,21 @@ as a named list where names match the annotation column names.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic heatmap with gene age annotation</span></span></span>
-<span class="r-in"><span><span class="co"># p1 &lt;- plot_gene_heatmap(bulk_phyex_set, show_gene_age = TRUE)</span></span></span>
+<span class="r-in"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">plot_gene_heatmap</span><span class="op">(</span><span class="va">example_phyex_set</span>, show_gene_age <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Single-cell heatmap with subset of cells</span></span></span>
-<span class="r-in"><span><span class="co"># p2 &lt;- plot_gene_heatmap(sc_phyex_set, show_reps = TRUE, max_cells_per_type = 3)</span></span></span>
+<span class="r-in"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">plot_gene_heatmap</span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, show_reps <span class="op">=</span> <span class="cn">TRUE</span>, max_cells_per_type <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Showing 9 out of 1000 cells. Use max_cells_per_type to control the number of cells per type.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Custom gene annotation example</span></span></span>
-<span class="r-in"><span><span class="co"># gene_annot &lt;- data.frame(</span></span></span>
-<span class="r-in"><span><span class="co">#   Category = c("High", "Medium", "Low"),</span></span></span>
-<span class="r-in"><span><span class="co">#   row.names = c("Gene1", "Gene2", "Gene3")</span></span></span>
-<span class="r-in"><span><span class="co"># )</span></span></span>
-<span class="r-in"><span><span class="co"># colors &lt;- list(Category = c("High" = "red", "Medium" = "yellow", "Low" = "blue"))</span></span></span>
-<span class="r-in"><span><span class="co"># p3 &lt;- plot_gene_heatmap(phyex_set, gene_annotation = gene_annot, </span></span></span>
-<span class="r-in"><span><span class="co">#                        gene_annotation_colors = colors, show_gene_age = FALSE)</span></span></span>
+<span class="r-in"><span><span class="va">gene_ids</span> <span class="op">&lt;-</span> <span class="va">example_phyex_set</span><span class="op">@</span><span class="va">gene_ids</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">gene_annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  Category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"High"</span>, <span class="st">"Medium"</span>, <span class="st">"Low"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  row.names <span class="op">=</span> <span class="va">gene_ids</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"High"</span> <span class="op">=</span> <span class="st">"red"</span>, <span class="st">"Medium"</span> <span class="op">=</span> <span class="st">"yellow"</span>, <span class="st">"Low"</span> <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">plot_gene_heatmap</span><span class="op">(</span><span class="va">example_phyex_set</span> <span class="op">|&gt;</span> <span class="fu"><a href="select_genes.html">select_genes</a></span><span class="op">(</span><span class="va">gene_ids</span><span class="op">)</span>, gene_annotation <span class="op">=</span> <span class="va">gene_annot</span>, </span></span>
+<span class="r-in"><span>                       gene_annotation_colors <span class="op">=</span> <span class="va">colors</span>, show_gene_age <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -163,7 +165,7 @@ as a named list where names match the annotation column names.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Stefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">

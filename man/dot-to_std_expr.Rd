@@ -20,10 +20,7 @@ This function standardises each gene's expression profile by subtracting the mea
 and dividing by the standard deviation. Genes with zero or undefined variance
 are set to zero. This is useful for comparing expression patterns across genes
 with different absolute expression levels.
-}
-\examples{
 # Standardise expression data
 # std_expr <- .to_std_expr(expression_matrix)
-
 }
 \keyword{internal}

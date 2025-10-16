@@ -13,8 +13,6 @@
 #' This function creates a null distribution by randomly permuting phylostratum
 #' assignments while keeping the expression matrix fixed. This preserves the
 #' expression structure while breaking the phylostratum-expression relationship.
-#' 
-#' @examples
 #' # Generate null TXI distribution
 #' # null_txis <- stat_generate_conservation_txis(strata_vec, expr_matrix, 1000)
 #' 

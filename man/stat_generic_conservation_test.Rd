@@ -47,14 +47,6 @@ This function provides a generic framework for conservation testing by:
 3. Fitting the specified distribution to the null sample
 4. Computing p-values based on the alternative hypothesis
 }
-\examples{
-# Perform a custom conservation test
-# result <- stat_generic_conservation_test(phyex_set, 
-#                                    test_name = "Custom Test",
-#                                    scoring_function = var,
-#                                    fitting_dist = distributions$gamma)
-
-}
 \seealso{
 \code{\link{stat_flatline_test}}, \code{\link{stat_early_conservation_test}}
 }

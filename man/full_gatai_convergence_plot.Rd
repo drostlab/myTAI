@@ -26,10 +26,7 @@ runs and thresholds.
 This function creates a comprehensive visualization of GATAI convergence
 including consensus set sizes, p-values, threshold comparisons, and
 gene removal patterns across multiple runs.
-}
-\examples{
 # Create full convergence plot
 # conv_plot <- full_gatai_convergence_plot(phyex_set, gatai_runs)
-
 }
 \keyword{internal}

@@ -18,11 +18,10 @@
 #' @return a \code{PhyloExpressionSet} object storing transformed Phylostratum levels.
 #' @author Jaruwatana Sodai Lotharukpong and Lukas Maischak
 #' @seealso \code{\link{tf}}
-#' @examplesIf FALSE
+#' @examples
 #'
 #' # get the relative expression profiles for each phylostratum
-#' tfPES <- tf_PS(phyex_set, transform = "qr")
-#' head(tfPES)
+#' tfPES <- tf_PS(example_phyex_set, transform = "qr")
 #'
 #' @export
 

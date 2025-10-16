@@ -23,6 +23,6 @@ which are often the most informative for downstream analyses.
 }
 \examples{
 # Select top 1\% most variable genes
-# high_var_genes <- genes_top_variance(phyex_set, p = 0.99)
+high_var_genes <- genes_top_variance(example_phyex_set, p = 0.99)
 
 }

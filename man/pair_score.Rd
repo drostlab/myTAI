@@ -24,11 +24,8 @@ Compute the pairwise contrast score between two groups of developmental stages.
 \details{
 The score is computed as mean(contrast1) - mean(contrast2).
 For alternative = "less", the score is negated.
-}
-\examples{
 # Compute pairwise score
 # modules <- list(contrast1 = 1:3, contrast2 = 7:9)
 # score <- pair_score(txi_values, modules, "greater")
-
 }
 \keyword{internal}

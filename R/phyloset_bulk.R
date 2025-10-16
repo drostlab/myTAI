@@ -15,6 +15,8 @@
 #' @param .null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' @param .bootstrapped_txis Precomputed bootstrapped TXI values (default: NULL)
 #' 
+#' @return A BulkPhyloExpressionSet object
+#' 
 #' @details
 #' The BulkPhyloExpressionSet class is designed for bulk RNA-seq data with biological replicates.
 #' It extends the base PhyloExpressionSetBase class with bulk-specific functionality.
@@ -117,11 +119,6 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
 #' 
 #' @return A BulkPhyloExpressionSet object
 #' 
-#' @examples
-#' # Convert data frame to BulkPhyloExpressionSet
-#' # bulk_set <- BulkPhyloExpressionSet_from_df(my_data, 
-#' #                                            groups = c("A, "A", "B", "B"),
-#' #                                            name = "Development Dataset")
 #' 
 #' @export
 BulkPhyloExpressionSet_from_df <- function(data, 
@@ -173,6 +170,7 @@ BulkPhyloExpressionSet_from_df <- function(data,
 #' @param strata_legend Optional data frame mapping phylostratum numbers to labels
 #' @param ... Additional arguments passed to BulkPhyloExpressionSet_from_df
 #' @seealso \code{\link{BulkPhyloExpressionSet_from_df}}
+#' @return A BulkPhyloExpressionSet object
 #' @export
 as_BulkPhyloExpressionSet <- BulkPhyloExpressionSet_from_df
 
@@ -250,8 +248,8 @@ match_map <- function(data,
 #' 
 #' @examples
 #' # Convert BulkPhyloExpressionSet back to data frame
-#' # df <- as_data_frame(bulk_phyex_set)
-#' # df_collapsed <- as_data_frame(bulk_phyex_set, use_collapsed = TRUE)
+#' df <- as_data_frame(example_phyex_set)
+#' df_collapsed <- as_data_frame(example_phyex_set, use_collapsed = TRUE)
 #' 
 #' @export
 as_data_frame <- function(phyex_set, use_collapsed = FALSE) {

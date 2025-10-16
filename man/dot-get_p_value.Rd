@@ -33,10 +33,7 @@ This function calculates p-values using the appropriate tail(s) of the distribut
 - "greater": Uses upper tail (1 - CDF)
 - "less": Uses lower tail (CDF)  
 - "two-sided": Uses 2 * minimum of both tails
-}
-\examples{
 # Calculate p-value (internal use)
 # pval <- .get_p_value(pnorm, 1.96, list(mean=0, sd=1), "two-sided")
-
 }
 \keyword{internal}

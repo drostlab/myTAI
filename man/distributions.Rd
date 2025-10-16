@@ -22,10 +22,4 @@ This list provides ready-to-use Distribution objects for common statistical
 tests. Each distribution includes appropriate fitting functions and statistical
 functions for hypothesis testing.
 }
-\examples{
-# Use normal distribution for testing
-# test_result <- stat_generic_conservation_test(phyex_set, 
-#                                               fitting_dist = distributions$normal)
-
-}
 \keyword{datasets}

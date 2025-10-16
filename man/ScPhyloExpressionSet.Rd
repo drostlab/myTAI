@@ -56,6 +56,9 @@ ScPhyloExpressionSet(
 
 \item{reductions}{List of dimensional reduction matrices (PCA, UMAP, etc.) with cells as rows and dimensions as columns}
 }
+\value{
+A ScPhyloExpressionSet object
+}
 \description{
 S7 class for single-cell phylotranscriptomic expression data.
 This class stores expression matrices and metadata, with support for dimensional
@@ -104,18 +107,17 @@ Inherited computed properties from PhyloExpressionSetBase include:
 These properties use lazy evaluation and caching for optimal performance.
 }
 \examples{
-\dontrun{
 # Create from Seurat object
-sc_set <- ScPhyloExpressionSet_from_seurat(seurat_obj, strata)
+data(example_phyex_set_sc)
+sc_set <- example_phyex_set_sc
 
 # Switch to different cell grouping
-sc_set@selected_idents <- "development_stage"
+sc_set@selected_idents <- "day"
 
-# Access pseudobulked data (computed automatically)
+# Access pseudobulked data (computed au  tomatically)
 pseudobulk <- sc_set@expression_collapsed
 
 # Access TXI values for each cell
 txi_values <- sc_set@TXI_sample
-}
 
 }

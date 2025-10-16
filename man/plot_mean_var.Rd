@@ -34,12 +34,13 @@ or averaged across cells per cell type for single-cell data).
 }
 \examples{
 # Create mean-variance plot for bulk data
-# mv_plot <- plot_mean_var(bulk_phyex_set)
+mv_plot <- plot_mean_var(example_phyex_set)
 
 # Highlight and label specific genes in single-cell data
-# mv_plot_sc <- plot_mean_var(sc_phyex_set, highlight_genes = c("GeneA", "GeneB"))
+mv_plot_sc <- plot_mean_var(example_phyex_set_sc, 
+  highlight_genes = example_phyex_set_sc@gene_ids[1:3])
 
 # Color by phylostratum
-# mv_plot_colored <- plot_mean_var(phyex_set, colour_by = "strata")
+mv_plot_colored <- plot_mean_var(example_phyex_set, colour_by = "strata")
 
 }

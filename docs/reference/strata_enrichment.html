@@ -9,7 +9,7 @@ in a selected gene set compared to the background distribution."><meta property=
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,8 +88,28 @@ values indicate depletion (fewer genes than expected).</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Calculate enrichment for a gene set</span></span></span>
-<span class="r-in"><span><span class="co"># enrichment &lt;- strata_enrichment(phyex_set@strata, my_gene_set)</span></span></span>
-<span class="r-in"><span><span class="co"># print(enrichment)</span></span></span>
+<span class="r-in"><span><span class="va">enrichment</span> <span class="op">&lt;-</span> <span class="fu">strata_enrichment</span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span>, <span class="va">example_phyex_set</span><span class="op">@</span><span class="va">gene_ids</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">enrichment</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Stratum log_obs_exp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Cellular Organisms  0.08837558</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2             Eukaryota  0.20650847</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         Viridiplantae  0.87596724</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4          Streptophyta  0.87596724</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        Streptophytina        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           Embryophyta        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7           Traceophyta        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8         Euphyllophyta        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9         Spermatophyta        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10        Magnoliopsida        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11      Mesangiospermae        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12         Pentapetalae        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13               Rosids        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14              Malvids        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15          Brassicales        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16         Brassicaceae        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17           Camelineae        -Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18          Arabidopsis  2.19789534</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19 Arabidopsis thaliana        -Inf</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -98,7 +118,7 @@ values indicate depletion (fewer genes than expected).</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Stefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">

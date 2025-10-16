@@ -19,10 +19,7 @@ between the null sample and fitted distribution.
 \details{
 This function tests whether the null sample follows the fitted distribution
 using the Kolmogorov-Smirnov test. A significant result indicates poor fit.
-}
-\examples{
 # Test goodness of fit
 # gof_result <- goodness_of_fit(test_result)
-
 }
 \keyword{internal}

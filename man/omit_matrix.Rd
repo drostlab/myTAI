@@ -26,7 +26,7 @@ phylotranscriptomic signature.
 }
 \examples{
 # Compute omit matrix for a PhyloExpressionSet
-# omit_mat <- omit_matrix(phyex_set)
+omit_mat <- omit_matrix(example_phyex_set)
 
 }
 \author{

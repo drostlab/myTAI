@@ -7,6 +7,9 @@
 #' @param show_strata Logical, whether to show stratum-specific distributions.
 #' @param log_transform Logical, whether to apply log transformation to expression values (default: TRUE).
 #' @param seed Seed for reproducible color selection.
+#' 
+#' @return A ggplot2 object showing expression levels distributions across identities
+#'
 #' @section Recommendation: 
 #' Apply a square root transformation to enhance the visualization of differences
 #' in the distributions: \code{plot_distribution_expression(transform_counts(phyex_set, sqrt))}

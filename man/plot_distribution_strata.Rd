@@ -34,11 +34,11 @@ enrichment or depletion of specific strata in gene sets.
 }
 \examples{
 # Plot raw gene counts by strata
-# p1 <- plot_distribution_strata(phyex_set@strata)
+p1 <- plot_distribution_strata(example_phyex_set@strata)
 
 # Plot observed vs expected ratios for selected genes
-# p2 <- plot_distribution_strata(phyex_set@strata, 
-#                                selected_gene_ids = my_genes,
-#                                as_log_obs_exp = TRUE)
+p2 <- plot_distribution_strata(example_phyex_set@strata, 
+                               selected_gene_ids = example_phyex_set@gene_ids[5:20],
+                               as_log_obs_exp = TRUE)
 
 }

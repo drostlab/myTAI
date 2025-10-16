@@ -14,12 +14,16 @@
 #' @description \emph{plot_distribution_pTAI} generates 2 plots that help to compare the distribution
 #' of the quotient of expression by partial TAI through various developmental stages or cell types, highlighting each stage with 
 #' distinct colors.
+#' 
 #' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet).
 #' @param stages A numeric vector specifying the indices of the stages to compare. Each index 
 #' corresponds to a stage in the PhyloExpressionSet. If NULL, all stages are used.
 #' @param xlab Label of x-axis.
 #' @param ylab Label of y-axis.
 #' @param main Figure title.
+#' 
+#' @return A ggplot2 object showing partial TAI distributions
+#'
 #' @author Filipa Martins Costa
 #' @export
 plot_distribution_pTAI <- function(phyex_set,
@@ -70,7 +74,6 @@ plot_distribution_pTAI <- function(phyex_set,
     # Generate colors
     qual_col_pals <- RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]
     col_vector <- unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
-    set.seed(123)
     colors <- sample(col_vector, ncol(partial_TAI_matrix))
     
     # Create density plot
@@ -121,6 +124,9 @@ plot_distribution_pTAI <- function(phyex_set,
 #' @param main Figure title.
 #' @param alpha Transparency of the points.
 #' @param size Size of the points.
+#' 
+#' @return A ggplot2 object showing a qqplot of partial TAI distributions
+#'
 #' @author Filipa Martins Costa
 #' @export
 plot_distribution_pTAI_qqplot <- function(phyex_set, 

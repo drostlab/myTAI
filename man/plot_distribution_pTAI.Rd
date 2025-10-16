@@ -24,6 +24,9 @@ corresponds to a stage in the PhyloExpressionSet. If NULL, all stages are used.}
 
 \item{main}{Figure title.}
 }
+\value{
+A ggplot2 object showing partial TAI distributions
+}
 \description{
 Functions for plotting and comparing partial TAI distributions using PhyloExpressionSet S7 objects.
 

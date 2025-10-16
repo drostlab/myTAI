@@ -29,9 +29,8 @@ An S7 property object that is required
 \description{
 Helper function to create an S7 property that is required (throws error if not provided).
 }
-\examples{
+\details{
 # Create a required property
 # required_prop <- new_required_property(class = class_character, name = "gene_ids")
-
 }
 \keyword{internal}

@@ -25,8 +25,3 @@ This function creates a visualization of the null hypothesis testing by plotting
 The plot helps visualize how the observed TXI pattern compares to what would
 be expected under the null hypothesis of no conservation signal.
 }
-\examples{
-# Plot null TXI sample distribution
-# null_plot <- plot_null_txi_sample(conservation_test_result)
-
-}

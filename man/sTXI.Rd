@@ -21,7 +21,7 @@ Calculate the stratum-specific transcriptomic index (sTXI) by summing pTXI value
 }
 \examples{
 # Calculate sTXI values
-# stxi_values <- sTXI(phyex_set, option = "identity")
-# stxi_cumsum <- sTXI(phyex_set, option = "add")
+stxi_values <- sTXI(example_phyex_set, option = "identity")
+stxi_cumsum <- sTXI(example_phyex_set, option = "add")
 
 }

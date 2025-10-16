@@ -20,6 +20,8 @@
 #' @param .pseudobulk_cache Internal cache for pseudobulked expression matrices by different groupings
 #' @param .TXI_sample Internal storage for computed TXI values
 #' 
+#' @return A ScPhyloExpressionSet object
+#' 
 #' @details
 #' The ScPhyloExpressionSet class provides a comprehensive framework for single-cell 
 #' phylotranscriptomic analysis. Key features include:
@@ -63,19 +65,18 @@
 #' These properties use lazy evaluation and caching for optimal performance.
 #' 
 #' @examples
-#' \dontrun{
 #' # Create from Seurat object
-#' sc_set <- ScPhyloExpressionSet_from_seurat(seurat_obj, strata)
+#' data(example_phyex_set_sc)
+#' sc_set <- example_phyex_set_sc
 #' 
 #' # Switch to different cell grouping
-#' sc_set@selected_idents <- "development_stage"
+#' sc_set@selected_idents <- "day"
 #' 
-#' # Access pseudobulked data (computed automatically)
+#' # Access pseudobulked data (computed au  tomatically)
 #' pseudobulk <- sc_set@expression_collapsed
 #' 
 #' # Access TXI values for each cell
 #' txi_values <- sc_set@TXI_sample
-#' }
 #' 
 #' @import S7
 #' @export
@@ -320,10 +321,6 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
 #' 
 #' @return A ScPhyloExpressionSet object
 #' 
-#' @examples
-#' # Convert Seurat object to ScPhyloExpressionSet
-#' # sc_set <- ScPhyloExpressionSet_from_seurat(seurat_obj, strata,
-#' #                                           name = "Brain Development SC Dataset")
 #' 
 #' @export
 ScPhyloExpressionSet_from_seurat <- function(seurat, 
@@ -416,16 +413,6 @@ ScPhyloExpressionSet_from_seurat <- function(seurat,
 #' 
 #' @return A ScPhyloExpressionSet object
 #' 
-#' @examples
-#' \dontrun{
-#' # Create from matrix and metadata
-#' sc_set <- ScPhyloExpressionSet_from_matrix(expr_matrix, strata, metadata,
-#'                                           groups_column = "cell_type")
-#' 
-#' # Later change grouping
-#' sc_set@selected_idents <- "treatment_group"
-#' }
-#' 
 #' @export
 ScPhyloExpressionSet_from_matrix <- function(expression_matrix,
                                              strata,
@@ -498,11 +485,6 @@ ScPhyloExpressionSet_from_matrix <- function(expression_matrix,
 #' 
 #' @return A ScPhyloExpressionSet object
 #' 
-#' @examples
-#' \dontrun{
-#' # Match Seurat object with phylostratum map
-#' sc_set <- match_map_sc_seurat(seurat_obj, phylo_map, layer = "counts")
-#' }
 #' 
 #' @export
 match_map_sc_seurat <- function(seurat, 
@@ -568,11 +550,6 @@ match_map_sc_seurat <- function(seurat,
 #' 
 #' @return A ScPhyloExpressionSet object
 #' 
-#' @examples
-#' \dontrun{
-#' # Match expression matrix with phylostratum map
-#' sc_set <- match_map_sc_matrix(expr_matrix, metadata, phylo_map)
-#' }
 #' 
 #' @export
 match_map_sc_matrix <- function(expression_matrix,
@@ -920,11 +897,6 @@ S7::method(print, ScPhyloExpressionSet) <- function(x, ...) {
 #' The returned expression matrix is converted to dense format and maintains column names
 #' from the original matrix. Useful for creating balanced subsets for visualization or
 #' when memory is limited.
-#' @examples
-#' \dontrun{
-#' # Downsample expression matrix to 5 samples per group
-#' downsampled <- downsample_expression(expr_matrix, groups, downsample = 5)
-#' }
 #' @export
 downsample_expression <- function(expression_matrix, groups, downsample = 10) {
     # Get unique groups
@@ -956,14 +928,12 @@ downsample_expression <- function(expression_matrix, groups, downsample = 10) {
 #' by the current \code{selected_idents} grouping. All metadata and reductions are 
 #' filtered to match the selected cells.
 #' @examples
-#' \dontrun{
 #' # Downsample to 20 cells per identity
-#' small_set <- downsample(sc_phyex_set, downsample = 20)
+#' small_set <- downsample(example_phyex_set_sc, downsample = 20)
 #' 
 #' # Change grouping and downsample
-#' sc_phyex_set@selected_idents <- "treatment"
-#' treatment_set <- downsample(sc_phyex_set, downsample = 15)
-#' }
+#' example_phyex_set_sc@selected_idents <- "day"
+#' treatment_set <- downsample(example_phyex_set_sc, downsample = 15)
 #' @export
 downsample <- function(phyex_set, downsample = 10) {
     # Use downsample_expression to get the downsampled matrix

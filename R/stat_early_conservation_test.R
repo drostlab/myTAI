@@ -18,8 +18,8 @@
 #' 
 #' @examples
 #' # Define developmental modules
-#' # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
-#' # result <- early_conservation_test(phyex_set, modules)
+#' modules <- list(early = 1:2, mid = 3:5, late = 6:7)
+#' result <- stat_early_conservation_test(example_phyex_set_old, modules=modules)
 #' 
 #' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_late_conservation_test}}
 #' @export
@@ -52,8 +52,6 @@ stat_early_conservation_test <- function(phyex_set, modules, ...) {
 #' - D2: mean(late) - mean(early)
 #' 
 #' Higher scores indicate stronger early conservation patterns.
-#' 
-#' @examples
 #' # Compute early conservation score
 #' # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 #' # score <- ec_score(txi_values, modules)

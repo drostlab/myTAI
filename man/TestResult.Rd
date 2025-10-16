@@ -32,6 +32,9 @@ TestResult(
 
 \item{p_label}{Character string for p-value label (default: "p_val")}
 }
+\value{
+A TestResult object
+}
 \description{
 S7 class for storing and manipulating statistical test results
 from phylotranscriptomic conservation tests.
@@ -39,9 +42,4 @@ from phylotranscriptomic conservation tests.
 \details{
 The TestResult class provides computed properties including:
 - `p_value`: Computed p-value based on test statistic and fitted distribution
-}
-\examples{
-# Create a test result (typically done internally by conservation tests)
-# result <- TestResult(method_name = "Test", test_stat = 1.5, ...)
-
 }

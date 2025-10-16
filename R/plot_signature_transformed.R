@@ -53,12 +53,14 @@ COUNT_TRANSFORMS <- {
 #' normalization and transformation methods.
 #' 
 #' @examples
-#' # Compare signatures under all default transformations for bulk data
-#' # p <- plot_signature_transformed(bulk_phyex_set)
-#' 
 #' # Single-cell data with custom transformations
-#' # custom_transforms <- list(raw = identity, log = log1p)
-#' # p2 <- plot_signature_transformed(sc_phyex_set, transformations = custom_transforms)
+#' 
+#' phyex_set <- example_phyex_set |>
+#'     select_genes(example_phyex_set@gene_ids[1:100])
+#' phyex_set@null_conservation_sample_size <- 500
+#' 
+#' custom_transforms <- list(raw = identity, log = log1p)
+#' p <- plot_signature_transformed(phyex_set, transformations = custom_transforms)
 #' 
 #' @export
 plot_signature_transformed <- function(phyex_set,

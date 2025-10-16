@@ -25,7 +25,5 @@ proper mathematical formatting.
 \examples{
 # Format p-value for plotting
 expr <- exp_p(0.001)
-# Use in ggplot annotation:
-# annotate("text", x = 1, y = 1, label = expr, parse = TRUE)
 
 }

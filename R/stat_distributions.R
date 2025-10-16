@@ -16,8 +16,8 @@
 #' 
 #' @examples
 #' # Access predefined distributions
-#' # normal_dist <- distributions$normal
-#' # gamma_dist <- distributions$gamma
+#' normal_dist <- distributions$normal
+#' gamma_dist <- distributions$gamma
 #' 
 #' @import S7
 Distribution <- new_class("Distribution",
@@ -58,7 +58,7 @@ Distribution <- new_class("Distribution",
 #' 
 #' @return List with mean and sd parameters
 #' 
-#' @examples
+#' @details
 #' # Fit normal distribution
 #' # params <- .fit_normal(data_vector)
 #' 
@@ -80,8 +80,6 @@ Distribution <- new_class("Distribution",
 #' This function uses an iterative approach to filter outliers and find
 #' the gamma distribution parameters that best fit the data, improving
 #' robustness compared to standard fitting methods.
-#' 
-#' @examples
 #' # Fit gamma distribution
 #' # params <- .fit_gamma(data_vector)
 #' 
@@ -169,11 +167,6 @@ Distribution <- new_class("Distribution",
 #' This list provides ready-to-use Distribution objects for common statistical
 #' tests. Each distribution includes appropriate fitting functions and statistical
 #' functions for hypothesis testing.
-#' 
-#' @examples
-#' # Use normal distribution for testing
-#' # test_result <- stat_generic_conservation_test(phyex_set, 
-#' #                                               fitting_dist = distributions$normal)
 #' 
 #' @export
 distributions <- list(

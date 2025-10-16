@@ -19,8 +19,8 @@
 #' 
 #' @examples
 #' # Define developmental modules
-#' # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
-#' # result <- reverse_hourglass_test(phyex_set, modules)
+#' modules <- list(early = 1:2, mid = 3:5, late = 6:7)
+#' result <- stat_reverse_hourglass_test(example_phyex_set_old, modules=modules)
 #' 
 #' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_reductive_hourglass_test}}
 #' @export
@@ -55,8 +55,6 @@ stat_reverse_hourglass_test <- function(phyex_set,
 #' 
 #' Higher scores indicate stronger reverse hourglass patterns (mid stages
 #' dominated by younger genes).
-#' 
-#' @examples
 #' # Compute reverse hourglass score
 #' # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 #' # score <- reverse_hourglass_score(txi_values, modules)

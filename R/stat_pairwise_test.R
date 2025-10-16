@@ -20,8 +20,8 @@
 #' 
 #' @examples
 #' # Define contrast groups
-#' # modules <- list(contrast1 = 1:3, contrast2 = 7:9)
-#' # result <- pairwise_test(phyex_set, modules, alternative = "greater")
+#' modules <- list(contrast1 = 1:3, contrast2 = 4:7)
+#' result <- stat_pairwise_test(example_phyex_set, modules, alternative = "greater")
 #' 
 #' @seealso \code{\link{stat_generic_conservation_test}}
 #' @export
@@ -56,8 +56,6 @@ stat_pairwise_test <- function(phyex_set,
 #' @details
 #' The score is computed as mean(contrast1) - mean(contrast2).
 #' For alternative = "less", the score is negated.
-#' 
-#' @examples
 #' # Compute pairwise score
 #' # modules <- list(contrast1 = 1:3, contrast2 = 7:9)
 #' # score <- pair_score(txi_values, modules, "greater")

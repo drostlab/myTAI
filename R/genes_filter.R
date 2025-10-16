@@ -21,13 +21,13 @@
 #' 
 #' @examples
 #' # Select top 1% most expressed genes by mean
-#' # high_expr_genes <- genes_top_expr(phyex_set, rowMeans, p = 0.99)
+#' high_expr_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), p = 0.99)
 #' 
 #' # Select top 5% most variable genes
-#' # high_var_genes <- genes_top_expr(phyex_set, rowVars, p = 0.95)
+#' high_var_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, var), p = 0.95)
 #' 
 #' # Select top genes by median expression
-#' # high_median_genes <- genes_top_expr(phyex_set, function(x) apply(x, 1, median), p = 0.9)
+#' high_median_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, median), p = 0.9)
 #' 
 #' @export
 genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
@@ -62,7 +62,7 @@ genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
 #' 
 #' @examples
 #' # Select top 1% most variable genes
-#' # high_var_genes <- genes_top_variance(phyex_set, p = 0.99)
+#' high_var_genes <- genes_top_variance(example_phyex_set, p = 0.99)
 #' 
 #' @export
 genes_top_variance <- function(phyex_set, p = .99) {
@@ -83,7 +83,7 @@ genes_top_variance <- function(phyex_set, p = .99) {
 #' 
 #' @examples
 #' # Select top 1% most expressed genes by mean
-#' # high_expr_genes <- genes_top_mean(phyex_set, p = 0.99)
+#' high_expr_genes <- genes_top_mean(example_phyex_set, p = 0.99)
 #' 
 #' @export
 genes_top_mean <- function(phyex_set, p = .99) {
@@ -104,7 +104,7 @@ genes_top_mean <- function(phyex_set, p = .99) {
 #' 
 #' @examples
 #' # Select genes with mean expression <= 1
-#' # low_expr_genes <- genes_lowly_expressed(phyex_set, threshold = 1)
+#' low_expr_genes <- genes_lowly_expressed(example_phyex_set, threshold = 1)
 #' 
 #' @export
 genes_lowly_expressed <- function(phyex_set, threshold = 1) {
@@ -128,8 +128,6 @@ genes_lowly_expressed <- function(phyex_set, threshold = 1) {
 #' This function calculates the variance for each gene across samples and retains
 #' only genes with variance above the specified quantile threshold. This helps
 #' focus analysis on genes that show significant expression changes.
-#' 
-#' @examples
 #' # Filter top 10% most variable genes
 #' # filtered_expr <- genes_filter_dynamic(expression_matrix, thr = 0.9)
 #' 

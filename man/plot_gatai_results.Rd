@@ -43,15 +43,6 @@ This function provides a comprehensive visualization of the impact of GATAI gene
 including transcriptomic signature plots, gene expression profiles, heatmaps, mean-variance relationships,
 phylostrata distributions, conservation test comparisons, and convergence diagnostics.
 }
-\examples{
-# Run GATAI analysis
-# gatai_result <- destroy_pattern(phyex_set, num_runs = 20)
-# Plot results
-# plots <- plot_gatai_results(phyex_set, gatai_result)
-# Print signature plots
-# print(plots$signature_plots)
-
-}
 \author{
 Filipa Martins Costa, Stefan Manolache
 }
