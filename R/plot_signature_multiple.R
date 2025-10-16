@@ -29,8 +29,10 @@
 #' 
 #' @examples
 #' # Compare multiple bulk datasets
-#' bulk_list <- c(example_phyex_set, 
-#'   example_phyex_set |> remove_genes(example_phyex_set@gene_ids[1:5]))
+#' phyex_set <- example_phyex_set |>
+#'     select_genes(example_phyex_set@gene_ids[1:100])
+#' bulk_list <- c(phyex_set, 
+#'   phyex_set |> remove_genes(phyex_set@gene_ids[1:5]))
 #' p <- plot_signature_multiple(bulk_list, legend_title = "Dataset")
 #' 
 #' # Compare single-cell datasets

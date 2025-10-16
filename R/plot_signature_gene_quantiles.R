@@ -22,7 +22,10 @@
 #' 
 #' @examples
 #' # Plot signature across expression quantiles for bulk data
-#' p <- plot_signature_gene_quantiles(example_phyex_set, quantiles = c(0.95, 0.90))
+#' phyex_set <- example_phyex_set |>
+#'     select_genes(example_phyex_set@gene_ids[1:100])
+#' phyex_set@null_conservation_sample_size <- 500
+#' p <- plot_signature_gene_quantiles(phyex_set, quantiles = c(0.95, 0.90))
 #' 
 #' @import purrr
 #' @export
