@@ -20,10 +20,7 @@ filters outliers iteratively to find the best fit.
 This function uses an iterative approach to filter outliers and find
 the gamma distribution parameters that best fit the data, improving
 robustness compared to standard fitting methods.
-}
-\examples{
 # Fit gamma distribution
 # params <- .fit_gamma(data_vector)
-
 }
 \keyword{internal}

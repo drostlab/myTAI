@@ -30,8 +30,8 @@ minimum difference between early vs. mid and late vs. mid TXI values.
 }
 \examples{
 # Define developmental modules
-# modules <- list(early = 1:3, mid = 4:6, late = 7:9)
-# result <- stat_reductive_hourglass_test(phyex_set, modules)
+modules <- list(early = 1:2, mid = 3:5, late = 6:7)
+result <- stat_reductive_hourglass_test(example_phyex_set_old, modules=modules)
 
 }
 \seealso{

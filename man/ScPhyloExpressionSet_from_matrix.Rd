@@ -38,14 +38,3 @@ parameter determines the initial \code{selected_idents} value, which can be chan
 using the setter. All discrete columns in metadata are automatically converted to factors
 for consistent handling.
 }
-\examples{
-\dontrun{
-# Create from matrix and metadata
-sc_set <- ScPhyloExpressionSet_from_matrix(expr_matrix, strata, metadata,
-                                          groups_column = "cell_type")
-
-# Later change grouping
-sc_set@selected_idents <- "treatment_group"
-}
-
-}

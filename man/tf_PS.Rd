@@ -31,12 +31,10 @@ transformed phylostratum \code{tfPhylostratum} as the first column, satisfying
 available function, currently limited to only \code{"qr"} (or \code{"quantilerank"}).
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 # get the relative expression profiles for each phylostratum
-tfPES <- tf_PS(phyex_set, transform = "qr")
-head(tfPES)
-\dontshow{\}) # examplesIf}
+tfPES <- tf_PS(example_phyex_set, transform = "qr")
+
 }
 \seealso{
 \code{\link{tf}}

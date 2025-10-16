@@ -25,11 +25,8 @@ The score is computed as the minimum of:
 - D2: mean(late) - mean(early)
 
 Higher scores indicate stronger early conservation patterns.
-}
-\examples{
 # Compute early conservation score
 # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 # score <- ec_score(txi_values, modules)
-
 }
 \keyword{internal}

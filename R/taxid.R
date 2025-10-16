@@ -9,8 +9,10 @@
 #' @param filter a character string specifying the kingdom of life for which taxids shall be returned. Options are
 #' \code{"Archea"}, \code{"Bacteria"}, \code{"Eukaryota"}, \code{"Viruses"}, \code{"Unclassified"}.
 #' @author Hajk-Georg Drost
+#' 
+#' @return A tibble object containing taxonomy category information
+#'
 #' @examplesIf FALSE 
-#' \dontrun{
 #' # download categories.dmp file to current working directory 
 #' # and filter for 'Archea' taxids
 #' Archea.taxids <- taxid(db.path = getwd(), filter = "Archea", download = TRUE)
@@ -19,7 +21,6 @@
 #' # the 'taxid()' function can be proceed on the local 'categories.dmp' file
 #' # e.g. filter for Virus taxids
 #' Virus.taxids <- taxid(db.path = getwd(), filter = "Viruses")
-#' }
 #' 
 #' @export
 

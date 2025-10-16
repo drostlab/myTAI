@@ -8,7 +8,7 @@
 #' 
 #' @return An S7 property object with validation for allowed options
 #' 
-#' @examples
+#' @details
 #' # Create a property that only accepts specific values
 #' # color_prop <- new_options_property(options = c("red", "blue", "green"))
 #' 
@@ -36,7 +36,7 @@ new_options_property <- function(class = S7::class_any,
 #' 
 #' @return An S7 property object that is required
 #' 
-#' @examples
+#' @details
 #' # Create a required property
 #' # required_prop <- new_required_property(class = class_character, name = "gene_ids")
 #' 

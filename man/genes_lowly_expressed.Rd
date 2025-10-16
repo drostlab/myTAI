@@ -23,6 +23,6 @@ might be candidates for filtering or separate analysis.
 }
 \examples{
 # Select genes with mean expression <= 1
-# low_expr_genes <- genes_lowly_expressed(phyex_set, threshold = 1)
+low_expr_genes <- genes_lowly_expressed(example_phyex_set, threshold = 1)
 
 }

@@ -70,18 +70,19 @@ as a named list where names match the annotation column names.
 }
 \examples{
 # Basic heatmap with gene age annotation
-# p1 <- plot_gene_heatmap(bulk_phyex_set, show_gene_age = TRUE)
+p1 <- plot_gene_heatmap(example_phyex_set, show_gene_age = TRUE)
 
 # Single-cell heatmap with subset of cells
-# p2 <- plot_gene_heatmap(sc_phyex_set, show_reps = TRUE, max_cells_per_type = 3)
+p2 <- plot_gene_heatmap(example_phyex_set_sc, show_reps = TRUE, max_cells_per_type = 3)
 
 # Custom gene annotation example
-# gene_annot <- data.frame(
-#   Category = c("High", "Medium", "Low"),
-#   row.names = c("Gene1", "Gene2", "Gene3")
-# )
-# colors <- list(Category = c("High" = "red", "Medium" = "yellow", "Low" = "blue"))
-# p3 <- plot_gene_heatmap(phyex_set, gene_annotation = gene_annot, 
-#                        gene_annotation_colors = colors, show_gene_age = FALSE)
+gene_ids <- example_phyex_set@gene_ids[1:3]
+gene_annot <- data.frame(
+  Category = c("High", "Medium", "Low"),
+  row.names = gene_ids
+)
+colors <- list(Category = c("High" = "red", "Medium" = "yellow", "Low" = "blue"))
+p3 <- plot_gene_heatmap(example_phyex_set |> select_genes(gene_ids), gene_annotation = gene_annot, 
+                       gene_annotation_colors = colors, show_gene_age = FALSE)
 
 }

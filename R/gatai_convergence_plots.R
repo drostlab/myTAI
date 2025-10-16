@@ -11,8 +11,6 @@
 #' This function identifies genes that appear in at least p proportion of
 #' the input gene sets, providing a consensus set of genes across multiple
 #' GATAI runs.
-#' 
-#' @examples
 #' # Calculate consensus from multiple runs
 #' # consensus_genes <- consensus(gatai_runs, p = 0.5)
 #' 
@@ -43,8 +41,6 @@ consensus <- function(x, p=0.5) {
 #' This function creates a comprehensive visualization of GATAI convergence
 #' including consensus set sizes, p-values, threshold comparisons, and
 #' gene removal patterns across multiple runs.
-#' 
-#' @examples
 #' # Create full convergence plot
 #' # conv_plot <- full_gatai_convergence_plot(phyex_set, gatai_runs)
 #' 
@@ -120,8 +116,6 @@ full_gatai_convergence_plot <- function(phyex_set,
 #' This function creates a petal plot visualization showing the relationship
 #' between individual GATAI runs and the consensus gene set, highlighting
 #' how many genes are unique to each run.
-#' 
-#' @examples
 #' # Create petal plot
 #' # petal <- petal_plot(gatai_runs, p = 0.5)
 #' 
@@ -184,8 +178,6 @@ petal_plot <- function(sets, p=0.5) {
 #' This function analyzes how consensus gene sets and their statistical
 #' significance change as more GATAI runs are included in the analysis.
 #' It uses cached null distributions for efficient p-value calculation.
-#' 
-#' @examples
 #' # Create convergence plots
 #' # conv_plots <- convergence_plots(phyex_set, gatai_runs, ps = c(0.25, 0.5, 0.75))
 #' 
@@ -281,8 +273,6 @@ convergence_plots <- function(phyex_set, runs, ps=c(0.5)) {
 #' number of runs a gene must appear in) affects the final gene set size
 #' and statistical significance. Uses cached null distributions for
 #' efficient p-value calculation.
-#' 
-#' @examples
 #' # Create threshold comparison plots
 #' # thresh_plots <- threshold_comparison_plots(phyex_set, gatai_runs)
 #' 

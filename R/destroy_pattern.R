@@ -21,10 +21,6 @@
 #' that contribute to phylotranscriptomic patterns by iteratively testing gene removal and
 #' evaluating the impact on the overall transcriptomic signature.
 #' 
-#' @examples
-#' # Apply GATAI to identify pattern-contributing genes
-#' # gatai_result <- destroy_pattern(phyex_set, num_runs = 10, runs_threshold = 0.6)
-#' 
 #' @import patchwork
 #' @author Filipa Martins Costa
 #' @export
@@ -141,13 +137,6 @@ destroy_pattern <- function(phyex_set,
 #' including transcriptomic signature plots, gene expression profiles, heatmaps, mean-variance relationships,
 #' phylostrata distributions, conservation test comparisons, and convergence diagnostics.
 #'
-#' @examples
-#' # Run GATAI analysis
-#' # gatai_result <- destroy_pattern(phyex_set, num_runs = 20)
-#' # Plot results
-#' # plots <- plot_gatai_results(phyex_set, gatai_result)
-#' # Print signature plots
-#' # print(plots$signature_plots)
 #'
 #' @author Filipa Martins Costa, Stefan Manolache
 #' @export
@@ -385,10 +374,6 @@ plot_gatai_results <- function(phyex_set,
 #'
 #' @return Invisibly returns the path to the saved PDF.
 #'
-#' @examples
-#' # Save results after running destroy_pattern
-#' # save_gatai_results_pdf("results/", phyex_set, gatai_result)
-#'
 #' @importFrom stats density
 #' @importFrom graphics plot.new title text
 #' @export
@@ -483,13 +468,6 @@ save_gatai_results_pdf <- function(phyex_set,
 #' The intermediate file format contains generation numbers in the first column and TAI values
 #' for each developmental stage in subsequent columns.
 #'
-#' @examples
-#' # Create animation and return object
-#' # anim <- gatai_animate_destruction(phyex_set)
-#' # anim  # Display animation
-#' 
-#' # Save animation to file
-#' # gatai_animate_destruction(phyex_set, save_file = "gatai_destruction.gif")
 #'
 #' @import ggplot2
 #' @importFrom utils read.table

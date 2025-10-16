@@ -39,9 +39,9 @@ are coloured by their group assignments or TAI values.
 }
 \examples{
 # Create PCA plot coloured by identity
-# pca_plot <- plot_sample_space(phyex_set, method = "PCA", colour_by = "identity")
+pca_plot <- plot_sample_space(example_phyex_set, method = "PCA", colour_by = "identity")
 
 # Create UMAP plot coloured by TXI
-# umap_plot <- plot_sample_space(phyex_set, method = "UMAP", colour_by = "TXI")
+umap_plot <- plot_sample_space(example_phyex_set, method = "UMAP", colour_by = "TXI")
 
 }

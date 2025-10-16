@@ -52,21 +52,25 @@ This function creates visualizations appropriate for the data type:
 }
 \examples{
 # Basic signature plot for bulk data
-# p1 <- plot_signature(bulk_phyex_set)
+p1 <- plot_signature(example_phyex_set)
 
 # Bulk plot with replicates and p-value
-# p2 <- plot_signature(bulk_phyex_set, show_reps = TRUE, show_p_val = TRUE)
+p2 <- plot_signature(example_phyex_set, show_reps = TRUE, show_p_val = TRUE)
 
 # Single-cell plot with individual cells
-# p3 <- plot_signature(sc_phyex_set, show_reps = TRUE)
+p3 <- plot_signature(example_phyex_set_sc, show_reps = TRUE)
 
 # Single-cell plot with custom primary identity
-# p4 <- plot_signature(sc_phyex_set, primary_identity = "day")
+p4 <- plot_signature(example_phyex_set_sc, primary_identity = "day")
 
 # Single-cell plot with primary and secondary identities (colored)
-# p5 <- plot_signature(sc_phyex_set, primary_identity = "day", secondary_identity = "condition")
+p5 <- plot_signature(example_phyex_set_sc, 
+                     primary_identity = "day", 
+                     secondary_identity = "condition")
 
 # Single-cell plot with faceting by secondary identity
-# p6 <- plot_signature(sc_phyex_set, primary_identity = "day", 
-#                      secondary_identity = "condition", facet_by_secondary = TRUE)
+p6 <- plot_signature(example_phyex_set_sc, 
+                     primary_identity = "day", 
+                     secondary_identity = "condition", 
+                     facet_by_secondary = TRUE)
 }

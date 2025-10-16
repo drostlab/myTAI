@@ -31,6 +31,9 @@ for comparisons with other stages (default: stage index 1).}
 
 \item{size}{Size of the points.}
 }
+\value{
+A ggplot2 object showing a qqplot of partial TAI distributions
+}
 \description{
 \emph{plot_distribution_partialTAI_qqplot} generates a QQ plot to compare the partial TAI 
 distributions of various developmental stages against a reference stage.

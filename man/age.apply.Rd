@@ -34,32 +34,31 @@ In case you use an anonymous function you could use \code{function(x) apply(x , 
 developmental stage s.
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
  
- # source the example dataset
- data(PhyloExpressionSetExample)
+# source the example dataset
+data(example_phyex_set)
  
 # Example 1
 # get the relative expression profiles for each phylostratum
-age.apply(PhyloExpressionSetExample, RE)
+age.apply(example_phyex_set, relative_expression)
 
 # this is analogous to 
-REMatrix(PhyloExpressionSetExample)
+rel_exp_matrix(example_phyex_set)
 # Example 2
 # compute the mean expression profiles for each phylostratum
-age.apply(PhyloExpressionSetExample, colMeans)
+age.apply(example_phyex_set, colMeans)
 
 # Example 3
 # compute the variance profiles for each phylostratum
-age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , var))
+age.apply(example_phyex_set, function(x) apply(x , 2 , var))
 
 # Example 4
 # compute the range for each phylostratum
 # Note: in this case, the range() function returns 2 values for each phylostratum
 # and each developmental stage, hence one should use the argument 'as.list = TRUE'
 # to make sure that the results are returned properly 
-age.apply(PhyloExpressionSetExample, function(x) apply(x , 2 , range), as.list = TRUE)
-\dontshow{\}) # examplesIf}
+age.apply(example_phyex_set, function(x) apply(x , 2 , range), as.list = TRUE)
+
 }
 \seealso{
 \code{\link{split}}, \code{\link{tapply}}, \code{\link{lapply}}

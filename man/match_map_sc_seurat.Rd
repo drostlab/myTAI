@@ -35,10 +35,3 @@ This is a convenience function that combines phylostratum mapping with Seurat ob
 Only genes present in both the expression data and phylomap will be retained. The function
 extracts all metadata and dimensional reductions from the Seurat object.
 }
-\examples{
-\dontrun{
-# Match Seurat object with phylostratum map
-sc_set <- match_map_sc_seurat(seurat_obj, phylo_map, layer = "counts")
-}
-
-}

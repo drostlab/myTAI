@@ -25,9 +25,3 @@ The returned expression matrix is converted to dense format and maintains column
 from the original matrix. Useful for creating balanced subsets for visualization or
 when memory is limited.
 }
-\examples{
-\dontrun{
-# Downsample expression matrix to 5 samples per group
-downsampled <- downsample_expression(expr_matrix, groups, downsample = 5)
-}
-}

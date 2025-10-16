@@ -21,12 +21,6 @@
 #' 3. Fitting the specified distribution to the null sample
 #' 4. Computing p-values based on the alternative hypothesis
 #' 
-#' @examples
-#' # Perform a custom conservation test
-#' # result <- stat_generic_conservation_test(phyex_set, 
-#' #                                    test_name = "Custom Test",
-#' #                                    scoring_function = var,
-#' #                                    fitting_dist = distributions$gamma)
 #' 
 #' @seealso \code{\link{stat_flatline_test}}, \code{\link{stat_early_conservation_test}}
 stat_generic_conservation_test <- function(phyex_set,
@@ -95,7 +89,11 @@ stat_generic_conservation_test <- function(phyex_set,
 #' 
 #' @examples
 #' # Diagnose flatline test robustness
-#' # robustness <- diagnose_test_robustness(stat_flatline_test, phyex_set)
+#' robustness <- diagnose_test_robustness(stat_flatline_test, 
+#'                                        example_phyex_set,
+#'                                        sample_sizes=c(10,20),
+#'                                        plot_result=FALSE,
+#'                                        num_reps=3)
 #' 
 #' @import ggplot2
 #' 
@@ -108,7 +106,8 @@ diagnose_test_robustness <- function(test,
                                      ...) {
 
     f <- function(size) {
-        null_txis <- stat_generate_conservation_txis(phyex_set,
+        null_txis <- stat_generate_conservation_txis(phyex_set@strata,
+                                                     phyex_set@expression_collapsed,
                                                      sample_size=size)
         return(test(phyex_set, custom_null_txis=null_txis, ..., plot_result=FALSE))
     }

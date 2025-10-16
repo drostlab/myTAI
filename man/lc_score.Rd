@@ -25,11 +25,8 @@ The score is computed as the minimum of:
 - D2: mean(mid) - mean(late)
 
 Higher scores indicate stronger late conservation patterns.
-}
-\examples{
 # Compute late conservation score
 # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 # score <- lc_score(txi_values, modules)
-
 }
 \keyword{internal}

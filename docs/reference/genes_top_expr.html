@@ -11,7 +11,7 @@ Generic function to select genes with the highest values for a given expression 
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,13 +92,13 @@ or custom functions for other metrics.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Select top 1% most expressed genes by mean</span></span></span>
-<span class="r-in"><span><span class="co"># high_expr_genes &lt;- genes_top_expr(phyex_set, rowMeans, p = 0.99)</span></span></span>
+<span class="r-in"><span><span class="va">high_expr_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span>, p <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select top 5% most variable genes</span></span></span>
-<span class="r-in"><span><span class="co"># high_var_genes &lt;- genes_top_expr(phyex_set, rowVars, p = 0.95)</span></span></span>
+<span class="r-in"><span><span class="va">high_var_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span>, p <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Select top genes by median expression</span></span></span>
-<span class="r-in"><span><span class="co"># high_median_genes &lt;- genes_top_expr(phyex_set, function(x) apply(x, 1, median), p = 0.9)</span></span></span>
+<span class="r-in"><span><span class="va">high_median_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">median</span><span class="op">)</span>, p <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -107,7 +107,7 @@ or custom functions for other metrics.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Stefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">

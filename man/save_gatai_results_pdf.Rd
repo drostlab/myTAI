@@ -29,8 +29,3 @@ Invisibly returns the path to the saved PDF.
 \description{
 Save removed gene IDs and all GATAI analysis plots to a PDF file.
 }
-\examples{
-# Save results after running destroy_pattern
-# save_gatai_results_pdf("results/", phyex_set, gatai_result)
-
-}

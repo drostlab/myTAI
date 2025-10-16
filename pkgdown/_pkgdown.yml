@@ -143,6 +143,7 @@ reference:
       - COUNT_TRANSFORMS
       - PS_colours
       - save_gatai_results_pdf
+      - gatai_animate_destruction
       - print.TestResult
       - rename_phyex_set
       - TI_map

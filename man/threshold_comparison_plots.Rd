@@ -27,10 +27,7 @@ This function analyzes how the choice of consensus threshold (minimum
 number of runs a gene must appear in) affects the final gene set size
 and statistical significance. Uses cached null distributions for
 efficient p-value calculation.
-}
-\examples{
 # Create threshold comparison plots
 # thresh_plots <- threshold_comparison_plots(phyex_set, gatai_runs)
-
 }
 \keyword{internal}

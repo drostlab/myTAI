@@ -22,10 +22,7 @@
 #' 
 #' @examples
 #' # Plot signature across expression quantiles for bulk data
-#' # p <- plot_signature_gene_quantiles(bulk_phyex_set)
-#' 
-#' # Single-cell data with custom quantiles
-#' # p2 <- plot_signature_gene_quantiles(sc_phyex_set, quantiles = c(1.0, 0.95, 0.90))
+#' p <- plot_signature_gene_quantiles(example_phyex_set, quantiles = c(0.95, 0.90))
 #' 
 #' @import purrr
 #' @export

@@ -16,8 +16,3 @@ Numeric vector of TEI values for each identity
 Calculate the transcriptomic evolutionary index values for a PhyloExpressionSet.
 This function provides backward compatibility with the old TEI() function.
 }
-\examples{
-# Calculate TEI values
-# tei_values <- TEI(phyex_set)
-
-}

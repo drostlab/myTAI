@@ -18,13 +18,15 @@ or whether a local version already exists on the users machine (\code{download =
 \item{filter}{a character string specifying the kingdom of life for which taxids shall be returned. Options are
 \code{"Archea"}, \code{"Bacteria"}, \code{"Eukaryota"}, \code{"Viruses"}, \code{"Unclassified"}.}
 }
+\value{
+A tibble object containing taxonomy category information
+}
 \description{
 This function retrieves category information 
 from NCBI Taxonomy and is able to filter kingdom specific taxids.
 }
 \examples{
 \dontshow{if (FALSE ) withAutoprint(\{ # examplesIf}
-\dontrun{
 # download categories.dmp file to current working directory 
 # and filter for 'Archea' taxids
 Archea.taxids <- taxid(db.path = getwd(), filter = "Archea", download = TRUE)
@@ -33,7 +35,6 @@ Archea.taxids <- taxid(db.path = getwd(), filter = "Archea", download = TRUE)
 # the 'taxid()' function can be proceed on the local 'categories.dmp' file
 # e.g. filter for Virus taxids
 Virus.taxids <- taxid(db.path = getwd(), filter = "Viruses")
-}
 \dontshow{\}) # examplesIf}
 }
 \author{

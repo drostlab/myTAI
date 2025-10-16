@@ -29,15 +29,17 @@
 #' 
 #' @examples
 #' # Compare multiple bulk datasets
-#' # bulk_list <- c(bulk_phyex_set1, bulk_phyex_set2)
-#' # p <- plot_signature_multiple(bulk_list, legend_title = "Dataset")
+#' bulk_list <- c(example_phyex_set, 
+#'   example_phyex_set |> remove_genes(example_phyex_set@gene_ids[1:5]))
+#' p <- plot_signature_multiple(bulk_list, legend_title = "Dataset")
 #' 
 #' # Compare single-cell datasets
-#' # sc_list <- c(sc_phyex_set1, sc_phyex_set2)
-#' # p2 <- plot_signature_multiple(sc_list, legend_title = "Cell Type")
+#' sc_list <- c(example_phyex_set_sc, 
+#'   example_phyex_set_sc |> remove_genes(example_phyex_set_sc@gene_ids[1:5]))
+#' p2 <- plot_signature_multiple(sc_list, legend_title = "Cell Type")
 #' 
 #' # With transformation
-#' # p3 <- plot_signature_multiple(bulk_list, transformation = log1p)
+#' p3 <- plot_signature_multiple(bulk_list, transformation = log1p)
 #' 
 #'
 #' @import ggplot2 purrr

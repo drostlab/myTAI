@@ -19,6 +19,6 @@ Extract a subset of genes from a PhyloExpressionSet object.
 }
 \examples{
 # Select specific genes
-# selected_set <- select_genes(phyex_set, c("gene1", "gene2", "gene3"))
+selected_set <- select_genes(example_phyex_set, example_phyex_set@gene_ids[1:10])
 
 }

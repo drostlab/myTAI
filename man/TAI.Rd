@@ -18,6 +18,6 @@ This function provides backward compatibility with the old TAI() function.
 }
 \examples{
 # Calculate TAI values
-# tai_values <- TAI(phyex_set)
+tai_values <- TAI(example_phyex_set)
 
 }

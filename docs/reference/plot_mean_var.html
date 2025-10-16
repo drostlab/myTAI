@@ -9,7 +9,7 @@ and variance for genes, colored by phylostratum, with optional highlighting and 
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,13 +90,14 @@ or averaged across cells per cell type for single-cell data).</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create mean-variance plot for bulk data</span></span></span>
-<span class="r-in"><span><span class="co"># mv_plot &lt;- plot_mean_var(bulk_phyex_set)</span></span></span>
+<span class="r-in"><span><span class="va">mv_plot</span> <span class="op">&lt;-</span> <span class="fu">plot_mean_var</span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Highlight and label specific genes in single-cell data</span></span></span>
-<span class="r-in"><span><span class="co"># mv_plot_sc &lt;- plot_mean_var(sc_phyex_set, highlight_genes = c("GeneA", "GeneB"))</span></span></span>
+<span class="r-in"><span><span class="va">mv_plot_sc</span> <span class="op">&lt;-</span> <span class="fu">plot_mean_var</span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, </span></span>
+<span class="r-in"><span>  highlight_genes <span class="op">=</span> <span class="va">example_phyex_set_sc</span><span class="op">@</span><span class="va">gene_ids</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Color by phylostratum</span></span></span>
-<span class="r-in"><span><span class="co"># mv_plot_colored &lt;- plot_mean_var(phyex_set, colour_by = "strata")</span></span></span>
+<span class="r-in"><span><span class="va">mv_plot_colored</span> <span class="op">&lt;-</span> <span class="fu">plot_mean_var</span><span class="op">(</span><span class="va">example_phyex_set</span>, colour_by <span class="op">=</span> <span class="st">"strata"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -105,7 +106,7 @@ or averaged across cells per cell type for single-cell data).</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Stefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">

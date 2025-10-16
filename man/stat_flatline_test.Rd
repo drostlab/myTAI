@@ -25,7 +25,7 @@ distribution. A significant result indicates rejection of the flat line pattern.
 }
 \examples{
 # Perform flat line test
-# result <- stat_flatline_test(phyex_set)
+result <- stat_flatline_test(example_phyex_set)
 
 }
 \seealso{

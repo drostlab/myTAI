@@ -16,8 +16,3 @@ Numeric vector of TPI values for each identity
 Calculate the transcriptomic polymorphism index values for a PhyloExpressionSet.
 This function provides backward compatibility with the old TPI() function.
 }
-\examples{
-# Calculate TPI values
-# tpi_values <- TPI(phyex_set)
-
-}

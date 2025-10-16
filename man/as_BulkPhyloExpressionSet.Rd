@@ -23,6 +23,9 @@ as_BulkPhyloExpressionSet(
 
 \item{...}{Additional arguments passed to BulkPhyloExpressionSet_from_df}
 }
+\value{
+A BulkPhyloExpressionSet object
+}
 \description{
 This function is an alias for \code{BulkPhyloExpressionSet_from_df}. 
 Please refer to the documentation for \code{BulkPhyloExpressionSet_from_df} for usage details, arguments, and examples.

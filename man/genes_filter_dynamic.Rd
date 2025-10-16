@@ -21,10 +21,7 @@ Filter genes based on expression variance to select the most dynamically express
 This function calculates the variance for each gene across samples and retains
 only genes with variance above the specified quantile threshold. This helps
 focus analysis on genes that show significant expression changes.
-}
-\examples{
-# Filter top 10\% most variable genes
+# Filter top 10% most variable genes
 # filtered_expr <- genes_filter_dynamic(expression_matrix, thr = 0.9)
-
 }
 \keyword{internal}

@@ -31,11 +31,8 @@ whether phylotranscriptomic patterns are consistent across different
 normalization and transformation methods.
 }
 \examples{
-# Compare signatures under all default transformations for bulk data
-# p <- plot_signature_transformed(bulk_phyex_set)
-
 # Single-cell data with custom transformations
-# custom_transforms <- list(raw = identity, log = log1p)
-# p2 <- plot_signature_transformed(sc_phyex_set, transformations = custom_transforms)
+custom_transforms <- list(raw = identity, log = log1p)
+p <- plot_signature_transformed(example_phyex_set, transformations = custom_transforms)
 
 }

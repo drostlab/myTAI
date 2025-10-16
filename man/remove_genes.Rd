@@ -28,7 +28,7 @@ Remove specified genes from a PhyloExpressionSet object.
 }
 \examples{
 # Remove specific genes
-# filtered_set <- remove_genes(phyex_set, c("gene1", "gene2"), 
-#                             new_name = "Filtered Dataset")
+filtered_set <- remove_genes(example_phyex_set, example_phyex_set@gene_ids[1:5], 
+                            new_name = "Filtered Dataset")
 
 }

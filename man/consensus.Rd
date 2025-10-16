@@ -22,10 +22,7 @@ frequency threshold.
 This function identifies genes that appear in at least p proportion of
 the input gene sets, providing a consensus set of genes across multiple
 GATAI runs.
-}
-\examples{
 # Calculate consensus from multiple runs
 # consensus_genes <- consensus(gatai_runs, p = 0.5)
-
 }
 \keyword{internal}

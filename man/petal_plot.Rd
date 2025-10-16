@@ -22,10 +22,7 @@ relative to the consensus set.
 This function creates a petal plot visualization showing the relationship
 between individual GATAI runs and the consensus gene set, highlighting
 how many genes are unique to each run.
-}
-\examples{
 # Create petal plot
 # petal <- petal_plot(gatai_runs, p = 0.5)
-
 }
 \keyword{internal}

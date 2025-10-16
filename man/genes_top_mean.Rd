@@ -23,6 +23,6 @@ which are often the most reliably detected and functionally important.
 }
 \examples{
 # Select top 1\% most expressed genes by mean
-# high_expr_genes <- genes_top_mean(phyex_set, p = 0.99)
+high_expr_genes <- genes_top_mean(example_phyex_set, p = 0.99)
 
 }

@@ -20,8 +20,3 @@ best fits the null sample data.
 The Cullen-Frey diagram plots skewness vs. kurtosis to help identify
 appropriate distribution families for the null sample data.
 }
-\examples{
-# Create Cullen-Frey diagram
-# cf_plot <- plot_cullen_frey(test_result)
-
-}

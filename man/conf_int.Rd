@@ -17,9 +17,8 @@ Numeric vector of quantiles from the null distribution
 \description{
 Calculate confidence intervals for the null distribution of a test result.
 }
-\examples{
-# Calculate 95\% confidence intervals
+\details{
+# Calculate 95% confidence intervals
 # ci <- conf_int(test_result, probs = c(0.025, 0.975))
-
 }
 \keyword{internal}

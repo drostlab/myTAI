@@ -40,6 +40,10 @@ for reliable testing.
 }
 \examples{
 # Diagnose flatline test robustness
-# robustness <- diagnose_test_robustness(stat_flatline_test, phyex_set)
+robustness <- diagnose_test_robustness(stat_flatline_test, 
+                                       example_phyex_set,
+                                       sample_sizes=c(10,20),
+                                       plot_result=FALSE,
+                                       num_reps=3)
 
 }

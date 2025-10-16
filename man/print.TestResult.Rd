@@ -14,9 +14,8 @@ Invisibly returns the TestResult object
 \description{
 Print method for TestResult objects showing test summary information.
 }
-\examples{
+\details{
 # Print a test result
 # print(test_result)
-
 }
 \keyword{internal}

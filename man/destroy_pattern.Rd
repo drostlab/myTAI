@@ -53,11 +53,6 @@ This function requires the gataiR package to be installed. GATAI systematically 
 that contribute to phylotranscriptomic patterns by iteratively testing gene removal and
 evaluating the impact on the overall transcriptomic signature.
 }
-\examples{
-# Apply GATAI to identify pattern-contributing genes
-# gatai_result <- destroy_pattern(phyex_set, num_runs = 10, runs_threshold = 0.6)
-
-}
 \author{
 Filipa Martins Costa
 }

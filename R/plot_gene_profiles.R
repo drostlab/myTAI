@@ -26,11 +26,10 @@
 #' 
 #' @examples
 #' # Plot specific genes for bulk data
-#' # p1 <- plot_gene_profiles(bulk_phyex_set, genes = c("gene1", "gene2", "gene3"))
+#' p1 <- plot_gene_profiles(example_phyex_set, genes = example_phyex_set@gene_ids[1:5])
 #' 
 #' # Plot for single-cell data with faceting by strata
-#' # p2 <- plot_gene_profiles(sc_phyex_set, facet_by_strata = TRUE)
-#' # p2 <- plot_gene_profiles(phyex_set, facet_by_strata = TRUE)
+#' p2 <- plot_gene_profiles(example_phyex_set_sc, facet_by_strata = TRUE)
 #' 
 #' @author Filipa Martins Costa, Stefan Manolache, Hajk-Georg Drost
 #' 

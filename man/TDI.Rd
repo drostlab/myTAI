@@ -16,8 +16,3 @@ Numeric vector of TDI values for each identity
 Calculate the transcriptomic divergence index values for a PhyloExpressionSet.
 This function provides backward compatibility with the old TDI() function.
 }
-\examples{
-# Calculate TDI values
-# tdi_values <- TDI(phyex_set)
-
-}

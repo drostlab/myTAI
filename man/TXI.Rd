@@ -18,6 +18,6 @@ This function provides backward compatibility with the old TXI() function.
 }
 \examples{
 # Calculate TXI values
-# txi_values <- TXI(phyex_set)
+txi_values <- TXI(example_phyex_set)
 
 }

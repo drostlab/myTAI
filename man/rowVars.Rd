@@ -20,11 +20,8 @@ Calculate the variance for each row of a matrix or data frame.
 \details{
 This function computes the sample variance for each row using the formula:
 var = sum((x - mean(x))^2) / (n - 1)
-}
-\examples{
 # Calculate row variances for a matrix
 # mat <- matrix(1:12, nrow = 3)
 # row_vars <- rowVars(mat)
-
 }
 \keyword{internal}

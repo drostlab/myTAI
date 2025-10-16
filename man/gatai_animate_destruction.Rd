@@ -45,12 +45,3 @@ progressively removed. The animation shows:
 The intermediate file format contains generation numbers in the first column and TAI values
 for each developmental stage in subsequent columns.
 }
-\examples{
-# Create animation and return object
-# anim <- gatai_animate_destruction(phyex_set)
-# anim  # Display animation
-
-# Save animation to file
-# gatai_animate_destruction(phyex_set, save_file = "gatai_destruction.gif")
-
-}

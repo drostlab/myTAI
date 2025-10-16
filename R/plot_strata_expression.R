@@ -18,10 +18,10 @@
 #' 
 #' @examples
 #' # Plot expression by strata using mean aggregation for bulk data
-#' # p1 <- plot_strata_expression(bulk_phyex_set, aggregate_FUN = mean)
+#' p1 <- plot_strata_expression(example_phyex_set, aggregate_FUN = mean)
 #' 
 #' # Plot using median aggregation for single-cell data
-#' # p2 <- plot_strata_expression(sc_phyex_set, aggregate_FUN = median)
+#' p2 <- plot_strata_expression(example_phyex_set_sc, aggregate_FUN = median)
 #' 
 #' @import ggplot2 
 #' @export

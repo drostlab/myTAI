@@ -26,11 +26,8 @@ The score is computed as the minimum of:
 
 Higher scores indicate stronger reverse hourglass patterns (mid stages
 dominated by younger genes).
-}
-\examples{
 # Compute reverse hourglass score
 # modules <- list(early = 1:3, mid = 4:6, late = 7:9)
 # score <- reverse_hourglass_score(txi_values, modules)
-
 }
 \keyword{internal}

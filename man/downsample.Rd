@@ -24,12 +24,10 @@ by the current \code{selected_idents} grouping. All metadata and reductions are
 filtered to match the selected cells.
 }
 \examples{
-\dontrun{
 # Downsample to 20 cells per identity
-small_set <- downsample(sc_phyex_set, downsample = 20)
+small_set <- downsample(example_phyex_set_sc, downsample = 20)
 
 # Change grouping and downsample
-sc_phyex_set@selected_idents <- "treatment"
-treatment_set <- downsample(sc_phyex_set, downsample = 15)
-}
+example_phyex_set_sc@selected_idents <- "day"
+treatment_set <- downsample(example_phyex_set_sc, downsample = 15)
 }

@@ -12,12 +12,10 @@ geom_mean(x)
 \description{
 This function computes the geometric mean of a numeric input vector \code{x}.
 }
-\examples{
-\dontshow{if (FALSE ) withAutoprint(\{ # examplesIf}
+\details{
 x <- 1:10
 
 geom_mean(x)
-\dontshow{\}) # examplesIf}
 }
 \author{
 Hajk-Georg Drost

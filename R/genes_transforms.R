@@ -76,7 +76,7 @@ tf <- transform_counts
 #' 
 #' @examples
 #' # Normalise to 1 million total expression per sample
-#' # normalised_set <- normalise_stage_expression(phyex_set, total = 1e6)
+#' normalised_set <- normalise_stage_expression(example_phyex_set, total = 1e6)
 #' 
 #' @export
 normalise_stage_expression <- function(phyex_set, total=1e6) {
@@ -96,8 +96,6 @@ normalise_stage_expression <- function(phyex_set, total=1e6) {
 #' and dividing by the standard deviation. Genes with zero or undefined variance
 #' are set to zero. This is useful for comparing expression patterns across genes
 #' with different absolute expression levels.
-#' 
-#' @examples
 #' # Standardise expression data
 #' # std_expr <- .to_std_expr(expression_matrix)
 #' 

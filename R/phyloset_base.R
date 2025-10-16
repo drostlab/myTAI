@@ -29,6 +29,8 @@ TI_map <- list(TXI = "Transcriptomic Index",
 #' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
 #' @param .null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' 
+#' @return A PhyloExpressionSetBase object
+#' 
 #' @details
 #' The PhyloExpressionSetBase class serves as the foundation for phylotranscriptomic analysis,
 #' providing shared functionality for both bulk and single-cell data types.
@@ -272,7 +274,7 @@ S7::method(print, PhyloExpressionSetBase) <- function(x, ...) {
 #' 
 #' @examples
 #' # Collapse replicates in a PhyloExpressionSet
-#' # collapsed_set <- collapse(phyex_set)
+#' collapsed_set <- collapse(example_phyex_set)
 #' 
 #' @export
 collapse <- S7::new_generic("collapse", "phyex_set")
@@ -287,7 +289,7 @@ collapse <- S7::new_generic("collapse", "phyex_set")
 #' 
 #' @examples
 #' # Select specific genes
-#' # selected_set <- select_genes(phyex_set, c("gene1", "gene2", "gene3"))
+#' selected_set <- select_genes(example_phyex_set, example_phyex_set@gene_ids[1:10])
 #' 
 #' @export
 select_genes <- S7::new_generic("select_genes", "phyex_set")
@@ -306,8 +308,8 @@ select_genes <- S7::new_generic("select_genes", "phyex_set")
 #' 
 #' @examples
 #' # Calculate sTXI values
-#' # stxi_values <- sTXI(phyex_set, option = "identity")
-#' # stxi_cumsum <- sTXI(phyex_set, option = "add")
+#' stxi_values <- sTXI(example_phyex_set, option = "identity")
+#' stxi_cumsum <- sTXI(example_phyex_set, option = "add")
 #' 
 #' @export
 sTXI <- function(phyex_set,
@@ -352,8 +354,8 @@ pTXI <- function(phyex_set, reps=FALSE) {
 #' 
 #' @examples
 #' # Remove specific genes
-#' # filtered_set <- remove_genes(phyex_set, c("gene1", "gene2"), 
-#' #                             new_name = "Filtered Dataset")
+#' filtered_set <- remove_genes(example_phyex_set, example_phyex_set@gene_ids[1:5], 
+#'                             new_name = "Filtered Dataset")
 #' 
 #' @export
 remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "perturbed"), reuse_null_txis = TRUE) {
@@ -381,7 +383,7 @@ remove_genes <- function(phyex_set, genes, new_name = paste(phyex_set@name, "per
 #' 
 #' @examples
 #' # Calculate TXI values
-#' # txi_values <- TXI(phyex_set)
+#' txi_values <- TXI(example_phyex_set)
 #' 
 #' @export
 TXI <- function(phyex_set) {
@@ -398,7 +400,7 @@ TXI <- function(phyex_set) {
 #' 
 #' @examples
 #' # Calculate TAI values
-#' # tai_values <- TAI(phyex_set)
+#' tai_values <- TAI(example_phyex_set)
 #' 
 #' @export
 TAI <- function(phyex_set) {
@@ -413,9 +415,6 @@ TAI <- function(phyex_set) {
 #' 
 #' @return Numeric vector of TDI values for each identity
 #' 
-#' @examples
-#' # Calculate TDI values
-#' # tdi_values <- TDI(phyex_set)
 #' 
 #' @export
 TDI <- function(phyex_set) {
@@ -430,9 +429,6 @@ TDI <- function(phyex_set) {
 #' 
 #' @return Numeric vector of TEI values for each identity
 #' 
-#' @examples
-#' # Calculate TEI values
-#' # tei_values <- TEI(phyex_set)
 #' 
 #' @export
 TEI <- function(phyex_set) {
@@ -447,9 +443,6 @@ TEI <- function(phyex_set) {
 #' 
 #' @return Numeric vector of TPI values for each identity
 #' 
-#' @examples
-#' # Calculate TPI values
-#' # tpi_values <- TPI(phyex_set)
 #' 
 #' @export
 TPI <- function(phyex_set) {

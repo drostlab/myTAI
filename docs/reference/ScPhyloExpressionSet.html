@@ -11,7 +11,7 @@ reductions and pseudobulking functionality."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -143,6 +143,10 @@ reductions and pseudobulking functionality.</p>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A ScPhyloExpressionSet object</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The ScPhyloExpressionSet class provides a comprehensive framework for single-cell
 phylotranscriptomic analysis. Key features include:</p>
@@ -177,19 +181,19 @@ Several properties are computed automatically when accessed:</p><ul><li><p><code
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Create from Seurat object</span></span></span>
-<span class="r-in"><span><span class="va">sc_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="ScPhyloExpressionSet_from_seurat.html">ScPhyloExpressionSet_from_seurat</a></span><span class="op">(</span><span class="va">seurat_obj</span>, <span class="va">strata</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create from Seurat object</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sc_set</span> <span class="op">&lt;-</span> <span class="va">example_phyex_set_sc</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Switch to different cell grouping</span></span></span>
-<span class="r-in"><span><span class="va">sc_set</span><span class="op">@</span><span class="va">selected_idents</span> <span class="op">&lt;-</span> <span class="st">"development_stage"</span></span></span>
+<span class="r-in"><span><span class="va">sc_set</span><span class="op">@</span><span class="va">selected_idents</span> <span class="op">&lt;-</span> <span class="st">"day"</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: Matrix</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Access pseudobulked data (computed automatically)</span></span></span>
+<span class="r-in"><span><span class="co"># Access pseudobulked data (computed au  tomatically)</span></span></span>
 <span class="r-in"><span><span class="va">pseudobulk</span> <span class="op">&lt;-</span> <span class="va">sc_set</span><span class="op">@</span><span class="va">expression_collapsed</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Access TXI values for each cell</span></span></span>
 <span class="r-in"><span><span class="va">txi_values</span> <span class="op">&lt;-</span> <span class="va">sc_set</span><span class="op">@</span><span class="va">TXI_sample</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -198,7 +202,7 @@ Several properties are computed automatically when accessed:</p><ul><li><p><code
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Hajk-Georg Drost, Jaruwatana Sodai Lotharukpong, Stefan Manolache, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
+  <p>Developed by Hajk-Georg Drost, Stefan Manolache, Jaruwatana Sodai Lotharukpong, Nikola Kalábová, Filipa Martins Costa, Kristian K Ullrich.</p>
 </div>
 
 <div class="pkgdown-footer-right">

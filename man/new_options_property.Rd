@@ -26,9 +26,8 @@ An S7 property object with validation for allowed options
 \description{
 Helper function to create an S7 property with a limited set of valid options.
 }
-\examples{
+\details{
 # Create a property that only accepts specific values
 # color_prop <- new_options_property(options = c("red", "blue", "green"))
-
 }
 \keyword{internal}

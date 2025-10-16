@@ -19,6 +19,6 @@ Normalise expression data to a specified total expression level per sample.
 }
 \examples{
 # Normalise to 1 million total expression per sample
-# normalised_set <- normalise_stage_expression(phyex_set, total = 1e6)
+normalised_set <- normalise_stage_expression(example_phyex_set, total = 1e6)
 
 }
