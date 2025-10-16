@@ -52,17 +52,14 @@ All datasets must use the same axis labels (developmental stages or cell types).
 # Compare multiple bulk datasets
 phyex_set <- example_phyex_set |>
     select_genes(example_phyex_set@gene_ids[1:100])
+phyex_set@null_conservation_sample_size <- 500
+
 bulk_list <- c(phyex_set, 
   phyex_set |> remove_genes(phyex_set@gene_ids[1:5]))
 p <- plot_signature_multiple(bulk_list, legend_title = "Dataset")
 
-# Compare single-cell datasets
-sc_list <- c(example_phyex_set_sc, 
-  example_phyex_set_sc |> remove_genes(example_phyex_set_sc@gene_ids[1:5]))
-p2 <- plot_signature_multiple(sc_list, legend_title = "Cell Type")
-
 # With transformation
-p3 <- plot_signature_multiple(bulk_list, transformation = log1p)
+p2 <- plot_signature_multiple(bulk_list, transformation = log1p)
 
 
 }
