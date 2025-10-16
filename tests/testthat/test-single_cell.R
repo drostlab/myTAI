@@ -71,8 +71,10 @@ test_that("Single-cell sample space plots work", {
     expect_s3_class(p_pca, "ggplot")
     
     # Test UMAP plot (should use stored reductions)
-    p_umap <- plot_sample_space(example_phyex_set_sc, method = "UMAP")
-    expect_s3_class(p_umap, "ggplot")
+    if (requireNamespace("uwot", quietly = TRUE)) {
+        p_umap <- plot_sample_space(example_phyex_set_sc, method = "UMAP")
+        expect_s3_class(p_umap, "ggplot")
+    }
     
     # Test with different coloring
     p_color <- plot_sample_space(example_phyex_set_sc, method = "PCA", colour_by = "identity")

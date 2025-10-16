@@ -23,7 +23,9 @@
 #' pca_plot <- plot_sample_space(example_phyex_set, method = "PCA", colour_by = "identity")
 #' 
 #' # Create UMAP plot coloured by TXI
-#' umap_plot <- plot_sample_space(example_phyex_set, method = "UMAP", colour_by = "TXI")
+#' if (requireNamespace("uwot", quietly = TRUE)) {
+#'     umap_plot <- plot_sample_space(example_phyex_set, method = "UMAP", colour_by = "TXI")
+#' }
 #' 
 #' @import ggplot2
 #' @export
