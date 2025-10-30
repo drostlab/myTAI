@@ -30,21 +30,12 @@
 #' 
 #' @examples
 #' phyex_set <- example_phyex_set |>
-#'     select_genes(example_phyex_set@gene_ids[1:100])
-#' phyex_set@null_conservation_sample_size <- 500
+#'     select_genes(example_phyex_set@gene_ids[1:50])
+#' phyex_set@null_conservation_sample_size <- 100
 #' 
 #' # Basic signature plot for bulk data
-#' p1 <- plot_signature(example_phyex_set)
+#' p <- plot_signature(example_phyex_set)
 #' 
-#' phyex_set_sc <- example_phyex_set_sc |>
-#'      select_genes(example_phyex_set_sc@gene_ids[1:100])
-#' phyex_set_sc@null_conservation_sample_size <- 500
-#' 
-#' # Single-cell plot with faceting by secondary identity
-#' p2 <- plot_signature(phyex_set_sc, 
-#'                      primary_identity = "day", 
-#'                      secondary_identity = "condition", 
-#'                      facet_by_secondary = TRUE)
 
 #' @import ggplot2
 #' @importFrom dplyr group_by summarise mutate

@@ -18,8 +18,10 @@
 #' 
 #' @examples
 #' # Define developmental modules
+#' p <- example_phyex_set_old |> 
+#'      select_genes(example_phyex_set_old@gene_ids[1:100])
 #' modules <- list(early = 1:2, mid = 3:5, late = 6:7)
-#' result <- stat_early_conservation_test(example_phyex_set_old, modules=modules)
+#' result <- stat_early_conservation_test(p, modules=modules)
 #' 
 #' @seealso \code{\link{stat_generic_conservation_test}}, \code{\link{stat_late_conservation_test}}
 #' @export
