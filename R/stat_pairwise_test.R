@@ -69,9 +69,6 @@ pair_score <- function(txi,
         stop('`modules` must have the structure: `list(contrast1 = ..., contrast2 = ...)`')
     D_constrast <- mean(txi[modules$contrast1]) - mean(txi[modules$contrast2])
     
-    if(alternative == "less"){
-        D_constrast <- -D_constrast
-    }
     
     return(D_constrast)
 }
