@@ -11,6 +11,7 @@
 #' @param species Character string specifying the species (default: NULL)
 #' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
 #' @param identities_label Character string labeling the identities (default: "Stages")
+#' @param gene_ids Character vector of gene identifiers (default: character(0), auto-generated from expression rownames if not provided)
 #' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
 #' @param .null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' @param .bootstrapped_txis Precomputed bootstrapped TXI values (default: NULL)
@@ -78,7 +79,7 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
                     computed_boot <- memo_generate_bootstrapped_txis(
                         ptxi,
                         self@expression_collapsed,
-                        500
+                        self@null_conservation_sample_size
                     )
                     self@.bootstrapped_txis <- computed_boot
                     return(computed_boot)

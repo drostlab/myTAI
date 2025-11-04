@@ -9,7 +9,7 @@ to assess the robustness of phylotranscriptomic patterns."><meta property="og:im
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,8 +88,12 @@ normalization and transformation methods.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Single-cell data with custom transformations</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">phyex_set</span> <span class="op">&lt;-</span> <span class="va">example_phyex_set</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">custom_transforms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>raw <span class="op">=</span> <span class="va">identity</span>, log <span class="op">=</span> <span class="va">log1p</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_signature_transformed</span><span class="op">(</span><span class="va">example_phyex_set</span>, transformations <span class="op">=</span> <span class="va">custom_transforms</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_signature_transformed</span><span class="op">(</span><span class="va">phyex_set</span>, transformations <span class="op">=</span> <span class="va">custom_transforms</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Computing: [========================================] 100% (done)                         </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

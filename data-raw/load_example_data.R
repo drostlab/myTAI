@@ -17,7 +17,8 @@ example_phyex_set <- BulkPhyloExpressionSet_from_df(data,
                                                     new_name="Embryogenesis 2019",
                                                     reuse_null_txis=FALSE)
 
-top_genes <- example_phyex_set |> genes_top_mean(p=0.93)
-example_phyex_set <- example_phyex_set |> select_genes(top_genes)                                                
-
+top_genes <- example_phyex_set |> genes_top_mean(top_p=0.93)
+example_phyex_set <- example_phyex_set |> select_genes(top_genes)
+example_phyex_set@null_conservation_sample_size <- 50
+plot_signature(example_phyex_set)
 usethis::use_data(example_phyex_set, overwrite = TRUE)

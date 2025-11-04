@@ -11,7 +11,7 @@ reductions and pseudobulking functionality."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +63,7 @@ reductions and pseudobulking functionality.</p>
 <span>  species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
 <span>  index_type <span class="op">=</span> <span class="st">"TXI"</span>,</span>
 <span>  identities_label <span class="op">=</span> <span class="st">"Identities"</span>,</span>
+<span>  gene_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
 <span>  null_conservation_sample_size <span class="op">=</span> <span class="fl">5000L</span>,</span>
 <span>  .null_conservation_txis <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .pseudobulk_cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -108,6 +109,10 @@ reductions and pseudobulking functionality.</p>
 
 <dt id="arg-identities-label">identities_label<a class="anchor" aria-label="anchor" href="#arg-identities-label"></a></dt>
 <dd><p>Character string labeling the identities (default: "Cell Type")</p></dd>
+
+
+<dt id="arg-gene-ids">gene_ids<a class="anchor" aria-label="anchor" href="#arg-gene-ids"></a></dt>
+<dd><p>Character vector of gene identifiers (default: character(0), auto-generated from expression rownames if not provided)</p></dd>
 
 
 <dt id="arg-null-conservation-sample-size">null_conservation_sample_size<a class="anchor" aria-label="anchor" href="#arg-null-conservation-sample-size"></a></dt>

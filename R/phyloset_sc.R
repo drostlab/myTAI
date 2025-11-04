@@ -11,6 +11,7 @@
 #' @param species Character string specifying the species (default: NULL)
 #' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
 #' @param identities_label Character string labeling the identities (default: "Cell Type")
+#' @param gene_ids Character vector of gene identifiers (default: character(0), auto-generated from expression rownames if not provided)
 #' @param metadata Data frame with cell metadata, where rownames correspond to cell IDs and columns contain cell attributes
 #' @param selected_idents Character string specifying which metadata column is currently used for grouping cells
 #' @param reductions List of dimensional reduction matrices (PCA, UMAP, etc.) with cells as rows and dimensions as columns

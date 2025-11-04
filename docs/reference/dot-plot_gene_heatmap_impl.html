@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,11 +54,13 @@
 <span>  <span class="va">gene_ids</span>,</span>
 <span>  <span class="va">num_strata</span>,</span>
 <span>  genes <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  top_p <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  top_p <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  top_k <span class="op">=</span> <span class="fl">30</span>,</span>
 <span>  std <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  cluster_rows <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cluster_cols <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_gene_age <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_phylostrata_legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_gene_ids <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  gene_annotation <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gene_annotation_colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -93,7 +95,11 @@
 
 
 <dt id="arg-top-p">top_p<a class="anchor" aria-label="anchor" href="#arg-top-p"></a></dt>
-<dd><p>Proportion of most dynamic genes to include (default: 0.2)</p></dd>
+<dd><p>Proportion of most dynamic genes to include (default: NULL). Ignored if top_k is specified.</p></dd>
+
+
+<dt id="arg-top-k">top_k<a class="anchor" aria-label="anchor" href="#arg-top-k"></a></dt>
+<dd><p>Absolute number of top genes to select (default: 30). Takes precedence over top_p.</p></dd>
 
 
 <dt id="arg-std">std<a class="anchor" aria-label="anchor" href="#arg-std"></a></dt>
@@ -110,6 +116,10 @@
 
 <dt id="arg-show-gene-age">show_gene_age<a class="anchor" aria-label="anchor" href="#arg-show-gene-age"></a></dt>
 <dd><p>Logical indicating whether to show gene age as row annotation (default: TRUE)</p></dd>
+
+
+<dt id="arg-show-phylostrata-legend">show_phylostrata_legend<a class="anchor" aria-label="anchor" href="#arg-show-phylostrata-legend"></a></dt>
+<dd><p>Logical indicating whether to show the phylostratum legend (default: TRUE)</p></dd>
 
 
 <dt id="arg-show-gene-ids">show_gene_ids<a class="anchor" aria-label="anchor" href="#arg-show-gene-ids"></a></dt>

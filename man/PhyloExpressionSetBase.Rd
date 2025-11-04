@@ -13,6 +13,7 @@ PhyloExpressionSetBase(
   species = character(0),
   index_type = "TXI",
   identities_label = "Identities",
+  gene_ids = character(0),
   null_conservation_sample_size = 5000L,
   .null_conservation_txis = NULL
 )
@@ -33,6 +34,8 @@ PhyloExpressionSetBase(
 \item{index_type}{Character string specifying the transcriptomic index type (default: "TXI")}
 
 \item{identities_label}{Character string labeling the identities (default: "Identities")}
+
+\item{gene_ids}{Character vector of gene identifiers (default: character(0), auto-generated from expression rownames if not provided)}
 
 \item{null_conservation_sample_size}{Numeric value for null conservation sample size (default: 5000)}
 

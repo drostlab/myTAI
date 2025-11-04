@@ -10,7 +10,8 @@ example_phyex_set_old <- BulkPhyloExpressionSet_from_df(data,
                                                     strata_legend=legend,
                                                     identities_label="Stages")
 
-top_genes <- example_phyex_set_old |> genes_top_mean(p=0.9)
+top_genes <- example_phyex_set_old |> genes_top_mean(top_p=0.93)
 example_phyex_set_old <- example_phyex_set_old |> select_genes(top_genes)
-
+example_phyex_set_old@null_conservation_sample_size <- 50
+plot_signature(example_phyex_set_old)
 usethis::use_data(example_phyex_set_old, overwrite = TRUE)

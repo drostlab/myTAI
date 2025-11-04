@@ -8,42 +8,50 @@
 #' 
 #' @param phyex_set A PhyloExpressionSet object
 #' @param FUN Function to calculate gene-wise expression metric (default: rowMeans)
-#' @param p Quantile threshold for gene selection (default: 0.99)
+#' @param top_p Quantile threshold for gene selection (default: 0.99). Ignored if top_k is specified.
+#' @param top_k Absolute number of top genes to select (default: NULL). Takes precedence over top_p.
 #' @param ... Additional arguments passed to FUN
 #' 
-#' @return Character vector of gene IDs with metric values >= p quantile
+#' @return Character vector of gene IDs with metric values >= top_p quantile or top top_k genes
 #' 
 #' @details
 #' This function applies the specified function to calculate a metric for each gene
-#' across samples, then selects genes above the specified quantile threshold.
-#' Common functions include rowMeans for mean expression, rowVars for variance,
-#' or custom functions for other metrics.
+#' across samples, then selects genes above the specified quantile threshold or the
+#' top k genes by absolute count. If both top_p and top_k are specified, top_k takes precedence.
 #' 
 #' @examples
 #' # Select top 1% most expressed genes by mean
-#' high_expr_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), p = 0.99)
+#' high_expr_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), top_p = 0.99)
 #' 
-#' # Select top 5% most variable genes
-#' high_var_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, var), p = 0.95)
-#' 
-#' # Select top genes by median expression
-#' high_median_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, median), p = 0.9)
+#' # Select top 100 most expressed genes
+#' top_100_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), top_k = 100)
 #' 
 #' @export
-genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
+genes_top_expr <- function(phyex_set, FUN = rowMeans, top_p = .99, top_k = NULL, ...) {
     check_PhyloExpressionSet(phyex_set)
     FUN <- match.fun(FUN)
     metric_values <- FUN(phyex_set@expression_collapsed, ...)
     names(metric_values) <- phyex_set@gene_ids
 
-    if (p >= 1) {
-        return(character(0)) # Return no genes if p = 1
+    if (!is.null(top_k)) {
+        if (top_k <= 0) {
+            return(character(0))
+        }
+        if (top_k >= length(metric_values)) {
+            return(names(metric_values))
+        }
+        sorted_genes <- names(sort(metric_values, decreasing = TRUE))
+        return(sorted_genes[1:top_k])
     }
-    if (p <= 0) {
-        return(names(metric_values)) # Return all genes if p = 0
+
+    if (top_p >= 1) {
+        return(character(0))
+    }
+    if (top_p <= 0) {
+        return(names(metric_values))
     }
     
-    top_genes <- names(metric_values)[metric_values > stats::quantile(metric_values, p, na.rm = TRUE)]
+    top_genes <- names(metric_values)[metric_values > stats::quantile(metric_values, top_p, na.rm = TRUE)]
     
     return(top_genes)
 }
@@ -52,9 +60,10 @@ genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
 #' @description Select genes with the highest variance across samples.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
-#' @param p Quantile threshold for gene selection (default: 0.99)
+#' @param top_p Quantile threshold for gene selection (default: 0.99). Ignored if top_k is specified.
+#' @param top_k Absolute number of top genes to select (default: NULL). Takes precedence over top_p.
 #' 
-#' @return Character vector of gene IDs with variance >= p quantile
+#' @return Character vector of gene IDs with variance >= top_p quantile or top top_k genes
 #' 
 #' @details
 #' This function identifies genes with the highest variance across samples,
@@ -62,20 +71,24 @@ genes_top_expr <- function(phyex_set, FUN = rowMeans, p = .99, ...) {
 #' 
 #' @examples
 #' # Select top 1% most variable genes
-#' high_var_genes <- genes_top_variance(example_phyex_set, p = 0.99)
+#' high_var_genes <- genes_top_variance(example_phyex_set, top_p = 0.99)
+#' 
+#' # Select top 500 most variable genes
+#' top_500_var_genes <- genes_top_variance(example_phyex_set, top_k = 500)
 #' 
 #' @export
-genes_top_variance <- function(phyex_set, p = .99) {
-    genes_top_expr(phyex_set, FUN = rowVars, p = p)
+genes_top_variance <- function(phyex_set, top_p = .99, top_k = NULL) {
+    genes_top_expr(phyex_set, FUN = rowVars, top_p = top_p, top_k = top_k)
 }
 
 #' @title Select Top Mean Expressed Genes
 #' @description Select genes with the highest mean expression across samples.
 #' 
 #' @param phyex_set A PhyloExpressionSet object
-#' @param p Quantile threshold for gene selection (default: 0.99)
+#' @param top_p Quantile threshold for gene selection (default: 0.99). Ignored if top_k is specified.
+#' @param top_k Absolute number of top genes to select (default: NULL). Takes precedence over top_p.
 #' 
-#' @return Character vector of gene IDs with mean expression >= p quantile
+#' @return Character vector of gene IDs with mean expression >= top_p quantile or top top_k genes
 #' 
 #' @details
 #' This function identifies genes with the highest mean expression levels,
@@ -83,11 +96,14 @@ genes_top_variance <- function(phyex_set, p = .99) {
 #' 
 #' @examples
 #' # Select top 1% most expressed genes by mean
-#' high_expr_genes <- genes_top_mean(example_phyex_set, p = 0.99)
+#' high_expr_genes <- genes_top_mean(example_phyex_set, top_p = 0.99)
+#' 
+#' # Select top 1000 most expressed genes
+#' top_1000_genes <- genes_top_mean(example_phyex_set, top_k = 1000)
 #' 
 #' @export
-genes_top_mean <- function(phyex_set, p = .99) {
-    genes_top_expr(phyex_set, FUN = rowMeans, p = p)
+genes_top_mean <- function(phyex_set, top_p = .99, top_k = NULL) {
+    genes_top_expr(phyex_set, FUN = rowMeans, top_p = top_p, top_k = top_k)
 }
 
 #' @title Select Lowly Expressed Genes

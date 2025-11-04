@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,8 +139,8 @@ Show output
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Flat Line Test </span></span>
-<span><span class="co">## Test statistic: 0.02864928 </span></span>
-<span><span class="co">## P-value: 7.063146e-07 </span></span>
+<span><span class="co">## Test statistic: 0.03103926 </span></span>
+<span><span class="co">## P-value: 2.540886e-05 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>We can see a histogram of the <strong>null</strong> distribution
@@ -173,12 +173,12 @@ Show output
 <p><img src="tai-stats_files/figure-html/unnamed-chunk-7-1.png" alt="plot_cullen_frey function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## summary statistics</span></span>
 <span><span class="co">## ------</span></span>
-<span><span class="co">## min:  2.492963e-05   max:  0.0311538 </span></span>
-<span><span class="co">## median:  0.002239929 </span></span>
-<span><span class="co">## mean:  0.002976196 </span></span>
-<span><span class="co">## estimated sd:  0.002606176 </span></span>
-<span><span class="co">## estimated skewness:  2.376258 </span></span>
-<span><span class="co">## estimated kurtosis:  13.62014</span></span></code></pre>
+<span><span class="co">## min:  0.0003148019   max:  0.01559003 </span></span>
+<span><span class="co">## median:  0.003355335 </span></span>
+<span><span class="co">## mean:  0.004021331 </span></span>
+<span><span class="co">## estimated sd:  0.003232607 </span></span>
+<span><span class="co">## estimated skewness:  1.60506 </span></span>
+<span><span class="co">## estimated kurtosis:  5.958654</span></span></code></pre>
 </details><p>We can see that the null sample lies within the gamma distribution
 family, which is a good sign because the
 <code><a href="../reference/stat_flatline_test.html">myTAI::stat_flatline_test()</a></code> assumes that the null sample is
@@ -253,8 +253,8 @@ Show output
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Reductive Hourglass Test </span></span>
-<span><span class="co">## Test statistic: 0.1218678 </span></span>
-<span><span class="co">## P-value: 0.001219147 </span></span>
+<span><span class="co">## Test statistic: 0.1111285 </span></span>
+<span><span class="co">## P-value: 0.003664066 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>In this example, we can see that the TAI pattern is consistent with
@@ -275,12 +275,12 @@ is normally-distributed, which the assumption for the
 <p><img src="tai-stats_files/figure-html/unnamed-chunk-13-1.png" alt="plot_cullen_frey function output for stat_reductive_hourglass_test" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## summary statistics</span></span>
 <span><span class="co">## ------</span></span>
-<span><span class="co">## min:  -0.2743518   max:  0.1137399 </span></span>
-<span><span class="co">## median:  -0.02584063 </span></span>
-<span><span class="co">## mean:  -0.02991773 </span></span>
-<span><span class="co">## estimated sd:  0.05008444 </span></span>
-<span><span class="co">## estimated skewness:  -0.3800859 </span></span>
-<span><span class="co">## estimated kurtosis:  3.536079</span></span></code></pre>
+<span><span class="co">## min:  -0.1626165   max:  0.09232091 </span></span>
+<span><span class="co">## median:  -0.02884119 </span></span>
+<span><span class="co">## mean:  -0.02579048 </span></span>
+<span><span class="co">## estimated sd:  0.05157796 </span></span>
+<span><span class="co">## estimated skewness:  -0.2791443 </span></span>
+<span><span class="co">## estimated kurtosis:  3.26753</span></span></code></pre>
 <p>Indeed it is!</p>
 </details>
 </div>
@@ -304,8 +304,8 @@ Show output
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Reverse Hourglass Test </span></span>
-<span><span class="co">## Test statistic: -0.2726821 </span></span>
-<span><span class="co">## P-value: 0.9999987 </span></span>
+<span><span class="co">## Test statistic: -0.2985458 </span></span>
+<span><span class="co">## P-value: 0.9999954 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>As we can see from the p-values of the one-tailed test, the TAI
@@ -337,8 +337,8 @@ Show output
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Early Conservation Test </span></span>
-<span><span class="co">## Test statistic: -0.1218678 </span></span>
-<span><span class="co">## P-value: 0.9540384 </span></span>
+<span><span class="co">## Test statistic: -0.1111285 </span></span>
+<span><span class="co">## P-value: 0.8829328 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>Again, the TAI profile does not support the early conservation
@@ -366,8 +366,8 @@ Show output
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Late Conservation Test </span></span>
-<span><span class="co">## Test statistic: -0.2726821 </span></span>
-<span><span class="co">## P-value: 0.999778 </span></span>
+<span><span class="co">## Test statistic: -0.2985458 </span></span>
+<span><span class="co">## P-value: 0.9988204 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>As expected again, we do not see support for the late conservation
@@ -407,8 +407,8 @@ Show output
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Pairwise Test </span></span>
-<span><span class="co">## Test statistic: -0.07232483 </span></span>
-<span><span class="co">## P-value: 0.8890747 </span></span>
+<span><span class="co">## Test statistic: -0.0942979 </span></span>
+<span><span class="co">## P-value: 0.891025 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>In this mock example, we can see that the TAI profile of the control

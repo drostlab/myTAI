@@ -4,12 +4,14 @@
 #' 
 #' @param phyex_set A PhyloExpressionSet object (BulkPhyloExpressionSet or ScPhyloExpressionSet)
 #' @param genes Character vector of specific gene IDs to include in the heatmap (default: NULL for auto-selection of dynamic genes)
-#' @param top_p Numeric value specifying the top proportion of genes to include (default: 0.2)
+#' @param top_p Numeric value specifying the top proportion of genes to include (default: NULL). Ignored if top_k is specified.
+#' @param top_k Absolute number of top genes to select (default: 30). Takes precedence over top_p.
 #' @param std Logical indicating whether to standardize expression values (default: TRUE)
 #' @param show_reps Logical indicating whether to show replicates or collapsed data (default: FALSE)
 #' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
 #' @param cluster_cols Logical indicating whether to cluster conditions/columns (default: FALSE)
 #' @param show_gene_age Logical indicating whether to show gene age annotation (default: TRUE)
+#' @param show_phylostrata_legend Logical indicating whether to show the phylostratum legend (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene identifiers (default: FALSE)
 #' @param gene_annotation Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)
 #' @param gene_annotation_colors Named list of color vectors for custom gene annotations (default: NULL)
@@ -55,12 +57,14 @@
 plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
     function(phyex_set,
              genes = NULL,
-             top_p = 0.2,
+             top_p = NULL,
+             top_k = 30,
              std = TRUE,
              show_reps = FALSE,
              cluster_rows = FALSE,
              cluster_cols = FALSE,
              show_gene_age = TRUE,
+             show_phylostrata_legend = TRUE,
              show_gene_ids = FALSE,
              gene_annotation = NULL,
              gene_annotation_colors = NULL,
@@ -77,11 +81,13 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
 #' @param gene_ids Character vector of all gene IDs in the dataset (used for phylostratum mapping)
 #' @param num_strata Integer number of phylostrata
 #' @param genes Character vector of specific genes to plot. If NULL, uses top dynamic genes
-#' @param top_p Proportion of most dynamic genes to include (default: 0.2)
+#' @param top_p Proportion of most dynamic genes to include (default: NULL). Ignored if top_k is specified.
+#' @param top_k Absolute number of top genes to select (default: 30). Takes precedence over top_p.
 #' @param std Logical indicating whether to use standardized expression values (default: TRUE)
 #' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
 #' @param cluster_cols Logical indicating whether to cluster identities/columns (default: FALSE)
 #' @param show_gene_age Logical indicating whether to show gene age as row annotation (default: TRUE)
+#' @param show_phylostrata_legend Logical indicating whether to show the phylostratum legend (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene names (default: FALSE)
 #' @param gene_annotation Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)
 #' @param gene_annotation_colors Named list of color vectors for custom gene annotations (default: NULL)
@@ -97,11 +103,13 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
                                    gene_ids, 
                                    num_strata,
                                    genes = NULL,
-                                   top_p = 0.2, 
+                                   top_p = NULL,
+                                   top_k = 30,
                                    std = TRUE, 
                                    cluster_rows = FALSE,
                                    cluster_cols = FALSE,
                                    show_gene_age = TRUE,
+                                   show_phylostrata_legend = TRUE,
                                    show_gene_ids = FALSE,
                                    gene_annotation = NULL,
                                    gene_annotation_colors = NULL,
@@ -132,7 +140,32 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
         message(sprintf("Using %d out of %d specified genes", length(present_genes), length(genes)))
     } else {
         # Filter for dynamic genes
-        e <- e |> genes_filter_dynamic(thr = 1 - top_p)
+        if (!is.null(top_k)) {
+            # Use absolute number of genes
+            var_genes <- apply(e, 1, stats::var, na.rm = TRUE)
+            var_genes <- var_genes[!is.na(var_genes) & !is.nan(var_genes)]
+            if (length(var_genes) == 0) {
+                e <- e[FALSE, , drop = FALSE]
+            } else {
+                k <- min(top_k, length(var_genes))
+                sorted_genes <- names(sort(var_genes, decreasing = TRUE))
+                e <- e[sorted_genes[1:k], , drop = FALSE]
+            }
+        } else if (!is.null(top_p)) {
+            # Use proportion of genes
+            e <- e |> genes_filter_dynamic(thr = 1 - top_p)
+        } else {
+            # Default to top 30 genes if neither is specified
+            var_genes <- apply(e, 1, stats::var, na.rm = TRUE)
+            var_genes <- var_genes[!is.na(var_genes) & !is.nan(var_genes)]
+            if (length(var_genes) == 0) {
+                e <- e[FALSE, , drop = FALSE]
+            } else {
+                k <- min(30, length(var_genes))
+                sorted_genes <- names(sort(var_genes, decreasing = TRUE))
+                e <- e[sorted_genes[1:k], , drop = FALSE]
+            }
+        }
     }
     
     # Calculate standardized expression for ordering
@@ -214,6 +247,12 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
         )
     }
     
+    # Determine which legends to show
+    annotation_legend <- TRUE
+    if (show_gene_age && !show_phylostrata_legend && is.null(gene_annotation)) {
+        # Only hide legend if phylostratum is the only row annotation
+        annotation_legend <- FALSE
+    }
 
     p <- pheatmap::pheatmap(
         e,
@@ -225,7 +264,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
         annotation_row = annotation_row,
         annotation_col = annotation_col,
         annotation_colors = c(annotation_colors, annotation_col_colors),
-        fontsize_row = 5,
+        annotation_legend = annotation_legend,
         silent = TRUE,
         ...
     ) |>
@@ -237,12 +276,14 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
 #' @export
 S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                  genes = NULL,
-                                                                 top_p = 0.2, 
+                                                                 top_p = NULL,
+                                                                 top_k = 30,
                                                                  std = TRUE, 
                                                                  show_reps = FALSE,
                                                                  cluster_rows = FALSE,
                                                                  cluster_cols = FALSE,
                                                                  show_gene_age = TRUE,
+                                                                 show_phylostrata_legend = TRUE,
                                                                  show_gene_ids = FALSE,
                                                                  gene_annotation = NULL,
                                                                  gene_annotation_colors = NULL,
@@ -263,10 +304,12 @@ S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
         num_strata = phyex_set@num_strata,
         genes = genes,
         top_p = top_p,
+        top_k = top_k,
         std = std,
         cluster_rows = cluster_rows,
         cluster_cols = cluster_cols,
         show_gene_age = show_gene_age,
+        show_phylostrata_legend = show_phylostrata_legend,
         show_gene_ids = show_gene_ids,
         gene_annotation = gene_annotation,
         gene_annotation_colors = gene_annotation_colors,
@@ -277,13 +320,15 @@ S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
 #' @export
 S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
                                                                genes = NULL,
-                                                               top_p = 0.2, 
+                                                               top_p = NULL,
+                                                               top_k = 30,
                                                                std = TRUE, 
                                                                show_reps = FALSE,
                                                                max_cells_per_type = 5,
                                                                cluster_rows = FALSE,
                                                                cluster_cols = FALSE,
                                                                show_gene_age = TRUE,
+                                                               show_phylostrata_legend = TRUE,
                                                                show_gene_ids = FALSE,
                                                                gene_annotation = NULL,
                                                                gene_annotation_colors = NULL,
@@ -354,10 +399,12 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
         num_strata = phyex_set@num_strata,
         genes = genes,
         top_p = top_p,
+        top_k = top_k,
         std = std,
         cluster_rows = cluster_rows,
         cluster_cols = cluster_cols,
         show_gene_age = show_gene_age,
+        show_phylostrata_legend = show_phylostrata_legend,
         show_gene_ids = show_gene_ids,
         gene_annotation = gene_annotation,
         gene_annotation_colors = gene_annotation_colors,

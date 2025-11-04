@@ -10,11 +10,13 @@
   gene_ids,
   num_strata,
   genes = NULL,
-  top_p = 0.2,
+  top_p = NULL,
+  top_k = 30,
   std = TRUE,
   cluster_rows = FALSE,
   cluster_cols = FALSE,
   show_gene_age = TRUE,
+  show_phylostrata_legend = TRUE,
   show_gene_ids = FALSE,
   gene_annotation = NULL,
   gene_annotation_colors = NULL,
@@ -34,7 +36,9 @@
 
 \item{genes}{Character vector of specific genes to plot. If NULL, uses top dynamic genes}
 
-\item{top_p}{Proportion of most dynamic genes to include (default: 0.2)}
+\item{top_p}{Proportion of most dynamic genes to include (default: NULL). Ignored if top_k is specified.}
+
+\item{top_k}{Absolute number of top genes to select (default: 30). Takes precedence over top_p.}
 
 \item{std}{Logical indicating whether to use standardized expression values (default: TRUE)}
 
@@ -43,6 +47,8 @@
 \item{cluster_cols}{Logical indicating whether to cluster identities/columns (default: FALSE)}
 
 \item{show_gene_age}{Logical indicating whether to show gene age as row annotation (default: TRUE)}
+
+\item{show_phylostrata_legend}{Logical indicating whether to show the phylostratum legend (default: TRUE)}
 
 \item{show_gene_ids}{Logical indicating whether to show gene names (default: FALSE)}
 

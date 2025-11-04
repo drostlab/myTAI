@@ -11,7 +11,7 @@ Generic function to select genes with the highest values for a given expression 
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@ in PhyloExpressionSet objects.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">phyex_set</span>, FUN <span class="op">=</span> <span class="va">rowMeans</span>, p <span class="op">=</span> <span class="fl">0.99</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">phyex_set</span>, FUN <span class="op">=</span> <span class="va">rowMeans</span>, top_p <span class="op">=</span> <span class="fl">0.99</span>, top_k <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -69,8 +69,12 @@ in PhyloExpressionSet objects.</p>
 <dd><p>Function to calculate gene-wise expression metric (default: rowMeans)</p></dd>
 
 
-<dt id="arg-p">p<a class="anchor" aria-label="anchor" href="#arg-p"></a></dt>
-<dd><p>Quantile threshold for gene selection (default: 0.99)</p></dd>
+<dt id="arg-top-p">top_p<a class="anchor" aria-label="anchor" href="#arg-top-p"></a></dt>
+<dd><p>Quantile threshold for gene selection (default: 0.99). Ignored if top_k is specified.</p></dd>
+
+
+<dt id="arg-top-k">top_k<a class="anchor" aria-label="anchor" href="#arg-top-k"></a></dt>
+<dd><p>Absolute number of top genes to select (default: NULL). Takes precedence over top_p.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -79,26 +83,22 @@ in PhyloExpressionSet objects.</p>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Character vector of gene IDs with metric values &gt;= p quantile</p>
+    <p>Character vector of gene IDs with metric values &gt;= top_p quantile or top top_k genes</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function applies the specified function to calculate a metric for each gene
-across samples, then selects genes above the specified quantile threshold.
-Common functions include rowMeans for mean expression, rowVars for variance,
-or custom functions for other metrics.</p>
+across samples, then selects genes above the specified quantile threshold or the
+top k genes by absolute count. If both top_p and top_k are specified, top_k takes precedence.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Select top 1% most expressed genes by mean</span></span></span>
-<span class="r-in"><span><span class="va">high_expr_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span>, p <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">high_expr_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span>, top_p <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Select top 5% most variable genes</span></span></span>
-<span class="r-in"><span><span class="va">high_var_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span>, p <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Select top genes by median expression</span></span></span>
-<span class="r-in"><span><span class="va">high_median_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">median</span><span class="op">)</span>, p <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Select top 100 most expressed genes</span></span></span>
+<span class="r-in"><span><span class="va">top_100_genes</span> <span class="op">&lt;-</span> <span class="fu">genes_top_expr</span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span>, top_k <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

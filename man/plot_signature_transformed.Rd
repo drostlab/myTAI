@@ -33,9 +33,7 @@ normalization and transformation methods.
 \examples{
 # Single-cell data with custom transformations
 
-phyex_set <- example_phyex_set |>
-    select_genes(example_phyex_set@gene_ids[1:100])
-phyex_set@null_conservation_sample_size <- 500
+phyex_set <- example_phyex_set
 
 custom_transforms <- list(raw = identity, log = log1p)
 p <- plot_signature_transformed(phyex_set, transformations = custom_transforms)

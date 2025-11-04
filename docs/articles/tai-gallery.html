@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,7 +149,7 @@ vignette here:<br>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Flat Line Test </span></span>
 <span><span class="co">## Test statistic: 0.0446168 </span></span>
-<span><span class="co">## P-value: 0.4501203 </span></span>
+<span><span class="co">## P-value: 0.3845666 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2019</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -159,12 +159,12 @@ vignette here:<br>
 <p><img src="tai-gallery_files/figure-html/unnamed-chunk-8-1.png" alt="plot_cullen_frey function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## summary statistics</span></span>
 <span><span class="co">## ------</span></span>
-<span><span class="co">## min:  0.0001335667   max:  4.195634 </span></span>
-<span><span class="co">## median:  0.04634538 </span></span>
-<span><span class="co">## mean:  0.1129296 </span></span>
-<span><span class="co">## estimated sd:  0.2508679 </span></span>
-<span><span class="co">## estimated skewness:  6.076783 </span></span>
-<span><span class="co">## estimated kurtosis:  56.52191</span></span></code></pre>
+<span><span class="co">## min:  0.002770593   max:  0.4317721 </span></span>
+<span><span class="co">## median:  0.03377584 </span></span>
+<span><span class="co">## mean:  0.05543874 </span></span>
+<span><span class="co">## estimated sd:  0.07404477 </span></span>
+<span><span class="co">## estimated skewness:  3.683234 </span></span>
+<span><span class="co">## estimated kurtosis:  18.93271</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_null_txi_sample.html">plot_null_txi_sample</a></span><span class="op">(</span><span class="va">res_flt</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>x <span class="op">=</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_axis.html" class="external-link">guide_axis</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -180,7 +180,7 @@ vignette here:<br>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Reductive Hourglass Test </span></span>
 <span><span class="co">## Test statistic: -0.03191036 </span></span>
-<span><span class="co">## P-value: 0.1966439 </span></span>
+<span><span class="co">## P-value: 0.1351351 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2019</span></span></code></pre>
 </div>
@@ -264,7 +264,7 @@ various developmental stages against a reference stage (default is stage
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_distribution_strata.html">plot_distribution_strata</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span><span class="op">)</span> <span class="op">/</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_distribution_strata.html">plot_distribution_strata</a></span><span class="op">(</span></span>
 <span>  <span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span>,</span>
-<span>  selected_gene_ids <span class="op">=</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/genes_top_variance.html">genes_top_variance</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, p <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span>,</span>
+<span>  selected_gene_ids <span class="op">=</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/genes_top_variance.html">genes_top_variance</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, top_p <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span>,</span>
 <span>  as_log_obs_exp <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of gene ages (top), Observed vs Expected plot of top 5% variance genes (bottom)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tai-gallery_files/figure-html/unnamed-chunk-17-1.png" alt="plot_distribution_strata function output" width="576" style="display: block; margin: auto;"></p>
@@ -312,7 +312,7 @@ various developmental stages against a reference stage (default is stage
 </h4>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># highlighting top variance genes</span></span>
-<span><span class="va">top_var_genes</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/genes_top_variance.html">genes_top_variance</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, p <span class="op">=</span> <span class="fl">0.9995</span><span class="op">)</span></span>
+<span><span class="va">top_var_genes</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/genes_top_variance.html">genes_top_variance</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, top_p <span class="op">=</span> <span class="fl">0.9995</span><span class="op">)</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_mean_var.html">plot_mean_var</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_mean_var.html">plot_mean_var</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, </span>
 <span>                     highlight_genes <span class="op">=</span> <span class="va">top_var_genes</span><span class="op">)</span></span>
@@ -374,14 +374,14 @@ capabilities:</p>
 <span><span class="co">## Species: Example Species </span></span>
 <span><span class="co">## Index type: TXI </span></span>
 <span><span class="co">## Cell Type : TypeA, TypeB, TypeC </span></span>
-<span><span class="co">## Number of genes: 100 </span></span>
+<span><span class="co">## Number of genes: 99 </span></span>
 <span><span class="co">## Number of cell type : 3 </span></span>
 <span><span class="co">## Number of phylostrata: 10 </span></span>
-<span><span class="co">## Total cells: 1000 </span></span>
+<span><span class="co">## Total cells: 200 </span></span>
 <span><span class="co">## Cells per type:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## TypeA TypeB TypeC </span></span>
-<span><span class="co">##   341   335   324 </span></span>
+<span><span class="co">##    70    66    64 </span></span>
 <span><span class="co">## Available metadata:</span></span>
 <span><span class="co">##   groups: TypeA, TypeB, TypeC</span></span>
 <span><span class="co">##   day: Day1, Day3, Day5, Day7</span></span>

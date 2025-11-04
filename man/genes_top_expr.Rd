@@ -4,19 +4,21 @@
 \alias{genes_top_expr}
 \title{Gene Expression Filtering Functions}
 \usage{
-genes_top_expr(phyex_set, FUN = rowMeans, p = 0.99, ...)
+genes_top_expr(phyex_set, FUN = rowMeans, top_p = 0.99, top_k = NULL, ...)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
 \item{FUN}{Function to calculate gene-wise expression metric (default: rowMeans)}
 
-\item{p}{Quantile threshold for gene selection (default: 0.99)}
+\item{top_p}{Quantile threshold for gene selection (default: 0.99). Ignored if top_k is specified.}
+
+\item{top_k}{Absolute number of top genes to select (default: NULL). Takes precedence over top_p.}
 
 \item{...}{Additional arguments passed to FUN}
 }
 \value{
-Character vector of gene IDs with metric values >= p quantile
+Character vector of gene IDs with metric values >= top_p quantile or top top_k genes
 }
 \description{
 Collection of functions for filtering genes based on expression patterns
@@ -26,18 +28,14 @@ Generic function to select genes with the highest values for a given expression 
 }
 \details{
 This function applies the specified function to calculate a metric for each gene
-across samples, then selects genes above the specified quantile threshold.
-Common functions include rowMeans for mean expression, rowVars for variance,
-or custom functions for other metrics.
+across samples, then selects genes above the specified quantile threshold or the
+top k genes by absolute count. If both top_p and top_k are specified, top_k takes precedence.
 }
 \examples{
 # Select top 1\% most expressed genes by mean
-high_expr_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), p = 0.99)
+high_expr_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), top_p = 0.99)
 
-# Select top 5\% most variable genes
-high_var_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, var), p = 0.95)
-
-# Select top genes by median expression
-high_median_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, median), p = 0.9)
+# Select top 100 most expressed genes
+top_100_genes <- genes_top_expr(example_phyex_set, function(x) apply(x, 1, mean), top_k = 100)
 
 }

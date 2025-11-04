@@ -159,7 +159,7 @@ myTAI::plot_distribution_pTAI_qqplot(example_phyex_set)
 myTAI::plot_distribution_strata(example_phyex_set@strata) /
 myTAI::plot_distribution_strata(
   example_phyex_set@strata,
-  selected_gene_ids = myTAI::genes_top_variance(example_phyex_set, p = 0.95),
+  selected_gene_ids = myTAI::genes_top_variance(example_phyex_set, top_p = 0.95),
   as_log_obs_exp = TRUE
 ) + plot_annotation(title = "Distribution of gene ages (top), Observed vs Expected plot of top 5% variance genes (bottom)")
 ```
@@ -207,7 +207,7 @@ myTAI::plot_sample_space(example_phyex_set, method = "UMAP")
 ```{r message = FALSE, warning = FALSE, results = FALSE, fig.height=3, fig.width=8, fig.alt="plot_mean_var function output simple vs highlighted", dev.args = list(bg = 'transparent'), fig.align='center'}
 
 # highlighting top variance genes
-top_var_genes <- myTAI::genes_top_variance(example_phyex_set, p = 0.9995)
+top_var_genes <- myTAI::genes_top_variance(example_phyex_set, top_p = 0.9995)
 p1 <- myTAI::plot_mean_var(example_phyex_set)
 p2 <- myTAI::plot_mean_var(example_phyex_set, 
                      highlight_genes = top_var_genes)

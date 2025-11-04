@@ -34,7 +34,7 @@ plot_signature_gene_quantiles <- function(phyex_set,
                                           selection_FUN=genes_top_mean,
                                           ...) {
     phyex_sets <- quantiles |>
-        map(\(p) selection_FUN(phyex_set, p=p)) |>
+        map(\(p) selection_FUN(phyex_set, top_p=p)) |>
         map(\(genes) remove_genes(phyex_set, genes=genes)) |>
         map2(quantiles, \(set, p) {set@name <- as.character(p); set})
     

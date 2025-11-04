@@ -47,7 +47,7 @@ test_that("plot_gene_heatmap works", {
     expect_s3_class(p_no_std, "ggplot")
     
     # Test with replicates
-    p_reps <- plot_gene_heatmap(example_phyex_set, reps = TRUE)
+    p_reps <- plot_gene_heatmap(example_phyex_set, show_reps = TRUE)
     expect_s3_class(p_reps, "ggplot")
     
     # Test with clustering
@@ -65,6 +65,10 @@ test_that("plot_gene_heatmap works", {
     # Test with different top_p
     p_top_p <- plot_gene_heatmap(example_phyex_set, top_p = 0.1)
     expect_s3_class(p_top_p, "ggplot")
+    
+    # Test with top_k
+    p_top_k <- plot_gene_heatmap(example_phyex_set, top_k = 10)
+    expect_s3_class(p_top_k, "ggplot")
 })
 
 test_that("plot_gene_heatmap works with a single gene", {

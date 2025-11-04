@@ -29,16 +29,12 @@
 #' 
 #' @examples
 #' # Compare multiple bulk datasets
-#' phyex_set <- example_phyex_set |>
-#'     select_genes(example_phyex_set@gene_ids[1:100])
-#' phyex_set@null_conservation_sample_size <- 500
+#' phyex_set <- example_phyex_set
 #' 
 #' bulk_list <- c(phyex_set, 
 #'   phyex_set |> remove_genes(phyex_set@gene_ids[1:5]))
 #' p <- plot_signature_multiple(bulk_list, legend_title = "Dataset")
 #' 
-#' # With transformation
-#' p2 <- plot_signature_multiple(bulk_list, transformation = log1p)
 #' 
 #'
 #' @import ggplot2 purrr

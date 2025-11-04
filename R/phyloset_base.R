@@ -26,6 +26,7 @@ TI_map <- list(TXI = "Transcriptomic Index",
 #' @param species Character string specifying the species (default: NULL)
 #' @param index_type Character string specifying the transcriptomic index type (default: "TXI")
 #' @param identities_label Character string labeling the identities (default: "Identities")
+#' @param gene_ids Character vector of gene identifiers (default: character(0), auto-generated from expression rownames if not provided)
 #' @param null_conservation_sample_size Numeric value for null conservation sample size (default: 5000)
 #' @param .null_conservation_txis Precomputed null conservation TXI values (default: NULL)
 #' 
@@ -127,6 +128,12 @@ PhyloExpressionSetBase <- new_class("PhyloExpressionSetBase",
         gene_ids = new_property(
             class = class_character,
             getter = function(self) rownames(self@expression),
+            setter = function(self, value) {
+                if (!length(value))
+                    return(self)
+                rownames(self@expression) <- value
+                self
+            },
             validator = function(value) {
                 if (any(is.na(value))) return("cannot contain NA values. Check gene IDs.")
                 if (length(value) == 0) return("cannot be empty. Check gene IDs.")

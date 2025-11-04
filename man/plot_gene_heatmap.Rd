@@ -7,12 +7,14 @@
 plot_gene_heatmap(
   phyex_set,
   genes = NULL,
-  top_p = 0.2,
+  top_p = NULL,
+  top_k = 30,
   std = TRUE,
   show_reps = FALSE,
   cluster_rows = FALSE,
   cluster_cols = FALSE,
   show_gene_age = TRUE,
+  show_phylostrata_legend = TRUE,
   show_gene_ids = FALSE,
   gene_annotation = NULL,
   gene_annotation_colors = NULL,
@@ -24,7 +26,9 @@ plot_gene_heatmap(
 
 \item{genes}{Character vector of specific gene IDs to include in the heatmap (default: NULL for auto-selection of dynamic genes)}
 
-\item{top_p}{Numeric value specifying the top proportion of genes to include (default: 0.2)}
+\item{top_p}{Numeric value specifying the top proportion of genes to include (default: NULL). Ignored if top_k is specified.}
+
+\item{top_k}{Absolute number of top genes to select (default: 30). Takes precedence over top_p.}
 
 \item{std}{Logical indicating whether to standardize expression values (default: TRUE)}
 
@@ -35,6 +39,8 @@ plot_gene_heatmap(
 \item{cluster_cols}{Logical indicating whether to cluster conditions/columns (default: FALSE)}
 
 \item{show_gene_age}{Logical indicating whether to show gene age annotation (default: TRUE)}
+
+\item{show_phylostrata_legend}{Logical indicating whether to show the phylostratum legend (default: TRUE)}
 
 \item{show_gene_ids}{Logical indicating whether to show gene identifiers (default: FALSE)}
 

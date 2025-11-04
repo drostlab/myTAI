@@ -4,15 +4,17 @@
 \alias{genes_top_mean}
 \title{Select Top Mean Expressed Genes}
 \usage{
-genes_top_mean(phyex_set, p = 0.99)
+genes_top_mean(phyex_set, top_p = 0.99, top_k = NULL)
 }
 \arguments{
 \item{phyex_set}{A PhyloExpressionSet object}
 
-\item{p}{Quantile threshold for gene selection (default: 0.99)}
+\item{top_p}{Quantile threshold for gene selection (default: 0.99). Ignored if top_k is specified.}
+
+\item{top_k}{Absolute number of top genes to select (default: NULL). Takes precedence over top_p.}
 }
 \value{
-Character vector of gene IDs with mean expression >= p quantile
+Character vector of gene IDs with mean expression >= top_p quantile or top top_k genes
 }
 \description{
 Select genes with the highest mean expression across samples.
@@ -23,6 +25,9 @@ which are often the most reliably detected and functionally important.
 }
 \examples{
 # Select top 1\% most expressed genes by mean
-high_expr_genes <- genes_top_mean(example_phyex_set, p = 0.99)
+high_expr_genes <- genes_top_mean(example_phyex_set, top_p = 0.99)
+
+# Select top 1000 most expressed genes
+top_1000_genes <- genes_top_mean(example_phyex_set, top_k = 1000)
 
 }

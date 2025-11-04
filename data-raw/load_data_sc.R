@@ -3,7 +3,7 @@ library(myTAI)
 load_example_phyex_set_sc <- function() {
     set.seed(1234)
     n_genes <- 1000
-    n_cells <- 1000
+    n_cells <- 200
 
     # Create count matrix
     counts <- matrix(
@@ -55,7 +55,8 @@ load_example_phyex_set_sc <- function() {
 
 example_phyex_set_sc <- load_example_phyex_set_sc()
 
-top_genes <- example_phyex_set_sc |> genes_top_mean(p=0.9)
+top_genes <- example_phyex_set_sc |> genes_top_mean(top_p=0.9)
 example_phyex_set_sc <- example_phyex_set_sc |> select_genes(top_genes)
-
+example_phyex_set_sc@null_conservation_sample_size <- 50
+plot_signature(example_phyex_set_sc)
 usethis::use_data(example_phyex_set_sc, overwrite = TRUE)

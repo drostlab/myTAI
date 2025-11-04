@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,12 +79,12 @@ filtered to match the selected cells.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Downsample to 20 cells per identity</span></span></span>
 <span class="r-in"><span><span class="va">small_set</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, downsample <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Downsampled from 1000 to 60 cells.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Downsampled from 200 to 60 cells.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change grouping and downsample</span></span></span>
 <span class="r-in"><span><span class="va">example_phyex_set_sc</span><span class="op">@</span><span class="va">selected_idents</span> <span class="op">&lt;-</span> <span class="st">"day"</span></span></span>
 <span class="r-in"><span><span class="va">treatment_set</span> <span class="op">&lt;-</span> <span class="fu">downsample</span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, downsample <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Downsampled from 1000 to 60 cells.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Downsampled from 200 to 60 cells.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

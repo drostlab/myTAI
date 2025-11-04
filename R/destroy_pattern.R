@@ -153,7 +153,7 @@ plot_gatai_results <- function(phyex_set,
     # 1.1 Plot TAI signature before/after GATAI
     gatai_set <- remove_genes(phyex_set, removed_genes, new_name = paste(phyex_set@name, "- GATAI removed"))
     q <- 1.0 - n_top_genes/phyex_set@num_genes
-    top_var_genes <- genes_top_variance(phyex_set, p = q)
+    top_var_genes <- genes_top_variance(phyex_set, top_p = q)
     top_set <- remove_genes(phyex_set, top_var_genes, new_name = paste(phyex_set@name, "- Top variance removed"))
 
     set.seed(1234)

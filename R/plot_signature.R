@@ -29,10 +29,6 @@
 #'   - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)
 #' 
 #' @examples
-#' phyex_set <- example_phyex_set |>
-#'     select_genes(example_phyex_set@gene_ids[1:50])
-#' phyex_set@null_conservation_sample_size <- 100
-#' 
 #' # Basic signature plot for bulk data
 #' p <- plot_signature(example_phyex_set)
 #' 
