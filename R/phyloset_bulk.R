@@ -92,10 +92,6 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
     validator = function(self) {
         # This validation should/could be done in PhyloExpressionSetBase, but doesn't work because of a bug: 
         # https://github.com/RConsortium/S7/issues/539
-
-        # Validate expression_collapsed rownames match gene_ids
-        if (!identical(rownames(self@expression_collapsed), self@gene_ids)) 
-            return("@expression_collapsed rownames must match @gene_ids")
         
         unique_groups <- sort(as.character(unique(self@groups)))
         if (!identical(sort(self@identities), unique_groups)) {
