@@ -58,8 +58,6 @@
 \item{annotation_col_colors}{List of colors for column annotations (default: NULL)}
 
 \item{...}{Additional arguments passed to pheatmap::pheatmap}
-
-\item{show_phylostrata_legend}{Logical indicating whether to show the phylostratum legend (default: TRUE)}
 }
 \value{
 A ggplot object showing the gene expression heatmap

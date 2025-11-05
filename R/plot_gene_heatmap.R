@@ -11,7 +11,6 @@
 #' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
 #' @param cluster_cols Logical indicating whether to cluster conditions/columns (default: FALSE)
 #' @param show_gene_age Logical indicating whether to show gene age annotation (default: TRUE)
-#' @param show_phylostrata_legend Logical indicating whether to show the phylostratum legend (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene identifiers (default: FALSE)
 #' @param gene_annotation Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)
 #' @param gene_annotation_colors Named list of color vectors for custom gene annotations (default: NULL)
@@ -64,7 +63,6 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
              cluster_rows = FALSE,
              cluster_cols = FALSE,
              show_gene_age = TRUE,
-             show_phylostrata_legend = TRUE,
              show_gene_ids = FALSE,
              gene_annotation = NULL,
              gene_annotation_colors = NULL,
@@ -87,7 +85,6 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
 #' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
 #' @param cluster_cols Logical indicating whether to cluster identities/columns (default: FALSE)
 #' @param show_gene_age Logical indicating whether to show gene age as row annotation (default: TRUE)
-#' @param show_phylostrata_legend Logical indicating whether to show the phylostratum legend (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene names (default: FALSE)
 #' @param gene_annotation Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)
 #' @param gene_annotation_colors Named list of color vectors for custom gene annotations (default: NULL)
@@ -275,7 +272,6 @@ S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                  cluster_rows = FALSE,
                                                                  cluster_cols = FALSE,
                                                                  show_gene_age = TRUE,
-                                                                 show_phylostrata_legend = TRUE,
                                                                  show_gene_ids = FALSE,
                                                                  gene_annotation = NULL,
                                                                  gene_annotation_colors = NULL,
@@ -301,7 +297,6 @@ S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
         cluster_rows = cluster_rows,
         cluster_cols = cluster_cols,
         show_gene_age = show_gene_age,
-        show_phylostrata_legend = show_phylostrata_legend,
         show_gene_ids = show_gene_ids,
         gene_annotation = gene_annotation,
         gene_annotation_colors = gene_annotation_colors,
@@ -320,7 +315,6 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
                                                                cluster_rows = FALSE,
                                                                cluster_cols = FALSE,
                                                                show_gene_age = TRUE,
-                                                               show_phylostrata_legend = TRUE,
                                                                show_gene_ids = FALSE,
                                                                gene_annotation = NULL,
                                                                gene_annotation_colors = NULL,
@@ -396,7 +390,6 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
         cluster_rows = cluster_rows,
         cluster_cols = cluster_cols,
         show_gene_age = show_gene_age,
-        show_phylostrata_legend = show_phylostrata_legend,
         show_gene_ids = show_gene_ids,
         gene_annotation = gene_annotation,
         gene_annotation_colors = gene_annotation_colors,
