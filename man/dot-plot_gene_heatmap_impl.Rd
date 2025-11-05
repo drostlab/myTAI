@@ -16,7 +16,6 @@
   cluster_rows = FALSE,
   cluster_cols = FALSE,
   show_gene_age = TRUE,
-  show_phylostrata_legend = TRUE,
   show_gene_ids = FALSE,
   gene_annotation = NULL,
   gene_annotation_colors = NULL,
@@ -48,8 +47,6 @@
 
 \item{show_gene_age}{Logical indicating whether to show gene age as row annotation (default: TRUE)}
 
-\item{show_phylostrata_legend}{Logical indicating whether to show the phylostratum legend (default: TRUE)}
-
 \item{show_gene_ids}{Logical indicating whether to show gene names (default: FALSE)}
 
 \item{gene_annotation}{Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)}
@@ -61,6 +58,8 @@
 \item{annotation_col_colors}{List of colors for column annotations (default: NULL)}
 
 \item{...}{Additional arguments passed to pheatmap::pheatmap}
+
+\item{show_phylostrata_legend}{Logical indicating whether to show the phylostratum legend (default: TRUE)}
 }
 \value{
 A ggplot object showing the gene expression heatmap

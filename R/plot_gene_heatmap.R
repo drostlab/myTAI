@@ -109,7 +109,6 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
                                    cluster_rows = FALSE,
                                    cluster_cols = FALSE,
                                    show_gene_age = TRUE,
-                                   show_phylostrata_legend = TRUE,
                                    show_gene_ids = FALSE,
                                    gene_annotation = NULL,
                                    gene_annotation_colors = NULL,
@@ -246,13 +245,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
             Phylostratum = ps_colors
         )
     }
-    
-    # Determine which legends to show
-    annotation_legend <- TRUE
-    if (show_gene_age && !show_phylostrata_legend && is.null(gene_annotation)) {
-        # Only hide legend if phylostratum is the only row annotation
-        annotation_legend <- FALSE
-    }
+
 
     p <- pheatmap::pheatmap(
         e,
@@ -264,7 +257,6 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
         annotation_row = annotation_row,
         annotation_col = annotation_col,
         annotation_colors = c(annotation_colors, annotation_col_colors),
-        annotation_legend = annotation_legend,
         silent = TRUE,
         ...
     ) |>
