@@ -1,5 +1,13 @@
 # NEWS
 
+
+myTAI 2.3.4
+===========
+Patches:
+- taxid now throws warning instead of error and returns NULL if no internet is available
+- taxonomy.Rmd vignetter now builds even with no internet
+- fixed plot_contribution failing when some of the stratas have no genes
+
 myTAI 2.3.0.9006
 ===========
 

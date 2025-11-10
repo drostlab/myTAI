@@ -30,7 +30,14 @@ plot_contribution <- function(phyex_set, type = c("stacked", "line")) {
     type <- match.arg(type)
     check_PhyloExpressionSet(phyex_set)
     contribution <- sTXI(phyex_set, option="identity")
-    strata_labels <- levels(phyex_set@strata)
+    strata_labels <- levels(droplevels(phyex_set@strata))
+    
+    # Get indices of present strata to map colors correctly
+    all_strata_levels <- levels(phyex_set@strata)
+    present_indices <- match(strata_labels, all_strata_levels)
+    all_colors <- PS_colours(phyex_set@num_strata)
+    present_colors <- all_colors[present_indices]
+    
     df <- data.frame(contribution) |>
         mutate(Stratum = factor(strata_labels, levels = rev(strata_labels))) |>
         tidyr::pivot_longer(-Stratum, names_to = "Identity", values_to = "TXI") |>
@@ -44,7 +51,7 @@ plot_contribution <- function(phyex_set, type = c("stacked", "line")) {
                         group = Stratum)) +
             geom_area(position = "stack", colour="black", linewidth=0.2) +
             labs(x=phyex_set@identities_label, y=phyex_set@index_full_name) +
-            scale_fill_manual(values = rev(PS_colours(phyex_set@num_strata))) +
+            scale_fill_manual(values = rev(present_colors)) +
             guides(fill=guide_legend(override.aes = list(size = 1.0), keyheight = 0.5, keywidth = 0.5)) +
             theme_minimal() +
             theme(axis.text.x = element_text(angle = 45, hjust = 1))
@@ -56,7 +63,7 @@ plot_contribution <- function(phyex_set, type = c("stacked", "line")) {
                         group = Stratum)) +
             geom_line(linewidth=1) +
             labs(x=phyex_set@identities_label, y=phyex_set@index_full_name) +
-            scale_color_manual(values = rev(PS_colours(phyex_set@num_strata))) +
+            scale_color_manual(values = rev(present_colors)) +
             guides(color=guide_legend(override.aes = list(size = 1.0), keyheight = 0.5, keywidth = 0.5)) +
             theme_minimal() +
             theme(axis.text.x = element_text(angle = 45, hjust = 1))

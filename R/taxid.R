@@ -28,13 +28,33 @@
 taxid <- function(db.path, download = FALSE, update = FALSE, filter = NULL){
         
         if (download || update){
-                utils::download.file("ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxcat.zip",file.path(db.path,"taxcat.zip"))
-                utils::unzip(file.path(db.path,"taxcat.zip"))
+                tryCatch({
+                        utils::download.file("ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxcat.zip",file.path(db.path,"taxcat.zip"))
+                        utils::unzip(file.path(db.path,"taxcat.zip"))
+                }, error = function(e) {
+                        warning("Failed to download taxonomy data. Please check your internet connection or try again later.", call. = FALSE)
+                        return(NULL)
+                })
         }
         
         top_level_category <- NULL
         
-        ncbi.taxcat <- readr::read_tsv("categories.dmp", col_names = TRUE)
+        if (!file.exists(file.path(db.path, "categories.dmp"))) {
+                warning("categories.dmp file not found. Please download it first using download = TRUE.", call. = FALSE)
+                return(NULL)
+        }
+        
+        ncbi.taxcat <- tryCatch({
+                readr::read_tsv(file.path(db.path, "categories.dmp"), col_names = TRUE, show_col_types = FALSE)
+        }, error = function(e) {
+                warning("Failed to read categories.dmp file. The file may be corrupted.", call. = FALSE)
+                return(NULL)
+        })
+        
+        if (is.null(ncbi.taxcat)) {
+                return(NULL)
+        }
+        
         colnames(ncbi.taxcat) <- c("top_level_category","species_level_taxid","tax_id")
 
         if (is.null(filter))
@@ -55,6 +75,12 @@ taxid <- function(db.path, download = FALSE, update = FALSE, filter = NULL){
                                                 Unclassified = dplyr::filter(dplyr::tbl_df(ncbi.taxcat),top_level_category == "U")
                                )
                 }
+                
+                if (nrow(filtered.taxids) == 0) {
+                        warning("No taxids found for filter '", filter, "'.", call. = FALSE)
+                        return(NULL)
+                }
+                
                 return(filtered.taxids)
         }
 }
