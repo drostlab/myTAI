@@ -190,8 +190,23 @@ test_that("plot_distribution_strata works", {
 })
 
 test_that("plot_contribution works", {
+    # Basic contribution plot
     p <- plot_contribution(example_phyex_set)
     expect_s3_class(p, "ggplot")
+    
+    # Test with line type
+    p_line <- plot_contribution(example_phyex_set, type = "line")
+    expect_s3_class(p_line, "ggplot")
+    
+    # Test with gene subset (different number of strata present)
+    p_subset <- example_phyex_set |> 
+        select_genes(example_phyex_set@gene_ids[1:10])
+    p_contrib_subset <- plot_contribution(p_subset)
+    expect_s3_class(p_contrib_subset, "ggplot")
+    
+    # Test line type with gene subset
+    p_contrib_subset_line <- plot_contribution(p_subset, type = "line")
+    expect_s3_class(p_contrib_subset_line, "ggplot")
 })
 
 test_that("plot_distribution_expression works", {
