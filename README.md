@@ -122,24 +122,18 @@ please follow my [updated discussion about the gene age inference literature](ht
 
 ## Installation
 
-`myTAIv2` is still work in progress. To install the development version, do:
+Install [myTAIv2](https://CRAN.R-project.org/package=myTAI):
 
 ```r
-devtools::install_github("drostlab/myTAI")
+install.packages("myTAI", dependencies = TRUE)
 ```
 
-To install the previous version of myTAI, and access the old vignettes, do:
+To install the old version of myTAI, and access the old vignettes, do:
 
 ```r
 devtools::install_github("drostlab/myTAI@v1.0")
 ```
 
-Soon, users will be able to install `myTAI` from [CRAN](https://CRAN.R-project.org/package=myTAI):
-
-```r
-# install myTAIv2 from CRAN
-install.packages("myTAI", dependencies = TRUE)
-```
 
 ## Citation
 Please cite the following paper when using `myTAI` for your own research. This will allow us to continue working on this software tool and will motivate us to extend its functionality and usability in the next years. Many thanks in advance!
