@@ -4,6 +4,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Bring your datasets into myTAI}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ## S7 BulkPhyloExpressionSet and ScPhyloExpressionSet objects
@@ -14,7 +15,7 @@ To illustrate this, we will use the example data `example_phyex_set`. The `BulkP
 
 We will first focus on the `BulkPhyloExpressionSet` object, which is for bulk RNA-seq data.
 
-```{r message = FALSE}
+```{r message = FALSE, echo = FALSE}
 library(myTAI)
 data("example_phyex_set")
 ```
@@ -82,7 +83,7 @@ The raw outputs of (1) gene expression quantification and (2) gene age inference
 
 In this example, we are using a dataset with only one entry per stage (no replicates).
 
-```{r message = FALSE}
+```{r message = FALSE, echo=FALSE}
 data("example_phyex_set_old")
 example_expression <- 
     example_phyex_set_old@expression |> 
@@ -108,7 +109,7 @@ As you can see, there is one column as the gene identifier and the rest of the c
  
 Now we construct the input data.frame for `as_BulkPhyloExpressionSet()`
 
-```{r message = FALSE}
+```{r message = FALSE, echo = FALSE}
 example_phyex_set.df <-
     data.frame(phylorank = example_phylorank) |>
     tibble::rownames_to_column(var = "GeneID") |>
@@ -143,7 +144,7 @@ The `BulkPhyloExpressionSet_from_df()` function will automatically detect the fi
 
 Now, we can use the `BulkPhyloExpressionSet_from_df()` function to convert the correctly formatted input `data.frame` to a `BulkPhyloExpressionSet` object.
 
-```{r warning=FALSE, message=FALSE}
+```{r warning=FALSE, message=FALSE, echo = FALSE}
 example_phyex_set.remake <- 
     myTAI::BulkPhyloExpressionSet_from_df(
         example_phyex_set.df,
@@ -180,7 +181,7 @@ This is exactly the case for the new `example_phyex_set` dataset (not like `exam
      alt="PhyEx replicates overview" 
      class="img-fluid d-block mx-auto" />
 
-```{r message = FALSE}
+```{r message = FALSE, echo = FALSE}
 data("example_phyex_set") # not data("example_phyex_set_old")
 example_expression <- 
     example_phyex_set@expression |> 
@@ -207,7 +208,7 @@ colnames(example_phyex_set.df)
 
 As you can see, this dataset has three replicates per stage.
 
-```{r message = FALSE}
+```{r message = FALSE, echo = FALSE}
 groups_example_phyex_set.df <- c(
             rep("Preglobular",3), 
             rep("Globular",3), 

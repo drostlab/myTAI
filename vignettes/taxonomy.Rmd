@@ -4,6 +4,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{taxonomy}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 The `taxonomy()` function (formerly) implemented in `myTAI` relies on the powerful package [taxize](https://github.com/ropensci/taxize).
