@@ -9,7 +9,7 @@ vignette: >
 
 ## The motivation for transformating of RNA-seq data
 
-As noted in the vignette [`Statistical testing with myTAI`](tai-stats.html), RNA-seq data transformation (e.g. log2 transformation) can affect the results of the tests and the overall TAI (as well as TDI, TSI and analogous) profile. There has been a lively debate around this topic (see [Piasecka et al. (2013)](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1003476) and [Liu & Robinson-Rechavi (2018)](https://doi.org/10.1093/gbe/evy177) for more information).
+As noted in the vignette [`Statistical testing with myTAI`](tai-stats.html), RNA-seq data transformation (e.g. log2 transformation) can affect the results of the tests and the overall TAI (as well as TDI, TSI and analogous) profile. There has been a lively debate around this topic (see [Piasecka et al. (2013)](https://doi.org/10.1371/journal.pgen.1003476) and [Liu & Robinson-Rechavi (2018)](https://doi.org/10.1093/gbe/evy177) for more information).
 
 How can we use this to our advantage?
 

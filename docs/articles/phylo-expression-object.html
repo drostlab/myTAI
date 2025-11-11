@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,15 +95,12 @@ type and other relevant properties.</p>
 <p>We will first focus on the <code>BulkPhyloExpressionSet</code>
 object, which is for bulk RNA-seq data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://drostlab.github.io/myTAI/">myTAI</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># inspect the object</span></span>
 <span><span class="va">example_phyex_set</span></span></code></pre></div>
 <details><summary>
 More on <code>S7</code> and the <code>BulkPhyloExpressionSet</code>
 object
-</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">S7</span><span class="fu">::</span><span class="fu"><a href="https://rconsortium.github.io/S7/reference/prop_names.html" class="external-link">prop_names</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
@@ -120,7 +117,7 @@ Show output
 <span><span class="co">## [21] "null_conservation_sample_size" ".null_conservation_txis"      </span></span>
 <span><span class="co">## [23] "null_conservation_txis"        ".bootstrapped_txis"           </span></span>
 <span><span class="co">## [25] "bootstrapped_txis"</span></span></code></pre>
-</details><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+</details><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># let's explore the properties using @</span></span>
 <span><span class="co"># for example:</span></span>
 <span><span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -131,7 +128,7 @@ Show output
 efficient interaction with <code>myTAIv2</code> functions. For example,
 if you try the <code><a href="../reference/stat_flatline_test.html">myTAI::stat_flatline_test()</a></code> function twice,
 i.e.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/stat_flatline_test.html">stat_flatline_test</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/stat_flatline_test.html">stat_flatline_test</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
 <p>you will notice that the permutations are already pre-computed for
@@ -190,15 +187,7 @@ try <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class=
 </h4>
 <p>In this example, we are using a dataset with only one entry per stage
 (no replicates).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set_old"</span><span class="op">)</span></span>
-<span><span class="va">example_expression</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="va">example_phyex_set_old</span><span class="op">@</span><span class="va">expression</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"GeneID"</span><span class="op">)</span></span>
-<span><span class="va">example_phylorank</span> <span class="op">&lt;-</span></span>
-<span>    <span class="va">example_phyex_set_old</span><span class="op">@</span><span class="va">strata</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># let's explore the example expression dataset</span></span>
 <span><span class="co"># for example:</span></span>
 <span><span class="va">example_expression</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -224,13 +213,7 @@ stage. Instead of developmental stage, one can also use experimental
 conditions, e.g. <code>control</code>, <code>treatment</code>, etc.</p>
 </details><p>Now we construct the input data.frame for
 <code><a href="../reference/as_BulkPhyloExpressionSet.html">as_BulkPhyloExpressionSet()</a></code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example_phyex_set.df</span> <span class="op">&lt;-</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>phylorank <span class="op">=</span> <span class="va">example_phylorank</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"GeneID"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">phylorank</span>, <span class="va">GeneID</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">example_expression</span>, by <span class="op">=</span> <span class="st">"GeneID"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">example_phyex_set.df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
@@ -283,13 +266,8 @@ you can reassign the columns accordingly using
 function to convert the correctly formatted input
 <code>data.frame</code> to a <code>BulkPhyloExpressionSet</code>
 object.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/BulkPhyloExpressionSet_from_df.html">BulkPhyloExpressionSet_from_df</a></span><span class="op">(</span></span>
-<span>        <span class="va">example_phyex_set.df</span>,</span>
-<span>        name <span class="op">=</span> <span class="st">"reconstituted phyex_set_old"</span><span class="op">)</span></span></code></pre></div>
 <p>There you have it, a <code>BulkPhyloExpressionSet</code> object!</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span></span></code></pre></div>
 <details><summary>
 Show output
@@ -309,7 +287,7 @@ Show output
 operator, for example:
 <code>example_phyex_set.remake@counts |&gt; head()</code>.</p>
 <p>… and plot your transcriptome age index!</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set.remake</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
@@ -325,21 +303,7 @@ replicates for each developmental stage. The
 well, as long as we use the <code>groups</code> parameter to specify the
 grouping of replicates, i.e.</p>
 <p><img src="Figures/myTAI_phyex_group.png" alt="PhyEx replicates overview" class="img-fluid d-block mx-auto"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set"</span><span class="op">)</span> <span class="co"># not data("example_phyex_set_old")</span></span>
-<span><span class="va">example_expression</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="va">example_phyex_set</span><span class="op">@</span><span class="va">expression</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"GeneID"</span><span class="op">)</span></span>
-<span><span class="va">example_phylorank</span> <span class="op">&lt;-</span></span>
-<span>    <span class="va">example_phyex_set</span><span class="op">@</span><span class="va">strata</span></span>
-<span></span>
-<span><span class="va">example_phyex_set.df</span> <span class="op">&lt;-</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>phylorank <span class="op">=</span> <span class="va">example_phylorank</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"GeneID"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">phylorank</span>, <span class="va">GeneID</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">example_expression</span>, by <span class="op">=</span> <span class="st">"GeneID"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">example_phyex_set.df</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
@@ -349,23 +313,6 @@ Show output
 <span><span class="co">## [19] "lt_2"      "lt_3"      "bc_1"      "bc_2"      "bc_3"      "mg_1"     </span></span>
 <span><span class="co">## [25] "mg_2"      "mg_3"</span></span></code></pre>
 </details><p>As you can see, this dataset has three replicates per stage.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">groups_example_phyex_set.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Preglobular"</span>,<span class="fl">3</span><span class="op">)</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Globular"</span>,<span class="fl">3</span><span class="op">)</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Early Heart"</span>,<span class="fl">3</span><span class="op">)</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Late Heart"</span>,<span class="fl">3</span><span class="op">)</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Early Torpedo"</span>,<span class="fl">3</span><span class="op">)</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Late Torpedo"</span>,<span class="fl">3</span><span class="op">)</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Bent Cotyledon"</span>,<span class="fl">3</span><span class="op">)</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Mature Green"</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># we can add the group information using groups</span></span>
-<span><span class="va">example_phyex_set.remake</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/BulkPhyloExpressionSet_from_df.html">BulkPhyloExpressionSet_from_df</a></span><span class="op">(</span></span>
-<span>        <span class="va">example_phyex_set.df</span>,</span>
-<span>        groups <span class="op">=</span> <span class="va">groups_example_phyex_set.df</span>, <span class="co"># adding group information here</span></span>
-<span>        name <span class="op">=</span> <span class="st">"reconstituted phyex_set"</span><span class="op">)</span></span></code></pre></div>
 <p>Done!</p>
 <div class="tip">
 <p>Along with the <code>groups</code> parameter, you can also specify
@@ -387,7 +334,7 @@ correctly for single cell analysis, i.e. as a <a href="https://satijalab.org/se
 or <code>ScPhyloExpressionSet_from_matrix</code> function with
 adjustments to the relevant metadata.</p>
 <p><img src="Figures/myTAI_scphyex_seurat.png" alt="scPhyEx overview" class="img-fluid d-block mx-auto"><img src="Figures/myTAI_scphyex_matrix.png" alt="scPhyEx overview" class="img-fluid d-block mx-auto"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the relevant packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></span>
@@ -401,7 +348,7 @@ tab-separated file with the first column as gene identifiers and the
 rest of the columns as expression values for each cell. The
 <code>pbmc_raw</code> object is a data frame with gene expression
 data.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pbmc_raw</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
@@ -546,9 +493,9 @@ Show output
 <span><span class="co">## TCL1A                 0              0              0              0</span></span>
 <span><span class="co">## HLA-DQB1              0              0              0              1</span></span></code></pre>
 </details><p>Now, we create a Seurat object. i.e.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pbmc_small</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.github.io/seurat-object/reference/CreateSeuratObject.html" class="external-link">CreateSeuratObject</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">pbmc_raw</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/methods/is.html" class="external-link">is</a></span><span class="op">(</span><span class="va">pbmc_small</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Seurat"</span></span></code></pre>
 <p>Now, we can convert this Seurat object to a
@@ -559,12 +506,12 @@ information in a specific format with the same gene identifiers as that
 of <code>pbmc_small</code>.</p>
 <p>We will generate <strong>random</strong> phyloranks for each gene as
 integers.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_names</span> <span class="op">&lt;-</span> <span class="va">pbmc_small</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">example_phylorank_sc</span> <span class="op">&lt;-</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">gene_names</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="va">gene_names</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set_sc</span> <span class="op">&lt;-</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/ScPhyloExpressionSet_from_seurat.html">ScPhyloExpressionSet_from_seurat</a></span><span class="op">(</span></span>
 <span>        <span class="va">pbmc_small</span>,</span>
@@ -573,7 +520,7 @@ integers.</p>
 Example of a downstream analysis
 </summary><p>Here, we will go a bit deeper and cluster the <code>pbmc_small</code>
 object before integrating this to the <code>myTAIv2</code> workflow.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># example workflow to cluster the single cell data</span></span>
 <span><span class="va">pbmc_small</span> <span class="op">&lt;-</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/NormalizeData.html" class="external-link">NormalizeData</a></span><span class="op">(</span><span class="va">pbmc_small</span><span class="op">)</span></span>
 <span><span class="va">pbmc_small</span> <span class="op">&lt;-</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/FindVariableFeatures.html" class="external-link">FindVariableFeatures</a></span><span class="op">(</span><span class="va">pbmc_small</span>, selection.method <span class="op">=</span> <span class="st">"vst"</span>, nfeatures <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
@@ -590,16 +537,16 @@ object before integrating this to the <code>myTAIv2</code> workflow.</p>
 <span><span class="co">## Maximum modularity in 10 random starts: 0.4014</span></span>
 <span><span class="co">## Number of communities: 2</span></span>
 <span><span class="co">## Elapsed time: 0 seconds</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set_sc.cluster</span> <span class="op">&lt;-</span> </span>
 <span>    <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/ScPhyloExpressionSet_from_seurat.html">ScPhyloExpressionSet_from_seurat</a></span><span class="op">(</span></span>
 <span>        seurat <span class="op">=</span> <span class="va">pbmc_small.cluster</span>,</span>
 <span>        strata <span class="op">=</span> <span class="va">example_phylorank_sc</span><span class="op">)</span></span></code></pre></div>
 <p>Now we have the <code>ScPhyloExpressionSet</code> object,</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_phyex_set_sc.cluster</span></span></code></pre></div>
 <p>… which you can now plot!</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc.cluster</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
