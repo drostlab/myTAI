@@ -392,7 +392,14 @@ save_gatai_results_pdf <- function(phyex_set,
     
     grDevices::pdf(pdf_path, width = 10, height = 8)
     
-    # Page 1: Removed gene IDs - handle long gene lists better
+    # First pages: Plots without titles
+    for (nm in names(plots)) {
+        try({
+            print(plots[[nm]])
+        }, silent = TRUE)
+    }
+    
+    # Last pages: Removed gene IDs - handle long gene lists better
     plot.new()
     title("GATAI Removed Gene IDs")
     text(0, 0.95, paste("Total removed genes:", length(removed_genes)), adj = c(0, 1), cex = 1.2)
@@ -400,10 +407,10 @@ save_gatai_results_pdf <- function(phyex_set,
     
     # Better handling of long gene lists
     gene_text <- paste(removed_genes, collapse = ", ")
-    wrapped <- strwrap(gene_text, width = 100)  # Reduced width for better fit
+    wrapped <- strwrap(gene_text, width = 100)
     
     # Calculate how many lines can fit on page
-    max_lines <- floor((0.90 - 0.1) / 0.02)  # Leave space at bottom and adjust for new spacing
+    max_lines <- floor((0.90 - 0.1) / 0.02)
     
     if (length(wrapped) > max_lines) {
         # Split across multiple pages
@@ -428,14 +435,6 @@ save_gatai_results_pdf <- function(phyex_set,
         for (i in seq_along(wrapped)) {
             text(0, 0.90 - 0.02 * i, wrapped[i], adj = c(0, 1), cex = 0.8)
         }
-    }
-    
-    # Remaining pages: Plots without titles
-    for (nm in names(plots)) {
-        try({
-            print(plots[[nm]])
-            # Remove the title() call to avoid showing plot names
-        }, silent = TRUE)
     }
     
     grDevices::dev.off()
