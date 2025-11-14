@@ -105,12 +105,20 @@ S7::method(plot_signature, BulkPhyloExpressionSet) <- function(phyex_set,
             ub = phyex_set@TXI + std_dev
         )
 
-        if (show_stddev)
+        if (show_stddev) {
+            # Calculate y-axis limits to include ribbon bounds
+            y_min <- min(c(df_sd$lb, df_samples$TXI, df_main$TXI), na.rm = TRUE)
+            y_max <- max(c(df_sd$ub, df_samples$TXI, df_main$TXI), na.rm = TRUE)
+            y_range <- y_max - y_min
+            y_expand <- y_range * 0.05  # 5% padding
+            
             p <- p +
                 geom_ribbon(
                     data = df_sd,
                     aes(x = Identity, ymin = lb, ymax = ub, fill = phyex_set@name, group=1), alpha = 0.3, inherit.aes = FALSE
-                )
+                ) +
+                coord_cartesian(ylim = c(y_min - y_expand, y_max + y_expand))
+        }
             
         p <- p +
             geom_jitter(
