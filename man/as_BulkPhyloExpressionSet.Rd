@@ -7,7 +7,7 @@
 as_BulkPhyloExpressionSet(
   data,
   groups = colnames(data[, 3:ncol(data)]),
-  name = deparse(substitute(data)),
+  name = "PhyloExpressionSet",
   strata_legend = NULL,
   ...
 )
