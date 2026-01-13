@@ -120,7 +120,7 @@ BulkPhyloExpressionSet <- new_class("BulkPhyloExpressionSet",
 #' @export
 BulkPhyloExpressionSet_from_df <- function(data, 
                                            groups = colnames(data[, 3:ncol(data)]),
-                                           name = deparse(substitute(data)),
+                                           name = "PhyloExpressionSet",
                                            strata_legend = NULL,
                                            ...) {
     gene_ids <- as.character(data[[2]])
