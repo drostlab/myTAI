@@ -3,6 +3,7 @@
 [![Paper link](https://img.shields.io/badge/Published%20in-Bioinformatics-126888.svg)](https://doi.org/10.1093/bioinformatics/btx835)
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://bioconda.github.io/)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2FmyTAI&label=VISITORS&countColor=%23263759&style=flat)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/myTAI)](https://github.com/r-hub/cranlogs.app)
 [![R-CMD-check](https://github.com/drostlab/myTAI/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/drostlab/myTAI/actions/workflows/R-CMD-check.yaml)
 [![GitHub release](https://img.shields.io/github/v/release/drostlab/myTAI?label=Latest%20Release)](https://github.com/drostlab/myTAI/releases)
 
