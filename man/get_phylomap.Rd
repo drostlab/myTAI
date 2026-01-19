@@ -17,6 +17,6 @@ Extract a phylomap (tibble of strata-to-gene mappings) from a PhyloExpressionSet
 }
 \examples{
 # Extract phylomap
-phylomap <- extract_phylomap(example_phyex_set)
+phylomap <- get_phylomap(example_phyex_set)
 
 }

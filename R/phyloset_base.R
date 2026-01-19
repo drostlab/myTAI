@@ -511,7 +511,7 @@ permute_PS <- function(phyex_set) {
 #' 
 #' @examples
 #' # Extract phylomap
-#' phylomap <- extract_phylomap(example_phyex_set)
+#' phylomap <- get_phylomap(example_phyex_set)
 #' 
 #' @export
 get_phylomap <- function(phyex_set) {

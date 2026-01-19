@@ -103,15 +103,16 @@ for reliable testing.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Diagnose flatline test robustness</span></span></span>
-<span class="r-in"><span><span class="va">robustness</span> <span class="op">&lt;-</span> <span class="fu">diagnose_test_robustness</span><span class="op">(</span><span class="va">stat_flatline_test</span> <span class="op">|&gt;</span> <span class="fu"><a href="select_genes.html">select_genes</a></span><span class="op">(</span><span class="va">stat_flatline_test</span><span class="op">@</span><span class="va">gene_ids</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                                       <span class="va">example_phyex_set</span>,</span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">example_phyex_set</span></span></span>
+<span class="r-in"><span><span class="va">robustness</span> <span class="op">&lt;-</span> <span class="fu">diagnose_test_robustness</span><span class="op">(</span><span class="va">stat_flatline_test</span>, </span></span>
+<span class="r-in"><span>                                       <span class="va">p</span> <span class="op">|&gt;</span> <span class="fu"><a href="select_genes.html">select_genes</a></span><span class="op">(</span><span class="va">p</span><span class="op">@</span><span class="va">gene_ids</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                       sample_sizes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                       plot_result<span class="op">=</span><span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>                                       num_reps<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computing: [========================================] 100% (done)                         </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(rep(sample_sizes, each = num_reps), f):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Can't find method for `select_genes(&lt;closure&gt;)`.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Computing: [========================================] 100% (done)                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Computing: [========================================] 100% (done)                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Computing: [========================================] 100% (done)                         </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -149,7 +149,7 @@ e.g. <code>conservation_test = stat_flatline_test</code>,
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf_stability_res</span></span></code></pre></div>
 <pre><code><span><span class="co">##         none         sqrt         log2         rank          vst         rlog </span></span>
-<span><span class="co">## 4.114127e-01 2.909200e-08 8.575227e-07 1.365835e-13 1.828151e-11 7.526237e-16</span></span></code></pre>
+<span><span class="co">## 3.981219e-01 7.948459e-09 9.298298e-24 7.483081e-10 1.360986e-07 3.981179e-13</span></span></code></pre>
 <p>Here, we can see that the p-values for the flat line test are all
 below 0.05 for all transformations. This is reassuring as to the
 stability of the TAI profile across transformations.</p>
@@ -232,7 +232,9 @@ genes in a given set:</p>
 <span>  <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/select_genes.html">select_genes</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="va">genes.top_mean</span><span class="op">)</span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set.select_top_expr</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
+<pre><code><span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
+<span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
 <p><img src="tai-transform_files/figure-html/unnamed-chunk-13-1.png" alt="plot_signature function output for top expressed" width="576" style="display: block; margin: auto;"></p>
 <p>If you have certain genes of interest, we can also select or remove
 individual genes with <code><a href="../reference/select_genes.html">myTAI::select_genes()</a></code> and
