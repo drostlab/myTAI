@@ -108,7 +108,7 @@ Want to use myTAI on your data?
 
 <p style="font-family: 'Fira Mono', monospace; font-size: 1.5rem;">
 Want to learn even more?   
-→ check out our vignettes under the [`Articles`](index.html) tab or the [`Reference`](../reference/index.html) tab for a list of functions and their documentation.
+→ check out our vignettes under the [`Articles`](index.html) tab or the `Reference` tab for a list of functions and their documentation.
 </p>
 
 <br/><br/>

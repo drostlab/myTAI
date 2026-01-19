@@ -10,6 +10,7 @@
 #' @param show_reps Logical indicating whether to show replicates or collapsed data (default: FALSE)
 #' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
 #' @param cluster_cols Logical indicating whether to cluster conditions/columns (default: FALSE)
+#' @param order_by_stage Logical indicating whether to order genes by expression angle/developmental stage (default: TRUE). Ignored if cluster_rows is TRUE
 #' @param show_gene_age Logical indicating whether to show gene age annotation (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene identifiers (default: FALSE)
 #' @param gene_annotation Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)
@@ -62,6 +63,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
              show_reps = FALSE,
              cluster_rows = FALSE,
              cluster_cols = FALSE,
+             order_by_stage = TRUE,
              show_gene_age = TRUE,
              show_gene_ids = FALSE,
              gene_annotation = NULL,
@@ -84,6 +86,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
 #' @param std Logical indicating whether to use standardized expression values (default: TRUE)
 #' @param cluster_rows Logical indicating whether to cluster genes/rows (default: FALSE)
 #' @param cluster_cols Logical indicating whether to cluster identities/columns (default: FALSE)
+#' @param order_by_stage Logical indicating whether to order genes by expression angle/developmental stage (default: TRUE). Ignored if cluster_rows is TRUE
 #' @param show_gene_age Logical indicating whether to show gene age as row annotation (default: TRUE)
 #' @param show_gene_ids Logical indicating whether to show gene names (default: FALSE)
 #' @param gene_annotation Data frame with custom gene annotations, rownames should match gene IDs (default: NULL)
@@ -105,6 +108,7 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
                                    std = TRUE, 
                                    cluster_rows = FALSE,
                                    cluster_cols = FALSE,
+                                   order_by_stage = TRUE,
                                    show_gene_age = TRUE,
                                    show_gene_ids = FALSE,
                                    gene_annotation = NULL,
@@ -179,8 +183,8 @@ plot_gene_heatmap <- S7::new_generic("plot_gene_heatmap", "phyex_set",
     if (n_genes == 1) {
         cluster_rows <- FALSE
     }
-    # Order genes by expression angle if not clustering
-    if (!cluster_rows) {
+    # Order genes by expression angle if not clustering and order_by_stage is TRUE
+    if (!cluster_rows && order_by_stage) {
         gene_order <- order(get_angles(se))
         e <- e[gene_order, , drop = FALSE]
     }
@@ -271,6 +275,7 @@ S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
                                                                  show_reps = FALSE,
                                                                  cluster_rows = FALSE,
                                                                  cluster_cols = FALSE,
+                                                                 order_by_stage = TRUE,
                                                                  show_gene_age = TRUE,
                                                                  show_gene_ids = FALSE,
                                                                  gene_annotation = NULL,
@@ -296,6 +301,7 @@ S7::method(plot_gene_heatmap, BulkPhyloExpressionSet) <- function(phyex_set,
         std = std,
         cluster_rows = cluster_rows,
         cluster_cols = cluster_cols,
+        order_by_stage = order_by_stage,
         show_gene_age = show_gene_age,
         show_gene_ids = show_gene_ids,
         gene_annotation = gene_annotation,
@@ -314,6 +320,7 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
                                                                max_cells_per_type = 5,
                                                                cluster_rows = FALSE,
                                                                cluster_cols = FALSE,
+                                                               order_by_stage = TRUE,
                                                                show_gene_age = TRUE,
                                                                show_gene_ids = FALSE,
                                                                gene_annotation = NULL,
@@ -389,6 +396,7 @@ S7::method(plot_gene_heatmap, ScPhyloExpressionSet) <- function(phyex_set,
         std = std,
         cluster_rows = cluster_rows,
         cluster_cols = cluster_cols,
+        order_by_stage = order_by_stage,
         show_gene_age = show_gene_age,
         show_gene_ids = show_gene_ids,
         gene_annotation = gene_annotation,

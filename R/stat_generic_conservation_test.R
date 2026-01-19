@@ -89,11 +89,11 @@ stat_generic_conservation_test <- function(phyex_set,
 #' 
 #' @examples
 #' # Diagnose flatline test robustness
-#' robustness <- diagnose_test_robustness(stat_flatline_test, 
+#' robustness <- diagnose_test_robustness(stat_flatline_test |> select_genes(stat_flatline_test@gene_ids[1:30]), 
 #'                                        example_phyex_set,
 #'                                        sample_sizes=c(10,20),
 #'                                        plot_result=FALSE,
-#'                                        num_reps=3)
+#'                                        num_reps=2)
 #' 
 #' @import ggplot2
 #' 

@@ -501,3 +501,46 @@ permute_PS <- function(phyex_set) {
     new_obj@strata_values <- new_strata_values
     new_obj
 }
+
+#' @title Extract Phylomap from PhyloExpressionSet
+#' @description Extract a phylomap (tibble of strata-to-gene mappings) from a PhyloExpressionSet object.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return A tibble with two columns: Stratum (gene age value) and GeneID (gene identifiers)
+#' 
+#' @examples
+#' # Extract phylomap
+#' phylomap <- extract_phylomap(example_phyex_set)
+#' 
+#' @export
+get_phylomap <- function(phyex_set) {
+    check_PhyloExpressionSet(phyex_set)
+    tibble::tibble(
+        Stratum = phyex_set@strata_values,
+        GeneID = phyex_set@gene_ids
+    )
+}
+
+#' @title Get Strata Legend from PhyloExpressionSet
+#' @description Extract the strata legend (phylostratum ranks and names) from a PhyloExpressionSet object.
+#' 
+#' @param phyex_set A PhyloExpressionSet object
+#' 
+#' @return A tibble with two columns: Rank (phylostratum values) and Name (phylostratum labels), sorted by Rank
+#' 
+#' @examples
+#' # Get strata legend
+#' legend <- get_strata_legend(example_phyex_set)
+#' 
+#' @export
+get_strata_legend <- function(phyex_set) {
+    check_PhyloExpressionSet(phyex_set)
+    
+    tibble::tibble(
+        Rank = phyex_set@strata_values,
+        Name = as.character(phyex_set@strata)
+    ) |>
+        dplyr::distinct() |>
+        dplyr::arrange(Rank)
+}

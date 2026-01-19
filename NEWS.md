@@ -1,5 +1,9 @@
 # NEWS
 
+myTAI 2.3.5
+===========
+- added functions `get_strata_legend` and `get_phylomap`
+- removed faulty dynamic links from documentation
 
 myTAI 2.3.4
 ===========

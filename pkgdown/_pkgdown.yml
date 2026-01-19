@@ -121,6 +121,8 @@ reference:
       - genes_top_expr
       - genes_top_mean
       - genes_top_variance
+      - get_phylomap
+      - get_strata_legend
       - match_map
       - normalise_stage_expression
       - omit_matrix

@@ -13,6 +13,7 @@ plot_gene_heatmap(
   show_reps = FALSE,
   cluster_rows = FALSE,
   cluster_cols = FALSE,
+  order_by_stage = TRUE,
   show_gene_age = TRUE,
   show_gene_ids = FALSE,
   gene_annotation = NULL,
@@ -36,6 +37,8 @@ plot_gene_heatmap(
 \item{cluster_rows}{Logical indicating whether to cluster genes/rows (default: FALSE)}
 
 \item{cluster_cols}{Logical indicating whether to cluster conditions/columns (default: FALSE)}
+
+\item{order_by_stage}{Logical indicating whether to order genes by expression angle/developmental stage (default: TRUE). Ignored if cluster_rows is TRUE}
 
 \item{show_gene_age}{Logical indicating whether to show gene age annotation (default: TRUE)}
 

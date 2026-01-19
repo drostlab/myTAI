@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">myTAI</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,7 @@
 <span>  std <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  cluster_rows <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cluster_cols <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  order_by_stage <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_gene_age <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_gene_ids <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  gene_annotation <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -111,6 +112,10 @@
 
 <dt id="arg-cluster-cols">cluster_cols<a class="anchor" aria-label="anchor" href="#arg-cluster-cols"></a></dt>
 <dd><p>Logical indicating whether to cluster identities/columns (default: FALSE)</p></dd>
+
+
+<dt id="arg-order-by-stage">order_by_stage<a class="anchor" aria-label="anchor" href="#arg-order-by-stage"></a></dt>
+<dd><p>Logical indicating whether to order genes by expression angle/developmental stage (default: TRUE). Ignored if cluster_rows is TRUE</p></dd>
 
 
 <dt id="arg-show-gene-age">show_gene_age<a class="anchor" aria-label="anchor" href="#arg-show-gene-age"></a></dt>

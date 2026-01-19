@@ -249,7 +249,7 @@ myTAI::plot_gene_profiles(example_phyex_set, max_genes = 1000,
 ::: {.tip}
 These plots are examples of plots that `myTAIv2` can generate. To check out the functions, use `?` before the function (i.e. `?myTAI::plot_mean_var()`.
 
-You can also find a list of plotting functions in [`Reference`](../reference/index.html).
+You can also find a list of plotting functions in `Reference`.
 :::
 
 ### Single cell RNA-seq data
