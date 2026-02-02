@@ -116,12 +116,12 @@ due to RNA-seq transformations.</p>
 <span><span class="co"># no transformation</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
-<p><img src="tai-transform_files/figure-html/unnamed-chunk-2-1.png" alt="plot_signature function output no transform" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-transform_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="plot_signature function output no transform" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># rank transformation</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set</span> <span class="op">|&gt;</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span>FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
-<p><img src="tai-transform_files/figure-html/unnamed-chunk-3-1.png" alt="plot_signature function output rank transform" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-transform_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="plot_signature function output rank transform" width="576" style="display: block; margin: auto;"></p>
 <p>Indeed, <code>myTAIv2</code> is fitted with a single plotting
 function (<code><a href="../reference/plot_signature_transformed.html">myTAI::plot_signature_transformed()</a></code>) to evaluate
 the robustness of the patterns against multiple transformations,
@@ -132,7 +132,7 @@ i.e.</p>
 <span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
 <span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
 <span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
-<p><img src="tai-transform_files/figure-html/unnamed-chunk-4-1.png" alt="plot_signature_transformed function output transform all" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-transform_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="plot_signature_transformed function output transform all" width="768" style="display: block; margin: auto;"></p>
 <p>See how different some of the transformations are! In general,
 though, the earlier stages are younger compared to the mid-stage. Across
 most transformations, the late-stage is younger compared to the
@@ -149,7 +149,7 @@ e.g. <code>conservation_test = stat_flatline_test</code>,
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf_stability_res</span></span></code></pre></div>
 <pre><code><span><span class="co">##         none         sqrt         log2         rank          vst         rlog </span></span>
-<span><span class="co">## 3.981219e-01 7.948459e-09 9.298298e-24 7.483081e-10 1.360986e-07 3.981179e-13</span></span></code></pre>
+<span><span class="co">## 5.562288e-01 6.714072e-04 2.622694e-08 2.828259e-14 4.740345e-06 2.251359e-15</span></span></code></pre>
 <p>Here, we can see that the p-values for the flat line test are all
 below 0.05 for all transformations. This is reassuring as to the
 stability of the TAI profile across transformations.</p>
@@ -196,7 +196,7 @@ removing no genes <code>quantile = 1</code> to removing the top 20% of
 expressed genes <code>quantile = 0.8</code>).</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature_gene_quantiles.html">plot_signature_gene_quantiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-transform_files/figure-html/unnamed-chunk-10-1.png" alt="plot_signature_gene_quantiles function output" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-transform_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="plot_signature_gene_quantiles function output" width="768" style="display: block; margin: auto;"></p>
 <p>From this, we can see that the most of the ‘bulge’ on the Bent
 Cotyledon stage is driven by a very few highly expressed genes.
 Otherwise, the TAI profile is very stable.</p>
@@ -223,7 +223,7 @@ set:</p>
 <span>  <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/remove_genes.html">remove_genes</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="va">genes.top_var</span><span class="op">)</span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set.rm_top_var</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-transform_files/figure-html/unnamed-chunk-12-1.png" alt="plot_signature function output removing top variance" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-transform_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="plot_signature function output removing top variance" width="576" style="display: block; margin: auto;"></p>
 <p>We could also use <code><a href="../reference/select_genes.html">myTAI::select_genes()</a></code> to keep the
 genes in a given set:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -232,10 +232,8 @@ genes in a given set:</p>
 <span>  <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/select_genes.html">select_genes</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="va">genes.top_mean</span><span class="op">)</span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set.select_top_expr</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
-<span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
-<p><img src="tai-transform_files/figure-html/unnamed-chunk-13-1.png" alt="plot_signature function output for top expressed" width="576" style="display: block; margin: auto;"></p>
+<pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
+<p><img src="tai-transform_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="plot_signature function output for top expressed" width="576" style="display: block; margin: auto;"></p>
 <p>If you have certain genes of interest, we can also select or remove
 individual genes with <code><a href="../reference/select_genes.html">myTAI::select_genes()</a></code> and
 <code><a href="../reference/remove_genes.html">myTAI::remove_genes()</a></code>, respectively.</p>
@@ -245,7 +243,7 @@ individual genes with <code><a href="../reference/select_genes.html">myTAI::sele
 <span>  <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/remove_genes.html">remove_genes</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AT1G02780"</span>, <span class="st">"AT1G03880"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set.select_goi</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-transform_files/figure-html/unnamed-chunk-14-1.png" alt="plot_signature function output for gene of interest" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-transform_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="plot_signature function output for gene of interest" width="576" style="display: block; margin: auto;"></p>
 </details><p>For a more sophisticated workflow to extract genes that drive the TAI
 profile, check out this vignette<br>
 → <a href="tai-breaker.html"><code>Break TAI patterns using gaTAI</code></a></p>
@@ -292,7 +290,7 @@ processing.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

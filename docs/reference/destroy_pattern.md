@@ -1,0 +1,90 @@
+# Destroy Phylotranscriptomic Pattern Using GATAI
+
+Apply the GATAI algorithm to identify and remove genes that contribute
+to phylotranscriptomic patterns.
+
+## Usage
+
+``` r
+destroy_pattern(
+  phyex_set,
+  num_runs = 20,
+  runs_threshold = 0.5,
+  analysis_dir = NULL,
+  plot_results = TRUE,
+  max_generations = 10000,
+  seed = 1234,
+  extended_analysis = FALSE,
+  min_pval = 0.05,
+  always_return_genes = FALSE,
+  ...
+)
+```
+
+## Arguments
+
+- phyex_set:
+
+  A PhyloExpressionSet object (bulk or single cell, the latter which
+  will get pseudo-bulked)
+
+- num_runs:
+
+  Number of GATAI runs to perform (default: 20)
+
+- runs_threshold:
+
+  Threshold for gene removal consistency across runs (default: 0.5)
+
+- analysis_dir:
+
+  Directory to store GATAI analysis results (default: NULL)
+
+- plot_results:
+
+  Whether to plot the results. If analysis dir is given, this will be
+  ignored.
+
+- max_generations:
+
+  Integer. Maximum number of generations (iterations) for the genetic
+  algorithm (default 10000).
+
+- seed:
+
+  Random seed for reproducibility (default: 1234)
+
+- extended_analysis:
+
+  Whether to show the multiple runs and convergence plots (default:
+  FALSE)
+
+- min_pval:
+
+  Minimum p-value for which the pattern is considered destroyed
+  (default: 0.05).
+
+- always_return_genes:
+
+  Whether to return genes even when the pattern is not destroyed
+  (default: FALSE).
+
+- ...:
+
+  Additional arguments passed to gataiR::gatai
+
+## Value
+
+A list containing GATAI results including identified genes that
+contribute to the pattern
+
+## Details
+
+This function requires the gataiR package to be installed. GATAI
+systematically removes genes that contribute to phylotranscriptomic
+patterns by iteratively testing gene removal and evaluating the impact
+on the overall transcriptomic signature.
+
+## Author
+
+Filipa Martins Costa

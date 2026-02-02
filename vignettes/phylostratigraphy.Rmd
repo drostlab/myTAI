@@ -13,7 +13,7 @@ Genomic phylostratigraphy is a method to date the evolutionary emergence of a gi
 
 <img src="Figures/Basics_of_phylostratigraphy.png" alt="phylostratigraphy overview" align="center" style="max-height: 500px; max-width: 500px;" />
 
-<p style="font-size:10px;"> Overview of gene age inference. Here, we are searching two genes from the genome of interest against a taxonomically-informed database. The first gene is assigned as *relative age* 1 since homologues can be found as far as node 1. The second gene is assigned as *relative age* 3 since homologues can be found only up to node 3. Adapted from [Barrera-Redondo et al., 2023](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z). </p>
+<p style="font-size:10px;"> Overview of gene age inference. Here, we are searching two genes from the genome of interest against a taxonomically-informed database. The first gene is assigned as *relative age* 1 since homologues can be found as far as node 1. The second gene is assigned as *relative age* 3 since homologues can be found only up to node 3. Adapted from [Barrera-Redondo et al., 2023](https://link.springer.com/article/10.1186/s13059-023-02895-z). </p>
 
 The output can be fed into `myTAIv2` and, combined with expression data, is used to compute the transcriptome age index (`TAI`). More specifically, gene age inference generates a table storing the gene age in the first column and the corresponding gene id of the organism of interest in the second column. This table is named _phylostratigraphic map_ (or _phylomap_).
 
@@ -160,11 +160,11 @@ In the context of gene age inference, sequence-based alignments have not been ex
 <details>
   <summary>**Synteny-based gene age inference**</summary>
 
-A recently introduced approach is called `synteny-based phylostratigraphy` ([Arendsee et al., 2019](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y)). Here, the authors provide a comparative analysis of genes across evolutionary clades, augmenting standard phylostratigraphy with a detailed, synteny-based analysis. 
+A recently introduced approach is called `synteny-based phylostratigraphy` ([Arendsee et al., 2019](https://link.springer.com/article/10.1186/s12859-019-3023-y)). Here, the authors provide a comparative analysis of genes across evolutionary clades, augmenting standard phylostratigraphy with a detailed, synteny-based analysis. 
 
 Whereas standard phylostratigraphy searches the proteomes of related species for similarities to focal genes, their `fagin` pipeline first finds syntenic genomic intervals and then searches within these intervals for any trace of similarity. 
 
-`fagin` searches the (`in silico` translated) amino acid sequence of all unannotated ORFs as well as all known CDS within the syntenic search space of the target genomes. If no amino acid similarity is found within the syntenic search space, their `fagin` pipeline will search for nucleotide similarity. Finding nucleotide sequence similarity, but not amino acid similarity, is consistent with a `de novo` origin of the focal gene. If no similarity of any sort is found, their `fagin` pipeline will use the syntenic data to infer a possible reason. Thus, they detect indels, scrambled synteny, assembly issues, and regions of uncertain synteny ([Arendsee et al., 2019](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3023-y)).
+`fagin` searches the (`in silico` translated) amino acid sequence of all unannotated ORFs as well as all known CDS within the syntenic search space of the target genomes. If no amino acid similarity is found within the syntenic search space, their `fagin` pipeline will search for nucleotide similarity. Finding nucleotide sequence similarity, but not amino acid similarity, is consistent with a `de novo` origin of the focal gene. If no similarity of any sort is found, their `fagin` pipeline will use the syntenic data to infer a possible reason. Thus, they detect indels, scrambled synteny, assembly issues, and regions of uncertain synteny ([Arendsee et al., 2019](https://link.springer.com/article/10.1186/s12859-019-3023-y)).
 
 </details> 
 

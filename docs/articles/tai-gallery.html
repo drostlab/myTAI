@@ -106,7 +106,7 @@ vignette here:<br>
 <span>                      colour <span class="op">=</span> <span class="st">"lavender"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># as the plots are ggplot2 objects, we can simply modify them using ggplot2</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Developmental stages of A. thaliana"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-2-1.png" alt="plot_signature function output with stat_flatline_test" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="plot_signature function output with stat_flatline_test" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">module_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, mid <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, late <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set</span>,</span>
@@ -114,7 +114,7 @@ vignette here:<br>
 <span>                      conservation_test <span class="op">=</span> <span class="va">stat_reductive_hourglass_test</span>,</span>
 <span>                      modules <span class="op">=</span> <span class="va">module_info</span>,</span>
 <span>                      colour <span class="op">=</span> <span class="st">"lavender"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-3-1.png" alt="plot_signature function output with stat_reductive_hourglass_test" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="plot_signature function output with stat_reductive_hourglass_test" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="transformation-and-robustness-checks">Transformation and robustness checks<a class="anchor" aria-label="anchor" href="#transformation-and-robustness-checks"></a>
@@ -129,11 +129,11 @@ vignette here:<br>
 <span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
 <span><span class="co">## Computing: [========================================] 100% (done)                         </span></span>
 <span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-4-1.png" alt="plot_signature_transformed function output" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="plot_signature_transformed function output" width="768" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature_gene_quantiles.html">plot_signature_gene_quantiles</a></span><span class="op">(</span></span>
 <span>  <span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-5-1.png" alt="plot_signature_gene_quantiles function output" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="plot_signature_gene_quantiles function output" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="statistical-tests-and-plotting-results">Statistical tests and plotting results<a class="anchor" aria-label="anchor" href="#statistical-tests-and-plotting-results"></a>
@@ -143,44 +143,44 @@ vignette here:<br>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/stat_flatline_test.html">stat_flatline_test</a></span><span class="op">(</span></span>
 <span>  <span class="va">example_phyex_set</span>, plot_result <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-6-1.png" alt="stat_flatline_test function output" width="480" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="stat_flatline_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Flat Line Test </span></span>
 <span><span class="co">## Test statistic: 0.0446168 </span></span>
-<span><span class="co">## P-value: 0.5203637 </span></span>
+<span><span class="co">## P-value: 0.3368477 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2019</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_flt</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/stat_flatline_test.html">stat_flatline_test</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, plot_result <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_cullen_frey.html">plot_cullen_frey</a></span><span class="op">(</span><span class="va">res_flt</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-8-1.png" alt="plot_cullen_frey function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="plot_cullen_frey function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## summary statistics</span></span>
 <span><span class="co">## ------</span></span>
-<span><span class="co">## min:  0.0004847491   max:  1.640113 </span></span>
-<span><span class="co">## median:  0.05188614 </span></span>
-<span><span class="co">## mean:  0.1314005 </span></span>
-<span><span class="co">## estimated sd:  0.2818634 </span></span>
-<span><span class="co">## estimated skewness:  4.160966 </span></span>
-<span><span class="co">## estimated kurtosis:  21.6599</span></span></code></pre>
+<span><span class="co">## min:  0.0005487484   max:  0.4556628 </span></span>
+<span><span class="co">## median:  0.03506333 </span></span>
+<span><span class="co">## mean:  0.06595785 </span></span>
+<span><span class="co">## estimated sd:  0.09274537 </span></span>
+<span><span class="co">## estimated skewness:  2.914687 </span></span>
+<span><span class="co">## estimated kurtosis:  12.10274</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_null_txi_sample.html">plot_null_txi_sample</a></span><span class="op">(</span><span class="va">res_flt</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>x <span class="op">=</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_axis.html" class="external-link">guide_axis</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-9-1.png" alt="plot_null_txi_sample function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="plot_null_txi_sample function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">module_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>early <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, mid <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, late <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/stat_reductive_hourglass_test.html">stat_reductive_hourglass_test</a></span><span class="op">(</span></span>
 <span>  <span class="va">example_phyex_set</span>, plot_result <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  modules <span class="op">=</span> <span class="va">module_info</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-10-1.png" alt="stat_reductive_hourglass_test function output" width="480" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="stat_reductive_hourglass_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Reductive Hourglass Test </span></span>
 <span><span class="co">## Test statistic: -0.03191036 </span></span>
-<span><span class="co">## P-value: 0.1511379 </span></span>
+<span><span class="co">## P-value: 0.1499504 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2019</span></span></code></pre>
 </div>
@@ -189,13 +189,13 @@ vignette here:<br>
 </h4>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_strata_expression.html">plot_strata_expression</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-11-1.png" alt="plot_strata_expression function output" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="plot_strata_expression function output" width="576" style="display: block; margin: auto;"></p>
 <p><code>plot_strata_expression</code> with scaled y axis</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_strata_expression.html">plot_strata_expression</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Expression aggregated by mean (log-scaled)"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-12-1.png" alt="plot_strata_expression function output ggplot2" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="plot_strata_expression function output ggplot2" width="576" style="display: block; margin: auto;"></p>
 <p><code>plot_strata_expression</code> with explicit transformation</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
@@ -205,7 +205,7 @@ vignette here:<br>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">example_phyex_set</span> <span class="op">|&gt;</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">log1p</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_strata_expression.html">plot_strata_expression</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">p1</span><span class="op">+</span><span class="va">p2</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-13-1.png" alt="plot_strata_expression function output" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="plot_strata_expression function output" width="768" style="display: block; margin: auto;"></p>
 <p>As you can see, both plots are identical. This example demonstrates
 that there are multiple ways to achieve the same result through piping
 (<code>|&gt;</code>) operator in R. <code>|&gt;</code> is basically the
@@ -216,7 +216,7 @@ same as <code>%&gt;%</code>.</p>
 </h4>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_contribution.html">plot_contribution</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-14-1.png" alt="plot_contribution function output" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="plot_contribution function output" width="576" style="display: block; margin: auto;"></p>
 <p>Curious about methods to obtain gene age information? See more
 here:<br>
 → <a href="phylostratigraphy.html">📚</a></p>
@@ -225,7 +225,7 @@ information to each gene for TDI, TSI etc., see here:<br>
 → <a href="other-strata.html">🧬</a></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_distribution_expression.html">plot_distribution_expression</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-15-1.png" alt="plot_distribution_expression function output" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="plot_distribution_expression function output" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="contribution-to-the-overall-tai-by-partial-tai-ptai">Contribution to the overall TAI by partial TAI (pTAI)<a class="anchor" aria-label="anchor" href="#contribution-to-the-overall-tai-by-partial-tai-ptai"></a>
@@ -255,7 +255,7 @@ various developmental stages against a reference stage (default is stage
 1).</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_distribution_pTAI_qqplot.html">plot_distribution_pTAI_qqplot</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-16-1.png" alt="plot_distribution_pTAI_qqplot function output" width="864" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="plot_distribution_pTAI_qqplot function output" width="864" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="phylostratum-distribution">Phylostratum distribution<a class="anchor" aria-label="anchor" href="#phylostratum-distribution"></a>
@@ -267,20 +267,20 @@ various developmental stages against a reference stage (default is stage
 <span>  selected_gene_ids <span class="op">=</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/genes_top_variance.html">genes_top_variance</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, top_p <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span>,</span>
 <span>  as_log_obs_exp <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of gene ages (top), Observed vs Expected plot of top 5% variance genes (bottom)"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-17-1.png" alt="plot_distribution_strata function output" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="plot_distribution_strata function output" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="expression-heatmap">Expression heatmap<a class="anchor" aria-label="anchor" href="#expression-heatmap"></a>
 </h4>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-18-1.png" alt="plot_gene_heatmap function output default" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-18-1.png" class="r-plt" alt="plot_gene_heatmap function output default" width="1152" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>, show_reps<span class="op">=</span><span class="cn">TRUE</span>, show_gene_ids<span class="op">=</span><span class="cn">TRUE</span>, top_p<span class="op">=</span><span class="fl">0.005</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-19-1.png" alt="plot_gene_heatmap function output clustered" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="plot_gene_heatmap function output clustered" width="1152" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>, show_reps<span class="op">=</span><span class="cn">TRUE</span>, top_p<span class="op">=</span><span class="fl">0.005</span>, std<span class="op">=</span><span class="cn">FALSE</span>, show_gene_ids<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-20-1.png" alt="plot_gene_heatmap function output nonstd" width="960" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" alt="plot_gene_heatmap function output nonstd" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="dimension-reduction">Dimension reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
@@ -290,21 +290,21 @@ various developmental stages against a reference stage (default is stage
 </h5>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_space.html">plot_gene_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-21-1.png" alt="plot_gene_space function output" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-21-1.png" class="r-plt" alt="plot_gene_space function output" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_space.html">plot_gene_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span>,colour_by <span class="op">=</span> <span class="st">"strata"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-22-1.png" alt="plot_gene_space function output by strata" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" alt="plot_gene_space function output by strata" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level5">
 <h5 id="at-the-sample-level">At the sample level<a class="anchor" aria-label="anchor" href="#at-the-sample-level"></a>
 </h5>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span><span class="op">)</span> <span class="op">|</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, colour_by <span class="op">=</span> <span class="st">"TXI"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-23-1.png" alt="plot_sample_space function output by TXI" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" alt="plot_sample_space function output by TXI" width="1152" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can even do a UMAP</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_sample_space.html">plot_sample_space</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, method <span class="op">=</span> <span class="st">"UMAP"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-24-1.png" alt="plot_sample_space function output by TXI" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="plot_sample_space function output by TXI" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level4">
@@ -318,13 +318,13 @@ various developmental stages against a reference stage (default is stage
 <span>                     highlight_genes <span class="op">=</span> <span class="va">top_var_genes</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Mean-variance: simple vs. highlighted top variance genes"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-25-1.png" alt="plot_mean_var function output simple vs highlighted" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-25-1.png" class="r-plt" alt="plot_mean_var function output simple vs highlighted" width="768" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># with log transform and colouring by phylostratum</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_mean_var.html">plot_mean_var</a></span><span class="op">(</span><span class="va">example_phyex_set</span> <span class="op">|&gt;</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/tf.html">tf</a></span><span class="op">(</span><span class="va">log1p</span><span class="op">)</span>, </span>
 <span>                     colour_by <span class="op">=</span> <span class="st">"strata"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-26-1.png" alt="plot_gene_space function output log transform coloured by strata" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-26-1.png" class="r-plt" alt="plot_gene_space function output log transform coloured by strata" width="576" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="individual-gene-expression-profiles">Individual gene expression profiles<a class="anchor" aria-label="anchor" href="#individual-gene-expression-profiles"></a>
@@ -335,18 +335,18 @@ various developmental stages against a reference stage (default is stage
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_profiles.html">plot_gene_profiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, max_genes <span class="op">=</span> <span class="fl">10</span>, colour_by <span class="op">=</span> <span class="st">"strata"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Gene profiles: manual vs. strata coloring"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-27-1.png" alt="plot_gene_profiles function output manual vs strata coloring" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-27-1.png" class="r-plt" alt="plot_gene_profiles function output manual vs strata coloring" width="1152" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># stage colouring with standardized log transformation</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_profiles.html">plot_gene_profiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, max_genes <span class="op">=</span> <span class="fl">10</span>, </span>
 <span>                          transformation <span class="op">=</span> <span class="st">"std_log"</span>, colour_by <span class="op">=</span> <span class="st">"stage"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-28-1.png" alt="plot_gene_profiles function output stage std_log transformation" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-28-1.png" class="r-plt" alt="plot_gene_profiles function output stage std_log transformation" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># faceted by phylostratum</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_profiles.html">plot_gene_profiles</a></span><span class="op">(</span><span class="va">example_phyex_set</span>, max_genes <span class="op">=</span> <span class="fl">1000</span>, </span>
 <span>                          colour_by <span class="op">=</span> <span class="st">"strata"</span>, facet_by_strata <span class="op">=</span> <span class="cn">TRUE</span>, show_set_mean <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                          show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-29-1.png" alt="plot_gene_profiles function output faceted by strata" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-29-1.png" class="r-plt" alt="plot_gene_profiles function output faceted by strata" width="1152" style="display: block; margin: auto;"></p>
 <div class="tip">
 <p>These plots are examples of plots that <code>myTAIv2</code> can
 generate. To check out the functions, use <code>?</code> before the
@@ -410,19 +410,19 @@ capabilities:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Basic signature plot showing TXI distribution across cell types</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-34-1.png" alt="plot_signature single-cell basic" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-34-1.png" class="r-plt" alt="plot_signature single-cell basic" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot without showing individual cells (just means)</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, show_reps <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-35-1.png" alt="plot_signature single-cell without individual cells" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-35-1.png" class="r-plt" alt="plot_signature single-cell without individual cells" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot TXI distribution by developmental day instead of cell type</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, primary_identity <span class="op">=</span> <span class="st">"day"</span>, show_p_val <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-36-1.png" alt="plot_signature single-cell by day" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-36-1.png" class="r-plt" alt="plot_signature single-cell by day" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot TXI distribution by experimental condition</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, primary_identity <span class="op">=</span> <span class="st">"condition"</span>, show_p_val<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-37-1.png" alt="plot_signature single-cell by condition" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-37-1.png" class="r-plt" alt="plot_signature single-cell by condition" width="576" style="display: block; margin: auto;"></p>
 <p>You can use a secondary identity for either coloring or faceting to
 create more informative plots:</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
@@ -431,7 +431,7 @@ create more informative plots:</p>
 <span>                     primary_identity <span class="op">=</span> <span class="st">"day"</span>, </span>
 <span>                     secondary_identity <span class="op">=</span> <span class="st">"condition"</span>,</span>
 <span>                     show_p_val<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-38-1.png" alt="plot_signature single-cell with secondary coloring" width="768" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-38-1.png" class="r-plt" alt="plot_signature single-cell with secondary coloring" width="768" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot by day, faceted by condition</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, </span>
@@ -439,7 +439,7 @@ create more informative plots:</p>
 <span>                     secondary_identity <span class="op">=</span> <span class="st">"batch"</span>,</span>
 <span>                     facet_by_secondary <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     show_p_val <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-39-1.png" alt="plot_signature single-cell with faceting" width="960" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-39-1.png" class="r-plt" alt="plot_signature single-cell with faceting" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="other-single-cell-visualizations">Other single-cell visualizations<a class="anchor" aria-label="anchor" href="#other-single-cell-visualizations"></a>
@@ -449,17 +449,17 @@ show individual cells or be aggregated:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Gene heatmap for single-cell data (aggregated by cell type)</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, top_p <span class="op">=</span> <span class="fl">0.1</span>, cluster_rows<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-40-1.png" alt="plot_gene_heatmap single-cell" width="960" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-40-1.png" class="r-plt" alt="plot_gene_heatmap single-cell" width="960" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Gene heatmap showing individual cells (subsampled)</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_phyex_set_sc</span>, show_reps <span class="op">=</span> <span class="cn">TRUE</span>, max_cells_per_type <span class="op">=</span> <span class="fl">10</span>, top_p <span class="op">=</span> <span class="fl">0.05</span>, cluster_rows<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-41-1.png" alt="plot_gene_heatmap single-cell with individual cells" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-41-1.png" class="r-plt" alt="plot_gene_heatmap single-cell with individual cells" width="1152" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Change identity to "day" and plot heatmap grouped by developmental time</span></span>
 <span><span class="va">example_sc_by_day</span> <span class="op">&lt;-</span> <span class="va">example_phyex_set_sc</span></span>
 <span><span class="va">example_sc_by_day</span><span class="op">@</span><span class="va">selected_idents</span> <span class="op">&lt;-</span> <span class="st">"day"</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_gene_heatmap.html">plot_gene_heatmap</a></span><span class="op">(</span><span class="va">example_sc_by_day</span>, show_reps <span class="op">=</span> <span class="cn">TRUE</span>, max_cells_per_type <span class="op">=</span> <span class="fl">8</span>, top_p <span class="op">=</span> <span class="fl">0.05</span>, cluster_rows<span class="op">=</span><span class="cn">TRUE</span>, show_gene_ids<span class="op">=</span><span class="cn">TRUE</span>, std<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-gallery_files/figure-html/unnamed-chunk-42-1.png" alt="plot_gene_heatmap single-cell grouped by day" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="tai-gallery_files/figure-html/unnamed-chunk-42-1.png" class="r-plt" alt="plot_gene_heatmap single-cell grouped by day" width="1152" style="display: block; margin: auto;"></p>
 <div class="tip">
 <p><strong>Single-cell plotting tips:</strong></p>
 <ul>
@@ -491,7 +491,7 @@ colour-coded plots</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

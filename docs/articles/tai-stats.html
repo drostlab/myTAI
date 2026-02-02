@@ -90,7 +90,7 @@ pattern, e.g.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"example_phyex_set_old"</span><span class="op">)</span></span>
 <span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_signature.html">plot_signature</a></span><span class="op">(</span><span class="va">example_phyex_set_old</span>, show_p_val <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-stats_files/figure-html/unnamed-chunk-2-1.png" alt="plot_signature function output" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-stats_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="plot_signature function output" width="576" style="display: block; margin: auto;"></p>
 <p>But how can you test if this pattern is significant?</p>
 </div>
 <div class="section level2">
@@ -134,13 +134,13 @@ profile against a null distribution.</p>
 <details><summary>
 Show output
 </summary><pre><code><span><span class="co">## Computing: [========================================] 100% (done)</span></span></code></pre>
-<p><img src="tai-stats_files/figure-html/unnamed-chunk-4-1.png" alt="stat_flatline_test function output" width="480" style="display: block; margin: auto;"></p>
+<p><img src="tai-stats_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="stat_flatline_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Flat Line Test </span></span>
 <span><span class="co">## Test statistic: 0.03103926 </span></span>
-<span><span class="co">## P-value: 4.223892e-05 </span></span>
+<span><span class="co">## P-value: 1.561661e-10 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>We can see a histogram of the <strong>null</strong> distribution
@@ -170,15 +170,15 @@ distribution families for the null sample data.</p>
 Show output
 </summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_cullen_frey.html">plot_cullen_frey</a></span><span class="op">(</span><span class="va">res_flt</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-stats_files/figure-html/unnamed-chunk-7-1.png" alt="plot_cullen_frey function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
+<p><img src="tai-stats_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="plot_cullen_frey function output for stat_flatline_test" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## summary statistics</span></span>
 <span><span class="co">## ------</span></span>
-<span><span class="co">## min:  0.0001852423   max:  0.03326328 </span></span>
-<span><span class="co">## median:  0.003064929 </span></span>
-<span><span class="co">## mean:  0.004512221 </span></span>
-<span><span class="co">## estimated sd:  0.005295526 </span></span>
-<span><span class="co">## estimated skewness:  3.757419 </span></span>
-<span><span class="co">## estimated kurtosis:  21.10533</span></span></code></pre>
+<span><span class="co">## min:  0.0001283258   max:  0.01825729 </span></span>
+<span><span class="co">## median:  0.002638708 </span></span>
+<span><span class="co">## mean:  0.003642082 </span></span>
+<span><span class="co">## estimated sd:  0.003156145 </span></span>
+<span><span class="co">## estimated skewness:  2.468061 </span></span>
+<span><span class="co">## estimated kurtosis:  11.67111</span></span></code></pre>
 </details><p>We can see that the null sample lies within the gamma distribution
 family, which is a good sign because the
 <code><a href="../reference/stat_flatline_test.html">myTAI::stat_flatline_test()</a></code> assumes that the null sample is
@@ -205,7 +205,7 @@ permutations using <code><a href="../reference/plot_null_txi_sample.html">myTAI:
 Show output
 </summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_null_txi_sample.html">plot_null_txi_sample</a></span><span class="op">(</span><span class="va">res_flt</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-stats_files/figure-html/unnamed-chunk-9-1.png" alt="plot_null_txi_sample function output" width="576" style="display: block; margin: auto;"></p>
+<p><img src="tai-stats_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="plot_null_txi_sample function output" width="576" style="display: block; margin: auto;"></p>
 <p>The null variance distribution is produced from the grey lines, while
 the red line is the observed TAI profile. The distance between the red
 and grey lines indicate that older genes are generally higher expressed
@@ -248,13 +248,13 @@ with the function
 <span>  modules <span class="op">=</span> <span class="va">modules</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
-</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-11-1.png" alt="stat_reductive_hourglass_test function output" width="480" style="display: block; margin: auto;"></p>
+</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="stat_reductive_hourglass_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Reductive Hourglass Test </span></span>
 <span><span class="co">## Test statistic: 0.1111285 </span></span>
-<span><span class="co">## P-value: 0.009915782 </span></span>
+<span><span class="co">## P-value: 0.003536678 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>In this example, we can see that the TAI pattern is consistent with
@@ -272,15 +272,15 @@ is normally-distributed, which the assumption for the
 <span>  modules <span class="op">=</span> <span class="va">modules</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">myTAI</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_cullen_frey.html">plot_cullen_frey</a></span><span class="op">(</span><span class="va">res_flt</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tai-stats_files/figure-html/unnamed-chunk-13-1.png" alt="plot_cullen_frey function output for stat_reductive_hourglass_test" width="480" style="display: block; margin: auto;"></p>
+<p><img src="tai-stats_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="plot_cullen_frey function output for stat_reductive_hourglass_test" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## summary statistics</span></span>
 <span><span class="co">## ------</span></span>
-<span><span class="co">## min:  -0.2069266   max:  0.0847961 </span></span>
-<span><span class="co">## median:  -0.02337587 </span></span>
-<span><span class="co">## mean:  -0.02516809 </span></span>
-<span><span class="co">## estimated sd:  0.05910246 </span></span>
-<span><span class="co">## estimated skewness:  -0.4270809 </span></span>
-<span><span class="co">## estimated kurtosis:  3.514582</span></span></code></pre>
+<span><span class="co">## min:  -0.1742683   max:  0.08118835 </span></span>
+<span><span class="co">## median:  -0.03535915 </span></span>
+<span><span class="co">## mean:  -0.0369504 </span></span>
+<span><span class="co">## estimated sd:  0.05553719 </span></span>
+<span><span class="co">## estimated skewness:  -0.01281856 </span></span>
+<span><span class="co">## estimated kurtosis:  2.887145</span></span></code></pre>
 <p>Indeed it is!</p>
 </details>
 </div>
@@ -299,13 +299,13 @@ higher in the mid-stage. This can be achieved with the function
 <span>  modules <span class="op">=</span> <span class="va">modules</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
-</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-15-1.png" alt="stat_reverse_hourglass_test function output" width="480" style="display: block; margin: auto;"></p>
+</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="stat_reverse_hourglass_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Reverse Hourglass Test </span></span>
 <span><span class="co">## Test statistic: -0.2985458 </span></span>
-<span><span class="co">## P-value: 0.9999294 </span></span>
+<span><span class="co">## P-value: 0.9999999 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>As we can see from the p-values of the one-tailed test, the TAI
@@ -332,13 +332,13 @@ whether the TAI profile is significantly lower in the early stages.</p>
 <span>  modules <span class="op">=</span> <span class="va">modules</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
-</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-17-1.png" alt="stat_early_conservation_test function output" width="480" style="display: block; margin: auto;"></p>
+</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="stat_early_conservation_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Early Conservation Test </span></span>
 <span><span class="co">## Test statistic: -0.1111285 </span></span>
-<span><span class="co">## P-value: 0.8633577 </span></span>
+<span><span class="co">## P-value: 0.8602803 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>Again, the TAI profile does not support the early conservation
@@ -361,13 +361,13 @@ pattern, we can use the function
 <span>  modules <span class="op">=</span> <span class="va">modules</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
-</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-19-1.png" alt="stat_late_conservation_test function output" width="480" style="display: block; margin: auto;"></p>
+</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="stat_late_conservation_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Late Conservation Test </span></span>
 <span><span class="co">## Test statistic: -0.2985458 </span></span>
-<span><span class="co">## P-value: 0.9992844 </span></span>
+<span><span class="co">## P-value: 0.9997022 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>As expected again, we do not see support for the late conservation
@@ -402,13 +402,13 @@ TAI profiles of these two groups using the
 <span>  alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Show output
-</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-21-1.png" alt="stat_pairwise_test function output" width="480" style="display: block; margin: auto;"></p>
+</summary><p><img src="tai-stats_files/figure-html/unnamed-chunk-21-1.png" class="r-plt" alt="stat_pairwise_test function output" width="480" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistical Test Result</span></span>
 <span><span class="co">## =======================</span></span>
 <span><span class="co">## Method: Pairwise Test </span></span>
 <span><span class="co">## Test statistic: -0.0942979 </span></span>
-<span><span class="co">## P-value: 0.9251208 </span></span>
+<span><span class="co">## P-value: 0.9192866 </span></span>
 <span><span class="co">## Alternative hypothesis: greater </span></span>
 <span><span class="co">## Data: Embryogenesis 2011</span></span></code></pre>
 </details><p>In this mock example, we can see that the TAI profile of the control
@@ -453,7 +453,7 @@ information, check out this <a href="tai-transform.html">article</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
