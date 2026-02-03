@@ -176,10 +176,10 @@ expansion/contraction studies should avoid drawing direct inferences of
 evolutionary relatedness from measures of sequence similarity alone, and
 should instead, where possible, use more rigorous phylogeny-based
 methods. For this purpose, we recommend researchers to consult the
-[phylomedb database](https://orthology.phylomedb.org/) to retrieve
-phylogeny-based gene orthology relationships and use these age estimates
-in combination with `myTAI`. Similarly, users can also retrieve gene
-ages from [EggNOG database](http://eggnog5.embl.de/#/app/home) using
+phylomeDB database to retrieve phylogeny-based gene orthology
+relationships and use these age estimates in combination with `myTAI`.
+Similarly, users can also retrieve gene ages from [EggNOG
+database](http://eggnog5.embl.de/#/app/home) using
 [`orthomap`](https://github.com/kullrich/orthomap). Alternatively, users
 might find the simulation based removal approach proposed by [Moyers &
 Zhang, 2018](https://doi.org/10.1093/gbe/evy161) more suitable.

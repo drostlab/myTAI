@@ -79,7 +79,7 @@ output](tai-stats_files/figure-html/unnamed-chunk-4-1.png)
     ## =======================
     ## Method: Flat Line Test 
     ## Test statistic: 0.03103926 
-    ## P-value: 1.561661e-10 
+    ## P-value: 5.848634e-07 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2011
 
@@ -124,12 +124,12 @@ stat_flatline_test](tai-stats_files/figure-html/unnamed-chunk-7-1.png)
 
     ## summary statistics
     ## ------
-    ## min:  0.0001283258   max:  0.01825729 
-    ## median:  0.002638708 
-    ## mean:  0.003642082 
-    ## estimated sd:  0.003156145 
-    ## estimated skewness:  2.468061 
-    ## estimated kurtosis:  11.67111
+    ## min:  0.0003103067   max:  0.01688975 
+    ## median:  0.002999041 
+    ## mean:  0.004106012 
+    ## estimated sd:  0.003870327 
+    ## estimated skewness:  1.917448 
+    ## estimated kurtosis:  6.649296
 
 We can see that the null sample lies within the gamma distribution
 family, which is a good sign because the
@@ -218,7 +218,7 @@ output](tai-stats_files/figure-html/unnamed-chunk-11-1.png)
     ## =======================
     ## Method: Reductive Hourglass Test 
     ## Test statistic: 0.1111285 
-    ## P-value: 0.003536678 
+    ## P-value: 0.008791967 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2011
 
@@ -248,12 +248,12 @@ stat_reductive_hourglass_test](tai-stats_files/figure-html/unnamed-chunk-13-1.pn
 
     ## summary statistics
     ## ------
-    ## min:  -0.1742683   max:  0.08118835 
-    ## median:  -0.03535915 
-    ## mean:  -0.0369504 
-    ## estimated sd:  0.05553719 
-    ## estimated skewness:  -0.01281856 
-    ## estimated kurtosis:  2.887145
+    ## min:  -0.1702348   max:  0.1282585 
+    ## median:  -0.04169454 
+    ## mean:  -0.03451902 
+    ## estimated sd:  0.06196705 
+    ## estimated skewness:  0.02654995 
+    ## estimated kurtosis:  3.140974
 
 Indeed it is!
 
@@ -282,7 +282,7 @@ output](tai-stats_files/figure-html/unnamed-chunk-15-1.png)
     ## =======================
     ## Method: Reverse Hourglass Test 
     ## Test statistic: -0.2985458 
-    ## P-value: 0.9999999 
+    ## P-value: 0.9999943 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2011
 
@@ -322,7 +322,7 @@ output](tai-stats_files/figure-html/unnamed-chunk-17-1.png)
     ## =======================
     ## Method: Early Conservation Test 
     ## Test statistic: -0.1111285 
-    ## P-value: 0.8602803 
+    ## P-value: 0.8455715 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2011
 
@@ -356,7 +356,7 @@ output](tai-stats_files/figure-html/unnamed-chunk-19-1.png)
     ## =======================
     ## Method: Late Conservation Test 
     ## Test statistic: -0.2985458 
-    ## P-value: 0.9997022 
+    ## P-value: 0.9998538 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2011
 
@@ -405,7 +405,7 @@ output](tai-stats_files/figure-html/unnamed-chunk-21-1.png)
     ## =======================
     ## Method: Pairwise Test 
     ## Test statistic: -0.0942979 
-    ## P-value: 0.9192866 
+    ## P-value: 0.9609805 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2011
 
