@@ -96,7 +96,7 @@ tf_stability_res
 ```
 
     ##         none         sqrt         log2         rank          vst         rlog 
-    ## 5.562288e-01 6.714072e-04 2.622694e-08 2.828259e-14 4.740345e-06 2.251359e-15
+    ## 5.225205e-01 4.467333e-03 2.042186e-13 2.661653e-17 2.170954e-07 7.846328e-18
 
 Here, we can see that the p-values for the flat line test are all below
 0.05 for all transformations. This is reassuring as to the stability of

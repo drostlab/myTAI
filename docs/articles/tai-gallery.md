@@ -91,7 +91,7 @@ output](tai-gallery_files/figure-html/unnamed-chunk-6-1.png)
     ## =======================
     ## Method: Flat Line Test 
     ## Test statistic: 0.0446168 
-    ## P-value: 0.3368477 
+    ## P-value: 0.5355739 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2019
 
@@ -108,12 +108,12 @@ stat_flatline_test](tai-gallery_files/figure-html/unnamed-chunk-8-1.png)
 
     ## summary statistics
     ## ------
-    ## min:  0.0005487484   max:  0.4556628 
-    ## median:  0.03506333 
-    ## mean:  0.06595785 
-    ## estimated sd:  0.09274537 
-    ## estimated skewness:  2.914687 
-    ## estimated kurtosis:  12.10274
+    ## min:  0.001759994   max:  2.310455 
+    ## median:  0.05782675 
+    ## mean:  0.1457052 
+    ## estimated sd:  0.3651816 
+    ## estimated skewness:  5.044146 
+    ## estimated kurtosis:  30.38556
 
 ``` r
 myTAI::plot_null_txi_sample(res_flt) +
@@ -138,7 +138,7 @@ output](tai-gallery_files/figure-html/unnamed-chunk-10-1.png)
     ## =======================
     ## Method: Reductive Hourglass Test 
     ## Test statistic: -0.03191036 
-    ## P-value: 0.1499504 
+    ## P-value: 0.2772082 
     ## Alternative hypothesis: greater 
     ## Data: Embryogenesis 2019
 

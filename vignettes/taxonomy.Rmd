@@ -222,7 +222,7 @@ taxonomy( organism = "Arabidopsis thaliana",
 ```
 
 <details> <summary>Show output</summary>
-```{r message = FALSE, warning = FALSE, echo = FALSE, eval = requireNamespace("taxize", quietly = TRUE) && curl::has_internet()}
+```{r message = FALSE, warning = FALSE, echo = FALSE, eval = FALSE}
 taxonomy( organism = "Arabidopsis thaliana", 
           db       = "ncbi", 
           output   = "taxid" )
