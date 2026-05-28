@@ -1,5 +1,9 @@
 # NEWS
 
+myTAI 2.3.6
+===========
+- taxonomy.Rmd vignette no longer queries online databases, so it builds without internet (fixes CRAN check error)
+
 myTAI 2.3.5
 ===========
 - added functions `get_strata_legend` and `get_phylomap`
