@@ -108,28 +108,34 @@ taxonomy <- function(organism, db = "ncbi", output = "classification"){
                 else if (db == "itis")    
                         as.data.frame(taxize::classification(taxize::get_tsn(organism), db = "itis")[[1]])
         }, error = function(e) {
-                warning("Could not retrieve taxonomy information from ", db, ". Check internet connection or try again later.", call. = FALSE)
+                message("Could not retrieve taxonomy information from ", db, ". Check internet connection or try again later.")
                 return(NULL)
         })
-        
+
         if (is.null(tax_hierarchy)) {
                 return(NULL)
         }
-        
+
         if(output == "classification"){
-                
+
                 return(tax_hierarchy)
         }
-        
+
         if(output == "taxid"){
-                
+
                         return(dplyr::select(dplyr::filter(tax_hierarchy, name == organism),id))
         }
-        
+
         if(output == "children"){
-                
-                return(as.data.frame(taxize::children(organism, db = db)[[1]]))
-        } 
+
+                result <- tryCatch({
+                        as.data.frame(taxize::children(organism, db = db)[[1]])
+                }, error = function(e) {
+                        message("Could not retrieve children taxa from ", db, ". Check internet connection or try again later.")
+                        return(NULL)
+                })
+                return(result)
+        }
 }
 ```
 
