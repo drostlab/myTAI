@@ -87,8 +87,7 @@ plot_signature_multiple <- function(phyex_sets,
         p_vals <- test_res |> map(\(t) t@p_value) |>
             map(\(pval) signif(pval, digits=3)) |> as.character()
         p_label <- test_res[[1]]@p_label
-        labels <- map2(labels, p_vals, \(l, pval) paste0(l, "<br>**", p_label, "**: ", pval, "<br>"))
-        p <- p + theme(legend.text=ggtext::element_markdown())
+        labels <- map2(labels, p_vals, \(l, pval) bquote(atop(.(l), bold(.(p_label)) * ": " * .(pval))))
     }
     
     if (!is.null(colours))

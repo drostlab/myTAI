@@ -1,5 +1,9 @@
 # NEWS
 
+myTAI 2.3.7
+===========
+- remove `ggtext` dependency
+
 myTAI 2.3.6
 ===========
 - taxonomy.Rmd vignette no longer queries online databases, so it builds without internet (fixes CRAN check error)

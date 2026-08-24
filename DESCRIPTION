@@ -1,7 +1,7 @@
 Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
-Version: 2.3.6
+Version: 2.3.7
 Date: 2026-05-28
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@tuebingen.mpg.de>
 Authors@R: c(person("Hajk-Georg", "Drost",
@@ -50,7 +50,6 @@ Imports:
     ggplot2 (>= 1.0.1),
     ggforce,
     ggridges,
-    ggtext,
     readr (>= 0.2.2),
     tibble,
     ggplotify,
