@@ -1,0 +1,2 @@
+# The clang toolchain on Windows arm64 has no libatomic (not needed there)
+PKG_LIBS = $(if $(findstring clang,$(CC)),,-latomic)
