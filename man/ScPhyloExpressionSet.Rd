@@ -12,7 +12,7 @@ ScPhyloExpressionSet(
   name = "Phylo Expression Set",
   species = character(0),
   index_type = "TXI",
-  identities_label = "Identities",
+  identities_label = "Cell Type",
   gene_ids = character(0),
   null_conservation_sample_size = 5000L,
   .null_conservation_txis = NULL,
