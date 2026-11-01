@@ -191,7 +191,7 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
     secondary_label <- plot_data$secondary_label
     
     # Determine which identity to use for coloring
-    color_by_identity <- if (!is.null(secondary_identity)) secondary_identity else primary_identity
+    color_by_identity <- if (!is.null(secondary_identity) && !facet_by_secondary) secondary_identity else primary_identity
     if (is.null(color_by_identity)) color_by_identity <- phyex_set@identities_label
     
     # Check for custom colors and show message if using defaults
