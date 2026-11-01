@@ -469,6 +469,44 @@ ScPhyloExpressionSet_from_matrix <- function(expression_matrix,
     ))
 }
 
+#' @title Convert SingleCellExperiment to Single-Cell PhyloExpressionSet
+#' @description Convert a SingleCellExperiment (including monocle3 cell_data_set) into a ScPhyloExpressionSet.
+#'
+#' @param sce A SingleCellExperiment object
+#' @param strata Factor vector of phylostratum assignments for each gene
+#' @param assay_name Character string specifying which assay to use (default: "counts")
+#' @param groups_column Character string specifying which colData column to use for grouping
+#' @param name A character string naming the dataset
+#' @param ... Additional arguments passed to ScPhyloExpressionSet_from_matrix
+#'
+#' @return A ScPhyloExpressionSet object
+#'
+#' @export
+ScPhyloExpressionSet_from_sce <- function(sce,
+                                          strata,
+                                          assay_name = "counts",
+                                          groups_column = NULL,
+                                          name = "Single-Cell PhyloExpressionSet",
+                                          ...) {
+    if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) {
+        stop("Package 'SingleCellExperiment' must be installed to use this function.")
+    }
+
+    expression_matrix <- SummarizedExperiment::assay(sce, assay_name)
+    metadata <- as.data.frame(SummarizedExperiment::colData(sce))
+    reductions <- as.list(SingleCellExperiment::reducedDims(sce))
+
+    ScPhyloExpressionSet_from_matrix(
+        expression_matrix = expression_matrix,
+        strata = strata,
+        metadata = metadata,
+        groups_column = groups_column,
+        name = name,
+        reductions = reductions,
+        ...
+    )
+}
+
 #' @title Match Single-Cell Expression Data with Phylostratum Map (Seurat)
 #' @description Join single-cell gene expression data (from a Seurat object) with a phylostratum mapping to create 
 #' a ScPhyloExpressionSet object. Automatically extracts dimensional reductions and metadata.

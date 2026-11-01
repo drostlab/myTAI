@@ -63,6 +63,8 @@ Suggests:
     mgcv,
     Seurat,
     SeuratObject,
+    SingleCellExperiment,
+    SummarizedExperiment,
     uwot,
     decor,
     DESeq2,

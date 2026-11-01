@@ -672,3 +672,24 @@ test_that("match_map_sc_seurat function works", {
     expect_equal(length(sc_set@strata), n_map_genes)
     expect_true(all(as.numeric(sc_set@strata) %in% phylomap$Stratum))
 })
+
+test_that("ScPhyloExpressionSet_from_sce converts a SingleCellExperiment", {
+    skip_if_not_installed("SingleCellExperiment")
+
+    set.seed(1)
+    counts <- Matrix::rsparsematrix(50, 30, density = 0.3, rand.x = function(n) rpois(n, 5) + 1)
+    rownames(counts) <- paste0("gene", 1:50)
+    colnames(counts) <- paste0("cell", 1:30)
+    cell_type <- factor(rep(c("A", "B", "C"), each = 10))
+    sce <- SingleCellExperiment::SingleCellExperiment(
+        assays = list(counts = counts),
+        colData = data.frame(cell_type = cell_type, row.names = colnames(counts)),
+        reducedDims = list(UMAP = matrix(rnorm(60), 30, 2, dimnames = list(colnames(counts), NULL)))
+    )
+    strata <- factor(sample(1:5, 50, replace = TRUE))
+
+    phyex_set <- ScPhyloExpressionSet_from_sce(sce, strata = strata, groups_column = "cell_type")
+
+    expect_s7_class(phyex_set, myTAI::ScPhyloExpressionSet)
+    expect_true("UMAP" %in% names(phyex_set@reductions))
+})
