@@ -50,8 +50,3 @@ This function creates visualizations appropriate for the data type:
   - `secondary_identity`: Character, name of metadata column for coloring/faceting
   - `facet_by_secondary`: Logical, whether to facet by secondary identity (default: FALSE uses colouring)
 }
-\examples{
-# Basic signature plot for bulk data
-p <- plot_signature(example_phyex_set)
-
-}

@@ -2,7 +2,7 @@ Package: myTAI
 Type: Package
 Title: Evolutionary Transcriptomics
 Version: 2.3.7
-Date: 2026-05-28
+Date: 2026-11-01
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@tuebingen.mpg.de>
 Authors@R: c(person("Hajk-Georg", "Drost",
                 role = c("aut", "cre"),
