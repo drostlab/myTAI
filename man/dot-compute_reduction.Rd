@@ -4,7 +4,13 @@
 \alias{.compute_reduction}
 \title{Compute Dimensional Reduction}
 \usage{
-.compute_reduction(expression, method = c("PCA", "UMAP"), seed = 42)
+.compute_reduction(
+  expression,
+  method = c("PCA", "UMAP"),
+  seed = 42,
+  n_genes = 2000,
+  n_pcs = 50
+)
 }
 \arguments{
 \item{expression}{Expression matrix with genes as rows and cells as columns}

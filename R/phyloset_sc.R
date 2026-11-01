@@ -317,7 +317,6 @@ ScPhyloExpressionSet <- new_class("ScPhyloExpressionSet",
 #' @param layer Character string specifying which layer to use from the Seurat object (default: "counts")
 #' @param selected_idents Character string specifying which metadata column to use for grouping (default: NULL, uses active idents)
 #' @param name A character string naming the dataset (default: "Single-Cell Phylo Expression Set")
-#' @param seed Integer seed for reproducible UMAP computation (default: 42)
 #' @param ... Additional arguments passed to ScPhyloExpressionSet constructor
 #' 
 #' @return A ScPhyloExpressionSet object
@@ -329,7 +328,6 @@ ScPhyloExpressionSet_from_seurat <- function(seurat,
                                              layer = "counts",
                                              selected_idents = NULL,
                                              name = "Single-Cell PhyloExpressionSet",
-                                             seed = 42,
                                              ...) {
     
     if (!requireNamespace("Seurat", quietly = TRUE)) {
@@ -364,21 +362,6 @@ ScPhyloExpressionSet_from_seurat <- function(seurat,
         for (reduction_name in names(seurat@reductions)) {
             embeddings <- Seurat::Embeddings(seurat, reduction = reduction_name)
             reductions[[reduction_name]] <- embeddings
-        }
-    }
-    
-    # If no reductions are available, compute basic ones
-    if (length(reductions) == 0) {
-        message("No dimensional reductions found in Seurat object. Computing PCA and UMAP...")
-        
-        # Compute PCA
-        pca_coords <- .compute_reduction(sc_counts, method = "PCA", seed = seed)
-        reductions[["pca"]] <- pca_coords
-        
-        # Compute UMAP (if uwot is available)
-        if (requireNamespace("uwot", quietly = TRUE)) {
-            umap_coords <- .compute_reduction(sc_counts, method = "UMAP", seed = seed)
-            reductions[["umap"]] <- umap_coords
         }
     }
     
@@ -728,26 +711,33 @@ match_map_sc_matrix <- function(expression_matrix,
 #' @return Matrix with cells as rows and dimensions as columns
 #' 
 #' @keywords internal
-.compute_reduction <- function(expression, method = c("PCA", "UMAP"), seed = 42) {
+.compute_reduction <- function(expression, method = c("PCA", "UMAP"), seed = 42,
+                               n_genes = 2000, n_pcs = 50) {
     method <- match.arg(method)
-    
-    # Prepare expression data
-    expr <- log1p(as.matrix(expression))
-    # Remove genes with zero variance
-    nonzero_var_genes <- apply(expr, 1, function(x) stats::var(x) != 0)
-    expr <- expr[nonzero_var_genes, , drop = FALSE]
-    
-    if (method == "PCA") {
-        coords <- stats::prcomp(t(expr), scale. = TRUE)$x[, 1:2]
-    } else if (method == "UMAP") {
-        if (!requireNamespace("uwot", quietly = TRUE)) {
-            stop("Package 'uwot' must be installed to compute UMAP.")
-        }
-        set.seed(seed)
-        coords <- uwot::umap(t(expr), scale = TRUE)
-        rownames(coords) <- colnames(expression)
+    if (method == "UMAP" && !requireNamespace("uwot", quietly = TRUE)) {
+        stop("Package 'uwot' must be installed to compute UMAP.")
     }
-    
+
+    expr <- log1p(Matrix::Matrix(expression, sparse = TRUE))
+    gene_means <- Matrix::rowMeans(expr)
+    gene_vars <- Matrix::rowMeans(expr^2) - gene_means^2
+    top_genes <- utils::head(order(gene_vars, decreasing = TRUE), min(n_genes, sum(gene_vars > 0)))
+    expr <- t(as.matrix(expr[top_genes, , drop = FALSE]))
+
+    set.seed(seed)
+    n_pcs <- min(n_pcs, nrow(expr) - 1, ncol(expr) - 1)
+    pcs <- if (n_pcs < min(dim(expr)) / 2 && requireNamespace("irlba", quietly = TRUE)) {
+        irlba::prcomp_irlba(expr, n = n_pcs, scale. = TRUE)$x
+    } else {
+        stats::prcomp(expr, scale. = TRUE, rank. = n_pcs)$x
+    }
+    rownames(pcs) <- colnames(expression)
+
+    if (method == "PCA") {
+        return(pcs[, 1:2])
+    }
+    coords <- uwot::umap(pcs)
+    rownames(coords) <- colnames(expression)
     return(coords)
 }
 

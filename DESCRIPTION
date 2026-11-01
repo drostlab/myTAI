@@ -66,6 +66,7 @@ Suggests:
     SingleCellExperiment,
     SummarizedExperiment,
     uwot,
+    irlba,
     decor,
     DESeq2,
     gganimate,

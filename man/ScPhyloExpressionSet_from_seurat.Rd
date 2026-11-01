@@ -10,7 +10,6 @@ ScPhyloExpressionSet_from_seurat(
   layer = "counts",
   selected_idents = NULL,
   name = "Single-Cell PhyloExpressionSet",
-  seed = 42,
   ...
 )
 }
@@ -24,8 +23,6 @@ ScPhyloExpressionSet_from_seurat(
 \item{selected_idents}{Character string specifying which metadata column to use for grouping (default: NULL, uses active idents)}
 
 \item{name}{A character string naming the dataset (default: "Single-Cell Phylo Expression Set")}
-
-\item{seed}{Integer seed for reproducible UMAP computation (default: 42)}
 
 \item{...}{Additional arguments passed to ScPhyloExpressionSet constructor}
 }
