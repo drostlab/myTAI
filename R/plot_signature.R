@@ -228,7 +228,7 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
                 ggforce::geom_sina(size = 0.8, alpha = 0.7) +
                 # Add faint black line connecting means
                 stat_summary(fun = mean, geom = "line", 
-                           color = "black", alpha = 0.4, size = 0.8, 
+                           color = "black", alpha = 0.4, linewidth = 0.8, 
                            aes(group = 1), show.legend = FALSE) +
                 # Add prominent mean lines for each identity with matching colors
                 geom_boxplot(width=0.5, outlier.shape=NA, color="black",  fill="white", alpha=0.5)
@@ -239,7 +239,7 @@ S7::method(plot_signature, ScPhyloExpressionSet) <- function(phyex_set,
                 ggforce::geom_sina(size = 0.8, alpha = 0.7) +
                 # Add faint black line connecting means
                 stat_summary(fun = mean, geom = "line", 
-                           color = "black", alpha = 0.4, size = 0.8, 
+                           color = "black", alpha = 0.4, linewidth = 0.8, 
                            aes(group = 1), show.legend = FALSE) +
                 # Add prominent mean lines for each identity with matching colors
                 geom_boxplot(width=0.5, outlier.shape=NA, color="black",  fill="white", alpha=0.5)
