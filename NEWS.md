@@ -1,5 +1,13 @@
 # NEWS
 
+myTAI 2.3.8
+===========
+- new `ScPhyloExpressionSet_from_sce` to build a `ScPhyloExpressionSet` from a `SingleCellExperiment`, including monocle3 `cell_data_set` (#81)
+- `ScPhyloExpressionSet_from_seurat` no longer computes PCA/UMAP on import. Reductions are now computed on demand, using the top 2000 variable genes and truncated PCA (with `irlba` if installed), with UMAP on the PCs. The `seed` argument was removed
+- `plot_signature(..., facet_by_secondary = TRUE)` now uses the primary identity's colours
+- compatibility with S7 1.0.0: constructor documentation and package lifecycle hooks
+- replace deprecated ggplot2 `size` with `linewidth` for lines
+
 myTAI 2.3.7
 ===========
 - remove `ggtext` dependency
