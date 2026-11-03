@@ -11,7 +11,7 @@ vignette: >
 
 Inspired by the 'ontogeny-phylogeny' correlations and the hourglass model of evolutionary development, we recently asked whether we could break the hourglass or any TAI profile by extracting a stable set of genes, and gain information about the role these extracted genes have in the development of the organism.
 
-Further motivation is in [this thesis](https://dspace.cuni.cz/handle/20.500.11956/193428).
+Further motivation is in a thesis available from the Charles University Digital Repository at `hdl.handle.net/20.500.11956/193428`.
 
 ## Break the hourglass using gaTAI
 
